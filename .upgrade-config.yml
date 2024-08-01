@@ -1,0 +1,3 @@
+upstream-provider-name: terraform-provider-descope
+allow-missing-docs: false
+pr-assign: "omercnet"

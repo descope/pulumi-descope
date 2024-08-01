@@ -1,6 +1,43 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>descope/renovate-config"
-  ]
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "configMigration": true,
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "github.com/descope/terraform-provider-descope",
+        "github.com/pulumi/pulumi-terraform-bridge",
+        "github.com/pulumi/pulumi-terraform-bridge/pf"
+      ],
+      "enabled": false
+    },
+    {
+      "matchFileNames": ["sdk/**"],
+      "enabled": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "lockFileMaintenance"],
+      "groupName": "minor/patch updates"
+    },
+    {
+      "description": "Opt-out minimum Go version updates: https://github.com/renovatebot/renovate/issues/16715",
+      "matchManagers": ["gomod"],
+      "matchDepTypes": ["golang"],
+      "enabled": false
+    }
+  ],
+  "automerge": true,
+  "internalChecksFilter": "strict",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 4am on Friday"]
+  },
+  "minimumReleaseAge": "3 days",
+  "schedule": ["at any time"],
+  "automergeStrategy": "squash",
+  "constraints": {
+    "go": "1.20"
+  },
+  "postUpdateOptions": ["gomodTidy"]
 }

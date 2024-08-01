@@ -7,11 +7,15 @@ on:
     - cron: "0 5 * * *"
   workflow_dispatch:
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   upgrade_provider:
     name: upgrade-provider
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
       - name: Call upgrade provider action
         uses: pulumi/pulumi-upgrade-provider-action@main
