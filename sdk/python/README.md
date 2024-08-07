@@ -25,7 +25,7 @@ yarn add @descope/pulumi-descope
 To use from Python, install using `pip`:
 
 ```bash
-pip install pulumi_descope
+pip install descope_pulumi
 ```
 
 ### Go
@@ -41,16 +41,16 @@ go get github.com/descope/pulumi-descope/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumi.Descope
+dotnet add package Descope.Pulumi.Descope
 ```
 
 ## Configuration
 
 The following configuration points are available for the `foo` provider:
 
-- `foo:apiKey` (environment: `FOO_API_KEY`) - the API key for `foo`
-- `foo:region` (environment: `FOO_REGION`) - the region in which to deploy resources
+- `descope:projectId` (environment: `DESCOPE_PROJECT_ID`) - Descope Project ID
+- `descope:managementKey` (environment: `DESCOPE_MANAGEMENT_KEY`) - Descope Management Key
 
 ## Reference
 
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/foo/api-docs/).
+For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/descope/api-docs/).

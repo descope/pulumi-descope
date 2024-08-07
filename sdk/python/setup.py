@@ -17,7 +17,7 @@ def readme():
         return "descope Pulumi Package - Development Version"
 
 
-setup(name='pulumi_descope',
+setup(name='descope_pulumi',
       python_requires='>=3.8',
       version=VERSION,
       description="A Pulumi package for creating and managing descope cloud resources.",
@@ -31,7 +31,7 @@ setup(name='pulumi_descope',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumi_descope': [
+          'descope_pulumi': [
               'py.typed',
               'pulumi-plugin.json',
           ]

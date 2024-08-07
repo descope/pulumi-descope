@@ -164,7 +164,7 @@ func callPlainInner(
 // PkgResourceDefaultOpts provides package level defaults to pulumi.OptionResource.
 func PkgResourceDefaultOpts(opts []pulumi.ResourceOption) []pulumi.ResourceOption {
 	defaults := []pulumi.ResourceOption{}
-	defaults = append(defaults, pulumi.PluginDownloadURL("https://github.com/descope/pulumi-descope/releases/"))
+	defaults = append(defaults, pulumi.PluginDownloadURL("github://api.github.com/descope"))
 	version := SdkVersion
 	if !version.Equals(semver.Version{}) {
 		defaults = append(defaults, pulumi.Version(version.String()))
@@ -175,7 +175,7 @@ func PkgResourceDefaultOpts(opts []pulumi.ResourceOption) []pulumi.ResourceOptio
 // PkgInvokeDefaultOpts provides package level defaults to pulumi.OptionInvoke.
 func PkgInvokeDefaultOpts(opts []pulumi.InvokeOption) []pulumi.InvokeOption {
 	defaults := []pulumi.InvokeOption{}
-	defaults = append(defaults, pulumi.PluginDownloadURL("https://github.com/descope/pulumi-descope/releases/"))
+	defaults = append(defaults, pulumi.PluginDownloadURL("github://api.github.com/descope"))
 	version := SdkVersion
 	if !version.Equals(semver.Version{}) {
 		defaults = append(defaults, pulumi.Version(version.String()))
