@@ -48,8 +48,8 @@ dotnet add package Descope.Pulumi.Descope
 
 The following configuration points are available for the `foo` provider:
 
-- `descope:projectId` (environment: `DESCOPE_PROJECT_ID`) - the API key for `Descope`
-- `descope:managementKey` (environment: `DESCOPE_MANAGEMENT_KEY`) - the region in which to deploy resources
+- `descope:projectId` (environment: `DESCOPE_PROJECT_ID`) - Descope Project ID
+- `descope:managementKey` (environment: `DESCOPE_MANAGEMENT_KEY`) - Descope Management Key
 
 ## Reference
 
