@@ -6,7 +6,7 @@
     <Company>descope</Company>
     <Description>A Pulumi package for creating and managing descope cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
+    <PackageProjectUrl>https://www.descope.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/descope/pulumi-descope</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 

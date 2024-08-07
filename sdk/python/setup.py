@@ -23,8 +23,8 @@ setup(name='pulumi_descope',
       description="A Pulumi package for creating and managing descope cloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      keywords='descope descope category/cloud',
-      url='https://www.pulumi.com',
+      keywords='descope category/cloud',
+      url='https://www.descope.com',
       project_urls={
           'Repository': 'https://github.com/descope/pulumi-descope'
       },

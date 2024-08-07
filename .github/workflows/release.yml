@@ -10,14 +10,14 @@ permissions:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
+  NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
+  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
   PROVIDER: descope
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
-  PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+  PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
   PYPI_USERNAME: "__token__"
   PUBLISH_PYPI: true
   PUBLISH_NPM: true
@@ -86,7 +86,7 @@ jobs:
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: ${{matrix.nodeversion}}
-          registry-url: ${{env.NPM_REGISTRY_URL}}
+          registry-url: ${{ env.NPM_REGISTRY_URL }}
       - name: Setup DotNet
         uses: actions/setup-dotnet@6bd8b7f7774af54e05809fcc5431931b3eb1ddee # v4.0.1
         with:

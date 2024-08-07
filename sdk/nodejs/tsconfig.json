@@ -15,7 +15,6 @@
     "files": [
         "config/index.ts",
         "config/vars.ts",
-        "getData.ts",
         "index.ts",
         "project.ts",
         "provider.ts",

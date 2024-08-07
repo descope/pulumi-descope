@@ -4,10 +4,9 @@
     "description": "A Pulumi package for creating and managing descope cloud resources.",
     "keywords": [
         "descope",
-        "descope",
         "category/cloud"
     ],
-    "homepage": "https://www.pulumi.com",
+    "homepage": "https://www.descope.com",
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`descope` Terraform Provider](https://github.com/descope/terraform-provider-descope).",
     "repository": "https://github.com/descope/pulumi-descope",
@@ -4329,27 +4328,6 @@
                     }
                 },
                 "type": "object"
-            }
-        }
-    },
-    "functions": {
-        "descope:index/getData:getData": {
-            "outputs": {
-                "description": "A collection of values returned by getData.\n",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "The provider-assigned unique ID for this managed resource.\n"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "value",
-                    "id"
-                ]
             }
         }
     }

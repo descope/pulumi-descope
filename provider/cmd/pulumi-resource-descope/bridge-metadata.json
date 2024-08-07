@@ -361,11 +361,6 @@
                     }
                 }
             }
-        },
-        "datasources": {
-            "descope_data": {
-                "current": "descope:index/getData:getData"
-            }
         }
     },
     "auto-settings": {}

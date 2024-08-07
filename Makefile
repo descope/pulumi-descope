@@ -3,7 +3,7 @@ PROJECT_NAME := descope Package
 SHELL            := /bin/bash
 PACK             := descope
 PROJECT          := github.com/descope/pulumi-descope
-NODE_MODULE_NAME := @descope/${PACK}
+NODE_MODULE_NAME := @descope/pulumi-${PACK}
 TF_NAME          := ${PACK}
 PROVIDER_PATH    := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
@@ -123,4 +123,3 @@ install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 
 test::
 	cd examples && go test -v -tags=all -parallel ${TESTPARALLELISM} -timeout 2h
-

@@ -5,11 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export { GetDataResult } from "./getData";
-export const getData: typeof import("./getData").getData = null as any;
-export const getDataOutput: typeof import("./getData").getDataOutput = null as any;
-utilities.lazyLoad(exports, ["getData","getDataOutput"], () => require("./getData"));
-
 export { ProjectArgs, ProjectState } from "./project";
 export type Project = import("./project").Project;
 export const Project: typeof import("./project").Project = null as any;

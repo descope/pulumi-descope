@@ -24,7 +24,7 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 
 	// Replace this provider with the provider you are bridging.
-	descope "github.com/descope/terraform-provider-descope/provider"
+	descope "github.com/descope/terraform-provider-descope/shim"
 
 	"github.com/descope/pulumi-descope/provider/pkg/version"
 	pfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
@@ -42,81 +42,26 @@ const (
 //go:embed cmd/pulumi-resource-descope/bridge-metadata.json
 var metadata []byte
 
-// Provider returns additional overlaid schema and metadata associated with the provider.
 func Provider() tfbridge.ProviderInfo {
-	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		// 3. Providers written with terraform-plugin-framework:
-		//
-		//    If the provider you are bridging is written with the terraform-plugin-framework, then
-		//    you will need to adapt the boilerplate:
-		//
-		//    - Remove the `shimv2` import and add:
-		//
-		//      	pfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
-		//
-		//    - Replace `shimv2.NewProvider` with `pfbridge.ShimProvider`.
-		//
-		//    - In provider/cmd/pulumi-tfgen-descope/main.go, replace the
-		//      "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen" import with
-		//      "github.com/pulumi/pulumi-terraform-bridge/pf/tfgen". Remove the `version.Version`
-		//      argument to `tfgen.Main`.
-		//
-		//    - In provider/cmd/pulumi-resource-descope/main.go, replace the
-		//      "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge" import with
-		//      "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge". Replace the arguments to the
-		//      `tfbridge.Main` so it looks like this:
-		//
-		//      	tfbridge.Main(context.Background(), "descope", descope.Provider(),
-		//			tfbridge.ProviderMetadata{PulumiSchema: pulumiSchema})
-		//
-		//   Detailed instructions can be found at
-		//   https://github.com/pulumi/pulumi-terraform-bridge/blob/master/pf/README.md#how-to-upgrade-a-bridged-provider-to-plugin-framework.
-		//   After that, you can proceed as normal.
-		//
-		P: pfbridge.ShimProvider(descope.New(version.Version)()),
+		P: pfbridge.ShimProvider(descope.Provider(version.Version)),
 
-		Name:    "descope",
-		Version: version.Version,
-		// DisplayName is a way to be able to change the casing of the provider name when being
-		// displayed on the Pulumi registry
-		DisplayName: "Descope",
-		// Change this to your personal name (or a company name) that you would like to be shown in
-		// the Pulumi Registry if this package is published there.
-		Publisher: "descope",
-		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
-		// if this package is published there.
-		//
-		// You may host a logo on a domain you control or add an SVG logo for your package
-		// in your repository and use the raw content URL for that file as your logo URL.
-		LogoURL: "",
-		// PluginDownloadURL is an optional URL used to download the Provider
-		// for use in Pulumi programs
-		// e.g https://github.com/org/pulumi-provider-name/releases/
+		Name:              "descope",
+		Version:           version.Version,
+		DisplayName:       "Descope",
+		Publisher:         "descope",
+		LogoURL:           "",
 		PluginDownloadURL: "https://github.com/descope/pulumi-descope/releases/",
 		Description:       "A Pulumi package for creating and managing descope cloud resources.",
-		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
-		// For all available categories, see `Keywords` in
-		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"descope", "descope", "category/cloud"},
-		License:    "Apache-2.0",
-		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/descope/pulumi-descope",
-		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this should
-		// match the TF provider module's require directive, not any replace directives.
-		GitHubOrg:    "descope",
-		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
-		Config:       map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			// "region": {
-			// 	Type: tfbridge.MakeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
-		},
+		Keywords:          []string{"descope", "category/cloud"},
+		License:           "Apache-2.0",
+		Homepage:          "https://www.descope.com",
+		Repository:        "https://github.com/descope/pulumi-descope",
+		GitHubOrg:         "descope",
+		MetadataInfo:      tfbridge.NewProviderMetadata(metadata),
+		Config:            map[string]*tfbridge.SchemaInfo{},
 		JavaScript: &tfbridge.JavaScriptInfo{
+
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
