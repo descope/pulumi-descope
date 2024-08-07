@@ -1,5 +1,0 @@
-{
-  "resource": true,
-  "name": "descope",
-  "server": "https://github.com/descope/pulumi-descope/releases/"
-}

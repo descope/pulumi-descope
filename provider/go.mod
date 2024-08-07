@@ -10,6 +10,7 @@ require (
 	github.com/descope/terraform-provider-descope/shim v0.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.41.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.88.0
+	golang.org/x/text v0.17.0
 )
 
 require (
@@ -228,7 +229,6 @@ require (
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.23.0 // indirect
 	golang.org/x/term v0.23.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.23.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
