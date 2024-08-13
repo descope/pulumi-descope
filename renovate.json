@@ -36,8 +36,5 @@
   "minimumReleaseAge": "3 days",
   "schedule": ["at any time"],
   "automergeStrategy": "squash",
-  "constraints": {
-    "go": "1.20"
-  },
   "postUpdateOptions": ["gomodTidy"]
 }
