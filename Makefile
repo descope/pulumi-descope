@@ -7,6 +7,7 @@ PROVIDER_PATH := provider
 VERSION_PATH := $(PROVIDER_PATH)/pkg/version.Version
 TFGEN := pulumi-tfgen-$(PACK)
 PROVIDER := pulumi-resource-$(PACK)
+JAVA_GEN := pulumi-java-gen
 TESTPARALLELISM := 10
 WORKING_DIR := $(shell pwd)
 PULUMI_PROVIDER_BUILD_PARALLELISM ?= -p 2
@@ -28,13 +29,15 @@ development: install_plugins provider build_sdks install_sdks
 
 build: install_plugins provider build_sdks install_sdks
 
-build_sdks: build_nodejs build_python build_go build_dotnet
+build_sdks: build_nodejs build_python build_go build_dotnet build_java
 
 install_go_sdk:
 
+install_java_sdk:
+
 install_python_sdk:
 
-install_sdks: install_dotnet_sdk install_python_sdk install_nodejs_sdk 
+install_sdks: install_dotnet_sdk install_python_sdk install_nodejs_sdk install_java_sdk
 
 only_build: build
 
@@ -54,6 +57,17 @@ build_go: export PULUMI_CONVERT_EXAMPLES_CACHE_DIR := $(WORKING_DIR)/.pulumi/exa
 build_go: upstream
 	PULUMI_CONVERT=$(PULUMI_CONVERT) PULUMI_DISABLE_AUTOMATIC_PLUGIN_ACQUISITION=$(PULUMI_CONVERT) $(WORKING_DIR)/bin/$(TFGEN) go --out sdk/go/
 	cd sdk && go list "$$(grep -e "^module" go.mod | cut -d ' ' -f 2)/go/..." | xargs -I {} bash -c 'go build {} && go clean -i {}'
+
+build_java: PACKAGE_VERSION := $(VERSION_GENERIC)
+build_java: export PULUMI_HOME := $(WORKING_DIR)/.pulumi
+build_java: export PATH := $(WORKING_DIR)/.pulumi/bin:$(PATH)
+build_java: export PULUMI_CONVERT_EXAMPLES_CACHE_DIR := $(WORKING_DIR)/.pulumi/examples-cache
+build_java: bin/pulumi-java-gen upstream
+	$(WORKING_DIR)/bin/$(JAVA_GEN) generate --schema provider/cmd/$(PROVIDER)/schema.json --out sdk/java  --build gradle-nexus
+	cd sdk/java/ && \
+		printf "module fake_java_module // Exclude this directory from Go tools\n\ngo 1.17\n" > go.mod && \
+		gradle --console=plain build && \
+		gradle --console=plain javadoc
 
 build_nodejs: export PULUMI_HOME := $(WORKING_DIR)/.pulumi
 build_nodejs: export PATH := $(WORKING_DIR)/.pulumi/bin:$(PATH)
@@ -104,6 +118,9 @@ install_nodejs_sdk:
 install_plugins: export PULUMI_HOME := $(WORKING_DIR)/.pulumi
 install_plugins: export PATH := $(WORKING_DIR)/.pulumi/bin:$(PATH)
 install_plugins: .pulumi/bin/pulumi
+	.pulumi/bin/pulumi plugin install resource random 4.8.2
+	.pulumi/bin/pulumi plugin install resource std 1.6.2
+	.pulumi/bin/pulumi plugin install converter terraform 1.0.15
 
 lint_provider: provider
 	cd provider && golangci-lint run -c ../.golangci.yml
@@ -151,6 +168,9 @@ ifneq ("$(wildcard upstream)","")
 	./upstream.sh init
 endif
 
+bin/pulumi-java-gen: .pulumi-java-gen.version
+	pulumictl download-binary -n pulumi-language-java -v v$(shell cat .pulumi-java-gen.version) -r pulumi/pulumi-java
+
 # To make an immediately observable change to .ci-mgmt.yaml:
 #
 # - Edit .ci-mgmt.yaml
@@ -187,7 +207,7 @@ ci-mgmt: .ci-mgmt.yaml
 debug_tfgen:
 	dlv  --listen=:2345 --headless=true --api-version=2  exec $(WORKING_DIR)/bin/$(TFGEN) -- schema --out provider/cmd/$(PROVIDER)
 
-.PHONY: development build build_sdks install_go_sdk  install_python_sdk install_sdks only_build build_dotnet build_go build_nodejs build_python clean cleanup help install_dotnet_sdk install_nodejs_sdk install_plugins lint_provider provider provider_no_deps test tfgen upstream ci-mgmt test_provider debug_tfgen tfgen_build_only
+.PHONY: development build build_sdks install_go_sdk install_java_sdk install_python_sdk install_sdks only_build build_dotnet build_go build_java build_nodejs build_python clean cleanup help install_dotnet_sdk install_nodejs_sdk install_plugins lint_provider provider provider_no_deps test tfgen upstream ci-mgmt test_provider debug_tfgen tfgen_build_only
 
 # Provider cross-platform build & packaging
 

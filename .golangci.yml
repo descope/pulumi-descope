@@ -2,25 +2,22 @@
 
 linters:
   enable:
-  - errcheck
-  - gci
-  - goconst
-  - gofmt
-  - gosec
-  - govet
-  - ineffassign
-  - lll
-  - megacheck
-  - misspell
-  - nakedret
-  - revive
-  - unconvert
-  - unused
+    - errcheck
+    - gci
+    - goconst
+    - gofmt
+    - gosec
+    - govet
+    - ineffassign
+    - lll
+    - megacheck
+    - misspell
+    - nakedret
+    - revive
+    - unconvert
+    - unused
   enable-all: false
 run:
-  skip-files:
-  - schema.go
-  - pulumiManifest.go
   timeout: 20m
 linters-settings:
   gci:

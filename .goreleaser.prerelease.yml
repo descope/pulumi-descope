@@ -28,17 +28,9 @@ builds:
       - -X github.com/pulumi/pulumi-descope/provider/pkg/version.Version={{.Tag}}
     main: ./cmd/pulumi-resource-descope/
 changelog:
-  filters:
-    exclude:
-      - Merge branch
-      - Merge pull request
-      - \Winternal\W
-      - \Wci\W
-      - \Wchore\W
-  sort: asc
-  use: git
+  skip: true
 release:
-  disable: false
+  disable: true
 snapshot:
   name_template: "{{ .Tag }}-SNAPSHOT"
 project_name: "pulumi-descope"
