@@ -21,12 +21,14 @@
                 "Pulumi": "3.*"
             },
             "compatibility": "tfbridge20",
-            "rootNamespace": "Descope.Pulumi"
+            "rootNamespace": "Descope.Pulumi",
+            "respectSchemaVersion": true
         },
         "go": {
             "importBasePath": "github.com/descope/pulumi-descope/sdk/go/descope",
             "generateResourceContainerTypes": true,
-            "generateExtraInputTypes": true
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
         },
         "nodejs": {
             "packageName": "@descope/pulumi-descope",
@@ -40,7 +42,8 @@
                 "@types/node": "^10.0.0"
             },
             "compatibility": "tfbridge20",
-            "disableUnionOutputTypes": true
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
         },
         "python": {
             "packageName": "descope_pulumi",
@@ -49,6 +52,7 @@
             },
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/descope/terraform-provider-descope)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-descope` repo](https://github.com/descope/pulumi-descope/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-descope` repo](https://github.com/descope/terraform-provider-descope/issues).",
             "compatibility": "tfbridge20",
+            "respectSchemaVersion": true,
             "pyproject": {}
         }
     },

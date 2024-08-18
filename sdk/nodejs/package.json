@@ -1,6 +1,6 @@
 {
     "name": "@descope/pulumi-descope",
-    "version": "${VERSION}",
+    "version": "1.0.0-alpha.0+dev",
     "description": "A Pulumi package for creating and managing descope cloud resources.",
     "keywords": [
         "descope",
@@ -23,6 +23,7 @@
     "pulumi": {
         "resource": true,
         "name": "descope",
+        "version": "1.0.0-alpha.0+dev",
         "server": "github://api.github.com/descope"
     }
 }
