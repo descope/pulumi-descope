@@ -96,6 +96,7 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion:           true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RootNamespace: fmt.Sprintf("%s.Pulumi", caser.String(publisher)),
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
