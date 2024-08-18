@@ -3,6 +3,7 @@
         "resources": {
             "descope_project": {
                 "current": "descope:index/project:Project",
+                "majorVersion": 1,
                 "fields": {
                     "applications": {
                         "fields": {

@@ -1,0 +1,7 @@
+name: pulumi-descope-go
+runtime: go
+description: A minimal Go Pulumi program that uses the Pulumi descope package.
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: go
