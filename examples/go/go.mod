@@ -6,7 +6,7 @@ toolchain go1.22.2
 
 require (
 	github.com/descope/pulumi-descope/sdk v0.0.2
-	github.com/pulumi/pulumi/sdk/v3 v3.128.0
+	github.com/pulumi/pulumi/sdk/v3 v3.129.0
 )
 
 require (
