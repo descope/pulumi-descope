@@ -2,7 +2,7 @@ module github.com/descope/pulumi-descope/provider
 
 go 1.21.12
 
-toolchain go1.22.6
+toolchain go1.23.0
 
 replace github.com/descope/terraform-provider-descope/shim => ./shim
 
