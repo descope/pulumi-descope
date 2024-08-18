@@ -25,7 +25,7 @@ builds:
         - env GOOS={{ .Os }} GOARCH={{ .Arch }} go clean -modcache
     ignore: []
     ldflags:
-      - -X github.com/pulumi/pulumi-descope/provider/pkg/version.Version={{.Tag}}
+      - -X github.com/descope/pulumi-descope/provider/pkg/version.Version={{.Tag}}
     main: ./cmd/pulumi-resource-descope/
 changelog:
   filters:
