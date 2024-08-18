@@ -20,3 +20,11 @@ func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 
 	return basePython
 }
+
+func TestAccDescopePy(t *testing.T) {
+	test := getPythonBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "py"),
+		})
+	integration.ProgramTest(t, &test)
+}

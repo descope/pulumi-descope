@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://www.descope.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/descope/pulumi-descope</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
+    <Version>1.0.0-alpha.0+dev</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>

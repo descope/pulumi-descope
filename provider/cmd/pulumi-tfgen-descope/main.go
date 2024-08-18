@@ -1,5 +1,3 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,8 +13,9 @@
 package main
 
 import (
-	descope "github.com/descope/pulumi-descope/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+
+	descope "github.com/descope/pulumi-descope/provider"
 )
 
 func main() {

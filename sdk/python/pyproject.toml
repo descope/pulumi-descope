@@ -1,0 +1,22 @@
+[project]
+  name = "descope_pulumi"
+  description = "A Pulumi package for creating and managing descope cloud resources."
+  dependencies = ["parver>=0.2.1", "pulumi>=3.0.0,<4.0.0", "semver>=2.8.1"]
+  keywords = ["descope", "category/cloud"]
+  readme = "README.md"
+  requires-python = ">=3.8"
+  version = "1.0.0a0+dev"
+  [project.license]
+    text = "Apache-2.0"
+  [project.urls]
+    Homepage = "https://www.descope.com"
+    Repository = "https://github.com/descope/pulumi-descope"
+
+[build-system]
+  requires = ["setuptools>=61.0"]
+  build-backend = "setuptools.build_meta"
+
+[tool]
+  [tool.setuptools]
+    [tool.setuptools.package-data]
+      descope_pulumi = ["py.typed", "pulumi-plugin.json"]

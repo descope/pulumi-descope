@@ -1,5 +1,3 @@
-// Copyright 2016-2024, Pulumi Corporation.
-//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -21,6 +19,7 @@ import (
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
+	pfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"golang.org/x/text/cases"
@@ -30,7 +29,6 @@ import (
 	descope "github.com/descope/terraform-provider-descope/shim"
 
 	"github.com/descope/pulumi-descope/provider/pkg/version"
-	pfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 )
 
 // all of the token components used below.
@@ -76,6 +74,7 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
 			},
+			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
 			PackageName: fmt.Sprintf("%s_pulumi", publisher),
@@ -83,6 +82,8 @@ func Provider() tfbridge.ProviderInfo {
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
+			RespectSchemaVersion: true,
+			PyProject:            struct{ Enabled bool }{true},
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: path.Join(
@@ -92,11 +93,16 @@ func Provider() tfbridge.ProviderInfo {
 				mainPkg,
 			),
 			GenerateResourceContainerTypes: true,
+			RespectSchemaVersion:           true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			RootNamespace: fmt.Sprintf("%s.Pulumi", caser.String(publisher)),
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
+			},
+			RespectSchemaVersion: true,
+			Namespaces: map[string]string{
+				mainPkg: caser.String(mainPkg),
 			},
 		},
 	}
