@@ -10,7 +10,9 @@ linters:
     - govet
     - ineffassign
     - lll
-    - megacheck
+    - gosimple
+    - staticcheck
+    - unused
     - misspell
     - nakedret
     - revive
