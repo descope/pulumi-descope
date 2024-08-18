@@ -6,17 +6,12 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
-  PUBLISH_REPO_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-  PUBLISH_REPO_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   PULUMI_API: https://api.pulumi-staging.io
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
   PYPI_USERNAME: __token__
-  SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
-  SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
-  SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
   TF_APPEND_USER_AGENT: pulumi
 
 # This should cancel any previous runs of the same workflow on the same branch which are still running.
@@ -56,16 +51,16 @@ jobs:
     name: comment-notification
     runs-on: ubuntu-latest
     steps:
-    - id: run-url
-      name: Create URL to the run output
-      run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
-    - name: Update with Result
-      uses: peter-evans/create-or-update-comment@v1
-      with:
-        body: "Please view the PR build: ${{ steps.run-url.outputs.run-url }}"
-        issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
-        repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-        token: ${{ secrets.PULUMI_BOT_TOKEN }}
+      - id: run-url
+        name: Create URL to the run output
+        run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+      - name: Update with Result
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          body: "Please view the PR build: ${{ steps.run-url.outputs.run-url }}"
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          token: ${{ secrets.PULUMI_BOT_TOKEN }}
   lint:
     if: github.event_name == 'repository_dispatch' ||
       github.event.pull_request.head.repo.full_name == github.repository
@@ -77,23 +72,23 @@ jobs:
     if: github.event_name == 'repository_dispatch' ||
       github.event.pull_request.head.repo.full_name == github.repository
     needs:
-    - test
-    - build_provider
-    - license_check
-    - lint
+      - test
+      - build_provider
+      - license_check
+      - lint
     runs-on: ubuntu-latest
     steps:
-    - uses: guibranco/github-status-action-v2@0849440ec82c5fa69b2377725b9b7852a3977e76
-      with: 
-        authToken: ${{secrets.GITHUB_TOKEN}}
-        # Write an explicit status check called "Sentinel" which will only pass if this code really runs.
-        # This should always be a required check for PRs.
-        context: 'Sentinel'
-        description: 'All required checks passed'
-        state: 'success'
-        # Write to the PR commit SHA if it's available as we don't want the merge commit sha,
-        # otherwise use the current SHA for any other type of build.
-        sha: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: guibranco/github-status-action-v2@0849440ec82c5fa69b2377725b9b7852a3977e76
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          # Write an explicit status check called "Sentinel" which will only pass if this code really runs.
+          # This should always be a required check for PRs.
+          context: "Sentinel"
+          description: "All required checks passed"
+          state: "success"
+          # Write to the PR commit SHA if it's available as we don't want the merge commit sha,
+          # otherwise use the current SHA for any other type of build.
+          sha: ${{ github.event.pull_request.head.sha || github.sha }}
 
   test:
     if: github.event_name == 'repository_dispatch' ||
@@ -109,56 +104,56 @@ jobs:
     env:
       PROVIDER_VERSION: ${{ needs.prerequisites.outputs.version }}
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ env.PR_COMMIT_SHA }}
-    - name: Checkout p/examples
-      if: matrix.testTarget == 'pulumiExamples'
-      uses: actions/checkout@v4
-      with:
-        repository: pulumi/examples
-        path: p-examples
-    - name: Setup tools
-      uses: ./.github/actions/setup-tools
-      with:
-        tools: pulumictl, pulumicli, go, node, dotnet, python, java
-    - name: Download bin
-      uses: ./.github/actions/download-bin
-    - run: dotnet nuget add source ${{ github.workspace }}/nuget
-    - name: Download SDK
-      uses: ./.github/actions/download-sdk
-      with:
-        language: ${{ matrix.language }}
-    - name: Update path
-      run: echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
-    - name: Install Python deps
-      run: |-
-        pip3 install virtualenv==20.0.23
-        pip3 install pipenv
-    - name: Install dependencies
-      run: make install_${{ matrix.language}}_sdk
-    - name: Install gotestfmt
-      uses: GoTestTools/gotestfmt-action@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        version: v2.5.0
-    - name: Run tests
-      if: matrix.testTarget == 'local'
-      run: cd examples && go test -v -json -count=1 -cover -timeout 2h -tags=${{ matrix.language }} -skip TestPulumiExamples -parallel 4 . 2>&1 | tee /tmp/gotest.log | gotestfmt
-    - name: Run pulumi/examples tests
-      if: matrix.testTarget == 'pulumiExamples'
-      run: cd examples && go test -v -json -count=1 -cover -timeout 2h -tags=${{
-        matrix.language }} -run TestPulumiExamples -parallel 4 . 2>&1 | tee /tmp/gotest.log | gotestfmt
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PR_COMMIT_SHA }}
+      - name: Checkout p/examples
+        if: matrix.testTarget == 'pulumiExamples'
+        uses: actions/checkout@v4
+        with:
+          repository: pulumi/examples
+          path: p-examples
+      - name: Setup tools
+        uses: ./.github/actions/setup-tools
+        with:
+          tools: pulumictl, pulumicli, go, node, dotnet, python
+      - name: Download bin
+        uses: ./.github/actions/download-bin
+      - run: dotnet nuget add source ${{ github.workspace }}/nuget
+      - name: Download SDK
+        uses: ./.github/actions/download-sdk
+        with:
+          language: ${{ matrix.language }}
+      - name: Update path
+        run: echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
+      - name: Install Python deps
+        run: |-
+          pip3 install virtualenv==20.0.23
+          pip3 install pipenv
+      - name: Install dependencies
+        run: make install_${{ matrix.language}}_sdk
+      - name: Install gotestfmt
+        uses: GoTestTools/gotestfmt-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: v2.5.0
+      - name: Run tests
+        if: matrix.testTarget == 'local'
+        run: cd examples && go test -v -json -count=1 -cover -timeout 2h -tags=${{ matrix.language }} -skip TestPulumiExamples -parallel 4 . 2>&1 | tee /tmp/gotest.log | gotestfmt
+      - name: Run pulumi/examples tests
+        if: matrix.testTarget == 'pulumiExamples'
+        run:
+          cd examples && go test -v -json -count=1 -cover -timeout 2h -tags=${{
+          matrix.language }} -run TestPulumiExamples -parallel 4 . 2>&1 | tee /tmp/gotest.log | gotestfmt
     strategy:
       fail-fast: false
       matrix:
         language:
-        - nodejs
-        - python
-        - dotnet
-        - go
-        - java
+          - nodejs
+          - python
+          - dotnet
+          - go
         testTarget: [local]
   license_check:
     name: License Check
@@ -168,7 +163,7 @@ name: run-acceptance-tests
 on:
   pull_request:
     paths-ignore:
-    - CHANGELOG.md
+      - CHANGELOG.md
   repository_dispatch:
     types:
-    - run-acceptance-tests-command
+      - run-acceptance-tests-command

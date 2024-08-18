@@ -4,7 +4,7 @@ description: Upload the SDK for a specific language as an asset for the workflow
 inputs:
   language:
     required: true
-    description: One of nodejs, python, dotnet, go, java
+    description: One of nodejs, python, dotnet, go.
 
 runs:
   using: "composite"

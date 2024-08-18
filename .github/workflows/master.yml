@@ -5,17 +5,12 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
-  PUBLISH_REPO_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-  PUBLISH_REPO_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   PULUMI_API: https://api.pulumi-staging.io
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
   PYPI_USERNAME: __token__
-  SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
-  SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
-  SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
   TF_APPEND_USER_AGENT: pulumi
 jobs:
   prerequisites:
@@ -136,7 +131,7 @@ jobs:
       - name: Setup tools
         uses: ./.github/actions/setup-tools
         with:
-          tools: pulumictl, pulumicli, go, node, dotnet, python, java
+          tools: pulumictl, pulumicli, go, node, dotnet, python
       - name: Download bin
         uses: ./.github/actions/download-bin
       - run: dotnet nuget add source ${{ github.workspace }}/nuget
@@ -167,7 +162,6 @@ jobs:
           - python
           - dotnet
           - go
-          - java
 name: master
 on:
   workflow_dispatch: {}

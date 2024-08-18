@@ -16,10 +16,12 @@ package main
 
 import (
 	"context"
+
 	_ "embed"
 
-	descope "github.com/descope/pulumi-descope/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+
+	descope "github.com/descope/pulumi-descope/provider"
 )
 
 //go:embed schema.json

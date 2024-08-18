@@ -1,5 +1,5 @@
 name: Setup tools
-description: Installs Go, Pulumi, pulumictl, schema-tools, Node.JS, Python, dotnet and Java.
+description: Installs Go, Pulumi, pulumictl, schema-tools, Node.JS, Python and dotnet.
 
 inputs:
   tools:
@@ -12,7 +12,6 @@ inputs:
         node
         python
         dotnet
-        java
     default: all
 
 runs:
@@ -65,17 +64,3 @@ runs:
       uses: actions/setup-python@v5
       with:
         python-version: 3.11.8
-
-    - name: Setup Java
-      if: inputs.tools == 'all' || contains(inputs.tools, 'java')
-      uses: actions/setup-java@v4
-      with:
-        cache: gradle
-        distribution: temurin
-        java-version: 11
-
-    - name: Setup Gradle
-      if: inputs.tools == 'all' || contains(inputs.tools, 'java')
-      uses: gradle/gradle-build-action@v3
-      with:
-        gradle-version: 7.6

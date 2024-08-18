@@ -15,8 +15,9 @@
 package main
 
 import (
-	descope "github.com/descope/pulumi-descope/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+
+	descope "github.com/descope/pulumi-descope/provider"
 )
 
 func main() {
