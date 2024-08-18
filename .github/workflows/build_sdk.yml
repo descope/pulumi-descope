@@ -26,7 +26,7 @@ jobs:
     name: build_sdk
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         language:
           - nodejs
@@ -59,7 +59,7 @@ jobs:
         with:
           allowed-changes: |
             sdk/**/pulumi-plugin.json
-            sdk/dotnet/Pulumi.*.csproj
+            sdk/dotnet/Descope.Pulumi.*.csproj
             sdk/go/**/pulumiUtilities.go
             sdk/nodejs/package.json
             sdk/python/pyproject.toml

@@ -51,6 +51,6 @@ jobs:
             github.com/pjbgf/sha1cd,
             github.com/pulumi,
             github.com/segmentio/asm,
-            golang.org
-            github.com/descope/terraform-provider-descope
+            golang.org,
+            github.com/descope/terraform-provider-descope,
             github.com/descope/pulumi-descope
