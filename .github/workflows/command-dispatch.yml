@@ -38,5 +38,5 @@ jobs:
           issue-type: pull-request
           permission: write
           reaction-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: pulumi/pulumi-descope
+          repository: descope/pulumi-descope
           token: ${{ steps.get_token.outputs.token }}

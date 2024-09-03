@@ -17,6 +17,4 @@ plugins:
   - name: terraform
     version: "1.0.15"
     kind: converter
-releaseVerification:
-  nodejs: examples/ts
 generate-nightly-test-workflow: true

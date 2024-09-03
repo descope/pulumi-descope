@@ -61,7 +61,7 @@ jobs:
         shell: bash
         run: |
           # Get latest stable release. Return only first column from result (tag).
-          LAST_VERSION=$(gh release view --repo pulumi/pulumi-descope --json tagName -q .tagName || echo "No stable release" )
+          LAST_VERSION=$(gh release view --repo descope/pulumi-descope --json tagName -q .tagName || echo "No stable release" )
           {
             echo 'summary<<EOF'
             if [[ "$LAST_VERSION" != "No stable release" ]]; then
@@ -124,14 +124,3 @@ jobs:
             go.*
             go/**
             !*.tar.gz
-
-  verify_release:
-    name: verify_release
-    needs: publish_sdk
-    uses: ./.github/workflows/verify-release.yml
-    secrets: inherit
-    with:
-      providerVersion: ${{ inputs.version }}
-      # Prelease is run often but we only have 5 concurrent macos runners, so we only test after the stable release.
-      enableMacosRunner: ${{ inputs.isPrerelease == false }}
-      skipGoSdk: ${{ inputs.skipGoSdk }}
