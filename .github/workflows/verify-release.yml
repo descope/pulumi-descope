@@ -62,5 +62,6 @@ jobs:
         with:
           runtime: nodejs
           directory: examples/ts
-          provider: descope
+          publisher: descope
+          provider: pulumi-descope
           providerVersion: ${{ inputs.providerVersion }}
