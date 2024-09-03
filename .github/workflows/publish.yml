@@ -65,7 +65,7 @@ jobs:
           {
             echo 'summary<<EOF'
             if [[ "$LAST_VERSION" != "No stable release" ]]; then
-              schema-tools compare --provider="descope" --old-commit="$LAST_VERSION" --new-commit="--local-path=provider/cmd/pulumi-resource-descope/schema.json"
+              schema-tools compare --repository github://api.github.com/descope --provider="descope" --old-commit="$LAST_VERSION" --new-commit="--local-path=provider/cmd/pulumi-resource-descope/schema.json"
             fi
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"

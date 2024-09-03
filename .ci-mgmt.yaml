@@ -18,3 +18,5 @@ plugins:
     version: "1.0.15"
     kind: converter
 generate-nightly-test-workflow: true
+publish:
+  sdk: all,!java
