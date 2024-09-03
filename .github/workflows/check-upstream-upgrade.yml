@@ -5,6 +5,13 @@ jobs:
     name: Check for upstream provider upgrades
     runs-on: ubuntu-latest
     steps:
+      - name: Get token
+        id: get_token
+        uses: tibdex/github-app-token@v2
+        with:
+          private_key: ${{ secrets.RELEASE_APP_PEM }}
+          app_id: ${{ secrets.RELEASE_APP_ID }}
+
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Setup tools
