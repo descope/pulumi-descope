@@ -23,9 +23,12 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly ImmutableArray<Outputs.ProjectConnectorsDatadog> Datadogs;
         public readonly ImmutableArray<Outputs.ProjectConnectorsDevrevGrow> DevrevGrows;
         public readonly ImmutableArray<Outputs.ProjectConnectorsDocebo> Docebos;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsFingerprintDescope> FingerprintDescopes;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsFingerprint> Fingerprints;
         public readonly ImmutableArray<Outputs.ProjectConnectorsForter> Forters;
         public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> GoogleCloudTranslations;
         public readonly ImmutableArray<Outputs.ProjectConnectorsHibp> Hibps;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsHttpStaticIp> HttpStaticIps;
         public readonly ImmutableArray<Outputs.ProjectConnectorsHttp> Https;
         public readonly ImmutableArray<Outputs.ProjectConnectorsHubspot> Hubspots;
         public readonly ImmutableArray<Outputs.ProjectConnectorsIntercom> Intercoms;
@@ -64,11 +67,17 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsDocebo> docebos,
 
+            ImmutableArray<Outputs.ProjectConnectorsFingerprintDescope> fingerprintDescopes,
+
+            ImmutableArray<Outputs.ProjectConnectorsFingerprint> fingerprints,
+
             ImmutableArray<Outputs.ProjectConnectorsForter> forters,
 
             ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations,
 
             ImmutableArray<Outputs.ProjectConnectorsHibp> hibps,
+
+            ImmutableArray<Outputs.ProjectConnectorsHttpStaticIp> httpStaticIps,
 
             ImmutableArray<Outputs.ProjectConnectorsHttp> https,
 
@@ -113,9 +122,12 @@ namespace Descope.Pulumi.Descope.Outputs
             Datadogs = datadogs;
             DevrevGrows = devrevGrows;
             Docebos = docebos;
+            FingerprintDescopes = fingerprintDescopes;
+            Fingerprints = fingerprints;
             Forters = forters;
             GoogleCloudTranslations = googleCloudTranslations;
             Hibps = hibps;
+            HttpStaticIps = httpStaticIps;
             Https = https;
             Hubspots = hubspots;
             Intercoms = intercoms;

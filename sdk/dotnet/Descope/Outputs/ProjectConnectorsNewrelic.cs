@@ -20,7 +20,9 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string? DataCenter;
         public readonly string? Description;
         public readonly string? Id;
+        public readonly string? LogsPrefix;
         public readonly string Name;
+        public readonly bool? OverrideLogsPrefix;
         public readonly bool? TroubleshootLogEnabled;
 
         [OutputConstructor]
@@ -37,7 +39,11 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
+            string? logsPrefix,
+
             string name,
+
+            bool? overrideLogsPrefix,
 
             bool? troubleshootLogEnabled)
         {
@@ -47,7 +53,9 @@ namespace Descope.Pulumi.Descope.Outputs
             DataCenter = dataCenter;
             Description = description;
             Id = id;
+            LogsPrefix = logsPrefix;
             Name = name;
+            OverrideLogsPrefix = overrideLogsPrefix;
             TroubleshootLogEnabled = troubleshootLogEnabled;
         }
     }

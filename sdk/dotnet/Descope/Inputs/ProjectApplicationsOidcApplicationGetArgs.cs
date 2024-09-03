@@ -11,7 +11,7 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectApplicationsOidcArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectApplicationsOidcApplicationGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("claims")]
         private InputList<string>? _claims;
@@ -27,6 +27,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
@@ -39,9 +42,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        public ProjectApplicationsOidcArgs()
+        public ProjectApplicationsOidcApplicationGetArgs()
         {
         }
-        public static new ProjectApplicationsOidcArgs Empty => new ProjectApplicationsOidcArgs();
+        public static new ProjectApplicationsOidcApplicationGetArgs Empty => new ProjectApplicationsOidcApplicationGetArgs();
     }
 }

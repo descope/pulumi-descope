@@ -13,20 +13,20 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectApplicationsArgs : global::Pulumi.ResourceArgs
     {
-        [Input("oidcs")]
-        private InputList<Inputs.ProjectApplicationsOidcArgs>? _oidcs;
-        public InputList<Inputs.ProjectApplicationsOidcArgs> Oidcs
+        [Input("oidcApplications")]
+        private InputList<Inputs.ProjectApplicationsOidcApplicationArgs>? _oidcApplications;
+        public InputList<Inputs.ProjectApplicationsOidcApplicationArgs> OidcApplications
         {
-            get => _oidcs ?? (_oidcs = new InputList<Inputs.ProjectApplicationsOidcArgs>());
-            set => _oidcs = value;
+            get => _oidcApplications ?? (_oidcApplications = new InputList<Inputs.ProjectApplicationsOidcApplicationArgs>());
+            set => _oidcApplications = value;
         }
 
-        [Input("samls")]
-        private InputList<Inputs.ProjectApplicationsSamlArgs>? _samls;
-        public InputList<Inputs.ProjectApplicationsSamlArgs> Samls
+        [Input("samlApplications")]
+        private InputList<Inputs.ProjectApplicationsSamlApplicationArgs>? _samlApplications;
+        public InputList<Inputs.ProjectApplicationsSamlApplicationArgs> SamlApplications
         {
-            get => _samls ?? (_samls = new InputList<Inputs.ProjectApplicationsSamlArgs>());
-            set => _samls = value;
+            get => _samlApplications ?? (_samlApplications = new InputList<Inputs.ProjectApplicationsSamlApplicationArgs>());
+            set => _samlApplications = value;
         }
 
         public ProjectApplicationsArgs()

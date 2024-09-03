@@ -2,10 +2,16 @@ import * as descope from "@descope/pulumi-descope";
 
 export const project = new descope.Project("pulumi-ts-test", {
   jwtTemplates: {
-    templates: [
+    userTemplates: [
       {
-        name: "jwt",
-        type: "user",
+        name: "userjwt",
+        description: "JWT token",
+        template: "{}", // must be json
+      },
+    ],
+    accessKeyTemplates: [
+      {
+        name: "accesskeyjwt",
         description: "JWT token",
         template: "{}", // must be json
       },

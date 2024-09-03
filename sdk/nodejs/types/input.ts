@@ -6,46 +6,52 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface ProjectApplications {
-    oidcs?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidc>[]>;
-    samls?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSaml>[]>;
+    oidcApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidcApplication>[]>;
+    samlApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplication>[]>;
 }
 
-export interface ProjectApplicationsOidc {
+export interface ProjectApplicationsOidcApplication {
     claims?: pulumi.Input<pulumi.Input<string>[]>;
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The ID of this resource.
+     */
     id?: pulumi.Input<string>;
     loginPageUrl?: pulumi.Input<string>;
     logo?: pulumi.Input<string>;
     name: pulumi.Input<string>;
 }
 
-export interface ProjectApplicationsSaml {
+export interface ProjectApplicationsSamlApplication {
     acsAllowedCallbackUrls?: pulumi.Input<pulumi.Input<string>[]>;
-    attributeMappings?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlAttributeMapping>[]>;
+    attributeMappings?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplicationAttributeMapping>[]>;
     defaultRelayState?: pulumi.Input<string>;
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
-    dynamicConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlDynamicConfiguration>;
+    dynamicConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlApplicationDynamicConfiguration>;
+    /**
+     * The ID of this resource.
+     */
     id?: pulumi.Input<string>;
     loginPageUrl?: pulumi.Input<string>;
     logo?: pulumi.Input<string>;
-    manualConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlManualConfiguration>;
+    manualConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlApplicationManualConfiguration>;
     name: pulumi.Input<string>;
     subjectNameIdFormat?: pulumi.Input<string>;
     subjectNameIdType?: pulumi.Input<string>;
 }
 
-export interface ProjectApplicationsSamlAttributeMapping {
+export interface ProjectApplicationsSamlApplicationAttributeMapping {
     name: pulumi.Input<string>;
     value: pulumi.Input<string>;
 }
 
-export interface ProjectApplicationsSamlDynamicConfiguration {
+export interface ProjectApplicationsSamlApplicationDynamicConfiguration {
     metadataUrl: pulumi.Input<string>;
 }
 
-export interface ProjectApplicationsSamlManualConfiguration {
+export interface ProjectApplicationsSamlApplicationManualConfiguration {
     acsUrl: pulumi.Input<string>;
     certificate: pulumi.Input<string>;
     entityId: pulumi.Input<string>;
@@ -531,9 +537,12 @@ export interface ProjectConnectors {
     datadogs?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDatadog>[]>;
     devrevGrows?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDevrevGrow>[]>;
     docebos?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDocebo>[]>;
+    fingerprintDescopes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsFingerprintDescope>[]>;
+    fingerprints?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsFingerprint>[]>;
     forters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsForter>[]>;
     googleCloudTranslations?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleCloudTranslation>[]>;
     hibps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHibp>[]>;
+    httpStaticIps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHttpStaticIp>[]>;
     https?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHttp>[]>;
     hubspots?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHubspot>[]>;
     intercoms?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsIntercom>[]>;
@@ -599,6 +608,7 @@ export interface ProjectConnectorsAuditWebhookAuthenticationBasic {
 
 export interface ProjectConnectorsAwsS3 {
     accessKeyId: pulumi.Input<string>;
+    auditEnabled?: pulumi.Input<boolean>;
     auditFilters?: pulumi.Input<string>;
     bucket: pulumi.Input<string>;
     description?: pulumi.Input<string>;
@@ -606,6 +616,7 @@ export interface ProjectConnectorsAwsS3 {
     name: pulumi.Input<string>;
     region: pulumi.Input<string>;
     secretAccessKey: pulumi.Input<string>;
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsAwsTranslate {
@@ -653,6 +664,24 @@ export interface ProjectConnectorsDocebo {
     name: pulumi.Input<string>;
     password: pulumi.Input<string>;
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsFingerprint {
+    cloudflareEndpointUrl?: pulumi.Input<string>;
+    cloudflareScriptUrl?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    publicApiKey: pulumi.Input<string>;
+    secretApiKey: pulumi.Input<string>;
+    useCloudflareIntegration?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsFingerprintDescope {
+    customDomain?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsForter {
@@ -708,6 +737,34 @@ export interface ProjectConnectorsHttpAuthenticationBasic {
     username: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsHttpStaticIp {
+    authentication?: pulumi.Input<inputs.ProjectConnectorsHttpStaticIpAuthentication>;
+    baseUrl: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    hmacSecret?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    includeHeadersInContext?: pulumi.Input<boolean>;
+    insecure?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthentication {
+    apiKey?: pulumi.Input<inputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey>;
+    basic?: pulumi.Input<inputs.ProjectConnectorsHttpStaticIpAuthenticationBasic>;
+    bearerToken?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+    key: pulumi.Input<string>;
+    token: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthenticationBasic {
+    password: pulumi.Input<string>;
+    username: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsHubspot {
     accessToken: pulumi.Input<string>;
     baseUrl?: pulumi.Input<string>;
@@ -731,7 +788,9 @@ export interface ProjectConnectorsNewrelic {
     dataCenter?: pulumi.Input<string>;
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    logsPrefix?: pulumi.Input<string>;
     name: pulumi.Input<string>;
+    overrideLogsPrefix?: pulumi.Input<boolean>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
@@ -908,22 +967,37 @@ export interface ProjectFlows {
 }
 
 export interface ProjectJwtTemplates {
-    templates?: pulumi.Input<pulumi.Input<inputs.ProjectJwtTemplatesTemplate>[]>;
+    accessKeyTemplates?: pulumi.Input<pulumi.Input<inputs.ProjectJwtTemplatesAccessKeyTemplate>[]>;
+    userTemplates?: pulumi.Input<pulumi.Input<inputs.ProjectJwtTemplatesUserTemplate>[]>;
 }
 
-export interface ProjectJwtTemplatesTemplate {
+export interface ProjectJwtTemplatesAccessKeyTemplate {
     authSchema?: pulumi.Input<string>;
     conformanceIssuer?: pulumi.Input<boolean>;
     description?: pulumi.Input<string>;
+    /**
+     * The ID of this resource.
+     */
     id?: pulumi.Input<string>;
     name: pulumi.Input<string>;
     template: pulumi.Input<string>;
-    type: pulumi.Input<string>;
+}
+
+export interface ProjectJwtTemplatesUserTemplate {
+    authSchema?: pulumi.Input<string>;
+    conformanceIssuer?: pulumi.Input<boolean>;
+    description?: pulumi.Input<string>;
+    /**
+     * The ID of this resource.
+     */
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    template: pulumi.Input<string>;
 }
 
 export interface ProjectProjectSettings {
     accessKeyJwtTemplate?: pulumi.Input<string>;
-    cookiePolicy?: pulumi.Input<number>;
+    cookiePolicy?: pulumi.Input<string>;
     domain?: pulumi.Input<string>;
     enableInactivity?: pulumi.Input<boolean>;
     inactivityTime?: pulumi.Input<string>;

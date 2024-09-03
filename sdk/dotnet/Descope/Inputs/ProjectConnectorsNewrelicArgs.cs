@@ -40,8 +40,14 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        [Input("logsPrefix")]
+        public Input<string>? LogsPrefix { get; set; }
+
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        [Input("overrideLogsPrefix")]
+        public Input<bool>? OverrideLogsPrefix { get; set; }
 
         [Input("troubleshootLogEnabled")]
         public Input<bool>? TroubleshootLogEnabled { get; set; }

@@ -6,46 +6,52 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface ProjectApplications {
-    oidcs: outputs.ProjectApplicationsOidc[];
-    samls: outputs.ProjectApplicationsSaml[];
+    oidcApplications: outputs.ProjectApplicationsOidcApplication[];
+    samlApplications: outputs.ProjectApplicationsSamlApplication[];
 }
 
-export interface ProjectApplicationsOidc {
+export interface ProjectApplicationsOidcApplication {
     claims: string[];
     description: string;
     disabled: boolean;
+    /**
+     * The ID of this resource.
+     */
     id: string;
     loginPageUrl: string;
     logo: string;
     name: string;
 }
 
-export interface ProjectApplicationsSaml {
+export interface ProjectApplicationsSamlApplication {
     acsAllowedCallbackUrls: string[];
-    attributeMappings: outputs.ProjectApplicationsSamlAttributeMapping[];
+    attributeMappings: outputs.ProjectApplicationsSamlApplicationAttributeMapping[];
     defaultRelayState: string;
     description: string;
     disabled: boolean;
-    dynamicConfiguration: outputs.ProjectApplicationsSamlDynamicConfiguration;
+    dynamicConfiguration: outputs.ProjectApplicationsSamlApplicationDynamicConfiguration;
+    /**
+     * The ID of this resource.
+     */
     id: string;
     loginPageUrl: string;
     logo: string;
-    manualConfiguration: outputs.ProjectApplicationsSamlManualConfiguration;
+    manualConfiguration: outputs.ProjectApplicationsSamlApplicationManualConfiguration;
     name: string;
     subjectNameIdFormat: string;
     subjectNameIdType: string;
 }
 
-export interface ProjectApplicationsSamlAttributeMapping {
+export interface ProjectApplicationsSamlApplicationAttributeMapping {
     name: string;
     value: string;
 }
 
-export interface ProjectApplicationsSamlDynamicConfiguration {
+export interface ProjectApplicationsSamlApplicationDynamicConfiguration {
     metadataUrl: string;
 }
 
-export interface ProjectApplicationsSamlManualConfiguration {
+export interface ProjectApplicationsSamlApplicationManualConfiguration {
     acsUrl: string;
     certificate: string;
     entityId: string;
@@ -531,9 +537,12 @@ export interface ProjectConnectors {
     datadogs: outputs.ProjectConnectorsDatadog[];
     devrevGrows: outputs.ProjectConnectorsDevrevGrow[];
     docebos: outputs.ProjectConnectorsDocebo[];
+    fingerprintDescopes: outputs.ProjectConnectorsFingerprintDescope[];
+    fingerprints: outputs.ProjectConnectorsFingerprint[];
     forters: outputs.ProjectConnectorsForter[];
     googleCloudTranslations: outputs.ProjectConnectorsGoogleCloudTranslation[];
     hibps: outputs.ProjectConnectorsHibp[];
+    httpStaticIps: outputs.ProjectConnectorsHttpStaticIp[];
     https: outputs.ProjectConnectorsHttp[];
     hubspots: outputs.ProjectConnectorsHubspot[];
     intercoms: outputs.ProjectConnectorsIntercom[];
@@ -599,6 +608,7 @@ export interface ProjectConnectorsAuditWebhookAuthenticationBasic {
 
 export interface ProjectConnectorsAwsS3 {
     accessKeyId: string;
+    auditEnabled: boolean;
     auditFilters: string;
     bucket: string;
     description: string;
@@ -606,6 +616,7 @@ export interface ProjectConnectorsAwsS3 {
     name: string;
     region: string;
     secretAccessKey: string;
+    troubleshootLogEnabled: boolean;
 }
 
 export interface ProjectConnectorsAwsTranslate {
@@ -653,6 +664,24 @@ export interface ProjectConnectorsDocebo {
     name: string;
     password: string;
     username: string;
+}
+
+export interface ProjectConnectorsFingerprint {
+    cloudflareEndpointUrl: string;
+    cloudflareScriptUrl: string;
+    description: string;
+    id: string;
+    name: string;
+    publicApiKey: string;
+    secretApiKey: string;
+    useCloudflareIntegration: boolean;
+}
+
+export interface ProjectConnectorsFingerprintDescope {
+    customDomain: string;
+    description: string;
+    id: string;
+    name: string;
 }
 
 export interface ProjectConnectorsForter {
@@ -708,6 +737,34 @@ export interface ProjectConnectorsHttpAuthenticationBasic {
     username: string;
 }
 
+export interface ProjectConnectorsHttpStaticIp {
+    authentication: outputs.ProjectConnectorsHttpStaticIpAuthentication;
+    baseUrl: string;
+    description: string;
+    headers: {[key: string]: string};
+    hmacSecret: string;
+    id: string;
+    includeHeadersInContext: boolean;
+    insecure: boolean;
+    name: string;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthentication {
+    apiKey: outputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey;
+    basic: outputs.ProjectConnectorsHttpStaticIpAuthenticationBasic;
+    bearerToken: string;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+    key: string;
+    token: string;
+}
+
+export interface ProjectConnectorsHttpStaticIpAuthenticationBasic {
+    password: string;
+    username: string;
+}
+
 export interface ProjectConnectorsHubspot {
     accessToken: string;
     baseUrl: string;
@@ -731,7 +788,9 @@ export interface ProjectConnectorsNewrelic {
     dataCenter: string;
     description: string;
     id: string;
+    logsPrefix: string;
     name: string;
+    overrideLogsPrefix: boolean;
     troubleshootLogEnabled: boolean;
 }
 
@@ -908,22 +967,37 @@ export interface ProjectFlows {
 }
 
 export interface ProjectJwtTemplates {
-    templates: outputs.ProjectJwtTemplatesTemplate[];
+    accessKeyTemplates: outputs.ProjectJwtTemplatesAccessKeyTemplate[];
+    userTemplates: outputs.ProjectJwtTemplatesUserTemplate[];
 }
 
-export interface ProjectJwtTemplatesTemplate {
+export interface ProjectJwtTemplatesAccessKeyTemplate {
     authSchema: string;
     conformanceIssuer: boolean;
     description: string;
+    /**
+     * The ID of this resource.
+     */
     id: string;
     name: string;
     template: string;
-    type: string;
+}
+
+export interface ProjectJwtTemplatesUserTemplate {
+    authSchema: string;
+    conformanceIssuer: boolean;
+    description: string;
+    /**
+     * The ID of this resource.
+     */
+    id: string;
+    name: string;
+    template: string;
 }
 
 export interface ProjectProjectSettings {
     accessKeyJwtTemplate: string;
-    cookiePolicy: number;
+    cookiePolicy: string;
     domain: string;
     enableInactivity: boolean;
     inactivityTime: string;

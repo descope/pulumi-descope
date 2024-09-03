@@ -11,14 +11,14 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectApplicationsSamlDynamicConfigurationArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectApplicationsSamlApplicationDynamicConfigurationArgs : global::Pulumi.ResourceArgs
     {
         [Input("metadataUrl", required: true)]
         public Input<string> MetadataUrl { get; set; } = null!;
 
-        public ProjectApplicationsSamlDynamicConfigurationArgs()
+        public ProjectApplicationsSamlApplicationDynamicConfigurationArgs()
         {
         }
-        public static new ProjectApplicationsSamlDynamicConfigurationArgs Empty => new ProjectApplicationsSamlDynamicConfigurationArgs();
+        public static new ProjectApplicationsSamlApplicationDynamicConfigurationArgs Empty => new ProjectApplicationsSamlApplicationDynamicConfigurationArgs();
     }
 }

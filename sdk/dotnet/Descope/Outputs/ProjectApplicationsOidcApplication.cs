@@ -12,18 +12,21 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectApplicationsOidc
+    public sealed class ProjectApplicationsOidcApplication
     {
         public readonly ImmutableArray<string> Claims;
         public readonly string? Description;
         public readonly bool? Disabled;
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
         public readonly string? Id;
         public readonly string? LoginPageUrl;
         public readonly string? Logo;
         public readonly string Name;
 
         [OutputConstructor]
-        private ProjectApplicationsOidc(
+        private ProjectApplicationsOidcApplication(
             ImmutableArray<string> claims,
 
             string? description,

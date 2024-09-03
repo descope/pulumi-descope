@@ -14,17 +14,17 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplications
     {
-        public readonly ImmutableArray<Outputs.ProjectApplicationsOidc> Oidcs;
-        public readonly ImmutableArray<Outputs.ProjectApplicationsSaml> Samls;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsOidcApplication> OidcApplications;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplication> SamlApplications;
 
         [OutputConstructor]
         private ProjectApplications(
-            ImmutableArray<Outputs.ProjectApplicationsOidc> oidcs,
+            ImmutableArray<Outputs.ProjectApplicationsOidcApplication> oidcApplications,
 
-            ImmutableArray<Outputs.ProjectApplicationsSaml> samls)
+            ImmutableArray<Outputs.ProjectApplicationsSamlApplication> samlApplications)
         {
-            Oidcs = oidcs;
-            Samls = samls;
+            OidcApplications = oidcApplications;
+            SamlApplications = samlApplications;
         }
     }
 }

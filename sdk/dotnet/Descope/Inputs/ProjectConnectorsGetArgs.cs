@@ -85,6 +85,22 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _docebos = value;
         }
 
+        [Input("fingerprintDescopes")]
+        private InputList<Inputs.ProjectConnectorsFingerprintDescopeGetArgs>? _fingerprintDescopes;
+        public InputList<Inputs.ProjectConnectorsFingerprintDescopeGetArgs> FingerprintDescopes
+        {
+            get => _fingerprintDescopes ?? (_fingerprintDescopes = new InputList<Inputs.ProjectConnectorsFingerprintDescopeGetArgs>());
+            set => _fingerprintDescopes = value;
+        }
+
+        [Input("fingerprints")]
+        private InputList<Inputs.ProjectConnectorsFingerprintGetArgs>? _fingerprints;
+        public InputList<Inputs.ProjectConnectorsFingerprintGetArgs> Fingerprints
+        {
+            get => _fingerprints ?? (_fingerprints = new InputList<Inputs.ProjectConnectorsFingerprintGetArgs>());
+            set => _fingerprints = value;
+        }
+
         [Input("forters")]
         private InputList<Inputs.ProjectConnectorsForterGetArgs>? _forters;
         public InputList<Inputs.ProjectConnectorsForterGetArgs> Forters
@@ -107,6 +123,14 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _hibps ?? (_hibps = new InputList<Inputs.ProjectConnectorsHibpGetArgs>());
             set => _hibps = value;
+        }
+
+        [Input("httpStaticIps")]
+        private InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs>? _httpStaticIps;
+        public InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs> HttpStaticIps
+        {
+            get => _httpStaticIps ?? (_httpStaticIps = new InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs>());
+            set => _httpStaticIps = value;
         }
 
         [Input("https")]

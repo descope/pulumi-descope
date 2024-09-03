@@ -11,7 +11,7 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectApplicationsSamlAttributeMappingArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectApplicationsSamlApplicationAttributeMappingGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -19,9 +19,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
-        public ProjectApplicationsSamlAttributeMappingArgs()
+        public ProjectApplicationsSamlApplicationAttributeMappingGetArgs()
         {
         }
-        public static new ProjectApplicationsSamlAttributeMappingArgs Empty => new ProjectApplicationsSamlAttributeMappingArgs();
+        public static new ProjectApplicationsSamlApplicationAttributeMappingGetArgs Empty => new ProjectApplicationsSamlApplicationAttributeMappingGetArgs();
     }
 }

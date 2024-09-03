@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectProjectSettings
     {
         public readonly string? AccessKeyJwtTemplate;
-        public readonly int? CookiePolicy;
+        public readonly string? CookiePolicy;
         public readonly string? Domain;
         public readonly bool? EnableInactivity;
         public readonly string? InactivityTime;
@@ -26,7 +26,7 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectProjectSettings(
             string? accessKeyJwtTemplate,
 
-            int? cookiePolicy,
+            string? cookiePolicy,
 
             string? domain,
 

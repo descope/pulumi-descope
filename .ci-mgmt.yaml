@@ -18,5 +18,5 @@ plugins:
     version: "1.0.15"
     kind: converter
 releaseVerification:
-  nodejs: examples/basic
+  nodejs: examples/ts
 generate-nightly-test-workflow: true

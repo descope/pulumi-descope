@@ -12,18 +12,20 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectJwtTemplatesTemplate
+    public sealed class ProjectJwtTemplatesUserTemplate
     {
         public readonly string? AuthSchema;
         public readonly bool? ConformanceIssuer;
         public readonly string? Description;
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
         public readonly string? Id;
         public readonly string Name;
         public readonly string Template;
-        public readonly string Type;
 
         [OutputConstructor]
-        private ProjectJwtTemplatesTemplate(
+        private ProjectJwtTemplatesUserTemplate(
             string? authSchema,
 
             bool? conformanceIssuer,
@@ -34,9 +36,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string name,
 
-            string template,
-
-            string type)
+            string template)
         {
             AuthSchema = authSchema;
             ConformanceIssuer = conformanceIssuer;
@@ -44,7 +44,6 @@ namespace Descope.Pulumi.Descope.Outputs
             Id = id;
             Name = name;
             Template = template;
-            Type = type;
         }
     }
 }

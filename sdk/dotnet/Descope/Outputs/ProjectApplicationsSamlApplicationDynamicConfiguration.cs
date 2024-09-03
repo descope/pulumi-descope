@@ -12,12 +12,12 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectApplicationsSamlDynamicConfiguration
+    public sealed class ProjectApplicationsSamlApplicationDynamicConfiguration
     {
         public readonly string MetadataUrl;
 
         [OutputConstructor]
-        private ProjectApplicationsSamlDynamicConfiguration(string metadataUrl)
+        private ProjectApplicationsSamlApplicationDynamicConfiguration(string metadataUrl)
         {
             MetadataUrl = metadataUrl;
         }
