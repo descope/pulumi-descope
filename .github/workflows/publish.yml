@@ -104,7 +104,7 @@ jobs:
       - name: Publish SDKs
         uses: pulumi/pulumi-package-publisher@v0.0.20
         with:
-          sdk: all
+          sdk: all,!java
           version: ${{ inputs.version }}
       - name: Download Go SDK
         uses: ./.github/actions/download-sdk
