@@ -13,12 +13,20 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectJwtTemplatesGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("templates")]
-        private InputList<Inputs.ProjectJwtTemplatesTemplateGetArgs>? _templates;
-        public InputList<Inputs.ProjectJwtTemplatesTemplateGetArgs> Templates
+        [Input("accessKeyTemplates")]
+        private InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs>? _accessKeyTemplates;
+        public InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs> AccessKeyTemplates
         {
-            get => _templates ?? (_templates = new InputList<Inputs.ProjectJwtTemplatesTemplateGetArgs>());
-            set => _templates = value;
+            get => _accessKeyTemplates ?? (_accessKeyTemplates = new InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs>());
+            set => _accessKeyTemplates = value;
+        }
+
+        [Input("userTemplates")]
+        private InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs>? _userTemplates;
+        public InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs> UserTemplates
+        {
+            get => _userTemplates ?? (_userTemplates = new InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs>());
+            set => _userTemplates = value;
         }
 
         public ProjectJwtTemplatesGetArgs()

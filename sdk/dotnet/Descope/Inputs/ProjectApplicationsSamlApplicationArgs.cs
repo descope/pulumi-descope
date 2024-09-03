@@ -11,7 +11,7 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectApplicationsSamlArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectApplicationsSamlApplicationArgs : global::Pulumi.ResourceArgs
     {
         [Input("acsAllowedCallbackUrls")]
         private InputList<string>? _acsAllowedCallbackUrls;
@@ -22,10 +22,10 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         [Input("attributeMappings")]
-        private InputList<Inputs.ProjectApplicationsSamlAttributeMappingArgs>? _attributeMappings;
-        public InputList<Inputs.ProjectApplicationsSamlAttributeMappingArgs> AttributeMappings
+        private InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs>? _attributeMappings;
+        public InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs> AttributeMappings
         {
-            get => _attributeMappings ?? (_attributeMappings = new InputList<Inputs.ProjectApplicationsSamlAttributeMappingArgs>());
+            get => _attributeMappings ?? (_attributeMappings = new InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs>());
             set => _attributeMappings = value;
         }
 
@@ -39,8 +39,11 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? Disabled { get; set; }
 
         [Input("dynamicConfiguration")]
-        public Input<Inputs.ProjectApplicationsSamlDynamicConfigurationArgs>? DynamicConfiguration { get; set; }
+        public Input<Inputs.ProjectApplicationsSamlApplicationDynamicConfigurationArgs>? DynamicConfiguration { get; set; }
 
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
@@ -51,7 +54,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Logo { get; set; }
 
         [Input("manualConfiguration")]
-        public Input<Inputs.ProjectApplicationsSamlManualConfigurationArgs>? ManualConfiguration { get; set; }
+        public Input<Inputs.ProjectApplicationsSamlApplicationManualConfigurationArgs>? ManualConfiguration { get; set; }
 
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -62,9 +65,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("subjectNameIdType")]
         public Input<string>? SubjectNameIdType { get; set; }
 
-        public ProjectApplicationsSamlArgs()
+        public ProjectApplicationsSamlApplicationArgs()
         {
         }
-        public static new ProjectApplicationsSamlArgs Empty => new ProjectApplicationsSamlArgs();
+        public static new ProjectApplicationsSamlApplicationArgs Empty => new ProjectApplicationsSamlApplicationArgs();
     }
 }

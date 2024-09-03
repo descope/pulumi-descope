@@ -13,20 +13,20 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectApplicationsGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("oidcs")]
-        private InputList<Inputs.ProjectApplicationsOidcGetArgs>? _oidcs;
-        public InputList<Inputs.ProjectApplicationsOidcGetArgs> Oidcs
+        [Input("oidcApplications")]
+        private InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs>? _oidcApplications;
+        public InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs> OidcApplications
         {
-            get => _oidcs ?? (_oidcs = new InputList<Inputs.ProjectApplicationsOidcGetArgs>());
-            set => _oidcs = value;
+            get => _oidcApplications ?? (_oidcApplications = new InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs>());
+            set => _oidcApplications = value;
         }
 
-        [Input("samls")]
-        private InputList<Inputs.ProjectApplicationsSamlGetArgs>? _samls;
-        public InputList<Inputs.ProjectApplicationsSamlGetArgs> Samls
+        [Input("samlApplications")]
+        private InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs>? _samlApplications;
+        public InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs> SamlApplications
         {
-            get => _samls ?? (_samls = new InputList<Inputs.ProjectApplicationsSamlGetArgs>());
-            set => _samls = value;
+            get => _samlApplications ?? (_samlApplications = new InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs>());
+            set => _samlApplications = value;
         }
 
         public ProjectApplicationsGetArgs()

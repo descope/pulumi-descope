@@ -15,6 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsAwsS3
     {
         public readonly string AccessKeyId;
+        public readonly bool? AuditEnabled;
         public readonly string? AuditFilters;
         public readonly string Bucket;
         public readonly string? Description;
@@ -22,10 +23,13 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string Name;
         public readonly string Region;
         public readonly string SecretAccessKey;
+        public readonly bool? TroubleshootLogEnabled;
 
         [OutputConstructor]
         private ProjectConnectorsAwsS3(
             string accessKeyId,
+
+            bool? auditEnabled,
 
             string? auditFilters,
 
@@ -39,9 +43,12 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string region,
 
-            string secretAccessKey)
+            string secretAccessKey,
+
+            bool? troubleshootLogEnabled)
         {
             AccessKeyId = accessKeyId;
+            AuditEnabled = auditEnabled;
             AuditFilters = auditFilters;
             Bucket = bucket;
             Description = description;
@@ -49,6 +56,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Name = name;
             Region = region;
             SecretAccessKey = secretAccessKey;
+            TroubleshootLogEnabled = troubleshootLogEnabled;
         }
     }
 }

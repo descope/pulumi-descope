@@ -12,19 +12,27 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectApplicationsSamlAttributeMapping
+    public sealed class ProjectConnectorsFingerprintDescope
     {
+        public readonly string? CustomDomain;
+        public readonly string? Description;
+        public readonly string? Id;
         public readonly string Name;
-        public readonly string Value;
 
         [OutputConstructor]
-        private ProjectApplicationsSamlAttributeMapping(
-            string name,
+        private ProjectConnectorsFingerprintDescope(
+            string? customDomain,
 
-            string value)
+            string? description,
+
+            string? id,
+
+            string name)
         {
+            CustomDomain = customDomain;
+            Description = description;
+            Id = id;
             Name = name;
-            Value = value;
         }
     }
 }

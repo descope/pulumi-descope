@@ -11,7 +11,7 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectApplicationsSamlManualConfigurationGetArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectApplicationsSamlApplicationManualConfigurationArgs : global::Pulumi.ResourceArgs
     {
         [Input("acsUrl", required: true)]
         public Input<string> AcsUrl { get; set; } = null!;
@@ -22,9 +22,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("entityId", required: true)]
         public Input<string> EntityId { get; set; } = null!;
 
-        public ProjectApplicationsSamlManualConfigurationGetArgs()
+        public ProjectApplicationsSamlApplicationManualConfigurationArgs()
         {
         }
-        public static new ProjectApplicationsSamlManualConfigurationGetArgs Empty => new ProjectApplicationsSamlManualConfigurationGetArgs();
+        public static new ProjectApplicationsSamlApplicationManualConfigurationArgs Empty => new ProjectApplicationsSamlApplicationManualConfigurationArgs();
     }
 }

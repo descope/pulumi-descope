@@ -11,11 +11,11 @@ from . import _utilities
 
 __all__ = [
     'ProjectApplicationsArgs',
-    'ProjectApplicationsOidcArgs',
-    'ProjectApplicationsSamlArgs',
-    'ProjectApplicationsSamlAttributeMappingArgs',
-    'ProjectApplicationsSamlDynamicConfigurationArgs',
-    'ProjectApplicationsSamlManualConfigurationArgs',
+    'ProjectApplicationsOidcApplicationArgs',
+    'ProjectApplicationsSamlApplicationArgs',
+    'ProjectApplicationsSamlApplicationAttributeMappingArgs',
+    'ProjectApplicationsSamlApplicationDynamicConfigurationArgs',
+    'ProjectApplicationsSamlApplicationManualConfigurationArgs',
     'ProjectAttributesArgs',
     'ProjectAttributesTenantArgs',
     'ProjectAttributesUserArgs',
@@ -81,6 +81,8 @@ __all__ = [
     'ProjectConnectorsDatadogArgs',
     'ProjectConnectorsDevrevGrowArgs',
     'ProjectConnectorsDoceboArgs',
+    'ProjectConnectorsFingerprintArgs',
+    'ProjectConnectorsFingerprintDescopeArgs',
     'ProjectConnectorsForterArgs',
     'ProjectConnectorsGoogleCloudTranslationArgs',
     'ProjectConnectorsHibpArgs',
@@ -88,6 +90,10 @@ __all__ = [
     'ProjectConnectorsHttpAuthenticationArgs',
     'ProjectConnectorsHttpAuthenticationApiKeyArgs',
     'ProjectConnectorsHttpAuthenticationBasicArgs',
+    'ProjectConnectorsHttpStaticIpArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationBasicArgs',
     'ProjectConnectorsHubspotArgs',
     'ProjectConnectorsIntercomArgs',
     'ProjectConnectorsNewrelicArgs',
@@ -116,7 +122,8 @@ __all__ = [
     'ProjectConnectorsVeriffArgs',
     'ProjectFlowsArgs',
     'ProjectJwtTemplatesArgs',
-    'ProjectJwtTemplatesTemplateArgs',
+    'ProjectJwtTemplatesAccessKeyTemplateArgs',
+    'ProjectJwtTemplatesUserTemplateArgs',
     'ProjectProjectSettingsArgs',
     'ProjectStylesArgs',
 ]
@@ -124,34 +131,34 @@ __all__ = [
 @pulumi.input_type
 class ProjectApplicationsArgs:
     def __init__(__self__, *,
-                 oidcs: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcArgs']]]] = None,
-                 samls: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlArgs']]]] = None):
-        if oidcs is not None:
-            pulumi.set(__self__, "oidcs", oidcs)
-        if samls is not None:
-            pulumi.set(__self__, "samls", samls)
+                 oidc_applications: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]]] = None,
+                 saml_applications: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]] = None):
+        if oidc_applications is not None:
+            pulumi.set(__self__, "oidc_applications", oidc_applications)
+        if saml_applications is not None:
+            pulumi.set(__self__, "saml_applications", saml_applications)
 
     @property
-    @pulumi.getter
-    def oidcs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcArgs']]]]:
-        return pulumi.get(self, "oidcs")
+    @pulumi.getter(name="oidcApplications")
+    def oidc_applications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]]]:
+        return pulumi.get(self, "oidc_applications")
 
-    @oidcs.setter
-    def oidcs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcArgs']]]]):
-        pulumi.set(self, "oidcs", value)
+    @oidc_applications.setter
+    def oidc_applications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]]]):
+        pulumi.set(self, "oidc_applications", value)
 
     @property
-    @pulumi.getter
-    def samls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlArgs']]]]:
-        return pulumi.get(self, "samls")
+    @pulumi.getter(name="samlApplications")
+    def saml_applications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]]:
+        return pulumi.get(self, "saml_applications")
 
-    @samls.setter
-    def samls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlArgs']]]]):
-        pulumi.set(self, "samls", value)
+    @saml_applications.setter
+    def saml_applications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]]):
+        pulumi.set(self, "saml_applications", value)
 
 
 @pulumi.input_type
-class ProjectApplicationsOidcArgs:
+class ProjectApplicationsOidcApplicationArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  claims: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -160,6 +167,9 @@ class ProjectApplicationsOidcArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  login_page_url: Optional[pulumi.Input[str]] = None,
                  logo: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         if claims is not None:
             pulumi.set(__self__, "claims", claims)
@@ -213,6 +223,9 @@ class ProjectApplicationsOidcArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -239,21 +252,24 @@ class ProjectApplicationsOidcArgs:
 
 
 @pulumi.input_type
-class ProjectApplicationsSamlArgs:
+class ProjectApplicationsSamlApplicationArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  acs_allowed_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 attribute_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlAttributeMappingArgs']]]] = None,
+                 attribute_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgs']]]] = None,
                  default_relay_state: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  disabled: Optional[pulumi.Input[bool]] = None,
-                 dynamic_configuration: Optional[pulumi.Input['ProjectApplicationsSamlDynamicConfigurationArgs']] = None,
+                 dynamic_configuration: Optional[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgs']] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  login_page_url: Optional[pulumi.Input[str]] = None,
                  logo: Optional[pulumi.Input[str]] = None,
-                 manual_configuration: Optional[pulumi.Input['ProjectApplicationsSamlManualConfigurationArgs']] = None,
+                 manual_configuration: Optional[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgs']] = None,
                  subject_name_id_format: Optional[pulumi.Input[str]] = None,
                  subject_name_id_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         if acs_allowed_callback_urls is not None:
             pulumi.set(__self__, "acs_allowed_callback_urls", acs_allowed_callback_urls)
@@ -300,11 +316,11 @@ class ProjectApplicationsSamlArgs:
 
     @property
     @pulumi.getter(name="attributeMappings")
-    def attribute_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlAttributeMappingArgs']]]]:
+    def attribute_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgs']]]]:
         return pulumi.get(self, "attribute_mappings")
 
     @attribute_mappings.setter
-    def attribute_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlAttributeMappingArgs']]]]):
+    def attribute_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgs']]]]):
         pulumi.set(self, "attribute_mappings", value)
 
     @property
@@ -336,16 +352,19 @@ class ProjectApplicationsSamlArgs:
 
     @property
     @pulumi.getter(name="dynamicConfiguration")
-    def dynamic_configuration(self) -> Optional[pulumi.Input['ProjectApplicationsSamlDynamicConfigurationArgs']]:
+    def dynamic_configuration(self) -> Optional[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgs']]:
         return pulumi.get(self, "dynamic_configuration")
 
     @dynamic_configuration.setter
-    def dynamic_configuration(self, value: Optional[pulumi.Input['ProjectApplicationsSamlDynamicConfigurationArgs']]):
+    def dynamic_configuration(self, value: Optional[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgs']]):
         pulumi.set(self, "dynamic_configuration", value)
 
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -372,11 +391,11 @@ class ProjectApplicationsSamlArgs:
 
     @property
     @pulumi.getter(name="manualConfiguration")
-    def manual_configuration(self) -> Optional[pulumi.Input['ProjectApplicationsSamlManualConfigurationArgs']]:
+    def manual_configuration(self) -> Optional[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgs']]:
         return pulumi.get(self, "manual_configuration")
 
     @manual_configuration.setter
-    def manual_configuration(self, value: Optional[pulumi.Input['ProjectApplicationsSamlManualConfigurationArgs']]):
+    def manual_configuration(self, value: Optional[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgs']]):
         pulumi.set(self, "manual_configuration", value)
 
     @property
@@ -399,7 +418,7 @@ class ProjectApplicationsSamlArgs:
 
 
 @pulumi.input_type
-class ProjectApplicationsSamlAttributeMappingArgs:
+class ProjectApplicationsSamlApplicationAttributeMappingArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  value: pulumi.Input[str]):
@@ -426,7 +445,7 @@ class ProjectApplicationsSamlAttributeMappingArgs:
 
 
 @pulumi.input_type
-class ProjectApplicationsSamlDynamicConfigurationArgs:
+class ProjectApplicationsSamlApplicationDynamicConfigurationArgs:
     def __init__(__self__, *,
                  metadata_url: pulumi.Input[str]):
         pulumi.set(__self__, "metadata_url", metadata_url)
@@ -442,7 +461,7 @@ class ProjectApplicationsSamlDynamicConfigurationArgs:
 
 
 @pulumi.input_type
-class ProjectApplicationsSamlManualConfigurationArgs:
+class ProjectApplicationsSamlApplicationManualConfigurationArgs:
     def __init__(__self__, *,
                  acs_url: pulumi.Input[str],
                  certificate: pulumi.Input[str],
@@ -4492,9 +4511,12 @@ class ProjectConnectorsArgs:
                  datadogs: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]]] = None,
                  devrev_grows: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgs']]]] = None,
                  docebos: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgs']]]] = None,
+                 fingerprint_descopes: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgs']]]] = None,
+                 fingerprints: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgs']]]] = None,
                  forters: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]]] = None,
                  google_cloud_translations: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgs']]]] = None,
                  hibps: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]]] = None,
+                 http_static_ips: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpStaticIpArgs']]]] = None,
                  https: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgs']]]] = None,
                  hubspots: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgs']]]] = None,
                  intercoms: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgs']]]] = None,
@@ -4530,12 +4552,18 @@ class ProjectConnectorsArgs:
             pulumi.set(__self__, "devrev_grows", devrev_grows)
         if docebos is not None:
             pulumi.set(__self__, "docebos", docebos)
+        if fingerprint_descopes is not None:
+            pulumi.set(__self__, "fingerprint_descopes", fingerprint_descopes)
+        if fingerprints is not None:
+            pulumi.set(__self__, "fingerprints", fingerprints)
         if forters is not None:
             pulumi.set(__self__, "forters", forters)
         if google_cloud_translations is not None:
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if hibps is not None:
             pulumi.set(__self__, "hibps", hibps)
+        if http_static_ips is not None:
+            pulumi.set(__self__, "http_static_ips", http_static_ips)
         if https is not None:
             pulumi.set(__self__, "https", https)
         if hubspots is not None:
@@ -4653,6 +4681,24 @@ class ProjectConnectorsArgs:
         pulumi.set(self, "docebos", value)
 
     @property
+    @pulumi.getter(name="fingerprintDescopes")
+    def fingerprint_descopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgs']]]]:
+        return pulumi.get(self, "fingerprint_descopes")
+
+    @fingerprint_descopes.setter
+    def fingerprint_descopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgs']]]]):
+        pulumi.set(self, "fingerprint_descopes", value)
+
+    @property
+    @pulumi.getter
+    def fingerprints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgs']]]]:
+        return pulumi.get(self, "fingerprints")
+
+    @fingerprints.setter
+    def fingerprints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgs']]]]):
+        pulumi.set(self, "fingerprints", value)
+
+    @property
     @pulumi.getter
     def forters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]]]:
         return pulumi.get(self, "forters")
@@ -4678,6 +4724,15 @@ class ProjectConnectorsArgs:
     @hibps.setter
     def hibps(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]]]):
         pulumi.set(self, "hibps", value)
+
+    @property
+    @pulumi.getter(name="httpStaticIps")
+    def http_static_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpStaticIpArgs']]]]:
+        return pulumi.get(self, "http_static_ips")
+
+    @http_static_ips.setter
+    def http_static_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpStaticIpArgs']]]]):
+        pulumi.set(self, "http_static_ips", value)
 
     @property
     @pulumi.getter
@@ -5173,20 +5228,26 @@ class ProjectConnectorsAwsS3Args:
                  name: pulumi.Input[str],
                  region: pulumi.Input[str],
                  secret_access_key: pulumi.Input[str],
+                 audit_enabled: Optional[pulumi.Input[bool]] = None,
                  audit_filters: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 id: Optional[pulumi.Input[str]] = None):
+                 id: Optional[pulumi.Input[str]] = None,
+                 troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "secret_access_key", secret_access_key)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
         if audit_filters is not None:
             pulumi.set(__self__, "audit_filters", audit_filters)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
     @property
     @pulumi.getter(name="accessKeyId")
@@ -5234,6 +5295,15 @@ class ProjectConnectorsAwsS3Args:
         pulumi.set(self, "secret_access_key", value)
 
     @property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "audit_enabled")
+
+    @audit_enabled.setter
+    def audit_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "audit_enabled", value)
+
+    @property
     @pulumi.getter(name="auditFilters")
     def audit_filters(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "audit_filters")
@@ -5259,6 +5329,15 @@ class ProjectConnectorsAwsS3Args:
     @id.setter
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+    @troubleshoot_log_enabled.setter
+    def troubleshoot_log_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
 @pulumi.input_type
@@ -5633,6 +5712,156 @@ class ProjectConnectorsDoceboArgs:
     @username.setter
     def username(self, value: pulumi.Input[str]):
         pulumi.set(self, "username", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+
+@pulumi.input_type
+class ProjectConnectorsFingerprintArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 public_api_key: pulumi.Input[str],
+                 secret_api_key: pulumi.Input[str],
+                 cloudflare_endpoint_url: Optional[pulumi.Input[str]] = None,
+                 cloudflare_script_url: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 use_cloudflare_integration: Optional[pulumi.Input[bool]] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "public_api_key", public_api_key)
+        pulumi.set(__self__, "secret_api_key", secret_api_key)
+        if cloudflare_endpoint_url is not None:
+            pulumi.set(__self__, "cloudflare_endpoint_url", cloudflare_endpoint_url)
+        if cloudflare_script_url is not None:
+            pulumi.set(__self__, "cloudflare_script_url", cloudflare_script_url)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if use_cloudflare_integration is not None:
+            pulumi.set(__self__, "use_cloudflare_integration", use_cloudflare_integration)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="publicApiKey")
+    def public_api_key(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "public_api_key")
+
+    @public_api_key.setter
+    def public_api_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "public_api_key", value)
+
+    @property
+    @pulumi.getter(name="secretApiKey")
+    def secret_api_key(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "secret_api_key")
+
+    @secret_api_key.setter
+    def secret_api_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "secret_api_key", value)
+
+    @property
+    @pulumi.getter(name="cloudflareEndpointUrl")
+    def cloudflare_endpoint_url(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cloudflare_endpoint_url")
+
+    @cloudflare_endpoint_url.setter
+    def cloudflare_endpoint_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cloudflare_endpoint_url", value)
+
+    @property
+    @pulumi.getter(name="cloudflareScriptUrl")
+    def cloudflare_script_url(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "cloudflare_script_url")
+
+    @cloudflare_script_url.setter
+    def cloudflare_script_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cloudflare_script_url", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="useCloudflareIntegration")
+    def use_cloudflare_integration(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "use_cloudflare_integration")
+
+    @use_cloudflare_integration.setter
+    def use_cloudflare_integration(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "use_cloudflare_integration", value)
+
+
+@pulumi.input_type
+class ProjectConnectorsFingerprintDescopeArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 custom_domain: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "name", name)
+        if custom_domain is not None:
+            pulumi.set(__self__, "custom_domain", custom_domain)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="customDomain")
+    def custom_domain(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "custom_domain")
+
+    @custom_domain.setter
+    def custom_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "custom_domain", value)
 
     @property
     @pulumi.getter
@@ -6060,6 +6289,212 @@ class ProjectConnectorsHttpAuthenticationBasicArgs:
 
 
 @pulumi.input_type
+class ProjectConnectorsHttpStaticIpArgs:
+    def __init__(__self__, *,
+                 base_url: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 authentication: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgs']] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 headers: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 hmac_secret: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 include_headers_in_context: Optional[pulumi.Input[bool]] = None,
+                 insecure: Optional[pulumi.Input[bool]] = None):
+        pulumi.set(__self__, "base_url", base_url)
+        pulumi.set(__self__, "name", name)
+        if authentication is not None:
+            pulumi.set(__self__, "authentication", authentication)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if hmac_secret is not None:
+            pulumi.set(__self__, "hmac_secret", hmac_secret)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if include_headers_in_context is not None:
+            pulumi.set(__self__, "include_headers_in_context", include_headers_in_context)
+        if insecure is not None:
+            pulumi.set(__self__, "insecure", insecure)
+
+    @property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "base_url")
+
+    @base_url.setter
+    def base_url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "base_url", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def authentication(self) -> Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgs']]:
+        return pulumi.get(self, "authentication")
+
+    @authentication.setter
+    def authentication(self, value: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgs']]):
+        pulumi.set(self, "authentication", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "headers", value)
+
+    @property
+    @pulumi.getter(name="hmacSecret")
+    def hmac_secret(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "hmac_secret")
+
+    @hmac_secret.setter
+    def hmac_secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hmac_secret", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="includeHeadersInContext")
+    def include_headers_in_context(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "include_headers_in_context")
+
+    @include_headers_in_context.setter
+    def include_headers_in_context(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "include_headers_in_context", value)
+
+    @property
+    @pulumi.getter
+    def insecure(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "insecure")
+
+    @insecure.setter
+    def insecure(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "insecure", value)
+
+
+@pulumi.input_type
+class ProjectConnectorsHttpStaticIpAuthenticationArgs:
+    def __init__(__self__, *,
+                 api_key: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs']] = None,
+                 basic: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationBasicArgs']] = None,
+                 bearer_token: Optional[pulumi.Input[str]] = None):
+        if api_key is not None:
+            pulumi.set(__self__, "api_key", api_key)
+        if basic is not None:
+            pulumi.set(__self__, "basic", basic)
+        if bearer_token is not None:
+            pulumi.set(__self__, "bearer_token", bearer_token)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs']]:
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs']]):
+        pulumi.set(self, "api_key", value)
+
+    @property
+    @pulumi.getter
+    def basic(self) -> Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationBasicArgs']]:
+        return pulumi.get(self, "basic")
+
+    @basic.setter
+    def basic(self, value: Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationBasicArgs']]):
+        pulumi.set(self, "basic", value)
+
+    @property
+    @pulumi.getter(name="bearerToken")
+    def bearer_token(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "bearer_token")
+
+    @bearer_token.setter
+    def bearer_token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bearer_token", value)
+
+
+@pulumi.input_type
+class ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 token: pulumi.Input[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def token(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: pulumi.Input[str]):
+        pulumi.set(self, "token", value)
+
+
+@pulumi.input_type
+class ProjectConnectorsHttpStaticIpAuthenticationBasicArgs:
+    def __init__(__self__, *,
+                 password: pulumi.Input[str],
+                 username: pulumi.Input[str]):
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: pulumi.Input[str]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def username(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: pulumi.Input[str]):
+        pulumi.set(self, "username", value)
+
+
+@pulumi.input_type
 class ProjectConnectorsHubspotArgs:
     def __init__(__self__, *,
                  access_token: pulumi.Input[str],
@@ -6195,6 +6630,8 @@ class ProjectConnectorsNewrelicArgs:
                  data_center: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
+                 logs_prefix: Optional[pulumi.Input[str]] = None,
+                 override_logs_prefix: Optional[pulumi.Input[bool]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
@@ -6208,6 +6645,10 @@ class ProjectConnectorsNewrelicArgs:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if logs_prefix is not None:
+            pulumi.set(__self__, "logs_prefix", logs_prefix)
+        if override_logs_prefix is not None:
+            pulumi.set(__self__, "override_logs_prefix", override_logs_prefix)
         if troubleshoot_log_enabled is not None:
             pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
@@ -6273,6 +6714,24 @@ class ProjectConnectorsNewrelicArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="logsPrefix")
+    def logs_prefix(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "logs_prefix")
+
+    @logs_prefix.setter
+    def logs_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "logs_prefix", value)
+
+    @property
+    @pulumi.getter(name="overrideLogsPrefix")
+    def override_logs_prefix(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "override_logs_prefix")
+
+    @override_logs_prefix.setter
+    def override_logs_prefix(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "override_logs_prefix", value)
 
     @property
     @pulumi.getter(name="troubleshootLogEnabled")
@@ -7555,33 +8014,46 @@ class ProjectFlowsArgs:
 @pulumi.input_type
 class ProjectJwtTemplatesArgs:
     def __init__(__self__, *,
-                 templates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesTemplateArgs']]]] = None):
-        if templates is not None:
-            pulumi.set(__self__, "templates", templates)
+                 access_key_templates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgs']]]] = None,
+                 user_templates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgs']]]] = None):
+        if access_key_templates is not None:
+            pulumi.set(__self__, "access_key_templates", access_key_templates)
+        if user_templates is not None:
+            pulumi.set(__self__, "user_templates", user_templates)
 
     @property
-    @pulumi.getter
-    def templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesTemplateArgs']]]]:
-        return pulumi.get(self, "templates")
+    @pulumi.getter(name="accessKeyTemplates")
+    def access_key_templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgs']]]]:
+        return pulumi.get(self, "access_key_templates")
 
-    @templates.setter
-    def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesTemplateArgs']]]]):
-        pulumi.set(self, "templates", value)
+    @access_key_templates.setter
+    def access_key_templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgs']]]]):
+        pulumi.set(self, "access_key_templates", value)
+
+    @property
+    @pulumi.getter(name="userTemplates")
+    def user_templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgs']]]]:
+        return pulumi.get(self, "user_templates")
+
+    @user_templates.setter
+    def user_templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgs']]]]):
+        pulumi.set(self, "user_templates", value)
 
 
 @pulumi.input_type
-class ProjectJwtTemplatesTemplateArgs:
+class ProjectJwtTemplatesAccessKeyTemplateArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  template: pulumi.Input[str],
-                 type: pulumi.Input[str],
                  auth_schema: Optional[pulumi.Input[str]] = None,
                  conformance_issuer: Optional[pulumi.Input[bool]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
-        pulumi.set(__self__, "type", type)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if conformance_issuer is not None:
@@ -7608,15 +8080,6 @@ class ProjectJwtTemplatesTemplateArgs:
     @template.setter
     def template(self, value: pulumi.Input[str]):
         pulumi.set(self, "template", value)
-
-    @property
-    @pulumi.getter
-    def type(self) -> pulumi.Input[str]:
-        return pulumi.get(self, "type")
-
-    @type.setter
-    def type(self, value: pulumi.Input[str]):
-        pulumi.set(self, "type", value)
 
     @property
     @pulumi.getter(name="authSchema")
@@ -7648,6 +8111,90 @@ class ProjectJwtTemplatesTemplateArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of this resource.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+
+@pulumi.input_type
+class ProjectJwtTemplatesUserTemplateArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 template: pulumi.Input[str],
+                 auth_schema: Optional[pulumi.Input[str]] = None,
+                 conformance_issuer: Optional[pulumi.Input[bool]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] id: The ID of this resource.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "template", template)
+        if auth_schema is not None:
+            pulumi.set(__self__, "auth_schema", auth_schema)
+        if conformance_issuer is not None:
+            pulumi.set(__self__, "conformance_issuer", conformance_issuer)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def template(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "template")
+
+    @template.setter
+    def template(self, value: pulumi.Input[str]):
+        pulumi.set(self, "template", value)
+
+    @property
+    @pulumi.getter(name="authSchema")
+    def auth_schema(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "auth_schema")
+
+    @auth_schema.setter
+    def auth_schema(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "auth_schema", value)
+
+    @property
+    @pulumi.getter(name="conformanceIssuer")
+    def conformance_issuer(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "conformance_issuer")
+
+    @conformance_issuer.setter
+    def conformance_issuer(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "conformance_issuer", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -7659,7 +8206,7 @@ class ProjectJwtTemplatesTemplateArgs:
 class ProjectProjectSettingsArgs:
     def __init__(__self__, *,
                  access_key_jwt_template: Optional[pulumi.Input[str]] = None,
-                 cookie_policy: Optional[pulumi.Input[int]] = None,
+                 cookie_policy: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  enable_inactivity: Optional[pulumi.Input[bool]] = None,
                  inactivity_time: Optional[pulumi.Input[str]] = None,
@@ -7691,11 +8238,11 @@ class ProjectProjectSettingsArgs:
 
     @property
     @pulumi.getter(name="cookiePolicy")
-    def cookie_policy(self) -> Optional[pulumi.Input[int]]:
+    def cookie_policy(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "cookie_policy")
 
     @cookie_policy.setter
-    def cookie_policy(self, value: Optional[pulumi.Input[int]]):
+    def cookie_policy(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cookie_policy", value)
 
     @property

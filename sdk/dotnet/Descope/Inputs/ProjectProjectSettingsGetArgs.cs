@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? AccessKeyJwtTemplate { get; set; }
 
         [Input("cookiePolicy")]
-        public Input<int>? CookiePolicy { get; set; }
+        public Input<string>? CookiePolicy { get; set; }
 
         [Input("domain")]
         public Input<string>? Domain { get; set; }

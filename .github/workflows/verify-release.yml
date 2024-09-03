@@ -33,8 +33,6 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
-  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-  PULUMI_API: https://api.pulumi-staging.io
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
@@ -63,6 +61,6 @@ jobs:
         uses: pulumi/verify-provider-release@v1
         with:
           runtime: nodejs
-          directory: examples/basic
+          directory: examples/ts
           provider: descope
           providerVersion: ${{ inputs.providerVersion }}

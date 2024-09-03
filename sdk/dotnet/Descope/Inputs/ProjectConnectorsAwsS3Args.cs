@@ -25,6 +25,9 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        [Input("auditEnabled")]
+        public Input<bool>? AuditEnabled { get; set; }
+
         [Input("auditFilters")]
         public Input<string>? AuditFilters { get; set; }
 
@@ -54,6 +57,9 @@ namespace Descope.Pulumi.Descope.Inputs
                 _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        [Input("troubleshootLogEnabled")]
+        public Input<bool>? TroubleshootLogEnabled { get; set; }
 
         public ProjectConnectorsAwsS3Args()
         {

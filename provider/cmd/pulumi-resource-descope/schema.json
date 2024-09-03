@@ -78,16 +78,16 @@
     "types": {
         "descope:index/ProjectApplications:ProjectApplications": {
             "properties": {
-                "oidcs": {
+                "oidcApplications": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/descope:index/ProjectApplicationsOidc:ProjectApplicationsOidc"
+                        "$ref": "#/types/descope:index/ProjectApplicationsOidcApplication:ProjectApplicationsOidcApplication"
                     }
                 },
-                "samls": {
+                "samlApplications": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/descope:index/ProjectApplicationsSaml:ProjectApplicationsSaml"
+                        "$ref": "#/types/descope:index/ProjectApplicationsSamlApplication:ProjectApplicationsSamlApplication"
                     }
                 }
             },
@@ -95,13 +95,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "oidcs",
-                        "samls"
+                        "oidcApplications",
+                        "samlApplications"
                     ]
                 }
             }
         },
-        "descope:index/ProjectApplicationsOidc:ProjectApplicationsOidc": {
+        "descope:index/ProjectApplicationsOidcApplication:ProjectApplicationsOidcApplication": {
             "properties": {
                 "claims": {
                     "type": "array",
@@ -116,7 +116,8 @@
                     "type": "boolean"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
                 },
                 "loginPageUrl": {
                     "type": "string"
@@ -146,7 +147,7 @@
                 }
             }
         },
-        "descope:index/ProjectApplicationsSaml:ProjectApplicationsSaml": {
+        "descope:index/ProjectApplicationsSamlApplication:ProjectApplicationsSamlApplication": {
             "properties": {
                 "acsAllowedCallbackUrls": {
                     "type": "array",
@@ -157,7 +158,7 @@
                 "attributeMappings": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/descope:index/ProjectApplicationsSamlAttributeMapping:ProjectApplicationsSamlAttributeMapping"
+                        "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationAttributeMapping:ProjectApplicationsSamlApplicationAttributeMapping"
                     }
                 },
                 "defaultRelayState": {
@@ -170,10 +171,11 @@
                     "type": "boolean"
                 },
                 "dynamicConfiguration": {
-                    "$ref": "#/types/descope:index/ProjectApplicationsSamlDynamicConfiguration:ProjectApplicationsSamlDynamicConfiguration"
+                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
                 },
                 "loginPageUrl": {
                     "type": "string"
@@ -182,7 +184,7 @@
                     "type": "string"
                 },
                 "manualConfiguration": {
-                    "$ref": "#/types/descope:index/ProjectApplicationsSamlManualConfiguration:ProjectApplicationsSamlManualConfiguration"
+                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration"
                 },
                 "name": {
                     "type": "string"
@@ -218,7 +220,7 @@
                 }
             }
         },
-        "descope:index/ProjectApplicationsSamlAttributeMapping:ProjectApplicationsSamlAttributeMapping": {
+        "descope:index/ProjectApplicationsSamlApplicationAttributeMapping:ProjectApplicationsSamlApplicationAttributeMapping": {
             "properties": {
                 "name": {
                     "type": "string"
@@ -233,7 +235,7 @@
                 "value"
             ]
         },
-        "descope:index/ProjectApplicationsSamlDynamicConfiguration:ProjectApplicationsSamlDynamicConfiguration": {
+        "descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration": {
             "properties": {
                 "metadataUrl": {
                     "type": "string"
@@ -244,7 +246,7 @@
                 "metadataUrl"
             ]
         },
-        "descope:index/ProjectApplicationsSamlManualConfiguration:ProjectApplicationsSamlManualConfiguration": {
+        "descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration": {
             "properties": {
                 "acsUrl": {
                     "type": "string"
@@ -2361,6 +2363,18 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsDocebo:ProjectConnectorsDocebo"
                     }
                 },
+                "fingerprintDescopes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsFingerprintDescope:ProjectConnectorsFingerprintDescope"
+                    }
+                },
+                "fingerprints": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsFingerprint:ProjectConnectorsFingerprint"
+                    }
+                },
                 "forters": {
                     "type": "array",
                     "items": {
@@ -2377,6 +2391,12 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsHibp:ProjectConnectorsHibp"
+                    }
+                },
+                "httpStaticIps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIp:ProjectConnectorsHttpStaticIp"
                     }
                 },
                 "https": {
@@ -2495,9 +2515,12 @@
                         "datadogs",
                         "devrevGrows",
                         "docebos",
+                        "fingerprintDescopes",
+                        "fingerprints",
                         "forters",
                         "googleCloudTranslations",
                         "hibps",
+                        "httpStaticIps",
                         "https",
                         "hubspots",
                         "intercoms",
@@ -2708,6 +2731,9 @@
                     "type": "string",
                     "secret": true
                 },
+                "auditEnabled": {
+                    "type": "boolean"
+                },
                 "auditFilters": {
                     "type": "string"
                 },
@@ -2729,6 +2755,9 @@
                 "secretAccessKey": {
                     "type": "string",
                     "secret": true
+                },
+                "troubleshootLogEnabled": {
+                    "type": "boolean"
                 }
             },
             "type": "object",
@@ -2743,13 +2772,15 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "accessKeyId",
+                        "auditEnabled",
                         "auditFilters",
                         "bucket",
                         "description",
                         "id",
                         "name",
                         "region",
-                        "secretAccessKey"
+                        "secretAccessKey",
+                        "troubleshootLogEnabled"
                     ]
                 }
             }
@@ -2967,6 +2998,85 @@
                         "name",
                         "password",
                         "username"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsFingerprint:ProjectConnectorsFingerprint": {
+            "properties": {
+                "cloudflareEndpointUrl": {
+                    "type": "string"
+                },
+                "cloudflareScriptUrl": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "publicApiKey": {
+                    "type": "string"
+                },
+                "secretApiKey": {
+                    "type": "string",
+                    "secret": true
+                },
+                "useCloudflareIntegration": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "publicApiKey",
+                "secretApiKey"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "cloudflareEndpointUrl",
+                        "cloudflareScriptUrl",
+                        "description",
+                        "id",
+                        "name",
+                        "publicApiKey",
+                        "secretApiKey",
+                        "useCloudflareIntegration"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsFingerprintDescope:ProjectConnectorsFingerprintDescope": {
+            "properties": {
+                "customDomain": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "customDomain",
+                        "description",
+                        "id",
+                        "name"
                     ]
                 }
             }
@@ -3194,6 +3304,117 @@
                 "username"
             ]
         },
+        "descope:index/ProjectConnectorsHttpStaticIp:ProjectConnectorsHttpStaticIp": {
+            "properties": {
+                "authentication": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication"
+                },
+                "baseUrl": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "hmacSecret": {
+                    "type": "string",
+                    "secret": true
+                },
+                "id": {
+                    "type": "string"
+                },
+                "includeHeadersInContext": {
+                    "type": "boolean"
+                },
+                "insecure": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "baseUrl",
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authentication",
+                        "baseUrl",
+                        "description",
+                        "headers",
+                        "hmacSecret",
+                        "id",
+                        "includeHeadersInContext",
+                        "insecure",
+                        "name"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication": {
+            "properties": {
+                "apiKey": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthenticationApiKey:ProjectConnectorsHttpStaticIpAuthenticationApiKey"
+                },
+                "basic": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthenticationBasic:ProjectConnectorsHttpStaticIpAuthenticationBasic"
+                },
+                "bearerToken": {
+                    "type": "string",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "apiKey",
+                        "basic",
+                        "bearerToken"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsHttpStaticIpAuthenticationApiKey:ProjectConnectorsHttpStaticIpAuthenticationApiKey": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "token"
+            ]
+        },
+        "descope:index/ProjectConnectorsHttpStaticIpAuthenticationBasic:ProjectConnectorsHttpStaticIpAuthenticationBasic": {
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ]
+        },
         "descope:index/ProjectConnectorsHubspot:ProjectConnectorsHubspot": {
             "properties": {
                 "accessToken": {
@@ -3287,8 +3508,14 @@
                 "id": {
                     "type": "string"
                 },
+                "logsPrefix": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
+                },
+                "overrideLogsPrefix": {
+                    "type": "boolean"
                 },
                 "troubleshootLogEnabled": {
                     "type": "boolean"
@@ -3308,7 +3535,9 @@
                         "dataCenter",
                         "description",
                         "id",
+                        "logsPrefix",
                         "name",
+                        "overrideLogsPrefix",
                         "troubleshootLogEnabled"
                     ]
                 }
@@ -4070,10 +4299,16 @@
         },
         "descope:index/ProjectJwtTemplates:ProjectJwtTemplates": {
             "properties": {
-                "templates": {
+                "accessKeyTemplates": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/descope:index/ProjectJwtTemplatesTemplate:ProjectJwtTemplatesTemplate"
+                        "$ref": "#/types/descope:index/ProjectJwtTemplatesAccessKeyTemplate:ProjectJwtTemplatesAccessKeyTemplate"
+                    }
+                },
+                "userTemplates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectJwtTemplatesUserTemplate:ProjectJwtTemplatesUserTemplate"
                     }
                 }
             },
@@ -4081,12 +4316,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "templates"
+                        "accessKeyTemplates",
+                        "userTemplates"
                     ]
                 }
             }
         },
-        "descope:index/ProjectJwtTemplatesTemplate:ProjectJwtTemplatesTemplate": {
+        "descope:index/ProjectJwtTemplatesAccessKeyTemplate:ProjectJwtTemplatesAccessKeyTemplate": {
             "properties": {
                 "authSchema": {
                     "type": "string"
@@ -4098,23 +4334,20 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
                 },
                 "name": {
                     "type": "string"
                 },
                 "template": {
                     "type": "string"
-                },
-                "type": {
-                    "type": "string"
                 }
             },
             "type": "object",
             "required": [
                 "name",
-                "template",
-                "type"
+                "template"
             ],
             "language": {
                 "nodejs": {
@@ -4124,8 +4357,47 @@
                         "description",
                         "id",
                         "name",
-                        "template",
-                        "type"
+                        "template"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectJwtTemplatesUserTemplate:ProjectJwtTemplatesUserTemplate": {
+            "properties": {
+                "authSchema": {
+                    "type": "string"
+                },
+                "conformanceIssuer": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "template": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "template"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authSchema",
+                        "conformanceIssuer",
+                        "description",
+                        "id",
+                        "name",
+                        "template"
                     ]
                 }
             }
@@ -4136,7 +4408,7 @@
                     "type": "string"
                 },
                 "cookiePolicy": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "domain": {
                     "type": "string"

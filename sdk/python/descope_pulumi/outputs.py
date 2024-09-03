@@ -12,11 +12,11 @@ from . import outputs
 
 __all__ = [
     'ProjectApplications',
-    'ProjectApplicationsOidc',
-    'ProjectApplicationsSaml',
-    'ProjectApplicationsSamlAttributeMapping',
-    'ProjectApplicationsSamlDynamicConfiguration',
-    'ProjectApplicationsSamlManualConfiguration',
+    'ProjectApplicationsOidcApplication',
+    'ProjectApplicationsSamlApplication',
+    'ProjectApplicationsSamlApplicationAttributeMapping',
+    'ProjectApplicationsSamlApplicationDynamicConfiguration',
+    'ProjectApplicationsSamlApplicationManualConfiguration',
     'ProjectAttributes',
     'ProjectAttributesTenant',
     'ProjectAttributesUser',
@@ -82,6 +82,8 @@ __all__ = [
     'ProjectConnectorsDatadog',
     'ProjectConnectorsDevrevGrow',
     'ProjectConnectorsDocebo',
+    'ProjectConnectorsFingerprint',
+    'ProjectConnectorsFingerprintDescope',
     'ProjectConnectorsForter',
     'ProjectConnectorsGoogleCloudTranslation',
     'ProjectConnectorsHibp',
@@ -89,6 +91,10 @@ __all__ = [
     'ProjectConnectorsHttpAuthentication',
     'ProjectConnectorsHttpAuthenticationApiKey',
     'ProjectConnectorsHttpAuthenticationBasic',
+    'ProjectConnectorsHttpStaticIp',
+    'ProjectConnectorsHttpStaticIpAuthentication',
+    'ProjectConnectorsHttpStaticIpAuthenticationApiKey',
+    'ProjectConnectorsHttpStaticIpAuthenticationBasic',
     'ProjectConnectorsHubspot',
     'ProjectConnectorsIntercom',
     'ProjectConnectorsNewrelic',
@@ -117,34 +123,54 @@ __all__ = [
     'ProjectConnectorsVeriff',
     'ProjectFlows',
     'ProjectJwtTemplates',
-    'ProjectJwtTemplatesTemplate',
+    'ProjectJwtTemplatesAccessKeyTemplate',
+    'ProjectJwtTemplatesUserTemplate',
     'ProjectProjectSettings',
     'ProjectStyles',
 ]
 
 @pulumi.output_type
 class ProjectApplications(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "oidcApplications":
+            suggest = "oidc_applications"
+        elif key == "samlApplications":
+            suggest = "saml_applications"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplications. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplications.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplications.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
-                 oidcs: Optional[Sequence['outputs.ProjectApplicationsOidc']] = None,
-                 samls: Optional[Sequence['outputs.ProjectApplicationsSaml']] = None):
-        if oidcs is not None:
-            pulumi.set(__self__, "oidcs", oidcs)
-        if samls is not None:
-            pulumi.set(__self__, "samls", samls)
+                 oidc_applications: Optional[Sequence['outputs.ProjectApplicationsOidcApplication']] = None,
+                 saml_applications: Optional[Sequence['outputs.ProjectApplicationsSamlApplication']] = None):
+        if oidc_applications is not None:
+            pulumi.set(__self__, "oidc_applications", oidc_applications)
+        if saml_applications is not None:
+            pulumi.set(__self__, "saml_applications", saml_applications)
 
     @property
-    @pulumi.getter
-    def oidcs(self) -> Optional[Sequence['outputs.ProjectApplicationsOidc']]:
-        return pulumi.get(self, "oidcs")
+    @pulumi.getter(name="oidcApplications")
+    def oidc_applications(self) -> Optional[Sequence['outputs.ProjectApplicationsOidcApplication']]:
+        return pulumi.get(self, "oidc_applications")
 
     @property
-    @pulumi.getter
-    def samls(self) -> Optional[Sequence['outputs.ProjectApplicationsSaml']]:
-        return pulumi.get(self, "samls")
+    @pulumi.getter(name="samlApplications")
+    def saml_applications(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlApplication']]:
+        return pulumi.get(self, "saml_applications")
 
 
 @pulumi.output_type
-class ProjectApplicationsOidc(dict):
+class ProjectApplicationsOidcApplication(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -152,14 +178,14 @@ class ProjectApplicationsOidc(dict):
             suggest = "login_page_url"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsOidc. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsOidcApplication. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ProjectApplicationsOidc.__key_warning(key)
+        ProjectApplicationsOidcApplication.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ProjectApplicationsOidc.__key_warning(key)
+        ProjectApplicationsOidcApplication.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -170,6 +196,9 @@ class ProjectApplicationsOidc(dict):
                  id: Optional[str] = None,
                  login_page_url: Optional[str] = None,
                  logo: Optional[str] = None):
+        """
+        :param str id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         if claims is not None:
             pulumi.set(__self__, "claims", claims)
@@ -207,6 +236,9 @@ class ProjectApplicationsOidc(dict):
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @property
@@ -221,7 +253,7 @@ class ProjectApplicationsOidc(dict):
 
 
 @pulumi.output_type
-class ProjectApplicationsSaml(dict):
+class ProjectApplicationsSamlApplication(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -243,30 +275,33 @@ class ProjectApplicationsSaml(dict):
             suggest = "subject_name_id_type"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSaml. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlApplication. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ProjectApplicationsSaml.__key_warning(key)
+        ProjectApplicationsSamlApplication.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ProjectApplicationsSaml.__key_warning(key)
+        ProjectApplicationsSamlApplication.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  name: str,
                  acs_allowed_callback_urls: Optional[Sequence[str]] = None,
-                 attribute_mappings: Optional[Sequence['outputs.ProjectApplicationsSamlAttributeMapping']] = None,
+                 attribute_mappings: Optional[Sequence['outputs.ProjectApplicationsSamlApplicationAttributeMapping']] = None,
                  default_relay_state: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 dynamic_configuration: Optional['outputs.ProjectApplicationsSamlDynamicConfiguration'] = None,
+                 dynamic_configuration: Optional['outputs.ProjectApplicationsSamlApplicationDynamicConfiguration'] = None,
                  id: Optional[str] = None,
                  login_page_url: Optional[str] = None,
                  logo: Optional[str] = None,
-                 manual_configuration: Optional['outputs.ProjectApplicationsSamlManualConfiguration'] = None,
+                 manual_configuration: Optional['outputs.ProjectApplicationsSamlApplicationManualConfiguration'] = None,
                  subject_name_id_format: Optional[str] = None,
                  subject_name_id_type: Optional[str] = None):
+        """
+        :param str id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         if acs_allowed_callback_urls is not None:
             pulumi.set(__self__, "acs_allowed_callback_urls", acs_allowed_callback_urls)
@@ -305,7 +340,7 @@ class ProjectApplicationsSaml(dict):
 
     @property
     @pulumi.getter(name="attributeMappings")
-    def attribute_mappings(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlAttributeMapping']]:
+    def attribute_mappings(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlApplicationAttributeMapping']]:
         return pulumi.get(self, "attribute_mappings")
 
     @property
@@ -325,12 +360,15 @@ class ProjectApplicationsSaml(dict):
 
     @property
     @pulumi.getter(name="dynamicConfiguration")
-    def dynamic_configuration(self) -> Optional['outputs.ProjectApplicationsSamlDynamicConfiguration']:
+    def dynamic_configuration(self) -> Optional['outputs.ProjectApplicationsSamlApplicationDynamicConfiguration']:
         return pulumi.get(self, "dynamic_configuration")
 
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @property
@@ -345,7 +383,7 @@ class ProjectApplicationsSaml(dict):
 
     @property
     @pulumi.getter(name="manualConfiguration")
-    def manual_configuration(self) -> Optional['outputs.ProjectApplicationsSamlManualConfiguration']:
+    def manual_configuration(self) -> Optional['outputs.ProjectApplicationsSamlApplicationManualConfiguration']:
         return pulumi.get(self, "manual_configuration")
 
     @property
@@ -360,7 +398,7 @@ class ProjectApplicationsSaml(dict):
 
 
 @pulumi.output_type
-class ProjectApplicationsSamlAttributeMapping(dict):
+class ProjectApplicationsSamlApplicationAttributeMapping(dict):
     def __init__(__self__, *,
                  name: str,
                  value: str):
@@ -379,7 +417,7 @@ class ProjectApplicationsSamlAttributeMapping(dict):
 
 
 @pulumi.output_type
-class ProjectApplicationsSamlDynamicConfiguration(dict):
+class ProjectApplicationsSamlApplicationDynamicConfiguration(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -387,14 +425,14 @@ class ProjectApplicationsSamlDynamicConfiguration(dict):
             suggest = "metadata_url"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlDynamicConfiguration. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlApplicationDynamicConfiguration. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ProjectApplicationsSamlDynamicConfiguration.__key_warning(key)
+        ProjectApplicationsSamlApplicationDynamicConfiguration.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ProjectApplicationsSamlDynamicConfiguration.__key_warning(key)
+        ProjectApplicationsSamlApplicationDynamicConfiguration.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -408,7 +446,7 @@ class ProjectApplicationsSamlDynamicConfiguration(dict):
 
 
 @pulumi.output_type
-class ProjectApplicationsSamlManualConfiguration(dict):
+class ProjectApplicationsSamlApplicationManualConfiguration(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -418,14 +456,14 @@ class ProjectApplicationsSamlManualConfiguration(dict):
             suggest = "entity_id"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlManualConfiguration. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlApplicationManualConfiguration. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ProjectApplicationsSamlManualConfiguration.__key_warning(key)
+        ProjectApplicationsSamlApplicationManualConfiguration.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ProjectApplicationsSamlManualConfiguration.__key_warning(key)
+        ProjectApplicationsSamlApplicationManualConfiguration.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -4063,8 +4101,12 @@ class ProjectConnectors(dict):
             suggest = "aws_translates"
         elif key == "devrevGrows":
             suggest = "devrev_grows"
+        elif key == "fingerprintDescopes":
+            suggest = "fingerprint_descopes"
         elif key == "googleCloudTranslations":
             suggest = "google_cloud_translations"
+        elif key == "httpStaticIps":
+            suggest = "http_static_ips"
         elif key == "recaptchaEnterprises":
             suggest = "recaptcha_enterprises"
         elif key == "twilioCores":
@@ -4093,9 +4135,12 @@ class ProjectConnectors(dict):
                  datadogs: Optional[Sequence['outputs.ProjectConnectorsDatadog']] = None,
                  devrev_grows: Optional[Sequence['outputs.ProjectConnectorsDevrevGrow']] = None,
                  docebos: Optional[Sequence['outputs.ProjectConnectorsDocebo']] = None,
+                 fingerprint_descopes: Optional[Sequence['outputs.ProjectConnectorsFingerprintDescope']] = None,
+                 fingerprints: Optional[Sequence['outputs.ProjectConnectorsFingerprint']] = None,
                  forters: Optional[Sequence['outputs.ProjectConnectorsForter']] = None,
                  google_cloud_translations: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudTranslation']] = None,
                  hibps: Optional[Sequence['outputs.ProjectConnectorsHibp']] = None,
+                 http_static_ips: Optional[Sequence['outputs.ProjectConnectorsHttpStaticIp']] = None,
                  https: Optional[Sequence['outputs.ProjectConnectorsHttp']] = None,
                  hubspots: Optional[Sequence['outputs.ProjectConnectorsHubspot']] = None,
                  intercoms: Optional[Sequence['outputs.ProjectConnectorsIntercom']] = None,
@@ -4131,12 +4176,18 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "devrev_grows", devrev_grows)
         if docebos is not None:
             pulumi.set(__self__, "docebos", docebos)
+        if fingerprint_descopes is not None:
+            pulumi.set(__self__, "fingerprint_descopes", fingerprint_descopes)
+        if fingerprints is not None:
+            pulumi.set(__self__, "fingerprints", fingerprints)
         if forters is not None:
             pulumi.set(__self__, "forters", forters)
         if google_cloud_translations is not None:
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if hibps is not None:
             pulumi.set(__self__, "hibps", hibps)
+        if http_static_ips is not None:
+            pulumi.set(__self__, "http_static_ips", http_static_ips)
         if https is not None:
             pulumi.set(__self__, "https", https)
         if hubspots is not None:
@@ -4218,6 +4269,16 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "docebos")
 
     @property
+    @pulumi.getter(name="fingerprintDescopes")
+    def fingerprint_descopes(self) -> Optional[Sequence['outputs.ProjectConnectorsFingerprintDescope']]:
+        return pulumi.get(self, "fingerprint_descopes")
+
+    @property
+    @pulumi.getter
+    def fingerprints(self) -> Optional[Sequence['outputs.ProjectConnectorsFingerprint']]:
+        return pulumi.get(self, "fingerprints")
+
+    @property
     @pulumi.getter
     def forters(self) -> Optional[Sequence['outputs.ProjectConnectorsForter']]:
         return pulumi.get(self, "forters")
@@ -4231,6 +4292,11 @@ class ProjectConnectors(dict):
     @pulumi.getter
     def hibps(self) -> Optional[Sequence['outputs.ProjectConnectorsHibp']]:
         return pulumi.get(self, "hibps")
+
+    @property
+    @pulumi.getter(name="httpStaticIps")
+    def http_static_ips(self) -> Optional[Sequence['outputs.ProjectConnectorsHttpStaticIp']]:
+        return pulumi.get(self, "http_static_ips")
 
     @property
     @pulumi.getter
@@ -4633,8 +4699,12 @@ class ProjectConnectorsAwsS3(dict):
             suggest = "access_key_id"
         elif key == "secretAccessKey":
             suggest = "secret_access_key"
+        elif key == "auditEnabled":
+            suggest = "audit_enabled"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "troubleshootLogEnabled":
+            suggest = "troubleshoot_log_enabled"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsAwsS3. Access the value via the '{suggest}' property getter instead.")
@@ -4653,20 +4723,26 @@ class ProjectConnectorsAwsS3(dict):
                  name: str,
                  region: str,
                  secret_access_key: str,
+                 audit_enabled: Optional[bool] = None,
                  audit_filters: Optional[str] = None,
                  description: Optional[str] = None,
-                 id: Optional[str] = None):
+                 id: Optional[str] = None,
+                 troubleshoot_log_enabled: Optional[bool] = None):
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "secret_access_key", secret_access_key)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
         if audit_filters is not None:
             pulumi.set(__self__, "audit_filters", audit_filters)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
     @property
     @pulumi.getter(name="accessKeyId")
@@ -4694,6 +4770,11 @@ class ProjectConnectorsAwsS3(dict):
         return pulumi.get(self, "secret_access_key")
 
     @property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "audit_enabled")
+
+    @property
     @pulumi.getter(name="auditFilters")
     def audit_filters(self) -> Optional[str]:
         return pulumi.get(self, "audit_filters")
@@ -4707,6 +4788,11 @@ class ProjectConnectorsAwsS3(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "troubleshoot_log_enabled")
 
 
 @pulumi.output_type
@@ -5062,6 +5148,150 @@ class ProjectConnectorsDocebo(dict):
     @pulumi.getter
     def username(self) -> str:
         return pulumi.get(self, "username")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectConnectorsFingerprint(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "publicApiKey":
+            suggest = "public_api_key"
+        elif key == "secretApiKey":
+            suggest = "secret_api_key"
+        elif key == "cloudflareEndpointUrl":
+            suggest = "cloudflare_endpoint_url"
+        elif key == "cloudflareScriptUrl":
+            suggest = "cloudflare_script_url"
+        elif key == "useCloudflareIntegration":
+            suggest = "use_cloudflare_integration"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsFingerprint. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsFingerprint.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsFingerprint.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
+                 public_api_key: str,
+                 secret_api_key: str,
+                 cloudflare_endpoint_url: Optional[str] = None,
+                 cloudflare_script_url: Optional[str] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None,
+                 use_cloudflare_integration: Optional[bool] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "public_api_key", public_api_key)
+        pulumi.set(__self__, "secret_api_key", secret_api_key)
+        if cloudflare_endpoint_url is not None:
+            pulumi.set(__self__, "cloudflare_endpoint_url", cloudflare_endpoint_url)
+        if cloudflare_script_url is not None:
+            pulumi.set(__self__, "cloudflare_script_url", cloudflare_script_url)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if use_cloudflare_integration is not None:
+            pulumi.set(__self__, "use_cloudflare_integration", use_cloudflare_integration)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="publicApiKey")
+    def public_api_key(self) -> str:
+        return pulumi.get(self, "public_api_key")
+
+    @property
+    @pulumi.getter(name="secretApiKey")
+    def secret_api_key(self) -> str:
+        return pulumi.get(self, "secret_api_key")
+
+    @property
+    @pulumi.getter(name="cloudflareEndpointUrl")
+    def cloudflare_endpoint_url(self) -> Optional[str]:
+        return pulumi.get(self, "cloudflare_endpoint_url")
+
+    @property
+    @pulumi.getter(name="cloudflareScriptUrl")
+    def cloudflare_script_url(self) -> Optional[str]:
+        return pulumi.get(self, "cloudflare_script_url")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="useCloudflareIntegration")
+    def use_cloudflare_integration(self) -> Optional[bool]:
+        return pulumi.get(self, "use_cloudflare_integration")
+
+
+@pulumi.output_type
+class ProjectConnectorsFingerprintDescope(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customDomain":
+            suggest = "custom_domain"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsFingerprintDescope. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsFingerprintDescope.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsFingerprintDescope.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
+                 custom_domain: Optional[str] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        pulumi.set(__self__, "name", name)
+        if custom_domain is not None:
+            pulumi.set(__self__, "custom_domain", custom_domain)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="customDomain")
+    def custom_domain(self) -> Optional[str]:
+        return pulumi.get(self, "custom_domain")
 
     @property
     @pulumi.getter
@@ -5435,6 +5665,188 @@ class ProjectConnectorsHttpAuthenticationBasic(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsHttpStaticIp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "baseUrl":
+            suggest = "base_url"
+        elif key == "hmacSecret":
+            suggest = "hmac_secret"
+        elif key == "includeHeadersInContext":
+            suggest = "include_headers_in_context"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpStaticIp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsHttpStaticIp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsHttpStaticIp.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 base_url: str,
+                 name: str,
+                 authentication: Optional['outputs.ProjectConnectorsHttpStaticIpAuthentication'] = None,
+                 description: Optional[str] = None,
+                 headers: Optional[Mapping[str, str]] = None,
+                 hmac_secret: Optional[str] = None,
+                 id: Optional[str] = None,
+                 include_headers_in_context: Optional[bool] = None,
+                 insecure: Optional[bool] = None):
+        pulumi.set(__self__, "base_url", base_url)
+        pulumi.set(__self__, "name", name)
+        if authentication is not None:
+            pulumi.set(__self__, "authentication", authentication)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if hmac_secret is not None:
+            pulumi.set(__self__, "hmac_secret", hmac_secret)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if include_headers_in_context is not None:
+            pulumi.set(__self__, "include_headers_in_context", include_headers_in_context)
+        if insecure is not None:
+            pulumi.set(__self__, "insecure", insecure)
+
+    @property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> str:
+        return pulumi.get(self, "base_url")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def authentication(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthentication']:
+        return pulumi.get(self, "authentication")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "headers")
+
+    @property
+    @pulumi.getter(name="hmacSecret")
+    def hmac_secret(self) -> Optional[str]:
+        return pulumi.get(self, "hmac_secret")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="includeHeadersInContext")
+    def include_headers_in_context(self) -> Optional[bool]:
+        return pulumi.get(self, "include_headers_in_context")
+
+    @property
+    @pulumi.getter
+    def insecure(self) -> Optional[bool]:
+        return pulumi.get(self, "insecure")
+
+
+@pulumi.output_type
+class ProjectConnectorsHttpStaticIpAuthentication(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "bearerToken":
+            suggest = "bearer_token"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpStaticIpAuthentication. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsHttpStaticIpAuthentication.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsHttpStaticIpAuthentication.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey'] = None,
+                 basic: Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationBasic'] = None,
+                 bearer_token: Optional[str] = None):
+        if api_key is not None:
+            pulumi.set(__self__, "api_key", api_key)
+        if basic is not None:
+            pulumi.set(__self__, "basic", basic)
+        if bearer_token is not None:
+            pulumi.set(__self__, "bearer_token", bearer_token)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey']:
+        return pulumi.get(self, "api_key")
+
+    @property
+    @pulumi.getter
+    def basic(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationBasic']:
+        return pulumi.get(self, "basic")
+
+    @property
+    @pulumi.getter(name="bearerToken")
+    def bearer_token(self) -> Optional[str]:
+        return pulumi.get(self, "bearer_token")
+
+
+@pulumi.output_type
+class ProjectConnectorsHttpStaticIpAuthenticationApiKey(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 token: str):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def token(self) -> str:
+        return pulumi.get(self, "token")
+
+
+@pulumi.output_type
+class ProjectConnectorsHttpStaticIpAuthenticationBasic(dict):
+    def __init__(__self__, *,
+                 password: str,
+                 username: str):
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def username(self) -> str:
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
 class ProjectConnectorsHubspot(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -5552,6 +5964,10 @@ class ProjectConnectorsNewrelic(dict):
             suggest = "audit_filters"
         elif key == "dataCenter":
             suggest = "data_center"
+        elif key == "logsPrefix":
+            suggest = "logs_prefix"
+        elif key == "overrideLogsPrefix":
+            suggest = "override_logs_prefix"
         elif key == "troubleshootLogEnabled":
             suggest = "troubleshoot_log_enabled"
 
@@ -5574,6 +5990,8 @@ class ProjectConnectorsNewrelic(dict):
                  data_center: Optional[str] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None,
+                 logs_prefix: Optional[str] = None,
+                 override_logs_prefix: Optional[bool] = None,
                  troubleshoot_log_enabled: Optional[bool] = None):
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
@@ -5587,6 +6005,10 @@ class ProjectConnectorsNewrelic(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if logs_prefix is not None:
+            pulumi.set(__self__, "logs_prefix", logs_prefix)
+        if override_logs_prefix is not None:
+            pulumi.set(__self__, "override_logs_prefix", override_logs_prefix)
         if troubleshoot_log_enabled is not None:
             pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
@@ -5624,6 +6046,16 @@ class ProjectConnectorsNewrelic(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="logsPrefix")
+    def logs_prefix(self) -> Optional[str]:
+        return pulumi.get(self, "logs_prefix")
+
+    @property
+    @pulumi.getter(name="overrideLogsPrefix")
+    def override_logs_prefix(self) -> Optional[bool]:
+        return pulumi.get(self, "override_logs_prefix")
 
     @property
     @pulumi.getter(name="troubleshootLogEnabled")
@@ -6817,19 +7249,46 @@ class ProjectFlows(dict):
 
 @pulumi.output_type
 class ProjectJwtTemplates(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessKeyTemplates":
+            suggest = "access_key_templates"
+        elif key == "userTemplates":
+            suggest = "user_templates"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplates. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectJwtTemplates.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectJwtTemplates.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
-                 templates: Optional[Sequence['outputs.ProjectJwtTemplatesTemplate']] = None):
-        if templates is not None:
-            pulumi.set(__self__, "templates", templates)
+                 access_key_templates: Optional[Sequence['outputs.ProjectJwtTemplatesAccessKeyTemplate']] = None,
+                 user_templates: Optional[Sequence['outputs.ProjectJwtTemplatesUserTemplate']] = None):
+        if access_key_templates is not None:
+            pulumi.set(__self__, "access_key_templates", access_key_templates)
+        if user_templates is not None:
+            pulumi.set(__self__, "user_templates", user_templates)
 
     @property
-    @pulumi.getter
-    def templates(self) -> Optional[Sequence['outputs.ProjectJwtTemplatesTemplate']]:
-        return pulumi.get(self, "templates")
+    @pulumi.getter(name="accessKeyTemplates")
+    def access_key_templates(self) -> Optional[Sequence['outputs.ProjectJwtTemplatesAccessKeyTemplate']]:
+        return pulumi.get(self, "access_key_templates")
+
+    @property
+    @pulumi.getter(name="userTemplates")
+    def user_templates(self) -> Optional[Sequence['outputs.ProjectJwtTemplatesUserTemplate']]:
+        return pulumi.get(self, "user_templates")
 
 
 @pulumi.output_type
-class ProjectJwtTemplatesTemplate(dict):
+class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -6839,27 +7298,28 @@ class ProjectJwtTemplatesTemplate(dict):
             suggest = "conformance_issuer"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesTemplate. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesAccessKeyTemplate. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        ProjectJwtTemplatesTemplate.__key_warning(key)
+        ProjectJwtTemplatesAccessKeyTemplate.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        ProjectJwtTemplatesTemplate.__key_warning(key)
+        ProjectJwtTemplatesAccessKeyTemplate.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
                  name: str,
                  template: str,
-                 type: str,
                  auth_schema: Optional[str] = None,
                  conformance_issuer: Optional[bool] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None):
+        """
+        :param str id: The ID of this resource.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
-        pulumi.set(__self__, "type", type)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if conformance_issuer is not None:
@@ -6880,9 +7340,80 @@ class ProjectJwtTemplatesTemplate(dict):
         return pulumi.get(self, "template")
 
     @property
+    @pulumi.getter(name="authSchema")
+    def auth_schema(self) -> Optional[str]:
+        return pulumi.get(self, "auth_schema")
+
+    @property
+    @pulumi.getter(name="conformanceIssuer")
+    def conformance_issuer(self) -> Optional[bool]:
+        return pulumi.get(self, "conformance_issuer")
+
+    @property
     @pulumi.getter
-    def type(self) -> str:
-        return pulumi.get(self, "type")
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        The ID of this resource.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectJwtTemplatesUserTemplate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authSchema":
+            suggest = "auth_schema"
+        elif key == "conformanceIssuer":
+            suggest = "conformance_issuer"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesUserTemplate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectJwtTemplatesUserTemplate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectJwtTemplatesUserTemplate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
+                 template: str,
+                 auth_schema: Optional[str] = None,
+                 conformance_issuer: Optional[bool] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str id: The ID of this resource.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "template", template)
+        if auth_schema is not None:
+            pulumi.set(__self__, "auth_schema", auth_schema)
+        if conformance_issuer is not None:
+            pulumi.set(__self__, "conformance_issuer", conformance_issuer)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def template(self) -> str:
+        return pulumi.get(self, "template")
 
     @property
     @pulumi.getter(name="authSchema")
@@ -6902,6 +7433,9 @@ class ProjectJwtTemplatesTemplate(dict):
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
 
@@ -6936,7 +7470,7 @@ class ProjectProjectSettings(dict):
 
     def __init__(__self__, *,
                  access_key_jwt_template: Optional[str] = None,
-                 cookie_policy: Optional[int] = None,
+                 cookie_policy: Optional[str] = None,
                  domain: Optional[str] = None,
                  enable_inactivity: Optional[bool] = None,
                  inactivity_time: Optional[str] = None,
@@ -6964,7 +7498,7 @@ class ProjectProjectSettings(dict):
 
     @property
     @pulumi.getter(name="cookiePolicy")
-    def cookie_policy(self) -> Optional[int]:
+    def cookie_policy(self) -> Optional[str]:
         return pulumi.get(self, "cookie_policy")
 
     @property

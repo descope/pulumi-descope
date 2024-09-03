@@ -11,13 +11,10 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectJwtTemplatesTemplateGetArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectConnectorsFingerprintDescopeGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("authSchema")]
-        public Input<string>? AuthSchema { get; set; }
-
-        [Input("conformanceIssuer")]
-        public Input<bool>? ConformanceIssuer { get; set; }
+        [Input("customDomain")]
+        public Input<string>? CustomDomain { get; set; }
 
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -28,15 +25,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        [Input("template", required: true)]
-        public Input<string> Template { get; set; } = null!;
-
-        [Input("type", required: true)]
-        public Input<string> Type { get; set; } = null!;
-
-        public ProjectJwtTemplatesTemplateGetArgs()
+        public ProjectConnectorsFingerprintDescopeGetArgs()
         {
         }
-        public static new ProjectJwtTemplatesTemplateGetArgs Empty => new ProjectJwtTemplatesTemplateGetArgs();
+        public static new ProjectConnectorsFingerprintDescopeGetArgs Empty => new ProjectConnectorsFingerprintDescopeGetArgs();
     }
 }

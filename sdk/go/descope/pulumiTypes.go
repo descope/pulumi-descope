@@ -14,8 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ProjectApplications struct {
-	Oidcs []ProjectApplicationsOidc `pulumi:"oidcs"`
-	Samls []ProjectApplicationsSaml `pulumi:"samls"`
+	OidcApplications []ProjectApplicationsOidcApplication `pulumi:"oidcApplications"`
+	SamlApplications []ProjectApplicationsSamlApplication `pulumi:"samlApplications"`
 }
 
 // ProjectApplicationsInput is an input type that accepts ProjectApplicationsArgs and ProjectApplicationsOutput values.
@@ -30,8 +30,8 @@ type ProjectApplicationsInput interface {
 }
 
 type ProjectApplicationsArgs struct {
-	Oidcs ProjectApplicationsOidcArrayInput `pulumi:"oidcs"`
-	Samls ProjectApplicationsSamlArrayInput `pulumi:"samls"`
+	OidcApplications ProjectApplicationsOidcApplicationArrayInput `pulumi:"oidcApplications"`
+	SamlApplications ProjectApplicationsSamlApplicationArrayInput `pulumi:"samlApplications"`
 }
 
 func (ProjectApplicationsArgs) ElementType() reflect.Type {
@@ -111,12 +111,12 @@ func (o ProjectApplicationsOutput) ToProjectApplicationsPtrOutputWithContext(ctx
 	}).(ProjectApplicationsPtrOutput)
 }
 
-func (o ProjectApplicationsOutput) Oidcs() ProjectApplicationsOidcArrayOutput {
-	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsOidc { return v.Oidcs }).(ProjectApplicationsOidcArrayOutput)
+func (o ProjectApplicationsOutput) OidcApplications() ProjectApplicationsOidcApplicationArrayOutput {
+	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsOidcApplication { return v.OidcApplications }).(ProjectApplicationsOidcApplicationArrayOutput)
 }
 
-func (o ProjectApplicationsOutput) Samls() ProjectApplicationsSamlArrayOutput {
-	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsSaml { return v.Samls }).(ProjectApplicationsSamlArrayOutput)
+func (o ProjectApplicationsOutput) SamlApplications() ProjectApplicationsSamlApplicationArrayOutput {
+	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsSamlApplication { return v.SamlApplications }).(ProjectApplicationsSamlApplicationArrayOutput)
 }
 
 type ProjectApplicationsPtrOutput struct{ *pulumi.OutputState }
@@ -143,550 +143,558 @@ func (o ProjectApplicationsPtrOutput) Elem() ProjectApplicationsOutput {
 	}).(ProjectApplicationsOutput)
 }
 
-func (o ProjectApplicationsPtrOutput) Oidcs() ProjectApplicationsOidcArrayOutput {
-	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsOidc {
+func (o ProjectApplicationsPtrOutput) OidcApplications() ProjectApplicationsOidcApplicationArrayOutput {
+	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsOidcApplication {
 		if v == nil {
 			return nil
 		}
-		return v.Oidcs
-	}).(ProjectApplicationsOidcArrayOutput)
+		return v.OidcApplications
+	}).(ProjectApplicationsOidcApplicationArrayOutput)
 }
 
-func (o ProjectApplicationsPtrOutput) Samls() ProjectApplicationsSamlArrayOutput {
-	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsSaml {
+func (o ProjectApplicationsPtrOutput) SamlApplications() ProjectApplicationsSamlApplicationArrayOutput {
+	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsSamlApplication {
 		if v == nil {
 			return nil
 		}
-		return v.Samls
-	}).(ProjectApplicationsSamlArrayOutput)
+		return v.SamlApplications
+	}).(ProjectApplicationsSamlApplicationArrayOutput)
 }
 
-type ProjectApplicationsOidc struct {
-	Claims       []string `pulumi:"claims"`
-	Description  *string  `pulumi:"description"`
-	Disabled     *bool    `pulumi:"disabled"`
-	Id           *string  `pulumi:"id"`
-	LoginPageUrl *string  `pulumi:"loginPageUrl"`
-	Logo         *string  `pulumi:"logo"`
-	Name         string   `pulumi:"name"`
+type ProjectApplicationsOidcApplication struct {
+	Claims      []string `pulumi:"claims"`
+	Description *string  `pulumi:"description"`
+	Disabled    *bool    `pulumi:"disabled"`
+	// The ID of this resource.
+	Id           *string `pulumi:"id"`
+	LoginPageUrl *string `pulumi:"loginPageUrl"`
+	Logo         *string `pulumi:"logo"`
+	Name         string  `pulumi:"name"`
 }
 
-// ProjectApplicationsOidcInput is an input type that accepts ProjectApplicationsOidcArgs and ProjectApplicationsOidcOutput values.
-// You can construct a concrete instance of `ProjectApplicationsOidcInput` via:
+// ProjectApplicationsOidcApplicationInput is an input type that accepts ProjectApplicationsOidcApplicationArgs and ProjectApplicationsOidcApplicationOutput values.
+// You can construct a concrete instance of `ProjectApplicationsOidcApplicationInput` via:
 //
-//	ProjectApplicationsOidcArgs{...}
-type ProjectApplicationsOidcInput interface {
+//	ProjectApplicationsOidcApplicationArgs{...}
+type ProjectApplicationsOidcApplicationInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsOidcOutput() ProjectApplicationsOidcOutput
-	ToProjectApplicationsOidcOutputWithContext(context.Context) ProjectApplicationsOidcOutput
+	ToProjectApplicationsOidcApplicationOutput() ProjectApplicationsOidcApplicationOutput
+	ToProjectApplicationsOidcApplicationOutputWithContext(context.Context) ProjectApplicationsOidcApplicationOutput
 }
 
-type ProjectApplicationsOidcArgs struct {
-	Claims       pulumi.StringArrayInput `pulumi:"claims"`
-	Description  pulumi.StringPtrInput   `pulumi:"description"`
-	Disabled     pulumi.BoolPtrInput     `pulumi:"disabled"`
-	Id           pulumi.StringPtrInput   `pulumi:"id"`
-	LoginPageUrl pulumi.StringPtrInput   `pulumi:"loginPageUrl"`
-	Logo         pulumi.StringPtrInput   `pulumi:"logo"`
-	Name         pulumi.StringInput      `pulumi:"name"`
+type ProjectApplicationsOidcApplicationArgs struct {
+	Claims      pulumi.StringArrayInput `pulumi:"claims"`
+	Description pulumi.StringPtrInput   `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput     `pulumi:"disabled"`
+	// The ID of this resource.
+	Id           pulumi.StringPtrInput `pulumi:"id"`
+	LoginPageUrl pulumi.StringPtrInput `pulumi:"loginPageUrl"`
+	Logo         pulumi.StringPtrInput `pulumi:"logo"`
+	Name         pulumi.StringInput    `pulumi:"name"`
 }
 
-func (ProjectApplicationsOidcArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsOidc)(nil)).Elem()
+func (ProjectApplicationsOidcApplicationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsOidcApplication)(nil)).Elem()
 }
 
-func (i ProjectApplicationsOidcArgs) ToProjectApplicationsOidcOutput() ProjectApplicationsOidcOutput {
-	return i.ToProjectApplicationsOidcOutputWithContext(context.Background())
+func (i ProjectApplicationsOidcApplicationArgs) ToProjectApplicationsOidcApplicationOutput() ProjectApplicationsOidcApplicationOutput {
+	return i.ToProjectApplicationsOidcApplicationOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsOidcArgs) ToProjectApplicationsOidcOutputWithContext(ctx context.Context) ProjectApplicationsOidcOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsOidcOutput)
+func (i ProjectApplicationsOidcApplicationArgs) ToProjectApplicationsOidcApplicationOutputWithContext(ctx context.Context) ProjectApplicationsOidcApplicationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsOidcApplicationOutput)
 }
 
-// ProjectApplicationsOidcArrayInput is an input type that accepts ProjectApplicationsOidcArray and ProjectApplicationsOidcArrayOutput values.
-// You can construct a concrete instance of `ProjectApplicationsOidcArrayInput` via:
+// ProjectApplicationsOidcApplicationArrayInput is an input type that accepts ProjectApplicationsOidcApplicationArray and ProjectApplicationsOidcApplicationArrayOutput values.
+// You can construct a concrete instance of `ProjectApplicationsOidcApplicationArrayInput` via:
 //
-//	ProjectApplicationsOidcArray{ ProjectApplicationsOidcArgs{...} }
-type ProjectApplicationsOidcArrayInput interface {
+//	ProjectApplicationsOidcApplicationArray{ ProjectApplicationsOidcApplicationArgs{...} }
+type ProjectApplicationsOidcApplicationArrayInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsOidcArrayOutput() ProjectApplicationsOidcArrayOutput
-	ToProjectApplicationsOidcArrayOutputWithContext(context.Context) ProjectApplicationsOidcArrayOutput
+	ToProjectApplicationsOidcApplicationArrayOutput() ProjectApplicationsOidcApplicationArrayOutput
+	ToProjectApplicationsOidcApplicationArrayOutputWithContext(context.Context) ProjectApplicationsOidcApplicationArrayOutput
 }
 
-type ProjectApplicationsOidcArray []ProjectApplicationsOidcInput
+type ProjectApplicationsOidcApplicationArray []ProjectApplicationsOidcApplicationInput
 
-func (ProjectApplicationsOidcArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsOidc)(nil)).Elem()
+func (ProjectApplicationsOidcApplicationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsOidcApplication)(nil)).Elem()
 }
 
-func (i ProjectApplicationsOidcArray) ToProjectApplicationsOidcArrayOutput() ProjectApplicationsOidcArrayOutput {
-	return i.ToProjectApplicationsOidcArrayOutputWithContext(context.Background())
+func (i ProjectApplicationsOidcApplicationArray) ToProjectApplicationsOidcApplicationArrayOutput() ProjectApplicationsOidcApplicationArrayOutput {
+	return i.ToProjectApplicationsOidcApplicationArrayOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsOidcArray) ToProjectApplicationsOidcArrayOutputWithContext(ctx context.Context) ProjectApplicationsOidcArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsOidcArrayOutput)
+func (i ProjectApplicationsOidcApplicationArray) ToProjectApplicationsOidcApplicationArrayOutputWithContext(ctx context.Context) ProjectApplicationsOidcApplicationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsOidcApplicationArrayOutput)
 }
 
-type ProjectApplicationsOidcOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsOidcApplicationOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsOidcOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsOidc)(nil)).Elem()
+func (ProjectApplicationsOidcApplicationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsOidcApplication)(nil)).Elem()
 }
 
-func (o ProjectApplicationsOidcOutput) ToProjectApplicationsOidcOutput() ProjectApplicationsOidcOutput {
+func (o ProjectApplicationsOidcApplicationOutput) ToProjectApplicationsOidcApplicationOutput() ProjectApplicationsOidcApplicationOutput {
 	return o
 }
 
-func (o ProjectApplicationsOidcOutput) ToProjectApplicationsOidcOutputWithContext(ctx context.Context) ProjectApplicationsOidcOutput {
+func (o ProjectApplicationsOidcApplicationOutput) ToProjectApplicationsOidcApplicationOutputWithContext(ctx context.Context) ProjectApplicationsOidcApplicationOutput {
 	return o
 }
 
-func (o ProjectApplicationsOidcOutput) Claims() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) []string { return v.Claims }).(pulumi.StringArrayOutput)
+func (o ProjectApplicationsOidcApplicationOutput) Claims() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) []string { return v.Claims }).(pulumi.StringArrayOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsOidcApplicationOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) Disabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+func (o ProjectApplicationsOidcApplicationOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) *string { return v.Id }).(pulumi.StringPtrOutput)
+// The ID of this resource.
+func (o ProjectApplicationsOidcApplicationOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) LoginPageUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsOidcApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) Logo() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) *string { return v.Logo }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsOidcApplicationOutput) Logo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsOidcOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsOidc) string { return v.Name }).(pulumi.StringOutput)
+func (o ProjectApplicationsOidcApplicationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsOidcApplication) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type ProjectApplicationsOidcArrayOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsOidcApplicationArrayOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsOidcArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsOidc)(nil)).Elem()
+func (ProjectApplicationsOidcApplicationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsOidcApplication)(nil)).Elem()
 }
 
-func (o ProjectApplicationsOidcArrayOutput) ToProjectApplicationsOidcArrayOutput() ProjectApplicationsOidcArrayOutput {
+func (o ProjectApplicationsOidcApplicationArrayOutput) ToProjectApplicationsOidcApplicationArrayOutput() ProjectApplicationsOidcApplicationArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsOidcArrayOutput) ToProjectApplicationsOidcArrayOutputWithContext(ctx context.Context) ProjectApplicationsOidcArrayOutput {
+func (o ProjectApplicationsOidcApplicationArrayOutput) ToProjectApplicationsOidcApplicationArrayOutputWithContext(ctx context.Context) ProjectApplicationsOidcApplicationArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsOidcArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsOidcOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsOidc {
-		return vs[0].([]ProjectApplicationsOidc)[vs[1].(int)]
-	}).(ProjectApplicationsOidcOutput)
+func (o ProjectApplicationsOidcApplicationArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsOidcApplicationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsOidcApplication {
+		return vs[0].([]ProjectApplicationsOidcApplication)[vs[1].(int)]
+	}).(ProjectApplicationsOidcApplicationOutput)
 }
 
-type ProjectApplicationsSaml struct {
-	AcsAllowedCallbackUrls []string                                     `pulumi:"acsAllowedCallbackUrls"`
-	AttributeMappings      []ProjectApplicationsSamlAttributeMapping    `pulumi:"attributeMappings"`
-	DefaultRelayState      *string                                      `pulumi:"defaultRelayState"`
-	Description            *string                                      `pulumi:"description"`
-	Disabled               *bool                                        `pulumi:"disabled"`
-	DynamicConfiguration   *ProjectApplicationsSamlDynamicConfiguration `pulumi:"dynamicConfiguration"`
-	Id                     *string                                      `pulumi:"id"`
-	LoginPageUrl           *string                                      `pulumi:"loginPageUrl"`
-	Logo                   *string                                      `pulumi:"logo"`
-	ManualConfiguration    *ProjectApplicationsSamlManualConfiguration  `pulumi:"manualConfiguration"`
-	Name                   string                                       `pulumi:"name"`
-	SubjectNameIdFormat    *string                                      `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType      *string                                      `pulumi:"subjectNameIdType"`
+type ProjectApplicationsSamlApplication struct {
+	AcsAllowedCallbackUrls []string                                                `pulumi:"acsAllowedCallbackUrls"`
+	AttributeMappings      []ProjectApplicationsSamlApplicationAttributeMapping    `pulumi:"attributeMappings"`
+	DefaultRelayState      *string                                                 `pulumi:"defaultRelayState"`
+	Description            *string                                                 `pulumi:"description"`
+	Disabled               *bool                                                   `pulumi:"disabled"`
+	DynamicConfiguration   *ProjectApplicationsSamlApplicationDynamicConfiguration `pulumi:"dynamicConfiguration"`
+	// The ID of this resource.
+	Id                  *string                                                `pulumi:"id"`
+	LoginPageUrl        *string                                                `pulumi:"loginPageUrl"`
+	Logo                *string                                                `pulumi:"logo"`
+	ManualConfiguration *ProjectApplicationsSamlApplicationManualConfiguration `pulumi:"manualConfiguration"`
+	Name                string                                                 `pulumi:"name"`
+	SubjectNameIdFormat *string                                                `pulumi:"subjectNameIdFormat"`
+	SubjectNameIdType   *string                                                `pulumi:"subjectNameIdType"`
 }
 
-// ProjectApplicationsSamlInput is an input type that accepts ProjectApplicationsSamlArgs and ProjectApplicationsSamlOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlInput` via:
+// ProjectApplicationsSamlApplicationInput is an input type that accepts ProjectApplicationsSamlApplicationArgs and ProjectApplicationsSamlApplicationOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationInput` via:
 //
-//	ProjectApplicationsSamlArgs{...}
-type ProjectApplicationsSamlInput interface {
+//	ProjectApplicationsSamlApplicationArgs{...}
+type ProjectApplicationsSamlApplicationInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlOutput() ProjectApplicationsSamlOutput
-	ToProjectApplicationsSamlOutputWithContext(context.Context) ProjectApplicationsSamlOutput
+	ToProjectApplicationsSamlApplicationOutput() ProjectApplicationsSamlApplicationOutput
+	ToProjectApplicationsSamlApplicationOutputWithContext(context.Context) ProjectApplicationsSamlApplicationOutput
 }
 
-type ProjectApplicationsSamlArgs struct {
-	AcsAllowedCallbackUrls pulumi.StringArrayInput                             `pulumi:"acsAllowedCallbackUrls"`
-	AttributeMappings      ProjectApplicationsSamlAttributeMappingArrayInput   `pulumi:"attributeMappings"`
-	DefaultRelayState      pulumi.StringPtrInput                               `pulumi:"defaultRelayState"`
-	Description            pulumi.StringPtrInput                               `pulumi:"description"`
-	Disabled               pulumi.BoolPtrInput                                 `pulumi:"disabled"`
-	DynamicConfiguration   ProjectApplicationsSamlDynamicConfigurationPtrInput `pulumi:"dynamicConfiguration"`
-	Id                     pulumi.StringPtrInput                               `pulumi:"id"`
-	LoginPageUrl           pulumi.StringPtrInput                               `pulumi:"loginPageUrl"`
-	Logo                   pulumi.StringPtrInput                               `pulumi:"logo"`
-	ManualConfiguration    ProjectApplicationsSamlManualConfigurationPtrInput  `pulumi:"manualConfiguration"`
-	Name                   pulumi.StringInput                                  `pulumi:"name"`
-	SubjectNameIdFormat    pulumi.StringPtrInput                               `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType      pulumi.StringPtrInput                               `pulumi:"subjectNameIdType"`
+type ProjectApplicationsSamlApplicationArgs struct {
+	AcsAllowedCallbackUrls pulumi.StringArrayInput                                        `pulumi:"acsAllowedCallbackUrls"`
+	AttributeMappings      ProjectApplicationsSamlApplicationAttributeMappingArrayInput   `pulumi:"attributeMappings"`
+	DefaultRelayState      pulumi.StringPtrInput                                          `pulumi:"defaultRelayState"`
+	Description            pulumi.StringPtrInput                                          `pulumi:"description"`
+	Disabled               pulumi.BoolPtrInput                                            `pulumi:"disabled"`
+	DynamicConfiguration   ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput `pulumi:"dynamicConfiguration"`
+	// The ID of this resource.
+	Id                  pulumi.StringPtrInput                                         `pulumi:"id"`
+	LoginPageUrl        pulumi.StringPtrInput                                         `pulumi:"loginPageUrl"`
+	Logo                pulumi.StringPtrInput                                         `pulumi:"logo"`
+	ManualConfiguration ProjectApplicationsSamlApplicationManualConfigurationPtrInput `pulumi:"manualConfiguration"`
+	Name                pulumi.StringInput                                            `pulumi:"name"`
+	SubjectNameIdFormat pulumi.StringPtrInput                                         `pulumi:"subjectNameIdFormat"`
+	SubjectNameIdType   pulumi.StringPtrInput                                         `pulumi:"subjectNameIdType"`
 }
 
-func (ProjectApplicationsSamlArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSaml)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplication)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlArgs) ToProjectApplicationsSamlOutput() ProjectApplicationsSamlOutput {
-	return i.ToProjectApplicationsSamlOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationArgs) ToProjectApplicationsSamlApplicationOutput() ProjectApplicationsSamlApplicationOutput {
+	return i.ToProjectApplicationsSamlApplicationOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlArgs) ToProjectApplicationsSamlOutputWithContext(ctx context.Context) ProjectApplicationsSamlOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlOutput)
+func (i ProjectApplicationsSamlApplicationArgs) ToProjectApplicationsSamlApplicationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationOutput)
 }
 
-// ProjectApplicationsSamlArrayInput is an input type that accepts ProjectApplicationsSamlArray and ProjectApplicationsSamlArrayOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlArrayInput` via:
+// ProjectApplicationsSamlApplicationArrayInput is an input type that accepts ProjectApplicationsSamlApplicationArray and ProjectApplicationsSamlApplicationArrayOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationArrayInput` via:
 //
-//	ProjectApplicationsSamlArray{ ProjectApplicationsSamlArgs{...} }
-type ProjectApplicationsSamlArrayInput interface {
+//	ProjectApplicationsSamlApplicationArray{ ProjectApplicationsSamlApplicationArgs{...} }
+type ProjectApplicationsSamlApplicationArrayInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlArrayOutput() ProjectApplicationsSamlArrayOutput
-	ToProjectApplicationsSamlArrayOutputWithContext(context.Context) ProjectApplicationsSamlArrayOutput
+	ToProjectApplicationsSamlApplicationArrayOutput() ProjectApplicationsSamlApplicationArrayOutput
+	ToProjectApplicationsSamlApplicationArrayOutputWithContext(context.Context) ProjectApplicationsSamlApplicationArrayOutput
 }
 
-type ProjectApplicationsSamlArray []ProjectApplicationsSamlInput
+type ProjectApplicationsSamlApplicationArray []ProjectApplicationsSamlApplicationInput
 
-func (ProjectApplicationsSamlArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsSaml)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsSamlApplication)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlArray) ToProjectApplicationsSamlArrayOutput() ProjectApplicationsSamlArrayOutput {
-	return i.ToProjectApplicationsSamlArrayOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationArray) ToProjectApplicationsSamlApplicationArrayOutput() ProjectApplicationsSamlApplicationArrayOutput {
+	return i.ToProjectApplicationsSamlApplicationArrayOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlArray) ToProjectApplicationsSamlArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlArrayOutput)
+func (i ProjectApplicationsSamlApplicationArray) ToProjectApplicationsSamlApplicationArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationArrayOutput)
 }
 
-type ProjectApplicationsSamlOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSaml)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplication)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlOutput) ToProjectApplicationsSamlOutput() ProjectApplicationsSamlOutput {
+func (o ProjectApplicationsSamlApplicationOutput) ToProjectApplicationsSamlApplicationOutput() ProjectApplicationsSamlApplicationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlOutput) ToProjectApplicationsSamlOutputWithContext(ctx context.Context) ProjectApplicationsSamlOutput {
+func (o ProjectApplicationsSamlApplicationOutput) ToProjectApplicationsSamlApplicationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlOutput) AcsAllowedCallbackUrls() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) []string { return v.AcsAllowedCallbackUrls }).(pulumi.StringArrayOutput)
+func (o ProjectApplicationsSamlApplicationOutput) AcsAllowedCallbackUrls() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []string { return v.AcsAllowedCallbackUrls }).(pulumi.StringArrayOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) AttributeMappings() ProjectApplicationsSamlAttributeMappingArrayOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) []ProjectApplicationsSamlAttributeMapping { return v.AttributeMappings }).(ProjectApplicationsSamlAttributeMappingArrayOutput)
+func (o ProjectApplicationsSamlApplicationOutput) AttributeMappings() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []ProjectApplicationsSamlApplicationAttributeMapping {
+		return v.AttributeMappings
+	}).(ProjectApplicationsSamlApplicationAttributeMappingArrayOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) DefaultRelayState() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.DefaultRelayState }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) DefaultRelayState() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.DefaultRelayState }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) Disabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) DynamicConfiguration() ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *ProjectApplicationsSamlDynamicConfiguration {
+func (o ProjectApplicationsSamlApplicationOutput) DynamicConfiguration() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *ProjectApplicationsSamlApplicationDynamicConfiguration {
 		return v.DynamicConfiguration
-	}).(ProjectApplicationsSamlDynamicConfigurationPtrOutput)
+	}).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.Id }).(pulumi.StringPtrOutput)
+// The ID of this resource.
+func (o ProjectApplicationsSamlApplicationOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) LoginPageUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) Logo() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.Logo }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) Logo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) ManualConfiguration() ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *ProjectApplicationsSamlManualConfiguration {
+func (o ProjectApplicationsSamlApplicationOutput) ManualConfiguration() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *ProjectApplicationsSamlApplicationManualConfiguration {
 		return v.ManualConfiguration
-	}).(ProjectApplicationsSamlManualConfigurationPtrOutput)
+	}).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) string { return v.Name }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) SubjectNameIdFormat() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.SubjectNameIdFormat }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) SubjectNameIdFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.SubjectNameIdFormat }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlOutput) SubjectNameIdType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectApplicationsSaml) *string { return v.SubjectNameIdType }).(pulumi.StringPtrOutput)
+func (o ProjectApplicationsSamlApplicationOutput) SubjectNameIdType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.SubjectNameIdType }).(pulumi.StringPtrOutput)
 }
 
-type ProjectApplicationsSamlArrayOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationArrayOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsSaml)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsSamlApplication)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlArrayOutput) ToProjectApplicationsSamlArrayOutput() ProjectApplicationsSamlArrayOutput {
+func (o ProjectApplicationsSamlApplicationArrayOutput) ToProjectApplicationsSamlApplicationArrayOutput() ProjectApplicationsSamlApplicationArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlArrayOutput) ToProjectApplicationsSamlArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlArrayOutput {
+func (o ProjectApplicationsSamlApplicationArrayOutput) ToProjectApplicationsSamlApplicationArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsSamlOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsSaml {
-		return vs[0].([]ProjectApplicationsSaml)[vs[1].(int)]
-	}).(ProjectApplicationsSamlOutput)
+func (o ProjectApplicationsSamlApplicationArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsSamlApplicationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsSamlApplication {
+		return vs[0].([]ProjectApplicationsSamlApplication)[vs[1].(int)]
+	}).(ProjectApplicationsSamlApplicationOutput)
 }
 
-type ProjectApplicationsSamlAttributeMapping struct {
+type ProjectApplicationsSamlApplicationAttributeMapping struct {
 	Name  string `pulumi:"name"`
 	Value string `pulumi:"value"`
 }
 
-// ProjectApplicationsSamlAttributeMappingInput is an input type that accepts ProjectApplicationsSamlAttributeMappingArgs and ProjectApplicationsSamlAttributeMappingOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlAttributeMappingInput` via:
+// ProjectApplicationsSamlApplicationAttributeMappingInput is an input type that accepts ProjectApplicationsSamlApplicationAttributeMappingArgs and ProjectApplicationsSamlApplicationAttributeMappingOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationAttributeMappingInput` via:
 //
-//	ProjectApplicationsSamlAttributeMappingArgs{...}
-type ProjectApplicationsSamlAttributeMappingInput interface {
+//	ProjectApplicationsSamlApplicationAttributeMappingArgs{...}
+type ProjectApplicationsSamlApplicationAttributeMappingInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlAttributeMappingOutput() ProjectApplicationsSamlAttributeMappingOutput
-	ToProjectApplicationsSamlAttributeMappingOutputWithContext(context.Context) ProjectApplicationsSamlAttributeMappingOutput
+	ToProjectApplicationsSamlApplicationAttributeMappingOutput() ProjectApplicationsSamlApplicationAttributeMappingOutput
+	ToProjectApplicationsSamlApplicationAttributeMappingOutputWithContext(context.Context) ProjectApplicationsSamlApplicationAttributeMappingOutput
 }
 
-type ProjectApplicationsSamlAttributeMappingArgs struct {
+type ProjectApplicationsSamlApplicationAttributeMappingArgs struct {
 	Name  pulumi.StringInput `pulumi:"name"`
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (ProjectApplicationsSamlAttributeMappingArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlAttributeMapping)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationAttributeMappingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationAttributeMapping)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlAttributeMappingArgs) ToProjectApplicationsSamlAttributeMappingOutput() ProjectApplicationsSamlAttributeMappingOutput {
-	return i.ToProjectApplicationsSamlAttributeMappingOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationAttributeMappingArgs) ToProjectApplicationsSamlApplicationAttributeMappingOutput() ProjectApplicationsSamlApplicationAttributeMappingOutput {
+	return i.ToProjectApplicationsSamlApplicationAttributeMappingOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlAttributeMappingArgs) ToProjectApplicationsSamlAttributeMappingOutputWithContext(ctx context.Context) ProjectApplicationsSamlAttributeMappingOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlAttributeMappingOutput)
+func (i ProjectApplicationsSamlApplicationAttributeMappingArgs) ToProjectApplicationsSamlApplicationAttributeMappingOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationAttributeMappingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationAttributeMappingOutput)
 }
 
-// ProjectApplicationsSamlAttributeMappingArrayInput is an input type that accepts ProjectApplicationsSamlAttributeMappingArray and ProjectApplicationsSamlAttributeMappingArrayOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlAttributeMappingArrayInput` via:
+// ProjectApplicationsSamlApplicationAttributeMappingArrayInput is an input type that accepts ProjectApplicationsSamlApplicationAttributeMappingArray and ProjectApplicationsSamlApplicationAttributeMappingArrayOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationAttributeMappingArrayInput` via:
 //
-//	ProjectApplicationsSamlAttributeMappingArray{ ProjectApplicationsSamlAttributeMappingArgs{...} }
-type ProjectApplicationsSamlAttributeMappingArrayInput interface {
+//	ProjectApplicationsSamlApplicationAttributeMappingArray{ ProjectApplicationsSamlApplicationAttributeMappingArgs{...} }
+type ProjectApplicationsSamlApplicationAttributeMappingArrayInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlAttributeMappingArrayOutput() ProjectApplicationsSamlAttributeMappingArrayOutput
-	ToProjectApplicationsSamlAttributeMappingArrayOutputWithContext(context.Context) ProjectApplicationsSamlAttributeMappingArrayOutput
+	ToProjectApplicationsSamlApplicationAttributeMappingArrayOutput() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput
+	ToProjectApplicationsSamlApplicationAttributeMappingArrayOutputWithContext(context.Context) ProjectApplicationsSamlApplicationAttributeMappingArrayOutput
 }
 
-type ProjectApplicationsSamlAttributeMappingArray []ProjectApplicationsSamlAttributeMappingInput
+type ProjectApplicationsSamlApplicationAttributeMappingArray []ProjectApplicationsSamlApplicationAttributeMappingInput
 
-func (ProjectApplicationsSamlAttributeMappingArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsSamlAttributeMapping)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationAttributeMappingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsSamlApplicationAttributeMapping)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlAttributeMappingArray) ToProjectApplicationsSamlAttributeMappingArrayOutput() ProjectApplicationsSamlAttributeMappingArrayOutput {
-	return i.ToProjectApplicationsSamlAttributeMappingArrayOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationAttributeMappingArray) ToProjectApplicationsSamlApplicationAttributeMappingArrayOutput() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
+	return i.ToProjectApplicationsSamlApplicationAttributeMappingArrayOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlAttributeMappingArray) ToProjectApplicationsSamlAttributeMappingArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlAttributeMappingArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlAttributeMappingArrayOutput)
+func (i ProjectApplicationsSamlApplicationAttributeMappingArray) ToProjectApplicationsSamlApplicationAttributeMappingArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationAttributeMappingArrayOutput)
 }
 
-type ProjectApplicationsSamlAttributeMappingOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationAttributeMappingOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlAttributeMappingOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlAttributeMapping)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationAttributeMappingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationAttributeMapping)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlAttributeMappingOutput) ToProjectApplicationsSamlAttributeMappingOutput() ProjectApplicationsSamlAttributeMappingOutput {
+func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) ToProjectApplicationsSamlApplicationAttributeMappingOutput() ProjectApplicationsSamlApplicationAttributeMappingOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlAttributeMappingOutput) ToProjectApplicationsSamlAttributeMappingOutputWithContext(ctx context.Context) ProjectApplicationsSamlAttributeMappingOutput {
+func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) ToProjectApplicationsSamlApplicationAttributeMappingOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationAttributeMappingOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlAttributeMappingOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlAttributeMapping) string { return v.Name }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProjectApplicationsSamlAttributeMappingOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlAttributeMapping) string { return v.Value }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type ProjectApplicationsSamlAttributeMappingArrayOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationAttributeMappingArrayOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlAttributeMappingArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectApplicationsSamlAttributeMapping)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationAttributeMappingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectApplicationsSamlApplicationAttributeMapping)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlAttributeMappingArrayOutput) ToProjectApplicationsSamlAttributeMappingArrayOutput() ProjectApplicationsSamlAttributeMappingArrayOutput {
+func (o ProjectApplicationsSamlApplicationAttributeMappingArrayOutput) ToProjectApplicationsSamlApplicationAttributeMappingArrayOutput() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlAttributeMappingArrayOutput) ToProjectApplicationsSamlAttributeMappingArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlAttributeMappingArrayOutput {
+func (o ProjectApplicationsSamlApplicationAttributeMappingArrayOutput) ToProjectApplicationsSamlApplicationAttributeMappingArrayOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlAttributeMappingArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsSamlAttributeMappingOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsSamlAttributeMapping {
-		return vs[0].([]ProjectApplicationsSamlAttributeMapping)[vs[1].(int)]
-	}).(ProjectApplicationsSamlAttributeMappingOutput)
+func (o ProjectApplicationsSamlApplicationAttributeMappingArrayOutput) Index(i pulumi.IntInput) ProjectApplicationsSamlApplicationAttributeMappingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectApplicationsSamlApplicationAttributeMapping {
+		return vs[0].([]ProjectApplicationsSamlApplicationAttributeMapping)[vs[1].(int)]
+	}).(ProjectApplicationsSamlApplicationAttributeMappingOutput)
 }
 
-type ProjectApplicationsSamlDynamicConfiguration struct {
+type ProjectApplicationsSamlApplicationDynamicConfiguration struct {
 	MetadataUrl string `pulumi:"metadataUrl"`
 }
 
-// ProjectApplicationsSamlDynamicConfigurationInput is an input type that accepts ProjectApplicationsSamlDynamicConfigurationArgs and ProjectApplicationsSamlDynamicConfigurationOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlDynamicConfigurationInput` via:
+// ProjectApplicationsSamlApplicationDynamicConfigurationInput is an input type that accepts ProjectApplicationsSamlApplicationDynamicConfigurationArgs and ProjectApplicationsSamlApplicationDynamicConfigurationOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationDynamicConfigurationInput` via:
 //
-//	ProjectApplicationsSamlDynamicConfigurationArgs{...}
-type ProjectApplicationsSamlDynamicConfigurationInput interface {
+//	ProjectApplicationsSamlApplicationDynamicConfigurationArgs{...}
+type ProjectApplicationsSamlApplicationDynamicConfigurationInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlDynamicConfigurationOutput() ProjectApplicationsSamlDynamicConfigurationOutput
-	ToProjectApplicationsSamlDynamicConfigurationOutputWithContext(context.Context) ProjectApplicationsSamlDynamicConfigurationOutput
+	ToProjectApplicationsSamlApplicationDynamicConfigurationOutput() ProjectApplicationsSamlApplicationDynamicConfigurationOutput
+	ToProjectApplicationsSamlApplicationDynamicConfigurationOutputWithContext(context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationOutput
 }
 
-type ProjectApplicationsSamlDynamicConfigurationArgs struct {
+type ProjectApplicationsSamlApplicationDynamicConfigurationArgs struct {
 	MetadataUrl pulumi.StringInput `pulumi:"metadataUrl"`
 }
 
-func (ProjectApplicationsSamlDynamicConfigurationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlDynamicConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationDynamicConfiguration)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlDynamicConfigurationArgs) ToProjectApplicationsSamlDynamicConfigurationOutput() ProjectApplicationsSamlDynamicConfigurationOutput {
-	return i.ToProjectApplicationsSamlDynamicConfigurationOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ToProjectApplicationsSamlApplicationDynamicConfigurationOutput() ProjectApplicationsSamlApplicationDynamicConfigurationOutput {
+	return i.ToProjectApplicationsSamlApplicationDynamicConfigurationOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlDynamicConfigurationArgs) ToProjectApplicationsSamlDynamicConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlDynamicConfigurationOutput)
+func (i ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ToProjectApplicationsSamlApplicationDynamicConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationDynamicConfigurationOutput)
 }
 
-func (i ProjectApplicationsSamlDynamicConfigurationArgs) ToProjectApplicationsSamlDynamicConfigurationPtrOutput() ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return i.ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return i.ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlDynamicConfigurationArgs) ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlDynamicConfigurationOutput).ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(ctx)
+func (i ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationDynamicConfigurationOutput).ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(ctx)
 }
 
-// ProjectApplicationsSamlDynamicConfigurationPtrInput is an input type that accepts ProjectApplicationsSamlDynamicConfigurationArgs, ProjectApplicationsSamlDynamicConfigurationPtr and ProjectApplicationsSamlDynamicConfigurationPtrOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlDynamicConfigurationPtrInput` via:
+// ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput is an input type that accepts ProjectApplicationsSamlApplicationDynamicConfigurationArgs, ProjectApplicationsSamlApplicationDynamicConfigurationPtr and ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput` via:
 //
-//	        ProjectApplicationsSamlDynamicConfigurationArgs{...}
+//	        ProjectApplicationsSamlApplicationDynamicConfigurationArgs{...}
 //
 //	or:
 //
 //	        nil
-type ProjectApplicationsSamlDynamicConfigurationPtrInput interface {
+type ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlDynamicConfigurationPtrOutput() ProjectApplicationsSamlDynamicConfigurationPtrOutput
-	ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(context.Context) ProjectApplicationsSamlDynamicConfigurationPtrOutput
+	ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput
+	ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput
 }
 
-type projectApplicationsSamlDynamicConfigurationPtrType ProjectApplicationsSamlDynamicConfigurationArgs
+type projectApplicationsSamlApplicationDynamicConfigurationPtrType ProjectApplicationsSamlApplicationDynamicConfigurationArgs
 
-func ProjectApplicationsSamlDynamicConfigurationPtr(v *ProjectApplicationsSamlDynamicConfigurationArgs) ProjectApplicationsSamlDynamicConfigurationPtrInput {
-	return (*projectApplicationsSamlDynamicConfigurationPtrType)(v)
+func ProjectApplicationsSamlApplicationDynamicConfigurationPtr(v *ProjectApplicationsSamlApplicationDynamicConfigurationArgs) ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput {
+	return (*projectApplicationsSamlApplicationDynamicConfigurationPtrType)(v)
 }
 
-func (*projectApplicationsSamlDynamicConfigurationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectApplicationsSamlDynamicConfiguration)(nil)).Elem()
+func (*projectApplicationsSamlApplicationDynamicConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectApplicationsSamlApplicationDynamicConfiguration)(nil)).Elem()
 }
 
-func (i *projectApplicationsSamlDynamicConfigurationPtrType) ToProjectApplicationsSamlDynamicConfigurationPtrOutput() ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return i.ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(context.Background())
+func (i *projectApplicationsSamlApplicationDynamicConfigurationPtrType) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return i.ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (i *projectApplicationsSamlDynamicConfigurationPtrType) ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlDynamicConfigurationPtrOutput)
+func (i *projectApplicationsSamlApplicationDynamicConfigurationPtrType) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
-type ProjectApplicationsSamlDynamicConfigurationOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationDynamicConfigurationOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlDynamicConfigurationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlDynamicConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationDynamicConfiguration)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationOutput) ToProjectApplicationsSamlDynamicConfigurationOutput() ProjectApplicationsSamlDynamicConfigurationOutput {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationOutput() ProjectApplicationsSamlApplicationDynamicConfigurationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationOutput) ToProjectApplicationsSamlDynamicConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationOutput {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationOutput) ToProjectApplicationsSamlDynamicConfigurationPtrOutput() ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return o.ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(context.Background())
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return o.ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationOutput) ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectApplicationsSamlDynamicConfiguration) *ProjectApplicationsSamlDynamicConfiguration {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectApplicationsSamlApplicationDynamicConfiguration) *ProjectApplicationsSamlApplicationDynamicConfiguration {
 		return &v
-	}).(ProjectApplicationsSamlDynamicConfigurationPtrOutput)
+	}).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationOutput) MetadataUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlDynamicConfiguration) string { return v.MetadataUrl }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) MetadataUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationDynamicConfiguration) string { return v.MetadataUrl }).(pulumi.StringOutput)
 }
 
-type ProjectApplicationsSamlDynamicConfigurationPtrOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlDynamicConfigurationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectApplicationsSamlDynamicConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectApplicationsSamlApplicationDynamicConfiguration)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationPtrOutput) ToProjectApplicationsSamlDynamicConfigurationPtrOutput() ProjectApplicationsSamlDynamicConfigurationPtrOutput {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationPtrOutput) ToProjectApplicationsSamlDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlDynamicConfigurationPtrOutput {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) ToProjectApplicationsSamlApplicationDynamicConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationPtrOutput) Elem() ProjectApplicationsSamlDynamicConfigurationOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlDynamicConfiguration) ProjectApplicationsSamlDynamicConfiguration {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) Elem() ProjectApplicationsSamlApplicationDynamicConfigurationOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationDynamicConfiguration) ProjectApplicationsSamlApplicationDynamicConfiguration {
 		if v != nil {
 			return *v
 		}
-		var ret ProjectApplicationsSamlDynamicConfiguration
+		var ret ProjectApplicationsSamlApplicationDynamicConfiguration
 		return ret
-	}).(ProjectApplicationsSamlDynamicConfigurationOutput)
+	}).(ProjectApplicationsSamlApplicationDynamicConfigurationOutput)
 }
 
-func (o ProjectApplicationsSamlDynamicConfigurationPtrOutput) MetadataUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlDynamicConfiguration) *string {
+func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) MetadataUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationDynamicConfiguration) *string {
 		if v == nil {
 			return nil
 		}
@@ -694,144 +702,144 @@ func (o ProjectApplicationsSamlDynamicConfigurationPtrOutput) MetadataUrl() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-type ProjectApplicationsSamlManualConfiguration struct {
+type ProjectApplicationsSamlApplicationManualConfiguration struct {
 	AcsUrl      string `pulumi:"acsUrl"`
 	Certificate string `pulumi:"certificate"`
 	EntityId    string `pulumi:"entityId"`
 }
 
-// ProjectApplicationsSamlManualConfigurationInput is an input type that accepts ProjectApplicationsSamlManualConfigurationArgs and ProjectApplicationsSamlManualConfigurationOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlManualConfigurationInput` via:
+// ProjectApplicationsSamlApplicationManualConfigurationInput is an input type that accepts ProjectApplicationsSamlApplicationManualConfigurationArgs and ProjectApplicationsSamlApplicationManualConfigurationOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationManualConfigurationInput` via:
 //
-//	ProjectApplicationsSamlManualConfigurationArgs{...}
-type ProjectApplicationsSamlManualConfigurationInput interface {
+//	ProjectApplicationsSamlApplicationManualConfigurationArgs{...}
+type ProjectApplicationsSamlApplicationManualConfigurationInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlManualConfigurationOutput() ProjectApplicationsSamlManualConfigurationOutput
-	ToProjectApplicationsSamlManualConfigurationOutputWithContext(context.Context) ProjectApplicationsSamlManualConfigurationOutput
+	ToProjectApplicationsSamlApplicationManualConfigurationOutput() ProjectApplicationsSamlApplicationManualConfigurationOutput
+	ToProjectApplicationsSamlApplicationManualConfigurationOutputWithContext(context.Context) ProjectApplicationsSamlApplicationManualConfigurationOutput
 }
 
-type ProjectApplicationsSamlManualConfigurationArgs struct {
+type ProjectApplicationsSamlApplicationManualConfigurationArgs struct {
 	AcsUrl      pulumi.StringInput `pulumi:"acsUrl"`
 	Certificate pulumi.StringInput `pulumi:"certificate"`
 	EntityId    pulumi.StringInput `pulumi:"entityId"`
 }
 
-func (ProjectApplicationsSamlManualConfigurationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlManualConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationManualConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationManualConfiguration)(nil)).Elem()
 }
 
-func (i ProjectApplicationsSamlManualConfigurationArgs) ToProjectApplicationsSamlManualConfigurationOutput() ProjectApplicationsSamlManualConfigurationOutput {
-	return i.ToProjectApplicationsSamlManualConfigurationOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationManualConfigurationArgs) ToProjectApplicationsSamlApplicationManualConfigurationOutput() ProjectApplicationsSamlApplicationManualConfigurationOutput {
+	return i.ToProjectApplicationsSamlApplicationManualConfigurationOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlManualConfigurationArgs) ToProjectApplicationsSamlManualConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlManualConfigurationOutput)
+func (i ProjectApplicationsSamlApplicationManualConfigurationArgs) ToProjectApplicationsSamlApplicationManualConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationManualConfigurationOutput)
 }
 
-func (i ProjectApplicationsSamlManualConfigurationArgs) ToProjectApplicationsSamlManualConfigurationPtrOutput() ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return i.ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(context.Background())
+func (i ProjectApplicationsSamlApplicationManualConfigurationArgs) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutput() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return i.ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (i ProjectApplicationsSamlManualConfigurationArgs) ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlManualConfigurationOutput).ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(ctx)
+func (i ProjectApplicationsSamlApplicationManualConfigurationArgs) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationManualConfigurationOutput).ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(ctx)
 }
 
-// ProjectApplicationsSamlManualConfigurationPtrInput is an input type that accepts ProjectApplicationsSamlManualConfigurationArgs, ProjectApplicationsSamlManualConfigurationPtr and ProjectApplicationsSamlManualConfigurationPtrOutput values.
-// You can construct a concrete instance of `ProjectApplicationsSamlManualConfigurationPtrInput` via:
+// ProjectApplicationsSamlApplicationManualConfigurationPtrInput is an input type that accepts ProjectApplicationsSamlApplicationManualConfigurationArgs, ProjectApplicationsSamlApplicationManualConfigurationPtr and ProjectApplicationsSamlApplicationManualConfigurationPtrOutput values.
+// You can construct a concrete instance of `ProjectApplicationsSamlApplicationManualConfigurationPtrInput` via:
 //
-//	        ProjectApplicationsSamlManualConfigurationArgs{...}
+//	        ProjectApplicationsSamlApplicationManualConfigurationArgs{...}
 //
 //	or:
 //
 //	        nil
-type ProjectApplicationsSamlManualConfigurationPtrInput interface {
+type ProjectApplicationsSamlApplicationManualConfigurationPtrInput interface {
 	pulumi.Input
 
-	ToProjectApplicationsSamlManualConfigurationPtrOutput() ProjectApplicationsSamlManualConfigurationPtrOutput
-	ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(context.Context) ProjectApplicationsSamlManualConfigurationPtrOutput
+	ToProjectApplicationsSamlApplicationManualConfigurationPtrOutput() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput
+	ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(context.Context) ProjectApplicationsSamlApplicationManualConfigurationPtrOutput
 }
 
-type projectApplicationsSamlManualConfigurationPtrType ProjectApplicationsSamlManualConfigurationArgs
+type projectApplicationsSamlApplicationManualConfigurationPtrType ProjectApplicationsSamlApplicationManualConfigurationArgs
 
-func ProjectApplicationsSamlManualConfigurationPtr(v *ProjectApplicationsSamlManualConfigurationArgs) ProjectApplicationsSamlManualConfigurationPtrInput {
-	return (*projectApplicationsSamlManualConfigurationPtrType)(v)
+func ProjectApplicationsSamlApplicationManualConfigurationPtr(v *ProjectApplicationsSamlApplicationManualConfigurationArgs) ProjectApplicationsSamlApplicationManualConfigurationPtrInput {
+	return (*projectApplicationsSamlApplicationManualConfigurationPtrType)(v)
 }
 
-func (*projectApplicationsSamlManualConfigurationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectApplicationsSamlManualConfiguration)(nil)).Elem()
+func (*projectApplicationsSamlApplicationManualConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectApplicationsSamlApplicationManualConfiguration)(nil)).Elem()
 }
 
-func (i *projectApplicationsSamlManualConfigurationPtrType) ToProjectApplicationsSamlManualConfigurationPtrOutput() ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return i.ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(context.Background())
+func (i *projectApplicationsSamlApplicationManualConfigurationPtrType) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutput() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return i.ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (i *projectApplicationsSamlManualConfigurationPtrType) ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlManualConfigurationPtrOutput)
+func (i *projectApplicationsSamlApplicationManualConfigurationPtrType) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
-type ProjectApplicationsSamlManualConfigurationOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationManualConfigurationOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlManualConfigurationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectApplicationsSamlManualConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationManualConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectApplicationsSamlApplicationManualConfiguration)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) ToProjectApplicationsSamlManualConfigurationOutput() ProjectApplicationsSamlManualConfigurationOutput {
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) ToProjectApplicationsSamlApplicationManualConfigurationOutput() ProjectApplicationsSamlApplicationManualConfigurationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) ToProjectApplicationsSamlManualConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationOutput {
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) ToProjectApplicationsSamlApplicationManualConfigurationOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) ToProjectApplicationsSamlManualConfigurationPtrOutput() ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return o.ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(context.Background())
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutput() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return o.ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(context.Background())
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectApplicationsSamlManualConfiguration) *ProjectApplicationsSamlManualConfiguration {
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectApplicationsSamlApplicationManualConfiguration) *ProjectApplicationsSamlApplicationManualConfiguration {
 		return &v
-	}).(ProjectApplicationsSamlManualConfigurationPtrOutput)
+	}).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) AcsUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlManualConfiguration) string { return v.AcsUrl }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) AcsUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.AcsUrl }).(pulumi.StringOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) Certificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlManualConfiguration) string { return v.Certificate }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) Certificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.Certificate }).(pulumi.StringOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationOutput) EntityId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlManualConfiguration) string { return v.EntityId }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) EntityId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.EntityId }).(pulumi.StringOutput)
 }
 
-type ProjectApplicationsSamlManualConfigurationPtrOutput struct{ *pulumi.OutputState }
+type ProjectApplicationsSamlApplicationManualConfigurationPtrOutput struct{ *pulumi.OutputState }
 
-func (ProjectApplicationsSamlManualConfigurationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectApplicationsSamlManualConfiguration)(nil)).Elem()
+func (ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectApplicationsSamlApplicationManualConfiguration)(nil)).Elem()
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) ToProjectApplicationsSamlManualConfigurationPtrOutput() ProjectApplicationsSamlManualConfigurationPtrOutput {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutput() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) ToProjectApplicationsSamlManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlManualConfigurationPtrOutput {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) ToProjectApplicationsSamlApplicationManualConfigurationPtrOutputWithContext(ctx context.Context) ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
 	return o
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) Elem() ProjectApplicationsSamlManualConfigurationOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlManualConfiguration) ProjectApplicationsSamlManualConfiguration {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Elem() ProjectApplicationsSamlApplicationManualConfigurationOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) ProjectApplicationsSamlApplicationManualConfiguration {
 		if v != nil {
 			return *v
 		}
-		var ret ProjectApplicationsSamlManualConfiguration
+		var ret ProjectApplicationsSamlApplicationManualConfiguration
 		return ret
-	}).(ProjectApplicationsSamlManualConfigurationOutput)
+	}).(ProjectApplicationsSamlApplicationManualConfigurationOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) AcsUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlManualConfiguration) *string {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) AcsUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
 			return nil
 		}
@@ -839,8 +847,8 @@ func (o ProjectApplicationsSamlManualConfigurationPtrOutput) AcsUrl() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) Certificate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlManualConfiguration) *string {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Certificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
 			return nil
 		}
@@ -848,8 +856,8 @@ func (o ProjectApplicationsSamlManualConfigurationPtrOutput) Certificate() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectApplicationsSamlManualConfigurationPtrOutput) EntityId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectApplicationsSamlManualConfiguration) *string {
+func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) EntityId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
 			return nil
 		}
@@ -10775,9 +10783,12 @@ type ProjectConnectors struct {
 	Datadogs                []ProjectConnectorsDatadog                `pulumi:"datadogs"`
 	DevrevGrows             []ProjectConnectorsDevrevGrow             `pulumi:"devrevGrows"`
 	Docebos                 []ProjectConnectorsDocebo                 `pulumi:"docebos"`
+	FingerprintDescopes     []ProjectConnectorsFingerprintDescope     `pulumi:"fingerprintDescopes"`
+	Fingerprints            []ProjectConnectorsFingerprint            `pulumi:"fingerprints"`
 	Forters                 []ProjectConnectorsForter                 `pulumi:"forters"`
 	GoogleCloudTranslations []ProjectConnectorsGoogleCloudTranslation `pulumi:"googleCloudTranslations"`
 	Hibps                   []ProjectConnectorsHibp                   `pulumi:"hibps"`
+	HttpStaticIps           []ProjectConnectorsHttpStaticIp           `pulumi:"httpStaticIps"`
 	Https                   []ProjectConnectorsHttp                   `pulumi:"https"`
 	Hubspots                []ProjectConnectorsHubspot                `pulumi:"hubspots"`
 	Intercoms               []ProjectConnectorsIntercom               `pulumi:"intercoms"`
@@ -10818,9 +10829,12 @@ type ProjectConnectorsArgs struct {
 	Datadogs                ProjectConnectorsDatadogArrayInput                `pulumi:"datadogs"`
 	DevrevGrows             ProjectConnectorsDevrevGrowArrayInput             `pulumi:"devrevGrows"`
 	Docebos                 ProjectConnectorsDoceboArrayInput                 `pulumi:"docebos"`
+	FingerprintDescopes     ProjectConnectorsFingerprintDescopeArrayInput     `pulumi:"fingerprintDescopes"`
+	Fingerprints            ProjectConnectorsFingerprintArrayInput            `pulumi:"fingerprints"`
 	Forters                 ProjectConnectorsForterArrayInput                 `pulumi:"forters"`
 	GoogleCloudTranslations ProjectConnectorsGoogleCloudTranslationArrayInput `pulumi:"googleCloudTranslations"`
 	Hibps                   ProjectConnectorsHibpArrayInput                   `pulumi:"hibps"`
+	HttpStaticIps           ProjectConnectorsHttpStaticIpArrayInput           `pulumi:"httpStaticIps"`
 	Https                   ProjectConnectorsHttpArrayInput                   `pulumi:"https"`
 	Hubspots                ProjectConnectorsHubspotArrayInput                `pulumi:"hubspots"`
 	Intercoms               ProjectConnectorsIntercomArrayInput               `pulumi:"intercoms"`
@@ -10953,6 +10967,14 @@ func (o ProjectConnectorsOutput) Docebos() ProjectConnectorsDoceboArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsDocebo { return v.Docebos }).(ProjectConnectorsDoceboArrayOutput)
 }
 
+func (o ProjectConnectorsOutput) FingerprintDescopes() ProjectConnectorsFingerprintDescopeArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsFingerprintDescope { return v.FingerprintDescopes }).(ProjectConnectorsFingerprintDescopeArrayOutput)
+}
+
+func (o ProjectConnectorsOutput) Fingerprints() ProjectConnectorsFingerprintArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsFingerprint { return v.Fingerprints }).(ProjectConnectorsFingerprintArrayOutput)
+}
+
 func (o ProjectConnectorsOutput) Forters() ProjectConnectorsForterArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsForter { return v.Forters }).(ProjectConnectorsForterArrayOutput)
 }
@@ -10963,6 +10985,10 @@ func (o ProjectConnectorsOutput) GoogleCloudTranslations() ProjectConnectorsGoog
 
 func (o ProjectConnectorsOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHibp { return v.Hibps }).(ProjectConnectorsHibpArrayOutput)
+}
+
+func (o ProjectConnectorsOutput) HttpStaticIps() ProjectConnectorsHttpStaticIpArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHttpStaticIp { return v.HttpStaticIps }).(ProjectConnectorsHttpStaticIpArrayOutput)
 }
 
 func (o ProjectConnectorsOutput) Https() ProjectConnectorsHttpArrayOutput {
@@ -11138,6 +11164,24 @@ func (o ProjectConnectorsPtrOutput) Docebos() ProjectConnectorsDoceboArrayOutput
 	}).(ProjectConnectorsDoceboArrayOutput)
 }
 
+func (o ProjectConnectorsPtrOutput) FingerprintDescopes() ProjectConnectorsFingerprintDescopeArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsFingerprintDescope {
+		if v == nil {
+			return nil
+		}
+		return v.FingerprintDescopes
+	}).(ProjectConnectorsFingerprintDescopeArrayOutput)
+}
+
+func (o ProjectConnectorsPtrOutput) Fingerprints() ProjectConnectorsFingerprintArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsFingerprint {
+		if v == nil {
+			return nil
+		}
+		return v.Fingerprints
+	}).(ProjectConnectorsFingerprintArrayOutput)
+}
+
 func (o ProjectConnectorsPtrOutput) Forters() ProjectConnectorsForterArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsForter {
 		if v == nil {
@@ -11163,6 +11207,15 @@ func (o ProjectConnectorsPtrOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 		}
 		return v.Hibps
 	}).(ProjectConnectorsHibpArrayOutput)
+}
+
+func (o ProjectConnectorsPtrOutput) HttpStaticIps() ProjectConnectorsHttpStaticIpArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHttpStaticIp {
+		if v == nil {
+			return nil
+		}
+		return v.HttpStaticIps
+	}).(ProjectConnectorsHttpStaticIpArrayOutput)
 }
 
 func (o ProjectConnectorsPtrOutput) Https() ProjectConnectorsHttpArrayOutput {
@@ -12162,14 +12215,16 @@ func (o ProjectConnectorsAuditWebhookAuthenticationBasicPtrOutput) Username() pu
 }
 
 type ProjectConnectorsAwsS3 struct {
-	AccessKeyId     string  `pulumi:"accessKeyId"`
-	AuditFilters    *string `pulumi:"auditFilters"`
-	Bucket          string  `pulumi:"bucket"`
-	Description     *string `pulumi:"description"`
-	Id              *string `pulumi:"id"`
-	Name            string  `pulumi:"name"`
-	Region          string  `pulumi:"region"`
-	SecretAccessKey string  `pulumi:"secretAccessKey"`
+	AccessKeyId            string  `pulumi:"accessKeyId"`
+	AuditEnabled           *bool   `pulumi:"auditEnabled"`
+	AuditFilters           *string `pulumi:"auditFilters"`
+	Bucket                 string  `pulumi:"bucket"`
+	Description            *string `pulumi:"description"`
+	Id                     *string `pulumi:"id"`
+	Name                   string  `pulumi:"name"`
+	Region                 string  `pulumi:"region"`
+	SecretAccessKey        string  `pulumi:"secretAccessKey"`
+	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
 }
 
 // ProjectConnectorsAwsS3Input is an input type that accepts ProjectConnectorsAwsS3Args and ProjectConnectorsAwsS3Output values.
@@ -12184,14 +12239,16 @@ type ProjectConnectorsAwsS3Input interface {
 }
 
 type ProjectConnectorsAwsS3Args struct {
-	AccessKeyId     pulumi.StringInput    `pulumi:"accessKeyId"`
-	AuditFilters    pulumi.StringPtrInput `pulumi:"auditFilters"`
-	Bucket          pulumi.StringInput    `pulumi:"bucket"`
-	Description     pulumi.StringPtrInput `pulumi:"description"`
-	Id              pulumi.StringPtrInput `pulumi:"id"`
-	Name            pulumi.StringInput    `pulumi:"name"`
-	Region          pulumi.StringInput    `pulumi:"region"`
-	SecretAccessKey pulumi.StringInput    `pulumi:"secretAccessKey"`
+	AccessKeyId            pulumi.StringInput    `pulumi:"accessKeyId"`
+	AuditEnabled           pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
+	AuditFilters           pulumi.StringPtrInput `pulumi:"auditFilters"`
+	Bucket                 pulumi.StringInput    `pulumi:"bucket"`
+	Description            pulumi.StringPtrInput `pulumi:"description"`
+	Id                     pulumi.StringPtrInput `pulumi:"id"`
+	Name                   pulumi.StringInput    `pulumi:"name"`
+	Region                 pulumi.StringInput    `pulumi:"region"`
+	SecretAccessKey        pulumi.StringInput    `pulumi:"secretAccessKey"`
+	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
 }
 
 func (ProjectConnectorsAwsS3Args) ElementType() reflect.Type {
@@ -12249,6 +12306,10 @@ func (o ProjectConnectorsAwsS3Output) AccessKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.AccessKeyId }).(pulumi.StringOutput)
 }
 
+func (o ProjectConnectorsAwsS3Output) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsS3) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
 func (o ProjectConnectorsAwsS3Output) AuditFilters() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
@@ -12275,6 +12336,10 @@ func (o ProjectConnectorsAwsS3Output) Region() pulumi.StringOutput {
 
 func (o ProjectConnectorsAwsS3Output) SecretAccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.SecretAccessKey }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsAwsS3Output) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsS3) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
 }
 
 type ProjectConnectorsAwsS3ArrayOutput struct{ *pulumi.OutputState }
@@ -12927,6 +12992,254 @@ func (o ProjectConnectorsDoceboArrayOutput) Index(i pulumi.IntInput) ProjectConn
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsDocebo {
 		return vs[0].([]ProjectConnectorsDocebo)[vs[1].(int)]
 	}).(ProjectConnectorsDoceboOutput)
+}
+
+type ProjectConnectorsFingerprint struct {
+	CloudflareEndpointUrl    *string `pulumi:"cloudflareEndpointUrl"`
+	CloudflareScriptUrl      *string `pulumi:"cloudflareScriptUrl"`
+	Description              *string `pulumi:"description"`
+	Id                       *string `pulumi:"id"`
+	Name                     string  `pulumi:"name"`
+	PublicApiKey             string  `pulumi:"publicApiKey"`
+	SecretApiKey             string  `pulumi:"secretApiKey"`
+	UseCloudflareIntegration *bool   `pulumi:"useCloudflareIntegration"`
+}
+
+// ProjectConnectorsFingerprintInput is an input type that accepts ProjectConnectorsFingerprintArgs and ProjectConnectorsFingerprintOutput values.
+// You can construct a concrete instance of `ProjectConnectorsFingerprintInput` via:
+//
+//	ProjectConnectorsFingerprintArgs{...}
+type ProjectConnectorsFingerprintInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsFingerprintOutput() ProjectConnectorsFingerprintOutput
+	ToProjectConnectorsFingerprintOutputWithContext(context.Context) ProjectConnectorsFingerprintOutput
+}
+
+type ProjectConnectorsFingerprintArgs struct {
+	CloudflareEndpointUrl    pulumi.StringPtrInput `pulumi:"cloudflareEndpointUrl"`
+	CloudflareScriptUrl      pulumi.StringPtrInput `pulumi:"cloudflareScriptUrl"`
+	Description              pulumi.StringPtrInput `pulumi:"description"`
+	Id                       pulumi.StringPtrInput `pulumi:"id"`
+	Name                     pulumi.StringInput    `pulumi:"name"`
+	PublicApiKey             pulumi.StringInput    `pulumi:"publicApiKey"`
+	SecretApiKey             pulumi.StringInput    `pulumi:"secretApiKey"`
+	UseCloudflareIntegration pulumi.BoolPtrInput   `pulumi:"useCloudflareIntegration"`
+}
+
+func (ProjectConnectorsFingerprintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsFingerprint)(nil)).Elem()
+}
+
+func (i ProjectConnectorsFingerprintArgs) ToProjectConnectorsFingerprintOutput() ProjectConnectorsFingerprintOutput {
+	return i.ToProjectConnectorsFingerprintOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsFingerprintArgs) ToProjectConnectorsFingerprintOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsFingerprintOutput)
+}
+
+// ProjectConnectorsFingerprintArrayInput is an input type that accepts ProjectConnectorsFingerprintArray and ProjectConnectorsFingerprintArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsFingerprintArrayInput` via:
+//
+//	ProjectConnectorsFingerprintArray{ ProjectConnectorsFingerprintArgs{...} }
+type ProjectConnectorsFingerprintArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsFingerprintArrayOutput() ProjectConnectorsFingerprintArrayOutput
+	ToProjectConnectorsFingerprintArrayOutputWithContext(context.Context) ProjectConnectorsFingerprintArrayOutput
+}
+
+type ProjectConnectorsFingerprintArray []ProjectConnectorsFingerprintInput
+
+func (ProjectConnectorsFingerprintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsFingerprint)(nil)).Elem()
+}
+
+func (i ProjectConnectorsFingerprintArray) ToProjectConnectorsFingerprintArrayOutput() ProjectConnectorsFingerprintArrayOutput {
+	return i.ToProjectConnectorsFingerprintArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsFingerprintArray) ToProjectConnectorsFingerprintArrayOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsFingerprintArrayOutput)
+}
+
+type ProjectConnectorsFingerprintOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsFingerprintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsFingerprint)(nil)).Elem()
+}
+
+func (o ProjectConnectorsFingerprintOutput) ToProjectConnectorsFingerprintOutput() ProjectConnectorsFingerprintOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintOutput) ToProjectConnectorsFingerprintOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintOutput) CloudflareEndpointUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.CloudflareEndpointUrl }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) CloudflareScriptUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.CloudflareScriptUrl }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) PublicApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.PublicApiKey }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) SecretApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.SecretApiKey }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsFingerprintOutput) UseCloudflareIntegration() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprint) *bool { return v.UseCloudflareIntegration }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsFingerprintArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsFingerprintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsFingerprint)(nil)).Elem()
+}
+
+func (o ProjectConnectorsFingerprintArrayOutput) ToProjectConnectorsFingerprintArrayOutput() ProjectConnectorsFingerprintArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintArrayOutput) ToProjectConnectorsFingerprintArrayOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsFingerprintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsFingerprint {
+		return vs[0].([]ProjectConnectorsFingerprint)[vs[1].(int)]
+	}).(ProjectConnectorsFingerprintOutput)
+}
+
+type ProjectConnectorsFingerprintDescope struct {
+	CustomDomain *string `pulumi:"customDomain"`
+	Description  *string `pulumi:"description"`
+	Id           *string `pulumi:"id"`
+	Name         string  `pulumi:"name"`
+}
+
+// ProjectConnectorsFingerprintDescopeInput is an input type that accepts ProjectConnectorsFingerprintDescopeArgs and ProjectConnectorsFingerprintDescopeOutput values.
+// You can construct a concrete instance of `ProjectConnectorsFingerprintDescopeInput` via:
+//
+//	ProjectConnectorsFingerprintDescopeArgs{...}
+type ProjectConnectorsFingerprintDescopeInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsFingerprintDescopeOutput() ProjectConnectorsFingerprintDescopeOutput
+	ToProjectConnectorsFingerprintDescopeOutputWithContext(context.Context) ProjectConnectorsFingerprintDescopeOutput
+}
+
+type ProjectConnectorsFingerprintDescopeArgs struct {
+	CustomDomain pulumi.StringPtrInput `pulumi:"customDomain"`
+	Description  pulumi.StringPtrInput `pulumi:"description"`
+	Id           pulumi.StringPtrInput `pulumi:"id"`
+	Name         pulumi.StringInput    `pulumi:"name"`
+}
+
+func (ProjectConnectorsFingerprintDescopeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsFingerprintDescope)(nil)).Elem()
+}
+
+func (i ProjectConnectorsFingerprintDescopeArgs) ToProjectConnectorsFingerprintDescopeOutput() ProjectConnectorsFingerprintDescopeOutput {
+	return i.ToProjectConnectorsFingerprintDescopeOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsFingerprintDescopeArgs) ToProjectConnectorsFingerprintDescopeOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintDescopeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsFingerprintDescopeOutput)
+}
+
+// ProjectConnectorsFingerprintDescopeArrayInput is an input type that accepts ProjectConnectorsFingerprintDescopeArray and ProjectConnectorsFingerprintDescopeArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsFingerprintDescopeArrayInput` via:
+//
+//	ProjectConnectorsFingerprintDescopeArray{ ProjectConnectorsFingerprintDescopeArgs{...} }
+type ProjectConnectorsFingerprintDescopeArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsFingerprintDescopeArrayOutput() ProjectConnectorsFingerprintDescopeArrayOutput
+	ToProjectConnectorsFingerprintDescopeArrayOutputWithContext(context.Context) ProjectConnectorsFingerprintDescopeArrayOutput
+}
+
+type ProjectConnectorsFingerprintDescopeArray []ProjectConnectorsFingerprintDescopeInput
+
+func (ProjectConnectorsFingerprintDescopeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsFingerprintDescope)(nil)).Elem()
+}
+
+func (i ProjectConnectorsFingerprintDescopeArray) ToProjectConnectorsFingerprintDescopeArrayOutput() ProjectConnectorsFingerprintDescopeArrayOutput {
+	return i.ToProjectConnectorsFingerprintDescopeArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsFingerprintDescopeArray) ToProjectConnectorsFingerprintDescopeArrayOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintDescopeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsFingerprintDescopeArrayOutput)
+}
+
+type ProjectConnectorsFingerprintDescopeOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsFingerprintDescopeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsFingerprintDescope)(nil)).Elem()
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) ToProjectConnectorsFingerprintDescopeOutput() ProjectConnectorsFingerprintDescopeOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) ToProjectConnectorsFingerprintDescopeOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintDescopeOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) CustomDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.CustomDomain }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsFingerprintDescopeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsFingerprintDescopeArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsFingerprintDescopeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsFingerprintDescope)(nil)).Elem()
+}
+
+func (o ProjectConnectorsFingerprintDescopeArrayOutput) ToProjectConnectorsFingerprintDescopeArrayOutput() ProjectConnectorsFingerprintDescopeArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintDescopeArrayOutput) ToProjectConnectorsFingerprintDescopeArrayOutputWithContext(ctx context.Context) ProjectConnectorsFingerprintDescopeArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsFingerprintDescopeArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsFingerprintDescopeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsFingerprintDescope {
+		return vs[0].([]ProjectConnectorsFingerprintDescope)[vs[1].(int)]
+	}).(ProjectConnectorsFingerprintDescopeOutput)
 }
 
 type ProjectConnectorsForter struct {
@@ -13892,6 +14205,613 @@ func (o ProjectConnectorsHttpAuthenticationBasicPtrOutput) Username() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsHttpStaticIp struct {
+	Authentication          *ProjectConnectorsHttpStaticIpAuthentication `pulumi:"authentication"`
+	BaseUrl                 string                                       `pulumi:"baseUrl"`
+	Description             *string                                      `pulumi:"description"`
+	Headers                 map[string]string                            `pulumi:"headers"`
+	HmacSecret              *string                                      `pulumi:"hmacSecret"`
+	Id                      *string                                      `pulumi:"id"`
+	IncludeHeadersInContext *bool                                        `pulumi:"includeHeadersInContext"`
+	Insecure                *bool                                        `pulumi:"insecure"`
+	Name                    string                                       `pulumi:"name"`
+}
+
+// ProjectConnectorsHttpStaticIpInput is an input type that accepts ProjectConnectorsHttpStaticIpArgs and ProjectConnectorsHttpStaticIpOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpInput` via:
+//
+//	ProjectConnectorsHttpStaticIpArgs{...}
+type ProjectConnectorsHttpStaticIpInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput
+	ToProjectConnectorsHttpStaticIpOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpOutput
+}
+
+type ProjectConnectorsHttpStaticIpArgs struct {
+	Authentication          ProjectConnectorsHttpStaticIpAuthenticationPtrInput `pulumi:"authentication"`
+	BaseUrl                 pulumi.StringInput                                  `pulumi:"baseUrl"`
+	Description             pulumi.StringPtrInput                               `pulumi:"description"`
+	Headers                 pulumi.StringMapInput                               `pulumi:"headers"`
+	HmacSecret              pulumi.StringPtrInput                               `pulumi:"hmacSecret"`
+	Id                      pulumi.StringPtrInput                               `pulumi:"id"`
+	IncludeHeadersInContext pulumi.BoolPtrInput                                 `pulumi:"includeHeadersInContext"`
+	Insecure                pulumi.BoolPtrInput                                 `pulumi:"insecure"`
+	Name                    pulumi.StringInput                                  `pulumi:"name"`
+}
+
+func (ProjectConnectorsHttpStaticIpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIp)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpStaticIpArgs) ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput {
+	return i.ToProjectConnectorsHttpStaticIpOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpArgs) ToProjectConnectorsHttpStaticIpOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpOutput)
+}
+
+// ProjectConnectorsHttpStaticIpArrayInput is an input type that accepts ProjectConnectorsHttpStaticIpArray and ProjectConnectorsHttpStaticIpArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpArrayInput` via:
+//
+//	ProjectConnectorsHttpStaticIpArray{ ProjectConnectorsHttpStaticIpArgs{...} }
+type ProjectConnectorsHttpStaticIpArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput
+	ToProjectConnectorsHttpStaticIpArrayOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpArrayOutput
+}
+
+type ProjectConnectorsHttpStaticIpArray []ProjectConnectorsHttpStaticIpInput
+
+func (ProjectConnectorsHttpStaticIpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsHttpStaticIp)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpStaticIpArray) ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput {
+	return i.ToProjectConnectorsHttpStaticIpArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpArray) ToProjectConnectorsHttpStaticIpArrayOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpArrayOutput)
+}
+
+type ProjectConnectorsHttpStaticIpOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIp)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) ToProjectConnectorsHttpStaticIpOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Authentication() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *ProjectConnectorsHttpStaticIpAuthentication {
+		return v.Authentication
+	}).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) BaseUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.BaseUrl }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Headers() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) HmacSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.HmacSecret }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) IncludeHeadersInContext() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.IncludeHeadersInContext }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Insecure() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsHttpStaticIpArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsHttpStaticIp)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpArrayOutput) ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpArrayOutput) ToProjectConnectorsHttpStaticIpArrayOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsHttpStaticIpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsHttpStaticIp {
+		return vs[0].([]ProjectConnectorsHttpStaticIp)[vs[1].(int)]
+	}).(ProjectConnectorsHttpStaticIpOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthentication struct {
+	ApiKey      *ProjectConnectorsHttpStaticIpAuthenticationApiKey `pulumi:"apiKey"`
+	Basic       *ProjectConnectorsHttpStaticIpAuthenticationBasic  `pulumi:"basic"`
+	BearerToken *string                                            `pulumi:"bearerToken"`
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationArgs and ProjectConnectorsHttpStaticIpAuthenticationOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationInput` via:
+//
+//	ProjectConnectorsHttpStaticIpAuthenticationArgs{...}
+type ProjectConnectorsHttpStaticIpAuthenticationInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationArgs struct {
+	ApiKey      ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput `pulumi:"apiKey"`
+	Basic       ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput  `pulumi:"basic"`
+	BearerToken pulumi.StringPtrInput                                     `pulumi:"bearerToken"`
+}
+
+func (ProjectConnectorsHttpStaticIpAuthenticationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationOutput)
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationOutput).ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationArgs, ProjectConnectorsHttpStaticIpAuthenticationPtr and ProjectConnectorsHttpStaticIpAuthenticationPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationPtrInput` via:
+//
+//	        ProjectConnectorsHttpStaticIpAuthenticationArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsHttpStaticIpAuthenticationPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput
+}
+
+type projectConnectorsHttpStaticIpAuthenticationPtrType ProjectConnectorsHttpStaticIpAuthenticationArgs
+
+func ProjectConnectorsHttpStaticIpAuthenticationPtr(v *ProjectConnectorsHttpStaticIpAuthenticationArgs) ProjectConnectorsHttpStaticIpAuthenticationPtrInput {
+	return (*projectConnectorsHttpStaticIpAuthenticationPtrType)(v)
+}
+
+func (*projectConnectorsHttpStaticIpAuthenticationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationPtrType) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationPtrType) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return o.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthentication {
+		return &v
+	}).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ApiKey() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+		return v.ApiKey
+	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) Basic() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
+		return v.Basic
+	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) BearerToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) ProjectConnectorsHttpStaticIpAuthentication {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsHttpStaticIpAuthentication
+		return ret
+	}).(ProjectConnectorsHttpStaticIpAuthenticationOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ApiKey() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+		if v == nil {
+			return nil
+		}
+		return v.ApiKey
+	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) Basic() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
+		if v == nil {
+			return nil
+		}
+		return v.Basic
+	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) BearerToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BearerToken
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationApiKey struct {
+	Key   string `pulumi:"key"`
+	Token string `pulumi:"token"`
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs and ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput` via:
+//
+//	ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{...}
+type ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs struct {
+	Key   pulumi.StringInput `pulumi:"key"`
+	Token pulumi.StringInput `pulumi:"token"`
+}
+
+func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput)
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput).ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs, ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtr and ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput` via:
+//
+//	        ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput
+}
+
+type projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs
+
+func ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtr(v *ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput {
+	return (*projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType)(v)
+}
+
+func (*projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthenticationApiKey) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+		return &v
+	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationApiKey) string { return v.Key }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationApiKey) string { return v.Token }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) ProjectConnectorsHttpStaticIpAuthenticationApiKey {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsHttpStaticIpAuthenticationApiKey
+		return ret
+	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Token
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationBasic struct {
+	Password string `pulumi:"password"`
+	Username string `pulumi:"username"`
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationBasicInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationBasicArgs and ProjectConnectorsHttpStaticIpAuthenticationBasicOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationBasicInput` via:
+//
+//	ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{...}
+type ProjectConnectorsHttpStaticIpAuthenticationBasicInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationBasicArgs struct {
+	Password pulumi.StringInput `pulumi:"password"`
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput)
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput).ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationBasicArgs, ProjectConnectorsHttpStaticIpAuthenticationBasicPtr and ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput` via:
+//
+//	        ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput
+	ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput
+}
+
+type projectConnectorsHttpStaticIpAuthenticationBasicPtrType ProjectConnectorsHttpStaticIpAuthenticationBasicArgs
+
+func ProjectConnectorsHttpStaticIpAuthenticationBasicPtr(v *ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput {
+	return (*projectConnectorsHttpStaticIpAuthenticationBasicPtrType)(v)
+}
+
+func (*projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationBasicOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthenticationBasic) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
+		return &v
+	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationBasic) string { return v.Password }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationBasic) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) ProjectConnectorsHttpStaticIpAuthenticationBasic {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsHttpStaticIpAuthenticationBasic
+		return ret
+	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
 type ProjectConnectorsHubspot struct {
 	AccessToken string  `pulumi:"accessToken"`
 	BaseUrl     *string `pulumi:"baseUrl"`
@@ -14135,7 +15055,9 @@ type ProjectConnectorsNewrelic struct {
 	DataCenter             *string `pulumi:"dataCenter"`
 	Description            *string `pulumi:"description"`
 	Id                     *string `pulumi:"id"`
+	LogsPrefix             *string `pulumi:"logsPrefix"`
 	Name                   string  `pulumi:"name"`
+	OverrideLogsPrefix     *bool   `pulumi:"overrideLogsPrefix"`
 	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
 }
 
@@ -14157,7 +15079,9 @@ type ProjectConnectorsNewrelicArgs struct {
 	DataCenter             pulumi.StringPtrInput `pulumi:"dataCenter"`
 	Description            pulumi.StringPtrInput `pulumi:"description"`
 	Id                     pulumi.StringPtrInput `pulumi:"id"`
+	LogsPrefix             pulumi.StringPtrInput `pulumi:"logsPrefix"`
 	Name                   pulumi.StringInput    `pulumi:"name"`
+	OverrideLogsPrefix     pulumi.BoolPtrInput   `pulumi:"overrideLogsPrefix"`
 	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
 }
 
@@ -14236,8 +15160,16 @@ func (o ProjectConnectorsNewrelicOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+func (o ProjectConnectorsNewrelicOutput) LogsPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.LogsPrefix }).(pulumi.StringPtrOutput)
+}
+
 func (o ProjectConnectorsNewrelicOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsNewrelicOutput) OverrideLogsPrefix() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsNewrelic) *bool { return v.OverrideLogsPrefix }).(pulumi.BoolPtrOutput)
 }
 
 func (o ProjectConnectorsNewrelicOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
@@ -16613,7 +17545,8 @@ func (o ProjectFlowsMapOutput) MapIndex(k pulumi.StringInput) ProjectFlowsOutput
 }
 
 type ProjectJwtTemplates struct {
-	Templates []ProjectJwtTemplatesTemplate `pulumi:"templates"`
+	AccessKeyTemplates []ProjectJwtTemplatesAccessKeyTemplate `pulumi:"accessKeyTemplates"`
+	UserTemplates      []ProjectJwtTemplatesUserTemplate      `pulumi:"userTemplates"`
 }
 
 // ProjectJwtTemplatesInput is an input type that accepts ProjectJwtTemplatesArgs and ProjectJwtTemplatesOutput values.
@@ -16628,7 +17561,8 @@ type ProjectJwtTemplatesInput interface {
 }
 
 type ProjectJwtTemplatesArgs struct {
-	Templates ProjectJwtTemplatesTemplateArrayInput `pulumi:"templates"`
+	AccessKeyTemplates ProjectJwtTemplatesAccessKeyTemplateArrayInput `pulumi:"accessKeyTemplates"`
+	UserTemplates      ProjectJwtTemplatesUserTemplateArrayInput      `pulumi:"userTemplates"`
 }
 
 func (ProjectJwtTemplatesArgs) ElementType() reflect.Type {
@@ -16708,8 +17642,12 @@ func (o ProjectJwtTemplatesOutput) ToProjectJwtTemplatesPtrOutputWithContext(ctx
 	}).(ProjectJwtTemplatesPtrOutput)
 }
 
-func (o ProjectJwtTemplatesOutput) Templates() ProjectJwtTemplatesTemplateArrayOutput {
-	return o.ApplyT(func(v ProjectJwtTemplates) []ProjectJwtTemplatesTemplate { return v.Templates }).(ProjectJwtTemplatesTemplateArrayOutput)
+func (o ProjectJwtTemplatesOutput) AccessKeyTemplates() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
+	return o.ApplyT(func(v ProjectJwtTemplates) []ProjectJwtTemplatesAccessKeyTemplate { return v.AccessKeyTemplates }).(ProjectJwtTemplatesAccessKeyTemplateArrayOutput)
+}
+
+func (o ProjectJwtTemplatesOutput) UserTemplates() ProjectJwtTemplatesUserTemplateArrayOutput {
+	return o.ApplyT(func(v ProjectJwtTemplates) []ProjectJwtTemplatesUserTemplate { return v.UserTemplates }).(ProjectJwtTemplatesUserTemplateArrayOutput)
 }
 
 type ProjectJwtTemplatesPtrOutput struct{ *pulumi.OutputState }
@@ -16736,148 +17674,281 @@ func (o ProjectJwtTemplatesPtrOutput) Elem() ProjectJwtTemplatesOutput {
 	}).(ProjectJwtTemplatesOutput)
 }
 
-func (o ProjectJwtTemplatesPtrOutput) Templates() ProjectJwtTemplatesTemplateArrayOutput {
-	return o.ApplyT(func(v *ProjectJwtTemplates) []ProjectJwtTemplatesTemplate {
+func (o ProjectJwtTemplatesPtrOutput) AccessKeyTemplates() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
+	return o.ApplyT(func(v *ProjectJwtTemplates) []ProjectJwtTemplatesAccessKeyTemplate {
 		if v == nil {
 			return nil
 		}
-		return v.Templates
-	}).(ProjectJwtTemplatesTemplateArrayOutput)
+		return v.AccessKeyTemplates
+	}).(ProjectJwtTemplatesAccessKeyTemplateArrayOutput)
 }
 
-type ProjectJwtTemplatesTemplate struct {
+func (o ProjectJwtTemplatesPtrOutput) UserTemplates() ProjectJwtTemplatesUserTemplateArrayOutput {
+	return o.ApplyT(func(v *ProjectJwtTemplates) []ProjectJwtTemplatesUserTemplate {
+		if v == nil {
+			return nil
+		}
+		return v.UserTemplates
+	}).(ProjectJwtTemplatesUserTemplateArrayOutput)
+}
+
+type ProjectJwtTemplatesAccessKeyTemplate struct {
 	AuthSchema        *string `pulumi:"authSchema"`
 	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
 	Description       *string `pulumi:"description"`
-	Id                *string `pulumi:"id"`
-	Name              string  `pulumi:"name"`
-	Template          string  `pulumi:"template"`
-	Type              string  `pulumi:"type"`
+	// The ID of this resource.
+	Id       *string `pulumi:"id"`
+	Name     string  `pulumi:"name"`
+	Template string  `pulumi:"template"`
 }
 
-// ProjectJwtTemplatesTemplateInput is an input type that accepts ProjectJwtTemplatesTemplateArgs and ProjectJwtTemplatesTemplateOutput values.
-// You can construct a concrete instance of `ProjectJwtTemplatesTemplateInput` via:
+// ProjectJwtTemplatesAccessKeyTemplateInput is an input type that accepts ProjectJwtTemplatesAccessKeyTemplateArgs and ProjectJwtTemplatesAccessKeyTemplateOutput values.
+// You can construct a concrete instance of `ProjectJwtTemplatesAccessKeyTemplateInput` via:
 //
-//	ProjectJwtTemplatesTemplateArgs{...}
-type ProjectJwtTemplatesTemplateInput interface {
+//	ProjectJwtTemplatesAccessKeyTemplateArgs{...}
+type ProjectJwtTemplatesAccessKeyTemplateInput interface {
 	pulumi.Input
 
-	ToProjectJwtTemplatesTemplateOutput() ProjectJwtTemplatesTemplateOutput
-	ToProjectJwtTemplatesTemplateOutputWithContext(context.Context) ProjectJwtTemplatesTemplateOutput
+	ToProjectJwtTemplatesAccessKeyTemplateOutput() ProjectJwtTemplatesAccessKeyTemplateOutput
+	ToProjectJwtTemplatesAccessKeyTemplateOutputWithContext(context.Context) ProjectJwtTemplatesAccessKeyTemplateOutput
 }
 
-type ProjectJwtTemplatesTemplateArgs struct {
+type ProjectJwtTemplatesAccessKeyTemplateArgs struct {
 	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
 	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
 	Description       pulumi.StringPtrInput `pulumi:"description"`
-	Id                pulumi.StringPtrInput `pulumi:"id"`
-	Name              pulumi.StringInput    `pulumi:"name"`
-	Template          pulumi.StringInput    `pulumi:"template"`
-	Type              pulumi.StringInput    `pulumi:"type"`
+	// The ID of this resource.
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	Name     pulumi.StringInput    `pulumi:"name"`
+	Template pulumi.StringInput    `pulumi:"template"`
 }
 
-func (ProjectJwtTemplatesTemplateArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectJwtTemplatesTemplate)(nil)).Elem()
+func (ProjectJwtTemplatesAccessKeyTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplate)(nil)).Elem()
 }
 
-func (i ProjectJwtTemplatesTemplateArgs) ToProjectJwtTemplatesTemplateOutput() ProjectJwtTemplatesTemplateOutput {
-	return i.ToProjectJwtTemplatesTemplateOutputWithContext(context.Background())
+func (i ProjectJwtTemplatesAccessKeyTemplateArgs) ToProjectJwtTemplatesAccessKeyTemplateOutput() ProjectJwtTemplatesAccessKeyTemplateOutput {
+	return i.ToProjectJwtTemplatesAccessKeyTemplateOutputWithContext(context.Background())
 }
 
-func (i ProjectJwtTemplatesTemplateArgs) ToProjectJwtTemplatesTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesTemplateOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesTemplateOutput)
+func (i ProjectJwtTemplatesAccessKeyTemplateArgs) ToProjectJwtTemplatesAccessKeyTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesAccessKeyTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesAccessKeyTemplateOutput)
 }
 
-// ProjectJwtTemplatesTemplateArrayInput is an input type that accepts ProjectJwtTemplatesTemplateArray and ProjectJwtTemplatesTemplateArrayOutput values.
-// You can construct a concrete instance of `ProjectJwtTemplatesTemplateArrayInput` via:
+// ProjectJwtTemplatesAccessKeyTemplateArrayInput is an input type that accepts ProjectJwtTemplatesAccessKeyTemplateArray and ProjectJwtTemplatesAccessKeyTemplateArrayOutput values.
+// You can construct a concrete instance of `ProjectJwtTemplatesAccessKeyTemplateArrayInput` via:
 //
-//	ProjectJwtTemplatesTemplateArray{ ProjectJwtTemplatesTemplateArgs{...} }
-type ProjectJwtTemplatesTemplateArrayInput interface {
+//	ProjectJwtTemplatesAccessKeyTemplateArray{ ProjectJwtTemplatesAccessKeyTemplateArgs{...} }
+type ProjectJwtTemplatesAccessKeyTemplateArrayInput interface {
 	pulumi.Input
 
-	ToProjectJwtTemplatesTemplateArrayOutput() ProjectJwtTemplatesTemplateArrayOutput
-	ToProjectJwtTemplatesTemplateArrayOutputWithContext(context.Context) ProjectJwtTemplatesTemplateArrayOutput
+	ToProjectJwtTemplatesAccessKeyTemplateArrayOutput() ProjectJwtTemplatesAccessKeyTemplateArrayOutput
+	ToProjectJwtTemplatesAccessKeyTemplateArrayOutputWithContext(context.Context) ProjectJwtTemplatesAccessKeyTemplateArrayOutput
 }
 
-type ProjectJwtTemplatesTemplateArray []ProjectJwtTemplatesTemplateInput
+type ProjectJwtTemplatesAccessKeyTemplateArray []ProjectJwtTemplatesAccessKeyTemplateInput
 
-func (ProjectJwtTemplatesTemplateArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectJwtTemplatesTemplate)(nil)).Elem()
+func (ProjectJwtTemplatesAccessKeyTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectJwtTemplatesAccessKeyTemplate)(nil)).Elem()
 }
 
-func (i ProjectJwtTemplatesTemplateArray) ToProjectJwtTemplatesTemplateArrayOutput() ProjectJwtTemplatesTemplateArrayOutput {
-	return i.ToProjectJwtTemplatesTemplateArrayOutputWithContext(context.Background())
+func (i ProjectJwtTemplatesAccessKeyTemplateArray) ToProjectJwtTemplatesAccessKeyTemplateArrayOutput() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
+	return i.ToProjectJwtTemplatesAccessKeyTemplateArrayOutputWithContext(context.Background())
 }
 
-func (i ProjectJwtTemplatesTemplateArray) ToProjectJwtTemplatesTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesTemplateArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesTemplateArrayOutput)
+func (i ProjectJwtTemplatesAccessKeyTemplateArray) ToProjectJwtTemplatesAccessKeyTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesAccessKeyTemplateArrayOutput)
 }
 
-type ProjectJwtTemplatesTemplateOutput struct{ *pulumi.OutputState }
+type ProjectJwtTemplatesAccessKeyTemplateOutput struct{ *pulumi.OutputState }
 
-func (ProjectJwtTemplatesTemplateOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectJwtTemplatesTemplate)(nil)).Elem()
+func (ProjectJwtTemplatesAccessKeyTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplate)(nil)).Elem()
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) ToProjectJwtTemplatesTemplateOutput() ProjectJwtTemplatesTemplateOutput {
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ToProjectJwtTemplatesAccessKeyTemplateOutput() ProjectJwtTemplatesAccessKeyTemplateOutput {
 	return o
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) ToProjectJwtTemplatesTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesTemplateOutput {
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ToProjectJwtTemplatesAccessKeyTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesAccessKeyTemplateOutput {
 	return o
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) ConformanceIssuer() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) *bool { return v.ConformanceIssuer }).(pulumi.BoolPtrOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ConformanceIssuer() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.ConformanceIssuer }).(pulumi.BoolPtrOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
+// The ID of this resource.
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) string { return v.Name }).(pulumi.StringOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) string { return v.Name }).(pulumi.StringOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) Template() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) string { return v.Template }).(pulumi.StringOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Template() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) string { return v.Template }).(pulumi.StringOutput)
 }
 
-func (o ProjectJwtTemplatesTemplateOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectJwtTemplatesTemplate) string { return v.Type }).(pulumi.StringOutput)
+type ProjectJwtTemplatesAccessKeyTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectJwtTemplatesAccessKeyTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectJwtTemplatesAccessKeyTemplate)(nil)).Elem()
 }
 
-type ProjectJwtTemplatesTemplateArrayOutput struct{ *pulumi.OutputState }
-
-func (ProjectJwtTemplatesTemplateArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectJwtTemplatesTemplate)(nil)).Elem()
-}
-
-func (o ProjectJwtTemplatesTemplateArrayOutput) ToProjectJwtTemplatesTemplateArrayOutput() ProjectJwtTemplatesTemplateArrayOutput {
+func (o ProjectJwtTemplatesAccessKeyTemplateArrayOutput) ToProjectJwtTemplatesAccessKeyTemplateArrayOutput() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
 	return o
 }
 
-func (o ProjectJwtTemplatesTemplateArrayOutput) ToProjectJwtTemplatesTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesTemplateArrayOutput {
+func (o ProjectJwtTemplatesAccessKeyTemplateArrayOutput) ToProjectJwtTemplatesAccessKeyTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
 	return o
 }
 
-func (o ProjectJwtTemplatesTemplateArrayOutput) Index(i pulumi.IntInput) ProjectJwtTemplatesTemplateOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectJwtTemplatesTemplate {
-		return vs[0].([]ProjectJwtTemplatesTemplate)[vs[1].(int)]
-	}).(ProjectJwtTemplatesTemplateOutput)
+func (o ProjectJwtTemplatesAccessKeyTemplateArrayOutput) Index(i pulumi.IntInput) ProjectJwtTemplatesAccessKeyTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectJwtTemplatesAccessKeyTemplate {
+		return vs[0].([]ProjectJwtTemplatesAccessKeyTemplate)[vs[1].(int)]
+	}).(ProjectJwtTemplatesAccessKeyTemplateOutput)
+}
+
+type ProjectJwtTemplatesUserTemplate struct {
+	AuthSchema        *string `pulumi:"authSchema"`
+	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
+	Description       *string `pulumi:"description"`
+	// The ID of this resource.
+	Id       *string `pulumi:"id"`
+	Name     string  `pulumi:"name"`
+	Template string  `pulumi:"template"`
+}
+
+// ProjectJwtTemplatesUserTemplateInput is an input type that accepts ProjectJwtTemplatesUserTemplateArgs and ProjectJwtTemplatesUserTemplateOutput values.
+// You can construct a concrete instance of `ProjectJwtTemplatesUserTemplateInput` via:
+//
+//	ProjectJwtTemplatesUserTemplateArgs{...}
+type ProjectJwtTemplatesUserTemplateInput interface {
+	pulumi.Input
+
+	ToProjectJwtTemplatesUserTemplateOutput() ProjectJwtTemplatesUserTemplateOutput
+	ToProjectJwtTemplatesUserTemplateOutputWithContext(context.Context) ProjectJwtTemplatesUserTemplateOutput
+}
+
+type ProjectJwtTemplatesUserTemplateArgs struct {
+	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
+	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
+	Description       pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of this resource.
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	Name     pulumi.StringInput    `pulumi:"name"`
+	Template pulumi.StringInput    `pulumi:"template"`
+}
+
+func (ProjectJwtTemplatesUserTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectJwtTemplatesUserTemplate)(nil)).Elem()
+}
+
+func (i ProjectJwtTemplatesUserTemplateArgs) ToProjectJwtTemplatesUserTemplateOutput() ProjectJwtTemplatesUserTemplateOutput {
+	return i.ToProjectJwtTemplatesUserTemplateOutputWithContext(context.Background())
+}
+
+func (i ProjectJwtTemplatesUserTemplateArgs) ToProjectJwtTemplatesUserTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesUserTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesUserTemplateOutput)
+}
+
+// ProjectJwtTemplatesUserTemplateArrayInput is an input type that accepts ProjectJwtTemplatesUserTemplateArray and ProjectJwtTemplatesUserTemplateArrayOutput values.
+// You can construct a concrete instance of `ProjectJwtTemplatesUserTemplateArrayInput` via:
+//
+//	ProjectJwtTemplatesUserTemplateArray{ ProjectJwtTemplatesUserTemplateArgs{...} }
+type ProjectJwtTemplatesUserTemplateArrayInput interface {
+	pulumi.Input
+
+	ToProjectJwtTemplatesUserTemplateArrayOutput() ProjectJwtTemplatesUserTemplateArrayOutput
+	ToProjectJwtTemplatesUserTemplateArrayOutputWithContext(context.Context) ProjectJwtTemplatesUserTemplateArrayOutput
+}
+
+type ProjectJwtTemplatesUserTemplateArray []ProjectJwtTemplatesUserTemplateInput
+
+func (ProjectJwtTemplatesUserTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectJwtTemplatesUserTemplate)(nil)).Elem()
+}
+
+func (i ProjectJwtTemplatesUserTemplateArray) ToProjectJwtTemplatesUserTemplateArrayOutput() ProjectJwtTemplatesUserTemplateArrayOutput {
+	return i.ToProjectJwtTemplatesUserTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectJwtTemplatesUserTemplateArray) ToProjectJwtTemplatesUserTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesUserTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectJwtTemplatesUserTemplateArrayOutput)
+}
+
+type ProjectJwtTemplatesUserTemplateOutput struct{ *pulumi.OutputState }
+
+func (ProjectJwtTemplatesUserTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectJwtTemplatesUserTemplate)(nil)).Elem()
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) ToProjectJwtTemplatesUserTemplateOutput() ProjectJwtTemplatesUserTemplateOutput {
+	return o
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) ToProjectJwtTemplatesUserTemplateOutputWithContext(ctx context.Context) ProjectJwtTemplatesUserTemplateOutput {
+	return o
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) ConformanceIssuer() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.ConformanceIssuer }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of this resource.
+func (o ProjectJwtTemplatesUserTemplateOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o ProjectJwtTemplatesUserTemplateOutput) Template() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) string { return v.Template }).(pulumi.StringOutput)
+}
+
+type ProjectJwtTemplatesUserTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectJwtTemplatesUserTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectJwtTemplatesUserTemplate)(nil)).Elem()
+}
+
+func (o ProjectJwtTemplatesUserTemplateArrayOutput) ToProjectJwtTemplatesUserTemplateArrayOutput() ProjectJwtTemplatesUserTemplateArrayOutput {
+	return o
+}
+
+func (o ProjectJwtTemplatesUserTemplateArrayOutput) ToProjectJwtTemplatesUserTemplateArrayOutputWithContext(ctx context.Context) ProjectJwtTemplatesUserTemplateArrayOutput {
+	return o
+}
+
+func (o ProjectJwtTemplatesUserTemplateArrayOutput) Index(i pulumi.IntInput) ProjectJwtTemplatesUserTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectJwtTemplatesUserTemplate {
+		return vs[0].([]ProjectJwtTemplatesUserTemplate)[vs[1].(int)]
+	}).(ProjectJwtTemplatesUserTemplateOutput)
 }
 
 type ProjectProjectSettings struct {
 	AccessKeyJwtTemplate   *string `pulumi:"accessKeyJwtTemplate"`
-	CookiePolicy           *int    `pulumi:"cookiePolicy"`
+	CookiePolicy           *string `pulumi:"cookiePolicy"`
 	Domain                 *string `pulumi:"domain"`
 	EnableInactivity       *bool   `pulumi:"enableInactivity"`
 	InactivityTime         *string `pulumi:"inactivityTime"`
@@ -16898,7 +17969,7 @@ type ProjectProjectSettingsInput interface {
 
 type ProjectProjectSettingsArgs struct {
 	AccessKeyJwtTemplate   pulumi.StringPtrInput `pulumi:"accessKeyJwtTemplate"`
-	CookiePolicy           pulumi.IntPtrInput    `pulumi:"cookiePolicy"`
+	CookiePolicy           pulumi.StringPtrInput `pulumi:"cookiePolicy"`
 	Domain                 pulumi.StringPtrInput `pulumi:"domain"`
 	EnableInactivity       pulumi.BoolPtrInput   `pulumi:"enableInactivity"`
 	InactivityTime         pulumi.StringPtrInput `pulumi:"inactivityTime"`
@@ -16987,8 +18058,8 @@ func (o ProjectProjectSettingsOutput) AccessKeyJwtTemplate() pulumi.StringPtrOut
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AccessKeyJwtTemplate }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectProjectSettingsOutput) CookiePolicy() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ProjectProjectSettings) *int { return v.CookiePolicy }).(pulumi.IntPtrOutput)
+func (o ProjectProjectSettingsOutput) CookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CookiePolicy }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectProjectSettingsOutput) Domain() pulumi.StringPtrOutput {
@@ -17044,13 +18115,13 @@ func (o ProjectProjectSettingsPtrOutput) AccessKeyJwtTemplate() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ProjectProjectSettings) *int {
+func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
 			return nil
 		}
 		return v.CookiePolicy
-	}).(pulumi.IntPtrOutput)
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectProjectSettingsPtrOutput) Domain() pulumi.StringPtrOutput {
@@ -17234,16 +18305,16 @@ func (o ProjectStylesPtrOutput) Data() pulumi.StringPtrOutput {
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsInput)(nil)).Elem(), ProjectApplicationsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsPtrInput)(nil)).Elem(), ProjectApplicationsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsOidcInput)(nil)).Elem(), ProjectApplicationsOidcArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsOidcArrayInput)(nil)).Elem(), ProjectApplicationsOidcArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlInput)(nil)).Elem(), ProjectApplicationsSamlArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlArrayInput)(nil)).Elem(), ProjectApplicationsSamlArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlAttributeMappingInput)(nil)).Elem(), ProjectApplicationsSamlAttributeMappingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlAttributeMappingArrayInput)(nil)).Elem(), ProjectApplicationsSamlAttributeMappingArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlDynamicConfigurationInput)(nil)).Elem(), ProjectApplicationsSamlDynamicConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlDynamicConfigurationPtrInput)(nil)).Elem(), ProjectApplicationsSamlDynamicConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlManualConfigurationInput)(nil)).Elem(), ProjectApplicationsSamlManualConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlManualConfigurationPtrInput)(nil)).Elem(), ProjectApplicationsSamlManualConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsOidcApplicationInput)(nil)).Elem(), ProjectApplicationsOidcApplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsOidcApplicationArrayInput)(nil)).Elem(), ProjectApplicationsOidcApplicationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationInput)(nil)).Elem(), ProjectApplicationsSamlApplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationArrayInput)(nil)).Elem(), ProjectApplicationsSamlApplicationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationAttributeMappingInput)(nil)).Elem(), ProjectApplicationsSamlApplicationAttributeMappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationAttributeMappingArrayInput)(nil)).Elem(), ProjectApplicationsSamlApplicationAttributeMappingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationDynamicConfigurationInput)(nil)).Elem(), ProjectApplicationsSamlApplicationDynamicConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput)(nil)).Elem(), ProjectApplicationsSamlApplicationDynamicConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationManualConfigurationInput)(nil)).Elem(), ProjectApplicationsSamlApplicationManualConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationManualConfigurationPtrInput)(nil)).Elem(), ProjectApplicationsSamlApplicationManualConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesInput)(nil)).Elem(), ProjectAttributesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesPtrInput)(nil)).Elem(), ProjectAttributesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesTenantInput)(nil)).Elem(), ProjectAttributesTenantArgs{})
@@ -17374,6 +18445,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDevrevGrowArrayInput)(nil)).Elem(), ProjectConnectorsDevrevGrowArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDoceboInput)(nil)).Elem(), ProjectConnectorsDoceboArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDoceboArrayInput)(nil)).Elem(), ProjectConnectorsDoceboArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintInput)(nil)).Elem(), ProjectConnectorsFingerprintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintArrayInput)(nil)).Elem(), ProjectConnectorsFingerprintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintDescopeInput)(nil)).Elem(), ProjectConnectorsFingerprintDescopeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintDescopeArrayInput)(nil)).Elem(), ProjectConnectorsFingerprintDescopeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsForterInput)(nil)).Elem(), ProjectConnectorsForterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsForterArrayInput)(nil)).Elem(), ProjectConnectorsForterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudTranslationInput)(nil)).Elem(), ProjectConnectorsGoogleCloudTranslationArgs{})
@@ -17388,6 +18463,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpArrayInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotInput)(nil)).Elem(), ProjectConnectorsHubspotArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotArrayInput)(nil)).Elem(), ProjectConnectorsHubspotArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIntercomInput)(nil)).Elem(), ProjectConnectorsIntercomArgs{})
@@ -17435,24 +18518,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsMapInput)(nil)).Elem(), ProjectFlowsMap{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesInput)(nil)).Elem(), ProjectJwtTemplatesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesPtrInput)(nil)).Elem(), ProjectJwtTemplatesArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesTemplateInput)(nil)).Elem(), ProjectJwtTemplatesTemplateArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesTemplateArrayInput)(nil)).Elem(), ProjectJwtTemplatesTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplateInput)(nil)).Elem(), ProjectJwtTemplatesAccessKeyTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplateArrayInput)(nil)).Elem(), ProjectJwtTemplatesAccessKeyTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesUserTemplateInput)(nil)).Elem(), ProjectJwtTemplatesUserTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesUserTemplateArrayInput)(nil)).Elem(), ProjectJwtTemplatesUserTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsInput)(nil)).Elem(), ProjectProjectSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsPtrInput)(nil)).Elem(), ProjectProjectSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectStylesInput)(nil)).Elem(), ProjectStylesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectStylesPtrInput)(nil)).Elem(), ProjectStylesArgs{})
 	pulumi.RegisterOutputType(ProjectApplicationsOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsPtrOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsOidcOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsOidcArrayOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlArrayOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlAttributeMappingOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlAttributeMappingArrayOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlDynamicConfigurationOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlDynamicConfigurationPtrOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlManualConfigurationOutput{})
-	pulumi.RegisterOutputType(ProjectApplicationsSamlManualConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsOidcApplicationOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsOidcApplicationArrayOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationArrayOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationAttributeMappingOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationAttributeMappingArrayOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationDynamicConfigurationOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationManualConfigurationOutput{})
+	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesTenantOutput{})
@@ -17583,6 +18668,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsDevrevGrowArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDoceboOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDoceboArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsFingerprintOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsFingerprintArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsFingerprintDescopeOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsFingerprintDescopeArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsForterOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsForterArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudTranslationOutput{})
@@ -17597,6 +18686,14 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIntercomOutput{})
@@ -17644,8 +18741,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectFlowsMapOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesPtrOutput{})
-	pulumi.RegisterOutputType(ProjectJwtTemplatesTemplateOutput{})
-	pulumi.RegisterOutputType(ProjectJwtTemplatesTemplateArrayOutput{})
+	pulumi.RegisterOutputType(ProjectJwtTemplatesAccessKeyTemplateOutput{})
+	pulumi.RegisterOutputType(ProjectJwtTemplatesAccessKeyTemplateArrayOutput{})
+	pulumi.RegisterOutputType(ProjectJwtTemplatesUserTemplateOutput{})
+	pulumi.RegisterOutputType(ProjectJwtTemplatesUserTemplateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectProjectSettingsOutput{})
 	pulumi.RegisterOutputType(ProjectProjectSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectStylesOutput{})

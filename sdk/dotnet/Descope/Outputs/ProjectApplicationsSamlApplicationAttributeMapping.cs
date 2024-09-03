@@ -12,23 +12,19 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectApplicationsSamlManualConfiguration
+    public sealed class ProjectApplicationsSamlApplicationAttributeMapping
     {
-        public readonly string AcsUrl;
-        public readonly string Certificate;
-        public readonly string EntityId;
+        public readonly string Name;
+        public readonly string Value;
 
         [OutputConstructor]
-        private ProjectApplicationsSamlManualConfiguration(
-            string acsUrl,
+        private ProjectApplicationsSamlApplicationAttributeMapping(
+            string name,
 
-            string certificate,
-
-            string entityId)
+            string value)
         {
-            AcsUrl = acsUrl;
-            Certificate = certificate;
-            EntityId = entityId;
+            Name = name;
+            Value = value;
         }
     }
 }

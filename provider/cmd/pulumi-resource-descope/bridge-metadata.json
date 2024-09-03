@@ -7,7 +7,7 @@
                 "fields": {
                     "applications": {
                         "fields": {
-                            "oidc": {
+                            "oidc_applications": {
                                 "maxItemsOne": false,
                                 "elem": {
                                     "fields": {
@@ -17,7 +17,7 @@
                                     }
                                 }
                             },
-                            "saml": {
+                            "saml_applications": {
                                 "maxItemsOne": false,
                                 "elem": {
                                     "fields": {
@@ -291,6 +291,12 @@
                             "docebo": {
                                 "maxItemsOne": false
                             },
+                            "fingerprint": {
+                                "maxItemsOne": false
+                            },
+                            "fingerprint_descope": {
+                                "maxItemsOne": false
+                            },
                             "forter": {
                                 "maxItemsOne": false
                             },
@@ -301,6 +307,9 @@
                                 "maxItemsOne": false
                             },
                             "http": {
+                                "maxItemsOne": false
+                            },
+                            "http_static_ip": {
                                 "maxItemsOne": false
                             },
                             "hubspot": {
@@ -355,7 +364,10 @@
                     },
                     "jwt_templates": {
                         "fields": {
-                            "templates": {
+                            "access_key_templates": {
+                                "maxItemsOne": false
+                            },
+                            "user_templates": {
                                 "maxItemsOne": false
                             }
                         }

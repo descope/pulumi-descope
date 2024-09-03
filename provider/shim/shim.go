@@ -18,5 +18,5 @@ import (
 )
 
 func Provider(version string) provider.Provider {
-	return p.New(version)()
+	return p.NewDescopeProvider(version)()
 }

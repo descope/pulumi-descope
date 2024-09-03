@@ -12,27 +12,30 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectApplicationsSaml
+    public sealed class ProjectApplicationsSamlApplication
     {
         public readonly ImmutableArray<string> AcsAllowedCallbackUrls;
-        public readonly ImmutableArray<Outputs.ProjectApplicationsSamlAttributeMapping> AttributeMappings;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplicationAttributeMapping> AttributeMappings;
         public readonly string? DefaultRelayState;
         public readonly string? Description;
         public readonly bool? Disabled;
-        public readonly Outputs.ProjectApplicationsSamlDynamicConfiguration? DynamicConfiguration;
+        public readonly Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? DynamicConfiguration;
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
         public readonly string? Id;
         public readonly string? LoginPageUrl;
         public readonly string? Logo;
-        public readonly Outputs.ProjectApplicationsSamlManualConfiguration? ManualConfiguration;
+        public readonly Outputs.ProjectApplicationsSamlApplicationManualConfiguration? ManualConfiguration;
         public readonly string Name;
         public readonly string? SubjectNameIdFormat;
         public readonly string? SubjectNameIdType;
 
         [OutputConstructor]
-        private ProjectApplicationsSaml(
+        private ProjectApplicationsSamlApplication(
             ImmutableArray<string> acsAllowedCallbackUrls,
 
-            ImmutableArray<Outputs.ProjectApplicationsSamlAttributeMapping> attributeMappings,
+            ImmutableArray<Outputs.ProjectApplicationsSamlApplicationAttributeMapping> attributeMappings,
 
             string? defaultRelayState,
 
@@ -40,7 +43,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? disabled,
 
-            Outputs.ProjectApplicationsSamlDynamicConfiguration? dynamicConfiguration,
+            Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? dynamicConfiguration,
 
             string? id,
 
@@ -48,7 +51,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? logo,
 
-            Outputs.ProjectApplicationsSamlManualConfiguration? manualConfiguration,
+            Outputs.ProjectApplicationsSamlApplicationManualConfiguration? manualConfiguration,
 
             string name,
 

@@ -14,12 +14,17 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectJwtTemplates
     {
-        public readonly ImmutableArray<Outputs.ProjectJwtTemplatesTemplate> Templates;
+        public readonly ImmutableArray<Outputs.ProjectJwtTemplatesAccessKeyTemplate> AccessKeyTemplates;
+        public readonly ImmutableArray<Outputs.ProjectJwtTemplatesUserTemplate> UserTemplates;
 
         [OutputConstructor]
-        private ProjectJwtTemplates(ImmutableArray<Outputs.ProjectJwtTemplatesTemplate> templates)
+        private ProjectJwtTemplates(
+            ImmutableArray<Outputs.ProjectJwtTemplatesAccessKeyTemplate> accessKeyTemplates,
+
+            ImmutableArray<Outputs.ProjectJwtTemplatesUserTemplate> userTemplates)
         {
-            Templates = templates;
+            AccessKeyTemplates = accessKeyTemplates;
+            UserTemplates = userTemplates;
         }
     }
 }
