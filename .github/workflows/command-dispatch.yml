@@ -30,7 +30,7 @@ jobs:
           app_id: ${{ secrets.RELEASE_APP_ID }}
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - uses: peter-evans/slash-command-dispatch@v2
+      - uses: peter-evans/slash-command-dispatch@v4
         with:
           commands: |
             run-acceptance-tests
