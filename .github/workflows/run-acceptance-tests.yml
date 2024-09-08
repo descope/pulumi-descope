@@ -89,7 +89,7 @@ jobs:
       - lint
     runs-on: ubuntu-latest
     steps:
-      - uses: guibranco/github-status-action-v2@f856c21628d52f5a75e13959f65a3f1f4c084b37
+      - uses: guibranco/github-status-action-v2@da6b059dd62a4de5bc11991808d997818813a04f
         with:
           authToken: ${{secrets.GITHUB_TOKEN}}
           # Write an explicit status check called "Sentinel" which will only pass if this code really runs.
