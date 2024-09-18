@@ -1,12 +1,12 @@
 module github.com/descope/terraform-provider-descope/shim
 
-go 1.21.12
+go 1.22.0
 
 toolchain go1.23.1
 
 require (
 	github.com/descope/terraform-provider-descope v0.0.2
-	github.com/hashicorp/terraform-plugin-framework v1.11.0
+	github.com/hashicorp/terraform-plugin-framework v1.12.0
 )
 
 require (
@@ -19,7 +19,7 @@ require (
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.13.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.23.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.24.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.2 // indirect
