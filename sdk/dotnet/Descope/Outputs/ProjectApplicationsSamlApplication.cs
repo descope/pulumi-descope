@@ -15,18 +15,36 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectApplicationsSamlApplication
     {
         public readonly ImmutableArray<string> AcsAllowedCallbackUrls;
+        /// <summary>
+        /// Map user attributes from the third party identity provider to custom attributes in Descope.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplicationAttributeMapping> AttributeMappings;
         public readonly string? DefaultRelayState;
+        /// <summary>
+        /// A brief description of the application.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Indicates whether the application is disabled.
+        /// </summary>
         public readonly bool? Disabled;
         public readonly Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? DynamicConfiguration;
         /// <summary>
-        /// The ID of this resource.
+        /// An optional identifier for the application.
         /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// The URL of the custom login page for the application.
+        /// </summary>
         public readonly string? LoginPageUrl;
+        /// <summary>
+        /// The URL of the logo associated with the application.
+        /// </summary>
         public readonly string? Logo;
         public readonly Outputs.ProjectApplicationsSamlApplicationManualConfiguration? ManualConfiguration;
+        /// <summary>
+        /// The name of the application.
+        /// </summary>
         public readonly string Name;
         public readonly string? SubjectNameIdFormat;
         public readonly string? SubjectNameIdType;

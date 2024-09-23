@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("oidcApplications")]
         private InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs>? _oidcApplications;
+
+        /// <summary>
+        /// Applications using OpenID Connect (OIDC) for authentication.
+        /// </summary>
         public InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs> OidcApplications
         {
             get => _oidcApplications ?? (_oidcApplications = new InputList<Inputs.ProjectApplicationsOidcApplicationGetArgs>());
@@ -23,6 +27,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("samlApplications")]
         private InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs>? _samlApplications;
+
+        /// <summary>
+        /// Applications using SAML for authentication.
+        /// </summary>
         public InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs> SamlApplications
         {
             get => _samlApplications ?? (_samlApplications = new InputList<Inputs.ProjectApplicationsSamlApplicationGetArgs>());

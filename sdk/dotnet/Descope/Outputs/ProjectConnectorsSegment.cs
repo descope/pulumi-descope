@@ -14,10 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsSegment
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// The base URL of the Segment API, when using a custom domain in Segment.
+        /// </summary>
         public readonly string? Host;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Segment Write Key generated for the Descope service.
+        /// </summary>
         public readonly string WriteKey;
 
         [OutputConstructor]

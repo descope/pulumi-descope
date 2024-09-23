@@ -13,6 +13,9 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationOauthSystemGithubGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The URL that users are redirected to for authorization with the OAuth provider.
+        /// </summary>
         [Input("authorizationEndpoint")]
         public Input<string>? AuthorizationEndpoint { get; set; }
 
@@ -24,11 +27,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _claimMapping = value;
         }
 
+        /// <summary>
+        /// The client ID for the OAuth provider, used to identify the application to the provider.
+        /// </summary>
         [Input("clientId")]
         public Input<string>? ClientId { get; set; }
 
         [Input("clientSecret")]
         private Input<string>? _clientSecret;
+
+        /// <summary>
+        /// The client secret for the OAuth provider, used to authenticate the application with the provider.
+        /// </summary>
         public Input<string>? ClientSecret
         {
             get => _clientSecret;
@@ -39,49 +49,81 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// A brief description of the OAuth provider.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
+        /// <summary>
+        /// The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        /// </summary>
         [Input("grantType")]
         public Input<string>? GrantType { get; set; }
 
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
+        /// <summary>
+        /// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        /// </summary>
         [Input("jwksEndpoint")]
         public Input<string>? JwksEndpoint { get; set; }
 
+        /// <summary>
+        /// The URL of the logo associated with the OAuth provider.
+        /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
 
+        /// <summary>
+        /// Whether to merge existing user accounts with new ones created through OAuth authentication.
+        /// </summary>
         [Input("mergeUserAccounts")]
         public Input<bool>? MergeUserAccounts { get; set; }
 
         [Input("prompts")]
         private InputList<string>? _prompts;
+
+        /// <summary>
+        /// Custom prompts or consent screens that users may see during OAuth authentication.
+        /// </summary>
         public InputList<string> Prompts
         {
             get => _prompts ?? (_prompts = new InputList<string>());
             set => _prompts = value;
         }
 
+        /// <summary>
+        /// Settings related to token management for the OAuth provider.
+        /// </summary>
         [Input("providerTokenManagement")]
         public Input<Inputs.ProjectAuthenticationOauthSystemGithubProviderTokenManagementGetArgs>? ProviderTokenManagement { get; set; }
 
         [Input("scopes")]
         private InputList<string>? _scopes;
+
+        /// <summary>
+        /// Scopes of access that the application requests from the user's account on the OAuth provider.
+        /// </summary>
         public InputList<string> Scopes
         {
             get => _scopes ?? (_scopes = new InputList<string>());
             set => _scopes = value;
         }
 
+        /// <summary>
+        /// The URL where the application requests an access token from the OAuth provider.
+        /// </summary>
         [Input("tokenEndpoint")]
         public Input<string>? TokenEndpoint { get; set; }
 
+        /// <summary>
+        /// The URL where the application retrieves user information from the OAuth provider.
+        /// </summary>
         [Input("userInfoEndpoint")]
         public Input<string>? UserInfoEndpoint { get; set; }
 

@@ -13,6 +13,9 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationMagicLinkGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Settings related to sending emails as part of the magic link authentication.
+        /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationMagicLinkEmailServiceGetArgs>? EmailService { get; set; }
 
@@ -25,9 +28,15 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("expirationTimeUnit")]
         public Input<string>? ExpirationTimeUnit { get; set; }
 
+        /// <summary>
+        /// The URL to redirect users to after they log in using the magic link.
+        /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
 
+        /// <summary>
+        /// Settings related to sending SMS messages as part of the magic link authentication.
+        /// </summary>
         [Input("textService")]
         public Input<Inputs.ProjectAuthenticationMagicLinkTextServiceGetArgs>? TextService { get; set; }
 

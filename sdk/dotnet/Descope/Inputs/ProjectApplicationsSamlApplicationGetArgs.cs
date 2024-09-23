@@ -23,6 +23,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("attributeMappings")]
         private InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingGetArgs>? _attributeMappings;
+
+        /// <summary>
+        /// Map user attributes from the third party identity provider to custom attributes in Descope.
+        /// </summary>
         public InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingGetArgs> AttributeMappings
         {
             get => _attributeMappings ?? (_attributeMappings = new InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingGetArgs>());
@@ -32,9 +36,15 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("defaultRelayState")]
         public Input<string>? DefaultRelayState { get; set; }
 
+        /// <summary>
+        /// A brief description of the application.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Indicates whether the application is disabled.
+        /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
@@ -42,20 +52,29 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<Inputs.ProjectApplicationsSamlApplicationDynamicConfigurationGetArgs>? DynamicConfiguration { get; set; }
 
         /// <summary>
-        /// The ID of this resource.
+        /// An optional identifier for the application.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// The URL of the custom login page for the application.
+        /// </summary>
         [Input("loginPageUrl")]
         public Input<string>? LoginPageUrl { get; set; }
 
+        /// <summary>
+        /// The URL of the logo associated with the application.
+        /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
 
         [Input("manualConfiguration")]
         public Input<Inputs.ProjectApplicationsSamlApplicationManualConfigurationGetArgs>? ManualConfiguration { get; set; }
 
+        /// <summary>
+        /// The name of the application.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

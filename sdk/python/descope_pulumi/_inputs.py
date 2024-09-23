@@ -59,12 +59,12 @@ __all__ = [
     'ProjectAuthenticationOtpTextServiceTemplateArgs',
     'ProjectAuthenticationOtpVoiceServiceArgs',
     'ProjectAuthenticationOtpVoiceServiceTemplateArgs',
+    'ProjectAuthenticationPasskeysArgs',
     'ProjectAuthenticationPasswordArgs',
     'ProjectAuthenticationPasswordEmailServiceArgs',
     'ProjectAuthenticationPasswordEmailServiceTemplateArgs',
     'ProjectAuthenticationSsoArgs',
     'ProjectAuthenticationTotpArgs',
-    'ProjectAuthenticationWebauthnArgs',
     'ProjectAuthorizationArgs',
     'ProjectAuthorizationPermissionArgs',
     'ProjectAuthorizationRoleArgs',
@@ -133,6 +133,10 @@ class ProjectApplicationsArgs:
     def __init__(__self__, *,
                  oidc_applications: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]]] = None,
                  saml_applications: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]] oidc_applications: Applications using OpenID Connect (OIDC) for authentication.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]] saml_applications: Applications using SAML for authentication.
+        """
         if oidc_applications is not None:
             pulumi.set(__self__, "oidc_applications", oidc_applications)
         if saml_applications is not None:
@@ -141,6 +145,9 @@ class ProjectApplicationsArgs:
     @property
     @pulumi.getter(name="oidcApplications")
     def oidc_applications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgs']]]]:
+        """
+        Applications using OpenID Connect (OIDC) for authentication.
+        """
         return pulumi.get(self, "oidc_applications")
 
     @oidc_applications.setter
@@ -150,6 +157,9 @@ class ProjectApplicationsArgs:
     @property
     @pulumi.getter(name="samlApplications")
     def saml_applications(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]]:
+        """
+        Applications using SAML for authentication.
+        """
         return pulumi.get(self, "saml_applications")
 
     @saml_applications.setter
@@ -168,7 +178,13 @@ class ProjectApplicationsOidcApplicationArgs:
                  login_page_url: Optional[pulumi.Input[str]] = None,
                  logo: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] name: The name of the application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] claims: Claims associated with JWT tokens, typically used for user information.
+        :param pulumi.Input[str] description: A brief description of the application.
+        :param pulumi.Input[bool] disabled: Indicates whether the resource or functionality is disabled.
+        :param pulumi.Input[str] id: An optional identifier for the application.
+        :param pulumi.Input[str] login_page_url: The URL of the custom login page for the application.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the application.
         """
         pulumi.set(__self__, "name", name)
         if claims is not None:
@@ -187,6 +203,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        The name of the application.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -196,6 +215,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter
     def claims(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Claims associated with JWT tokens, typically used for user information.
+        """
         return pulumi.get(self, "claims")
 
     @claims.setter
@@ -205,6 +227,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the application.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -214,6 +239,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter
     def disabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the resource or functionality is disabled.
+        """
         return pulumi.get(self, "disabled")
 
     @disabled.setter
@@ -224,7 +252,7 @@ class ProjectApplicationsOidcApplicationArgs:
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        An optional identifier for the application.
         """
         return pulumi.get(self, "id")
 
@@ -235,6 +263,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter(name="loginPageUrl")
     def login_page_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the custom login page for the application.
+        """
         return pulumi.get(self, "login_page_url")
 
     @login_page_url.setter
@@ -244,6 +275,9 @@ class ProjectApplicationsOidcApplicationArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the application.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -268,7 +302,13 @@ class ProjectApplicationsSamlApplicationArgs:
                  subject_name_id_format: Optional[pulumi.Input[str]] = None,
                  subject_name_id_type: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] name: The name of the application.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgs']]] attribute_mappings: Map user attributes from the third party identity provider to custom attributes in Descope.
+        :param pulumi.Input[str] description: A brief description of the application.
+        :param pulumi.Input[bool] disabled: Indicates whether the application is disabled.
+        :param pulumi.Input[str] id: An optional identifier for the application.
+        :param pulumi.Input[str] login_page_url: The URL of the custom login page for the application.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the application.
         """
         pulumi.set(__self__, "name", name)
         if acs_allowed_callback_urls is not None:
@@ -299,6 +339,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        The name of the application.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -317,6 +360,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter(name="attributeMappings")
     def attribute_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgs']]]]:
+        """
+        Map user attributes from the third party identity provider to custom attributes in Descope.
+        """
         return pulumi.get(self, "attribute_mappings")
 
     @attribute_mappings.setter
@@ -335,6 +381,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the application.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -344,6 +393,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter
     def disabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether the application is disabled.
+        """
         return pulumi.get(self, "disabled")
 
     @disabled.setter
@@ -363,7 +415,7 @@ class ProjectApplicationsSamlApplicationArgs:
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        An optional identifier for the application.
         """
         return pulumi.get(self, "id")
 
@@ -374,6 +426,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter(name="loginPageUrl")
     def login_page_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the custom login page for the application.
+        """
         return pulumi.get(self, "login_page_url")
 
     @login_page_url.setter
@@ -383,6 +438,9 @@ class ProjectApplicationsSamlApplicationArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the application.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -422,12 +480,19 @@ class ProjectApplicationsSamlApplicationAttributeMappingArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
                  value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: The name of the user attribute in the third party identity provider.
+        :param pulumi.Input[str] value: The name of the user custom attribute in Descope.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        The name of the user attribute in the third party identity provider.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -437,6 +502,9 @@ class ProjectApplicationsSamlApplicationAttributeMappingArgs:
     @property
     @pulumi.getter
     def value(self) -> pulumi.Input[str]:
+        """
+        The name of the user custom attribute in Descope.
+        """
         return pulumi.get(self, "value")
 
     @value.setter
@@ -503,6 +571,10 @@ class ProjectAttributesArgs:
     def __init__(__self__, *,
                  tenants: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgs']]]] = None,
                  users: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgs']]] tenants: Custom attributes to store additional details about your tenants.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgs']]] users: Custom attributes to store additional details about your users.
+        """
         if tenants is not None:
             pulumi.set(__self__, "tenants", tenants)
         if users is not None:
@@ -511,6 +583,9 @@ class ProjectAttributesArgs:
     @property
     @pulumi.getter
     def tenants(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgs']]]]:
+        """
+        Custom attributes to store additional details about your tenants.
+        """
         return pulumi.get(self, "tenants")
 
     @tenants.setter
@@ -520,6 +595,9 @@ class ProjectAttributesArgs:
     @property
     @pulumi.getter
     def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgs']]]]:
+        """
+        Custom attributes to store additional details about your users.
+        """
         return pulumi.get(self, "users")
 
     @users.setter
@@ -533,6 +611,11 @@ class ProjectAttributesTenantArgs:
                  name: pulumi.Input[str],
                  type: pulumi.Input[str],
                  select_options: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] name: The name of the tenant attribute.
+        :param pulumi.Input[str] type: The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] select_options: A list of strings to define the set of options for select attributes.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
         if select_options is not None:
@@ -541,6 +624,9 @@ class ProjectAttributesTenantArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        The name of the tenant attribute.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -550,6 +636,9 @@ class ProjectAttributesTenantArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -559,6 +648,9 @@ class ProjectAttributesTenantArgs:
     @property
     @pulumi.getter(name="selectOptions")
     def select_options(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings to define the set of options for select attributes.
+        """
         return pulumi.get(self, "select_options")
 
     @select_options.setter
@@ -573,6 +665,12 @@ class ProjectAttributesUserArgs:
                  type: pulumi.Input[str],
                  select_options: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  widget_authorization: Optional[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgs']] = None):
+        """
+        :param pulumi.Input[str] name: The name of the user attribute.
+        :param pulumi.Input[str] type: The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] select_options: A list of strings to define the set of options for select attributes.
+        :param pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgs'] widget_authorization: When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
         if select_options is not None:
@@ -583,6 +681,9 @@ class ProjectAttributesUserArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        The name of the user attribute.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -592,6 +693,9 @@ class ProjectAttributesUserArgs:
     @property
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
+        """
+        The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -601,6 +705,9 @@ class ProjectAttributesUserArgs:
     @property
     @pulumi.getter(name="selectOptions")
     def select_options(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings to define the set of options for select attributes.
+        """
         return pulumi.get(self, "select_options")
 
     @select_options.setter
@@ -610,6 +717,9 @@ class ProjectAttributesUserArgs:
     @property
     @pulumi.getter(name="widgetAuthorization")
     def widget_authorization(self) -> Optional[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgs']]:
+        """
+        When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        """
         return pulumi.get(self, "widget_authorization")
 
     @widget_authorization.setter
@@ -622,6 +732,10 @@ class ProjectAttributesUserWidgetAuthorizationArgs:
     def __init__(__self__, *,
                  edit_permissions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  view_permissions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] edit_permissions: Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] view_permissions: Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        """
         if edit_permissions is not None:
             pulumi.set(__self__, "edit_permissions", edit_permissions)
         if view_permissions is not None:
@@ -630,6 +744,9 @@ class ProjectAttributesUserWidgetAuthorizationArgs:
     @property
     @pulumi.getter(name="editPermissions")
     def edit_permissions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        """
         return pulumi.get(self, "edit_permissions")
 
     @edit_permissions.setter
@@ -639,6 +756,9 @@ class ProjectAttributesUserWidgetAuthorizationArgs:
     @property
     @pulumi.getter(name="viewPermissions")
     def view_permissions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        """
         return pulumi.get(self, "view_permissions")
 
     @view_permissions.setter
@@ -654,10 +774,21 @@ class ProjectAuthenticationArgs:
                  magic_link: Optional[pulumi.Input['ProjectAuthenticationMagicLinkArgs']] = None,
                  oauth: Optional[pulumi.Input['ProjectAuthenticationOauthArgs']] = None,
                  otp: Optional[pulumi.Input['ProjectAuthenticationOtpArgs']] = None,
+                 passkeys: Optional[pulumi.Input['ProjectAuthenticationPasskeysArgs']] = None,
                  password: Optional[pulumi.Input['ProjectAuthenticationPasswordArgs']] = None,
                  sso: Optional[pulumi.Input['ProjectAuthenticationSsoArgs']] = None,
-                 totp: Optional[pulumi.Input['ProjectAuthenticationTotpArgs']] = None,
-                 webauthn: Optional[pulumi.Input['ProjectAuthenticationWebauthnArgs']] = None):
+                 totp: Optional[pulumi.Input['ProjectAuthenticationTotpArgs']] = None):
+        """
+        :param pulumi.Input['ProjectAuthenticationEmbeddedLinkArgs'] embedded_link: Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+        :param pulumi.Input['ProjectAuthenticationEnchantedLinkArgs'] enchanted_link: An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+        :param pulumi.Input['ProjectAuthenticationMagicLinkArgs'] magic_link: An authentication method where a user receives a unique link via email to log in.
+        :param pulumi.Input['ProjectAuthenticationOauthArgs'] oauth: Authentication using Open Authorization, which allows users to authenticate with various external services.
+        :param pulumi.Input['ProjectAuthenticationOtpArgs'] otp: A dynamically generated set of numbers, granting the user one-time access.
+        :param pulumi.Input['ProjectAuthenticationPasskeysArgs'] passkeys: Device-based passwordless authentication, using fingerprint, face scan, and more.
+        :param pulumi.Input['ProjectAuthenticationPasswordArgs'] password: The classic username and password combination used for authentication.
+        :param pulumi.Input['ProjectAuthenticationSsoArgs'] sso: Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+        :param pulumi.Input['ProjectAuthenticationTotpArgs'] totp: A one-time code generated for the user using a shared secret and time.
+        """
         if embedded_link is not None:
             pulumi.set(__self__, "embedded_link", embedded_link)
         if enchanted_link is not None:
@@ -668,18 +799,21 @@ class ProjectAuthenticationArgs:
             pulumi.set(__self__, "oauth", oauth)
         if otp is not None:
             pulumi.set(__self__, "otp", otp)
+        if passkeys is not None:
+            pulumi.set(__self__, "passkeys", passkeys)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if sso is not None:
             pulumi.set(__self__, "sso", sso)
         if totp is not None:
             pulumi.set(__self__, "totp", totp)
-        if webauthn is not None:
-            pulumi.set(__self__, "webauthn", webauthn)
 
     @property
     @pulumi.getter(name="embeddedLink")
     def embedded_link(self) -> Optional[pulumi.Input['ProjectAuthenticationEmbeddedLinkArgs']]:
+        """
+        Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+        """
         return pulumi.get(self, "embedded_link")
 
     @embedded_link.setter
@@ -689,6 +823,9 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter(name="enchantedLink")
     def enchanted_link(self) -> Optional[pulumi.Input['ProjectAuthenticationEnchantedLinkArgs']]:
+        """
+        An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+        """
         return pulumi.get(self, "enchanted_link")
 
     @enchanted_link.setter
@@ -698,6 +835,9 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter(name="magicLink")
     def magic_link(self) -> Optional[pulumi.Input['ProjectAuthenticationMagicLinkArgs']]:
+        """
+        An authentication method where a user receives a unique link via email to log in.
+        """
         return pulumi.get(self, "magic_link")
 
     @magic_link.setter
@@ -707,6 +847,9 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter
     def oauth(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthArgs']]:
+        """
+        Authentication using Open Authorization, which allows users to authenticate with various external services.
+        """
         return pulumi.get(self, "oauth")
 
     @oauth.setter
@@ -716,6 +859,9 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter
     def otp(self) -> Optional[pulumi.Input['ProjectAuthenticationOtpArgs']]:
+        """
+        A dynamically generated set of numbers, granting the user one-time access.
+        """
         return pulumi.get(self, "otp")
 
     @otp.setter
@@ -724,7 +870,22 @@ class ProjectAuthenticationArgs:
 
     @property
     @pulumi.getter
+    def passkeys(self) -> Optional[pulumi.Input['ProjectAuthenticationPasskeysArgs']]:
+        """
+        Device-based passwordless authentication, using fingerprint, face scan, and more.
+        """
+        return pulumi.get(self, "passkeys")
+
+    @passkeys.setter
+    def passkeys(self, value: Optional[pulumi.Input['ProjectAuthenticationPasskeysArgs']]):
+        pulumi.set(self, "passkeys", value)
+
+    @property
+    @pulumi.getter
     def password(self) -> Optional[pulumi.Input['ProjectAuthenticationPasswordArgs']]:
+        """
+        The classic username and password combination used for authentication.
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -734,6 +895,9 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter
     def sso(self) -> Optional[pulumi.Input['ProjectAuthenticationSsoArgs']]:
+        """
+        Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+        """
         return pulumi.get(self, "sso")
 
     @sso.setter
@@ -743,20 +907,14 @@ class ProjectAuthenticationArgs:
     @property
     @pulumi.getter
     def totp(self) -> Optional[pulumi.Input['ProjectAuthenticationTotpArgs']]:
+        """
+        A one-time code generated for the user using a shared secret and time.
+        """
         return pulumi.get(self, "totp")
 
     @totp.setter
     def totp(self, value: Optional[pulumi.Input['ProjectAuthenticationTotpArgs']]):
         pulumi.set(self, "totp", value)
-
-    @property
-    @pulumi.getter
-    def webauthn(self) -> Optional[pulumi.Input['ProjectAuthenticationWebauthnArgs']]:
-        return pulumi.get(self, "webauthn")
-
-    @webauthn.setter
-    def webauthn(self, value: Optional[pulumi.Input['ProjectAuthenticationWebauthnArgs']]):
-        pulumi.set(self, "webauthn", value)
 
 
 @pulumi.input_type
@@ -765,6 +923,9 @@ class ProjectAuthenticationEmbeddedLinkArgs:
                  enabled: Optional[pulumi.Input[bool]] = None,
                  expiration_time: Optional[pulumi.Input[int]] = None,
                  expiration_time_unit: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] expiration_time: The amount of time that the embedded link will be valid for.
+        """
         if enabled is not None:
             pulumi.set(__self__, "enabled", enabled)
         if expiration_time is not None:
@@ -784,6 +945,9 @@ class ProjectAuthenticationEmbeddedLinkArgs:
     @property
     @pulumi.getter(name="expirationTime")
     def expiration_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        The amount of time that the embedded link will be valid for.
+        """
         return pulumi.get(self, "expiration_time")
 
     @expiration_time.setter
@@ -808,6 +972,10 @@ class ProjectAuthenticationEnchantedLinkArgs:
                  expiration_time: Optional[pulumi.Input[int]] = None,
                  expiration_time_unit: Optional[pulumi.Input[str]] = None,
                  redirect_url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceArgs'] email_service: Settings related to sending emails as part of the enchanted link authentication.
+        :param pulumi.Input[str] redirect_url: The URL to redirect users to after they log in using the enchanted link.
+        """
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
         if enabled is not None:
@@ -822,6 +990,9 @@ class ProjectAuthenticationEnchantedLinkArgs:
     @property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceArgs']]:
+        """
+        Settings related to sending emails as part of the enchanted link authentication.
+        """
         return pulumi.get(self, "email_service")
 
     @email_service.setter
@@ -858,6 +1029,9 @@ class ProjectAuthenticationEnchantedLinkArgs:
     @property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL to redirect users to after they log in using the enchanted link.
+        """
         return pulumi.get(self, "redirect_url")
 
     @redirect_url.setter
@@ -989,6 +1163,11 @@ class ProjectAuthenticationMagicLinkArgs:
                  expiration_time_unit: Optional[pulumi.Input[str]] = None,
                  redirect_url: Optional[pulumi.Input[str]] = None,
                  text_service: Optional[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgs']] = None):
+        """
+        :param pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceArgs'] email_service: Settings related to sending emails as part of the magic link authentication.
+        :param pulumi.Input[str] redirect_url: The URL to redirect users to after they log in using the magic link.
+        :param pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgs'] text_service: Settings related to sending SMS messages as part of the magic link authentication.
+        """
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
         if enabled is not None:
@@ -1005,6 +1184,9 @@ class ProjectAuthenticationMagicLinkArgs:
     @property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceArgs']]:
+        """
+        Settings related to sending emails as part of the magic link authentication.
+        """
         return pulumi.get(self, "email_service")
 
     @email_service.setter
@@ -1041,6 +1223,9 @@ class ProjectAuthenticationMagicLinkArgs:
     @property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL to redirect users to after they log in using the magic link.
+        """
         return pulumi.get(self, "redirect_url")
 
     @redirect_url.setter
@@ -1050,6 +1235,9 @@ class ProjectAuthenticationMagicLinkArgs:
     @property
     @pulumi.getter(name="textService")
     def text_service(self) -> Optional[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgs']]:
+        """
+        Settings related to sending SMS messages as part of the magic link authentication.
+        """
         return pulumi.get(self, "text_service")
 
     @text_service.setter
@@ -1257,6 +1445,10 @@ class ProjectAuthenticationOauthArgs:
                  custom: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgs']]]] = None,
                  disabled: Optional[pulumi.Input[bool]] = None,
                  system: Optional[pulumi.Input['ProjectAuthenticationOauthSystemArgs']] = None):
+        """
+        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgs']]] custom: Custom OAuth providers configured for this project.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemArgs'] system: Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+        """
         if custom is not None:
             pulumi.set(__self__, "custom", custom)
         if disabled is not None:
@@ -1267,6 +1459,9 @@ class ProjectAuthenticationOauthArgs:
     @property
     @pulumi.getter
     def custom(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgs']]]]:
+        """
+        Custom OAuth providers configured for this project.
+        """
         return pulumi.get(self, "custom")
 
     @custom.setter
@@ -1285,6 +1480,9 @@ class ProjectAuthenticationOauthArgs:
     @property
     @pulumi.getter
     def system(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemArgs']]:
+        """
+        Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+        """
         return pulumi.get(self, "system")
 
     @system.setter
@@ -1311,6 +1509,21 @@ class ProjectAuthenticationOauthCustomArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -1347,6 +1560,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -1365,6 +1581,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -1374,6 +1593,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -1383,6 +1605,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -1401,6 +1626,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -1419,6 +1647,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -1428,6 +1659,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -1437,6 +1671,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -1446,6 +1683,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -1455,6 +1695,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -1464,6 +1707,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -1473,6 +1719,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -1482,6 +1731,9 @@ class ProjectAuthenticationOauthCustomArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -1530,6 +1782,17 @@ class ProjectAuthenticationOauthSystemArgs:
                  linkedin: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgs']] = None,
                  microsoft: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgs']] = None,
                  slack: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgs']] = None):
+        """
+        :param pulumi.Input['ProjectAuthenticationOauthSystemAppleArgs'] apple: Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemDiscordArgs'] discord: Discord's OAuth provider, allowing users to authenticate with their Discord account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemFacebookArgs'] facebook: Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGithubArgs'] github: GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGitlabArgs'] gitlab: GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGoogleArgs'] google: Google's OAuth provider, allowing users to authenticate with their Google account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgs'] linkedin: LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgs'] microsoft: Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemSlackArgs'] slack: Slack's OAuth provider, allowing users to authenticate with their Slack account.
+        """
         if apple is not None:
             pulumi.set(__self__, "apple", apple)
         if discord is not None:
@@ -1552,6 +1815,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def apple(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleArgs']]:
+        """
+        Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+        """
         return pulumi.get(self, "apple")
 
     @apple.setter
@@ -1561,6 +1827,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def discord(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordArgs']]:
+        """
+        Discord's OAuth provider, allowing users to authenticate with their Discord account.
+        """
         return pulumi.get(self, "discord")
 
     @discord.setter
@@ -1570,6 +1839,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def facebook(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookArgs']]:
+        """
+        Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+        """
         return pulumi.get(self, "facebook")
 
     @facebook.setter
@@ -1579,6 +1851,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def github(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubArgs']]:
+        """
+        GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+        """
         return pulumi.get(self, "github")
 
     @github.setter
@@ -1588,6 +1863,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def gitlab(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabArgs']]:
+        """
+        GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+        """
         return pulumi.get(self, "gitlab")
 
     @gitlab.setter
@@ -1597,6 +1875,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def google(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleArgs']]:
+        """
+        Google's OAuth provider, allowing users to authenticate with their Google account.
+        """
         return pulumi.get(self, "google")
 
     @google.setter
@@ -1606,6 +1887,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def linkedin(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgs']]:
+        """
+        LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+        """
         return pulumi.get(self, "linkedin")
 
     @linkedin.setter
@@ -1615,6 +1899,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def microsoft(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgs']]:
+        """
+        Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+        """
         return pulumi.get(self, "microsoft")
 
     @microsoft.setter
@@ -1624,6 +1911,9 @@ class ProjectAuthenticationOauthSystemArgs:
     @property
     @pulumi.getter
     def slack(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgs']]:
+        """
+        Slack's OAuth provider, allowing users to authenticate with their Slack account.
+        """
         return pulumi.get(self, "slack")
 
     @slack.setter
@@ -1650,6 +1940,21 @@ class ProjectAuthenticationOauthSystemAppleArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -1686,6 +1991,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -1704,6 +2012,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -1713,6 +2024,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -1722,6 +2036,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -1740,6 +2057,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -1758,6 +2078,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -1767,6 +2090,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -1776,6 +2102,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -1785,6 +2114,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -1794,6 +2126,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -1803,6 +2138,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -1812,6 +2150,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -1821,6 +2162,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -1876,6 +2220,21 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -1912,6 +2271,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -1930,6 +2292,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -1939,6 +2304,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -1948,6 +2316,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -1966,6 +2337,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -1984,6 +2358,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -1993,6 +2370,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -2002,6 +2382,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -2011,6 +2394,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -2020,6 +2406,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -2029,6 +2418,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -2038,6 +2430,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -2047,6 +2442,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -2102,6 +2500,21 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2138,6 +2551,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -2156,6 +2572,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -2165,6 +2584,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -2174,6 +2596,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -2192,6 +2617,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -2210,6 +2638,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -2219,6 +2650,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -2228,6 +2662,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -2237,6 +2674,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -2246,6 +2686,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -2255,6 +2698,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -2264,6 +2710,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -2273,6 +2722,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -2328,6 +2780,21 @@ class ProjectAuthenticationOauthSystemGithubArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2364,6 +2831,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -2382,6 +2852,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -2391,6 +2864,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -2400,6 +2876,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -2418,6 +2897,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -2436,6 +2918,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -2445,6 +2930,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -2454,6 +2942,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -2463,6 +2954,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -2472,6 +2966,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -2481,6 +2978,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -2490,6 +2990,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -2499,6 +3002,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -2554,6 +3060,21 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2590,6 +3111,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -2608,6 +3132,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -2617,6 +3144,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -2626,6 +3156,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -2644,6 +3177,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -2662,6 +3198,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -2671,6 +3210,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -2680,6 +3222,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -2689,6 +3234,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -2698,6 +3246,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -2707,6 +3258,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -2716,6 +3270,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -2725,6 +3282,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -2780,6 +3340,21 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2816,6 +3391,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -2834,6 +3412,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -2843,6 +3424,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -2852,6 +3436,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -2870,6 +3457,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -2888,6 +3478,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -2897,6 +3490,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -2906,6 +3502,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -2915,6 +3514,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -2924,6 +3526,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -2933,6 +3538,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -2942,6 +3550,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -2951,6 +3562,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -3006,6 +3620,21 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3042,6 +3671,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -3060,6 +3692,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -3069,6 +3704,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -3078,6 +3716,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -3096,6 +3737,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -3114,6 +3758,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -3123,6 +3770,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -3132,6 +3782,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -3141,6 +3794,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -3150,6 +3806,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -3159,6 +3818,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -3168,6 +3830,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -3177,6 +3842,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -3232,6 +3900,21 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3268,6 +3951,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -3286,6 +3972,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -3295,6 +3984,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -3304,6 +3996,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -3322,6 +4017,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -3340,6 +4038,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -3349,6 +4050,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -3358,6 +4062,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -3367,6 +4074,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -3376,6 +4086,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -3385,6 +4098,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -3394,6 +4110,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -3403,6 +4122,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -3458,6 +4180,21 @@ class ProjectAuthenticationOauthSystemSlackArgs:
                  scopes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  token_endpoint: Optional[pulumi.Input[str]] = None,
                  user_info_endpoint: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
+        :param pulumi.Input[str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
+        :param pulumi.Input[str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
+        :param pulumi.Input[str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[str] grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param pulumi.Input[str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        :param pulumi.Input[str] logo: The URL of the logo associated with the OAuth provider.
+        :param pulumi.Input[bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs'] provider_token_management: Settings related to token management for the OAuth provider.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
+        :param pulumi.Input[str] token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param pulumi.Input[str] user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
+        """
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3494,6 +4231,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="authorizationEndpoint")
     def authorization_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
         return pulumi.get(self, "authorization_endpoint")
 
     @authorization_endpoint.setter
@@ -3512,6 +4252,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -3521,6 +4264,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -3530,6 +4276,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A brief description of the OAuth provider.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -3548,6 +4297,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="grantType")
     def grant_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
         return pulumi.get(self, "grant_type")
 
     @grant_type.setter
@@ -3566,6 +4318,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="jwksEndpoint")
     def jwks_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
         return pulumi.get(self, "jwks_endpoint")
 
     @jwks_endpoint.setter
@@ -3575,6 +4330,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter
     def logo(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
         return pulumi.get(self, "logo")
 
     @logo.setter
@@ -3584,6 +4342,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="mergeUserAccounts")
     def merge_user_accounts(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
         return pulumi.get(self, "merge_user_accounts")
 
     @merge_user_accounts.setter
@@ -3593,6 +4354,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
         return pulumi.get(self, "prompts")
 
     @prompts.setter
@@ -3602,6 +4366,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="providerTokenManagement")
     def provider_token_management(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs']]:
+        """
+        Settings related to token management for the OAuth provider.
+        """
         return pulumi.get(self, "provider_token_management")
 
     @provider_token_management.setter
@@ -3611,6 +4378,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter
     def scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
         return pulumi.get(self, "scopes")
 
     @scopes.setter
@@ -3620,6 +4390,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="tokenEndpoint")
     def token_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
         return pulumi.get(self, "token_endpoint")
 
     @token_endpoint.setter
@@ -3629,6 +4402,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
         return pulumi.get(self, "user_info_endpoint")
 
     @user_info_endpoint.setter
@@ -3675,6 +4451,13 @@ class ProjectAuthenticationOtpArgs:
                  expiration_time_unit: Optional[pulumi.Input[str]] = None,
                  text_service: Optional[pulumi.Input['ProjectAuthenticationOtpTextServiceArgs']] = None,
                  voice_service: Optional[pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgs']] = None):
+        """
+        :param pulumi.Input[str] domain: The domain to embed in OTP messages.
+        :param pulumi.Input['ProjectAuthenticationOtpEmailServiceArgs'] email_service: Settings related to sending emails with OTP codes.
+        :param pulumi.Input[int] expiration_time: The amount of time that an OTP code will be valid for.
+        :param pulumi.Input['ProjectAuthenticationOtpTextServiceArgs'] text_service: Settings related to sending SMS messages with OTP codes.
+        :param pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgs'] voice_service: Settings related to voice calls with OTP codes.
+        """
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if email_service is not None:
@@ -3693,6 +4476,9 @@ class ProjectAuthenticationOtpArgs:
     @property
     @pulumi.getter
     def domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        The domain to embed in OTP messages.
+        """
         return pulumi.get(self, "domain")
 
     @domain.setter
@@ -3702,6 +4488,9 @@ class ProjectAuthenticationOtpArgs:
     @property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional[pulumi.Input['ProjectAuthenticationOtpEmailServiceArgs']]:
+        """
+        Settings related to sending emails with OTP codes.
+        """
         return pulumi.get(self, "email_service")
 
     @email_service.setter
@@ -3720,6 +4509,9 @@ class ProjectAuthenticationOtpArgs:
     @property
     @pulumi.getter(name="expirationTime")
     def expiration_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        The amount of time that an OTP code will be valid for.
+        """
         return pulumi.get(self, "expiration_time")
 
     @expiration_time.setter
@@ -3738,6 +4530,9 @@ class ProjectAuthenticationOtpArgs:
     @property
     @pulumi.getter(name="textService")
     def text_service(self) -> Optional[pulumi.Input['ProjectAuthenticationOtpTextServiceArgs']]:
+        """
+        Settings related to sending SMS messages with OTP codes.
+        """
         return pulumi.get(self, "text_service")
 
     @text_service.setter
@@ -3747,6 +4542,9 @@ class ProjectAuthenticationOtpArgs:
     @property
     @pulumi.getter(name="voiceService")
     def voice_service(self) -> Optional[pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgs']]:
+        """
+        Settings related to voice calls with OTP codes.
+        """
         return pulumi.get(self, "voice_service")
 
     @voice_service.setter
@@ -4028,6 +4826,41 @@ class ProjectAuthenticationOtpVoiceServiceTemplateArgs:
 
 
 @pulumi.input_type
+class ProjectAuthenticationPasskeysArgs:
+    def __init__(__self__, *,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 top_level_domain: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] top_level_domain: Passkeys will be usable in the following domain and all its subdomains.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if top_level_domain is not None:
+            pulumi.set(__self__, "top_level_domain", top_level_domain)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="topLevelDomain")
+    def top_level_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Passkeys will be usable in the following domain and all its subdomains.
+        """
+        return pulumi.get(self, "top_level_domain")
+
+    @top_level_domain.setter
+    def top_level_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "top_level_domain", value)
+
+
+@pulumi.input_type
 class ProjectAuthenticationPasswordArgs:
     def __init__(__self__, *,
                  email_service: Optional[pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgs']] = None,
@@ -4043,6 +4876,19 @@ class ProjectAuthenticationPasswordArgs:
                  reuse: Optional[pulumi.Input[bool]] = None,
                  reuse_amount: Optional[pulumi.Input[int]] = None,
                  uppercase: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgs'] email_service: Settings related to sending password reset emails as part of the password feature.
+        :param pulumi.Input[bool] expiration: Whether users are required to change their password periodically.
+        :param pulumi.Input[int] expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
+        :param pulumi.Input[bool] lock: Whether the user account should be locked after a specified number of failed login attempts.
+        :param pulumi.Input[int] lock_attempts: The number of failed login attempts allowed before an account is locked.
+        :param pulumi.Input[bool] lowercase: Whether passwords must contain at least one lowercase letter.
+        :param pulumi.Input[int] min_length: The minimum length of the password that users are required to use. The maximum length is always `64`.
+        :param pulumi.Input[bool] non_alphanumeric: Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        :param pulumi.Input[bool] number: Whether passwords must contain at least one number.
+        :param pulumi.Input[bool] reuse: Whether to forbid password reuse when users change their password.
+        :param pulumi.Input[bool] uppercase: Whether passwords must contain at least one uppercase letter.
+        """
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
         if enabled is not None:
@@ -4073,6 +4919,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional[pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgs']]:
+        """
+        Settings related to sending password reset emails as part of the password feature.
+        """
         return pulumi.get(self, "email_service")
 
     @email_service.setter
@@ -4091,6 +4940,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def expiration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether users are required to change their password periodically.
+        """
         return pulumi.get(self, "expiration")
 
     @expiration.setter
@@ -4100,6 +4952,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter(name="expirationWeeks")
     def expiration_weeks(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of weeks after which a user's password expires and they need to replace it.
+        """
         return pulumi.get(self, "expiration_weeks")
 
     @expiration_weeks.setter
@@ -4109,6 +4964,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def lock(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the user account should be locked after a specified number of failed login attempts.
+        """
         return pulumi.get(self, "lock")
 
     @lock.setter
@@ -4118,6 +4976,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter(name="lockAttempts")
     def lock_attempts(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of failed login attempts allowed before an account is locked.
+        """
         return pulumi.get(self, "lock_attempts")
 
     @lock_attempts.setter
@@ -4127,6 +4988,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def lowercase(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether passwords must contain at least one lowercase letter.
+        """
         return pulumi.get(self, "lowercase")
 
     @lowercase.setter
@@ -4136,6 +5000,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter(name="minLength")
     def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        The minimum length of the password that users are required to use. The maximum length is always `64`.
+        """
         return pulumi.get(self, "min_length")
 
     @min_length.setter
@@ -4145,6 +5012,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter(name="nonAlphanumeric")
     def non_alphanumeric(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        """
         return pulumi.get(self, "non_alphanumeric")
 
     @non_alphanumeric.setter
@@ -4154,6 +5024,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def number(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether passwords must contain at least one number.
+        """
         return pulumi.get(self, "number")
 
     @number.setter
@@ -4163,6 +5036,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def reuse(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to forbid password reuse when users change their password.
+        """
         return pulumi.get(self, "reuse")
 
     @reuse.setter
@@ -4181,6 +5057,9 @@ class ProjectAuthenticationPasswordArgs:
     @property
     @pulumi.getter
     def uppercase(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether passwords must contain at least one uppercase letter.
+        """
         return pulumi.get(self, "uppercase")
 
     @uppercase.setter
@@ -4308,6 +5187,9 @@ class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  merge_users: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        """
         if enabled is not None:
             pulumi.set(__self__, "enabled", enabled)
         if merge_users is not None:
@@ -4325,6 +5207,9 @@ class ProjectAuthenticationSsoArgs:
     @property
     @pulumi.getter(name="mergeUsers")
     def merge_users(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to merge existing user accounts with new ones created through SSO authentication.
+        """
         return pulumi.get(self, "merge_users")
 
     @merge_users.setter
@@ -4347,35 +5232,6 @@ class ProjectAuthenticationTotpArgs:
     @enabled.setter
     def enabled(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enabled", value)
-
-
-@pulumi.input_type
-class ProjectAuthenticationWebauthnArgs:
-    def __init__(__self__, *,
-                 enabled: Optional[pulumi.Input[bool]] = None,
-                 top_level_domain: Optional[pulumi.Input[str]] = None):
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
-        if top_level_domain is not None:
-            pulumi.set(__self__, "top_level_domain", top_level_domain)
-
-    @property
-    @pulumi.getter
-    def enabled(self) -> Optional[pulumi.Input[bool]]:
-        return pulumi.get(self, "enabled")
-
-    @enabled.setter
-    def enabled(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "enabled", value)
-
-    @property
-    @pulumi.getter(name="topLevelDomain")
-    def top_level_domain(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "top_level_domain")
-
-    @top_level_domain.setter
-    def top_level_domain(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "top_level_domain", value)
 
 
 @pulumi.input_type
@@ -4534,6 +5390,28 @@ class ProjectConnectorsArgs:
                  twilio_cores: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioCoreArgs']]]] = None,
                  twilio_verifies: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioVerifyArgs']]]] = None,
                  veriffs: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsVeriffArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAbuseipdbArgs']]] abuseipdbs: AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAmplitudeArgs']]] amplitudes: Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]] clears: An identity verification platform that allow customers to digitally verify their identity from anywhere.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]] datadogs: Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgs']]] docebos: Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgs']]] fingerprints: Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]] forters: Use the Forter connector for account fraud prevention.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]] hibps: API to check if password appeared previously exposed in data breaches.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgs']]] https: A general purpose HTTP client
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgs']]] hubspots: HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgs']]] intercoms: Intercom is a Conversational Relationship Platform (CRP).
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicArgs']]] newrelics: Use this connector to send audit events and troubleshooting logs to New Relic.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaArgs']]] recaptchas: reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRekognitionArgs']]] rekognitions: AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceArgs']]] salesforces: Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSegmentArgs']]] segments: Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicArgs']]] sumologics: Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTelesignArgs']]] telesigns: Telesign Phone number intelligence API provides risk score for phone numbers.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTraceableArgs']]] traceables: API security for a cloud-first, API-driven world.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsVeriffArgs']]] veriffs: AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+        """
         if abuseipdbs is not None:
             pulumi.set(__self__, "abuseipdbs", abuseipdbs)
         if amplitudes is not None:
@@ -4602,6 +5480,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def abuseipdbs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAbuseipdbArgs']]]]:
+        """
+        AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+        """
         return pulumi.get(self, "abuseipdbs")
 
     @abuseipdbs.setter
@@ -4611,6 +5492,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def amplitudes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAmplitudeArgs']]]]:
+        """
+        Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        """
         return pulumi.get(self, "amplitudes")
 
     @amplitudes.setter
@@ -4647,6 +5531,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def clears(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]]]:
+        """
+        An identity verification platform that allow customers to digitally verify their identity from anywhere.
+        """
         return pulumi.get(self, "clears")
 
     @clears.setter
@@ -4656,6 +5543,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def datadogs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]]]:
+        """
+        Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+        """
         return pulumi.get(self, "datadogs")
 
     @datadogs.setter
@@ -4674,6 +5564,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def docebos(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgs']]]]:
+        """
+        Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+        """
         return pulumi.get(self, "docebos")
 
     @docebos.setter
@@ -4692,6 +5585,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def fingerprints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgs']]]]:
+        """
+        Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+        """
         return pulumi.get(self, "fingerprints")
 
     @fingerprints.setter
@@ -4701,6 +5597,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def forters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]]]:
+        """
+        Use the Forter connector for account fraud prevention.
+        """
         return pulumi.get(self, "forters")
 
     @forters.setter
@@ -4719,6 +5618,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def hibps(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]]]:
+        """
+        API to check if password appeared previously exposed in data breaches.
+        """
         return pulumi.get(self, "hibps")
 
     @hibps.setter
@@ -4737,6 +5639,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def https(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgs']]]]:
+        """
+        A general purpose HTTP client
+        """
         return pulumi.get(self, "https")
 
     @https.setter
@@ -4746,6 +5651,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def hubspots(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgs']]]]:
+        """
+        HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        """
         return pulumi.get(self, "hubspots")
 
     @hubspots.setter
@@ -4755,6 +5663,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def intercoms(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgs']]]]:
+        """
+        Intercom is a Conversational Relationship Platform (CRP).
+        """
         return pulumi.get(self, "intercoms")
 
     @intercoms.setter
@@ -4764,6 +5675,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def newrelics(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicArgs']]]]:
+        """
+        Use this connector to send audit events and troubleshooting logs to New Relic.
+        """
         return pulumi.get(self, "newrelics")
 
     @newrelics.setter
@@ -4782,6 +5696,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def recaptchas(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaArgs']]]]:
+        """
+        reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+        """
         return pulumi.get(self, "recaptchas")
 
     @recaptchas.setter
@@ -4791,6 +5708,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def rekognitions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRekognitionArgs']]]]:
+        """
+        AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+        """
         return pulumi.get(self, "rekognitions")
 
     @rekognitions.setter
@@ -4800,6 +5720,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def salesforces(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceArgs']]]]:
+        """
+        Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+        """
         return pulumi.get(self, "salesforces")
 
     @salesforces.setter
@@ -4809,6 +5732,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def segments(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSegmentArgs']]]]:
+        """
+        Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        """
         return pulumi.get(self, "segments")
 
     @segments.setter
@@ -4836,6 +5762,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def sumologics(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicArgs']]]]:
+        """
+        Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+        """
         return pulumi.get(self, "sumologics")
 
     @sumologics.setter
@@ -4845,6 +5774,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def telesigns(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTelesignArgs']]]]:
+        """
+        Telesign Phone number intelligence API provides risk score for phone numbers.
+        """
         return pulumi.get(self, "telesigns")
 
     @telesigns.setter
@@ -4854,6 +5786,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def traceables(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTraceableArgs']]]]:
+        """
+        API security for a cloud-first, API-driven world.
+        """
         return pulumi.get(self, "traceables")
 
     @traceables.setter
@@ -4881,6 +5816,9 @@ class ProjectConnectorsArgs:
     @property
     @pulumi.getter
     def veriffs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsVeriffArgs']]]]:
+        """
+        AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+        """
         return pulumi.get(self, "veriffs")
 
     @veriffs.setter
@@ -4895,6 +5833,11 @@ class ProjectConnectorsAbuseipdbArgs:
                  name: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: The unique AbuseIPDB API key.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         if description is not None:
@@ -4905,6 +5848,9 @@ class ProjectConnectorsAbuseipdbArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        The unique AbuseIPDB API key.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -4914,6 +5860,9 @@ class ProjectConnectorsAbuseipdbArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -4923,6 +5872,9 @@ class ProjectConnectorsAbuseipdbArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -4948,6 +5900,13 @@ class ProjectConnectorsAmplitudeArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  server_url: Optional[pulumi.Input[str]] = None,
                  server_zone: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: The Amplitude API Key generated for the Descope service.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] server_url: The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+        :param pulumi.Input[str] server_zone: `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         if description is not None:
@@ -4962,6 +5921,9 @@ class ProjectConnectorsAmplitudeArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        The Amplitude API Key generated for the Descope service.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -4971,6 +5933,9 @@ class ProjectConnectorsAmplitudeArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -4980,6 +5945,9 @@ class ProjectConnectorsAmplitudeArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -4998,6 +5966,9 @@ class ProjectConnectorsAmplitudeArgs:
     @property
     @pulumi.getter(name="serverUrl")
     def server_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+        """
         return pulumi.get(self, "server_url")
 
     @server_url.setter
@@ -5007,6 +5978,9 @@ class ProjectConnectorsAmplitudeArgs:
     @property
     @pulumi.getter(name="serverZone")
     def server_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+        """
         return pulumi.get(self, "server_zone")
 
     @server_zone.setter
@@ -5026,6 +6000,16 @@ class ProjectConnectorsAuditWebhookArgs:
                  hmac_secret: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  insecure: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] base_url: The base URL to fetch
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationArgs'] authentication: Authentication Information
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] headers: The headers to send with the request
+        :param pulumi.Input[str] hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        :param pulumi.Input[bool] insecure: Will ignore certificate errors raised by the client
+        """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "name", name)
         if audit_filters is not None:
@@ -5046,6 +6030,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Input[str]:
+        """
+        The base URL to fetch
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -5055,6 +6042,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5064,6 +6054,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter(name="auditFilters")
     def audit_filters(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
         return pulumi.get(self, "audit_filters")
 
     @audit_filters.setter
@@ -5073,6 +6066,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter
     def authentication(self) -> Optional[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationArgs']]:
+        """
+        Authentication Information
+        """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
@@ -5082,6 +6078,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5091,6 +6090,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter
     def headers(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        The headers to send with the request
+        """
         return pulumi.get(self, "headers")
 
     @headers.setter
@@ -5100,6 +6102,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter(name="hmacSecret")
     def hmac_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
         return pulumi.get(self, "hmac_secret")
 
     @hmac_secret.setter
@@ -5118,6 +6123,9 @@ class ProjectConnectorsAuditWebhookArgs:
     @property
     @pulumi.getter
     def insecure(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Will ignore certificate errors raised by the client
+        """
         return pulumi.get(self, "insecure")
 
     @insecure.setter
@@ -5233,6 +6241,14 @@ class ProjectConnectorsAwsS3Args:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] access_key_id: The unique AWS access key ID.
+        :param pulumi.Input[str] bucket: The AWS S3 bucket. This bucket should already exist for the connector to work.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] region: The AWS S3 region, e.g. `us-east-1`.
+        :param pulumi.Input[str] secret_access_key: The secret AWS access key.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "name", name)
@@ -5252,6 +6268,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter(name="accessKeyId")
     def access_key_id(self) -> pulumi.Input[str]:
+        """
+        The unique AWS access key ID.
+        """
         return pulumi.get(self, "access_key_id")
 
     @access_key_id.setter
@@ -5261,6 +6280,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter
     def bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket. This bucket should already exist for the connector to work.
+        """
         return pulumi.get(self, "bucket")
 
     @bucket.setter
@@ -5270,6 +6292,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5279,6 +6304,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 region, e.g. `us-east-1`.
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -5288,6 +6316,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter(name="secretAccessKey")
     def secret_access_key(self) -> pulumi.Input[str]:
+        """
+        The secret AWS access key.
+        """
         return pulumi.get(self, "secret_access_key")
 
     @secret_access_key.setter
@@ -5315,6 +6346,9 @@ class ProjectConnectorsAwsS3Args:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5350,6 +6384,14 @@ class ProjectConnectorsAwsTranslateArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  session_token: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] access_key_id: AWS access key ID.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] region: The AWS region to which this client will send requests. (e.g. us-east-1.)
+        :param pulumi.Input[str] secret_access_key: AWS secret access key.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] session_token: (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        """
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
@@ -5364,6 +6406,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter(name="accessKeyId")
     def access_key_id(self) -> pulumi.Input[str]:
+        """
+        AWS access key ID.
+        """
         return pulumi.get(self, "access_key_id")
 
     @access_key_id.setter
@@ -5373,6 +6418,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5382,6 +6430,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter
     def region(self) -> pulumi.Input[str]:
+        """
+        The AWS region to which this client will send requests. (e.g. us-east-1.)
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -5391,6 +6442,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter(name="secretAccessKey")
     def secret_access_key(self) -> pulumi.Input[str]:
+        """
+        AWS secret access key.
+        """
         return pulumi.get(self, "secret_access_key")
 
     @secret_access_key.setter
@@ -5400,6 +6454,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5418,6 +6475,9 @@ class ProjectConnectorsAwsTranslateArgs:
     @property
     @pulumi.getter(name="sessionToken")
     def session_token(self) -> Optional[pulumi.Input[str]]:
+        """
+        (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        """
         return pulumi.get(self, "session_token")
 
     @session_token.setter
@@ -5433,6 +6493,12 @@ class ProjectConnectorsClearArgs:
                  project_id: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: Your CLEAR API key.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] project_id: Your CLEAR project ID.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "project_id", project_id)
@@ -5444,6 +6510,9 @@ class ProjectConnectorsClearArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        Your CLEAR API key.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -5453,6 +6522,9 @@ class ProjectConnectorsClearArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5462,6 +6534,9 @@ class ProjectConnectorsClearArgs:
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[str]:
+        """
+        Your CLEAR project ID.
+        """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
@@ -5471,6 +6546,9 @@ class ProjectConnectorsClearArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5498,6 +6576,12 @@ class ProjectConnectorsDatadogArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  site: Optional[pulumi.Input[str]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] api_key: The unique Datadog organization key.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] site: The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         if audit_enabled is not None:
@@ -5516,6 +6600,9 @@ class ProjectConnectorsDatadogArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        The unique Datadog organization key.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -5525,6 +6612,9 @@ class ProjectConnectorsDatadogArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5552,6 +6642,9 @@ class ProjectConnectorsDatadogArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5570,6 +6663,9 @@ class ProjectConnectorsDatadogArgs:
     @property
     @pulumi.getter
     def site(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        """
         return pulumi.get(self, "site")
 
     @site.setter
@@ -5593,6 +6689,11 @@ class ProjectConnectorsDevrevGrowArgs:
                  name: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: Authentication to DevRev APIs requires a personal access token (PAT).
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         if description is not None:
@@ -5603,6 +6704,9 @@ class ProjectConnectorsDevrevGrowArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        Authentication to DevRev APIs requires a personal access token (PAT).
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -5612,6 +6716,9 @@ class ProjectConnectorsDevrevGrowArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5621,6 +6728,9 @@ class ProjectConnectorsDevrevGrowArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5648,6 +6758,15 @@ class ProjectConnectorsDoceboArgs:
                  username: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] base_url: The Docebo api base url.
+        :param pulumi.Input[str] client_id: The Docebo OAuth 2.0 app client ID.
+        :param pulumi.Input[str] client_secret: The Docebo OAuth 2.0 app client secret.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] password: The Docebo user's password.
+        :param pulumi.Input[str] username: The Docebo username.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "client_id", client_id)
         pulumi.set(__self__, "client_secret", client_secret)
@@ -5662,6 +6781,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Input[str]:
+        """
+        The Docebo api base url.
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -5671,6 +6793,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Input[str]:
+        """
+        The Docebo OAuth 2.0 app client ID.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -5680,6 +6805,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> pulumi.Input[str]:
+        """
+        The Docebo OAuth 2.0 app client secret.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -5689,6 +6817,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5698,6 +6829,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter
     def password(self) -> pulumi.Input[str]:
+        """
+        The Docebo user's password.
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -5707,6 +6841,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter
     def username(self) -> pulumi.Input[str]:
+        """
+        The Docebo username.
+        """
         return pulumi.get(self, "username")
 
     @username.setter
@@ -5716,6 +6853,9 @@ class ProjectConnectorsDoceboArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5743,6 +6883,15 @@ class ProjectConnectorsFingerprintArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  use_cloudflare_integration: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] public_api_key: The Fingerprint public API key.
+        :param pulumi.Input[str] secret_api_key: The Fingerprint secret API key.
+        :param pulumi.Input[str] cloudflare_endpoint_url: The Cloudflare integration Endpoint URL.
+        :param pulumi.Input[str] cloudflare_script_url: The Cloudflare integration Script URL.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[bool] use_cloudflare_integration: Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "public_api_key", public_api_key)
         pulumi.set(__self__, "secret_api_key", secret_api_key)
@@ -5760,6 +6909,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5769,6 +6921,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter(name="publicApiKey")
     def public_api_key(self) -> pulumi.Input[str]:
+        """
+        The Fingerprint public API key.
+        """
         return pulumi.get(self, "public_api_key")
 
     @public_api_key.setter
@@ -5778,6 +6933,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter(name="secretApiKey")
     def secret_api_key(self) -> pulumi.Input[str]:
+        """
+        The Fingerprint secret API key.
+        """
         return pulumi.get(self, "secret_api_key")
 
     @secret_api_key.setter
@@ -5787,6 +6945,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter(name="cloudflareEndpointUrl")
     def cloudflare_endpoint_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Cloudflare integration Endpoint URL.
+        """
         return pulumi.get(self, "cloudflare_endpoint_url")
 
     @cloudflare_endpoint_url.setter
@@ -5796,6 +6957,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter(name="cloudflareScriptUrl")
     def cloudflare_script_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Cloudflare integration Script URL.
+        """
         return pulumi.get(self, "cloudflare_script_url")
 
     @cloudflare_script_url.setter
@@ -5805,6 +6969,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5823,6 +6990,9 @@ class ProjectConnectorsFingerprintArgs:
     @property
     @pulumi.getter(name="useCloudflareIntegration")
     def use_cloudflare_integration(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+        """
         return pulumi.get(self, "use_cloudflare_integration")
 
     @use_cloudflare_integration.setter
@@ -5837,6 +7007,11 @@ class ProjectConnectorsFingerprintDescopeArgs:
                  custom_domain: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] custom_domain: The custom domain to fetch
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "name", name)
         if custom_domain is not None:
             pulumi.set(__self__, "custom_domain", custom_domain)
@@ -5848,6 +7023,9 @@ class ProjectConnectorsFingerprintDescopeArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5857,6 +7035,9 @@ class ProjectConnectorsFingerprintDescopeArgs:
     @property
     @pulumi.getter(name="customDomain")
     def custom_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        The custom domain to fetch
+        """
         return pulumi.get(self, "custom_domain")
 
     @custom_domain.setter
@@ -5866,6 +7047,9 @@ class ProjectConnectorsFingerprintDescopeArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5893,6 +7077,15 @@ class ProjectConnectorsForterArgs:
                  override_ip_address: Optional[pulumi.Input[str]] = None,
                  override_user_email: Optional[pulumi.Input[str]] = None,
                  overrides: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] secret_key: The Forter secret key.
+        :param pulumi.Input[str] site_id: The Forter site ID.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] override_ip_address: Override the user IP address.
+        :param pulumi.Input[str] override_user_email: Override the user email.
+        :param pulumi.Input[bool] overrides: Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "secret_key", secret_key)
         pulumi.set(__self__, "site_id", site_id)
@@ -5910,6 +7103,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -5919,6 +7115,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The Forter secret key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -5928,6 +7127,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter(name="siteId")
     def site_id(self) -> pulumi.Input[str]:
+        """
+        The Forter site ID.
+        """
         return pulumi.get(self, "site_id")
 
     @site_id.setter
@@ -5937,6 +7139,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -5955,6 +7160,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter(name="overrideIpAddress")
     def override_ip_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Override the user IP address.
+        """
         return pulumi.get(self, "override_ip_address")
 
     @override_ip_address.setter
@@ -5964,6 +7172,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter(name="overrideUserEmail")
     def override_user_email(self) -> Optional[pulumi.Input[str]]:
+        """
+        Override the user email.
+        """
         return pulumi.get(self, "override_user_email")
 
     @override_user_email.setter
@@ -5973,6 +7184,9 @@ class ProjectConnectorsForterArgs:
     @property
     @pulumi.getter
     def overrides(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+        """
         return pulumi.get(self, "overrides")
 
     @overrides.setter
@@ -5988,6 +7202,12 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
                  service_account_json: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] project_id: The Google Cloud project ID where the Google Cloud Translation is managed.
+        :param pulumi.Input[str] service_account_json: Service Account JSON associated with the current project.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "service_account_json", service_account_json)
@@ -5999,6 +7219,9 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6008,6 +7231,9 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[str]:
+        """
+        The Google Cloud project ID where the Google Cloud Translation is managed.
+        """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
@@ -6017,6 +7243,9 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
     @property
     @pulumi.getter(name="serviceAccountJson")
     def service_account_json(self) -> pulumi.Input[str]:
+        """
+        Service Account JSON associated with the current project.
+        """
         return pulumi.get(self, "service_account_json")
 
     @service_account_json.setter
@@ -6026,6 +7255,9 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6048,6 +7280,10 @@ class ProjectConnectorsHibpArgs:
                  name: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "name", name)
         if description is not None:
             pulumi.set(__self__, "description", description)
@@ -6057,6 +7293,9 @@ class ProjectConnectorsHibpArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6066,6 +7305,9 @@ class ProjectConnectorsHibpArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6094,6 +7336,16 @@ class ProjectConnectorsHttpArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  include_headers_in_context: Optional[pulumi.Input[bool]] = None,
                  insecure: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] base_url: The base URL to fetch
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input['ProjectConnectorsHttpAuthenticationArgs'] authentication: Authentication Information
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] headers: The headers to send with the request
+        :param pulumi.Input[str] hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        :param pulumi.Input[bool] include_headers_in_context: The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        :param pulumi.Input[bool] insecure: Will ignore certificate errors raised by the client
+        """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "name", name)
         if authentication is not None:
@@ -6114,6 +7366,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Input[str]:
+        """
+        The base URL to fetch
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -6123,6 +7378,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6132,6 +7390,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter
     def authentication(self) -> Optional[pulumi.Input['ProjectConnectorsHttpAuthenticationArgs']]:
+        """
+        Authentication Information
+        """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
@@ -6141,6 +7402,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6150,6 +7414,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter
     def headers(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        The headers to send with the request
+        """
         return pulumi.get(self, "headers")
 
     @headers.setter
@@ -6159,6 +7426,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter(name="hmacSecret")
     def hmac_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
         return pulumi.get(self, "hmac_secret")
 
     @hmac_secret.setter
@@ -6177,6 +7447,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter(name="includeHeadersInContext")
     def include_headers_in_context(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        """
         return pulumi.get(self, "include_headers_in_context")
 
     @include_headers_in_context.setter
@@ -6186,6 +7459,9 @@ class ProjectConnectorsHttpArgs:
     @property
     @pulumi.getter
     def insecure(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Will ignore certificate errors raised by the client
+        """
         return pulumi.get(self, "insecure")
 
     @insecure.setter
@@ -6300,6 +7576,16 @@ class ProjectConnectorsHttpStaticIpArgs:
                  id: Optional[pulumi.Input[str]] = None,
                  include_headers_in_context: Optional[pulumi.Input[bool]] = None,
                  insecure: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] base_url: The base URL to fetch
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgs'] authentication: Authentication Information
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] headers: The headers to send with the request
+        :param pulumi.Input[str] hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        :param pulumi.Input[bool] include_headers_in_context: The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        :param pulumi.Input[bool] insecure: Will ignore certificate errors raised by the client
+        """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "name", name)
         if authentication is not None:
@@ -6320,6 +7606,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Input[str]:
+        """
+        The base URL to fetch
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -6329,6 +7618,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6338,6 +7630,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter
     def authentication(self) -> Optional[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgs']]:
+        """
+        Authentication Information
+        """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
@@ -6347,6 +7642,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6356,6 +7654,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter
     def headers(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        The headers to send with the request
+        """
         return pulumi.get(self, "headers")
 
     @headers.setter
@@ -6365,6 +7666,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter(name="hmacSecret")
     def hmac_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
         return pulumi.get(self, "hmac_secret")
 
     @hmac_secret.setter
@@ -6383,6 +7687,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter(name="includeHeadersInContext")
     def include_headers_in_context(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        """
         return pulumi.get(self, "include_headers_in_context")
 
     @include_headers_in_context.setter
@@ -6392,6 +7699,9 @@ class ProjectConnectorsHttpStaticIpArgs:
     @property
     @pulumi.getter
     def insecure(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Will ignore certificate errors raised by the client
+        """
         return pulumi.get(self, "insecure")
 
     @insecure.setter
@@ -6502,6 +7812,12 @@ class ProjectConnectorsHubspotArgs:
                  base_url: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] access_token: The HubSpot private API access token generated for the Descope service.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] base_url: The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "access_token", access_token)
         pulumi.set(__self__, "name", name)
         if base_url is not None:
@@ -6514,6 +7830,9 @@ class ProjectConnectorsHubspotArgs:
     @property
     @pulumi.getter(name="accessToken")
     def access_token(self) -> pulumi.Input[str]:
+        """
+        The HubSpot private API access token generated for the Descope service.
+        """
         return pulumi.get(self, "access_token")
 
     @access_token.setter
@@ -6523,6 +7842,9 @@ class ProjectConnectorsHubspotArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6532,6 +7854,9 @@ class ProjectConnectorsHubspotArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -6541,6 +7866,9 @@ class ProjectConnectorsHubspotArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6565,6 +7893,12 @@ class ProjectConnectorsIntercomArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] token: The Intercom access token.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] region: Regional Hosting - US, EU, or AU. default: US
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "token", token)
         if description is not None:
@@ -6577,6 +7911,9 @@ class ProjectConnectorsIntercomArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6586,6 +7923,9 @@ class ProjectConnectorsIntercomArgs:
     @property
     @pulumi.getter
     def token(self) -> pulumi.Input[str]:
+        """
+        The Intercom access token.
+        """
         return pulumi.get(self, "token")
 
     @token.setter
@@ -6595,6 +7935,9 @@ class ProjectConnectorsIntercomArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6613,6 +7956,9 @@ class ProjectConnectorsIntercomArgs:
     @property
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Regional Hosting - US, EU, or AU. default: US
+        """
         return pulumi.get(self, "region")
 
     @region.setter
@@ -6633,6 +7979,14 @@ class ProjectConnectorsNewrelicArgs:
                  logs_prefix: Optional[pulumi.Input[str]] = None,
                  override_logs_prefix: Optional[pulumi.Input[bool]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] api_key: Ingest License Key of the account you want to report data to.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] data_center: The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] logs_prefix: Specify a custom prefix for all log fields. The default prefix is `descope.`.
+        :param pulumi.Input[bool] override_logs_prefix: Enable this option to use a custom prefix for log fields.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         if audit_enabled is not None:
@@ -6655,6 +8009,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        Ingest License Key of the account you want to report data to.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -6664,6 +8021,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6691,6 +8051,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter(name="dataCenter")
     def data_center(self) -> Optional[pulumi.Input[str]]:
+        """
+        The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+        """
         return pulumi.get(self, "data_center")
 
     @data_center.setter
@@ -6700,6 +8063,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6718,6 +8084,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter(name="logsPrefix")
     def logs_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        Specify a custom prefix for all log fields. The default prefix is `descope.`.
+        """
         return pulumi.get(self, "logs_prefix")
 
     @logs_prefix.setter
@@ -6727,6 +8096,9 @@ class ProjectConnectorsNewrelicArgs:
     @property
     @pulumi.getter(name="overrideLogsPrefix")
     def override_logs_prefix(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable this option to use a custom prefix for log fields.
+        """
         return pulumi.get(self, "override_logs_prefix")
 
     @override_logs_prefix.setter
@@ -6751,6 +8123,12 @@ class ProjectConnectorsRecaptchaArgs:
                  site_key: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] secret_key: The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+        :param pulumi.Input[str] site_key: The site key is used to invoke reCAPTCHA service on your site or mobile application.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "secret_key", secret_key)
         pulumi.set(__self__, "site_key", site_key)
@@ -6762,6 +8140,9 @@ class ProjectConnectorsRecaptchaArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6771,6 +8152,9 @@ class ProjectConnectorsRecaptchaArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -6780,6 +8164,9 @@ class ProjectConnectorsRecaptchaArgs:
     @property
     @pulumi.getter(name="siteKey")
     def site_key(self) -> pulumi.Input[str]:
+        """
+        The site key is used to invoke reCAPTCHA service on your site or mobile application.
+        """
         return pulumi.get(self, "site_key")
 
     @site_key.setter
@@ -6789,6 +8176,9 @@ class ProjectConnectorsRecaptchaArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6816,6 +8206,15 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  override_assessment: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] api_key: API key associated with the current project.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] project_id: The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+        :param pulumi.Input[str] site_key: The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+        :param pulumi.Input[float] assessment_score: When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[bool] override_assessment: Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "project_id", project_id)
@@ -6832,6 +8231,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        API key associated with the current project.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -6841,6 +8243,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6850,6 +8255,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[str]:
+        """
+        The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+        """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
@@ -6859,6 +8267,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter(name="siteKey")
     def site_key(self) -> pulumi.Input[str]:
+        """
+        The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+        """
         return pulumi.get(self, "site_key")
 
     @site_key.setter
@@ -6868,6 +8279,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter(name="assessmentScore")
     def assessment_score(self) -> Optional[pulumi.Input[float]]:
+        """
+        When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+        """
         return pulumi.get(self, "assessment_score")
 
     @assessment_score.setter
@@ -6877,6 +8291,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6895,6 +8312,9 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @property
     @pulumi.getter(name="overrideAssessment")
     def override_assessment(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+        """
         return pulumi.get(self, "override_assessment")
 
     @override_assessment.setter
@@ -6911,6 +8331,13 @@ class ProjectConnectorsRekognitionArgs:
                  secret_access_key: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] access_key_id: The AWS access key ID
+        :param pulumi.Input[str] collection_id: The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] secret_access_key: The AWS secret access key
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "collection_id", collection_id)
         pulumi.set(__self__, "name", name)
@@ -6923,6 +8350,9 @@ class ProjectConnectorsRekognitionArgs:
     @property
     @pulumi.getter(name="accessKeyId")
     def access_key_id(self) -> pulumi.Input[str]:
+        """
+        The AWS access key ID
+        """
         return pulumi.get(self, "access_key_id")
 
     @access_key_id.setter
@@ -6932,6 +8362,9 @@ class ProjectConnectorsRekognitionArgs:
     @property
     @pulumi.getter(name="collectionId")
     def collection_id(self) -> pulumi.Input[str]:
+        """
+        The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+        """
         return pulumi.get(self, "collection_id")
 
     @collection_id.setter
@@ -6941,6 +8374,9 @@ class ProjectConnectorsRekognitionArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -6950,6 +8386,9 @@ class ProjectConnectorsRekognitionArgs:
     @property
     @pulumi.getter(name="secretAccessKey")
     def secret_access_key(self) -> pulumi.Input[str]:
+        """
+        The AWS secret access key
+        """
         return pulumi.get(self, "secret_access_key")
 
     @secret_access_key.setter
@@ -6959,6 +8398,9 @@ class ProjectConnectorsRekognitionArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -6985,6 +8427,14 @@ class ProjectConnectorsSalesforceArgs:
                  version: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] base_url: The Salesforce API base URL.
+        :param pulumi.Input[str] client_id: The consumer key of the connected app.
+        :param pulumi.Input[str] client_secret: The consumer secret of the connected app.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] version: REST API Version.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "client_id", client_id)
         pulumi.set(__self__, "client_secret", client_secret)
@@ -6998,6 +8448,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Input[str]:
+        """
+        The Salesforce API base URL.
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -7007,6 +8460,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Input[str]:
+        """
+        The consumer key of the connected app.
+        """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
@@ -7016,6 +8472,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> pulumi.Input[str]:
+        """
+        The consumer secret of the connected app.
+        """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
@@ -7025,6 +8484,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7034,6 +8496,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter
     def version(self) -> pulumi.Input[str]:
+        """
+        REST API Version.
+        """
         return pulumi.get(self, "version")
 
     @version.setter
@@ -7043,6 +8508,9 @@ class ProjectConnectorsSalesforceArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7067,6 +8535,12 @@ class ProjectConnectorsSegmentArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] write_key: The Segment Write Key generated for the Descope service.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[str] host: The base URL of the Segment API, when using a custom domain in Segment.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "write_key", write_key)
         if description is not None:
@@ -7079,6 +8553,9 @@ class ProjectConnectorsSegmentArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7088,6 +8565,9 @@ class ProjectConnectorsSegmentArgs:
     @property
     @pulumi.getter(name="writeKey")
     def write_key(self) -> pulumi.Input[str]:
+        """
+        The Segment Write Key generated for the Descope service.
+        """
         return pulumi.get(self, "write_key")
 
     @write_key.setter
@@ -7097,6 +8577,9 @@ class ProjectConnectorsSegmentArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7106,6 +8589,9 @@ class ProjectConnectorsSegmentArgs:
     @property
     @pulumi.getter
     def host(self) -> Optional[pulumi.Input[str]]:
+        """
+        The base URL of the Segment API, when using a custom domain in Segment.
+        """
         return pulumi.get(self, "host")
 
     @host.setter
@@ -7130,6 +8616,10 @@ class ProjectConnectorsSendgridArgs:
                  sender: pulumi.Input['ProjectConnectorsSendgridSenderArgs'],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "authentication", authentication)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "sender", sender)
@@ -7150,6 +8640,9 @@ class ProjectConnectorsSendgridArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7168,6 +8661,9 @@ class ProjectConnectorsSendgridArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7237,6 +8733,10 @@ class ProjectConnectorsSmtpArgs:
                  server: pulumi.Input['ProjectConnectorsSmtpServerArgs'],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "authentication", authentication)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "sender", sender)
@@ -7258,6 +8758,9 @@ class ProjectConnectorsSmtpArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7285,6 +8788,9 @@ class ProjectConnectorsSmtpArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7406,6 +8912,11 @@ class ProjectConnectorsSumologicArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] http_source_url: The URL associated with an HTTP Hosted collector
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "http_source_url", http_source_url)
         pulumi.set(__self__, "name", name)
         if audit_enabled is not None:
@@ -7422,6 +8933,9 @@ class ProjectConnectorsSumologicArgs:
     @property
     @pulumi.getter(name="httpSourceUrl")
     def http_source_url(self) -> pulumi.Input[str]:
+        """
+        The URL associated with an HTTP Hosted collector
+        """
         return pulumi.get(self, "http_source_url")
 
     @http_source_url.setter
@@ -7431,6 +8945,9 @@ class ProjectConnectorsSumologicArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7458,6 +8975,9 @@ class ProjectConnectorsSumologicArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7491,6 +9011,12 @@ class ProjectConnectorsTelesignArgs:
                  name: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: The unique Telesign API key
+        :param pulumi.Input[str] customer_id: The unique Telesign account Customer ID
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "customer_id", customer_id)
         pulumi.set(__self__, "name", name)
@@ -7502,6 +9028,9 @@ class ProjectConnectorsTelesignArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        The unique Telesign API key
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -7511,6 +9040,9 @@ class ProjectConnectorsTelesignArgs:
     @property
     @pulumi.getter(name="customerId")
     def customer_id(self) -> pulumi.Input[str]:
+        """
+        The unique Telesign account Customer ID
+        """
         return pulumi.get(self, "customer_id")
 
     @customer_id.setter
@@ -7520,6 +9052,9 @@ class ProjectConnectorsTelesignArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7529,6 +9064,9 @@ class ProjectConnectorsTelesignArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7553,6 +9091,12 @@ class ProjectConnectorsTraceableArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  eu_region: Optional[pulumi.Input[bool]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] secret_key: The Traceable secret key.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        :param pulumi.Input[bool] eu_region: EU(Europe) Region deployment of Traceable platform.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "secret_key", secret_key)
         if description is not None:
@@ -7565,6 +9109,9 @@ class ProjectConnectorsTraceableArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7574,6 +9121,9 @@ class ProjectConnectorsTraceableArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The Traceable secret key.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -7583,6 +9133,9 @@ class ProjectConnectorsTraceableArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7592,6 +9145,9 @@ class ProjectConnectorsTraceableArgs:
     @property
     @pulumi.getter(name="euRegion")
     def eu_region(self) -> Optional[pulumi.Input[bool]]:
+        """
+        EU(Europe) Region deployment of Traceable platform.
+        """
         return pulumi.get(self, "eu_region")
 
     @eu_region.setter
@@ -7617,6 +9173,10 @@ class ProjectConnectorsTwilioCoreArgs:
                  senders: pulumi.Input['ProjectConnectorsTwilioCoreSendersArgs'],
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "account_sid", account_sid)
         pulumi.set(__self__, "authentication", authentication)
         pulumi.set(__self__, "name", name)
@@ -7647,6 +9207,9 @@ class ProjectConnectorsTwilioCoreArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7665,6 +9228,9 @@ class ProjectConnectorsTwilioCoreArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7805,6 +9371,10 @@ class ProjectConnectorsTwilioVerifyArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  sender: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "account_sid", account_sid)
         pulumi.set(__self__, "authentication", authentication)
         pulumi.set(__self__, "name", name)
@@ -7837,6 +9407,9 @@ class ProjectConnectorsTwilioVerifyArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7855,6 +9428,9 @@ class ProjectConnectorsTwilioVerifyArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -7930,6 +9506,13 @@ class ProjectConnectorsVeriffArgs:
                  base_url: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] api_key: The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        :param pulumi.Input[str] name: A custom name for your connector.
+        :param pulumi.Input[str] secret_key: The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+        :param pulumi.Input[str] base_url: The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+        :param pulumi.Input[str] description: A description of what your connector is used for.
+        """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "secret_key", secret_key)
@@ -7943,6 +9526,9 @@ class ProjectConnectorsVeriffArgs:
     @property
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
+        """
+        The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        """
         return pulumi.get(self, "api_key")
 
     @api_key.setter
@@ -7952,6 +9538,9 @@ class ProjectConnectorsVeriffArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        A custom name for your connector.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -7961,6 +9550,9 @@ class ProjectConnectorsVeriffArgs:
     @property
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Input[str]:
+        """
+        The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+        """
         return pulumi.get(self, "secret_key")
 
     @secret_key.setter
@@ -7970,6 +9562,9 @@ class ProjectConnectorsVeriffArgs:
     @property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -7979,6 +9574,9 @@ class ProjectConnectorsVeriffArgs:
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        A description of what your connector is used for.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -8049,9 +9647,6 @@ class ProjectJwtTemplatesAccessKeyTemplateArgs:
                  conformance_issuer: Optional[pulumi.Input[bool]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] id: The ID of this resource.
-        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
         if auth_schema is not None:
@@ -8111,9 +9706,6 @@ class ProjectJwtTemplatesAccessKeyTemplateArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of this resource.
-        """
         return pulumi.get(self, "id")
 
     @id.setter
@@ -8130,9 +9722,6 @@ class ProjectJwtTemplatesUserTemplateArgs:
                  conformance_issuer: Optional[pulumi.Input[bool]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  id: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] id: The ID of this resource.
-        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
         if auth_schema is not None:
@@ -8192,9 +9781,6 @@ class ProjectJwtTemplatesUserTemplateArgs:
     @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of this resource.
-        """
         return pulumi.get(self, "id")
 
     @id.setter

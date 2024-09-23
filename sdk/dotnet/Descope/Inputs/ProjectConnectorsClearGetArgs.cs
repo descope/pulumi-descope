@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
+
+        /// <summary>
+        /// Your CLEAR API key.
+        /// </summary>
         public Input<string>? ApiKey
         {
             get => _apiKey;
@@ -25,15 +29,24 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Your CLEAR project ID.
+        /// </summary>
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
 

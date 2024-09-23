@@ -34,17 +34,47 @@ export class Project extends pulumi.CustomResource {
         return obj['__pulumiType'] === Project.__pulumiType;
     }
 
+    /**
+     * Applications that are registered with the project.
+     */
     public readonly applications!: pulumi.Output<outputs.ProjectApplications>;
+    /**
+     * Custom attributes that can be attached to users and tenants.
+     */
     public readonly attributes!: pulumi.Output<outputs.ProjectAttributes>;
+    /**
+     * Settings for each authentication method.
+     */
     public readonly authentication!: pulumi.Output<outputs.ProjectAuthentication>;
+    /**
+     * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+     */
     public readonly authorization!: pulumi.Output<outputs.ProjectAuthorization>;
+    /**
+     * Enrich your flows by interacting with third party services.
+     */
     public readonly connectors!: pulumi.Output<outputs.ProjectConnectors>;
+    /**
+     * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+     */
+    public readonly environment!: pulumi.Output<string>;
     public readonly flows!: pulumi.Output<{[key: string]: outputs.ProjectFlows}>;
+    /**
+     * Defines templates for JSON Web Tokens (JWT) used for authentication.
+     */
     public readonly jwtTemplates!: pulumi.Output<outputs.ProjectJwtTemplates>;
+    /**
+     * The name of the Descope project.
+     */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * General settings for the Descope project.
+     */
     public readonly projectSettings!: pulumi.Output<outputs.ProjectProjectSettings>;
+    /**
+     * Custom styles that can be applied to the project's authentication flows.
+     */
     public readonly styles!: pulumi.Output<outputs.ProjectStyles>;
-    public readonly tag!: pulumi.Output<string>;
 
     /**
      * Create a Project resource with the given unique name, arguments, and options.
@@ -64,12 +94,12 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["authentication"] = state ? state.authentication : undefined;
             resourceInputs["authorization"] = state ? state.authorization : undefined;
             resourceInputs["connectors"] = state ? state.connectors : undefined;
+            resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["flows"] = state ? state.flows : undefined;
             resourceInputs["jwtTemplates"] = state ? state.jwtTemplates : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["projectSettings"] = state ? state.projectSettings : undefined;
             resourceInputs["styles"] = state ? state.styles : undefined;
-            resourceInputs["tag"] = state ? state.tag : undefined;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
             resourceInputs["applications"] = args ? args.applications : undefined;
@@ -77,12 +107,12 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["authentication"] = args ? args.authentication : undefined;
             resourceInputs["authorization"] = args ? args.authorization : undefined;
             resourceInputs["connectors"] = args ? args.connectors : undefined;
+            resourceInputs["environment"] = args ? args.environment : undefined;
             resourceInputs["flows"] = args ? args.flows : undefined;
             resourceInputs["jwtTemplates"] = args ? args.jwtTemplates : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["projectSettings"] = args ? args.projectSettings : undefined;
             resourceInputs["styles"] = args ? args.styles : undefined;
-            resourceInputs["tag"] = args ? args.tag : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Project.__pulumiType, name, resourceInputs, opts);
@@ -93,32 +123,92 @@ export class Project extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Project resources.
  */
 export interface ProjectState {
+    /**
+     * Applications that are registered with the project.
+     */
     applications?: pulumi.Input<inputs.ProjectApplications>;
+    /**
+     * Custom attributes that can be attached to users and tenants.
+     */
     attributes?: pulumi.Input<inputs.ProjectAttributes>;
+    /**
+     * Settings for each authentication method.
+     */
     authentication?: pulumi.Input<inputs.ProjectAuthentication>;
+    /**
+     * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+     */
     authorization?: pulumi.Input<inputs.ProjectAuthorization>;
+    /**
+     * Enrich your flows by interacting with third party services.
+     */
     connectors?: pulumi.Input<inputs.ProjectConnectors>;
+    /**
+     * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+     */
+    environment?: pulumi.Input<string>;
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    /**
+     * Defines templates for JSON Web Tokens (JWT) used for authentication.
+     */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    /**
+     * The name of the Descope project.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * General settings for the Descope project.
+     */
     projectSettings?: pulumi.Input<inputs.ProjectProjectSettings>;
+    /**
+     * Custom styles that can be applied to the project's authentication flows.
+     */
     styles?: pulumi.Input<inputs.ProjectStyles>;
-    tag?: pulumi.Input<string>;
 }
 
 /**
  * The set of arguments for constructing a Project resource.
  */
 export interface ProjectArgs {
+    /**
+     * Applications that are registered with the project.
+     */
     applications?: pulumi.Input<inputs.ProjectApplications>;
+    /**
+     * Custom attributes that can be attached to users and tenants.
+     */
     attributes?: pulumi.Input<inputs.ProjectAttributes>;
+    /**
+     * Settings for each authentication method.
+     */
     authentication?: pulumi.Input<inputs.ProjectAuthentication>;
+    /**
+     * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+     */
     authorization?: pulumi.Input<inputs.ProjectAuthorization>;
+    /**
+     * Enrich your flows by interacting with third party services.
+     */
     connectors?: pulumi.Input<inputs.ProjectConnectors>;
+    /**
+     * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+     */
+    environment?: pulumi.Input<string>;
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    /**
+     * Defines templates for JSON Web Tokens (JWT) used for authentication.
+     */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    /**
+     * The name of the Descope project.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * General settings for the Descope project.
+     */
     projectSettings?: pulumi.Input<inputs.ProjectProjectSettings>;
+    /**
+     * Custom styles that can be applied to the project's authentication flows.
+     */
     styles?: pulumi.Input<inputs.ProjectStyles>;
-    tag?: pulumi.Input<string>;
 }

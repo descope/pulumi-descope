@@ -14,17 +14,27 @@ import (
 type Project struct {
 	pulumi.CustomResourceState
 
-	Applications    ProjectApplicationsOutput    `pulumi:"applications"`
-	Attributes      ProjectAttributesOutput      `pulumi:"attributes"`
-	Authentication  ProjectAuthenticationOutput  `pulumi:"authentication"`
-	Authorization   ProjectAuthorizationOutput   `pulumi:"authorization"`
-	Connectors      ProjectConnectorsOutput      `pulumi:"connectors"`
-	Flows           ProjectFlowsMapOutput        `pulumi:"flows"`
-	JwtTemplates    ProjectJwtTemplatesOutput    `pulumi:"jwtTemplates"`
-	Name            pulumi.StringOutput          `pulumi:"name"`
+	// Applications that are registered with the project.
+	Applications ProjectApplicationsOutput `pulumi:"applications"`
+	// Custom attributes that can be attached to users and tenants.
+	Attributes ProjectAttributesOutput `pulumi:"attributes"`
+	// Settings for each authentication method.
+	Authentication ProjectAuthenticationOutput `pulumi:"authentication"`
+	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+	Authorization ProjectAuthorizationOutput `pulumi:"authorization"`
+	// Enrich your flows by interacting with third party services.
+	Connectors ProjectConnectorsOutput `pulumi:"connectors"`
+	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+	Environment pulumi.StringOutput   `pulumi:"environment"`
+	Flows       ProjectFlowsMapOutput `pulumi:"flows"`
+	// Defines templates for JSON Web Tokens (JWT) used for authentication.
+	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
+	// The name of the Descope project.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// General settings for the Descope project.
 	ProjectSettings ProjectProjectSettingsOutput `pulumi:"projectSettings"`
-	Styles          ProjectStylesOutput          `pulumi:"styles"`
-	Tag             pulumi.StringOutput          `pulumi:"tag"`
+	// Custom styles that can be applied to the project's authentication flows.
+	Styles ProjectStylesOutput `pulumi:"styles"`
 }
 
 // NewProject registers a new resource with the given unique name, arguments, and options.
@@ -57,31 +67,51 @@ func GetProject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Project resources.
 type projectState struct {
-	Applications    *ProjectApplications    `pulumi:"applications"`
-	Attributes      *ProjectAttributes      `pulumi:"attributes"`
-	Authentication  *ProjectAuthentication  `pulumi:"authentication"`
-	Authorization   *ProjectAuthorization   `pulumi:"authorization"`
-	Connectors      *ProjectConnectors      `pulumi:"connectors"`
-	Flows           map[string]ProjectFlows `pulumi:"flows"`
-	JwtTemplates    *ProjectJwtTemplates    `pulumi:"jwtTemplates"`
-	Name            *string                 `pulumi:"name"`
+	// Applications that are registered with the project.
+	Applications *ProjectApplications `pulumi:"applications"`
+	// Custom attributes that can be attached to users and tenants.
+	Attributes *ProjectAttributes `pulumi:"attributes"`
+	// Settings for each authentication method.
+	Authentication *ProjectAuthentication `pulumi:"authentication"`
+	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+	Authorization *ProjectAuthorization `pulumi:"authorization"`
+	// Enrich your flows by interacting with third party services.
+	Connectors *ProjectConnectors `pulumi:"connectors"`
+	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+	Environment *string                 `pulumi:"environment"`
+	Flows       map[string]ProjectFlows `pulumi:"flows"`
+	// Defines templates for JSON Web Tokens (JWT) used for authentication.
+	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
+	// The name of the Descope project.
+	Name *string `pulumi:"name"`
+	// General settings for the Descope project.
 	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
-	Styles          *ProjectStyles          `pulumi:"styles"`
-	Tag             *string                 `pulumi:"tag"`
+	// Custom styles that can be applied to the project's authentication flows.
+	Styles *ProjectStyles `pulumi:"styles"`
 }
 
 type ProjectState struct {
-	Applications    ProjectApplicationsPtrInput
-	Attributes      ProjectAttributesPtrInput
-	Authentication  ProjectAuthenticationPtrInput
-	Authorization   ProjectAuthorizationPtrInput
-	Connectors      ProjectConnectorsPtrInput
-	Flows           ProjectFlowsMapInput
-	JwtTemplates    ProjectJwtTemplatesPtrInput
-	Name            pulumi.StringPtrInput
+	// Applications that are registered with the project.
+	Applications ProjectApplicationsPtrInput
+	// Custom attributes that can be attached to users and tenants.
+	Attributes ProjectAttributesPtrInput
+	// Settings for each authentication method.
+	Authentication ProjectAuthenticationPtrInput
+	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+	Authorization ProjectAuthorizationPtrInput
+	// Enrich your flows by interacting with third party services.
+	Connectors ProjectConnectorsPtrInput
+	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+	Environment pulumi.StringPtrInput
+	Flows       ProjectFlowsMapInput
+	// Defines templates for JSON Web Tokens (JWT) used for authentication.
+	JwtTemplates ProjectJwtTemplatesPtrInput
+	// The name of the Descope project.
+	Name pulumi.StringPtrInput
+	// General settings for the Descope project.
 	ProjectSettings ProjectProjectSettingsPtrInput
-	Styles          ProjectStylesPtrInput
-	Tag             pulumi.StringPtrInput
+	// Custom styles that can be applied to the project's authentication flows.
+	Styles ProjectStylesPtrInput
 }
 
 func (ProjectState) ElementType() reflect.Type {
@@ -89,32 +119,52 @@ func (ProjectState) ElementType() reflect.Type {
 }
 
 type projectArgs struct {
-	Applications    *ProjectApplications    `pulumi:"applications"`
-	Attributes      *ProjectAttributes      `pulumi:"attributes"`
-	Authentication  *ProjectAuthentication  `pulumi:"authentication"`
-	Authorization   *ProjectAuthorization   `pulumi:"authorization"`
-	Connectors      *ProjectConnectors      `pulumi:"connectors"`
-	Flows           map[string]ProjectFlows `pulumi:"flows"`
-	JwtTemplates    *ProjectJwtTemplates    `pulumi:"jwtTemplates"`
-	Name            *string                 `pulumi:"name"`
+	// Applications that are registered with the project.
+	Applications *ProjectApplications `pulumi:"applications"`
+	// Custom attributes that can be attached to users and tenants.
+	Attributes *ProjectAttributes `pulumi:"attributes"`
+	// Settings for each authentication method.
+	Authentication *ProjectAuthentication `pulumi:"authentication"`
+	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+	Authorization *ProjectAuthorization `pulumi:"authorization"`
+	// Enrich your flows by interacting with third party services.
+	Connectors *ProjectConnectors `pulumi:"connectors"`
+	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+	Environment *string                 `pulumi:"environment"`
+	Flows       map[string]ProjectFlows `pulumi:"flows"`
+	// Defines templates for JSON Web Tokens (JWT) used for authentication.
+	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
+	// The name of the Descope project.
+	Name *string `pulumi:"name"`
+	// General settings for the Descope project.
 	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
-	Styles          *ProjectStyles          `pulumi:"styles"`
-	Tag             *string                 `pulumi:"tag"`
+	// Custom styles that can be applied to the project's authentication flows.
+	Styles *ProjectStyles `pulumi:"styles"`
 }
 
 // The set of arguments for constructing a Project resource.
 type ProjectArgs struct {
-	Applications    ProjectApplicationsPtrInput
-	Attributes      ProjectAttributesPtrInput
-	Authentication  ProjectAuthenticationPtrInput
-	Authorization   ProjectAuthorizationPtrInput
-	Connectors      ProjectConnectorsPtrInput
-	Flows           ProjectFlowsMapInput
-	JwtTemplates    ProjectJwtTemplatesPtrInput
-	Name            pulumi.StringPtrInput
+	// Applications that are registered with the project.
+	Applications ProjectApplicationsPtrInput
+	// Custom attributes that can be attached to users and tenants.
+	Attributes ProjectAttributesPtrInput
+	// Settings for each authentication method.
+	Authentication ProjectAuthenticationPtrInput
+	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+	Authorization ProjectAuthorizationPtrInput
+	// Enrich your flows by interacting with third party services.
+	Connectors ProjectConnectorsPtrInput
+	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+	Environment pulumi.StringPtrInput
+	Flows       ProjectFlowsMapInput
+	// Defines templates for JSON Web Tokens (JWT) used for authentication.
+	JwtTemplates ProjectJwtTemplatesPtrInput
+	// The name of the Descope project.
+	Name pulumi.StringPtrInput
+	// General settings for the Descope project.
 	ProjectSettings ProjectProjectSettingsPtrInput
-	Styles          ProjectStylesPtrInput
-	Tag             pulumi.StringPtrInput
+	// Custom styles that can be applied to the project's authentication flows.
+	Styles ProjectStylesPtrInput
 }
 
 func (ProjectArgs) ElementType() reflect.Type {
@@ -204,48 +254,58 @@ func (o ProjectOutput) ToProjectOutputWithContext(ctx context.Context) ProjectOu
 	return o
 }
 
+// Applications that are registered with the project.
 func (o ProjectOutput) Applications() ProjectApplicationsOutput {
 	return o.ApplyT(func(v *Project) ProjectApplicationsOutput { return v.Applications }).(ProjectApplicationsOutput)
 }
 
+// Custom attributes that can be attached to users and tenants.
 func (o ProjectOutput) Attributes() ProjectAttributesOutput {
 	return o.ApplyT(func(v *Project) ProjectAttributesOutput { return v.Attributes }).(ProjectAttributesOutput)
 }
 
+// Settings for each authentication method.
 func (o ProjectOutput) Authentication() ProjectAuthenticationOutput {
 	return o.ApplyT(func(v *Project) ProjectAuthenticationOutput { return v.Authentication }).(ProjectAuthenticationOutput)
 }
 
+// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
 func (o ProjectOutput) Authorization() ProjectAuthorizationOutput {
 	return o.ApplyT(func(v *Project) ProjectAuthorizationOutput { return v.Authorization }).(ProjectAuthorizationOutput)
 }
 
+// Enrich your flows by interacting with third party services.
 func (o ProjectOutput) Connectors() ProjectConnectorsOutput {
 	return o.ApplyT(func(v *Project) ProjectConnectorsOutput { return v.Connectors }).(ProjectConnectorsOutput)
+}
+
+// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+func (o ProjectOutput) Environment() pulumi.StringOutput {
+	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
 }
 
 func (o ProjectOutput) Flows() ProjectFlowsMapOutput {
 	return o.ApplyT(func(v *Project) ProjectFlowsMapOutput { return v.Flows }).(ProjectFlowsMapOutput)
 }
 
+// Defines templates for JSON Web Tokens (JWT) used for authentication.
 func (o ProjectOutput) JwtTemplates() ProjectJwtTemplatesOutput {
 	return o.ApplyT(func(v *Project) ProjectJwtTemplatesOutput { return v.JwtTemplates }).(ProjectJwtTemplatesOutput)
 }
 
+// The name of the Descope project.
 func (o ProjectOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// General settings for the Descope project.
 func (o ProjectOutput) ProjectSettings() ProjectProjectSettingsOutput {
 	return o.ApplyT(func(v *Project) ProjectProjectSettingsOutput { return v.ProjectSettings }).(ProjectProjectSettingsOutput)
 }
 
+// Custom styles that can be applied to the project's authentication flows.
 func (o ProjectOutput) Styles() ProjectStylesOutput {
 	return o.ApplyT(func(v *Project) ProjectStylesOutput { return v.Styles }).(ProjectStylesOutput)
-}
-
-func (o ProjectOutput) Tag() pulumi.StringOutput {
-	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Tag }).(pulumi.StringOutput)
 }
 
 type ProjectArrayOutput struct{ *pulumi.OutputState }

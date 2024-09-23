@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
+
+        /// <summary>
+        /// The unique Datadog organization key.
+        /// </summary>
         public Input<string>? ApiKey
         {
             get => _apiKey;
@@ -31,15 +35,24 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("auditFilters")]
         public Input<string>? AuditFilters { get; set; }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        /// </summary>
         [Input("site")]
         public Input<string>? Site { get; set; }
 

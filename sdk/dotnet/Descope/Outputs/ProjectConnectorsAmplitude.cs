@@ -14,11 +14,26 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsAmplitude
     {
+        /// <summary>
+        /// The Amplitude API Key generated for the Descope service.
+        /// </summary>
         public readonly string ApiKey;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+        /// </summary>
         public readonly string? ServerUrl;
+        /// <summary>
+        /// `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+        /// </summary>
         public readonly string? ServerZone;
 
         [OutputConstructor]

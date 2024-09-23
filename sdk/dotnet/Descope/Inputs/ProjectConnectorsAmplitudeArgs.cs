@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
+
+        /// <summary>
+        /// The Amplitude API Key generated for the Descope service.
+        /// </summary>
         public Input<string>? ApiKey
         {
             get => _apiKey;
@@ -25,18 +29,30 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+        /// </summary>
         [Input("serverUrl")]
         public Input<string>? ServerUrl { get; set; }
 
+        /// <summary>
+        /// `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+        /// </summary>
         [Input("serverZone")]
         public Input<string>? ServerZone { get; set; }
 

@@ -14,15 +14,42 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthentication
     {
+        /// <summary>
+        /// Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationEmbeddedLink? EmbeddedLink;
+        /// <summary>
+        /// An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationEnchantedLink? EnchantedLink;
+        /// <summary>
+        /// An authentication method where a user receives a unique link via email to log in.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationMagicLink? MagicLink;
+        /// <summary>
+        /// Authentication using Open Authorization, which allows users to authenticate with various external services.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauth? Oauth;
+        /// <summary>
+        /// A dynamically generated set of numbers, granting the user one-time access.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOtp? Otp;
+        /// <summary>
+        /// Device-based passwordless authentication, using fingerprint, face scan, and more.
+        /// </summary>
+        public readonly Outputs.ProjectAuthenticationPasskeys? Passkeys;
+        /// <summary>
+        /// The classic username and password combination used for authentication.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationPassword? Password;
+        /// <summary>
+        /// Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationSso? Sso;
+        /// <summary>
+        /// A one-time code generated for the user using a shared secret and time.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationTotp? Totp;
-        public readonly Outputs.ProjectAuthenticationWebauthn? Webauthn;
 
         [OutputConstructor]
         private ProjectAuthentication(
@@ -36,23 +63,23 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectAuthenticationOtp? otp,
 
+            Outputs.ProjectAuthenticationPasskeys? passkeys,
+
             Outputs.ProjectAuthenticationPassword? password,
 
             Outputs.ProjectAuthenticationSso? sso,
 
-            Outputs.ProjectAuthenticationTotp? totp,
-
-            Outputs.ProjectAuthenticationWebauthn? webauthn)
+            Outputs.ProjectAuthenticationTotp? totp)
         {
             EmbeddedLink = embeddedLink;
             EnchantedLink = enchantedLink;
             MagicLink = magicLink;
             Oauth = oauth;
             Otp = otp;
+            Passkeys = passkeys;
             Password = password;
             Sso = sso;
             Totp = totp;
-            Webauthn = webauthn;
         }
     }
 }

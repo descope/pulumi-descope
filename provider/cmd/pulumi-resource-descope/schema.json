@@ -10,6 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`descope` Terraform Provider](https://github.com/descope/terraform-provider-descope).",
     "repository": "https://github.com/descope/pulumi-descope",
+    "logoUrl": "https://avatars3.githubusercontent.com/descope",
     "pluginDownloadURL": "github://api.github.com/descope",
     "publisher": "Descope",
     "meta": {
@@ -82,13 +83,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectApplicationsOidcApplication:ProjectApplicationsOidcApplication"
-                    }
+                    },
+                    "description": "Applications using OpenID Connect (OIDC) for authentication.\n"
                 },
                 "samlApplications": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectApplicationsSamlApplication:ProjectApplicationsSamlApplication"
-                    }
+                    },
+                    "description": "Applications using SAML for authentication.\n"
                 }
             },
             "type": "object",
@@ -107,26 +110,32 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Claims associated with JWT tokens, typically used for user information.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the application.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Indicates whether the resource or functionality is disabled.\n"
                 },
                 "id": {
                     "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "description": "An optional identifier for the application.\n"
                 },
                 "loginPageUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the custom login page for the application.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the application.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the application.\n"
                 }
             },
             "type": "object",
@@ -159,35 +168,41 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationAttributeMapping:ProjectApplicationsSamlApplicationAttributeMapping"
-                    }
+                    },
+                    "description": "Map user attributes from the third party identity provider to custom attributes in Descope.\n"
                 },
                 "defaultRelayState": {
                     "type": "string"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the application.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Indicates whether the application is disabled.\n"
                 },
                 "dynamicConfiguration": {
                     "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration"
                 },
                 "id": {
                     "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "description": "An optional identifier for the application.\n"
                 },
                 "loginPageUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the custom login page for the application.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the application.\n"
                 },
                 "manualConfiguration": {
                     "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the application.\n"
                 },
                 "subjectNameIdFormat": {
                     "type": "string"
@@ -223,10 +238,12 @@
         "descope:index/ProjectApplicationsSamlApplicationAttributeMapping:ProjectApplicationsSamlApplicationAttributeMapping": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the user attribute in the third party identity provider.\n"
                 },
                 "value": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the user custom attribute in Descope.\n"
                 }
             },
             "type": "object",
@@ -271,13 +288,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAttributesTenant:ProjectAttributesTenant"
-                    }
+                    },
+                    "description": "Custom attributes to store additional details about your tenants.\n"
                 },
                 "users": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAttributesUser:ProjectAttributesUser"
-                    }
+                    },
+                    "description": "Custom attributes to store additional details about your users.\n"
                 }
             },
             "type": "object",
@@ -293,16 +312,19 @@
         "descope:index/ProjectAttributesTenant:ProjectAttributesTenant": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the tenant attribute.\n"
                 },
                 "selectOptions": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings to define the set of options for select attributes.\n"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.\n"
                 }
             },
             "type": "object",
@@ -323,19 +345,23 @@
         "descope:index/ProjectAttributesUser:ProjectAttributesUser": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the user attribute.\n"
                 },
                 "selectOptions": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of strings to define the set of options for select attributes.\n"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.\n"
                 },
                 "widgetAuthorization": {
-                    "$ref": "#/types/descope:index/ProjectAttributesUserWidgetAuthorization:ProjectAttributesUserWidgetAuthorization"
+                    "$ref": "#/types/descope:index/ProjectAttributesUserWidgetAuthorization:ProjectAttributesUserWidgetAuthorization",
+                    "description": "When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.\n"
                 }
             },
             "type": "object",
@@ -360,13 +386,15 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Editing the attribute value in widgets will be restricted to users with the specified permissions.\n"
                 },
                 "viewPermissions": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Viewing the attribute value in widgets will be restricted to users with the specified permissions.\n"
                 }
             },
             "type": "object",
@@ -382,31 +410,40 @@
         "descope:index/ProjectAuthentication:ProjectAuthentication": {
             "properties": {
                 "embeddedLink": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationEmbeddedLink:ProjectAuthenticationEmbeddedLink"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationEmbeddedLink:ProjectAuthenticationEmbeddedLink",
+                    "description": "Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.\n"
                 },
                 "enchantedLink": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLink:ProjectAuthenticationEnchantedLink"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLink:ProjectAuthenticationEnchantedLink",
+                    "description": "An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.\n"
                 },
                 "magicLink": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLink:ProjectAuthenticationMagicLink"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLink:ProjectAuthenticationMagicLink",
+                    "description": "An authentication method where a user receives a unique link via email to log in.\n"
                 },
                 "oauth": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauth:ProjectAuthenticationOauth"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauth:ProjectAuthenticationOauth",
+                    "description": "Authentication using Open Authorization, which allows users to authenticate with various external services.\n"
                 },
                 "otp": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOtp:ProjectAuthenticationOtp"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOtp:ProjectAuthenticationOtp",
+                    "description": "A dynamically generated set of numbers, granting the user one-time access.\n"
+                },
+                "passkeys": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationPasskeys:ProjectAuthenticationPasskeys",
+                    "description": "Device-based passwordless authentication, using fingerprint, face scan, and more.\n"
                 },
                 "password": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationPassword:ProjectAuthenticationPassword"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationPassword:ProjectAuthenticationPassword",
+                    "description": "The classic username and password combination used for authentication.\n"
                 },
                 "sso": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationSso:ProjectAuthenticationSso"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationSso:ProjectAuthenticationSso",
+                    "description": "Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.\n"
                 },
                 "totp": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationTotp:ProjectAuthenticationTotp"
-                },
-                "webauthn": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationWebauthn:ProjectAuthenticationWebauthn"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationTotp:ProjectAuthenticationTotp",
+                    "description": "A one-time code generated for the user using a shared secret and time.\n"
                 }
             },
             "type": "object",
@@ -418,10 +455,10 @@
                         "magicLink",
                         "oauth",
                         "otp",
+                        "passkeys",
                         "password",
                         "sso",
-                        "totp",
-                        "webauthn"
+                        "totp"
                     ]
                 }
             }
@@ -432,7 +469,8 @@
                     "type": "boolean"
                 },
                 "expirationTime": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The amount of time that the embedded link will be valid for.\n"
                 },
                 "expirationTimeUnit": {
                     "type": "string"
@@ -452,7 +490,8 @@
         "descope:index/ProjectAuthenticationEnchantedLink:ProjectAuthenticationEnchantedLink": {
             "properties": {
                 "emailService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLinkEmailService:ProjectAuthenticationEnchantedLinkEmailService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLinkEmailService:ProjectAuthenticationEnchantedLinkEmailService",
+                    "description": "Settings related to sending emails as part of the enchanted link authentication.\n"
                 },
                 "enabled": {
                     "type": "boolean"
@@ -464,7 +503,8 @@
                     "type": "string"
                 },
                 "redirectUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL to redirect users to after they log in using the enchanted link.\n"
                 }
             },
             "type": "object",
@@ -551,7 +591,8 @@
         "descope:index/ProjectAuthenticationMagicLink:ProjectAuthenticationMagicLink": {
             "properties": {
                 "emailService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkEmailService:ProjectAuthenticationMagicLinkEmailService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkEmailService:ProjectAuthenticationMagicLinkEmailService",
+                    "description": "Settings related to sending emails as part of the magic link authentication.\n"
                 },
                 "enabled": {
                     "type": "boolean"
@@ -563,10 +604,12 @@
                     "type": "string"
                 },
                 "redirectUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL to redirect users to after they log in using the magic link.\n"
                 },
                 "textService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkTextService:ProjectAuthenticationMagicLinkTextService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkTextService:ProjectAuthenticationMagicLinkTextService",
+                    "description": "Settings related to sending SMS messages as part of the magic link authentication.\n"
                 }
             },
             "type": "object",
@@ -713,13 +756,15 @@
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustom:ProjectAuthenticationOauthCustom"
-                    }
+                    },
+                    "description": "Custom OAuth providers configured for this project.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "system": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystem:ProjectAuthenticationOauthSystem"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystem:ProjectAuthenticationOauthSystem",
+                    "description": "Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.\n"
                 }
             },
             "type": "object",
@@ -736,7 +781,8 @@
         "descope:index/ProjectAuthenticationOauthCustom:ProjectAuthenticationOauthCustom": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -745,53 +791,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustomProviderTokenManagement:ProjectAuthenticationOauthCustomProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustomProviderTokenManagement:ProjectAuthenticationOauthCustomProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -840,31 +898,40 @@
         "descope:index/ProjectAuthenticationOauthSystem:ProjectAuthenticationOauthSystem": {
             "properties": {
                 "apple": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemApple:ProjectAuthenticationOauthSystemApple"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemApple:ProjectAuthenticationOauthSystemApple",
+                    "description": "Apple's OAuth provider, allowing users to authenticate with their Apple Account.\n"
                 },
                 "discord": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscord:ProjectAuthenticationOauthSystemDiscord"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscord:ProjectAuthenticationOauthSystemDiscord",
+                    "description": "Discord's OAuth provider, allowing users to authenticate with their Discord account.\n"
                 },
                 "facebook": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebook:ProjectAuthenticationOauthSystemFacebook"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebook:ProjectAuthenticationOauthSystemFacebook",
+                    "description": "Facebook's OAuth provider, allowing users to authenticate with their Facebook account.\n"
                 },
                 "github": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithub:ProjectAuthenticationOauthSystemGithub"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithub:ProjectAuthenticationOauthSystemGithub",
+                    "description": "GitHub's OAuth provider, allowing users to authenticate with their GitHub account.\n"
                 },
                 "gitlab": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlab:ProjectAuthenticationOauthSystemGitlab"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlab:ProjectAuthenticationOauthSystemGitlab",
+                    "description": "GitLab's OAuth provider, allowing users to authenticate with their GitLab account.\n"
                 },
                 "google": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogle:ProjectAuthenticationOauthSystemGoogle"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogle:ProjectAuthenticationOauthSystemGoogle",
+                    "description": "Google's OAuth provider, allowing users to authenticate with their Google account.\n"
                 },
                 "linkedin": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedin:ProjectAuthenticationOauthSystemLinkedin"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedin:ProjectAuthenticationOauthSystemLinkedin",
+                    "description": "LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.\n"
                 },
                 "microsoft": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoft:ProjectAuthenticationOauthSystemMicrosoft"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoft:ProjectAuthenticationOauthSystemMicrosoft",
+                    "description": "Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.\n"
                 },
                 "slack": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlack:ProjectAuthenticationOauthSystemSlack"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlack:ProjectAuthenticationOauthSystemSlack",
+                    "description": "Slack's OAuth provider, allowing users to authenticate with their Slack account.\n"
                 }
             },
             "type": "object",
@@ -887,7 +954,8 @@
         "descope:index/ProjectAuthenticationOauthSystemApple:ProjectAuthenticationOauthSystemApple": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -896,53 +964,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemAppleProviderTokenManagement:ProjectAuthenticationOauthSystemAppleProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemAppleProviderTokenManagement:ProjectAuthenticationOauthSystemAppleProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -991,7 +1071,8 @@
         "descope:index/ProjectAuthenticationOauthSystemDiscord:ProjectAuthenticationOauthSystemDiscord": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1000,53 +1081,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscordProviderTokenManagement:ProjectAuthenticationOauthSystemDiscordProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscordProviderTokenManagement:ProjectAuthenticationOauthSystemDiscordProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1095,7 +1188,8 @@
         "descope:index/ProjectAuthenticationOauthSystemFacebook:ProjectAuthenticationOauthSystemFacebook": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1104,53 +1198,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebookProviderTokenManagement:ProjectAuthenticationOauthSystemFacebookProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebookProviderTokenManagement:ProjectAuthenticationOauthSystemFacebookProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1199,7 +1305,8 @@
         "descope:index/ProjectAuthenticationOauthSystemGithub:ProjectAuthenticationOauthSystemGithub": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1208,53 +1315,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithubProviderTokenManagement:ProjectAuthenticationOauthSystemGithubProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithubProviderTokenManagement:ProjectAuthenticationOauthSystemGithubProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1303,7 +1422,8 @@
         "descope:index/ProjectAuthenticationOauthSystemGitlab:ProjectAuthenticationOauthSystemGitlab": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1312,53 +1432,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlabProviderTokenManagement:ProjectAuthenticationOauthSystemGitlabProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlabProviderTokenManagement:ProjectAuthenticationOauthSystemGitlabProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1407,7 +1539,8 @@
         "descope:index/ProjectAuthenticationOauthSystemGoogle:ProjectAuthenticationOauthSystemGoogle": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1416,53 +1549,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogleProviderTokenManagement:ProjectAuthenticationOauthSystemGoogleProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogleProviderTokenManagement:ProjectAuthenticationOauthSystemGoogleProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1511,7 +1656,8 @@
         "descope:index/ProjectAuthenticationOauthSystemLinkedin:ProjectAuthenticationOauthSystemLinkedin": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1520,53 +1666,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement:ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement:ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1615,7 +1773,8 @@
         "descope:index/ProjectAuthenticationOauthSystemMicrosoft:ProjectAuthenticationOauthSystemMicrosoft": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1624,53 +1783,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement:ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement:ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1719,7 +1890,8 @@
         "descope:index/ProjectAuthenticationOauthSystemSlack:ProjectAuthenticationOauthSystemSlack": {
             "properties": {
                 "authorizationEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
                 },
                 "claimMapping": {
                     "type": "object",
@@ -1728,53 +1900,65 @@
                     }
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The client secret for the OAuth provider, used to authenticate the application with the provider.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
                     "type": "boolean"
                 },
                 "grantType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
                 },
                 "issuer": {
                     "type": "string"
                 },
                 "jwksEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.\n"
                 },
                 "logo": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL of the logo associated with the OAuth provider.\n"
                 },
                 "mergeUserAccounts": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
                 "prompts": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Custom prompts or consent screens that users may see during OAuth authentication.\n"
                 },
                 "providerTokenManagement": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlackProviderTokenManagement:ProjectAuthenticationOauthSystemSlackProviderTokenManagement"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlackProviderTokenManagement:ProjectAuthenticationOauthSystemSlackProviderTokenManagement",
+                    "description": "Settings related to token management for the OAuth provider.\n"
                 },
                 "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Scopes of access that the application requests from the user's account on the OAuth provider.\n"
                 },
                 "tokenEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
                 "userInfoEndpoint": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL where the application retrieves user information from the OAuth provider.\n"
                 }
             },
             "type": "object",
@@ -1823,25 +2007,30 @@
         "descope:index/ProjectAuthenticationOtp:ProjectAuthenticationOtp": {
             "properties": {
                 "domain": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The domain to embed in OTP messages.\n"
                 },
                 "emailService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpEmailService:ProjectAuthenticationOtpEmailService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpEmailService:ProjectAuthenticationOtpEmailService",
+                    "description": "Settings related to sending emails with OTP codes.\n"
                 },
                 "enabled": {
                     "type": "boolean"
                 },
                 "expirationTime": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The amount of time that an OTP code will be valid for.\n"
                 },
                 "expirationTimeUnit": {
                     "type": "string"
                 },
                 "textService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpTextService:ProjectAuthenticationOtpTextService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpTextService:ProjectAuthenticationOtpTextService",
+                    "description": "Settings related to sending SMS messages with OTP codes.\n"
                 },
                 "voiceService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpVoiceService:ProjectAuthenticationOtpVoiceService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOtpVoiceService:ProjectAuthenticationOtpVoiceService",
+                    "description": "Settings related to voice calls with OTP codes.\n"
                 }
             },
             "type": "object",
@@ -2039,46 +2228,77 @@
                 }
             }
         },
+        "descope:index/ProjectAuthenticationPasskeys:ProjectAuthenticationPasskeys": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "topLevelDomain": {
+                    "type": "string",
+                    "description": "Passkeys will be usable in the following domain and all its subdomains.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "enabled",
+                        "topLevelDomain"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectAuthenticationPassword:ProjectAuthenticationPassword": {
             "properties": {
                 "emailService": {
-                    "$ref": "#/types/descope:index/ProjectAuthenticationPasswordEmailService:ProjectAuthenticationPasswordEmailService"
+                    "$ref": "#/types/descope:index/ProjectAuthenticationPasswordEmailService:ProjectAuthenticationPasswordEmailService",
+                    "description": "Settings related to sending password reset emails as part of the password feature.\n"
                 },
                 "enabled": {
                     "type": "boolean"
                 },
                 "expiration": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether users are required to change their password periodically.\n"
                 },
                 "expirationWeeks": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The number of weeks after which a user's password expires and they need to replace it.\n"
                 },
                 "lock": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether the user account should be locked after a specified number of failed login attempts.\n"
                 },
                 "lockAttempts": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The number of failed login attempts allowed before an account is locked.\n"
                 },
                 "lowercase": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether passwords must contain at least one lowercase letter.\n"
                 },
                 "minLength": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The minimum length of the password that users are required to use. The maximum length is always `64`.\n"
                 },
                 "nonAlphanumeric": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).\n"
                 },
                 "number": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether passwords must contain at least one number.\n"
                 },
                 "reuse": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to forbid password reuse when users change their password.\n"
                 },
                 "reuseAmount": {
                     "type": "integer"
                 },
                 "uppercase": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether passwords must contain at least one uppercase letter.\n"
                 }
             },
             "type": "object",
@@ -2176,7 +2396,8 @@
                     "type": "boolean"
                 },
                 "mergeUsers": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
                 }
             },
             "type": "object",
@@ -2200,25 +2421,6 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "enabled"
-                    ]
-                }
-            }
-        },
-        "descope:index/ProjectAuthenticationWebauthn:ProjectAuthenticationWebauthn": {
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "topLevelDomain": {
-                    "type": "string"
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "enabled",
-                        "topLevelDomain"
                     ]
                 }
             }
@@ -2313,13 +2515,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsAbuseipdb:ProjectConnectorsAbuseipdb"
-                    }
+                    },
+                    "description": "AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.\n"
                 },
                 "amplitudes": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsAmplitude:ProjectConnectorsAmplitude"
-                    }
+                    },
+                    "description": "Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.\n"
                 },
                 "auditWebhooks": {
                     "type": "array",
@@ -2343,13 +2547,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsClear:ProjectConnectorsClear"
-                    }
+                    },
+                    "description": "An identity verification platform that allow customers to digitally verify their identity from anywhere.\n"
                 },
                 "datadogs": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsDatadog:ProjectConnectorsDatadog"
-                    }
+                    },
+                    "description": "Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.\n"
                 },
                 "devrevGrows": {
                     "type": "array",
@@ -2361,7 +2567,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsDocebo:ProjectConnectorsDocebo"
-                    }
+                    },
+                    "description": "Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.\n"
                 },
                 "fingerprintDescopes": {
                     "type": "array",
@@ -2373,13 +2580,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsFingerprint:ProjectConnectorsFingerprint"
-                    }
+                    },
+                    "description": "Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.\n"
                 },
                 "forters": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsForter:ProjectConnectorsForter"
-                    }
+                    },
+                    "description": "Use the Forter connector for account fraud prevention.\n"
                 },
                 "googleCloudTranslations": {
                     "type": "array",
@@ -2391,7 +2600,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsHibp:ProjectConnectorsHibp"
-                    }
+                    },
+                    "description": "API to check if password appeared previously exposed in data breaches.\n"
                 },
                 "httpStaticIps": {
                     "type": "array",
@@ -2403,25 +2613,29 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsHttp:ProjectConnectorsHttp"
-                    }
+                    },
+                    "description": "A general purpose HTTP client\n"
                 },
                 "hubspots": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsHubspot:ProjectConnectorsHubspot"
-                    }
+                    },
+                    "description": "HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.\n"
                 },
                 "intercoms": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsIntercom:ProjectConnectorsIntercom"
-                    }
+                    },
+                    "description": "Intercom is a Conversational Relationship Platform (CRP).\n"
                 },
                 "newrelics": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsNewrelic:ProjectConnectorsNewrelic"
-                    }
+                    },
+                    "description": "Use this connector to send audit events and troubleshooting logs to New Relic.\n"
                 },
                 "recaptchaEnterprises": {
                     "type": "array",
@@ -2433,25 +2647,29 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsRecaptcha:ProjectConnectorsRecaptcha"
-                    }
+                    },
+                    "description": "reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.\n"
                 },
                 "rekognitions": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsRekognition:ProjectConnectorsRekognition"
-                    }
+                    },
+                    "description": "AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.\n"
                 },
                 "salesforces": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsSalesforce:ProjectConnectorsSalesforce"
-                    }
+                    },
+                    "description": "Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.\n"
                 },
                 "segments": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsSegment:ProjectConnectorsSegment"
-                    }
+                    },
+                    "description": "Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.\n"
                 },
                 "sendgrids": {
                     "type": "array",
@@ -2469,19 +2687,22 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsSumologic:ProjectConnectorsSumologic"
-                    }
+                    },
+                    "description": "Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics\n"
                 },
                 "telesigns": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsTelesign:ProjectConnectorsTelesign"
-                    }
+                    },
+                    "description": "Telesign Phone number intelligence API provides risk score for phone numbers.\n"
                 },
                 "traceables": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsTraceable:ProjectConnectorsTraceable"
-                    }
+                    },
+                    "description": "API security for a cloud-first, API-driven world.\n"
                 },
                 "twilioCores": {
                     "type": "array",
@@ -2499,7 +2720,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsVeriff:ProjectConnectorsVeriff"
-                    }
+                    },
+                    "description": "AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.\n"
                 }
             },
             "type": "object",
@@ -2546,16 +2768,19 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "The unique AbuseIPDB API key.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -2578,22 +2803,27 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "The Amplitude API Key generated for the Descope service.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "serverUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.\n"
                 },
                 "serverZone": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "`EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.\n"
                 }
             },
             "type": "object",
@@ -2617,35 +2847,43 @@
         "descope:index/ProjectConnectorsAuditWebhook:ProjectConnectorsAuditWebhook": {
             "properties": {
                 "auditFilters": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Specify which events will be sent to the external audit service (including tenant selection).\n"
                 },
                 "authentication": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsAuditWebhookAuthentication:ProjectConnectorsAuditWebhookAuthentication"
+                    "$ref": "#/types/descope:index/ProjectConnectorsAuditWebhookAuthentication:ProjectConnectorsAuditWebhookAuthentication",
+                    "description": "Authentication Information\n"
                 },
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL to fetch\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The headers to send with the request\n"
                 },
                 "hmacSecret": {
                     "type": "string",
+                    "description": "HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature\n",
                     "secret": true
                 },
                 "id": {
                     "type": "string"
                 },
                 "insecure": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Will ignore certificate errors raised by the client\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -2729,6 +2967,7 @@
             "properties": {
                 "accessKeyId": {
                     "type": "string",
+                    "description": "The unique AWS access key ID.\n",
                     "secret": true
                 },
                 "auditEnabled": {
@@ -2738,22 +2977,27 @@
                     "type": "string"
                 },
                 "bucket": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The AWS S3 bucket. This bucket should already exist for the connector to work.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The AWS S3 region, e.g. `us-east-1`.\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
+                    "description": "The secret AWS access key.\n",
                     "secret": true
                 },
                 "troubleshootLogEnabled": {
@@ -2788,26 +3032,32 @@
         "descope:index/ProjectConnectorsAwsTranslate:ProjectConnectorsAwsTranslate": {
             "properties": {
                 "accessKeyId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "AWS access key ID.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The AWS region to which this client will send requests. (e.g. us-east-1.)\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
+                    "description": "AWS secret access key.\n",
                     "secret": true
                 },
                 "sessionToken": {
                     "type": "string",
+                    "description": "(Optional) A security or session token to use with these credentials. Usually present for temporary credentials.\n",
                     "secret": true
                 }
             },
@@ -2836,19 +3086,23 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "Your CLEAR API key.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "projectId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Your CLEAR project ID.\n"
                 }
             },
             "type": "object",
@@ -2873,6 +3127,7 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "The unique Datadog organization key.\n",
                     "secret": true
                 },
                 "auditEnabled": {
@@ -2882,16 +3137,19 @@
                     "type": "string"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "site": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.\n"
                 },
                 "troubleshootLogEnabled": {
                     "type": "boolean"
@@ -2921,16 +3179,19 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "Authentication to DevRev APIs requires a personal access token (PAT).\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -2952,30 +3213,37 @@
         "descope:index/ProjectConnectorsDocebo:ProjectConnectorsDocebo": {
             "properties": {
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Docebo api base url.\n"
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Docebo OAuth 2.0 app client ID.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The Docebo OAuth 2.0 app client secret.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "password": {
                     "type": "string",
+                    "description": "The Docebo user's password.\n",
                     "secret": true
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Docebo username.\n"
                 }
             },
             "type": "object",
@@ -3005,29 +3273,36 @@
         "descope:index/ProjectConnectorsFingerprint:ProjectConnectorsFingerprint": {
             "properties": {
                 "cloudflareEndpointUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Cloudflare integration Endpoint URL.\n"
                 },
                 "cloudflareScriptUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Cloudflare integration Script URL.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "publicApiKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Fingerprint public API key.\n"
                 },
                 "secretApiKey": {
                     "type": "string",
+                    "description": "The Fingerprint secret API key.\n",
                     "secret": true
                 },
                 "useCloudflareIntegration": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.\n"
                 }
             },
             "type": "object",
@@ -3054,16 +3329,19 @@
         "descope:index/ProjectConnectorsFingerprintDescope:ProjectConnectorsFingerprintDescope": {
             "properties": {
                 "customDomain": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The custom domain to fetch\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -3084,29 +3362,36 @@
         "descope:index/ProjectConnectorsForter:ProjectConnectorsForter": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "overrideIpAddress": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Override the user IP address.\n"
                 },
                 "overrideUserEmail": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Override the user email.\n"
                 },
                 "overrides": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.\n"
                 },
                 "secretKey": {
                     "type": "string",
+                    "description": "The Forter secret key.\n",
                     "secret": true
                 },
                 "siteId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Forter site ID.\n"
                 }
             },
             "type": "object",
@@ -3133,19 +3418,23 @@
         "descope:index/ProjectConnectorsGoogleCloudTranslation:ProjectConnectorsGoogleCloudTranslation": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "projectId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Google Cloud project ID where the Google Cloud Translation is managed.\n"
                 },
                 "serviceAccountJson": {
                     "type": "string",
+                    "description": "Service Account JSON associated with the current project.\n",
                     "secret": true
                 }
             },
@@ -3170,13 +3459,15 @@
         "descope:index/ProjectConnectorsHibp:ProjectConnectorsHibp": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -3196,35 +3487,43 @@
         "descope:index/ProjectConnectorsHttp:ProjectConnectorsHttp": {
             "properties": {
                 "authentication": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsHttpAuthentication:ProjectConnectorsHttpAuthentication"
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpAuthentication:ProjectConnectorsHttpAuthentication",
+                    "description": "Authentication Information\n"
                 },
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL to fetch\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The headers to send with the request\n"
                 },
                 "hmacSecret": {
                     "type": "string",
+                    "description": "HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature\n",
                     "secret": true
                 },
                 "id": {
                     "type": "string"
                 },
                 "includeHeadersInContext": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "The connector response context will also include the headers. The context will have a \"body\" attribute and a \"headers\" attribute. See more details in the help guide\n"
                 },
                 "insecure": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Will ignore certificate errors raised by the client\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -3307,35 +3606,43 @@
         "descope:index/ProjectConnectorsHttpStaticIp:ProjectConnectorsHttpStaticIp": {
             "properties": {
                 "authentication": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication"
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication",
+                    "description": "Authentication Information\n"
                 },
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL to fetch\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The headers to send with the request\n"
                 },
                 "hmacSecret": {
                     "type": "string",
+                    "description": "HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature\n",
                     "secret": true
                 },
                 "id": {
                     "type": "string"
                 },
                 "includeHeadersInContext": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "The connector response context will also include the headers. The context will have a \"body\" attribute and a \"headers\" attribute. See more details in the help guide\n"
                 },
                 "insecure": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Will ignore certificate errors raised by the client\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -3419,19 +3726,23 @@
             "properties": {
                 "accessToken": {
                     "type": "string",
+                    "description": "The HubSpot private API access token generated for the Descope service.\n",
                     "secret": true
                 },
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -3454,19 +3765,23 @@
         "descope:index/ProjectConnectorsIntercom:ProjectConnectorsIntercom": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Regional Hosting - US, EU, or AU. default: US\n"
                 },
                 "token": {
                     "type": "string",
+                    "description": "The Intercom access token.\n",
                     "secret": true
                 }
             },
@@ -3491,6 +3806,7 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "Ingest License Key of the account you want to report data to.\n",
                     "secret": true
                 },
                 "auditEnabled": {
@@ -3500,22 +3816,27 @@
                     "type": "string"
                 },
                 "dataCenter": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "logsPrefix": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Specify a custom prefix for all log fields. The default prefix is `descope.`.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "overrideLogsPrefix": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Enable this option to use a custom prefix for log fields.\n"
                 },
                 "troubleshootLogEnabled": {
                     "type": "boolean"
@@ -3546,20 +3867,24 @@
         "descope:index/ProjectConnectorsRecaptcha:ProjectConnectorsRecaptcha": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "secretKey": {
                     "type": "string",
+                    "description": "The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.\n",
                     "secret": true
                 },
                 "siteKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The site key is used to invoke reCAPTCHA service on your site or mobile application.\n"
                 }
             },
             "type": "object",
@@ -3584,28 +3909,35 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "API key associated with the current project.\n",
                     "secret": true
                 },
                 "assessmentScore": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "overrideAssessment": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.\n"
                 },
                 "projectId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Google Cloud project ID where the reCAPTCHA Enterprise is managed.\n"
                 },
                 "siteKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.\n"
                 }
             },
             "type": "object",
@@ -3633,22 +3965,27 @@
         "descope:index/ProjectConnectorsRekognition:ProjectConnectorsRekognition": {
             "properties": {
                 "accessKeyId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The AWS access key ID\n"
                 },
                 "collectionId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
+                    "description": "The AWS secret access key\n",
                     "secret": true
                 }
             },
@@ -3675,26 +4012,32 @@
         "descope:index/ProjectConnectorsSalesforce:ProjectConnectorsSalesforce": {
             "properties": {
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Salesforce API base URL.\n"
                 },
                 "clientId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The consumer key of the connected app.\n"
                 },
                 "clientSecret": {
                     "type": "string",
+                    "description": "The consumer secret of the connected app.\n",
                     "secret": true
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "version": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "REST API Version.\n"
                 }
             },
             "type": "object",
@@ -3722,19 +4065,23 @@
         "descope:index/ProjectConnectorsSegment:ProjectConnectorsSegment": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL of the Segment API, when using a custom domain in Segment.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "writeKey": {
                     "type": "string",
+                    "description": "The Segment Write Key generated for the Descope service.\n",
                     "secret": true
                 }
             },
@@ -3761,13 +4108,15 @@
                     "$ref": "#/types/descope:index/ProjectConnectorsSendgridAuthentication:ProjectConnectorsSendgridAuthentication"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "sender": {
                     "$ref": "#/types/descope:index/ProjectConnectorsSendgridSender:ProjectConnectorsSendgridSender"
@@ -3831,13 +4180,15 @@
                     "$ref": "#/types/descope:index/ProjectConnectorsSmtpAuthentication:ProjectConnectorsSmtpAuthentication"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "sender": {
                     "$ref": "#/types/descope:index/ProjectConnectorsSmtpSender:ProjectConnectorsSmtpSender"
@@ -3947,17 +4298,20 @@
                     "type": "string"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "httpSourceUrl": {
                     "type": "string",
+                    "description": "The URL associated with an HTTP Hosted collector\n",
                     "secret": true
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "troubleshootLogEnabled": {
                     "type": "boolean"
@@ -3986,19 +4340,23 @@
             "properties": {
                 "apiKey": {
                     "type": "string",
+                    "description": "The unique Telesign API key\n",
                     "secret": true
                 },
                 "customerId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The unique Telesign account Customer ID\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 }
             },
             "type": "object",
@@ -4022,19 +4380,23 @@
         "descope:index/ProjectConnectorsTraceable:ProjectConnectorsTraceable": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "euRegion": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "EU(Europe) Region deployment of Traceable platform.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "secretKey": {
                     "type": "string",
+                    "description": "The Traceable secret key.\n",
                     "secret": true
                 }
             },
@@ -4064,13 +4426,15 @@
                     "$ref": "#/types/descope:index/ProjectConnectorsTwilioCoreAuthentication:ProjectConnectorsTwilioCoreAuthentication"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "senders": {
                     "$ref": "#/types/descope:index/ProjectConnectorsTwilioCoreSenders:ProjectConnectorsTwilioCoreSenders"
@@ -4183,13 +4547,15 @@
                     "$ref": "#/types/descope:index/ProjectConnectorsTwilioVerifyAuthentication:ProjectConnectorsTwilioVerifyAuthentication"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "sender": {
                     "type": "string"
@@ -4248,22 +4614,27 @@
         "descope:index/ProjectConnectorsVeriff:ProjectConnectorsVeriff": {
             "properties": {
                 "apiKey": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The Veriff Public API Key, you can find under Veriff Station - Integrations.\n"
                 },
                 "baseUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The base URL of the Veriff API, default value is https://stationapi.veriff.com.\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
                 },
                 "secretKey": {
                     "type": "string",
+                    "description": "The Veriff Shared secret key, you can find under Veriff Station - Integrations.\n",
                     "secret": true
                 }
             },
@@ -4334,8 +4705,7 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
@@ -4374,8 +4744,7 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
@@ -4484,19 +4853,28 @@
         "descope:index/project:Project": {
             "properties": {
                 "applications": {
-                    "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications"
+                    "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications",
+                    "description": "Applications that are registered with the project.\n"
                 },
                 "attributes": {
-                    "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes"
+                    "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes",
+                    "description": "Custom attributes that can be attached to users and tenants.\n"
                 },
                 "authentication": {
-                    "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication"
+                    "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication",
+                    "description": "Settings for each authentication method.\n"
                 },
                 "authorization": {
-                    "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization"
+                    "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization",
+                    "description": "Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.\n"
                 },
                 "connectors": {
-                    "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors"
+                    "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors",
+                    "description": "Enrich your flows by interacting with third party services.\n"
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                 },
                 "flows": {
                     "type": "object",
@@ -4505,19 +4883,20 @@
                     }
                 },
                 "jwtTemplates": {
-                    "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates"
+                    "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
+                    "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the Descope project.\n"
                 },
                 "projectSettings": {
-                    "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings"
+                    "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings",
+                    "description": "General settings for the Descope project.\n"
                 },
                 "styles": {
-                    "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles"
-                },
-                "tag": {
-                    "type": "string"
+                    "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
+                    "description": "Custom styles that can be applied to the project's authentication flows.\n"
                 }
             },
             "required": [
@@ -4526,28 +4905,37 @@
                 "authentication",
                 "authorization",
                 "connectors",
+                "environment",
                 "flows",
                 "jwtTemplates",
                 "name",
                 "projectSettings",
-                "styles",
-                "tag"
+                "styles"
             ],
             "inputProperties": {
                 "applications": {
-                    "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications"
+                    "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications",
+                    "description": "Applications that are registered with the project.\n"
                 },
                 "attributes": {
-                    "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes"
+                    "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes",
+                    "description": "Custom attributes that can be attached to users and tenants.\n"
                 },
                 "authentication": {
-                    "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication"
+                    "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication",
+                    "description": "Settings for each authentication method.\n"
                 },
                 "authorization": {
-                    "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization"
+                    "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization",
+                    "description": "Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.\n"
                 },
                 "connectors": {
-                    "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors"
+                    "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors",
+                    "description": "Enrich your flows by interacting with third party services.\n"
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                 },
                 "flows": {
                     "type": "object",
@@ -4556,38 +4944,48 @@
                     }
                 },
                 "jwtTemplates": {
-                    "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates"
+                    "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
+                    "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the Descope project.\n"
                 },
                 "projectSettings": {
-                    "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings"
+                    "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings",
+                    "description": "General settings for the Descope project.\n"
                 },
                 "styles": {
-                    "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles"
-                },
-                "tag": {
-                    "type": "string"
+                    "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
+                    "description": "Custom styles that can be applied to the project's authentication flows.\n"
                 }
             },
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Project resources.\n",
                 "properties": {
                     "applications": {
-                        "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications"
+                        "$ref": "#/types/descope:index/ProjectApplications:ProjectApplications",
+                        "description": "Applications that are registered with the project.\n"
                     },
                     "attributes": {
-                        "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes"
+                        "$ref": "#/types/descope:index/ProjectAttributes:ProjectAttributes",
+                        "description": "Custom attributes that can be attached to users and tenants.\n"
                     },
                     "authentication": {
-                        "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication"
+                        "$ref": "#/types/descope:index/ProjectAuthentication:ProjectAuthentication",
+                        "description": "Settings for each authentication method.\n"
                     },
                     "authorization": {
-                        "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization"
+                        "$ref": "#/types/descope:index/ProjectAuthorization:ProjectAuthorization",
+                        "description": "Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.\n"
                     },
                     "connectors": {
-                        "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors"
+                        "$ref": "#/types/descope:index/ProjectConnectors:ProjectConnectors",
+                        "description": "Enrich your flows by interacting with third party services.\n"
+                    },
+                    "environment": {
+                        "type": "string",
+                        "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                     },
                     "flows": {
                         "type": "object",
@@ -4596,19 +4994,20 @@
                         }
                     },
                     "jwtTemplates": {
-                        "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates"
+                        "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
+                        "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the Descope project.\n"
                     },
                     "projectSettings": {
-                        "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings"
+                        "$ref": "#/types/descope:index/ProjectProjectSettings:ProjectProjectSettings",
+                        "description": "General settings for the Descope project.\n"
                     },
                     "styles": {
-                        "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles"
-                    },
-                    "tag": {
-                        "type": "string"
+                        "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
+                        "description": "Custom styles that can be applied to the project's authentication flows.\n"
                     }
                 },
                 "type": "object"

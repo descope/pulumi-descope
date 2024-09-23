@@ -14,10 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsHubspot
     {
+        /// <summary>
+        /// The HubSpot private API access token generated for the Descope service.
+        /// </summary>
         public readonly string AccessToken;
+        /// <summary>
+        /// The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+        /// </summary>
         public readonly string? BaseUrl;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

@@ -13,23 +13,39 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsRekognitionGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The AWS access key ID
+        /// </summary>
         [Input("accessKeyId", required: true)]
         public Input<string> AccessKeyId { get; set; } = null!;
 
+        /// <summary>
+        /// The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+        /// </summary>
         [Input("collectionId", required: true)]
         public Input<string> CollectionId { get; set; } = null!;
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("secretAccessKey", required: true)]
         private Input<string>? _secretAccessKey;
+
+        /// <summary>
+        /// The AWS secret access key
+        /// </summary>
         public Input<string>? SecretAccessKey
         {
             get => _secretAccessKey;

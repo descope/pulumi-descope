@@ -13,17 +13,30 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsHttpStaticIpGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Authentication Information
+        /// </summary>
         [Input("authentication")]
         public Input<Inputs.ProjectConnectorsHttpStaticIpAuthenticationGetArgs>? Authentication { get; set; }
 
+        /// <summary>
+        /// The base URL to fetch
+        /// </summary>
         [Input("baseUrl", required: true)]
         public Input<string> BaseUrl { get; set; } = null!;
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("headers")]
         private InputMap<string>? _headers;
+
+        /// <summary>
+        /// The headers to send with the request
+        /// </summary>
         public InputMap<string> Headers
         {
             get => _headers ?? (_headers = new InputMap<string>());
@@ -32,6 +45,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("hmacSecret")]
         private Input<string>? _hmacSecret;
+
+        /// <summary>
+        /// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        /// </summary>
         public Input<string>? HmacSecret
         {
             get => _hmacSecret;
@@ -45,12 +62,21 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        /// </summary>
         [Input("includeHeadersInContext")]
         public Input<bool>? IncludeHeadersInContext { get; set; }
 
+        /// <summary>
+        /// Will ignore certificate errors raised by the client
+        /// </summary>
         [Input("insecure")]
         public Input<bool>? Insecure { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

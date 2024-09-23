@@ -17,9 +17,6 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string? AuthSchema;
         public readonly bool? ConformanceIssuer;
         public readonly string? Description;
-        /// <summary>
-        /// The ID of this resource.
-        /// </summary>
         public readonly string? Id;
         public readonly string Name;
         public readonly string Template;

@@ -21,14 +21,24 @@ class ProjectArgs:
                  authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
                  authorization: Optional[pulumi.Input['ProjectAuthorizationArgs']] = None,
                  connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
+                 environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tag: Optional[pulumi.Input[str]] = None):
+                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None):
         """
         The set of arguments for constructing a Project resource.
+        :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
+        :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
+        :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
+        :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[str] name: The name of the Descope project.
+        :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
+        :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -40,6 +50,8 @@ class ProjectArgs:
             pulumi.set(__self__, "authorization", authorization)
         if connectors is not None:
             pulumi.set(__self__, "connectors", connectors)
+        if environment is not None:
+            pulumi.set(__self__, "environment", environment)
         if flows is not None:
             pulumi.set(__self__, "flows", flows)
         if jwt_templates is not None:
@@ -50,12 +62,13 @@ class ProjectArgs:
             pulumi.set(__self__, "project_settings", project_settings)
         if styles is not None:
             pulumi.set(__self__, "styles", styles)
-        if tag is not None:
-            pulumi.set(__self__, "tag", tag)
 
     @property
     @pulumi.getter
     def applications(self) -> Optional[pulumi.Input['ProjectApplicationsArgs']]:
+        """
+        Applications that are registered with the project.
+        """
         return pulumi.get(self, "applications")
 
     @applications.setter
@@ -65,6 +78,9 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def attributes(self) -> Optional[pulumi.Input['ProjectAttributesArgs']]:
+        """
+        Custom attributes that can be attached to users and tenants.
+        """
         return pulumi.get(self, "attributes")
 
     @attributes.setter
@@ -74,6 +90,9 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def authentication(self) -> Optional[pulumi.Input['ProjectAuthenticationArgs']]:
+        """
+        Settings for each authentication method.
+        """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
@@ -83,6 +102,9 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def authorization(self) -> Optional[pulumi.Input['ProjectAuthorizationArgs']]:
+        """
+        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        """
         return pulumi.get(self, "authorization")
 
     @authorization.setter
@@ -92,11 +114,26 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def connectors(self) -> Optional[pulumi.Input['ProjectConnectorsArgs']]:
+        """
+        Enrich your flows by interacting with third party services.
+        """
         return pulumi.get(self, "connectors")
 
     @connectors.setter
     def connectors(self, value: Optional[pulumi.Input['ProjectConnectorsArgs']]):
         pulumi.set(self, "connectors", value)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        """
+        return pulumi.get(self, "environment")
+
+    @environment.setter
+    def environment(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "environment", value)
 
     @property
     @pulumi.getter
@@ -110,6 +147,9 @@ class ProjectArgs:
     @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
+        """
+        Defines templates for JSON Web Tokens (JWT) used for authentication.
+        """
         return pulumi.get(self, "jwt_templates")
 
     @jwt_templates.setter
@@ -119,6 +159,9 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Descope project.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -128,6 +171,9 @@ class ProjectArgs:
     @property
     @pulumi.getter(name="projectSettings")
     def project_settings(self) -> Optional[pulumi.Input['ProjectProjectSettingsArgs']]:
+        """
+        General settings for the Descope project.
+        """
         return pulumi.get(self, "project_settings")
 
     @project_settings.setter
@@ -137,20 +183,14 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def styles(self) -> Optional[pulumi.Input['ProjectStylesArgs']]:
+        """
+        Custom styles that can be applied to the project's authentication flows.
+        """
         return pulumi.get(self, "styles")
 
     @styles.setter
     def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
-
-    @property
-    @pulumi.getter
-    def tag(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "tag")
-
-    @tag.setter
-    def tag(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "tag", value)
 
 
 @pulumi.input_type
@@ -161,14 +201,24 @@ class _ProjectState:
                  authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
                  authorization: Optional[pulumi.Input['ProjectAuthorizationArgs']] = None,
                  connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
+                 environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tag: Optional[pulumi.Input[str]] = None):
+                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None):
         """
         Input properties used for looking up and filtering Project resources.
+        :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
+        :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
+        :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
+        :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[str] name: The name of the Descope project.
+        :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
+        :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -180,6 +230,8 @@ class _ProjectState:
             pulumi.set(__self__, "authorization", authorization)
         if connectors is not None:
             pulumi.set(__self__, "connectors", connectors)
+        if environment is not None:
+            pulumi.set(__self__, "environment", environment)
         if flows is not None:
             pulumi.set(__self__, "flows", flows)
         if jwt_templates is not None:
@@ -190,12 +242,13 @@ class _ProjectState:
             pulumi.set(__self__, "project_settings", project_settings)
         if styles is not None:
             pulumi.set(__self__, "styles", styles)
-        if tag is not None:
-            pulumi.set(__self__, "tag", tag)
 
     @property
     @pulumi.getter
     def applications(self) -> Optional[pulumi.Input['ProjectApplicationsArgs']]:
+        """
+        Applications that are registered with the project.
+        """
         return pulumi.get(self, "applications")
 
     @applications.setter
@@ -205,6 +258,9 @@ class _ProjectState:
     @property
     @pulumi.getter
     def attributes(self) -> Optional[pulumi.Input['ProjectAttributesArgs']]:
+        """
+        Custom attributes that can be attached to users and tenants.
+        """
         return pulumi.get(self, "attributes")
 
     @attributes.setter
@@ -214,6 +270,9 @@ class _ProjectState:
     @property
     @pulumi.getter
     def authentication(self) -> Optional[pulumi.Input['ProjectAuthenticationArgs']]:
+        """
+        Settings for each authentication method.
+        """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
@@ -223,6 +282,9 @@ class _ProjectState:
     @property
     @pulumi.getter
     def authorization(self) -> Optional[pulumi.Input['ProjectAuthorizationArgs']]:
+        """
+        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        """
         return pulumi.get(self, "authorization")
 
     @authorization.setter
@@ -232,11 +294,26 @@ class _ProjectState:
     @property
     @pulumi.getter
     def connectors(self) -> Optional[pulumi.Input['ProjectConnectorsArgs']]:
+        """
+        Enrich your flows by interacting with third party services.
+        """
         return pulumi.get(self, "connectors")
 
     @connectors.setter
     def connectors(self, value: Optional[pulumi.Input['ProjectConnectorsArgs']]):
         pulumi.set(self, "connectors", value)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        """
+        return pulumi.get(self, "environment")
+
+    @environment.setter
+    def environment(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "environment", value)
 
     @property
     @pulumi.getter
@@ -250,6 +327,9 @@ class _ProjectState:
     @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
+        """
+        Defines templates for JSON Web Tokens (JWT) used for authentication.
+        """
         return pulumi.get(self, "jwt_templates")
 
     @jwt_templates.setter
@@ -259,6 +339,9 @@ class _ProjectState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Descope project.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -268,6 +351,9 @@ class _ProjectState:
     @property
     @pulumi.getter(name="projectSettings")
     def project_settings(self) -> Optional[pulumi.Input['ProjectProjectSettingsArgs']]:
+        """
+        General settings for the Descope project.
+        """
         return pulumi.get(self, "project_settings")
 
     @project_settings.setter
@@ -277,20 +363,14 @@ class _ProjectState:
     @property
     @pulumi.getter
     def styles(self) -> Optional[pulumi.Input['ProjectStylesArgs']]:
+        """
+        Custom styles that can be applied to the project's authentication flows.
+        """
         return pulumi.get(self, "styles")
 
     @styles.setter
     def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
-
-    @property
-    @pulumi.getter
-    def tag(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "tag")
-
-    @tag.setter
-    def tag(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "tag", value)
 
 
 class Project(pulumi.CustomResource):
@@ -303,17 +383,27 @@ class Project(pulumi.CustomResource):
                  authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
                  authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
                  connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-                 tag: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Create a Project resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
+        :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
+        :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
+        :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[str] name: The name of the Descope project.
+        :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
+        :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         """
         ...
     @overload
@@ -343,12 +433,12 @@ class Project(pulumi.CustomResource):
                  authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
                  authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
                  connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-                 tag: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -363,12 +453,12 @@ class Project(pulumi.CustomResource):
             __props__.__dict__["authentication"] = authentication
             __props__.__dict__["authorization"] = authorization
             __props__.__dict__["connectors"] = connectors
+            __props__.__dict__["environment"] = environment
             __props__.__dict__["flows"] = flows
             __props__.__dict__["jwt_templates"] = jwt_templates
             __props__.__dict__["name"] = name
             __props__.__dict__["project_settings"] = project_settings
             __props__.__dict__["styles"] = styles
-            __props__.__dict__["tag"] = tag
         super(Project, __self__).__init__(
             'descope:index/project:Project',
             resource_name,
@@ -384,12 +474,12 @@ class Project(pulumi.CustomResource):
             authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
             authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
             connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+            environment: Optional[pulumi.Input[str]] = None,
             flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
             jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
             name: Optional[pulumi.Input[str]] = None,
             project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-            styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-            tag: Optional[pulumi.Input[str]] = None) -> 'Project':
+            styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None) -> 'Project':
         """
         Get an existing Project resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -397,6 +487,16 @@ class Project(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
+        :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
+        :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
+        :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[str] name: The name of the Descope project.
+        :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
+        :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -407,38 +507,61 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["authentication"] = authentication
         __props__.__dict__["authorization"] = authorization
         __props__.__dict__["connectors"] = connectors
+        __props__.__dict__["environment"] = environment
         __props__.__dict__["flows"] = flows
         __props__.__dict__["jwt_templates"] = jwt_templates
         __props__.__dict__["name"] = name
         __props__.__dict__["project_settings"] = project_settings
         __props__.__dict__["styles"] = styles
-        __props__.__dict__["tag"] = tag
         return Project(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
     def applications(self) -> pulumi.Output['outputs.ProjectApplications']:
+        """
+        Applications that are registered with the project.
+        """
         return pulumi.get(self, "applications")
 
     @property
     @pulumi.getter
     def attributes(self) -> pulumi.Output['outputs.ProjectAttributes']:
+        """
+        Custom attributes that can be attached to users and tenants.
+        """
         return pulumi.get(self, "attributes")
 
     @property
     @pulumi.getter
     def authentication(self) -> pulumi.Output['outputs.ProjectAuthentication']:
+        """
+        Settings for each authentication method.
+        """
         return pulumi.get(self, "authentication")
 
     @property
     @pulumi.getter
     def authorization(self) -> pulumi.Output['outputs.ProjectAuthorization']:
+        """
+        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        """
         return pulumi.get(self, "authorization")
 
     @property
     @pulumi.getter
     def connectors(self) -> pulumi.Output['outputs.ProjectConnectors']:
+        """
+        Enrich your flows by interacting with third party services.
+        """
         return pulumi.get(self, "connectors")
+
+    @property
+    @pulumi.getter
+    def environment(self) -> pulumi.Output[str]:
+        """
+        This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        """
+        return pulumi.get(self, "environment")
 
     @property
     @pulumi.getter
@@ -448,25 +571,32 @@ class Project(pulumi.CustomResource):
     @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> pulumi.Output['outputs.ProjectJwtTemplates']:
+        """
+        Defines templates for JSON Web Tokens (JWT) used for authentication.
+        """
         return pulumi.get(self, "jwt_templates")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
+        """
+        The name of the Descope project.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="projectSettings")
     def project_settings(self) -> pulumi.Output['outputs.ProjectProjectSettings']:
+        """
+        General settings for the Descope project.
+        """
         return pulumi.get(self, "project_settings")
 
     @property
     @pulumi.getter
     def styles(self) -> pulumi.Output['outputs.ProjectStyles']:
+        """
+        Custom styles that can be applied to the project's authentication flows.
+        """
         return pulumi.get(self, "styles")
-
-    @property
-    @pulumi.getter
-    def tag(self) -> pulumi.Output[str]:
-        return pulumi.get(self, "tag")
 

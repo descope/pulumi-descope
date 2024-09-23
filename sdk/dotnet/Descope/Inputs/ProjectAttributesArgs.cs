@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("tenants")]
         private InputList<Inputs.ProjectAttributesTenantArgs>? _tenants;
+
+        /// <summary>
+        /// Custom attributes to store additional details about your tenants.
+        /// </summary>
         public InputList<Inputs.ProjectAttributesTenantArgs> Tenants
         {
             get => _tenants ?? (_tenants = new InputList<Inputs.ProjectAttributesTenantArgs>());
@@ -23,6 +27,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("users")]
         private InputList<Inputs.ProjectAttributesUserArgs>? _users;
+
+        /// <summary>
+        /// Custom attributes to store additional details about your users.
+        /// </summary>
         public InputList<Inputs.ProjectAttributesUserArgs> Users
         {
             get => _users ?? (_users = new InputList<Inputs.ProjectAttributesUserArgs>());

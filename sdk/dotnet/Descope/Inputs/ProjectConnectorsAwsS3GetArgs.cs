@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("accessKeyId", required: true)]
         private Input<string>? _accessKeyId;
+
+        /// <summary>
+        /// The unique AWS access key ID.
+        /// </summary>
         public Input<string>? AccessKeyId
         {
             get => _accessKeyId;
@@ -31,23 +35,39 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("auditFilters")]
         public Input<string>? AuditFilters { get; set; }
 
+        /// <summary>
+        /// The AWS S3 bucket. This bucket should already exist for the connector to work.
+        /// </summary>
         [Input("bucket", required: true)]
         public Input<string> Bucket { get; set; } = null!;
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// The AWS S3 region, e.g. `us-east-1`.
+        /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
         [Input("secretAccessKey", required: true)]
         private Input<string>? _secretAccessKey;
+
+        /// <summary>
+        /// The secret AWS access key.
+        /// </summary>
         public Input<string>? SecretAccessKey
         {
             get => _secretAccessKey;

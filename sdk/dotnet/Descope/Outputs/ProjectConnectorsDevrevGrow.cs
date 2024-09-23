@@ -14,9 +14,18 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsDevrevGrow
     {
+        /// <summary>
+        /// Authentication to DevRev APIs requires a personal access token (PAT).
+        /// </summary>
         public readonly string ApiKey;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

@@ -14,14 +14,41 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationOauthSystem
     {
+        /// <summary>
+        /// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemApple? Apple;
+        /// <summary>
+        /// Discord's OAuth provider, allowing users to authenticate with their Discord account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemDiscord? Discord;
+        /// <summary>
+        /// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemFacebook? Facebook;
+        /// <summary>
+        /// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemGithub? Github;
+        /// <summary>
+        /// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemGitlab? Gitlab;
+        /// <summary>
+        /// Google's OAuth provider, allowing users to authenticate with their Google account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemGoogle? Google;
+        /// <summary>
+        /// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemLinkedin? Linkedin;
+        /// <summary>
+        /// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemMicrosoft? Microsoft;
+        /// <summary>
+        /// Slack's OAuth provider, allowing users to authenticate with their Slack account.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemSlack? Slack;
 
         [OutputConstructor]

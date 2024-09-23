@@ -14,8 +14,14 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationOauth
     {
+        /// <summary>
+        /// Custom OAuth providers configured for this project.
+        /// </summary>
         public readonly ImmutableDictionary<string, Outputs.ProjectAuthenticationOauthCustom>? Custom;
         public readonly bool? Disabled;
+        /// <summary>
+        /// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystem? System;
 
         [OutputConstructor]

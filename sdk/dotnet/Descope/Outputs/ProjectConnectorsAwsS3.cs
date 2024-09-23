@@ -14,14 +14,32 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsAwsS3
     {
+        /// <summary>
+        /// The unique AWS access key ID.
+        /// </summary>
         public readonly string AccessKeyId;
         public readonly bool? AuditEnabled;
         public readonly string? AuditFilters;
+        /// <summary>
+        /// The AWS S3 bucket. This bucket should already exist for the connector to work.
+        /// </summary>
         public readonly string Bucket;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The AWS S3 region, e.g. `us-east-1`.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// The secret AWS access key.
+        /// </summary>
         public readonly string SecretAccessKey;
         public readonly bool? TroubleshootLogEnabled;
 

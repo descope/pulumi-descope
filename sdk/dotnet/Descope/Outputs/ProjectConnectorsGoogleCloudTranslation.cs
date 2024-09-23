@@ -14,10 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsGoogleCloudTranslation
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Google Cloud project ID where the Google Cloud Translation is managed.
+        /// </summary>
         public readonly string ProjectId;
+        /// <summary>
+        /// Service Account JSON associated with the current project.
+        /// </summary>
         public readonly string ServiceAccountJson;
 
         [OutputConstructor]

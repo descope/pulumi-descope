@@ -43,8 +43,5 @@ export const project = new descope.Project("pulumi-ts-test", {
   connectors: {
     https: [{ name: "my_https", baseUrl: "https://example.com" }],
   },
-  projectSettings: {
-    domain: "example.com",
-  },
-  tag: "production",
+  environment: "production",
 });

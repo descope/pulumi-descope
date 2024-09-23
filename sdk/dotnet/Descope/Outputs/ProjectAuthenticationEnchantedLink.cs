@@ -14,10 +14,16 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationEnchantedLink
     {
+        /// <summary>
+        /// Settings related to sending emails as part of the enchanted link authentication.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationEnchantedLinkEmailService? EmailService;
         public readonly bool? Enabled;
         public readonly int? ExpirationTime;
         public readonly string? ExpirationTimeUnit;
+        /// <summary>
+        /// The URL to redirect users to after they log in using the enchanted link.
+        /// </summary>
         public readonly string? RedirectUrl;
 
         [OutputConstructor]

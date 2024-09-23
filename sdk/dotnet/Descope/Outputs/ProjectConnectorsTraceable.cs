@@ -14,10 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsTraceable
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// EU(Europe) Region deployment of Traceable platform.
+        /// </summary>
         public readonly bool? EuRegion;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Traceable secret key.
+        /// </summary>
         public readonly string SecretKey;
 
         [OutputConstructor]

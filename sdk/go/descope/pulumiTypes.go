@@ -14,7 +14,9 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ProjectApplications struct {
+	// Applications using OpenID Connect (OIDC) for authentication.
 	OidcApplications []ProjectApplicationsOidcApplication `pulumi:"oidcApplications"`
+	// Applications using SAML for authentication.
 	SamlApplications []ProjectApplicationsSamlApplication `pulumi:"samlApplications"`
 }
 
@@ -30,7 +32,9 @@ type ProjectApplicationsInput interface {
 }
 
 type ProjectApplicationsArgs struct {
+	// Applications using OpenID Connect (OIDC) for authentication.
 	OidcApplications ProjectApplicationsOidcApplicationArrayInput `pulumi:"oidcApplications"`
+	// Applications using SAML for authentication.
 	SamlApplications ProjectApplicationsSamlApplicationArrayInput `pulumi:"samlApplications"`
 }
 
@@ -111,10 +115,12 @@ func (o ProjectApplicationsOutput) ToProjectApplicationsPtrOutputWithContext(ctx
 	}).(ProjectApplicationsPtrOutput)
 }
 
+// Applications using OpenID Connect (OIDC) for authentication.
 func (o ProjectApplicationsOutput) OidcApplications() ProjectApplicationsOidcApplicationArrayOutput {
 	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsOidcApplication { return v.OidcApplications }).(ProjectApplicationsOidcApplicationArrayOutput)
 }
 
+// Applications using SAML for authentication.
 func (o ProjectApplicationsOutput) SamlApplications() ProjectApplicationsSamlApplicationArrayOutput {
 	return o.ApplyT(func(v ProjectApplications) []ProjectApplicationsSamlApplication { return v.SamlApplications }).(ProjectApplicationsSamlApplicationArrayOutput)
 }
@@ -143,6 +149,7 @@ func (o ProjectApplicationsPtrOutput) Elem() ProjectApplicationsOutput {
 	}).(ProjectApplicationsOutput)
 }
 
+// Applications using OpenID Connect (OIDC) for authentication.
 func (o ProjectApplicationsPtrOutput) OidcApplications() ProjectApplicationsOidcApplicationArrayOutput {
 	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsOidcApplication {
 		if v == nil {
@@ -152,6 +159,7 @@ func (o ProjectApplicationsPtrOutput) OidcApplications() ProjectApplicationsOidc
 	}).(ProjectApplicationsOidcApplicationArrayOutput)
 }
 
+// Applications using SAML for authentication.
 func (o ProjectApplicationsPtrOutput) SamlApplications() ProjectApplicationsSamlApplicationArrayOutput {
 	return o.ApplyT(func(v *ProjectApplications) []ProjectApplicationsSamlApplication {
 		if v == nil {
@@ -162,14 +170,20 @@ func (o ProjectApplicationsPtrOutput) SamlApplications() ProjectApplicationsSaml
 }
 
 type ProjectApplicationsOidcApplication struct {
-	Claims      []string `pulumi:"claims"`
-	Description *string  `pulumi:"description"`
-	Disabled    *bool    `pulumi:"disabled"`
-	// The ID of this resource.
-	Id           *string `pulumi:"id"`
+	// Claims associated with JWT tokens, typically used for user information.
+	Claims []string `pulumi:"claims"`
+	// A brief description of the application.
+	Description *string `pulumi:"description"`
+	// Indicates whether the resource or functionality is disabled.
+	Disabled *bool `pulumi:"disabled"`
+	// An optional identifier for the application.
+	Id *string `pulumi:"id"`
+	// The URL of the custom login page for the application.
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
-	Logo         *string `pulumi:"logo"`
-	Name         string  `pulumi:"name"`
+	// The URL of the logo associated with the application.
+	Logo *string `pulumi:"logo"`
+	// The name of the application.
+	Name string `pulumi:"name"`
 }
 
 // ProjectApplicationsOidcApplicationInput is an input type that accepts ProjectApplicationsOidcApplicationArgs and ProjectApplicationsOidcApplicationOutput values.
@@ -184,14 +198,20 @@ type ProjectApplicationsOidcApplicationInput interface {
 }
 
 type ProjectApplicationsOidcApplicationArgs struct {
-	Claims      pulumi.StringArrayInput `pulumi:"claims"`
-	Description pulumi.StringPtrInput   `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput     `pulumi:"disabled"`
-	// The ID of this resource.
-	Id           pulumi.StringPtrInput `pulumi:"id"`
+	// Claims associated with JWT tokens, typically used for user information.
+	Claims pulumi.StringArrayInput `pulumi:"claims"`
+	// A brief description of the application.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Indicates whether the resource or functionality is disabled.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
+	// An optional identifier for the application.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The URL of the custom login page for the application.
 	LoginPageUrl pulumi.StringPtrInput `pulumi:"loginPageUrl"`
-	Logo         pulumi.StringPtrInput `pulumi:"logo"`
-	Name         pulumi.StringInput    `pulumi:"name"`
+	// The URL of the logo associated with the application.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// The name of the application.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectApplicationsOidcApplicationArgs) ElementType() reflect.Type {
@@ -245,31 +265,37 @@ func (o ProjectApplicationsOidcApplicationOutput) ToProjectApplicationsOidcAppli
 	return o
 }
 
+// Claims associated with JWT tokens, typically used for user information.
 func (o ProjectApplicationsOidcApplicationOutput) Claims() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) []string { return v.Claims }).(pulumi.StringArrayOutput)
 }
 
+// A brief description of the application.
 func (o ProjectApplicationsOidcApplicationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Indicates whether the resource or functionality is disabled.
 func (o ProjectApplicationsOidcApplicationOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-// The ID of this resource.
+// An optional identifier for the application.
 func (o ProjectApplicationsOidcApplicationOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the custom login page for the application.
 func (o ProjectApplicationsOidcApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the application.
 func (o ProjectApplicationsOidcApplicationOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// The name of the application.
 func (o ProjectApplicationsOidcApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -295,20 +321,26 @@ func (o ProjectApplicationsOidcApplicationArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type ProjectApplicationsSamlApplication struct {
-	AcsAllowedCallbackUrls []string                                                `pulumi:"acsAllowedCallbackUrls"`
-	AttributeMappings      []ProjectApplicationsSamlApplicationAttributeMapping    `pulumi:"attributeMappings"`
-	DefaultRelayState      *string                                                 `pulumi:"defaultRelayState"`
-	Description            *string                                                 `pulumi:"description"`
-	Disabled               *bool                                                   `pulumi:"disabled"`
-	DynamicConfiguration   *ProjectApplicationsSamlApplicationDynamicConfiguration `pulumi:"dynamicConfiguration"`
-	// The ID of this resource.
-	Id                  *string                                                `pulumi:"id"`
-	LoginPageUrl        *string                                                `pulumi:"loginPageUrl"`
+	AcsAllowedCallbackUrls []string `pulumi:"acsAllowedCallbackUrls"`
+	// Map user attributes from the third party identity provider to custom attributes in Descope.
+	AttributeMappings []ProjectApplicationsSamlApplicationAttributeMapping `pulumi:"attributeMappings"`
+	DefaultRelayState *string                                              `pulumi:"defaultRelayState"`
+	// A brief description of the application.
+	Description *string `pulumi:"description"`
+	// Indicates whether the application is disabled.
+	Disabled             *bool                                                   `pulumi:"disabled"`
+	DynamicConfiguration *ProjectApplicationsSamlApplicationDynamicConfiguration `pulumi:"dynamicConfiguration"`
+	// An optional identifier for the application.
+	Id *string `pulumi:"id"`
+	// The URL of the custom login page for the application.
+	LoginPageUrl *string `pulumi:"loginPageUrl"`
+	// The URL of the logo associated with the application.
 	Logo                *string                                                `pulumi:"logo"`
 	ManualConfiguration *ProjectApplicationsSamlApplicationManualConfiguration `pulumi:"manualConfiguration"`
-	Name                string                                                 `pulumi:"name"`
-	SubjectNameIdFormat *string                                                `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType   *string                                                `pulumi:"subjectNameIdType"`
+	// The name of the application.
+	Name                string  `pulumi:"name"`
+	SubjectNameIdFormat *string `pulumi:"subjectNameIdFormat"`
+	SubjectNameIdType   *string `pulumi:"subjectNameIdType"`
 }
 
 // ProjectApplicationsSamlApplicationInput is an input type that accepts ProjectApplicationsSamlApplicationArgs and ProjectApplicationsSamlApplicationOutput values.
@@ -323,20 +355,26 @@ type ProjectApplicationsSamlApplicationInput interface {
 }
 
 type ProjectApplicationsSamlApplicationArgs struct {
-	AcsAllowedCallbackUrls pulumi.StringArrayInput                                        `pulumi:"acsAllowedCallbackUrls"`
-	AttributeMappings      ProjectApplicationsSamlApplicationAttributeMappingArrayInput   `pulumi:"attributeMappings"`
-	DefaultRelayState      pulumi.StringPtrInput                                          `pulumi:"defaultRelayState"`
-	Description            pulumi.StringPtrInput                                          `pulumi:"description"`
-	Disabled               pulumi.BoolPtrInput                                            `pulumi:"disabled"`
-	DynamicConfiguration   ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput `pulumi:"dynamicConfiguration"`
-	// The ID of this resource.
-	Id                  pulumi.StringPtrInput                                         `pulumi:"id"`
-	LoginPageUrl        pulumi.StringPtrInput                                         `pulumi:"loginPageUrl"`
+	AcsAllowedCallbackUrls pulumi.StringArrayInput `pulumi:"acsAllowedCallbackUrls"`
+	// Map user attributes from the third party identity provider to custom attributes in Descope.
+	AttributeMappings ProjectApplicationsSamlApplicationAttributeMappingArrayInput `pulumi:"attributeMappings"`
+	DefaultRelayState pulumi.StringPtrInput                                        `pulumi:"defaultRelayState"`
+	// A brief description of the application.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Indicates whether the application is disabled.
+	Disabled             pulumi.BoolPtrInput                                            `pulumi:"disabled"`
+	DynamicConfiguration ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput `pulumi:"dynamicConfiguration"`
+	// An optional identifier for the application.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The URL of the custom login page for the application.
+	LoginPageUrl pulumi.StringPtrInput `pulumi:"loginPageUrl"`
+	// The URL of the logo associated with the application.
 	Logo                pulumi.StringPtrInput                                         `pulumi:"logo"`
 	ManualConfiguration ProjectApplicationsSamlApplicationManualConfigurationPtrInput `pulumi:"manualConfiguration"`
-	Name                pulumi.StringInput                                            `pulumi:"name"`
-	SubjectNameIdFormat pulumi.StringPtrInput                                         `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType   pulumi.StringPtrInput                                         `pulumi:"subjectNameIdType"`
+	// The name of the application.
+	Name                pulumi.StringInput    `pulumi:"name"`
+	SubjectNameIdFormat pulumi.StringPtrInput `pulumi:"subjectNameIdFormat"`
+	SubjectNameIdType   pulumi.StringPtrInput `pulumi:"subjectNameIdType"`
 }
 
 func (ProjectApplicationsSamlApplicationArgs) ElementType() reflect.Type {
@@ -394,6 +432,7 @@ func (o ProjectApplicationsSamlApplicationOutput) AcsAllowedCallbackUrls() pulum
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []string { return v.AcsAllowedCallbackUrls }).(pulumi.StringArrayOutput)
 }
 
+// Map user attributes from the third party identity provider to custom attributes in Descope.
 func (o ProjectApplicationsSamlApplicationOutput) AttributeMappings() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []ProjectApplicationsSamlApplicationAttributeMapping {
 		return v.AttributeMappings
@@ -404,10 +443,12 @@ func (o ProjectApplicationsSamlApplicationOutput) DefaultRelayState() pulumi.Str
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.DefaultRelayState }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the application.
 func (o ProjectApplicationsSamlApplicationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Indicates whether the application is disabled.
 func (o ProjectApplicationsSamlApplicationOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
@@ -418,15 +459,17 @@ func (o ProjectApplicationsSamlApplicationOutput) DynamicConfiguration() Project
 	}).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
-// The ID of this resource.
+// An optional identifier for the application.
 func (o ProjectApplicationsSamlApplicationOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the custom login page for the application.
 func (o ProjectApplicationsSamlApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the application.
 func (o ProjectApplicationsSamlApplicationOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
@@ -437,6 +480,7 @@ func (o ProjectApplicationsSamlApplicationOutput) ManualConfiguration() ProjectA
 	}).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
+// The name of the application.
 func (o ProjectApplicationsSamlApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -470,7 +514,9 @@ func (o ProjectApplicationsSamlApplicationArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type ProjectApplicationsSamlApplicationAttributeMapping struct {
-	Name  string `pulumi:"name"`
+	// The name of the user attribute in the third party identity provider.
+	Name string `pulumi:"name"`
+	// The name of the user custom attribute in Descope.
 	Value string `pulumi:"value"`
 }
 
@@ -486,7 +532,9 @@ type ProjectApplicationsSamlApplicationAttributeMappingInput interface {
 }
 
 type ProjectApplicationsSamlApplicationAttributeMappingArgs struct {
-	Name  pulumi.StringInput `pulumi:"name"`
+	// The name of the user attribute in the third party identity provider.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The name of the user custom attribute in Descope.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -541,10 +589,12 @@ func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) ToProjectAppli
 	return o
 }
 
+// The name of the user attribute in the third party identity provider.
 func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The name of the user custom attribute in Descope.
 func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -866,8 +916,10 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) EntityId
 }
 
 type ProjectAttributes struct {
+	// Custom attributes to store additional details about your tenants.
 	Tenants []ProjectAttributesTenant `pulumi:"tenants"`
-	Users   []ProjectAttributesUser   `pulumi:"users"`
+	// Custom attributes to store additional details about your users.
+	Users []ProjectAttributesUser `pulumi:"users"`
 }
 
 // ProjectAttributesInput is an input type that accepts ProjectAttributesArgs and ProjectAttributesOutput values.
@@ -882,8 +934,10 @@ type ProjectAttributesInput interface {
 }
 
 type ProjectAttributesArgs struct {
+	// Custom attributes to store additional details about your tenants.
 	Tenants ProjectAttributesTenantArrayInput `pulumi:"tenants"`
-	Users   ProjectAttributesUserArrayInput   `pulumi:"users"`
+	// Custom attributes to store additional details about your users.
+	Users ProjectAttributesUserArrayInput `pulumi:"users"`
 }
 
 func (ProjectAttributesArgs) ElementType() reflect.Type {
@@ -963,10 +1017,12 @@ func (o ProjectAttributesOutput) ToProjectAttributesPtrOutputWithContext(ctx con
 	}).(ProjectAttributesPtrOutput)
 }
 
+// Custom attributes to store additional details about your tenants.
 func (o ProjectAttributesOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesTenant { return v.Tenants }).(ProjectAttributesTenantArrayOutput)
 }
 
+// Custom attributes to store additional details about your users.
 func (o ProjectAttributesOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesUser { return v.Users }).(ProjectAttributesUserArrayOutput)
 }
@@ -995,6 +1051,7 @@ func (o ProjectAttributesPtrOutput) Elem() ProjectAttributesOutput {
 	}).(ProjectAttributesOutput)
 }
 
+// Custom attributes to store additional details about your tenants.
 func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesTenant {
 		if v == nil {
@@ -1004,6 +1061,7 @@ func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput
 	}).(ProjectAttributesTenantArrayOutput)
 }
 
+// Custom attributes to store additional details about your users.
 func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesUser {
 		if v == nil {
@@ -1014,9 +1072,12 @@ func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 }
 
 type ProjectAttributesTenant struct {
-	Name          string   `pulumi:"name"`
+	// The name of the tenant attribute.
+	Name string `pulumi:"name"`
+	// A list of strings to define the set of options for select attributes.
 	SelectOptions []string `pulumi:"selectOptions"`
-	Type          string   `pulumi:"type"`
+	// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	Type string `pulumi:"type"`
 }
 
 // ProjectAttributesTenantInput is an input type that accepts ProjectAttributesTenantArgs and ProjectAttributesTenantOutput values.
@@ -1031,9 +1092,12 @@ type ProjectAttributesTenantInput interface {
 }
 
 type ProjectAttributesTenantArgs struct {
-	Name          pulumi.StringInput      `pulumi:"name"`
+	// The name of the tenant attribute.
+	Name pulumi.StringInput `pulumi:"name"`
+	// A list of strings to define the set of options for select attributes.
 	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
-	Type          pulumi.StringInput      `pulumi:"type"`
+	// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (ProjectAttributesTenantArgs) ElementType() reflect.Type {
@@ -1087,14 +1151,17 @@ func (o ProjectAttributesTenantOutput) ToProjectAttributesTenantOutputWithContex
 	return o
 }
 
+// The name of the tenant attribute.
 func (o ProjectAttributesTenantOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// A list of strings to define the set of options for select attributes.
 func (o ProjectAttributesTenantOutput) SelectOptions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) []string { return v.SelectOptions }).(pulumi.StringArrayOutput)
 }
 
+// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
 func (o ProjectAttributesTenantOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -1120,9 +1187,13 @@ func (o ProjectAttributesTenantArrayOutput) Index(i pulumi.IntInput) ProjectAttr
 }
 
 type ProjectAttributesUser struct {
-	Name                string                                    `pulumi:"name"`
-	SelectOptions       []string                                  `pulumi:"selectOptions"`
-	Type                string                                    `pulumi:"type"`
+	// The name of the user attribute.
+	Name string `pulumi:"name"`
+	// A list of strings to define the set of options for select attributes.
+	SelectOptions []string `pulumi:"selectOptions"`
+	// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	Type string `pulumi:"type"`
+	// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
 	WidgetAuthorization *ProjectAttributesUserWidgetAuthorization `pulumi:"widgetAuthorization"`
 }
 
@@ -1138,9 +1209,13 @@ type ProjectAttributesUserInput interface {
 }
 
 type ProjectAttributesUserArgs struct {
-	Name                pulumi.StringInput                               `pulumi:"name"`
-	SelectOptions       pulumi.StringArrayInput                          `pulumi:"selectOptions"`
-	Type                pulumi.StringInput                               `pulumi:"type"`
+	// The name of the user attribute.
+	Name pulumi.StringInput `pulumi:"name"`
+	// A list of strings to define the set of options for select attributes.
+	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
+	// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
 	WidgetAuthorization ProjectAttributesUserWidgetAuthorizationPtrInput `pulumi:"widgetAuthorization"`
 }
 
@@ -1195,18 +1270,22 @@ func (o ProjectAttributesUserOutput) ToProjectAttributesUserOutputWithContext(ct
 	return o
 }
 
+// The name of the user attribute.
 func (o ProjectAttributesUserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// A list of strings to define the set of options for select attributes.
 func (o ProjectAttributesUserOutput) SelectOptions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) []string { return v.SelectOptions }).(pulumi.StringArrayOutput)
 }
 
+// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
 func (o ProjectAttributesUserOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) string { return v.Type }).(pulumi.StringOutput)
 }
 
+// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
 func (o ProjectAttributesUserOutput) WidgetAuthorization() ProjectAttributesUserWidgetAuthorizationPtrOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) *ProjectAttributesUserWidgetAuthorization { return v.WidgetAuthorization }).(ProjectAttributesUserWidgetAuthorizationPtrOutput)
 }
@@ -1232,7 +1311,9 @@ func (o ProjectAttributesUserArrayOutput) Index(i pulumi.IntInput) ProjectAttrib
 }
 
 type ProjectAttributesUserWidgetAuthorization struct {
+	// Editing the attribute value in widgets will be restricted to users with the specified permissions.
 	EditPermissions []string `pulumi:"editPermissions"`
+	// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
 	ViewPermissions []string `pulumi:"viewPermissions"`
 }
 
@@ -1248,7 +1329,9 @@ type ProjectAttributesUserWidgetAuthorizationInput interface {
 }
 
 type ProjectAttributesUserWidgetAuthorizationArgs struct {
+	// Editing the attribute value in widgets will be restricted to users with the specified permissions.
 	EditPermissions pulumi.StringArrayInput `pulumi:"editPermissions"`
+	// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
 	ViewPermissions pulumi.StringArrayInput `pulumi:"viewPermissions"`
 }
 
@@ -1329,10 +1412,12 @@ func (o ProjectAttributesUserWidgetAuthorizationOutput) ToProjectAttributesUserW
 	}).(ProjectAttributesUserWidgetAuthorizationPtrOutput)
 }
 
+// Editing the attribute value in widgets will be restricted to users with the specified permissions.
 func (o ProjectAttributesUserWidgetAuthorizationOutput) EditPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUserWidgetAuthorization) []string { return v.EditPermissions }).(pulumi.StringArrayOutput)
 }
 
+// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
 func (o ProjectAttributesUserWidgetAuthorizationOutput) ViewPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUserWidgetAuthorization) []string { return v.ViewPermissions }).(pulumi.StringArrayOutput)
 }
@@ -1361,6 +1446,7 @@ func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) Elem() ProjectAttribu
 	}).(ProjectAttributesUserWidgetAuthorizationOutput)
 }
 
+// Editing the attribute value in widgets will be restricted to users with the specified permissions.
 func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) EditPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributesUserWidgetAuthorization) []string {
 		if v == nil {
@@ -1370,6 +1456,7 @@ func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) EditPermissions() pul
 	}).(pulumi.StringArrayOutput)
 }
 
+// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
 func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) ViewPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributesUserWidgetAuthorization) []string {
 		if v == nil {
@@ -1380,15 +1467,24 @@ func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) ViewPermissions() pul
 }
 
 type ProjectAuthentication struct {
-	EmbeddedLink  *ProjectAuthenticationEmbeddedLink  `pulumi:"embeddedLink"`
+	// Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+	EmbeddedLink *ProjectAuthenticationEmbeddedLink `pulumi:"embeddedLink"`
+	// An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
 	EnchantedLink *ProjectAuthenticationEnchantedLink `pulumi:"enchantedLink"`
-	MagicLink     *ProjectAuthenticationMagicLink     `pulumi:"magicLink"`
-	Oauth         *ProjectAuthenticationOauth         `pulumi:"oauth"`
-	Otp           *ProjectAuthenticationOtp           `pulumi:"otp"`
-	Password      *ProjectAuthenticationPassword      `pulumi:"password"`
-	Sso           *ProjectAuthenticationSso           `pulumi:"sso"`
-	Totp          *ProjectAuthenticationTotp          `pulumi:"totp"`
-	Webauthn      *ProjectAuthenticationWebauthn      `pulumi:"webauthn"`
+	// An authentication method where a user receives a unique link via email to log in.
+	MagicLink *ProjectAuthenticationMagicLink `pulumi:"magicLink"`
+	// Authentication using Open Authorization, which allows users to authenticate with various external services.
+	Oauth *ProjectAuthenticationOauth `pulumi:"oauth"`
+	// A dynamically generated set of numbers, granting the user one-time access.
+	Otp *ProjectAuthenticationOtp `pulumi:"otp"`
+	// Device-based passwordless authentication, using fingerprint, face scan, and more.
+	Passkeys *ProjectAuthenticationPasskeys `pulumi:"passkeys"`
+	// The classic username and password combination used for authentication.
+	Password *ProjectAuthenticationPassword `pulumi:"password"`
+	// Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+	Sso *ProjectAuthenticationSso `pulumi:"sso"`
+	// A one-time code generated for the user using a shared secret and time.
+	Totp *ProjectAuthenticationTotp `pulumi:"totp"`
 }
 
 // ProjectAuthenticationInput is an input type that accepts ProjectAuthenticationArgs and ProjectAuthenticationOutput values.
@@ -1403,15 +1499,24 @@ type ProjectAuthenticationInput interface {
 }
 
 type ProjectAuthenticationArgs struct {
-	EmbeddedLink  ProjectAuthenticationEmbeddedLinkPtrInput  `pulumi:"embeddedLink"`
+	// Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+	EmbeddedLink ProjectAuthenticationEmbeddedLinkPtrInput `pulumi:"embeddedLink"`
+	// An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
 	EnchantedLink ProjectAuthenticationEnchantedLinkPtrInput `pulumi:"enchantedLink"`
-	MagicLink     ProjectAuthenticationMagicLinkPtrInput     `pulumi:"magicLink"`
-	Oauth         ProjectAuthenticationOauthPtrInput         `pulumi:"oauth"`
-	Otp           ProjectAuthenticationOtpPtrInput           `pulumi:"otp"`
-	Password      ProjectAuthenticationPasswordPtrInput      `pulumi:"password"`
-	Sso           ProjectAuthenticationSsoPtrInput           `pulumi:"sso"`
-	Totp          ProjectAuthenticationTotpPtrInput          `pulumi:"totp"`
-	Webauthn      ProjectAuthenticationWebauthnPtrInput      `pulumi:"webauthn"`
+	// An authentication method where a user receives a unique link via email to log in.
+	MagicLink ProjectAuthenticationMagicLinkPtrInput `pulumi:"magicLink"`
+	// Authentication using Open Authorization, which allows users to authenticate with various external services.
+	Oauth ProjectAuthenticationOauthPtrInput `pulumi:"oauth"`
+	// A dynamically generated set of numbers, granting the user one-time access.
+	Otp ProjectAuthenticationOtpPtrInput `pulumi:"otp"`
+	// Device-based passwordless authentication, using fingerprint, face scan, and more.
+	Passkeys ProjectAuthenticationPasskeysPtrInput `pulumi:"passkeys"`
+	// The classic username and password combination used for authentication.
+	Password ProjectAuthenticationPasswordPtrInput `pulumi:"password"`
+	// Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+	Sso ProjectAuthenticationSsoPtrInput `pulumi:"sso"`
+	// A one-time code generated for the user using a shared secret and time.
+	Totp ProjectAuthenticationTotpPtrInput `pulumi:"totp"`
 }
 
 func (ProjectAuthenticationArgs) ElementType() reflect.Type {
@@ -1491,40 +1596,49 @@ func (o ProjectAuthenticationOutput) ToProjectAuthenticationPtrOutputWithContext
 	}).(ProjectAuthenticationPtrOutput)
 }
 
+// Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
 func (o ProjectAuthenticationOutput) EmbeddedLink() ProjectAuthenticationEmbeddedLinkPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationEmbeddedLink { return v.EmbeddedLink }).(ProjectAuthenticationEmbeddedLinkPtrOutput)
 }
 
+// An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
 func (o ProjectAuthenticationOutput) EnchantedLink() ProjectAuthenticationEnchantedLinkPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationEnchantedLink { return v.EnchantedLink }).(ProjectAuthenticationEnchantedLinkPtrOutput)
 }
 
+// An authentication method where a user receives a unique link via email to log in.
 func (o ProjectAuthenticationOutput) MagicLink() ProjectAuthenticationMagicLinkPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationMagicLink { return v.MagicLink }).(ProjectAuthenticationMagicLinkPtrOutput)
 }
 
+// Authentication using Open Authorization, which allows users to authenticate with various external services.
 func (o ProjectAuthenticationOutput) Oauth() ProjectAuthenticationOauthPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationOauth { return v.Oauth }).(ProjectAuthenticationOauthPtrOutput)
 }
 
+// A dynamically generated set of numbers, granting the user one-time access.
 func (o ProjectAuthenticationOutput) Otp() ProjectAuthenticationOtpPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationOtp { return v.Otp }).(ProjectAuthenticationOtpPtrOutput)
 }
 
+// Device-based passwordless authentication, using fingerprint, face scan, and more.
+func (o ProjectAuthenticationOutput) Passkeys() ProjectAuthenticationPasskeysPtrOutput {
+	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationPasskeys { return v.Passkeys }).(ProjectAuthenticationPasskeysPtrOutput)
+}
+
+// The classic username and password combination used for authentication.
 func (o ProjectAuthenticationOutput) Password() ProjectAuthenticationPasswordPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationPassword { return v.Password }).(ProjectAuthenticationPasswordPtrOutput)
 }
 
+// Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
 func (o ProjectAuthenticationOutput) Sso() ProjectAuthenticationSsoPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationSso { return v.Sso }).(ProjectAuthenticationSsoPtrOutput)
 }
 
+// A one-time code generated for the user using a shared secret and time.
 func (o ProjectAuthenticationOutput) Totp() ProjectAuthenticationTotpPtrOutput {
 	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationTotp { return v.Totp }).(ProjectAuthenticationTotpPtrOutput)
-}
-
-func (o ProjectAuthenticationOutput) Webauthn() ProjectAuthenticationWebauthnPtrOutput {
-	return o.ApplyT(func(v ProjectAuthentication) *ProjectAuthenticationWebauthn { return v.Webauthn }).(ProjectAuthenticationWebauthnPtrOutput)
 }
 
 type ProjectAuthenticationPtrOutput struct{ *pulumi.OutputState }
@@ -1551,6 +1665,7 @@ func (o ProjectAuthenticationPtrOutput) Elem() ProjectAuthenticationOutput {
 	}).(ProjectAuthenticationOutput)
 }
 
+// Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
 func (o ProjectAuthenticationPtrOutput) EmbeddedLink() ProjectAuthenticationEmbeddedLinkPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationEmbeddedLink {
 		if v == nil {
@@ -1560,6 +1675,7 @@ func (o ProjectAuthenticationPtrOutput) EmbeddedLink() ProjectAuthenticationEmbe
 	}).(ProjectAuthenticationEmbeddedLinkPtrOutput)
 }
 
+// An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
 func (o ProjectAuthenticationPtrOutput) EnchantedLink() ProjectAuthenticationEnchantedLinkPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationEnchantedLink {
 		if v == nil {
@@ -1569,6 +1685,7 @@ func (o ProjectAuthenticationPtrOutput) EnchantedLink() ProjectAuthenticationEnc
 	}).(ProjectAuthenticationEnchantedLinkPtrOutput)
 }
 
+// An authentication method where a user receives a unique link via email to log in.
 func (o ProjectAuthenticationPtrOutput) MagicLink() ProjectAuthenticationMagicLinkPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationMagicLink {
 		if v == nil {
@@ -1578,6 +1695,7 @@ func (o ProjectAuthenticationPtrOutput) MagicLink() ProjectAuthenticationMagicLi
 	}).(ProjectAuthenticationMagicLinkPtrOutput)
 }
 
+// Authentication using Open Authorization, which allows users to authenticate with various external services.
 func (o ProjectAuthenticationPtrOutput) Oauth() ProjectAuthenticationOauthPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationOauth {
 		if v == nil {
@@ -1587,6 +1705,7 @@ func (o ProjectAuthenticationPtrOutput) Oauth() ProjectAuthenticationOauthPtrOut
 	}).(ProjectAuthenticationOauthPtrOutput)
 }
 
+// A dynamically generated set of numbers, granting the user one-time access.
 func (o ProjectAuthenticationPtrOutput) Otp() ProjectAuthenticationOtpPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationOtp {
 		if v == nil {
@@ -1596,6 +1715,17 @@ func (o ProjectAuthenticationPtrOutput) Otp() ProjectAuthenticationOtpPtrOutput 
 	}).(ProjectAuthenticationOtpPtrOutput)
 }
 
+// Device-based passwordless authentication, using fingerprint, face scan, and more.
+func (o ProjectAuthenticationPtrOutput) Passkeys() ProjectAuthenticationPasskeysPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationPasskeys {
+		if v == nil {
+			return nil
+		}
+		return v.Passkeys
+	}).(ProjectAuthenticationPasskeysPtrOutput)
+}
+
+// The classic username and password combination used for authentication.
 func (o ProjectAuthenticationPtrOutput) Password() ProjectAuthenticationPasswordPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationPassword {
 		if v == nil {
@@ -1605,6 +1735,7 @@ func (o ProjectAuthenticationPtrOutput) Password() ProjectAuthenticationPassword
 	}).(ProjectAuthenticationPasswordPtrOutput)
 }
 
+// Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
 func (o ProjectAuthenticationPtrOutput) Sso() ProjectAuthenticationSsoPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationSso {
 		if v == nil {
@@ -1614,6 +1745,7 @@ func (o ProjectAuthenticationPtrOutput) Sso() ProjectAuthenticationSsoPtrOutput 
 	}).(ProjectAuthenticationSsoPtrOutput)
 }
 
+// A one-time code generated for the user using a shared secret and time.
 func (o ProjectAuthenticationPtrOutput) Totp() ProjectAuthenticationTotpPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationTotp {
 		if v == nil {
@@ -1623,17 +1755,9 @@ func (o ProjectAuthenticationPtrOutput) Totp() ProjectAuthenticationTotpPtrOutpu
 	}).(ProjectAuthenticationTotpPtrOutput)
 }
 
-func (o ProjectAuthenticationPtrOutput) Webauthn() ProjectAuthenticationWebauthnPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthentication) *ProjectAuthenticationWebauthn {
-		if v == nil {
-			return nil
-		}
-		return v.Webauthn
-	}).(ProjectAuthenticationWebauthnPtrOutput)
-}
-
 type ProjectAuthenticationEmbeddedLink struct {
-	Enabled            *bool   `pulumi:"enabled"`
+	Enabled *bool `pulumi:"enabled"`
+	// The amount of time that the embedded link will be valid for.
 	ExpirationTime     *int    `pulumi:"expirationTime"`
 	ExpirationTimeUnit *string `pulumi:"expirationTimeUnit"`
 }
@@ -1650,7 +1774,8 @@ type ProjectAuthenticationEmbeddedLinkInput interface {
 }
 
 type ProjectAuthenticationEmbeddedLinkArgs struct {
-	Enabled            pulumi.BoolPtrInput   `pulumi:"enabled"`
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// The amount of time that the embedded link will be valid for.
 	ExpirationTime     pulumi.IntPtrInput    `pulumi:"expirationTime"`
 	ExpirationTimeUnit pulumi.StringPtrInput `pulumi:"expirationTimeUnit"`
 }
@@ -1736,6 +1861,7 @@ func (o ProjectAuthenticationEmbeddedLinkOutput) Enabled() pulumi.BoolPtrOutput 
 	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// The amount of time that the embedded link will be valid for.
 func (o ProjectAuthenticationEmbeddedLinkOutput) ExpirationTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
 }
@@ -1777,6 +1903,7 @@ func (o ProjectAuthenticationEmbeddedLinkPtrOutput) Enabled() pulumi.BoolPtrOutp
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The amount of time that the embedded link will be valid for.
 func (o ProjectAuthenticationEmbeddedLinkPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEmbeddedLink) *int {
 		if v == nil {
@@ -1796,11 +1923,13 @@ func (o ProjectAuthenticationEmbeddedLinkPtrOutput) ExpirationTimeUnit() pulumi.
 }
 
 type ProjectAuthenticationEnchantedLink struct {
+	// Settings related to sending emails as part of the enchanted link authentication.
 	EmailService       *ProjectAuthenticationEnchantedLinkEmailService `pulumi:"emailService"`
 	Enabled            *bool                                           `pulumi:"enabled"`
 	ExpirationTime     *int                                            `pulumi:"expirationTime"`
 	ExpirationTimeUnit *string                                         `pulumi:"expirationTimeUnit"`
-	RedirectUrl        *string                                         `pulumi:"redirectUrl"`
+	// The URL to redirect users to after they log in using the enchanted link.
+	RedirectUrl *string `pulumi:"redirectUrl"`
 }
 
 // ProjectAuthenticationEnchantedLinkInput is an input type that accepts ProjectAuthenticationEnchantedLinkArgs and ProjectAuthenticationEnchantedLinkOutput values.
@@ -1815,11 +1944,13 @@ type ProjectAuthenticationEnchantedLinkInput interface {
 }
 
 type ProjectAuthenticationEnchantedLinkArgs struct {
+	// Settings related to sending emails as part of the enchanted link authentication.
 	EmailService       ProjectAuthenticationEnchantedLinkEmailServicePtrInput `pulumi:"emailService"`
 	Enabled            pulumi.BoolPtrInput                                    `pulumi:"enabled"`
 	ExpirationTime     pulumi.IntPtrInput                                     `pulumi:"expirationTime"`
 	ExpirationTimeUnit pulumi.StringPtrInput                                  `pulumi:"expirationTimeUnit"`
-	RedirectUrl        pulumi.StringPtrInput                                  `pulumi:"redirectUrl"`
+	// The URL to redirect users to after they log in using the enchanted link.
+	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
 }
 
 func (ProjectAuthenticationEnchantedLinkArgs) ElementType() reflect.Type {
@@ -1899,6 +2030,7 @@ func (o ProjectAuthenticationEnchantedLinkOutput) ToProjectAuthenticationEnchant
 	}).(ProjectAuthenticationEnchantedLinkPtrOutput)
 }
 
+// Settings related to sending emails as part of the enchanted link authentication.
 func (o ProjectAuthenticationEnchantedLinkOutput) EmailService() ProjectAuthenticationEnchantedLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *ProjectAuthenticationEnchantedLinkEmailService {
 		return v.EmailService
@@ -1917,6 +2049,7 @@ func (o ProjectAuthenticationEnchantedLinkOutput) ExpirationTimeUnit() pulumi.St
 	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
 }
 
+// The URL to redirect users to after they log in using the enchanted link.
 func (o ProjectAuthenticationEnchantedLinkOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
 }
@@ -1945,6 +2078,7 @@ func (o ProjectAuthenticationEnchantedLinkPtrOutput) Elem() ProjectAuthenticatio
 	}).(ProjectAuthenticationEnchantedLinkOutput)
 }
 
+// Settings related to sending emails as part of the enchanted link authentication.
 func (o ProjectAuthenticationEnchantedLinkPtrOutput) EmailService() ProjectAuthenticationEnchantedLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *ProjectAuthenticationEnchantedLinkEmailService {
 		if v == nil {
@@ -1981,6 +2115,7 @@ func (o ProjectAuthenticationEnchantedLinkPtrOutput) ExpirationTimeUnit() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL to redirect users to after they log in using the enchanted link.
 func (o ProjectAuthenticationEnchantedLinkPtrOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *string {
 		if v == nil {
@@ -2271,12 +2406,15 @@ func (o ProjectAuthenticationEnchantedLinkEmailServiceTemplateArrayOutput) Index
 }
 
 type ProjectAuthenticationMagicLink struct {
+	// Settings related to sending emails as part of the magic link authentication.
 	EmailService       *ProjectAuthenticationMagicLinkEmailService `pulumi:"emailService"`
 	Enabled            *bool                                       `pulumi:"enabled"`
 	ExpirationTime     *int                                        `pulumi:"expirationTime"`
 	ExpirationTimeUnit *string                                     `pulumi:"expirationTimeUnit"`
-	RedirectUrl        *string                                     `pulumi:"redirectUrl"`
-	TextService        *ProjectAuthenticationMagicLinkTextService  `pulumi:"textService"`
+	// The URL to redirect users to after they log in using the magic link.
+	RedirectUrl *string `pulumi:"redirectUrl"`
+	// Settings related to sending SMS messages as part of the magic link authentication.
+	TextService *ProjectAuthenticationMagicLinkTextService `pulumi:"textService"`
 }
 
 // ProjectAuthenticationMagicLinkInput is an input type that accepts ProjectAuthenticationMagicLinkArgs and ProjectAuthenticationMagicLinkOutput values.
@@ -2291,12 +2429,15 @@ type ProjectAuthenticationMagicLinkInput interface {
 }
 
 type ProjectAuthenticationMagicLinkArgs struct {
+	// Settings related to sending emails as part of the magic link authentication.
 	EmailService       ProjectAuthenticationMagicLinkEmailServicePtrInput `pulumi:"emailService"`
 	Enabled            pulumi.BoolPtrInput                                `pulumi:"enabled"`
 	ExpirationTime     pulumi.IntPtrInput                                 `pulumi:"expirationTime"`
 	ExpirationTimeUnit pulumi.StringPtrInput                              `pulumi:"expirationTimeUnit"`
-	RedirectUrl        pulumi.StringPtrInput                              `pulumi:"redirectUrl"`
-	TextService        ProjectAuthenticationMagicLinkTextServicePtrInput  `pulumi:"textService"`
+	// The URL to redirect users to after they log in using the magic link.
+	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
+	// Settings related to sending SMS messages as part of the magic link authentication.
+	TextService ProjectAuthenticationMagicLinkTextServicePtrInput `pulumi:"textService"`
 }
 
 func (ProjectAuthenticationMagicLinkArgs) ElementType() reflect.Type {
@@ -2376,6 +2517,7 @@ func (o ProjectAuthenticationMagicLinkOutput) ToProjectAuthenticationMagicLinkPt
 	}).(ProjectAuthenticationMagicLinkPtrOutput)
 }
 
+// Settings related to sending emails as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkOutput) EmailService() ProjectAuthenticationMagicLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkEmailService {
 		return v.EmailService
@@ -2394,10 +2536,12 @@ func (o ProjectAuthenticationMagicLinkOutput) ExpirationTimeUnit() pulumi.String
 	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
 }
 
+// The URL to redirect users to after they log in using the magic link.
 func (o ProjectAuthenticationMagicLinkOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending SMS messages as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkOutput) TextService() ProjectAuthenticationMagicLinkTextServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkTextService {
 		return v.TextService
@@ -2428,6 +2572,7 @@ func (o ProjectAuthenticationMagicLinkPtrOutput) Elem() ProjectAuthenticationMag
 	}).(ProjectAuthenticationMagicLinkOutput)
 }
 
+// Settings related to sending emails as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkPtrOutput) EmailService() ProjectAuthenticationMagicLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkEmailService {
 		if v == nil {
@@ -2464,6 +2609,7 @@ func (o ProjectAuthenticationMagicLinkPtrOutput) ExpirationTimeUnit() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL to redirect users to after they log in using the magic link.
 func (o ProjectAuthenticationMagicLinkPtrOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *string {
 		if v == nil {
@@ -2473,6 +2619,7 @@ func (o ProjectAuthenticationMagicLinkPtrOutput) RedirectUrl() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending SMS messages as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkPtrOutput) TextService() ProjectAuthenticationMagicLinkTextServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkTextService {
 		if v == nil {
@@ -3025,9 +3172,11 @@ func (o ProjectAuthenticationMagicLinkTextServiceTemplateArrayOutput) Index(i pu
 }
 
 type ProjectAuthenticationOauth struct {
+	// Custom OAuth providers configured for this project.
 	Custom   map[string]ProjectAuthenticationOauthCustom `pulumi:"custom"`
 	Disabled *bool                                       `pulumi:"disabled"`
-	System   *ProjectAuthenticationOauthSystem           `pulumi:"system"`
+	// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+	System *ProjectAuthenticationOauthSystem `pulumi:"system"`
 }
 
 // ProjectAuthenticationOauthInput is an input type that accepts ProjectAuthenticationOauthArgs and ProjectAuthenticationOauthOutput values.
@@ -3042,9 +3191,11 @@ type ProjectAuthenticationOauthInput interface {
 }
 
 type ProjectAuthenticationOauthArgs struct {
+	// Custom OAuth providers configured for this project.
 	Custom   ProjectAuthenticationOauthCustomMapInput `pulumi:"custom"`
 	Disabled pulumi.BoolPtrInput                      `pulumi:"disabled"`
-	System   ProjectAuthenticationOauthSystemPtrInput `pulumi:"system"`
+	// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+	System ProjectAuthenticationOauthSystemPtrInput `pulumi:"system"`
 }
 
 func (ProjectAuthenticationOauthArgs) ElementType() reflect.Type {
@@ -3124,6 +3275,7 @@ func (o ProjectAuthenticationOauthOutput) ToProjectAuthenticationOauthPtrOutputW
 	}).(ProjectAuthenticationOauthPtrOutput)
 }
 
+// Custom OAuth providers configured for this project.
 func (o ProjectAuthenticationOauthOutput) Custom() ProjectAuthenticationOauthCustomMapOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauth) map[string]ProjectAuthenticationOauthCustom { return v.Custom }).(ProjectAuthenticationOauthCustomMapOutput)
 }
@@ -3132,6 +3284,7 @@ func (o ProjectAuthenticationOauthOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauth) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
 func (o ProjectAuthenticationOauthOutput) System() ProjectAuthenticationOauthSystemPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauth) *ProjectAuthenticationOauthSystem { return v.System }).(ProjectAuthenticationOauthSystemPtrOutput)
 }
@@ -3160,6 +3313,7 @@ func (o ProjectAuthenticationOauthPtrOutput) Elem() ProjectAuthenticationOauthOu
 	}).(ProjectAuthenticationOauthOutput)
 }
 
+// Custom OAuth providers configured for this project.
 func (o ProjectAuthenticationOauthPtrOutput) Custom() ProjectAuthenticationOauthCustomMapOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauth) map[string]ProjectAuthenticationOauthCustom {
 		if v == nil {
@@ -3178,6 +3332,7 @@ func (o ProjectAuthenticationOauthPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
 func (o ProjectAuthenticationOauthPtrOutput) System() ProjectAuthenticationOauthSystemPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauth) *ProjectAuthenticationOauthSystem {
 		if v == nil {
@@ -3188,22 +3343,35 @@ func (o ProjectAuthenticationOauthPtrOutput) System() ProjectAuthenticationOauth
 }
 
 type ProjectAuthenticationOauthCustom struct {
-	AuthorizationEndpoint   *string                                                  `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                        `pulumi:"claimMapping"`
-	ClientId                *string                                                  `pulumi:"clientId"`
-	ClientSecret            *string                                                  `pulumi:"clientSecret"`
-	Description             *string                                                  `pulumi:"description"`
-	Disabled                *bool                                                    `pulumi:"disabled"`
-	GrantType               *string                                                  `pulumi:"grantType"`
-	Issuer                  *string                                                  `pulumi:"issuer"`
-	JwksEndpoint            *string                                                  `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                  `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                    `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                 `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthCustomProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                 `pulumi:"scopes"`
-	TokenEndpoint           *string                                                  `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                  `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthCustomInput is an input type that accepts ProjectAuthenticationOauthCustomArgs and ProjectAuthenticationOauthCustomOutput values.
@@ -3218,22 +3386,35 @@ type ProjectAuthenticationOauthCustomInput interface {
 }
 
 type ProjectAuthenticationOauthCustomArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                           `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                           `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                           `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                           `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                           `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                             `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                           `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                           `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                           `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                           `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                             `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                         `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthCustomProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                         `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                           `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                           `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthCustomArgs) ElementType() reflect.Type {
@@ -3287,6 +3468,7 @@ func (o ProjectAuthenticationOauthCustomOutput) ToProjectAuthenticationOauthCust
 	return o
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -3295,14 +3477,17 @@ func (o ProjectAuthenticationOauthCustomOutput) ClaimMapping() pulumi.StringMapO
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthCustomOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthCustomOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -3311,6 +3496,7 @@ func (o ProjectAuthenticationOauthCustomOutput) Disabled() pulumi.BoolPtrOutput 
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -3319,36 +3505,44 @@ func (o ProjectAuthenticationOauthCustomOutput) Issuer() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthCustomOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthCustomOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) ProviderTokenManagement() ProjectAuthenticationOauthCustomProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *ProjectAuthenticationOauthCustomProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthCustomProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -3522,15 +3716,24 @@ func (o ProjectAuthenticationOauthCustomProviderTokenManagementPtrOutput) Redire
 }
 
 type ProjectAuthenticationOauthSystem struct {
-	Apple     *ProjectAuthenticationOauthSystemApple     `pulumi:"apple"`
-	Discord   *ProjectAuthenticationOauthSystemDiscord   `pulumi:"discord"`
-	Facebook  *ProjectAuthenticationOauthSystemFacebook  `pulumi:"facebook"`
-	Github    *ProjectAuthenticationOauthSystemGithub    `pulumi:"github"`
-	Gitlab    *ProjectAuthenticationOauthSystemGitlab    `pulumi:"gitlab"`
-	Google    *ProjectAuthenticationOauthSystemGoogle    `pulumi:"google"`
-	Linkedin  *ProjectAuthenticationOauthSystemLinkedin  `pulumi:"linkedin"`
+	// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+	Apple *ProjectAuthenticationOauthSystemApple `pulumi:"apple"`
+	// Discord's OAuth provider, allowing users to authenticate with their Discord account.
+	Discord *ProjectAuthenticationOauthSystemDiscord `pulumi:"discord"`
+	// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+	Facebook *ProjectAuthenticationOauthSystemFacebook `pulumi:"facebook"`
+	// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+	Github *ProjectAuthenticationOauthSystemGithub `pulumi:"github"`
+	// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+	Gitlab *ProjectAuthenticationOauthSystemGitlab `pulumi:"gitlab"`
+	// Google's OAuth provider, allowing users to authenticate with their Google account.
+	Google *ProjectAuthenticationOauthSystemGoogle `pulumi:"google"`
+	// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+	Linkedin *ProjectAuthenticationOauthSystemLinkedin `pulumi:"linkedin"`
+	// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
 	Microsoft *ProjectAuthenticationOauthSystemMicrosoft `pulumi:"microsoft"`
-	Slack     *ProjectAuthenticationOauthSystemSlack     `pulumi:"slack"`
+	// Slack's OAuth provider, allowing users to authenticate with their Slack account.
+	Slack *ProjectAuthenticationOauthSystemSlack `pulumi:"slack"`
 }
 
 // ProjectAuthenticationOauthSystemInput is an input type that accepts ProjectAuthenticationOauthSystemArgs and ProjectAuthenticationOauthSystemOutput values.
@@ -3545,15 +3748,24 @@ type ProjectAuthenticationOauthSystemInput interface {
 }
 
 type ProjectAuthenticationOauthSystemArgs struct {
-	Apple     ProjectAuthenticationOauthSystemApplePtrInput     `pulumi:"apple"`
-	Discord   ProjectAuthenticationOauthSystemDiscordPtrInput   `pulumi:"discord"`
-	Facebook  ProjectAuthenticationOauthSystemFacebookPtrInput  `pulumi:"facebook"`
-	Github    ProjectAuthenticationOauthSystemGithubPtrInput    `pulumi:"github"`
-	Gitlab    ProjectAuthenticationOauthSystemGitlabPtrInput    `pulumi:"gitlab"`
-	Google    ProjectAuthenticationOauthSystemGooglePtrInput    `pulumi:"google"`
-	Linkedin  ProjectAuthenticationOauthSystemLinkedinPtrInput  `pulumi:"linkedin"`
+	// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+	Apple ProjectAuthenticationOauthSystemApplePtrInput `pulumi:"apple"`
+	// Discord's OAuth provider, allowing users to authenticate with their Discord account.
+	Discord ProjectAuthenticationOauthSystemDiscordPtrInput `pulumi:"discord"`
+	// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+	Facebook ProjectAuthenticationOauthSystemFacebookPtrInput `pulumi:"facebook"`
+	// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+	Github ProjectAuthenticationOauthSystemGithubPtrInput `pulumi:"github"`
+	// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+	Gitlab ProjectAuthenticationOauthSystemGitlabPtrInput `pulumi:"gitlab"`
+	// Google's OAuth provider, allowing users to authenticate with their Google account.
+	Google ProjectAuthenticationOauthSystemGooglePtrInput `pulumi:"google"`
+	// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+	Linkedin ProjectAuthenticationOauthSystemLinkedinPtrInput `pulumi:"linkedin"`
+	// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
 	Microsoft ProjectAuthenticationOauthSystemMicrosoftPtrInput `pulumi:"microsoft"`
-	Slack     ProjectAuthenticationOauthSystemSlackPtrInput     `pulumi:"slack"`
+	// Slack's OAuth provider, allowing users to authenticate with their Slack account.
+	Slack ProjectAuthenticationOauthSystemSlackPtrInput `pulumi:"slack"`
 }
 
 func (ProjectAuthenticationOauthSystemArgs) ElementType() reflect.Type {
@@ -3633,40 +3845,49 @@ func (o ProjectAuthenticationOauthSystemOutput) ToProjectAuthenticationOauthSyst
 	}).(ProjectAuthenticationOauthSystemPtrOutput)
 }
 
+// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
 func (o ProjectAuthenticationOauthSystemOutput) Apple() ProjectAuthenticationOauthSystemApplePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemApple { return v.Apple }).(ProjectAuthenticationOauthSystemApplePtrOutput)
 }
 
+// Discord's OAuth provider, allowing users to authenticate with their Discord account.
 func (o ProjectAuthenticationOauthSystemOutput) Discord() ProjectAuthenticationOauthSystemDiscordPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemDiscord { return v.Discord }).(ProjectAuthenticationOauthSystemDiscordPtrOutput)
 }
 
+// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
 func (o ProjectAuthenticationOauthSystemOutput) Facebook() ProjectAuthenticationOauthSystemFacebookPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemFacebook { return v.Facebook }).(ProjectAuthenticationOauthSystemFacebookPtrOutput)
 }
 
+// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
 func (o ProjectAuthenticationOauthSystemOutput) Github() ProjectAuthenticationOauthSystemGithubPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGithub { return v.Github }).(ProjectAuthenticationOauthSystemGithubPtrOutput)
 }
 
+// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
 func (o ProjectAuthenticationOauthSystemOutput) Gitlab() ProjectAuthenticationOauthSystemGitlabPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGitlab { return v.Gitlab }).(ProjectAuthenticationOauthSystemGitlabPtrOutput)
 }
 
+// Google's OAuth provider, allowing users to authenticate with their Google account.
 func (o ProjectAuthenticationOauthSystemOutput) Google() ProjectAuthenticationOauthSystemGooglePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGoogle { return v.Google }).(ProjectAuthenticationOauthSystemGooglePtrOutput)
 }
 
+// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
 func (o ProjectAuthenticationOauthSystemOutput) Linkedin() ProjectAuthenticationOauthSystemLinkedinPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemLinkedin { return v.Linkedin }).(ProjectAuthenticationOauthSystemLinkedinPtrOutput)
 }
 
+// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
 func (o ProjectAuthenticationOauthSystemOutput) Microsoft() ProjectAuthenticationOauthSystemMicrosoftPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemMicrosoft {
 		return v.Microsoft
 	}).(ProjectAuthenticationOauthSystemMicrosoftPtrOutput)
 }
 
+// Slack's OAuth provider, allowing users to authenticate with their Slack account.
 func (o ProjectAuthenticationOauthSystemOutput) Slack() ProjectAuthenticationOauthSystemSlackPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemSlack { return v.Slack }).(ProjectAuthenticationOauthSystemSlackPtrOutput)
 }
@@ -3695,6 +3916,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Elem() ProjectAuthenticationO
 	}).(ProjectAuthenticationOauthSystemOutput)
 }
 
+// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Apple() ProjectAuthenticationOauthSystemApplePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemApple {
 		if v == nil {
@@ -3704,6 +3926,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Apple() ProjectAuthentication
 	}).(ProjectAuthenticationOauthSystemApplePtrOutput)
 }
 
+// Discord's OAuth provider, allowing users to authenticate with their Discord account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Discord() ProjectAuthenticationOauthSystemDiscordPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemDiscord {
 		if v == nil {
@@ -3713,6 +3936,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Discord() ProjectAuthenticati
 	}).(ProjectAuthenticationOauthSystemDiscordPtrOutput)
 }
 
+// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Facebook() ProjectAuthenticationOauthSystemFacebookPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemFacebook {
 		if v == nil {
@@ -3722,6 +3946,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Facebook() ProjectAuthenticat
 	}).(ProjectAuthenticationOauthSystemFacebookPtrOutput)
 }
 
+// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Github() ProjectAuthenticationOauthSystemGithubPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGithub {
 		if v == nil {
@@ -3731,6 +3956,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Github() ProjectAuthenticatio
 	}).(ProjectAuthenticationOauthSystemGithubPtrOutput)
 }
 
+// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Gitlab() ProjectAuthenticationOauthSystemGitlabPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGitlab {
 		if v == nil {
@@ -3740,6 +3966,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Gitlab() ProjectAuthenticatio
 	}).(ProjectAuthenticationOauthSystemGitlabPtrOutput)
 }
 
+// Google's OAuth provider, allowing users to authenticate with their Google account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Google() ProjectAuthenticationOauthSystemGooglePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemGoogle {
 		if v == nil {
@@ -3749,6 +3976,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Google() ProjectAuthenticatio
 	}).(ProjectAuthenticationOauthSystemGooglePtrOutput)
 }
 
+// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Linkedin() ProjectAuthenticationOauthSystemLinkedinPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemLinkedin {
 		if v == nil {
@@ -3758,6 +3986,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Linkedin() ProjectAuthenticat
 	}).(ProjectAuthenticationOauthSystemLinkedinPtrOutput)
 }
 
+// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Microsoft() ProjectAuthenticationOauthSystemMicrosoftPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemMicrosoft {
 		if v == nil {
@@ -3767,6 +3996,7 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Microsoft() ProjectAuthentica
 	}).(ProjectAuthenticationOauthSystemMicrosoftPtrOutput)
 }
 
+// Slack's OAuth provider, allowing users to authenticate with their Slack account.
 func (o ProjectAuthenticationOauthSystemPtrOutput) Slack() ProjectAuthenticationOauthSystemSlackPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystem) *ProjectAuthenticationOauthSystemSlack {
 		if v == nil {
@@ -3777,22 +4007,35 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Slack() ProjectAuthentication
 }
 
 type ProjectAuthenticationOauthSystemApple struct {
-	AuthorizationEndpoint   *string                                                       `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                             `pulumi:"claimMapping"`
-	ClientId                *string                                                       `pulumi:"clientId"`
-	ClientSecret            *string                                                       `pulumi:"clientSecret"`
-	Description             *string                                                       `pulumi:"description"`
-	Disabled                *bool                                                         `pulumi:"disabled"`
-	GrantType               *string                                                       `pulumi:"grantType"`
-	Issuer                  *string                                                       `pulumi:"issuer"`
-	JwksEndpoint            *string                                                       `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                       `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                         `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                      `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemAppleProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                      `pulumi:"scopes"`
-	TokenEndpoint           *string                                                       `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                       `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemAppleInput is an input type that accepts ProjectAuthenticationOauthSystemAppleArgs and ProjectAuthenticationOauthSystemAppleOutput values.
@@ -3807,22 +4050,35 @@ type ProjectAuthenticationOauthSystemAppleInput interface {
 }
 
 type ProjectAuthenticationOauthSystemAppleArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                  `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                  `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                              `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                              `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemAppleArgs) ElementType() reflect.Type {
@@ -3902,6 +4158,7 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) ToProjectAuthenticationOaut
 	}).(ProjectAuthenticationOauthSystemApplePtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -3910,14 +4167,17 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) ClaimMapping() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -3926,6 +4186,7 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) Disabled() pulumi.BoolPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -3934,36 +4195,44 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) Issuer() pulumi.StringPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemAppleOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -3992,6 +4261,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Elem() ProjectAuthentica
 	}).(ProjectAuthenticationOauthSystemAppleOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4010,6 +4280,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) ClaimMapping() pulumi.St
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4019,6 +4290,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) ClientId() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4028,6 +4300,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) ClientSecret() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4046,6 +4319,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Disabled() pulumi.BoolPt
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4064,6 +4338,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Issuer() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4073,6 +4348,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) JwksEndpoint() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4082,6 +4358,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Logo() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *bool {
 		if v == nil {
@@ -4091,6 +4368,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) MergeUserAccounts() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) []string {
 		if v == nil {
@@ -4100,6 +4378,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Prompts() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleProviderTokenManagement {
 		if v == nil {
@@ -4109,6 +4388,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) ProviderTokenManagement(
 	}).(ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) []string {
 		if v == nil {
@@ -4118,6 +4398,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Scopes() pulumi.StringAr
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4127,6 +4408,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) TokenEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
 		if v == nil {
@@ -4285,22 +4567,35 @@ func (o ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput) R
 }
 
 type ProjectAuthenticationOauthSystemDiscord struct {
-	AuthorizationEndpoint   *string                                                         `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                               `pulumi:"claimMapping"`
-	ClientId                *string                                                         `pulumi:"clientId"`
-	ClientSecret            *string                                                         `pulumi:"clientSecret"`
-	Description             *string                                                         `pulumi:"description"`
-	Disabled                *bool                                                           `pulumi:"disabled"`
-	GrantType               *string                                                         `pulumi:"grantType"`
-	Issuer                  *string                                                         `pulumi:"issuer"`
-	JwksEndpoint            *string                                                         `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                         `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                           `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                        `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemDiscordProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                        `pulumi:"scopes"`
-	TokenEndpoint           *string                                                         `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                         `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemDiscordInput is an input type that accepts ProjectAuthenticationOauthSystemDiscordArgs and ProjectAuthenticationOauthSystemDiscordOutput values.
@@ -4315,22 +4610,35 @@ type ProjectAuthenticationOauthSystemDiscordInput interface {
 }
 
 type ProjectAuthenticationOauthSystemDiscordArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                  `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                  `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                  `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                  `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                  `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                    `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                  `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                  `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                  `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                  `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                    `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                                `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                                `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                  `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                  `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemDiscordArgs) ElementType() reflect.Type {
@@ -4410,6 +4718,7 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) ToProjectAuthenticationOa
 	}).(ProjectAuthenticationOauthSystemDiscordPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -4418,14 +4727,17 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) ClaimMapping() pulumi.Str
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -4434,6 +4746,7 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) Disabled() pulumi.BoolPtr
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -4442,36 +4755,44 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) Issuer() pulumi.StringPtr
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -4500,6 +4821,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Elem() ProjectAuthenti
 	}).(ProjectAuthenticationOauthSystemDiscordOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4518,6 +4840,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ClaimMapping() pulumi.
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4527,6 +4850,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ClientId() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4536,6 +4860,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ClientSecret() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4554,6 +4879,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Disabled() pulumi.Bool
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4572,6 +4898,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Issuer() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4581,6 +4908,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) JwksEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4590,6 +4918,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Logo() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *bool {
 		if v == nil {
@@ -4599,6 +4928,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) MergeUserAccounts() pu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) []string {
 		if v == nil {
@@ -4608,6 +4938,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Prompts() pulumi.Strin
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordProviderTokenManagement {
 		if v == nil {
@@ -4617,6 +4948,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) ProviderTokenManagemen
 	}).(ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) []string {
 		if v == nil {
@@ -4626,6 +4958,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Scopes() pulumi.String
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4635,6 +4968,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) TokenEndpoint() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
 		if v == nil {
@@ -4795,22 +5129,35 @@ func (o ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput)
 }
 
 type ProjectAuthenticationOauthSystemFacebook struct {
-	AuthorizationEndpoint   *string                                                          `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                                `pulumi:"claimMapping"`
-	ClientId                *string                                                          `pulumi:"clientId"`
-	ClientSecret            *string                                                          `pulumi:"clientSecret"`
-	Description             *string                                                          `pulumi:"description"`
-	Disabled                *bool                                                            `pulumi:"disabled"`
-	GrantType               *string                                                          `pulumi:"grantType"`
-	Issuer                  *string                                                          `pulumi:"issuer"`
-	JwksEndpoint            *string                                                          `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                          `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                            `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                         `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemFacebookProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                         `pulumi:"scopes"`
-	TokenEndpoint           *string                                                          `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                          `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemFacebookInput is an input type that accepts ProjectAuthenticationOauthSystemFacebookArgs and ProjectAuthenticationOauthSystemFacebookOutput values.
@@ -4825,22 +5172,35 @@ type ProjectAuthenticationOauthSystemFacebookInput interface {
 }
 
 type ProjectAuthenticationOauthSystemFacebookArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                   `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                   `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                   `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                   `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                   `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                     `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                   `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                   `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                   `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                   `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                     `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                                 `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                                 `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                   `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                   `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemFacebookArgs) ElementType() reflect.Type {
@@ -4920,6 +5280,7 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) ToProjectAuthenticationO
 	}).(ProjectAuthenticationOauthSystemFacebookPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -4928,14 +5289,17 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) ClaimMapping() pulumi.St
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -4944,6 +5308,7 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) Disabled() pulumi.BoolPt
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -4952,36 +5317,44 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) Issuer() pulumi.StringPt
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -5010,6 +5383,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Elem() ProjectAuthent
 	}).(ProjectAuthenticationOauthSystemFacebookOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5028,6 +5402,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ClaimMapping() pulumi
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5037,6 +5412,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ClientId() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5046,6 +5422,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ClientSecret() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5064,6 +5441,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Disabled() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5082,6 +5460,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Issuer() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5091,6 +5470,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) JwksEndpoint() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5100,6 +5480,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Logo() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *bool {
 		if v == nil {
@@ -5109,6 +5490,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) MergeUserAccounts() p
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) []string {
 		if v == nil {
@@ -5118,6 +5500,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Prompts() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookProviderTokenManagement {
 		if v == nil {
@@ -5127,6 +5510,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) ProviderTokenManageme
 	}).(ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) []string {
 		if v == nil {
@@ -5136,6 +5520,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Scopes() pulumi.Strin
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5145,6 +5530,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) TokenEndpoint() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
 		if v == nil {
@@ -5305,22 +5691,35 @@ func (o ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput
 }
 
 type ProjectAuthenticationOauthSystemGithub struct {
-	AuthorizationEndpoint   *string                                                        `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                              `pulumi:"claimMapping"`
-	ClientId                *string                                                        `pulumi:"clientId"`
-	ClientSecret            *string                                                        `pulumi:"clientSecret"`
-	Description             *string                                                        `pulumi:"description"`
-	Disabled                *bool                                                          `pulumi:"disabled"`
-	GrantType               *string                                                        `pulumi:"grantType"`
-	Issuer                  *string                                                        `pulumi:"issuer"`
-	JwksEndpoint            *string                                                        `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                        `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                          `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                       `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemGithubProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                       `pulumi:"scopes"`
-	TokenEndpoint           *string                                                        `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                        `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemGithubInput is an input type that accepts ProjectAuthenticationOauthSystemGithubArgs and ProjectAuthenticationOauthSystemGithubOutput values.
@@ -5335,22 +5734,35 @@ type ProjectAuthenticationOauthSystemGithubInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGithubArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                 `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                 `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                 `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                 `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                 `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                   `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                 `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                 `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                 `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                 `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                   `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                               `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                               `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                 `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                 `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemGithubArgs) ElementType() reflect.Type {
@@ -5430,6 +5842,7 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGithubPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -5438,14 +5851,17 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) ClaimMapping() pulumi.Stri
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -5454,6 +5870,7 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) Disabled() pulumi.BoolPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -5462,36 +5879,44 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) Issuer() pulumi.StringPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -5520,6 +5945,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGithubOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5538,6 +5964,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ClaimMapping() pulumi.S
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5547,6 +5974,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ClientId() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5556,6 +5984,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ClientSecret() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5574,6 +6003,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Disabled() pulumi.BoolP
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5592,6 +6022,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Issuer() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5601,6 +6032,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) JwksEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5610,6 +6042,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Logo() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *bool {
 		if v == nil {
@@ -5619,6 +6052,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) []string {
 		if v == nil {
@@ -5628,6 +6062,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Prompts() pulumi.String
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubProviderTokenManagement {
 		if v == nil {
@@ -5637,6 +6072,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) []string {
 		if v == nil {
@@ -5646,6 +6082,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Scopes() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5655,6 +6092,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
 		if v == nil {
@@ -5813,22 +6251,35 @@ func (o ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemGitlab struct {
-	AuthorizationEndpoint   *string                                                        `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                              `pulumi:"claimMapping"`
-	ClientId                *string                                                        `pulumi:"clientId"`
-	ClientSecret            *string                                                        `pulumi:"clientSecret"`
-	Description             *string                                                        `pulumi:"description"`
-	Disabled                *bool                                                          `pulumi:"disabled"`
-	GrantType               *string                                                        `pulumi:"grantType"`
-	Issuer                  *string                                                        `pulumi:"issuer"`
-	JwksEndpoint            *string                                                        `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                        `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                          `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                       `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemGitlabProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                       `pulumi:"scopes"`
-	TokenEndpoint           *string                                                        `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                        `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemGitlabInput is an input type that accepts ProjectAuthenticationOauthSystemGitlabArgs and ProjectAuthenticationOauthSystemGitlabOutput values.
@@ -5843,22 +6294,35 @@ type ProjectAuthenticationOauthSystemGitlabInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGitlabArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                 `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                 `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                 `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                 `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                 `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                   `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                 `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                 `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                 `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                 `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                   `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                               `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                               `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                 `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                 `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemGitlabArgs) ElementType() reflect.Type {
@@ -5938,6 +6402,7 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGitlabPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -5946,14 +6411,17 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) ClaimMapping() pulumi.Stri
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -5962,6 +6430,7 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) Disabled() pulumi.BoolPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -5970,36 +6439,44 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) Issuer() pulumi.StringPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -6028,6 +6505,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGitlabOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6046,6 +6524,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ClaimMapping() pulumi.S
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6055,6 +6534,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ClientId() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6064,6 +6544,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ClientSecret() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6082,6 +6563,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Disabled() pulumi.BoolP
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6100,6 +6582,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Issuer() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6109,6 +6592,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) JwksEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6118,6 +6602,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Logo() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *bool {
 		if v == nil {
@@ -6127,6 +6612,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) []string {
 		if v == nil {
@@ -6136,6 +6622,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Prompts() pulumi.String
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabProviderTokenManagement {
 		if v == nil {
@@ -6145,6 +6632,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) []string {
 		if v == nil {
@@ -6154,6 +6642,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Scopes() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6163,6 +6652,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
 		if v == nil {
@@ -6321,22 +6811,35 @@ func (o ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemGoogle struct {
-	AuthorizationEndpoint   *string                                                        `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                              `pulumi:"claimMapping"`
-	ClientId                *string                                                        `pulumi:"clientId"`
-	ClientSecret            *string                                                        `pulumi:"clientSecret"`
-	Description             *string                                                        `pulumi:"description"`
-	Disabled                *bool                                                          `pulumi:"disabled"`
-	GrantType               *string                                                        `pulumi:"grantType"`
-	Issuer                  *string                                                        `pulumi:"issuer"`
-	JwksEndpoint            *string                                                        `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                        `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                          `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                       `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemGoogleProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                       `pulumi:"scopes"`
-	TokenEndpoint           *string                                                        `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                        `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemGoogleInput is an input type that accepts ProjectAuthenticationOauthSystemGoogleArgs and ProjectAuthenticationOauthSystemGoogleOutput values.
@@ -6351,22 +6854,35 @@ type ProjectAuthenticationOauthSystemGoogleInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGoogleArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                 `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                 `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                 `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                 `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                 `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                   `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                 `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                 `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                 `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                 `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                   `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                               `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                               `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                 `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                 `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemGoogleArgs) ElementType() reflect.Type {
@@ -6446,6 +6962,7 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGooglePtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -6454,14 +6971,17 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) ClaimMapping() pulumi.Stri
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -6470,6 +6990,7 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) Disabled() pulumi.BoolPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -6478,36 +6999,44 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) Issuer() pulumi.StringPtrO
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -6536,6 +7065,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGoogleOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6554,6 +7084,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ClaimMapping() pulumi.S
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6563,6 +7094,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ClientId() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6572,6 +7104,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ClientSecret() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6590,6 +7123,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Disabled() pulumi.BoolP
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6608,6 +7142,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Issuer() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6617,6 +7152,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) JwksEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6626,6 +7162,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Logo() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *bool {
 		if v == nil {
@@ -6635,6 +7172,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) []string {
 		if v == nil {
@@ -6644,6 +7182,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Prompts() pulumi.String
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleProviderTokenManagement {
 		if v == nil {
@@ -6653,6 +7192,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) []string {
 		if v == nil {
@@ -6662,6 +7202,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Scopes() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6671,6 +7212,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
 		if v == nil {
@@ -6829,22 +7371,35 @@ func (o ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemLinkedin struct {
-	AuthorizationEndpoint   *string                                                          `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                                `pulumi:"claimMapping"`
-	ClientId                *string                                                          `pulumi:"clientId"`
-	ClientSecret            *string                                                          `pulumi:"clientSecret"`
-	Description             *string                                                          `pulumi:"description"`
-	Disabled                *bool                                                            `pulumi:"disabled"`
-	GrantType               *string                                                          `pulumi:"grantType"`
-	Issuer                  *string                                                          `pulumi:"issuer"`
-	JwksEndpoint            *string                                                          `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                          `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                            `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                         `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                         `pulumi:"scopes"`
-	TokenEndpoint           *string                                                          `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                          `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemLinkedinInput is an input type that accepts ProjectAuthenticationOauthSystemLinkedinArgs and ProjectAuthenticationOauthSystemLinkedinOutput values.
@@ -6859,22 +7414,35 @@ type ProjectAuthenticationOauthSystemLinkedinInput interface {
 }
 
 type ProjectAuthenticationOauthSystemLinkedinArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                   `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                   `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                   `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                   `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                   `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                     `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                   `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                   `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                   `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                   `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                     `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                                 `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                                 `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                   `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                   `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemLinkedinArgs) ElementType() reflect.Type {
@@ -6954,6 +7522,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) ToProjectAuthenticationO
 	}).(ProjectAuthenticationOauthSystemLinkedinPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -6962,14 +7531,17 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) ClaimMapping() pulumi.St
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -6978,6 +7550,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) Disabled() pulumi.BoolPt
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -6986,36 +7559,44 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) Issuer() pulumi.StringPt
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -7044,6 +7625,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Elem() ProjectAuthent
 	}).(ProjectAuthenticationOauthSystemLinkedinOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7062,6 +7644,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ClaimMapping() pulumi
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7071,6 +7654,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ClientId() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7080,6 +7664,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ClientSecret() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7098,6 +7683,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Disabled() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7116,6 +7702,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Issuer() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7125,6 +7712,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) JwksEndpoint() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7134,6 +7722,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Logo() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *bool {
 		if v == nil {
@@ -7143,6 +7732,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) MergeUserAccounts() p
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) []string {
 		if v == nil {
@@ -7152,6 +7742,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Prompts() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement {
 		if v == nil {
@@ -7161,6 +7752,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) ProviderTokenManageme
 	}).(ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) []string {
 		if v == nil {
@@ -7170,6 +7762,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Scopes() pulumi.Strin
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7179,6 +7772,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) TokenEndpoint() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
 		if v == nil {
@@ -7339,22 +7933,35 @@ func (o ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput
 }
 
 type ProjectAuthenticationOauthSystemMicrosoft struct {
-	AuthorizationEndpoint   *string                                                           `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                                 `pulumi:"claimMapping"`
-	ClientId                *string                                                           `pulumi:"clientId"`
-	ClientSecret            *string                                                           `pulumi:"clientSecret"`
-	Description             *string                                                           `pulumi:"description"`
-	Disabled                *bool                                                             `pulumi:"disabled"`
-	GrantType               *string                                                           `pulumi:"grantType"`
-	Issuer                  *string                                                           `pulumi:"issuer"`
-	JwksEndpoint            *string                                                           `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                           `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                             `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                          `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                          `pulumi:"scopes"`
-	TokenEndpoint           *string                                                           `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                           `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemMicrosoftInput is an input type that accepts ProjectAuthenticationOauthSystemMicrosoftArgs and ProjectAuthenticationOauthSystemMicrosoftOutput values.
@@ -7369,22 +7976,35 @@ type ProjectAuthenticationOauthSystemMicrosoftInput interface {
 }
 
 type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                    `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                    `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                    `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                    `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                    `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                      `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                    `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                    `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                    `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                    `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                      `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                                  `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                                  `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                    `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                    `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemMicrosoftArgs) ElementType() reflect.Type {
@@ -7464,6 +8084,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ToProjectAuthentication
 	}).(ProjectAuthenticationOauthSystemMicrosoftPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -7472,14 +8093,17 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ClaimMapping() pulumi.S
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -7488,6 +8112,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Disabled() pulumi.BoolP
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -7496,36 +8121,44 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Issuer() pulumi.StringP
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -7554,6 +8187,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Elem() ProjectAuthen
 	}).(ProjectAuthenticationOauthSystemMicrosoftOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7572,6 +8206,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ClaimMapping() pulum
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7581,6 +8216,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ClientId() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7590,6 +8226,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ClientSecret() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7608,6 +8245,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Disabled() pulumi.Bo
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7626,6 +8264,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Issuer() pulumi.Stri
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7635,6 +8274,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) JwksEndpoint() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7644,6 +8284,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Logo() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *bool {
 		if v == nil {
@@ -7653,6 +8294,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) MergeUserAccounts() 
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) []string {
 		if v == nil {
@@ -7662,6 +8304,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Prompts() pulumi.Str
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement {
 		if v == nil {
@@ -7671,6 +8314,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) ProviderTokenManagem
 	}).(ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) []string {
 		if v == nil {
@@ -7680,6 +8324,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Scopes() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7689,6 +8334,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) TokenEndpoint() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
 		if v == nil {
@@ -7849,22 +8495,35 @@ func (o ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutpu
 }
 
 type ProjectAuthenticationOauthSystemSlack struct {
-	AuthorizationEndpoint   *string                                                       `pulumi:"authorizationEndpoint"`
-	ClaimMapping            map[string]string                                             `pulumi:"claimMapping"`
-	ClientId                *string                                                       `pulumi:"clientId"`
-	ClientSecret            *string                                                       `pulumi:"clientSecret"`
-	Description             *string                                                       `pulumi:"description"`
-	Disabled                *bool                                                         `pulumi:"disabled"`
-	GrantType               *string                                                       `pulumi:"grantType"`
-	Issuer                  *string                                                       `pulumi:"issuer"`
-	JwksEndpoint            *string                                                       `pulumi:"jwksEndpoint"`
-	Logo                    *string                                                       `pulumi:"logo"`
-	MergeUserAccounts       *bool                                                         `pulumi:"mergeUserAccounts"`
-	Prompts                 []string                                                      `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
+	ClaimMapping          map[string]string `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId *string `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret *string `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description *string `pulumi:"description"`
+	Disabled    *bool   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType *string `pulumi:"grantType"`
+	Issuer    *string `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint *string `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo *string `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts []string `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement *ProjectAuthenticationOauthSystemSlackProviderTokenManagement `pulumi:"providerTokenManagement"`
-	Scopes                  []string                                                      `pulumi:"scopes"`
-	TokenEndpoint           *string                                                       `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        *string                                                       `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes []string `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
 
 // ProjectAuthenticationOauthSystemSlackInput is an input type that accepts ProjectAuthenticationOauthSystemSlackArgs and ProjectAuthenticationOauthSystemSlackOutput values.
@@ -7879,22 +8538,35 @@ type ProjectAuthenticationOauthSystemSlackInput interface {
 }
 
 type ProjectAuthenticationOauthSystemSlackArgs struct {
-	AuthorizationEndpoint   pulumi.StringPtrInput                                                `pulumi:"authorizationEndpoint"`
-	ClaimMapping            pulumi.StringMapInput                                                `pulumi:"claimMapping"`
-	ClientId                pulumi.StringPtrInput                                                `pulumi:"clientId"`
-	ClientSecret            pulumi.StringPtrInput                                                `pulumi:"clientSecret"`
-	Description             pulumi.StringPtrInput                                                `pulumi:"description"`
-	Disabled                pulumi.BoolPtrInput                                                  `pulumi:"disabled"`
-	GrantType               pulumi.StringPtrInput                                                `pulumi:"grantType"`
-	Issuer                  pulumi.StringPtrInput                                                `pulumi:"issuer"`
-	JwksEndpoint            pulumi.StringPtrInput                                                `pulumi:"jwksEndpoint"`
-	Logo                    pulumi.StringPtrInput                                                `pulumi:"logo"`
-	MergeUserAccounts       pulumi.BoolPtrInput                                                  `pulumi:"mergeUserAccounts"`
-	Prompts                 pulumi.StringArrayInput                                              `pulumi:"prompts"`
+	// The URL that users are redirected to for authorization with the OAuth provider.
+	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
+	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
+	// The client ID for the OAuth provider, used to identify the application to the provider.
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
+	// The client secret for the OAuth provider, used to authenticate the application with the provider.
+	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
+	// A brief description of the OAuth provider.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
+	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
+	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
+	// The URL of the logo associated with the OAuth provider.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// Whether to merge existing user accounts with new ones created through OAuth authentication.
+	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// Custom prompts or consent screens that users may see during OAuth authentication.
+	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
+	// Settings related to token management for the OAuth provider.
 	ProviderTokenManagement ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrInput `pulumi:"providerTokenManagement"`
-	Scopes                  pulumi.StringArrayInput                                              `pulumi:"scopes"`
-	TokenEndpoint           pulumi.StringPtrInput                                                `pulumi:"tokenEndpoint"`
-	UserInfoEndpoint        pulumi.StringPtrInput                                                `pulumi:"userInfoEndpoint"`
+	// Scopes of access that the application requests from the user's account on the OAuth provider.
+	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
+	// The URL where the application requests an access token from the OAuth provider.
+	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// The URL where the application retrieves user information from the OAuth provider.
+	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
 
 func (ProjectAuthenticationOauthSystemSlackArgs) ElementType() reflect.Type {
@@ -7974,6 +8646,7 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) ToProjectAuthenticationOaut
 	}).(ProjectAuthenticationOauthSystemSlackPtrOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -7982,14 +8655,17 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) ClaimMapping() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) map[string]string { return v.ClaimMapping }).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.ClientSecret }).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -7998,6 +8674,7 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) Disabled() pulumi.BoolPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
@@ -8006,36 +8683,44 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) Issuer() pulumi.StringPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.JwksEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) []string { return v.Prompts }).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackProviderTokenManagement {
 		return v.ProviderTokenManagement
 	}).(ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) []string { return v.Scopes }).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.UserInfoEndpoint }).(pulumi.StringPtrOutput)
 }
@@ -8064,6 +8749,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Elem() ProjectAuthentica
 	}).(ProjectAuthenticationOauthSystemSlackOutput)
 }
 
+// The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8082,6 +8768,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ClaimMapping() pulumi.St
 	}).(pulumi.StringMapOutput)
 }
 
+// The client ID for the OAuth provider, used to identify the application to the provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ClientId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8091,6 +8778,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ClientId() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// The client secret for the OAuth provider, used to authenticate the application with the provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ClientSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8100,6 +8788,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ClientSecret() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8118,6 +8807,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Disabled() pulumi.BoolPt
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) GrantType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8136,6 +8826,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Issuer() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) JwksEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8145,6 +8836,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) JwksEndpoint() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL of the logo associated with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8154,6 +8846,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Logo() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *bool {
 		if v == nil {
@@ -8163,6 +8856,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) MergeUserAccounts() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) []string {
 		if v == nil {
@@ -8172,6 +8866,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Prompts() pulumi.StringA
 	}).(pulumi.StringArrayOutput)
 }
 
+// Settings related to token management for the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ProviderTokenManagement() ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackProviderTokenManagement {
 		if v == nil {
@@ -8181,6 +8876,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) ProviderTokenManagement(
 	}).(ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput)
 }
 
+// Scopes of access that the application requests from the user's account on the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Scopes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) []string {
 		if v == nil {
@@ -8190,6 +8886,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Scopes() pulumi.StringAr
 	}).(pulumi.StringArrayOutput)
 }
 
+// The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8199,6 +8896,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) TokenEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
 		if v == nil {
@@ -8357,13 +9055,18 @@ func (o ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput) R
 }
 
 type ProjectAuthenticationOtp struct {
-	Domain             *string                               `pulumi:"domain"`
-	EmailService       *ProjectAuthenticationOtpEmailService `pulumi:"emailService"`
-	Enabled            *bool                                 `pulumi:"enabled"`
-	ExpirationTime     *int                                  `pulumi:"expirationTime"`
-	ExpirationTimeUnit *string                               `pulumi:"expirationTimeUnit"`
-	TextService        *ProjectAuthenticationOtpTextService  `pulumi:"textService"`
-	VoiceService       *ProjectAuthenticationOtpVoiceService `pulumi:"voiceService"`
+	// The domain to embed in OTP messages.
+	Domain *string `pulumi:"domain"`
+	// Settings related to sending emails with OTP codes.
+	EmailService *ProjectAuthenticationOtpEmailService `pulumi:"emailService"`
+	Enabled      *bool                                 `pulumi:"enabled"`
+	// The amount of time that an OTP code will be valid for.
+	ExpirationTime     *int    `pulumi:"expirationTime"`
+	ExpirationTimeUnit *string `pulumi:"expirationTimeUnit"`
+	// Settings related to sending SMS messages with OTP codes.
+	TextService *ProjectAuthenticationOtpTextService `pulumi:"textService"`
+	// Settings related to voice calls with OTP codes.
+	VoiceService *ProjectAuthenticationOtpVoiceService `pulumi:"voiceService"`
 }
 
 // ProjectAuthenticationOtpInput is an input type that accepts ProjectAuthenticationOtpArgs and ProjectAuthenticationOtpOutput values.
@@ -8378,13 +9081,18 @@ type ProjectAuthenticationOtpInput interface {
 }
 
 type ProjectAuthenticationOtpArgs struct {
-	Domain             pulumi.StringPtrInput                        `pulumi:"domain"`
-	EmailService       ProjectAuthenticationOtpEmailServicePtrInput `pulumi:"emailService"`
-	Enabled            pulumi.BoolPtrInput                          `pulumi:"enabled"`
-	ExpirationTime     pulumi.IntPtrInput                           `pulumi:"expirationTime"`
-	ExpirationTimeUnit pulumi.StringPtrInput                        `pulumi:"expirationTimeUnit"`
-	TextService        ProjectAuthenticationOtpTextServicePtrInput  `pulumi:"textService"`
-	VoiceService       ProjectAuthenticationOtpVoiceServicePtrInput `pulumi:"voiceService"`
+	// The domain to embed in OTP messages.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// Settings related to sending emails with OTP codes.
+	EmailService ProjectAuthenticationOtpEmailServicePtrInput `pulumi:"emailService"`
+	Enabled      pulumi.BoolPtrInput                          `pulumi:"enabled"`
+	// The amount of time that an OTP code will be valid for.
+	ExpirationTime     pulumi.IntPtrInput    `pulumi:"expirationTime"`
+	ExpirationTimeUnit pulumi.StringPtrInput `pulumi:"expirationTimeUnit"`
+	// Settings related to sending SMS messages with OTP codes.
+	TextService ProjectAuthenticationOtpTextServicePtrInput `pulumi:"textService"`
+	// Settings related to voice calls with OTP codes.
+	VoiceService ProjectAuthenticationOtpVoiceServicePtrInput `pulumi:"voiceService"`
 }
 
 func (ProjectAuthenticationOtpArgs) ElementType() reflect.Type {
@@ -8464,10 +9172,12 @@ func (o ProjectAuthenticationOtpOutput) ToProjectAuthenticationOtpPtrOutputWithC
 	}).(ProjectAuthenticationOtpPtrOutput)
 }
 
+// The domain to embed in OTP messages.
 func (o ProjectAuthenticationOtpOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *string { return v.Domain }).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending emails with OTP codes.
 func (o ProjectAuthenticationOtpOutput) EmailService() ProjectAuthenticationOtpEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *ProjectAuthenticationOtpEmailService { return v.EmailService }).(ProjectAuthenticationOtpEmailServicePtrOutput)
 }
@@ -8476,6 +9186,7 @@ func (o ProjectAuthenticationOtpOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// The amount of time that an OTP code will be valid for.
 func (o ProjectAuthenticationOtpOutput) ExpirationTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
 }
@@ -8484,10 +9195,12 @@ func (o ProjectAuthenticationOtpOutput) ExpirationTimeUnit() pulumi.StringPtrOut
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending SMS messages with OTP codes.
 func (o ProjectAuthenticationOtpOutput) TextService() ProjectAuthenticationOtpTextServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *ProjectAuthenticationOtpTextService { return v.TextService }).(ProjectAuthenticationOtpTextServicePtrOutput)
 }
 
+// Settings related to voice calls with OTP codes.
 func (o ProjectAuthenticationOtpOutput) VoiceService() ProjectAuthenticationOtpVoiceServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *ProjectAuthenticationOtpVoiceService { return v.VoiceService }).(ProjectAuthenticationOtpVoiceServicePtrOutput)
 }
@@ -8516,6 +9229,7 @@ func (o ProjectAuthenticationOtpPtrOutput) Elem() ProjectAuthenticationOtpOutput
 	}).(ProjectAuthenticationOtpOutput)
 }
 
+// The domain to embed in OTP messages.
 func (o ProjectAuthenticationOtpPtrOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *string {
 		if v == nil {
@@ -8525,6 +9239,7 @@ func (o ProjectAuthenticationOtpPtrOutput) Domain() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending emails with OTP codes.
 func (o ProjectAuthenticationOtpPtrOutput) EmailService() ProjectAuthenticationOtpEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *ProjectAuthenticationOtpEmailService {
 		if v == nil {
@@ -8543,6 +9258,7 @@ func (o ProjectAuthenticationOtpPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The amount of time that an OTP code will be valid for.
 func (o ProjectAuthenticationOtpPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *int {
 		if v == nil {
@@ -8561,6 +9277,7 @@ func (o ProjectAuthenticationOtpPtrOutput) ExpirationTimeUnit() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// Settings related to sending SMS messages with OTP codes.
 func (o ProjectAuthenticationOtpPtrOutput) TextService() ProjectAuthenticationOtpTextServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *ProjectAuthenticationOtpTextService {
 		if v == nil {
@@ -8570,6 +9287,7 @@ func (o ProjectAuthenticationOtpPtrOutput) TextService() ProjectAuthenticationOt
 	}).(ProjectAuthenticationOtpTextServicePtrOutput)
 }
 
+// Settings related to voice calls with OTP codes.
 func (o ProjectAuthenticationOtpPtrOutput) VoiceService() ProjectAuthenticationOtpVoiceServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *ProjectAuthenticationOtpVoiceService {
 		if v == nil {
@@ -9383,20 +10101,183 @@ func (o ProjectAuthenticationOtpVoiceServiceTemplateArrayOutput) Index(i pulumi.
 	}).(ProjectAuthenticationOtpVoiceServiceTemplateOutput)
 }
 
+type ProjectAuthenticationPasskeys struct {
+	Enabled *bool `pulumi:"enabled"`
+	// Passkeys will be usable in the following domain and all its subdomains.
+	TopLevelDomain *string `pulumi:"topLevelDomain"`
+}
+
+// ProjectAuthenticationPasskeysInput is an input type that accepts ProjectAuthenticationPasskeysArgs and ProjectAuthenticationPasskeysOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationPasskeysInput` via:
+//
+//	ProjectAuthenticationPasskeysArgs{...}
+type ProjectAuthenticationPasskeysInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationPasskeysOutput() ProjectAuthenticationPasskeysOutput
+	ToProjectAuthenticationPasskeysOutputWithContext(context.Context) ProjectAuthenticationPasskeysOutput
+}
+
+type ProjectAuthenticationPasskeysArgs struct {
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Passkeys will be usable in the following domain and all its subdomains.
+	TopLevelDomain pulumi.StringPtrInput `pulumi:"topLevelDomain"`
+}
+
+func (ProjectAuthenticationPasskeysArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationPasskeys)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationPasskeysArgs) ToProjectAuthenticationPasskeysOutput() ProjectAuthenticationPasskeysOutput {
+	return i.ToProjectAuthenticationPasskeysOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationPasskeysArgs) ToProjectAuthenticationPasskeysOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationPasskeysOutput)
+}
+
+func (i ProjectAuthenticationPasskeysArgs) ToProjectAuthenticationPasskeysPtrOutput() ProjectAuthenticationPasskeysPtrOutput {
+	return i.ToProjectAuthenticationPasskeysPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationPasskeysArgs) ToProjectAuthenticationPasskeysPtrOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationPasskeysOutput).ToProjectAuthenticationPasskeysPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationPasskeysPtrInput is an input type that accepts ProjectAuthenticationPasskeysArgs, ProjectAuthenticationPasskeysPtr and ProjectAuthenticationPasskeysPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationPasskeysPtrInput` via:
+//
+//	        ProjectAuthenticationPasskeysArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationPasskeysPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationPasskeysPtrOutput() ProjectAuthenticationPasskeysPtrOutput
+	ToProjectAuthenticationPasskeysPtrOutputWithContext(context.Context) ProjectAuthenticationPasskeysPtrOutput
+}
+
+type projectAuthenticationPasskeysPtrType ProjectAuthenticationPasskeysArgs
+
+func ProjectAuthenticationPasskeysPtr(v *ProjectAuthenticationPasskeysArgs) ProjectAuthenticationPasskeysPtrInput {
+	return (*projectAuthenticationPasskeysPtrType)(v)
+}
+
+func (*projectAuthenticationPasskeysPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationPasskeys)(nil)).Elem()
+}
+
+func (i *projectAuthenticationPasskeysPtrType) ToProjectAuthenticationPasskeysPtrOutput() ProjectAuthenticationPasskeysPtrOutput {
+	return i.ToProjectAuthenticationPasskeysPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationPasskeysPtrType) ToProjectAuthenticationPasskeysPtrOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationPasskeysPtrOutput)
+}
+
+type ProjectAuthenticationPasskeysOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationPasskeysOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationPasskeys)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationPasskeysOutput) ToProjectAuthenticationPasskeysOutput() ProjectAuthenticationPasskeysOutput {
+	return o
+}
+
+func (o ProjectAuthenticationPasskeysOutput) ToProjectAuthenticationPasskeysOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysOutput {
+	return o
+}
+
+func (o ProjectAuthenticationPasskeysOutput) ToProjectAuthenticationPasskeysPtrOutput() ProjectAuthenticationPasskeysPtrOutput {
+	return o.ToProjectAuthenticationPasskeysPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationPasskeysOutput) ToProjectAuthenticationPasskeysPtrOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationPasskeys) *ProjectAuthenticationPasskeys {
+		return &v
+	}).(ProjectAuthenticationPasskeysPtrOutput)
+}
+
+func (o ProjectAuthenticationPasskeysOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPasskeys) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Passkeys will be usable in the following domain and all its subdomains.
+func (o ProjectAuthenticationPasskeysOutput) TopLevelDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPasskeys) *string { return v.TopLevelDomain }).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationPasskeysPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationPasskeysPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationPasskeys)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationPasskeysPtrOutput) ToProjectAuthenticationPasskeysPtrOutput() ProjectAuthenticationPasskeysPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationPasskeysPtrOutput) ToProjectAuthenticationPasskeysPtrOutputWithContext(ctx context.Context) ProjectAuthenticationPasskeysPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationPasskeysPtrOutput) Elem() ProjectAuthenticationPasskeysOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPasskeys) ProjectAuthenticationPasskeys {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationPasskeys
+		return ret
+	}).(ProjectAuthenticationPasskeysOutput)
+}
+
+func (o ProjectAuthenticationPasskeysPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPasskeys) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Passkeys will be usable in the following domain and all its subdomains.
+func (o ProjectAuthenticationPasskeysPtrOutput) TopLevelDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPasskeys) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopLevelDomain
+	}).(pulumi.StringPtrOutput)
+}
+
 type ProjectAuthenticationPassword struct {
-	EmailService    *ProjectAuthenticationPasswordEmailService `pulumi:"emailService"`
-	Enabled         *bool                                      `pulumi:"enabled"`
-	Expiration      *bool                                      `pulumi:"expiration"`
-	ExpirationWeeks *int                                       `pulumi:"expirationWeeks"`
-	Lock            *bool                                      `pulumi:"lock"`
-	LockAttempts    *int                                       `pulumi:"lockAttempts"`
-	Lowercase       *bool                                      `pulumi:"lowercase"`
-	MinLength       *int                                       `pulumi:"minLength"`
-	NonAlphanumeric *bool                                      `pulumi:"nonAlphanumeric"`
-	Number          *bool                                      `pulumi:"number"`
-	Reuse           *bool                                      `pulumi:"reuse"`
-	ReuseAmount     *int                                       `pulumi:"reuseAmount"`
-	Uppercase       *bool                                      `pulumi:"uppercase"`
+	// Settings related to sending password reset emails as part of the password feature.
+	EmailService *ProjectAuthenticationPasswordEmailService `pulumi:"emailService"`
+	Enabled      *bool                                      `pulumi:"enabled"`
+	// Whether users are required to change their password periodically.
+	Expiration *bool `pulumi:"expiration"`
+	// The number of weeks after which a user's password expires and they need to replace it.
+	ExpirationWeeks *int `pulumi:"expirationWeeks"`
+	// Whether the user account should be locked after a specified number of failed login attempts.
+	Lock *bool `pulumi:"lock"`
+	// The number of failed login attempts allowed before an account is locked.
+	LockAttempts *int `pulumi:"lockAttempts"`
+	// Whether passwords must contain at least one lowercase letter.
+	Lowercase *bool `pulumi:"lowercase"`
+	// The minimum length of the password that users are required to use. The maximum length is always `64`.
+	MinLength *int `pulumi:"minLength"`
+	// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+	NonAlphanumeric *bool `pulumi:"nonAlphanumeric"`
+	// Whether passwords must contain at least one number.
+	Number *bool `pulumi:"number"`
+	// Whether to forbid password reuse when users change their password.
+	Reuse       *bool `pulumi:"reuse"`
+	ReuseAmount *int  `pulumi:"reuseAmount"`
+	// Whether passwords must contain at least one uppercase letter.
+	Uppercase *bool `pulumi:"uppercase"`
 }
 
 // ProjectAuthenticationPasswordInput is an input type that accepts ProjectAuthenticationPasswordArgs and ProjectAuthenticationPasswordOutput values.
@@ -9411,19 +10292,30 @@ type ProjectAuthenticationPasswordInput interface {
 }
 
 type ProjectAuthenticationPasswordArgs struct {
-	EmailService    ProjectAuthenticationPasswordEmailServicePtrInput `pulumi:"emailService"`
-	Enabled         pulumi.BoolPtrInput                               `pulumi:"enabled"`
-	Expiration      pulumi.BoolPtrInput                               `pulumi:"expiration"`
-	ExpirationWeeks pulumi.IntPtrInput                                `pulumi:"expirationWeeks"`
-	Lock            pulumi.BoolPtrInput                               `pulumi:"lock"`
-	LockAttempts    pulumi.IntPtrInput                                `pulumi:"lockAttempts"`
-	Lowercase       pulumi.BoolPtrInput                               `pulumi:"lowercase"`
-	MinLength       pulumi.IntPtrInput                                `pulumi:"minLength"`
-	NonAlphanumeric pulumi.BoolPtrInput                               `pulumi:"nonAlphanumeric"`
-	Number          pulumi.BoolPtrInput                               `pulumi:"number"`
-	Reuse           pulumi.BoolPtrInput                               `pulumi:"reuse"`
-	ReuseAmount     pulumi.IntPtrInput                                `pulumi:"reuseAmount"`
-	Uppercase       pulumi.BoolPtrInput                               `pulumi:"uppercase"`
+	// Settings related to sending password reset emails as part of the password feature.
+	EmailService ProjectAuthenticationPasswordEmailServicePtrInput `pulumi:"emailService"`
+	Enabled      pulumi.BoolPtrInput                               `pulumi:"enabled"`
+	// Whether users are required to change their password periodically.
+	Expiration pulumi.BoolPtrInput `pulumi:"expiration"`
+	// The number of weeks after which a user's password expires and they need to replace it.
+	ExpirationWeeks pulumi.IntPtrInput `pulumi:"expirationWeeks"`
+	// Whether the user account should be locked after a specified number of failed login attempts.
+	Lock pulumi.BoolPtrInput `pulumi:"lock"`
+	// The number of failed login attempts allowed before an account is locked.
+	LockAttempts pulumi.IntPtrInput `pulumi:"lockAttempts"`
+	// Whether passwords must contain at least one lowercase letter.
+	Lowercase pulumi.BoolPtrInput `pulumi:"lowercase"`
+	// The minimum length of the password that users are required to use. The maximum length is always `64`.
+	MinLength pulumi.IntPtrInput `pulumi:"minLength"`
+	// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+	NonAlphanumeric pulumi.BoolPtrInput `pulumi:"nonAlphanumeric"`
+	// Whether passwords must contain at least one number.
+	Number pulumi.BoolPtrInput `pulumi:"number"`
+	// Whether to forbid password reuse when users change their password.
+	Reuse       pulumi.BoolPtrInput `pulumi:"reuse"`
+	ReuseAmount pulumi.IntPtrInput  `pulumi:"reuseAmount"`
+	// Whether passwords must contain at least one uppercase letter.
+	Uppercase pulumi.BoolPtrInput `pulumi:"uppercase"`
 }
 
 func (ProjectAuthenticationPasswordArgs) ElementType() reflect.Type {
@@ -9503,6 +10395,7 @@ func (o ProjectAuthenticationPasswordOutput) ToProjectAuthenticationPasswordPtrO
 	}).(ProjectAuthenticationPasswordPtrOutput)
 }
 
+// Settings related to sending password reset emails as part of the password feature.
 func (o ProjectAuthenticationPasswordOutput) EmailService() ProjectAuthenticationPasswordEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *ProjectAuthenticationPasswordEmailService {
 		return v.EmailService
@@ -9513,38 +10406,47 @@ func (o ProjectAuthenticationPasswordOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// Whether users are required to change their password periodically.
 func (o ProjectAuthenticationPasswordOutput) Expiration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Expiration }).(pulumi.BoolPtrOutput)
 }
 
+// The number of weeks after which a user's password expires and they need to replace it.
 func (o ProjectAuthenticationPasswordOutput) ExpirationWeeks() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.ExpirationWeeks }).(pulumi.IntPtrOutput)
 }
 
+// Whether the user account should be locked after a specified number of failed login attempts.
 func (o ProjectAuthenticationPasswordOutput) Lock() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Lock }).(pulumi.BoolPtrOutput)
 }
 
+// The number of failed login attempts allowed before an account is locked.
 func (o ProjectAuthenticationPasswordOutput) LockAttempts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.LockAttempts }).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one lowercase letter.
 func (o ProjectAuthenticationPasswordOutput) Lowercase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Lowercase }).(pulumi.BoolPtrOutput)
 }
 
+// The minimum length of the password that users are required to use. The maximum length is always `64`.
 func (o ProjectAuthenticationPasswordOutput) MinLength() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.MinLength }).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
 func (o ProjectAuthenticationPasswordOutput) NonAlphanumeric() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.NonAlphanumeric }).(pulumi.BoolPtrOutput)
 }
 
+// Whether passwords must contain at least one number.
 func (o ProjectAuthenticationPasswordOutput) Number() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Number }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to forbid password reuse when users change their password.
 func (o ProjectAuthenticationPasswordOutput) Reuse() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Reuse }).(pulumi.BoolPtrOutput)
 }
@@ -9553,6 +10455,7 @@ func (o ProjectAuthenticationPasswordOutput) ReuseAmount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.ReuseAmount }).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one uppercase letter.
 func (o ProjectAuthenticationPasswordOutput) Uppercase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Uppercase }).(pulumi.BoolPtrOutput)
 }
@@ -9581,6 +10484,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Elem() ProjectAuthenticationPass
 	}).(ProjectAuthenticationPasswordOutput)
 }
 
+// Settings related to sending password reset emails as part of the password feature.
 func (o ProjectAuthenticationPasswordPtrOutput) EmailService() ProjectAuthenticationPasswordEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *ProjectAuthenticationPasswordEmailService {
 		if v == nil {
@@ -9599,6 +10503,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Whether users are required to change their password periodically.
 func (o ProjectAuthenticationPasswordPtrOutput) Expiration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9608,6 +10513,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Expiration() pulumi.BoolPtrOutpu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The number of weeks after which a user's password expires and they need to replace it.
 func (o ProjectAuthenticationPasswordPtrOutput) ExpirationWeeks() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *int {
 		if v == nil {
@@ -9617,6 +10523,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) ExpirationWeeks() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether the user account should be locked after a specified number of failed login attempts.
 func (o ProjectAuthenticationPasswordPtrOutput) Lock() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9626,6 +10533,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Lock() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The number of failed login attempts allowed before an account is locked.
 func (o ProjectAuthenticationPasswordPtrOutput) LockAttempts() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *int {
 		if v == nil {
@@ -9635,6 +10543,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) LockAttempts() pulumi.IntPtrOutp
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one lowercase letter.
 func (o ProjectAuthenticationPasswordPtrOutput) Lowercase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9644,6 +10553,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Lowercase() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The minimum length of the password that users are required to use. The maximum length is always `64`.
 func (o ProjectAuthenticationPasswordPtrOutput) MinLength() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *int {
 		if v == nil {
@@ -9653,6 +10563,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) MinLength() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
 func (o ProjectAuthenticationPasswordPtrOutput) NonAlphanumeric() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9662,6 +10573,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) NonAlphanumeric() pulumi.BoolPtr
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Whether passwords must contain at least one number.
 func (o ProjectAuthenticationPasswordPtrOutput) Number() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9671,6 +10583,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) Number() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Whether to forbid password reuse when users change their password.
 func (o ProjectAuthenticationPasswordPtrOutput) Reuse() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9689,6 +10602,7 @@ func (o ProjectAuthenticationPasswordPtrOutput) ReuseAmount() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Whether passwords must contain at least one uppercase letter.
 func (o ProjectAuthenticationPasswordPtrOutput) Uppercase() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
 		if v == nil {
@@ -9979,7 +10893,8 @@ func (o ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput) Index(i pu
 }
 
 type ProjectAuthenticationSso struct {
-	Enabled    *bool `pulumi:"enabled"`
+	Enabled *bool `pulumi:"enabled"`
+	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 }
 
@@ -9995,7 +10910,8 @@ type ProjectAuthenticationSsoInput interface {
 }
 
 type ProjectAuthenticationSsoArgs struct {
-	Enabled    pulumi.BoolPtrInput `pulumi:"enabled"`
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
 }
 
@@ -10080,6 +10996,7 @@ func (o ProjectAuthenticationSsoOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through SSO authentication.
 func (o ProjectAuthenticationSsoOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.MergeUsers }).(pulumi.BoolPtrOutput)
 }
@@ -10117,6 +11034,7 @@ func (o ProjectAuthenticationSsoPtrOutput) Enabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Whether to merge existing user accounts with new ones created through SSO authentication.
 func (o ProjectAuthenticationSsoPtrOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
 		if v == nil {
@@ -10257,154 +11175,6 @@ func (o ProjectAuthenticationTotpPtrOutput) Enabled() pulumi.BoolPtrOutput {
 		}
 		return v.Enabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-type ProjectAuthenticationWebauthn struct {
-	Enabled        *bool   `pulumi:"enabled"`
-	TopLevelDomain *string `pulumi:"topLevelDomain"`
-}
-
-// ProjectAuthenticationWebauthnInput is an input type that accepts ProjectAuthenticationWebauthnArgs and ProjectAuthenticationWebauthnOutput values.
-// You can construct a concrete instance of `ProjectAuthenticationWebauthnInput` via:
-//
-//	ProjectAuthenticationWebauthnArgs{...}
-type ProjectAuthenticationWebauthnInput interface {
-	pulumi.Input
-
-	ToProjectAuthenticationWebauthnOutput() ProjectAuthenticationWebauthnOutput
-	ToProjectAuthenticationWebauthnOutputWithContext(context.Context) ProjectAuthenticationWebauthnOutput
-}
-
-type ProjectAuthenticationWebauthnArgs struct {
-	Enabled        pulumi.BoolPtrInput   `pulumi:"enabled"`
-	TopLevelDomain pulumi.StringPtrInput `pulumi:"topLevelDomain"`
-}
-
-func (ProjectAuthenticationWebauthnArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectAuthenticationWebauthn)(nil)).Elem()
-}
-
-func (i ProjectAuthenticationWebauthnArgs) ToProjectAuthenticationWebauthnOutput() ProjectAuthenticationWebauthnOutput {
-	return i.ToProjectAuthenticationWebauthnOutputWithContext(context.Background())
-}
-
-func (i ProjectAuthenticationWebauthnArgs) ToProjectAuthenticationWebauthnOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationWebauthnOutput)
-}
-
-func (i ProjectAuthenticationWebauthnArgs) ToProjectAuthenticationWebauthnPtrOutput() ProjectAuthenticationWebauthnPtrOutput {
-	return i.ToProjectAuthenticationWebauthnPtrOutputWithContext(context.Background())
-}
-
-func (i ProjectAuthenticationWebauthnArgs) ToProjectAuthenticationWebauthnPtrOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationWebauthnOutput).ToProjectAuthenticationWebauthnPtrOutputWithContext(ctx)
-}
-
-// ProjectAuthenticationWebauthnPtrInput is an input type that accepts ProjectAuthenticationWebauthnArgs, ProjectAuthenticationWebauthnPtr and ProjectAuthenticationWebauthnPtrOutput values.
-// You can construct a concrete instance of `ProjectAuthenticationWebauthnPtrInput` via:
-//
-//	        ProjectAuthenticationWebauthnArgs{...}
-//
-//	or:
-//
-//	        nil
-type ProjectAuthenticationWebauthnPtrInput interface {
-	pulumi.Input
-
-	ToProjectAuthenticationWebauthnPtrOutput() ProjectAuthenticationWebauthnPtrOutput
-	ToProjectAuthenticationWebauthnPtrOutputWithContext(context.Context) ProjectAuthenticationWebauthnPtrOutput
-}
-
-type projectAuthenticationWebauthnPtrType ProjectAuthenticationWebauthnArgs
-
-func ProjectAuthenticationWebauthnPtr(v *ProjectAuthenticationWebauthnArgs) ProjectAuthenticationWebauthnPtrInput {
-	return (*projectAuthenticationWebauthnPtrType)(v)
-}
-
-func (*projectAuthenticationWebauthnPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectAuthenticationWebauthn)(nil)).Elem()
-}
-
-func (i *projectAuthenticationWebauthnPtrType) ToProjectAuthenticationWebauthnPtrOutput() ProjectAuthenticationWebauthnPtrOutput {
-	return i.ToProjectAuthenticationWebauthnPtrOutputWithContext(context.Background())
-}
-
-func (i *projectAuthenticationWebauthnPtrType) ToProjectAuthenticationWebauthnPtrOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationWebauthnPtrOutput)
-}
-
-type ProjectAuthenticationWebauthnOutput struct{ *pulumi.OutputState }
-
-func (ProjectAuthenticationWebauthnOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectAuthenticationWebauthn)(nil)).Elem()
-}
-
-func (o ProjectAuthenticationWebauthnOutput) ToProjectAuthenticationWebauthnOutput() ProjectAuthenticationWebauthnOutput {
-	return o
-}
-
-func (o ProjectAuthenticationWebauthnOutput) ToProjectAuthenticationWebauthnOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnOutput {
-	return o
-}
-
-func (o ProjectAuthenticationWebauthnOutput) ToProjectAuthenticationWebauthnPtrOutput() ProjectAuthenticationWebauthnPtrOutput {
-	return o.ToProjectAuthenticationWebauthnPtrOutputWithContext(context.Background())
-}
-
-func (o ProjectAuthenticationWebauthnOutput) ToProjectAuthenticationWebauthnPtrOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationWebauthn) *ProjectAuthenticationWebauthn {
-		return &v
-	}).(ProjectAuthenticationWebauthnPtrOutput)
-}
-
-func (o ProjectAuthenticationWebauthnOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationWebauthn) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationWebauthnOutput) TopLevelDomain() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationWebauthn) *string { return v.TopLevelDomain }).(pulumi.StringPtrOutput)
-}
-
-type ProjectAuthenticationWebauthnPtrOutput struct{ *pulumi.OutputState }
-
-func (ProjectAuthenticationWebauthnPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectAuthenticationWebauthn)(nil)).Elem()
-}
-
-func (o ProjectAuthenticationWebauthnPtrOutput) ToProjectAuthenticationWebauthnPtrOutput() ProjectAuthenticationWebauthnPtrOutput {
-	return o
-}
-
-func (o ProjectAuthenticationWebauthnPtrOutput) ToProjectAuthenticationWebauthnPtrOutputWithContext(ctx context.Context) ProjectAuthenticationWebauthnPtrOutput {
-	return o
-}
-
-func (o ProjectAuthenticationWebauthnPtrOutput) Elem() ProjectAuthenticationWebauthnOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationWebauthn) ProjectAuthenticationWebauthn {
-		if v != nil {
-			return *v
-		}
-		var ret ProjectAuthenticationWebauthn
-		return ret
-	}).(ProjectAuthenticationWebauthnOutput)
-}
-
-func (o ProjectAuthenticationWebauthnPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationWebauthn) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationWebauthnPtrOutput) TopLevelDomain() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationWebauthn) *string {
-		if v == nil {
-			return nil
-		}
-		return v.TopLevelDomain
-	}).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthorization struct {
@@ -10774,38 +11544,58 @@ func (o ProjectAuthorizationRoleArrayOutput) Index(i pulumi.IntInput) ProjectAut
 }
 
 type ProjectConnectors struct {
-	Abuseipdbs              []ProjectConnectorsAbuseipdb              `pulumi:"abuseipdbs"`
-	Amplitudes              []ProjectConnectorsAmplitude              `pulumi:"amplitudes"`
-	AuditWebhooks           []ProjectConnectorsAuditWebhook           `pulumi:"auditWebhooks"`
-	AwsS3s                  []ProjectConnectorsAwsS3                  `pulumi:"awsS3s"`
-	AwsTranslates           []ProjectConnectorsAwsTranslate           `pulumi:"awsTranslates"`
-	Clears                  []ProjectConnectorsClear                  `pulumi:"clears"`
-	Datadogs                []ProjectConnectorsDatadog                `pulumi:"datadogs"`
-	DevrevGrows             []ProjectConnectorsDevrevGrow             `pulumi:"devrevGrows"`
-	Docebos                 []ProjectConnectorsDocebo                 `pulumi:"docebos"`
-	FingerprintDescopes     []ProjectConnectorsFingerprintDescope     `pulumi:"fingerprintDescopes"`
-	Fingerprints            []ProjectConnectorsFingerprint            `pulumi:"fingerprints"`
+	// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+	Abuseipdbs []ProjectConnectorsAbuseipdb `pulumi:"abuseipdbs"`
+	// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+	Amplitudes    []ProjectConnectorsAmplitude    `pulumi:"amplitudes"`
+	AuditWebhooks []ProjectConnectorsAuditWebhook `pulumi:"auditWebhooks"`
+	AwsS3s        []ProjectConnectorsAwsS3        `pulumi:"awsS3s"`
+	AwsTranslates []ProjectConnectorsAwsTranslate `pulumi:"awsTranslates"`
+	// An identity verification platform that allow customers to digitally verify their identity from anywhere.
+	Clears []ProjectConnectorsClear `pulumi:"clears"`
+	// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+	Datadogs    []ProjectConnectorsDatadog    `pulumi:"datadogs"`
+	DevrevGrows []ProjectConnectorsDevrevGrow `pulumi:"devrevGrows"`
+	// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+	Docebos             []ProjectConnectorsDocebo             `pulumi:"docebos"`
+	FingerprintDescopes []ProjectConnectorsFingerprintDescope `pulumi:"fingerprintDescopes"`
+	// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+	Fingerprints []ProjectConnectorsFingerprint `pulumi:"fingerprints"`
+	// Use the Forter connector for account fraud prevention.
 	Forters                 []ProjectConnectorsForter                 `pulumi:"forters"`
 	GoogleCloudTranslations []ProjectConnectorsGoogleCloudTranslation `pulumi:"googleCloudTranslations"`
-	Hibps                   []ProjectConnectorsHibp                   `pulumi:"hibps"`
-	HttpStaticIps           []ProjectConnectorsHttpStaticIp           `pulumi:"httpStaticIps"`
-	Https                   []ProjectConnectorsHttp                   `pulumi:"https"`
-	Hubspots                []ProjectConnectorsHubspot                `pulumi:"hubspots"`
-	Intercoms               []ProjectConnectorsIntercom               `pulumi:"intercoms"`
-	Newrelics               []ProjectConnectorsNewrelic               `pulumi:"newrelics"`
-	RecaptchaEnterprises    []ProjectConnectorsRecaptchaEnterprise    `pulumi:"recaptchaEnterprises"`
-	Recaptchas              []ProjectConnectorsRecaptcha              `pulumi:"recaptchas"`
-	Rekognitions            []ProjectConnectorsRekognition            `pulumi:"rekognitions"`
-	Salesforces             []ProjectConnectorsSalesforce             `pulumi:"salesforces"`
-	Segments                []ProjectConnectorsSegment                `pulumi:"segments"`
-	Sendgrids               []ProjectConnectorsSendgrid               `pulumi:"sendgrids"`
-	Smtps                   []ProjectConnectorsSmtp                   `pulumi:"smtps"`
-	Sumologics              []ProjectConnectorsSumologic              `pulumi:"sumologics"`
-	Telesigns               []ProjectConnectorsTelesign               `pulumi:"telesigns"`
-	Traceables              []ProjectConnectorsTraceable              `pulumi:"traceables"`
-	TwilioCores             []ProjectConnectorsTwilioCore             `pulumi:"twilioCores"`
-	TwilioVerifies          []ProjectConnectorsTwilioVerify           `pulumi:"twilioVerifies"`
-	Veriffs                 []ProjectConnectorsVeriff                 `pulumi:"veriffs"`
+	// API to check if password appeared previously exposed in data breaches.
+	Hibps         []ProjectConnectorsHibp         `pulumi:"hibps"`
+	HttpStaticIps []ProjectConnectorsHttpStaticIp `pulumi:"httpStaticIps"`
+	// A general purpose HTTP client
+	Https []ProjectConnectorsHttp `pulumi:"https"`
+	// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+	Hubspots []ProjectConnectorsHubspot `pulumi:"hubspots"`
+	// Intercom is a Conversational Relationship Platform (CRP).
+	Intercoms []ProjectConnectorsIntercom `pulumi:"intercoms"`
+	// Use this connector to send audit events and troubleshooting logs to New Relic.
+	Newrelics            []ProjectConnectorsNewrelic            `pulumi:"newrelics"`
+	RecaptchaEnterprises []ProjectConnectorsRecaptchaEnterprise `pulumi:"recaptchaEnterprises"`
+	// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+	Recaptchas []ProjectConnectorsRecaptcha `pulumi:"recaptchas"`
+	// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+	Rekognitions []ProjectConnectorsRekognition `pulumi:"rekognitions"`
+	// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+	Salesforces []ProjectConnectorsSalesforce `pulumi:"salesforces"`
+	// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+	Segments  []ProjectConnectorsSegment  `pulumi:"segments"`
+	Sendgrids []ProjectConnectorsSendgrid `pulumi:"sendgrids"`
+	Smtps     []ProjectConnectorsSmtp     `pulumi:"smtps"`
+	// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+	Sumologics []ProjectConnectorsSumologic `pulumi:"sumologics"`
+	// Telesign Phone number intelligence API provides risk score for phone numbers.
+	Telesigns []ProjectConnectorsTelesign `pulumi:"telesigns"`
+	// API security for a cloud-first, API-driven world.
+	Traceables     []ProjectConnectorsTraceable    `pulumi:"traceables"`
+	TwilioCores    []ProjectConnectorsTwilioCore   `pulumi:"twilioCores"`
+	TwilioVerifies []ProjectConnectorsTwilioVerify `pulumi:"twilioVerifies"`
+	// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+	Veriffs []ProjectConnectorsVeriff `pulumi:"veriffs"`
 }
 
 // ProjectConnectorsInput is an input type that accepts ProjectConnectorsArgs and ProjectConnectorsOutput values.
@@ -10820,38 +11610,58 @@ type ProjectConnectorsInput interface {
 }
 
 type ProjectConnectorsArgs struct {
-	Abuseipdbs              ProjectConnectorsAbuseipdbArrayInput              `pulumi:"abuseipdbs"`
-	Amplitudes              ProjectConnectorsAmplitudeArrayInput              `pulumi:"amplitudes"`
-	AuditWebhooks           ProjectConnectorsAuditWebhookArrayInput           `pulumi:"auditWebhooks"`
-	AwsS3s                  ProjectConnectorsAwsS3ArrayInput                  `pulumi:"awsS3s"`
-	AwsTranslates           ProjectConnectorsAwsTranslateArrayInput           `pulumi:"awsTranslates"`
-	Clears                  ProjectConnectorsClearArrayInput                  `pulumi:"clears"`
-	Datadogs                ProjectConnectorsDatadogArrayInput                `pulumi:"datadogs"`
-	DevrevGrows             ProjectConnectorsDevrevGrowArrayInput             `pulumi:"devrevGrows"`
-	Docebos                 ProjectConnectorsDoceboArrayInput                 `pulumi:"docebos"`
-	FingerprintDescopes     ProjectConnectorsFingerprintDescopeArrayInput     `pulumi:"fingerprintDescopes"`
-	Fingerprints            ProjectConnectorsFingerprintArrayInput            `pulumi:"fingerprints"`
+	// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+	Abuseipdbs ProjectConnectorsAbuseipdbArrayInput `pulumi:"abuseipdbs"`
+	// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+	Amplitudes    ProjectConnectorsAmplitudeArrayInput    `pulumi:"amplitudes"`
+	AuditWebhooks ProjectConnectorsAuditWebhookArrayInput `pulumi:"auditWebhooks"`
+	AwsS3s        ProjectConnectorsAwsS3ArrayInput        `pulumi:"awsS3s"`
+	AwsTranslates ProjectConnectorsAwsTranslateArrayInput `pulumi:"awsTranslates"`
+	// An identity verification platform that allow customers to digitally verify their identity from anywhere.
+	Clears ProjectConnectorsClearArrayInput `pulumi:"clears"`
+	// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+	Datadogs    ProjectConnectorsDatadogArrayInput    `pulumi:"datadogs"`
+	DevrevGrows ProjectConnectorsDevrevGrowArrayInput `pulumi:"devrevGrows"`
+	// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+	Docebos             ProjectConnectorsDoceboArrayInput             `pulumi:"docebos"`
+	FingerprintDescopes ProjectConnectorsFingerprintDescopeArrayInput `pulumi:"fingerprintDescopes"`
+	// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+	Fingerprints ProjectConnectorsFingerprintArrayInput `pulumi:"fingerprints"`
+	// Use the Forter connector for account fraud prevention.
 	Forters                 ProjectConnectorsForterArrayInput                 `pulumi:"forters"`
 	GoogleCloudTranslations ProjectConnectorsGoogleCloudTranslationArrayInput `pulumi:"googleCloudTranslations"`
-	Hibps                   ProjectConnectorsHibpArrayInput                   `pulumi:"hibps"`
-	HttpStaticIps           ProjectConnectorsHttpStaticIpArrayInput           `pulumi:"httpStaticIps"`
-	Https                   ProjectConnectorsHttpArrayInput                   `pulumi:"https"`
-	Hubspots                ProjectConnectorsHubspotArrayInput                `pulumi:"hubspots"`
-	Intercoms               ProjectConnectorsIntercomArrayInput               `pulumi:"intercoms"`
-	Newrelics               ProjectConnectorsNewrelicArrayInput               `pulumi:"newrelics"`
-	RecaptchaEnterprises    ProjectConnectorsRecaptchaEnterpriseArrayInput    `pulumi:"recaptchaEnterprises"`
-	Recaptchas              ProjectConnectorsRecaptchaArrayInput              `pulumi:"recaptchas"`
-	Rekognitions            ProjectConnectorsRekognitionArrayInput            `pulumi:"rekognitions"`
-	Salesforces             ProjectConnectorsSalesforceArrayInput             `pulumi:"salesforces"`
-	Segments                ProjectConnectorsSegmentArrayInput                `pulumi:"segments"`
-	Sendgrids               ProjectConnectorsSendgridArrayInput               `pulumi:"sendgrids"`
-	Smtps                   ProjectConnectorsSmtpArrayInput                   `pulumi:"smtps"`
-	Sumologics              ProjectConnectorsSumologicArrayInput              `pulumi:"sumologics"`
-	Telesigns               ProjectConnectorsTelesignArrayInput               `pulumi:"telesigns"`
-	Traceables              ProjectConnectorsTraceableArrayInput              `pulumi:"traceables"`
-	TwilioCores             ProjectConnectorsTwilioCoreArrayInput             `pulumi:"twilioCores"`
-	TwilioVerifies          ProjectConnectorsTwilioVerifyArrayInput           `pulumi:"twilioVerifies"`
-	Veriffs                 ProjectConnectorsVeriffArrayInput                 `pulumi:"veriffs"`
+	// API to check if password appeared previously exposed in data breaches.
+	Hibps         ProjectConnectorsHibpArrayInput         `pulumi:"hibps"`
+	HttpStaticIps ProjectConnectorsHttpStaticIpArrayInput `pulumi:"httpStaticIps"`
+	// A general purpose HTTP client
+	Https ProjectConnectorsHttpArrayInput `pulumi:"https"`
+	// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+	Hubspots ProjectConnectorsHubspotArrayInput `pulumi:"hubspots"`
+	// Intercom is a Conversational Relationship Platform (CRP).
+	Intercoms ProjectConnectorsIntercomArrayInput `pulumi:"intercoms"`
+	// Use this connector to send audit events and troubleshooting logs to New Relic.
+	Newrelics            ProjectConnectorsNewrelicArrayInput            `pulumi:"newrelics"`
+	RecaptchaEnterprises ProjectConnectorsRecaptchaEnterpriseArrayInput `pulumi:"recaptchaEnterprises"`
+	// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+	Recaptchas ProjectConnectorsRecaptchaArrayInput `pulumi:"recaptchas"`
+	// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+	Rekognitions ProjectConnectorsRekognitionArrayInput `pulumi:"rekognitions"`
+	// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+	Salesforces ProjectConnectorsSalesforceArrayInput `pulumi:"salesforces"`
+	// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+	Segments  ProjectConnectorsSegmentArrayInput  `pulumi:"segments"`
+	Sendgrids ProjectConnectorsSendgridArrayInput `pulumi:"sendgrids"`
+	Smtps     ProjectConnectorsSmtpArrayInput     `pulumi:"smtps"`
+	// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+	Sumologics ProjectConnectorsSumologicArrayInput `pulumi:"sumologics"`
+	// Telesign Phone number intelligence API provides risk score for phone numbers.
+	Telesigns ProjectConnectorsTelesignArrayInput `pulumi:"telesigns"`
+	// API security for a cloud-first, API-driven world.
+	Traceables     ProjectConnectorsTraceableArrayInput    `pulumi:"traceables"`
+	TwilioCores    ProjectConnectorsTwilioCoreArrayInput   `pulumi:"twilioCores"`
+	TwilioVerifies ProjectConnectorsTwilioVerifyArrayInput `pulumi:"twilioVerifies"`
+	// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+	Veriffs ProjectConnectorsVeriffArrayInput `pulumi:"veriffs"`
 }
 
 func (ProjectConnectorsArgs) ElementType() reflect.Type {
@@ -10931,10 +11741,12 @@ func (o ProjectConnectorsOutput) ToProjectConnectorsPtrOutputWithContext(ctx con
 	}).(ProjectConnectorsPtrOutput)
 }
 
+// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
 func (o ProjectConnectorsOutput) Abuseipdbs() ProjectConnectorsAbuseipdbArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAbuseipdb { return v.Abuseipdbs }).(ProjectConnectorsAbuseipdbArrayOutput)
 }
 
+// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 func (o ProjectConnectorsOutput) Amplitudes() ProjectConnectorsAmplitudeArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAmplitude { return v.Amplitudes }).(ProjectConnectorsAmplitudeArrayOutput)
 }
@@ -10951,10 +11763,12 @@ func (o ProjectConnectorsOutput) AwsTranslates() ProjectConnectorsAwsTranslateAr
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAwsTranslate { return v.AwsTranslates }).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
+// An identity verification platform that allow customers to digitally verify their identity from anywhere.
 func (o ProjectConnectorsOutput) Clears() ProjectConnectorsClearArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsClear { return v.Clears }).(ProjectConnectorsClearArrayOutput)
 }
 
+// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
 func (o ProjectConnectorsOutput) Datadogs() ProjectConnectorsDatadogArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsDatadog { return v.Datadogs }).(ProjectConnectorsDatadogArrayOutput)
 }
@@ -10963,6 +11777,7 @@ func (o ProjectConnectorsOutput) DevrevGrows() ProjectConnectorsDevrevGrowArrayO
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsDevrevGrow { return v.DevrevGrows }).(ProjectConnectorsDevrevGrowArrayOutput)
 }
 
+// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
 func (o ProjectConnectorsOutput) Docebos() ProjectConnectorsDoceboArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsDocebo { return v.Docebos }).(ProjectConnectorsDoceboArrayOutput)
 }
@@ -10971,10 +11786,12 @@ func (o ProjectConnectorsOutput) FingerprintDescopes() ProjectConnectorsFingerpr
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsFingerprintDescope { return v.FingerprintDescopes }).(ProjectConnectorsFingerprintDescopeArrayOutput)
 }
 
+// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
 func (o ProjectConnectorsOutput) Fingerprints() ProjectConnectorsFingerprintArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsFingerprint { return v.Fingerprints }).(ProjectConnectorsFingerprintArrayOutput)
 }
 
+// Use the Forter connector for account fraud prevention.
 func (o ProjectConnectorsOutput) Forters() ProjectConnectorsForterArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsForter { return v.Forters }).(ProjectConnectorsForterArrayOutput)
 }
@@ -10983,6 +11800,7 @@ func (o ProjectConnectorsOutput) GoogleCloudTranslations() ProjectConnectorsGoog
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsGoogleCloudTranslation { return v.GoogleCloudTranslations }).(ProjectConnectorsGoogleCloudTranslationArrayOutput)
 }
 
+// API to check if password appeared previously exposed in data breaches.
 func (o ProjectConnectorsOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHibp { return v.Hibps }).(ProjectConnectorsHibpArrayOutput)
 }
@@ -10991,18 +11809,22 @@ func (o ProjectConnectorsOutput) HttpStaticIps() ProjectConnectorsHttpStaticIpAr
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHttpStaticIp { return v.HttpStaticIps }).(ProjectConnectorsHttpStaticIpArrayOutput)
 }
 
+// A general purpose HTTP client
 func (o ProjectConnectorsOutput) Https() ProjectConnectorsHttpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHttp { return v.Https }).(ProjectConnectorsHttpArrayOutput)
 }
 
+// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
 func (o ProjectConnectorsOutput) Hubspots() ProjectConnectorsHubspotArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHubspot { return v.Hubspots }).(ProjectConnectorsHubspotArrayOutput)
 }
 
+// Intercom is a Conversational Relationship Platform (CRP).
 func (o ProjectConnectorsOutput) Intercoms() ProjectConnectorsIntercomArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsIntercom { return v.Intercoms }).(ProjectConnectorsIntercomArrayOutput)
 }
 
+// Use this connector to send audit events and troubleshooting logs to New Relic.
 func (o ProjectConnectorsOutput) Newrelics() ProjectConnectorsNewrelicArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsNewrelic { return v.Newrelics }).(ProjectConnectorsNewrelicArrayOutput)
 }
@@ -11011,18 +11833,22 @@ func (o ProjectConnectorsOutput) RecaptchaEnterprises() ProjectConnectorsRecaptc
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsRecaptchaEnterprise { return v.RecaptchaEnterprises }).(ProjectConnectorsRecaptchaEnterpriseArrayOutput)
 }
 
+// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
 func (o ProjectConnectorsOutput) Recaptchas() ProjectConnectorsRecaptchaArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsRecaptcha { return v.Recaptchas }).(ProjectConnectorsRecaptchaArrayOutput)
 }
 
+// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
 func (o ProjectConnectorsOutput) Rekognitions() ProjectConnectorsRekognitionArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsRekognition { return v.Rekognitions }).(ProjectConnectorsRekognitionArrayOutput)
 }
 
+// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
 func (o ProjectConnectorsOutput) Salesforces() ProjectConnectorsSalesforceArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSalesforce { return v.Salesforces }).(ProjectConnectorsSalesforceArrayOutput)
 }
 
+// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 func (o ProjectConnectorsOutput) Segments() ProjectConnectorsSegmentArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSegment { return v.Segments }).(ProjectConnectorsSegmentArrayOutput)
 }
@@ -11035,14 +11861,17 @@ func (o ProjectConnectorsOutput) Smtps() ProjectConnectorsSmtpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSmtp { return v.Smtps }).(ProjectConnectorsSmtpArrayOutput)
 }
 
+// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
 func (o ProjectConnectorsOutput) Sumologics() ProjectConnectorsSumologicArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSumologic { return v.Sumologics }).(ProjectConnectorsSumologicArrayOutput)
 }
 
+// Telesign Phone number intelligence API provides risk score for phone numbers.
 func (o ProjectConnectorsOutput) Telesigns() ProjectConnectorsTelesignArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsTelesign { return v.Telesigns }).(ProjectConnectorsTelesignArrayOutput)
 }
 
+// API security for a cloud-first, API-driven world.
 func (o ProjectConnectorsOutput) Traceables() ProjectConnectorsTraceableArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsTraceable { return v.Traceables }).(ProjectConnectorsTraceableArrayOutput)
 }
@@ -11055,6 +11884,7 @@ func (o ProjectConnectorsOutput) TwilioVerifies() ProjectConnectorsTwilioVerifyA
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsTwilioVerify { return v.TwilioVerifies }).(ProjectConnectorsTwilioVerifyArrayOutput)
 }
 
+// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
 func (o ProjectConnectorsOutput) Veriffs() ProjectConnectorsVeriffArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsVeriff { return v.Veriffs }).(ProjectConnectorsVeriffArrayOutput)
 }
@@ -11083,6 +11913,7 @@ func (o ProjectConnectorsPtrOutput) Elem() ProjectConnectorsOutput {
 	}).(ProjectConnectorsOutput)
 }
 
+// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
 func (o ProjectConnectorsPtrOutput) Abuseipdbs() ProjectConnectorsAbuseipdbArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsAbuseipdb {
 		if v == nil {
@@ -11092,6 +11923,7 @@ func (o ProjectConnectorsPtrOutput) Abuseipdbs() ProjectConnectorsAbuseipdbArray
 	}).(ProjectConnectorsAbuseipdbArrayOutput)
 }
 
+// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 func (o ProjectConnectorsPtrOutput) Amplitudes() ProjectConnectorsAmplitudeArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsAmplitude {
 		if v == nil {
@@ -11128,6 +11960,7 @@ func (o ProjectConnectorsPtrOutput) AwsTranslates() ProjectConnectorsAwsTranslat
 	}).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
+// An identity verification platform that allow customers to digitally verify their identity from anywhere.
 func (o ProjectConnectorsPtrOutput) Clears() ProjectConnectorsClearArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsClear {
 		if v == nil {
@@ -11137,6 +11970,7 @@ func (o ProjectConnectorsPtrOutput) Clears() ProjectConnectorsClearArrayOutput {
 	}).(ProjectConnectorsClearArrayOutput)
 }
 
+// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
 func (o ProjectConnectorsPtrOutput) Datadogs() ProjectConnectorsDatadogArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsDatadog {
 		if v == nil {
@@ -11155,6 +11989,7 @@ func (o ProjectConnectorsPtrOutput) DevrevGrows() ProjectConnectorsDevrevGrowArr
 	}).(ProjectConnectorsDevrevGrowArrayOutput)
 }
 
+// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
 func (o ProjectConnectorsPtrOutput) Docebos() ProjectConnectorsDoceboArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsDocebo {
 		if v == nil {
@@ -11173,6 +12008,7 @@ func (o ProjectConnectorsPtrOutput) FingerprintDescopes() ProjectConnectorsFinge
 	}).(ProjectConnectorsFingerprintDescopeArrayOutput)
 }
 
+// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
 func (o ProjectConnectorsPtrOutput) Fingerprints() ProjectConnectorsFingerprintArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsFingerprint {
 		if v == nil {
@@ -11182,6 +12018,7 @@ func (o ProjectConnectorsPtrOutput) Fingerprints() ProjectConnectorsFingerprintA
 	}).(ProjectConnectorsFingerprintArrayOutput)
 }
 
+// Use the Forter connector for account fraud prevention.
 func (o ProjectConnectorsPtrOutput) Forters() ProjectConnectorsForterArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsForter {
 		if v == nil {
@@ -11200,6 +12037,7 @@ func (o ProjectConnectorsPtrOutput) GoogleCloudTranslations() ProjectConnectorsG
 	}).(ProjectConnectorsGoogleCloudTranslationArrayOutput)
 }
 
+// API to check if password appeared previously exposed in data breaches.
 func (o ProjectConnectorsPtrOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHibp {
 		if v == nil {
@@ -11218,6 +12056,7 @@ func (o ProjectConnectorsPtrOutput) HttpStaticIps() ProjectConnectorsHttpStaticI
 	}).(ProjectConnectorsHttpStaticIpArrayOutput)
 }
 
+// A general purpose HTTP client
 func (o ProjectConnectorsPtrOutput) Https() ProjectConnectorsHttpArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHttp {
 		if v == nil {
@@ -11227,6 +12066,7 @@ func (o ProjectConnectorsPtrOutput) Https() ProjectConnectorsHttpArrayOutput {
 	}).(ProjectConnectorsHttpArrayOutput)
 }
 
+// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
 func (o ProjectConnectorsPtrOutput) Hubspots() ProjectConnectorsHubspotArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHubspot {
 		if v == nil {
@@ -11236,6 +12076,7 @@ func (o ProjectConnectorsPtrOutput) Hubspots() ProjectConnectorsHubspotArrayOutp
 	}).(ProjectConnectorsHubspotArrayOutput)
 }
 
+// Intercom is a Conversational Relationship Platform (CRP).
 func (o ProjectConnectorsPtrOutput) Intercoms() ProjectConnectorsIntercomArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsIntercom {
 		if v == nil {
@@ -11245,6 +12086,7 @@ func (o ProjectConnectorsPtrOutput) Intercoms() ProjectConnectorsIntercomArrayOu
 	}).(ProjectConnectorsIntercomArrayOutput)
 }
 
+// Use this connector to send audit events and troubleshooting logs to New Relic.
 func (o ProjectConnectorsPtrOutput) Newrelics() ProjectConnectorsNewrelicArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsNewrelic {
 		if v == nil {
@@ -11263,6 +12105,7 @@ func (o ProjectConnectorsPtrOutput) RecaptchaEnterprises() ProjectConnectorsReca
 	}).(ProjectConnectorsRecaptchaEnterpriseArrayOutput)
 }
 
+// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
 func (o ProjectConnectorsPtrOutput) Recaptchas() ProjectConnectorsRecaptchaArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsRecaptcha {
 		if v == nil {
@@ -11272,6 +12115,7 @@ func (o ProjectConnectorsPtrOutput) Recaptchas() ProjectConnectorsRecaptchaArray
 	}).(ProjectConnectorsRecaptchaArrayOutput)
 }
 
+// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
 func (o ProjectConnectorsPtrOutput) Rekognitions() ProjectConnectorsRekognitionArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsRekognition {
 		if v == nil {
@@ -11281,6 +12125,7 @@ func (o ProjectConnectorsPtrOutput) Rekognitions() ProjectConnectorsRekognitionA
 	}).(ProjectConnectorsRekognitionArrayOutput)
 }
 
+// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
 func (o ProjectConnectorsPtrOutput) Salesforces() ProjectConnectorsSalesforceArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSalesforce {
 		if v == nil {
@@ -11290,6 +12135,7 @@ func (o ProjectConnectorsPtrOutput) Salesforces() ProjectConnectorsSalesforceArr
 	}).(ProjectConnectorsSalesforceArrayOutput)
 }
 
+// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 func (o ProjectConnectorsPtrOutput) Segments() ProjectConnectorsSegmentArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSegment {
 		if v == nil {
@@ -11317,6 +12163,7 @@ func (o ProjectConnectorsPtrOutput) Smtps() ProjectConnectorsSmtpArrayOutput {
 	}).(ProjectConnectorsSmtpArrayOutput)
 }
 
+// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
 func (o ProjectConnectorsPtrOutput) Sumologics() ProjectConnectorsSumologicArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSumologic {
 		if v == nil {
@@ -11326,6 +12173,7 @@ func (o ProjectConnectorsPtrOutput) Sumologics() ProjectConnectorsSumologicArray
 	}).(ProjectConnectorsSumologicArrayOutput)
 }
 
+// Telesign Phone number intelligence API provides risk score for phone numbers.
 func (o ProjectConnectorsPtrOutput) Telesigns() ProjectConnectorsTelesignArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsTelesign {
 		if v == nil {
@@ -11335,6 +12183,7 @@ func (o ProjectConnectorsPtrOutput) Telesigns() ProjectConnectorsTelesignArrayOu
 	}).(ProjectConnectorsTelesignArrayOutput)
 }
 
+// API security for a cloud-first, API-driven world.
 func (o ProjectConnectorsPtrOutput) Traceables() ProjectConnectorsTraceableArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsTraceable {
 		if v == nil {
@@ -11362,6 +12211,7 @@ func (o ProjectConnectorsPtrOutput) TwilioVerifies() ProjectConnectorsTwilioVeri
 	}).(ProjectConnectorsTwilioVerifyArrayOutput)
 }
 
+// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
 func (o ProjectConnectorsPtrOutput) Veriffs() ProjectConnectorsVeriffArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsVeriff {
 		if v == nil {
@@ -11372,10 +12222,13 @@ func (o ProjectConnectorsPtrOutput) Veriffs() ProjectConnectorsVeriffArrayOutput
 }
 
 type ProjectConnectorsAbuseipdb struct {
-	ApiKey      string  `pulumi:"apiKey"`
+	// The unique AbuseIPDB API key.
+	ApiKey string `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsAbuseipdbInput is an input type that accepts ProjectConnectorsAbuseipdbArgs and ProjectConnectorsAbuseipdbOutput values.
@@ -11390,10 +12243,13 @@ type ProjectConnectorsAbuseipdbInput interface {
 }
 
 type ProjectConnectorsAbuseipdbArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
+	// The unique AbuseIPDB API key.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsAbuseipdbArgs) ElementType() reflect.Type {
@@ -11447,10 +12303,12 @@ func (o ProjectConnectorsAbuseipdbOutput) ToProjectConnectorsAbuseipdbOutputWith
 	return o
 }
 
+// The unique AbuseIPDB API key.
 func (o ProjectConnectorsAbuseipdbOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAbuseipdb) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsAbuseipdbOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAbuseipdb) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -11459,6 +12317,7 @@ func (o ProjectConnectorsAbuseipdbOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAbuseipdb) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsAbuseipdbOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAbuseipdb) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -11484,12 +12343,17 @@ func (o ProjectConnectorsAbuseipdbArrayOutput) Index(i pulumi.IntInput) ProjectC
 }
 
 type ProjectConnectorsAmplitude struct {
-	ApiKey      string  `pulumi:"apiKey"`
+	// The Amplitude API Key generated for the Descope service.
+	ApiKey string `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	ServerUrl   *string `pulumi:"serverUrl"`
-	ServerZone  *string `pulumi:"serverZone"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+	ServerUrl *string `pulumi:"serverUrl"`
+	// `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+	ServerZone *string `pulumi:"serverZone"`
 }
 
 // ProjectConnectorsAmplitudeInput is an input type that accepts ProjectConnectorsAmplitudeArgs and ProjectConnectorsAmplitudeOutput values.
@@ -11504,12 +12368,17 @@ type ProjectConnectorsAmplitudeInput interface {
 }
 
 type ProjectConnectorsAmplitudeArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
+	// The Amplitude API Key generated for the Descope service.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	ServerUrl   pulumi.StringPtrInput `pulumi:"serverUrl"`
-	ServerZone  pulumi.StringPtrInput `pulumi:"serverZone"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+	ServerUrl pulumi.StringPtrInput `pulumi:"serverUrl"`
+	// `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+	ServerZone pulumi.StringPtrInput `pulumi:"serverZone"`
 }
 
 func (ProjectConnectorsAmplitudeArgs) ElementType() reflect.Type {
@@ -11563,10 +12432,12 @@ func (o ProjectConnectorsAmplitudeOutput) ToProjectConnectorsAmplitudeOutputWith
 	return o
 }
 
+// The Amplitude API Key generated for the Descope service.
 func (o ProjectConnectorsAmplitudeOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsAmplitudeOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -11575,14 +12446,17 @@ func (o ProjectConnectorsAmplitudeOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsAmplitudeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
 func (o ProjectConnectorsAmplitudeOutput) ServerUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) *string { return v.ServerUrl }).(pulumi.StringPtrOutput)
 }
 
+// `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
 func (o ProjectConnectorsAmplitudeOutput) ServerZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAmplitude) *string { return v.ServerZone }).(pulumi.StringPtrOutput)
 }
@@ -11608,15 +12482,23 @@ func (o ProjectConnectorsAmplitudeArrayOutput) Index(i pulumi.IntInput) ProjectC
 }
 
 type ProjectConnectorsAuditWebhook struct {
-	AuditFilters   *string                                      `pulumi:"auditFilters"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters *string `pulumi:"auditFilters"`
+	// Authentication Information
 	Authentication *ProjectConnectorsAuditWebhookAuthentication `pulumi:"authentication"`
-	BaseUrl        string                                       `pulumi:"baseUrl"`
-	Description    *string                                      `pulumi:"description"`
-	Headers        map[string]string                            `pulumi:"headers"`
-	HmacSecret     *string                                      `pulumi:"hmacSecret"`
-	Id             *string                                      `pulumi:"id"`
-	Insecure       *bool                                        `pulumi:"insecure"`
-	Name           string                                       `pulumi:"name"`
+	// The base URL to fetch
+	BaseUrl string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The headers to send with the request
+	Headers map[string]string `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret *string `pulumi:"hmacSecret"`
+	Id         *string `pulumi:"id"`
+	// Will ignore certificate errors raised by the client
+	Insecure *bool `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsAuditWebhookInput is an input type that accepts ProjectConnectorsAuditWebhookArgs and ProjectConnectorsAuditWebhookOutput values.
@@ -11631,15 +12513,23 @@ type ProjectConnectorsAuditWebhookInput interface {
 }
 
 type ProjectConnectorsAuditWebhookArgs struct {
-	AuditFilters   pulumi.StringPtrInput                               `pulumi:"auditFilters"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters pulumi.StringPtrInput `pulumi:"auditFilters"`
+	// Authentication Information
 	Authentication ProjectConnectorsAuditWebhookAuthenticationPtrInput `pulumi:"authentication"`
-	BaseUrl        pulumi.StringInput                                  `pulumi:"baseUrl"`
-	Description    pulumi.StringPtrInput                               `pulumi:"description"`
-	Headers        pulumi.StringMapInput                               `pulumi:"headers"`
-	HmacSecret     pulumi.StringPtrInput                               `pulumi:"hmacSecret"`
-	Id             pulumi.StringPtrInput                               `pulumi:"id"`
-	Insecure       pulumi.BoolPtrInput                                 `pulumi:"insecure"`
-	Name           pulumi.StringInput                                  `pulumi:"name"`
+	// The base URL to fetch
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The headers to send with the request
+	Headers pulumi.StringMapInput `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret pulumi.StringPtrInput `pulumi:"hmacSecret"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
+	// Will ignore certificate errors raised by the client
+	Insecure pulumi.BoolPtrInput `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsAuditWebhookArgs) ElementType() reflect.Type {
@@ -11693,28 +12583,34 @@ func (o ProjectConnectorsAuditWebhookOutput) ToProjectConnectorsAuditWebhookOutp
 	return o
 }
 
+// Specify which events will be sent to the external audit service (including tenant selection).
 func (o ProjectConnectorsAuditWebhookOutput) AuditFilters() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
 
+// Authentication Information
 func (o ProjectConnectorsAuditWebhookOutput) Authentication() ProjectConnectorsAuditWebhookAuthenticationPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *ProjectConnectorsAuditWebhookAuthentication {
 		return v.Authentication
 	}).(ProjectConnectorsAuditWebhookAuthenticationPtrOutput)
 }
 
+// The base URL to fetch
 func (o ProjectConnectorsAuditWebhookOutput) BaseUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsAuditWebhookOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The headers to send with the request
 func (o ProjectConnectorsAuditWebhookOutput) Headers() pulumi.StringMapOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
 }
 
+// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
 func (o ProjectConnectorsAuditWebhookOutput) HmacSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.HmacSecret }).(pulumi.StringPtrOutput)
 }
@@ -11723,10 +12619,12 @@ func (o ProjectConnectorsAuditWebhookOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Will ignore certificate errors raised by the client
 func (o ProjectConnectorsAuditWebhookOutput) Insecure() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsAuditWebhookOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -12215,16 +13113,22 @@ func (o ProjectConnectorsAuditWebhookAuthenticationBasicPtrOutput) Username() pu
 }
 
 type ProjectConnectorsAwsS3 struct {
-	AccessKeyId            string  `pulumi:"accessKeyId"`
-	AuditEnabled           *bool   `pulumi:"auditEnabled"`
-	AuditFilters           *string `pulumi:"auditFilters"`
-	Bucket                 string  `pulumi:"bucket"`
-	Description            *string `pulumi:"description"`
-	Id                     *string `pulumi:"id"`
-	Name                   string  `pulumi:"name"`
-	Region                 string  `pulumi:"region"`
-	SecretAccessKey        string  `pulumi:"secretAccessKey"`
-	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
+	// The unique AWS access key ID.
+	AccessKeyId  string  `pulumi:"accessKeyId"`
+	AuditEnabled *bool   `pulumi:"auditEnabled"`
+	AuditFilters *string `pulumi:"auditFilters"`
+	// The AWS S3 bucket. This bucket should already exist for the connector to work.
+	Bucket string `pulumi:"bucket"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The AWS S3 region, e.g. `us-east-1`.
+	Region string `pulumi:"region"`
+	// The secret AWS access key.
+	SecretAccessKey        string `pulumi:"secretAccessKey"`
+	TroubleshootLogEnabled *bool  `pulumi:"troubleshootLogEnabled"`
 }
 
 // ProjectConnectorsAwsS3Input is an input type that accepts ProjectConnectorsAwsS3Args and ProjectConnectorsAwsS3Output values.
@@ -12239,16 +13143,22 @@ type ProjectConnectorsAwsS3Input interface {
 }
 
 type ProjectConnectorsAwsS3Args struct {
-	AccessKeyId            pulumi.StringInput    `pulumi:"accessKeyId"`
-	AuditEnabled           pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
-	AuditFilters           pulumi.StringPtrInput `pulumi:"auditFilters"`
-	Bucket                 pulumi.StringInput    `pulumi:"bucket"`
-	Description            pulumi.StringPtrInput `pulumi:"description"`
-	Id                     pulumi.StringPtrInput `pulumi:"id"`
-	Name                   pulumi.StringInput    `pulumi:"name"`
-	Region                 pulumi.StringInput    `pulumi:"region"`
-	SecretAccessKey        pulumi.StringInput    `pulumi:"secretAccessKey"`
-	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
+	// The unique AWS access key ID.
+	AccessKeyId  pulumi.StringInput    `pulumi:"accessKeyId"`
+	AuditEnabled pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
+	AuditFilters pulumi.StringPtrInput `pulumi:"auditFilters"`
+	// The AWS S3 bucket. This bucket should already exist for the connector to work.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The AWS S3 region, e.g. `us-east-1`.
+	Region pulumi.StringInput `pulumi:"region"`
+	// The secret AWS access key.
+	SecretAccessKey        pulumi.StringInput  `pulumi:"secretAccessKey"`
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
 }
 
 func (ProjectConnectorsAwsS3Args) ElementType() reflect.Type {
@@ -12302,6 +13212,7 @@ func (o ProjectConnectorsAwsS3Output) ToProjectConnectorsAwsS3OutputWithContext(
 	return o
 }
 
+// The unique AWS access key ID.
 func (o ProjectConnectorsAwsS3Output) AccessKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.AccessKeyId }).(pulumi.StringOutput)
 }
@@ -12314,10 +13225,12 @@ func (o ProjectConnectorsAwsS3Output) AuditFilters() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
 
+// The AWS S3 bucket. This bucket should already exist for the connector to work.
 func (o ProjectConnectorsAwsS3Output) Bucket() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.Bucket }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsAwsS3Output) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12326,14 +13239,17 @@ func (o ProjectConnectorsAwsS3Output) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsAwsS3Output) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The AWS S3 region, e.g. `us-east-1`.
 func (o ProjectConnectorsAwsS3Output) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// The secret AWS access key.
 func (o ProjectConnectorsAwsS3Output) SecretAccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.SecretAccessKey }).(pulumi.StringOutput)
 }
@@ -12363,13 +13279,19 @@ func (o ProjectConnectorsAwsS3ArrayOutput) Index(i pulumi.IntInput) ProjectConne
 }
 
 type ProjectConnectorsAwsTranslate struct {
-	AccessKeyId     string  `pulumi:"accessKeyId"`
-	Description     *string `pulumi:"description"`
-	Id              *string `pulumi:"id"`
-	Name            string  `pulumi:"name"`
-	Region          string  `pulumi:"region"`
-	SecretAccessKey string  `pulumi:"secretAccessKey"`
-	SessionToken    *string `pulumi:"sessionToken"`
+	// AWS access key ID.
+	AccessKeyId string `pulumi:"accessKeyId"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The AWS region to which this client will send requests. (e.g. us-east-1.)
+	Region string `pulumi:"region"`
+	// AWS secret access key.
+	SecretAccessKey string `pulumi:"secretAccessKey"`
+	// (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+	SessionToken *string `pulumi:"sessionToken"`
 }
 
 // ProjectConnectorsAwsTranslateInput is an input type that accepts ProjectConnectorsAwsTranslateArgs and ProjectConnectorsAwsTranslateOutput values.
@@ -12384,13 +13306,19 @@ type ProjectConnectorsAwsTranslateInput interface {
 }
 
 type ProjectConnectorsAwsTranslateArgs struct {
-	AccessKeyId     pulumi.StringInput    `pulumi:"accessKeyId"`
-	Description     pulumi.StringPtrInput `pulumi:"description"`
-	Id              pulumi.StringPtrInput `pulumi:"id"`
-	Name            pulumi.StringInput    `pulumi:"name"`
-	Region          pulumi.StringInput    `pulumi:"region"`
-	SecretAccessKey pulumi.StringInput    `pulumi:"secretAccessKey"`
-	SessionToken    pulumi.StringPtrInput `pulumi:"sessionToken"`
+	// AWS access key ID.
+	AccessKeyId pulumi.StringInput `pulumi:"accessKeyId"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The AWS region to which this client will send requests. (e.g. us-east-1.)
+	Region pulumi.StringInput `pulumi:"region"`
+	// AWS secret access key.
+	SecretAccessKey pulumi.StringInput `pulumi:"secretAccessKey"`
+	// (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+	SessionToken pulumi.StringPtrInput `pulumi:"sessionToken"`
 }
 
 func (ProjectConnectorsAwsTranslateArgs) ElementType() reflect.Type {
@@ -12444,10 +13372,12 @@ func (o ProjectConnectorsAwsTranslateOutput) ToProjectConnectorsAwsTranslateOutp
 	return o
 }
 
+// AWS access key ID.
 func (o ProjectConnectorsAwsTranslateOutput) AccessKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) string { return v.AccessKeyId }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsAwsTranslateOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12456,18 +13386,22 @@ func (o ProjectConnectorsAwsTranslateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsAwsTranslateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The AWS region to which this client will send requests. (e.g. us-east-1.)
 func (o ProjectConnectorsAwsTranslateOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// AWS secret access key.
 func (o ProjectConnectorsAwsTranslateOutput) SecretAccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) string { return v.SecretAccessKey }).(pulumi.StringOutput)
 }
 
+// (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
 func (o ProjectConnectorsAwsTranslateOutput) SessionToken() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) *string { return v.SessionToken }).(pulumi.StringPtrOutput)
 }
@@ -12493,11 +13427,15 @@ func (o ProjectConnectorsAwsTranslateArrayOutput) Index(i pulumi.IntInput) Proje
 }
 
 type ProjectConnectorsClear struct {
-	ApiKey      string  `pulumi:"apiKey"`
+	// Your CLEAR API key.
+	ApiKey string `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	ProjectId   string  `pulumi:"projectId"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Your CLEAR project ID.
+	ProjectId string `pulumi:"projectId"`
 }
 
 // ProjectConnectorsClearInput is an input type that accepts ProjectConnectorsClearArgs and ProjectConnectorsClearOutput values.
@@ -12512,11 +13450,15 @@ type ProjectConnectorsClearInput interface {
 }
 
 type ProjectConnectorsClearArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
+	// Your CLEAR API key.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	ProjectId   pulumi.StringInput    `pulumi:"projectId"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Your CLEAR project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
 }
 
 func (ProjectConnectorsClearArgs) ElementType() reflect.Type {
@@ -12570,10 +13512,12 @@ func (o ProjectConnectorsClearOutput) ToProjectConnectorsClearOutputWithContext(
 	return o
 }
 
+// Your CLEAR API key.
 func (o ProjectConnectorsClearOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsClearOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsClear) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12582,10 +13526,12 @@ func (o ProjectConnectorsClearOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsClear) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsClearOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Your CLEAR project ID.
 func (o ProjectConnectorsClearOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.ProjectId }).(pulumi.StringOutput)
 }
@@ -12611,12 +13557,16 @@ func (o ProjectConnectorsClearArrayOutput) Index(i pulumi.IntInput) ProjectConne
 }
 
 type ProjectConnectorsDatadog struct {
-	ApiKey                 string  `pulumi:"apiKey"`
-	AuditEnabled           *bool   `pulumi:"auditEnabled"`
-	AuditFilters           *string `pulumi:"auditFilters"`
-	Description            *string `pulumi:"description"`
-	Id                     *string `pulumi:"id"`
-	Name                   string  `pulumi:"name"`
+	// The unique Datadog organization key.
+	ApiKey       string  `pulumi:"apiKey"`
+	AuditEnabled *bool   `pulumi:"auditEnabled"`
+	AuditFilters *string `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
 	Site                   *string `pulumi:"site"`
 	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
 }
@@ -12633,12 +13583,16 @@ type ProjectConnectorsDatadogInput interface {
 }
 
 type ProjectConnectorsDatadogArgs struct {
-	ApiKey                 pulumi.StringInput    `pulumi:"apiKey"`
-	AuditEnabled           pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
-	AuditFilters           pulumi.StringPtrInput `pulumi:"auditFilters"`
-	Description            pulumi.StringPtrInput `pulumi:"description"`
-	Id                     pulumi.StringPtrInput `pulumi:"id"`
-	Name                   pulumi.StringInput    `pulumi:"name"`
+	// The unique Datadog organization key.
+	ApiKey       pulumi.StringInput    `pulumi:"apiKey"`
+	AuditEnabled pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
+	AuditFilters pulumi.StringPtrInput `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
 	Site                   pulumi.StringPtrInput `pulumi:"site"`
 	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
 }
@@ -12694,6 +13648,7 @@ func (o ProjectConnectorsDatadogOutput) ToProjectConnectorsDatadogOutputWithCont
 	return o
 }
 
+// The unique Datadog organization key.
 func (o ProjectConnectorsDatadogOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) string { return v.ApiKey }).(pulumi.StringOutput)
 }
@@ -12706,6 +13661,7 @@ func (o ProjectConnectorsDatadogOutput) AuditFilters() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsDatadogOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12714,10 +13670,12 @@ func (o ProjectConnectorsDatadogOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsDatadogOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
 func (o ProjectConnectorsDatadogOutput) Site() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.Site }).(pulumi.StringPtrOutput)
 }
@@ -12747,10 +13705,13 @@ func (o ProjectConnectorsDatadogArrayOutput) Index(i pulumi.IntInput) ProjectCon
 }
 
 type ProjectConnectorsDevrevGrow struct {
-	ApiKey      string  `pulumi:"apiKey"`
+	// Authentication to DevRev APIs requires a personal access token (PAT).
+	ApiKey string `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsDevrevGrowInput is an input type that accepts ProjectConnectorsDevrevGrowArgs and ProjectConnectorsDevrevGrowOutput values.
@@ -12765,10 +13726,13 @@ type ProjectConnectorsDevrevGrowInput interface {
 }
 
 type ProjectConnectorsDevrevGrowArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
+	// Authentication to DevRev APIs requires a personal access token (PAT).
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsDevrevGrowArgs) ElementType() reflect.Type {
@@ -12822,10 +13786,12 @@ func (o ProjectConnectorsDevrevGrowOutput) ToProjectConnectorsDevrevGrowOutputWi
 	return o
 }
 
+// Authentication to DevRev APIs requires a personal access token (PAT).
 func (o ProjectConnectorsDevrevGrowOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDevrevGrow) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsDevrevGrowOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDevrevGrow) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12834,6 +13800,7 @@ func (o ProjectConnectorsDevrevGrowOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDevrevGrow) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsDevrevGrowOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDevrevGrow) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -12859,14 +13826,21 @@ func (o ProjectConnectorsDevrevGrowArrayOutput) Index(i pulumi.IntInput) Project
 }
 
 type ProjectConnectorsDocebo struct {
-	BaseUrl      string  `pulumi:"baseUrl"`
-	ClientId     string  `pulumi:"clientId"`
-	ClientSecret string  `pulumi:"clientSecret"`
-	Description  *string `pulumi:"description"`
-	Id           *string `pulumi:"id"`
-	Name         string  `pulumi:"name"`
-	Password     string  `pulumi:"password"`
-	Username     string  `pulumi:"username"`
+	// The Docebo api base url.
+	BaseUrl string `pulumi:"baseUrl"`
+	// The Docebo OAuth 2.0 app client ID.
+	ClientId string `pulumi:"clientId"`
+	// The Docebo OAuth 2.0 app client secret.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Docebo user's password.
+	Password string `pulumi:"password"`
+	// The Docebo username.
+	Username string `pulumi:"username"`
 }
 
 // ProjectConnectorsDoceboInput is an input type that accepts ProjectConnectorsDoceboArgs and ProjectConnectorsDoceboOutput values.
@@ -12881,14 +13855,21 @@ type ProjectConnectorsDoceboInput interface {
 }
 
 type ProjectConnectorsDoceboArgs struct {
-	BaseUrl      pulumi.StringInput    `pulumi:"baseUrl"`
-	ClientId     pulumi.StringInput    `pulumi:"clientId"`
-	ClientSecret pulumi.StringInput    `pulumi:"clientSecret"`
-	Description  pulumi.StringPtrInput `pulumi:"description"`
-	Id           pulumi.StringPtrInput `pulumi:"id"`
-	Name         pulumi.StringInput    `pulumi:"name"`
-	Password     pulumi.StringInput    `pulumi:"password"`
-	Username     pulumi.StringInput    `pulumi:"username"`
+	// The Docebo api base url.
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
+	// The Docebo OAuth 2.0 app client ID.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The Docebo OAuth 2.0 app client secret.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Docebo user's password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// The Docebo username.
+	Username pulumi.StringInput `pulumi:"username"`
 }
 
 func (ProjectConnectorsDoceboArgs) ElementType() reflect.Type {
@@ -12942,18 +13923,22 @@ func (o ProjectConnectorsDoceboOutput) ToProjectConnectorsDoceboOutputWithContex
 	return o
 }
 
+// The Docebo api base url.
 func (o ProjectConnectorsDoceboOutput) BaseUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
+// The Docebo OAuth 2.0 app client ID.
 func (o ProjectConnectorsDoceboOutput) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.ClientId }).(pulumi.StringOutput)
 }
 
+// The Docebo OAuth 2.0 app client secret.
 func (o ProjectConnectorsDoceboOutput) ClientSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsDoceboOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -12962,14 +13947,17 @@ func (o ProjectConnectorsDoceboOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsDoceboOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Docebo user's password.
 func (o ProjectConnectorsDoceboOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.Password }).(pulumi.StringOutput)
 }
 
+// The Docebo username.
 func (o ProjectConnectorsDoceboOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsDocebo) string { return v.Username }).(pulumi.StringOutput)
 }
@@ -12995,14 +13983,21 @@ func (o ProjectConnectorsDoceboArrayOutput) Index(i pulumi.IntInput) ProjectConn
 }
 
 type ProjectConnectorsFingerprint struct {
-	CloudflareEndpointUrl    *string `pulumi:"cloudflareEndpointUrl"`
-	CloudflareScriptUrl      *string `pulumi:"cloudflareScriptUrl"`
-	Description              *string `pulumi:"description"`
-	Id                       *string `pulumi:"id"`
-	Name                     string  `pulumi:"name"`
-	PublicApiKey             string  `pulumi:"publicApiKey"`
-	SecretApiKey             string  `pulumi:"secretApiKey"`
-	UseCloudflareIntegration *bool   `pulumi:"useCloudflareIntegration"`
+	// The Cloudflare integration Endpoint URL.
+	CloudflareEndpointUrl *string `pulumi:"cloudflareEndpointUrl"`
+	// The Cloudflare integration Script URL.
+	CloudflareScriptUrl *string `pulumi:"cloudflareScriptUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Fingerprint public API key.
+	PublicApiKey string `pulumi:"publicApiKey"`
+	// The Fingerprint secret API key.
+	SecretApiKey string `pulumi:"secretApiKey"`
+	// Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+	UseCloudflareIntegration *bool `pulumi:"useCloudflareIntegration"`
 }
 
 // ProjectConnectorsFingerprintInput is an input type that accepts ProjectConnectorsFingerprintArgs and ProjectConnectorsFingerprintOutput values.
@@ -13017,14 +14012,21 @@ type ProjectConnectorsFingerprintInput interface {
 }
 
 type ProjectConnectorsFingerprintArgs struct {
-	CloudflareEndpointUrl    pulumi.StringPtrInput `pulumi:"cloudflareEndpointUrl"`
-	CloudflareScriptUrl      pulumi.StringPtrInput `pulumi:"cloudflareScriptUrl"`
-	Description              pulumi.StringPtrInput `pulumi:"description"`
-	Id                       pulumi.StringPtrInput `pulumi:"id"`
-	Name                     pulumi.StringInput    `pulumi:"name"`
-	PublicApiKey             pulumi.StringInput    `pulumi:"publicApiKey"`
-	SecretApiKey             pulumi.StringInput    `pulumi:"secretApiKey"`
-	UseCloudflareIntegration pulumi.BoolPtrInput   `pulumi:"useCloudflareIntegration"`
+	// The Cloudflare integration Endpoint URL.
+	CloudflareEndpointUrl pulumi.StringPtrInput `pulumi:"cloudflareEndpointUrl"`
+	// The Cloudflare integration Script URL.
+	CloudflareScriptUrl pulumi.StringPtrInput `pulumi:"cloudflareScriptUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Fingerprint public API key.
+	PublicApiKey pulumi.StringInput `pulumi:"publicApiKey"`
+	// The Fingerprint secret API key.
+	SecretApiKey pulumi.StringInput `pulumi:"secretApiKey"`
+	// Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+	UseCloudflareIntegration pulumi.BoolPtrInput `pulumi:"useCloudflareIntegration"`
 }
 
 func (ProjectConnectorsFingerprintArgs) ElementType() reflect.Type {
@@ -13078,14 +14080,17 @@ func (o ProjectConnectorsFingerprintOutput) ToProjectConnectorsFingerprintOutput
 	return o
 }
 
+// The Cloudflare integration Endpoint URL.
 func (o ProjectConnectorsFingerprintOutput) CloudflareEndpointUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.CloudflareEndpointUrl }).(pulumi.StringPtrOutput)
 }
 
+// The Cloudflare integration Script URL.
 func (o ProjectConnectorsFingerprintOutput) CloudflareScriptUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.CloudflareScriptUrl }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsFingerprintOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -13094,18 +14099,22 @@ func (o ProjectConnectorsFingerprintOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsFingerprintOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Fingerprint public API key.
 func (o ProjectConnectorsFingerprintOutput) PublicApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.PublicApiKey }).(pulumi.StringOutput)
 }
 
+// The Fingerprint secret API key.
 func (o ProjectConnectorsFingerprintOutput) SecretApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) string { return v.SecretApiKey }).(pulumi.StringOutput)
 }
 
+// Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
 func (o ProjectConnectorsFingerprintOutput) UseCloudflareIntegration() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprint) *bool { return v.UseCloudflareIntegration }).(pulumi.BoolPtrOutput)
 }
@@ -13131,10 +14140,13 @@ func (o ProjectConnectorsFingerprintArrayOutput) Index(i pulumi.IntInput) Projec
 }
 
 type ProjectConnectorsFingerprintDescope struct {
+	// The custom domain to fetch
 	CustomDomain *string `pulumi:"customDomain"`
-	Description  *string `pulumi:"description"`
-	Id           *string `pulumi:"id"`
-	Name         string  `pulumi:"name"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsFingerprintDescopeInput is an input type that accepts ProjectConnectorsFingerprintDescopeArgs and ProjectConnectorsFingerprintDescopeOutput values.
@@ -13149,10 +14161,13 @@ type ProjectConnectorsFingerprintDescopeInput interface {
 }
 
 type ProjectConnectorsFingerprintDescopeArgs struct {
+	// The custom domain to fetch
 	CustomDomain pulumi.StringPtrInput `pulumi:"customDomain"`
-	Description  pulumi.StringPtrInput `pulumi:"description"`
-	Id           pulumi.StringPtrInput `pulumi:"id"`
-	Name         pulumi.StringInput    `pulumi:"name"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsFingerprintDescopeArgs) ElementType() reflect.Type {
@@ -13206,10 +14221,12 @@ func (o ProjectConnectorsFingerprintDescopeOutput) ToProjectConnectorsFingerprin
 	return o
 }
 
+// The custom domain to fetch
 func (o ProjectConnectorsFingerprintDescopeOutput) CustomDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.CustomDomain }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsFingerprintDescopeOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -13218,6 +14235,7 @@ func (o ProjectConnectorsFingerprintDescopeOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsFingerprintDescopeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsFingerprintDescope) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -13243,14 +14261,21 @@ func (o ProjectConnectorsFingerprintDescopeArrayOutput) Index(i pulumi.IntInput)
 }
 
 type ProjectConnectorsForter struct {
-	Description       *string `pulumi:"description"`
-	Id                *string `pulumi:"id"`
-	Name              string  `pulumi:"name"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Override the user IP address.
 	OverrideIpAddress *string `pulumi:"overrideIpAddress"`
+	// Override the user email.
 	OverrideUserEmail *string `pulumi:"overrideUserEmail"`
-	Overrides         *bool   `pulumi:"overrides"`
-	SecretKey         string  `pulumi:"secretKey"`
-	SiteId            string  `pulumi:"siteId"`
+	// Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+	Overrides *bool `pulumi:"overrides"`
+	// The Forter secret key.
+	SecretKey string `pulumi:"secretKey"`
+	// The Forter site ID.
+	SiteId string `pulumi:"siteId"`
 }
 
 // ProjectConnectorsForterInput is an input type that accepts ProjectConnectorsForterArgs and ProjectConnectorsForterOutput values.
@@ -13265,14 +14290,21 @@ type ProjectConnectorsForterInput interface {
 }
 
 type ProjectConnectorsForterArgs struct {
-	Description       pulumi.StringPtrInput `pulumi:"description"`
-	Id                pulumi.StringPtrInput `pulumi:"id"`
-	Name              pulumi.StringInput    `pulumi:"name"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Override the user IP address.
 	OverrideIpAddress pulumi.StringPtrInput `pulumi:"overrideIpAddress"`
+	// Override the user email.
 	OverrideUserEmail pulumi.StringPtrInput `pulumi:"overrideUserEmail"`
-	Overrides         pulumi.BoolPtrInput   `pulumi:"overrides"`
-	SecretKey         pulumi.StringInput    `pulumi:"secretKey"`
-	SiteId            pulumi.StringInput    `pulumi:"siteId"`
+	// Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+	Overrides pulumi.BoolPtrInput `pulumi:"overrides"`
+	// The Forter secret key.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// The Forter site ID.
+	SiteId pulumi.StringInput `pulumi:"siteId"`
 }
 
 func (ProjectConnectorsForterArgs) ElementType() reflect.Type {
@@ -13326,6 +14358,7 @@ func (o ProjectConnectorsForterOutput) ToProjectConnectorsForterOutputWithContex
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsForterOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -13334,26 +14367,32 @@ func (o ProjectConnectorsForterOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsForterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Override the user IP address.
 func (o ProjectConnectorsForterOutput) OverrideIpAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) *string { return v.OverrideIpAddress }).(pulumi.StringPtrOutput)
 }
 
+// Override the user email.
 func (o ProjectConnectorsForterOutput) OverrideUserEmail() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) *string { return v.OverrideUserEmail }).(pulumi.StringPtrOutput)
 }
 
+// Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
 func (o ProjectConnectorsForterOutput) Overrides() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) *bool { return v.Overrides }).(pulumi.BoolPtrOutput)
 }
 
+// The Forter secret key.
 func (o ProjectConnectorsForterOutput) SecretKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
+// The Forter site ID.
 func (o ProjectConnectorsForterOutput) SiteId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsForter) string { return v.SiteId }).(pulumi.StringOutput)
 }
@@ -13379,11 +14418,15 @@ func (o ProjectConnectorsForterArrayOutput) Index(i pulumi.IntInput) ProjectConn
 }
 
 type ProjectConnectorsGoogleCloudTranslation struct {
-	Description        *string `pulumi:"description"`
-	Id                 *string `pulumi:"id"`
-	Name               string  `pulumi:"name"`
-	ProjectId          string  `pulumi:"projectId"`
-	ServiceAccountJson string  `pulumi:"serviceAccountJson"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Google Cloud project ID where the Google Cloud Translation is managed.
+	ProjectId string `pulumi:"projectId"`
+	// Service Account JSON associated with the current project.
+	ServiceAccountJson string `pulumi:"serviceAccountJson"`
 }
 
 // ProjectConnectorsGoogleCloudTranslationInput is an input type that accepts ProjectConnectorsGoogleCloudTranslationArgs and ProjectConnectorsGoogleCloudTranslationOutput values.
@@ -13398,11 +14441,15 @@ type ProjectConnectorsGoogleCloudTranslationInput interface {
 }
 
 type ProjectConnectorsGoogleCloudTranslationArgs struct {
-	Description        pulumi.StringPtrInput `pulumi:"description"`
-	Id                 pulumi.StringPtrInput `pulumi:"id"`
-	Name               pulumi.StringInput    `pulumi:"name"`
-	ProjectId          pulumi.StringInput    `pulumi:"projectId"`
-	ServiceAccountJson pulumi.StringInput    `pulumi:"serviceAccountJson"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Google Cloud project ID where the Google Cloud Translation is managed.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Service Account JSON associated with the current project.
+	ServiceAccountJson pulumi.StringInput `pulumi:"serviceAccountJson"`
 }
 
 func (ProjectConnectorsGoogleCloudTranslationArgs) ElementType() reflect.Type {
@@ -13456,6 +14503,7 @@ func (o ProjectConnectorsGoogleCloudTranslationOutput) ToProjectConnectorsGoogle
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsGoogleCloudTranslationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -13464,14 +14512,17 @@ func (o ProjectConnectorsGoogleCloudTranslationOutput) Id() pulumi.StringPtrOutp
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsGoogleCloudTranslationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Google Cloud project ID where the Google Cloud Translation is managed.
 func (o ProjectConnectorsGoogleCloudTranslationOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Service Account JSON associated with the current project.
 func (o ProjectConnectorsGoogleCloudTranslationOutput) ServiceAccountJson() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) string { return v.ServiceAccountJson }).(pulumi.StringOutput)
 }
@@ -13497,9 +14548,11 @@ func (o ProjectConnectorsGoogleCloudTranslationArrayOutput) Index(i pulumi.IntIn
 }
 
 type ProjectConnectorsHibp struct {
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsHibpInput is an input type that accepts ProjectConnectorsHibpArgs and ProjectConnectorsHibpOutput values.
@@ -13514,9 +14567,11 @@ type ProjectConnectorsHibpInput interface {
 }
 
 type ProjectConnectorsHibpArgs struct {
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsHibpArgs) ElementType() reflect.Type {
@@ -13570,6 +14625,7 @@ func (o ProjectConnectorsHibpOutput) ToProjectConnectorsHibpOutputWithContext(ct
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsHibpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHibp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -13578,6 +14634,7 @@ func (o ProjectConnectorsHibpOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHibp) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsHibpOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHibp) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -13603,15 +14660,23 @@ func (o ProjectConnectorsHibpArrayOutput) Index(i pulumi.IntInput) ProjectConnec
 }
 
 type ProjectConnectorsHttp struct {
-	Authentication          *ProjectConnectorsHttpAuthentication `pulumi:"authentication"`
-	BaseUrl                 string                               `pulumi:"baseUrl"`
-	Description             *string                              `pulumi:"description"`
-	Headers                 map[string]string                    `pulumi:"headers"`
-	HmacSecret              *string                              `pulumi:"hmacSecret"`
-	Id                      *string                              `pulumi:"id"`
-	IncludeHeadersInContext *bool                                `pulumi:"includeHeadersInContext"`
-	Insecure                *bool                                `pulumi:"insecure"`
-	Name                    string                               `pulumi:"name"`
+	// Authentication Information
+	Authentication *ProjectConnectorsHttpAuthentication `pulumi:"authentication"`
+	// The base URL to fetch
+	BaseUrl string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The headers to send with the request
+	Headers map[string]string `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret *string `pulumi:"hmacSecret"`
+	Id         *string `pulumi:"id"`
+	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+	IncludeHeadersInContext *bool `pulumi:"includeHeadersInContext"`
+	// Will ignore certificate errors raised by the client
+	Insecure *bool `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsHttpInput is an input type that accepts ProjectConnectorsHttpArgs and ProjectConnectorsHttpOutput values.
@@ -13626,15 +14691,23 @@ type ProjectConnectorsHttpInput interface {
 }
 
 type ProjectConnectorsHttpArgs struct {
-	Authentication          ProjectConnectorsHttpAuthenticationPtrInput `pulumi:"authentication"`
-	BaseUrl                 pulumi.StringInput                          `pulumi:"baseUrl"`
-	Description             pulumi.StringPtrInput                       `pulumi:"description"`
-	Headers                 pulumi.StringMapInput                       `pulumi:"headers"`
-	HmacSecret              pulumi.StringPtrInput                       `pulumi:"hmacSecret"`
-	Id                      pulumi.StringPtrInput                       `pulumi:"id"`
-	IncludeHeadersInContext pulumi.BoolPtrInput                         `pulumi:"includeHeadersInContext"`
-	Insecure                pulumi.BoolPtrInput                         `pulumi:"insecure"`
-	Name                    pulumi.StringInput                          `pulumi:"name"`
+	// Authentication Information
+	Authentication ProjectConnectorsHttpAuthenticationPtrInput `pulumi:"authentication"`
+	// The base URL to fetch
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The headers to send with the request
+	Headers pulumi.StringMapInput `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret pulumi.StringPtrInput `pulumi:"hmacSecret"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
+	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+	IncludeHeadersInContext pulumi.BoolPtrInput `pulumi:"includeHeadersInContext"`
+	// Will ignore certificate errors raised by the client
+	Insecure pulumi.BoolPtrInput `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsHttpArgs) ElementType() reflect.Type {
@@ -13688,22 +14761,27 @@ func (o ProjectConnectorsHttpOutput) ToProjectConnectorsHttpOutputWithContext(ct
 	return o
 }
 
+// Authentication Information
 func (o ProjectConnectorsHttpOutput) Authentication() ProjectConnectorsHttpAuthenticationPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *ProjectConnectorsHttpAuthentication { return v.Authentication }).(ProjectConnectorsHttpAuthenticationPtrOutput)
 }
 
+// The base URL to fetch
 func (o ProjectConnectorsHttpOutput) BaseUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsHttpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The headers to send with the request
 func (o ProjectConnectorsHttpOutput) Headers() pulumi.StringMapOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
 }
 
+// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
 func (o ProjectConnectorsHttpOutput) HmacSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.HmacSecret }).(pulumi.StringPtrOutput)
 }
@@ -13712,14 +14790,17 @@ func (o ProjectConnectorsHttpOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
 func (o ProjectConnectorsHttpOutput) IncludeHeadersInContext() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *bool { return v.IncludeHeadersInContext }).(pulumi.BoolPtrOutput)
 }
 
+// Will ignore certificate errors raised by the client
 func (o ProjectConnectorsHttpOutput) Insecure() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsHttpOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -14206,15 +15287,23 @@ func (o ProjectConnectorsHttpAuthenticationBasicPtrOutput) Username() pulumi.Str
 }
 
 type ProjectConnectorsHttpStaticIp struct {
-	Authentication          *ProjectConnectorsHttpStaticIpAuthentication `pulumi:"authentication"`
-	BaseUrl                 string                                       `pulumi:"baseUrl"`
-	Description             *string                                      `pulumi:"description"`
-	Headers                 map[string]string                            `pulumi:"headers"`
-	HmacSecret              *string                                      `pulumi:"hmacSecret"`
-	Id                      *string                                      `pulumi:"id"`
-	IncludeHeadersInContext *bool                                        `pulumi:"includeHeadersInContext"`
-	Insecure                *bool                                        `pulumi:"insecure"`
-	Name                    string                                       `pulumi:"name"`
+	// Authentication Information
+	Authentication *ProjectConnectorsHttpStaticIpAuthentication `pulumi:"authentication"`
+	// The base URL to fetch
+	BaseUrl string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The headers to send with the request
+	Headers map[string]string `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret *string `pulumi:"hmacSecret"`
+	Id         *string `pulumi:"id"`
+	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+	IncludeHeadersInContext *bool `pulumi:"includeHeadersInContext"`
+	// Will ignore certificate errors raised by the client
+	Insecure *bool `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsHttpStaticIpInput is an input type that accepts ProjectConnectorsHttpStaticIpArgs and ProjectConnectorsHttpStaticIpOutput values.
@@ -14229,15 +15318,23 @@ type ProjectConnectorsHttpStaticIpInput interface {
 }
 
 type ProjectConnectorsHttpStaticIpArgs struct {
-	Authentication          ProjectConnectorsHttpStaticIpAuthenticationPtrInput `pulumi:"authentication"`
-	BaseUrl                 pulumi.StringInput                                  `pulumi:"baseUrl"`
-	Description             pulumi.StringPtrInput                               `pulumi:"description"`
-	Headers                 pulumi.StringMapInput                               `pulumi:"headers"`
-	HmacSecret              pulumi.StringPtrInput                               `pulumi:"hmacSecret"`
-	Id                      pulumi.StringPtrInput                               `pulumi:"id"`
-	IncludeHeadersInContext pulumi.BoolPtrInput                                 `pulumi:"includeHeadersInContext"`
-	Insecure                pulumi.BoolPtrInput                                 `pulumi:"insecure"`
-	Name                    pulumi.StringInput                                  `pulumi:"name"`
+	// Authentication Information
+	Authentication ProjectConnectorsHttpStaticIpAuthenticationPtrInput `pulumi:"authentication"`
+	// The base URL to fetch
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The headers to send with the request
+	Headers pulumi.StringMapInput `pulumi:"headers"`
+	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+	HmacSecret pulumi.StringPtrInput `pulumi:"hmacSecret"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
+	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+	IncludeHeadersInContext pulumi.BoolPtrInput `pulumi:"includeHeadersInContext"`
+	// Will ignore certificate errors raised by the client
+	Insecure pulumi.BoolPtrInput `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsHttpStaticIpArgs) ElementType() reflect.Type {
@@ -14291,24 +15388,29 @@ func (o ProjectConnectorsHttpStaticIpOutput) ToProjectConnectorsHttpStaticIpOutp
 	return o
 }
 
+// Authentication Information
 func (o ProjectConnectorsHttpStaticIpOutput) Authentication() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *ProjectConnectorsHttpStaticIpAuthentication {
 		return v.Authentication
 	}).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
 }
 
+// The base URL to fetch
 func (o ProjectConnectorsHttpStaticIpOutput) BaseUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsHttpStaticIpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The headers to send with the request
 func (o ProjectConnectorsHttpStaticIpOutput) Headers() pulumi.StringMapOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
 }
 
+// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
 func (o ProjectConnectorsHttpStaticIpOutput) HmacSecret() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.HmacSecret }).(pulumi.StringPtrOutput)
 }
@@ -14317,14 +15419,17 @@ func (o ProjectConnectorsHttpStaticIpOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
 func (o ProjectConnectorsHttpStaticIpOutput) IncludeHeadersInContext() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.IncludeHeadersInContext }).(pulumi.BoolPtrOutput)
 }
 
+// Will ignore certificate errors raised by the client
 func (o ProjectConnectorsHttpStaticIpOutput) Insecure() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsHttpStaticIpOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -14813,11 +15918,15 @@ func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Username() pu
 }
 
 type ProjectConnectorsHubspot struct {
-	AccessToken string  `pulumi:"accessToken"`
-	BaseUrl     *string `pulumi:"baseUrl"`
+	// The HubSpot private API access token generated for the Descope service.
+	AccessToken string `pulumi:"accessToken"`
+	// The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+	BaseUrl *string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsHubspotInput is an input type that accepts ProjectConnectorsHubspotArgs and ProjectConnectorsHubspotOutput values.
@@ -14832,11 +15941,15 @@ type ProjectConnectorsHubspotInput interface {
 }
 
 type ProjectConnectorsHubspotArgs struct {
-	AccessToken pulumi.StringInput    `pulumi:"accessToken"`
-	BaseUrl     pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// The HubSpot private API access token generated for the Descope service.
+	AccessToken pulumi.StringInput `pulumi:"accessToken"`
+	// The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsHubspotArgs) ElementType() reflect.Type {
@@ -14890,14 +16003,17 @@ func (o ProjectConnectorsHubspotOutput) ToProjectConnectorsHubspotOutputWithCont
 	return o
 }
 
+// The HubSpot private API access token generated for the Descope service.
 func (o ProjectConnectorsHubspotOutput) AccessToken() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHubspot) string { return v.AccessToken }).(pulumi.StringOutput)
 }
 
+// The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
 func (o ProjectConnectorsHubspotOutput) BaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHubspot) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsHubspotOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHubspot) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -14906,6 +16022,7 @@ func (o ProjectConnectorsHubspotOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHubspot) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsHubspotOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsHubspot) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -14931,11 +16048,15 @@ func (o ProjectConnectorsHubspotArrayOutput) Index(i pulumi.IntInput) ProjectCon
 }
 
 type ProjectConnectorsIntercom struct {
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	Region      *string `pulumi:"region"`
-	Token       string  `pulumi:"token"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Regional Hosting - US, EU, or AU. default: US
+	Region *string `pulumi:"region"`
+	// The Intercom access token.
+	Token string `pulumi:"token"`
 }
 
 // ProjectConnectorsIntercomInput is an input type that accepts ProjectConnectorsIntercomArgs and ProjectConnectorsIntercomOutput values.
@@ -14950,11 +16071,15 @@ type ProjectConnectorsIntercomInput interface {
 }
 
 type ProjectConnectorsIntercomArgs struct {
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	Region      pulumi.StringPtrInput `pulumi:"region"`
-	Token       pulumi.StringInput    `pulumi:"token"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Regional Hosting - US, EU, or AU. default: US
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// The Intercom access token.
+	Token pulumi.StringInput `pulumi:"token"`
 }
 
 func (ProjectConnectorsIntercomArgs) ElementType() reflect.Type {
@@ -15008,6 +16133,7 @@ func (o ProjectConnectorsIntercomOutput) ToProjectConnectorsIntercomOutputWithCo
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsIntercomOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsIntercom) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15016,14 +16142,17 @@ func (o ProjectConnectorsIntercomOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsIntercom) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsIntercomOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsIntercom) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Regional Hosting - US, EU, or AU. default: US
 func (o ProjectConnectorsIntercomOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsIntercom) *string { return v.Region }).(pulumi.StringPtrOutput)
 }
 
+// The Intercom access token.
 func (o ProjectConnectorsIntercomOutput) Token() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsIntercom) string { return v.Token }).(pulumi.StringOutput)
 }
@@ -15049,16 +16178,22 @@ func (o ProjectConnectorsIntercomArrayOutput) Index(i pulumi.IntInput) ProjectCo
 }
 
 type ProjectConnectorsNewrelic struct {
-	ApiKey                 string  `pulumi:"apiKey"`
-	AuditEnabled           *bool   `pulumi:"auditEnabled"`
-	AuditFilters           *string `pulumi:"auditFilters"`
-	DataCenter             *string `pulumi:"dataCenter"`
-	Description            *string `pulumi:"description"`
-	Id                     *string `pulumi:"id"`
-	LogsPrefix             *string `pulumi:"logsPrefix"`
-	Name                   string  `pulumi:"name"`
-	OverrideLogsPrefix     *bool   `pulumi:"overrideLogsPrefix"`
-	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
+	// Ingest License Key of the account you want to report data to.
+	ApiKey       string  `pulumi:"apiKey"`
+	AuditEnabled *bool   `pulumi:"auditEnabled"`
+	AuditFilters *string `pulumi:"auditFilters"`
+	// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+	DataCenter *string `pulumi:"dataCenter"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+	LogsPrefix *string `pulumi:"logsPrefix"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Enable this option to use a custom prefix for log fields.
+	OverrideLogsPrefix     *bool `pulumi:"overrideLogsPrefix"`
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
 }
 
 // ProjectConnectorsNewrelicInput is an input type that accepts ProjectConnectorsNewrelicArgs and ProjectConnectorsNewrelicOutput values.
@@ -15073,16 +16208,22 @@ type ProjectConnectorsNewrelicInput interface {
 }
 
 type ProjectConnectorsNewrelicArgs struct {
-	ApiKey                 pulumi.StringInput    `pulumi:"apiKey"`
-	AuditEnabled           pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
-	AuditFilters           pulumi.StringPtrInput `pulumi:"auditFilters"`
-	DataCenter             pulumi.StringPtrInput `pulumi:"dataCenter"`
-	Description            pulumi.StringPtrInput `pulumi:"description"`
-	Id                     pulumi.StringPtrInput `pulumi:"id"`
-	LogsPrefix             pulumi.StringPtrInput `pulumi:"logsPrefix"`
-	Name                   pulumi.StringInput    `pulumi:"name"`
-	OverrideLogsPrefix     pulumi.BoolPtrInput   `pulumi:"overrideLogsPrefix"`
-	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
+	// Ingest License Key of the account you want to report data to.
+	ApiKey       pulumi.StringInput    `pulumi:"apiKey"`
+	AuditEnabled pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
+	AuditFilters pulumi.StringPtrInput `pulumi:"auditFilters"`
+	// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+	DataCenter pulumi.StringPtrInput `pulumi:"dataCenter"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+	LogsPrefix pulumi.StringPtrInput `pulumi:"logsPrefix"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Enable this option to use a custom prefix for log fields.
+	OverrideLogsPrefix     pulumi.BoolPtrInput `pulumi:"overrideLogsPrefix"`
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
 }
 
 func (ProjectConnectorsNewrelicArgs) ElementType() reflect.Type {
@@ -15136,6 +16277,7 @@ func (o ProjectConnectorsNewrelicOutput) ToProjectConnectorsNewrelicOutputWithCo
 	return o
 }
 
+// Ingest License Key of the account you want to report data to.
 func (o ProjectConnectorsNewrelicOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) string { return v.ApiKey }).(pulumi.StringOutput)
 }
@@ -15148,10 +16290,12 @@ func (o ProjectConnectorsNewrelicOutput) AuditFilters() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
 
+// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
 func (o ProjectConnectorsNewrelicOutput) DataCenter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.DataCenter }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsNewrelicOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15160,14 +16304,17 @@ func (o ProjectConnectorsNewrelicOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Specify a custom prefix for all log fields. The default prefix is `descope.`.
 func (o ProjectConnectorsNewrelicOutput) LogsPrefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *string { return v.LogsPrefix }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsNewrelicOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Enable this option to use a custom prefix for log fields.
 func (o ProjectConnectorsNewrelicOutput) OverrideLogsPrefix() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsNewrelic) *bool { return v.OverrideLogsPrefix }).(pulumi.BoolPtrOutput)
 }
@@ -15197,11 +16344,15 @@ func (o ProjectConnectorsNewrelicArrayOutput) Index(i pulumi.IntInput) ProjectCo
 }
 
 type ProjectConnectorsRecaptcha struct {
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	SecretKey   string  `pulumi:"secretKey"`
-	SiteKey     string  `pulumi:"siteKey"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+	SecretKey string `pulumi:"secretKey"`
+	// The site key is used to invoke reCAPTCHA service on your site or mobile application.
+	SiteKey string `pulumi:"siteKey"`
 }
 
 // ProjectConnectorsRecaptchaInput is an input type that accepts ProjectConnectorsRecaptchaArgs and ProjectConnectorsRecaptchaOutput values.
@@ -15216,11 +16367,15 @@ type ProjectConnectorsRecaptchaInput interface {
 }
 
 type ProjectConnectorsRecaptchaArgs struct {
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	SecretKey   pulumi.StringInput    `pulumi:"secretKey"`
-	SiteKey     pulumi.StringInput    `pulumi:"siteKey"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// The site key is used to invoke reCAPTCHA service on your site or mobile application.
+	SiteKey pulumi.StringInput `pulumi:"siteKey"`
 }
 
 func (ProjectConnectorsRecaptchaArgs) ElementType() reflect.Type {
@@ -15274,6 +16429,7 @@ func (o ProjectConnectorsRecaptchaOutput) ToProjectConnectorsRecaptchaOutputWith
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsRecaptchaOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptcha) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15282,14 +16438,17 @@ func (o ProjectConnectorsRecaptchaOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptcha) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsRecaptchaOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptcha) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
 func (o ProjectConnectorsRecaptchaOutput) SecretKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptcha) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
+// The site key is used to invoke reCAPTCHA service on your site or mobile application.
 func (o ProjectConnectorsRecaptchaOutput) SiteKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptcha) string { return v.SiteKey }).(pulumi.StringOutput)
 }
@@ -15315,14 +16474,21 @@ func (o ProjectConnectorsRecaptchaArrayOutput) Index(i pulumi.IntInput) ProjectC
 }
 
 type ProjectConnectorsRecaptchaEnterprise struct {
-	ApiKey             string   `pulumi:"apiKey"`
-	AssessmentScore    *float64 `pulumi:"assessmentScore"`
-	Description        *string  `pulumi:"description"`
-	Id                 *string  `pulumi:"id"`
-	Name               string   `pulumi:"name"`
-	OverrideAssessment *bool    `pulumi:"overrideAssessment"`
-	ProjectId          string   `pulumi:"projectId"`
-	SiteKey            string   `pulumi:"siteKey"`
+	// API key associated with the current project.
+	ApiKey string `pulumi:"apiKey"`
+	// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+	AssessmentScore *float64 `pulumi:"assessmentScore"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+	OverrideAssessment *bool `pulumi:"overrideAssessment"`
+	// The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+	ProjectId string `pulumi:"projectId"`
+	// The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+	SiteKey string `pulumi:"siteKey"`
 }
 
 // ProjectConnectorsRecaptchaEnterpriseInput is an input type that accepts ProjectConnectorsRecaptchaEnterpriseArgs and ProjectConnectorsRecaptchaEnterpriseOutput values.
@@ -15337,14 +16503,21 @@ type ProjectConnectorsRecaptchaEnterpriseInput interface {
 }
 
 type ProjectConnectorsRecaptchaEnterpriseArgs struct {
-	ApiKey             pulumi.StringInput     `pulumi:"apiKey"`
-	AssessmentScore    pulumi.Float64PtrInput `pulumi:"assessmentScore"`
-	Description        pulumi.StringPtrInput  `pulumi:"description"`
-	Id                 pulumi.StringPtrInput  `pulumi:"id"`
-	Name               pulumi.StringInput     `pulumi:"name"`
-	OverrideAssessment pulumi.BoolPtrInput    `pulumi:"overrideAssessment"`
-	ProjectId          pulumi.StringInput     `pulumi:"projectId"`
-	SiteKey            pulumi.StringInput     `pulumi:"siteKey"`
+	// API key associated with the current project.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+	AssessmentScore pulumi.Float64PtrInput `pulumi:"assessmentScore"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+	OverrideAssessment pulumi.BoolPtrInput `pulumi:"overrideAssessment"`
+	// The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+	SiteKey pulumi.StringInput `pulumi:"siteKey"`
 }
 
 func (ProjectConnectorsRecaptchaEnterpriseArgs) ElementType() reflect.Type {
@@ -15398,14 +16571,17 @@ func (o ProjectConnectorsRecaptchaEnterpriseOutput) ToProjectConnectorsRecaptcha
 	return o
 }
 
+// API key associated with the current project.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) AssessmentScore() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *float64 { return v.AssessmentScore }).(pulumi.Float64PtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15414,18 +16590,22 @@ func (o ProjectConnectorsRecaptchaEnterpriseOutput) Id() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) OverrideAssessment() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *bool { return v.OverrideAssessment }).(pulumi.BoolPtrOutput)
 }
 
+// The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) SiteKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) string { return v.SiteKey }).(pulumi.StringOutput)
 }
@@ -15451,12 +16631,17 @@ func (o ProjectConnectorsRecaptchaEnterpriseArrayOutput) Index(i pulumi.IntInput
 }
 
 type ProjectConnectorsRekognition struct {
-	AccessKeyId     string  `pulumi:"accessKeyId"`
-	CollectionId    string  `pulumi:"collectionId"`
-	Description     *string `pulumi:"description"`
-	Id              *string `pulumi:"id"`
-	Name            string  `pulumi:"name"`
-	SecretAccessKey string  `pulumi:"secretAccessKey"`
+	// The AWS access key ID
+	AccessKeyId string `pulumi:"accessKeyId"`
+	// The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+	CollectionId string `pulumi:"collectionId"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The AWS secret access key
+	SecretAccessKey string `pulumi:"secretAccessKey"`
 }
 
 // ProjectConnectorsRekognitionInput is an input type that accepts ProjectConnectorsRekognitionArgs and ProjectConnectorsRekognitionOutput values.
@@ -15471,12 +16656,17 @@ type ProjectConnectorsRekognitionInput interface {
 }
 
 type ProjectConnectorsRekognitionArgs struct {
-	AccessKeyId     pulumi.StringInput    `pulumi:"accessKeyId"`
-	CollectionId    pulumi.StringInput    `pulumi:"collectionId"`
-	Description     pulumi.StringPtrInput `pulumi:"description"`
-	Id              pulumi.StringPtrInput `pulumi:"id"`
-	Name            pulumi.StringInput    `pulumi:"name"`
-	SecretAccessKey pulumi.StringInput    `pulumi:"secretAccessKey"`
+	// The AWS access key ID
+	AccessKeyId pulumi.StringInput `pulumi:"accessKeyId"`
+	// The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+	CollectionId pulumi.StringInput `pulumi:"collectionId"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The AWS secret access key
+	SecretAccessKey pulumi.StringInput `pulumi:"secretAccessKey"`
 }
 
 func (ProjectConnectorsRekognitionArgs) ElementType() reflect.Type {
@@ -15530,14 +16720,17 @@ func (o ProjectConnectorsRekognitionOutput) ToProjectConnectorsRekognitionOutput
 	return o
 }
 
+// The AWS access key ID
 func (o ProjectConnectorsRekognitionOutput) AccessKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) string { return v.AccessKeyId }).(pulumi.StringOutput)
 }
 
+// The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
 func (o ProjectConnectorsRekognitionOutput) CollectionId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) string { return v.CollectionId }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsRekognitionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15546,10 +16739,12 @@ func (o ProjectConnectorsRekognitionOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsRekognitionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The AWS secret access key
 func (o ProjectConnectorsRekognitionOutput) SecretAccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) string { return v.SecretAccessKey }).(pulumi.StringOutput)
 }
@@ -15575,13 +16770,19 @@ func (o ProjectConnectorsRekognitionArrayOutput) Index(i pulumi.IntInput) Projec
 }
 
 type ProjectConnectorsSalesforce struct {
-	BaseUrl      string  `pulumi:"baseUrl"`
-	ClientId     string  `pulumi:"clientId"`
-	ClientSecret string  `pulumi:"clientSecret"`
-	Description  *string `pulumi:"description"`
-	Id           *string `pulumi:"id"`
-	Name         string  `pulumi:"name"`
-	Version      string  `pulumi:"version"`
+	// The Salesforce API base URL.
+	BaseUrl string `pulumi:"baseUrl"`
+	// The consumer key of the connected app.
+	ClientId string `pulumi:"clientId"`
+	// The consumer secret of the connected app.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// REST API Version.
+	Version string `pulumi:"version"`
 }
 
 // ProjectConnectorsSalesforceInput is an input type that accepts ProjectConnectorsSalesforceArgs and ProjectConnectorsSalesforceOutput values.
@@ -15596,13 +16797,19 @@ type ProjectConnectorsSalesforceInput interface {
 }
 
 type ProjectConnectorsSalesforceArgs struct {
-	BaseUrl      pulumi.StringInput    `pulumi:"baseUrl"`
-	ClientId     pulumi.StringInput    `pulumi:"clientId"`
-	ClientSecret pulumi.StringInput    `pulumi:"clientSecret"`
-	Description  pulumi.StringPtrInput `pulumi:"description"`
-	Id           pulumi.StringPtrInput `pulumi:"id"`
-	Name         pulumi.StringInput    `pulumi:"name"`
-	Version      pulumi.StringInput    `pulumi:"version"`
+	// The Salesforce API base URL.
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
+	// The consumer key of the connected app.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The consumer secret of the connected app.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// REST API Version.
+	Version pulumi.StringInput `pulumi:"version"`
 }
 
 func (ProjectConnectorsSalesforceArgs) ElementType() reflect.Type {
@@ -15656,18 +16863,22 @@ func (o ProjectConnectorsSalesforceOutput) ToProjectConnectorsSalesforceOutputWi
 	return o
 }
 
+// The Salesforce API base URL.
 func (o ProjectConnectorsSalesforceOutput) BaseUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
+// The consumer key of the connected app.
 func (o ProjectConnectorsSalesforceOutput) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) string { return v.ClientId }).(pulumi.StringOutput)
 }
 
+// The consumer secret of the connected app.
 func (o ProjectConnectorsSalesforceOutput) ClientSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) string { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsSalesforceOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15676,10 +16887,12 @@ func (o ProjectConnectorsSalesforceOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsSalesforceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// REST API Version.
 func (o ProjectConnectorsSalesforceOutput) Version() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) string { return v.Version }).(pulumi.StringOutput)
 }
@@ -15705,11 +16918,15 @@ func (o ProjectConnectorsSalesforceArrayOutput) Index(i pulumi.IntInput) Project
 }
 
 type ProjectConnectorsSegment struct {
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Host        *string `pulumi:"host"`
-	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	WriteKey    string  `pulumi:"writeKey"`
+	// The base URL of the Segment API, when using a custom domain in Segment.
+	Host *string `pulumi:"host"`
+	Id   *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Segment Write Key generated for the Descope service.
+	WriteKey string `pulumi:"writeKey"`
 }
 
 // ProjectConnectorsSegmentInput is an input type that accepts ProjectConnectorsSegmentArgs and ProjectConnectorsSegmentOutput values.
@@ -15724,11 +16941,15 @@ type ProjectConnectorsSegmentInput interface {
 }
 
 type ProjectConnectorsSegmentArgs struct {
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Host        pulumi.StringPtrInput `pulumi:"host"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	WriteKey    pulumi.StringInput    `pulumi:"writeKey"`
+	// The base URL of the Segment API, when using a custom domain in Segment.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	Id   pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Segment Write Key generated for the Descope service.
+	WriteKey pulumi.StringInput `pulumi:"writeKey"`
 }
 
 func (ProjectConnectorsSegmentArgs) ElementType() reflect.Type {
@@ -15782,10 +17003,12 @@ func (o ProjectConnectorsSegmentOutput) ToProjectConnectorsSegmentOutputWithCont
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsSegmentOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSegment) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The base URL of the Segment API, when using a custom domain in Segment.
 func (o ProjectConnectorsSegmentOutput) Host() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSegment) *string { return v.Host }).(pulumi.StringPtrOutput)
 }
@@ -15794,10 +17017,12 @@ func (o ProjectConnectorsSegmentOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSegment) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsSegmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSegment) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Segment Write Key generated for the Descope service.
 func (o ProjectConnectorsSegmentOutput) WriteKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSegment) string { return v.WriteKey }).(pulumi.StringOutput)
 }
@@ -15824,10 +17049,12 @@ func (o ProjectConnectorsSegmentArrayOutput) Index(i pulumi.IntInput) ProjectCon
 
 type ProjectConnectorsSendgrid struct {
 	Authentication ProjectConnectorsSendgridAuthentication `pulumi:"authentication"`
-	Description    *string                                 `pulumi:"description"`
-	Id             *string                                 `pulumi:"id"`
-	Name           string                                  `pulumi:"name"`
-	Sender         ProjectConnectorsSendgridSender         `pulumi:"sender"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name   string                          `pulumi:"name"`
+	Sender ProjectConnectorsSendgridSender `pulumi:"sender"`
 }
 
 // ProjectConnectorsSendgridInput is an input type that accepts ProjectConnectorsSendgridArgs and ProjectConnectorsSendgridOutput values.
@@ -15843,10 +17070,12 @@ type ProjectConnectorsSendgridInput interface {
 
 type ProjectConnectorsSendgridArgs struct {
 	Authentication ProjectConnectorsSendgridAuthenticationInput `pulumi:"authentication"`
-	Description    pulumi.StringPtrInput                        `pulumi:"description"`
-	Id             pulumi.StringPtrInput                        `pulumi:"id"`
-	Name           pulumi.StringInput                           `pulumi:"name"`
-	Sender         ProjectConnectorsSendgridSenderInput         `pulumi:"sender"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name   pulumi.StringInput                   `pulumi:"name"`
+	Sender ProjectConnectorsSendgridSenderInput `pulumi:"sender"`
 }
 
 func (ProjectConnectorsSendgridArgs) ElementType() reflect.Type {
@@ -15904,6 +17133,7 @@ func (o ProjectConnectorsSendgridOutput) Authentication() ProjectConnectorsSendg
 	return o.ApplyT(func(v ProjectConnectorsSendgrid) ProjectConnectorsSendgridAuthentication { return v.Authentication }).(ProjectConnectorsSendgridAuthenticationOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsSendgridOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSendgrid) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -15912,6 +17142,7 @@ func (o ProjectConnectorsSendgridOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSendgrid) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsSendgridOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSendgrid) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -16046,11 +17277,13 @@ func (o ProjectConnectorsSendgridSenderOutput) Name() pulumi.StringPtrOutput {
 
 type ProjectConnectorsSmtp struct {
 	Authentication ProjectConnectorsSmtpAuthentication `pulumi:"authentication"`
-	Description    *string                             `pulumi:"description"`
-	Id             *string                             `pulumi:"id"`
-	Name           string                              `pulumi:"name"`
-	Sender         ProjectConnectorsSmtpSender         `pulumi:"sender"`
-	Server         ProjectConnectorsSmtpServer         `pulumi:"server"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name   string                      `pulumi:"name"`
+	Sender ProjectConnectorsSmtpSender `pulumi:"sender"`
+	Server ProjectConnectorsSmtpServer `pulumi:"server"`
 }
 
 // ProjectConnectorsSmtpInput is an input type that accepts ProjectConnectorsSmtpArgs and ProjectConnectorsSmtpOutput values.
@@ -16066,11 +17299,13 @@ type ProjectConnectorsSmtpInput interface {
 
 type ProjectConnectorsSmtpArgs struct {
 	Authentication ProjectConnectorsSmtpAuthenticationInput `pulumi:"authentication"`
-	Description    pulumi.StringPtrInput                    `pulumi:"description"`
-	Id             pulumi.StringPtrInput                    `pulumi:"id"`
-	Name           pulumi.StringInput                       `pulumi:"name"`
-	Sender         ProjectConnectorsSmtpSenderInput         `pulumi:"sender"`
-	Server         ProjectConnectorsSmtpServerInput         `pulumi:"server"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name   pulumi.StringInput               `pulumi:"name"`
+	Sender ProjectConnectorsSmtpSenderInput `pulumi:"sender"`
+	Server ProjectConnectorsSmtpServerInput `pulumi:"server"`
 }
 
 func (ProjectConnectorsSmtpArgs) ElementType() reflect.Type {
@@ -16128,6 +17363,7 @@ func (o ProjectConnectorsSmtpOutput) Authentication() ProjectConnectorsSmtpAuthe
 	return o.ApplyT(func(v ProjectConnectorsSmtp) ProjectConnectorsSmtpAuthentication { return v.Authentication }).(ProjectConnectorsSmtpAuthenticationOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsSmtpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSmtp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -16136,6 +17372,7 @@ func (o ProjectConnectorsSmtpOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSmtp) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsSmtpOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSmtp) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -16340,13 +17577,16 @@ func (o ProjectConnectorsSmtpServerOutput) Port() pulumi.IntPtrOutput {
 }
 
 type ProjectConnectorsSumologic struct {
-	AuditEnabled           *bool   `pulumi:"auditEnabled"`
-	AuditFilters           *string `pulumi:"auditFilters"`
-	Description            *string `pulumi:"description"`
-	HttpSourceUrl          string  `pulumi:"httpSourceUrl"`
-	Id                     *string `pulumi:"id"`
-	Name                   string  `pulumi:"name"`
-	TroubleshootLogEnabled *bool   `pulumi:"troubleshootLogEnabled"`
+	AuditEnabled *bool   `pulumi:"auditEnabled"`
+	AuditFilters *string `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The URL associated with an HTTP Hosted collector
+	HttpSourceUrl string  `pulumi:"httpSourceUrl"`
+	Id            *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name                   string `pulumi:"name"`
+	TroubleshootLogEnabled *bool  `pulumi:"troubleshootLogEnabled"`
 }
 
 // ProjectConnectorsSumologicInput is an input type that accepts ProjectConnectorsSumologicArgs and ProjectConnectorsSumologicOutput values.
@@ -16361,13 +17601,16 @@ type ProjectConnectorsSumologicInput interface {
 }
 
 type ProjectConnectorsSumologicArgs struct {
-	AuditEnabled           pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
-	AuditFilters           pulumi.StringPtrInput `pulumi:"auditFilters"`
-	Description            pulumi.StringPtrInput `pulumi:"description"`
-	HttpSourceUrl          pulumi.StringInput    `pulumi:"httpSourceUrl"`
-	Id                     pulumi.StringPtrInput `pulumi:"id"`
-	Name                   pulumi.StringInput    `pulumi:"name"`
-	TroubleshootLogEnabled pulumi.BoolPtrInput   `pulumi:"troubleshootLogEnabled"`
+	AuditEnabled pulumi.BoolPtrInput   `pulumi:"auditEnabled"`
+	AuditFilters pulumi.StringPtrInput `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The URL associated with an HTTP Hosted collector
+	HttpSourceUrl pulumi.StringInput    `pulumi:"httpSourceUrl"`
+	Id            pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name                   pulumi.StringInput  `pulumi:"name"`
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
 }
 
 func (ProjectConnectorsSumologicArgs) ElementType() reflect.Type {
@@ -16429,10 +17672,12 @@ func (o ProjectConnectorsSumologicOutput) AuditFilters() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v ProjectConnectorsSumologic) *string { return v.AuditFilters }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsSumologicOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSumologic) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The URL associated with an HTTP Hosted collector
 func (o ProjectConnectorsSumologicOutput) HttpSourceUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSumologic) string { return v.HttpSourceUrl }).(pulumi.StringOutput)
 }
@@ -16441,6 +17686,7 @@ func (o ProjectConnectorsSumologicOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSumologic) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsSumologicOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSumologic) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -16470,11 +17716,15 @@ func (o ProjectConnectorsSumologicArrayOutput) Index(i pulumi.IntInput) ProjectC
 }
 
 type ProjectConnectorsTelesign struct {
-	ApiKey      string  `pulumi:"apiKey"`
-	CustomerId  string  `pulumi:"customerId"`
+	// The unique Telesign API key
+	ApiKey string `pulumi:"apiKey"`
+	// The unique Telesign account Customer ID
+	CustomerId string `pulumi:"customerId"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
 }
 
 // ProjectConnectorsTelesignInput is an input type that accepts ProjectConnectorsTelesignArgs and ProjectConnectorsTelesignOutput values.
@@ -16489,11 +17739,15 @@ type ProjectConnectorsTelesignInput interface {
 }
 
 type ProjectConnectorsTelesignArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
-	CustomerId  pulumi.StringInput    `pulumi:"customerId"`
+	// The unique Telesign API key
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// The unique Telesign account Customer ID
+	CustomerId pulumi.StringInput `pulumi:"customerId"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectConnectorsTelesignArgs) ElementType() reflect.Type {
@@ -16547,14 +17801,17 @@ func (o ProjectConnectorsTelesignOutput) ToProjectConnectorsTelesignOutputWithCo
 	return o
 }
 
+// The unique Telesign API key
 func (o ProjectConnectorsTelesignOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTelesign) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// The unique Telesign account Customer ID
 func (o ProjectConnectorsTelesignOutput) CustomerId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTelesign) string { return v.CustomerId }).(pulumi.StringOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsTelesignOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTelesign) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -16563,6 +17820,7 @@ func (o ProjectConnectorsTelesignOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTelesign) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsTelesignOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTelesign) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -16588,11 +17846,15 @@ func (o ProjectConnectorsTelesignArrayOutput) Index(i pulumi.IntInput) ProjectCo
 }
 
 type ProjectConnectorsTraceable struct {
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	EuRegion    *bool   `pulumi:"euRegion"`
-	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	SecretKey   string  `pulumi:"secretKey"`
+	// EU(Europe) Region deployment of Traceable platform.
+	EuRegion *bool   `pulumi:"euRegion"`
+	Id       *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Traceable secret key.
+	SecretKey string `pulumi:"secretKey"`
 }
 
 // ProjectConnectorsTraceableInput is an input type that accepts ProjectConnectorsTraceableArgs and ProjectConnectorsTraceableOutput values.
@@ -16607,11 +17869,15 @@ type ProjectConnectorsTraceableInput interface {
 }
 
 type ProjectConnectorsTraceableArgs struct {
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	EuRegion    pulumi.BoolPtrInput   `pulumi:"euRegion"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	SecretKey   pulumi.StringInput    `pulumi:"secretKey"`
+	// EU(Europe) Region deployment of Traceable platform.
+	EuRegion pulumi.BoolPtrInput   `pulumi:"euRegion"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Traceable secret key.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
 }
 
 func (ProjectConnectorsTraceableArgs) ElementType() reflect.Type {
@@ -16665,10 +17931,12 @@ func (o ProjectConnectorsTraceableOutput) ToProjectConnectorsTraceableOutputWith
 	return o
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsTraceableOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTraceable) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// EU(Europe) Region deployment of Traceable platform.
 func (o ProjectConnectorsTraceableOutput) EuRegion() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTraceable) *bool { return v.EuRegion }).(pulumi.BoolPtrOutput)
 }
@@ -16677,10 +17945,12 @@ func (o ProjectConnectorsTraceableOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTraceable) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsTraceableOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTraceable) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Traceable secret key.
 func (o ProjectConnectorsTraceableOutput) SecretKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTraceable) string { return v.SecretKey }).(pulumi.StringOutput)
 }
@@ -16708,10 +17978,12 @@ func (o ProjectConnectorsTraceableArrayOutput) Index(i pulumi.IntInput) ProjectC
 type ProjectConnectorsTwilioCore struct {
 	AccountSid     string                                    `pulumi:"accountSid"`
 	Authentication ProjectConnectorsTwilioCoreAuthentication `pulumi:"authentication"`
-	Description    *string                                   `pulumi:"description"`
-	Id             *string                                   `pulumi:"id"`
-	Name           string                                    `pulumi:"name"`
-	Senders        ProjectConnectorsTwilioCoreSenders        `pulumi:"senders"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name    string                             `pulumi:"name"`
+	Senders ProjectConnectorsTwilioCoreSenders `pulumi:"senders"`
 }
 
 // ProjectConnectorsTwilioCoreInput is an input type that accepts ProjectConnectorsTwilioCoreArgs and ProjectConnectorsTwilioCoreOutput values.
@@ -16728,10 +18000,12 @@ type ProjectConnectorsTwilioCoreInput interface {
 type ProjectConnectorsTwilioCoreArgs struct {
 	AccountSid     pulumi.StringInput                             `pulumi:"accountSid"`
 	Authentication ProjectConnectorsTwilioCoreAuthenticationInput `pulumi:"authentication"`
-	Description    pulumi.StringPtrInput                          `pulumi:"description"`
-	Id             pulumi.StringPtrInput                          `pulumi:"id"`
-	Name           pulumi.StringInput                             `pulumi:"name"`
-	Senders        ProjectConnectorsTwilioCoreSendersInput        `pulumi:"senders"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name    pulumi.StringInput                      `pulumi:"name"`
+	Senders ProjectConnectorsTwilioCoreSendersInput `pulumi:"senders"`
 }
 
 func (ProjectConnectorsTwilioCoreArgs) ElementType() reflect.Type {
@@ -16793,6 +18067,7 @@ func (o ProjectConnectorsTwilioCoreOutput) Authentication() ProjectConnectorsTwi
 	return o.ApplyT(func(v ProjectConnectorsTwilioCore) ProjectConnectorsTwilioCoreAuthentication { return v.Authentication }).(ProjectConnectorsTwilioCoreAuthenticationOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsTwilioCoreOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioCore) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -16801,6 +18076,7 @@ func (o ProjectConnectorsTwilioCoreOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioCore) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsTwilioCoreOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioCore) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -17136,11 +18412,13 @@ func (o ProjectConnectorsTwilioCoreSendersVoicePtrOutput) PhoneNumber() pulumi.S
 type ProjectConnectorsTwilioVerify struct {
 	AccountSid     string                                      `pulumi:"accountSid"`
 	Authentication ProjectConnectorsTwilioVerifyAuthentication `pulumi:"authentication"`
-	Description    *string                                     `pulumi:"description"`
-	Id             *string                                     `pulumi:"id"`
-	Name           string                                      `pulumi:"name"`
-	Sender         *string                                     `pulumi:"sender"`
-	ServiceSid     string                                      `pulumi:"serviceSid"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name       string  `pulumi:"name"`
+	Sender     *string `pulumi:"sender"`
+	ServiceSid string  `pulumi:"serviceSid"`
 }
 
 // ProjectConnectorsTwilioVerifyInput is an input type that accepts ProjectConnectorsTwilioVerifyArgs and ProjectConnectorsTwilioVerifyOutput values.
@@ -17157,11 +18435,13 @@ type ProjectConnectorsTwilioVerifyInput interface {
 type ProjectConnectorsTwilioVerifyArgs struct {
 	AccountSid     pulumi.StringInput                               `pulumi:"accountSid"`
 	Authentication ProjectConnectorsTwilioVerifyAuthenticationInput `pulumi:"authentication"`
-	Description    pulumi.StringPtrInput                            `pulumi:"description"`
-	Id             pulumi.StringPtrInput                            `pulumi:"id"`
-	Name           pulumi.StringInput                               `pulumi:"name"`
-	Sender         pulumi.StringPtrInput                            `pulumi:"sender"`
-	ServiceSid     pulumi.StringInput                               `pulumi:"serviceSid"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name       pulumi.StringInput    `pulumi:"name"`
+	Sender     pulumi.StringPtrInput `pulumi:"sender"`
+	ServiceSid pulumi.StringInput    `pulumi:"serviceSid"`
 }
 
 func (ProjectConnectorsTwilioVerifyArgs) ElementType() reflect.Type {
@@ -17225,6 +18505,7 @@ func (o ProjectConnectorsTwilioVerifyOutput) Authentication() ProjectConnectorsT
 	}).(ProjectConnectorsTwilioVerifyAuthenticationOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsTwilioVerifyOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioVerify) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -17233,6 +18514,7 @@ func (o ProjectConnectorsTwilioVerifyOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioVerify) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsTwilioVerifyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioVerify) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -17327,12 +18609,17 @@ func (o ProjectConnectorsTwilioVerifyAuthenticationOutput) AuthToken() pulumi.St
 }
 
 type ProjectConnectorsVeriff struct {
-	ApiKey      string  `pulumi:"apiKey"`
-	BaseUrl     *string `pulumi:"baseUrl"`
+	// The Veriff Public API Key, you can find under Veriff Station - Integrations.
+	ApiKey string `pulumi:"apiKey"`
+	// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+	BaseUrl *string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
-	SecretKey   string  `pulumi:"secretKey"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+	SecretKey string `pulumi:"secretKey"`
 }
 
 // ProjectConnectorsVeriffInput is an input type that accepts ProjectConnectorsVeriffArgs and ProjectConnectorsVeriffOutput values.
@@ -17347,12 +18634,17 @@ type ProjectConnectorsVeriffInput interface {
 }
 
 type ProjectConnectorsVeriffArgs struct {
-	ApiKey      pulumi.StringInput    `pulumi:"apiKey"`
-	BaseUrl     pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// The Veriff Public API Key, you can find under Veriff Station - Integrations.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	SecretKey   pulumi.StringInput    `pulumi:"secretKey"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
 }
 
 func (ProjectConnectorsVeriffArgs) ElementType() reflect.Type {
@@ -17406,14 +18698,17 @@ func (o ProjectConnectorsVeriffOutput) ToProjectConnectorsVeriffOutputWithContex
 	return o
 }
 
+// The Veriff Public API Key, you can find under Veriff Station - Integrations.
 func (o ProjectConnectorsVeriffOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.ApiKey }).(pulumi.StringOutput)
 }
 
+// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
 func (o ProjectConnectorsVeriffOutput) BaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
 }
 
+// A description of what your connector is used for.
 func (o ProjectConnectorsVeriffOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -17422,10 +18717,12 @@ func (o ProjectConnectorsVeriffOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A custom name for your connector.
 func (o ProjectConnectorsVeriffOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
 func (o ProjectConnectorsVeriffOutput) SecretKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.SecretKey }).(pulumi.StringOutput)
 }
@@ -17696,10 +18993,9 @@ type ProjectJwtTemplatesAccessKeyTemplate struct {
 	AuthSchema        *string `pulumi:"authSchema"`
 	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
 	Description       *string `pulumi:"description"`
-	// The ID of this resource.
-	Id       *string `pulumi:"id"`
-	Name     string  `pulumi:"name"`
-	Template string  `pulumi:"template"`
+	Id                *string `pulumi:"id"`
+	Name              string  `pulumi:"name"`
+	Template          string  `pulumi:"template"`
 }
 
 // ProjectJwtTemplatesAccessKeyTemplateInput is an input type that accepts ProjectJwtTemplatesAccessKeyTemplateArgs and ProjectJwtTemplatesAccessKeyTemplateOutput values.
@@ -17717,10 +19013,9 @@ type ProjectJwtTemplatesAccessKeyTemplateArgs struct {
 	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
 	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
 	Description       pulumi.StringPtrInput `pulumi:"description"`
-	// The ID of this resource.
-	Id       pulumi.StringPtrInput `pulumi:"id"`
-	Name     pulumi.StringInput    `pulumi:"name"`
-	Template pulumi.StringInput    `pulumi:"template"`
+	Id                pulumi.StringPtrInput `pulumi:"id"`
+	Name              pulumi.StringInput    `pulumi:"name"`
+	Template          pulumi.StringInput    `pulumi:"template"`
 }
 
 func (ProjectJwtTemplatesAccessKeyTemplateArgs) ElementType() reflect.Type {
@@ -17786,7 +19081,6 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Description() pulumi.StringP
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The ID of this resource.
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -17823,10 +19117,9 @@ type ProjectJwtTemplatesUserTemplate struct {
 	AuthSchema        *string `pulumi:"authSchema"`
 	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
 	Description       *string `pulumi:"description"`
-	// The ID of this resource.
-	Id       *string `pulumi:"id"`
-	Name     string  `pulumi:"name"`
-	Template string  `pulumi:"template"`
+	Id                *string `pulumi:"id"`
+	Name              string  `pulumi:"name"`
+	Template          string  `pulumi:"template"`
 }
 
 // ProjectJwtTemplatesUserTemplateInput is an input type that accepts ProjectJwtTemplatesUserTemplateArgs and ProjectJwtTemplatesUserTemplateOutput values.
@@ -17844,10 +19137,9 @@ type ProjectJwtTemplatesUserTemplateArgs struct {
 	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
 	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
 	Description       pulumi.StringPtrInput `pulumi:"description"`
-	// The ID of this resource.
-	Id       pulumi.StringPtrInput `pulumi:"id"`
-	Name     pulumi.StringInput    `pulumi:"name"`
-	Template pulumi.StringInput    `pulumi:"template"`
+	Id                pulumi.StringPtrInput `pulumi:"id"`
+	Name              pulumi.StringInput    `pulumi:"name"`
+	Template          pulumi.StringInput    `pulumi:"template"`
 }
 
 func (ProjectJwtTemplatesUserTemplateArgs) ElementType() reflect.Type {
@@ -17913,7 +19205,6 @@ func (o ProjectJwtTemplatesUserTemplateOutput) Description() pulumi.StringPtrOut
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The ID of this resource.
 func (o ProjectJwtTemplatesUserTemplateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -18401,6 +19692,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOtpVoiceServicePtrInput)(nil)).Elem(), ProjectAuthenticationOtpVoiceServiceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOtpVoiceServiceTemplateInput)(nil)).Elem(), ProjectAuthenticationOtpVoiceServiceTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOtpVoiceServiceTemplateArrayInput)(nil)).Elem(), ProjectAuthenticationOtpVoiceServiceTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasskeysInput)(nil)).Elem(), ProjectAuthenticationPasskeysArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasskeysPtrInput)(nil)).Elem(), ProjectAuthenticationPasskeysArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasswordInput)(nil)).Elem(), ProjectAuthenticationPasswordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasswordPtrInput)(nil)).Elem(), ProjectAuthenticationPasswordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasswordEmailServiceInput)(nil)).Elem(), ProjectAuthenticationPasswordEmailServiceArgs{})
@@ -18411,8 +19704,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoPtrInput)(nil)).Elem(), ProjectAuthenticationSsoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationTotpInput)(nil)).Elem(), ProjectAuthenticationTotpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationTotpPtrInput)(nil)).Elem(), ProjectAuthenticationTotpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationWebauthnInput)(nil)).Elem(), ProjectAuthenticationWebauthnArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationWebauthnPtrInput)(nil)).Elem(), ProjectAuthenticationWebauthnArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthorizationInput)(nil)).Elem(), ProjectAuthorizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthorizationPtrInput)(nil)).Elem(), ProjectAuthorizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthorizationPermissionInput)(nil)).Elem(), ProjectAuthorizationPermissionArgs{})
@@ -18624,6 +19915,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectAuthenticationOtpVoiceServicePtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOtpVoiceServiceTemplateOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOtpVoiceServiceTemplateArrayOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationPasskeysOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationPasskeysPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationPasswordOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationPasswordPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationPasswordEmailServiceOutput{})
@@ -18634,8 +19927,6 @@ func init() {
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationTotpOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationTotpPtrOutput{})
-	pulumi.RegisterOutputType(ProjectAuthenticationWebauthnOutput{})
-	pulumi.RegisterOutputType(ProjectAuthenticationWebauthnPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthorizationOutput{})
 	pulumi.RegisterOutputType(ProjectAuthorizationPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthorizationPermissionOutput{})

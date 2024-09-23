@@ -14,11 +14,26 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsRekognition
     {
+        /// <summary>
+        /// The AWS access key ID
+        /// </summary>
         public readonly string AccessKeyId;
+        /// <summary>
+        /// The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+        /// </summary>
         public readonly string CollectionId;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The AWS secret access key
+        /// </summary>
         public readonly string SecretAccessKey;
 
         [OutputConstructor]

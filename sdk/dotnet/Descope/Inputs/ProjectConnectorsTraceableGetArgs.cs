@@ -13,20 +13,33 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsTraceableGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// EU(Europe) Region deployment of Traceable platform.
+        /// </summary>
         [Input("euRegion")]
         public Input<bool>? EuRegion { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("secretKey", required: true)]
         private Input<string>? _secretKey;
+
+        /// <summary>
+        /// The Traceable secret key.
+        /// </summary>
         public Input<string>? SecretKey
         {
             get => _secretKey;

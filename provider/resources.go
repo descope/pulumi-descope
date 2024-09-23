@@ -54,7 +54,7 @@ func Provider() tfbridge.ProviderInfo {
 		Version:           version.Version,
 		DisplayName:       caser.String(mainPkg),
 		Publisher:         caser.String(publisher),
-		LogoURL:           "",
+		LogoURL:           "https://avatars3.githubusercontent.com/descope",
 		PluginDownloadURL: fmt.Sprintf("github://api.github.com/%s", publisher),
 		Description:       "A Pulumi package for creating and managing descope cloud resources.",
 		Keywords:          []string{"descope", "category/cloud"},

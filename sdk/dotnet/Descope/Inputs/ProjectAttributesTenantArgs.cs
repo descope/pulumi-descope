@@ -13,17 +13,27 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAttributesTenantArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The name of the tenant attribute.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("selectOptions")]
         private InputList<string>? _selectOptions;
+
+        /// <summary>
+        /// A list of strings to define the set of options for select attributes.
+        /// </summary>
         public InputList<string> SelectOptions
         {
             get => _selectOptions ?? (_selectOptions = new InputList<string>());
             set => _selectOptions = value;
         }
 
+        /// <summary>
+        /// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 
