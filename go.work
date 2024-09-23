@@ -7,4 +7,5 @@ use (
 	./examples/go
 	./provider
 	./provider/shim
+	./sdk
 )
