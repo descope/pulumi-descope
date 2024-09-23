@@ -11,17 +11,20 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectAuthenticationWebauthnGetArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectAuthenticationPasskeysArgs : global::Pulumi.ResourceArgs
     {
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// Passkeys will be usable in the following domain and all its subdomains.
+        /// </summary>
         [Input("topLevelDomain")]
         public Input<string>? TopLevelDomain { get; set; }
 
-        public ProjectAuthenticationWebauthnGetArgs()
+        public ProjectAuthenticationPasskeysArgs()
         {
         }
-        public static new ProjectAuthenticationWebauthnGetArgs Empty => new ProjectAuthenticationWebauthnGetArgs();
+        public static new ProjectAuthenticationPasskeysArgs Empty => new ProjectAuthenticationPasskeysArgs();
     }
 }

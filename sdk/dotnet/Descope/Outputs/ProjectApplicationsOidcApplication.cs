@@ -14,15 +14,33 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplicationsOidcApplication
     {
+        /// <summary>
+        /// Claims associated with JWT tokens, typically used for user information.
+        /// </summary>
         public readonly ImmutableArray<string> Claims;
+        /// <summary>
+        /// A brief description of the application.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Indicates whether the resource or functionality is disabled.
+        /// </summary>
         public readonly bool? Disabled;
         /// <summary>
-        /// The ID of this resource.
+        /// An optional identifier for the application.
         /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// The URL of the custom login page for the application.
+        /// </summary>
         public readonly string? LoginPageUrl;
+        /// <summary>
+        /// The URL of the logo associated with the application.
+        /// </summary>
         public readonly string? Logo;
+        /// <summary>
+        /// The name of the application.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

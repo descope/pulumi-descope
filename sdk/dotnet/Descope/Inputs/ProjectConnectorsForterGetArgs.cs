@@ -13,26 +13,45 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsForterGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Override the user IP address.
+        /// </summary>
         [Input("overrideIpAddress")]
         public Input<string>? OverrideIpAddress { get; set; }
 
+        /// <summary>
+        /// Override the user email.
+        /// </summary>
         [Input("overrideUserEmail")]
         public Input<string>? OverrideUserEmail { get; set; }
 
+        /// <summary>
+        /// Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+        /// </summary>
         [Input("overrides")]
         public Input<bool>? Overrides { get; set; }
 
         [Input("secretKey", required: true)]
         private Input<string>? _secretKey;
+
+        /// <summary>
+        /// The Forter secret key.
+        /// </summary>
         public Input<string>? SecretKey
         {
             get => _secretKey;
@@ -43,6 +62,9 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// The Forter site ID.
+        /// </summary>
         [Input("siteId", required: true)]
         public Input<string> SiteId { get; set; } = null!;
 

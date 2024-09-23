@@ -14,11 +14,26 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsVeriff
     {
+        /// <summary>
+        /// The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        /// </summary>
         public readonly string ApiKey;
+        /// <summary>
+        /// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+        /// </summary>
         public readonly string? BaseUrl;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+        /// </summary>
         public readonly string SecretKey;
 
         [OutputConstructor]

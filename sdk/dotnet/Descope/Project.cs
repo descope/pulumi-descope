@@ -13,38 +13,68 @@ namespace Descope.Pulumi.Descope
     [DescopeResourceType("descope:index/project:Project")]
     public partial class Project : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Applications that are registered with the project.
+        /// </summary>
         [Output("applications")]
         public Output<Outputs.ProjectApplications> Applications { get; private set; } = null!;
 
+        /// <summary>
+        /// Custom attributes that can be attached to users and tenants.
+        /// </summary>
         [Output("attributes")]
         public Output<Outputs.ProjectAttributes> Attributes { get; private set; } = null!;
 
+        /// <summary>
+        /// Settings for each authentication method.
+        /// </summary>
         [Output("authentication")]
         public Output<Outputs.ProjectAuthentication> Authentication { get; private set; } = null!;
 
+        /// <summary>
+        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        /// </summary>
         [Output("authorization")]
         public Output<Outputs.ProjectAuthorization> Authorization { get; private set; } = null!;
 
+        /// <summary>
+        /// Enrich your flows by interacting with third party services.
+        /// </summary>
         [Output("connectors")]
         public Output<Outputs.ProjectConnectors> Connectors { get; private set; } = null!;
+
+        /// <summary>
+        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// </summary>
+        [Output("environment")]
+        public Output<string> Environment { get; private set; } = null!;
 
         [Output("flows")]
         public Output<ImmutableDictionary<string, Outputs.ProjectFlows>> Flows { get; private set; } = null!;
 
+        /// <summary>
+        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
+        /// </summary>
         [Output("jwtTemplates")]
         public Output<Outputs.ProjectJwtTemplates> JwtTemplates { get; private set; } = null!;
 
+        /// <summary>
+        /// The name of the Descope project.
+        /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// General settings for the Descope project.
+        /// </summary>
         [Output("projectSettings")]
         public Output<Outputs.ProjectProjectSettings> ProjectSettings { get; private set; } = null!;
 
+        /// <summary>
+        /// Custom styles that can be applied to the project's authentication flows.
+        /// </summary>
         [Output("styles")]
         public Output<Outputs.ProjectStyles> Styles { get; private set; } = null!;
-
-        [Output("tag")]
-        public Output<string> Tag { get; private set; } = null!;
 
 
         /// <summary>
@@ -93,20 +123,41 @@ namespace Descope.Pulumi.Descope
 
     public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Applications that are registered with the project.
+        /// </summary>
         [Input("applications")]
         public Input<Inputs.ProjectApplicationsArgs>? Applications { get; set; }
 
+        /// <summary>
+        /// Custom attributes that can be attached to users and tenants.
+        /// </summary>
         [Input("attributes")]
         public Input<Inputs.ProjectAttributesArgs>? Attributes { get; set; }
 
+        /// <summary>
+        /// Settings for each authentication method.
+        /// </summary>
         [Input("authentication")]
         public Input<Inputs.ProjectAuthenticationArgs>? Authentication { get; set; }
 
+        /// <summary>
+        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        /// </summary>
         [Input("authorization")]
         public Input<Inputs.ProjectAuthorizationArgs>? Authorization { get; set; }
 
+        /// <summary>
+        /// Enrich your flows by interacting with third party services.
+        /// </summary>
         [Input("connectors")]
         public Input<Inputs.ProjectConnectorsArgs>? Connectors { get; set; }
+
+        /// <summary>
+        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// </summary>
+        [Input("environment")]
+        public Input<string>? Environment { get; set; }
 
         [Input("flows")]
         private InputMap<Inputs.ProjectFlowsArgs>? _flows;
@@ -116,20 +167,29 @@ namespace Descope.Pulumi.Descope
             set => _flows = value;
         }
 
+        /// <summary>
+        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
+        /// </summary>
         [Input("jwtTemplates")]
         public Input<Inputs.ProjectJwtTemplatesArgs>? JwtTemplates { get; set; }
 
+        /// <summary>
+        /// The name of the Descope project.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// General settings for the Descope project.
+        /// </summary>
         [Input("projectSettings")]
         public Input<Inputs.ProjectProjectSettingsArgs>? ProjectSettings { get; set; }
 
+        /// <summary>
+        /// Custom styles that can be applied to the project's authentication flows.
+        /// </summary>
         [Input("styles")]
         public Input<Inputs.ProjectStylesArgs>? Styles { get; set; }
-
-        [Input("tag")]
-        public Input<string>? Tag { get; set; }
 
         public ProjectArgs()
         {
@@ -139,20 +199,41 @@ namespace Descope.Pulumi.Descope
 
     public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Applications that are registered with the project.
+        /// </summary>
         [Input("applications")]
         public Input<Inputs.ProjectApplicationsGetArgs>? Applications { get; set; }
 
+        /// <summary>
+        /// Custom attributes that can be attached to users and tenants.
+        /// </summary>
         [Input("attributes")]
         public Input<Inputs.ProjectAttributesGetArgs>? Attributes { get; set; }
 
+        /// <summary>
+        /// Settings for each authentication method.
+        /// </summary>
         [Input("authentication")]
         public Input<Inputs.ProjectAuthenticationGetArgs>? Authentication { get; set; }
 
+        /// <summary>
+        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
+        /// </summary>
         [Input("authorization")]
         public Input<Inputs.ProjectAuthorizationGetArgs>? Authorization { get; set; }
 
+        /// <summary>
+        /// Enrich your flows by interacting with third party services.
+        /// </summary>
         [Input("connectors")]
         public Input<Inputs.ProjectConnectorsGetArgs>? Connectors { get; set; }
+
+        /// <summary>
+        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// </summary>
+        [Input("environment")]
+        public Input<string>? Environment { get; set; }
 
         [Input("flows")]
         private InputMap<Inputs.ProjectFlowsGetArgs>? _flows;
@@ -162,20 +243,29 @@ namespace Descope.Pulumi.Descope
             set => _flows = value;
         }
 
+        /// <summary>
+        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
+        /// </summary>
         [Input("jwtTemplates")]
         public Input<Inputs.ProjectJwtTemplatesGetArgs>? JwtTemplates { get; set; }
 
+        /// <summary>
+        /// The name of the Descope project.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// General settings for the Descope project.
+        /// </summary>
         [Input("projectSettings")]
         public Input<Inputs.ProjectProjectSettingsGetArgs>? ProjectSettings { get; set; }
 
+        /// <summary>
+        /// Custom styles that can be applied to the project's authentication flows.
+        /// </summary>
         [Input("styles")]
         public Input<Inputs.ProjectStylesGetArgs>? Styles { get; set; }
-
-        [Input("tag")]
-        public Input<string>? Tag { get; set; }
 
         public ProjectState()
         {

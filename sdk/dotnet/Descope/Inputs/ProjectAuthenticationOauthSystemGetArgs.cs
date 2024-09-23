@@ -13,30 +13,57 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationOauthSystemGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+        /// </summary>
         [Input("apple")]
         public Input<Inputs.ProjectAuthenticationOauthSystemAppleGetArgs>? Apple { get; set; }
 
+        /// <summary>
+        /// Discord's OAuth provider, allowing users to authenticate with their Discord account.
+        /// </summary>
         [Input("discord")]
         public Input<Inputs.ProjectAuthenticationOauthSystemDiscordGetArgs>? Discord { get; set; }
 
+        /// <summary>
+        /// Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+        /// </summary>
         [Input("facebook")]
         public Input<Inputs.ProjectAuthenticationOauthSystemFacebookGetArgs>? Facebook { get; set; }
 
+        /// <summary>
+        /// GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+        /// </summary>
         [Input("github")]
         public Input<Inputs.ProjectAuthenticationOauthSystemGithubGetArgs>? Github { get; set; }
 
+        /// <summary>
+        /// GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+        /// </summary>
         [Input("gitlab")]
         public Input<Inputs.ProjectAuthenticationOauthSystemGitlabGetArgs>? Gitlab { get; set; }
 
+        /// <summary>
+        /// Google's OAuth provider, allowing users to authenticate with their Google account.
+        /// </summary>
         [Input("google")]
         public Input<Inputs.ProjectAuthenticationOauthSystemGoogleGetArgs>? Google { get; set; }
 
+        /// <summary>
+        /// LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+        /// </summary>
         [Input("linkedin")]
         public Input<Inputs.ProjectAuthenticationOauthSystemLinkedinGetArgs>? Linkedin { get; set; }
 
+        /// <summary>
+        /// Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+        /// </summary>
         [Input("microsoft")]
         public Input<Inputs.ProjectAuthenticationOauthSystemMicrosoftGetArgs>? Microsoft { get; set; }
 
+        /// <summary>
+        /// Slack's OAuth provider, allowing users to authenticate with their Slack account.
+        /// </summary>
         [Input("slack")]
         public Input<Inputs.ProjectAuthenticationOauthSystemSlackGetArgs>? Slack { get; set; }
 

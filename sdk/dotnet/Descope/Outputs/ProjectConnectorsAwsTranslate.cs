@@ -14,12 +14,30 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsAwsTranslate
     {
+        /// <summary>
+        /// AWS access key ID.
+        /// </summary>
         public readonly string AccessKeyId;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The AWS region to which this client will send requests. (e.g. us-east-1.)
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// AWS secret access key.
+        /// </summary>
         public readonly string SecretAccessKey;
+        /// <summary>
+        /// (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        /// </summary>
         public readonly string? SessionToken;
 
         [OutputConstructor]

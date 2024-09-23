@@ -13,17 +13,27 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsRecaptchaGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("secretKey", required: true)]
         private Input<string>? _secretKey;
+
+        /// <summary>
+        /// The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+        /// </summary>
         public Input<string>? SecretKey
         {
             get => _secretKey;
@@ -34,6 +44,9 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// The site key is used to invoke reCAPTCHA service on your site or mobile application.
+        /// </summary>
         [Input("siteKey", required: true)]
         public Input<string> SiteKey { get; set; } = null!;
 

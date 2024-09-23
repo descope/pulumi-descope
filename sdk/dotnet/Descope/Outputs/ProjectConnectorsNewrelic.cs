@@ -14,14 +14,32 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsNewrelic
     {
+        /// <summary>
+        /// Ingest License Key of the account you want to report data to.
+        /// </summary>
         public readonly string ApiKey;
         public readonly bool? AuditEnabled;
         public readonly string? AuditFilters;
+        /// <summary>
+        /// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+        /// </summary>
         public readonly string? DataCenter;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+        /// </summary>
         public readonly string? LogsPrefix;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Enable this option to use a custom prefix for log fields.
+        /// </summary>
         public readonly bool? OverrideLogsPrefix;
         public readonly bool? TroubleshootLogEnabled;
 

@@ -13,24 +13,39 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationOtpArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The domain to embed in OTP messages.
+        /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
 
+        /// <summary>
+        /// Settings related to sending emails with OTP codes.
+        /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationOtpEmailServiceArgs>? EmailService { get; set; }
 
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// The amount of time that an OTP code will be valid for.
+        /// </summary>
         [Input("expirationTime")]
         public Input<int>? ExpirationTime { get; set; }
 
         [Input("expirationTimeUnit")]
         public Input<string>? ExpirationTimeUnit { get; set; }
 
+        /// <summary>
+        /// Settings related to sending SMS messages with OTP codes.
+        /// </summary>
         [Input("textService")]
         public Input<Inputs.ProjectAuthenticationOtpTextServiceArgs>? TextService { get; set; }
 
+        /// <summary>
+        /// Settings related to voice calls with OTP codes.
+        /// </summary>
         [Input("voiceService")]
         public Input<Inputs.ProjectAuthenticationOtpVoiceServiceArgs>? VoiceService { get; set; }
 

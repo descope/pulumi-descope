@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("abuseipdbs")]
         private InputList<Inputs.ProjectConnectorsAbuseipdbGetArgs>? _abuseipdbs;
+
+        /// <summary>
+        /// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsAbuseipdbGetArgs> Abuseipdbs
         {
             get => _abuseipdbs ?? (_abuseipdbs = new InputList<Inputs.ProjectConnectorsAbuseipdbGetArgs>());
@@ -23,6 +27,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("amplitudes")]
         private InputList<Inputs.ProjectConnectorsAmplitudeGetArgs>? _amplitudes;
+
+        /// <summary>
+        /// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsAmplitudeGetArgs> Amplitudes
         {
             get => _amplitudes ?? (_amplitudes = new InputList<Inputs.ProjectConnectorsAmplitudeGetArgs>());
@@ -55,6 +63,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("clears")]
         private InputList<Inputs.ProjectConnectorsClearGetArgs>? _clears;
+
+        /// <summary>
+        /// An identity verification platform that allow customers to digitally verify their identity from anywhere.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsClearGetArgs> Clears
         {
             get => _clears ?? (_clears = new InputList<Inputs.ProjectConnectorsClearGetArgs>());
@@ -63,6 +75,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("datadogs")]
         private InputList<Inputs.ProjectConnectorsDatadogGetArgs>? _datadogs;
+
+        /// <summary>
+        /// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsDatadogGetArgs> Datadogs
         {
             get => _datadogs ?? (_datadogs = new InputList<Inputs.ProjectConnectorsDatadogGetArgs>());
@@ -79,6 +95,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("docebos")]
         private InputList<Inputs.ProjectConnectorsDoceboGetArgs>? _docebos;
+
+        /// <summary>
+        /// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsDoceboGetArgs> Docebos
         {
             get => _docebos ?? (_docebos = new InputList<Inputs.ProjectConnectorsDoceboGetArgs>());
@@ -95,6 +115,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("fingerprints")]
         private InputList<Inputs.ProjectConnectorsFingerprintGetArgs>? _fingerprints;
+
+        /// <summary>
+        /// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsFingerprintGetArgs> Fingerprints
         {
             get => _fingerprints ?? (_fingerprints = new InputList<Inputs.ProjectConnectorsFingerprintGetArgs>());
@@ -103,6 +127,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("forters")]
         private InputList<Inputs.ProjectConnectorsForterGetArgs>? _forters;
+
+        /// <summary>
+        /// Use the Forter connector for account fraud prevention.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsForterGetArgs> Forters
         {
             get => _forters ?? (_forters = new InputList<Inputs.ProjectConnectorsForterGetArgs>());
@@ -119,6 +147,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("hibps")]
         private InputList<Inputs.ProjectConnectorsHibpGetArgs>? _hibps;
+
+        /// <summary>
+        /// API to check if password appeared previously exposed in data breaches.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsHibpGetArgs> Hibps
         {
             get => _hibps ?? (_hibps = new InputList<Inputs.ProjectConnectorsHibpGetArgs>());
@@ -135,6 +167,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("https")]
         private InputList<Inputs.ProjectConnectorsHttpGetArgs>? _https;
+
+        /// <summary>
+        /// A general purpose HTTP client
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsHttpGetArgs> Https
         {
             get => _https ?? (_https = new InputList<Inputs.ProjectConnectorsHttpGetArgs>());
@@ -143,6 +179,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("hubspots")]
         private InputList<Inputs.ProjectConnectorsHubspotGetArgs>? _hubspots;
+
+        /// <summary>
+        /// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsHubspotGetArgs> Hubspots
         {
             get => _hubspots ?? (_hubspots = new InputList<Inputs.ProjectConnectorsHubspotGetArgs>());
@@ -151,6 +191,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("intercoms")]
         private InputList<Inputs.ProjectConnectorsIntercomGetArgs>? _intercoms;
+
+        /// <summary>
+        /// Intercom is a Conversational Relationship Platform (CRP).
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsIntercomGetArgs> Intercoms
         {
             get => _intercoms ?? (_intercoms = new InputList<Inputs.ProjectConnectorsIntercomGetArgs>());
@@ -159,6 +203,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("newrelics")]
         private InputList<Inputs.ProjectConnectorsNewrelicGetArgs>? _newrelics;
+
+        /// <summary>
+        /// Use this connector to send audit events and troubleshooting logs to New Relic.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsNewrelicGetArgs> Newrelics
         {
             get => _newrelics ?? (_newrelics = new InputList<Inputs.ProjectConnectorsNewrelicGetArgs>());
@@ -175,6 +223,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("recaptchas")]
         private InputList<Inputs.ProjectConnectorsRecaptchaGetArgs>? _recaptchas;
+
+        /// <summary>
+        /// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsRecaptchaGetArgs> Recaptchas
         {
             get => _recaptchas ?? (_recaptchas = new InputList<Inputs.ProjectConnectorsRecaptchaGetArgs>());
@@ -183,6 +235,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("rekognitions")]
         private InputList<Inputs.ProjectConnectorsRekognitionGetArgs>? _rekognitions;
+
+        /// <summary>
+        /// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsRekognitionGetArgs> Rekognitions
         {
             get => _rekognitions ?? (_rekognitions = new InputList<Inputs.ProjectConnectorsRekognitionGetArgs>());
@@ -191,6 +247,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("salesforces")]
         private InputList<Inputs.ProjectConnectorsSalesforceGetArgs>? _salesforces;
+
+        /// <summary>
+        /// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsSalesforceGetArgs> Salesforces
         {
             get => _salesforces ?? (_salesforces = new InputList<Inputs.ProjectConnectorsSalesforceGetArgs>());
@@ -199,6 +259,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("segments")]
         private InputList<Inputs.ProjectConnectorsSegmentGetArgs>? _segments;
+
+        /// <summary>
+        /// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsSegmentGetArgs> Segments
         {
             get => _segments ?? (_segments = new InputList<Inputs.ProjectConnectorsSegmentGetArgs>());
@@ -223,6 +287,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("sumologics")]
         private InputList<Inputs.ProjectConnectorsSumologicGetArgs>? _sumologics;
+
+        /// <summary>
+        /// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsSumologicGetArgs> Sumologics
         {
             get => _sumologics ?? (_sumologics = new InputList<Inputs.ProjectConnectorsSumologicGetArgs>());
@@ -231,6 +299,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("telesigns")]
         private InputList<Inputs.ProjectConnectorsTelesignGetArgs>? _telesigns;
+
+        /// <summary>
+        /// Telesign Phone number intelligence API provides risk score for phone numbers.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsTelesignGetArgs> Telesigns
         {
             get => _telesigns ?? (_telesigns = new InputList<Inputs.ProjectConnectorsTelesignGetArgs>());
@@ -239,6 +311,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("traceables")]
         private InputList<Inputs.ProjectConnectorsTraceableGetArgs>? _traceables;
+
+        /// <summary>
+        /// API security for a cloud-first, API-driven world.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsTraceableGetArgs> Traceables
         {
             get => _traceables ?? (_traceables = new InputList<Inputs.ProjectConnectorsTraceableGetArgs>());
@@ -263,6 +339,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("veriffs")]
         private InputList<Inputs.ProjectConnectorsVeriffGetArgs>? _veriffs;
+
+        /// <summary>
+        /// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+        /// </summary>
         public InputList<Inputs.ProjectConnectorsVeriffGetArgs> Veriffs
         {
             get => _veriffs ?? (_veriffs = new InputList<Inputs.ProjectConnectorsVeriffGetArgs>());

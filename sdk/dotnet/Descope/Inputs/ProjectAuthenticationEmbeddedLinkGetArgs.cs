@@ -16,6 +16,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// The amount of time that the embedded link will be valid for.
+        /// </summary>
         [Input("expirationTime")]
         public Input<int>? ExpirationTime { get; set; }
 

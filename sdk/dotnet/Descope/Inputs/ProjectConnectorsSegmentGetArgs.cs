@@ -13,20 +13,33 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsSegmentGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// The base URL of the Segment API, when using a custom domain in Segment.
+        /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("writeKey", required: true)]
         private Input<string>? _writeKey;
+
+        /// <summary>
+        /// The Segment Write Key generated for the Descope service.
+        /// </summary>
         public Input<string>? WriteKey
         {
             get => _writeKey;

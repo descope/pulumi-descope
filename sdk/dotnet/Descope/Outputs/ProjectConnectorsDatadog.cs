@@ -14,12 +14,24 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsDatadog
     {
+        /// <summary>
+        /// The unique Datadog organization key.
+        /// </summary>
         public readonly string ApiKey;
         public readonly bool? AuditEnabled;
         public readonly string? AuditFilters;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        /// </summary>
         public readonly string? Site;
         public readonly bool? TroubleshootLogEnabled;
 

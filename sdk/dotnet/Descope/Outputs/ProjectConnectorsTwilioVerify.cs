@@ -16,8 +16,14 @@ namespace Descope.Pulumi.Descope.Outputs
     {
         public readonly string AccountSid;
         public readonly Outputs.ProjectConnectorsTwilioVerifyAuthentication Authentication;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
         public readonly string? Sender;
         public readonly string ServiceSid;

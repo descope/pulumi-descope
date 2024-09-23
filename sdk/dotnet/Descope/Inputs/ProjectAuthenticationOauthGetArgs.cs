@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("custom")]
         private InputMap<Inputs.ProjectAuthenticationOauthCustomGetArgs>? _custom;
+
+        /// <summary>
+        /// Custom OAuth providers configured for this project.
+        /// </summary>
         public InputMap<Inputs.ProjectAuthenticationOauthCustomGetArgs> Custom
         {
             get => _custom ?? (_custom = new InputMap<Inputs.ProjectAuthenticationOauthCustomGetArgs>());
@@ -24,6 +28,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
+        /// <summary>
+        /// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+        /// </summary>
         [Input("system")]
         public Input<Inputs.ProjectAuthenticationOauthSystemGetArgs>? System { get; set; }
 

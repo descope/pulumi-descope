@@ -13,14 +13,24 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsDoceboArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The Docebo api base url.
+        /// </summary>
         [Input("baseUrl", required: true)]
         public Input<string> BaseUrl { get; set; } = null!;
 
+        /// <summary>
+        /// The Docebo OAuth 2.0 app client ID.
+        /// </summary>
         [Input("clientId", required: true)]
         public Input<string> ClientId { get; set; } = null!;
 
         [Input("clientSecret", required: true)]
         private Input<string>? _clientSecret;
+
+        /// <summary>
+        /// The Docebo OAuth 2.0 app client secret.
+        /// </summary>
         public Input<string>? ClientSecret
         {
             get => _clientSecret;
@@ -31,17 +41,27 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("password", required: true)]
         private Input<string>? _password;
+
+        /// <summary>
+        /// The Docebo user's password.
+        /// </summary>
         public Input<string>? Password
         {
             get => _password;
@@ -52,6 +72,9 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// The Docebo username.
+        /// </summary>
         [Input("username", required: true)]
         public Input<string> Username { get; set; } = null!;
 

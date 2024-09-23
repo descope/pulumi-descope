@@ -14,13 +14,34 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsDocebo
     {
+        /// <summary>
+        /// The Docebo api base url.
+        /// </summary>
         public readonly string BaseUrl;
+        /// <summary>
+        /// The Docebo OAuth 2.0 app client ID.
+        /// </summary>
         public readonly string ClientId;
+        /// <summary>
+        /// The Docebo OAuth 2.0 app client secret.
+        /// </summary>
         public readonly string ClientSecret;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The Docebo user's password.
+        /// </summary>
         public readonly string Password;
+        /// <summary>
+        /// The Docebo username.
+        /// </summary>
         public readonly string Username;
 
         [OutputConstructor]

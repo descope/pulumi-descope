@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
+
+        /// <summary>
+        /// API key associated with the current project.
+        /// </summary>
         public Input<string>? ApiKey
         {
             get => _apiKey;
@@ -25,24 +29,42 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+        /// </summary>
         [Input("assessmentScore")]
         public Input<double>? AssessmentScore { get; set; }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+        /// </summary>
         [Input("overrideAssessment")]
         public Input<bool>? OverrideAssessment { get; set; }
 
+        /// <summary>
+        /// The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+        /// </summary>
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
 
+        /// <summary>
+        /// The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+        /// </summary>
         [Input("siteKey", required: true)]
         public Input<string> SiteKey { get; set; } = null!;
 

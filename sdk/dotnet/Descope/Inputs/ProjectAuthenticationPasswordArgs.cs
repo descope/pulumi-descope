@@ -13,42 +13,75 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationPasswordArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Settings related to sending password reset emails as part of the password feature.
+        /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationPasswordEmailServiceArgs>? EmailService { get; set; }
 
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// Whether users are required to change their password periodically.
+        /// </summary>
         [Input("expiration")]
         public Input<bool>? Expiration { get; set; }
 
+        /// <summary>
+        /// The number of weeks after which a user's password expires and they need to replace it.
+        /// </summary>
         [Input("expirationWeeks")]
         public Input<int>? ExpirationWeeks { get; set; }
 
+        /// <summary>
+        /// Whether the user account should be locked after a specified number of failed login attempts.
+        /// </summary>
         [Input("lock")]
         public Input<bool>? Lock { get; set; }
 
+        /// <summary>
+        /// The number of failed login attempts allowed before an account is locked.
+        /// </summary>
         [Input("lockAttempts")]
         public Input<int>? LockAttempts { get; set; }
 
+        /// <summary>
+        /// Whether passwords must contain at least one lowercase letter.
+        /// </summary>
         [Input("lowercase")]
         public Input<bool>? Lowercase { get; set; }
 
+        /// <summary>
+        /// The minimum length of the password that users are required to use. The maximum length is always `64`.
+        /// </summary>
         [Input("minLength")]
         public Input<int>? MinLength { get; set; }
 
+        /// <summary>
+        /// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        /// </summary>
         [Input("nonAlphanumeric")]
         public Input<bool>? NonAlphanumeric { get; set; }
 
+        /// <summary>
+        /// Whether passwords must contain at least one number.
+        /// </summary>
         [Input("number")]
         public Input<bool>? Number { get; set; }
 
+        /// <summary>
+        /// Whether to forbid password reuse when users change their password.
+        /// </summary>
         [Input("reuse")]
         public Input<bool>? Reuse { get; set; }
 
         [Input("reuseAmount")]
         public Input<int>? ReuseAmount { get; set; }
 
+        /// <summary>
+        /// Whether passwords must contain at least one uppercase letter.
+        /// </summary>
         [Input("uppercase")]
         public Input<bool>? Uppercase { get; set; }
 

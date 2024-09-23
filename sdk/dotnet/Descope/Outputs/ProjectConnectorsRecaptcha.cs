@@ -14,10 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsRecaptcha
     {
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+        /// </summary>
         public readonly string SecretKey;
+        /// <summary>
+        /// The site key is used to invoke reCAPTCHA service on your site or mobile application.
+        /// </summary>
         public readonly string SiteKey;
 
         [OutputConstructor]

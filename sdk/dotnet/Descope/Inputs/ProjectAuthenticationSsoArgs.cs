@@ -16,6 +16,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// Whether to merge existing user accounts with new ones created through SSO authentication.
+        /// </summary>
         [Input("mergeUsers")]
         public Input<bool>? MergeUsers { get; set; }
 

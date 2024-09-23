@@ -14,18 +14,51 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationPassword
     {
+        /// <summary>
+        /// Settings related to sending password reset emails as part of the password feature.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationPasswordEmailService? EmailService;
         public readonly bool? Enabled;
+        /// <summary>
+        /// Whether users are required to change their password periodically.
+        /// </summary>
         public readonly bool? Expiration;
+        /// <summary>
+        /// The number of weeks after which a user's password expires and they need to replace it.
+        /// </summary>
         public readonly int? ExpirationWeeks;
+        /// <summary>
+        /// Whether the user account should be locked after a specified number of failed login attempts.
+        /// </summary>
         public readonly bool? Lock;
+        /// <summary>
+        /// The number of failed login attempts allowed before an account is locked.
+        /// </summary>
         public readonly int? LockAttempts;
+        /// <summary>
+        /// Whether passwords must contain at least one lowercase letter.
+        /// </summary>
         public readonly bool? Lowercase;
+        /// <summary>
+        /// The minimum length of the password that users are required to use. The maximum length is always `64`.
+        /// </summary>
         public readonly int? MinLength;
+        /// <summary>
+        /// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        /// </summary>
         public readonly bool? NonAlphanumeric;
+        /// <summary>
+        /// Whether passwords must contain at least one number.
+        /// </summary>
         public readonly bool? Number;
+        /// <summary>
+        /// Whether to forbid password reuse when users change their password.
+        /// </summary>
         public readonly bool? Reuse;
         public readonly int? ReuseAmount;
+        /// <summary>
+        /// Whether passwords must contain at least one uppercase letter.
+        /// </summary>
         public readonly bool? Uppercase;
 
         [OutputConstructor]

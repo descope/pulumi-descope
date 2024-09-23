@@ -14,7 +14,13 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplicationsSamlApplicationAttributeMapping
     {
+        /// <summary>
+        /// The name of the user attribute in the third party identity provider.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The name of the user custom attribute in Descope.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

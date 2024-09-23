@@ -15,6 +15,9 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationSso
     {
         public readonly bool? Enabled;
+        /// <summary>
+        /// Whether to merge existing user accounts with new ones created through SSO authentication.
+        /// </summary>
         public readonly bool? MergeUsers;
 
         [OutputConstructor]

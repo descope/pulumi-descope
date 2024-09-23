@@ -19,11 +19,18 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("auditFilters")]
         public Input<string>? AuditFilters { get; set; }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("httpSourceUrl", required: true)]
         private Input<string>? _httpSourceUrl;
+
+        /// <summary>
+        /// The URL associated with an HTTP Hosted collector
+        /// </summary>
         public Input<string>? HttpSourceUrl
         {
             get => _httpSourceUrl;
@@ -37,6 +44,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

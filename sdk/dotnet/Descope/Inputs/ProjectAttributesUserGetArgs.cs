@@ -13,20 +13,33 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAttributesUserGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The name of the user attribute.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("selectOptions")]
         private InputList<string>? _selectOptions;
+
+        /// <summary>
+        /// A list of strings to define the set of options for select attributes.
+        /// </summary>
         public InputList<string> SelectOptions
         {
             get => _selectOptions ?? (_selectOptions = new InputList<string>());
             set => _selectOptions = value;
         }
 
+        /// <summary>
+        /// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 
+        /// <summary>
+        /// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        /// </summary>
         [Input("widgetAuthorization")]
         public Input<Inputs.ProjectAttributesUserWidgetAuthorizationGetArgs>? WidgetAuthorization { get; set; }
 

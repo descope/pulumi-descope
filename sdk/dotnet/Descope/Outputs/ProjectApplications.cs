@@ -14,7 +14,13 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplications
     {
+        /// <summary>
+        /// Applications using OpenID Connect (OIDC) for authentication.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectApplicationsOidcApplication> OidcApplications;
+        /// <summary>
+        /// Applications using SAML for authentication.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplication> SamlApplications;
 
         [OutputConstructor]

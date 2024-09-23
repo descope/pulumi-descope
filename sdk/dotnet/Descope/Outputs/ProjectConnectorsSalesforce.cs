@@ -14,12 +14,30 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectorsSalesforce
     {
+        /// <summary>
+        /// The Salesforce API base URL.
+        /// </summary>
         public readonly string BaseUrl;
+        /// <summary>
+        /// The consumer key of the connected app.
+        /// </summary>
         public readonly string ClientId;
+        /// <summary>
+        /// The consumer secret of the connected app.
+        /// </summary>
         public readonly string ClientSecret;
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// REST API Version.
+        /// </summary>
         public readonly string Version;
 
         [OutputConstructor]

@@ -14,12 +14,27 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationOtp
     {
+        /// <summary>
+        /// The domain to embed in OTP messages.
+        /// </summary>
         public readonly string? Domain;
+        /// <summary>
+        /// Settings related to sending emails with OTP codes.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOtpEmailService? EmailService;
         public readonly bool? Enabled;
+        /// <summary>
+        /// The amount of time that an OTP code will be valid for.
+        /// </summary>
         public readonly int? ExpirationTime;
         public readonly string? ExpirationTimeUnit;
+        /// <summary>
+        /// Settings related to sending SMS messages with OTP codes.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOtpTextService? TextService;
+        /// <summary>
+        /// Settings related to voice calls with OTP codes.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationOtpVoiceService? VoiceService;
 
         [OutputConstructor]

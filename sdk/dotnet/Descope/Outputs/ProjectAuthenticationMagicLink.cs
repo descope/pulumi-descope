@@ -14,11 +14,20 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationMagicLink
     {
+        /// <summary>
+        /// Settings related to sending emails as part of the magic link authentication.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationMagicLinkEmailService? EmailService;
         public readonly bool? Enabled;
         public readonly int? ExpirationTime;
         public readonly string? ExpirationTimeUnit;
+        /// <summary>
+        /// The URL to redirect users to after they log in using the magic link.
+        /// </summary>
         public readonly string? RedirectUrl;
+        /// <summary>
+        /// Settings related to sending SMS messages as part of the magic link authentication.
+        /// </summary>
         public readonly Outputs.ProjectAuthenticationMagicLinkTextService? TextService;
 
         [OutputConstructor]

@@ -15,6 +15,9 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationEmbeddedLink
     {
         public readonly bool? Enabled;
+        /// <summary>
+        /// The amount of time that the embedded link will be valid for.
+        /// </summary>
         public readonly int? ExpirationTime;
         public readonly string? ExpirationTimeUnit;
 

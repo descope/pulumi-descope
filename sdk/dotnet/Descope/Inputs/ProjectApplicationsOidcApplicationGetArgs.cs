@@ -15,30 +15,49 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("claims")]
         private InputList<string>? _claims;
+
+        /// <summary>
+        /// Claims associated with JWT tokens, typically used for user information.
+        /// </summary>
         public InputList<string> Claims
         {
             get => _claims ?? (_claims = new InputList<string>());
             set => _claims = value;
         }
 
+        /// <summary>
+        /// A brief description of the application.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Indicates whether the resource or functionality is disabled.
+        /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
-        /// The ID of this resource.
+        /// An optional identifier for the application.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// The URL of the custom login page for the application.
+        /// </summary>
         [Input("loginPageUrl")]
         public Input<string>? LoginPageUrl { get; set; }
 
+        /// <summary>
+        /// The URL of the logo associated with the application.
+        /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
 
+        /// <summary>
+        /// The name of the application.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

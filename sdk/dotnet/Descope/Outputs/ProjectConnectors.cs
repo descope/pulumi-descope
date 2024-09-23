@@ -14,37 +14,97 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectConnectors
     {
+        /// <summary>
+        /// AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAbuseipdb> Abuseipdbs;
+        /// <summary>
+        /// Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAmplitude> Amplitudes;
         public readonly ImmutableArray<Outputs.ProjectConnectorsAuditWebhook> AuditWebhooks;
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsS3> AwsS3s;
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> AwsTranslates;
+        /// <summary>
+        /// An identity verification platform that allow customers to digitally verify their identity from anywhere.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsClear> Clears;
+        /// <summary>
+        /// Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsDatadog> Datadogs;
         public readonly ImmutableArray<Outputs.ProjectConnectorsDevrevGrow> DevrevGrows;
+        /// <summary>
+        /// Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsDocebo> Docebos;
         public readonly ImmutableArray<Outputs.ProjectConnectorsFingerprintDescope> FingerprintDescopes;
+        /// <summary>
+        /// Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsFingerprint> Fingerprints;
+        /// <summary>
+        /// Use the Forter connector for account fraud prevention.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsForter> Forters;
         public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> GoogleCloudTranslations;
+        /// <summary>
+        /// API to check if password appeared previously exposed in data breaches.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHibp> Hibps;
         public readonly ImmutableArray<Outputs.ProjectConnectorsHttpStaticIp> HttpStaticIps;
+        /// <summary>
+        /// A general purpose HTTP client
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHttp> Https;
+        /// <summary>
+        /// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHubspot> Hubspots;
+        /// <summary>
+        /// Intercom is a Conversational Relationship Platform (CRP).
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsIntercom> Intercoms;
+        /// <summary>
+        /// Use this connector to send audit events and troubleshooting logs to New Relic.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsNewrelic> Newrelics;
         public readonly ImmutableArray<Outputs.ProjectConnectorsRecaptchaEnterprise> RecaptchaEnterprises;
+        /// <summary>
+        /// reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRecaptcha> Recaptchas;
+        /// <summary>
+        /// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRekognition> Rekognitions;
+        /// <summary>
+        /// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSalesforce> Salesforces;
+        /// <summary>
+        /// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSegment> Segments;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSendgrid> Sendgrids;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSmtp> Smtps;
+        /// <summary>
+        /// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSumologic> Sumologics;
+        /// <summary>
+        /// Telesign Phone number intelligence API provides risk score for phone numbers.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsTelesign> Telesigns;
+        /// <summary>
+        /// API security for a cloud-first, API-driven world.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsTraceable> Traceables;
         public readonly ImmutableArray<Outputs.ProjectConnectorsTwilioCore> TwilioCores;
         public readonly ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> TwilioVerifies;
+        /// <summary>
+        /// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsVeriff> Veriffs;
 
         [OutputConstructor]

@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
+
+        /// <summary>
+        /// Ingest License Key of the account you want to report data to.
+        /// </summary>
         public Input<string>? ApiKey
         {
             get => _apiKey;
@@ -31,21 +35,36 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("auditFilters")]
         public Input<string>? AuditFilters { get; set; }
 
+        /// <summary>
+        /// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+        /// </summary>
         [Input("dataCenter")]
         public Input<string>? DataCenter { get; set; }
 
+        /// <summary>
+        /// A description of what your connector is used for.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+        /// </summary>
         [Input("logsPrefix")]
         public Input<string>? LogsPrefix { get; set; }
 
+        /// <summary>
+        /// A custom name for your connector.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Enable this option to use a custom prefix for log fields.
+        /// </summary>
         [Input("overrideLogsPrefix")]
         public Input<bool>? OverrideLogsPrefix { get; set; }
 

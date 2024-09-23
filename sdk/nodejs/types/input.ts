@@ -6,44 +6,92 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
 export interface ProjectApplications {
+    /**
+     * Applications using OpenID Connect (OIDC) for authentication.
+     */
     oidcApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidcApplication>[]>;
+    /**
+     * Applications using SAML for authentication.
+     */
     samlApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplication>[]>;
 }
 
 export interface ProjectApplicationsOidcApplication {
+    /**
+     * Claims associated with JWT tokens, typically used for user information.
+     */
     claims?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A brief description of the application.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * Indicates whether the resource or functionality is disabled.
+     */
     disabled?: pulumi.Input<boolean>;
     /**
-     * The ID of this resource.
+     * An optional identifier for the application.
      */
     id?: pulumi.Input<string>;
+    /**
+     * The URL of the custom login page for the application.
+     */
     loginPageUrl?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the application.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * The name of the application.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectApplicationsSamlApplication {
     acsAllowedCallbackUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Map user attributes from the third party identity provider to custom attributes in Descope.
+     */
     attributeMappings?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplicationAttributeMapping>[]>;
     defaultRelayState?: pulumi.Input<string>;
+    /**
+     * A brief description of the application.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * Indicates whether the application is disabled.
+     */
     disabled?: pulumi.Input<boolean>;
     dynamicConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlApplicationDynamicConfiguration>;
     /**
-     * The ID of this resource.
+     * An optional identifier for the application.
      */
     id?: pulumi.Input<string>;
+    /**
+     * The URL of the custom login page for the application.
+     */
     loginPageUrl?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the application.
+     */
     logo?: pulumi.Input<string>;
     manualConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlApplicationManualConfiguration>;
+    /**
+     * The name of the application.
+     */
     name: pulumi.Input<string>;
     subjectNameIdFormat?: pulumi.Input<string>;
     subjectNameIdType?: pulumi.Input<string>;
 }
 
 export interface ProjectApplicationsSamlApplicationAttributeMapping {
+    /**
+     * The name of the user attribute in the third party identity provider.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The name of the user custom attribute in Descope.
+     */
     value: pulumi.Input<string>;
 }
 
@@ -58,51 +106,120 @@ export interface ProjectApplicationsSamlApplicationManualConfiguration {
 }
 
 export interface ProjectAttributes {
+    /**
+     * Custom attributes to store additional details about your tenants.
+     */
     tenants?: pulumi.Input<pulumi.Input<inputs.ProjectAttributesTenant>[]>;
+    /**
+     * Custom attributes to store additional details about your users.
+     */
     users?: pulumi.Input<pulumi.Input<inputs.ProjectAttributesUser>[]>;
 }
 
 export interface ProjectAttributesTenant {
+    /**
+     * The name of the tenant attribute.
+     */
     name: pulumi.Input<string>;
+    /**
+     * A list of strings to define the set of options for select attributes.
+     */
     selectOptions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+     */
     type: pulumi.Input<string>;
 }
 
 export interface ProjectAttributesUser {
+    /**
+     * The name of the user attribute.
+     */
     name: pulumi.Input<string>;
+    /**
+     * A list of strings to define the set of options for select attributes.
+     */
     selectOptions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+     */
     type: pulumi.Input<string>;
+    /**
+     * When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+     */
     widgetAuthorization?: pulumi.Input<inputs.ProjectAttributesUserWidgetAuthorization>;
 }
 
 export interface ProjectAttributesUserWidgetAuthorization {
+    /**
+     * Editing the attribute value in widgets will be restricted to users with the specified permissions.
+     */
     editPermissions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+     */
     viewPermissions?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectAuthentication {
+    /**
+     * Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+     */
     embeddedLink?: pulumi.Input<inputs.ProjectAuthenticationEmbeddedLink>;
+    /**
+     * An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+     */
     enchantedLink?: pulumi.Input<inputs.ProjectAuthenticationEnchantedLink>;
+    /**
+     * An authentication method where a user receives a unique link via email to log in.
+     */
     magicLink?: pulumi.Input<inputs.ProjectAuthenticationMagicLink>;
+    /**
+     * Authentication using Open Authorization, which allows users to authenticate with various external services.
+     */
     oauth?: pulumi.Input<inputs.ProjectAuthenticationOauth>;
+    /**
+     * A dynamically generated set of numbers, granting the user one-time access.
+     */
     otp?: pulumi.Input<inputs.ProjectAuthenticationOtp>;
+    /**
+     * Device-based passwordless authentication, using fingerprint, face scan, and more.
+     */
+    passkeys?: pulumi.Input<inputs.ProjectAuthenticationPasskeys>;
+    /**
+     * The classic username and password combination used for authentication.
+     */
     password?: pulumi.Input<inputs.ProjectAuthenticationPassword>;
+    /**
+     * Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+     */
     sso?: pulumi.Input<inputs.ProjectAuthenticationSso>;
+    /**
+     * A one-time code generated for the user using a shared secret and time.
+     */
     totp?: pulumi.Input<inputs.ProjectAuthenticationTotp>;
-    webauthn?: pulumi.Input<inputs.ProjectAuthenticationWebauthn>;
 }
 
 export interface ProjectAuthenticationEmbeddedLink {
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The amount of time that the embedded link will be valid for.
+     */
     expirationTime?: pulumi.Input<number>;
     expirationTimeUnit?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationEnchantedLink {
+    /**
+     * Settings related to sending emails as part of the enchanted link authentication.
+     */
     emailService?: pulumi.Input<inputs.ProjectAuthenticationEnchantedLinkEmailService>;
     enabled?: pulumi.Input<boolean>;
     expirationTime?: pulumi.Input<number>;
     expirationTimeUnit?: pulumi.Input<string>;
+    /**
+     * The URL to redirect users to after they log in using the enchanted link.
+     */
     redirectUrl?: pulumi.Input<string>;
 }
 
@@ -122,11 +239,20 @@ export interface ProjectAuthenticationEnchantedLinkEmailServiceTemplate {
 }
 
 export interface ProjectAuthenticationMagicLink {
+    /**
+     * Settings related to sending emails as part of the magic link authentication.
+     */
     emailService?: pulumi.Input<inputs.ProjectAuthenticationMagicLinkEmailService>;
     enabled?: pulumi.Input<boolean>;
     expirationTime?: pulumi.Input<number>;
     expirationTimeUnit?: pulumi.Input<string>;
+    /**
+     * The URL to redirect users to after they log in using the magic link.
+     */
     redirectUrl?: pulumi.Input<string>;
+    /**
+     * Settings related to sending SMS messages as part of the magic link authentication.
+     */
     textService?: pulumi.Input<inputs.ProjectAuthenticationMagicLinkTextService>;
 }
 
@@ -158,27 +284,72 @@ export interface ProjectAuthenticationMagicLinkTextServiceTemplate {
 }
 
 export interface ProjectAuthenticationOauth {
+    /**
+     * Custom OAuth providers configured for this project.
+     */
     custom?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectAuthenticationOauthCustom>}>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+     */
     system?: pulumi.Input<inputs.ProjectAuthenticationOauthSystem>;
 }
 
 export interface ProjectAuthenticationOauthCustom {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthCustomProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -188,33 +359,99 @@ export interface ProjectAuthenticationOauthCustomProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOauthSystem {
+    /**
+     * Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+     */
     apple?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemApple>;
+    /**
+     * Discord's OAuth provider, allowing users to authenticate with their Discord account.
+     */
     discord?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemDiscord>;
+    /**
+     * Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+     */
     facebook?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemFacebook>;
+    /**
+     * GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+     */
     github?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGithub>;
+    /**
+     * GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+     */
     gitlab?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGitlab>;
+    /**
+     * Google's OAuth provider, allowing users to authenticate with their Google account.
+     */
     google?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGoogle>;
+    /**
+     * LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+     */
     linkedin?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemLinkedin>;
+    /**
+     * Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+     */
     microsoft?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemMicrosoft>;
+    /**
+     * Slack's OAuth provider, allowing users to authenticate with their Slack account.
+     */
     slack?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemSlack>;
 }
 
 export interface ProjectAuthenticationOauthSystemApple {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemAppleProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -224,21 +461,60 @@ export interface ProjectAuthenticationOauthSystemAppleProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOauthSystemDiscord {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemDiscordProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -248,21 +524,60 @@ export interface ProjectAuthenticationOauthSystemDiscordProviderTokenManagement 
 }
 
 export interface ProjectAuthenticationOauthSystemFacebook {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemFacebookProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -272,21 +587,60 @@ export interface ProjectAuthenticationOauthSystemFacebookProviderTokenManagement
 }
 
 export interface ProjectAuthenticationOauthSystemGithub {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGithubProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -296,21 +650,60 @@ export interface ProjectAuthenticationOauthSystemGithubProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOauthSystemGitlab {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGitlabProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -320,21 +713,60 @@ export interface ProjectAuthenticationOauthSystemGitlabProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOauthSystemGoogle {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGoogleProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -344,21 +776,60 @@ export interface ProjectAuthenticationOauthSystemGoogleProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOauthSystemLinkedin {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -368,21 +839,60 @@ export interface ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement
 }
 
 export interface ProjectAuthenticationOauthSystemMicrosoft {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -392,21 +902,60 @@ export interface ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagemen
 }
 
 export interface ProjectAuthenticationOauthSystemSlack {
+    /**
+     * The URL that users are redirected to for authorization with the OAuth provider.
+     */
     authorizationEndpoint?: pulumi.Input<string>;
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The client ID for the OAuth provider, used to identify the application to the provider.
+     */
     clientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used to authenticate the application with the provider.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * A brief description of the OAuth provider.
+     */
     description?: pulumi.Input<string>;
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
+     */
     grantType?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
+    /**
+     * The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+     */
     jwksEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL of the logo associated with the OAuth provider.
+     */
     logo?: pulumi.Input<string>;
+    /**
+     * Whether to merge existing user accounts with new ones created through OAuth authentication.
+     */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * Custom prompts or consent screens that users may see during OAuth authentication.
+     */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Settings related to token management for the OAuth provider.
+     */
     providerTokenManagement?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemSlackProviderTokenManagement>;
+    /**
+     * Scopes of access that the application requests from the user's account on the OAuth provider.
+     */
     scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL where the application requests an access token from the OAuth provider.
+     */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * The URL where the application retrieves user information from the OAuth provider.
+     */
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
@@ -416,12 +965,27 @@ export interface ProjectAuthenticationOauthSystemSlackProviderTokenManagement {
 }
 
 export interface ProjectAuthenticationOtp {
+    /**
+     * The domain to embed in OTP messages.
+     */
     domain?: pulumi.Input<string>;
+    /**
+     * Settings related to sending emails with OTP codes.
+     */
     emailService?: pulumi.Input<inputs.ProjectAuthenticationOtpEmailService>;
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The amount of time that an OTP code will be valid for.
+     */
     expirationTime?: pulumi.Input<number>;
     expirationTimeUnit?: pulumi.Input<string>;
+    /**
+     * Settings related to sending SMS messages with OTP codes.
+     */
     textService?: pulumi.Input<inputs.ProjectAuthenticationOtpTextService>;
+    /**
+     * Settings related to voice calls with OTP codes.
+     */
     voiceService?: pulumi.Input<inputs.ProjectAuthenticationOtpVoiceService>;
 }
 
@@ -464,19 +1028,60 @@ export interface ProjectAuthenticationOtpVoiceServiceTemplate {
     name: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationPasskeys {
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Passkeys will be usable in the following domain and all its subdomains.
+     */
+    topLevelDomain?: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationPassword {
+    /**
+     * Settings related to sending password reset emails as part of the password feature.
+     */
     emailService?: pulumi.Input<inputs.ProjectAuthenticationPasswordEmailService>;
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Whether users are required to change their password periodically.
+     */
     expiration?: pulumi.Input<boolean>;
+    /**
+     * The number of weeks after which a user's password expires and they need to replace it.
+     */
     expirationWeeks?: pulumi.Input<number>;
+    /**
+     * Whether the user account should be locked after a specified number of failed login attempts.
+     */
     lock?: pulumi.Input<boolean>;
+    /**
+     * The number of failed login attempts allowed before an account is locked.
+     */
     lockAttempts?: pulumi.Input<number>;
+    /**
+     * Whether passwords must contain at least one lowercase letter.
+     */
     lowercase?: pulumi.Input<boolean>;
+    /**
+     * The minimum length of the password that users are required to use. The maximum length is always `64`.
+     */
     minLength?: pulumi.Input<number>;
+    /**
+     * Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+     */
     nonAlphanumeric?: pulumi.Input<boolean>;
+    /**
+     * Whether passwords must contain at least one number.
+     */
     number?: pulumi.Input<boolean>;
+    /**
+     * Whether to forbid password reuse when users change their password.
+     */
     reuse?: pulumi.Input<boolean>;
     reuseAmount?: pulumi.Input<number>;
+    /**
+     * Whether passwords must contain at least one uppercase letter.
+     */
     uppercase?: pulumi.Input<boolean>;
 }
 
@@ -497,16 +1102,14 @@ export interface ProjectAuthenticationPasswordEmailServiceTemplate {
 
 export interface ProjectAuthenticationSso {
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     */
     mergeUsers?: pulumi.Input<boolean>;
 }
 
 export interface ProjectAuthenticationTotp {
     enabled?: pulumi.Input<boolean>;
-}
-
-export interface ProjectAuthenticationWebauthn {
-    enabled?: pulumi.Input<boolean>;
-    topLevelDomain?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthorization {
@@ -528,65 +1131,173 @@ export interface ProjectAuthorizationRole {
 }
 
 export interface ProjectConnectors {
+    /**
+     * AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+     */
     abuseipdbs?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAbuseipdb>[]>;
+    /**
+     * Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     */
     amplitudes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAmplitude>[]>;
     auditWebhooks?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAuditWebhook>[]>;
     awsS3s?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsS3>[]>;
     awsTranslates?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsTranslate>[]>;
+    /**
+     * An identity verification platform that allow customers to digitally verify their identity from anywhere.
+     */
     clears?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsClear>[]>;
+    /**
+     * Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+     */
     datadogs?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDatadog>[]>;
     devrevGrows?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDevrevGrow>[]>;
+    /**
+     * Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+     */
     docebos?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDocebo>[]>;
     fingerprintDescopes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsFingerprintDescope>[]>;
+    /**
+     * Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+     */
     fingerprints?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsFingerprint>[]>;
+    /**
+     * Use the Forter connector for account fraud prevention.
+     */
     forters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsForter>[]>;
     googleCloudTranslations?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleCloudTranslation>[]>;
+    /**
+     * API to check if password appeared previously exposed in data breaches.
+     */
     hibps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHibp>[]>;
     httpStaticIps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHttpStaticIp>[]>;
+    /**
+     * A general purpose HTTP client
+     */
     https?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHttp>[]>;
+    /**
+     * HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+     */
     hubspots?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHubspot>[]>;
+    /**
+     * Intercom is a Conversational Relationship Platform (CRP).
+     */
     intercoms?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsIntercom>[]>;
+    /**
+     * Use this connector to send audit events and troubleshooting logs to New Relic.
+     */
     newrelics?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsNewrelic>[]>;
     recaptchaEnterprises?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRecaptchaEnterprise>[]>;
+    /**
+     * reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+     */
     recaptchas?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRecaptcha>[]>;
+    /**
+     * AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+     */
     rekognitions?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRekognition>[]>;
+    /**
+     * Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+     */
     salesforces?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSalesforce>[]>;
+    /**
+     * Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     */
     segments?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSegment>[]>;
     sendgrids?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSendgrid>[]>;
     smtps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSmtp>[]>;
+    /**
+     * Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+     */
     sumologics?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSumologic>[]>;
+    /**
+     * Telesign Phone number intelligence API provides risk score for phone numbers.
+     */
     telesigns?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsTelesign>[]>;
+    /**
+     * API security for a cloud-first, API-driven world.
+     */
     traceables?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsTraceable>[]>;
     twilioCores?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsTwilioCore>[]>;
     twilioVerifies?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsTwilioVerify>[]>;
+    /**
+     * AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+     */
     veriffs?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsVeriff>[]>;
 }
 
 export interface ProjectConnectorsAbuseipdb {
+    /**
+     * The unique AbuseIPDB API key.
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsAmplitude {
+    /**
+     * The Amplitude API Key generated for the Descope service.
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+     */
     serverUrl?: pulumi.Input<string>;
+    /**
+     * `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+     */
     serverZone?: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsAuditWebhook {
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
     auditFilters?: pulumi.Input<string>;
+    /**
+     * Authentication Information
+     */
     authentication?: pulumi.Input<inputs.ProjectConnectorsAuditWebhookAuthentication>;
+    /**
+     * The base URL to fetch
+     */
     baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The headers to send with the request
+     */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+     */
     hmacSecret?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
     insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
@@ -607,117 +1318,300 @@ export interface ProjectConnectorsAuditWebhookAuthenticationBasic {
 }
 
 export interface ProjectConnectorsAwsS3 {
+    /**
+     * The unique AWS access key ID.
+     */
     accessKeyId: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
     auditFilters?: pulumi.Input<string>;
+    /**
+     * The AWS S3 bucket. This bucket should already exist for the connector to work.
+     */
     bucket: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The AWS S3 region, e.g. `us-east-1`.
+     */
     region: pulumi.Input<string>;
+    /**
+     * The secret AWS access key.
+     */
     secretAccessKey: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsAwsTranslate {
+    /**
+     * AWS access key ID.
+     */
     accessKeyId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The AWS region to which this client will send requests. (e.g. us-east-1.)
+     */
     region: pulumi.Input<string>;
+    /**
+     * AWS secret access key.
+     */
     secretAccessKey: pulumi.Input<string>;
+    /**
+     * (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+     */
     sessionToken?: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsClear {
+    /**
+     * Your CLEAR API key.
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Your CLEAR project ID.
+     */
     projectId: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsDatadog {
+    /**
+     * The unique Datadog organization key.
+     */
     apiKey: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
     auditFilters?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+     */
     site?: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsDevrevGrow {
+    /**
+     * Authentication to DevRev APIs requires a personal access token (PAT).
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsDocebo {
+    /**
+     * The Docebo api base url.
+     */
     baseUrl: pulumi.Input<string>;
+    /**
+     * The Docebo OAuth 2.0 app client ID.
+     */
     clientId: pulumi.Input<string>;
+    /**
+     * The Docebo OAuth 2.0 app client secret.
+     */
     clientSecret: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Docebo user's password.
+     */
     password: pulumi.Input<string>;
+    /**
+     * The Docebo username.
+     */
     username: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsFingerprint {
+    /**
+     * The Cloudflare integration Endpoint URL.
+     */
     cloudflareEndpointUrl?: pulumi.Input<string>;
+    /**
+     * The Cloudflare integration Script URL.
+     */
     cloudflareScriptUrl?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Fingerprint public API key.
+     */
     publicApiKey: pulumi.Input<string>;
+    /**
+     * The Fingerprint secret API key.
+     */
     secretApiKey: pulumi.Input<string>;
+    /**
+     * Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+     */
     useCloudflareIntegration?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsFingerprintDescope {
+    /**
+     * The custom domain to fetch
+     */
     customDomain?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsForter {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Override the user IP address.
+     */
     overrideIpAddress?: pulumi.Input<string>;
+    /**
+     * Override the user email.
+     */
     overrideUserEmail?: pulumi.Input<string>;
+    /**
+     * Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+     */
     overrides?: pulumi.Input<boolean>;
+    /**
+     * The Forter secret key.
+     */
     secretKey: pulumi.Input<string>;
+    /**
+     * The Forter site ID.
+     */
     siteId: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsGoogleCloudTranslation {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Google Cloud project ID where the Google Cloud Translation is managed.
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Service Account JSON associated with the current project.
+     */
     serviceAccountJson: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsHibp {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsHttp {
+    /**
+     * Authentication Information
+     */
     authentication?: pulumi.Input<inputs.ProjectConnectorsHttpAuthentication>;
+    /**
+     * The base URL to fetch
+     */
     baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The headers to send with the request
+     */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+     */
     hmacSecret?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+     */
     includeHeadersInContext?: pulumi.Input<boolean>;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
     insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
@@ -738,14 +1632,38 @@ export interface ProjectConnectorsHttpAuthenticationBasic {
 }
 
 export interface ProjectConnectorsHttpStaticIp {
+    /**
+     * Authentication Information
+     */
     authentication?: pulumi.Input<inputs.ProjectConnectorsHttpStaticIpAuthentication>;
+    /**
+     * The base URL to fetch
+     */
     baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The headers to send with the request
+     */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+     */
     hmacSecret?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+     */
     includeHeadersInContext?: pulumi.Input<boolean>;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
     insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
@@ -766,84 +1684,210 @@ export interface ProjectConnectorsHttpStaticIpAuthenticationBasic {
 }
 
 export interface ProjectConnectorsHubspot {
+    /**
+     * The HubSpot private API access token generated for the Descope service.
+     */
     accessToken: pulumi.Input<string>;
+    /**
+     * The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+     */
     baseUrl?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsIntercom {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Regional Hosting - US, EU, or AU. default: US
+     */
     region?: pulumi.Input<string>;
+    /**
+     * The Intercom access token.
+     */
     token: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsNewrelic {
+    /**
+     * Ingest License Key of the account you want to report data to.
+     */
     apiKey: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
     auditFilters?: pulumi.Input<string>;
+    /**
+     * The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+     */
     dataCenter?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * Specify a custom prefix for all log fields. The default prefix is `descope.`.
+     */
     logsPrefix?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Enable this option to use a custom prefix for log fields.
+     */
     overrideLogsPrefix?: pulumi.Input<boolean>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsRecaptcha {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+     */
     secretKey: pulumi.Input<string>;
+    /**
+     * The site key is used to invoke reCAPTCHA service on your site or mobile application.
+     */
     siteKey: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsRecaptchaEnterprise {
+    /**
+     * API key associated with the current project.
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     */
     assessmentScore?: pulumi.Input<number>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     */
     overrideAssessment?: pulumi.Input<boolean>;
+    /**
+     * The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+     */
     siteKey: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsRekognition {
+    /**
+     * The AWS access key ID
+     */
     accessKeyId: pulumi.Input<string>;
+    /**
+     * The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+     */
     collectionId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The AWS secret access key
+     */
     secretAccessKey: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSalesforce {
+    /**
+     * The Salesforce API base URL.
+     */
     baseUrl: pulumi.Input<string>;
+    /**
+     * The consumer key of the connected app.
+     */
     clientId: pulumi.Input<string>;
+    /**
+     * The consumer secret of the connected app.
+     */
     clientSecret: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * REST API Version.
+     */
     version: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSegment {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The base URL of the Segment API, when using a custom domain in Segment.
+     */
     host?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Segment Write Key generated for the Descope service.
+     */
     writeKey: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSendgrid {
     authentication: pulumi.Input<inputs.ProjectConnectorsSendgridAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
     sender: pulumi.Input<inputs.ProjectConnectorsSendgridSender>;
 }
@@ -859,8 +1903,14 @@ export interface ProjectConnectorsSendgridSender {
 
 export interface ProjectConnectorsSmtp {
     authentication: pulumi.Input<inputs.ProjectConnectorsSmtpAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
     sender: pulumi.Input<inputs.ProjectConnectorsSmtpSender>;
     server: pulumi.Input<inputs.ProjectConnectorsSmtpServer>;
@@ -885,34 +1935,73 @@ export interface ProjectConnectorsSmtpServer {
 export interface ProjectConnectorsSumologic {
     auditEnabled?: pulumi.Input<boolean>;
     auditFilters?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The URL associated with an HTTP Hosted collector
+     */
     httpSourceUrl: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsTelesign {
+    /**
+     * The unique Telesign API key
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * The unique Telesign account Customer ID
+     */
     customerId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsTraceable {
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * EU(Europe) Region deployment of Traceable platform.
+     */
     euRegion?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Traceable secret key.
+     */
     secretKey: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsTwilioCore {
     accountSid: pulumi.Input<string>;
     authentication: pulumi.Input<inputs.ProjectConnectorsTwilioCoreAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
     senders: pulumi.Input<inputs.ProjectConnectorsTwilioCoreSenders>;
 }
@@ -940,8 +2029,14 @@ export interface ProjectConnectorsTwilioCoreSendersVoice {
 export interface ProjectConnectorsTwilioVerify {
     accountSid: pulumi.Input<string>;
     authentication: pulumi.Input<inputs.ProjectConnectorsTwilioVerifyAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
     sender?: pulumi.Input<string>;
     serviceSid: pulumi.Input<string>;
@@ -954,11 +2049,26 @@ export interface ProjectConnectorsTwilioVerifyAuthentication {
 }
 
 export interface ProjectConnectorsVeriff {
+    /**
+     * The Veriff Public API Key, you can find under Veriff Station - Integrations.
+     */
     apiKey: pulumi.Input<string>;
+    /**
+     * The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+     */
     baseUrl?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+     */
     secretKey: pulumi.Input<string>;
 }
 
@@ -975,9 +2085,6 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
     authSchema?: pulumi.Input<string>;
     conformanceIssuer?: pulumi.Input<boolean>;
     description?: pulumi.Input<string>;
-    /**
-     * The ID of this resource.
-     */
     id?: pulumi.Input<string>;
     name: pulumi.Input<string>;
     template: pulumi.Input<string>;
@@ -987,9 +2094,6 @@ export interface ProjectJwtTemplatesUserTemplate {
     authSchema?: pulumi.Input<string>;
     conformanceIssuer?: pulumi.Input<boolean>;
     description?: pulumi.Input<string>;
-    /**
-     * The ID of this resource.
-     */
     id?: pulumi.Input<string>;
     name: pulumi.Input<string>;
     template: pulumi.Input<string>;

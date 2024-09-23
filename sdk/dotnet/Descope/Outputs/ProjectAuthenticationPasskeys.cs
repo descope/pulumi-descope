@@ -12,13 +12,16 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectAuthenticationWebauthn
+    public sealed class ProjectAuthenticationPasskeys
     {
         public readonly bool? Enabled;
+        /// <summary>
+        /// Passkeys will be usable in the following domain and all its subdomains.
+        /// </summary>
         public readonly string? TopLevelDomain;
 
         [OutputConstructor]
-        private ProjectAuthenticationWebauthn(
+        private ProjectAuthenticationPasskeys(
             bool? enabled,
 
             string? topLevelDomain)
