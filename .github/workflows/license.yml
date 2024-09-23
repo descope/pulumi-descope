@@ -53,4 +53,5 @@ jobs:
             github.com/segmentio/asm,
             golang.org,
             github.com/descope/terraform-provider-descope,
+            github.com/descope/pulumi-descope/sdk,
             pulumi-descope-go
