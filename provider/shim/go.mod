@@ -5,7 +5,7 @@ go 1.22.0
 toolchain go1.23.1
 
 require (
-	github.com/descope/terraform-provider-descope v0.0.3
+	github.com/descope/terraform-provider-descope v0.0.4
 	github.com/hashicorp/terraform-plugin-framework v1.12.0
 )
 
