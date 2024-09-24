@@ -2,3 +2,4 @@
 upstream-provider-name: terraform-provider-descope
 remove-plugins: true
 pr-reviewers: omercnet
+pr-assign: omercnet
