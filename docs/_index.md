@@ -8,7 +8,7 @@ The `Descope` provider for Pulumi can be used to provision any of the resources 
 
 ## Example
 
-{{< chooser language "typescript,python,go,csharp,yaml" >}}
+{{< chooser language "javascript,typescript,python,go,csharp,yaml" >}}
 
 {{% choosable language javascript %}}
 
