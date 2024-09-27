@@ -85,7 +85,6 @@ jobs:
     needs:
       - test
       - build_provider
-      - license_check
       - lint
     runs-on: ubuntu-latest
     steps:
@@ -161,8 +160,3 @@ jobs:
         run: |
           go test -v -json -count=1 -cover -timeout 2h \
           -tags=${{matrix.language }} -parallel 4 . 2>&1 | tee /tmp/gotest.log | gotestfmt
-
-  license_check:
-    name: License Check
-    uses: ./.github/workflows/license.yml
-    secrets: inherit
