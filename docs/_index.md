@@ -24,7 +24,7 @@ export const project = new descope.Project("descope-project", {});
 {{% choosable language typescript %}}
 
 ```typescript
-import * as descope from "@descope/descope";
+import * as descope from "@descope/pulumi-descope";
 
 export const project = new descope.Project("descope-project", {});
 ```
