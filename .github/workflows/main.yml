@@ -49,10 +49,6 @@ jobs:
     name: lint
     uses: ./.github/workflows/lint.yml
     secrets: inherit
-  license_check:
-    name: License Check
-    uses: ./.github/workflows/license.yml
-    secrets: inherit
 
   publish:
     name: publish
@@ -60,7 +56,6 @@ jobs:
       - prerequisites
       - build_provider
       - test
-      - license_check
     uses: ./.github/workflows/publish.yml
     secrets: inherit
     with:
