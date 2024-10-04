@@ -10,7 +10,7 @@ require (
 	github.com/descope/terraform-provider-descope/shim v0.0.4
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.44.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1
-	golang.org/x/text v0.18.0
+	golang.org/x/text v0.19.0
 )
 
 require (
