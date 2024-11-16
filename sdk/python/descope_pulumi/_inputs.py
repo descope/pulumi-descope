@@ -4,129 +4,265 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'ProjectApplicationsArgs',
+    'ProjectApplicationsArgsDict',
     'ProjectApplicationsOidcApplicationArgs',
+    'ProjectApplicationsOidcApplicationArgsDict',
     'ProjectApplicationsSamlApplicationArgs',
+    'ProjectApplicationsSamlApplicationArgsDict',
     'ProjectApplicationsSamlApplicationAttributeMappingArgs',
+    'ProjectApplicationsSamlApplicationAttributeMappingArgsDict',
     'ProjectApplicationsSamlApplicationDynamicConfigurationArgs',
+    'ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict',
     'ProjectApplicationsSamlApplicationManualConfigurationArgs',
+    'ProjectApplicationsSamlApplicationManualConfigurationArgsDict',
     'ProjectAttributesArgs',
+    'ProjectAttributesArgsDict',
     'ProjectAttributesTenantArgs',
+    'ProjectAttributesTenantArgsDict',
     'ProjectAttributesUserArgs',
+    'ProjectAttributesUserArgsDict',
     'ProjectAttributesUserWidgetAuthorizationArgs',
+    'ProjectAttributesUserWidgetAuthorizationArgsDict',
     'ProjectAuthenticationArgs',
+    'ProjectAuthenticationArgsDict',
     'ProjectAuthenticationEmbeddedLinkArgs',
+    'ProjectAuthenticationEmbeddedLinkArgsDict',
     'ProjectAuthenticationEnchantedLinkArgs',
+    'ProjectAuthenticationEnchantedLinkArgsDict',
     'ProjectAuthenticationEnchantedLinkEmailServiceArgs',
+    'ProjectAuthenticationEnchantedLinkEmailServiceArgsDict',
     'ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs',
+    'ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict',
     'ProjectAuthenticationMagicLinkArgs',
+    'ProjectAuthenticationMagicLinkArgsDict',
     'ProjectAuthenticationMagicLinkEmailServiceArgs',
+    'ProjectAuthenticationMagicLinkEmailServiceArgsDict',
     'ProjectAuthenticationMagicLinkEmailServiceTemplateArgs',
+    'ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict',
     'ProjectAuthenticationMagicLinkTextServiceArgs',
+    'ProjectAuthenticationMagicLinkTextServiceArgsDict',
     'ProjectAuthenticationMagicLinkTextServiceTemplateArgs',
+    'ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict',
     'ProjectAuthenticationOauthArgs',
+    'ProjectAuthenticationOauthArgsDict',
     'ProjectAuthenticationOauthCustomArgs',
+    'ProjectAuthenticationOauthCustomArgsDict',
     'ProjectAuthenticationOauthCustomProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemArgs',
+    'ProjectAuthenticationOauthSystemArgsDict',
     'ProjectAuthenticationOauthSystemAppleArgs',
+    'ProjectAuthenticationOauthSystemAppleArgsDict',
     'ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemDiscordArgs',
+    'ProjectAuthenticationOauthSystemDiscordArgsDict',
     'ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemFacebookArgs',
+    'ProjectAuthenticationOauthSystemFacebookArgsDict',
     'ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGithubArgs',
+    'ProjectAuthenticationOauthSystemGithubArgsDict',
     'ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGitlabArgs',
+    'ProjectAuthenticationOauthSystemGitlabArgsDict',
     'ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGoogleArgs',
+    'ProjectAuthenticationOauthSystemGoogleArgsDict',
     'ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemLinkedinArgs',
+    'ProjectAuthenticationOauthSystemLinkedinArgsDict',
     'ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemMicrosoftArgs',
+    'ProjectAuthenticationOauthSystemMicrosoftArgsDict',
     'ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemSlackArgs',
+    'ProjectAuthenticationOauthSystemSlackArgsDict',
     'ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs',
+    'ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict',
     'ProjectAuthenticationOtpArgs',
+    'ProjectAuthenticationOtpArgsDict',
     'ProjectAuthenticationOtpEmailServiceArgs',
+    'ProjectAuthenticationOtpEmailServiceArgsDict',
     'ProjectAuthenticationOtpEmailServiceTemplateArgs',
+    'ProjectAuthenticationOtpEmailServiceTemplateArgsDict',
     'ProjectAuthenticationOtpTextServiceArgs',
+    'ProjectAuthenticationOtpTextServiceArgsDict',
     'ProjectAuthenticationOtpTextServiceTemplateArgs',
+    'ProjectAuthenticationOtpTextServiceTemplateArgsDict',
     'ProjectAuthenticationOtpVoiceServiceArgs',
+    'ProjectAuthenticationOtpVoiceServiceArgsDict',
     'ProjectAuthenticationOtpVoiceServiceTemplateArgs',
+    'ProjectAuthenticationOtpVoiceServiceTemplateArgsDict',
     'ProjectAuthenticationPasskeysArgs',
+    'ProjectAuthenticationPasskeysArgsDict',
     'ProjectAuthenticationPasswordArgs',
+    'ProjectAuthenticationPasswordArgsDict',
     'ProjectAuthenticationPasswordEmailServiceArgs',
+    'ProjectAuthenticationPasswordEmailServiceArgsDict',
     'ProjectAuthenticationPasswordEmailServiceTemplateArgs',
+    'ProjectAuthenticationPasswordEmailServiceTemplateArgsDict',
     'ProjectAuthenticationSsoArgs',
+    'ProjectAuthenticationSsoArgsDict',
     'ProjectAuthenticationTotpArgs',
+    'ProjectAuthenticationTotpArgsDict',
     'ProjectAuthorizationArgs',
+    'ProjectAuthorizationArgsDict',
     'ProjectAuthorizationPermissionArgs',
+    'ProjectAuthorizationPermissionArgsDict',
     'ProjectAuthorizationRoleArgs',
+    'ProjectAuthorizationRoleArgsDict',
     'ProjectConnectorsArgs',
+    'ProjectConnectorsArgsDict',
     'ProjectConnectorsAbuseipdbArgs',
+    'ProjectConnectorsAbuseipdbArgsDict',
     'ProjectConnectorsAmplitudeArgs',
+    'ProjectConnectorsAmplitudeArgsDict',
     'ProjectConnectorsAuditWebhookArgs',
+    'ProjectConnectorsAuditWebhookArgsDict',
     'ProjectConnectorsAuditWebhookAuthenticationArgs',
+    'ProjectConnectorsAuditWebhookAuthenticationArgsDict',
     'ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs',
+    'ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict',
     'ProjectConnectorsAuditWebhookAuthenticationBasicArgs',
+    'ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict',
     'ProjectConnectorsAwsS3Args',
+    'ProjectConnectorsAwsS3ArgsDict',
     'ProjectConnectorsAwsTranslateArgs',
+    'ProjectConnectorsAwsTranslateArgsDict',
     'ProjectConnectorsClearArgs',
+    'ProjectConnectorsClearArgsDict',
     'ProjectConnectorsDatadogArgs',
+    'ProjectConnectorsDatadogArgsDict',
     'ProjectConnectorsDevrevGrowArgs',
+    'ProjectConnectorsDevrevGrowArgsDict',
     'ProjectConnectorsDoceboArgs',
+    'ProjectConnectorsDoceboArgsDict',
     'ProjectConnectorsFingerprintArgs',
+    'ProjectConnectorsFingerprintArgsDict',
     'ProjectConnectorsFingerprintDescopeArgs',
+    'ProjectConnectorsFingerprintDescopeArgsDict',
     'ProjectConnectorsForterArgs',
+    'ProjectConnectorsForterArgsDict',
     'ProjectConnectorsGoogleCloudTranslationArgs',
+    'ProjectConnectorsGoogleCloudTranslationArgsDict',
     'ProjectConnectorsHibpArgs',
+    'ProjectConnectorsHibpArgsDict',
     'ProjectConnectorsHttpArgs',
+    'ProjectConnectorsHttpArgsDict',
     'ProjectConnectorsHttpAuthenticationArgs',
+    'ProjectConnectorsHttpAuthenticationArgsDict',
     'ProjectConnectorsHttpAuthenticationApiKeyArgs',
+    'ProjectConnectorsHttpAuthenticationApiKeyArgsDict',
     'ProjectConnectorsHttpAuthenticationBasicArgs',
+    'ProjectConnectorsHttpAuthenticationBasicArgsDict',
     'ProjectConnectorsHttpStaticIpArgs',
+    'ProjectConnectorsHttpStaticIpArgsDict',
     'ProjectConnectorsHttpStaticIpAuthenticationArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationArgsDict',
     'ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgsDict',
     'ProjectConnectorsHttpStaticIpAuthenticationBasicArgs',
+    'ProjectConnectorsHttpStaticIpAuthenticationBasicArgsDict',
     'ProjectConnectorsHubspotArgs',
+    'ProjectConnectorsHubspotArgsDict',
     'ProjectConnectorsIntercomArgs',
+    'ProjectConnectorsIntercomArgsDict',
     'ProjectConnectorsNewrelicArgs',
+    'ProjectConnectorsNewrelicArgsDict',
     'ProjectConnectorsRecaptchaArgs',
+    'ProjectConnectorsRecaptchaArgsDict',
     'ProjectConnectorsRecaptchaEnterpriseArgs',
+    'ProjectConnectorsRecaptchaEnterpriseArgsDict',
     'ProjectConnectorsRekognitionArgs',
+    'ProjectConnectorsRekognitionArgsDict',
     'ProjectConnectorsSalesforceArgs',
+    'ProjectConnectorsSalesforceArgsDict',
     'ProjectConnectorsSegmentArgs',
+    'ProjectConnectorsSegmentArgsDict',
     'ProjectConnectorsSendgridArgs',
+    'ProjectConnectorsSendgridArgsDict',
     'ProjectConnectorsSendgridAuthenticationArgs',
+    'ProjectConnectorsSendgridAuthenticationArgsDict',
     'ProjectConnectorsSendgridSenderArgs',
+    'ProjectConnectorsSendgridSenderArgsDict',
     'ProjectConnectorsSmtpArgs',
+    'ProjectConnectorsSmtpArgsDict',
     'ProjectConnectorsSmtpAuthenticationArgs',
+    'ProjectConnectorsSmtpAuthenticationArgsDict',
     'ProjectConnectorsSmtpSenderArgs',
+    'ProjectConnectorsSmtpSenderArgsDict',
     'ProjectConnectorsSmtpServerArgs',
+    'ProjectConnectorsSmtpServerArgsDict',
     'ProjectConnectorsSumologicArgs',
+    'ProjectConnectorsSumologicArgsDict',
     'ProjectConnectorsTelesignArgs',
+    'ProjectConnectorsTelesignArgsDict',
     'ProjectConnectorsTraceableArgs',
+    'ProjectConnectorsTraceableArgsDict',
     'ProjectConnectorsTwilioCoreArgs',
+    'ProjectConnectorsTwilioCoreArgsDict',
     'ProjectConnectorsTwilioCoreAuthenticationArgs',
+    'ProjectConnectorsTwilioCoreAuthenticationArgsDict',
     'ProjectConnectorsTwilioCoreSendersArgs',
+    'ProjectConnectorsTwilioCoreSendersArgsDict',
     'ProjectConnectorsTwilioCoreSendersSmsArgs',
+    'ProjectConnectorsTwilioCoreSendersSmsArgsDict',
     'ProjectConnectorsTwilioCoreSendersVoiceArgs',
+    'ProjectConnectorsTwilioCoreSendersVoiceArgsDict',
     'ProjectConnectorsTwilioVerifyArgs',
+    'ProjectConnectorsTwilioVerifyArgsDict',
     'ProjectConnectorsTwilioVerifyAuthenticationArgs',
+    'ProjectConnectorsTwilioVerifyAuthenticationArgsDict',
     'ProjectConnectorsVeriffArgs',
+    'ProjectConnectorsVeriffArgsDict',
     'ProjectFlowsArgs',
+    'ProjectFlowsArgsDict',
     'ProjectJwtTemplatesArgs',
+    'ProjectJwtTemplatesArgsDict',
     'ProjectJwtTemplatesAccessKeyTemplateArgs',
+    'ProjectJwtTemplatesAccessKeyTemplateArgsDict',
     'ProjectJwtTemplatesUserTemplateArgs',
+    'ProjectJwtTemplatesUserTemplateArgsDict',
     'ProjectProjectSettingsArgs',
+    'ProjectProjectSettingsArgsDict',
     'ProjectStylesArgs',
+    'ProjectStylesArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class ProjectApplicationsArgsDict(TypedDict):
+        oidc_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgsDict']]]]
+        """
+        Applications using OpenID Connect (OIDC) for authentication.
+        """
+        saml_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgsDict']]]]
+        """
+        Applications using SAML for authentication.
+        """
+elif False:
+    ProjectApplicationsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectApplicationsArgs:
@@ -166,6 +302,39 @@ class ProjectApplicationsArgs:
     def saml_applications(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgs']]]]):
         pulumi.set(self, "saml_applications", value)
 
+
+if not MYPY:
+    class ProjectApplicationsOidcApplicationArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the application.
+        """
+        claims: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Claims associated with JWT tokens, typically used for user information.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the application.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        """
+        Indicates whether the resource or functionality is disabled.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        """
+        An optional identifier for the application.
+        """
+        login_page_url: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the custom login page for the application.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the application.
+        """
+elif False:
+    ProjectApplicationsOidcApplicationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectApplicationsOidcApplicationArgs:
@@ -284,6 +453,45 @@ class ProjectApplicationsOidcApplicationArgs:
     def logo(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "logo", value)
 
+
+if not MYPY:
+    class ProjectApplicationsSamlApplicationArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the application.
+        """
+        acs_allowed_callback_urls: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        attribute_mappings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgsDict']]]]
+        """
+        Map user attributes from the third party identity provider to custom attributes in Descope.
+        """
+        default_relay_state: NotRequired[pulumi.Input[str]]
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the application.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        """
+        Indicates whether the application is disabled.
+        """
+        dynamic_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict']]
+        id: NotRequired[pulumi.Input[str]]
+        """
+        An optional identifier for the application.
+        """
+        login_page_url: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the custom login page for the application.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the application.
+        """
+        manual_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgsDict']]
+        subject_name_id_format: NotRequired[pulumi.Input[str]]
+        subject_name_id_type: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectApplicationsSamlApplicationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationArgs:
@@ -475,6 +683,19 @@ class ProjectApplicationsSamlApplicationArgs:
         pulumi.set(self, "subject_name_id_type", value)
 
 
+if not MYPY:
+    class ProjectApplicationsSamlApplicationAttributeMappingArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the user attribute in the third party identity provider.
+        """
+        value: pulumi.Input[str]
+        """
+        The name of the user custom attribute in Descope.
+        """
+elif False:
+    ProjectApplicationsSamlApplicationAttributeMappingArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationAttributeMappingArgs:
     def __init__(__self__, *,
@@ -512,6 +733,12 @@ class ProjectApplicationsSamlApplicationAttributeMappingArgs:
         pulumi.set(self, "value", value)
 
 
+if not MYPY:
+    class ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict(TypedDict):
+        metadata_url: pulumi.Input[str]
+elif False:
+    ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationDynamicConfigurationArgs:
     def __init__(__self__, *,
@@ -527,6 +754,14 @@ class ProjectApplicationsSamlApplicationDynamicConfigurationArgs:
     def metadata_url(self, value: pulumi.Input[str]):
         pulumi.set(self, "metadata_url", value)
 
+
+if not MYPY:
+    class ProjectApplicationsSamlApplicationManualConfigurationArgsDict(TypedDict):
+        acs_url: pulumi.Input[str]
+        certificate: pulumi.Input[str]
+        entity_id: pulumi.Input[str]
+elif False:
+    ProjectApplicationsSamlApplicationManualConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationManualConfigurationArgs:
@@ -566,6 +801,19 @@ class ProjectApplicationsSamlApplicationManualConfigurationArgs:
         pulumi.set(self, "entity_id", value)
 
 
+if not MYPY:
+    class ProjectAttributesArgsDict(TypedDict):
+        tenants: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgsDict']]]]
+        """
+        Custom attributes to store additional details about your tenants.
+        """
+        users: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgsDict']]]]
+        """
+        Custom attributes to store additional details about your users.
+        """
+elif False:
+    ProjectAttributesArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAttributesArgs:
     def __init__(__self__, *,
@@ -604,6 +852,23 @@ class ProjectAttributesArgs:
     def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgs']]]]):
         pulumi.set(self, "users", value)
 
+
+if not MYPY:
+    class ProjectAttributesTenantArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the tenant attribute.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        """
+        select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of strings to define the set of options for select attributes.
+        """
+elif False:
+    ProjectAttributesTenantArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAttributesTenantArgs:
@@ -657,6 +922,27 @@ class ProjectAttributesTenantArgs:
     def select_options(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "select_options", value)
 
+
+if not MYPY:
+    class ProjectAttributesUserArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the user attribute.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        """
+        select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of strings to define the set of options for select attributes.
+        """
+        widget_authorization: NotRequired[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgsDict']]
+        """
+        When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        """
+elif False:
+    ProjectAttributesUserArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAttributesUserArgs:
@@ -727,6 +1013,19 @@ class ProjectAttributesUserArgs:
         pulumi.set(self, "widget_authorization", value)
 
 
+if not MYPY:
+    class ProjectAttributesUserWidgetAuthorizationArgsDict(TypedDict):
+        edit_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        """
+        view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        """
+elif False:
+    ProjectAttributesUserWidgetAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAttributesUserWidgetAuthorizationArgs:
     def __init__(__self__, *,
@@ -765,6 +1064,47 @@ class ProjectAttributesUserWidgetAuthorizationArgs:
     def view_permissions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "view_permissions", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationArgsDict(TypedDict):
+        embedded_link: NotRequired[pulumi.Input['ProjectAuthenticationEmbeddedLinkArgsDict']]
+        """
+        Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+        """
+        enchanted_link: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkArgsDict']]
+        """
+        An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+        """
+        magic_link: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkArgsDict']]
+        """
+        An authentication method where a user receives a unique link via email to log in.
+        """
+        oauth: NotRequired[pulumi.Input['ProjectAuthenticationOauthArgsDict']]
+        """
+        Authentication using Open Authorization, which allows users to authenticate with various external services.
+        """
+        otp: NotRequired[pulumi.Input['ProjectAuthenticationOtpArgsDict']]
+        """
+        A dynamically generated set of numbers, granting the user one-time access.
+        """
+        passkeys: NotRequired[pulumi.Input['ProjectAuthenticationPasskeysArgsDict']]
+        """
+        Device-based passwordless authentication, using fingerprint, face scan, and more.
+        """
+        password: NotRequired[pulumi.Input['ProjectAuthenticationPasswordArgsDict']]
+        """
+        The classic username and password combination used for authentication.
+        """
+        sso: NotRequired[pulumi.Input['ProjectAuthenticationSsoArgsDict']]
+        """
+        Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+        """
+        totp: NotRequired[pulumi.Input['ProjectAuthenticationTotpArgsDict']]
+        """
+        A one-time code generated for the user using a shared secret and time.
+        """
+elif False:
+    ProjectAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationArgs:
@@ -917,6 +1257,17 @@ class ProjectAuthenticationArgs:
         pulumi.set(self, "totp", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationEmbeddedLinkArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[bool]]
+        expiration_time: NotRequired[pulumi.Input[int]]
+        """
+        The amount of time that the embedded link will be valid for.
+        """
+        expiration_time_unit: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationEmbeddedLinkArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationEmbeddedLinkArgs:
     def __init__(__self__, *,
@@ -963,6 +1314,22 @@ class ProjectAuthenticationEmbeddedLinkArgs:
     def expiration_time_unit(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "expiration_time_unit", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationEnchantedLinkArgsDict(TypedDict):
+        email_service: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceArgsDict']]
+        """
+        Settings related to sending emails as part of the enchanted link authentication.
+        """
+        enabled: NotRequired[pulumi.Input[bool]]
+        expiration_time: NotRequired[pulumi.Input[int]]
+        expiration_time_unit: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+        """
+        The URL to redirect users to after they log in using the enchanted link.
+        """
+elif False:
+    ProjectAuthenticationEnchantedLinkArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkArgs:
@@ -1039,6 +1406,13 @@ class ProjectAuthenticationEnchantedLinkArgs:
         pulumi.set(self, "redirect_url", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationEnchantedLinkEmailServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationEnchantedLinkEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkEmailServiceArgs:
     def __init__(__self__, *,
@@ -1066,6 +1440,18 @@ class ProjectAuthenticationEnchantedLinkEmailServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        subject: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        html_body: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+        plain_text_body: NotRequired[pulumi.Input[str]]
+        use_plain_text_body: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs:
@@ -1153,6 +1539,26 @@ class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs:
     def use_plain_text_body(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "use_plain_text_body", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationMagicLinkArgsDict(TypedDict):
+        email_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceArgsDict']]
+        """
+        Settings related to sending emails as part of the magic link authentication.
+        """
+        enabled: NotRequired[pulumi.Input[bool]]
+        expiration_time: NotRequired[pulumi.Input[int]]
+        expiration_time_unit: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+        """
+        The URL to redirect users to after they log in using the magic link.
+        """
+        text_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgsDict']]
+        """
+        Settings related to sending SMS messages as part of the magic link authentication.
+        """
+elif False:
+    ProjectAuthenticationMagicLinkArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkArgs:
@@ -1245,6 +1651,13 @@ class ProjectAuthenticationMagicLinkArgs:
         pulumi.set(self, "text_service", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationMagicLinkEmailServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationMagicLinkEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkEmailServiceArgs:
     def __init__(__self__, *,
@@ -1272,6 +1685,18 @@ class ProjectAuthenticationMagicLinkEmailServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        subject: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        html_body: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+        plain_text_body: NotRequired[pulumi.Input[str]]
+        use_plain_text_body: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs:
@@ -1360,6 +1785,13 @@ class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationMagicLinkTextServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationMagicLinkTextServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkTextServiceArgs:
     def __init__(__self__, *,
@@ -1387,6 +1819,15 @@ class ProjectAuthenticationMagicLinkTextServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict(TypedDict):
+        body: pulumi.Input[str]
+        name: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkTextServiceTemplateArgs:
@@ -1439,6 +1880,20 @@ class ProjectAuthenticationMagicLinkTextServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthArgsDict(TypedDict):
+        custom: NotRequired[pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgsDict']]]]
+        """
+        Custom OAuth providers configured for this project.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        system: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemArgsDict']]
+        """
+        Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+        """
+elif False:
+    ProjectAuthenticationOauthArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthArgs:
     def __init__(__self__, *,
@@ -1489,6 +1944,66 @@ class ProjectAuthenticationOauthArgs:
     def system(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemArgs']]):
         pulumi.set(self, "system", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthCustomArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthCustomArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomArgs:
@@ -1741,6 +2256,13 @@ class ProjectAuthenticationOauthCustomArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -1769,6 +2291,47 @@ class ProjectAuthenticationOauthCustomProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemArgsDict(TypedDict):
+        apple: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleArgsDict']]
+        """
+        Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+        """
+        discord: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordArgsDict']]
+        """
+        Discord's OAuth provider, allowing users to authenticate with their Discord account.
+        """
+        facebook: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookArgsDict']]
+        """
+        Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+        """
+        github: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubArgsDict']]
+        """
+        GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+        """
+        gitlab: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabArgsDict']]
+        """
+        GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+        """
+        google: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleArgsDict']]
+        """
+        Google's OAuth provider, allowing users to authenticate with their Google account.
+        """
+        linkedin: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgsDict']]
+        """
+        LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+        """
+        microsoft: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgsDict']]
+        """
+        Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+        """
+        slack: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgsDict']]
+        """
+        Slack's OAuth provider, allowing users to authenticate with their Slack account.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemArgs:
@@ -1920,6 +2483,66 @@ class ProjectAuthenticationOauthSystemArgs:
     def slack(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgs']]):
         pulumi.set(self, "slack", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemAppleArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemAppleArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleArgs:
@@ -2172,6 +2795,13 @@ class ProjectAuthenticationOauthSystemAppleArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -2200,6 +2830,66 @@ class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemDiscordArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemDiscordArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordArgs:
@@ -2452,6 +3142,13 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -2480,6 +3177,66 @@ class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemFacebookArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemFacebookArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookArgs:
@@ -2732,6 +3489,13 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -2760,6 +3524,66 @@ class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGithubArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGithubArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubArgs:
@@ -3012,6 +3836,13 @@ class ProjectAuthenticationOauthSystemGithubArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -3040,6 +3871,66 @@ class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGitlabArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGitlabArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabArgs:
@@ -3292,6 +4183,13 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -3320,6 +4218,66 @@ class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGoogleArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGoogleArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleArgs:
@@ -3572,6 +4530,13 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -3600,6 +4565,66 @@ class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemLinkedinArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemLinkedinArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinArgs:
@@ -3852,6 +4877,13 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -3880,6 +4912,66 @@ class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemMicrosoftArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemMicrosoftArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftArgs:
@@ -4132,6 +5224,13 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -4160,6 +5259,66 @@ class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemSlackArgsDict(TypedDict):
+        authorization_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL that users are redirected to for authorization with the OAuth provider.
+        """
+        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        client_id: NotRequired[pulumi.Input[str]]
+        """
+        The client ID for the OAuth provider, used to identify the application to the provider.
+        """
+        client_secret: NotRequired[pulumi.Input[str]]
+        """
+        The client secret for the OAuth provider, used to authenticate the application with the provider.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A brief description of the OAuth provider.
+        """
+        disabled: NotRequired[pulumi.Input[bool]]
+        grant_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        """
+        issuer: NotRequired[pulumi.Input[str]]
+        jwks_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+        """
+        logo: NotRequired[pulumi.Input[str]]
+        """
+        The URL of the logo associated with the OAuth provider.
+        """
+        merge_user_accounts: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through OAuth authentication.
+        """
+        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Custom prompts or consent screens that users may see during OAuth authentication.
+        """
+        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict']]
+        """
+        Settings related to token management for the OAuth provider.
+        """
+        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Scopes of access that the application requests from the user's account on the OAuth provider.
+        """
+        token_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application requests an access token from the OAuth provider.
+        """
+        user_info_endpoint: NotRequired[pulumi.Input[str]]
+        """
+        The URL where the application retrieves user information from the OAuth provider.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemSlackArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackArgs:
@@ -4412,6 +5571,13 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict(TypedDict):
+        callback_domain: NotRequired[pulumi.Input[str]]
+        redirect_url: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs:
     def __init__(__self__, *,
@@ -4440,6 +5606,33 @@ class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs:
     def redirect_url(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "redirect_url", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOtpArgsDict(TypedDict):
+        domain: NotRequired[pulumi.Input[str]]
+        """
+        The domain to embed in OTP messages.
+        """
+        email_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpEmailServiceArgsDict']]
+        """
+        Settings related to sending emails with OTP codes.
+        """
+        enabled: NotRequired[pulumi.Input[bool]]
+        expiration_time: NotRequired[pulumi.Input[int]]
+        """
+        The amount of time that an OTP code will be valid for.
+        """
+        expiration_time_unit: NotRequired[pulumi.Input[str]]
+        text_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpTextServiceArgsDict']]
+        """
+        Settings related to sending SMS messages with OTP codes.
+        """
+        voice_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgsDict']]
+        """
+        Settings related to voice calls with OTP codes.
+        """
+elif False:
+    ProjectAuthenticationOtpArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpArgs:
@@ -4552,6 +5745,13 @@ class ProjectAuthenticationOtpArgs:
         pulumi.set(self, "voice_service", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOtpEmailServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpEmailServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationOtpEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOtpEmailServiceArgs:
     def __init__(__self__, *,
@@ -4579,6 +5779,18 @@ class ProjectAuthenticationOtpEmailServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpEmailServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOtpEmailServiceTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        subject: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        html_body: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+        plain_text_body: NotRequired[pulumi.Input[str]]
+        use_plain_text_body: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectAuthenticationOtpEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpEmailServiceTemplateArgs:
@@ -4667,6 +5879,13 @@ class ProjectAuthenticationOtpEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOtpTextServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpTextServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationOtpTextServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOtpTextServiceArgs:
     def __init__(__self__, *,
@@ -4694,6 +5913,15 @@ class ProjectAuthenticationOtpTextServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpTextServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOtpTextServiceTemplateArgsDict(TypedDict):
+        body: pulumi.Input[str]
+        name: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOtpTextServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpTextServiceTemplateArgs:
@@ -4746,6 +5974,13 @@ class ProjectAuthenticationOtpTextServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationOtpVoiceServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpVoiceServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationOtpVoiceServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationOtpVoiceServiceArgs:
     def __init__(__self__, *,
@@ -4773,6 +6008,15 @@ class ProjectAuthenticationOtpVoiceServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpVoiceServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationOtpVoiceServiceTemplateArgsDict(TypedDict):
+        body: pulumi.Input[str]
+        name: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthenticationOtpVoiceServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpVoiceServiceTemplateArgs:
@@ -4825,6 +6069,16 @@ class ProjectAuthenticationOtpVoiceServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationPasskeysArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[bool]]
+        top_level_domain: NotRequired[pulumi.Input[str]]
+        """
+        Passkeys will be usable in the following domain and all its subdomains.
+        """
+elif False:
+    ProjectAuthenticationPasskeysArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationPasskeysArgs:
     def __init__(__self__, *,
@@ -4859,6 +6113,57 @@ class ProjectAuthenticationPasskeysArgs:
     def top_level_domain(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "top_level_domain", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationPasswordArgsDict(TypedDict):
+        email_service: NotRequired[pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgsDict']]
+        """
+        Settings related to sending password reset emails as part of the password feature.
+        """
+        enabled: NotRequired[pulumi.Input[bool]]
+        expiration: NotRequired[pulumi.Input[bool]]
+        """
+        Whether users are required to change their password periodically.
+        """
+        expiration_weeks: NotRequired[pulumi.Input[int]]
+        """
+        The number of weeks after which a user's password expires and they need to replace it.
+        """
+        lock: NotRequired[pulumi.Input[bool]]
+        """
+        Whether the user account should be locked after a specified number of failed login attempts.
+        """
+        lock_attempts: NotRequired[pulumi.Input[int]]
+        """
+        The number of failed login attempts allowed before an account is locked.
+        """
+        lowercase: NotRequired[pulumi.Input[bool]]
+        """
+        Whether passwords must contain at least one lowercase letter.
+        """
+        min_length: NotRequired[pulumi.Input[int]]
+        """
+        The minimum length of the password that users are required to use. The maximum length is always `64`.
+        """
+        non_alphanumeric: NotRequired[pulumi.Input[bool]]
+        """
+        Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        """
+        number: NotRequired[pulumi.Input[bool]]
+        """
+        Whether passwords must contain at least one number.
+        """
+        reuse: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to forbid password reuse when users change their password.
+        """
+        reuse_amount: NotRequired[pulumi.Input[int]]
+        uppercase: NotRequired[pulumi.Input[bool]]
+        """
+        Whether passwords must contain at least one uppercase letter.
+        """
+elif False:
+    ProjectAuthenticationPasswordArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationPasswordArgs:
@@ -5067,6 +6372,13 @@ class ProjectAuthenticationPasswordArgs:
         pulumi.set(self, "uppercase", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationPasswordEmailServiceArgsDict(TypedDict):
+        connector: pulumi.Input[str]
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationPasswordEmailServiceTemplateArgsDict']]]]
+elif False:
+    ProjectAuthenticationPasswordEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationPasswordEmailServiceArgs:
     def __init__(__self__, *,
@@ -5094,6 +6406,18 @@ class ProjectAuthenticationPasswordEmailServiceArgs:
     def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationPasswordEmailServiceTemplateArgs']]]]):
         pulumi.set(self, "templates", value)
 
+
+if not MYPY:
+    class ProjectAuthenticationPasswordEmailServiceTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        subject: pulumi.Input[str]
+        active: NotRequired[pulumi.Input[bool]]
+        html_body: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+        plain_text_body: NotRequired[pulumi.Input[str]]
+        use_plain_text_body: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectAuthenticationPasswordEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationPasswordEmailServiceTemplateArgs:
@@ -5182,6 +6506,16 @@ class ProjectAuthenticationPasswordEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationSsoArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[bool]]
+        merge_users: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to merge existing user accounts with new ones created through SSO authentication.
+        """
+elif False:
+    ProjectAuthenticationSsoArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
@@ -5217,6 +6551,12 @@ class ProjectAuthenticationSsoArgs:
         pulumi.set(self, "merge_users", value)
 
 
+if not MYPY:
+    class ProjectAuthenticationTotpArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectAuthenticationTotpArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectAuthenticationTotpArgs:
     def __init__(__self__, *,
@@ -5233,6 +6573,13 @@ class ProjectAuthenticationTotpArgs:
     def enabled(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enabled", value)
 
+
+if not MYPY:
+    class ProjectAuthorizationArgsDict(TypedDict):
+        permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationPermissionArgsDict']]]]
+        roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationRoleArgsDict']]]]
+elif False:
+    ProjectAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthorizationArgs:
@@ -5262,6 +6609,14 @@ class ProjectAuthorizationArgs:
     def roles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationRoleArgs']]]]):
         pulumi.set(self, "roles", value)
 
+
+if not MYPY:
+    class ProjectAuthorizationPermissionArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        description: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectAuthorizationPermissionArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthorizationPermissionArgs:
@@ -5302,6 +6657,15 @@ class ProjectAuthorizationPermissionArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectAuthorizationRoleArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        description: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+        permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+elif False:
+    ProjectAuthorizationRoleArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthorizationRoleArgs:
@@ -5354,6 +6718,103 @@ class ProjectAuthorizationRoleArgs:
     def permissions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "permissions", value)
 
+
+if not MYPY:
+    class ProjectConnectorsArgsDict(TypedDict):
+        abuseipdbs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAbuseipdbArgsDict']]]]
+        """
+        AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+        """
+        amplitudes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAmplitudeArgsDict']]]]
+        """
+        Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        """
+        audit_webhooks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgsDict']]]]
+        aws_s3s: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3ArgsDict']]]]
+        aws_translates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgsDict']]]]
+        clears: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgsDict']]]]
+        """
+        An identity verification platform that allow customers to digitally verify their identity from anywhere.
+        """
+        datadogs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgsDict']]]]
+        """
+        Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+        """
+        devrev_grows: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgsDict']]]]
+        docebos: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgsDict']]]]
+        """
+        Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+        """
+        fingerprint_descopes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgsDict']]]]
+        fingerprints: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgsDict']]]]
+        """
+        Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+        """
+        forters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgsDict']]]]
+        """
+        Use the Forter connector for account fraud prevention.
+        """
+        google_cloud_translations: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgsDict']]]]
+        hibps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgsDict']]]]
+        """
+        API to check if password appeared previously exposed in data breaches.
+        """
+        http_static_ips: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpStaticIpArgsDict']]]]
+        https: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgsDict']]]]
+        """
+        A general purpose HTTP client
+        """
+        hubspots: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgsDict']]]]
+        """
+        HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        """
+        intercoms: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgsDict']]]]
+        """
+        Intercom is a Conversational Relationship Platform (CRP).
+        """
+        newrelics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicArgsDict']]]]
+        """
+        Use this connector to send audit events and troubleshooting logs to New Relic.
+        """
+        recaptcha_enterprises: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaEnterpriseArgsDict']]]]
+        recaptchas: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaArgsDict']]]]
+        """
+        reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+        """
+        rekognitions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRekognitionArgsDict']]]]
+        """
+        AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+        """
+        salesforces: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceArgsDict']]]]
+        """
+        Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+        """
+        segments: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSegmentArgsDict']]]]
+        """
+        Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        """
+        sendgrids: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSendgridArgsDict']]]]
+        smtps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSmtpArgsDict']]]]
+        sumologics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicArgsDict']]]]
+        """
+        Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+        """
+        telesigns: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTelesignArgsDict']]]]
+        """
+        Telesign Phone number intelligence API provides risk score for phone numbers.
+        """
+        traceables: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTraceableArgsDict']]]]
+        """
+        API security for a cloud-first, API-driven world.
+        """
+        twilio_cores: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioCoreArgsDict']]]]
+        twilio_verifies: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioVerifyArgsDict']]]]
+        veriffs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsVeriffArgsDict']]]]
+        """
+        AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
+        """
+elif False:
+    ProjectConnectorsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsArgs:
@@ -5826,6 +7287,24 @@ class ProjectConnectorsArgs:
         pulumi.set(self, "veriffs", value)
 
 
+if not MYPY:
+    class ProjectConnectorsAbuseipdbArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        The unique AbuseIPDB API key.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsAbuseipdbArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsAbuseipdbArgs:
     def __init__(__self__, *,
@@ -5890,6 +7369,32 @@ class ProjectConnectorsAbuseipdbArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsAmplitudeArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        The Amplitude API Key generated for the Descope service.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        server_url: NotRequired[pulumi.Input[str]]
+        """
+        The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+        """
+        server_zone: NotRequired[pulumi.Input[str]]
+        """
+        `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+        """
+elif False:
+    ProjectConnectorsAmplitudeArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsAmplitudeArgs:
@@ -5987,6 +7492,44 @@ class ProjectConnectorsAmplitudeArgs:
     def server_zone(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "server_zone", value)
 
+
+if not MYPY:
+    class ProjectConnectorsAuditWebhookArgsDict(TypedDict):
+        base_url: pulumi.Input[str]
+        """
+        The base URL to fetch
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        audit_filters: NotRequired[pulumi.Input[str]]
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        authentication: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationArgsDict']]
+        """
+        Authentication Information
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        """
+        The headers to send with the request
+        """
+        hmac_secret: NotRequired[pulumi.Input[str]]
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
+        id: NotRequired[pulumi.Input[str]]
+        insecure: NotRequired[pulumi.Input[bool]]
+        """
+        Will ignore certificate errors raised by the client
+        """
+elif False:
+    ProjectConnectorsAuditWebhookArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookArgs:
@@ -6133,6 +7676,14 @@ class ProjectConnectorsAuditWebhookArgs:
         pulumi.set(self, "insecure", value)
 
 
+if not MYPY:
+    class ProjectConnectorsAuditWebhookAuthenticationArgsDict(TypedDict):
+        api_key: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict']]
+        basic: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict']]
+        bearer_token: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsAuditWebhookAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationArgs:
     def __init__(__self__, *,
@@ -6174,6 +7725,13 @@ class ProjectConnectorsAuditWebhookAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        token: pulumi.Input[str]
+elif False:
+    ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs:
     def __init__(__self__, *,
@@ -6201,6 +7759,13 @@ class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict(TypedDict):
+        password: pulumi.Input[str]
+        username: pulumi.Input[str]
+elif False:
+    ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationBasicArgs:
     def __init__(__self__, *,
@@ -6227,6 +7792,39 @@ class ProjectConnectorsAuditWebhookAuthenticationBasicArgs:
     def username(self, value: pulumi.Input[str]):
         pulumi.set(self, "username", value)
 
+
+if not MYPY:
+    class ProjectConnectorsAwsS3ArgsDict(TypedDict):
+        access_key_id: pulumi.Input[str]
+        """
+        The unique AWS access key ID.
+        """
+        bucket: pulumi.Input[str]
+        """
+        The AWS S3 bucket. This bucket should already exist for the connector to work.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        region: pulumi.Input[str]
+        """
+        The AWS S3 region, e.g. `us-east-1`.
+        """
+        secret_access_key: pulumi.Input[str]
+        """
+        The secret AWS access key.
+        """
+        audit_enabled: NotRequired[pulumi.Input[bool]]
+        audit_filters: NotRequired[pulumi.Input[str]]
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        troubleshoot_log_enabled: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectConnectorsAwsS3ArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsAwsS3Args:
@@ -6374,6 +7972,36 @@ class ProjectConnectorsAwsS3Args:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
+if not MYPY:
+    class ProjectConnectorsAwsTranslateArgsDict(TypedDict):
+        access_key_id: pulumi.Input[str]
+        """
+        AWS access key ID.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        region: pulumi.Input[str]
+        """
+        The AWS region to which this client will send requests. (e.g. us-east-1.)
+        """
+        secret_access_key: pulumi.Input[str]
+        """
+        AWS secret access key.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        session_token: NotRequired[pulumi.Input[str]]
+        """
+        (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        """
+elif False:
+    ProjectConnectorsAwsTranslateArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsAwsTranslateArgs:
     def __init__(__self__, *,
@@ -6485,6 +8113,28 @@ class ProjectConnectorsAwsTranslateArgs:
         pulumi.set(self, "session_token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsClearArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        Your CLEAR API key.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        project_id: pulumi.Input[str]
+        """
+        Your CLEAR project ID.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsClearArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsClearArgs:
     def __init__(__self__, *,
@@ -6564,6 +8214,31 @@ class ProjectConnectorsClearArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsDatadogArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        The unique Datadog organization key.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        audit_enabled: NotRequired[pulumi.Input[bool]]
+        audit_filters: NotRequired[pulumi.Input[str]]
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        site: NotRequired[pulumi.Input[str]]
+        """
+        The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        """
+        troubleshoot_log_enabled: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectConnectorsDatadogArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsDatadogArgs:
@@ -6682,6 +8357,24 @@ class ProjectConnectorsDatadogArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
+if not MYPY:
+    class ProjectConnectorsDevrevGrowArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        Authentication to DevRev APIs requires a personal access token (PAT).
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsDevrevGrowArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsDevrevGrowArgs:
     def __init__(__self__, *,
@@ -6746,6 +8439,40 @@ class ProjectConnectorsDevrevGrowArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsDoceboArgsDict(TypedDict):
+        base_url: pulumi.Input[str]
+        """
+        The Docebo api base url.
+        """
+        client_id: pulumi.Input[str]
+        """
+        The Docebo OAuth 2.0 app client ID.
+        """
+        client_secret: pulumi.Input[str]
+        """
+        The Docebo OAuth 2.0 app client secret.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        password: pulumi.Input[str]
+        """
+        The Docebo user's password.
+        """
+        username: pulumi.Input[str]
+        """
+        The Docebo username.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsDoceboArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsDoceboArgs:
@@ -6871,6 +8598,40 @@ class ProjectConnectorsDoceboArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsFingerprintArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        public_api_key: pulumi.Input[str]
+        """
+        The Fingerprint public API key.
+        """
+        secret_api_key: pulumi.Input[str]
+        """
+        The Fingerprint secret API key.
+        """
+        cloudflare_endpoint_url: NotRequired[pulumi.Input[str]]
+        """
+        The Cloudflare integration Endpoint URL.
+        """
+        cloudflare_script_url: NotRequired[pulumi.Input[str]]
+        """
+        The Cloudflare integration Script URL.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        use_cloudflare_integration: NotRequired[pulumi.Input[bool]]
+        """
+        Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+        """
+elif False:
+    ProjectConnectorsFingerprintArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsFingerprintArgs:
@@ -7000,6 +8761,24 @@ class ProjectConnectorsFingerprintArgs:
         pulumi.set(self, "use_cloudflare_integration", value)
 
 
+if not MYPY:
+    class ProjectConnectorsFingerprintDescopeArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        custom_domain: NotRequired[pulumi.Input[str]]
+        """
+        The custom domain to fetch
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsFingerprintDescopeArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsFingerprintDescopeArgs:
     def __init__(__self__, *,
@@ -7065,6 +8844,40 @@ class ProjectConnectorsFingerprintDescopeArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsForterArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        secret_key: pulumi.Input[str]
+        """
+        The Forter secret key.
+        """
+        site_id: pulumi.Input[str]
+        """
+        The Forter site ID.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        override_ip_address: NotRequired[pulumi.Input[str]]
+        """
+        Override the user IP address.
+        """
+        override_user_email: NotRequired[pulumi.Input[str]]
+        """
+        Override the user email.
+        """
+        overrides: NotRequired[pulumi.Input[bool]]
+        """
+        Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+        """
+elif False:
+    ProjectConnectorsForterArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsForterArgs:
@@ -7194,6 +9007,28 @@ class ProjectConnectorsForterArgs:
         pulumi.set(self, "overrides", value)
 
 
+if not MYPY:
+    class ProjectConnectorsGoogleCloudTranslationArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        project_id: pulumi.Input[str]
+        """
+        The Google Cloud project ID where the Google Cloud Translation is managed.
+        """
+        service_account_json: pulumi.Input[str]
+        """
+        Service Account JSON associated with the current project.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsGoogleCloudTranslationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsGoogleCloudTranslationArgs:
     def __init__(__self__, *,
@@ -7274,6 +9109,20 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHibpArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsHibpArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHibpArgs:
     def __init__(__self__, *,
@@ -7323,6 +9172,44 @@ class ProjectConnectorsHibpArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsHttpArgsDict(TypedDict):
+        base_url: pulumi.Input[str]
+        """
+        The base URL to fetch
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        authentication: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationArgsDict']]
+        """
+        Authentication Information
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        """
+        The headers to send with the request
+        """
+        hmac_secret: NotRequired[pulumi.Input[str]]
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
+        id: NotRequired[pulumi.Input[str]]
+        include_headers_in_context: NotRequired[pulumi.Input[bool]]
+        """
+        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        """
+        insecure: NotRequired[pulumi.Input[bool]]
+        """
+        Will ignore certificate errors raised by the client
+        """
+elif False:
+    ProjectConnectorsHttpArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsHttpArgs:
@@ -7469,6 +9356,14 @@ class ProjectConnectorsHttpArgs:
         pulumi.set(self, "insecure", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpAuthenticationArgsDict(TypedDict):
+        api_key: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationApiKeyArgsDict']]
+        basic: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationBasicArgsDict']]
+        bearer_token: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsHttpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationArgs:
     def __init__(__self__, *,
@@ -7510,6 +9405,13 @@ class ProjectConnectorsHttpAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpAuthenticationApiKeyArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        token: pulumi.Input[str]
+elif False:
+    ProjectConnectorsHttpAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationApiKeyArgs:
     def __init__(__self__, *,
@@ -7537,6 +9439,13 @@ class ProjectConnectorsHttpAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpAuthenticationBasicArgsDict(TypedDict):
+        password: pulumi.Input[str]
+        username: pulumi.Input[str]
+elif False:
+    ProjectConnectorsHttpAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationBasicArgs:
     def __init__(__self__, *,
@@ -7563,6 +9472,44 @@ class ProjectConnectorsHttpAuthenticationBasicArgs:
     def username(self, value: pulumi.Input[str]):
         pulumi.set(self, "username", value)
 
+
+if not MYPY:
+    class ProjectConnectorsHttpStaticIpArgsDict(TypedDict):
+        base_url: pulumi.Input[str]
+        """
+        The base URL to fetch
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        authentication: NotRequired[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationArgsDict']]
+        """
+        Authentication Information
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        """
+        The headers to send with the request
+        """
+        hmac_secret: NotRequired[pulumi.Input[str]]
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
+        id: NotRequired[pulumi.Input[str]]
+        include_headers_in_context: NotRequired[pulumi.Input[bool]]
+        """
+        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        """
+        insecure: NotRequired[pulumi.Input[bool]]
+        """
+        Will ignore certificate errors raised by the client
+        """
+elif False:
+    ProjectConnectorsHttpStaticIpArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsHttpStaticIpArgs:
@@ -7709,6 +9656,14 @@ class ProjectConnectorsHttpStaticIpArgs:
         pulumi.set(self, "insecure", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpStaticIpAuthenticationArgsDict(TypedDict):
+        api_key: NotRequired[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgsDict']]
+        basic: NotRequired[pulumi.Input['ProjectConnectorsHttpStaticIpAuthenticationBasicArgsDict']]
+        bearer_token: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsHttpStaticIpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpStaticIpAuthenticationArgs:
     def __init__(__self__, *,
@@ -7750,6 +9705,13 @@ class ProjectConnectorsHttpStaticIpAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        token: pulumi.Input[str]
+elif False:
+    ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs:
     def __init__(__self__, *,
@@ -7777,6 +9739,13 @@ class ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsHttpStaticIpAuthenticationBasicArgsDict(TypedDict):
+        password: pulumi.Input[str]
+        username: pulumi.Input[str]
+elif False:
+    ProjectConnectorsHttpStaticIpAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsHttpStaticIpAuthenticationBasicArgs:
     def __init__(__self__, *,
@@ -7803,6 +9772,28 @@ class ProjectConnectorsHttpStaticIpAuthenticationBasicArgs:
     def username(self, value: pulumi.Input[str]):
         pulumi.set(self, "username", value)
 
+
+if not MYPY:
+    class ProjectConnectorsHubspotArgsDict(TypedDict):
+        access_token: pulumi.Input[str]
+        """
+        The HubSpot private API access token generated for the Descope service.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        base_url: NotRequired[pulumi.Input[str]]
+        """
+        The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsHubspotArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsHubspotArgs:
@@ -7885,6 +9876,28 @@ class ProjectConnectorsHubspotArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsIntercomArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        token: pulumi.Input[str]
+        """
+        The Intercom access token.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        region: NotRequired[pulumi.Input[str]]
+        """
+        Regional Hosting - US, EU, or AU. default: US
+        """
+elif False:
+    ProjectConnectorsIntercomArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsIntercomArgs:
     def __init__(__self__, *,
@@ -7965,6 +9978,39 @@ class ProjectConnectorsIntercomArgs:
     def region(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "region", value)
 
+
+if not MYPY:
+    class ProjectConnectorsNewrelicArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        Ingest License Key of the account you want to report data to.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        audit_enabled: NotRequired[pulumi.Input[bool]]
+        audit_filters: NotRequired[pulumi.Input[str]]
+        data_center: NotRequired[pulumi.Input[str]]
+        """
+        The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        logs_prefix: NotRequired[pulumi.Input[str]]
+        """
+        Specify a custom prefix for all log fields. The default prefix is `descope.`.
+        """
+        override_logs_prefix: NotRequired[pulumi.Input[bool]]
+        """
+        Enable this option to use a custom prefix for log fields.
+        """
+        troubleshoot_log_enabled: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectConnectorsNewrelicArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsNewrelicArgs:
@@ -8115,6 +10161,28 @@ class ProjectConnectorsNewrelicArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
+if not MYPY:
+    class ProjectConnectorsRecaptchaArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        secret_key: pulumi.Input[str]
+        """
+        The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+        """
+        site_key: pulumi.Input[str]
+        """
+        The site key is used to invoke reCAPTCHA service on your site or mobile application.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsRecaptchaArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsRecaptchaArgs:
     def __init__(__self__, *,
@@ -8194,6 +10262,40 @@ class ProjectConnectorsRecaptchaArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsRecaptchaEnterpriseArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        API key associated with the current project.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        project_id: pulumi.Input[str]
+        """
+        The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+        """
+        site_key: pulumi.Input[str]
+        """
+        The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+        """
+        assessment_score: NotRequired[pulumi.Input[float]]
+        """
+        When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        override_assessment: NotRequired[pulumi.Input[bool]]
+        """
+        Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+        """
+elif False:
+    ProjectConnectorsRecaptchaEnterpriseArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsRecaptchaEnterpriseArgs:
@@ -8322,6 +10424,32 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
         pulumi.set(self, "override_assessment", value)
 
 
+if not MYPY:
+    class ProjectConnectorsRekognitionArgsDict(TypedDict):
+        access_key_id: pulumi.Input[str]
+        """
+        The AWS access key ID
+        """
+        collection_id: pulumi.Input[str]
+        """
+        The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        secret_access_key: pulumi.Input[str]
+        """
+        The AWS secret access key
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsRekognitionArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsRekognitionArgs:
     def __init__(__self__, *,
@@ -8416,6 +10544,36 @@ class ProjectConnectorsRekognitionArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsSalesforceArgsDict(TypedDict):
+        base_url: pulumi.Input[str]
+        """
+        The Salesforce API base URL.
+        """
+        client_id: pulumi.Input[str]
+        """
+        The consumer key of the connected app.
+        """
+        client_secret: pulumi.Input[str]
+        """
+        The consumer secret of the connected app.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        version: pulumi.Input[str]
+        """
+        REST API Version.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSalesforceArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsSalesforceArgs:
@@ -8527,6 +10685,28 @@ class ProjectConnectorsSalesforceArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSegmentArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        write_key: pulumi.Input[str]
+        """
+        The Segment Write Key generated for the Descope service.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        host: NotRequired[pulumi.Input[str]]
+        """
+        The base URL of the Segment API, when using a custom domain in Segment.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSegmentArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSegmentArgs:
     def __init__(__self__, *,
@@ -8608,6 +10788,22 @@ class ProjectConnectorsSegmentArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSendgridArgsDict(TypedDict):
+        authentication: pulumi.Input['ProjectConnectorsSendgridAuthenticationArgsDict']
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        sender: pulumi.Input['ProjectConnectorsSendgridSenderArgsDict']
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSendgridArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSendgridArgs:
     def __init__(__self__, *,
@@ -8680,6 +10876,12 @@ class ProjectConnectorsSendgridArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSendgridAuthenticationArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+elif False:
+    ProjectConnectorsSendgridAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSendgridAuthenticationArgs:
     def __init__(__self__, *,
@@ -8695,6 +10897,13 @@ class ProjectConnectorsSendgridAuthenticationArgs:
     def api_key(self, value: pulumi.Input[str]):
         pulumi.set(self, "api_key", value)
 
+
+if not MYPY:
+    class ProjectConnectorsSendgridSenderArgsDict(TypedDict):
+        email: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSendgridSenderArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsSendgridSenderArgs:
@@ -8723,6 +10932,23 @@ class ProjectConnectorsSendgridSenderArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+
+if not MYPY:
+    class ProjectConnectorsSmtpArgsDict(TypedDict):
+        authentication: pulumi.Input['ProjectConnectorsSmtpAuthenticationArgsDict']
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        sender: pulumi.Input['ProjectConnectorsSmtpSenderArgsDict']
+        server: pulumi.Input['ProjectConnectorsSmtpServerArgsDict']
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSmtpArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsSmtpArgs:
@@ -8807,6 +11033,14 @@ class ProjectConnectorsSmtpArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSmtpAuthenticationArgsDict(TypedDict):
+        password: pulumi.Input[str]
+        username: pulumi.Input[str]
+        method: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSmtpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSmtpAuthenticationArgs:
     def __init__(__self__, *,
@@ -8846,6 +11080,13 @@ class ProjectConnectorsSmtpAuthenticationArgs:
         pulumi.set(self, "method", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSmtpSenderArgsDict(TypedDict):
+        email: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsSmtpSenderArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSmtpSenderArgs:
     def __init__(__self__, *,
@@ -8874,6 +11115,13 @@ class ProjectConnectorsSmtpSenderArgs:
         pulumi.set(self, "name", value)
 
 
+if not MYPY:
+    class ProjectConnectorsSmtpServerArgsDict(TypedDict):
+        host: pulumi.Input[str]
+        port: NotRequired[pulumi.Input[int]]
+elif False:
+    ProjectConnectorsSmtpServerArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsSmtpServerArgs:
     def __init__(__self__, *,
@@ -8901,6 +11149,27 @@ class ProjectConnectorsSmtpServerArgs:
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
 
+
+if not MYPY:
+    class ProjectConnectorsSumologicArgsDict(TypedDict):
+        http_source_url: pulumi.Input[str]
+        """
+        The URL associated with an HTTP Hosted collector
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        audit_enabled: NotRequired[pulumi.Input[bool]]
+        audit_filters: NotRequired[pulumi.Input[str]]
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        troubleshoot_log_enabled: NotRequired[pulumi.Input[bool]]
+elif False:
+    ProjectConnectorsSumologicArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsSumologicArgs:
@@ -9003,6 +11272,28 @@ class ProjectConnectorsSumologicArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
+if not MYPY:
+    class ProjectConnectorsTelesignArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        The unique Telesign API key
+        """
+        customer_id: pulumi.Input[str]
+        """
+        The unique Telesign account Customer ID
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTelesignArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsTelesignArgs:
     def __init__(__self__, *,
@@ -9082,6 +11373,28 @@ class ProjectConnectorsTelesignArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsTraceableArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        secret_key: pulumi.Input[str]
+        """
+        The Traceable secret key.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        eu_region: NotRequired[pulumi.Input[bool]]
+        """
+        EU(Europe) Region deployment of Traceable platform.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTraceableArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsTraceableArgs:
@@ -9163,6 +11476,23 @@ class ProjectConnectorsTraceableArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectConnectorsTwilioCoreArgsDict(TypedDict):
+        account_sid: pulumi.Input[str]
+        authentication: pulumi.Input['ProjectConnectorsTwilioCoreAuthenticationArgsDict']
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        senders: pulumi.Input['ProjectConnectorsTwilioCoreSendersArgsDict']
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTwilioCoreArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreArgs:
@@ -9247,6 +11577,14 @@ class ProjectConnectorsTwilioCoreArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectConnectorsTwilioCoreAuthenticationArgsDict(TypedDict):
+        api_key: NotRequired[pulumi.Input[str]]
+        api_secret: NotRequired[pulumi.Input[str]]
+        auth_token: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTwilioCoreAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreAuthenticationArgs:
     def __init__(__self__, *,
@@ -9288,6 +11626,13 @@ class ProjectConnectorsTwilioCoreAuthenticationArgs:
         pulumi.set(self, "auth_token", value)
 
 
+if not MYPY:
+    class ProjectConnectorsTwilioCoreSendersArgsDict(TypedDict):
+        sms: pulumi.Input['ProjectConnectorsTwilioCoreSendersSmsArgsDict']
+        voice: NotRequired[pulumi.Input['ProjectConnectorsTwilioCoreSendersVoiceArgsDict']]
+elif False:
+    ProjectConnectorsTwilioCoreSendersArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersArgs:
     def __init__(__self__, *,
@@ -9315,6 +11660,13 @@ class ProjectConnectorsTwilioCoreSendersArgs:
     def voice(self, value: Optional[pulumi.Input['ProjectConnectorsTwilioCoreSendersVoiceArgs']]):
         pulumi.set(self, "voice", value)
 
+
+if not MYPY:
+    class ProjectConnectorsTwilioCoreSendersSmsArgsDict(TypedDict):
+        messaging_service_sid: NotRequired[pulumi.Input[str]]
+        phone_number: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTwilioCoreSendersSmsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersSmsArgs:
@@ -9345,6 +11697,12 @@ class ProjectConnectorsTwilioCoreSendersSmsArgs:
         pulumi.set(self, "phone_number", value)
 
 
+if not MYPY:
+    class ProjectConnectorsTwilioCoreSendersVoiceArgsDict(TypedDict):
+        phone_number: pulumi.Input[str]
+elif False:
+    ProjectConnectorsTwilioCoreSendersVoiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersVoiceArgs:
     def __init__(__self__, *,
@@ -9360,6 +11718,24 @@ class ProjectConnectorsTwilioCoreSendersVoiceArgs:
     def phone_number(self, value: pulumi.Input[str]):
         pulumi.set(self, "phone_number", value)
 
+
+if not MYPY:
+    class ProjectConnectorsTwilioVerifyArgsDict(TypedDict):
+        account_sid: pulumi.Input[str]
+        authentication: pulumi.Input['ProjectConnectorsTwilioVerifyAuthenticationArgsDict']
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        service_sid: pulumi.Input[str]
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+        sender: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTwilioVerifyArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsTwilioVerifyArgs:
@@ -9456,6 +11832,14 @@ class ProjectConnectorsTwilioVerifyArgs:
         pulumi.set(self, "sender", value)
 
 
+if not MYPY:
+    class ProjectConnectorsTwilioVerifyAuthenticationArgsDict(TypedDict):
+        api_key: NotRequired[pulumi.Input[str]]
+        api_secret: NotRequired[pulumi.Input[str]]
+        auth_token: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsTwilioVerifyAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectConnectorsTwilioVerifyAuthenticationArgs:
     def __init__(__self__, *,
@@ -9496,6 +11880,32 @@ class ProjectConnectorsTwilioVerifyAuthenticationArgs:
     def auth_token(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "auth_token", value)
 
+
+if not MYPY:
+    class ProjectConnectorsVeriffArgsDict(TypedDict):
+        api_key: pulumi.Input[str]
+        """
+        The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        """
+        name: pulumi.Input[str]
+        """
+        A custom name for your connector.
+        """
+        secret_key: pulumi.Input[str]
+        """
+        The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+        """
+        base_url: NotRequired[pulumi.Input[str]]
+        """
+        The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+        """
+        description: NotRequired[pulumi.Input[str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectConnectorsVeriffArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsVeriffArgs:
@@ -9593,6 +12003,12 @@ class ProjectConnectorsVeriffArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectFlowsArgsDict(TypedDict):
+        data: pulumi.Input[str]
+elif False:
+    ProjectFlowsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectFlowsArgs:
     def __init__(__self__, *,
@@ -9608,6 +12024,13 @@ class ProjectFlowsArgs:
     def data(self, value: pulumi.Input[str]):
         pulumi.set(self, "data", value)
 
+
+if not MYPY:
+    class ProjectJwtTemplatesArgsDict(TypedDict):
+        access_key_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgsDict']]]]
+        user_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgsDict']]]]
+elif False:
+    ProjectJwtTemplatesArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectJwtTemplatesArgs:
@@ -9637,6 +12060,17 @@ class ProjectJwtTemplatesArgs:
     def user_templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgs']]]]):
         pulumi.set(self, "user_templates", value)
 
+
+if not MYPY:
+    class ProjectJwtTemplatesAccessKeyTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        template: pulumi.Input[str]
+        auth_schema: NotRequired[pulumi.Input[str]]
+        conformance_issuer: NotRequired[pulumi.Input[bool]]
+        description: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectJwtTemplatesAccessKeyTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectJwtTemplatesAccessKeyTemplateArgs:
@@ -9713,6 +12147,17 @@ class ProjectJwtTemplatesAccessKeyTemplateArgs:
         pulumi.set(self, "id", value)
 
 
+if not MYPY:
+    class ProjectJwtTemplatesUserTemplateArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        template: pulumi.Input[str]
+        auth_schema: NotRequired[pulumi.Input[str]]
+        conformance_issuer: NotRequired[pulumi.Input[bool]]
+        description: NotRequired[pulumi.Input[str]]
+        id: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectJwtTemplatesUserTemplateArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProjectJwtTemplatesUserTemplateArgs:
     def __init__(__self__, *,
@@ -9787,6 +12232,18 @@ class ProjectJwtTemplatesUserTemplateArgs:
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
 
+
+if not MYPY:
+    class ProjectProjectSettingsArgsDict(TypedDict):
+        access_key_jwt_template: NotRequired[pulumi.Input[str]]
+        cookie_policy: NotRequired[pulumi.Input[str]]
+        domain: NotRequired[pulumi.Input[str]]
+        enable_inactivity: NotRequired[pulumi.Input[bool]]
+        inactivity_time: NotRequired[pulumi.Input[str]]
+        refresh_token_expiration: NotRequired[pulumi.Input[str]]
+        user_jwt_template: NotRequired[pulumi.Input[str]]
+elif False:
+    ProjectProjectSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectProjectSettingsArgs:
@@ -9876,6 +12333,12 @@ class ProjectProjectSettingsArgs:
     def user_jwt_template(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "user_jwt_template", value)
 
+
+if not MYPY:
+    class ProjectStylesArgsDict(TypedDict):
+        data: pulumi.Input[str]
+elif False:
+    ProjectStylesArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectStylesArgs:
