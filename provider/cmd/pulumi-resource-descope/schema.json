@@ -111,31 +111,31 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Claims associated with JWT tokens, typically used for user information.\n"
+                    "description": "A list of supported claims. e.g. `sub`, `email`, `exp`.\n"
                 },
                 "description": {
                     "type": "string",
-                    "description": "A brief description of the application.\n"
+                    "description": "A description for the OIDC application.\n"
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Indicates whether the resource or functionality is disabled.\n"
+                    "description": "Whether the application should be enabled or disabled.\n"
                 },
                 "id": {
                     "type": "string",
-                    "description": "An optional identifier for the application.\n"
+                    "description": "An optional identifier for the OIDC application.\n"
                 },
                 "loginPageUrl": {
                     "type": "string",
-                    "description": "The URL of the custom login page for the application.\n"
+                    "description": "The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).\n"
                 },
                 "logo": {
                     "type": "string",
-                    "description": "The URL of the logo associated with the application.\n"
+                    "description": "A logo for the OIDC application. Should be a hosted image URL.\n"
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of the application.\n"
+                    "description": "A name for the OIDC application.\n"
                 }
             },
             "type": "object",
@@ -162,53 +162,59 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.\n"
                 },
                 "attributeMappings": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationAttributeMapping:ProjectApplicationsSamlApplicationAttributeMapping"
                     },
-                    "description": "Map user attributes from the third party identity provider to custom attributes in Descope.\n"
+                    "description": "The `AttributeMapping` object. Read the description below.\n"
                 },
                 "defaultRelayState": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.\n"
                 },
                 "description": {
                     "type": "string",
-                    "description": "A brief description of the application.\n"
+                    "description": "A description for the SAML application.\n"
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Indicates whether the application is disabled.\n"
+                    "description": "Whether the application should be enabled or disabled.\n"
                 },
                 "dynamicConfiguration": {
-                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration"
+                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration",
+                    "description": "The `DynamicConfiguration` object. Read the description below.\n"
                 },
                 "id": {
                     "type": "string",
-                    "description": "An optional identifier for the application.\n"
+                    "description": "An optional identifier for the SAML application.\n"
                 },
                 "loginPageUrl": {
                     "type": "string",
-                    "description": "The URL of the custom login page for the application.\n"
+                    "description": "The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).\n"
                 },
                 "logo": {
                     "type": "string",
-                    "description": "The URL of the logo associated with the application.\n"
+                    "description": "A logo for the SAML application. Should be a hosted image URL.\n"
                 },
                 "manualConfiguration": {
-                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration"
+                    "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration",
+                    "description": "The `ManualConfiguration` object. Read the description below.\n"
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of the application.\n"
+                    "description": "A name for the SAML application.\n"
                 },
                 "subjectNameIdFormat": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The subject name id format. Choose one of \"\", \"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\", \"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\", \"urn:oasis:names:tc:SAML:2.0:nameid-format:persistent\", \"urn:oasis:names:tc:SAML:2.0:nameid-format:transient\". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).\n"
                 },
                 "subjectNameIdType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The subject name id type. Choose one of \"\", \"email\", \"phone\". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).\n"
                 }
             },
             "type": "object",
@@ -239,11 +245,11 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The name of the user attribute in the third party identity provider.\n"
+                    "description": "The name of the attribute.\n"
                 },
                 "value": {
                     "type": "string",
-                    "description": "The name of the user custom attribute in Descope.\n"
+                    "description": "The value of the attribute.\n"
                 }
             },
             "type": "object",
@@ -255,7 +261,8 @@
         "descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration": {
             "properties": {
                 "metadataUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The metadata URL when retrieving the connection details dynamically.\n"
                 }
             },
             "type": "object",
@@ -266,13 +273,16 @@
         "descope:index/ProjectApplicationsSamlApplicationManualConfiguration:ProjectApplicationsSamlApplicationManualConfiguration": {
             "properties": {
                 "acsUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Enter the `ACS URL` from the SP.\n"
                 },
                 "certificate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Enter the `Certificate` from the SP.\n"
                 },
                 "entityId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Enter the `Entity Id` from the SP.\n"
                 }
             },
             "type": "object",
@@ -289,14 +299,14 @@
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAttributesTenant:ProjectAttributesTenant"
                     },
-                    "description": "Custom attributes to store additional details about your tenants.\n"
+                    "description": "A list of `TenantAttribute`. Read the description below.\n"
                 },
                 "users": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAttributesUser:ProjectAttributesUser"
                     },
-                    "description": "Custom attributes to store additional details about your users.\n"
+                    "description": "A list of `UserAttribute`. Read the description below.\n"
                 }
             },
             "type": "object",
@@ -313,18 +323,18 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The name of the tenant attribute.\n"
+                    "description": "The name of the attribute.\n"
                 },
                 "selectOptions": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings to define the set of options for select attributes.\n"
+                    "description": "When the attribute type is \"multiselect\". A list of options to chose from.\n"
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.\n"
+                    "description": "The type of the attribute. Choose one of \"string\", \"number\", \"boolean\", \"singleselect\", \"multiselect\", \"date\".\n"
                 }
             },
             "type": "object",
@@ -346,22 +356,22 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The name of the user attribute.\n"
+                    "description": "The name of the attribute.\n"
                 },
                 "selectOptions": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of strings to define the set of options for select attributes.\n"
+                    "description": "When the attribute type is \"multiselect\". A list of options to chose from.\n"
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.\n"
+                    "description": "The type of the attribute. Choose one of \"string\", \"number\", \"boolean\", \"singleselect\", \"multiselect\", \"date\".\n"
                 },
                 "widgetAuthorization": {
                     "$ref": "#/types/descope:index/ProjectAttributesUserWidgetAuthorization:ProjectAttributesUserWidgetAuthorization",
-                    "description": "When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.\n"
+                    "description": "The `UserAttributeWidgetAuthorization` object. Read the description below.\n"
                 }
             },
             "type": "object",
@@ -387,14 +397,14 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Editing the attribute value in widgets will be restricted to users with the specified permissions.\n"
+                    "description": "A list of permissions by name to set editing permissions to the attribute in widgets. e.g \"SSO Admin\".\n"
                 },
                 "viewPermissions": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "Viewing the attribute value in widgets will be restricted to users with the specified permissions.\n"
+                    "description": "A list of permissions by name to set viewing permissions to the attribute in widgets. e.g \"SSO Admin\".\n"
                 }
             },
             "type": "object",
@@ -465,41 +475,36 @@
         },
         "descope:index/ProjectAuthenticationEmbeddedLink:ProjectAuthenticationEmbeddedLink": {
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "expirationTime": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "The amount of time that the embedded link will be valid for.\n"
-                },
-                "expirationTimeUnit": {
-                    "type": "string"
                 }
             },
             "type": "object",
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "enabled",
-                        "expirationTime",
-                        "expirationTimeUnit"
+                        "disabled",
+                        "expirationTime"
                     ]
                 }
             }
         },
         "descope:index/ProjectAuthenticationEnchantedLink:ProjectAuthenticationEnchantedLink": {
             "properties": {
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLinkEmailService:ProjectAuthenticationEnchantedLinkEmailService",
                     "description": "Settings related to sending emails as part of the enchanted link authentication.\n"
                 },
-                "enabled": {
-                    "type": "boolean"
-                },
                 "expirationTime": {
-                    "type": "integer"
-                },
-                "expirationTimeUnit": {
                     "type": "string"
                 },
                 "redirectUrl": {
@@ -511,10 +516,9 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "disabled",
                         "emailService",
-                        "enabled",
                         "expirationTime",
-                        "expirationTimeUnit",
                         "redirectUrl"
                     ]
                 }
@@ -590,17 +594,15 @@
         },
         "descope:index/ProjectAuthenticationMagicLink:ProjectAuthenticationMagicLink": {
             "properties": {
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkEmailService:ProjectAuthenticationMagicLinkEmailService",
                     "description": "Settings related to sending emails as part of the magic link authentication.\n"
                 },
-                "enabled": {
-                    "type": "boolean"
-                },
                 "expirationTime": {
-                    "type": "integer"
-                },
-                "expirationTimeUnit": {
                     "type": "string"
                 },
                 "redirectUrl": {
@@ -616,10 +618,9 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "disabled",
                         "emailService",
-                        "enabled",
                         "expirationTime",
-                        "expirationTimeUnit",
                         "redirectUrl",
                         "textService"
                     ]
@@ -760,7 +761,8 @@
                     "description": "Custom OAuth providers configured for this project.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "system": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystem:ProjectAuthenticationOauthSystem",
@@ -780,6 +782,13 @@
         },
         "descope:index/ProjectAuthenticationOauthCustom:ProjectAuthenticationOauthCustom": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -804,11 +813,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -856,13 +862,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -953,6 +959,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemApple:ProjectAuthenticationOauthSystemApple": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -977,11 +990,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1029,13 +1039,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1070,6 +1080,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemDiscord:ProjectAuthenticationOauthSystemDiscord": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1094,11 +1111,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1146,13 +1160,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1187,6 +1201,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemFacebook:ProjectAuthenticationOauthSystemFacebook": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1211,11 +1232,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1263,13 +1281,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1304,6 +1322,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemGithub:ProjectAuthenticationOauthSystemGithub": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1328,11 +1353,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1380,13 +1402,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1421,6 +1443,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemGitlab:ProjectAuthenticationOauthSystemGitlab": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1445,11 +1474,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1497,13 +1523,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1538,6 +1564,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemGoogle:ProjectAuthenticationOauthSystemGoogle": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1562,11 +1595,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1614,13 +1644,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1655,6 +1685,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemLinkedin:ProjectAuthenticationOauthSystemLinkedin": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1679,11 +1716,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1731,13 +1765,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1772,6 +1806,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemMicrosoft:ProjectAuthenticationOauthSystemMicrosoft": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1796,11 +1837,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1848,13 +1886,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -1889,6 +1927,13 @@
         },
         "descope:index/ProjectAuthenticationOauthSystemSlack:ProjectAuthenticationOauthSystemSlack": {
             "properties": {
+                "allowedGrantTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1913,11 +1958,8 @@
                     "description": "A brief description of the OAuth provider.\n"
                 },
                 "disabled": {
-                    "type": "boolean"
-                },
-                "grantType": {
-                    "type": "string",
-                    "description": "The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.\n"
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string"
@@ -1965,13 +2007,13 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowedGrantTypes",
                         "authorizationEndpoint",
                         "claimMapping",
                         "clientId",
                         "clientSecret",
                         "description",
                         "disabled",
-                        "grantType",
                         "issuer",
                         "jwksEndpoint",
                         "logo",
@@ -2006,6 +2048,10 @@
         },
         "descope:index/ProjectAuthenticationOtp:ProjectAuthenticationOtp": {
             "properties": {
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                },
                 "domain": {
                     "type": "string",
                     "description": "The domain to embed in OTP messages.\n"
@@ -2014,15 +2060,9 @@
                     "$ref": "#/types/descope:index/ProjectAuthenticationOtpEmailService:ProjectAuthenticationOtpEmailService",
                     "description": "Settings related to sending emails with OTP codes.\n"
                 },
-                "enabled": {
-                    "type": "boolean"
-                },
                 "expirationTime": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "The amount of time that an OTP code will be valid for.\n"
-                },
-                "expirationTimeUnit": {
-                    "type": "string"
                 },
                 "textService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOtpTextService:ProjectAuthenticationOtpTextService",
@@ -2037,11 +2077,10 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "disabled",
                         "domain",
                         "emailService",
-                        "enabled",
                         "expirationTime",
-                        "expirationTimeUnit",
                         "textService",
                         "voiceService"
                     ]
@@ -2230,8 +2269,9 @@
         },
         "descope:index/ProjectAuthenticationPasskeys:ProjectAuthenticationPasskeys": {
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "topLevelDomain": {
                     "type": "string",
@@ -2242,7 +2282,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "enabled",
+                        "disabled",
                         "topLevelDomain"
                     ]
                 }
@@ -2250,12 +2290,13 @@
         },
         "descope:index/ProjectAuthenticationPassword:ProjectAuthenticationPassword": {
             "properties": {
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationPasswordEmailService:ProjectAuthenticationPasswordEmailService",
                     "description": "Settings related to sending password reset emails as part of the password feature.\n"
-                },
-                "enabled": {
-                    "type": "boolean"
                 },
                 "expiration": {
                     "type": "boolean",
@@ -2305,8 +2346,8 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "disabled",
                         "emailService",
-                        "enabled",
                         "expiration",
                         "expirationWeeks",
                         "lock",
@@ -2392,8 +2433,9 @@
         },
         "descope:index/ProjectAuthenticationSso:ProjectAuthenticationSso": {
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "mergeUsers": {
                     "type": "boolean",
@@ -2404,7 +2446,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "enabled",
+                        "disabled",
                         "mergeUsers"
                     ]
                 }
@@ -2412,15 +2454,16 @@
         },
         "descope:index/ProjectAuthenticationTotp:ProjectAuthenticationTotp": {
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "disabled": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 }
             },
             "type": "object",
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "enabled"
+                        "disabled"
                     ]
                 }
             }
@@ -2431,13 +2474,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAuthorizationPermission:ProjectAuthorizationPermission"
-                    }
+                    },
+                    "description": "A list of `Permission` objects.\n"
                 },
                 "roles": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectAuthorizationRole:ProjectAuthorizationRole"
-                    }
+                    },
+                    "description": "A list of `Role` objects.\n"
                 }
             },
             "type": "object",
@@ -2453,13 +2498,15 @@
         "descope:index/ProjectAuthorizationPermission:ProjectAuthorizationPermission": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description for the permission.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A name for the permission.\n"
                 }
             },
             "type": "object",
@@ -2479,19 +2526,22 @@
         "descope:index/ProjectAuthorizationRole:ProjectAuthorizationRole": {
             "properties": {
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A description for the role.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A name for the role.\n"
                 },
                 "permissions": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of permissions by name to be included in the role.\n"
                 }
             },
             "type": "object",
@@ -2603,12 +2653,6 @@
                     },
                     "description": "API to check if password appeared previously exposed in data breaches.\n"
                 },
-                "httpStaticIps": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIp:ProjectConnectorsHttpStaticIp"
-                    }
-                },
                 "https": {
                     "type": "array",
                     "items": {
@@ -2629,6 +2673,20 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsIntercom:ProjectConnectorsIntercom"
                     },
                     "description": "Intercom is a Conversational Relationship Platform (CRP).\n"
+                },
+                "lokalises": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsLokalise:ProjectConnectorsLokalise"
+                    },
+                    "description": "Localize the language of your login and user journey screens with the Lokalise connector.\n"
+                },
+                "mparticles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsMparticle:ProjectConnectorsMparticle"
+                    },
+                    "description": "Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.\n"
                 },
                 "newrelics": {
                     "type": "array",
@@ -2677,6 +2735,13 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsSendgrid:ProjectConnectorsSendgrid"
                     }
                 },
+                "smartlings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSmartling:ProjectConnectorsSmartling"
+                    },
+                    "description": "Localize the language of your login and user journey screens with the Smartling connector.\n"
+                },
                 "smtps": {
                     "type": "array",
                     "items": {
@@ -2715,13 +2780,6 @@
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsTwilioVerify:ProjectConnectorsTwilioVerify"
                     }
-                },
-                "veriffs": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/descope:index/ProjectConnectorsVeriff:ProjectConnectorsVeriff"
-                    },
-                    "description": "AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.\n"
                 }
             },
             "type": "object",
@@ -2742,10 +2800,11 @@
                         "forters",
                         "googleCloudTranslations",
                         "hibps",
-                        "httpStaticIps",
                         "https",
                         "hubspots",
                         "intercoms",
+                        "lokalises",
+                        "mparticles",
                         "newrelics",
                         "recaptchaEnterprises",
                         "recaptchas",
@@ -2753,13 +2812,13 @@
                         "salesforces",
                         "segments",
                         "sendgrids",
+                        "smartlings",
                         "smtps",
                         "sumologics",
                         "telesigns",
                         "traceables",
                         "twilioCores",
-                        "twilioVerifies",
-                        "veriffs"
+                        "twilioVerifies"
                     ]
                 }
             }
@@ -3603,125 +3662,6 @@
                 "username"
             ]
         },
-        "descope:index/ProjectConnectorsHttpStaticIp:ProjectConnectorsHttpStaticIp": {
-            "properties": {
-                "authentication": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication",
-                    "description": "Authentication Information\n"
-                },
-                "baseUrl": {
-                    "type": "string",
-                    "description": "The base URL to fetch\n"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "A description of what your connector is used for.\n"
-                },
-                "headers": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "The headers to send with the request\n"
-                },
-                "hmacSecret": {
-                    "type": "string",
-                    "description": "HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature\n",
-                    "secret": true
-                },
-                "id": {
-                    "type": "string"
-                },
-                "includeHeadersInContext": {
-                    "type": "boolean",
-                    "description": "The connector response context will also include the headers. The context will have a \"body\" attribute and a \"headers\" attribute. See more details in the help guide\n"
-                },
-                "insecure": {
-                    "type": "boolean",
-                    "description": "Will ignore certificate errors raised by the client\n"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "A custom name for your connector.\n"
-                }
-            },
-            "type": "object",
-            "required": [
-                "baseUrl",
-                "name"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "authentication",
-                        "baseUrl",
-                        "description",
-                        "headers",
-                        "hmacSecret",
-                        "id",
-                        "includeHeadersInContext",
-                        "insecure",
-                        "name"
-                    ]
-                }
-            }
-        },
-        "descope:index/ProjectConnectorsHttpStaticIpAuthentication:ProjectConnectorsHttpStaticIpAuthentication": {
-            "properties": {
-                "apiKey": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthenticationApiKey:ProjectConnectorsHttpStaticIpAuthenticationApiKey"
-                },
-                "basic": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsHttpStaticIpAuthenticationBasic:ProjectConnectorsHttpStaticIpAuthenticationBasic"
-                },
-                "bearerToken": {
-                    "type": "string",
-                    "secret": true
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "apiKey",
-                        "basic",
-                        "bearerToken"
-                    ]
-                }
-            }
-        },
-        "descope:index/ProjectConnectorsHttpStaticIpAuthenticationApiKey:ProjectConnectorsHttpStaticIpAuthenticationApiKey": {
-            "properties": {
-                "key": {
-                    "type": "string"
-                },
-                "token": {
-                    "type": "string",
-                    "secret": true
-                }
-            },
-            "type": "object",
-            "required": [
-                "key",
-                "token"
-            ]
-        },
-        "descope:index/ProjectConnectorsHttpStaticIpAuthenticationBasic:ProjectConnectorsHttpStaticIpAuthenticationBasic": {
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "secret": true
-                },
-                "username": {
-                    "type": "string"
-                }
-            },
-            "type": "object",
-            "required": [
-                "password",
-                "username"
-            ]
-        },
         "descope:index/ProjectConnectorsHubspot:ProjectConnectorsHubspot": {
             "properties": {
                 "accessToken": {
@@ -3798,6 +3738,109 @@
                         "name",
                         "region",
                         "token"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsLokalise:ProjectConnectorsLokalise": {
+            "properties": {
+                "apiToken": {
+                    "type": "string",
+                    "description": "Lokalise API token.\n",
+                    "secret": true
+                },
+                "cardId": {
+                    "type": "string",
+                    "description": "(Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Lokalise project ID.\n"
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "Lokalise team ID. If not provided, the oldest available team will be used.\n"
+                },
+                "translationProvider": {
+                    "type": "string",
+                    "description": "The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiToken",
+                "name",
+                "projectId"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "apiToken",
+                        "cardId",
+                        "description",
+                        "id",
+                        "name",
+                        "projectId",
+                        "teamId",
+                        "translationProvider"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsMparticle:ProjectConnectorsMparticle": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "The mParticle Server to Server Key generated for the Descope service.\n",
+                    "secret": true
+                },
+                "apiSecret": {
+                    "type": "string",
+                    "description": "The mParticle Server to Server Secret generated for the Descope service.\n",
+                    "secret": true
+                },
+                "baseUrl": {
+                    "type": "string",
+                    "description": "The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiSecret",
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "apiKey",
+                        "apiSecret",
+                        "baseUrl",
+                        "description",
+                        "id",
+                        "name"
                     ]
                 }
             }
@@ -4170,6 +4213,53 @@
                     "requiredOutputs": [
                         "email",
                         "name"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsSmartling:ProjectConnectorsSmartling": {
+            "properties": {
+                "accountUid": {
+                    "type": "string",
+                    "description": "The account UID for the Smartling account.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "userIdentifier": {
+                    "type": "string",
+                    "description": "The user identifier for the Smartling account.\n"
+                },
+                "userSecret": {
+                    "type": "string",
+                    "description": "The user secret for the Smartling account.\n",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "accountUid",
+                "name",
+                "userIdentifier",
+                "userSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "accountUid",
+                        "description",
+                        "id",
+                        "name",
+                        "userIdentifier",
+                        "userSecret"
                     ]
                 }
             }
@@ -4611,52 +4701,6 @@
                 }
             }
         },
-        "descope:index/ProjectConnectorsVeriff:ProjectConnectorsVeriff": {
-            "properties": {
-                "apiKey": {
-                    "type": "string",
-                    "description": "The Veriff Public API Key, you can find under Veriff Station - Integrations.\n"
-                },
-                "baseUrl": {
-                    "type": "string",
-                    "description": "The base URL of the Veriff API, default value is https://stationapi.veriff.com.\n"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "A description of what your connector is used for.\n"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "A custom name for your connector.\n"
-                },
-                "secretKey": {
-                    "type": "string",
-                    "description": "The Veriff Shared secret key, you can find under Veriff Station - Integrations.\n",
-                    "secret": true
-                }
-            },
-            "type": "object",
-            "required": [
-                "apiKey",
-                "name",
-                "secretKey"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "apiKey",
-                        "baseUrl",
-                        "description",
-                        "id",
-                        "name",
-                        "secretKey"
-                    ]
-                }
-            }
-        },
         "descope:index/ProjectFlows:ProjectFlows": {
             "properties": {
                 "data": {
@@ -4674,13 +4718,15 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectJwtTemplatesAccessKeyTemplate:ProjectJwtTemplatesAccessKeyTemplate"
-                    }
+                    },
+                    "description": "A list of `Access Key` type JWT Templates.\n"
                 },
                 "userTemplates": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectJwtTemplatesUserTemplate:ProjectJwtTemplatesUserTemplate"
-                    }
+                    },
+                    "description": "A list of `User` type JWT Templates.\n"
                 }
             },
             "type": "object",
@@ -4696,19 +4742,22 @@
         "descope:index/ProjectJwtTemplatesAccessKeyTemplate:ProjectJwtTemplatesAccessKeyTemplate": {
             "properties": {
                 "authSchema": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The authorization claims format - \"default\", \"tenantOnly\" or \"none\". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the JWT Template.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the JWT Template.\n"
                 },
                 "template": {
                     "type": "string"
@@ -4735,19 +4784,22 @@
         "descope:index/ProjectJwtTemplatesUserTemplate:ProjectJwtTemplatesUserTemplate": {
             "properties": {
                 "authSchema": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The authorization claims format - \"default\", \"tenantOnly\" or \"none\". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the JWT Template.\n"
                 },
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the JWT Template.\n"
                 },
                 "template": {
                     "type": "string"
@@ -4774,25 +4826,72 @@
         "descope:index/ProjectProjectSettings:ProjectProjectSettings": {
             "properties": {
                 "accessKeyJwtTemplate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the access key JWT Template.\n"
+                },
+                "accessKeySessionTokenExpiration": {
+                    "type": "string",
+                    "description": "The expiry time for access key session tokens. Use values such as \"10 minutes\", \"4 hours\", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.\n"
+                },
+                "approvedDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.\n"
+                },
+                "cookieDomain": {
+                    "type": "string",
+                    "description": "The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
                 "cookiePolicy": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Use \"strict\", \"lax\" or \"none\". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
                 "domain": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "This attribute has been renamed to `cookie_domain`.\n",
+                    "deprecationMessage": "The domain attribute has been renamed, set the cookie_domain attribute instead. This attribute will be removed in the next major version of the provider."
                 },
                 "enableInactivity": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).\n"
                 },
                 "inactivityTime": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The session inactivity time. Use values such as \"15 minutes\", \"1 hour\", etc. The minimum value is \"10 minutes\".\n"
                 },
                 "refreshTokenExpiration": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The expiry time for the refresh token, after which the user must log in again. Use values such as \"4 weeks\", \"14 days\", etc. The minimum value is \"3 minutes\".\n"
+                },
+                "refreshTokenRotation": {
+                    "type": "boolean",
+                    "description": "Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.\n"
+                },
+                "sessionTokenExpiration": {
+                    "type": "string",
+                    "description": "The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.\n"
+                },
+                "stepUpTokenExpiration": {
+                    "type": "string",
+                    "description": "The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.\n"
+                },
+                "testUsersLoginidRegexp": {
+                    "type": "string",
+                    "description": "Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.\n"
+                },
+                "tokenResponseMethod": {
+                    "type": "string",
+                    "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
+                },
+                "trustedDeviceTokenExpiration": {
+                    "type": "string",
+                    "description": "The expiry time for the trusted device token. The minimum value is \"3 minutes\".\n"
                 },
                 "userJwtTemplate": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the user JWT Template.\n"
                 }
             },
             "type": "object",
@@ -4800,11 +4899,20 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "accessKeyJwtTemplate",
+                        "accessKeySessionTokenExpiration",
+                        "approvedDomains",
+                        "cookieDomain",
                         "cookiePolicy",
                         "domain",
                         "enableInactivity",
                         "inactivityTime",
                         "refreshTokenExpiration",
+                        "refreshTokenRotation",
+                        "sessionTokenExpiration",
+                        "stepUpTokenExpiration",
+                        "testUsersLoginidRegexp",
+                        "tokenResponseMethod",
+                        "trustedDeviceTokenExpiration",
                         "userJwtTemplate"
                     ]
                 }
@@ -4880,7 +4988,8 @@
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/types/descope:index/ProjectFlows:ProjectFlows"
-                    }
+                    },
+                    "description": "Custom authentication flows to use in this project.\n"
                 },
                 "jwtTemplates": {
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
@@ -4941,7 +5050,8 @@
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/types/descope:index/ProjectFlows:ProjectFlows"
-                    }
+                    },
+                    "description": "Custom authentication flows to use in this project.\n"
                 },
                 "jwtTemplates": {
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
@@ -4991,7 +5101,8 @@
                         "type": "object",
                         "additionalProperties": {
                             "$ref": "#/types/descope:index/ProjectFlows:ProjectFlows"
-                        }
+                        },
+                        "description": "Custom authentication flows to use in this project.\n"
                     },
                     "jwtTemplates": {
                         "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",

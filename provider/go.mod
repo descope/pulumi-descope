@@ -55,8 +55,8 @@ require (
 	github.com/cyphar/filepath-securejoin v0.3.2 // indirect
 	github.com/deckarep/golang-set/v2 v2.6.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
-	github.com/descope/go-sdk v1.6.6 // indirect
-	github.com/descope/terraform-provider-descope v0.0.4 // indirect
+	github.com/descope/go-sdk v1.6.8 // indirect
+	github.com/descope/terraform-provider-descope v0.0.8 // indirect
 	github.com/djherbis/times v1.6.0 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
@@ -93,10 +93,10 @@ require (
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/hashicorp/hcl/v2 v2.22.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.23.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20240904173158-8334f91b2a4d // indirect
 	github.com/hashicorp/terraform-plugin-framework v1.13.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework-validators v0.13.0 // indirect
+	github.com/hashicorp/terraform-plugin-framework-validators v0.15.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.25.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.3 // indirect
