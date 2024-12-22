@@ -14,8 +14,14 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthorizationPermission
     {
+        /// <summary>
+        /// A description for the permission.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A name for the permission.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

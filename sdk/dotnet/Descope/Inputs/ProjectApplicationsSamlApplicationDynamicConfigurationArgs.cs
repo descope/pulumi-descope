@@ -13,6 +13,9 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectApplicationsSamlApplicationDynamicConfigurationArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The metadata URL when retrieving the connection details dynamically.
+        /// </summary>
         [Input("metadataUrl", required: true)]
         public Input<string> MetadataUrl { get; set; } = null!;
 

@@ -14,24 +14,23 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationEmbeddedLink
     {
-        public readonly bool? Enabled;
+        /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        public readonly bool? Disabled;
         /// <summary>
         /// The amount of time that the embedded link will be valid for.
         /// </summary>
-        public readonly int? ExpirationTime;
-        public readonly string? ExpirationTimeUnit;
+        public readonly string? ExpirationTime;
 
         [OutputConstructor]
         private ProjectAuthenticationEmbeddedLink(
-            bool? enabled,
+            bool? disabled,
 
-            int? expirationTime,
-
-            string? expirationTimeUnit)
+            string? expirationTime)
         {
-            Enabled = enabled;
+            Disabled = disabled;
             ExpirationTime = expirationTime;
-            ExpirationTimeUnit = expirationTimeUnit;
         }
     }
 }

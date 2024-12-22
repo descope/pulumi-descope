@@ -58,6 +58,9 @@ export class Project extends pulumi.CustomResource {
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
     public readonly environment!: pulumi.Output<string>;
+    /**
+     * Custom authentication flows to use in this project.
+     */
     public readonly flows!: pulumi.Output<{[key: string]: outputs.ProjectFlows}>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
@@ -147,6 +150,9 @@ export interface ProjectState {
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
     environment?: pulumi.Input<string>;
+    /**
+     * Custom authentication flows to use in this project.
+     */
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
@@ -194,6 +200,9 @@ export interface ProjectArgs {
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
     environment?: pulumi.Input<string>;
+    /**
+     * Custom authentication flows to use in this project.
+     */
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.

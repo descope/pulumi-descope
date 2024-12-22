@@ -12,14 +12,18 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectConnectorsVeriff
+    public sealed class ProjectConnectorsMparticle
     {
         /// <summary>
-        /// The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        /// The mParticle Server to Server Key generated for the Descope service.
         /// </summary>
         public readonly string ApiKey;
         /// <summary>
-        /// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
+        /// The mParticle Server to Server Secret generated for the Descope service.
+        /// </summary>
+        public readonly string ApiSecret;
+        /// <summary>
+        /// The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
         /// </summary>
         public readonly string? BaseUrl;
         /// <summary>
@@ -31,14 +35,12 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
-        /// <summary>
-        /// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-        /// </summary>
-        public readonly string SecretKey;
 
         [OutputConstructor]
-        private ProjectConnectorsVeriff(
+        private ProjectConnectorsMparticle(
             string apiKey,
+
+            string apiSecret,
 
             string? baseUrl,
 
@@ -46,16 +48,14 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
-            string name,
-
-            string secretKey)
+            string name)
         {
             ApiKey = apiKey;
+            ApiSecret = apiSecret;
             BaseUrl = baseUrl;
             Description = description;
             Id = id;
             Name = name;
-            SecretKey = secretKey;
         }
     }
 }

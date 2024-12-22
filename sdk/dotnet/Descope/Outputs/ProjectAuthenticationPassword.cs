@@ -15,10 +15,13 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationPassword
     {
         /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        public readonly bool? Disabled;
+        /// <summary>
         /// Settings related to sending password reset emails as part of the password feature.
         /// </summary>
         public readonly Outputs.ProjectAuthenticationPasswordEmailService? EmailService;
-        public readonly bool? Enabled;
         /// <summary>
         /// Whether users are required to change their password periodically.
         /// </summary>
@@ -63,9 +66,9 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationPassword(
-            Outputs.ProjectAuthenticationPasswordEmailService? emailService,
+            bool? disabled,
 
-            bool? enabled,
+            Outputs.ProjectAuthenticationPasswordEmailService? emailService,
 
             bool? expiration,
 
@@ -89,8 +92,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? uppercase)
         {
+            Disabled = disabled;
             EmailService = emailService;
-            Enabled = enabled;
             Expiration = expiration;
             ExpirationWeeks = expirationWeeks;
             Lock = @lock;

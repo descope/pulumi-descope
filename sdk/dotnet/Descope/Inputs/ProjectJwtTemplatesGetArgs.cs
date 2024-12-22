@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("accessKeyTemplates")]
         private InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs>? _accessKeyTemplates;
+
+        /// <summary>
+        /// A list of `Access Key` type JWT Templates.
+        /// </summary>
         public InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs> AccessKeyTemplates
         {
             get => _accessKeyTemplates ?? (_accessKeyTemplates = new InputList<Inputs.ProjectJwtTemplatesAccessKeyTemplateGetArgs>());
@@ -23,6 +27,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("userTemplates")]
         private InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs>? _userTemplates;
+
+        /// <summary>
+        /// A list of `User` type JWT Templates.
+        /// </summary>
         public InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs> UserTemplates
         {
             get => _userTemplates ?? (_userTemplates = new InputList<Inputs.ProjectJwtTemplatesUserTemplateGetArgs>());

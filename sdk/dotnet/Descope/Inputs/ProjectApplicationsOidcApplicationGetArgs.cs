@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<string>? _claims;
 
         /// <summary>
-        /// Claims associated with JWT tokens, typically used for user information.
+        /// A list of supported claims. e.g. `sub`, `email`, `exp`.
         /// </summary>
         public InputList<string> Claims
         {
@@ -26,37 +26,37 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         /// <summary>
-        /// A brief description of the application.
+        /// A description for the OIDC application.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Indicates whether the resource or functionality is disabled.
+        /// Whether the application should be enabled or disabled.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
-        /// An optional identifier for the application.
+        /// An optional identifier for the OIDC application.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
         /// <summary>
-        /// The URL of the custom login page for the application.
+        /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
         [Input("loginPageUrl")]
         public Input<string>? LoginPageUrl { get; set; }
 
         /// <summary>
-        /// The URL of the logo associated with the application.
+        /// A logo for the OIDC application. Should be a hosted image URL.
         /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
 
         /// <summary>
-        /// The name of the application.
+        /// A name for the OIDC application.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;

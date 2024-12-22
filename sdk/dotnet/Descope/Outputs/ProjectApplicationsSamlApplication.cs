@@ -14,39 +14,57 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplicationsSamlApplication
     {
+        /// <summary>
+        /// A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
+        /// </summary>
         public readonly ImmutableArray<string> AcsAllowedCallbackUrls;
         /// <summary>
-        /// Map user attributes from the third party identity provider to custom attributes in Descope.
+        /// The `AttributeMapping` object. Read the description below.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplicationAttributeMapping> AttributeMappings;
+        /// <summary>
+        /// The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+        /// </summary>
         public readonly string? DefaultRelayState;
         /// <summary>
-        /// A brief description of the application.
+        /// A description for the SAML application.
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// Indicates whether the application is disabled.
+        /// Whether the application should be enabled or disabled.
         /// </summary>
         public readonly bool? Disabled;
+        /// <summary>
+        /// The `DynamicConfiguration` object. Read the description below.
+        /// </summary>
         public readonly Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? DynamicConfiguration;
         /// <summary>
-        /// An optional identifier for the application.
+        /// An optional identifier for the SAML application.
         /// </summary>
         public readonly string? Id;
         /// <summary>
-        /// The URL of the custom login page for the application.
+        /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
         public readonly string? LoginPageUrl;
         /// <summary>
-        /// The URL of the logo associated with the application.
+        /// A logo for the SAML application. Should be a hosted image URL.
         /// </summary>
         public readonly string? Logo;
+        /// <summary>
+        /// The `ManualConfiguration` object. Read the description below.
+        /// </summary>
         public readonly Outputs.ProjectApplicationsSamlApplicationManualConfiguration? ManualConfiguration;
         /// <summary>
-        /// The name of the application.
+        /// A name for the SAML application.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        /// </summary>
         public readonly string? SubjectNameIdFormat;
+        /// <summary>
+        /// The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        /// </summary>
         public readonly string? SubjectNameIdType;
 
         [OutputConstructor]

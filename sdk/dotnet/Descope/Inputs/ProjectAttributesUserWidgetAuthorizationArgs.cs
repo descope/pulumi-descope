@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<string>? _editPermissions;
 
         /// <summary>
-        /// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        /// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
         /// </summary>
         public InputList<string> EditPermissions
         {
@@ -29,7 +29,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<string>? _viewPermissions;
 
         /// <summary>
-        /// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        /// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
         /// </summary>
         public InputList<string> ViewPermissions
         {

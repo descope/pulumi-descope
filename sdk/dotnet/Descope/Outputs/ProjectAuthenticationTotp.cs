@@ -14,12 +14,15 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthenticationTotp
     {
-        public readonly bool? Enabled;
+        /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        public readonly bool? Disabled;
 
         [OutputConstructor]
-        private ProjectAuthenticationTotp(bool? enabled)
+        private ProjectAuthenticationTotp(bool? disabled)
         {
-            Enabled = enabled;
+            Disabled = disabled;
         }
     }
 }

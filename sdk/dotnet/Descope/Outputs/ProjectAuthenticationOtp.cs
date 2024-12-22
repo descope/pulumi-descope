@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationOtp
     {
         /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        public readonly bool? Disabled;
+        /// <summary>
         /// The domain to embed in OTP messages.
         /// </summary>
         public readonly string? Domain;
@@ -22,12 +26,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Settings related to sending emails with OTP codes.
         /// </summary>
         public readonly Outputs.ProjectAuthenticationOtpEmailService? EmailService;
-        public readonly bool? Enabled;
         /// <summary>
         /// The amount of time that an OTP code will be valid for.
         /// </summary>
-        public readonly int? ExpirationTime;
-        public readonly string? ExpirationTimeUnit;
+        public readonly string? ExpirationTime;
         /// <summary>
         /// Settings related to sending SMS messages with OTP codes.
         /// </summary>
@@ -39,25 +41,22 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationOtp(
+            bool? disabled,
+
             string? domain,
 
             Outputs.ProjectAuthenticationOtpEmailService? emailService,
 
-            bool? enabled,
-
-            int? expirationTime,
-
-            string? expirationTimeUnit,
+            string? expirationTime,
 
             Outputs.ProjectAuthenticationOtpTextService? textService,
 
             Outputs.ProjectAuthenticationOtpVoiceService? voiceService)
         {
+            Disabled = disabled;
             Domain = domain;
             EmailService = emailService;
-            Enabled = enabled;
             ExpirationTime = expirationTime;
-            ExpirationTimeUnit = expirationTimeUnit;
             TextService = textService;
             VoiceService = voiceService;
         }

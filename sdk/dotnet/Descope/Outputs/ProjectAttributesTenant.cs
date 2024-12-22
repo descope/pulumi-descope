@@ -15,15 +15,15 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAttributesTenant
     {
         /// <summary>
-        /// The name of the tenant attribute.
+        /// The name of the attribute.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// A list of strings to define the set of options for select attributes.
+        /// When the attribute type is "multiselect". A list of options to chose from.
         /// </summary>
         public readonly ImmutableArray<string> SelectOptions;
         /// <summary>
-        /// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        /// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
         /// </summary>
         public readonly string Type;
 

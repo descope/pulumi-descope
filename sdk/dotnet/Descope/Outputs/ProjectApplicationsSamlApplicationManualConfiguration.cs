@@ -14,8 +14,17 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplicationsSamlApplicationManualConfiguration
     {
+        /// <summary>
+        /// Enter the `ACS URL` from the SP.
+        /// </summary>
         public readonly string AcsUrl;
+        /// <summary>
+        /// Enter the `Certificate` from the SP.
+        /// </summary>
         public readonly string Certificate;
+        /// <summary>
+        /// Enter the `Entity Id` from the SP.
+        /// </summary>
         public readonly string EntityId;
 
         [OutputConstructor]

@@ -14,13 +14,16 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationPasswordArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        [Input("disabled")]
+        public Input<bool>? Disabled { get; set; }
+
+        /// <summary>
         /// Settings related to sending password reset emails as part of the password feature.
         /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationPasswordEmailServiceArgs>? EmailService { get; set; }
-
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
 
         /// <summary>
         /// Whether users are required to change their password periodically.

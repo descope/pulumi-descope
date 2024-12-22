@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<Inputs.ProjectAttributesTenantArgs>? _tenants;
 
         /// <summary>
-        /// Custom attributes to store additional details about your tenants.
+        /// A list of `TenantAttribute`. Read the description below.
         /// </summary>
         public InputList<Inputs.ProjectAttributesTenantArgs> Tenants
         {
@@ -29,7 +29,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<Inputs.ProjectAttributesUserArgs>? _users;
 
         /// <summary>
-        /// Custom attributes to store additional details about your users.
+        /// A list of `UserAttribute`. Read the description below.
         /// </summary>
         public InputList<Inputs.ProjectAttributesUserArgs> Users
         {

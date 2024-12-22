@@ -13,8 +13,11 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationSsoArgs : global::Pulumi.ResourceArgs
     {
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
+        /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        [Input("disabled")]
+        public Input<bool>? Disabled { get; set; }
 
         /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.

@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("permissions")]
         private InputList<Inputs.ProjectAuthorizationPermissionGetArgs>? _permissions;
+
+        /// <summary>
+        /// A list of `Permission` objects.
+        /// </summary>
         public InputList<Inputs.ProjectAuthorizationPermissionGetArgs> Permissions
         {
             get => _permissions ?? (_permissions = new InputList<Inputs.ProjectAuthorizationPermissionGetArgs>());
@@ -23,6 +27,10 @@ namespace Descope.Pulumi.Descope.Inputs
 
         [Input("roles")]
         private InputList<Inputs.ProjectAuthorizationRoleGetArgs>? _roles;
+
+        /// <summary>
+        /// A list of `Role` objects.
+        /// </summary>
         public InputList<Inputs.ProjectAuthorizationRoleGetArgs> Roles
         {
             get => _roles ?? (_roles = new InputList<Inputs.ProjectAuthorizationRoleGetArgs>());

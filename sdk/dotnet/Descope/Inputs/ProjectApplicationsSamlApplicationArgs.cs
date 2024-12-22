@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Inputs
     {
         [Input("acsAllowedCallbackUrls")]
         private InputList<string>? _acsAllowedCallbackUrls;
+
+        /// <summary>
+        /// A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
+        /// </summary>
         public InputList<string> AcsAllowedCallbackUrls
         {
             get => _acsAllowedCallbackUrls ?? (_acsAllowedCallbackUrls = new InputList<string>());
@@ -25,7 +29,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs>? _attributeMappings;
 
         /// <summary>
-        /// Map user attributes from the third party identity provider to custom attributes in Descope.
+        /// The `AttributeMapping` object. Read the description below.
         /// </summary>
         public InputList<Inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs> AttributeMappings
         {
@@ -33,54 +37,69 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _attributeMappings = value;
         }
 
+        /// <summary>
+        /// The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+        /// </summary>
         [Input("defaultRelayState")]
         public Input<string>? DefaultRelayState { get; set; }
 
         /// <summary>
-        /// A brief description of the application.
+        /// A description for the SAML application.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Indicates whether the application is disabled.
+        /// Whether the application should be enabled or disabled.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
+        /// <summary>
+        /// The `DynamicConfiguration` object. Read the description below.
+        /// </summary>
         [Input("dynamicConfiguration")]
         public Input<Inputs.ProjectApplicationsSamlApplicationDynamicConfigurationArgs>? DynamicConfiguration { get; set; }
 
         /// <summary>
-        /// An optional identifier for the application.
+        /// An optional identifier for the SAML application.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
         /// <summary>
-        /// The URL of the custom login page for the application.
+        /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
         [Input("loginPageUrl")]
         public Input<string>? LoginPageUrl { get; set; }
 
         /// <summary>
-        /// The URL of the logo associated with the application.
+        /// A logo for the SAML application. Should be a hosted image URL.
         /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
 
+        /// <summary>
+        /// The `ManualConfiguration` object. Read the description below.
+        /// </summary>
         [Input("manualConfiguration")]
         public Input<Inputs.ProjectApplicationsSamlApplicationManualConfigurationArgs>? ManualConfiguration { get; set; }
 
         /// <summary>
-        /// The name of the application.
+        /// A name for the SAML application.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        /// </summary>
         [Input("subjectNameIdFormat")]
         public Input<string>? SubjectNameIdFormat { get; set; }
 
+        /// <summary>
+        /// The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        /// </summary>
         [Input("subjectNameIdType")]
         public Input<string>? SubjectNameIdType { get; set; }
 

@@ -14,6 +14,9 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectApplicationsSamlApplicationDynamicConfiguration
     {
+        /// <summary>
+        /// The metadata URL when retrieving the connection details dynamically.
+        /// </summary>
         public readonly string MetadataUrl;
 
         [OutputConstructor]

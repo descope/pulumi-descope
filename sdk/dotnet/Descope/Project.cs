@@ -49,6 +49,9 @@ namespace Descope.Pulumi.Descope
         [Output("environment")]
         public Output<string> Environment { get; private set; } = null!;
 
+        /// <summary>
+        /// Custom authentication flows to use in this project.
+        /// </summary>
         [Output("flows")]
         public Output<ImmutableDictionary<string, Outputs.ProjectFlows>> Flows { get; private set; } = null!;
 
@@ -161,6 +164,10 @@ namespace Descope.Pulumi.Descope
 
         [Input("flows")]
         private InputMap<Inputs.ProjectFlowsArgs>? _flows;
+
+        /// <summary>
+        /// Custom authentication flows to use in this project.
+        /// </summary>
         public InputMap<Inputs.ProjectFlowsArgs> Flows
         {
             get => _flows ?? (_flows = new InputMap<Inputs.ProjectFlowsArgs>());
@@ -237,6 +244,10 @@ namespace Descope.Pulumi.Descope
 
         [Input("flows")]
         private InputMap<Inputs.ProjectFlowsGetArgs>? _flows;
+
+        /// <summary>
+        /// Custom authentication flows to use in this project.
+        /// </summary>
         public InputMap<Inputs.ProjectFlowsGetArgs> Flows
         {
             get => _flows ?? (_flows = new InputMap<Inputs.ProjectFlowsGetArgs>());

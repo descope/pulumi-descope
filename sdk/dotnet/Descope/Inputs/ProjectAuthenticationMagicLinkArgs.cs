@@ -14,19 +14,19 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationMagicLinkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        [Input("disabled")]
+        public Input<bool>? Disabled { get; set; }
+
+        /// <summary>
         /// Settings related to sending emails as part of the magic link authentication.
         /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationMagicLinkEmailServiceArgs>? EmailService { get; set; }
 
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
         [Input("expirationTime")]
-        public Input<int>? ExpirationTime { get; set; }
-
-        [Input("expirationTimeUnit")]
-        public Input<string>? ExpirationTimeUnit { get; set; }
+        public Input<string>? ExpirationTime { get; set; }
 
         /// <summary>
         /// The URL to redirect users to after they log in using the magic link.
