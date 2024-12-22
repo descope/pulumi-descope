@@ -23,7 +23,7 @@ export const project = new descope.Project("pulumi-ts-test", {
   },
   authentication: {
     otp: {
-      enabled: false,
+      disabled: false,
     },
   },
   authorization: {
