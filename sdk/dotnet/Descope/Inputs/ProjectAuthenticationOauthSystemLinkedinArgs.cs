@@ -13,6 +13,18 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthenticationOauthSystemLinkedinArgs : global::Pulumi.ResourceArgs
     {
+        [Input("allowedGrantTypes")]
+        private InputList<string>? _allowedGrantTypes;
+
+        /// <summary>
+        /// The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        /// </summary>
+        public InputList<string> AllowedGrantTypes
+        {
+            get => _allowedGrantTypes ?? (_allowedGrantTypes = new InputList<string>());
+            set => _allowedGrantTypes = value;
+        }
+
         /// <summary>
         /// The URL that users are redirected to for authorization with the OAuth provider.
         /// </summary>
@@ -55,14 +67,11 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
-
-        /// <summary>
-        /// The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        /// </summary>
-        [Input("grantType")]
-        public Input<string>? GrantType { get; set; }
 
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }

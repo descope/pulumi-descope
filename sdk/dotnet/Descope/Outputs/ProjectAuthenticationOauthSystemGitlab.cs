@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationOauthSystemGitlab
     {
         /// <summary>
+        /// The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        /// </summary>
+        public readonly ImmutableArray<string> AllowedGrantTypes;
+        /// <summary>
         /// The URL that users are redirected to for authorization with the OAuth provider.
         /// </summary>
         public readonly string? AuthorizationEndpoint;
@@ -31,11 +35,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A brief description of the OAuth provider.
         /// </summary>
         public readonly string? Description;
-        public readonly bool? Disabled;
         /// <summary>
-        /// The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
-        public readonly string? GrantType;
+        public readonly bool? Disabled;
         public readonly string? Issuer;
         /// <summary>
         /// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -72,6 +75,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationOauthSystemGitlab(
+            ImmutableArray<string> allowedGrantTypes,
+
             string? authorizationEndpoint,
 
             ImmutableDictionary<string, string>? claimMapping,
@@ -83,8 +88,6 @@ namespace Descope.Pulumi.Descope.Outputs
             string? description,
 
             bool? disabled,
-
-            string? grantType,
 
             string? issuer,
 
@@ -104,13 +107,13 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? userInfoEndpoint)
         {
+            AllowedGrantTypes = allowedGrantTypes;
             AuthorizationEndpoint = authorizationEndpoint;
             ClaimMapping = claimMapping;
             ClientId = clientId;
             ClientSecret = clientSecret;
             Description = description;
             Disabled = disabled;
-            GrantType = grantType;
             Issuer = issuer;
             JwksEndpoint = jwksEndpoint;
             Logo = logo;

@@ -14,7 +14,13 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectJwtTemplates
     {
+        /// <summary>
+        /// A list of `Access Key` type JWT Templates.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectJwtTemplatesAccessKeyTemplate> AccessKeyTemplates;
+        /// <summary>
+        /// A list of `User` type JWT Templates.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectJwtTemplatesUserTemplate> UserTemplates;
 
         [OutputConstructor]

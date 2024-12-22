@@ -170,19 +170,19 @@ func (o ProjectApplicationsPtrOutput) SamlApplications() ProjectApplicationsSaml
 }
 
 type ProjectApplicationsOidcApplication struct {
-	// Claims associated with JWT tokens, typically used for user information.
+	// A list of supported claims. e.g. `sub`, `email`, `exp`.
 	Claims []string `pulumi:"claims"`
-	// A brief description of the application.
+	// A description for the OIDC application.
 	Description *string `pulumi:"description"`
-	// Indicates whether the resource or functionality is disabled.
+	// Whether the application should be enabled or disabled.
 	Disabled *bool `pulumi:"disabled"`
-	// An optional identifier for the application.
+	// An optional identifier for the OIDC application.
 	Id *string `pulumi:"id"`
-	// The URL of the custom login page for the application.
+	// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
-	// The URL of the logo associated with the application.
+	// A logo for the OIDC application. Should be a hosted image URL.
 	Logo *string `pulumi:"logo"`
-	// The name of the application.
+	// A name for the OIDC application.
 	Name string `pulumi:"name"`
 }
 
@@ -198,19 +198,19 @@ type ProjectApplicationsOidcApplicationInput interface {
 }
 
 type ProjectApplicationsOidcApplicationArgs struct {
-	// Claims associated with JWT tokens, typically used for user information.
+	// A list of supported claims. e.g. `sub`, `email`, `exp`.
 	Claims pulumi.StringArrayInput `pulumi:"claims"`
-	// A brief description of the application.
+	// A description for the OIDC application.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// Indicates whether the resource or functionality is disabled.
+	// Whether the application should be enabled or disabled.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
-	// An optional identifier for the application.
+	// An optional identifier for the OIDC application.
 	Id pulumi.StringPtrInput `pulumi:"id"`
-	// The URL of the custom login page for the application.
+	// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl pulumi.StringPtrInput `pulumi:"loginPageUrl"`
-	// The URL of the logo associated with the application.
+	// A logo for the OIDC application. Should be a hosted image URL.
 	Logo pulumi.StringPtrInput `pulumi:"logo"`
-	// The name of the application.
+	// A name for the OIDC application.
 	Name pulumi.StringInput `pulumi:"name"`
 }
 
@@ -265,37 +265,37 @@ func (o ProjectApplicationsOidcApplicationOutput) ToProjectApplicationsOidcAppli
 	return o
 }
 
-// Claims associated with JWT tokens, typically used for user information.
+// A list of supported claims. e.g. `sub`, `email`, `exp`.
 func (o ProjectApplicationsOidcApplicationOutput) Claims() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) []string { return v.Claims }).(pulumi.StringArrayOutput)
 }
 
-// A brief description of the application.
+// A description for the OIDC application.
 func (o ProjectApplicationsOidcApplicationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Indicates whether the resource or functionality is disabled.
+// Whether the application should be enabled or disabled.
 func (o ProjectApplicationsOidcApplicationOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-// An optional identifier for the application.
+// An optional identifier for the OIDC application.
 func (o ProjectApplicationsOidcApplicationOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// The URL of the custom login page for the application.
+// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 func (o ProjectApplicationsOidcApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
-// The URL of the logo associated with the application.
+// A logo for the OIDC application. Should be a hosted image URL.
 func (o ProjectApplicationsOidcApplicationOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
-// The name of the application.
+// A name for the OIDC application.
 func (o ProjectApplicationsOidcApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsOidcApplication) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -321,26 +321,32 @@ func (o ProjectApplicationsOidcApplicationArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type ProjectApplicationsSamlApplication struct {
+	// A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
 	AcsAllowedCallbackUrls []string `pulumi:"acsAllowedCallbackUrls"`
-	// Map user attributes from the third party identity provider to custom attributes in Descope.
+	// The `AttributeMapping` object. Read the description below.
 	AttributeMappings []ProjectApplicationsSamlApplicationAttributeMapping `pulumi:"attributeMappings"`
-	DefaultRelayState *string                                              `pulumi:"defaultRelayState"`
-	// A brief description of the application.
+	// The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+	DefaultRelayState *string `pulumi:"defaultRelayState"`
+	// A description for the SAML application.
 	Description *string `pulumi:"description"`
-	// Indicates whether the application is disabled.
-	Disabled             *bool                                                   `pulumi:"disabled"`
+	// Whether the application should be enabled or disabled.
+	Disabled *bool `pulumi:"disabled"`
+	// The `DynamicConfiguration` object. Read the description below.
 	DynamicConfiguration *ProjectApplicationsSamlApplicationDynamicConfiguration `pulumi:"dynamicConfiguration"`
-	// An optional identifier for the application.
+	// An optional identifier for the SAML application.
 	Id *string `pulumi:"id"`
-	// The URL of the custom login page for the application.
+	// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
-	// The URL of the logo associated with the application.
-	Logo                *string                                                `pulumi:"logo"`
+	// A logo for the SAML application. Should be a hosted image URL.
+	Logo *string `pulumi:"logo"`
+	// The `ManualConfiguration` object. Read the description below.
 	ManualConfiguration *ProjectApplicationsSamlApplicationManualConfiguration `pulumi:"manualConfiguration"`
-	// The name of the application.
-	Name                string  `pulumi:"name"`
+	// A name for the SAML application.
+	Name string `pulumi:"name"`
+	// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	SubjectNameIdFormat *string `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType   *string `pulumi:"subjectNameIdType"`
+	// The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+	SubjectNameIdType *string `pulumi:"subjectNameIdType"`
 }
 
 // ProjectApplicationsSamlApplicationInput is an input type that accepts ProjectApplicationsSamlApplicationArgs and ProjectApplicationsSamlApplicationOutput values.
@@ -355,26 +361,32 @@ type ProjectApplicationsSamlApplicationInput interface {
 }
 
 type ProjectApplicationsSamlApplicationArgs struct {
+	// A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
 	AcsAllowedCallbackUrls pulumi.StringArrayInput `pulumi:"acsAllowedCallbackUrls"`
-	// Map user attributes from the third party identity provider to custom attributes in Descope.
+	// The `AttributeMapping` object. Read the description below.
 	AttributeMappings ProjectApplicationsSamlApplicationAttributeMappingArrayInput `pulumi:"attributeMappings"`
-	DefaultRelayState pulumi.StringPtrInput                                        `pulumi:"defaultRelayState"`
-	// A brief description of the application.
+	// The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+	DefaultRelayState pulumi.StringPtrInput `pulumi:"defaultRelayState"`
+	// A description for the SAML application.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// Indicates whether the application is disabled.
-	Disabled             pulumi.BoolPtrInput                                            `pulumi:"disabled"`
+	// Whether the application should be enabled or disabled.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
+	// The `DynamicConfiguration` object. Read the description below.
 	DynamicConfiguration ProjectApplicationsSamlApplicationDynamicConfigurationPtrInput `pulumi:"dynamicConfiguration"`
-	// An optional identifier for the application.
+	// An optional identifier for the SAML application.
 	Id pulumi.StringPtrInput `pulumi:"id"`
-	// The URL of the custom login page for the application.
+	// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl pulumi.StringPtrInput `pulumi:"loginPageUrl"`
-	// The URL of the logo associated with the application.
-	Logo                pulumi.StringPtrInput                                         `pulumi:"logo"`
+	// A logo for the SAML application. Should be a hosted image URL.
+	Logo pulumi.StringPtrInput `pulumi:"logo"`
+	// The `ManualConfiguration` object. Read the description below.
 	ManualConfiguration ProjectApplicationsSamlApplicationManualConfigurationPtrInput `pulumi:"manualConfiguration"`
-	// The name of the application.
-	Name                pulumi.StringInput    `pulumi:"name"`
+	// A name for the SAML application.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	SubjectNameIdFormat pulumi.StringPtrInput `pulumi:"subjectNameIdFormat"`
-	SubjectNameIdType   pulumi.StringPtrInput `pulumi:"subjectNameIdType"`
+	// The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+	SubjectNameIdType pulumi.StringPtrInput `pulumi:"subjectNameIdType"`
 }
 
 func (ProjectApplicationsSamlApplicationArgs) ElementType() reflect.Type {
@@ -428,67 +440,73 @@ func (o ProjectApplicationsSamlApplicationOutput) ToProjectApplicationsSamlAppli
 	return o
 }
 
+// A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
 func (o ProjectApplicationsSamlApplicationOutput) AcsAllowedCallbackUrls() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []string { return v.AcsAllowedCallbackUrls }).(pulumi.StringArrayOutput)
 }
 
-// Map user attributes from the third party identity provider to custom attributes in Descope.
+// The `AttributeMapping` object. Read the description below.
 func (o ProjectApplicationsSamlApplicationOutput) AttributeMappings() ProjectApplicationsSamlApplicationAttributeMappingArrayOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) []ProjectApplicationsSamlApplicationAttributeMapping {
 		return v.AttributeMappings
 	}).(ProjectApplicationsSamlApplicationAttributeMappingArrayOutput)
 }
 
+// The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
 func (o ProjectApplicationsSamlApplicationOutput) DefaultRelayState() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.DefaultRelayState }).(pulumi.StringPtrOutput)
 }
 
-// A brief description of the application.
+// A description for the SAML application.
 func (o ProjectApplicationsSamlApplicationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Indicates whether the application is disabled.
+// Whether the application should be enabled or disabled.
 func (o ProjectApplicationsSamlApplicationOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The `DynamicConfiguration` object. Read the description below.
 func (o ProjectApplicationsSamlApplicationOutput) DynamicConfiguration() ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *ProjectApplicationsSamlApplicationDynamicConfiguration {
 		return v.DynamicConfiguration
 	}).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
-// An optional identifier for the application.
+// An optional identifier for the SAML application.
 func (o ProjectApplicationsSamlApplicationOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// The URL of the custom login page for the application.
+// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 func (o ProjectApplicationsSamlApplicationOutput) LoginPageUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.LoginPageUrl }).(pulumi.StringPtrOutput)
 }
 
-// The URL of the logo associated with the application.
+// A logo for the SAML application. Should be a hosted image URL.
 func (o ProjectApplicationsSamlApplicationOutput) Logo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.Logo }).(pulumi.StringPtrOutput)
 }
 
+// The `ManualConfiguration` object. Read the description below.
 func (o ProjectApplicationsSamlApplicationOutput) ManualConfiguration() ProjectApplicationsSamlApplicationManualConfigurationPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *ProjectApplicationsSamlApplicationManualConfiguration {
 		return v.ManualConfiguration
 	}).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
-// The name of the application.
+// A name for the SAML application.
 func (o ProjectApplicationsSamlApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 func (o ProjectApplicationsSamlApplicationOutput) SubjectNameIdFormat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.SubjectNameIdFormat }).(pulumi.StringPtrOutput)
 }
 
+// The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 func (o ProjectApplicationsSamlApplicationOutput) SubjectNameIdType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplication) *string { return v.SubjectNameIdType }).(pulumi.StringPtrOutput)
 }
@@ -514,9 +532,9 @@ func (o ProjectApplicationsSamlApplicationArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type ProjectApplicationsSamlApplicationAttributeMapping struct {
-	// The name of the user attribute in the third party identity provider.
+	// The name of the attribute.
 	Name string `pulumi:"name"`
-	// The name of the user custom attribute in Descope.
+	// The value of the attribute.
 	Value string `pulumi:"value"`
 }
 
@@ -532,9 +550,9 @@ type ProjectApplicationsSamlApplicationAttributeMappingInput interface {
 }
 
 type ProjectApplicationsSamlApplicationAttributeMappingArgs struct {
-	// The name of the user attribute in the third party identity provider.
+	// The name of the attribute.
 	Name pulumi.StringInput `pulumi:"name"`
-	// The name of the user custom attribute in Descope.
+	// The value of the attribute.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -589,12 +607,12 @@ func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) ToProjectAppli
 	return o
 }
 
-// The name of the user attribute in the third party identity provider.
+// The name of the attribute.
 func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The name of the user custom attribute in Descope.
+// The value of the attribute.
 func (o ProjectApplicationsSamlApplicationAttributeMappingOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationAttributeMapping) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -620,6 +638,7 @@ func (o ProjectApplicationsSamlApplicationAttributeMappingArrayOutput) Index(i p
 }
 
 type ProjectApplicationsSamlApplicationDynamicConfiguration struct {
+	// The metadata URL when retrieving the connection details dynamically.
 	MetadataUrl string `pulumi:"metadataUrl"`
 }
 
@@ -635,6 +654,7 @@ type ProjectApplicationsSamlApplicationDynamicConfigurationInput interface {
 }
 
 type ProjectApplicationsSamlApplicationDynamicConfigurationArgs struct {
+	// The metadata URL when retrieving the connection details dynamically.
 	MetadataUrl pulumi.StringInput `pulumi:"metadataUrl"`
 }
 
@@ -715,6 +735,7 @@ func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) ToProjectA
 	}).(ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput)
 }
 
+// The metadata URL when retrieving the connection details dynamically.
 func (o ProjectApplicationsSamlApplicationDynamicConfigurationOutput) MetadataUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationDynamicConfiguration) string { return v.MetadataUrl }).(pulumi.StringOutput)
 }
@@ -743,6 +764,7 @@ func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) Elem() 
 	}).(ProjectApplicationsSamlApplicationDynamicConfigurationOutput)
 }
 
+// The metadata URL when retrieving the connection details dynamically.
 func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) MetadataUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationDynamicConfiguration) *string {
 		if v == nil {
@@ -753,9 +775,12 @@ func (o ProjectApplicationsSamlApplicationDynamicConfigurationPtrOutput) Metadat
 }
 
 type ProjectApplicationsSamlApplicationManualConfiguration struct {
-	AcsUrl      string `pulumi:"acsUrl"`
+	// Enter the `ACS URL` from the SP.
+	AcsUrl string `pulumi:"acsUrl"`
+	// Enter the `Certificate` from the SP.
 	Certificate string `pulumi:"certificate"`
-	EntityId    string `pulumi:"entityId"`
+	// Enter the `Entity Id` from the SP.
+	EntityId string `pulumi:"entityId"`
 }
 
 // ProjectApplicationsSamlApplicationManualConfigurationInput is an input type that accepts ProjectApplicationsSamlApplicationManualConfigurationArgs and ProjectApplicationsSamlApplicationManualConfigurationOutput values.
@@ -770,9 +795,12 @@ type ProjectApplicationsSamlApplicationManualConfigurationInput interface {
 }
 
 type ProjectApplicationsSamlApplicationManualConfigurationArgs struct {
-	AcsUrl      pulumi.StringInput `pulumi:"acsUrl"`
+	// Enter the `ACS URL` from the SP.
+	AcsUrl pulumi.StringInput `pulumi:"acsUrl"`
+	// Enter the `Certificate` from the SP.
 	Certificate pulumi.StringInput `pulumi:"certificate"`
-	EntityId    pulumi.StringInput `pulumi:"entityId"`
+	// Enter the `Entity Id` from the SP.
+	EntityId pulumi.StringInput `pulumi:"entityId"`
 }
 
 func (ProjectApplicationsSamlApplicationManualConfigurationArgs) ElementType() reflect.Type {
@@ -852,14 +880,17 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) ToProjectAp
 	}).(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput)
 }
 
+// Enter the `ACS URL` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) AcsUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.AcsUrl }).(pulumi.StringOutput)
 }
 
+// Enter the `Certificate` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) Certificate() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.Certificate }).(pulumi.StringOutput)
 }
 
+// Enter the `Entity Id` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) EntityId() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.EntityId }).(pulumi.StringOutput)
 }
@@ -888,6 +919,7 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Elem() P
 	}).(ProjectApplicationsSamlApplicationManualConfigurationOutput)
 }
 
+// Enter the `ACS URL` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) AcsUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
@@ -897,6 +929,7 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) AcsUrl()
 	}).(pulumi.StringPtrOutput)
 }
 
+// Enter the `Certificate` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Certificate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
@@ -906,6 +939,7 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Certific
 	}).(pulumi.StringPtrOutput)
 }
 
+// Enter the `Entity Id` from the SP.
 func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) EntityId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectApplicationsSamlApplicationManualConfiguration) *string {
 		if v == nil {
@@ -916,9 +950,9 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) EntityId
 }
 
 type ProjectAttributes struct {
-	// Custom attributes to store additional details about your tenants.
+	// A list of `TenantAttribute`. Read the description below.
 	Tenants []ProjectAttributesTenant `pulumi:"tenants"`
-	// Custom attributes to store additional details about your users.
+	// A list of `UserAttribute`. Read the description below.
 	Users []ProjectAttributesUser `pulumi:"users"`
 }
 
@@ -934,9 +968,9 @@ type ProjectAttributesInput interface {
 }
 
 type ProjectAttributesArgs struct {
-	// Custom attributes to store additional details about your tenants.
+	// A list of `TenantAttribute`. Read the description below.
 	Tenants ProjectAttributesTenantArrayInput `pulumi:"tenants"`
-	// Custom attributes to store additional details about your users.
+	// A list of `UserAttribute`. Read the description below.
 	Users ProjectAttributesUserArrayInput `pulumi:"users"`
 }
 
@@ -1017,12 +1051,12 @@ func (o ProjectAttributesOutput) ToProjectAttributesPtrOutputWithContext(ctx con
 	}).(ProjectAttributesPtrOutput)
 }
 
-// Custom attributes to store additional details about your tenants.
+// A list of `TenantAttribute`. Read the description below.
 func (o ProjectAttributesOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesTenant { return v.Tenants }).(ProjectAttributesTenantArrayOutput)
 }
 
-// Custom attributes to store additional details about your users.
+// A list of `UserAttribute`. Read the description below.
 func (o ProjectAttributesOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesUser { return v.Users }).(ProjectAttributesUserArrayOutput)
 }
@@ -1051,7 +1085,7 @@ func (o ProjectAttributesPtrOutput) Elem() ProjectAttributesOutput {
 	}).(ProjectAttributesOutput)
 }
 
-// Custom attributes to store additional details about your tenants.
+// A list of `TenantAttribute`. Read the description below.
 func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesTenant {
 		if v == nil {
@@ -1061,7 +1095,7 @@ func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput
 	}).(ProjectAttributesTenantArrayOutput)
 }
 
-// Custom attributes to store additional details about your users.
+// A list of `UserAttribute`. Read the description below.
 func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesUser {
 		if v == nil {
@@ -1072,11 +1106,11 @@ func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 }
 
 type ProjectAttributesTenant struct {
-	// The name of the tenant attribute.
+	// The name of the attribute.
 	Name string `pulumi:"name"`
-	// A list of strings to define the set of options for select attributes.
+	// When the attribute type is "multiselect". A list of options to chose from.
 	SelectOptions []string `pulumi:"selectOptions"`
-	// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 	Type string `pulumi:"type"`
 }
 
@@ -1092,11 +1126,11 @@ type ProjectAttributesTenantInput interface {
 }
 
 type ProjectAttributesTenantArgs struct {
-	// The name of the tenant attribute.
+	// The name of the attribute.
 	Name pulumi.StringInput `pulumi:"name"`
-	// A list of strings to define the set of options for select attributes.
+	// When the attribute type is "multiselect". A list of options to chose from.
 	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
-	// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 	Type pulumi.StringInput `pulumi:"type"`
 }
 
@@ -1151,17 +1185,17 @@ func (o ProjectAttributesTenantOutput) ToProjectAttributesTenantOutputWithContex
 	return o
 }
 
-// The name of the tenant attribute.
+// The name of the attribute.
 func (o ProjectAttributesTenantOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// A list of strings to define the set of options for select attributes.
+// When the attribute type is "multiselect". A list of options to chose from.
 func (o ProjectAttributesTenantOutput) SelectOptions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) []string { return v.SelectOptions }).(pulumi.StringArrayOutput)
 }
 
-// The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 func (o ProjectAttributesTenantOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -1187,13 +1221,13 @@ func (o ProjectAttributesTenantArrayOutput) Index(i pulumi.IntInput) ProjectAttr
 }
 
 type ProjectAttributesUser struct {
-	// The name of the user attribute.
+	// The name of the attribute.
 	Name string `pulumi:"name"`
-	// A list of strings to define the set of options for select attributes.
+	// When the attribute type is "multiselect". A list of options to chose from.
 	SelectOptions []string `pulumi:"selectOptions"`
-	// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 	Type string `pulumi:"type"`
-	// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+	// The `UserAttributeWidgetAuthorization` object. Read the description below.
 	WidgetAuthorization *ProjectAttributesUserWidgetAuthorization `pulumi:"widgetAuthorization"`
 }
 
@@ -1209,13 +1243,13 @@ type ProjectAttributesUserInput interface {
 }
 
 type ProjectAttributesUserArgs struct {
-	// The name of the user attribute.
+	// The name of the attribute.
 	Name pulumi.StringInput `pulumi:"name"`
-	// A list of strings to define the set of options for select attributes.
+	// When the attribute type is "multiselect". A list of options to chose from.
 	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
-	// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 	Type pulumi.StringInput `pulumi:"type"`
-	// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+	// The `UserAttributeWidgetAuthorization` object. Read the description below.
 	WidgetAuthorization ProjectAttributesUserWidgetAuthorizationPtrInput `pulumi:"widgetAuthorization"`
 }
 
@@ -1270,22 +1304,22 @@ func (o ProjectAttributesUserOutput) ToProjectAttributesUserOutputWithContext(ct
 	return o
 }
 
-// The name of the user attribute.
+// The name of the attribute.
 func (o ProjectAttributesUserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// A list of strings to define the set of options for select attributes.
+// When the attribute type is "multiselect". A list of options to chose from.
 func (o ProjectAttributesUserOutput) SelectOptions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) []string { return v.SelectOptions }).(pulumi.StringArrayOutput)
 }
 
-// The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
 func (o ProjectAttributesUserOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) string { return v.Type }).(pulumi.StringOutput)
 }
 
-// When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+// The `UserAttributeWidgetAuthorization` object. Read the description below.
 func (o ProjectAttributesUserOutput) WidgetAuthorization() ProjectAttributesUserWidgetAuthorizationPtrOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) *ProjectAttributesUserWidgetAuthorization { return v.WidgetAuthorization }).(ProjectAttributesUserWidgetAuthorizationPtrOutput)
 }
@@ -1311,9 +1345,9 @@ func (o ProjectAttributesUserArrayOutput) Index(i pulumi.IntInput) ProjectAttrib
 }
 
 type ProjectAttributesUserWidgetAuthorization struct {
-	// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+	// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
 	EditPermissions []string `pulumi:"editPermissions"`
-	// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+	// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
 	ViewPermissions []string `pulumi:"viewPermissions"`
 }
 
@@ -1329,9 +1363,9 @@ type ProjectAttributesUserWidgetAuthorizationInput interface {
 }
 
 type ProjectAttributesUserWidgetAuthorizationArgs struct {
-	// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+	// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
 	EditPermissions pulumi.StringArrayInput `pulumi:"editPermissions"`
-	// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+	// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
 	ViewPermissions pulumi.StringArrayInput `pulumi:"viewPermissions"`
 }
 
@@ -1412,12 +1446,12 @@ func (o ProjectAttributesUserWidgetAuthorizationOutput) ToProjectAttributesUserW
 	}).(ProjectAttributesUserWidgetAuthorizationPtrOutput)
 }
 
-// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
 func (o ProjectAttributesUserWidgetAuthorizationOutput) EditPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUserWidgetAuthorization) []string { return v.EditPermissions }).(pulumi.StringArrayOutput)
 }
 
-// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
 func (o ProjectAttributesUserWidgetAuthorizationOutput) ViewPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAttributesUserWidgetAuthorization) []string { return v.ViewPermissions }).(pulumi.StringArrayOutput)
 }
@@ -1446,7 +1480,7 @@ func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) Elem() ProjectAttribu
 	}).(ProjectAttributesUserWidgetAuthorizationOutput)
 }
 
-// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
 func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) EditPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributesUserWidgetAuthorization) []string {
 		if v == nil {
@@ -1456,7 +1490,7 @@ func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) EditPermissions() pul
 	}).(pulumi.StringArrayOutput)
 }
 
-// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
 func (o ProjectAttributesUserWidgetAuthorizationPtrOutput) ViewPermissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributesUserWidgetAuthorization) []string {
 		if v == nil {
@@ -1756,10 +1790,10 @@ func (o ProjectAuthenticationPtrOutput) Totp() ProjectAuthenticationTotpPtrOutpu
 }
 
 type ProjectAuthenticationEmbeddedLink struct {
-	Enabled *bool `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// The amount of time that the embedded link will be valid for.
-	ExpirationTime     *int    `pulumi:"expirationTime"`
-	ExpirationTimeUnit *string `pulumi:"expirationTimeUnit"`
+	ExpirationTime *string `pulumi:"expirationTime"`
 }
 
 // ProjectAuthenticationEmbeddedLinkInput is an input type that accepts ProjectAuthenticationEmbeddedLinkArgs and ProjectAuthenticationEmbeddedLinkOutput values.
@@ -1774,10 +1808,10 @@ type ProjectAuthenticationEmbeddedLinkInput interface {
 }
 
 type ProjectAuthenticationEmbeddedLinkArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The amount of time that the embedded link will be valid for.
-	ExpirationTime     pulumi.IntPtrInput    `pulumi:"expirationTime"`
-	ExpirationTimeUnit pulumi.StringPtrInput `pulumi:"expirationTimeUnit"`
+	ExpirationTime pulumi.StringPtrInput `pulumi:"expirationTime"`
 }
 
 func (ProjectAuthenticationEmbeddedLinkArgs) ElementType() reflect.Type {
@@ -1857,17 +1891,14 @@ func (o ProjectAuthenticationEmbeddedLinkOutput) ToProjectAuthenticationEmbedded
 	}).(ProjectAuthenticationEmbeddedLinkPtrOutput)
 }
 
-func (o ProjectAuthenticationEmbeddedLinkOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationEmbeddedLinkOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
 // The amount of time that the embedded link will be valid for.
-func (o ProjectAuthenticationEmbeddedLinkOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationEmbeddedLinkOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
+func (o ProjectAuthenticationEmbeddedLinkOutput) ExpirationTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationEmbeddedLink) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthenticationEmbeddedLinkPtrOutput struct{ *pulumi.OutputState }
@@ -1894,40 +1925,32 @@ func (o ProjectAuthenticationEmbeddedLinkPtrOutput) Elem() ProjectAuthentication
 	}).(ProjectAuthenticationEmbeddedLinkOutput)
 }
 
-func (o ProjectAuthenticationEmbeddedLinkPtrOutput) Enabled() pulumi.BoolPtrOutput {
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationEmbeddedLinkPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEmbeddedLink) *bool {
 		if v == nil {
 			return nil
 		}
-		return v.Enabled
+		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
 }
 
 // The amount of time that the embedded link will be valid for.
-func (o ProjectAuthenticationEmbeddedLinkPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationEmbeddedLink) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ExpirationTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationEmbeddedLinkPtrOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
+func (o ProjectAuthenticationEmbeddedLinkPtrOutput) ExpirationTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEmbeddedLink) *string {
 		if v == nil {
 			return nil
 		}
-		return v.ExpirationTimeUnit
+		return v.ExpirationTime
 	}).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthenticationEnchantedLink struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Settings related to sending emails as part of the enchanted link authentication.
-	EmailService       *ProjectAuthenticationEnchantedLinkEmailService `pulumi:"emailService"`
-	Enabled            *bool                                           `pulumi:"enabled"`
-	ExpirationTime     *int                                            `pulumi:"expirationTime"`
-	ExpirationTimeUnit *string                                         `pulumi:"expirationTimeUnit"`
+	EmailService   *ProjectAuthenticationEnchantedLinkEmailService `pulumi:"emailService"`
+	ExpirationTime *string                                         `pulumi:"expirationTime"`
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl *string `pulumi:"redirectUrl"`
 }
@@ -1944,11 +1967,11 @@ type ProjectAuthenticationEnchantedLinkInput interface {
 }
 
 type ProjectAuthenticationEnchantedLinkArgs struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Settings related to sending emails as part of the enchanted link authentication.
-	EmailService       ProjectAuthenticationEnchantedLinkEmailServicePtrInput `pulumi:"emailService"`
-	Enabled            pulumi.BoolPtrInput                                    `pulumi:"enabled"`
-	ExpirationTime     pulumi.IntPtrInput                                     `pulumi:"expirationTime"`
-	ExpirationTimeUnit pulumi.StringPtrInput                                  `pulumi:"expirationTimeUnit"`
+	EmailService   ProjectAuthenticationEnchantedLinkEmailServicePtrInput `pulumi:"emailService"`
+	ExpirationTime pulumi.StringPtrInput                                  `pulumi:"expirationTime"`
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
 }
@@ -2030,6 +2053,11 @@ func (o ProjectAuthenticationEnchantedLinkOutput) ToProjectAuthenticationEnchant
 	}).(ProjectAuthenticationEnchantedLinkPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationEnchantedLinkOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending emails as part of the enchanted link authentication.
 func (o ProjectAuthenticationEnchantedLinkOutput) EmailService() ProjectAuthenticationEnchantedLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *ProjectAuthenticationEnchantedLinkEmailService {
@@ -2037,16 +2065,8 @@ func (o ProjectAuthenticationEnchantedLinkOutput) EmailService() ProjectAuthenti
 	}).(ProjectAuthenticationEnchantedLinkEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationEnchantedLinkOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationEnchantedLinkOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationEnchantedLinkOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
+func (o ProjectAuthenticationEnchantedLinkOutput) ExpirationTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationEnchantedLink) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
 }
 
 // The URL to redirect users to after they log in using the enchanted link.
@@ -2078,6 +2098,16 @@ func (o ProjectAuthenticationEnchantedLinkPtrOutput) Elem() ProjectAuthenticatio
 	}).(ProjectAuthenticationEnchantedLinkOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationEnchantedLinkPtrOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending emails as part of the enchanted link authentication.
 func (o ProjectAuthenticationEnchantedLinkPtrOutput) EmailService() ProjectAuthenticationEnchantedLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *ProjectAuthenticationEnchantedLinkEmailService {
@@ -2088,30 +2118,12 @@ func (o ProjectAuthenticationEnchantedLinkPtrOutput) EmailService() ProjectAuthe
 	}).(ProjectAuthenticationEnchantedLinkEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationEnchantedLinkPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationEnchantedLinkPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ExpirationTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationEnchantedLinkPtrOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
+func (o ProjectAuthenticationEnchantedLinkPtrOutput) ExpirationTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationEnchantedLink) *string {
 		if v == nil {
 			return nil
 		}
-		return v.ExpirationTimeUnit
+		return v.ExpirationTime
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2406,11 +2418,11 @@ func (o ProjectAuthenticationEnchantedLinkEmailServiceTemplateArrayOutput) Index
 }
 
 type ProjectAuthenticationMagicLink struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Settings related to sending emails as part of the magic link authentication.
-	EmailService       *ProjectAuthenticationMagicLinkEmailService `pulumi:"emailService"`
-	Enabled            *bool                                       `pulumi:"enabled"`
-	ExpirationTime     *int                                        `pulumi:"expirationTime"`
-	ExpirationTimeUnit *string                                     `pulumi:"expirationTimeUnit"`
+	EmailService   *ProjectAuthenticationMagicLinkEmailService `pulumi:"emailService"`
+	ExpirationTime *string                                     `pulumi:"expirationTime"`
 	// The URL to redirect users to after they log in using the magic link.
 	RedirectUrl *string `pulumi:"redirectUrl"`
 	// Settings related to sending SMS messages as part of the magic link authentication.
@@ -2429,11 +2441,11 @@ type ProjectAuthenticationMagicLinkInput interface {
 }
 
 type ProjectAuthenticationMagicLinkArgs struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Settings related to sending emails as part of the magic link authentication.
-	EmailService       ProjectAuthenticationMagicLinkEmailServicePtrInput `pulumi:"emailService"`
-	Enabled            pulumi.BoolPtrInput                                `pulumi:"enabled"`
-	ExpirationTime     pulumi.IntPtrInput                                 `pulumi:"expirationTime"`
-	ExpirationTimeUnit pulumi.StringPtrInput                              `pulumi:"expirationTimeUnit"`
+	EmailService   ProjectAuthenticationMagicLinkEmailServicePtrInput `pulumi:"emailService"`
+	ExpirationTime pulumi.StringPtrInput                              `pulumi:"expirationTime"`
 	// The URL to redirect users to after they log in using the magic link.
 	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
 	// Settings related to sending SMS messages as part of the magic link authentication.
@@ -2517,6 +2529,11 @@ func (o ProjectAuthenticationMagicLinkOutput) ToProjectAuthenticationMagicLinkPt
 	}).(ProjectAuthenticationMagicLinkPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationMagicLinkOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending emails as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkOutput) EmailService() ProjectAuthenticationMagicLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkEmailService {
@@ -2524,16 +2541,8 @@ func (o ProjectAuthenticationMagicLinkOutput) EmailService() ProjectAuthenticati
 	}).(ProjectAuthenticationMagicLinkEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationMagicLinkOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationMagicLinkOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationMagicLinkOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
+func (o ProjectAuthenticationMagicLinkOutput) ExpirationTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationMagicLink) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
 }
 
 // The URL to redirect users to after they log in using the magic link.
@@ -2572,6 +2581,16 @@ func (o ProjectAuthenticationMagicLinkPtrOutput) Elem() ProjectAuthenticationMag
 	}).(ProjectAuthenticationMagicLinkOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationMagicLinkPtrOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending emails as part of the magic link authentication.
 func (o ProjectAuthenticationMagicLinkPtrOutput) EmailService() ProjectAuthenticationMagicLinkEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *ProjectAuthenticationMagicLinkEmailService {
@@ -2582,30 +2601,12 @@ func (o ProjectAuthenticationMagicLinkPtrOutput) EmailService() ProjectAuthentic
 	}).(ProjectAuthenticationMagicLinkEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationMagicLinkPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.BoolPtrOutput)
-}
-
-func (o ProjectAuthenticationMagicLinkPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ExpirationTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationMagicLinkPtrOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
+func (o ProjectAuthenticationMagicLinkPtrOutput) ExpirationTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationMagicLink) *string {
 		if v == nil {
 			return nil
 		}
-		return v.ExpirationTimeUnit
+		return v.ExpirationTime
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -3173,8 +3174,9 @@ func (o ProjectAuthenticationMagicLinkTextServiceTemplateArrayOutput) Index(i pu
 
 type ProjectAuthenticationOauth struct {
 	// Custom OAuth providers configured for this project.
-	Custom   map[string]ProjectAuthenticationOauthCustom `pulumi:"custom"`
-	Disabled *bool                                       `pulumi:"disabled"`
+	Custom map[string]ProjectAuthenticationOauthCustom `pulumi:"custom"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
 	System *ProjectAuthenticationOauthSystem `pulumi:"system"`
 }
@@ -3192,8 +3194,9 @@ type ProjectAuthenticationOauthInput interface {
 
 type ProjectAuthenticationOauthArgs struct {
 	// Custom OAuth providers configured for this project.
-	Custom   ProjectAuthenticationOauthCustomMapInput `pulumi:"custom"`
-	Disabled pulumi.BoolPtrInput                      `pulumi:"disabled"`
+	Custom ProjectAuthenticationOauthCustomMapInput `pulumi:"custom"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
 	System ProjectAuthenticationOauthSystemPtrInput `pulumi:"system"`
 }
@@ -3280,6 +3283,7 @@ func (o ProjectAuthenticationOauthOutput) Custom() ProjectAuthenticationOauthCus
 	return o.ApplyT(func(v ProjectAuthenticationOauth) map[string]ProjectAuthenticationOauthCustom { return v.Custom }).(ProjectAuthenticationOauthCustomMapOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauth) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
@@ -3323,6 +3327,7 @@ func (o ProjectAuthenticationOauthPtrOutput) Custom() ProjectAuthenticationOauth
 	}).(ProjectAuthenticationOauthCustomMapOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauth) *bool {
 		if v == nil {
@@ -3343,6 +3348,8 @@ func (o ProjectAuthenticationOauthPtrOutput) System() ProjectAuthenticationOauth
 }
 
 type ProjectAuthenticationOauthCustom struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -3352,10 +3359,9 @@ type ProjectAuthenticationOauthCustom struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -3386,6 +3392,8 @@ type ProjectAuthenticationOauthCustomInput interface {
 }
 
 type ProjectAuthenticationOauthCustomArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -3395,10 +3403,9 @@ type ProjectAuthenticationOauthCustomArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -3468,6 +3475,11 @@ func (o ProjectAuthenticationOauthCustomOutput) ToProjectAuthenticationOauthCust
 	return o
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthCustomOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -3492,13 +3504,9 @@ func (o ProjectAuthenticationOauthCustomOutput) Description() pulumi.StringPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthCustomOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthCustomOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthCustomOutput) Issuer() pulumi.StringPtrOutput {
@@ -4007,6 +4015,8 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Slack() ProjectAuthentication
 }
 
 type ProjectAuthenticationOauthSystemApple struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -4016,10 +4026,9 @@ type ProjectAuthenticationOauthSystemApple struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -4050,6 +4059,8 @@ type ProjectAuthenticationOauthSystemAppleInput interface {
 }
 
 type ProjectAuthenticationOauthSystemAppleArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -4059,10 +4070,9 @@ type ProjectAuthenticationOauthSystemAppleArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -4158,6 +4168,11 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) ToProjectAuthenticationOaut
 	}).(ProjectAuthenticationOauthSystemApplePtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemAppleOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -4182,13 +4197,9 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) Description() pulumi.String
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemAppleOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemAppleOutput) Issuer() pulumi.StringPtrOutput {
@@ -4261,6 +4272,16 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Elem() ProjectAuthentica
 	}).(ProjectAuthenticationOauthSystemAppleOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
@@ -4310,6 +4331,7 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Description() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *bool {
 		if v == nil {
@@ -4317,16 +4339,6 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Disabled() pulumi.BoolPt
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemApplePtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -4567,6 +4579,8 @@ func (o ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput) R
 }
 
 type ProjectAuthenticationOauthSystemDiscord struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -4576,10 +4590,9 @@ type ProjectAuthenticationOauthSystemDiscord struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -4610,6 +4623,8 @@ type ProjectAuthenticationOauthSystemDiscordInput interface {
 }
 
 type ProjectAuthenticationOauthSystemDiscordArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -4619,10 +4634,9 @@ type ProjectAuthenticationOauthSystemDiscordArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -4718,6 +4732,11 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) ToProjectAuthenticationOa
 	}).(ProjectAuthenticationOauthSystemDiscordPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -4742,13 +4761,9 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) Description() pulumi.Stri
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemDiscordOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Issuer() pulumi.StringPtrOutput {
@@ -4821,6 +4836,16 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Elem() ProjectAuthenti
 	}).(ProjectAuthenticationOauthSystemDiscordOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
@@ -4870,6 +4895,7 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Description() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *bool {
 		if v == nil {
@@ -4877,16 +4903,6 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Disabled() pulumi.Bool
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -5129,6 +5145,8 @@ func (o ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput)
 }
 
 type ProjectAuthenticationOauthSystemFacebook struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -5138,10 +5156,9 @@ type ProjectAuthenticationOauthSystemFacebook struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -5172,6 +5189,8 @@ type ProjectAuthenticationOauthSystemFacebookInput interface {
 }
 
 type ProjectAuthenticationOauthSystemFacebookArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -5181,10 +5200,9 @@ type ProjectAuthenticationOauthSystemFacebookArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -5280,6 +5298,11 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) ToProjectAuthenticationO
 	}).(ProjectAuthenticationOauthSystemFacebookPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -5304,13 +5327,9 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) Description() pulumi.Str
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemFacebookOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Issuer() pulumi.StringPtrOutput {
@@ -5383,6 +5402,16 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Elem() ProjectAuthent
 	}).(ProjectAuthenticationOauthSystemFacebookOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
@@ -5432,6 +5461,7 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Description() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *bool {
 		if v == nil {
@@ -5439,16 +5469,6 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Disabled() pulumi.Boo
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -5691,6 +5711,8 @@ func (o ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput
 }
 
 type ProjectAuthenticationOauthSystemGithub struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -5700,10 +5722,9 @@ type ProjectAuthenticationOauthSystemGithub struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -5734,6 +5755,8 @@ type ProjectAuthenticationOauthSystemGithubInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGithubArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -5743,10 +5766,9 @@ type ProjectAuthenticationOauthSystemGithubArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -5842,6 +5864,11 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGithubPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGithubOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -5866,13 +5893,9 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) Description() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGithubOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGithubOutput) Issuer() pulumi.StringPtrOutput {
@@ -5945,6 +5968,16 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGithubOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
@@ -5994,6 +6027,7 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Description() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *bool {
 		if v == nil {
@@ -6001,16 +6035,6 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Disabled() pulumi.BoolP
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGithubPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -6251,6 +6275,8 @@ func (o ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemGitlab struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -6260,10 +6286,9 @@ type ProjectAuthenticationOauthSystemGitlab struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -6294,6 +6319,8 @@ type ProjectAuthenticationOauthSystemGitlabInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGitlabArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -6303,10 +6330,9 @@ type ProjectAuthenticationOauthSystemGitlabArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -6402,6 +6428,11 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGitlabPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -6426,13 +6457,9 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) Description() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGitlabOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Issuer() pulumi.StringPtrOutput {
@@ -6505,6 +6532,16 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGitlabOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
@@ -6554,6 +6591,7 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Description() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *bool {
 		if v == nil {
@@ -6561,16 +6599,6 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Disabled() pulumi.BoolP
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -6811,6 +6839,8 @@ func (o ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemGoogle struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -6820,10 +6850,9 @@ type ProjectAuthenticationOauthSystemGoogle struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -6854,6 +6883,8 @@ type ProjectAuthenticationOauthSystemGoogleInput interface {
 }
 
 type ProjectAuthenticationOauthSystemGoogleArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -6863,10 +6894,9 @@ type ProjectAuthenticationOauthSystemGoogleArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -6962,6 +6992,11 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) ToProjectAuthenticationOau
 	}).(ProjectAuthenticationOauthSystemGooglePtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -6986,13 +7021,9 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) Description() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGoogleOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Issuer() pulumi.StringPtrOutput {
@@ -7065,6 +7096,16 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Elem() ProjectAuthentic
 	}).(ProjectAuthenticationOauthSystemGoogleOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
@@ -7114,6 +7155,7 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Description() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *bool {
 		if v == nil {
@@ -7121,16 +7163,6 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Disabled() pulumi.BoolP
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemGooglePtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -7371,6 +7403,8 @@ func (o ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput) 
 }
 
 type ProjectAuthenticationOauthSystemLinkedin struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -7380,10 +7414,9 @@ type ProjectAuthenticationOauthSystemLinkedin struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -7414,6 +7447,8 @@ type ProjectAuthenticationOauthSystemLinkedinInput interface {
 }
 
 type ProjectAuthenticationOauthSystemLinkedinArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -7423,10 +7458,9 @@ type ProjectAuthenticationOauthSystemLinkedinArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -7522,6 +7556,11 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) ToProjectAuthenticationO
 	}).(ProjectAuthenticationOauthSystemLinkedinPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -7546,13 +7585,9 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) Description() pulumi.Str
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemLinkedinOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Issuer() pulumi.StringPtrOutput {
@@ -7625,6 +7660,16 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Elem() ProjectAuthent
 	}).(ProjectAuthenticationOauthSystemLinkedinOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
@@ -7674,6 +7719,7 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Description() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *bool {
 		if v == nil {
@@ -7681,16 +7727,6 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Disabled() pulumi.Boo
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -7933,6 +7969,8 @@ func (o ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput
 }
 
 type ProjectAuthenticationOauthSystemMicrosoft struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -7942,10 +7980,9 @@ type ProjectAuthenticationOauthSystemMicrosoft struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -7976,6 +8013,8 @@ type ProjectAuthenticationOauthSystemMicrosoftInput interface {
 }
 
 type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -7985,10 +8024,9 @@ type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -8084,6 +8122,11 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ToProjectAuthentication
 	}).(ProjectAuthenticationOauthSystemMicrosoftPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -8108,13 +8151,9 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Description() pulumi.St
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemMicrosoftOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Issuer() pulumi.StringPtrOutput {
@@ -8187,6 +8226,16 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Elem() ProjectAuthen
 	}).(ProjectAuthenticationOauthSystemMicrosoftOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
@@ -8236,6 +8285,7 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Description() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *bool {
 		if v == nil {
@@ -8243,16 +8293,6 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Disabled() pulumi.Bo
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -8495,6 +8535,8 @@ func (o ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutpu
 }
 
 type ProjectAuthenticationOauthSystemSlack struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string           `pulumi:"authorizationEndpoint"`
 	ClaimMapping          map[string]string `pulumi:"claimMapping"`
@@ -8504,10 +8546,9 @@ type ProjectAuthenticationOauthSystemSlack struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
-	Disabled    *bool   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType *string `pulumi:"grantType"`
-	Issuer    *string `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool   `pulumi:"disabled"`
+	Issuer   *string `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint *string `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -8538,6 +8579,8 @@ type ProjectAuthenticationOauthSystemSlackInput interface {
 }
 
 type ProjectAuthenticationOauthSystemSlackArgs struct {
+	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	ClaimMapping          pulumi.StringMapInput `pulumi:"claimMapping"`
@@ -8547,10 +8590,9 @@ type ProjectAuthenticationOauthSystemSlackArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Disabled    pulumi.BoolPtrInput   `pulumi:"disabled"`
-	// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-	GrantType pulumi.StringPtrInput `pulumi:"grantType"`
-	Issuer    pulumi.StringPtrInput `pulumi:"issuer"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput   `pulumi:"disabled"`
+	Issuer   pulumi.StringPtrInput `pulumi:"issuer"`
 	// The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
 	JwksEndpoint pulumi.StringPtrInput `pulumi:"jwksEndpoint"`
 	// The URL of the logo associated with the OAuth provider.
@@ -8646,6 +8688,11 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) ToProjectAuthenticationOaut
 	}).(ProjectAuthenticationOauthSystemSlackPtrOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemSlackOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -8670,13 +8717,9 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) Description() pulumi.String
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemSlackOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.GrantType }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemSlackOutput) Issuer() pulumi.StringPtrOutput {
@@ -8749,6 +8792,16 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Elem() ProjectAuthentica
 	}).(ProjectAuthenticationOauthSystemSlackOutput)
 }
 
+// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) AllowedGrantTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedGrantTypes
+	}).(pulumi.StringArrayOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
@@ -8798,6 +8851,7 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Description() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *bool {
 		if v == nil {
@@ -8805,16 +8859,6 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Disabled() pulumi.BoolPt
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
-}
-
-// The type of grant (`authorizationCode` or `implicit`) to use when requesting access tokens from the OAuth provider.
-func (o ProjectAuthenticationOauthSystemSlackPtrOutput) GrantType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GrantType
-	}).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Issuer() pulumi.StringPtrOutput {
@@ -9055,14 +9099,14 @@ func (o ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput) R
 }
 
 type ProjectAuthenticationOtp struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// The domain to embed in OTP messages.
 	Domain *string `pulumi:"domain"`
 	// Settings related to sending emails with OTP codes.
 	EmailService *ProjectAuthenticationOtpEmailService `pulumi:"emailService"`
-	Enabled      *bool                                 `pulumi:"enabled"`
 	// The amount of time that an OTP code will be valid for.
-	ExpirationTime     *int    `pulumi:"expirationTime"`
-	ExpirationTimeUnit *string `pulumi:"expirationTimeUnit"`
+	ExpirationTime *string `pulumi:"expirationTime"`
 	// Settings related to sending SMS messages with OTP codes.
 	TextService *ProjectAuthenticationOtpTextService `pulumi:"textService"`
 	// Settings related to voice calls with OTP codes.
@@ -9081,14 +9125,14 @@ type ProjectAuthenticationOtpInput interface {
 }
 
 type ProjectAuthenticationOtpArgs struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The domain to embed in OTP messages.
 	Domain pulumi.StringPtrInput `pulumi:"domain"`
 	// Settings related to sending emails with OTP codes.
 	EmailService ProjectAuthenticationOtpEmailServicePtrInput `pulumi:"emailService"`
-	Enabled      pulumi.BoolPtrInput                          `pulumi:"enabled"`
 	// The amount of time that an OTP code will be valid for.
-	ExpirationTime     pulumi.IntPtrInput    `pulumi:"expirationTime"`
-	ExpirationTimeUnit pulumi.StringPtrInput `pulumi:"expirationTimeUnit"`
+	ExpirationTime pulumi.StringPtrInput `pulumi:"expirationTime"`
 	// Settings related to sending SMS messages with OTP codes.
 	TextService ProjectAuthenticationOtpTextServicePtrInput `pulumi:"textService"`
 	// Settings related to voice calls with OTP codes.
@@ -9172,6 +9216,11 @@ func (o ProjectAuthenticationOtpOutput) ToProjectAuthenticationOtpPtrOutputWithC
 	}).(ProjectAuthenticationOtpPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationOtpOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOtp) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+}
+
 // The domain to embed in OTP messages.
 func (o ProjectAuthenticationOtpOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *string { return v.Domain }).(pulumi.StringPtrOutput)
@@ -9182,17 +9231,9 @@ func (o ProjectAuthenticationOtpOutput) EmailService() ProjectAuthenticationOtpE
 	return o.ApplyT(func(v ProjectAuthenticationOtp) *ProjectAuthenticationOtpEmailService { return v.EmailService }).(ProjectAuthenticationOtpEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationOtpOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOtp) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
-}
-
 // The amount of time that an OTP code will be valid for.
-func (o ProjectAuthenticationOtpOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOtp) *int { return v.ExpirationTime }).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationOtpOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationOtp) *string { return v.ExpirationTimeUnit }).(pulumi.StringPtrOutput)
+func (o ProjectAuthenticationOtpOutput) ExpirationTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOtp) *string { return v.ExpirationTime }).(pulumi.StringPtrOutput)
 }
 
 // Settings related to sending SMS messages with OTP codes.
@@ -9229,6 +9270,16 @@ func (o ProjectAuthenticationOtpPtrOutput) Elem() ProjectAuthenticationOtpOutput
 	}).(ProjectAuthenticationOtpOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationOtpPtrOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOtp) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The domain to embed in OTP messages.
 func (o ProjectAuthenticationOtpPtrOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *string {
@@ -9249,31 +9300,13 @@ func (o ProjectAuthenticationOtpPtrOutput) EmailService() ProjectAuthenticationO
 	}).(ProjectAuthenticationOtpEmailServicePtrOutput)
 }
 
-func (o ProjectAuthenticationOtpPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOtp) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.BoolPtrOutput)
-}
-
 // The amount of time that an OTP code will be valid for.
-func (o ProjectAuthenticationOtpPtrOutput) ExpirationTime() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationOtp) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ExpirationTime
-	}).(pulumi.IntPtrOutput)
-}
-
-func (o ProjectAuthenticationOtpPtrOutput) ExpirationTimeUnit() pulumi.StringPtrOutput {
+func (o ProjectAuthenticationOtpPtrOutput) ExpirationTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOtp) *string {
 		if v == nil {
 			return nil
 		}
-		return v.ExpirationTimeUnit
+		return v.ExpirationTime
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -10102,7 +10135,8 @@ func (o ProjectAuthenticationOtpVoiceServiceTemplateArrayOutput) Index(i pulumi.
 }
 
 type ProjectAuthenticationPasskeys struct {
-	Enabled *bool `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Passkeys will be usable in the following domain and all its subdomains.
 	TopLevelDomain *string `pulumi:"topLevelDomain"`
 }
@@ -10119,7 +10153,8 @@ type ProjectAuthenticationPasskeysInput interface {
 }
 
 type ProjectAuthenticationPasskeysArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Passkeys will be usable in the following domain and all its subdomains.
 	TopLevelDomain pulumi.StringPtrInput `pulumi:"topLevelDomain"`
 }
@@ -10201,8 +10236,9 @@ func (o ProjectAuthenticationPasskeysOutput) ToProjectAuthenticationPasskeysPtrO
 	}).(ProjectAuthenticationPasskeysPtrOutput)
 }
 
-func (o ProjectAuthenticationPasskeysOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationPasskeys) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationPasskeysOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPasskeys) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
 // Passkeys will be usable in the following domain and all its subdomains.
@@ -10234,12 +10270,13 @@ func (o ProjectAuthenticationPasskeysPtrOutput) Elem() ProjectAuthenticationPass
 	}).(ProjectAuthenticationPasskeysOutput)
 }
 
-func (o ProjectAuthenticationPasskeysPtrOutput) Enabled() pulumi.BoolPtrOutput {
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationPasskeysPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPasskeys) *bool {
 		if v == nil {
 			return nil
 		}
-		return v.Enabled
+		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -10254,9 +10291,10 @@ func (o ProjectAuthenticationPasskeysPtrOutput) TopLevelDomain() pulumi.StringPt
 }
 
 type ProjectAuthenticationPassword struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Settings related to sending password reset emails as part of the password feature.
 	EmailService *ProjectAuthenticationPasswordEmailService `pulumi:"emailService"`
-	Enabled      *bool                                      `pulumi:"enabled"`
 	// Whether users are required to change their password periodically.
 	Expiration *bool `pulumi:"expiration"`
 	// The number of weeks after which a user's password expires and they need to replace it.
@@ -10292,9 +10330,10 @@ type ProjectAuthenticationPasswordInput interface {
 }
 
 type ProjectAuthenticationPasswordArgs struct {
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Settings related to sending password reset emails as part of the password feature.
 	EmailService ProjectAuthenticationPasswordEmailServicePtrInput `pulumi:"emailService"`
-	Enabled      pulumi.BoolPtrInput                               `pulumi:"enabled"`
 	// Whether users are required to change their password periodically.
 	Expiration pulumi.BoolPtrInput `pulumi:"expiration"`
 	// The number of weeks after which a user's password expires and they need to replace it.
@@ -10395,15 +10434,16 @@ func (o ProjectAuthenticationPasswordOutput) ToProjectAuthenticationPasswordPtrO
 	}).(ProjectAuthenticationPasswordPtrOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationPasswordOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending password reset emails as part of the password feature.
 func (o ProjectAuthenticationPasswordOutput) EmailService() ProjectAuthenticationPasswordEmailServicePtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *ProjectAuthenticationPasswordEmailService {
 		return v.EmailService
 	}).(ProjectAuthenticationPasswordEmailServicePtrOutput)
-}
-
-func (o ProjectAuthenticationPasswordOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 // Whether users are required to change their password periodically.
@@ -10484,6 +10524,16 @@ func (o ProjectAuthenticationPasswordPtrOutput) Elem() ProjectAuthenticationPass
 	}).(ProjectAuthenticationPasswordOutput)
 }
 
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationPasswordPtrOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Settings related to sending password reset emails as part of the password feature.
 func (o ProjectAuthenticationPasswordPtrOutput) EmailService() ProjectAuthenticationPasswordEmailServicePtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationPassword) *ProjectAuthenticationPasswordEmailService {
@@ -10492,15 +10542,6 @@ func (o ProjectAuthenticationPasswordPtrOutput) EmailService() ProjectAuthentica
 		}
 		return v.EmailService
 	}).(ProjectAuthenticationPasswordEmailServicePtrOutput)
-}
-
-func (o ProjectAuthenticationPasswordPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.Enabled
-	}).(pulumi.BoolPtrOutput)
 }
 
 // Whether users are required to change their password periodically.
@@ -10893,7 +10934,8 @@ func (o ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput) Index(i pu
 }
 
 type ProjectAuthenticationSso struct {
-	Enabled *bool `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 }
@@ -10910,7 +10952,8 @@ type ProjectAuthenticationSsoInput interface {
 }
 
 type ProjectAuthenticationSsoArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
 }
@@ -10992,8 +11035,9 @@ func (o ProjectAuthenticationSsoOutput) ToProjectAuthenticationSsoPtrOutputWithC
 	}).(ProjectAuthenticationSsoPtrOutput)
 }
 
-func (o ProjectAuthenticationSsoOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationSsoOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
 // Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -11025,12 +11069,13 @@ func (o ProjectAuthenticationSsoPtrOutput) Elem() ProjectAuthenticationSsoOutput
 	}).(ProjectAuthenticationSsoOutput)
 }
 
-func (o ProjectAuthenticationSsoPtrOutput) Enabled() pulumi.BoolPtrOutput {
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationSsoPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
 		if v == nil {
 			return nil
 		}
-		return v.Enabled
+		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -11045,7 +11090,8 @@ func (o ProjectAuthenticationSsoPtrOutput) MergeUsers() pulumi.BoolPtrOutput {
 }
 
 type ProjectAuthenticationTotp struct {
-	Enabled *bool `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled *bool `pulumi:"disabled"`
 }
 
 // ProjectAuthenticationTotpInput is an input type that accepts ProjectAuthenticationTotpArgs and ProjectAuthenticationTotpOutput values.
@@ -11060,7 +11106,8 @@ type ProjectAuthenticationTotpInput interface {
 }
 
 type ProjectAuthenticationTotpArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 }
 
 func (ProjectAuthenticationTotpArgs) ElementType() reflect.Type {
@@ -11140,8 +11187,9 @@ func (o ProjectAuthenticationTotpOutput) ToProjectAuthenticationTotpPtrOutputWit
 	}).(ProjectAuthenticationTotpPtrOutput)
 }
 
-func (o ProjectAuthenticationTotpOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectAuthenticationTotp) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationTotpOutput) Disabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationTotp) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
 type ProjectAuthenticationTotpPtrOutput struct{ *pulumi.OutputState }
@@ -11168,18 +11216,21 @@ func (o ProjectAuthenticationTotpPtrOutput) Elem() ProjectAuthenticationTotpOutp
 	}).(ProjectAuthenticationTotpOutput)
 }
 
-func (o ProjectAuthenticationTotpPtrOutput) Enabled() pulumi.BoolPtrOutput {
+// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+func (o ProjectAuthenticationTotpPtrOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationTotp) *bool {
 		if v == nil {
 			return nil
 		}
-		return v.Enabled
+		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
 }
 
 type ProjectAuthorization struct {
+	// A list of `Permission` objects.
 	Permissions []ProjectAuthorizationPermission `pulumi:"permissions"`
-	Roles       []ProjectAuthorizationRole       `pulumi:"roles"`
+	// A list of `Role` objects.
+	Roles []ProjectAuthorizationRole `pulumi:"roles"`
 }
 
 // ProjectAuthorizationInput is an input type that accepts ProjectAuthorizationArgs and ProjectAuthorizationOutput values.
@@ -11194,8 +11245,10 @@ type ProjectAuthorizationInput interface {
 }
 
 type ProjectAuthorizationArgs struct {
+	// A list of `Permission` objects.
 	Permissions ProjectAuthorizationPermissionArrayInput `pulumi:"permissions"`
-	Roles       ProjectAuthorizationRoleArrayInput       `pulumi:"roles"`
+	// A list of `Role` objects.
+	Roles ProjectAuthorizationRoleArrayInput `pulumi:"roles"`
 }
 
 func (ProjectAuthorizationArgs) ElementType() reflect.Type {
@@ -11275,10 +11328,12 @@ func (o ProjectAuthorizationOutput) ToProjectAuthorizationPtrOutputWithContext(c
 	}).(ProjectAuthorizationPtrOutput)
 }
 
+// A list of `Permission` objects.
 func (o ProjectAuthorizationOutput) Permissions() ProjectAuthorizationPermissionArrayOutput {
 	return o.ApplyT(func(v ProjectAuthorization) []ProjectAuthorizationPermission { return v.Permissions }).(ProjectAuthorizationPermissionArrayOutput)
 }
 
+// A list of `Role` objects.
 func (o ProjectAuthorizationOutput) Roles() ProjectAuthorizationRoleArrayOutput {
 	return o.ApplyT(func(v ProjectAuthorization) []ProjectAuthorizationRole { return v.Roles }).(ProjectAuthorizationRoleArrayOutput)
 }
@@ -11307,6 +11362,7 @@ func (o ProjectAuthorizationPtrOutput) Elem() ProjectAuthorizationOutput {
 	}).(ProjectAuthorizationOutput)
 }
 
+// A list of `Permission` objects.
 func (o ProjectAuthorizationPtrOutput) Permissions() ProjectAuthorizationPermissionArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthorization) []ProjectAuthorizationPermission {
 		if v == nil {
@@ -11316,6 +11372,7 @@ func (o ProjectAuthorizationPtrOutput) Permissions() ProjectAuthorizationPermiss
 	}).(ProjectAuthorizationPermissionArrayOutput)
 }
 
+// A list of `Role` objects.
 func (o ProjectAuthorizationPtrOutput) Roles() ProjectAuthorizationRoleArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthorization) []ProjectAuthorizationRole {
 		if v == nil {
@@ -11326,9 +11383,11 @@ func (o ProjectAuthorizationPtrOutput) Roles() ProjectAuthorizationRoleArrayOutp
 }
 
 type ProjectAuthorizationPermission struct {
+	// A description for the permission.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Name        string  `pulumi:"name"`
+	// A name for the permission.
+	Name string `pulumi:"name"`
 }
 
 // ProjectAuthorizationPermissionInput is an input type that accepts ProjectAuthorizationPermissionArgs and ProjectAuthorizationPermissionOutput values.
@@ -11343,9 +11402,11 @@ type ProjectAuthorizationPermissionInput interface {
 }
 
 type ProjectAuthorizationPermissionArgs struct {
+	// A description for the permission.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Name        pulumi.StringInput    `pulumi:"name"`
+	// A name for the permission.
+	Name pulumi.StringInput `pulumi:"name"`
 }
 
 func (ProjectAuthorizationPermissionArgs) ElementType() reflect.Type {
@@ -11399,6 +11460,7 @@ func (o ProjectAuthorizationPermissionOutput) ToProjectAuthorizationPermissionOu
 	return o
 }
 
+// A description for the permission.
 func (o ProjectAuthorizationPermissionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationPermission) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -11407,6 +11469,7 @@ func (o ProjectAuthorizationPermissionOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationPermission) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A name for the permission.
 func (o ProjectAuthorizationPermissionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAuthorizationPermission) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -11432,9 +11495,12 @@ func (o ProjectAuthorizationPermissionArrayOutput) Index(i pulumi.IntInput) Proj
 }
 
 type ProjectAuthorizationRole struct {
-	Description *string  `pulumi:"description"`
-	Id          *string  `pulumi:"id"`
-	Name        string   `pulumi:"name"`
+	// A description for the role.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A name for the role.
+	Name string `pulumi:"name"`
+	// A list of permissions by name to be included in the role.
 	Permissions []string `pulumi:"permissions"`
 }
 
@@ -11450,9 +11516,12 @@ type ProjectAuthorizationRoleInput interface {
 }
 
 type ProjectAuthorizationRoleArgs struct {
-	Description pulumi.StringPtrInput   `pulumi:"description"`
-	Id          pulumi.StringPtrInput   `pulumi:"id"`
-	Name        pulumi.StringInput      `pulumi:"name"`
+	// A description for the role.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A name for the role.
+	Name pulumi.StringInput `pulumi:"name"`
+	// A list of permissions by name to be included in the role.
 	Permissions pulumi.StringArrayInput `pulumi:"permissions"`
 }
 
@@ -11507,6 +11576,7 @@ func (o ProjectAuthorizationRoleOutput) ToProjectAuthorizationRoleOutputWithCont
 	return o
 }
 
+// A description for the role.
 func (o ProjectAuthorizationRoleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -11515,10 +11585,12 @@ func (o ProjectAuthorizationRoleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A name for the role.
 func (o ProjectAuthorizationRoleOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// A list of permissions by name to be included in the role.
 func (o ProjectAuthorizationRoleOutput) Permissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) []string { return v.Permissions }).(pulumi.StringArrayOutput)
 }
@@ -11565,14 +11637,17 @@ type ProjectConnectors struct {
 	Forters                 []ProjectConnectorsForter                 `pulumi:"forters"`
 	GoogleCloudTranslations []ProjectConnectorsGoogleCloudTranslation `pulumi:"googleCloudTranslations"`
 	// API to check if password appeared previously exposed in data breaches.
-	Hibps         []ProjectConnectorsHibp         `pulumi:"hibps"`
-	HttpStaticIps []ProjectConnectorsHttpStaticIp `pulumi:"httpStaticIps"`
+	Hibps []ProjectConnectorsHibp `pulumi:"hibps"`
 	// A general purpose HTTP client
 	Https []ProjectConnectorsHttp `pulumi:"https"`
 	// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
 	Hubspots []ProjectConnectorsHubspot `pulumi:"hubspots"`
 	// Intercom is a Conversational Relationship Platform (CRP).
 	Intercoms []ProjectConnectorsIntercom `pulumi:"intercoms"`
+	// Localize the language of your login and user journey screens with the Lokalise connector.
+	Lokalises []ProjectConnectorsLokalise `pulumi:"lokalises"`
+	// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+	Mparticles []ProjectConnectorsMparticle `pulumi:"mparticles"`
 	// Use this connector to send audit events and troubleshooting logs to New Relic.
 	Newrelics            []ProjectConnectorsNewrelic            `pulumi:"newrelics"`
 	RecaptchaEnterprises []ProjectConnectorsRecaptchaEnterprise `pulumi:"recaptchaEnterprises"`
@@ -11585,7 +11660,9 @@ type ProjectConnectors struct {
 	// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 	Segments  []ProjectConnectorsSegment  `pulumi:"segments"`
 	Sendgrids []ProjectConnectorsSendgrid `pulumi:"sendgrids"`
-	Smtps     []ProjectConnectorsSmtp     `pulumi:"smtps"`
+	// Localize the language of your login and user journey screens with the Smartling connector.
+	Smartlings []ProjectConnectorsSmartling `pulumi:"smartlings"`
+	Smtps      []ProjectConnectorsSmtp      `pulumi:"smtps"`
 	// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
 	Sumologics []ProjectConnectorsSumologic `pulumi:"sumologics"`
 	// Telesign Phone number intelligence API provides risk score for phone numbers.
@@ -11594,8 +11671,6 @@ type ProjectConnectors struct {
 	Traceables     []ProjectConnectorsTraceable    `pulumi:"traceables"`
 	TwilioCores    []ProjectConnectorsTwilioCore   `pulumi:"twilioCores"`
 	TwilioVerifies []ProjectConnectorsTwilioVerify `pulumi:"twilioVerifies"`
-	// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-	Veriffs []ProjectConnectorsVeriff `pulumi:"veriffs"`
 }
 
 // ProjectConnectorsInput is an input type that accepts ProjectConnectorsArgs and ProjectConnectorsOutput values.
@@ -11631,14 +11706,17 @@ type ProjectConnectorsArgs struct {
 	Forters                 ProjectConnectorsForterArrayInput                 `pulumi:"forters"`
 	GoogleCloudTranslations ProjectConnectorsGoogleCloudTranslationArrayInput `pulumi:"googleCloudTranslations"`
 	// API to check if password appeared previously exposed in data breaches.
-	Hibps         ProjectConnectorsHibpArrayInput         `pulumi:"hibps"`
-	HttpStaticIps ProjectConnectorsHttpStaticIpArrayInput `pulumi:"httpStaticIps"`
+	Hibps ProjectConnectorsHibpArrayInput `pulumi:"hibps"`
 	// A general purpose HTTP client
 	Https ProjectConnectorsHttpArrayInput `pulumi:"https"`
 	// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
 	Hubspots ProjectConnectorsHubspotArrayInput `pulumi:"hubspots"`
 	// Intercom is a Conversational Relationship Platform (CRP).
 	Intercoms ProjectConnectorsIntercomArrayInput `pulumi:"intercoms"`
+	// Localize the language of your login and user journey screens with the Lokalise connector.
+	Lokalises ProjectConnectorsLokaliseArrayInput `pulumi:"lokalises"`
+	// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+	Mparticles ProjectConnectorsMparticleArrayInput `pulumi:"mparticles"`
 	// Use this connector to send audit events and troubleshooting logs to New Relic.
 	Newrelics            ProjectConnectorsNewrelicArrayInput            `pulumi:"newrelics"`
 	RecaptchaEnterprises ProjectConnectorsRecaptchaEnterpriseArrayInput `pulumi:"recaptchaEnterprises"`
@@ -11651,7 +11729,9 @@ type ProjectConnectorsArgs struct {
 	// Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
 	Segments  ProjectConnectorsSegmentArrayInput  `pulumi:"segments"`
 	Sendgrids ProjectConnectorsSendgridArrayInput `pulumi:"sendgrids"`
-	Smtps     ProjectConnectorsSmtpArrayInput     `pulumi:"smtps"`
+	// Localize the language of your login and user journey screens with the Smartling connector.
+	Smartlings ProjectConnectorsSmartlingArrayInput `pulumi:"smartlings"`
+	Smtps      ProjectConnectorsSmtpArrayInput      `pulumi:"smtps"`
 	// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
 	Sumologics ProjectConnectorsSumologicArrayInput `pulumi:"sumologics"`
 	// Telesign Phone number intelligence API provides risk score for phone numbers.
@@ -11660,8 +11740,6 @@ type ProjectConnectorsArgs struct {
 	Traceables     ProjectConnectorsTraceableArrayInput    `pulumi:"traceables"`
 	TwilioCores    ProjectConnectorsTwilioCoreArrayInput   `pulumi:"twilioCores"`
 	TwilioVerifies ProjectConnectorsTwilioVerifyArrayInput `pulumi:"twilioVerifies"`
-	// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-	Veriffs ProjectConnectorsVeriffArrayInput `pulumi:"veriffs"`
 }
 
 func (ProjectConnectorsArgs) ElementType() reflect.Type {
@@ -11805,10 +11883,6 @@ func (o ProjectConnectorsOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHibp { return v.Hibps }).(ProjectConnectorsHibpArrayOutput)
 }
 
-func (o ProjectConnectorsOutput) HttpStaticIps() ProjectConnectorsHttpStaticIpArrayOutput {
-	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHttpStaticIp { return v.HttpStaticIps }).(ProjectConnectorsHttpStaticIpArrayOutput)
-}
-
 // A general purpose HTTP client
 func (o ProjectConnectorsOutput) Https() ProjectConnectorsHttpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHttp { return v.Https }).(ProjectConnectorsHttpArrayOutput)
@@ -11822,6 +11896,16 @@ func (o ProjectConnectorsOutput) Hubspots() ProjectConnectorsHubspotArrayOutput 
 // Intercom is a Conversational Relationship Platform (CRP).
 func (o ProjectConnectorsOutput) Intercoms() ProjectConnectorsIntercomArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsIntercom { return v.Intercoms }).(ProjectConnectorsIntercomArrayOutput)
+}
+
+// Localize the language of your login and user journey screens with the Lokalise connector.
+func (o ProjectConnectorsOutput) Lokalises() ProjectConnectorsLokaliseArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsLokalise { return v.Lokalises }).(ProjectConnectorsLokaliseArrayOutput)
+}
+
+// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+func (o ProjectConnectorsOutput) Mparticles() ProjectConnectorsMparticleArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsMparticle { return v.Mparticles }).(ProjectConnectorsMparticleArrayOutput)
 }
 
 // Use this connector to send audit events and troubleshooting logs to New Relic.
@@ -11857,6 +11941,11 @@ func (o ProjectConnectorsOutput) Sendgrids() ProjectConnectorsSendgridArrayOutpu
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSendgrid { return v.Sendgrids }).(ProjectConnectorsSendgridArrayOutput)
 }
 
+// Localize the language of your login and user journey screens with the Smartling connector.
+func (o ProjectConnectorsOutput) Smartlings() ProjectConnectorsSmartlingArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSmartling { return v.Smartlings }).(ProjectConnectorsSmartlingArrayOutput)
+}
+
 func (o ProjectConnectorsOutput) Smtps() ProjectConnectorsSmtpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSmtp { return v.Smtps }).(ProjectConnectorsSmtpArrayOutput)
 }
@@ -11882,11 +11971,6 @@ func (o ProjectConnectorsOutput) TwilioCores() ProjectConnectorsTwilioCoreArrayO
 
 func (o ProjectConnectorsOutput) TwilioVerifies() ProjectConnectorsTwilioVerifyArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsTwilioVerify { return v.TwilioVerifies }).(ProjectConnectorsTwilioVerifyArrayOutput)
-}
-
-// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-func (o ProjectConnectorsOutput) Veriffs() ProjectConnectorsVeriffArrayOutput {
-	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsVeriff { return v.Veriffs }).(ProjectConnectorsVeriffArrayOutput)
 }
 
 type ProjectConnectorsPtrOutput struct{ *pulumi.OutputState }
@@ -12047,15 +12131,6 @@ func (o ProjectConnectorsPtrOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	}).(ProjectConnectorsHibpArrayOutput)
 }
 
-func (o ProjectConnectorsPtrOutput) HttpStaticIps() ProjectConnectorsHttpStaticIpArrayOutput {
-	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHttpStaticIp {
-		if v == nil {
-			return nil
-		}
-		return v.HttpStaticIps
-	}).(ProjectConnectorsHttpStaticIpArrayOutput)
-}
-
 // A general purpose HTTP client
 func (o ProjectConnectorsPtrOutput) Https() ProjectConnectorsHttpArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHttp {
@@ -12084,6 +12159,26 @@ func (o ProjectConnectorsPtrOutput) Intercoms() ProjectConnectorsIntercomArrayOu
 		}
 		return v.Intercoms
 	}).(ProjectConnectorsIntercomArrayOutput)
+}
+
+// Localize the language of your login and user journey screens with the Lokalise connector.
+func (o ProjectConnectorsPtrOutput) Lokalises() ProjectConnectorsLokaliseArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsLokalise {
+		if v == nil {
+			return nil
+		}
+		return v.Lokalises
+	}).(ProjectConnectorsLokaliseArrayOutput)
+}
+
+// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+func (o ProjectConnectorsPtrOutput) Mparticles() ProjectConnectorsMparticleArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsMparticle {
+		if v == nil {
+			return nil
+		}
+		return v.Mparticles
+	}).(ProjectConnectorsMparticleArrayOutput)
 }
 
 // Use this connector to send audit events and troubleshooting logs to New Relic.
@@ -12154,6 +12249,16 @@ func (o ProjectConnectorsPtrOutput) Sendgrids() ProjectConnectorsSendgridArrayOu
 	}).(ProjectConnectorsSendgridArrayOutput)
 }
 
+// Localize the language of your login and user journey screens with the Smartling connector.
+func (o ProjectConnectorsPtrOutput) Smartlings() ProjectConnectorsSmartlingArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSmartling {
+		if v == nil {
+			return nil
+		}
+		return v.Smartlings
+	}).(ProjectConnectorsSmartlingArrayOutput)
+}
+
 func (o ProjectConnectorsPtrOutput) Smtps() ProjectConnectorsSmtpArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSmtp {
 		if v == nil {
@@ -12209,16 +12314,6 @@ func (o ProjectConnectorsPtrOutput) TwilioVerifies() ProjectConnectorsTwilioVeri
 		}
 		return v.TwilioVerifies
 	}).(ProjectConnectorsTwilioVerifyArrayOutput)
-}
-
-// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-func (o ProjectConnectorsPtrOutput) Veriffs() ProjectConnectorsVeriffArrayOutput {
-	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsVeriff {
-		if v == nil {
-			return nil
-		}
-		return v.Veriffs
-	}).(ProjectConnectorsVeriffArrayOutput)
 }
 
 type ProjectConnectorsAbuseipdb struct {
@@ -15286,637 +15381,6 @@ func (o ProjectConnectorsHttpAuthenticationBasicPtrOutput) Username() pulumi.Str
 	}).(pulumi.StringPtrOutput)
 }
 
-type ProjectConnectorsHttpStaticIp struct {
-	// Authentication Information
-	Authentication *ProjectConnectorsHttpStaticIpAuthentication `pulumi:"authentication"`
-	// The base URL to fetch
-	BaseUrl string `pulumi:"baseUrl"`
-	// A description of what your connector is used for.
-	Description *string `pulumi:"description"`
-	// The headers to send with the request
-	Headers map[string]string `pulumi:"headers"`
-	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-	HmacSecret *string `pulumi:"hmacSecret"`
-	Id         *string `pulumi:"id"`
-	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-	IncludeHeadersInContext *bool `pulumi:"includeHeadersInContext"`
-	// Will ignore certificate errors raised by the client
-	Insecure *bool `pulumi:"insecure"`
-	// A custom name for your connector.
-	Name string `pulumi:"name"`
-}
-
-// ProjectConnectorsHttpStaticIpInput is an input type that accepts ProjectConnectorsHttpStaticIpArgs and ProjectConnectorsHttpStaticIpOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpInput` via:
-//
-//	ProjectConnectorsHttpStaticIpArgs{...}
-type ProjectConnectorsHttpStaticIpInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput
-	ToProjectConnectorsHttpStaticIpOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpOutput
-}
-
-type ProjectConnectorsHttpStaticIpArgs struct {
-	// Authentication Information
-	Authentication ProjectConnectorsHttpStaticIpAuthenticationPtrInput `pulumi:"authentication"`
-	// The base URL to fetch
-	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
-	// A description of what your connector is used for.
-	Description pulumi.StringPtrInput `pulumi:"description"`
-	// The headers to send with the request
-	Headers pulumi.StringMapInput `pulumi:"headers"`
-	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-	HmacSecret pulumi.StringPtrInput `pulumi:"hmacSecret"`
-	Id         pulumi.StringPtrInput `pulumi:"id"`
-	// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-	IncludeHeadersInContext pulumi.BoolPtrInput `pulumi:"includeHeadersInContext"`
-	// Will ignore certificate errors raised by the client
-	Insecure pulumi.BoolPtrInput `pulumi:"insecure"`
-	// A custom name for your connector.
-	Name pulumi.StringInput `pulumi:"name"`
-}
-
-func (ProjectConnectorsHttpStaticIpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIp)(nil)).Elem()
-}
-
-func (i ProjectConnectorsHttpStaticIpArgs) ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput {
-	return i.ToProjectConnectorsHttpStaticIpOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpArgs) ToProjectConnectorsHttpStaticIpOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpOutput)
-}
-
-// ProjectConnectorsHttpStaticIpArrayInput is an input type that accepts ProjectConnectorsHttpStaticIpArray and ProjectConnectorsHttpStaticIpArrayOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpArrayInput` via:
-//
-//	ProjectConnectorsHttpStaticIpArray{ ProjectConnectorsHttpStaticIpArgs{...} }
-type ProjectConnectorsHttpStaticIpArrayInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput
-	ToProjectConnectorsHttpStaticIpArrayOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpArrayOutput
-}
-
-type ProjectConnectorsHttpStaticIpArray []ProjectConnectorsHttpStaticIpInput
-
-func (ProjectConnectorsHttpStaticIpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsHttpStaticIp)(nil)).Elem()
-}
-
-func (i ProjectConnectorsHttpStaticIpArray) ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput {
-	return i.ToProjectConnectorsHttpStaticIpArrayOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpArray) ToProjectConnectorsHttpStaticIpArrayOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpArrayOutput)
-}
-
-type ProjectConnectorsHttpStaticIpOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIp)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpOutput) ToProjectConnectorsHttpStaticIpOutput() ProjectConnectorsHttpStaticIpOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpOutput) ToProjectConnectorsHttpStaticIpOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpOutput {
-	return o
-}
-
-// Authentication Information
-func (o ProjectConnectorsHttpStaticIpOutput) Authentication() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *ProjectConnectorsHttpStaticIpAuthentication {
-		return v.Authentication
-	}).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
-}
-
-// The base URL to fetch
-func (o ProjectConnectorsHttpStaticIpOutput) BaseUrl() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.BaseUrl }).(pulumi.StringOutput)
-}
-
-// A description of what your connector is used for.
-func (o ProjectConnectorsHttpStaticIpOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Description }).(pulumi.StringPtrOutput)
-}
-
-// The headers to send with the request
-func (o ProjectConnectorsHttpStaticIpOutput) Headers() pulumi.StringMapOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
-}
-
-// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-func (o ProjectConnectorsHttpStaticIpOutput) HmacSecret() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.HmacSecret }).(pulumi.StringPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *string { return v.Id }).(pulumi.StringPtrOutput)
-}
-
-// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-func (o ProjectConnectorsHttpStaticIpOutput) IncludeHeadersInContext() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.IncludeHeadersInContext }).(pulumi.BoolPtrOutput)
-}
-
-// Will ignore certificate errors raised by the client
-func (o ProjectConnectorsHttpStaticIpOutput) Insecure() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
-}
-
-// A custom name for your connector.
-func (o ProjectConnectorsHttpStaticIpOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIp) string { return v.Name }).(pulumi.StringOutput)
-}
-
-type ProjectConnectorsHttpStaticIpArrayOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsHttpStaticIp)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpArrayOutput) ToProjectConnectorsHttpStaticIpArrayOutput() ProjectConnectorsHttpStaticIpArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpArrayOutput) ToProjectConnectorsHttpStaticIpArrayOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsHttpStaticIpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsHttpStaticIp {
-		return vs[0].([]ProjectConnectorsHttpStaticIp)[vs[1].(int)]
-	}).(ProjectConnectorsHttpStaticIpOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthentication struct {
-	ApiKey      *ProjectConnectorsHttpStaticIpAuthenticationApiKey `pulumi:"apiKey"`
-	Basic       *ProjectConnectorsHttpStaticIpAuthenticationBasic  `pulumi:"basic"`
-	BearerToken *string                                            `pulumi:"bearerToken"`
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationArgs and ProjectConnectorsHttpStaticIpAuthenticationOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationInput` via:
-//
-//	ProjectConnectorsHttpStaticIpAuthenticationArgs{...}
-type ProjectConnectorsHttpStaticIpAuthenticationInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationArgs struct {
-	ApiKey      ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput `pulumi:"apiKey"`
-	Basic       ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput  `pulumi:"basic"`
-	BearerToken pulumi.StringPtrInput                                     `pulumi:"bearerToken"`
-}
-
-func (ProjectConnectorsHttpStaticIpAuthenticationArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationOutput)
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationArgs) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationOutput).ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx)
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationArgs, ProjectConnectorsHttpStaticIpAuthenticationPtr and ProjectConnectorsHttpStaticIpAuthenticationPtrOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationPtrInput` via:
-//
-//	        ProjectConnectorsHttpStaticIpAuthenticationArgs{...}
-//
-//	or:
-//
-//	        nil
-type ProjectConnectorsHttpStaticIpAuthenticationPtrInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput
-}
-
-type projectConnectorsHttpStaticIpAuthenticationPtrType ProjectConnectorsHttpStaticIpAuthenticationArgs
-
-func ProjectConnectorsHttpStaticIpAuthenticationPtr(v *ProjectConnectorsHttpStaticIpAuthenticationArgs) ProjectConnectorsHttpStaticIpAuthenticationPtrInput {
-	return (*projectConnectorsHttpStaticIpAuthenticationPtrType)(v)
-}
-
-func (*projectConnectorsHttpStaticIpAuthenticationPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationPtrType) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationPtrType) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationOutput() ProjectConnectorsHttpStaticIpAuthenticationOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return o.ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(context.Background())
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthentication {
-		return &v
-	}).(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) ApiKey() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
-		return v.ApiKey
-	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) Basic() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
-		return v.Basic
-	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationOutput) BearerToken() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationPtrOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthentication)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) ProjectConnectorsHttpStaticIpAuthentication {
-		if v != nil {
-			return *v
-		}
-		var ret ProjectConnectorsHttpStaticIpAuthentication
-		return ret
-	}).(ProjectConnectorsHttpStaticIpAuthenticationOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) ApiKey() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
-		if v == nil {
-			return nil
-		}
-		return v.ApiKey
-	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) Basic() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
-		if v == nil {
-			return nil
-		}
-		return v.Basic
-	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationPtrOutput) BearerToken() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthentication) *string {
-		if v == nil {
-			return nil
-		}
-		return v.BearerToken
-	}).(pulumi.StringPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationApiKey struct {
-	Key   string `pulumi:"key"`
-	Token string `pulumi:"token"`
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs and ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput` via:
-//
-//	ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{...}
-type ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs struct {
-	Key   pulumi.StringInput `pulumi:"key"`
-	Token pulumi.StringInput `pulumi:"token"`
-}
-
-func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput)
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput).ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx)
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs, ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtr and ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput` via:
-//
-//	        ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{...}
-//
-//	or:
-//
-//	        nil
-type ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput
-}
-
-type projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs
-
-func ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtr(v *ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput {
-	return (*projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType)(v)
-}
-
-func (*projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationApiKeyPtrType) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o.ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(context.Background())
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthenticationApiKey) *ProjectConnectorsHttpStaticIpAuthenticationApiKey {
-		return &v
-	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationApiKey) string { return v.Key }).(pulumi.StringOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput) Token() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationApiKey) string { return v.Token }).(pulumi.StringOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationApiKey)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) ProjectConnectorsHttpStaticIpAuthenticationApiKey {
-		if v != nil {
-			return *v
-		}
-		var ret ProjectConnectorsHttpStaticIpAuthenticationApiKey
-		return ret
-	}).(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Key() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Key
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput) Token() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationApiKey) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Token
-	}).(pulumi.StringPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationBasic struct {
-	Password string `pulumi:"password"`
-	Username string `pulumi:"username"`
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationBasicInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationBasicArgs and ProjectConnectorsHttpStaticIpAuthenticationBasicOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationBasicInput` via:
-//
-//	ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{...}
-type ProjectConnectorsHttpStaticIpAuthenticationBasicInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationBasicArgs struct {
-	Password pulumi.StringInput `pulumi:"password"`
-	Username pulumi.StringInput `pulumi:"username"`
-}
-
-func (ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput)
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput).ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx)
-}
-
-// ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput is an input type that accepts ProjectConnectorsHttpStaticIpAuthenticationBasicArgs, ProjectConnectorsHttpStaticIpAuthenticationBasicPtr and ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput values.
-// You can construct a concrete instance of `ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput` via:
-//
-//	        ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{...}
-//
-//	or:
-//
-//	        nil
-type ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput
-	ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput
-}
-
-type projectConnectorsHttpStaticIpAuthenticationBasicPtrType ProjectConnectorsHttpStaticIpAuthenticationBasicArgs
-
-func ProjectConnectorsHttpStaticIpAuthenticationBasicPtr(v *ProjectConnectorsHttpStaticIpAuthenticationBasicArgs) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput {
-	return (*projectConnectorsHttpStaticIpAuthenticationBasicPtrType)(v)
-}
-
-func (*projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return i.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
-}
-
-func (i *projectConnectorsHttpStaticIpAuthenticationBasicPtrType) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationBasicOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o.ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(context.Background())
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpStaticIpAuthenticationBasic) *ProjectConnectorsHttpStaticIpAuthenticationBasic {
-		return &v
-	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationBasic) string { return v.Password }).(pulumi.StringOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicOutput) Username() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsHttpStaticIpAuthenticationBasic) string { return v.Username }).(pulumi.StringOutput)
-}
-
-type ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ProjectConnectorsHttpStaticIpAuthenticationBasic)(nil)).Elem()
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput() ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) ToProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput {
-	return o
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Elem() ProjectConnectorsHttpStaticIpAuthenticationBasicOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) ProjectConnectorsHttpStaticIpAuthenticationBasic {
-		if v != nil {
-			return *v
-		}
-		var ret ProjectConnectorsHttpStaticIpAuthenticationBasic
-		return ret
-	}).(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Password
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput) Username() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ProjectConnectorsHttpStaticIpAuthenticationBasic) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Username
-	}).(pulumi.StringPtrOutput)
-}
-
 type ProjectConnectorsHubspot struct {
 	// The HubSpot private API access token generated for the Descope service.
 	AccessToken string `pulumi:"accessToken"`
@@ -16175,6 +15639,302 @@ func (o ProjectConnectorsIntercomArrayOutput) Index(i pulumi.IntInput) ProjectCo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsIntercom {
 		return vs[0].([]ProjectConnectorsIntercom)[vs[1].(int)]
 	}).(ProjectConnectorsIntercomOutput)
+}
+
+type ProjectConnectorsLokalise struct {
+	// Lokalise API token.
+	ApiToken string `pulumi:"apiToken"`
+	// (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+	CardId *string `pulumi:"cardId"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Lokalise project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Lokalise team ID. If not provided, the oldest available team will be used.
+	TeamId *string `pulumi:"teamId"`
+	// The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+	TranslationProvider *string `pulumi:"translationProvider"`
+}
+
+// ProjectConnectorsLokaliseInput is an input type that accepts ProjectConnectorsLokaliseArgs and ProjectConnectorsLokaliseOutput values.
+// You can construct a concrete instance of `ProjectConnectorsLokaliseInput` via:
+//
+//	ProjectConnectorsLokaliseArgs{...}
+type ProjectConnectorsLokaliseInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsLokaliseOutput() ProjectConnectorsLokaliseOutput
+	ToProjectConnectorsLokaliseOutputWithContext(context.Context) ProjectConnectorsLokaliseOutput
+}
+
+type ProjectConnectorsLokaliseArgs struct {
+	// Lokalise API token.
+	ApiToken pulumi.StringInput `pulumi:"apiToken"`
+	// (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+	CardId pulumi.StringPtrInput `pulumi:"cardId"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Lokalise project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Lokalise team ID. If not provided, the oldest available team will be used.
+	TeamId pulumi.StringPtrInput `pulumi:"teamId"`
+	// The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+	TranslationProvider pulumi.StringPtrInput `pulumi:"translationProvider"`
+}
+
+func (ProjectConnectorsLokaliseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsLokalise)(nil)).Elem()
+}
+
+func (i ProjectConnectorsLokaliseArgs) ToProjectConnectorsLokaliseOutput() ProjectConnectorsLokaliseOutput {
+	return i.ToProjectConnectorsLokaliseOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsLokaliseArgs) ToProjectConnectorsLokaliseOutputWithContext(ctx context.Context) ProjectConnectorsLokaliseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsLokaliseOutput)
+}
+
+// ProjectConnectorsLokaliseArrayInput is an input type that accepts ProjectConnectorsLokaliseArray and ProjectConnectorsLokaliseArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsLokaliseArrayInput` via:
+//
+//	ProjectConnectorsLokaliseArray{ ProjectConnectorsLokaliseArgs{...} }
+type ProjectConnectorsLokaliseArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsLokaliseArrayOutput() ProjectConnectorsLokaliseArrayOutput
+	ToProjectConnectorsLokaliseArrayOutputWithContext(context.Context) ProjectConnectorsLokaliseArrayOutput
+}
+
+type ProjectConnectorsLokaliseArray []ProjectConnectorsLokaliseInput
+
+func (ProjectConnectorsLokaliseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsLokalise)(nil)).Elem()
+}
+
+func (i ProjectConnectorsLokaliseArray) ToProjectConnectorsLokaliseArrayOutput() ProjectConnectorsLokaliseArrayOutput {
+	return i.ToProjectConnectorsLokaliseArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsLokaliseArray) ToProjectConnectorsLokaliseArrayOutputWithContext(ctx context.Context) ProjectConnectorsLokaliseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsLokaliseArrayOutput)
+}
+
+type ProjectConnectorsLokaliseOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsLokaliseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsLokalise)(nil)).Elem()
+}
+
+func (o ProjectConnectorsLokaliseOutput) ToProjectConnectorsLokaliseOutput() ProjectConnectorsLokaliseOutput {
+	return o
+}
+
+func (o ProjectConnectorsLokaliseOutput) ToProjectConnectorsLokaliseOutputWithContext(ctx context.Context) ProjectConnectorsLokaliseOutput {
+	return o
+}
+
+// Lokalise API token.
+func (o ProjectConnectorsLokaliseOutput) ApiToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) string { return v.ApiToken }).(pulumi.StringOutput)
+}
+
+// (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+func (o ProjectConnectorsLokaliseOutput) CardId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) *string { return v.CardId }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsLokaliseOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsLokaliseOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsLokaliseOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Lokalise project ID.
+func (o ProjectConnectorsLokaliseOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Lokalise team ID. If not provided, the oldest available team will be used.
+func (o ProjectConnectorsLokaliseOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) *string { return v.TeamId }).(pulumi.StringPtrOutput)
+}
+
+// The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+func (o ProjectConnectorsLokaliseOutput) TranslationProvider() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLokalise) *string { return v.TranslationProvider }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsLokaliseArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsLokaliseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsLokalise)(nil)).Elem()
+}
+
+func (o ProjectConnectorsLokaliseArrayOutput) ToProjectConnectorsLokaliseArrayOutput() ProjectConnectorsLokaliseArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsLokaliseArrayOutput) ToProjectConnectorsLokaliseArrayOutputWithContext(ctx context.Context) ProjectConnectorsLokaliseArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsLokaliseArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsLokaliseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsLokalise {
+		return vs[0].([]ProjectConnectorsLokalise)[vs[1].(int)]
+	}).(ProjectConnectorsLokaliseOutput)
+}
+
+type ProjectConnectorsMparticle struct {
+	// The mParticle Server to Server Key generated for the Descope service.
+	ApiKey string `pulumi:"apiKey"`
+	// The mParticle Server to Server Secret generated for the Descope service.
+	ApiSecret string `pulumi:"apiSecret"`
+	// The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+	BaseUrl *string `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+}
+
+// ProjectConnectorsMparticleInput is an input type that accepts ProjectConnectorsMparticleArgs and ProjectConnectorsMparticleOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMparticleInput` via:
+//
+//	ProjectConnectorsMparticleArgs{...}
+type ProjectConnectorsMparticleInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMparticleOutput() ProjectConnectorsMparticleOutput
+	ToProjectConnectorsMparticleOutputWithContext(context.Context) ProjectConnectorsMparticleOutput
+}
+
+type ProjectConnectorsMparticleArgs struct {
+	// The mParticle Server to Server Key generated for the Descope service.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// The mParticle Server to Server Secret generated for the Descope service.
+	ApiSecret pulumi.StringInput `pulumi:"apiSecret"`
+	// The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (ProjectConnectorsMparticleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMparticle)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMparticleArgs) ToProjectConnectorsMparticleOutput() ProjectConnectorsMparticleOutput {
+	return i.ToProjectConnectorsMparticleOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMparticleArgs) ToProjectConnectorsMparticleOutputWithContext(ctx context.Context) ProjectConnectorsMparticleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMparticleOutput)
+}
+
+// ProjectConnectorsMparticleArrayInput is an input type that accepts ProjectConnectorsMparticleArray and ProjectConnectorsMparticleArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMparticleArrayInput` via:
+//
+//	ProjectConnectorsMparticleArray{ ProjectConnectorsMparticleArgs{...} }
+type ProjectConnectorsMparticleArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMparticleArrayOutput() ProjectConnectorsMparticleArrayOutput
+	ToProjectConnectorsMparticleArrayOutputWithContext(context.Context) ProjectConnectorsMparticleArrayOutput
+}
+
+type ProjectConnectorsMparticleArray []ProjectConnectorsMparticleInput
+
+func (ProjectConnectorsMparticleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMparticle)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMparticleArray) ToProjectConnectorsMparticleArrayOutput() ProjectConnectorsMparticleArrayOutput {
+	return i.ToProjectConnectorsMparticleArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMparticleArray) ToProjectConnectorsMparticleArrayOutputWithContext(ctx context.Context) ProjectConnectorsMparticleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMparticleArrayOutput)
+}
+
+type ProjectConnectorsMparticleOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMparticleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMparticle)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMparticleOutput) ToProjectConnectorsMparticleOutput() ProjectConnectorsMparticleOutput {
+	return o
+}
+
+func (o ProjectConnectorsMparticleOutput) ToProjectConnectorsMparticleOutputWithContext(ctx context.Context) ProjectConnectorsMparticleOutput {
+	return o
+}
+
+// The mParticle Server to Server Key generated for the Descope service.
+func (o ProjectConnectorsMparticleOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// The mParticle Server to Server Secret generated for the Descope service.
+func (o ProjectConnectorsMparticleOutput) ApiSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) string { return v.ApiSecret }).(pulumi.StringOutput)
+}
+
+// The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+func (o ProjectConnectorsMparticleOutput) BaseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsMparticleOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsMparticleOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsMparticleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMparticle) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsMparticleArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMparticleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMparticle)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMparticleArrayOutput) ToProjectConnectorsMparticleArrayOutput() ProjectConnectorsMparticleArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMparticleArrayOutput) ToProjectConnectorsMparticleArrayOutputWithContext(ctx context.Context) ProjectConnectorsMparticleArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMparticleArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsMparticleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsMparticle {
+		return vs[0].([]ProjectConnectorsMparticle)[vs[1].(int)]
+	}).(ProjectConnectorsMparticleOutput)
 }
 
 type ProjectConnectorsNewrelic struct {
@@ -17273,6 +17033,145 @@ func (o ProjectConnectorsSendgridSenderOutput) Email() pulumi.StringOutput {
 
 func (o ProjectConnectorsSendgridSenderOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSendgridSender) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsSmartling struct {
+	// The account UID for the Smartling account.
+	AccountUid string `pulumi:"accountUid"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The user identifier for the Smartling account.
+	UserIdentifier string `pulumi:"userIdentifier"`
+	// The user secret for the Smartling account.
+	UserSecret string `pulumi:"userSecret"`
+}
+
+// ProjectConnectorsSmartlingInput is an input type that accepts ProjectConnectorsSmartlingArgs and ProjectConnectorsSmartlingOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSmartlingInput` via:
+//
+//	ProjectConnectorsSmartlingArgs{...}
+type ProjectConnectorsSmartlingInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSmartlingOutput() ProjectConnectorsSmartlingOutput
+	ToProjectConnectorsSmartlingOutputWithContext(context.Context) ProjectConnectorsSmartlingOutput
+}
+
+type ProjectConnectorsSmartlingArgs struct {
+	// The account UID for the Smartling account.
+	AccountUid pulumi.StringInput `pulumi:"accountUid"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The user identifier for the Smartling account.
+	UserIdentifier pulumi.StringInput `pulumi:"userIdentifier"`
+	// The user secret for the Smartling account.
+	UserSecret pulumi.StringInput `pulumi:"userSecret"`
+}
+
+func (ProjectConnectorsSmartlingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSmartling)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSmartlingArgs) ToProjectConnectorsSmartlingOutput() ProjectConnectorsSmartlingOutput {
+	return i.ToProjectConnectorsSmartlingOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSmartlingArgs) ToProjectConnectorsSmartlingOutputWithContext(ctx context.Context) ProjectConnectorsSmartlingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSmartlingOutput)
+}
+
+// ProjectConnectorsSmartlingArrayInput is an input type that accepts ProjectConnectorsSmartlingArray and ProjectConnectorsSmartlingArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSmartlingArrayInput` via:
+//
+//	ProjectConnectorsSmartlingArray{ ProjectConnectorsSmartlingArgs{...} }
+type ProjectConnectorsSmartlingArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSmartlingArrayOutput() ProjectConnectorsSmartlingArrayOutput
+	ToProjectConnectorsSmartlingArrayOutputWithContext(context.Context) ProjectConnectorsSmartlingArrayOutput
+}
+
+type ProjectConnectorsSmartlingArray []ProjectConnectorsSmartlingInput
+
+func (ProjectConnectorsSmartlingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSmartling)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSmartlingArray) ToProjectConnectorsSmartlingArrayOutput() ProjectConnectorsSmartlingArrayOutput {
+	return i.ToProjectConnectorsSmartlingArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSmartlingArray) ToProjectConnectorsSmartlingArrayOutputWithContext(ctx context.Context) ProjectConnectorsSmartlingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSmartlingArrayOutput)
+}
+
+type ProjectConnectorsSmartlingOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSmartlingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSmartling)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSmartlingOutput) ToProjectConnectorsSmartlingOutput() ProjectConnectorsSmartlingOutput {
+	return o
+}
+
+func (o ProjectConnectorsSmartlingOutput) ToProjectConnectorsSmartlingOutputWithContext(ctx context.Context) ProjectConnectorsSmartlingOutput {
+	return o
+}
+
+// The account UID for the Smartling account.
+func (o ProjectConnectorsSmartlingOutput) AccountUid() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) string { return v.AccountUid }).(pulumi.StringOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsSmartlingOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsSmartlingOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsSmartlingOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The user identifier for the Smartling account.
+func (o ProjectConnectorsSmartlingOutput) UserIdentifier() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) string { return v.UserIdentifier }).(pulumi.StringOutput)
+}
+
+// The user secret for the Smartling account.
+func (o ProjectConnectorsSmartlingOutput) UserSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmartling) string { return v.UserSecret }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsSmartlingArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSmartlingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSmartling)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSmartlingArrayOutput) ToProjectConnectorsSmartlingArrayOutput() ProjectConnectorsSmartlingArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSmartlingArrayOutput) ToProjectConnectorsSmartlingArrayOutputWithContext(ctx context.Context) ProjectConnectorsSmartlingArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSmartlingArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsSmartlingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsSmartling {
+		return vs[0].([]ProjectConnectorsSmartling)[vs[1].(int)]
+	}).(ProjectConnectorsSmartlingOutput)
 }
 
 type ProjectConnectorsSmtp struct {
@@ -18608,145 +18507,6 @@ func (o ProjectConnectorsTwilioVerifyAuthenticationOutput) AuthToken() pulumi.St
 	return o.ApplyT(func(v ProjectConnectorsTwilioVerifyAuthentication) *string { return v.AuthToken }).(pulumi.StringPtrOutput)
 }
 
-type ProjectConnectorsVeriff struct {
-	// The Veriff Public API Key, you can find under Veriff Station - Integrations.
-	ApiKey string `pulumi:"apiKey"`
-	// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-	BaseUrl *string `pulumi:"baseUrl"`
-	// A description of what your connector is used for.
-	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
-	// A custom name for your connector.
-	Name string `pulumi:"name"`
-	// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-	SecretKey string `pulumi:"secretKey"`
-}
-
-// ProjectConnectorsVeriffInput is an input type that accepts ProjectConnectorsVeriffArgs and ProjectConnectorsVeriffOutput values.
-// You can construct a concrete instance of `ProjectConnectorsVeriffInput` via:
-//
-//	ProjectConnectorsVeriffArgs{...}
-type ProjectConnectorsVeriffInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsVeriffOutput() ProjectConnectorsVeriffOutput
-	ToProjectConnectorsVeriffOutputWithContext(context.Context) ProjectConnectorsVeriffOutput
-}
-
-type ProjectConnectorsVeriffArgs struct {
-	// The Veriff Public API Key, you can find under Veriff Station - Integrations.
-	ApiKey pulumi.StringInput `pulumi:"apiKey"`
-	// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
-	// A description of what your connector is used for.
-	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
-	// A custom name for your connector.
-	Name pulumi.StringInput `pulumi:"name"`
-	// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-	SecretKey pulumi.StringInput `pulumi:"secretKey"`
-}
-
-func (ProjectConnectorsVeriffArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsVeriff)(nil)).Elem()
-}
-
-func (i ProjectConnectorsVeriffArgs) ToProjectConnectorsVeriffOutput() ProjectConnectorsVeriffOutput {
-	return i.ToProjectConnectorsVeriffOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsVeriffArgs) ToProjectConnectorsVeriffOutputWithContext(ctx context.Context) ProjectConnectorsVeriffOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsVeriffOutput)
-}
-
-// ProjectConnectorsVeriffArrayInput is an input type that accepts ProjectConnectorsVeriffArray and ProjectConnectorsVeriffArrayOutput values.
-// You can construct a concrete instance of `ProjectConnectorsVeriffArrayInput` via:
-//
-//	ProjectConnectorsVeriffArray{ ProjectConnectorsVeriffArgs{...} }
-type ProjectConnectorsVeriffArrayInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsVeriffArrayOutput() ProjectConnectorsVeriffArrayOutput
-	ToProjectConnectorsVeriffArrayOutputWithContext(context.Context) ProjectConnectorsVeriffArrayOutput
-}
-
-type ProjectConnectorsVeriffArray []ProjectConnectorsVeriffInput
-
-func (ProjectConnectorsVeriffArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsVeriff)(nil)).Elem()
-}
-
-func (i ProjectConnectorsVeriffArray) ToProjectConnectorsVeriffArrayOutput() ProjectConnectorsVeriffArrayOutput {
-	return i.ToProjectConnectorsVeriffArrayOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsVeriffArray) ToProjectConnectorsVeriffArrayOutputWithContext(ctx context.Context) ProjectConnectorsVeriffArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsVeriffArrayOutput)
-}
-
-type ProjectConnectorsVeriffOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsVeriffOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsVeriff)(nil)).Elem()
-}
-
-func (o ProjectConnectorsVeriffOutput) ToProjectConnectorsVeriffOutput() ProjectConnectorsVeriffOutput {
-	return o
-}
-
-func (o ProjectConnectorsVeriffOutput) ToProjectConnectorsVeriffOutputWithContext(ctx context.Context) ProjectConnectorsVeriffOutput {
-	return o
-}
-
-// The Veriff Public API Key, you can find under Veriff Station - Integrations.
-func (o ProjectConnectorsVeriffOutput) ApiKey() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.ApiKey }).(pulumi.StringOutput)
-}
-
-// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-func (o ProjectConnectorsVeriffOutput) BaseUrl() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
-}
-
-// A description of what your connector is used for.
-func (o ProjectConnectorsVeriffOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.Description }).(pulumi.StringPtrOutput)
-}
-
-func (o ProjectConnectorsVeriffOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) *string { return v.Id }).(pulumi.StringPtrOutput)
-}
-
-// A custom name for your connector.
-func (o ProjectConnectorsVeriffOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.Name }).(pulumi.StringOutput)
-}
-
-// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-func (o ProjectConnectorsVeriffOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsVeriff) string { return v.SecretKey }).(pulumi.StringOutput)
-}
-
-type ProjectConnectorsVeriffArrayOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsVeriffArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsVeriff)(nil)).Elem()
-}
-
-func (o ProjectConnectorsVeriffArrayOutput) ToProjectConnectorsVeriffArrayOutput() ProjectConnectorsVeriffArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsVeriffArrayOutput) ToProjectConnectorsVeriffArrayOutputWithContext(ctx context.Context) ProjectConnectorsVeriffArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsVeriffArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsVeriffOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsVeriff {
-		return vs[0].([]ProjectConnectorsVeriff)[vs[1].(int)]
-	}).(ProjectConnectorsVeriffOutput)
-}
-
 type ProjectFlows struct {
 	Data string `pulumi:"data"`
 }
@@ -18842,8 +18602,10 @@ func (o ProjectFlowsMapOutput) MapIndex(k pulumi.StringInput) ProjectFlowsOutput
 }
 
 type ProjectJwtTemplates struct {
+	// A list of `Access Key` type JWT Templates.
 	AccessKeyTemplates []ProjectJwtTemplatesAccessKeyTemplate `pulumi:"accessKeyTemplates"`
-	UserTemplates      []ProjectJwtTemplatesUserTemplate      `pulumi:"userTemplates"`
+	// A list of `User` type JWT Templates.
+	UserTemplates []ProjectJwtTemplatesUserTemplate `pulumi:"userTemplates"`
 }
 
 // ProjectJwtTemplatesInput is an input type that accepts ProjectJwtTemplatesArgs and ProjectJwtTemplatesOutput values.
@@ -18858,8 +18620,10 @@ type ProjectJwtTemplatesInput interface {
 }
 
 type ProjectJwtTemplatesArgs struct {
+	// A list of `Access Key` type JWT Templates.
 	AccessKeyTemplates ProjectJwtTemplatesAccessKeyTemplateArrayInput `pulumi:"accessKeyTemplates"`
-	UserTemplates      ProjectJwtTemplatesUserTemplateArrayInput      `pulumi:"userTemplates"`
+	// A list of `User` type JWT Templates.
+	UserTemplates ProjectJwtTemplatesUserTemplateArrayInput `pulumi:"userTemplates"`
 }
 
 func (ProjectJwtTemplatesArgs) ElementType() reflect.Type {
@@ -18939,10 +18703,12 @@ func (o ProjectJwtTemplatesOutput) ToProjectJwtTemplatesPtrOutputWithContext(ctx
 	}).(ProjectJwtTemplatesPtrOutput)
 }
 
+// A list of `Access Key` type JWT Templates.
 func (o ProjectJwtTemplatesOutput) AccessKeyTemplates() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
 	return o.ApplyT(func(v ProjectJwtTemplates) []ProjectJwtTemplatesAccessKeyTemplate { return v.AccessKeyTemplates }).(ProjectJwtTemplatesAccessKeyTemplateArrayOutput)
 }
 
+// A list of `User` type JWT Templates.
 func (o ProjectJwtTemplatesOutput) UserTemplates() ProjectJwtTemplatesUserTemplateArrayOutput {
 	return o.ApplyT(func(v ProjectJwtTemplates) []ProjectJwtTemplatesUserTemplate { return v.UserTemplates }).(ProjectJwtTemplatesUserTemplateArrayOutput)
 }
@@ -18971,6 +18737,7 @@ func (o ProjectJwtTemplatesPtrOutput) Elem() ProjectJwtTemplatesOutput {
 	}).(ProjectJwtTemplatesOutput)
 }
 
+// A list of `Access Key` type JWT Templates.
 func (o ProjectJwtTemplatesPtrOutput) AccessKeyTemplates() ProjectJwtTemplatesAccessKeyTemplateArrayOutput {
 	return o.ApplyT(func(v *ProjectJwtTemplates) []ProjectJwtTemplatesAccessKeyTemplate {
 		if v == nil {
@@ -18980,6 +18747,7 @@ func (o ProjectJwtTemplatesPtrOutput) AccessKeyTemplates() ProjectJwtTemplatesAc
 	}).(ProjectJwtTemplatesAccessKeyTemplateArrayOutput)
 }
 
+// A list of `User` type JWT Templates.
 func (o ProjectJwtTemplatesPtrOutput) UserTemplates() ProjectJwtTemplatesUserTemplateArrayOutput {
 	return o.ApplyT(func(v *ProjectJwtTemplates) []ProjectJwtTemplatesUserTemplate {
 		if v == nil {
@@ -18990,12 +18758,15 @@ func (o ProjectJwtTemplatesPtrOutput) UserTemplates() ProjectJwtTemplatesUserTem
 }
 
 type ProjectJwtTemplatesAccessKeyTemplate struct {
+	// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema        *string `pulumi:"authSchema"`
 	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
-	Description       *string `pulumi:"description"`
-	Id                *string `pulumi:"id"`
-	Name              string  `pulumi:"name"`
-	Template          string  `pulumi:"template"`
+	// Description of the JWT Template.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// Name of the JWT Template.
+	Name     string `pulumi:"name"`
+	Template string `pulumi:"template"`
 }
 
 // ProjectJwtTemplatesAccessKeyTemplateInput is an input type that accepts ProjectJwtTemplatesAccessKeyTemplateArgs and ProjectJwtTemplatesAccessKeyTemplateOutput values.
@@ -19010,12 +18781,15 @@ type ProjectJwtTemplatesAccessKeyTemplateInput interface {
 }
 
 type ProjectJwtTemplatesAccessKeyTemplateArgs struct {
+	// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
 	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
-	Description       pulumi.StringPtrInput `pulumi:"description"`
-	Id                pulumi.StringPtrInput `pulumi:"id"`
-	Name              pulumi.StringInput    `pulumi:"name"`
-	Template          pulumi.StringInput    `pulumi:"template"`
+	// Description of the JWT Template.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// Name of the JWT Template.
+	Name     pulumi.StringInput `pulumi:"name"`
+	Template pulumi.StringInput `pulumi:"template"`
 }
 
 func (ProjectJwtTemplatesAccessKeyTemplateArgs) ElementType() reflect.Type {
@@ -19069,6 +18843,7 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ToProjectJwtTemplatesAccessK
 	return o
 }
 
+// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
 }
@@ -19077,6 +18852,7 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ConformanceIssuer() pulumi.B
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.ConformanceIssuer }).(pulumi.BoolPtrOutput)
 }
 
+// Description of the JWT Template.
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -19085,6 +18861,7 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Id() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Name of the JWT Template.
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -19114,12 +18891,15 @@ func (o ProjectJwtTemplatesAccessKeyTemplateArrayOutput) Index(i pulumi.IntInput
 }
 
 type ProjectJwtTemplatesUserTemplate struct {
+	// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema        *string `pulumi:"authSchema"`
 	ConformanceIssuer *bool   `pulumi:"conformanceIssuer"`
-	Description       *string `pulumi:"description"`
-	Id                *string `pulumi:"id"`
-	Name              string  `pulumi:"name"`
-	Template          string  `pulumi:"template"`
+	// Description of the JWT Template.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// Name of the JWT Template.
+	Name     string `pulumi:"name"`
+	Template string `pulumi:"template"`
 }
 
 // ProjectJwtTemplatesUserTemplateInput is an input type that accepts ProjectJwtTemplatesUserTemplateArgs and ProjectJwtTemplatesUserTemplateOutput values.
@@ -19134,12 +18914,15 @@ type ProjectJwtTemplatesUserTemplateInput interface {
 }
 
 type ProjectJwtTemplatesUserTemplateArgs struct {
+	// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema        pulumi.StringPtrInput `pulumi:"authSchema"`
 	ConformanceIssuer pulumi.BoolPtrInput   `pulumi:"conformanceIssuer"`
-	Description       pulumi.StringPtrInput `pulumi:"description"`
-	Id                pulumi.StringPtrInput `pulumi:"id"`
-	Name              pulumi.StringInput    `pulumi:"name"`
-	Template          pulumi.StringInput    `pulumi:"template"`
+	// Description of the JWT Template.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// Name of the JWT Template.
+	Name     pulumi.StringInput `pulumi:"name"`
+	Template pulumi.StringInput `pulumi:"template"`
 }
 
 func (ProjectJwtTemplatesUserTemplateArgs) ElementType() reflect.Type {
@@ -19193,6 +18976,7 @@ func (o ProjectJwtTemplatesUserTemplateOutput) ToProjectJwtTemplatesUserTemplate
 	return o
 }
 
+// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 func (o ProjectJwtTemplatesUserTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
 }
@@ -19201,6 +18985,7 @@ func (o ProjectJwtTemplatesUserTemplateOutput) ConformanceIssuer() pulumi.BoolPt
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.ConformanceIssuer }).(pulumi.BoolPtrOutput)
 }
 
+// Description of the JWT Template.
 func (o ProjectJwtTemplatesUserTemplateOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -19209,6 +18994,7 @@ func (o ProjectJwtTemplatesUserTemplateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// Name of the JWT Template.
 func (o ProjectJwtTemplatesUserTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -19238,13 +19024,40 @@ func (o ProjectJwtTemplatesUserTemplateArrayOutput) Index(i pulumi.IntInput) Pro
 }
 
 type ProjectProjectSettings struct {
-	AccessKeyJwtTemplate   *string `pulumi:"accessKeyJwtTemplate"`
-	CookiePolicy           *string `pulumi:"cookiePolicy"`
-	Domain                 *string `pulumi:"domain"`
-	EnableInactivity       *bool   `pulumi:"enableInactivity"`
-	InactivityTime         *string `pulumi:"inactivityTime"`
+	// Name of the access key JWT Template.
+	AccessKeyJwtTemplate *string `pulumi:"accessKeyJwtTemplate"`
+	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+	AccessKeySessionTokenExpiration *string `pulumi:"accessKeySessionTokenExpiration"`
+	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+	ApprovedDomains []string `pulumi:"approvedDomains"`
+	// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	CookieDomain *string `pulumi:"cookieDomain"`
+	// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	CookiePolicy *string `pulumi:"cookiePolicy"`
+	// This attribute has been renamed to `cookieDomain`.
+	//
+	// Deprecated: The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
+	Domain *string `pulumi:"domain"`
+	// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+	EnableInactivity *bool `pulumi:"enableInactivity"`
+	// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+	InactivityTime *string `pulumi:"inactivityTime"`
+	// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 	RefreshTokenExpiration *string `pulumi:"refreshTokenExpiration"`
-	UserJwtTemplate        *string `pulumi:"userJwtTemplate"`
+	// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+	RefreshTokenRotation *bool `pulumi:"refreshTokenRotation"`
+	// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+	SessionTokenExpiration *string `pulumi:"sessionTokenExpiration"`
+	// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+	StepUpTokenExpiration *string `pulumi:"stepUpTokenExpiration"`
+	// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+	TestUsersLoginidRegexp *string `pulumi:"testUsersLoginidRegexp"`
+	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	TokenResponseMethod *string `pulumi:"tokenResponseMethod"`
+	// The expiry time for the trusted device token. The minimum value is "3 minutes".
+	TrustedDeviceTokenExpiration *string `pulumi:"trustedDeviceTokenExpiration"`
+	// Name of the user JWT Template.
+	UserJwtTemplate *string `pulumi:"userJwtTemplate"`
 }
 
 // ProjectProjectSettingsInput is an input type that accepts ProjectProjectSettingsArgs and ProjectProjectSettingsOutput values.
@@ -19259,13 +19072,40 @@ type ProjectProjectSettingsInput interface {
 }
 
 type ProjectProjectSettingsArgs struct {
-	AccessKeyJwtTemplate   pulumi.StringPtrInput `pulumi:"accessKeyJwtTemplate"`
-	CookiePolicy           pulumi.StringPtrInput `pulumi:"cookiePolicy"`
-	Domain                 pulumi.StringPtrInput `pulumi:"domain"`
-	EnableInactivity       pulumi.BoolPtrInput   `pulumi:"enableInactivity"`
-	InactivityTime         pulumi.StringPtrInput `pulumi:"inactivityTime"`
+	// Name of the access key JWT Template.
+	AccessKeyJwtTemplate pulumi.StringPtrInput `pulumi:"accessKeyJwtTemplate"`
+	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+	AccessKeySessionTokenExpiration pulumi.StringPtrInput `pulumi:"accessKeySessionTokenExpiration"`
+	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+	ApprovedDomains pulumi.StringArrayInput `pulumi:"approvedDomains"`
+	// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	CookieDomain pulumi.StringPtrInput `pulumi:"cookieDomain"`
+	// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	CookiePolicy pulumi.StringPtrInput `pulumi:"cookiePolicy"`
+	// This attribute has been renamed to `cookieDomain`.
+	//
+	// Deprecated: The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+	EnableInactivity pulumi.BoolPtrInput `pulumi:"enableInactivity"`
+	// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+	InactivityTime pulumi.StringPtrInput `pulumi:"inactivityTime"`
+	// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 	RefreshTokenExpiration pulumi.StringPtrInput `pulumi:"refreshTokenExpiration"`
-	UserJwtTemplate        pulumi.StringPtrInput `pulumi:"userJwtTemplate"`
+	// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+	RefreshTokenRotation pulumi.BoolPtrInput `pulumi:"refreshTokenRotation"`
+	// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+	SessionTokenExpiration pulumi.StringPtrInput `pulumi:"sessionTokenExpiration"`
+	// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+	StepUpTokenExpiration pulumi.StringPtrInput `pulumi:"stepUpTokenExpiration"`
+	// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+	TestUsersLoginidRegexp pulumi.StringPtrInput `pulumi:"testUsersLoginidRegexp"`
+	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	TokenResponseMethod pulumi.StringPtrInput `pulumi:"tokenResponseMethod"`
+	// The expiry time for the trusted device token. The minimum value is "3 minutes".
+	TrustedDeviceTokenExpiration pulumi.StringPtrInput `pulumi:"trustedDeviceTokenExpiration"`
+	// Name of the user JWT Template.
+	UserJwtTemplate pulumi.StringPtrInput `pulumi:"userJwtTemplate"`
 }
 
 func (ProjectProjectSettingsArgs) ElementType() reflect.Type {
@@ -19345,30 +19185,84 @@ func (o ProjectProjectSettingsOutput) ToProjectProjectSettingsPtrOutputWithConte
 	}).(ProjectProjectSettingsPtrOutput)
 }
 
+// Name of the access key JWT Template.
 func (o ProjectProjectSettingsOutput) AccessKeyJwtTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AccessKeyJwtTemplate }).(pulumi.StringPtrOutput)
 }
 
+// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+func (o ProjectProjectSettingsOutput) AccessKeySessionTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AccessKeySessionTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+func (o ProjectProjectSettingsOutput) ApprovedDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) []string { return v.ApprovedDomains }).(pulumi.StringArrayOutput)
+}
+
+// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsOutput) CookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CookieDomain }).(pulumi.StringPtrOutput)
+}
+
+// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 func (o ProjectProjectSettingsOutput) CookiePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CookiePolicy }).(pulumi.StringPtrOutput)
 }
 
+// This attribute has been renamed to `cookieDomain`.
+//
+// Deprecated: The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
 func (o ProjectProjectSettingsOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.Domain }).(pulumi.StringPtrOutput)
 }
 
+// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
 func (o ProjectProjectSettingsOutput) EnableInactivity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *bool { return v.EnableInactivity }).(pulumi.BoolPtrOutput)
 }
 
+// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
 func (o ProjectProjectSettingsOutput) InactivityTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.InactivityTime }).(pulumi.StringPtrOutput)
 }
 
+// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 func (o ProjectProjectSettingsOutput) RefreshTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.RefreshTokenExpiration }).(pulumi.StringPtrOutput)
 }
 
+// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+func (o ProjectProjectSettingsOutput) RefreshTokenRotation() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *bool { return v.RefreshTokenRotation }).(pulumi.BoolPtrOutput)
+}
+
+// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+func (o ProjectProjectSettingsOutput) SessionTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.SessionTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+func (o ProjectProjectSettingsOutput) StepUpTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.StepUpTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+func (o ProjectProjectSettingsOutput) TestUsersLoginidRegexp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.TestUsersLoginidRegexp }).(pulumi.StringPtrOutput)
+}
+
+// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsOutput) TokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.TokenResponseMethod }).(pulumi.StringPtrOutput)
+}
+
+// The expiry time for the trusted device token. The minimum value is "3 minutes".
+func (o ProjectProjectSettingsOutput) TrustedDeviceTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.TrustedDeviceTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// Name of the user JWT Template.
 func (o ProjectProjectSettingsOutput) UserJwtTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.UserJwtTemplate }).(pulumi.StringPtrOutput)
 }
@@ -19397,6 +19291,7 @@ func (o ProjectProjectSettingsPtrOutput) Elem() ProjectProjectSettingsOutput {
 	}).(ProjectProjectSettingsOutput)
 }
 
+// Name of the access key JWT Template.
 func (o ProjectProjectSettingsPtrOutput) AccessKeyJwtTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19406,6 +19301,37 @@ func (o ProjectProjectSettingsPtrOutput) AccessKeyJwtTemplate() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+func (o ProjectProjectSettingsPtrOutput) AccessKeySessionTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccessKeySessionTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+func (o ProjectProjectSettingsPtrOutput) ApprovedDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ApprovedDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsPtrOutput) CookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CookieDomain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19415,6 +19341,9 @@ func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// This attribute has been renamed to `cookieDomain`.
+//
+// Deprecated: The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
 func (o ProjectProjectSettingsPtrOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19424,6 +19353,7 @@ func (o ProjectProjectSettingsPtrOutput) Domain() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
 func (o ProjectProjectSettingsPtrOutput) EnableInactivity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *bool {
 		if v == nil {
@@ -19433,6 +19363,7 @@ func (o ProjectProjectSettingsPtrOutput) EnableInactivity() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
 func (o ProjectProjectSettingsPtrOutput) InactivityTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19442,6 +19373,7 @@ func (o ProjectProjectSettingsPtrOutput) InactivityTime() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 func (o ProjectProjectSettingsPtrOutput) RefreshTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19451,6 +19383,67 @@ func (o ProjectProjectSettingsPtrOutput) RefreshTokenExpiration() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+func (o ProjectProjectSettingsPtrOutput) RefreshTokenRotation() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RefreshTokenRotation
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+func (o ProjectProjectSettingsPtrOutput) SessionTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+func (o ProjectProjectSettingsPtrOutput) StepUpTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StepUpTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+func (o ProjectProjectSettingsPtrOutput) TestUsersLoginidRegexp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TestUsersLoginidRegexp
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsPtrOutput) TokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenResponseMethod
+	}).(pulumi.StringPtrOutput)
+}
+
+// The expiry time for the trusted device token. The minimum value is "3 minutes".
+func (o ProjectProjectSettingsPtrOutput) TrustedDeviceTokenExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TrustedDeviceTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the user JWT Template.
 func (o ProjectProjectSettingsPtrOutput) UserJwtTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -19754,18 +19747,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpArrayInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKeyInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationApiKeyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpStaticIpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsHttpStaticIpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotInput)(nil)).Elem(), ProjectConnectorsHubspotArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotArrayInput)(nil)).Elem(), ProjectConnectorsHubspotArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIntercomInput)(nil)).Elem(), ProjectConnectorsIntercomArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIntercomArrayInput)(nil)).Elem(), ProjectConnectorsIntercomArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLokaliseInput)(nil)).Elem(), ProjectConnectorsLokaliseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLokaliseArrayInput)(nil)).Elem(), ProjectConnectorsLokaliseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMparticleInput)(nil)).Elem(), ProjectConnectorsMparticleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMparticleArrayInput)(nil)).Elem(), ProjectConnectorsMparticleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicInput)(nil)).Elem(), ProjectConnectorsNewrelicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicArrayInput)(nil)).Elem(), ProjectConnectorsNewrelicArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsRecaptchaInput)(nil)).Elem(), ProjectConnectorsRecaptchaArgs{})
@@ -19782,6 +19771,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSendgridArrayInput)(nil)).Elem(), ProjectConnectorsSendgridArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSendgridAuthenticationInput)(nil)).Elem(), ProjectConnectorsSendgridAuthenticationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSendgridSenderInput)(nil)).Elem(), ProjectConnectorsSendgridSenderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmartlingInput)(nil)).Elem(), ProjectConnectorsSmartlingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmartlingArrayInput)(nil)).Elem(), ProjectConnectorsSmartlingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmtpInput)(nil)).Elem(), ProjectConnectorsSmtpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmtpArrayInput)(nil)).Elem(), ProjectConnectorsSmtpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmtpAuthenticationInput)(nil)).Elem(), ProjectConnectorsSmtpAuthenticationArgs{})
@@ -19803,8 +19794,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyArrayInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyAuthenticationInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyAuthenticationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsVeriffInput)(nil)).Elem(), ProjectConnectorsVeriffArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsVeriffArrayInput)(nil)).Elem(), ProjectConnectorsVeriffArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsInput)(nil)).Elem(), ProjectFlowsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsMapInput)(nil)).Elem(), ProjectFlowsMap{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesInput)(nil)).Elem(), ProjectJwtTemplatesArgs{})
@@ -19977,18 +19966,14 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicPtrOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpArrayOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationPtrOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationApiKeyOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationApiKeyPtrOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationBasicOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsHttpStaticIpAuthenticationBasicPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIntercomOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIntercomArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsLokaliseOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsLokaliseArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMparticleOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMparticleArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsRecaptchaOutput{})
@@ -20005,6 +19990,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsSendgridArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSendgridAuthenticationOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSendgridSenderOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSmartlingOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSmartlingArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSmtpOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSmtpArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSmtpAuthenticationOutput{})
@@ -20026,8 +20013,6 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyAuthenticationOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsVeriffOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsVeriffArrayOutput{})
 	pulumi.RegisterOutputType(ProjectFlowsOutput{})
 	pulumi.RegisterOutputType(ProjectFlowsMapOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesOutput{})

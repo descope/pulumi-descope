@@ -15,11 +15,11 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAttributesUserWidgetAuthorization
     {
         /// <summary>
-        /// Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        /// A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
         /// </summary>
         public readonly ImmutableArray<string> EditPermissions;
         /// <summary>
-        /// Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        /// A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
         /// </summary>
         public readonly ImmutableArray<string> ViewPermissions;
 

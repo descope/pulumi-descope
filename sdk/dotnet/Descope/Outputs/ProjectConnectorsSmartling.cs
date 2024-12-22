@@ -12,29 +12,33 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectJwtTemplatesAccessKeyTemplate
+    public sealed class ProjectConnectorsSmartling
     {
         /// <summary>
-        /// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// The account UID for the Smartling account.
         /// </summary>
-        public readonly string? AuthSchema;
-        public readonly bool? ConformanceIssuer;
+        public readonly string AccountUid;
         /// <summary>
-        /// Description of the JWT Template.
+        /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
         public readonly string? Id;
         /// <summary>
-        /// Name of the JWT Template.
+        /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
-        public readonly string Template;
+        /// <summary>
+        /// The user identifier for the Smartling account.
+        /// </summary>
+        public readonly string UserIdentifier;
+        /// <summary>
+        /// The user secret for the Smartling account.
+        /// </summary>
+        public readonly string UserSecret;
 
         [OutputConstructor]
-        private ProjectJwtTemplatesAccessKeyTemplate(
-            string? authSchema,
-
-            bool? conformanceIssuer,
+        private ProjectConnectorsSmartling(
+            string accountUid,
 
             string? description,
 
@@ -42,14 +46,16 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string name,
 
-            string template)
+            string userIdentifier,
+
+            string userSecret)
         {
-            AuthSchema = authSchema;
-            ConformanceIssuer = conformanceIssuer;
+            AccountUid = accountUid;
             Description = description;
             Id = id;
             Name = name;
-            Template = template;
+            UserIdentifier = userIdentifier;
+            UserSecret = userSecret;
         }
     }
 }

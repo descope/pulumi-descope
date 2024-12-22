@@ -102,6 +102,9 @@
                                     "custom": {
                                         "elem": {
                                             "fields": {
+                                                "allowed_grant_types": {
+                                                    "maxItemsOne": false
+                                                },
                                                 "prompts": {
                                                     "maxItemsOne": false
                                                 },
@@ -115,6 +118,9 @@
                                         "fields": {
                                             "apple": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -125,6 +131,9 @@
                                             },
                                             "discord": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -135,6 +144,9 @@
                                             },
                                             "facebook": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -145,6 +157,9 @@
                                             },
                                             "github": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -155,6 +170,9 @@
                                             },
                                             "gitlab": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -165,6 +183,9 @@
                                             },
                                             "google": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -175,6 +196,9 @@
                                             },
                                             "linkedin": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -185,6 +209,9 @@
                                             },
                                             "microsoft": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -195,6 +222,9 @@
                                             },
                                             "slack": {
                                                 "fields": {
+                                                    "allowed_grant_types": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "prompts": {
                                                         "maxItemsOne": false
                                                     },
@@ -309,13 +339,16 @@
                             "http": {
                                 "maxItemsOne": false
                             },
-                            "http_static_ip": {
-                                "maxItemsOne": false
-                            },
                             "hubspot": {
                                 "maxItemsOne": false
                             },
                             "intercom": {
+                                "maxItemsOne": false
+                            },
+                            "lokalise": {
+                                "maxItemsOne": false
+                            },
+                            "mparticle": {
                                 "maxItemsOne": false
                             },
                             "newrelic": {
@@ -339,6 +372,9 @@
                             "sendgrid": {
                                 "maxItemsOne": false
                             },
+                            "smartling": {
+                                "maxItemsOne": false
+                            },
                             "smtp": {
                                 "maxItemsOne": false
                             },
@@ -356,9 +392,6 @@
                             },
                             "twilio_verify": {
                                 "maxItemsOne": false
-                            },
-                            "veriff": {
-                                "maxItemsOne": false
                             }
                         }
                     },
@@ -368,6 +401,13 @@
                                 "maxItemsOne": false
                             },
                             "user_templates": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "project_settings": {
+                        "fields": {
+                            "approved_domains": {
                                 "maxItemsOne": false
                             }
                         }

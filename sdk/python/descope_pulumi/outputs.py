@@ -96,12 +96,10 @@ __all__ = [
     'ProjectConnectorsHttpAuthentication',
     'ProjectConnectorsHttpAuthenticationApiKey',
     'ProjectConnectorsHttpAuthenticationBasic',
-    'ProjectConnectorsHttpStaticIp',
-    'ProjectConnectorsHttpStaticIpAuthentication',
-    'ProjectConnectorsHttpStaticIpAuthenticationApiKey',
-    'ProjectConnectorsHttpStaticIpAuthenticationBasic',
     'ProjectConnectorsHubspot',
     'ProjectConnectorsIntercom',
+    'ProjectConnectorsLokalise',
+    'ProjectConnectorsMparticle',
     'ProjectConnectorsNewrelic',
     'ProjectConnectorsRecaptcha',
     'ProjectConnectorsRecaptchaEnterprise',
@@ -111,6 +109,7 @@ __all__ = [
     'ProjectConnectorsSendgrid',
     'ProjectConnectorsSendgridAuthentication',
     'ProjectConnectorsSendgridSender',
+    'ProjectConnectorsSmartling',
     'ProjectConnectorsSmtp',
     'ProjectConnectorsSmtpAuthentication',
     'ProjectConnectorsSmtpSender',
@@ -125,7 +124,6 @@ __all__ = [
     'ProjectConnectorsTwilioCoreSendersVoice',
     'ProjectConnectorsTwilioVerify',
     'ProjectConnectorsTwilioVerifyAuthentication',
-    'ProjectConnectorsVeriff',
     'ProjectFlows',
     'ProjectJwtTemplates',
     'ProjectJwtTemplatesAccessKeyTemplate',
@@ -212,13 +210,13 @@ class ProjectApplicationsOidcApplication(dict):
                  login_page_url: Optional[str] = None,
                  logo: Optional[str] = None):
         """
-        :param str name: The name of the application.
-        :param Sequence[str] claims: Claims associated with JWT tokens, typically used for user information.
-        :param str description: A brief description of the application.
-        :param bool disabled: Indicates whether the resource or functionality is disabled.
-        :param str id: An optional identifier for the application.
-        :param str login_page_url: The URL of the custom login page for the application.
-        :param str logo: The URL of the logo associated with the application.
+        :param str name: A name for the OIDC application.
+        :param Sequence[str] claims: A list of supported claims. e.g. `sub`, `email`, `exp`.
+        :param str description: A description for the OIDC application.
+        :param bool disabled: Whether the application should be enabled or disabled.
+        :param str id: An optional identifier for the OIDC application.
+        :param str login_page_url: The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        :param str logo: A logo for the OIDC application. Should be a hosted image URL.
         """
         pulumi.set(__self__, "name", name)
         if claims is not None:
@@ -238,7 +236,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the application.
+        A name for the OIDC application.
         """
         return pulumi.get(self, "name")
 
@@ -246,7 +244,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def claims(self) -> Optional[Sequence[str]]:
         """
-        Claims associated with JWT tokens, typically used for user information.
+        A list of supported claims. e.g. `sub`, `email`, `exp`.
         """
         return pulumi.get(self, "claims")
 
@@ -254,7 +252,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def description(self) -> Optional[str]:
         """
-        A brief description of the application.
+        A description for the OIDC application.
         """
         return pulumi.get(self, "description")
 
@@ -262,7 +260,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
         """
-        Indicates whether the resource or functionality is disabled.
+        Whether the application should be enabled or disabled.
         """
         return pulumi.get(self, "disabled")
 
@@ -270,7 +268,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        An optional identifier for the application.
+        An optional identifier for the OIDC application.
         """
         return pulumi.get(self, "id")
 
@@ -278,7 +276,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter(name="loginPageUrl")
     def login_page_url(self) -> Optional[str]:
         """
-        The URL of the custom login page for the application.
+        The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         """
         return pulumi.get(self, "login_page_url")
 
@@ -286,7 +284,7 @@ class ProjectApplicationsOidcApplication(dict):
     @pulumi.getter
     def logo(self) -> Optional[str]:
         """
-        The URL of the logo associated with the application.
+        A logo for the OIDC application. Should be a hosted image URL.
         """
         return pulumi.get(self, "logo")
 
@@ -339,13 +337,19 @@ class ProjectApplicationsSamlApplication(dict):
                  subject_name_id_format: Optional[str] = None,
                  subject_name_id_type: Optional[str] = None):
         """
-        :param str name: The name of the application.
-        :param Sequence['ProjectApplicationsSamlApplicationAttributeMappingArgs'] attribute_mappings: Map user attributes from the third party identity provider to custom attributes in Descope.
-        :param str description: A brief description of the application.
-        :param bool disabled: Indicates whether the application is disabled.
-        :param str id: An optional identifier for the application.
-        :param str login_page_url: The URL of the custom login page for the application.
-        :param str logo: The URL of the logo associated with the application.
+        :param str name: A name for the SAML application.
+        :param Sequence[str] acs_allowed_callback_urls: A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
+        :param Sequence['ProjectApplicationsSamlApplicationAttributeMappingArgs'] attribute_mappings: The `AttributeMapping` object. Read the description below.
+        :param str default_relay_state: The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+        :param str description: A description for the SAML application.
+        :param bool disabled: Whether the application should be enabled or disabled.
+        :param 'ProjectApplicationsSamlApplicationDynamicConfigurationArgs' dynamic_configuration: The `DynamicConfiguration` object. Read the description below.
+        :param str id: An optional identifier for the SAML application.
+        :param str login_page_url: The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        :param str logo: A logo for the SAML application. Should be a hosted image URL.
+        :param 'ProjectApplicationsSamlApplicationManualConfigurationArgs' manual_configuration: The `ManualConfiguration` object. Read the description below.
+        :param str subject_name_id_format: The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        :param str subject_name_id_type: The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         """
         pulumi.set(__self__, "name", name)
         if acs_allowed_callback_urls is not None:
@@ -377,33 +381,39 @@ class ProjectApplicationsSamlApplication(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the application.
+        A name for the SAML application.
         """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="acsAllowedCallbackUrls")
     def acs_allowed_callback_urls(self) -> Optional[Sequence[str]]:
+        """
+        A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
+        """
         return pulumi.get(self, "acs_allowed_callback_urls")
 
     @property
     @pulumi.getter(name="attributeMappings")
     def attribute_mappings(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlApplicationAttributeMapping']]:
         """
-        Map user attributes from the third party identity provider to custom attributes in Descope.
+        The `AttributeMapping` object. Read the description below.
         """
         return pulumi.get(self, "attribute_mappings")
 
     @property
     @pulumi.getter(name="defaultRelayState")
     def default_relay_state(self) -> Optional[str]:
+        """
+        The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+        """
         return pulumi.get(self, "default_relay_state")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
         """
-        A brief description of the application.
+        A description for the SAML application.
         """
         return pulumi.get(self, "description")
 
@@ -411,20 +421,23 @@ class ProjectApplicationsSamlApplication(dict):
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
         """
-        Indicates whether the application is disabled.
+        Whether the application should be enabled or disabled.
         """
         return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="dynamicConfiguration")
     def dynamic_configuration(self) -> Optional['outputs.ProjectApplicationsSamlApplicationDynamicConfiguration']:
+        """
+        The `DynamicConfiguration` object. Read the description below.
+        """
         return pulumi.get(self, "dynamic_configuration")
 
     @property
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        An optional identifier for the application.
+        An optional identifier for the SAML application.
         """
         return pulumi.get(self, "id")
 
@@ -432,7 +445,7 @@ class ProjectApplicationsSamlApplication(dict):
     @pulumi.getter(name="loginPageUrl")
     def login_page_url(self) -> Optional[str]:
         """
-        The URL of the custom login page for the application.
+        The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         """
         return pulumi.get(self, "login_page_url")
 
@@ -440,23 +453,32 @@ class ProjectApplicationsSamlApplication(dict):
     @pulumi.getter
     def logo(self) -> Optional[str]:
         """
-        The URL of the logo associated with the application.
+        A logo for the SAML application. Should be a hosted image URL.
         """
         return pulumi.get(self, "logo")
 
     @property
     @pulumi.getter(name="manualConfiguration")
     def manual_configuration(self) -> Optional['outputs.ProjectApplicationsSamlApplicationManualConfiguration']:
+        """
+        The `ManualConfiguration` object. Read the description below.
+        """
         return pulumi.get(self, "manual_configuration")
 
     @property
     @pulumi.getter(name="subjectNameIdFormat")
     def subject_name_id_format(self) -> Optional[str]:
+        """
+        The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        """
         return pulumi.get(self, "subject_name_id_format")
 
     @property
     @pulumi.getter(name="subjectNameIdType")
     def subject_name_id_type(self) -> Optional[str]:
+        """
+        The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+        """
         return pulumi.get(self, "subject_name_id_type")
 
 
@@ -466,8 +488,8 @@ class ProjectApplicationsSamlApplicationAttributeMapping(dict):
                  name: str,
                  value: str):
         """
-        :param str name: The name of the user attribute in the third party identity provider.
-        :param str value: The name of the user custom attribute in Descope.
+        :param str name: The name of the attribute.
+        :param str value: The value of the attribute.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "value", value)
@@ -476,7 +498,7 @@ class ProjectApplicationsSamlApplicationAttributeMapping(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the user attribute in the third party identity provider.
+        The name of the attribute.
         """
         return pulumi.get(self, "name")
 
@@ -484,7 +506,7 @@ class ProjectApplicationsSamlApplicationAttributeMapping(dict):
     @pulumi.getter
     def value(self) -> str:
         """
-        The name of the user custom attribute in Descope.
+        The value of the attribute.
         """
         return pulumi.get(self, "value")
 
@@ -510,11 +532,17 @@ class ProjectApplicationsSamlApplicationDynamicConfiguration(dict):
 
     def __init__(__self__, *,
                  metadata_url: str):
+        """
+        :param str metadata_url: The metadata URL when retrieving the connection details dynamically.
+        """
         pulumi.set(__self__, "metadata_url", metadata_url)
 
     @property
     @pulumi.getter(name="metadataUrl")
     def metadata_url(self) -> str:
+        """
+        The metadata URL when retrieving the connection details dynamically.
+        """
         return pulumi.get(self, "metadata_url")
 
 
@@ -543,6 +571,11 @@ class ProjectApplicationsSamlApplicationManualConfiguration(dict):
                  acs_url: str,
                  certificate: str,
                  entity_id: str):
+        """
+        :param str acs_url: Enter the `ACS URL` from the SP.
+        :param str certificate: Enter the `Certificate` from the SP.
+        :param str entity_id: Enter the `Entity Id` from the SP.
+        """
         pulumi.set(__self__, "acs_url", acs_url)
         pulumi.set(__self__, "certificate", certificate)
         pulumi.set(__self__, "entity_id", entity_id)
@@ -550,16 +583,25 @@ class ProjectApplicationsSamlApplicationManualConfiguration(dict):
     @property
     @pulumi.getter(name="acsUrl")
     def acs_url(self) -> str:
+        """
+        Enter the `ACS URL` from the SP.
+        """
         return pulumi.get(self, "acs_url")
 
     @property
     @pulumi.getter
     def certificate(self) -> str:
+        """
+        Enter the `Certificate` from the SP.
+        """
         return pulumi.get(self, "certificate")
 
     @property
     @pulumi.getter(name="entityId")
     def entity_id(self) -> str:
+        """
+        Enter the `Entity Id` from the SP.
+        """
         return pulumi.get(self, "entity_id")
 
 
@@ -569,8 +611,8 @@ class ProjectAttributes(dict):
                  tenants: Optional[Sequence['outputs.ProjectAttributesTenant']] = None,
                  users: Optional[Sequence['outputs.ProjectAttributesUser']] = None):
         """
-        :param Sequence['ProjectAttributesTenantArgs'] tenants: Custom attributes to store additional details about your tenants.
-        :param Sequence['ProjectAttributesUserArgs'] users: Custom attributes to store additional details about your users.
+        :param Sequence['ProjectAttributesTenantArgs'] tenants: A list of `TenantAttribute`. Read the description below.
+        :param Sequence['ProjectAttributesUserArgs'] users: A list of `UserAttribute`. Read the description below.
         """
         if tenants is not None:
             pulumi.set(__self__, "tenants", tenants)
@@ -581,7 +623,7 @@ class ProjectAttributes(dict):
     @pulumi.getter
     def tenants(self) -> Optional[Sequence['outputs.ProjectAttributesTenant']]:
         """
-        Custom attributes to store additional details about your tenants.
+        A list of `TenantAttribute`. Read the description below.
         """
         return pulumi.get(self, "tenants")
 
@@ -589,7 +631,7 @@ class ProjectAttributes(dict):
     @pulumi.getter
     def users(self) -> Optional[Sequence['outputs.ProjectAttributesUser']]:
         """
-        Custom attributes to store additional details about your users.
+        A list of `UserAttribute`. Read the description below.
         """
         return pulumi.get(self, "users")
 
@@ -618,9 +660,9 @@ class ProjectAttributesTenant(dict):
                  type: str,
                  select_options: Optional[Sequence[str]] = None):
         """
-        :param str name: The name of the tenant attribute.
-        :param str type: The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
-        :param Sequence[str] select_options: A list of strings to define the set of options for select attributes.
+        :param str name: The name of the attribute.
+        :param str type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+        :param Sequence[str] select_options: When the attribute type is "multiselect". A list of options to chose from.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
@@ -631,7 +673,7 @@ class ProjectAttributesTenant(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the tenant attribute.
+        The name of the attribute.
         """
         return pulumi.get(self, "name")
 
@@ -639,7 +681,7 @@ class ProjectAttributesTenant(dict):
     @pulumi.getter
     def type(self) -> str:
         """
-        The type of the tenant attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
         """
         return pulumi.get(self, "type")
 
@@ -647,7 +689,7 @@ class ProjectAttributesTenant(dict):
     @pulumi.getter(name="selectOptions")
     def select_options(self) -> Optional[Sequence[str]]:
         """
-        A list of strings to define the set of options for select attributes.
+        When the attribute type is "multiselect". A list of options to chose from.
         """
         return pulumi.get(self, "select_options")
 
@@ -679,10 +721,10 @@ class ProjectAttributesUser(dict):
                  select_options: Optional[Sequence[str]] = None,
                  widget_authorization: Optional['outputs.ProjectAttributesUserWidgetAuthorization'] = None):
         """
-        :param str name: The name of the user attribute.
-        :param str type: The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
-        :param Sequence[str] select_options: A list of strings to define the set of options for select attributes.
-        :param 'ProjectAttributesUserWidgetAuthorizationArgs' widget_authorization: When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        :param str name: The name of the attribute.
+        :param str type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+        :param Sequence[str] select_options: When the attribute type is "multiselect". A list of options to chose from.
+        :param 'ProjectAttributesUserWidgetAuthorizationArgs' widget_authorization: The `UserAttributeWidgetAuthorization` object. Read the description below.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
@@ -695,7 +737,7 @@ class ProjectAttributesUser(dict):
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the user attribute.
+        The name of the attribute.
         """
         return pulumi.get(self, "name")
 
@@ -703,7 +745,7 @@ class ProjectAttributesUser(dict):
     @pulumi.getter
     def type(self) -> str:
         """
-        The type of the user attribute. Valid valus are `string`, `number`, `boolean`, `date`, `singleselect`, and `multiselect`.
+        The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
         """
         return pulumi.get(self, "type")
 
@@ -711,7 +753,7 @@ class ProjectAttributesUser(dict):
     @pulumi.getter(name="selectOptions")
     def select_options(self) -> Optional[Sequence[str]]:
         """
-        A list of strings to define the set of options for select attributes.
+        When the attribute type is "multiselect". A list of options to chose from.
         """
         return pulumi.get(self, "select_options")
 
@@ -719,7 +761,7 @@ class ProjectAttributesUser(dict):
     @pulumi.getter(name="widgetAuthorization")
     def widget_authorization(self) -> Optional['outputs.ProjectAttributesUserWidgetAuthorization']:
         """
-        When provided, viewing and editing the attribute values in widgets will be restricted to users with the specified permissions.
+        The `UserAttributeWidgetAuthorization` object. Read the description below.
         """
         return pulumi.get(self, "widget_authorization")
 
@@ -749,8 +791,8 @@ class ProjectAttributesUserWidgetAuthorization(dict):
                  edit_permissions: Optional[Sequence[str]] = None,
                  view_permissions: Optional[Sequence[str]] = None):
         """
-        :param Sequence[str] edit_permissions: Editing the attribute value in widgets will be restricted to users with the specified permissions.
-        :param Sequence[str] view_permissions: Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        :param Sequence[str] edit_permissions: A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
+        :param Sequence[str] view_permissions: A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
         """
         if edit_permissions is not None:
             pulumi.set(__self__, "edit_permissions", edit_permissions)
@@ -761,7 +803,7 @@ class ProjectAttributesUserWidgetAuthorization(dict):
     @pulumi.getter(name="editPermissions")
     def edit_permissions(self) -> Optional[Sequence[str]]:
         """
-        Editing the attribute value in widgets will be restricted to users with the specified permissions.
+        A list of permissions by name to set editing permissions to the attribute in widgets. e.g "SSO Admin".
         """
         return pulumi.get(self, "edit_permissions")
 
@@ -769,7 +811,7 @@ class ProjectAttributesUserWidgetAuthorization(dict):
     @pulumi.getter(name="viewPermissions")
     def view_permissions(self) -> Optional[Sequence[str]]:
         """
-        Viewing the attribute value in widgets will be restricted to users with the specified permissions.
+        A list of permissions by name to set viewing permissions to the attribute in widgets. e.g "SSO Admin".
         """
         return pulumi.get(self, "view_permissions")
 
@@ -917,8 +959,6 @@ class ProjectAuthenticationEmbeddedLink(dict):
         suggest = None
         if key == "expirationTime":
             suggest = "expiration_time"
-        elif key == "expirationTimeUnit":
-            suggest = "expiration_time_unit"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectAuthenticationEmbeddedLink. Access the value via the '{suggest}' property getter instead.")
@@ -932,36 +972,32 @@ class ProjectAuthenticationEmbeddedLink(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 enabled: Optional[bool] = None,
-                 expiration_time: Optional[int] = None,
-                 expiration_time_unit: Optional[str] = None):
+                 disabled: Optional[bool] = None,
+                 expiration_time: Optional[str] = None):
         """
-        :param int expiration_time: The amount of time that the embedded link will be valid for.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        :param str expiration_time: The amount of time that the embedded link will be valid for.
         """
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
-        if expiration_time_unit is not None:
-            pulumi.set(__self__, "expiration_time_unit", expiration_time_unit)
 
     @property
     @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="expirationTime")
-    def expiration_time(self) -> Optional[int]:
+    def expiration_time(self) -> Optional[str]:
         """
         The amount of time that the embedded link will be valid for.
         """
         return pulumi.get(self, "expiration_time")
-
-    @property
-    @pulumi.getter(name="expirationTimeUnit")
-    def expiration_time_unit(self) -> Optional[str]:
-        return pulumi.get(self, "expiration_time_unit")
 
 
 @pulumi.output_type
@@ -973,8 +1009,6 @@ class ProjectAuthenticationEnchantedLink(dict):
             suggest = "email_service"
         elif key == "expirationTime":
             suggest = "expiration_time"
-        elif key == "expirationTimeUnit":
-            suggest = "expiration_time_unit"
         elif key == "redirectUrl":
             suggest = "redirect_url"
 
@@ -990,25 +1024,31 @@ class ProjectAuthenticationEnchantedLink(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 disabled: Optional[bool] = None,
                  email_service: Optional['outputs.ProjectAuthenticationEnchantedLinkEmailService'] = None,
-                 enabled: Optional[bool] = None,
-                 expiration_time: Optional[int] = None,
-                 expiration_time_unit: Optional[str] = None,
+                 expiration_time: Optional[str] = None,
                  redirect_url: Optional[str] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param 'ProjectAuthenticationEnchantedLinkEmailServiceArgs' email_service: Settings related to sending emails as part of the enchanted link authentication.
         :param str redirect_url: The URL to redirect users to after they log in using the enchanted link.
         """
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
-        if expiration_time_unit is not None:
-            pulumi.set(__self__, "expiration_time_unit", expiration_time_unit)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
+
+    @property
+    @pulumi.getter
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="emailService")
@@ -1019,19 +1059,9 @@ class ProjectAuthenticationEnchantedLink(dict):
         return pulumi.get(self, "email_service")
 
     @property
-    @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
-
-    @property
     @pulumi.getter(name="expirationTime")
-    def expiration_time(self) -> Optional[int]:
+    def expiration_time(self) -> Optional[str]:
         return pulumi.get(self, "expiration_time")
-
-    @property
-    @pulumi.getter(name="expirationTimeUnit")
-    def expiration_time_unit(self) -> Optional[str]:
-        return pulumi.get(self, "expiration_time_unit")
 
     @property
     @pulumi.getter(name="redirectUrl")
@@ -1151,8 +1181,6 @@ class ProjectAuthenticationMagicLink(dict):
             suggest = "email_service"
         elif key == "expirationTime":
             suggest = "expiration_time"
-        elif key == "expirationTimeUnit":
-            suggest = "expiration_time_unit"
         elif key == "redirectUrl":
             suggest = "redirect_url"
         elif key == "textService":
@@ -1170,29 +1198,35 @@ class ProjectAuthenticationMagicLink(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 disabled: Optional[bool] = None,
                  email_service: Optional['outputs.ProjectAuthenticationMagicLinkEmailService'] = None,
-                 enabled: Optional[bool] = None,
-                 expiration_time: Optional[int] = None,
-                 expiration_time_unit: Optional[str] = None,
+                 expiration_time: Optional[str] = None,
                  redirect_url: Optional[str] = None,
                  text_service: Optional['outputs.ProjectAuthenticationMagicLinkTextService'] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param 'ProjectAuthenticationMagicLinkEmailServiceArgs' email_service: Settings related to sending emails as part of the magic link authentication.
         :param str redirect_url: The URL to redirect users to after they log in using the magic link.
         :param 'ProjectAuthenticationMagicLinkTextServiceArgs' text_service: Settings related to sending SMS messages as part of the magic link authentication.
         """
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
-        if expiration_time_unit is not None:
-            pulumi.set(__self__, "expiration_time_unit", expiration_time_unit)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
         if text_service is not None:
             pulumi.set(__self__, "text_service", text_service)
+
+    @property
+    @pulumi.getter
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="emailService")
@@ -1203,19 +1237,9 @@ class ProjectAuthenticationMagicLink(dict):
         return pulumi.get(self, "email_service")
 
     @property
-    @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
-
-    @property
     @pulumi.getter(name="expirationTime")
-    def expiration_time(self) -> Optional[int]:
+    def expiration_time(self) -> Optional[str]:
         return pulumi.get(self, "expiration_time")
-
-    @property
-    @pulumi.getter(name="expirationTimeUnit")
-    def expiration_time_unit(self) -> Optional[str]:
-        return pulumi.get(self, "expiration_time_unit")
 
     @property
     @pulumi.getter(name="redirectUrl")
@@ -1397,6 +1421,7 @@ class ProjectAuthenticationOauth(dict):
                  system: Optional['outputs.ProjectAuthenticationOauthSystem'] = None):
         """
         :param Mapping[str, 'ProjectAuthenticationOauthCustomArgs'] custom: Custom OAuth providers configured for this project.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param 'ProjectAuthenticationOauthSystemArgs' system: Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
         """
         if custom is not None:
@@ -1417,6 +1442,9 @@ class ProjectAuthenticationOauth(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
 
     @property
@@ -1433,7 +1461,9 @@ class ProjectAuthenticationOauthCustom(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -1441,8 +1471,6 @@ class ProjectAuthenticationOauthCustom(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -1466,13 +1494,13 @@ class ProjectAuthenticationOauthCustom(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -1483,11 +1511,12 @@ class ProjectAuthenticationOauthCustom(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -1497,6 +1526,8 @@ class ProjectAuthenticationOauthCustom(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -1509,8 +1540,6 @@ class ProjectAuthenticationOauthCustom(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -1529,6 +1558,14 @@ class ProjectAuthenticationOauthCustom(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -1570,15 +1607,10 @@ class ProjectAuthenticationOauthCustom(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -1810,7 +1842,9 @@ class ProjectAuthenticationOauthSystemApple(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -1818,8 +1852,6 @@ class ProjectAuthenticationOauthSystemApple(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -1843,13 +1875,13 @@ class ProjectAuthenticationOauthSystemApple(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -1860,11 +1892,12 @@ class ProjectAuthenticationOauthSystemApple(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -1874,6 +1907,8 @@ class ProjectAuthenticationOauthSystemApple(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -1886,8 +1921,6 @@ class ProjectAuthenticationOauthSystemApple(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -1906,6 +1939,14 @@ class ProjectAuthenticationOauthSystemApple(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -1947,15 +1988,10 @@ class ProjectAuthenticationOauthSystemApple(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -2072,7 +2108,9 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -2080,8 +2118,6 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -2105,13 +2141,13 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -2122,11 +2158,12 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -2136,6 +2173,8 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2148,8 +2187,6 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -2168,6 +2205,14 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -2209,15 +2254,10 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -2334,7 +2374,9 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -2342,8 +2384,6 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -2367,13 +2407,13 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -2384,11 +2424,12 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -2398,6 +2439,8 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2410,8 +2453,6 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -2430,6 +2471,14 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -2471,15 +2520,10 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -2596,7 +2640,9 @@ class ProjectAuthenticationOauthSystemGithub(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -2604,8 +2650,6 @@ class ProjectAuthenticationOauthSystemGithub(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -2629,13 +2673,13 @@ class ProjectAuthenticationOauthSystemGithub(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -2646,11 +2690,12 @@ class ProjectAuthenticationOauthSystemGithub(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -2660,6 +2705,8 @@ class ProjectAuthenticationOauthSystemGithub(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2672,8 +2719,6 @@ class ProjectAuthenticationOauthSystemGithub(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -2692,6 +2737,14 @@ class ProjectAuthenticationOauthSystemGithub(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -2733,15 +2786,10 @@ class ProjectAuthenticationOauthSystemGithub(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -2858,7 +2906,9 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -2866,8 +2916,6 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -2891,13 +2939,13 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -2908,11 +2956,12 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -2922,6 +2971,8 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -2934,8 +2985,6 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -2954,6 +3003,14 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -2995,15 +3052,10 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -3120,7 +3172,9 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -3128,8 +3182,6 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -3153,13 +3205,13 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -3170,11 +3222,12 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -3184,6 +3237,8 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3196,8 +3251,6 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -3216,6 +3269,14 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -3257,15 +3318,10 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -3382,7 +3438,9 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -3390,8 +3448,6 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -3415,13 +3471,13 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -3432,11 +3488,12 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -3446,6 +3503,8 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3458,8 +3517,6 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -3478,6 +3535,14 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -3519,15 +3584,10 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -3644,7 +3704,9 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -3652,8 +3714,6 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -3677,13 +3737,13 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -3694,11 +3754,12 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -3708,6 +3769,8 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3720,8 +3783,6 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -3740,6 +3801,14 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -3781,15 +3850,10 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -3906,7 +3970,9 @@ class ProjectAuthenticationOauthSystemSlack(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authorizationEndpoint":
+        if key == "allowedGrantTypes":
+            suggest = "allowed_grant_types"
+        elif key == "authorizationEndpoint":
             suggest = "authorization_endpoint"
         elif key == "claimMapping":
             suggest = "claim_mapping"
@@ -3914,8 +3980,6 @@ class ProjectAuthenticationOauthSystemSlack(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
-        elif key == "grantType":
-            suggest = "grant_type"
         elif key == "jwksEndpoint":
             suggest = "jwks_endpoint"
         elif key == "mergeUserAccounts":
@@ -3939,13 +4003,13 @@ class ProjectAuthenticationOauthSystemSlack(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allowed_grant_types: Optional[Sequence[str]] = None,
                  authorization_endpoint: Optional[str] = None,
                  claim_mapping: Optional[Mapping[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
-                 grant_type: Optional[str] = None,
                  issuer: Optional[str] = None,
                  jwks_endpoint: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -3956,11 +4020,12 @@ class ProjectAuthenticationOauthSystemSlack(dict):
                  token_endpoint: Optional[str] = None,
                  user_info_endpoint: Optional[str] = None):
         """
+        :param Sequence[str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         :param str authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param str client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param str client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param str description: A brief description of the OAuth provider.
-        :param str grant_type: The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
         :param str logo: The URL of the logo associated with the OAuth provider.
         :param bool merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
@@ -3970,6 +4035,8 @@ class ProjectAuthenticationOauthSystemSlack(dict):
         :param str token_endpoint: The URL where the application requests an access token from the OAuth provider.
         :param str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
+        if allowed_grant_types is not None:
+            pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if claim_mapping is not None:
@@ -3982,8 +4049,6 @@ class ProjectAuthenticationOauthSystemSlack(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
-        if grant_type is not None:
-            pulumi.set(__self__, "grant_type", grant_type)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_endpoint is not None:
@@ -4002,6 +4067,14 @@ class ProjectAuthenticationOauthSystemSlack(dict):
             pulumi.set(__self__, "token_endpoint", token_endpoint)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
+
+    @property
+    @pulumi.getter(name="allowedGrantTypes")
+    def allowed_grant_types(self) -> Optional[Sequence[str]]:
+        """
+        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        return pulumi.get(self, "allowed_grant_types")
 
     @property
     @pulumi.getter(name="authorizationEndpoint")
@@ -4043,15 +4116,10 @@ class ProjectAuthenticationOauthSystemSlack(dict):
     @property
     @pulumi.getter
     def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
         return pulumi.get(self, "disabled")
-
-    @property
-    @pulumi.getter(name="grantType")
-    def grant_type(self) -> Optional[str]:
-        """
-        The type of grant (`authorization_code` or `implicit`) to use when requesting access tokens from the OAuth provider.
-        """
-        return pulumi.get(self, "grant_type")
 
     @property
     @pulumi.getter
@@ -4172,8 +4240,6 @@ class ProjectAuthenticationOtp(dict):
             suggest = "email_service"
         elif key == "expirationTime":
             suggest = "expiration_time"
-        elif key == "expirationTimeUnit":
-            suggest = "expiration_time_unit"
         elif key == "textService":
             suggest = "text_service"
         elif key == "voiceService":
@@ -4191,34 +4257,40 @@ class ProjectAuthenticationOtp(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 disabled: Optional[bool] = None,
                  domain: Optional[str] = None,
                  email_service: Optional['outputs.ProjectAuthenticationOtpEmailService'] = None,
-                 enabled: Optional[bool] = None,
-                 expiration_time: Optional[int] = None,
-                 expiration_time_unit: Optional[str] = None,
+                 expiration_time: Optional[str] = None,
                  text_service: Optional['outputs.ProjectAuthenticationOtpTextService'] = None,
                  voice_service: Optional['outputs.ProjectAuthenticationOtpVoiceService'] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str domain: The domain to embed in OTP messages.
         :param 'ProjectAuthenticationOtpEmailServiceArgs' email_service: Settings related to sending emails with OTP codes.
-        :param int expiration_time: The amount of time that an OTP code will be valid for.
+        :param str expiration_time: The amount of time that an OTP code will be valid for.
         :param 'ProjectAuthenticationOtpTextServiceArgs' text_service: Settings related to sending SMS messages with OTP codes.
         :param 'ProjectAuthenticationOtpVoiceServiceArgs' voice_service: Settings related to voice calls with OTP codes.
         """
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
-        if expiration_time_unit is not None:
-            pulumi.set(__self__, "expiration_time_unit", expiration_time_unit)
         if text_service is not None:
             pulumi.set(__self__, "text_service", text_service)
         if voice_service is not None:
             pulumi.set(__self__, "voice_service", voice_service)
+
+    @property
+    @pulumi.getter
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter
@@ -4237,22 +4309,12 @@ class ProjectAuthenticationOtp(dict):
         return pulumi.get(self, "email_service")
 
     @property
-    @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
-
-    @property
     @pulumi.getter(name="expirationTime")
-    def expiration_time(self) -> Optional[int]:
+    def expiration_time(self) -> Optional[str]:
         """
         The amount of time that an OTP code will be valid for.
         """
         return pulumi.get(self, "expiration_time")
-
-    @property
-    @pulumi.getter(name="expirationTimeUnit")
-    def expiration_time_unit(self) -> Optional[str]:
-        return pulumi.get(self, "expiration_time_unit")
 
     @property
     @pulumi.getter(name="textService")
@@ -4501,20 +4563,24 @@ class ProjectAuthenticationPasskeys(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 enabled: Optional[bool] = None,
+                 disabled: Optional[bool] = None,
                  top_level_domain: Optional[str] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param str top_level_domain: Passkeys will be usable in the following domain and all its subdomains.
         """
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if top_level_domain is not None:
             pulumi.set(__self__, "top_level_domain", top_level_domain)
 
     @property
     @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="topLevelDomain")
@@ -4555,8 +4621,8 @@ class ProjectAuthenticationPassword(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 disabled: Optional[bool] = None,
                  email_service: Optional['outputs.ProjectAuthenticationPasswordEmailService'] = None,
-                 enabled: Optional[bool] = None,
                  expiration: Optional[bool] = None,
                  expiration_weeks: Optional[int] = None,
                  lock: Optional[bool] = None,
@@ -4569,6 +4635,7 @@ class ProjectAuthenticationPassword(dict):
                  reuse_amount: Optional[int] = None,
                  uppercase: Optional[bool] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param 'ProjectAuthenticationPasswordEmailServiceArgs' email_service: Settings related to sending password reset emails as part of the password feature.
         :param bool expiration: Whether users are required to change their password periodically.
         :param int expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
@@ -4581,10 +4648,10 @@ class ProjectAuthenticationPassword(dict):
         :param bool reuse: Whether to forbid password reuse when users change their password.
         :param bool uppercase: Whether passwords must contain at least one uppercase letter.
         """
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
         if expiration_weeks is not None:
@@ -4609,17 +4676,20 @@ class ProjectAuthenticationPassword(dict):
             pulumi.set(__self__, "uppercase", uppercase)
 
     @property
+    @pulumi.getter
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
+
+    @property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional['outputs.ProjectAuthenticationPasswordEmailService']:
         """
         Settings related to sending password reset emails as part of the password feature.
         """
         return pulumi.get(self, "email_service")
-
-    @property
-    @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter
@@ -4827,20 +4897,24 @@ class ProjectAuthenticationSso(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 enabled: Optional[bool] = None,
+                 disabled: Optional[bool] = None,
                  merge_users: Optional[bool] = None):
         """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param bool merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         """
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
             pulumi.set(__self__, "merge_users", merge_users)
 
     @property
     @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
     @property
     @pulumi.getter(name="mergeUsers")
@@ -4854,14 +4928,20 @@ class ProjectAuthenticationSso(dict):
 @pulumi.output_type
 class ProjectAuthenticationTotp(dict):
     def __init__(__self__, *,
-                 enabled: Optional[bool] = None):
-        if enabled is not None:
-            pulumi.set(__self__, "enabled", enabled)
+                 disabled: Optional[bool] = None):
+        """
+        :param bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
 
     @property
     @pulumi.getter
-    def enabled(self) -> Optional[bool]:
-        return pulumi.get(self, "enabled")
+    def disabled(self) -> Optional[bool]:
+        """
+        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        """
+        return pulumi.get(self, "disabled")
 
 
 @pulumi.output_type
@@ -4869,6 +4949,10 @@ class ProjectAuthorization(dict):
     def __init__(__self__, *,
                  permissions: Optional[Sequence['outputs.ProjectAuthorizationPermission']] = None,
                  roles: Optional[Sequence['outputs.ProjectAuthorizationRole']] = None):
+        """
+        :param Sequence['ProjectAuthorizationPermissionArgs'] permissions: A list of `Permission` objects.
+        :param Sequence['ProjectAuthorizationRoleArgs'] roles: A list of `Role` objects.
+        """
         if permissions is not None:
             pulumi.set(__self__, "permissions", permissions)
         if roles is not None:
@@ -4877,11 +4961,17 @@ class ProjectAuthorization(dict):
     @property
     @pulumi.getter
     def permissions(self) -> Optional[Sequence['outputs.ProjectAuthorizationPermission']]:
+        """
+        A list of `Permission` objects.
+        """
         return pulumi.get(self, "permissions")
 
     @property
     @pulumi.getter
     def roles(self) -> Optional[Sequence['outputs.ProjectAuthorizationRole']]:
+        """
+        A list of `Role` objects.
+        """
         return pulumi.get(self, "roles")
 
 
@@ -4891,6 +4981,10 @@ class ProjectAuthorizationPermission(dict):
                  name: str,
                  description: Optional[str] = None,
                  id: Optional[str] = None):
+        """
+        :param str name: A name for the permission.
+        :param str description: A description for the permission.
+        """
         pulumi.set(__self__, "name", name)
         if description is not None:
             pulumi.set(__self__, "description", description)
@@ -4900,11 +4994,17 @@ class ProjectAuthorizationPermission(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        A name for the permission.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        A description for the permission.
+        """
         return pulumi.get(self, "description")
 
     @property
@@ -4920,6 +5020,11 @@ class ProjectAuthorizationRole(dict):
                  description: Optional[str] = None,
                  id: Optional[str] = None,
                  permissions: Optional[Sequence[str]] = None):
+        """
+        :param str name: A name for the role.
+        :param str description: A description for the role.
+        :param Sequence[str] permissions: A list of permissions by name to be included in the role.
+        """
         pulumi.set(__self__, "name", name)
         if description is not None:
             pulumi.set(__self__, "description", description)
@@ -4931,11 +5036,17 @@ class ProjectAuthorizationRole(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        A name for the role.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        A description for the role.
+        """
         return pulumi.get(self, "description")
 
     @property
@@ -4946,6 +5057,9 @@ class ProjectAuthorizationRole(dict):
     @property
     @pulumi.getter
     def permissions(self) -> Optional[Sequence[str]]:
+        """
+        A list of permissions by name to be included in the role.
+        """
         return pulumi.get(self, "permissions")
 
 
@@ -4966,8 +5080,6 @@ class ProjectConnectors(dict):
             suggest = "fingerprint_descopes"
         elif key == "googleCloudTranslations":
             suggest = "google_cloud_translations"
-        elif key == "httpStaticIps":
-            suggest = "http_static_ips"
         elif key == "recaptchaEnterprises":
             suggest = "recaptcha_enterprises"
         elif key == "twilioCores":
@@ -5001,10 +5113,11 @@ class ProjectConnectors(dict):
                  forters: Optional[Sequence['outputs.ProjectConnectorsForter']] = None,
                  google_cloud_translations: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudTranslation']] = None,
                  hibps: Optional[Sequence['outputs.ProjectConnectorsHibp']] = None,
-                 http_static_ips: Optional[Sequence['outputs.ProjectConnectorsHttpStaticIp']] = None,
                  https: Optional[Sequence['outputs.ProjectConnectorsHttp']] = None,
                  hubspots: Optional[Sequence['outputs.ProjectConnectorsHubspot']] = None,
                  intercoms: Optional[Sequence['outputs.ProjectConnectorsIntercom']] = None,
+                 lokalises: Optional[Sequence['outputs.ProjectConnectorsLokalise']] = None,
+                 mparticles: Optional[Sequence['outputs.ProjectConnectorsMparticle']] = None,
                  newrelics: Optional[Sequence['outputs.ProjectConnectorsNewrelic']] = None,
                  recaptcha_enterprises: Optional[Sequence['outputs.ProjectConnectorsRecaptchaEnterprise']] = None,
                  recaptchas: Optional[Sequence['outputs.ProjectConnectorsRecaptcha']] = None,
@@ -5012,13 +5125,13 @@ class ProjectConnectors(dict):
                  salesforces: Optional[Sequence['outputs.ProjectConnectorsSalesforce']] = None,
                  segments: Optional[Sequence['outputs.ProjectConnectorsSegment']] = None,
                  sendgrids: Optional[Sequence['outputs.ProjectConnectorsSendgrid']] = None,
+                 smartlings: Optional[Sequence['outputs.ProjectConnectorsSmartling']] = None,
                  smtps: Optional[Sequence['outputs.ProjectConnectorsSmtp']] = None,
                  sumologics: Optional[Sequence['outputs.ProjectConnectorsSumologic']] = None,
                  telesigns: Optional[Sequence['outputs.ProjectConnectorsTelesign']] = None,
                  traceables: Optional[Sequence['outputs.ProjectConnectorsTraceable']] = None,
                  twilio_cores: Optional[Sequence['outputs.ProjectConnectorsTwilioCore']] = None,
-                 twilio_verifies: Optional[Sequence['outputs.ProjectConnectorsTwilioVerify']] = None,
-                 veriffs: Optional[Sequence['outputs.ProjectConnectorsVeriff']] = None):
+                 twilio_verifies: Optional[Sequence['outputs.ProjectConnectorsTwilioVerify']] = None):
         """
         :param Sequence['ProjectConnectorsAbuseipdbArgs'] abuseipdbs: AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
         :param Sequence['ProjectConnectorsAmplitudeArgs'] amplitudes: Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
@@ -5031,15 +5144,17 @@ class ProjectConnectors(dict):
         :param Sequence['ProjectConnectorsHttpArgs'] https: A general purpose HTTP client
         :param Sequence['ProjectConnectorsHubspotArgs'] hubspots: HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
         :param Sequence['ProjectConnectorsIntercomArgs'] intercoms: Intercom is a Conversational Relationship Platform (CRP).
+        :param Sequence['ProjectConnectorsLokaliseArgs'] lokalises: Localize the language of your login and user journey screens with the Lokalise connector.
+        :param Sequence['ProjectConnectorsMparticleArgs'] mparticles: Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
         :param Sequence['ProjectConnectorsNewrelicArgs'] newrelics: Use this connector to send audit events and troubleshooting logs to New Relic.
         :param Sequence['ProjectConnectorsRecaptchaArgs'] recaptchas: reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
         :param Sequence['ProjectConnectorsRekognitionArgs'] rekognitions: AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
         :param Sequence['ProjectConnectorsSalesforceArgs'] salesforces: Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
         :param Sequence['ProjectConnectorsSegmentArgs'] segments: Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        :param Sequence['ProjectConnectorsSmartlingArgs'] smartlings: Localize the language of your login and user journey screens with the Smartling connector.
         :param Sequence['ProjectConnectorsSumologicArgs'] sumologics: Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
         :param Sequence['ProjectConnectorsTelesignArgs'] telesigns: Telesign Phone number intelligence API provides risk score for phone numbers.
         :param Sequence['ProjectConnectorsTraceableArgs'] traceables: API security for a cloud-first, API-driven world.
-        :param Sequence['ProjectConnectorsVeriffArgs'] veriffs: AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
         """
         if abuseipdbs is not None:
             pulumi.set(__self__, "abuseipdbs", abuseipdbs)
@@ -5069,14 +5184,16 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if hibps is not None:
             pulumi.set(__self__, "hibps", hibps)
-        if http_static_ips is not None:
-            pulumi.set(__self__, "http_static_ips", http_static_ips)
         if https is not None:
             pulumi.set(__self__, "https", https)
         if hubspots is not None:
             pulumi.set(__self__, "hubspots", hubspots)
         if intercoms is not None:
             pulumi.set(__self__, "intercoms", intercoms)
+        if lokalises is not None:
+            pulumi.set(__self__, "lokalises", lokalises)
+        if mparticles is not None:
+            pulumi.set(__self__, "mparticles", mparticles)
         if newrelics is not None:
             pulumi.set(__self__, "newrelics", newrelics)
         if recaptcha_enterprises is not None:
@@ -5091,6 +5208,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "segments", segments)
         if sendgrids is not None:
             pulumi.set(__self__, "sendgrids", sendgrids)
+        if smartlings is not None:
+            pulumi.set(__self__, "smartlings", smartlings)
         if smtps is not None:
             pulumi.set(__self__, "smtps", smtps)
         if sumologics is not None:
@@ -5103,8 +5222,6 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "twilio_cores", twilio_cores)
         if twilio_verifies is not None:
             pulumi.set(__self__, "twilio_verifies", twilio_verifies)
-        if veriffs is not None:
-            pulumi.set(__self__, "veriffs", veriffs)
 
     @property
     @pulumi.getter
@@ -5201,11 +5318,6 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "hibps")
 
     @property
-    @pulumi.getter(name="httpStaticIps")
-    def http_static_ips(self) -> Optional[Sequence['outputs.ProjectConnectorsHttpStaticIp']]:
-        return pulumi.get(self, "http_static_ips")
-
-    @property
     @pulumi.getter
     def https(self) -> Optional[Sequence['outputs.ProjectConnectorsHttp']]:
         """
@@ -5228,6 +5340,22 @@ class ProjectConnectors(dict):
         Intercom is a Conversational Relationship Platform (CRP).
         """
         return pulumi.get(self, "intercoms")
+
+    @property
+    @pulumi.getter
+    def lokalises(self) -> Optional[Sequence['outputs.ProjectConnectorsLokalise']]:
+        """
+        Localize the language of your login and user journey screens with the Lokalise connector.
+        """
+        return pulumi.get(self, "lokalises")
+
+    @property
+    @pulumi.getter
+    def mparticles(self) -> Optional[Sequence['outputs.ProjectConnectorsMparticle']]:
+        """
+        Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+        """
+        return pulumi.get(self, "mparticles")
 
     @property
     @pulumi.getter
@@ -5281,6 +5409,14 @@ class ProjectConnectors(dict):
 
     @property
     @pulumi.getter
+    def smartlings(self) -> Optional[Sequence['outputs.ProjectConnectorsSmartling']]:
+        """
+        Localize the language of your login and user journey screens with the Smartling connector.
+        """
+        return pulumi.get(self, "smartlings")
+
+    @property
+    @pulumi.getter
     def smtps(self) -> Optional[Sequence['outputs.ProjectConnectorsSmtp']]:
         return pulumi.get(self, "smtps")
 
@@ -5317,14 +5453,6 @@ class ProjectConnectors(dict):
     @pulumi.getter(name="twilioVerifies")
     def twilio_verifies(self) -> Optional[Sequence['outputs.ProjectConnectorsTwilioVerify']]:
         return pulumi.get(self, "twilio_verifies")
-
-    @property
-    @pulumi.getter
-    def veriffs(self) -> Optional[Sequence['outputs.ProjectConnectorsVeriff']]:
-        """
-        AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-        """
-        return pulumi.get(self, "veriffs")
 
 
 @pulumi.output_type
@@ -6946,222 +7074,6 @@ class ProjectConnectorsHttpAuthenticationBasic(dict):
 
 
 @pulumi.output_type
-class ProjectConnectorsHttpStaticIp(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "baseUrl":
-            suggest = "base_url"
-        elif key == "hmacSecret":
-            suggest = "hmac_secret"
-        elif key == "includeHeadersInContext":
-            suggest = "include_headers_in_context"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpStaticIp. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ProjectConnectorsHttpStaticIp.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ProjectConnectorsHttpStaticIp.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 base_url: str,
-                 name: str,
-                 authentication: Optional['outputs.ProjectConnectorsHttpStaticIpAuthentication'] = None,
-                 description: Optional[str] = None,
-                 headers: Optional[Mapping[str, str]] = None,
-                 hmac_secret: Optional[str] = None,
-                 id: Optional[str] = None,
-                 include_headers_in_context: Optional[bool] = None,
-                 insecure: Optional[bool] = None):
-        """
-        :param str base_url: The base URL to fetch
-        :param str name: A custom name for your connector.
-        :param 'ProjectConnectorsHttpStaticIpAuthenticationArgs' authentication: Authentication Information
-        :param str description: A description of what your connector is used for.
-        :param Mapping[str, str] headers: The headers to send with the request
-        :param str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        :param bool include_headers_in_context: The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-        :param bool insecure: Will ignore certificate errors raised by the client
-        """
-        pulumi.set(__self__, "base_url", base_url)
-        pulumi.set(__self__, "name", name)
-        if authentication is not None:
-            pulumi.set(__self__, "authentication", authentication)
-        if description is not None:
-            pulumi.set(__self__, "description", description)
-        if headers is not None:
-            pulumi.set(__self__, "headers", headers)
-        if hmac_secret is not None:
-            pulumi.set(__self__, "hmac_secret", hmac_secret)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
-        if include_headers_in_context is not None:
-            pulumi.set(__self__, "include_headers_in_context", include_headers_in_context)
-        if insecure is not None:
-            pulumi.set(__self__, "insecure", insecure)
-
-    @property
-    @pulumi.getter(name="baseUrl")
-    def base_url(self) -> str:
-        """
-        The base URL to fetch
-        """
-        return pulumi.get(self, "base_url")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        """
-        A custom name for your connector.
-        """
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def authentication(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthentication']:
-        """
-        Authentication Information
-        """
-        return pulumi.get(self, "authentication")
-
-    @property
-    @pulumi.getter
-    def description(self) -> Optional[str]:
-        """
-        A description of what your connector is used for.
-        """
-        return pulumi.get(self, "description")
-
-    @property
-    @pulumi.getter
-    def headers(self) -> Optional[Mapping[str, str]]:
-        """
-        The headers to send with the request
-        """
-        return pulumi.get(self, "headers")
-
-    @property
-    @pulumi.getter(name="hmacSecret")
-    def hmac_secret(self) -> Optional[str]:
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        return pulumi.get(self, "hmac_secret")
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[str]:
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="includeHeadersInContext")
-    def include_headers_in_context(self) -> Optional[bool]:
-        """
-        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-        """
-        return pulumi.get(self, "include_headers_in_context")
-
-    @property
-    @pulumi.getter
-    def insecure(self) -> Optional[bool]:
-        """
-        Will ignore certificate errors raised by the client
-        """
-        return pulumi.get(self, "insecure")
-
-
-@pulumi.output_type
-class ProjectConnectorsHttpStaticIpAuthentication(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "apiKey":
-            suggest = "api_key"
-        elif key == "bearerToken":
-            suggest = "bearer_token"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpStaticIpAuthentication. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ProjectConnectorsHttpStaticIpAuthentication.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ProjectConnectorsHttpStaticIpAuthentication.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 api_key: Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey'] = None,
-                 basic: Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationBasic'] = None,
-                 bearer_token: Optional[str] = None):
-        if api_key is not None:
-            pulumi.set(__self__, "api_key", api_key)
-        if basic is not None:
-            pulumi.set(__self__, "basic", basic)
-        if bearer_token is not None:
-            pulumi.set(__self__, "bearer_token", bearer_token)
-
-    @property
-    @pulumi.getter(name="apiKey")
-    def api_key(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationApiKey']:
-        return pulumi.get(self, "api_key")
-
-    @property
-    @pulumi.getter
-    def basic(self) -> Optional['outputs.ProjectConnectorsHttpStaticIpAuthenticationBasic']:
-        return pulumi.get(self, "basic")
-
-    @property
-    @pulumi.getter(name="bearerToken")
-    def bearer_token(self) -> Optional[str]:
-        return pulumi.get(self, "bearer_token")
-
-
-@pulumi.output_type
-class ProjectConnectorsHttpStaticIpAuthenticationApiKey(dict):
-    def __init__(__self__, *,
-                 key: str,
-                 token: str):
-        pulumi.set(__self__, "key", key)
-        pulumi.set(__self__, "token", token)
-
-    @property
-    @pulumi.getter
-    def key(self) -> str:
-        return pulumi.get(self, "key")
-
-    @property
-    @pulumi.getter
-    def token(self) -> str:
-        return pulumi.get(self, "token")
-
-
-@pulumi.output_type
-class ProjectConnectorsHttpStaticIpAuthenticationBasic(dict):
-    def __init__(__self__, *,
-                 password: str,
-                 username: str):
-        pulumi.set(__self__, "password", password)
-        pulumi.set(__self__, "username", username)
-
-    @property
-    @pulumi.getter
-    def password(self) -> str:
-        return pulumi.get(self, "password")
-
-    @property
-    @pulumi.getter
-    def username(self) -> str:
-        return pulumi.get(self, "username")
-
-
-@pulumi.output_type
 class ProjectConnectorsHubspot(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -7300,6 +7212,220 @@ class ProjectConnectorsIntercom(dict):
         Regional Hosting - US, EU, or AU. default: US
         """
         return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class ProjectConnectorsLokalise(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiToken":
+            suggest = "api_token"
+        elif key == "projectId":
+            suggest = "project_id"
+        elif key == "cardId":
+            suggest = "card_id"
+        elif key == "teamId":
+            suggest = "team_id"
+        elif key == "translationProvider":
+            suggest = "translation_provider"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsLokalise. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsLokalise.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsLokalise.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_token: str,
+                 name: str,
+                 project_id: str,
+                 card_id: Optional[str] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None,
+                 team_id: Optional[str] = None,
+                 translation_provider: Optional[str] = None):
+        """
+        :param str api_token: Lokalise API token.
+        :param str name: A custom name for your connector.
+        :param str project_id: Lokalise project ID.
+        :param str card_id: (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+        :param str description: A description of what your connector is used for.
+        :param str team_id: Lokalise team ID. If not provided, the oldest available team will be used.
+        :param str translation_provider: The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+        """
+        pulumi.set(__self__, "api_token", api_token)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project_id", project_id)
+        if card_id is not None:
+            pulumi.set(__self__, "card_id", card_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if team_id is not None:
+            pulumi.set(__self__, "team_id", team_id)
+        if translation_provider is not None:
+            pulumi.set(__self__, "translation_provider", translation_provider)
+
+    @property
+    @pulumi.getter(name="apiToken")
+    def api_token(self) -> str:
+        """
+        Lokalise API token.
+        """
+        return pulumi.get(self, "api_token")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> str:
+        """
+        Lokalise project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="cardId")
+    def card_id(self) -> Optional[str]:
+        """
+        (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+        """
+        return pulumi.get(self, "card_id")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> Optional[str]:
+        """
+        Lokalise team ID. If not provided, the oldest available team will be used.
+        """
+        return pulumi.get(self, "team_id")
+
+    @property
+    @pulumi.getter(name="translationProvider")
+    def translation_provider(self) -> Optional[str]:
+        """
+        The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+        """
+        return pulumi.get(self, "translation_provider")
+
+
+@pulumi.output_type
+class ProjectConnectorsMparticle(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiSecret":
+            suggest = "api_secret"
+        elif key == "baseUrl":
+            suggest = "base_url"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsMparticle. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsMparticle.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsMparticle.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: str,
+                 api_secret: str,
+                 name: str,
+                 base_url: Optional[str] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str api_key: The mParticle Server to Server Key generated for the Descope service.
+        :param str api_secret: The mParticle Server to Server Secret generated for the Descope service.
+        :param str name: A custom name for your connector.
+        :param str base_url: The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+        :param str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_secret", api_secret)
+        pulumi.set(__self__, "name", name)
+        if base_url is not None:
+            pulumi.set(__self__, "base_url", base_url)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> str:
+        """
+        The mParticle Server to Server Key generated for the Descope service.
+        """
+        return pulumi.get(self, "api_key")
+
+    @property
+    @pulumi.getter(name="apiSecret")
+    def api_secret(self) -> str:
+        """
+        The mParticle Server to Server Secret generated for the Descope service.
+        """
+        return pulumi.get(self, "api_secret")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> Optional[str]:
+        """
+        The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+        """
+        return pulumi.get(self, "base_url")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
 
 
 @pulumi.output_type
@@ -8011,6 +8137,98 @@ class ProjectConnectorsSendgridSender(dict):
     @pulumi.getter
     def name(self) -> Optional[str]:
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class ProjectConnectorsSmartling(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accountUid":
+            suggest = "account_uid"
+        elif key == "userIdentifier":
+            suggest = "user_identifier"
+        elif key == "userSecret":
+            suggest = "user_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSmartling. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSmartling.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSmartling.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 account_uid: str,
+                 name: str,
+                 user_identifier: str,
+                 user_secret: str,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str account_uid: The account UID for the Smartling account.
+        :param str name: A custom name for your connector.
+        :param str user_identifier: The user identifier for the Smartling account.
+        :param str user_secret: The user secret for the Smartling account.
+        :param str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "account_uid", account_uid)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "user_identifier", user_identifier)
+        pulumi.set(__self__, "user_secret", user_secret)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="accountUid")
+    def account_uid(self) -> str:
+        """
+        The account UID for the Smartling account.
+        """
+        return pulumi.get(self, "account_uid")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="userIdentifier")
+    def user_identifier(self) -> str:
+        """
+        The user identifier for the Smartling account.
+        """
+        return pulumi.get(self, "user_identifier")
+
+    @property
+    @pulumi.getter(name="userSecret")
+    def user_secret(self) -> str:
+        """
+        The user secret for the Smartling account.
+        """
+        return pulumi.get(self, "user_secret")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
 
 
 @pulumi.output_type
@@ -8746,99 +8964,6 @@ class ProjectConnectorsTwilioVerifyAuthentication(dict):
 
 
 @pulumi.output_type
-class ProjectConnectorsVeriff(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "apiKey":
-            suggest = "api_key"
-        elif key == "secretKey":
-            suggest = "secret_key"
-        elif key == "baseUrl":
-            suggest = "base_url"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsVeriff. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ProjectConnectorsVeriff.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ProjectConnectorsVeriff.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 api_key: str,
-                 name: str,
-                 secret_key: str,
-                 base_url: Optional[str] = None,
-                 description: Optional[str] = None,
-                 id: Optional[str] = None):
-        """
-        :param str api_key: The Veriff Public API Key, you can find under Veriff Station - Integrations.
-        :param str name: A custom name for your connector.
-        :param str secret_key: The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-        :param str base_url: The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-        :param str description: A description of what your connector is used for.
-        """
-        pulumi.set(__self__, "api_key", api_key)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "secret_key", secret_key)
-        if base_url is not None:
-            pulumi.set(__self__, "base_url", base_url)
-        if description is not None:
-            pulumi.set(__self__, "description", description)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
-
-    @property
-    @pulumi.getter(name="apiKey")
-    def api_key(self) -> str:
-        """
-        The Veriff Public API Key, you can find under Veriff Station - Integrations.
-        """
-        return pulumi.get(self, "api_key")
-
-    @property
-    @pulumi.getter
-    def name(self) -> str:
-        """
-        A custom name for your connector.
-        """
-        return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="secretKey")
-    def secret_key(self) -> str:
-        """
-        The Veriff Shared secret key, you can find under Veriff Station - Integrations.
-        """
-        return pulumi.get(self, "secret_key")
-
-    @property
-    @pulumi.getter(name="baseUrl")
-    def base_url(self) -> Optional[str]:
-        """
-        The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-        """
-        return pulumi.get(self, "base_url")
-
-    @property
-    @pulumi.getter
-    def description(self) -> Optional[str]:
-        """
-        A description of what your connector is used for.
-        """
-        return pulumi.get(self, "description")
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[str]:
-        return pulumi.get(self, "id")
-
-
-@pulumi.output_type
 class ProjectFlows(dict):
     def __init__(__self__, *,
                  data: str):
@@ -8874,6 +8999,10 @@ class ProjectJwtTemplates(dict):
     def __init__(__self__, *,
                  access_key_templates: Optional[Sequence['outputs.ProjectJwtTemplatesAccessKeyTemplate']] = None,
                  user_templates: Optional[Sequence['outputs.ProjectJwtTemplatesUserTemplate']] = None):
+        """
+        :param Sequence['ProjectJwtTemplatesAccessKeyTemplateArgs'] access_key_templates: A list of `Access Key` type JWT Templates.
+        :param Sequence['ProjectJwtTemplatesUserTemplateArgs'] user_templates: A list of `User` type JWT Templates.
+        """
         if access_key_templates is not None:
             pulumi.set(__self__, "access_key_templates", access_key_templates)
         if user_templates is not None:
@@ -8882,11 +9011,17 @@ class ProjectJwtTemplates(dict):
     @property
     @pulumi.getter(name="accessKeyTemplates")
     def access_key_templates(self) -> Optional[Sequence['outputs.ProjectJwtTemplatesAccessKeyTemplate']]:
+        """
+        A list of `Access Key` type JWT Templates.
+        """
         return pulumi.get(self, "access_key_templates")
 
     @property
     @pulumi.getter(name="userTemplates")
     def user_templates(self) -> Optional[Sequence['outputs.ProjectJwtTemplatesUserTemplate']]:
+        """
+        A list of `User` type JWT Templates.
+        """
         return pulumi.get(self, "user_templates")
 
 
@@ -8918,6 +9053,11 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
                  conformance_issuer: Optional[bool] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None):
+        """
+        :param str name: Name of the JWT Template.
+        :param str auth_schema: The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        :param str description: Description of the JWT Template.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
         if auth_schema is not None:
@@ -8932,6 +9072,9 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the JWT Template.
+        """
         return pulumi.get(self, "name")
 
     @property
@@ -8942,6 +9085,9 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @property
     @pulumi.getter(name="authSchema")
     def auth_schema(self) -> Optional[str]:
+        """
+        The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        """
         return pulumi.get(self, "auth_schema")
 
     @property
@@ -8952,6 +9098,9 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        Description of the JWT Template.
+        """
         return pulumi.get(self, "description")
 
     @property
@@ -8988,6 +9137,11 @@ class ProjectJwtTemplatesUserTemplate(dict):
                  conformance_issuer: Optional[bool] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None):
+        """
+        :param str name: Name of the JWT Template.
+        :param str auth_schema: The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        :param str description: Description of the JWT Template.
+        """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
         if auth_schema is not None:
@@ -9002,6 +9156,9 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the JWT Template.
+        """
         return pulumi.get(self, "name")
 
     @property
@@ -9012,6 +9169,9 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @property
     @pulumi.getter(name="authSchema")
     def auth_schema(self) -> Optional[str]:
+        """
+        The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        """
         return pulumi.get(self, "auth_schema")
 
     @property
@@ -9022,6 +9182,9 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @property
     @pulumi.getter
     def description(self) -> Optional[str]:
+        """
+        Description of the JWT Template.
+        """
         return pulumi.get(self, "description")
 
     @property
@@ -9037,6 +9200,12 @@ class ProjectProjectSettings(dict):
         suggest = None
         if key == "accessKeyJwtTemplate":
             suggest = "access_key_jwt_template"
+        elif key == "accessKeySessionTokenExpiration":
+            suggest = "access_key_session_token_expiration"
+        elif key == "approvedDomains":
+            suggest = "approved_domains"
+        elif key == "cookieDomain":
+            suggest = "cookie_domain"
         elif key == "cookiePolicy":
             suggest = "cookie_policy"
         elif key == "enableInactivity":
@@ -9045,6 +9214,18 @@ class ProjectProjectSettings(dict):
             suggest = "inactivity_time"
         elif key == "refreshTokenExpiration":
             suggest = "refresh_token_expiration"
+        elif key == "refreshTokenRotation":
+            suggest = "refresh_token_rotation"
+        elif key == "sessionTokenExpiration":
+            suggest = "session_token_expiration"
+        elif key == "stepUpTokenExpiration":
+            suggest = "step_up_token_expiration"
+        elif key == "testUsersLoginidRegexp":
+            suggest = "test_users_loginid_regexp"
+        elif key == "tokenResponseMethod":
+            suggest = "token_response_method"
+        elif key == "trustedDeviceTokenExpiration":
+            suggest = "trusted_device_token_expiration"
         elif key == "userJwtTemplate":
             suggest = "user_jwt_template"
 
@@ -9061,14 +9242,47 @@ class ProjectProjectSettings(dict):
 
     def __init__(__self__, *,
                  access_key_jwt_template: Optional[str] = None,
+                 access_key_session_token_expiration: Optional[str] = None,
+                 approved_domains: Optional[Sequence[str]] = None,
+                 cookie_domain: Optional[str] = None,
                  cookie_policy: Optional[str] = None,
                  domain: Optional[str] = None,
                  enable_inactivity: Optional[bool] = None,
                  inactivity_time: Optional[str] = None,
                  refresh_token_expiration: Optional[str] = None,
+                 refresh_token_rotation: Optional[bool] = None,
+                 session_token_expiration: Optional[str] = None,
+                 step_up_token_expiration: Optional[str] = None,
+                 test_users_loginid_regexp: Optional[str] = None,
+                 token_response_method: Optional[str] = None,
+                 trusted_device_token_expiration: Optional[str] = None,
                  user_jwt_template: Optional[str] = None):
+        """
+        :param str access_key_jwt_template: Name of the access key JWT Template.
+        :param str access_key_session_token_expiration: The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+        :param Sequence[str] approved_domains: The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        :param str cookie_domain: The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        :param str cookie_policy: Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        :param str domain: This attribute has been renamed to `cookie_domain`.
+        :param bool enable_inactivity: Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+        :param str inactivity_time: The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+        :param str refresh_token_expiration: The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
+        :param bool refresh_token_rotation: Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+        :param str session_token_expiration: The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+        :param str step_up_token_expiration: The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+        :param str test_users_loginid_regexp: Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+        :param str token_response_method: Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        :param str trusted_device_token_expiration: The expiry time for the trusted device token. The minimum value is "3 minutes".
+        :param str user_jwt_template: Name of the user JWT Template.
+        """
         if access_key_jwt_template is not None:
             pulumi.set(__self__, "access_key_jwt_template", access_key_jwt_template)
+        if access_key_session_token_expiration is not None:
+            pulumi.set(__self__, "access_key_session_token_expiration", access_key_session_token_expiration)
+        if approved_domains is not None:
+            pulumi.set(__self__, "approved_domains", approved_domains)
+        if cookie_domain is not None:
+            pulumi.set(__self__, "cookie_domain", cookie_domain)
         if cookie_policy is not None:
             pulumi.set(__self__, "cookie_policy", cookie_policy)
         if domain is not None:
@@ -9079,42 +9293,148 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "inactivity_time", inactivity_time)
         if refresh_token_expiration is not None:
             pulumi.set(__self__, "refresh_token_expiration", refresh_token_expiration)
+        if refresh_token_rotation is not None:
+            pulumi.set(__self__, "refresh_token_rotation", refresh_token_rotation)
+        if session_token_expiration is not None:
+            pulumi.set(__self__, "session_token_expiration", session_token_expiration)
+        if step_up_token_expiration is not None:
+            pulumi.set(__self__, "step_up_token_expiration", step_up_token_expiration)
+        if test_users_loginid_regexp is not None:
+            pulumi.set(__self__, "test_users_loginid_regexp", test_users_loginid_regexp)
+        if token_response_method is not None:
+            pulumi.set(__self__, "token_response_method", token_response_method)
+        if trusted_device_token_expiration is not None:
+            pulumi.set(__self__, "trusted_device_token_expiration", trusted_device_token_expiration)
         if user_jwt_template is not None:
             pulumi.set(__self__, "user_jwt_template", user_jwt_template)
 
     @property
     @pulumi.getter(name="accessKeyJwtTemplate")
     def access_key_jwt_template(self) -> Optional[str]:
+        """
+        Name of the access key JWT Template.
+        """
         return pulumi.get(self, "access_key_jwt_template")
+
+    @property
+    @pulumi.getter(name="accessKeySessionTokenExpiration")
+    def access_key_session_token_expiration(self) -> Optional[str]:
+        """
+        The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+        """
+        return pulumi.get(self, "access_key_session_token_expiration")
+
+    @property
+    @pulumi.getter(name="approvedDomains")
+    def approved_domains(self) -> Optional[Sequence[str]]:
+        """
+        The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        """
+        return pulumi.get(self, "approved_domains")
+
+    @property
+    @pulumi.getter(name="cookieDomain")
+    def cookie_domain(self) -> Optional[str]:
+        """
+        The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
+        return pulumi.get(self, "cookie_domain")
 
     @property
     @pulumi.getter(name="cookiePolicy")
     def cookie_policy(self) -> Optional[str]:
+        """
+        Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
         return pulumi.get(self, "cookie_policy")
 
     @property
     @pulumi.getter
+    @_utilities.deprecated("""The domain attribute has been renamed, set the cookie_domain attribute instead. This attribute will be removed in the next major version of the provider.""")
     def domain(self) -> Optional[str]:
+        """
+        This attribute has been renamed to `cookie_domain`.
+        """
         return pulumi.get(self, "domain")
 
     @property
     @pulumi.getter(name="enableInactivity")
     def enable_inactivity(self) -> Optional[bool]:
+        """
+        Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+        """
         return pulumi.get(self, "enable_inactivity")
 
     @property
     @pulumi.getter(name="inactivityTime")
     def inactivity_time(self) -> Optional[str]:
+        """
+        The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+        """
         return pulumi.get(self, "inactivity_time")
 
     @property
     @pulumi.getter(name="refreshTokenExpiration")
     def refresh_token_expiration(self) -> Optional[str]:
+        """
+        The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
+        """
         return pulumi.get(self, "refresh_token_expiration")
+
+    @property
+    @pulumi.getter(name="refreshTokenRotation")
+    def refresh_token_rotation(self) -> Optional[bool]:
+        """
+        Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+        """
+        return pulumi.get(self, "refresh_token_rotation")
+
+    @property
+    @pulumi.getter(name="sessionTokenExpiration")
+    def session_token_expiration(self) -> Optional[str]:
+        """
+        The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+        """
+        return pulumi.get(self, "session_token_expiration")
+
+    @property
+    @pulumi.getter(name="stepUpTokenExpiration")
+    def step_up_token_expiration(self) -> Optional[str]:
+        """
+        The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+        """
+        return pulumi.get(self, "step_up_token_expiration")
+
+    @property
+    @pulumi.getter(name="testUsersLoginidRegexp")
+    def test_users_loginid_regexp(self) -> Optional[str]:
+        """
+        Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+        """
+        return pulumi.get(self, "test_users_loginid_regexp")
+
+    @property
+    @pulumi.getter(name="tokenResponseMethod")
+    def token_response_method(self) -> Optional[str]:
+        """
+        Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        """
+        return pulumi.get(self, "token_response_method")
+
+    @property
+    @pulumi.getter(name="trustedDeviceTokenExpiration")
+    def trusted_device_token_expiration(self) -> Optional[str]:
+        """
+        The expiry time for the trusted device token. The minimum value is "3 minutes".
+        """
+        return pulumi.get(self, "trusted_device_token_expiration")
 
     @property
     @pulumi.getter(name="userJwtTemplate")
     def user_jwt_template(self) -> Optional[str]:
+        """
+        Name of the user JWT Template.
+        """
         return pulumi.get(self, "user_jwt_template")
 
 

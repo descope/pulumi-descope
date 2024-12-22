@@ -15,31 +15,31 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectApplicationsOidcApplication
     {
         /// <summary>
-        /// Claims associated with JWT tokens, typically used for user information.
+        /// A list of supported claims. e.g. `sub`, `email`, `exp`.
         /// </summary>
         public readonly ImmutableArray<string> Claims;
         /// <summary>
-        /// A brief description of the application.
+        /// A description for the OIDC application.
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// Indicates whether the resource or functionality is disabled.
+        /// Whether the application should be enabled or disabled.
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
-        /// An optional identifier for the application.
+        /// An optional identifier for the OIDC application.
         /// </summary>
         public readonly string? Id;
         /// <summary>
-        /// The URL of the custom login page for the application.
+        /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
         public readonly string? LoginPageUrl;
         /// <summary>
-        /// The URL of the logo associated with the application.
+        /// A logo for the OIDC application. Should be a hosted image URL.
         /// </summary>
         public readonly string? Logo;
         /// <summary>
-        /// The name of the application.
+        /// A name for the OIDC application.
         /// </summary>
         public readonly string Name;
 

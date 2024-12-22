@@ -14,13 +14,13 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectApplicationsSamlApplicationAttributeMappingGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the user attribute in the third party identity provider.
+        /// The name of the attribute.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// The name of the user custom attribute in Descope.
+        /// The value of the attribute.
         /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;

@@ -157,14 +157,6 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _hibps = value;
         }
 
-        [Input("httpStaticIps")]
-        private InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs>? _httpStaticIps;
-        public InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs> HttpStaticIps
-        {
-            get => _httpStaticIps ?? (_httpStaticIps = new InputList<Inputs.ProjectConnectorsHttpStaticIpGetArgs>());
-            set => _httpStaticIps = value;
-        }
-
         [Input("https")]
         private InputList<Inputs.ProjectConnectorsHttpGetArgs>? _https;
 
@@ -199,6 +191,30 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _intercoms ?? (_intercoms = new InputList<Inputs.ProjectConnectorsIntercomGetArgs>());
             set => _intercoms = value;
+        }
+
+        [Input("lokalises")]
+        private InputList<Inputs.ProjectConnectorsLokaliseGetArgs>? _lokalises;
+
+        /// <summary>
+        /// Localize the language of your login and user journey screens with the Lokalise connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsLokaliseGetArgs> Lokalises
+        {
+            get => _lokalises ?? (_lokalises = new InputList<Inputs.ProjectConnectorsLokaliseGetArgs>());
+            set => _lokalises = value;
+        }
+
+        [Input("mparticles")]
+        private InputList<Inputs.ProjectConnectorsMparticleGetArgs>? _mparticles;
+
+        /// <summary>
+        /// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsMparticleGetArgs> Mparticles
+        {
+            get => _mparticles ?? (_mparticles = new InputList<Inputs.ProjectConnectorsMparticleGetArgs>());
+            set => _mparticles = value;
         }
 
         [Input("newrelics")]
@@ -277,6 +293,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _sendgrids = value;
         }
 
+        [Input("smartlings")]
+        private InputList<Inputs.ProjectConnectorsSmartlingGetArgs>? _smartlings;
+
+        /// <summary>
+        /// Localize the language of your login and user journey screens with the Smartling connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsSmartlingGetArgs> Smartlings
+        {
+            get => _smartlings ?? (_smartlings = new InputList<Inputs.ProjectConnectorsSmartlingGetArgs>());
+            set => _smartlings = value;
+        }
+
         [Input("smtps")]
         private InputList<Inputs.ProjectConnectorsSmtpGetArgs>? _smtps;
         public InputList<Inputs.ProjectConnectorsSmtpGetArgs> Smtps
@@ -335,18 +363,6 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _twilioVerifies ?? (_twilioVerifies = new InputList<Inputs.ProjectConnectorsTwilioVerifyGetArgs>());
             set => _twilioVerifies = value;
-        }
-
-        [Input("veriffs")]
-        private InputList<Inputs.ProjectConnectorsVeriffGetArgs>? _veriffs;
-
-        /// <summary>
-        /// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-        /// </summary>
-        public InputList<Inputs.ProjectConnectorsVeriffGetArgs> Veriffs
-        {
-            get => _veriffs ?? (_veriffs = new InputList<Inputs.ProjectConnectorsVeriffGetArgs>());
-            set => _veriffs = value;
         }
 
         public ProjectConnectorsGetArgs()

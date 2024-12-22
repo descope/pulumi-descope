@@ -14,10 +14,19 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectJwtTemplatesUserTemplate
     {
+        /// <summary>
+        /// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// </summary>
         public readonly string? AuthSchema;
         public readonly bool? ConformanceIssuer;
+        /// <summary>
+        /// Description of the JWT Template.
+        /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// Name of the JWT Template.
+        /// </summary>
         public readonly string Name;
         public readonly string Template;
 

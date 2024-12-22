@@ -40,6 +40,7 @@ class ProjectArgs:
         :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
         :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
@@ -143,6 +144,9 @@ class ProjectArgs:
     @property
     @pulumi.getter
     def flows(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
+        """
+        Custom authentication flows to use in this project.
+        """
         return pulumi.get(self, "flows")
 
     @flows.setter
@@ -220,6 +224,7 @@ class _ProjectState:
         :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
         :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
@@ -323,6 +328,9 @@ class _ProjectState:
     @property
     @pulumi.getter
     def flows(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
+        """
+        Custom authentication flows to use in this project.
+        """
         return pulumi.get(self, "flows")
 
     @flows.setter
@@ -405,6 +413,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
         :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
@@ -498,6 +507,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
         :param pulumi.Input[str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
@@ -571,6 +581,9 @@ class Project(pulumi.CustomResource):
     @property
     @pulumi.getter
     def flows(self) -> pulumi.Output[Mapping[str, 'outputs.ProjectFlows']]:
+        """
+        Custom authentication flows to use in this project.
+        """
         return pulumi.get(self, "flows")
 
     @property

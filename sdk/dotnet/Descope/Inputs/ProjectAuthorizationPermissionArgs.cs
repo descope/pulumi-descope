@@ -13,12 +13,18 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAuthorizationPermissionArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A description for the permission.
+        /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A name for the permission.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 

@@ -15,12 +15,14 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationEnchantedLink
     {
         /// <summary>
+        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// </summary>
+        public readonly bool? Disabled;
+        /// <summary>
         /// Settings related to sending emails as part of the enchanted link authentication.
         /// </summary>
         public readonly Outputs.ProjectAuthenticationEnchantedLinkEmailService? EmailService;
-        public readonly bool? Enabled;
-        public readonly int? ExpirationTime;
-        public readonly string? ExpirationTimeUnit;
+        public readonly string? ExpirationTime;
         /// <summary>
         /// The URL to redirect users to after they log in using the enchanted link.
         /// </summary>
@@ -28,20 +30,17 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationEnchantedLink(
+            bool? disabled,
+
             Outputs.ProjectAuthenticationEnchantedLinkEmailService? emailService,
 
-            bool? enabled,
-
-            int? expirationTime,
-
-            string? expirationTimeUnit,
+            string? expirationTime,
 
             string? redirectUrl)
         {
+            Disabled = disabled;
             EmailService = emailService;
-            Enabled = enabled;
             ExpirationTime = expirationTime;
-            ExpirationTimeUnit = expirationTimeUnit;
             RedirectUrl = redirectUrl;
         }
     }

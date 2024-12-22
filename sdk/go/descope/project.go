@@ -25,8 +25,9 @@ type Project struct {
 	// Enrich your flows by interacting with third party services.
 	Connectors ProjectConnectorsOutput `pulumi:"connectors"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-	Environment pulumi.StringOutput   `pulumi:"environment"`
-	Flows       ProjectFlowsMapOutput `pulumi:"flows"`
+	Environment pulumi.StringOutput `pulumi:"environment"`
+	// Custom authentication flows to use in this project.
+	Flows ProjectFlowsMapOutput `pulumi:"flows"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -78,8 +79,9 @@ type projectState struct {
 	// Enrich your flows by interacting with third party services.
 	Connectors *ProjectConnectors `pulumi:"connectors"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-	Environment *string                 `pulumi:"environment"`
-	Flows       map[string]ProjectFlows `pulumi:"flows"`
+	Environment *string `pulumi:"environment"`
+	// Custom authentication flows to use in this project.
+	Flows map[string]ProjectFlows `pulumi:"flows"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -103,7 +105,8 @@ type ProjectState struct {
 	Connectors ProjectConnectorsPtrInput
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
-	Flows       ProjectFlowsMapInput
+	// Custom authentication flows to use in this project.
+	Flows ProjectFlowsMapInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
 	// The name of the Descope project.
@@ -130,8 +133,9 @@ type projectArgs struct {
 	// Enrich your flows by interacting with third party services.
 	Connectors *ProjectConnectors `pulumi:"connectors"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-	Environment *string                 `pulumi:"environment"`
-	Flows       map[string]ProjectFlows `pulumi:"flows"`
+	Environment *string `pulumi:"environment"`
+	// Custom authentication flows to use in this project.
+	Flows map[string]ProjectFlows `pulumi:"flows"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -156,7 +160,8 @@ type ProjectArgs struct {
 	Connectors ProjectConnectorsPtrInput
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
-	Flows       ProjectFlowsMapInput
+	// Custom authentication flows to use in this project.
+	Flows ProjectFlowsMapInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
 	// The name of the Descope project.
@@ -284,6 +289,7 @@ func (o ProjectOutput) Environment() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
 }
 
+// Custom authentication flows to use in this project.
 func (o ProjectOutput) Flows() ProjectFlowsMapOutput {
 	return o.ApplyT(func(v *Project) ProjectFlowsMapOutput { return v.Flows }).(ProjectFlowsMapOutput)
 }

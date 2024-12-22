@@ -11,19 +11,13 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectConnectorsVeriffGetArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectConnectorsSmartlingGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The Veriff Public API Key, you can find under Veriff Station - Integrations.
+        /// The account UID for the Smartling account.
         /// </summary>
-        [Input("apiKey", required: true)]
-        public Input<string> ApiKey { get; set; } = null!;
-
-        /// <summary>
-        /// The base URL of the Veriff API, default value is https://stationapi.veriff.com.
-        /// </summary>
-        [Input("baseUrl")]
-        public Input<string>? BaseUrl { get; set; }
+        [Input("accountUid", required: true)]
+        public Input<string> AccountUid { get; set; } = null!;
 
         /// <summary>
         /// A description of what your connector is used for.
@@ -40,25 +34,31 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        [Input("secretKey", required: true)]
-        private Input<string>? _secretKey;
+        /// <summary>
+        /// The user identifier for the Smartling account.
+        /// </summary>
+        [Input("userIdentifier", required: true)]
+        public Input<string> UserIdentifier { get; set; } = null!;
+
+        [Input("userSecret", required: true)]
+        private Input<string>? _userSecret;
 
         /// <summary>
-        /// The Veriff Shared secret key, you can find under Veriff Station - Integrations.
+        /// The user secret for the Smartling account.
         /// </summary>
-        public Input<string>? SecretKey
+        public Input<string>? UserSecret
         {
-            get => _secretKey;
+            get => _userSecret;
             set
             {
                 var emptySecret = Output.CreateSecret(0);
-                _secretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+                _userSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 
-        public ProjectConnectorsVeriffGetArgs()
+        public ProjectConnectorsSmartlingGetArgs()
         {
         }
-        public static new ProjectConnectorsVeriffGetArgs Empty => new ProjectConnectorsVeriffGetArgs();
+        public static new ProjectConnectorsSmartlingGetArgs Empty => new ProjectConnectorsSmartlingGetArgs();
     }
 }

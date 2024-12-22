@@ -14,17 +14,80 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectProjectSettings
     {
+        /// <summary>
+        /// Name of the access key JWT Template.
+        /// </summary>
         public readonly string? AccessKeyJwtTemplate;
+        /// <summary>
+        /// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+        /// </summary>
+        public readonly string? AccessKeySessionTokenExpiration;
+        /// <summary>
+        /// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        /// </summary>
+        public readonly ImmutableArray<string> ApprovedDomains;
+        /// <summary>
+        /// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        public readonly string? CookieDomain;
+        /// <summary>
+        /// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
         public readonly string? CookiePolicy;
+        /// <summary>
+        /// This attribute has been renamed to `cookie_domain`.
+        /// </summary>
         public readonly string? Domain;
+        /// <summary>
+        /// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+        /// </summary>
         public readonly bool? EnableInactivity;
+        /// <summary>
+        /// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+        /// </summary>
         public readonly string? InactivityTime;
+        /// <summary>
+        /// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
+        /// </summary>
         public readonly string? RefreshTokenExpiration;
+        /// <summary>
+        /// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+        /// </summary>
+        public readonly bool? RefreshTokenRotation;
+        /// <summary>
+        /// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+        /// </summary>
+        public readonly string? SessionTokenExpiration;
+        /// <summary>
+        /// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+        /// </summary>
+        public readonly string? StepUpTokenExpiration;
+        /// <summary>
+        /// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+        /// </summary>
+        public readonly string? TestUsersLoginidRegexp;
+        /// <summary>
+        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// </summary>
+        public readonly string? TokenResponseMethod;
+        /// <summary>
+        /// The expiry time for the trusted device token. The minimum value is "3 minutes".
+        /// </summary>
+        public readonly string? TrustedDeviceTokenExpiration;
+        /// <summary>
+        /// Name of the user JWT Template.
+        /// </summary>
         public readonly string? UserJwtTemplate;
 
         [OutputConstructor]
         private ProjectProjectSettings(
             string? accessKeyJwtTemplate,
+
+            string? accessKeySessionTokenExpiration,
+
+            ImmutableArray<string> approvedDomains,
+
+            string? cookieDomain,
 
             string? cookiePolicy,
 
@@ -36,14 +99,35 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? refreshTokenExpiration,
 
+            bool? refreshTokenRotation,
+
+            string? sessionTokenExpiration,
+
+            string? stepUpTokenExpiration,
+
+            string? testUsersLoginidRegexp,
+
+            string? tokenResponseMethod,
+
+            string? trustedDeviceTokenExpiration,
+
             string? userJwtTemplate)
         {
             AccessKeyJwtTemplate = accessKeyJwtTemplate;
+            AccessKeySessionTokenExpiration = accessKeySessionTokenExpiration;
+            ApprovedDomains = approvedDomains;
+            CookieDomain = cookieDomain;
             CookiePolicy = cookiePolicy;
             Domain = domain;
             EnableInactivity = enableInactivity;
             InactivityTime = inactivityTime;
             RefreshTokenExpiration = refreshTokenExpiration;
+            RefreshTokenRotation = refreshTokenRotation;
+            SessionTokenExpiration = sessionTokenExpiration;
+            StepUpTokenExpiration = stepUpTokenExpiration;
+            TestUsersLoginidRegexp = testUsersLoginidRegexp;
+            TokenResponseMethod = tokenResponseMethod;
+            TrustedDeviceTokenExpiration = trustedDeviceTokenExpiration;
             UserJwtTemplate = userJwtTemplate;
         }
     }

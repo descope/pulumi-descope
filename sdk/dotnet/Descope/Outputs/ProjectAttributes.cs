@@ -15,11 +15,11 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAttributes
     {
         /// <summary>
-        /// Custom attributes to store additional details about your tenants.
+        /// A list of `TenantAttribute`. Read the description below.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAttributesTenant> Tenants;
         /// <summary>
-        /// Custom attributes to store additional details about your users.
+        /// A list of `UserAttribute`. Read the description below.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAttributesUser> Users;
 

@@ -52,7 +52,6 @@ namespace Descope.Pulumi.Descope.Outputs
         /// API to check if password appeared previously exposed in data breaches.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHibp> Hibps;
-        public readonly ImmutableArray<Outputs.ProjectConnectorsHttpStaticIp> HttpStaticIps;
         /// <summary>
         /// A general purpose HTTP client
         /// </summary>
@@ -65,6 +64,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Intercom is a Conversational Relationship Platform (CRP).
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsIntercom> Intercoms;
+        /// <summary>
+        /// Localize the language of your login and user journey screens with the Lokalise connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsLokalise> Lokalises;
+        /// <summary>
+        /// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsMparticle> Mparticles;
         /// <summary>
         /// Use this connector to send audit events and troubleshooting logs to New Relic.
         /// </summary>
@@ -87,6 +94,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSegment> Segments;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSendgrid> Sendgrids;
+        /// <summary>
+        /// Localize the language of your login and user journey screens with the Smartling connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSmartling> Smartlings;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSmtp> Smtps;
         /// <summary>
         /// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
@@ -102,10 +113,6 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly ImmutableArray<Outputs.ProjectConnectorsTraceable> Traceables;
         public readonly ImmutableArray<Outputs.ProjectConnectorsTwilioCore> TwilioCores;
         public readonly ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> TwilioVerifies;
-        /// <summary>
-        /// AI-powered identity verification solution for identity fraud prevention, Know Your Customer compliance, and fast conversions of valuable customers.
-        /// </summary>
-        public readonly ImmutableArray<Outputs.ProjectConnectorsVeriff> Veriffs;
 
         [OutputConstructor]
         private ProjectConnectors(
@@ -137,13 +144,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsHibp> hibps,
 
-            ImmutableArray<Outputs.ProjectConnectorsHttpStaticIp> httpStaticIps,
-
             ImmutableArray<Outputs.ProjectConnectorsHttp> https,
 
             ImmutableArray<Outputs.ProjectConnectorsHubspot> hubspots,
 
             ImmutableArray<Outputs.ProjectConnectorsIntercom> intercoms,
+
+            ImmutableArray<Outputs.ProjectConnectorsLokalise> lokalises,
+
+            ImmutableArray<Outputs.ProjectConnectorsMparticle> mparticles,
 
             ImmutableArray<Outputs.ProjectConnectorsNewrelic> newrelics,
 
@@ -159,6 +168,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsSendgrid> sendgrids,
 
+            ImmutableArray<Outputs.ProjectConnectorsSmartling> smartlings,
+
             ImmutableArray<Outputs.ProjectConnectorsSmtp> smtps,
 
             ImmutableArray<Outputs.ProjectConnectorsSumologic> sumologics,
@@ -169,9 +180,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsTwilioCore> twilioCores,
 
-            ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> twilioVerifies,
-
-            ImmutableArray<Outputs.ProjectConnectorsVeriff> veriffs)
+            ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> twilioVerifies)
         {
             Abuseipdbs = abuseipdbs;
             Amplitudes = amplitudes;
@@ -187,10 +196,11 @@ namespace Descope.Pulumi.Descope.Outputs
             Forters = forters;
             GoogleCloudTranslations = googleCloudTranslations;
             Hibps = hibps;
-            HttpStaticIps = httpStaticIps;
             Https = https;
             Hubspots = hubspots;
             Intercoms = intercoms;
+            Lokalises = lokalises;
+            Mparticles = mparticles;
             Newrelics = newrelics;
             RecaptchaEnterprises = recaptchaEnterprises;
             Recaptchas = recaptchas;
@@ -198,13 +208,13 @@ namespace Descope.Pulumi.Descope.Outputs
             Salesforces = salesforces;
             Segments = segments;
             Sendgrids = sendgrids;
+            Smartlings = smartlings;
             Smtps = smtps;
             Sumologics = sumologics;
             Telesigns = telesigns;
             Traceables = traceables;
             TwilioCores = twilioCores;
             TwilioVerifies = twilioVerifies;
-            Veriffs = veriffs;
         }
     }
 }

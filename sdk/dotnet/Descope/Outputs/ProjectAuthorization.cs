@@ -14,7 +14,13 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAuthorization
     {
+        /// <summary>
+        /// A list of `Permission` objects.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAuthorizationPermission> Permissions;
+        /// <summary>
+        /// A list of `Role` objects.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAuthorizationRole> Roles;
 
         [OutputConstructor]
