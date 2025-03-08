@@ -1,6 +1,6 @@
 module github.com/descope/pulumi-descope/provider
 
-go 1.22.3
+go 1.23.0
 
 toolchain go1.24.1
 
@@ -10,7 +10,7 @@ require (
 	github.com/descope/terraform-provider-descope/shim v0.1.3
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.48.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.104.0
-	golang.org/x/text v0.22.0
+	golang.org/x/text v0.23.0
 )
 
 require (
@@ -195,7 +195,7 @@ require (
 	golang.org/x/mod v0.22.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/oauth2 v0.23.0 // indirect
-	golang.org/x/sync v0.11.0 // indirect
+	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/term v0.29.0 // indirect
 	golang.org/x/time v0.6.0 // indirect
