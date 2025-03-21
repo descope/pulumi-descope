@@ -7,7 +7,7 @@ toolchain go1.24.1
 replace github.com/descope/terraform-provider-descope/shim => ./shim
 
 require (
-	github.com/descope/terraform-provider-descope/shim v0.1.5
+	github.com/descope/terraform-provider-descope/shim v0.1.6
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.48.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.105.0
 	golang.org/x/text v0.23.0
