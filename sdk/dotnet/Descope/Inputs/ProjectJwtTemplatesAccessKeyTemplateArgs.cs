@@ -14,7 +14,7 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectJwtTemplatesAccessKeyTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         [Input("authSchema")]
         public Input<string>? AuthSchema { get; set; }
@@ -27,6 +27,15 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Policy for empty claims - `none`, `nil` or `delete`.
+        /// </summary>
+        [Input("emptyClaimPolicy")]
+        public Input<string>? EmptyClaimPolicy { get; set; }
+
+        [Input("enforceIssuer")]
+        public Input<bool>? EnforceIssuer { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }

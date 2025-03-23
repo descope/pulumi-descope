@@ -31,6 +31,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        public readonly bool? UseStaticIps;
 
         [OutputConstructor]
         private ProjectConnectorsHubspot(
@@ -42,13 +46,16 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
-            string name)
+            string name,
+
+            bool? useStaticIps)
         {
             AccessToken = accessToken;
             BaseUrl = baseUrl;
             Description = description;
             Id = id;
             Name = name;
+            UseStaticIps = useStaticIps;
         }
     }
 }

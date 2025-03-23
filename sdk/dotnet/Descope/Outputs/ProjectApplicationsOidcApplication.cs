@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
+        /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        /// </summary>
+        public readonly bool? ForceAuthentication;
+        /// <summary>
         /// An optional identifier for the OIDC application.
         /// </summary>
         public readonly string? Id;
@@ -51,6 +55,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? disabled,
 
+            bool? forceAuthentication,
+
             string? id,
 
             string? loginPageUrl,
@@ -62,6 +68,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Claims = claims;
             Description = description;
             Disabled = disabled;
+            ForceAuthentication = forceAuthentication;
             Id = id;
             LoginPageUrl = loginPageUrl;
             Logo = logo;

@@ -30,6 +30,10 @@ export interface ProjectApplicationsOidcApplication {
      */
     disabled: boolean;
     /**
+     * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+     */
+    forceAuthentication: boolean;
+    /**
      * An optional identifier for the OIDC application.
      */
     id: string;
@@ -72,6 +76,10 @@ export interface ProjectApplicationsSamlApplication {
      * The `DynamicConfiguration` object. Read the description below.
      */
     dynamicConfiguration: outputs.ProjectApplicationsSamlApplicationDynamicConfiguration;
+    /**
+     * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+     */
+    forceAuthentication: boolean;
     /**
      * An optional identifier for the SAML application.
      */
@@ -147,6 +155,7 @@ export interface ProjectAttributes {
 }
 
 export interface ProjectAttributesTenant {
+    authorization: outputs.ProjectAttributesTenantAuthorization;
     /**
      * The name of the attribute.
      */
@@ -159,6 +168,10 @@ export interface ProjectAttributesTenant {
      * The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
      */
     type: string;
+}
+
+export interface ProjectAttributesTenantAuthorization {
+    viewPermissions: string[];
 }
 
 export interface ProjectAttributesUser {
@@ -1268,6 +1281,7 @@ export interface ProjectConnectors {
      * Use the Forter connector for account fraud prevention.
      */
     forters: outputs.ProjectConnectorsForter[];
+    genericSmsGateways: outputs.ProjectConnectorsGenericSmsGateway[];
     googleCloudTranslations: outputs.ProjectConnectorsGoogleCloudTranslation[];
     /**
      * API to check if password appeared previously exposed in data breaches.
@@ -1281,6 +1295,10 @@ export interface ProjectConnectors {
      * HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
      */
     hubspots: outputs.ProjectConnectorsHubspot[];
+    /**
+     * Use the Incode connection to run identity verification processes like document checks or facial recognition.
+     */
+    incodes: outputs.ProjectConnectorsIncode[];
     /**
      * Intercom is a Conversational Relationship Platform (CRP).
      */
@@ -1306,6 +1324,7 @@ export interface ProjectConnectors {
      * AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
      */
     rekognitions: outputs.ProjectConnectorsRekognition[];
+    salesforceMarketingClouds: outputs.ProjectConnectorsSalesforceMarketingCloud[];
     /**
      * Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
      */
@@ -1315,11 +1334,17 @@ export interface ProjectConnectors {
      */
     segments: outputs.ProjectConnectorsSegment[];
     sendgrids: outputs.ProjectConnectorsSendgrid[];
+    ses: outputs.ProjectConnectorsSe[];
+    /**
+     * Send updates to your team on Slack.
+     */
+    slacks: outputs.ProjectConnectorsSlack[];
     /**
      * Localize the language of your login and user journey screens with the Smartling connector.
      */
     smartlings: outputs.ProjectConnectorsSmartling[];
     smtps: outputs.ProjectConnectorsSmtp[];
+    sns: outputs.ProjectConnectorsSn[];
     /**
      * Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
      */
@@ -1380,7 +1405,7 @@ export interface ProjectConnectorsAuditWebhook {
     /**
      * Specify which events will be sent to the external audit service (including tenant selection).
      */
-    auditFilters: string;
+    auditFilters: outputs.ProjectConnectorsAuditWebhookAuditFilter[];
     /**
      * Authentication Information
      */
@@ -1412,6 +1437,12 @@ export interface ProjectConnectorsAuditWebhook {
     name: string;
 }
 
+export interface ProjectConnectorsAuditWebhookAuditFilter {
+    key: string;
+    operator: string;
+    values: string[];
+}
+
 export interface ProjectConnectorsAuditWebhookAuthentication {
     apiKey: outputs.ProjectConnectorsAuditWebhookAuthenticationApiKey;
     basic: outputs.ProjectConnectorsAuditWebhookAuthenticationBasic;
@@ -1434,7 +1465,7 @@ export interface ProjectConnectorsAwsS3 {
      */
     accessKeyId: string;
     auditEnabled: boolean;
-    auditFilters: string;
+    auditFilters: outputs.ProjectConnectorsAwsS3AuditFilter[];
     /**
      * The AWS S3 bucket. This bucket should already exist for the connector to work.
      */
@@ -1457,6 +1488,12 @@ export interface ProjectConnectorsAwsS3 {
      */
     secretAccessKey: string;
     troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsAwsS3AuditFilter {
+    key: string;
+    operator: string;
+    values: string[];
 }
 
 export interface ProjectConnectorsAwsTranslate {
@@ -1513,7 +1550,7 @@ export interface ProjectConnectorsDatadog {
      */
     apiKey: string;
     auditEnabled: boolean;
-    auditFilters: string;
+    auditFilters: outputs.ProjectConnectorsDatadogAuditFilter[];
     /**
      * A description of what your connector is used for.
      */
@@ -1528,6 +1565,12 @@ export interface ProjectConnectorsDatadog {
      */
     site: string;
     troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsDatadogAuditFilter {
+    key: string;
+    operator: string;
+    values: string[];
 }
 
 export interface ProjectConnectorsDevrevGrow {
@@ -1658,6 +1701,62 @@ export interface ProjectConnectorsForter {
     siteId: string;
 }
 
+export interface ProjectConnectorsGenericSmsGateway {
+    /**
+     * Authentication Information
+     */
+    authentication: outputs.ProjectConnectorsGenericSmsGatewayAuthentication;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * The headers to send with the request
+     */
+    headers: {[key: string]: string};
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+     */
+    hmacSecret: string;
+    id: string;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
+    insecure: boolean;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The URL of the post message request
+     */
+    postUrl: string;
+    /**
+     * The sender number
+     */
+    sender: string;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps: boolean;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthentication {
+    apiKey: outputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKey;
+    basic: outputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasic;
+    bearerToken: string;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationApiKey {
+    key: string;
+    token: string;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
+    password: string;
+    username: string;
+}
+
 export interface ProjectConnectorsGoogleCloudTranslation {
     /**
      * A description of what your connector is used for.
@@ -1724,6 +1823,10 @@ export interface ProjectConnectorsHttp {
      * A custom name for your connector.
      */
     name: string;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps: boolean;
 }
 
 export interface ProjectConnectorsHttpAuthentication {
@@ -1755,6 +1858,34 @@ export interface ProjectConnectorsHubspot {
      * A description of what your connector is used for.
      */
     description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps: boolean;
+}
+
+export interface ProjectConnectorsIncode {
+    /**
+     * Your InCode API key.
+     */
+    apiKey: string;
+    /**
+     * The base URL of the Incode API
+     */
+    apiUrl: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * Your wanted InCode's flow ID.
+     */
+    flowId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -1828,6 +1959,10 @@ export interface ProjectConnectorsMparticle {
      */
     baseUrl: string;
     /**
+     * The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
+     */
+    defaultEnvironment: string;
+    /**
      * A description of what your connector is used for.
      */
     description: string;
@@ -1836,6 +1971,10 @@ export interface ProjectConnectorsMparticle {
      * A custom name for your connector.
      */
     name: string;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps: boolean;
 }
 
 export interface ProjectConnectorsNewrelic {
@@ -1844,7 +1983,7 @@ export interface ProjectConnectorsNewrelic {
      */
     apiKey: string;
     auditEnabled: boolean;
-    auditFilters: string;
+    auditFilters: outputs.ProjectConnectorsNewrelicAuditFilter[];
     /**
      * The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
      */
@@ -1867,6 +2006,12 @@ export interface ProjectConnectorsNewrelic {
      */
     overrideLogsPrefix: boolean;
     troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsNewrelicAuditFilter {
+    key: string;
+    operator: string;
+    values: string[];
 }
 
 export interface ProjectConnectorsRecaptcha {
@@ -1902,6 +2047,7 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      * A description of what your connector is used for.
      */
     description: string;
+    enterprise: boolean;
     id: string;
     /**
      * A custom name for your connector.
@@ -1973,6 +2119,75 @@ export interface ProjectConnectorsSalesforce {
     version: string;
 }
 
+export interface ProjectConnectorsSalesforceMarketingCloud {
+    /**
+     * Account identifier, or MID, of the target business unit.
+     */
+    accountId: string;
+    /**
+     * Client ID issued when you create the API integration in Installed Packages.
+     */
+    clientId: string;
+    /**
+     * Client secret issued when you create the API integration in Installed Packages.
+     */
+    clientSecret: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Space-separated list of data-access permissions for your connector.
+     */
+    scope: string;
+    /**
+     * The Salesforce Marketing Cloud endpoint subdomain.
+     */
+    subdomain: string;
+}
+
+export interface ProjectConnectorsSe {
+    /**
+     * AWS Access key ID.
+     */
+    accessKeyId: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * An optional endpoint URL (hostname only or fully qualified URI).
+     */
+    endpoint: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * AWS region to send requests to (e.g. `us-west-2`).
+     */
+    region: string;
+    /**
+     * AWS Secret Access Key.
+     */
+    secret: string;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
+    sender: outputs.ProjectConnectorsSeSender;
+}
+
+export interface ProjectConnectorsSeSender {
+    email: string;
+    name: string;
+}
+
 export interface ProjectConnectorsSegment {
     /**
      * A description of what your connector is used for.
@@ -2004,6 +2219,9 @@ export interface ProjectConnectorsSendgrid {
      * A custom name for your connector.
      */
     name: string;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
     sender: outputs.ProjectConnectorsSendgridSender;
 }
 
@@ -2014,6 +2232,22 @@ export interface ProjectConnectorsSendgridAuthentication {
 export interface ProjectConnectorsSendgridSender {
     email: string;
     name: string;
+}
+
+export interface ProjectConnectorsSlack {
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The OAuth token for Slack's Bot User, used to authenticate API requests.
+     */
+    token: string;
 }
 
 export interface ProjectConnectorsSmartling {
@@ -2051,6 +2285,9 @@ export interface ProjectConnectorsSmtp {
      * A custom name for your connector.
      */
     name: string;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
     sender: outputs.ProjectConnectorsSmtpSender;
     server: outputs.ProjectConnectorsSmtpServer;
 }
@@ -2071,9 +2308,53 @@ export interface ProjectConnectorsSmtpServer {
     port: number;
 }
 
+export interface ProjectConnectorsSn {
+    /**
+     * AWS Access key ID.
+     */
+    accessKeyId: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * An optional endpoint URL (hostname only or fully qualified URI).
+     */
+    endpoint: string;
+    /**
+     * The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+     */
+    entityId: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+     */
+    organizationNumber: string;
+    /**
+     * AWS region to send requests to (e.g. `us-west-2`).
+     */
+    region: string;
+    /**
+     * AWS Secret Access Key.
+     */
+    secret: string;
+    /**
+     * The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
+     */
+    senderId: string;
+    /**
+     * The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
+     */
+    templateId: string;
+}
+
 export interface ProjectConnectorsSumologic {
     auditEnabled: boolean;
-    auditFilters: string;
+    auditFilters: outputs.ProjectConnectorsSumologicAuditFilter[];
     /**
      * A description of what your connector is used for.
      */
@@ -2088,6 +2369,12 @@ export interface ProjectConnectorsSumologic {
      */
     name: string;
     troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsSumologicAuditFilter {
+    key: string;
+    operator: string;
+    values: string[];
 }
 
 export interface ProjectConnectorsTelesign {
@@ -2191,6 +2478,14 @@ export interface ProjectFlows {
     data: string;
 }
 
+export interface ProjectInviteSettings {
+    addMagiclinkToken: boolean;
+    inviteUrl: string;
+    requireInvitation: boolean;
+    sendEmail: boolean;
+    sendText: boolean;
+}
+
 export interface ProjectJwtTemplates {
     /**
      * A list of `Access Key` type JWT Templates.
@@ -2204,7 +2499,7 @@ export interface ProjectJwtTemplates {
 
 export interface ProjectJwtTemplatesAccessKeyTemplate {
     /**
-     * The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+     * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema: string;
     conformanceIssuer: boolean;
@@ -2212,6 +2507,11 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
      * Description of the JWT Template.
      */
     description: string;
+    /**
+     * Policy for empty claims - `none`, `nil` or `delete`.
+     */
+    emptyClaimPolicy: string;
+    enforceIssuer: boolean;
     id: string;
     /**
      * Name of the JWT Template.
@@ -2222,7 +2522,7 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
 
 export interface ProjectJwtTemplatesUserTemplate {
     /**
-     * The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+     * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema: string;
     conformanceIssuer: boolean;
@@ -2230,6 +2530,11 @@ export interface ProjectJwtTemplatesUserTemplate {
      * Description of the JWT Template.
      */
     description: string;
+    /**
+     * Policy for empty claims - `none`, `nil` or `delete`.
+     */
+    emptyClaimPolicy: string;
+    enforceIssuer: boolean;
     id: string;
     /**
      * Name of the JWT Template.
@@ -2247,6 +2552,7 @@ export interface ProjectProjectSettings {
      * The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
      */
     accessKeySessionTokenExpiration: string;
+    appUrl: string;
     /**
      * The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
      */
@@ -2259,12 +2565,7 @@ export interface ProjectProjectSettings {
      * Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      */
     cookiePolicy: string;
-    /**
-     * This attribute has been renamed to `cookieDomain`.
-     *
-     * @deprecated The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
-     */
-    domain: string;
+    customDomain: string;
     /**
      * Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
      */
@@ -2293,6 +2594,14 @@ export interface ProjectProjectSettings {
      * Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      */
     testUsersLoginidRegexp: string;
+    /**
+     * A 6 digit static OTP code for use with test users.
+     */
+    testUsersStaticOtp: string;
+    /**
+     * The pattern of the verifiers that will be used for testing.
+     */
+    testUsersVerifierRegexp: string;
     /**
      * Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      */

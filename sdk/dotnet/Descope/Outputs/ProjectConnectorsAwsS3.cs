@@ -19,7 +19,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string AccessKeyId;
         public readonly bool? AuditEnabled;
-        public readonly string? AuditFilters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsAwsS3AuditFilter> AuditFilters;
         /// <summary>
         /// The AWS S3 bucket. This bucket should already exist for the connector to work.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? auditEnabled,
 
-            string? auditFilters,
+            ImmutableArray<Outputs.ProjectConnectorsAwsS3AuditFilter> auditFilters,
 
             string bucket,
 

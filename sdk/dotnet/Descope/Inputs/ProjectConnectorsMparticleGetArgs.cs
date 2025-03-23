@@ -52,6 +52,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? BaseUrl { get; set; }
 
         /// <summary>
+        /// The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
+        /// </summary>
+        [Input("defaultEnvironment")]
+        public Input<string>? DefaultEnvironment { get; set; }
+
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         [Input("description")]
@@ -65,6 +71,12 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        [Input("useStaticIps")]
+        public Input<bool>? UseStaticIps { get; set; }
 
         public ProjectConnectorsMparticleGetArgs()
         {

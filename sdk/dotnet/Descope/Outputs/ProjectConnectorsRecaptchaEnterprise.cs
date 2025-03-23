@@ -26,6 +26,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
+        public readonly bool? Enterprise;
         public readonly string? Id;
         /// <summary>
         /// A custom name for your connector.
@@ -52,6 +53,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            bool? enterprise,
+
             string? id,
 
             string name,
@@ -65,6 +68,7 @@ namespace Descope.Pulumi.Descope.Outputs
             ApiKey = apiKey;
             AssessmentScore = assessmentScore;
             Description = description;
+            Enterprise = enterprise;
             Id = id;
             Name = name;
             OverrideAssessment = overrideAssessment;

@@ -13,6 +13,9 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAttributesTenantArgs : global::Pulumi.ResourceArgs
     {
+        [Input("authorization")]
+        public Input<Inputs.ProjectAttributesTenantAuthorizationArgs>? Authorization { get; set; }
+
         /// <summary>
         /// The name of the attribute.
         /// </summary>
