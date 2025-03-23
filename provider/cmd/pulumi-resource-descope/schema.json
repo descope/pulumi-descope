@@ -121,6 +121,10 @@
                     "type": "boolean",
                     "description": "Whether the application should be enabled or disabled.\n"
                 },
+                "forceAuthentication": {
+                    "type": "boolean",
+                    "description": "This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.\n"
+                },
                 "id": {
                     "type": "string",
                     "description": "An optional identifier for the OIDC application.\n"
@@ -148,6 +152,7 @@
                         "claims",
                         "description",
                         "disabled",
+                        "forceAuthentication",
                         "id",
                         "loginPageUrl",
                         "logo",
@@ -187,6 +192,10 @@
                 "dynamicConfiguration": {
                     "$ref": "#/types/descope:index/ProjectApplicationsSamlApplicationDynamicConfiguration:ProjectApplicationsSamlApplicationDynamicConfiguration",
                     "description": "The `DynamicConfiguration` object. Read the description below.\n"
+                },
+                "forceAuthentication": {
+                    "type": "boolean",
+                    "description": "This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.\n"
                 },
                 "id": {
                     "type": "string",
@@ -230,6 +239,7 @@
                         "description",
                         "disabled",
                         "dynamicConfiguration",
+                        "forceAuthentication",
                         "id",
                         "loginPageUrl",
                         "logo",
@@ -321,6 +331,9 @@
         },
         "descope:index/ProjectAttributesTenant:ProjectAttributesTenant": {
             "properties": {
+                "authorization": {
+                    "$ref": "#/types/descope:index/ProjectAttributesTenantAuthorization:ProjectAttributesTenantAuthorization"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the attribute.\n"
@@ -345,9 +358,28 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "authorization",
                         "name",
                         "selectOptions",
                         "type"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectAttributesTenantAuthorization:ProjectAttributesTenantAuthorization": {
+            "properties": {
+                "viewPermissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "viewPermissions"
                     ]
                 }
             }
@@ -2640,6 +2672,12 @@
                     },
                     "description": "Use the Forter connector for account fraud prevention.\n"
                 },
+                "genericSmsGateways": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGateway:ProjectConnectorsGenericSmsGateway"
+                    }
+                },
                 "googleCloudTranslations": {
                     "type": "array",
                     "items": {
@@ -2666,6 +2704,13 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsHubspot:ProjectConnectorsHubspot"
                     },
                     "description": "HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.\n"
+                },
+                "incodes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsIncode:ProjectConnectorsIncode"
+                    },
+                    "description": "Use the Incode connection to run identity verification processes like document checks or facial recognition.\n"
                 },
                 "intercoms": {
                     "type": "array",
@@ -2715,6 +2760,12 @@
                     },
                     "description": "AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.\n"
                 },
+                "salesforceMarketingClouds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSalesforceMarketingCloud:ProjectConnectorsSalesforceMarketingCloud"
+                    }
+                },
                 "salesforces": {
                     "type": "array",
                     "items": {
@@ -2735,6 +2786,19 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsSendgrid:ProjectConnectorsSendgrid"
                     }
                 },
+                "ses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSe:ProjectConnectorsSe"
+                    }
+                },
+                "slacks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSlack:ProjectConnectorsSlack"
+                    },
+                    "description": "Send updates to your team on Slack.\n"
+                },
                 "smartlings": {
                     "type": "array",
                     "items": {
@@ -2746,6 +2810,12 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectConnectorsSmtp:ProjectConnectorsSmtp"
+                    }
+                },
+                "sns": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSn:ProjectConnectorsSn"
                     }
                 },
                 "sumologics": {
@@ -2798,10 +2868,12 @@
                         "fingerprintDescopes",
                         "fingerprints",
                         "forters",
+                        "genericSmsGateways",
                         "googleCloudTranslations",
                         "hibps",
                         "https",
                         "hubspots",
+                        "incodes",
                         "intercoms",
                         "lokalises",
                         "mparticles",
@@ -2809,11 +2881,15 @@
                         "recaptchaEnterprises",
                         "recaptchas",
                         "rekognitions",
+                        "salesforceMarketingClouds",
                         "salesforces",
                         "segments",
                         "sendgrids",
+                        "ses",
+                        "slacks",
                         "smartlings",
                         "smtps",
+                        "sns",
                         "sumologics",
                         "telesigns",
                         "traceables",
@@ -2906,7 +2982,10 @@
         "descope:index/ProjectConnectorsAuditWebhook:ProjectConnectorsAuditWebhook": {
             "properties": {
                 "auditFilters": {
-                    "type": "string",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsAuditWebhookAuditFilter:ProjectConnectorsAuditWebhookAuditFilter"
+                    },
                     "description": "Specify which events will be sent to the external audit service (including tenant selection).\n"
                 },
                 "authentication": {
@@ -2965,6 +3044,28 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectConnectorsAuditWebhookAuditFilter:ProjectConnectorsAuditWebhookAuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
         },
         "descope:index/ProjectConnectorsAuditWebhookAuthentication:ProjectConnectorsAuditWebhookAuthentication": {
             "properties": {
@@ -3033,7 +3134,10 @@
                     "type": "boolean"
                 },
                 "auditFilters": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsAwsS3AuditFilter:ProjectConnectorsAwsS3AuditFilter"
+                    }
                 },
                 "bucket": {
                     "type": "string",
@@ -3087,6 +3191,28 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectConnectorsAwsS3AuditFilter:ProjectConnectorsAwsS3AuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
         },
         "descope:index/ProjectConnectorsAwsTranslate:ProjectConnectorsAwsTranslate": {
             "properties": {
@@ -3193,7 +3319,10 @@
                     "type": "boolean"
                 },
                 "auditFilters": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsDatadogAuditFilter:ProjectConnectorsDatadogAuditFilter"
+                    }
                 },
                 "description": {
                     "type": "string",
@@ -3233,6 +3362,28 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectConnectorsDatadogAuditFilter:ProjectConnectorsDatadogAuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
         },
         "descope:index/ProjectConnectorsDevrevGrow:ProjectConnectorsDevrevGrow": {
             "properties": {
@@ -3474,6 +3625,130 @@
                 }
             }
         },
+        "descope:index/ProjectConnectorsGenericSmsGateway:ProjectConnectorsGenericSmsGateway": {
+            "properties": {
+                "authentication": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGatewayAuthentication:ProjectConnectorsGenericSmsGatewayAuthentication",
+                    "description": "Authentication Information\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The headers to send with the request\n"
+                },
+                "hmacSecret": {
+                    "type": "string",
+                    "description": "HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature\n",
+                    "secret": true
+                },
+                "id": {
+                    "type": "string"
+                },
+                "insecure": {
+                    "type": "boolean",
+                    "description": "Will ignore certificate errors raised by the client\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "postUrl": {
+                    "type": "string",
+                    "description": "The URL of the post message request\n"
+                },
+                "sender": {
+                    "type": "string",
+                    "description": "The sender number\n"
+                },
+                "useStaticIps": {
+                    "type": "boolean",
+                    "description": "Whether the connector should send all requests from specific static IPs.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "postUrl"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authentication",
+                        "description",
+                        "headers",
+                        "hmacSecret",
+                        "id",
+                        "insecure",
+                        "name",
+                        "postUrl",
+                        "sender",
+                        "useStaticIps"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsGenericSmsGatewayAuthentication:ProjectConnectorsGenericSmsGatewayAuthentication": {
+            "properties": {
+                "apiKey": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationApiKey:ProjectConnectorsGenericSmsGatewayAuthenticationApiKey"
+                },
+                "basic": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationBasic:ProjectConnectorsGenericSmsGatewayAuthenticationBasic"
+                },
+                "bearerToken": {
+                    "type": "string",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "apiKey",
+                        "basic",
+                        "bearerToken"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationApiKey:ProjectConnectorsGenericSmsGatewayAuthenticationApiKey": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "token"
+            ]
+        },
+        "descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationBasic:ProjectConnectorsGenericSmsGatewayAuthenticationBasic": {
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ]
+        },
         "descope:index/ProjectConnectorsGoogleCloudTranslation:ProjectConnectorsGoogleCloudTranslation": {
             "properties": {
                 "description": {
@@ -3583,6 +3858,10 @@
                 "name": {
                     "type": "string",
                     "description": "A custom name for your connector.\n"
+                },
+                "useStaticIps": {
+                    "type": "boolean",
+                    "description": "Whether the connector should send all requests from specific static IPs.\n"
                 }
             },
             "type": "object",
@@ -3601,7 +3880,8 @@
                         "id",
                         "includeHeadersInContext",
                         "insecure",
-                        "name"
+                        "name",
+                        "useStaticIps"
                     ]
                 }
             }
@@ -3683,6 +3963,10 @@
                 "name": {
                     "type": "string",
                     "description": "A custom name for your connector.\n"
+                },
+                "useStaticIps": {
+                    "type": "boolean",
+                    "description": "Whether the connector should send all requests from specific static IPs.\n"
                 }
             },
             "type": "object",
@@ -3696,6 +3980,54 @@
                         "accessToken",
                         "baseUrl",
                         "description",
+                        "id",
+                        "name",
+                        "useStaticIps"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsIncode:ProjectConnectorsIncode": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "Your InCode API key.\n",
+                    "secret": true
+                },
+                "apiUrl": {
+                    "type": "string",
+                    "description": "The base URL of the Incode API\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "flowId": {
+                    "type": "string",
+                    "description": "Your wanted InCode's flow ID.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "apiKey",
+                "apiUrl",
+                "flowId",
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "apiKey",
+                        "apiUrl",
+                        "description",
+                        "flowId",
                         "id",
                         "name"
                     ]
@@ -3814,6 +4146,10 @@
                     "type": "string",
                     "description": "The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/\n"
                 },
+                "defaultEnvironment": {
+                    "type": "string",
+                    "description": "The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
@@ -3824,6 +4160,10 @@
                 "name": {
                     "type": "string",
                     "description": "A custom name for your connector.\n"
+                },
+                "useStaticIps": {
+                    "type": "boolean",
+                    "description": "Whether the connector should send all requests from specific static IPs.\n"
                 }
             },
             "type": "object",
@@ -3838,9 +4178,11 @@
                         "apiKey",
                         "apiSecret",
                         "baseUrl",
+                        "defaultEnvironment",
                         "description",
                         "id",
-                        "name"
+                        "name",
+                        "useStaticIps"
                     ]
                 }
             }
@@ -3856,7 +4198,10 @@
                     "type": "boolean"
                 },
                 "auditFilters": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsNewrelicAuditFilter:ProjectConnectorsNewrelicAuditFilter"
+                    }
                 },
                 "dataCenter": {
                     "type": "string",
@@ -3906,6 +4251,28 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectConnectorsNewrelicAuditFilter:ProjectConnectorsNewrelicAuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
         },
         "descope:index/ProjectConnectorsRecaptcha:ProjectConnectorsRecaptcha": {
             "properties": {
@@ -3963,6 +4330,9 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "enterprise": {
+                    "type": "boolean"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -3996,6 +4366,7 @@
                         "apiKey",
                         "assessmentScore",
                         "description",
+                        "enterprise",
                         "id",
                         "name",
                         "overrideAssessment",
@@ -4105,6 +4476,143 @@
                 }
             }
         },
+        "descope:index/ProjectConnectorsSalesforceMarketingCloud:ProjectConnectorsSalesforceMarketingCloud": {
+            "properties": {
+                "accountId": {
+                    "type": "string",
+                    "description": "Account identifier, or MID, of the target business unit.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "Client ID issued when you create the API integration in Installed Packages.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "Client secret issued when you create the API integration in Installed Packages.\n",
+                    "secret": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "scope": {
+                    "type": "string",
+                    "description": "Space-separated list of data-access permissions for your connector.\n"
+                },
+                "subdomain": {
+                    "type": "string",
+                    "description": "The Salesforce Marketing Cloud endpoint subdomain.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "clientId",
+                "clientSecret",
+                "name",
+                "subdomain"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "accountId",
+                        "clientId",
+                        "clientSecret",
+                        "description",
+                        "id",
+                        "name",
+                        "scope",
+                        "subdomain"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsSe:ProjectConnectorsSe": {
+            "properties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "AWS Access key ID.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "An optional endpoint URL (hostname only or fully qualified URI).\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "AWS region to send requests to (e.g. `us-west-2`).\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "AWS Secret Access Key.\n",
+                    "secret": true
+                },
+                "sender": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsSeSender:ProjectConnectorsSeSender",
+                    "description": "The sender details that should be displayed in the email message.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "accessKeyId",
+                "name",
+                "region",
+                "secret",
+                "sender"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "accessKeyId",
+                        "description",
+                        "endpoint",
+                        "id",
+                        "name",
+                        "region",
+                        "secret",
+                        "sender"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsSeSender:ProjectConnectorsSeSender": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "email",
+                        "name"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectConnectorsSegment:ProjectConnectorsSegment": {
             "properties": {
                 "description": {
@@ -4162,7 +4670,8 @@
                     "description": "A custom name for your connector.\n"
                 },
                 "sender": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsSendgridSender:ProjectConnectorsSendgridSender"
+                    "$ref": "#/types/descope:index/ProjectConnectorsSendgridSender:ProjectConnectorsSendgridSender",
+                    "description": "The sender details that should be displayed in the email message.\n"
                 }
             },
             "type": "object",
@@ -4213,6 +4722,41 @@
                     "requiredOutputs": [
                         "email",
                         "name"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsSlack:ProjectConnectorsSlack": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "The OAuth token for Slack's Bot User, used to authenticate API requests.\n",
+                    "secret": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "token"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "description",
+                        "id",
+                        "name",
+                        "token"
                     ]
                 }
             }
@@ -4281,7 +4825,8 @@
                     "description": "A custom name for your connector.\n"
                 },
                 "sender": {
-                    "$ref": "#/types/descope:index/ProjectConnectorsSmtpSender:ProjectConnectorsSmtpSender"
+                    "$ref": "#/types/descope:index/ProjectConnectorsSmtpSender:ProjectConnectorsSmtpSender",
+                    "description": "The sender details that should be displayed in the email message.\n"
                 },
                 "server": {
                     "$ref": "#/types/descope:index/ProjectConnectorsSmtpServer:ProjectConnectorsSmtpServer"
@@ -4379,13 +4924,88 @@
                 }
             }
         },
+        "descope:index/ProjectConnectorsSn:ProjectConnectorsSn": {
+            "properties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "AWS Access key ID.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "An optional endpoint URL (hostname only or fully qualified URI).\n"
+                },
+                "entityId": {
+                    "type": "string",
+                    "description": "The entity ID or principal entity (PE) ID for sending text messages to recipients in India.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "organizationNumber": {
+                    "type": "string",
+                    "description": "An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "AWS region to send requests to (e.g. `us-west-2`).\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "AWS Secret Access Key.\n",
+                    "secret": true
+                },
+                "senderId": {
+                    "type": "string",
+                    "description": "The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).\n"
+                },
+                "templateId": {
+                    "type": "string",
+                    "description": "The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "accessKeyId",
+                "name",
+                "region",
+                "secret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "accessKeyId",
+                        "description",
+                        "endpoint",
+                        "entityId",
+                        "id",
+                        "name",
+                        "organizationNumber",
+                        "region",
+                        "secret",
+                        "senderId",
+                        "templateId"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectConnectorsSumologic:ProjectConnectorsSumologic": {
             "properties": {
                 "auditEnabled": {
                     "type": "boolean"
                 },
                 "auditFilters": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsSumologicAuditFilter:ProjectConnectorsSumologicAuditFilter"
+                    }
                 },
                 "description": {
                     "type": "string",
@@ -4425,6 +5045,28 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectConnectorsSumologicAuditFilter:ProjectConnectorsSumologicAuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
         },
         "descope:index/ProjectConnectorsTelesign:ProjectConnectorsTelesign": {
             "properties": {
@@ -4712,6 +5354,37 @@
                 "data"
             ]
         },
+        "descope:index/ProjectInviteSettings:ProjectInviteSettings": {
+            "properties": {
+                "addMagiclinkToken": {
+                    "type": "boolean"
+                },
+                "inviteUrl": {
+                    "type": "string"
+                },
+                "requireInvitation": {
+                    "type": "boolean"
+                },
+                "sendEmail": {
+                    "type": "boolean"
+                },
+                "sendText": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "addMagiclinkToken",
+                        "inviteUrl",
+                        "requireInvitation",
+                        "sendEmail",
+                        "sendText"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectJwtTemplates:ProjectJwtTemplates": {
             "properties": {
                 "accessKeyTemplates": {
@@ -4743,7 +5416,7 @@
             "properties": {
                 "authSchema": {
                     "type": "string",
-                    "description": "The authorization claims format - \"default\", \"tenantOnly\" or \"none\". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
+                    "description": "The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean"
@@ -4751,6 +5424,13 @@
                 "description": {
                     "type": "string",
                     "description": "Description of the JWT Template.\n"
+                },
+                "emptyClaimPolicy": {
+                    "type": "string",
+                    "description": "Policy for empty claims - `none`, `nil` or `delete`.\n"
+                },
+                "enforceIssuer": {
+                    "type": "boolean"
                 },
                 "id": {
                     "type": "string"
@@ -4774,6 +5454,8 @@
                         "authSchema",
                         "conformanceIssuer",
                         "description",
+                        "emptyClaimPolicy",
+                        "enforceIssuer",
                         "id",
                         "name",
                         "template"
@@ -4785,7 +5467,7 @@
             "properties": {
                 "authSchema": {
                     "type": "string",
-                    "description": "The authorization claims format - \"default\", \"tenantOnly\" or \"none\". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
+                    "description": "The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean"
@@ -4793,6 +5475,13 @@
                 "description": {
                     "type": "string",
                     "description": "Description of the JWT Template.\n"
+                },
+                "emptyClaimPolicy": {
+                    "type": "string",
+                    "description": "Policy for empty claims - `none`, `nil` or `delete`.\n"
+                },
+                "enforceIssuer": {
+                    "type": "boolean"
                 },
                 "id": {
                     "type": "string"
@@ -4816,6 +5505,8 @@
                         "authSchema",
                         "conformanceIssuer",
                         "description",
+                        "emptyClaimPolicy",
+                        "enforceIssuer",
                         "id",
                         "name",
                         "template"
@@ -4833,6 +5524,9 @@
                     "type": "string",
                     "description": "The expiry time for access key session tokens. Use values such as \"10 minutes\", \"4 hours\", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.\n"
                 },
+                "appUrl": {
+                    "type": "string"
+                },
                 "approvedDomains": {
                     "type": "array",
                     "items": {
@@ -4848,10 +5542,8 @@
                     "type": "string",
                     "description": "Use \"strict\", \"lax\" or \"none\". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
-                "domain": {
-                    "type": "string",
-                    "description": "This attribute has been renamed to `cookie_domain`.\n",
-                    "deprecationMessage": "The domain attribute has been renamed, set the cookie_domain attribute instead. This attribute will be removed in the next major version of the provider."
+                "customDomain": {
+                    "type": "string"
                 },
                 "enableInactivity": {
                     "type": "boolean",
@@ -4881,6 +5573,14 @@
                     "type": "string",
                     "description": "Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.\n"
                 },
+                "testUsersStaticOtp": {
+                    "type": "string",
+                    "description": "A 6 digit static OTP code for use with test users.\n"
+                },
+                "testUsersVerifierRegexp": {
+                    "type": "string",
+                    "description": "The pattern of the verifiers that will be used for testing.\n"
+                },
                 "tokenResponseMethod": {
                     "type": "string",
                     "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
@@ -4900,10 +5600,11 @@
                     "requiredOutputs": [
                         "accessKeyJwtTemplate",
                         "accessKeySessionTokenExpiration",
+                        "appUrl",
                         "approvedDomains",
                         "cookieDomain",
                         "cookiePolicy",
-                        "domain",
+                        "customDomain",
                         "enableInactivity",
                         "inactivityTime",
                         "refreshTokenExpiration",
@@ -4911,6 +5612,8 @@
                         "sessionTokenExpiration",
                         "stepUpTokenExpiration",
                         "testUsersLoginidRegexp",
+                        "testUsersStaticOtp",
+                        "testUsersVerifierRegexp",
                         "tokenResponseMethod",
                         "trustedDeviceTokenExpiration",
                         "userJwtTemplate"
@@ -4991,6 +5694,9 @@
                     },
                     "description": "Custom authentication flows to use in this project.\n"
                 },
+                "inviteSettings": {
+                    "$ref": "#/types/descope:index/ProjectInviteSettings:ProjectInviteSettings"
+                },
                 "jwtTemplates": {
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                     "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
@@ -5006,6 +5712,13 @@
                 "styles": {
                     "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
                     "description": "Custom styles that can be applied to the project's authentication flows.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
                 }
             },
             "required": [
@@ -5016,10 +5729,12 @@
                 "connectors",
                 "environment",
                 "flows",
+                "inviteSettings",
                 "jwtTemplates",
                 "name",
                 "projectSettings",
-                "styles"
+                "styles",
+                "tags"
             ],
             "inputProperties": {
                 "applications": {
@@ -5053,6 +5768,9 @@
                     },
                     "description": "Custom authentication flows to use in this project.\n"
                 },
+                "inviteSettings": {
+                    "$ref": "#/types/descope:index/ProjectInviteSettings:ProjectInviteSettings"
+                },
                 "jwtTemplates": {
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                     "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
@@ -5068,6 +5786,13 @@
                 "styles": {
                     "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
                     "description": "Custom styles that can be applied to the project's authentication flows.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
                 }
             },
             "stateInputs": {
@@ -5104,6 +5829,9 @@
                         },
                         "description": "Custom authentication flows to use in this project.\n"
                     },
+                    "inviteSettings": {
+                        "$ref": "#/types/descope:index/ProjectInviteSettings:ProjectInviteSettings"
+                    },
                     "jwtTemplates": {
                         "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                         "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
@@ -5119,6 +5847,13 @@
                     "styles": {
                         "$ref": "#/types/descope:index/ProjectStyles:ProjectStyles",
                         "description": "Custom styles that can be applied to the project's authentication flows.\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
                     }
                 },
                 "type": "object"
