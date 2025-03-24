@@ -47,6 +47,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Use the Forter connector for account fraud prevention.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsForter> Forters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsGenericSmsGateway> GenericSmsGateways;
         public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> GoogleCloudTranslations;
         /// <summary>
         /// API to check if password appeared previously exposed in data breaches.
@@ -60,6 +61,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHubspot> Hubspots;
+        /// <summary>
+        /// Use the Incode connection to run identity verification processes like document checks or facial recognition.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsIncode> Incodes;
         /// <summary>
         /// Intercom is a Conversational Relationship Platform (CRP).
         /// </summary>
@@ -85,6 +90,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRekognition> Rekognitions;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSalesforceMarketingCloud> SalesforceMarketingClouds;
         /// <summary>
         /// Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
         /// </summary>
@@ -94,11 +100,17 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSegment> Segments;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSendgrid> Sendgrids;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSe> Ses;
+        /// <summary>
+        /// Send updates to your team on Slack.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSlack> Slacks;
         /// <summary>
         /// Localize the language of your login and user journey screens with the Smartling connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSmartling> Smartlings;
         public readonly ImmutableArray<Outputs.ProjectConnectorsSmtp> Smtps;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSn> Sns;
         /// <summary>
         /// Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
         /// </summary>
@@ -140,6 +152,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsForter> forters,
 
+            ImmutableArray<Outputs.ProjectConnectorsGenericSmsGateway> genericSmsGateways,
+
             ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations,
 
             ImmutableArray<Outputs.ProjectConnectorsHibp> hibps,
@@ -147,6 +161,8 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectConnectorsHttp> https,
 
             ImmutableArray<Outputs.ProjectConnectorsHubspot> hubspots,
+
+            ImmutableArray<Outputs.ProjectConnectorsIncode> incodes,
 
             ImmutableArray<Outputs.ProjectConnectorsIntercom> intercoms,
 
@@ -162,15 +178,23 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsRekognition> rekognitions,
 
+            ImmutableArray<Outputs.ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds,
+
             ImmutableArray<Outputs.ProjectConnectorsSalesforce> salesforces,
 
             ImmutableArray<Outputs.ProjectConnectorsSegment> segments,
 
             ImmutableArray<Outputs.ProjectConnectorsSendgrid> sendgrids,
 
+            ImmutableArray<Outputs.ProjectConnectorsSe> ses,
+
+            ImmutableArray<Outputs.ProjectConnectorsSlack> slacks,
+
             ImmutableArray<Outputs.ProjectConnectorsSmartling> smartlings,
 
             ImmutableArray<Outputs.ProjectConnectorsSmtp> smtps,
+
+            ImmutableArray<Outputs.ProjectConnectorsSn> sns,
 
             ImmutableArray<Outputs.ProjectConnectorsSumologic> sumologics,
 
@@ -194,10 +218,12 @@ namespace Descope.Pulumi.Descope.Outputs
             FingerprintDescopes = fingerprintDescopes;
             Fingerprints = fingerprints;
             Forters = forters;
+            GenericSmsGateways = genericSmsGateways;
             GoogleCloudTranslations = googleCloudTranslations;
             Hibps = hibps;
             Https = https;
             Hubspots = hubspots;
+            Incodes = incodes;
             Intercoms = intercoms;
             Lokalises = lokalises;
             Mparticles = mparticles;
@@ -205,11 +231,15 @@ namespace Descope.Pulumi.Descope.Outputs
             RecaptchaEnterprises = recaptchaEnterprises;
             Recaptchas = recaptchas;
             Rekognitions = rekognitions;
+            SalesforceMarketingClouds = salesforceMarketingClouds;
             Salesforces = salesforces;
             Segments = segments;
             Sendgrids = sendgrids;
+            Ses = ses;
+            Slacks = slacks;
             Smartlings = smartlings;
             Smtps = smtps;
+            Sns = sns;
             Sumologics = sumologics;
             Telesigns = telesigns;
             Traceables = traceables;

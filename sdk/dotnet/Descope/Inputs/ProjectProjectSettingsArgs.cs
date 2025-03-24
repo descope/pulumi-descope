@@ -25,6 +25,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("accessKeySessionTokenExpiration")]
         public Input<string>? AccessKeySessionTokenExpiration { get; set; }
 
+        [Input("appUrl")]
+        public Input<string>? AppUrl { get; set; }
+
         [Input("approvedDomains")]
         private InputList<string>? _approvedDomains;
 
@@ -49,11 +52,8 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("cookiePolicy")]
         public Input<string>? CookiePolicy { get; set; }
 
-        /// <summary>
-        /// This attribute has been renamed to `cookie_domain`.
-        /// </summary>
-        [Input("domain")]
-        public Input<string>? Domain { get; set; }
+        [Input("customDomain")]
+        public Input<string>? CustomDomain { get; set; }
 
         /// <summary>
         /// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
@@ -96,6 +96,18 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("testUsersLoginidRegexp")]
         public Input<string>? TestUsersLoginidRegexp { get; set; }
+
+        /// <summary>
+        /// A 6 digit static OTP code for use with test users.
+        /// </summary>
+        [Input("testUsersStaticOtp")]
+        public Input<string>? TestUsersStaticOtp { get; set; }
+
+        /// <summary>
+        /// The pattern of the verifiers that will be used for testing.
+        /// </summary>
+        [Input("testUsersVerifierRegexp")]
+        public Input<string>? TestUsersVerifierRegexp { get; set; }
 
         /// <summary>
         /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.

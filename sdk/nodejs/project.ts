@@ -62,6 +62,7 @@ export class Project extends pulumi.CustomResource {
      * Custom authentication flows to use in this project.
      */
     public readonly flows!: pulumi.Output<{[key: string]: outputs.ProjectFlows}>;
+    public readonly inviteSettings!: pulumi.Output<outputs.ProjectInviteSettings>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
@@ -78,6 +79,10 @@ export class Project extends pulumi.CustomResource {
      * Custom styles that can be applied to the project's authentication flows.
      */
     public readonly styles!: pulumi.Output<outputs.ProjectStyles>;
+    /**
+     * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+     */
+    public readonly tags!: pulumi.Output<string[]>;
 
     /**
      * Create a Project resource with the given unique name, arguments, and options.
@@ -99,10 +104,12 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["connectors"] = state ? state.connectors : undefined;
             resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["flows"] = state ? state.flows : undefined;
+            resourceInputs["inviteSettings"] = state ? state.inviteSettings : undefined;
             resourceInputs["jwtTemplates"] = state ? state.jwtTemplates : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["projectSettings"] = state ? state.projectSettings : undefined;
             resourceInputs["styles"] = state ? state.styles : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
             resourceInputs["applications"] = args ? args.applications : undefined;
@@ -112,10 +119,12 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["connectors"] = args ? args.connectors : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
             resourceInputs["flows"] = args ? args.flows : undefined;
+            resourceInputs["inviteSettings"] = args ? args.inviteSettings : undefined;
             resourceInputs["jwtTemplates"] = args ? args.jwtTemplates : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["projectSettings"] = args ? args.projectSettings : undefined;
             resourceInputs["styles"] = args ? args.styles : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Project.__pulumiType, name, resourceInputs, opts);
@@ -154,6 +163,7 @@ export interface ProjectState {
      * Custom authentication flows to use in this project.
      */
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
@@ -170,6 +180,10 @@ export interface ProjectState {
      * Custom styles that can be applied to the project's authentication flows.
      */
     styles?: pulumi.Input<inputs.ProjectStyles>;
+    /**
+     * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -204,6 +218,7 @@ export interface ProjectArgs {
      * Custom authentication flows to use in this project.
      */
     flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
@@ -220,4 +235,8 @@ export interface ProjectArgs {
      * Custom styles that can be applied to the project's authentication flows.
      */
     styles?: pulumi.Input<inputs.ProjectStyles>;
+    /**
+     * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

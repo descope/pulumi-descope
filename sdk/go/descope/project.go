@@ -27,7 +27,8 @@ type Project struct {
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringOutput `pulumi:"environment"`
 	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapOutput `pulumi:"flows"`
+	Flows          ProjectFlowsMapOutput       `pulumi:"flows"`
+	InviteSettings ProjectInviteSettingsOutput `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -36,6 +37,8 @@ type Project struct {
 	ProjectSettings ProjectProjectSettingsOutput `pulumi:"projectSettings"`
 	// Custom styles that can be applied to the project's authentication flows.
 	Styles ProjectStylesOutput `pulumi:"styles"`
+	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
 
 // NewProject registers a new resource with the given unique name, arguments, and options.
@@ -81,7 +84,8 @@ type projectState struct {
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment *string `pulumi:"environment"`
 	// Custom authentication flows to use in this project.
-	Flows map[string]ProjectFlows `pulumi:"flows"`
+	Flows          map[string]ProjectFlows `pulumi:"flows"`
+	InviteSettings *ProjectInviteSettings  `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -90,6 +94,8 @@ type projectState struct {
 	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
 	// Custom styles that can be applied to the project's authentication flows.
 	Styles *ProjectStyles `pulumi:"styles"`
+	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+	Tags []string `pulumi:"tags"`
 }
 
 type ProjectState struct {
@@ -106,7 +112,8 @@ type ProjectState struct {
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
 	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapInput
+	Flows          ProjectFlowsMapInput
+	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
 	// The name of the Descope project.
@@ -115,6 +122,8 @@ type ProjectState struct {
 	ProjectSettings ProjectProjectSettingsPtrInput
 	// Custom styles that can be applied to the project's authentication flows.
 	Styles ProjectStylesPtrInput
+	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+	Tags pulumi.StringArrayInput
 }
 
 func (ProjectState) ElementType() reflect.Type {
@@ -135,7 +144,8 @@ type projectArgs struct {
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment *string `pulumi:"environment"`
 	// Custom authentication flows to use in this project.
-	Flows map[string]ProjectFlows `pulumi:"flows"`
+	Flows          map[string]ProjectFlows `pulumi:"flows"`
+	InviteSettings *ProjectInviteSettings  `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
 	// The name of the Descope project.
@@ -144,6 +154,8 @@ type projectArgs struct {
 	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
 	// Custom styles that can be applied to the project's authentication flows.
 	Styles *ProjectStyles `pulumi:"styles"`
+	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+	Tags []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Project resource.
@@ -161,7 +173,8 @@ type ProjectArgs struct {
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
 	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapInput
+	Flows          ProjectFlowsMapInput
+	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
 	// The name of the Descope project.
@@ -170,6 +183,8 @@ type ProjectArgs struct {
 	ProjectSettings ProjectProjectSettingsPtrInput
 	// Custom styles that can be applied to the project's authentication flows.
 	Styles ProjectStylesPtrInput
+	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+	Tags pulumi.StringArrayInput
 }
 
 func (ProjectArgs) ElementType() reflect.Type {
@@ -294,6 +309,10 @@ func (o ProjectOutput) Flows() ProjectFlowsMapOutput {
 	return o.ApplyT(func(v *Project) ProjectFlowsMapOutput { return v.Flows }).(ProjectFlowsMapOutput)
 }
 
+func (o ProjectOutput) InviteSettings() ProjectInviteSettingsOutput {
+	return o.ApplyT(func(v *Project) ProjectInviteSettingsOutput { return v.InviteSettings }).(ProjectInviteSettingsOutput)
+}
+
 // Defines templates for JSON Web Tokens (JWT) used for authentication.
 func (o ProjectOutput) JwtTemplates() ProjectJwtTemplatesOutput {
 	return o.ApplyT(func(v *Project) ProjectJwtTemplatesOutput { return v.JwtTemplates }).(ProjectJwtTemplatesOutput)
@@ -312,6 +331,11 @@ func (o ProjectOutput) ProjectSettings() ProjectProjectSettingsOutput {
 // Custom styles that can be applied to the project's authentication flows.
 func (o ProjectOutput) Styles() ProjectStylesOutput {
 	return o.ApplyT(func(v *Project) ProjectStylesOutput { return v.Styles }).(ProjectStylesOutput)
+}
+
+// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+func (o ProjectOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Project) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type ProjectArrayOutput struct{ *pulumi.OutputState }

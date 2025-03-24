@@ -47,6 +47,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        public readonly bool? UseStaticIps;
 
         [OutputConstructor]
         private ProjectConnectorsHttp(
@@ -66,7 +70,9 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? insecure,
 
-            string name)
+            string name,
+
+            bool? useStaticIps)
         {
             Authentication = authentication;
             BaseUrl = baseUrl;
@@ -77,6 +83,7 @@ namespace Descope.Pulumi.Descope.Outputs
             IncludeHeadersInContext = includeHeadersInContext;
             Insecure = insecure;
             Name = name;
+            UseStaticIps = useStaticIps;
         }
     }
 }

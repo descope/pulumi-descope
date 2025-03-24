@@ -33,7 +33,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AuditEnabled { get; set; }
 
         [Input("auditFilters")]
-        public Input<string>? AuditFilters { get; set; }
+        private InputList<Inputs.ProjectConnectorsAwsS3AuditFilterArgs>? _auditFilters;
+        public InputList<Inputs.ProjectConnectorsAwsS3AuditFilterArgs> AuditFilters
+        {
+            get => _auditFilters ?? (_auditFilters = new InputList<Inputs.ProjectConnectorsAwsS3AuditFilterArgs>());
+            set => _auditFilters = value;
+        }
 
         /// <summary>
         /// The AWS S3 bucket. This bucket should already exist for the connector to work.

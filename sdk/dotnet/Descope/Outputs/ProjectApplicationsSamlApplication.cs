@@ -39,6 +39,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? DynamicConfiguration;
         /// <summary>
+        /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        /// </summary>
+        public readonly bool? ForceAuthentication;
+        /// <summary>
         /// An optional identifier for the SAML application.
         /// </summary>
         public readonly string? Id;
@@ -81,6 +85,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectApplicationsSamlApplicationDynamicConfiguration? dynamicConfiguration,
 
+            bool? forceAuthentication,
+
             string? id,
 
             string? loginPageUrl,
@@ -101,6 +107,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Description = description;
             Disabled = disabled;
             DynamicConfiguration = dynamicConfiguration;
+            ForceAuthentication = forceAuthentication;
             Id = id;
             LoginPageUrl = loginPageUrl;
             Logo = logo;

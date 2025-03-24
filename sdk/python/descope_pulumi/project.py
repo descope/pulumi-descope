@@ -28,10 +28,12 @@ class ProjectArgs:
                  connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
                  environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
+                 invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None):
+                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Project resource.
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
@@ -45,6 +47,7 @@ class ProjectArgs:
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -60,6 +63,8 @@ class ProjectArgs:
             pulumi.set(__self__, "environment", environment)
         if flows is not None:
             pulumi.set(__self__, "flows", flows)
+        if invite_settings is not None:
+            pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
         if name is not None:
@@ -68,6 +73,8 @@ class ProjectArgs:
             pulumi.set(__self__, "project_settings", project_settings)
         if styles is not None:
             pulumi.set(__self__, "styles", styles)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -154,6 +161,15 @@ class ProjectArgs:
         pulumi.set(self, "flows", value)
 
     @property
+    @pulumi.getter(name="inviteSettings")
+    def invite_settings(self) -> Optional[pulumi.Input['ProjectInviteSettingsArgs']]:
+        return pulumi.get(self, "invite_settings")
+
+    @invite_settings.setter
+    def invite_settings(self, value: Optional[pulumi.Input['ProjectInviteSettingsArgs']]):
+        pulumi.set(self, "invite_settings", value)
+
+    @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
         """
@@ -201,6 +217,18 @@ class ProjectArgs:
     def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _ProjectState:
@@ -212,10 +240,12 @@ class _ProjectState:
                  connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
                  environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
+                 invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None):
+                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
@@ -229,6 +259,7 @@ class _ProjectState:
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -244,6 +275,8 @@ class _ProjectState:
             pulumi.set(__self__, "environment", environment)
         if flows is not None:
             pulumi.set(__self__, "flows", flows)
+        if invite_settings is not None:
+            pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
         if name is not None:
@@ -252,6 +285,8 @@ class _ProjectState:
             pulumi.set(__self__, "project_settings", project_settings)
         if styles is not None:
             pulumi.set(__self__, "styles", styles)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
@@ -338,6 +373,15 @@ class _ProjectState:
         pulumi.set(self, "flows", value)
 
     @property
+    @pulumi.getter(name="inviteSettings")
+    def invite_settings(self) -> Optional[pulumi.Input['ProjectInviteSettingsArgs']]:
+        return pulumi.get(self, "invite_settings")
+
+    @invite_settings.setter
+    def invite_settings(self, value: Optional[pulumi.Input['ProjectInviteSettingsArgs']]):
+        pulumi.set(self, "invite_settings", value)
+
+    @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
         """
@@ -384,6 +428,18 @@ class _ProjectState:
     @styles.setter
     def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class Project(pulumi.CustomResource):
@@ -398,10 +454,12 @@ class Project(pulumi.CustomResource):
                  connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
                  environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+                 invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Create a Project resource with the given unique name, props, and options.
@@ -418,6 +476,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         ...
     @overload
@@ -449,10 +508,12 @@ class Project(pulumi.CustomResource):
                  connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
                  environment: Optional[pulumi.Input[str]] = None,
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+                 invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -469,10 +530,12 @@ class Project(pulumi.CustomResource):
             __props__.__dict__["connectors"] = connectors
             __props__.__dict__["environment"] = environment
             __props__.__dict__["flows"] = flows
+            __props__.__dict__["invite_settings"] = invite_settings
             __props__.__dict__["jwt_templates"] = jwt_templates
             __props__.__dict__["name"] = name
             __props__.__dict__["project_settings"] = project_settings
             __props__.__dict__["styles"] = styles
+            __props__.__dict__["tags"] = tags
         super(Project, __self__).__init__(
             'descope:index/project:Project',
             resource_name,
@@ -490,10 +553,12 @@ class Project(pulumi.CustomResource):
             connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
             environment: Optional[pulumi.Input[str]] = None,
             flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+            invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
             jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
             name: Optional[pulumi.Input[str]] = None,
             project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-            styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None) -> 'Project':
+            styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Project':
         """
         Get an existing Project resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -512,6 +577,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -524,10 +590,12 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["connectors"] = connectors
         __props__.__dict__["environment"] = environment
         __props__.__dict__["flows"] = flows
+        __props__.__dict__["invite_settings"] = invite_settings
         __props__.__dict__["jwt_templates"] = jwt_templates
         __props__.__dict__["name"] = name
         __props__.__dict__["project_settings"] = project_settings
         __props__.__dict__["styles"] = styles
+        __props__.__dict__["tags"] = tags
         return Project(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -587,6 +655,11 @@ class Project(pulumi.CustomResource):
         return pulumi.get(self, "flows")
 
     @property
+    @pulumi.getter(name="inviteSettings")
+    def invite_settings(self) -> pulumi.Output['outputs.ProjectInviteSettings']:
+        return pulumi.get(self, "invite_settings")
+
+    @property
     @pulumi.getter(name="jwtTemplates")
     def jwt_templates(self) -> pulumi.Output['outputs.ProjectJwtTemplates']:
         """
@@ -617,4 +690,12 @@ class Project(pulumi.CustomResource):
         Custom styles that can be applied to the project's authentication flows.
         """
         return pulumi.get(self, "styles")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        """
+        return pulumi.get(self, "tags")
 

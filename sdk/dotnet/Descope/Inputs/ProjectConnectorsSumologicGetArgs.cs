@@ -17,7 +17,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AuditEnabled { get; set; }
 
         [Input("auditFilters")]
-        public Input<string>? AuditFilters { get; set; }
+        private InputList<Inputs.ProjectConnectorsSumologicAuditFilterGetArgs>? _auditFilters;
+        public InputList<Inputs.ProjectConnectorsSumologicAuditFilterGetArgs> AuditFilters
+        {
+            get => _auditFilters ?? (_auditFilters = new InputList<Inputs.ProjectConnectorsSumologicAuditFilterGetArgs>());
+            set => _auditFilters = value;
+        }
 
         /// <summary>
         /// A description of what your connector is used for.

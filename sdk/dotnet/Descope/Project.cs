@@ -55,6 +55,9 @@ namespace Descope.Pulumi.Descope
         [Output("flows")]
         public Output<ImmutableDictionary<string, Outputs.ProjectFlows>> Flows { get; private set; } = null!;
 
+        [Output("inviteSettings")]
+        public Output<Outputs.ProjectInviteSettings> InviteSettings { get; private set; } = null!;
+
         /// <summary>
         /// Defines templates for JSON Web Tokens (JWT) used for authentication.
         /// </summary>
@@ -78,6 +81,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("styles")]
         public Output<Outputs.ProjectStyles> Styles { get; private set; } = null!;
+
+        /// <summary>
+        /// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -174,6 +183,9 @@ namespace Descope.Pulumi.Descope
             set => _flows = value;
         }
 
+        [Input("inviteSettings")]
+        public Input<Inputs.ProjectInviteSettingsArgs>? InviteSettings { get; set; }
+
         /// <summary>
         /// Defines templates for JSON Web Tokens (JWT) used for authentication.
         /// </summary>
@@ -197,6 +209,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("styles")]
         public Input<Inputs.ProjectStylesArgs>? Styles { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public ProjectArgs()
         {
@@ -254,6 +278,9 @@ namespace Descope.Pulumi.Descope
             set => _flows = value;
         }
 
+        [Input("inviteSettings")]
+        public Input<Inputs.ProjectInviteSettingsGetArgs>? InviteSettings { get; set; }
+
         /// <summary>
         /// Defines templates for JSON Web Tokens (JWT) used for authentication.
         /// </summary>
@@ -277,6 +304,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("styles")]
         public Input<Inputs.ProjectStylesGetArgs>? Styles { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         public ProjectState()
         {

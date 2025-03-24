@@ -24,6 +24,9 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The sender details that should be displayed in the email message.
+        /// </summary>
         public readonly Outputs.ProjectConnectorsSmtpSender Sender;
         public readonly Outputs.ProjectConnectorsSmtpServer Server;
 

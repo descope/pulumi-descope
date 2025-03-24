@@ -14,6 +14,7 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectAttributesTenant
     {
+        public readonly Outputs.ProjectAttributesTenantAuthorization? Authorization;
         /// <summary>
         /// The name of the attribute.
         /// </summary>
@@ -29,12 +30,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAttributesTenant(
+            Outputs.ProjectAttributesTenantAuthorization? authorization,
+
             string name,
 
             ImmutableArray<string> selectOptions,
 
             string type)
         {
+            Authorization = authorization;
             Name = name;
             SelectOptions = selectOptions;
             Type = type;

@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectJwtTemplatesAccessKeyTemplate
     {
         /// <summary>
-        /// The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         public readonly string? AuthSchema;
         public readonly bool? ConformanceIssuer;
@@ -23,6 +23,11 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Description of the JWT Template.
         /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Policy for empty claims - `none`, `nil` or `delete`.
+        /// </summary>
+        public readonly string? EmptyClaimPolicy;
+        public readonly bool? EnforceIssuer;
         public readonly string? Id;
         /// <summary>
         /// Name of the JWT Template.
@@ -38,6 +43,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? emptyClaimPolicy,
+
+            bool? enforceIssuer,
+
             string? id,
 
             string name,
@@ -47,6 +56,8 @@ namespace Descope.Pulumi.Descope.Outputs
             AuthSchema = authSchema;
             ConformanceIssuer = conformanceIssuer;
             Description = description;
+            EmptyClaimPolicy = emptyClaimPolicy;
+            EnforceIssuer = enforceIssuer;
             Id = id;
             Name = name;
             Template = template;
