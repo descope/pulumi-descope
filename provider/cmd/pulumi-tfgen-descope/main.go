@@ -13,7 +13,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 
 	descope "github.com/descope/pulumi-descope/provider"
 )
