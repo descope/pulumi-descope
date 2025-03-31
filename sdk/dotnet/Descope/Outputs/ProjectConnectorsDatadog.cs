@@ -19,7 +19,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string ApiKey;
         public readonly bool? AuditEnabled;
-        public readonly string? AuditFilters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsDatadogAuditFilter> AuditFilters;
         /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? auditEnabled,
 
-            string? auditFilters,
+            ImmutableArray<Outputs.ProjectConnectorsDatadogAuditFilter> auditFilters,
 
             string? description,
 

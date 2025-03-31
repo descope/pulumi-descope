@@ -19,7 +19,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string ApiKey;
         public readonly bool? AuditEnabled;
-        public readonly string? AuditFilters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsNewrelicAuditFilter> AuditFilters;
         /// <summary>
         /// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? auditEnabled,
 
-            string? auditFilters,
+            ImmutableArray<Outputs.ProjectConnectorsNewrelicAuditFilter> auditFilters,
 
             string? dataCenter,
 

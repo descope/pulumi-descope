@@ -22,6 +22,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
         /// </summary>
         public readonly string? AccessKeySessionTokenExpiration;
+        public readonly string? AppUrl;
         /// <summary>
         /// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
         /// </summary>
@@ -34,10 +35,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         /// </summary>
         public readonly string? CookiePolicy;
-        /// <summary>
-        /// This attribute has been renamed to `cookie_domain`.
-        /// </summary>
-        public readonly string? Domain;
+        public readonly string? CustomDomain;
         /// <summary>
         /// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
         /// </summary>
@@ -67,6 +65,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? TestUsersLoginidRegexp;
         /// <summary>
+        /// A 6 digit static OTP code for use with test users.
+        /// </summary>
+        public readonly string? TestUsersStaticOtp;
+        /// <summary>
+        /// The pattern of the verifiers that will be used for testing.
+        /// </summary>
+        public readonly string? TestUsersVerifierRegexp;
+        /// <summary>
         /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
         /// </summary>
         public readonly string? TokenResponseMethod;
@@ -85,13 +91,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? accessKeySessionTokenExpiration,
 
+            string? appUrl,
+
             ImmutableArray<string> approvedDomains,
 
             string? cookieDomain,
 
             string? cookiePolicy,
 
-            string? domain,
+            string? customDomain,
 
             bool? enableInactivity,
 
@@ -107,6 +115,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? testUsersLoginidRegexp,
 
+            string? testUsersStaticOtp,
+
+            string? testUsersVerifierRegexp,
+
             string? tokenResponseMethod,
 
             string? trustedDeviceTokenExpiration,
@@ -115,10 +127,11 @@ namespace Descope.Pulumi.Descope.Outputs
         {
             AccessKeyJwtTemplate = accessKeyJwtTemplate;
             AccessKeySessionTokenExpiration = accessKeySessionTokenExpiration;
+            AppUrl = appUrl;
             ApprovedDomains = approvedDomains;
             CookieDomain = cookieDomain;
             CookiePolicy = cookiePolicy;
-            Domain = domain;
+            CustomDomain = customDomain;
             EnableInactivity = enableInactivity;
             InactivityTime = inactivityTime;
             RefreshTokenExpiration = refreshTokenExpiration;
@@ -126,6 +139,8 @@ namespace Descope.Pulumi.Descope.Outputs
             SessionTokenExpiration = sessionTokenExpiration;
             StepUpTokenExpiration = stepUpTokenExpiration;
             TestUsersLoginidRegexp = testUsersLoginidRegexp;
+            TestUsersStaticOtp = testUsersStaticOtp;
+            TestUsersVerifierRegexp = testUsersVerifierRegexp;
             TokenResponseMethod = tokenResponseMethod;
             TrustedDeviceTokenExpiration = trustedDeviceTokenExpiration;
             UserJwtTemplate = userJwtTemplate;

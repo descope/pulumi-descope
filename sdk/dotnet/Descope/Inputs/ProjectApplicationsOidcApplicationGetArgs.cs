@@ -38,6 +38,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
+        /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        /// </summary>
+        [Input("forceAuthentication")]
+        public Input<bool>? ForceAuthentication { get; set; }
+
+        /// <summary>
         /// An optional identifier for the OIDC application.
         /// </summary>
         [Input("id")]

@@ -24,6 +24,7 @@ __all__ = [
     'ProjectApplicationsSamlApplicationManualConfiguration',
     'ProjectAttributes',
     'ProjectAttributesTenant',
+    'ProjectAttributesTenantAuthorization',
     'ProjectAttributesUser',
     'ProjectAttributesUserWidgetAuthorization',
     'ProjectAuthentication',
@@ -78,18 +79,25 @@ __all__ = [
     'ProjectConnectorsAbuseipdb',
     'ProjectConnectorsAmplitude',
     'ProjectConnectorsAuditWebhook',
+    'ProjectConnectorsAuditWebhookAuditFilter',
     'ProjectConnectorsAuditWebhookAuthentication',
     'ProjectConnectorsAuditWebhookAuthenticationApiKey',
     'ProjectConnectorsAuditWebhookAuthenticationBasic',
     'ProjectConnectorsAwsS3',
+    'ProjectConnectorsAwsS3AuditFilter',
     'ProjectConnectorsAwsTranslate',
     'ProjectConnectorsClear',
     'ProjectConnectorsDatadog',
+    'ProjectConnectorsDatadogAuditFilter',
     'ProjectConnectorsDevrevGrow',
     'ProjectConnectorsDocebo',
     'ProjectConnectorsFingerprint',
     'ProjectConnectorsFingerprintDescope',
     'ProjectConnectorsForter',
+    'ProjectConnectorsGenericSmsGateway',
+    'ProjectConnectorsGenericSmsGatewayAuthentication',
+    'ProjectConnectorsGenericSmsGatewayAuthenticationApiKey',
+    'ProjectConnectorsGenericSmsGatewayAuthenticationBasic',
     'ProjectConnectorsGoogleCloudTranslation',
     'ProjectConnectorsHibp',
     'ProjectConnectorsHttp',
@@ -97,24 +105,32 @@ __all__ = [
     'ProjectConnectorsHttpAuthenticationApiKey',
     'ProjectConnectorsHttpAuthenticationBasic',
     'ProjectConnectorsHubspot',
+    'ProjectConnectorsIncode',
     'ProjectConnectorsIntercom',
     'ProjectConnectorsLokalise',
     'ProjectConnectorsMparticle',
     'ProjectConnectorsNewrelic',
+    'ProjectConnectorsNewrelicAuditFilter',
     'ProjectConnectorsRecaptcha',
     'ProjectConnectorsRecaptchaEnterprise',
     'ProjectConnectorsRekognition',
     'ProjectConnectorsSalesforce',
+    'ProjectConnectorsSalesforceMarketingCloud',
+    'ProjectConnectorsSe',
+    'ProjectConnectorsSeSender',
     'ProjectConnectorsSegment',
     'ProjectConnectorsSendgrid',
     'ProjectConnectorsSendgridAuthentication',
     'ProjectConnectorsSendgridSender',
+    'ProjectConnectorsSlack',
     'ProjectConnectorsSmartling',
     'ProjectConnectorsSmtp',
     'ProjectConnectorsSmtpAuthentication',
     'ProjectConnectorsSmtpSender',
     'ProjectConnectorsSmtpServer',
+    'ProjectConnectorsSn',
     'ProjectConnectorsSumologic',
+    'ProjectConnectorsSumologicAuditFilter',
     'ProjectConnectorsTelesign',
     'ProjectConnectorsTraceable',
     'ProjectConnectorsTwilioCore',
@@ -125,6 +141,7 @@ __all__ = [
     'ProjectConnectorsTwilioVerify',
     'ProjectConnectorsTwilioVerifyAuthentication',
     'ProjectFlows',
+    'ProjectInviteSettings',
     'ProjectJwtTemplates',
     'ProjectJwtTemplatesAccessKeyTemplate',
     'ProjectJwtTemplatesUserTemplate',
@@ -187,7 +204,9 @@ class ProjectApplicationsOidcApplication(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "loginPageUrl":
+        if key == "forceAuthentication":
+            suggest = "force_authentication"
+        elif key == "loginPageUrl":
             suggest = "login_page_url"
 
         if suggest:
@@ -206,6 +225,7 @@ class ProjectApplicationsOidcApplication(dict):
                  claims: Optional[Sequence[str]] = None,
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
+                 force_authentication: Optional[bool] = None,
                  id: Optional[str] = None,
                  login_page_url: Optional[str] = None,
                  logo: Optional[str] = None):
@@ -214,6 +234,7 @@ class ProjectApplicationsOidcApplication(dict):
         :param Sequence[str] claims: A list of supported claims. e.g. `sub`, `email`, `exp`.
         :param str description: A description for the OIDC application.
         :param bool disabled: Whether the application should be enabled or disabled.
+        :param bool force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         :param str id: An optional identifier for the OIDC application.
         :param str login_page_url: The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param str logo: A logo for the OIDC application. Should be a hosted image URL.
@@ -225,6 +246,8 @@ class ProjectApplicationsOidcApplication(dict):
             pulumi.set(__self__, "description", description)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if force_authentication is not None:
+            pulumi.set(__self__, "force_authentication", force_authentication)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if login_page_url is not None:
@@ -265,6 +288,14 @@ class ProjectApplicationsOidcApplication(dict):
         return pulumi.get(self, "disabled")
 
     @property
+    @pulumi.getter(name="forceAuthentication")
+    def force_authentication(self) -> Optional[bool]:
+        """
+        This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        """
+        return pulumi.get(self, "force_authentication")
+
+    @property
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
@@ -302,6 +333,8 @@ class ProjectApplicationsSamlApplication(dict):
             suggest = "default_relay_state"
         elif key == "dynamicConfiguration":
             suggest = "dynamic_configuration"
+        elif key == "forceAuthentication":
+            suggest = "force_authentication"
         elif key == "loginPageUrl":
             suggest = "login_page_url"
         elif key == "manualConfiguration":
@@ -330,6 +363,7 @@ class ProjectApplicationsSamlApplication(dict):
                  description: Optional[str] = None,
                  disabled: Optional[bool] = None,
                  dynamic_configuration: Optional['outputs.ProjectApplicationsSamlApplicationDynamicConfiguration'] = None,
+                 force_authentication: Optional[bool] = None,
                  id: Optional[str] = None,
                  login_page_url: Optional[str] = None,
                  logo: Optional[str] = None,
@@ -344,6 +378,7 @@ class ProjectApplicationsSamlApplication(dict):
         :param str description: A description for the SAML application.
         :param bool disabled: Whether the application should be enabled or disabled.
         :param 'ProjectApplicationsSamlApplicationDynamicConfigurationArgs' dynamic_configuration: The `DynamicConfiguration` object. Read the description below.
+        :param bool force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         :param str id: An optional identifier for the SAML application.
         :param str login_page_url: The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param str logo: A logo for the SAML application. Should be a hosted image URL.
@@ -364,6 +399,8 @@ class ProjectApplicationsSamlApplication(dict):
             pulumi.set(__self__, "disabled", disabled)
         if dynamic_configuration is not None:
             pulumi.set(__self__, "dynamic_configuration", dynamic_configuration)
+        if force_authentication is not None:
+            pulumi.set(__self__, "force_authentication", force_authentication)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if login_page_url is not None:
@@ -432,6 +469,14 @@ class ProjectApplicationsSamlApplication(dict):
         The `DynamicConfiguration` object. Read the description below.
         """
         return pulumi.get(self, "dynamic_configuration")
+
+    @property
+    @pulumi.getter(name="forceAuthentication")
+    def force_authentication(self) -> Optional[bool]:
+        """
+        This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        """
+        return pulumi.get(self, "force_authentication")
 
     @property
     @pulumi.getter
@@ -658,6 +703,7 @@ class ProjectAttributesTenant(dict):
     def __init__(__self__, *,
                  name: str,
                  type: str,
+                 authorization: Optional['outputs.ProjectAttributesTenantAuthorization'] = None,
                  select_options: Optional[Sequence[str]] = None):
         """
         :param str name: The name of the attribute.
@@ -666,6 +712,8 @@ class ProjectAttributesTenant(dict):
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
+        if authorization is not None:
+            pulumi.set(__self__, "authorization", authorization)
         if select_options is not None:
             pulumi.set(__self__, "select_options", select_options)
 
@@ -686,12 +734,47 @@ class ProjectAttributesTenant(dict):
         return pulumi.get(self, "type")
 
     @property
+    @pulumi.getter
+    def authorization(self) -> Optional['outputs.ProjectAttributesTenantAuthorization']:
+        return pulumi.get(self, "authorization")
+
+    @property
     @pulumi.getter(name="selectOptions")
     def select_options(self) -> Optional[Sequence[str]]:
         """
         When the attribute type is "multiselect". A list of options to chose from.
         """
         return pulumi.get(self, "select_options")
+
+
+@pulumi.output_type
+class ProjectAttributesTenantAuthorization(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "viewPermissions":
+            suggest = "view_permissions"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectAttributesTenantAuthorization. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectAttributesTenantAuthorization.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectAttributesTenantAuthorization.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 view_permissions: Optional[Sequence[str]] = None):
+        if view_permissions is not None:
+            pulumi.set(__self__, "view_permissions", view_permissions)
+
+    @property
+    @pulumi.getter(name="viewPermissions")
+    def view_permissions(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "view_permissions")
 
 
 @pulumi.output_type
@@ -5078,10 +5161,14 @@ class ProjectConnectors(dict):
             suggest = "devrev_grows"
         elif key == "fingerprintDescopes":
             suggest = "fingerprint_descopes"
+        elif key == "genericSmsGateways":
+            suggest = "generic_sms_gateways"
         elif key == "googleCloudTranslations":
             suggest = "google_cloud_translations"
         elif key == "recaptchaEnterprises":
             suggest = "recaptcha_enterprises"
+        elif key == "salesforceMarketingClouds":
+            suggest = "salesforce_marketing_clouds"
         elif key == "twilioCores":
             suggest = "twilio_cores"
         elif key == "twilioVerifies":
@@ -5111,10 +5198,12 @@ class ProjectConnectors(dict):
                  fingerprint_descopes: Optional[Sequence['outputs.ProjectConnectorsFingerprintDescope']] = None,
                  fingerprints: Optional[Sequence['outputs.ProjectConnectorsFingerprint']] = None,
                  forters: Optional[Sequence['outputs.ProjectConnectorsForter']] = None,
+                 generic_sms_gateways: Optional[Sequence['outputs.ProjectConnectorsGenericSmsGateway']] = None,
                  google_cloud_translations: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudTranslation']] = None,
                  hibps: Optional[Sequence['outputs.ProjectConnectorsHibp']] = None,
                  https: Optional[Sequence['outputs.ProjectConnectorsHttp']] = None,
                  hubspots: Optional[Sequence['outputs.ProjectConnectorsHubspot']] = None,
+                 incodes: Optional[Sequence['outputs.ProjectConnectorsIncode']] = None,
                  intercoms: Optional[Sequence['outputs.ProjectConnectorsIntercom']] = None,
                  lokalises: Optional[Sequence['outputs.ProjectConnectorsLokalise']] = None,
                  mparticles: Optional[Sequence['outputs.ProjectConnectorsMparticle']] = None,
@@ -5122,11 +5211,15 @@ class ProjectConnectors(dict):
                  recaptcha_enterprises: Optional[Sequence['outputs.ProjectConnectorsRecaptchaEnterprise']] = None,
                  recaptchas: Optional[Sequence['outputs.ProjectConnectorsRecaptcha']] = None,
                  rekognitions: Optional[Sequence['outputs.ProjectConnectorsRekognition']] = None,
+                 salesforce_marketing_clouds: Optional[Sequence['outputs.ProjectConnectorsSalesforceMarketingCloud']] = None,
                  salesforces: Optional[Sequence['outputs.ProjectConnectorsSalesforce']] = None,
                  segments: Optional[Sequence['outputs.ProjectConnectorsSegment']] = None,
                  sendgrids: Optional[Sequence['outputs.ProjectConnectorsSendgrid']] = None,
+                 ses: Optional[Sequence['outputs.ProjectConnectorsSe']] = None,
+                 slacks: Optional[Sequence['outputs.ProjectConnectorsSlack']] = None,
                  smartlings: Optional[Sequence['outputs.ProjectConnectorsSmartling']] = None,
                  smtps: Optional[Sequence['outputs.ProjectConnectorsSmtp']] = None,
+                 sns: Optional[Sequence['outputs.ProjectConnectorsSn']] = None,
                  sumologics: Optional[Sequence['outputs.ProjectConnectorsSumologic']] = None,
                  telesigns: Optional[Sequence['outputs.ProjectConnectorsTelesign']] = None,
                  traceables: Optional[Sequence['outputs.ProjectConnectorsTraceable']] = None,
@@ -5143,6 +5236,7 @@ class ProjectConnectors(dict):
         :param Sequence['ProjectConnectorsHibpArgs'] hibps: API to check if password appeared previously exposed in data breaches.
         :param Sequence['ProjectConnectorsHttpArgs'] https: A general purpose HTTP client
         :param Sequence['ProjectConnectorsHubspotArgs'] hubspots: HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+        :param Sequence['ProjectConnectorsIncodeArgs'] incodes: Use the Incode connection to run identity verification processes like document checks or facial recognition.
         :param Sequence['ProjectConnectorsIntercomArgs'] intercoms: Intercom is a Conversational Relationship Platform (CRP).
         :param Sequence['ProjectConnectorsLokaliseArgs'] lokalises: Localize the language of your login and user journey screens with the Lokalise connector.
         :param Sequence['ProjectConnectorsMparticleArgs'] mparticles: Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
@@ -5151,6 +5245,7 @@ class ProjectConnectors(dict):
         :param Sequence['ProjectConnectorsRekognitionArgs'] rekognitions: AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
         :param Sequence['ProjectConnectorsSalesforceArgs'] salesforces: Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
         :param Sequence['ProjectConnectorsSegmentArgs'] segments: Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+        :param Sequence['ProjectConnectorsSlackArgs'] slacks: Send updates to your team on Slack.
         :param Sequence['ProjectConnectorsSmartlingArgs'] smartlings: Localize the language of your login and user journey screens with the Smartling connector.
         :param Sequence['ProjectConnectorsSumologicArgs'] sumologics: Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
         :param Sequence['ProjectConnectorsTelesignArgs'] telesigns: Telesign Phone number intelligence API provides risk score for phone numbers.
@@ -5180,6 +5275,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "fingerprints", fingerprints)
         if forters is not None:
             pulumi.set(__self__, "forters", forters)
+        if generic_sms_gateways is not None:
+            pulumi.set(__self__, "generic_sms_gateways", generic_sms_gateways)
         if google_cloud_translations is not None:
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if hibps is not None:
@@ -5188,6 +5285,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "https", https)
         if hubspots is not None:
             pulumi.set(__self__, "hubspots", hubspots)
+        if incodes is not None:
+            pulumi.set(__self__, "incodes", incodes)
         if intercoms is not None:
             pulumi.set(__self__, "intercoms", intercoms)
         if lokalises is not None:
@@ -5202,16 +5301,24 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "recaptchas", recaptchas)
         if rekognitions is not None:
             pulumi.set(__self__, "rekognitions", rekognitions)
+        if salesforce_marketing_clouds is not None:
+            pulumi.set(__self__, "salesforce_marketing_clouds", salesforce_marketing_clouds)
         if salesforces is not None:
             pulumi.set(__self__, "salesforces", salesforces)
         if segments is not None:
             pulumi.set(__self__, "segments", segments)
         if sendgrids is not None:
             pulumi.set(__self__, "sendgrids", sendgrids)
+        if ses is not None:
+            pulumi.set(__self__, "ses", ses)
+        if slacks is not None:
+            pulumi.set(__self__, "slacks", slacks)
         if smartlings is not None:
             pulumi.set(__self__, "smartlings", smartlings)
         if smtps is not None:
             pulumi.set(__self__, "smtps", smtps)
+        if sns is not None:
+            pulumi.set(__self__, "sns", sns)
         if sumologics is not None:
             pulumi.set(__self__, "sumologics", sumologics)
         if telesigns is not None:
@@ -5305,6 +5412,11 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "forters")
 
     @property
+    @pulumi.getter(name="genericSmsGateways")
+    def generic_sms_gateways(self) -> Optional[Sequence['outputs.ProjectConnectorsGenericSmsGateway']]:
+        return pulumi.get(self, "generic_sms_gateways")
+
+    @property
     @pulumi.getter(name="googleCloudTranslations")
     def google_cloud_translations(self) -> Optional[Sequence['outputs.ProjectConnectorsGoogleCloudTranslation']]:
         return pulumi.get(self, "google_cloud_translations")
@@ -5332,6 +5444,14 @@ class ProjectConnectors(dict):
         HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
         """
         return pulumi.get(self, "hubspots")
+
+    @property
+    @pulumi.getter
+    def incodes(self) -> Optional[Sequence['outputs.ProjectConnectorsIncode']]:
+        """
+        Use the Incode connection to run identity verification processes like document checks or facial recognition.
+        """
+        return pulumi.get(self, "incodes")
 
     @property
     @pulumi.getter
@@ -5387,6 +5507,11 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "rekognitions")
 
     @property
+    @pulumi.getter(name="salesforceMarketingClouds")
+    def salesforce_marketing_clouds(self) -> Optional[Sequence['outputs.ProjectConnectorsSalesforceMarketingCloud']]:
+        return pulumi.get(self, "salesforce_marketing_clouds")
+
+    @property
     @pulumi.getter
     def salesforces(self) -> Optional[Sequence['outputs.ProjectConnectorsSalesforce']]:
         """
@@ -5409,6 +5534,19 @@ class ProjectConnectors(dict):
 
     @property
     @pulumi.getter
+    def ses(self) -> Optional[Sequence['outputs.ProjectConnectorsSe']]:
+        return pulumi.get(self, "ses")
+
+    @property
+    @pulumi.getter
+    def slacks(self) -> Optional[Sequence['outputs.ProjectConnectorsSlack']]:
+        """
+        Send updates to your team on Slack.
+        """
+        return pulumi.get(self, "slacks")
+
+    @property
+    @pulumi.getter
     def smartlings(self) -> Optional[Sequence['outputs.ProjectConnectorsSmartling']]:
         """
         Localize the language of your login and user journey screens with the Smartling connector.
@@ -5419,6 +5557,11 @@ class ProjectConnectors(dict):
     @pulumi.getter
     def smtps(self) -> Optional[Sequence['outputs.ProjectConnectorsSmtp']]:
         return pulumi.get(self, "smtps")
+
+    @property
+    @pulumi.getter
+    def sns(self) -> Optional[Sequence['outputs.ProjectConnectorsSn']]:
+        return pulumi.get(self, "sns")
 
     @property
     @pulumi.getter
@@ -5641,7 +5784,7 @@ class ProjectConnectorsAuditWebhook(dict):
     def __init__(__self__, *,
                  base_url: str,
                  name: str,
-                 audit_filters: Optional[str] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsAuditWebhookAuditFilter']] = None,
                  authentication: Optional['outputs.ProjectConnectorsAuditWebhookAuthentication'] = None,
                  description: Optional[str] = None,
                  headers: Optional[Mapping[str, str]] = None,
@@ -5651,7 +5794,7 @@ class ProjectConnectorsAuditWebhook(dict):
         """
         :param str base_url: The base URL to fetch
         :param str name: A custom name for your connector.
-        :param str audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param Sequence['ProjectConnectorsAuditWebhookAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param 'ProjectConnectorsAuditWebhookAuthenticationArgs' authentication: Authentication Information
         :param str description: A description of what your connector is used for.
         :param Mapping[str, str] headers: The headers to send with the request
@@ -5693,7 +5836,7 @@ class ProjectConnectorsAuditWebhook(dict):
 
     @property
     @pulumi.getter(name="auditFilters")
-    def audit_filters(self) -> Optional[str]:
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsAuditWebhookAuditFilter']]:
         """
         Specify which events will be sent to the external audit service (including tenant selection).
         """
@@ -5743,6 +5886,32 @@ class ProjectConnectorsAuditWebhook(dict):
         Will ignore certificate errors raised by the client
         """
         return pulumi.get(self, "insecure")
+
+
+@pulumi.output_type
+class ProjectConnectorsAuditWebhookAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -5865,7 +6034,7 @@ class ProjectConnectorsAwsS3(dict):
                  region: str,
                  secret_access_key: str,
                  audit_enabled: Optional[bool] = None,
-                 audit_filters: Optional[str] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsAwsS3AuditFilter']] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None,
                  troubleshoot_log_enabled: Optional[bool] = None):
@@ -5940,7 +6109,7 @@ class ProjectConnectorsAwsS3(dict):
 
     @property
     @pulumi.getter(name="auditFilters")
-    def audit_filters(self) -> Optional[str]:
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsAwsS3AuditFilter']]:
         return pulumi.get(self, "audit_filters")
 
     @property
@@ -5960,6 +6129,32 @@ class ProjectConnectorsAwsS3(dict):
     @pulumi.getter(name="troubleshootLogEnabled")
     def troubleshoot_log_enabled(self) -> Optional[bool]:
         return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsAwsS3AuditFilter(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -6174,7 +6369,7 @@ class ProjectConnectorsDatadog(dict):
                  api_key: str,
                  name: str,
                  audit_enabled: Optional[bool] = None,
-                 audit_filters: Optional[str] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsDatadogAuditFilter']] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None,
                  site: Optional[str] = None,
@@ -6223,7 +6418,7 @@ class ProjectConnectorsDatadog(dict):
 
     @property
     @pulumi.getter(name="auditFilters")
-    def audit_filters(self) -> Optional[str]:
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsDatadogAuditFilter']]:
         return pulumi.get(self, "audit_filters")
 
     @property
@@ -6251,6 +6446,32 @@ class ProjectConnectorsDatadog(dict):
     @pulumi.getter(name="troubleshootLogEnabled")
     def troubleshoot_log_enabled(self) -> Optional[bool]:
         return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsDatadogAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -6741,6 +6962,234 @@ class ProjectConnectorsForter(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsGenericSmsGateway(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "postUrl":
+            suggest = "post_url"
+        elif key == "hmacSecret":
+            suggest = "hmac_secret"
+        elif key == "useStaticIps":
+            suggest = "use_static_ips"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericSmsGateway. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsGenericSmsGateway.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsGenericSmsGateway.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: str,
+                 post_url: str,
+                 authentication: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthentication'] = None,
+                 description: Optional[str] = None,
+                 headers: Optional[Mapping[str, str]] = None,
+                 hmac_secret: Optional[str] = None,
+                 id: Optional[str] = None,
+                 insecure: Optional[bool] = None,
+                 sender: Optional[str] = None,
+                 use_static_ips: Optional[bool] = None):
+        """
+        :param str name: A custom name for your connector.
+        :param str post_url: The URL of the post message request
+        :param 'ProjectConnectorsGenericSmsGatewayAuthenticationArgs' authentication: Authentication Information
+        :param str description: A description of what your connector is used for.
+        :param Mapping[str, str] headers: The headers to send with the request
+        :param str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        :param bool insecure: Will ignore certificate errors raised by the client
+        :param str sender: The sender number
+        :param bool use_static_ips: Whether the connector should send all requests from specific static IPs.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "post_url", post_url)
+        if authentication is not None:
+            pulumi.set(__self__, "authentication", authentication)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if hmac_secret is not None:
+            pulumi.set(__self__, "hmac_secret", hmac_secret)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if insecure is not None:
+            pulumi.set(__self__, "insecure", insecure)
+        if sender is not None:
+            pulumi.set(__self__, "sender", sender)
+        if use_static_ips is not None:
+            pulumi.set(__self__, "use_static_ips", use_static_ips)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="postUrl")
+    def post_url(self) -> str:
+        """
+        The URL of the post message request
+        """
+        return pulumi.get(self, "post_url")
+
+    @property
+    @pulumi.getter
+    def authentication(self) -> Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthentication']:
+        """
+        Authentication Information
+        """
+        return pulumi.get(self, "authentication")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Mapping[str, str]]:
+        """
+        The headers to send with the request
+        """
+        return pulumi.get(self, "headers")
+
+    @property
+    @pulumi.getter(name="hmacSecret")
+    def hmac_secret(self) -> Optional[str]:
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+        """
+        return pulumi.get(self, "hmac_secret")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def insecure(self) -> Optional[bool]:
+        """
+        Will ignore certificate errors raised by the client
+        """
+        return pulumi.get(self, "insecure")
+
+    @property
+    @pulumi.getter
+    def sender(self) -> Optional[str]:
+        """
+        The sender number
+        """
+        return pulumi.get(self, "sender")
+
+    @property
+    @pulumi.getter(name="useStaticIps")
+    def use_static_ips(self) -> Optional[bool]:
+        """
+        Whether the connector should send all requests from specific static IPs.
+        """
+        return pulumi.get(self, "use_static_ips")
+
+
+@pulumi.output_type
+class ProjectConnectorsGenericSmsGatewayAuthentication(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "bearerToken":
+            suggest = "bearer_token"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericSmsGatewayAuthentication. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsGenericSmsGatewayAuthentication.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsGenericSmsGatewayAuthentication.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKey'] = None,
+                 basic: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasic'] = None,
+                 bearer_token: Optional[str] = None):
+        if api_key is not None:
+            pulumi.set(__self__, "api_key", api_key)
+        if basic is not None:
+            pulumi.set(__self__, "basic", basic)
+        if bearer_token is not None:
+            pulumi.set(__self__, "bearer_token", bearer_token)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKey']:
+        return pulumi.get(self, "api_key")
+
+    @property
+    @pulumi.getter
+    def basic(self) -> Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasic']:
+        return pulumi.get(self, "basic")
+
+    @property
+    @pulumi.getter(name="bearerToken")
+    def bearer_token(self) -> Optional[str]:
+        return pulumi.get(self, "bearer_token")
+
+
+@pulumi.output_type
+class ProjectConnectorsGenericSmsGatewayAuthenticationApiKey(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 token: str):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "token", token)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def token(self) -> str:
+        return pulumi.get(self, "token")
+
+
+@pulumi.output_type
+class ProjectConnectorsGenericSmsGatewayAuthenticationBasic(dict):
+    def __init__(__self__, *,
+                 password: str,
+                 username: str):
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def username(self) -> str:
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
 class ProjectConnectorsGoogleCloudTranslation(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -6868,6 +7317,8 @@ class ProjectConnectorsHttp(dict):
             suggest = "hmac_secret"
         elif key == "includeHeadersInContext":
             suggest = "include_headers_in_context"
+        elif key == "useStaticIps":
+            suggest = "use_static_ips"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttp. Access the value via the '{suggest}' property getter instead.")
@@ -6889,7 +7340,8 @@ class ProjectConnectorsHttp(dict):
                  hmac_secret: Optional[str] = None,
                  id: Optional[str] = None,
                  include_headers_in_context: Optional[bool] = None,
-                 insecure: Optional[bool] = None):
+                 insecure: Optional[bool] = None,
+                 use_static_ips: Optional[bool] = None):
         """
         :param str base_url: The base URL to fetch
         :param str name: A custom name for your connector.
@@ -6899,6 +7351,7 @@ class ProjectConnectorsHttp(dict):
         :param str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
         :param bool include_headers_in_context: The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
         :param bool insecure: Will ignore certificate errors raised by the client
+        :param bool use_static_ips: Whether the connector should send all requests from specific static IPs.
         """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "name", name)
@@ -6916,6 +7369,8 @@ class ProjectConnectorsHttp(dict):
             pulumi.set(__self__, "include_headers_in_context", include_headers_in_context)
         if insecure is not None:
             pulumi.set(__self__, "insecure", insecure)
+        if use_static_ips is not None:
+            pulumi.set(__self__, "use_static_ips", use_static_ips)
 
     @property
     @pulumi.getter(name="baseUrl")
@@ -6985,6 +7440,14 @@ class ProjectConnectorsHttp(dict):
         Will ignore certificate errors raised by the client
         """
         return pulumi.get(self, "insecure")
+
+    @property
+    @pulumi.getter(name="useStaticIps")
+    def use_static_ips(self) -> Optional[bool]:
+        """
+        Whether the connector should send all requests from specific static IPs.
+        """
+        return pulumi.get(self, "use_static_ips")
 
 
 @pulumi.output_type
@@ -7082,6 +7545,8 @@ class ProjectConnectorsHubspot(dict):
             suggest = "access_token"
         elif key == "baseUrl":
             suggest = "base_url"
+        elif key == "useStaticIps":
+            suggest = "use_static_ips"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHubspot. Access the value via the '{suggest}' property getter instead.")
@@ -7099,12 +7564,14 @@ class ProjectConnectorsHubspot(dict):
                  name: str,
                  base_url: Optional[str] = None,
                  description: Optional[str] = None,
-                 id: Optional[str] = None):
+                 id: Optional[str] = None,
+                 use_static_ips: Optional[bool] = None):
         """
         :param str access_token: The HubSpot private API access token generated for the Descope service.
         :param str name: A custom name for your connector.
         :param str base_url: The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
         :param str description: A description of what your connector is used for.
+        :param bool use_static_ips: Whether the connector should send all requests from specific static IPs.
         """
         pulumi.set(__self__, "access_token", access_token)
         pulumi.set(__self__, "name", name)
@@ -7114,6 +7581,8 @@ class ProjectConnectorsHubspot(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if use_static_ips is not None:
+            pulumi.set(__self__, "use_static_ips", use_static_ips)
 
     @property
     @pulumi.getter(name="accessToken")
@@ -7138,6 +7607,106 @@ class ProjectConnectorsHubspot(dict):
         The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
         """
         return pulumi.get(self, "base_url")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="useStaticIps")
+    def use_static_ips(self) -> Optional[bool]:
+        """
+        Whether the connector should send all requests from specific static IPs.
+        """
+        return pulumi.get(self, "use_static_ips")
+
+
+@pulumi.output_type
+class ProjectConnectorsIncode(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "apiUrl":
+            suggest = "api_url"
+        elif key == "flowId":
+            suggest = "flow_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsIncode. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsIncode.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsIncode.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: str,
+                 api_url: str,
+                 flow_id: str,
+                 name: str,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str api_key: Your InCode API key.
+        :param str api_url: The base URL of the Incode API
+        :param str flow_id: Your wanted InCode's flow ID.
+        :param str name: A custom name for your connector.
+        :param str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "api_url", api_url)
+        pulumi.set(__self__, "flow_id", flow_id)
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> str:
+        """
+        Your InCode API key.
+        """
+        return pulumi.get(self, "api_key")
+
+    @property
+    @pulumi.getter(name="apiUrl")
+    def api_url(self) -> str:
+        """
+        The base URL of the Incode API
+        """
+        return pulumi.get(self, "api_url")
+
+    @property
+    @pulumi.getter(name="flowId")
+    def flow_id(self) -> str:
+        """
+        Your wanted InCode's flow ID.
+        """
+        return pulumi.get(self, "flow_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
@@ -7346,6 +7915,10 @@ class ProjectConnectorsMparticle(dict):
             suggest = "api_secret"
         elif key == "baseUrl":
             suggest = "base_url"
+        elif key == "defaultEnvironment":
+            suggest = "default_environment"
+        elif key == "useStaticIps":
+            suggest = "use_static_ips"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsMparticle. Access the value via the '{suggest}' property getter instead.")
@@ -7363,24 +7936,32 @@ class ProjectConnectorsMparticle(dict):
                  api_secret: str,
                  name: str,
                  base_url: Optional[str] = None,
+                 default_environment: Optional[str] = None,
                  description: Optional[str] = None,
-                 id: Optional[str] = None):
+                 id: Optional[str] = None,
+                 use_static_ips: Optional[bool] = None):
         """
         :param str api_key: The mParticle Server to Server Key generated for the Descope service.
         :param str api_secret: The mParticle Server to Server Secret generated for the Descope service.
         :param str name: A custom name for your connector.
         :param str base_url: The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+        :param str default_environment: The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
         :param str description: A description of what your connector is used for.
+        :param bool use_static_ips: Whether the connector should send all requests from specific static IPs.
         """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "api_secret", api_secret)
         pulumi.set(__self__, "name", name)
         if base_url is not None:
             pulumi.set(__self__, "base_url", base_url)
+        if default_environment is not None:
+            pulumi.set(__self__, "default_environment", default_environment)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if use_static_ips is not None:
+            pulumi.set(__self__, "use_static_ips", use_static_ips)
 
     @property
     @pulumi.getter(name="apiKey")
@@ -7415,6 +7996,14 @@ class ProjectConnectorsMparticle(dict):
         return pulumi.get(self, "base_url")
 
     @property
+    @pulumi.getter(name="defaultEnvironment")
+    def default_environment(self) -> Optional[str]:
+        """
+        The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
+        """
+        return pulumi.get(self, "default_environment")
+
+    @property
     @pulumi.getter
     def description(self) -> Optional[str]:
         """
@@ -7426,6 +8015,14 @@ class ProjectConnectorsMparticle(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="useStaticIps")
+    def use_static_ips(self) -> Optional[bool]:
+        """
+        Whether the connector should send all requests from specific static IPs.
+        """
+        return pulumi.get(self, "use_static_ips")
 
 
 @pulumi.output_type
@@ -7463,7 +8060,7 @@ class ProjectConnectorsNewrelic(dict):
                  api_key: str,
                  name: str,
                  audit_enabled: Optional[bool] = None,
-                 audit_filters: Optional[str] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsNewrelicAuditFilter']] = None,
                  data_center: Optional[str] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None,
@@ -7520,7 +8117,7 @@ class ProjectConnectorsNewrelic(dict):
 
     @property
     @pulumi.getter(name="auditFilters")
-    def audit_filters(self) -> Optional[str]:
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsNewrelicAuditFilter']]:
         return pulumi.get(self, "audit_filters")
 
     @property
@@ -7564,6 +8161,32 @@ class ProjectConnectorsNewrelic(dict):
     @pulumi.getter(name="troubleshootLogEnabled")
     def troubleshoot_log_enabled(self) -> Optional[bool]:
         return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsNewrelicAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -7679,6 +8302,7 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
                  site_key: str,
                  assessment_score: Optional[float] = None,
                  description: Optional[str] = None,
+                 enterprise: Optional[bool] = None,
                  id: Optional[str] = None,
                  override_assessment: Optional[bool] = None):
         """
@@ -7698,6 +8322,8 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
             pulumi.set(__self__, "assessment_score", assessment_score)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if enterprise is not None:
+            pulumi.set(__self__, "enterprise", enterprise)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if override_assessment is not None:
@@ -7750,6 +8376,11 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def enterprise(self) -> Optional[bool]:
+        return pulumi.get(self, "enterprise")
 
     @property
     @pulumi.getter
@@ -7961,6 +8592,253 @@ class ProjectConnectorsSalesforce(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsSalesforceMarketingCloud(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "accountId":
+            suggest = "account_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSalesforceMarketingCloud. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSalesforceMarketingCloud.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSalesforceMarketingCloud.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 client_id: str,
+                 client_secret: str,
+                 name: str,
+                 subdomain: str,
+                 account_id: Optional[str] = None,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None,
+                 scope: Optional[str] = None):
+        """
+        :param str client_id: Client ID issued when you create the API integration in Installed Packages.
+        :param str client_secret: Client secret issued when you create the API integration in Installed Packages.
+        :param str name: A custom name for your connector.
+        :param str subdomain: The Salesforce Marketing Cloud endpoint subdomain.
+        :param str account_id: Account identifier, or MID, of the target business unit.
+        :param str description: A description of what your connector is used for.
+        :param str scope: Space-separated list of data-access permissions for your connector.
+        """
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subdomain", subdomain)
+        if account_id is not None:
+            pulumi.set(__self__, "account_id", account_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if scope is not None:
+            pulumi.set(__self__, "scope", scope)
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> str:
+        """
+        Client ID issued when you create the API integration in Installed Packages.
+        """
+        return pulumi.get(self, "client_id")
+
+    @property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> str:
+        """
+        Client secret issued when you create the API integration in Installed Packages.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def subdomain(self) -> str:
+        """
+        The Salesforce Marketing Cloud endpoint subdomain.
+        """
+        return pulumi.get(self, "subdomain")
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> Optional[str]:
+        """
+        Account identifier, or MID, of the target business unit.
+        """
+        return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def scope(self) -> Optional[str]:
+        """
+        Space-separated list of data-access permissions for your connector.
+        """
+        return pulumi.get(self, "scope")
+
+
+@pulumi.output_type
+class ProjectConnectorsSe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessKeyId":
+            suggest = "access_key_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 access_key_id: str,
+                 name: str,
+                 region: str,
+                 secret: str,
+                 sender: 'outputs.ProjectConnectorsSeSender',
+                 description: Optional[str] = None,
+                 endpoint: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str access_key_id: AWS Access key ID.
+        :param str name: A custom name for your connector.
+        :param str region: AWS region to send requests to (e.g. `us-west-2`).
+        :param str secret: AWS Secret Access Key.
+        :param 'ProjectConnectorsSeSenderArgs' sender: The sender details that should be displayed in the email message.
+        :param str description: A description of what your connector is used for.
+        :param str endpoint: An optional endpoint URL (hostname only or fully qualified URI).
+        """
+        pulumi.set(__self__, "access_key_id", access_key_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "secret", secret)
+        pulumi.set(__self__, "sender", sender)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if endpoint is not None:
+            pulumi.set(__self__, "endpoint", endpoint)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> str:
+        """
+        AWS Access key ID.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        AWS region to send requests to (e.g. `us-west-2`).
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def secret(self) -> str:
+        """
+        AWS Secret Access Key.
+        """
+        return pulumi.get(self, "secret")
+
+    @property
+    @pulumi.getter
+    def sender(self) -> 'outputs.ProjectConnectorsSeSender':
+        """
+        The sender details that should be displayed in the email message.
+        """
+        return pulumi.get(self, "sender")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> Optional[str]:
+        """
+        An optional endpoint URL (hostname only or fully qualified URI).
+        """
+        return pulumi.get(self, "endpoint")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectConnectorsSeSender(dict):
+    def __init__(__self__, *,
+                 email: str,
+                 name: Optional[str] = None):
+        pulumi.set(__self__, "email", email)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def email(self) -> str:
+        return pulumi.get(self, "email")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
 class ProjectConnectorsSegment(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -8048,6 +8926,7 @@ class ProjectConnectorsSendgrid(dict):
                  id: Optional[str] = None):
         """
         :param str name: A custom name for your connector.
+        :param 'ProjectConnectorsSendgridSenderArgs' sender: The sender details that should be displayed in the email message.
         :param str description: A description of what your connector is used for.
         """
         pulumi.set(__self__, "authentication", authentication)
@@ -8074,6 +8953,9 @@ class ProjectConnectorsSendgrid(dict):
     @property
     @pulumi.getter
     def sender(self) -> 'outputs.ProjectConnectorsSendgridSender':
+        """
+        The sender details that should be displayed in the email message.
+        """
         return pulumi.get(self, "sender")
 
     @property
@@ -8137,6 +9019,55 @@ class ProjectConnectorsSendgridSender(dict):
     @pulumi.getter
     def name(self) -> Optional[str]:
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class ProjectConnectorsSlack(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 token: str,
+                 description: Optional[str] = None,
+                 id: Optional[str] = None):
+        """
+        :param str name: A custom name for your connector.
+        :param str token: The OAuth token for Slack's Bot User, used to authenticate API requests.
+        :param str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "token", token)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def token(self) -> str:
+        """
+        The OAuth token for Slack's Bot User, used to authenticate API requests.
+        """
+        return pulumi.get(self, "token")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
 
 
 @pulumi.output_type
@@ -8242,6 +9173,7 @@ class ProjectConnectorsSmtp(dict):
                  id: Optional[str] = None):
         """
         :param str name: A custom name for your connector.
+        :param 'ProjectConnectorsSmtpSenderArgs' sender: The sender details that should be displayed in the email message.
         :param str description: A description of what your connector is used for.
         """
         pulumi.set(__self__, "authentication", authentication)
@@ -8269,6 +9201,9 @@ class ProjectConnectorsSmtp(dict):
     @property
     @pulumi.getter
     def sender(self) -> 'outputs.ProjectConnectorsSmtpSender':
+        """
+        The sender details that should be displayed in the email message.
+        """
         return pulumi.get(self, "sender")
 
     @property
@@ -8358,6 +9293,162 @@ class ProjectConnectorsSmtpServer(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsSn(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessKeyId":
+            suggest = "access_key_id"
+        elif key == "entityId":
+            suggest = "entity_id"
+        elif key == "organizationNumber":
+            suggest = "organization_number"
+        elif key == "senderId":
+            suggest = "sender_id"
+        elif key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSn. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSn.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSn.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 access_key_id: str,
+                 name: str,
+                 region: str,
+                 secret: str,
+                 description: Optional[str] = None,
+                 endpoint: Optional[str] = None,
+                 entity_id: Optional[str] = None,
+                 id: Optional[str] = None,
+                 organization_number: Optional[str] = None,
+                 sender_id: Optional[str] = None,
+                 template_id: Optional[str] = None):
+        """
+        :param str access_key_id: AWS Access key ID.
+        :param str name: A custom name for your connector.
+        :param str region: AWS region to send requests to (e.g. `us-west-2`).
+        :param str secret: AWS Secret Access Key.
+        :param str description: A description of what your connector is used for.
+        :param str endpoint: An optional endpoint URL (hostname only or fully qualified URI).
+        :param str entity_id: The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+        :param str organization_number: An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        :param str sender_id: The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
+        :param str template_id: The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
+        """
+        pulumi.set(__self__, "access_key_id", access_key_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "secret", secret)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if endpoint is not None:
+            pulumi.set(__self__, "endpoint", endpoint)
+        if entity_id is not None:
+            pulumi.set(__self__, "entity_id", entity_id)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if organization_number is not None:
+            pulumi.set(__self__, "organization_number", organization_number)
+        if sender_id is not None:
+            pulumi.set(__self__, "sender_id", sender_id)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> str:
+        """
+        AWS Access key ID.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        AWS region to send requests to (e.g. `us-west-2`).
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def secret(self) -> str:
+        """
+        AWS Secret Access Key.
+        """
+        return pulumi.get(self, "secret")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> Optional[str]:
+        """
+        An optional endpoint URL (hostname only or fully qualified URI).
+        """
+        return pulumi.get(self, "endpoint")
+
+    @property
+    @pulumi.getter(name="entityId")
+    def entity_id(self) -> Optional[str]:
+        """
+        The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+        """
+        return pulumi.get(self, "entity_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="organizationNumber")
+    def organization_number(self) -> Optional[str]:
+        """
+        An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        """
+        return pulumi.get(self, "organization_number")
+
+    @property
+    @pulumi.getter(name="senderId")
+    def sender_id(self) -> Optional[str]:
+        """
+        The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
+        """
+        return pulumi.get(self, "sender_id")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> Optional[str]:
+        """
+        The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
 class ProjectConnectorsSumologic(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -8386,7 +9477,7 @@ class ProjectConnectorsSumologic(dict):
                  http_source_url: str,
                  name: str,
                  audit_enabled: Optional[bool] = None,
-                 audit_filters: Optional[str] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsSumologicAuditFilter']] = None,
                  description: Optional[str] = None,
                  id: Optional[str] = None,
                  troubleshoot_log_enabled: Optional[bool] = None):
@@ -8431,7 +9522,7 @@ class ProjectConnectorsSumologic(dict):
 
     @property
     @pulumi.getter(name="auditFilters")
-    def audit_filters(self) -> Optional[str]:
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsSumologicAuditFilter']]:
         return pulumi.get(self, "audit_filters")
 
     @property
@@ -8451,6 +9542,32 @@ class ProjectConnectorsSumologic(dict):
     @pulumi.getter(name="troubleshootLogEnabled")
     def troubleshoot_log_enabled(self) -> Optional[bool]:
         return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsSumologicAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 operator: str,
+                 values: Sequence[str]):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -8976,6 +10093,76 @@ class ProjectFlows(dict):
 
 
 @pulumi.output_type
+class ProjectInviteSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "addMagiclinkToken":
+            suggest = "add_magiclink_token"
+        elif key == "inviteUrl":
+            suggest = "invite_url"
+        elif key == "requireInvitation":
+            suggest = "require_invitation"
+        elif key == "sendEmail":
+            suggest = "send_email"
+        elif key == "sendText":
+            suggest = "send_text"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectInviteSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectInviteSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectInviteSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 add_magiclink_token: Optional[bool] = None,
+                 invite_url: Optional[str] = None,
+                 require_invitation: Optional[bool] = None,
+                 send_email: Optional[bool] = None,
+                 send_text: Optional[bool] = None):
+        if add_magiclink_token is not None:
+            pulumi.set(__self__, "add_magiclink_token", add_magiclink_token)
+        if invite_url is not None:
+            pulumi.set(__self__, "invite_url", invite_url)
+        if require_invitation is not None:
+            pulumi.set(__self__, "require_invitation", require_invitation)
+        if send_email is not None:
+            pulumi.set(__self__, "send_email", send_email)
+        if send_text is not None:
+            pulumi.set(__self__, "send_text", send_text)
+
+    @property
+    @pulumi.getter(name="addMagiclinkToken")
+    def add_magiclink_token(self) -> Optional[bool]:
+        return pulumi.get(self, "add_magiclink_token")
+
+    @property
+    @pulumi.getter(name="inviteUrl")
+    def invite_url(self) -> Optional[str]:
+        return pulumi.get(self, "invite_url")
+
+    @property
+    @pulumi.getter(name="requireInvitation")
+    def require_invitation(self) -> Optional[bool]:
+        return pulumi.get(self, "require_invitation")
+
+    @property
+    @pulumi.getter(name="sendEmail")
+    def send_email(self) -> Optional[bool]:
+        return pulumi.get(self, "send_email")
+
+    @property
+    @pulumi.getter(name="sendText")
+    def send_text(self) -> Optional[bool]:
+        return pulumi.get(self, "send_text")
+
+
+@pulumi.output_type
 class ProjectJwtTemplates(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -9034,6 +10221,10 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             suggest = "auth_schema"
         elif key == "conformanceIssuer":
             suggest = "conformance_issuer"
+        elif key == "emptyClaimPolicy":
+            suggest = "empty_claim_policy"
+        elif key == "enforceIssuer":
+            suggest = "enforce_issuer"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesAccessKeyTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -9052,11 +10243,14 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
                  auth_schema: Optional[str] = None,
                  conformance_issuer: Optional[bool] = None,
                  description: Optional[str] = None,
+                 empty_claim_policy: Optional[str] = None,
+                 enforce_issuer: Optional[bool] = None,
                  id: Optional[str] = None):
         """
         :param str name: Name of the JWT Template.
-        :param str auth_schema: The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        :param str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param str description: Description of the JWT Template.
+        :param str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
@@ -9066,6 +10260,10 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             pulumi.set(__self__, "conformance_issuer", conformance_issuer)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if empty_claim_policy is not None:
+            pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
+        if enforce_issuer is not None:
+            pulumi.set(__self__, "enforce_issuer", enforce_issuer)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -9086,7 +10284,7 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @pulumi.getter(name="authSchema")
     def auth_schema(self) -> Optional[str]:
         """
-        The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         """
         return pulumi.get(self, "auth_schema")
 
@@ -9104,6 +10302,19 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
         return pulumi.get(self, "description")
 
     @property
+    @pulumi.getter(name="emptyClaimPolicy")
+    def empty_claim_policy(self) -> Optional[str]:
+        """
+        Policy for empty claims - `none`, `nil` or `delete`.
+        """
+        return pulumi.get(self, "empty_claim_policy")
+
+    @property
+    @pulumi.getter(name="enforceIssuer")
+    def enforce_issuer(self) -> Optional[bool]:
+        return pulumi.get(self, "enforce_issuer")
+
+    @property
     @pulumi.getter
     def id(self) -> Optional[str]:
         return pulumi.get(self, "id")
@@ -9118,6 +10329,10 @@ class ProjectJwtTemplatesUserTemplate(dict):
             suggest = "auth_schema"
         elif key == "conformanceIssuer":
             suggest = "conformance_issuer"
+        elif key == "emptyClaimPolicy":
+            suggest = "empty_claim_policy"
+        elif key == "enforceIssuer":
+            suggest = "enforce_issuer"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesUserTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -9136,11 +10351,14 @@ class ProjectJwtTemplatesUserTemplate(dict):
                  auth_schema: Optional[str] = None,
                  conformance_issuer: Optional[bool] = None,
                  description: Optional[str] = None,
+                 empty_claim_policy: Optional[str] = None,
+                 enforce_issuer: Optional[bool] = None,
                  id: Optional[str] = None):
         """
         :param str name: Name of the JWT Template.
-        :param str auth_schema: The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        :param str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param str description: Description of the JWT Template.
+        :param str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
@@ -9150,6 +10368,10 @@ class ProjectJwtTemplatesUserTemplate(dict):
             pulumi.set(__self__, "conformance_issuer", conformance_issuer)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if empty_claim_policy is not None:
+            pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
+        if enforce_issuer is not None:
+            pulumi.set(__self__, "enforce_issuer", enforce_issuer)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -9170,7 +10392,7 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @pulumi.getter(name="authSchema")
     def auth_schema(self) -> Optional[str]:
         """
-        The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         """
         return pulumi.get(self, "auth_schema")
 
@@ -9188,6 +10410,19 @@ class ProjectJwtTemplatesUserTemplate(dict):
         return pulumi.get(self, "description")
 
     @property
+    @pulumi.getter(name="emptyClaimPolicy")
+    def empty_claim_policy(self) -> Optional[str]:
+        """
+        Policy for empty claims - `none`, `nil` or `delete`.
+        """
+        return pulumi.get(self, "empty_claim_policy")
+
+    @property
+    @pulumi.getter(name="enforceIssuer")
+    def enforce_issuer(self) -> Optional[bool]:
+        return pulumi.get(self, "enforce_issuer")
+
+    @property
     @pulumi.getter
     def id(self) -> Optional[str]:
         return pulumi.get(self, "id")
@@ -9202,12 +10437,16 @@ class ProjectProjectSettings(dict):
             suggest = "access_key_jwt_template"
         elif key == "accessKeySessionTokenExpiration":
             suggest = "access_key_session_token_expiration"
+        elif key == "appUrl":
+            suggest = "app_url"
         elif key == "approvedDomains":
             suggest = "approved_domains"
         elif key == "cookieDomain":
             suggest = "cookie_domain"
         elif key == "cookiePolicy":
             suggest = "cookie_policy"
+        elif key == "customDomain":
+            suggest = "custom_domain"
         elif key == "enableInactivity":
             suggest = "enable_inactivity"
         elif key == "inactivityTime":
@@ -9222,6 +10461,10 @@ class ProjectProjectSettings(dict):
             suggest = "step_up_token_expiration"
         elif key == "testUsersLoginidRegexp":
             suggest = "test_users_loginid_regexp"
+        elif key == "testUsersStaticOtp":
+            suggest = "test_users_static_otp"
+        elif key == "testUsersVerifierRegexp":
+            suggest = "test_users_verifier_regexp"
         elif key == "tokenResponseMethod":
             suggest = "token_response_method"
         elif key == "trustedDeviceTokenExpiration":
@@ -9243,10 +10486,11 @@ class ProjectProjectSettings(dict):
     def __init__(__self__, *,
                  access_key_jwt_template: Optional[str] = None,
                  access_key_session_token_expiration: Optional[str] = None,
+                 app_url: Optional[str] = None,
                  approved_domains: Optional[Sequence[str]] = None,
                  cookie_domain: Optional[str] = None,
                  cookie_policy: Optional[str] = None,
-                 domain: Optional[str] = None,
+                 custom_domain: Optional[str] = None,
                  enable_inactivity: Optional[bool] = None,
                  inactivity_time: Optional[str] = None,
                  refresh_token_expiration: Optional[str] = None,
@@ -9254,6 +10498,8 @@ class ProjectProjectSettings(dict):
                  session_token_expiration: Optional[str] = None,
                  step_up_token_expiration: Optional[str] = None,
                  test_users_loginid_regexp: Optional[str] = None,
+                 test_users_static_otp: Optional[str] = None,
+                 test_users_verifier_regexp: Optional[str] = None,
                  token_response_method: Optional[str] = None,
                  trusted_device_token_expiration: Optional[str] = None,
                  user_jwt_template: Optional[str] = None):
@@ -9263,7 +10509,6 @@ class ProjectProjectSettings(dict):
         :param Sequence[str] approved_domains: The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
         :param str cookie_domain: The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         :param str cookie_policy: Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        :param str domain: This attribute has been renamed to `cookie_domain`.
         :param bool enable_inactivity: Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
         :param str inactivity_time: The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
         :param str refresh_token_expiration: The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
@@ -9271,6 +10516,8 @@ class ProjectProjectSettings(dict):
         :param str session_token_expiration: The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
         :param str step_up_token_expiration: The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
         :param str test_users_loginid_regexp: Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+        :param str test_users_static_otp: A 6 digit static OTP code for use with test users.
+        :param str test_users_verifier_regexp: The pattern of the verifiers that will be used for testing.
         :param str token_response_method: Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
         :param str trusted_device_token_expiration: The expiry time for the trusted device token. The minimum value is "3 minutes".
         :param str user_jwt_template: Name of the user JWT Template.
@@ -9279,14 +10526,16 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "access_key_jwt_template", access_key_jwt_template)
         if access_key_session_token_expiration is not None:
             pulumi.set(__self__, "access_key_session_token_expiration", access_key_session_token_expiration)
+        if app_url is not None:
+            pulumi.set(__self__, "app_url", app_url)
         if approved_domains is not None:
             pulumi.set(__self__, "approved_domains", approved_domains)
         if cookie_domain is not None:
             pulumi.set(__self__, "cookie_domain", cookie_domain)
         if cookie_policy is not None:
             pulumi.set(__self__, "cookie_policy", cookie_policy)
-        if domain is not None:
-            pulumi.set(__self__, "domain", domain)
+        if custom_domain is not None:
+            pulumi.set(__self__, "custom_domain", custom_domain)
         if enable_inactivity is not None:
             pulumi.set(__self__, "enable_inactivity", enable_inactivity)
         if inactivity_time is not None:
@@ -9301,6 +10550,10 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "step_up_token_expiration", step_up_token_expiration)
         if test_users_loginid_regexp is not None:
             pulumi.set(__self__, "test_users_loginid_regexp", test_users_loginid_regexp)
+        if test_users_static_otp is not None:
+            pulumi.set(__self__, "test_users_static_otp", test_users_static_otp)
+        if test_users_verifier_regexp is not None:
+            pulumi.set(__self__, "test_users_verifier_regexp", test_users_verifier_regexp)
         if token_response_method is not None:
             pulumi.set(__self__, "token_response_method", token_response_method)
         if trusted_device_token_expiration is not None:
@@ -9323,6 +10576,11 @@ class ProjectProjectSettings(dict):
         The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
         """
         return pulumi.get(self, "access_key_session_token_expiration")
+
+    @property
+    @pulumi.getter(name="appUrl")
+    def app_url(self) -> Optional[str]:
+        return pulumi.get(self, "app_url")
 
     @property
     @pulumi.getter(name="approvedDomains")
@@ -9349,13 +10607,9 @@ class ProjectProjectSettings(dict):
         return pulumi.get(self, "cookie_policy")
 
     @property
-    @pulumi.getter
-    @_utilities.deprecated("""The domain attribute has been renamed, set the cookie_domain attribute instead. This attribute will be removed in the next major version of the provider.""")
-    def domain(self) -> Optional[str]:
-        """
-        This attribute has been renamed to `cookie_domain`.
-        """
-        return pulumi.get(self, "domain")
+    @pulumi.getter(name="customDomain")
+    def custom_domain(self) -> Optional[str]:
+        return pulumi.get(self, "custom_domain")
 
     @property
     @pulumi.getter(name="enableInactivity")
@@ -9412,6 +10666,22 @@ class ProjectProjectSettings(dict):
         Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
         """
         return pulumi.get(self, "test_users_loginid_regexp")
+
+    @property
+    @pulumi.getter(name="testUsersStaticOtp")
+    def test_users_static_otp(self) -> Optional[str]:
+        """
+        A 6 digit static OTP code for use with test users.
+        """
+        return pulumi.get(self, "test_users_static_otp")
+
+    @property
+    @pulumi.getter(name="testUsersVerifierRegexp")
+    def test_users_verifier_regexp(self) -> Optional[str]:
+        """
+        The pattern of the verifiers that will be used for testing.
+        """
+        return pulumi.get(self, "test_users_verifier_regexp")
 
     @property
     @pulumi.getter(name="tokenResponseMethod")

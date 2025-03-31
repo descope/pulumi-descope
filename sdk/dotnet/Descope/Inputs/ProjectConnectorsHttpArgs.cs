@@ -80,6 +80,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        [Input("useStaticIps")]
+        public Input<bool>? UseStaticIps { get; set; }
+
         public ProjectConnectorsHttpArgs()
         {
         }

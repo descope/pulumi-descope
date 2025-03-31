@@ -31,6 +31,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// The sender details that should be displayed in the email message.
+        /// </summary>
         [Input("sender", required: true)]
         public Input<Inputs.ProjectConnectorsSendgridSenderArgs> Sender { get; set; } = null!;
 

@@ -41,6 +41,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        [Input("enterprise")]
+        public Input<bool>? Enterprise { get; set; }
+
         [Input("id")]
         public Input<string>? Id { get; set; }
 

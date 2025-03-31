@@ -33,7 +33,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AuditEnabled { get; set; }
 
         [Input("auditFilters")]
-        public Input<string>? AuditFilters { get; set; }
+        private InputList<Inputs.ProjectConnectorsNewrelicAuditFilterGetArgs>? _auditFilters;
+        public InputList<Inputs.ProjectConnectorsNewrelicAuditFilterGetArgs> AuditFilters
+        {
+            get => _auditFilters ?? (_auditFilters = new InputList<Inputs.ProjectConnectorsNewrelicAuditFilterGetArgs>());
+            set => _auditFilters = value;
+        }
 
         /// <summary>
         /// The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.

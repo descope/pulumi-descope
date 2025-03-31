@@ -137,6 +137,14 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _forters = value;
         }
 
+        [Input("genericSmsGateways")]
+        private InputList<Inputs.ProjectConnectorsGenericSmsGatewayArgs>? _genericSmsGateways;
+        public InputList<Inputs.ProjectConnectorsGenericSmsGatewayArgs> GenericSmsGateways
+        {
+            get => _genericSmsGateways ?? (_genericSmsGateways = new InputList<Inputs.ProjectConnectorsGenericSmsGatewayArgs>());
+            set => _genericSmsGateways = value;
+        }
+
         [Input("googleCloudTranslations")]
         private InputList<Inputs.ProjectConnectorsGoogleCloudTranslationArgs>? _googleCloudTranslations;
         public InputList<Inputs.ProjectConnectorsGoogleCloudTranslationArgs> GoogleCloudTranslations
@@ -179,6 +187,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _hubspots ?? (_hubspots = new InputList<Inputs.ProjectConnectorsHubspotArgs>());
             set => _hubspots = value;
+        }
+
+        [Input("incodes")]
+        private InputList<Inputs.ProjectConnectorsIncodeArgs>? _incodes;
+
+        /// <summary>
+        /// Use the Incode connection to run identity verification processes like document checks or facial recognition.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsIncodeArgs> Incodes
+        {
+            get => _incodes ?? (_incodes = new InputList<Inputs.ProjectConnectorsIncodeArgs>());
+            set => _incodes = value;
         }
 
         [Input("intercoms")]
@@ -261,6 +281,14 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _rekognitions = value;
         }
 
+        [Input("salesforceMarketingClouds")]
+        private InputList<Inputs.ProjectConnectorsSalesforceMarketingCloudArgs>? _salesforceMarketingClouds;
+        public InputList<Inputs.ProjectConnectorsSalesforceMarketingCloudArgs> SalesforceMarketingClouds
+        {
+            get => _salesforceMarketingClouds ?? (_salesforceMarketingClouds = new InputList<Inputs.ProjectConnectorsSalesforceMarketingCloudArgs>());
+            set => _salesforceMarketingClouds = value;
+        }
+
         [Input("salesforces")]
         private InputList<Inputs.ProjectConnectorsSalesforceArgs>? _salesforces;
 
@@ -293,6 +321,26 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _sendgrids = value;
         }
 
+        [Input("ses")]
+        private InputList<Inputs.ProjectConnectorsSeArgs>? _ses;
+        public InputList<Inputs.ProjectConnectorsSeArgs> Ses
+        {
+            get => _ses ?? (_ses = new InputList<Inputs.ProjectConnectorsSeArgs>());
+            set => _ses = value;
+        }
+
+        [Input("slacks")]
+        private InputList<Inputs.ProjectConnectorsSlackArgs>? _slacks;
+
+        /// <summary>
+        /// Send updates to your team on Slack.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsSlackArgs> Slacks
+        {
+            get => _slacks ?? (_slacks = new InputList<Inputs.ProjectConnectorsSlackArgs>());
+            set => _slacks = value;
+        }
+
         [Input("smartlings")]
         private InputList<Inputs.ProjectConnectorsSmartlingArgs>? _smartlings;
 
@@ -311,6 +359,14 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _smtps ?? (_smtps = new InputList<Inputs.ProjectConnectorsSmtpArgs>());
             set => _smtps = value;
+        }
+
+        [Input("sns")]
+        private InputList<Inputs.ProjectConnectorsSnArgs>? _sns;
+        public InputList<Inputs.ProjectConnectorsSnArgs> Sns
+        {
+            get => _sns ?? (_sns = new InputList<Inputs.ProjectConnectorsSnArgs>());
+            set => _sns = value;
         }
 
         [Input("sumologics")]

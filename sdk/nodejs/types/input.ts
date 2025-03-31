@@ -30,6 +30,10 @@ export interface ProjectApplicationsOidcApplication {
      */
     disabled?: pulumi.Input<boolean>;
     /**
+     * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+     */
+    forceAuthentication?: pulumi.Input<boolean>;
+    /**
      * An optional identifier for the OIDC application.
      */
     id?: pulumi.Input<string>;
@@ -72,6 +76,10 @@ export interface ProjectApplicationsSamlApplication {
      * The `DynamicConfiguration` object. Read the description below.
      */
     dynamicConfiguration?: pulumi.Input<inputs.ProjectApplicationsSamlApplicationDynamicConfiguration>;
+    /**
+     * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+     */
+    forceAuthentication?: pulumi.Input<boolean>;
     /**
      * An optional identifier for the SAML application.
      */
@@ -147,6 +155,7 @@ export interface ProjectAttributes {
 }
 
 export interface ProjectAttributesTenant {
+    authorization?: pulumi.Input<inputs.ProjectAttributesTenantAuthorization>;
     /**
      * The name of the attribute.
      */
@@ -159,6 +168,10 @@ export interface ProjectAttributesTenant {
      * The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
      */
     type: pulumi.Input<string>;
+}
+
+export interface ProjectAttributesTenantAuthorization {
+    viewPermissions?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectAttributesUser {
@@ -1268,6 +1281,7 @@ export interface ProjectConnectors {
      * Use the Forter connector for account fraud prevention.
      */
     forters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsForter>[]>;
+    genericSmsGateways?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGenericSmsGateway>[]>;
     googleCloudTranslations?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleCloudTranslation>[]>;
     /**
      * API to check if password appeared previously exposed in data breaches.
@@ -1281,6 +1295,10 @@ export interface ProjectConnectors {
      * HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
      */
     hubspots?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHubspot>[]>;
+    /**
+     * Use the Incode connection to run identity verification processes like document checks or facial recognition.
+     */
+    incodes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsIncode>[]>;
     /**
      * Intercom is a Conversational Relationship Platform (CRP).
      */
@@ -1306,6 +1324,7 @@ export interface ProjectConnectors {
      * AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
      */
     rekognitions?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRekognition>[]>;
+    salesforceMarketingClouds?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSalesforceMarketingCloud>[]>;
     /**
      * Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
      */
@@ -1315,11 +1334,17 @@ export interface ProjectConnectors {
      */
     segments?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSegment>[]>;
     sendgrids?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSendgrid>[]>;
+    ses?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSe>[]>;
+    /**
+     * Send updates to your team on Slack.
+     */
+    slacks?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSlack>[]>;
     /**
      * Localize the language of your login and user journey screens with the Smartling connector.
      */
     smartlings?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSmartling>[]>;
     smtps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSmtp>[]>;
+    sns?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSn>[]>;
     /**
      * Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
      */
@@ -1380,7 +1405,7 @@ export interface ProjectConnectorsAuditWebhook {
     /**
      * Specify which events will be sent to the external audit service (including tenant selection).
      */
-    auditFilters?: pulumi.Input<string>;
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAuditWebhookAuditFilter>[]>;
     /**
      * Authentication Information
      */
@@ -1412,6 +1437,12 @@ export interface ProjectConnectorsAuditWebhook {
     name: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsAuditWebhookAuditFilter {
+    key: pulumi.Input<string>;
+    operator: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface ProjectConnectorsAuditWebhookAuthentication {
     apiKey?: pulumi.Input<inputs.ProjectConnectorsAuditWebhookAuthenticationApiKey>;
     basic?: pulumi.Input<inputs.ProjectConnectorsAuditWebhookAuthenticationBasic>;
@@ -1434,7 +1465,7 @@ export interface ProjectConnectorsAwsS3 {
      */
     accessKeyId: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
-    auditFilters?: pulumi.Input<string>;
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsS3AuditFilter>[]>;
     /**
      * The AWS S3 bucket. This bucket should already exist for the connector to work.
      */
@@ -1457,6 +1488,12 @@ export interface ProjectConnectorsAwsS3 {
      */
     secretAccessKey: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsAwsS3AuditFilter {
+    key: pulumi.Input<string>;
+    operator: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsAwsTranslate {
@@ -1513,7 +1550,7 @@ export interface ProjectConnectorsDatadog {
      */
     apiKey: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
-    auditFilters?: pulumi.Input<string>;
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDatadogAuditFilter>[]>;
     /**
      * A description of what your connector is used for.
      */
@@ -1528,6 +1565,12 @@ export interface ProjectConnectorsDatadog {
      */
     site?: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsDatadogAuditFilter {
+    key: pulumi.Input<string>;
+    operator: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsDevrevGrow {
@@ -1658,6 +1701,62 @@ export interface ProjectConnectorsForter {
     siteId: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsGenericSmsGateway {
+    /**
+     * Authentication Information
+     */
+    authentication?: pulumi.Input<inputs.ProjectConnectorsGenericSmsGatewayAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The headers to send with the request
+     */
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+     */
+    hmacSecret?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
+    insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The URL of the post message request
+     */
+    postUrl: pulumi.Input<string>;
+    /**
+     * The sender number
+     */
+    sender?: pulumi.Input<string>;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthentication {
+    apiKey?: pulumi.Input<inputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKey>;
+    basic?: pulumi.Input<inputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasic>;
+    bearerToken?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationApiKey {
+    key: pulumi.Input<string>;
+    token: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
+    password: pulumi.Input<string>;
+    username: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsGoogleCloudTranslation {
     /**
      * A description of what your connector is used for.
@@ -1724,6 +1823,10 @@ export interface ProjectConnectorsHttp {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsHttpAuthentication {
@@ -1755,6 +1858,34 @@ export interface ProjectConnectorsHubspot {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsIncode {
+    /**
+     * Your InCode API key.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * The base URL of the Incode API
+     */
+    apiUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Your wanted InCode's flow ID.
+     */
+    flowId: pulumi.Input<string>;
     id?: pulumi.Input<string>;
     /**
      * A custom name for your connector.
@@ -1828,6 +1959,10 @@ export interface ProjectConnectorsMparticle {
      */
     baseUrl?: pulumi.Input<string>;
     /**
+     * The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
+     */
+    defaultEnvironment?: pulumi.Input<string>;
+    /**
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
@@ -1836,6 +1971,10 @@ export interface ProjectConnectorsMparticle {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsNewrelic {
@@ -1844,7 +1983,7 @@ export interface ProjectConnectorsNewrelic {
      */
     apiKey: pulumi.Input<string>;
     auditEnabled?: pulumi.Input<boolean>;
-    auditFilters?: pulumi.Input<string>;
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsNewrelicAuditFilter>[]>;
     /**
      * The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
      */
@@ -1867,6 +2006,12 @@ export interface ProjectConnectorsNewrelic {
      */
     overrideLogsPrefix?: pulumi.Input<boolean>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsNewrelicAuditFilter {
+    key: pulumi.Input<string>;
+    operator: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsRecaptcha {
@@ -1902,6 +2047,7 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
+    enterprise?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * A custom name for your connector.
@@ -1973,6 +2119,75 @@ export interface ProjectConnectorsSalesforce {
     version: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsSalesforceMarketingCloud {
+    /**
+     * Account identifier, or MID, of the target business unit.
+     */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Client ID issued when you create the API integration in Installed Packages.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * Client secret issued when you create the API integration in Installed Packages.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Space-separated list of data-access permissions for your connector.
+     */
+    scope?: pulumi.Input<string>;
+    /**
+     * The Salesforce Marketing Cloud endpoint subdomain.
+     */
+    subdomain: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsSe {
+    /**
+     * AWS Access key ID.
+     */
+    accessKeyId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * An optional endpoint URL (hostname only or fully qualified URI).
+     */
+    endpoint?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * AWS region to send requests to (e.g. `us-west-2`).
+     */
+    region: pulumi.Input<string>;
+    /**
+     * AWS Secret Access Key.
+     */
+    secret: pulumi.Input<string>;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
+    sender: pulumi.Input<inputs.ProjectConnectorsSeSender>;
+}
+
+export interface ProjectConnectorsSeSender {
+    email: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsSegment {
     /**
      * A description of what your connector is used for.
@@ -2004,6 +2219,9 @@ export interface ProjectConnectorsSendgrid {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
     sender: pulumi.Input<inputs.ProjectConnectorsSendgridSender>;
 }
 
@@ -2014,6 +2232,22 @@ export interface ProjectConnectorsSendgridAuthentication {
 export interface ProjectConnectorsSendgridSender {
     email: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsSlack {
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The OAuth token for Slack's Bot User, used to authenticate API requests.
+     */
+    token: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSmartling {
@@ -2051,6 +2285,9 @@ export interface ProjectConnectorsSmtp {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+    /**
+     * The sender details that should be displayed in the email message.
+     */
     sender: pulumi.Input<inputs.ProjectConnectorsSmtpSender>;
     server: pulumi.Input<inputs.ProjectConnectorsSmtpServer>;
 }
@@ -2071,9 +2308,53 @@ export interface ProjectConnectorsSmtpServer {
     port?: pulumi.Input<number>;
 }
 
+export interface ProjectConnectorsSn {
+    /**
+     * AWS Access key ID.
+     */
+    accessKeyId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * An optional endpoint URL (hostname only or fully qualified URI).
+     */
+    endpoint?: pulumi.Input<string>;
+    /**
+     * The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+     */
+    entityId?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+     */
+    organizationNumber?: pulumi.Input<string>;
+    /**
+     * AWS region to send requests to (e.g. `us-west-2`).
+     */
+    region: pulumi.Input<string>;
+    /**
+     * AWS Secret Access Key.
+     */
+    secret: pulumi.Input<string>;
+    /**
+     * The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
+     */
+    senderId?: pulumi.Input<string>;
+    /**
+     * The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
+     */
+    templateId?: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsSumologic {
     auditEnabled?: pulumi.Input<boolean>;
-    auditFilters?: pulumi.Input<string>;
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSumologicAuditFilter>[]>;
     /**
      * A description of what your connector is used for.
      */
@@ -2088,6 +2369,12 @@ export interface ProjectConnectorsSumologic {
      */
     name: pulumi.Input<string>;
     troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsSumologicAuditFilter {
+    key: pulumi.Input<string>;
+    operator: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsTelesign {
@@ -2191,6 +2478,14 @@ export interface ProjectFlows {
     data: pulumi.Input<string>;
 }
 
+export interface ProjectInviteSettings {
+    addMagiclinkToken?: pulumi.Input<boolean>;
+    inviteUrl?: pulumi.Input<string>;
+    requireInvitation?: pulumi.Input<boolean>;
+    sendEmail?: pulumi.Input<boolean>;
+    sendText?: pulumi.Input<boolean>;
+}
+
 export interface ProjectJwtTemplates {
     /**
      * A list of `Access Key` type JWT Templates.
@@ -2204,7 +2499,7 @@ export interface ProjectJwtTemplates {
 
 export interface ProjectJwtTemplatesAccessKeyTemplate {
     /**
-     * The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+     * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
     conformanceIssuer?: pulumi.Input<boolean>;
@@ -2212,6 +2507,11 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
      * Description of the JWT Template.
      */
     description?: pulumi.Input<string>;
+    /**
+     * Policy for empty claims - `none`, `nil` or `delete`.
+     */
+    emptyClaimPolicy?: pulumi.Input<string>;
+    enforceIssuer?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
@@ -2222,7 +2522,7 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
 
 export interface ProjectJwtTemplatesUserTemplate {
     /**
-     * The authorization claims format - "default", "tenantOnly" or "none". Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+     * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
     conformanceIssuer?: pulumi.Input<boolean>;
@@ -2230,6 +2530,11 @@ export interface ProjectJwtTemplatesUserTemplate {
      * Description of the JWT Template.
      */
     description?: pulumi.Input<string>;
+    /**
+     * Policy for empty claims - `none`, `nil` or `delete`.
+     */
+    emptyClaimPolicy?: pulumi.Input<string>;
+    enforceIssuer?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
@@ -2247,6 +2552,7 @@ export interface ProjectProjectSettings {
      * The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
      */
     accessKeySessionTokenExpiration?: pulumi.Input<string>;
+    appUrl?: pulumi.Input<string>;
     /**
      * The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
      */
@@ -2259,12 +2565,7 @@ export interface ProjectProjectSettings {
      * Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      */
     cookiePolicy?: pulumi.Input<string>;
-    /**
-     * This attribute has been renamed to `cookieDomain`.
-     *
-     * @deprecated The domain attribute has been renamed, set the cookieDomain attribute instead. This attribute will be removed in the next major version of the provider.
-     */
-    domain?: pulumi.Input<string>;
+    customDomain?: pulumi.Input<string>;
     /**
      * Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
      */
@@ -2293,6 +2594,14 @@ export interface ProjectProjectSettings {
      * Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      */
     testUsersLoginidRegexp?: pulumi.Input<string>;
+    /**
+     * A 6 digit static OTP code for use with test users.
+     */
+    testUsersStaticOtp?: pulumi.Input<string>;
+    /**
+     * The pattern of the verifiers that will be used for testing.
+     */
+    testUsersVerifierRegexp?: pulumi.Input<string>;
     /**
      * Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      */

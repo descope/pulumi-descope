@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// Specify which events will be sent to the external audit service (including tenant selection).
         /// </summary>
-        public readonly string? AuditFilters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsAuditWebhookAuditFilter> AuditFilters;
         /// <summary>
         /// Authentication Information
         /// </summary>
@@ -50,7 +50,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectConnectorsAuditWebhook(
-            string? auditFilters,
+            ImmutableArray<Outputs.ProjectConnectorsAuditWebhookAuditFilter> auditFilters,
 
             Outputs.ProjectConnectorsAuditWebhookAuthentication? authentication,
 

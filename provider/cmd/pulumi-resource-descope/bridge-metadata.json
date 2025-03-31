@@ -38,6 +38,13 @@
                                 "maxItemsOne": false,
                                 "elem": {
                                     "fields": {
+                                        "authorization": {
+                                            "fields": {
+                                                "view_permissions": {
+                                                    "maxItemsOne": false
+                                                }
+                                            }
+                                        },
                                         "select_options": {
                                             "maxItemsOne": false
                                         }
@@ -301,10 +308,38 @@
                                 "maxItemsOne": false
                             },
                             "audit_webhook": {
-                                "maxItemsOne": false
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "aws_s3": {
-                                "maxItemsOne": false
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "aws_translate": {
                                 "maxItemsOne": false
@@ -313,7 +348,21 @@
                                 "maxItemsOne": false
                             },
                             "datadog": {
-                                "maxItemsOne": false
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "devrev_grow": {
                                 "maxItemsOne": false
@@ -330,6 +379,9 @@
                             "forter": {
                                 "maxItemsOne": false
                             },
+                            "generic_sms_gateway": {
+                                "maxItemsOne": false
+                            },
                             "google_cloud_translation": {
                                 "maxItemsOne": false
                             },
@@ -342,6 +394,9 @@
                             "hubspot": {
                                 "maxItemsOne": false
                             },
+                            "incode": {
+                                "maxItemsOne": false
+                            },
                             "intercom": {
                                 "maxItemsOne": false
                             },
@@ -352,7 +407,21 @@
                                 "maxItemsOne": false
                             },
                             "newrelic": {
-                                "maxItemsOne": false
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "recaptcha": {
                                 "maxItemsOne": false
@@ -366,10 +435,19 @@
                             "salesforce": {
                                 "maxItemsOne": false
                             },
+                            "salesforce_marketing_cloud": {
+                                "maxItemsOne": false
+                            },
                             "segment": {
                                 "maxItemsOne": false
                             },
                             "sendgrid": {
+                                "maxItemsOne": false
+                            },
+                            "ses": {
+                                "maxItemsOne": false
+                            },
+                            "slack": {
                                 "maxItemsOne": false
                             },
                             "smartling": {
@@ -378,8 +456,25 @@
                             "smtp": {
                                 "maxItemsOne": false
                             },
-                            "sumologic": {
+                            "sns": {
                                 "maxItemsOne": false
+                            },
+                            "sumologic": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "telesign": {
                                 "maxItemsOne": false
@@ -411,6 +506,9 @@
                                 "maxItemsOne": false
                             }
                         }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
                     }
                 }
             }

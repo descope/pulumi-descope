@@ -13,11 +13,17 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsAuditWebhookArgs : global::Pulumi.ResourceArgs
     {
+        [Input("auditFilters")]
+        private InputList<Inputs.ProjectConnectorsAuditWebhookAuditFilterArgs>? _auditFilters;
+
         /// <summary>
         /// Specify which events will be sent to the external audit service (including tenant selection).
         /// </summary>
-        [Input("auditFilters")]
-        public Input<string>? AuditFilters { get; set; }
+        public InputList<Inputs.ProjectConnectorsAuditWebhookAuditFilterArgs> AuditFilters
+        {
+            get => _auditFilters ?? (_auditFilters = new InputList<Inputs.ProjectConnectorsAuditWebhookAuditFilterArgs>());
+            set => _auditFilters = value;
+        }
 
         /// <summary>
         /// Authentication Information

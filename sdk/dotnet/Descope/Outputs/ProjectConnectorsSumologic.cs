@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsSumologic
     {
         public readonly bool? AuditEnabled;
-        public readonly string? AuditFilters;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSumologicAuditFilter> AuditFilters;
         /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
@@ -35,7 +35,7 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectConnectorsSumologic(
             bool? auditEnabled,
 
-            string? auditFilters,
+            ImmutableArray<Outputs.ProjectConnectorsSumologicAuditFilter> auditFilters,
 
             string? description,
 
