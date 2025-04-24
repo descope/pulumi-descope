@@ -21,7 +21,7 @@ jobs:
           app_id: ${{ secrets.RELEASE_APP_ID }}
 
       - name: Call upgrade provider action
-        uses: pulumi/pulumi-upgrade-provider-action@v0.0.15
+        uses: pulumi/pulumi-upgrade-provider-action@v0.0.16
         env:
           GH_TOKEN: ${{ steps.get_token.outputs.token }}
         with:
