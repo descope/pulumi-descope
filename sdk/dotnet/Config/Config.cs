@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Descope.Descope
+namespace Descope.Pulumi.Descope
 {
     public static class Config
     {
