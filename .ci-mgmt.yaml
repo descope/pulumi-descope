@@ -1,22 +1,21 @@
+organization: descope
 provider: descope
 env:
   NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-makeTemplate: bridged
+template: external-bridged-provider
 pulumiConvert: 1
 goBuildParallelism: 2
 major-version: 1
 testMasterAndReleaseWorkflows: false
+publish:
+  cdn: false
 plugins:
-  - name: random
-    version: "4.8.2"
-  - name: std
-    version: "1.6.2"
   - name: terraform
-    version: "1.0.15"
+    version: "1.0.19"
     kind: converter
 generate-nightly-test-workflow: true
-publish:
-  sdk: all,!java
+registryDocs: true
+publishRegistry: false

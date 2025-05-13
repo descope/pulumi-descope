@@ -2,8 +2,6 @@ module github.com/descope/terraform-provider-descope/shim
 
 go 1.24.0
 
-toolchain go1.24.3
-
 require (
 	github.com/descope/terraform-provider-descope v0.1.7
 	github.com/hashicorp/terraform-plugin-framework v1.14.1

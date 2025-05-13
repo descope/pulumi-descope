@@ -10,10 +10,8 @@ export type Project = import("./project").Project;
 export const Project: typeof import("./project").Project = null as any;
 utilities.lazyLoad(exports, ["Project"], () => require("./project"));
 
-export { ProviderArgs } from "./provider";
-export type Provider = import("./provider").Provider;
-export const Provider: typeof import("./provider").Provider = null as any;
-utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+export * from "./provider";
+import { Provider } from "./provider";
 
 
 // Export sub-modules:

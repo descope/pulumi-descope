@@ -14,19 +14,19 @@ package descope
 
 import (
 	"fmt"
-	"path"
+	"path/filepath"
 
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
-	pfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
+	// Replace this provider with the provider you are bridging.
+	descope "github.com/descope/terraform-provider-descope/shim"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 
-	// Replace this provider with the provider you are bridging.
-	descope "github.com/descope/terraform-provider-descope/shim"
+	pfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 
 	"github.com/descope/pulumi-descope/provider/pkg/version"
 )
@@ -67,9 +67,7 @@ func Provider() tfbridge.ProviderInfo {
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: fmt.Sprintf("@%s/pulumi-%s", publisher, mainPkg),
 			// List any npm dependencies and their versions
-			Dependencies: map[string]string{
-				"@pulumi/pulumi": "^3.0.0",
-			},
+
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
@@ -77,16 +75,12 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName: fmt.Sprintf("%s_pulumi", publisher),
-			// List any Python dependencies and their version ranges
-			Requires: map[string]string{
-				"pulumi": ">=3.0.0,<4.0.0",
-			},
-			RespectSchemaVersion: true,
+			PackageName:          fmt.Sprintf("%s_%s", publisher, mainPkg),
 			PyProject:            struct{ Enabled bool }{true},
+			RespectSchemaVersion: true,
 		},
 		Golang: &tfbridge.GolangInfo{
-			ImportBasePath: path.Join(
+			ImportBasePath: filepath.Join(
 				fmt.Sprintf("github.com/%s/pulumi-%s/sdk/", publisher, mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
@@ -96,14 +90,14 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion:           true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
-			RootNamespace: fmt.Sprintf("%s.Pulumi", caser.String(publisher)),
+			RootNamespace: caser.String(publisher),
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
 			RespectSchemaVersion: true,
-			Namespaces: map[string]string{
-				mainPkg: caser.String(mainPkg),
-			},
+		},
+		Java: &tfbridge.JavaInfo{
+			BasePackage: "com.descope",
 		},
 	}
 
