@@ -75,7 +75,7 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName:          fmt.Sprintf("%s_%s", publisher, mainPkg),
+			PackageName:          fmt.Sprintf("%s_pulumi", publisher),
 			PyProject:            struct{ Enabled bool }{true},
 			RespectSchemaVersion: true,
 		},

@@ -1,5 +1,5 @@
 [project]
-  name = "descope_descope"
+  name = "descope_pulumi"
   description = "A Pulumi package for creating and managing descope cloud resources."
   dependencies = ["parver>=0.2.1", "pulumi>=3.165.0,<4.0.0", "semver>=2.8.1", "typing-extensions>=4.11,<5; python_version < \"3.11\""]
   keywords = ["descope", "category/cloud"]
@@ -19,4 +19,4 @@
 [tool]
   [tool.setuptools]
     [tool.setuptools.package-data]
-      descope_descope = ["py.typed", "pulumi-plugin.json"]
+      descope_pulumi = ["py.typed", "pulumi-plugin.json"]
