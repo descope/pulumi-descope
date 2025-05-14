@@ -5,6 +5,8 @@ env:
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+  DESCOPE_MANAGEMENT_KEY: ${{ secrets.DESCOPE_MANAGEMENT_KEY }}
+  DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
 providerDefaultBranch: main
 template: external-bridged-provider
 pulumiConvert: 1
