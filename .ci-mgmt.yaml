@@ -11,6 +11,7 @@ goBuildParallelism: 2
 major-version: 1
 testMasterAndReleaseWorkflows: false
 publish:
+  sdk: all,!java
   cdn: false
 plugins:
   - name: terraform
