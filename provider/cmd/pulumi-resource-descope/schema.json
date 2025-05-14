@@ -21,9 +21,6 @@
             "packageReferences": {
                 "Pulumi": "3.*"
             },
-            "namespaces": {
-                "descope": "Descope"
-            },
             "compatibility": "tfbridge20",
             "rootNamespace": "Descope.Pulumi",
             "respectSchemaVersion": true
@@ -34,13 +31,16 @@
             "generateExtraInputTypes": true,
             "respectSchemaVersion": true
         },
+        "java": {
+            "basePackage": "com.descope.pulumi",
+            "buildFiles": "",
+            "gradleNexusPublishPluginVersion": "",
+            "gradleTest": ""
+        },
         "nodejs": {
             "packageName": "@descope/pulumi-descope",
             "packageDescription": "A Pulumi package for creating and managing descope cloud resources.",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/descope/terraform-provider-descope)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-descope` repo](https://github.com/descope/pulumi-descope/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-descope` repo](https://github.com/descope/terraform-provider-descope/issues).",
-            "dependencies": {
-                "@pulumi/pulumi": "^3.0.0"
-            },
             "devDependencies": {
                 "@types/mime": "^2.0.0",
                 "@types/node": "^10.0.0"
@@ -51,9 +51,6 @@
         },
         "python": {
             "packageName": "descope_pulumi",
-            "requires": {
-                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
-            },
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/descope/terraform-provider-descope)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-descope` repo](https://github.com/descope/pulumi-descope/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-descope` repo](https://github.com/descope/terraform-provider-descope/issues).",
             "compatibility": "tfbridge20",
             "respectSchemaVersion": true,
@@ -4830,6 +4827,10 @@
                 },
                 "server": {
                     "$ref": "#/types/descope:index/ProjectConnectorsSmtpServer:ProjectConnectorsSmtpServer"
+                },
+                "useStaticIps": {
+                    "type": "boolean",
+                    "description": "Whether the connector should send all requests from specific static IPs.\n"
                 }
             },
             "type": "object",
@@ -4847,7 +4848,8 @@
                         "id",
                         "name",
                         "sender",
-                        "server"
+                        "server",
+                        "useStaticIps"
                     ]
                 }
             }
@@ -5525,7 +5527,8 @@
                     "description": "The expiry time for access key session tokens. Use values such as \"10 minutes\", \"4 hours\", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.\n"
                 },
                 "appUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URL which your application resides on.\n"
                 },
                 "approvedDomains": {
                     "type": "array",
@@ -5536,14 +5539,17 @@
                 },
                 "cookieDomain": {
                     "type": "string",
-                    "description": "The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                    "description": "Deprecated.\n",
+                    "deprecationMessage": "The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider."
                 },
                 "cookiePolicy": {
                     "type": "string",
-                    "description": "Use \"strict\", \"lax\" or \"none\". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                    "description": "Deprecated.\n",
+                    "deprecationMessage": "The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider."
                 },
                 "customDomain": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
                 "enableInactivity": {
                     "type": "boolean",
@@ -5553,17 +5559,41 @@
                     "type": "string",
                     "description": "The session inactivity time. Use values such as \"15 minutes\", \"1 hour\", etc. The minimum value is \"10 minutes\".\n"
                 },
+                "refreshTokenCookieDomain": {
+                    "type": "string",
+                    "description": "The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                },
+                "refreshTokenCookiePolicy": {
+                    "type": "string",
+                    "description": "Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                },
                 "refreshTokenExpiration": {
                     "type": "string",
                     "description": "The expiry time for the refresh token, after which the user must log in again. Use values such as \"4 weeks\", \"14 days\", etc. The minimum value is \"3 minutes\".\n"
+                },
+                "refreshTokenResponseMethod": {
+                    "type": "string",
+                    "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
                 },
                 "refreshTokenRotation": {
                     "type": "boolean",
                     "description": "Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.\n"
                 },
+                "sessionTokenCookieDomain": {
+                    "type": "string",
+                    "description": "The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                },
+                "sessionTokenCookiePolicy": {
+                    "type": "string",
+                    "description": "Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                },
                 "sessionTokenExpiration": {
                     "type": "string",
                     "description": "The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.\n"
+                },
+                "sessionTokenResponseMethod": {
+                    "type": "string",
+                    "description": "Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
                 },
                 "stepUpTokenExpiration": {
                     "type": "string",
@@ -5583,7 +5613,8 @@
                 },
                 "tokenResponseMethod": {
                     "type": "string",
-                    "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
+                    "description": "Deprecated.\n",
+                    "deprecationMessage": "The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider."
                 },
                 "trustedDeviceTokenExpiration": {
                     "type": "string",
@@ -5607,9 +5638,15 @@
                         "customDomain",
                         "enableInactivity",
                         "inactivityTime",
+                        "refreshTokenCookieDomain",
+                        "refreshTokenCookiePolicy",
                         "refreshTokenExpiration",
+                        "refreshTokenResponseMethod",
                         "refreshTokenRotation",
+                        "sessionTokenCookieDomain",
+                        "sessionTokenCookiePolicy",
                         "sessionTokenExpiration",
+                        "sessionTokenResponseMethod",
                         "stepUpTokenExpiration",
                         "testUsersLoginidRegexp",
                         "testUsersStaticOtp",
@@ -5658,6 +5695,9 @@
             "projectId": {
                 "type": "string"
             }
+        },
+        "methods": {
+            "terraformConfig": "pulumi:providers:descope/terraformConfig"
         }
     },
     "resources": {
@@ -5856,6 +5896,37 @@
                         "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
                     }
                 },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "pulumi:providers:descope/terraformConfig": {
+            "description": "This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.",
+            "inputs": {
+                "properties": {
+                    "__self__": {
+                        "type": "ref",
+                        "$ref": "#/resources/pulumi:providers:descope"
+                    }
+                },
+                "type": "pulumi:providers:descope/terraformConfig",
+                "required": [
+                    "__self__"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "result": {
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
                 "type": "object"
             }
         }

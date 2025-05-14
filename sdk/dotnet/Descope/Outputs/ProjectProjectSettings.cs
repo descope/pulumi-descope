@@ -22,19 +22,25 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
         /// </summary>
         public readonly string? AccessKeySessionTokenExpiration;
+        /// <summary>
+        /// The URL which your application resides on.
+        /// </summary>
         public readonly string? AppUrl;
         /// <summary>
         /// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
         /// </summary>
         public readonly ImmutableArray<string> ApprovedDomains;
         /// <summary>
-        /// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Deprecated.
         /// </summary>
         public readonly string? CookieDomain;
         /// <summary>
-        /// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Deprecated.
         /// </summary>
         public readonly string? CookiePolicy;
+        /// <summary>
+        /// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
         public readonly string? CustomDomain;
         /// <summary>
         /// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
@@ -45,17 +51,41 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? InactivityTime;
         /// <summary>
+        /// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        public readonly string? RefreshTokenCookieDomain;
+        /// <summary>
+        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        public readonly string? RefreshTokenCookiePolicy;
+        /// <summary>
         /// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
         /// </summary>
         public readonly string? RefreshTokenExpiration;
+        /// <summary>
+        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// </summary>
+        public readonly string? RefreshTokenResponseMethod;
         /// <summary>
         /// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
         /// </summary>
         public readonly bool? RefreshTokenRotation;
         /// <summary>
+        /// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        public readonly string? SessionTokenCookieDomain;
+        /// <summary>
+        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        public readonly string? SessionTokenCookiePolicy;
+        /// <summary>
         /// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
         /// </summary>
         public readonly string? SessionTokenExpiration;
+        /// <summary>
+        /// Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// </summary>
+        public readonly string? SessionTokenResponseMethod;
         /// <summary>
         /// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
         /// </summary>
@@ -73,7 +103,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? TestUsersVerifierRegexp;
         /// <summary>
-        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// Deprecated.
         /// </summary>
         public readonly string? TokenResponseMethod;
         /// <summary>
@@ -105,11 +135,23 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? inactivityTime,
 
+            string? refreshTokenCookieDomain,
+
+            string? refreshTokenCookiePolicy,
+
             string? refreshTokenExpiration,
+
+            string? refreshTokenResponseMethod,
 
             bool? refreshTokenRotation,
 
+            string? sessionTokenCookieDomain,
+
+            string? sessionTokenCookiePolicy,
+
             string? sessionTokenExpiration,
+
+            string? sessionTokenResponseMethod,
 
             string? stepUpTokenExpiration,
 
@@ -134,9 +176,15 @@ namespace Descope.Pulumi.Descope.Outputs
             CustomDomain = customDomain;
             EnableInactivity = enableInactivity;
             InactivityTime = inactivityTime;
+            RefreshTokenCookieDomain = refreshTokenCookieDomain;
+            RefreshTokenCookiePolicy = refreshTokenCookiePolicy;
             RefreshTokenExpiration = refreshTokenExpiration;
+            RefreshTokenResponseMethod = refreshTokenResponseMethod;
             RefreshTokenRotation = refreshTokenRotation;
+            SessionTokenCookieDomain = sessionTokenCookieDomain;
+            SessionTokenCookiePolicy = sessionTokenCookiePolicy;
             SessionTokenExpiration = sessionTokenExpiration;
+            SessionTokenResponseMethod = sessionTokenResponseMethod;
             StepUpTokenExpiration = stepUpTokenExpiration;
             TestUsersLoginidRegexp = testUsersLoginidRegexp;
             TestUsersStaticOtp = testUsersStaticOtp;

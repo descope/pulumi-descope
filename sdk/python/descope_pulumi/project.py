@@ -443,6 +443,7 @@ class _ProjectState:
         pulumi.set(self, "tags", value)
 
 
+@pulumi.type_token("descope:index/project:Project")
 class Project(pulumi.CustomResource):
     @overload
     def __init__(__self__,

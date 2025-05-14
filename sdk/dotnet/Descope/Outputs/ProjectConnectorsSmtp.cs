@@ -29,6 +29,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly Outputs.ProjectConnectorsSmtpSender Sender;
         public readonly Outputs.ProjectConnectorsSmtpServer Server;
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        public readonly bool? UseStaticIps;
 
         [OutputConstructor]
         private ProjectConnectorsSmtp(
@@ -42,7 +46,9 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectConnectorsSmtpSender sender,
 
-            Outputs.ProjectConnectorsSmtpServer server)
+            Outputs.ProjectConnectorsSmtpServer server,
+
+            bool? useStaticIps)
         {
             Authentication = authentication;
             Description = description;
@@ -50,6 +56,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Name = name;
             Sender = sender;
             Server = server;
+            UseStaticIps = useStaticIps;
         }
     }
 }

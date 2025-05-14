@@ -2290,6 +2290,10 @@ export interface ProjectConnectorsSmtp {
      */
     sender: pulumi.Input<inputs.ProjectConnectorsSmtpSender>;
     server: pulumi.Input<inputs.ProjectConnectorsSmtpServer>;
+    /**
+     * Whether the connector should send all requests from specific static IPs.
+     */
+    useStaticIps?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectorsSmtpAuthentication {
@@ -2552,19 +2556,29 @@ export interface ProjectProjectSettings {
      * The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
      */
     accessKeySessionTokenExpiration?: pulumi.Input<string>;
+    /**
+     * The URL which your application resides on.
+     */
     appUrl?: pulumi.Input<string>;
     /**
      * The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
      */
     approvedDomains?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     * Deprecated.
+     *
+     * @deprecated The cookieDomain attribute has been renamed, set the refreshTokenCookieDomain attribute instead. This attribute will be removed in a future version of the provider.
      */
     cookieDomain?: pulumi.Input<string>;
     /**
-     * Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     * Deprecated.
+     *
+     * @deprecated The cookiePolicy attribute has been renamed, set the refreshTokenCookiePolicy attribute instead. This attribute will be removed in a future version of the provider.
      */
     cookiePolicy?: pulumi.Input<string>;
+    /**
+     * A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     */
     customDomain?: pulumi.Input<string>;
     /**
      * Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
@@ -2575,17 +2589,41 @@ export interface ProjectProjectSettings {
      */
     inactivityTime?: pulumi.Input<string>;
     /**
+     * The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     */
+    refreshTokenCookieDomain?: pulumi.Input<string>;
+    /**
+     * Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     */
+    refreshTokenCookiePolicy?: pulumi.Input<string>;
+    /**
      * The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
      */
     refreshTokenExpiration?: pulumi.Input<string>;
+    /**
+     * Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+     */
+    refreshTokenResponseMethod?: pulumi.Input<string>;
     /**
      * Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
      */
     refreshTokenRotation?: pulumi.Input<boolean>;
     /**
+     * The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     */
+    sessionTokenCookieDomain?: pulumi.Input<string>;
+    /**
+     * Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+     */
+    sessionTokenCookiePolicy?: pulumi.Input<string>;
+    /**
      * The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
      */
     sessionTokenExpiration?: pulumi.Input<string>;
+    /**
+     * Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+     */
+    sessionTokenResponseMethod?: pulumi.Input<string>;
     /**
      * The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
      */
@@ -2603,7 +2641,9 @@ export interface ProjectProjectSettings {
      */
     testUsersVerifierRegexp?: pulumi.Input<string>;
     /**
-     * Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+     * Deprecated.
+     *
+     * @deprecated The tokenResponseMethod attribute has been renamed, set the refreshTokenResponseMethod attribute instead. This attribute will be removed in a future version of the provider.
      */
     tokenResponseMethod?: pulumi.Input<string>;
     /**

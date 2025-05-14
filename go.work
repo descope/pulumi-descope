@@ -1,9 +1,0 @@
-go 1.24.0
-
-use (
-	./examples
-	./examples/go
-	./provider
-	./provider/shim
-	./sdk
-)

@@ -19181,6 +19181,8 @@ type ProjectConnectorsSmtp struct {
 	// The sender details that should be displayed in the email message.
 	Sender ProjectConnectorsSmtpSender `pulumi:"sender"`
 	Server ProjectConnectorsSmtpServer `pulumi:"server"`
+	// Whether the connector should send all requests from specific static IPs.
+	UseStaticIps *bool `pulumi:"useStaticIps"`
 }
 
 // ProjectConnectorsSmtpInput is an input type that accepts ProjectConnectorsSmtpArgs and ProjectConnectorsSmtpOutput values.
@@ -19204,6 +19206,8 @@ type ProjectConnectorsSmtpArgs struct {
 	// The sender details that should be displayed in the email message.
 	Sender ProjectConnectorsSmtpSenderInput `pulumi:"sender"`
 	Server ProjectConnectorsSmtpServerInput `pulumi:"server"`
+	// Whether the connector should send all requests from specific static IPs.
+	UseStaticIps pulumi.BoolPtrInput `pulumi:"useStaticIps"`
 }
 
 func (ProjectConnectorsSmtpArgs) ElementType() reflect.Type {
@@ -19282,6 +19286,11 @@ func (o ProjectConnectorsSmtpOutput) Sender() ProjectConnectorsSmtpSenderOutput 
 
 func (o ProjectConnectorsSmtpOutput) Server() ProjectConnectorsSmtpServerOutput {
 	return o.ApplyT(func(v ProjectConnectorsSmtp) ProjectConnectorsSmtpServer { return v.Server }).(ProjectConnectorsSmtpServerOutput)
+}
+
+// Whether the connector should send all requests from specific static IPs.
+func (o ProjectConnectorsSmtpOutput) UseStaticIps() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSmtp) *bool { return v.UseStaticIps }).(pulumi.BoolPtrOutput)
 }
 
 type ProjectConnectorsSmtpArrayOutput struct{ *pulumi.OutputState }
@@ -21541,24 +21550,42 @@ type ProjectProjectSettings struct {
 	AccessKeyJwtTemplate *string `pulumi:"accessKeyJwtTemplate"`
 	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
 	AccessKeySessionTokenExpiration *string `pulumi:"accessKeySessionTokenExpiration"`
-	AppUrl                          *string `pulumi:"appUrl"`
+	// The URL which your application resides on.
+	AppUrl *string `pulumi:"appUrl"`
 	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
 	ApprovedDomains []string `pulumi:"approvedDomains"`
-	// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	// Deprecated.
+	//
+	// Deprecated: The cookieDomain attribute has been renamed, set the refreshTokenCookieDomain attribute instead. This attribute will be removed in a future version of the provider.
 	CookieDomain *string `pulumi:"cookieDomain"`
-	// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	// Deprecated.
+	//
+	// Deprecated: The cookiePolicy attribute has been renamed, set the refreshTokenCookiePolicy attribute instead. This attribute will be removed in a future version of the provider.
 	CookiePolicy *string `pulumi:"cookiePolicy"`
+	// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 	CustomDomain *string `pulumi:"customDomain"`
 	// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
 	EnableInactivity *bool `pulumi:"enableInactivity"`
 	// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
 	InactivityTime *string `pulumi:"inactivityTime"`
+	// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	RefreshTokenCookieDomain *string `pulumi:"refreshTokenCookieDomain"`
+	// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	RefreshTokenCookiePolicy *string `pulumi:"refreshTokenCookiePolicy"`
 	// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 	RefreshTokenExpiration *string `pulumi:"refreshTokenExpiration"`
+	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	RefreshTokenResponseMethod *string `pulumi:"refreshTokenResponseMethod"`
 	// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
 	RefreshTokenRotation *bool `pulumi:"refreshTokenRotation"`
+	// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	SessionTokenCookieDomain *string `pulumi:"sessionTokenCookieDomain"`
+	// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	SessionTokenCookiePolicy *string `pulumi:"sessionTokenCookiePolicy"`
 	// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
 	SessionTokenExpiration *string `pulumi:"sessionTokenExpiration"`
+	// Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	SessionTokenResponseMethod *string `pulumi:"sessionTokenResponseMethod"`
 	// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
 	StepUpTokenExpiration *string `pulumi:"stepUpTokenExpiration"`
 	// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
@@ -21567,7 +21594,9 @@ type ProjectProjectSettings struct {
 	TestUsersStaticOtp *string `pulumi:"testUsersStaticOtp"`
 	// The pattern of the verifiers that will be used for testing.
 	TestUsersVerifierRegexp *string `pulumi:"testUsersVerifierRegexp"`
-	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	// Deprecated.
+	//
+	// Deprecated: The tokenResponseMethod attribute has been renamed, set the refreshTokenResponseMethod attribute instead. This attribute will be removed in a future version of the provider.
 	TokenResponseMethod *string `pulumi:"tokenResponseMethod"`
 	// The expiry time for the trusted device token. The minimum value is "3 minutes".
 	TrustedDeviceTokenExpiration *string `pulumi:"trustedDeviceTokenExpiration"`
@@ -21591,24 +21620,42 @@ type ProjectProjectSettingsArgs struct {
 	AccessKeyJwtTemplate pulumi.StringPtrInput `pulumi:"accessKeyJwtTemplate"`
 	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
 	AccessKeySessionTokenExpiration pulumi.StringPtrInput `pulumi:"accessKeySessionTokenExpiration"`
-	AppUrl                          pulumi.StringPtrInput `pulumi:"appUrl"`
+	// The URL which your application resides on.
+	AppUrl pulumi.StringPtrInput `pulumi:"appUrl"`
 	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
 	ApprovedDomains pulumi.StringArrayInput `pulumi:"approvedDomains"`
-	// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	// Deprecated.
+	//
+	// Deprecated: The cookieDomain attribute has been renamed, set the refreshTokenCookieDomain attribute instead. This attribute will be removed in a future version of the provider.
 	CookieDomain pulumi.StringPtrInput `pulumi:"cookieDomain"`
-	// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	// Deprecated.
+	//
+	// Deprecated: The cookiePolicy attribute has been renamed, set the refreshTokenCookiePolicy attribute instead. This attribute will be removed in a future version of the provider.
 	CookiePolicy pulumi.StringPtrInput `pulumi:"cookiePolicy"`
+	// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 	CustomDomain pulumi.StringPtrInput `pulumi:"customDomain"`
 	// Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
 	EnableInactivity pulumi.BoolPtrInput `pulumi:"enableInactivity"`
 	// The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
 	InactivityTime pulumi.StringPtrInput `pulumi:"inactivityTime"`
+	// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	RefreshTokenCookieDomain pulumi.StringPtrInput `pulumi:"refreshTokenCookieDomain"`
+	// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	RefreshTokenCookiePolicy pulumi.StringPtrInput `pulumi:"refreshTokenCookiePolicy"`
 	// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 	RefreshTokenExpiration pulumi.StringPtrInput `pulumi:"refreshTokenExpiration"`
+	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	RefreshTokenResponseMethod pulumi.StringPtrInput `pulumi:"refreshTokenResponseMethod"`
 	// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
 	RefreshTokenRotation pulumi.BoolPtrInput `pulumi:"refreshTokenRotation"`
+	// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	SessionTokenCookieDomain pulumi.StringPtrInput `pulumi:"sessionTokenCookieDomain"`
+	// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+	SessionTokenCookiePolicy pulumi.StringPtrInput `pulumi:"sessionTokenCookiePolicy"`
 	// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
 	SessionTokenExpiration pulumi.StringPtrInput `pulumi:"sessionTokenExpiration"`
+	// Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	SessionTokenResponseMethod pulumi.StringPtrInput `pulumi:"sessionTokenResponseMethod"`
 	// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
 	StepUpTokenExpiration pulumi.StringPtrInput `pulumi:"stepUpTokenExpiration"`
 	// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
@@ -21617,7 +21664,9 @@ type ProjectProjectSettingsArgs struct {
 	TestUsersStaticOtp pulumi.StringPtrInput `pulumi:"testUsersStaticOtp"`
 	// The pattern of the verifiers that will be used for testing.
 	TestUsersVerifierRegexp pulumi.StringPtrInput `pulumi:"testUsersVerifierRegexp"`
-	// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+	// Deprecated.
+	//
+	// Deprecated: The tokenResponseMethod attribute has been renamed, set the refreshTokenResponseMethod attribute instead. This attribute will be removed in a future version of the provider.
 	TokenResponseMethod pulumi.StringPtrInput `pulumi:"tokenResponseMethod"`
 	// The expiry time for the trusted device token. The minimum value is "3 minutes".
 	TrustedDeviceTokenExpiration pulumi.StringPtrInput `pulumi:"trustedDeviceTokenExpiration"`
@@ -21712,6 +21761,7 @@ func (o ProjectProjectSettingsOutput) AccessKeySessionTokenExpiration() pulumi.S
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AccessKeySessionTokenExpiration }).(pulumi.StringPtrOutput)
 }
 
+// The URL which your application resides on.
 func (o ProjectProjectSettingsOutput) AppUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AppUrl }).(pulumi.StringPtrOutput)
 }
@@ -21721,16 +21771,21 @@ func (o ProjectProjectSettingsOutput) ApprovedDomains() pulumi.StringArrayOutput
 	return o.ApplyT(func(v ProjectProjectSettings) []string { return v.ApprovedDomains }).(pulumi.StringArrayOutput)
 }
 
-// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+// Deprecated.
+//
+// Deprecated: The cookieDomain attribute has been renamed, set the refreshTokenCookieDomain attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsOutput) CookieDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CookieDomain }).(pulumi.StringPtrOutput)
 }
 
-// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+// Deprecated.
+//
+// Deprecated: The cookiePolicy attribute has been renamed, set the refreshTokenCookiePolicy attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsOutput) CookiePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CookiePolicy }).(pulumi.StringPtrOutput)
 }
 
+// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 func (o ProjectProjectSettingsOutput) CustomDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.CustomDomain }).(pulumi.StringPtrOutput)
 }
@@ -21745,9 +21800,24 @@ func (o ProjectProjectSettingsOutput) InactivityTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.InactivityTime }).(pulumi.StringPtrOutput)
 }
 
+// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsOutput) RefreshTokenCookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.RefreshTokenCookieDomain }).(pulumi.StringPtrOutput)
+}
+
+// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsOutput) RefreshTokenCookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.RefreshTokenCookiePolicy }).(pulumi.StringPtrOutput)
+}
+
 // The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 func (o ProjectProjectSettingsOutput) RefreshTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.RefreshTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsOutput) RefreshTokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.RefreshTokenResponseMethod }).(pulumi.StringPtrOutput)
 }
 
 // Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
@@ -21755,9 +21825,24 @@ func (o ProjectProjectSettingsOutput) RefreshTokenRotation() pulumi.BoolPtrOutpu
 	return o.ApplyT(func(v ProjectProjectSettings) *bool { return v.RefreshTokenRotation }).(pulumi.BoolPtrOutput)
 }
 
+// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsOutput) SessionTokenCookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.SessionTokenCookieDomain }).(pulumi.StringPtrOutput)
+}
+
+// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsOutput) SessionTokenCookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.SessionTokenCookiePolicy }).(pulumi.StringPtrOutput)
+}
+
 // The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
 func (o ProjectProjectSettingsOutput) SessionTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.SessionTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsOutput) SessionTokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.SessionTokenResponseMethod }).(pulumi.StringPtrOutput)
 }
 
 // The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
@@ -21780,7 +21865,9 @@ func (o ProjectProjectSettingsOutput) TestUsersVerifierRegexp() pulumi.StringPtr
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.TestUsersVerifierRegexp }).(pulumi.StringPtrOutput)
 }
 
-// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+// Deprecated.
+//
+// Deprecated: The tokenResponseMethod attribute has been renamed, set the refreshTokenResponseMethod attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsOutput) TokenResponseMethod() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.TokenResponseMethod }).(pulumi.StringPtrOutput)
 }
@@ -21839,6 +21926,7 @@ func (o ProjectProjectSettingsPtrOutput) AccessKeySessionTokenExpiration() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// The URL which your application resides on.
 func (o ProjectProjectSettingsPtrOutput) AppUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -21858,7 +21946,9 @@ func (o ProjectProjectSettingsPtrOutput) ApprovedDomains() pulumi.StringArrayOut
 	}).(pulumi.StringArrayOutput)
 }
 
-// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+// Deprecated.
+//
+// Deprecated: The cookieDomain attribute has been renamed, set the refreshTokenCookieDomain attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsPtrOutput) CookieDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -21868,7 +21958,9 @@ func (o ProjectProjectSettingsPtrOutput) CookieDomain() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+// Deprecated.
+//
+// Deprecated: The cookiePolicy attribute has been renamed, set the refreshTokenCookiePolicy attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -21878,6 +21970,7 @@ func (o ProjectProjectSettingsPtrOutput) CookiePolicy() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
 func (o ProjectProjectSettingsPtrOutput) CustomDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
@@ -21907,6 +22000,26 @@ func (o ProjectProjectSettingsPtrOutput) InactivityTime() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsPtrOutput) RefreshTokenCookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RefreshTokenCookieDomain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsPtrOutput) RefreshTokenCookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RefreshTokenCookiePolicy
+	}).(pulumi.StringPtrOutput)
+}
+
 // The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
 func (o ProjectProjectSettingsPtrOutput) RefreshTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
@@ -21914,6 +22027,16 @@ func (o ProjectProjectSettingsPtrOutput) RefreshTokenExpiration() pulumi.StringP
 			return nil
 		}
 		return v.RefreshTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsPtrOutput) RefreshTokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RefreshTokenResponseMethod
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -21927,6 +22050,26 @@ func (o ProjectProjectSettingsPtrOutput) RefreshTokenRotation() pulumi.BoolPtrOu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsPtrOutput) SessionTokenCookieDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionTokenCookieDomain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+func (o ProjectProjectSettingsPtrOutput) SessionTokenCookiePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionTokenCookiePolicy
+	}).(pulumi.StringPtrOutput)
+}
+
 // The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
 func (o ProjectProjectSettingsPtrOutput) SessionTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
@@ -21934,6 +22077,16 @@ func (o ProjectProjectSettingsPtrOutput) SessionTokenExpiration() pulumi.StringP
 			return nil
 		}
 		return v.SessionTokenExpiration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+func (o ProjectProjectSettingsPtrOutput) SessionTokenResponseMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionTokenResponseMethod
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -21977,7 +22130,9 @@ func (o ProjectProjectSettingsPtrOutput) TestUsersVerifierRegexp() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-// Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
+// Deprecated.
+//
+// Deprecated: The tokenResponseMethod attribute has been renamed, set the refreshTokenResponseMethod attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectProjectSettingsPtrOutput) TokenResponseMethod() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectProjectSettings) *string {
 		if v == nil {
