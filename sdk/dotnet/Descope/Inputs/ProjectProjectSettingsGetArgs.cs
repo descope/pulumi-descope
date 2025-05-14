@@ -25,6 +25,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("accessKeySessionTokenExpiration")]
         public Input<string>? AccessKeySessionTokenExpiration { get; set; }
 
+        /// <summary>
+        /// The URL which your application resides on.
+        /// </summary>
         [Input("appUrl")]
         public Input<string>? AppUrl { get; set; }
 
@@ -41,17 +44,20 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         /// <summary>
-        /// The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Deprecated.
         /// </summary>
         [Input("cookieDomain")]
         public Input<string>? CookieDomain { get; set; }
 
         /// <summary>
-        /// Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Deprecated.
         /// </summary>
         [Input("cookiePolicy")]
         public Input<string>? CookiePolicy { get; set; }
 
+        /// <summary>
+        /// A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
         [Input("customDomain")]
         public Input<string>? CustomDomain { get; set; }
 
@@ -68,10 +74,28 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? InactivityTime { get; set; }
 
         /// <summary>
+        /// The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        [Input("refreshTokenCookieDomain")]
+        public Input<string>? RefreshTokenCookieDomain { get; set; }
+
+        /// <summary>
+        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        [Input("refreshTokenCookiePolicy")]
+        public Input<string>? RefreshTokenCookiePolicy { get; set; }
+
+        /// <summary>
         /// The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
         /// </summary>
         [Input("refreshTokenExpiration")]
         public Input<string>? RefreshTokenExpiration { get; set; }
+
+        /// <summary>
+        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// </summary>
+        [Input("refreshTokenResponseMethod")]
+        public Input<string>? RefreshTokenResponseMethod { get; set; }
 
         /// <summary>
         /// Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
@@ -80,10 +104,28 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? RefreshTokenRotation { get; set; }
 
         /// <summary>
+        /// The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        [Input("sessionTokenCookieDomain")]
+        public Input<string>? SessionTokenCookieDomain { get; set; }
+
+        /// <summary>
+        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// </summary>
+        [Input("sessionTokenCookiePolicy")]
+        public Input<string>? SessionTokenCookiePolicy { get; set; }
+
+        /// <summary>
         /// The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
         /// </summary>
         [Input("sessionTokenExpiration")]
         public Input<string>? SessionTokenExpiration { get; set; }
+
+        /// <summary>
+        /// Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// </summary>
+        [Input("sessionTokenResponseMethod")]
+        public Input<string>? SessionTokenResponseMethod { get; set; }
 
         /// <summary>
         /// The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
@@ -110,7 +152,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? TestUsersVerifierRegexp { get; set; }
 
         /// <summary>
-        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// Deprecated.
         /// </summary>
         [Input("tokenResponseMethod")]
         public Input<string>? TokenResponseMethod { get; set; }

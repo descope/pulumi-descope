@@ -9165,17 +9165,36 @@ class ProjectConnectorsSmartling(dict):
 
 @pulumi.output_type
 class ProjectConnectorsSmtp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "useStaticIps":
+            suggest = "use_static_ips"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSmtp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSmtp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSmtp.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  authentication: 'outputs.ProjectConnectorsSmtpAuthentication',
                  name: builtins.str,
                  sender: 'outputs.ProjectConnectorsSmtpSender',
                  server: 'outputs.ProjectConnectorsSmtpServer',
                  description: Optional[builtins.str] = None,
-                 id: Optional[builtins.str] = None):
+                 id: Optional[builtins.str] = None,
+                 use_static_ips: Optional[builtins.bool] = None):
         """
         :param builtins.str name: A custom name for your connector.
         :param 'ProjectConnectorsSmtpSenderArgs' sender: The sender details that should be displayed in the email message.
         :param builtins.str description: A description of what your connector is used for.
+        :param builtins.bool use_static_ips: Whether the connector should send all requests from specific static IPs.
         """
         pulumi.set(__self__, "authentication", authentication)
         pulumi.set(__self__, "name", name)
@@ -9185,6 +9204,8 @@ class ProjectConnectorsSmtp(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if use_static_ips is not None:
+            pulumi.set(__self__, "use_static_ips", use_static_ips)
 
     @property
     @pulumi.getter
@@ -9224,6 +9245,14 @@ class ProjectConnectorsSmtp(dict):
     @pulumi.getter
     def id(self) -> Optional[builtins.str]:
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="useStaticIps")
+    def use_static_ips(self) -> Optional[builtins.bool]:
+        """
+        Whether the connector should send all requests from specific static IPs.
+        """
+        return pulumi.get(self, "use_static_ips")
 
 
 @pulumi.output_type
@@ -10452,12 +10481,24 @@ class ProjectProjectSettings(dict):
             suggest = "enable_inactivity"
         elif key == "inactivityTime":
             suggest = "inactivity_time"
+        elif key == "refreshTokenCookieDomain":
+            suggest = "refresh_token_cookie_domain"
+        elif key == "refreshTokenCookiePolicy":
+            suggest = "refresh_token_cookie_policy"
         elif key == "refreshTokenExpiration":
             suggest = "refresh_token_expiration"
+        elif key == "refreshTokenResponseMethod":
+            suggest = "refresh_token_response_method"
         elif key == "refreshTokenRotation":
             suggest = "refresh_token_rotation"
+        elif key == "sessionTokenCookieDomain":
+            suggest = "session_token_cookie_domain"
+        elif key == "sessionTokenCookiePolicy":
+            suggest = "session_token_cookie_policy"
         elif key == "sessionTokenExpiration":
             suggest = "session_token_expiration"
+        elif key == "sessionTokenResponseMethod":
+            suggest = "session_token_response_method"
         elif key == "stepUpTokenExpiration":
             suggest = "step_up_token_expiration"
         elif key == "testUsersLoginidRegexp":
@@ -10494,9 +10535,15 @@ class ProjectProjectSettings(dict):
                  custom_domain: Optional[builtins.str] = None,
                  enable_inactivity: Optional[builtins.bool] = None,
                  inactivity_time: Optional[builtins.str] = None,
+                 refresh_token_cookie_domain: Optional[builtins.str] = None,
+                 refresh_token_cookie_policy: Optional[builtins.str] = None,
                  refresh_token_expiration: Optional[builtins.str] = None,
+                 refresh_token_response_method: Optional[builtins.str] = None,
                  refresh_token_rotation: Optional[builtins.bool] = None,
+                 session_token_cookie_domain: Optional[builtins.str] = None,
+                 session_token_cookie_policy: Optional[builtins.str] = None,
                  session_token_expiration: Optional[builtins.str] = None,
+                 session_token_response_method: Optional[builtins.str] = None,
                  step_up_token_expiration: Optional[builtins.str] = None,
                  test_users_loginid_regexp: Optional[builtins.str] = None,
                  test_users_static_otp: Optional[builtins.str] = None,
@@ -10507,19 +10554,27 @@ class ProjectProjectSettings(dict):
         """
         :param builtins.str access_key_jwt_template: Name of the access key JWT Template.
         :param builtins.str access_key_session_token_expiration: The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+        :param builtins.str app_url: The URL which your application resides on.
         :param Sequence[builtins.str] approved_domains: The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
-        :param builtins.str cookie_domain: The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        :param builtins.str cookie_policy: Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        :param builtins.str cookie_domain: Deprecated.
+        :param builtins.str cookie_policy: Deprecated.
+        :param builtins.str custom_domain: A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         :param builtins.bool enable_inactivity: Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
         :param builtins.str inactivity_time: The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+        :param builtins.str refresh_token_cookie_domain: The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        :param builtins.str refresh_token_cookie_policy: Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         :param builtins.str refresh_token_expiration: The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
+        :param builtins.str refresh_token_response_method: Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
         :param builtins.bool refresh_token_rotation: Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+        :param builtins.str session_token_cookie_domain: The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        :param builtins.str session_token_cookie_policy: Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         :param builtins.str session_token_expiration: The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+        :param builtins.str session_token_response_method: Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
         :param builtins.str step_up_token_expiration: The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
         :param builtins.str test_users_loginid_regexp: Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
         :param builtins.str test_users_static_otp: A 6 digit static OTP code for use with test users.
         :param builtins.str test_users_verifier_regexp: The pattern of the verifiers that will be used for testing.
-        :param builtins.str token_response_method: Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        :param builtins.str token_response_method: Deprecated.
         :param builtins.str trusted_device_token_expiration: The expiry time for the trusted device token. The minimum value is "3 minutes".
         :param builtins.str user_jwt_template: Name of the user JWT Template.
         """
@@ -10541,12 +10596,24 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "enable_inactivity", enable_inactivity)
         if inactivity_time is not None:
             pulumi.set(__self__, "inactivity_time", inactivity_time)
+        if refresh_token_cookie_domain is not None:
+            pulumi.set(__self__, "refresh_token_cookie_domain", refresh_token_cookie_domain)
+        if refresh_token_cookie_policy is not None:
+            pulumi.set(__self__, "refresh_token_cookie_policy", refresh_token_cookie_policy)
         if refresh_token_expiration is not None:
             pulumi.set(__self__, "refresh_token_expiration", refresh_token_expiration)
+        if refresh_token_response_method is not None:
+            pulumi.set(__self__, "refresh_token_response_method", refresh_token_response_method)
         if refresh_token_rotation is not None:
             pulumi.set(__self__, "refresh_token_rotation", refresh_token_rotation)
+        if session_token_cookie_domain is not None:
+            pulumi.set(__self__, "session_token_cookie_domain", session_token_cookie_domain)
+        if session_token_cookie_policy is not None:
+            pulumi.set(__self__, "session_token_cookie_policy", session_token_cookie_policy)
         if session_token_expiration is not None:
             pulumi.set(__self__, "session_token_expiration", session_token_expiration)
+        if session_token_response_method is not None:
+            pulumi.set(__self__, "session_token_response_method", session_token_response_method)
         if step_up_token_expiration is not None:
             pulumi.set(__self__, "step_up_token_expiration", step_up_token_expiration)
         if test_users_loginid_regexp is not None:
@@ -10581,6 +10648,9 @@ class ProjectProjectSettings(dict):
     @property
     @pulumi.getter(name="appUrl")
     def app_url(self) -> Optional[builtins.str]:
+        """
+        The URL which your application resides on.
+        """
         return pulumi.get(self, "app_url")
 
     @property
@@ -10593,23 +10663,28 @@ class ProjectProjectSettings(dict):
 
     @property
     @pulumi.getter(name="cookieDomain")
+    @_utilities.deprecated("""The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.""")
     def cookie_domain(self) -> Optional[builtins.str]:
         """
-        The domain name for custom domain set up. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        Deprecated.
         """
         return pulumi.get(self, "cookie_domain")
 
     @property
     @pulumi.getter(name="cookiePolicy")
+    @_utilities.deprecated("""The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.""")
     def cookie_policy(self) -> Optional[builtins.str]:
         """
-        Use "strict", "lax" or "none". To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        Deprecated.
         """
         return pulumi.get(self, "cookie_policy")
 
     @property
     @pulumi.getter(name="customDomain")
     def custom_domain(self) -> Optional[builtins.str]:
+        """
+        A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
         return pulumi.get(self, "custom_domain")
 
     @property
@@ -10629,12 +10704,36 @@ class ProjectProjectSettings(dict):
         return pulumi.get(self, "inactivity_time")
 
     @property
+    @pulumi.getter(name="refreshTokenCookieDomain")
+    def refresh_token_cookie_domain(self) -> Optional[builtins.str]:
+        """
+        The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
+        return pulumi.get(self, "refresh_token_cookie_domain")
+
+    @property
+    @pulumi.getter(name="refreshTokenCookiePolicy")
+    def refresh_token_cookie_policy(self) -> Optional[builtins.str]:
+        """
+        Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
+        return pulumi.get(self, "refresh_token_cookie_policy")
+
+    @property
     @pulumi.getter(name="refreshTokenExpiration")
     def refresh_token_expiration(self) -> Optional[builtins.str]:
         """
         The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
         """
         return pulumi.get(self, "refresh_token_expiration")
+
+    @property
+    @pulumi.getter(name="refreshTokenResponseMethod")
+    def refresh_token_response_method(self) -> Optional[builtins.str]:
+        """
+        Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        """
+        return pulumi.get(self, "refresh_token_response_method")
 
     @property
     @pulumi.getter(name="refreshTokenRotation")
@@ -10645,12 +10744,36 @@ class ProjectProjectSettings(dict):
         return pulumi.get(self, "refresh_token_rotation")
 
     @property
+    @pulumi.getter(name="sessionTokenCookieDomain")
+    def session_token_cookie_domain(self) -> Optional[builtins.str]:
+        """
+        The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
+        return pulumi.get(self, "session_token_cookie_domain")
+
+    @property
+    @pulumi.getter(name="sessionTokenCookiePolicy")
+    def session_token_cookie_policy(self) -> Optional[builtins.str]:
+        """
+        Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        """
+        return pulumi.get(self, "session_token_cookie_policy")
+
+    @property
     @pulumi.getter(name="sessionTokenExpiration")
     def session_token_expiration(self) -> Optional[builtins.str]:
         """
         The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
         """
         return pulumi.get(self, "session_token_expiration")
+
+    @property
+    @pulumi.getter(name="sessionTokenResponseMethod")
+    def session_token_response_method(self) -> Optional[builtins.str]:
+        """
+        Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        """
+        return pulumi.get(self, "session_token_response_method")
 
     @property
     @pulumi.getter(name="stepUpTokenExpiration")
@@ -10686,9 +10809,10 @@ class ProjectProjectSettings(dict):
 
     @property
     @pulumi.getter(name="tokenResponseMethod")
+    @_utilities.deprecated("""The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.""")
     def token_response_method(self) -> Optional[builtins.str]:
         """
-        Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        Deprecated.
         """
         return pulumi.get(self, "token_response_method")
 

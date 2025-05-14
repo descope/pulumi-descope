@@ -40,6 +40,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("server", required: true)]
         public Input<Inputs.ProjectConnectorsSmtpServerGetArgs> Server { get; set; } = null!;
 
+        /// <summary>
+        /// Whether the connector should send all requests from specific static IPs.
+        /// </summary>
+        [Input("useStaticIps")]
+        public Input<bool>? UseStaticIps { get; set; }
+
         public ProjectConnectorsSmtpGetArgs()
         {
         }
