@@ -5,18 +5,14 @@ env:
   NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
   PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+providerDefaultBranch: main
 template: external-bridged-provider
 pulumiConvert: 1
 goBuildParallelism: 2
 major-version: 1
 testMasterAndReleaseWorkflows: false
 publish:
-  sdk: all,!java
   cdn: false
-plugins:
-  - name: terraform
-    version: "1.0.19"
-    kind: converter
 generate-nightly-test-workflow: true
 registryDocs: true
 publishRegistry: false

@@ -97,7 +97,7 @@ func Provider() tfbridge.ProviderInfo {
 			RespectSchemaVersion: true,
 		},
 		Java: &tfbridge.JavaInfo{
-			BasePackage: "com.descope",
+			BasePackage: "com.descope.pulumi",
 		},
 	}
 

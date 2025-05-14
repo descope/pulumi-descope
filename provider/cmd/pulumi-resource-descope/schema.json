@@ -32,7 +32,7 @@
             "respectSchemaVersion": true
         },
         "java": {
-            "basePackage": "com.descope",
+            "basePackage": "com.descope.pulumi",
             "buildFiles": "",
             "gradleNexusPublishPluginVersion": "",
             "gradleTest": ""
