@@ -61,7 +61,7 @@ runs:
       if: inputs.tools == 'all' || contains(inputs.tools, 'nodejs')
       uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
       with:
-        node-version: 20.x
+        node-version: 22.x
         registry-url: https://registry.npmjs.org
 
     - name: Setup DotNet
