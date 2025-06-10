@@ -1,13 +1,13 @@
 {
   "packages": [
-    "yarn@1.22.22",
-    "pulumictl@0.0.49",
+    "yarn@latest",
+    "pulumictl@latest",
     "go@1.21.",
     "nodejs@20.",
-    "python3@3.12.8",
+    "python3@3.11.8",
     "dotnet-sdk@8.0.",
-    "gradle_7@7.6.4",
-    "curl@8.13.0"
+    "gradle_7@7.6",
+    "curl@8"
   ],
   "shell": {
     "init_hook": [
