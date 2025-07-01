@@ -68,6 +68,10 @@ public final class ProjectAuthenticationPassword {
      * 
      */
     private @Nullable Boolean reuse;
+    /**
+     * @return The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+     * 
+     */
     private @Nullable Integer reuseAmount;
     /**
      * @return Whether passwords must contain at least one uppercase letter.
@@ -153,6 +157,10 @@ public final class ProjectAuthenticationPassword {
     public Optional<Boolean> reuse() {
         return Optional.ofNullable(this.reuse);
     }
+    /**
+     * @return The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+     * 
+     */
     public Optional<Integer> reuseAmount() {
         return Optional.ofNullable(this.reuseAmount);
     }

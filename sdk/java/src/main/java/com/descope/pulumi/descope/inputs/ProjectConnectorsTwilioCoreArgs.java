@@ -18,16 +18,32 @@ public final class ProjectConnectorsTwilioCoreArgs extends com.pulumi.resources.
 
     public static final ProjectConnectorsTwilioCoreArgs Empty = new ProjectConnectorsTwilioCoreArgs();
 
+    /**
+     * Twilio Account SID from your Twilio Console.
+     * 
+     */
     @Import(name="accountSid", required=true)
     private Output<String> accountSid;
 
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     public Output<String> accountSid() {
         return this.accountSid;
     }
 
+    /**
+     * Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     @Import(name="authentication", required=true)
     private Output<ProjectConnectorsTwilioCoreAuthenticationArgs> authentication;
 
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     public Output<ProjectConnectorsTwilioCoreAuthenticationArgs> authentication() {
         return this.authentication;
     }
@@ -69,9 +85,17 @@ public final class ProjectConnectorsTwilioCoreArgs extends com.pulumi.resources.
         return this.name;
     }
 
+    /**
+     * Configuration for SMS and voice message senders.
+     * 
+     */
     @Import(name="senders", required=true)
     private Output<ProjectConnectorsTwilioCoreSendersArgs> senders;
 
+    /**
+     * @return Configuration for SMS and voice message senders.
+     * 
+     */
     public Output<ProjectConnectorsTwilioCoreSendersArgs> senders() {
         return this.senders;
     }
@@ -105,20 +129,44 @@ public final class ProjectConnectorsTwilioCoreArgs extends com.pulumi.resources.
             $ = new ProjectConnectorsTwilioCoreArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param accountSid Twilio Account SID from your Twilio Console.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountSid(Output<String> accountSid) {
             $.accountSid = accountSid;
             return this;
         }
 
+        /**
+         * @param accountSid Twilio Account SID from your Twilio Console.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountSid(String accountSid) {
             return accountSid(Output.of(accountSid));
         }
 
+        /**
+         * @param authentication Twilio authentication credentials (either auth token or API key/secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(Output<ProjectConnectorsTwilioCoreAuthenticationArgs> authentication) {
             $.authentication = authentication;
             return this;
         }
 
+        /**
+         * @param authentication Twilio authentication credentials (either auth token or API key/secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(ProjectConnectorsTwilioCoreAuthenticationArgs authentication) {
             return authentication(Output.of(authentication));
         }
@@ -174,11 +222,23 @@ public final class ProjectConnectorsTwilioCoreArgs extends com.pulumi.resources.
             return name(Output.of(name));
         }
 
+        /**
+         * @param senders Configuration for SMS and voice message senders.
+         * 
+         * @return builder
+         * 
+         */
         public Builder senders(Output<ProjectConnectorsTwilioCoreSendersArgs> senders) {
             $.senders = senders;
             return this;
         }
 
+        /**
+         * @param senders Configuration for SMS and voice message senders.
+         * 
+         * @return builder
+         * 
+         */
         public Builder senders(ProjectConnectorsTwilioCoreSendersArgs senders) {
             return senders(Output.of(senders));
         }

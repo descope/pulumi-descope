@@ -13,13 +13,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSmtpServer {
+    /**
+     * @return The hostname or IP address of the SMTP server.
+     * 
+     */
     private String host;
+    /**
+     * @return The port number to connect to on the SMTP server.
+     * 
+     */
     private @Nullable Integer port;
 
     private ProjectConnectorsSmtpServer() {}
+    /**
+     * @return The hostname or IP address of the SMTP server.
+     * 
+     */
     public String host() {
         return this.host;
     }
+    /**
+     * @return The port number to connect to on the SMTP server.
+     * 
+     */
     public Optional<Integer> port() {
         return Optional.ofNullable(this.port);
     }

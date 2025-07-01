@@ -15,16 +15,32 @@ public final class ProjectConnectorsTwilioCoreSendersSmsArgs extends com.pulumi.
 
     public static final ProjectConnectorsTwilioCoreSendersSmsArgs Empty = new ProjectConnectorsTwilioCoreSendersSmsArgs();
 
+    /**
+     * Twilio Messaging Service SID for sending SMS messages.
+     * 
+     */
     @Import(name="messagingServiceSid")
     private @Nullable Output<String> messagingServiceSid;
 
+    /**
+     * @return Twilio Messaging Service SID for sending SMS messages.
+     * 
+     */
     public Optional<Output<String>> messagingServiceSid() {
         return Optional.ofNullable(this.messagingServiceSid);
     }
 
+    /**
+     * Twilio phone number for sending SMS messages.
+     * 
+     */
     @Import(name="phoneNumber")
     private @Nullable Output<String> phoneNumber;
 
+    /**
+     * @return Twilio phone number for sending SMS messages.
+     * 
+     */
     public Optional<Output<String>> phoneNumber() {
         return Optional.ofNullable(this.phoneNumber);
     }
@@ -54,20 +70,44 @@ public final class ProjectConnectorsTwilioCoreSendersSmsArgs extends com.pulumi.
             $ = new ProjectConnectorsTwilioCoreSendersSmsArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param messagingServiceSid Twilio Messaging Service SID for sending SMS messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder messagingServiceSid(@Nullable Output<String> messagingServiceSid) {
             $.messagingServiceSid = messagingServiceSid;
             return this;
         }
 
+        /**
+         * @param messagingServiceSid Twilio Messaging Service SID for sending SMS messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder messagingServiceSid(String messagingServiceSid) {
             return messagingServiceSid(Output.of(messagingServiceSid));
         }
 
+        /**
+         * @param phoneNumber Twilio phone number for sending SMS messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder phoneNumber(@Nullable Output<String> phoneNumber) {
             $.phoneNumber = phoneNumber;
             return this;
         }
 
+        /**
+         * @param phoneNumber Twilio phone number for sending SMS messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder phoneNumber(String phoneNumber) {
             return phoneNumber(Output.of(phoneNumber));
         }

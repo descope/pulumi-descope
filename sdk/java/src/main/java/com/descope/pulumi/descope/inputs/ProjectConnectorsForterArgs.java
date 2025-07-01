@@ -18,6 +18,21 @@ public final class ProjectConnectorsForterArgs extends com.pulumi.resources.Reso
     public static final ProjectConnectorsForterArgs Empty = new ProjectConnectorsForterArgs();
 
     /**
+     * The Forter API version.
+     * 
+     */
+    @Import(name="apiVersion")
+    private @Nullable Output<String> apiVersion;
+
+    /**
+     * @return The Forter API version.
+     * 
+     */
+    public Optional<Output<String>> apiVersion() {
+        return Optional.ofNullable(this.apiVersion);
+    }
+
+    /**
      * A description of what your connector is used for.
      * 
      */
@@ -132,6 +147,7 @@ public final class ProjectConnectorsForterArgs extends com.pulumi.resources.Reso
     private ProjectConnectorsForterArgs() {}
 
     private ProjectConnectorsForterArgs(ProjectConnectorsForterArgs $) {
+        this.apiVersion = $.apiVersion;
         this.description = $.description;
         this.id = $.id;
         this.name = $.name;
@@ -158,6 +174,27 @@ public final class ProjectConnectorsForterArgs extends com.pulumi.resources.Reso
 
         public Builder(ProjectConnectorsForterArgs defaults) {
             $ = new ProjectConnectorsForterArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param apiVersion The Forter API version.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder apiVersion(@Nullable Output<String> apiVersion) {
+            $.apiVersion = apiVersion;
+            return this;
+        }
+
+        /**
+         * @param apiVersion The Forter API version.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder apiVersion(String apiVersion) {
+            return apiVersion(Output.of(apiVersion));
         }
 
         /**

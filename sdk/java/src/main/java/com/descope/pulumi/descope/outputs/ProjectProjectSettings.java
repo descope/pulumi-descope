@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectProjectSettingsSessionMigration;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
 import java.lang.String;
@@ -34,28 +35,15 @@ public final class ProjectProjectSettings {
      */
     private @Nullable List<String> approvedDomains;
     /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-    private @Nullable String cookieDomain;
-    /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-    private @Nullable String cookiePolicy;
-    /**
      * @return A custom CNAME that&#39;s configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      * 
      */
     private @Nullable String customDomain;
+    /**
+     * @return Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+     * 
+     */
+    private @Nullable Boolean defaultNoSsoApps;
     /**
      * @return Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
      * 
@@ -91,6 +79,11 @@ public final class ProjectProjectSettings {
      * 
      */
     private @Nullable Boolean refreshTokenRotation;
+    /**
+     * @return Configure seamless migration of existing user sessions from another vendor to Descope.
+     * 
+     */
+    private @Nullable ProjectProjectSettingsSessionMigration sessionMigration;
     /**
      * @return The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      * 
@@ -132,15 +125,6 @@ public final class ProjectProjectSettings {
      */
     private @Nullable String testUsersVerifierRegexp;
     /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-    private @Nullable String tokenResponseMethod;
-    /**
      * @return The expiry time for the trusted device token. The minimum value is &#34;3 minutes&#34;.
      * 
      */
@@ -181,33 +165,18 @@ public final class ProjectProjectSettings {
         return this.approvedDomains == null ? List.of() : this.approvedDomains;
     }
     /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<String> cookieDomain() {
-        return Optional.ofNullable(this.cookieDomain);
-    }
-    /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<String> cookiePolicy() {
-        return Optional.ofNullable(this.cookiePolicy);
-    }
-    /**
      * @return A custom CNAME that&#39;s configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      * 
      */
     public Optional<String> customDomain() {
         return Optional.ofNullable(this.customDomain);
+    }
+    /**
+     * @return Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+     * 
+     */
+    public Optional<Boolean> defaultNoSsoApps() {
+        return Optional.ofNullable(this.defaultNoSsoApps);
     }
     /**
      * @return Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
@@ -257,6 +226,13 @@ public final class ProjectProjectSettings {
      */
     public Optional<Boolean> refreshTokenRotation() {
         return Optional.ofNullable(this.refreshTokenRotation);
+    }
+    /**
+     * @return Configure seamless migration of existing user sessions from another vendor to Descope.
+     * 
+     */
+    public Optional<ProjectProjectSettingsSessionMigration> sessionMigration() {
+        return Optional.ofNullable(this.sessionMigration);
     }
     /**
      * @return The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
@@ -315,17 +291,6 @@ public final class ProjectProjectSettings {
         return Optional.ofNullable(this.testUsersVerifierRegexp);
     }
     /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<String> tokenResponseMethod() {
-        return Optional.ofNullable(this.tokenResponseMethod);
-    }
-    /**
      * @return The expiry time for the trusted device token. The minimum value is &#34;3 minutes&#34;.
      * 
      */
@@ -353,9 +318,8 @@ public final class ProjectProjectSettings {
         private @Nullable String accessKeySessionTokenExpiration;
         private @Nullable String appUrl;
         private @Nullable List<String> approvedDomains;
-        private @Nullable String cookieDomain;
-        private @Nullable String cookiePolicy;
         private @Nullable String customDomain;
+        private @Nullable Boolean defaultNoSsoApps;
         private @Nullable Boolean enableInactivity;
         private @Nullable String inactivityTime;
         private @Nullable String refreshTokenCookieDomain;
@@ -363,6 +327,7 @@ public final class ProjectProjectSettings {
         private @Nullable String refreshTokenExpiration;
         private @Nullable String refreshTokenResponseMethod;
         private @Nullable Boolean refreshTokenRotation;
+        private @Nullable ProjectProjectSettingsSessionMigration sessionMigration;
         private @Nullable String sessionTokenCookieDomain;
         private @Nullable String sessionTokenCookiePolicy;
         private @Nullable String sessionTokenExpiration;
@@ -371,7 +336,6 @@ public final class ProjectProjectSettings {
         private @Nullable String testUsersLoginidRegexp;
         private @Nullable String testUsersStaticOtp;
         private @Nullable String testUsersVerifierRegexp;
-        private @Nullable String tokenResponseMethod;
         private @Nullable String trustedDeviceTokenExpiration;
         private @Nullable String userJwtTemplate;
         public Builder() {}
@@ -381,9 +345,8 @@ public final class ProjectProjectSettings {
     	      this.accessKeySessionTokenExpiration = defaults.accessKeySessionTokenExpiration;
     	      this.appUrl = defaults.appUrl;
     	      this.approvedDomains = defaults.approvedDomains;
-    	      this.cookieDomain = defaults.cookieDomain;
-    	      this.cookiePolicy = defaults.cookiePolicy;
     	      this.customDomain = defaults.customDomain;
+    	      this.defaultNoSsoApps = defaults.defaultNoSsoApps;
     	      this.enableInactivity = defaults.enableInactivity;
     	      this.inactivityTime = defaults.inactivityTime;
     	      this.refreshTokenCookieDomain = defaults.refreshTokenCookieDomain;
@@ -391,6 +354,7 @@ public final class ProjectProjectSettings {
     	      this.refreshTokenExpiration = defaults.refreshTokenExpiration;
     	      this.refreshTokenResponseMethod = defaults.refreshTokenResponseMethod;
     	      this.refreshTokenRotation = defaults.refreshTokenRotation;
+    	      this.sessionMigration = defaults.sessionMigration;
     	      this.sessionTokenCookieDomain = defaults.sessionTokenCookieDomain;
     	      this.sessionTokenCookiePolicy = defaults.sessionTokenCookiePolicy;
     	      this.sessionTokenExpiration = defaults.sessionTokenExpiration;
@@ -399,7 +363,6 @@ public final class ProjectProjectSettings {
     	      this.testUsersLoginidRegexp = defaults.testUsersLoginidRegexp;
     	      this.testUsersStaticOtp = defaults.testUsersStaticOtp;
     	      this.testUsersVerifierRegexp = defaults.testUsersVerifierRegexp;
-    	      this.tokenResponseMethod = defaults.tokenResponseMethod;
     	      this.trustedDeviceTokenExpiration = defaults.trustedDeviceTokenExpiration;
     	      this.userJwtTemplate = defaults.userJwtTemplate;
         }
@@ -432,21 +395,15 @@ public final class ProjectProjectSettings {
             return approvedDomains(List.of(approvedDomains));
         }
         @CustomType.Setter
-        public Builder cookieDomain(@Nullable String cookieDomain) {
-
-            this.cookieDomain = cookieDomain;
-            return this;
-        }
-        @CustomType.Setter
-        public Builder cookiePolicy(@Nullable String cookiePolicy) {
-
-            this.cookiePolicy = cookiePolicy;
-            return this;
-        }
-        @CustomType.Setter
         public Builder customDomain(@Nullable String customDomain) {
 
             this.customDomain = customDomain;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder defaultNoSsoApps(@Nullable Boolean defaultNoSsoApps) {
+
+            this.defaultNoSsoApps = defaultNoSsoApps;
             return this;
         }
         @CustomType.Setter
@@ -489,6 +446,12 @@ public final class ProjectProjectSettings {
         public Builder refreshTokenRotation(@Nullable Boolean refreshTokenRotation) {
 
             this.refreshTokenRotation = refreshTokenRotation;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder sessionMigration(@Nullable ProjectProjectSettingsSessionMigration sessionMigration) {
+
+            this.sessionMigration = sessionMigration;
             return this;
         }
         @CustomType.Setter
@@ -540,12 +503,6 @@ public final class ProjectProjectSettings {
             return this;
         }
         @CustomType.Setter
-        public Builder tokenResponseMethod(@Nullable String tokenResponseMethod) {
-
-            this.tokenResponseMethod = tokenResponseMethod;
-            return this;
-        }
-        @CustomType.Setter
         public Builder trustedDeviceTokenExpiration(@Nullable String trustedDeviceTokenExpiration) {
 
             this.trustedDeviceTokenExpiration = trustedDeviceTokenExpiration;
@@ -563,9 +520,8 @@ public final class ProjectProjectSettings {
             _resultValue.accessKeySessionTokenExpiration = accessKeySessionTokenExpiration;
             _resultValue.appUrl = appUrl;
             _resultValue.approvedDomains = approvedDomains;
-            _resultValue.cookieDomain = cookieDomain;
-            _resultValue.cookiePolicy = cookiePolicy;
             _resultValue.customDomain = customDomain;
+            _resultValue.defaultNoSsoApps = defaultNoSsoApps;
             _resultValue.enableInactivity = enableInactivity;
             _resultValue.inactivityTime = inactivityTime;
             _resultValue.refreshTokenCookieDomain = refreshTokenCookieDomain;
@@ -573,6 +529,7 @@ public final class ProjectProjectSettings {
             _resultValue.refreshTokenExpiration = refreshTokenExpiration;
             _resultValue.refreshTokenResponseMethod = refreshTokenResponseMethod;
             _resultValue.refreshTokenRotation = refreshTokenRotation;
+            _resultValue.sessionMigration = sessionMigration;
             _resultValue.sessionTokenCookieDomain = sessionTokenCookieDomain;
             _resultValue.sessionTokenCookiePolicy = sessionTokenCookiePolicy;
             _resultValue.sessionTokenExpiration = sessionTokenExpiration;
@@ -581,7 +538,6 @@ public final class ProjectProjectSettings {
             _resultValue.testUsersLoginidRegexp = testUsersLoginidRegexp;
             _resultValue.testUsersStaticOtp = testUsersStaticOtp;
             _resultValue.testUsersVerifierRegexp = testUsersVerifierRegexp;
-            _resultValue.tokenResponseMethod = tokenResponseMethod;
             _resultValue.trustedDeviceTokenExpiration = trustedDeviceTokenExpiration;
             _resultValue.userJwtTemplate = userJwtTemplate;
             return _resultValue;

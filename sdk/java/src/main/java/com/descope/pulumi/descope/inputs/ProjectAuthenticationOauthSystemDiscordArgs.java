@@ -49,9 +49,32 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
         return Optional.ofNullable(this.authorizationEndpoint);
     }
 
+    /**
+     * Use a custom domain in your OAuth verification screen.
+     * 
+     */
+    @Import(name="callbackDomain")
+    private @Nullable Output<String> callbackDomain;
+
+    /**
+     * @return Use a custom domain in your OAuth verification screen.
+     * 
+     */
+    public Optional<Output<String>> callbackDomain() {
+        return Optional.ofNullable(this.callbackDomain);
+    }
+
+    /**
+     * Maps OAuth provider claims to Descope user attributes.
+     * 
+     */
     @Import(name="claimMapping")
     private @Nullable Output<Map<String,String>> claimMapping;
 
+    /**
+     * @return Maps OAuth provider claims to Descope user attributes.
+     * 
+     */
     public Optional<Output<Map<String,String>>> claimMapping() {
         return Optional.ofNullable(this.claimMapping);
     }
@@ -116,9 +139,17 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
         return Optional.ofNullable(this.disabled);
     }
 
+    /**
+     * The issuer identifier for the OAuth provider.
+     * 
+     */
     @Import(name="issuer")
     private @Nullable Output<String> issuer;
 
+    /**
+     * @return The issuer identifier for the OAuth provider.
+     * 
+     */
     public Optional<Output<String>> issuer() {
         return Optional.ofNullable(this.issuer);
     }
@@ -154,6 +185,21 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
     }
 
     /**
+     * Whether to enable provider token management for this OAuth provider.
+     * 
+     */
+    @Import(name="manageProviderTokens")
+    private @Nullable Output<Boolean> manageProviderTokens;
+
+    /**
+     * @return Whether to enable provider token management for this OAuth provider.
+     * 
+     */
+    public Optional<Output<Boolean>> manageProviderTokens() {
+        return Optional.ofNullable(this.manageProviderTokens);
+    }
+
+    /**
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      * 
      */
@@ -184,18 +230,33 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
     }
 
     /**
-     * Settings related to token management for the OAuth provider.
+     * This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
      * 
      */
     @Import(name="providerTokenManagement")
     private @Nullable Output<ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs> providerTokenManagement;
 
     /**
-     * @return Settings related to token management for the OAuth provider.
+     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
      * 
      */
     public Optional<Output<ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs>> providerTokenManagement() {
         return Optional.ofNullable(this.providerTokenManagement);
+    }
+
+    /**
+     * Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+     * 
+     */
+    @Import(name="redirectUrl")
+    private @Nullable Output<String> redirectUrl;
+
+    /**
+     * @return Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+     * 
+     */
+    public Optional<Output<String>> redirectUrl() {
+        return Optional.ofNullable(this.redirectUrl);
     }
 
     /**
@@ -248,6 +309,7 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
     private ProjectAuthenticationOauthSystemDiscordArgs(ProjectAuthenticationOauthSystemDiscordArgs $) {
         this.allowedGrantTypes = $.allowedGrantTypes;
         this.authorizationEndpoint = $.authorizationEndpoint;
+        this.callbackDomain = $.callbackDomain;
         this.claimMapping = $.claimMapping;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
@@ -256,9 +318,11 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
         this.issuer = $.issuer;
         this.jwksEndpoint = $.jwksEndpoint;
         this.logo = $.logo;
+        this.manageProviderTokens = $.manageProviderTokens;
         this.mergeUserAccounts = $.mergeUserAccounts;
         this.prompts = $.prompts;
         this.providerTokenManagement = $.providerTokenManagement;
+        this.redirectUrl = $.redirectUrl;
         this.scopes = $.scopes;
         this.tokenEndpoint = $.tokenEndpoint;
         this.userInfoEndpoint = $.userInfoEndpoint;
@@ -334,11 +398,44 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
             return authorizationEndpoint(Output.of(authorizationEndpoint));
         }
 
+        /**
+         * @param callbackDomain Use a custom domain in your OAuth verification screen.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder callbackDomain(@Nullable Output<String> callbackDomain) {
+            $.callbackDomain = callbackDomain;
+            return this;
+        }
+
+        /**
+         * @param callbackDomain Use a custom domain in your OAuth verification screen.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder callbackDomain(String callbackDomain) {
+            return callbackDomain(Output.of(callbackDomain));
+        }
+
+        /**
+         * @param claimMapping Maps OAuth provider claims to Descope user attributes.
+         * 
+         * @return builder
+         * 
+         */
         public Builder claimMapping(@Nullable Output<Map<String,String>> claimMapping) {
             $.claimMapping = claimMapping;
             return this;
         }
 
+        /**
+         * @param claimMapping Maps OAuth provider claims to Descope user attributes.
+         * 
+         * @return builder
+         * 
+         */
         public Builder claimMapping(Map<String,String> claimMapping) {
             return claimMapping(Output.of(claimMapping));
         }
@@ -427,11 +524,23 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
             return disabled(Output.of(disabled));
         }
 
+        /**
+         * @param issuer The issuer identifier for the OAuth provider.
+         * 
+         * @return builder
+         * 
+         */
         public Builder issuer(@Nullable Output<String> issuer) {
             $.issuer = issuer;
             return this;
         }
 
+        /**
+         * @param issuer The issuer identifier for the OAuth provider.
+         * 
+         * @return builder
+         * 
+         */
         public Builder issuer(String issuer) {
             return issuer(Output.of(issuer));
         }
@@ -476,6 +585,27 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
          */
         public Builder logo(String logo) {
             return logo(Output.of(logo));
+        }
+
+        /**
+         * @param manageProviderTokens Whether to enable provider token management for this OAuth provider.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder manageProviderTokens(@Nullable Output<Boolean> manageProviderTokens) {
+            $.manageProviderTokens = manageProviderTokens;
+            return this;
+        }
+
+        /**
+         * @param manageProviderTokens Whether to enable provider token management for this OAuth provider.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder manageProviderTokens(Boolean manageProviderTokens) {
+            return manageProviderTokens(Output.of(manageProviderTokens));
         }
 
         /**
@@ -531,7 +661,7 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
         }
 
         /**
-         * @param providerTokenManagement Settings related to token management for the OAuth provider.
+         * @param providerTokenManagement This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
          * 
          * @return builder
          * 
@@ -542,13 +672,34 @@ public final class ProjectAuthenticationOauthSystemDiscordArgs extends com.pulum
         }
 
         /**
-         * @param providerTokenManagement Settings related to token management for the OAuth provider.
+         * @param providerTokenManagement This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
          * 
          * @return builder
          * 
          */
         public Builder providerTokenManagement(ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs providerTokenManagement) {
             return providerTokenManagement(Output.of(providerTokenManagement));
+        }
+
+        /**
+         * @param redirectUrl Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder redirectUrl(@Nullable Output<String> redirectUrl) {
+            $.redirectUrl = redirectUrl;
+            return this;
+        }
+
+        /**
+         * @param redirectUrl Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder redirectUrl(String redirectUrl) {
+            return redirectUrl(Output.of(redirectUrl));
         }
 
         /**

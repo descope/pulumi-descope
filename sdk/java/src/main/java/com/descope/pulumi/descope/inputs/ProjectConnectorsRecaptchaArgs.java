@@ -6,6 +6,8 @@ package com.descope.pulumi.descope.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
+import java.lang.Double;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,6 +17,21 @@ import javax.annotation.Nullable;
 public final class ProjectConnectorsRecaptchaArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectConnectorsRecaptchaArgs Empty = new ProjectConnectorsRecaptchaArgs();
+
+    /**
+     * When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     * 
+     */
+    @Import(name="assessmentScore")
+    private @Nullable Output<Double> assessmentScore;
+
+    /**
+     * @return When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     * 
+     */
+    public Optional<Output<Double>> assessmentScore() {
+        return Optional.ofNullable(this.assessmentScore);
+    }
 
     /**
      * A description of what your connector is used for.
@@ -54,6 +71,21 @@ public final class ProjectConnectorsRecaptchaArgs extends com.pulumi.resources.R
     }
 
     /**
+     * Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     * 
+     */
+    @Import(name="overrideAssessment")
+    private @Nullable Output<Boolean> overrideAssessment;
+
+    /**
+     * @return Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     * 
+     */
+    public Optional<Output<Boolean>> overrideAssessment() {
+        return Optional.ofNullable(this.overrideAssessment);
+    }
+
+    /**
      * The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user&#39;s response.
      * 
      */
@@ -86,9 +118,11 @@ public final class ProjectConnectorsRecaptchaArgs extends com.pulumi.resources.R
     private ProjectConnectorsRecaptchaArgs() {}
 
     private ProjectConnectorsRecaptchaArgs(ProjectConnectorsRecaptchaArgs $) {
+        this.assessmentScore = $.assessmentScore;
         this.description = $.description;
         this.id = $.id;
         this.name = $.name;
+        this.overrideAssessment = $.overrideAssessment;
         this.secretKey = $.secretKey;
         this.siteKey = $.siteKey;
     }
@@ -109,6 +143,27 @@ public final class ProjectConnectorsRecaptchaArgs extends com.pulumi.resources.R
 
         public Builder(ProjectConnectorsRecaptchaArgs defaults) {
             $ = new ProjectConnectorsRecaptchaArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param assessmentScore When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder assessmentScore(@Nullable Output<Double> assessmentScore) {
+            $.assessmentScore = assessmentScore;
+            return this;
+        }
+
+        /**
+         * @param assessmentScore When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder assessmentScore(Double assessmentScore) {
+            return assessmentScore(Output.of(assessmentScore));
         }
 
         /**
@@ -160,6 +215,27 @@ public final class ProjectConnectorsRecaptchaArgs extends com.pulumi.resources.R
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param overrideAssessment Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder overrideAssessment(@Nullable Output<Boolean> overrideAssessment) {
+            $.overrideAssessment = overrideAssessment;
+            return this;
+        }
+
+        /**
+         * @param overrideAssessment Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder overrideAssessment(Boolean overrideAssessment) {
+            return overrideAssessment(Output.of(overrideAssessment));
         }
 
         /**

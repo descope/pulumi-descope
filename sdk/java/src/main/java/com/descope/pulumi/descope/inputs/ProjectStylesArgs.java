@@ -14,9 +14,17 @@ public final class ProjectStylesArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectStylesArgs Empty = new ProjectStylesArgs();
 
+    /**
+     * The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+     * 
+     */
     @Import(name="data", required=true)
     private Output<String> data;
 
+    /**
+     * @return The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+     * 
+     */
     public Output<String> data() {
         return this.data;
     }
@@ -45,11 +53,23 @@ public final class ProjectStylesArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ProjectStylesArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param data The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(Output<String> data) {
             $.data = data;
             return this;
         }
 
+        /**
+         * @param data The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(String data) {
             return data(Output.of(data));
         }

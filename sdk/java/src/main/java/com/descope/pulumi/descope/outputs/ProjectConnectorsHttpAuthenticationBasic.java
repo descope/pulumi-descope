@@ -10,13 +10,29 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectConnectorsHttpAuthenticationBasic {
+    /**
+     * @return Password for basic HTTP authentication.
+     * 
+     */
     private String password;
+    /**
+     * @return Username for basic HTTP authentication.
+     * 
+     */
     private String username;
 
     private ProjectConnectorsHttpAuthenticationBasic() {}
+    /**
+     * @return Password for basic HTTP authentication.
+     * 
+     */
     public String password() {
         return this.password;
     }
+    /**
+     * @return Username for basic HTTP authentication.
+     * 
+     */
     public String username() {
         return this.username;
     }

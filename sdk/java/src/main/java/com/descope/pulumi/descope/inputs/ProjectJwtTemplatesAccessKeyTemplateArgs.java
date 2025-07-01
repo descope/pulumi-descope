@@ -32,9 +32,32 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
         return Optional.ofNullable(this.authSchema);
     }
 
+    /**
+     * When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+     * 
+     */
+    @Import(name="autoTenantClaim")
+    private @Nullable Output<Boolean> autoTenantClaim;
+
+    /**
+     * @return When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+     * 
+     */
+    public Optional<Output<Boolean>> autoTenantClaim() {
+        return Optional.ofNullable(this.autoTenantClaim);
+    }
+
+    /**
+     * Whether to use OIDC conformance for the JWT issuer field.
+     * 
+     */
     @Import(name="conformanceIssuer")
     private @Nullable Output<Boolean> conformanceIssuer;
 
+    /**
+     * @return Whether to use OIDC conformance for the JWT issuer field.
+     * 
+     */
     public Optional<Output<Boolean>> conformanceIssuer() {
         return Optional.ofNullable(this.conformanceIssuer);
     }
@@ -69,9 +92,17 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
         return Optional.ofNullable(this.emptyClaimPolicy);
     }
 
+    /**
+     * Whether to enforce that the JWT issuer matches the project configuration.
+     * 
+     */
     @Import(name="enforceIssuer")
     private @Nullable Output<Boolean> enforceIssuer;
 
+    /**
+     * @return Whether to enforce that the JWT issuer matches the project configuration.
+     * 
+     */
     public Optional<Output<Boolean>> enforceIssuer() {
         return Optional.ofNullable(this.enforceIssuer);
     }
@@ -98,9 +129,17 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
         return this.name;
     }
 
+    /**
+     * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+     * 
+     */
     @Import(name="template", required=true)
     private Output<String> template;
 
+    /**
+     * @return The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+     * 
+     */
     public Output<String> template() {
         return this.template;
     }
@@ -109,6 +148,7 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
 
     private ProjectJwtTemplatesAccessKeyTemplateArgs(ProjectJwtTemplatesAccessKeyTemplateArgs $) {
         this.authSchema = $.authSchema;
+        this.autoTenantClaim = $.autoTenantClaim;
         this.conformanceIssuer = $.conformanceIssuer;
         this.description = $.description;
         this.emptyClaimPolicy = $.emptyClaimPolicy;
@@ -157,11 +197,44 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
             return authSchema(Output.of(authSchema));
         }
 
+        /**
+         * @param autoTenantClaim When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder autoTenantClaim(@Nullable Output<Boolean> autoTenantClaim) {
+            $.autoTenantClaim = autoTenantClaim;
+            return this;
+        }
+
+        /**
+         * @param autoTenantClaim When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder autoTenantClaim(Boolean autoTenantClaim) {
+            return autoTenantClaim(Output.of(autoTenantClaim));
+        }
+
+        /**
+         * @param conformanceIssuer Whether to use OIDC conformance for the JWT issuer field.
+         * 
+         * @return builder
+         * 
+         */
         public Builder conformanceIssuer(@Nullable Output<Boolean> conformanceIssuer) {
             $.conformanceIssuer = conformanceIssuer;
             return this;
         }
 
+        /**
+         * @param conformanceIssuer Whether to use OIDC conformance for the JWT issuer field.
+         * 
+         * @return builder
+         * 
+         */
         public Builder conformanceIssuer(Boolean conformanceIssuer) {
             return conformanceIssuer(Output.of(conformanceIssuer));
         }
@@ -208,11 +281,23 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
             return emptyClaimPolicy(Output.of(emptyClaimPolicy));
         }
 
+        /**
+         * @param enforceIssuer Whether to enforce that the JWT issuer matches the project configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder enforceIssuer(@Nullable Output<Boolean> enforceIssuer) {
             $.enforceIssuer = enforceIssuer;
             return this;
         }
 
+        /**
+         * @param enforceIssuer Whether to enforce that the JWT issuer matches the project configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder enforceIssuer(Boolean enforceIssuer) {
             return enforceIssuer(Output.of(enforceIssuer));
         }
@@ -247,11 +332,23 @@ public final class ProjectJwtTemplatesAccessKeyTemplateArgs extends com.pulumi.r
             return name(Output.of(name));
         }
 
+        /**
+         * @param template The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+         * 
+         * @return builder
+         * 
+         */
         public Builder template(Output<String> template) {
             $.template = template;
             return this;
         }
 
+        /**
+         * @param template The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+         * 
+         * @return builder
+         * 
+         */
         public Builder template(String template) {
             return template(Output.of(template));
         }

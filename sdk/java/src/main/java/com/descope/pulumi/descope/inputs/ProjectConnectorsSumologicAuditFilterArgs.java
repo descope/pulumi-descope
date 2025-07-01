@@ -15,23 +15,47 @@ public final class ProjectConnectorsSumologicAuditFilterArgs extends com.pulumi.
 
     public static final ProjectConnectorsSumologicAuditFilterArgs Empty = new ProjectConnectorsSumologicAuditFilterArgs();
 
+    /**
+     * The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+     * 
+     */
     @Import(name="key", required=true)
     private Output<String> key;
 
+    /**
+     * @return The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+     * 
+     */
     public Output<String> key() {
         return this.key;
     }
 
+    /**
+     * The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+     * 
+     */
     @Import(name="operator", required=true)
     private Output<String> operator;
 
+    /**
+     * @return The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+     * 
+     */
     public Output<String> operator() {
         return this.operator;
     }
 
+    /**
+     * The list of values to match against for the filter.
+     * 
+     */
     @Import(name="values", required=true)
     private Output<List<String>> values;
 
+    /**
+     * @return The list of values to match against for the filter.
+     * 
+     */
     public Output<List<String>> values() {
         return this.values;
     }
@@ -62,33 +86,75 @@ public final class ProjectConnectorsSumologicAuditFilterArgs extends com.pulumi.
             $ = new ProjectConnectorsSumologicAuditFilterArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param key The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+         * 
+         * @return builder
+         * 
+         */
         public Builder key(Output<String> key) {
             $.key = key;
             return this;
         }
 
+        /**
+         * @param key The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+         * 
+         * @return builder
+         * 
+         */
         public Builder key(String key) {
             return key(Output.of(key));
         }
 
+        /**
+         * @param operator The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+         * 
+         * @return builder
+         * 
+         */
         public Builder operator(Output<String> operator) {
             $.operator = operator;
             return this;
         }
 
+        /**
+         * @param operator The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+         * 
+         * @return builder
+         * 
+         */
         public Builder operator(String operator) {
             return operator(Output.of(operator));
         }
 
+        /**
+         * @param values The list of values to match against for the filter.
+         * 
+         * @return builder
+         * 
+         */
         public Builder values(Output<List<String>> values) {
             $.values = values;
             return this;
         }
 
+        /**
+         * @param values The list of values to match against for the filter.
+         * 
+         * @return builder
+         * 
+         */
         public Builder values(List<String> values) {
             return values(Output.of(values));
         }
 
+        /**
+         * @param values The list of values to match against for the filter.
+         * 
+         * @return builder
+         * 
+         */
         public Builder values(String... values) {
             return values(List.of(values));
         }

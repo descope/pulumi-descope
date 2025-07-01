@@ -34,14 +34,14 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
     }
 
     /**
-     * When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     @Import(name="selectOptions")
     private @Nullable Output<List<String>> selectOptions;
 
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     public Optional<Output<List<String>>> selectOptions() {
@@ -64,14 +64,14 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
     }
 
     /**
-     * The `UserAttributeWidgetAuthorization` object. Read the description below.
+     * Determines the permissions users are required to have to access this attribute in the user management widget.
      * 
      */
     @Import(name="widgetAuthorization")
     private @Nullable Output<ProjectAttributesUserWidgetAuthorizationArgs> widgetAuthorization;
 
     /**
-     * @return The `UserAttributeWidgetAuthorization` object. Read the description below.
+     * @return Determines the permissions users are required to have to access this attribute in the user management widget.
      * 
      */
     public Optional<Output<ProjectAttributesUserWidgetAuthorizationArgs>> widgetAuthorization() {
@@ -127,7 +127,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 
@@ -138,7 +138,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 
@@ -148,7 +148,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 
@@ -179,7 +179,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param widgetAuthorization The `UserAttributeWidgetAuthorization` object. Read the description below.
+         * @param widgetAuthorization Determines the permissions users are required to have to access this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -190,7 +190,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param widgetAuthorization The `UserAttributeWidgetAuthorization` object. Read the description below.
+         * @param widgetAuthorization Determines the permissions users are required to have to access this attribute in the user management widget.
          * 
          * @return builder
          * 

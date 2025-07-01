@@ -11,17 +11,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsTwilioVerifyAuthentication {
+    /**
+     * @return Twilio API Key for authentication (used with API Secret).
+     * 
+     */
     private @Nullable String apiKey;
+    /**
+     * @return Twilio API Secret for authentication (used with API Key).
+     * 
+     */
     private @Nullable String apiSecret;
+    /**
+     * @return Twilio Auth Token for authentication.
+     * 
+     */
     private @Nullable String authToken;
 
     private ProjectConnectorsTwilioVerifyAuthentication() {}
+    /**
+     * @return Twilio API Key for authentication (used with API Secret).
+     * 
+     */
     public Optional<String> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
+    /**
+     * @return Twilio API Secret for authentication (used with API Key).
+     * 
+     */
     public Optional<String> apiSecret() {
         return Optional.ofNullable(this.apiSecret);
     }
+    /**
+     * @return Twilio Auth Token for authentication.
+     * 
+     */
     public Optional<String> authToken() {
         return Optional.ofNullable(this.authToken);
     }

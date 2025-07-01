@@ -17,16 +17,32 @@ public final class ProjectAuthenticationOtpTextServiceTemplateArgs extends com.p
 
     public static final ProjectAuthenticationOtpTextServiceTemplateArgs Empty = new ProjectAuthenticationOtpTextServiceTemplateArgs();
 
+    /**
+     * Whether this text template is currently active and in use.
+     * 
+     */
     @Import(name="active")
     private @Nullable Output<Boolean> active;
 
+    /**
+     * @return Whether this text template is currently active and in use.
+     * 
+     */
     public Optional<Output<Boolean>> active() {
         return Optional.ofNullable(this.active);
     }
 
+    /**
+     * The content of the text message.
+     * 
+     */
     @Import(name="body", required=true)
     private Output<String> body;
 
+    /**
+     * @return The content of the text message.
+     * 
+     */
     public Output<String> body() {
         return this.body;
     }
@@ -38,9 +54,17 @@ public final class ProjectAuthenticationOtpTextServiceTemplateArgs extends com.p
         return Optional.ofNullable(this.id);
     }
 
+    /**
+     * Unique name for this text template.
+     * 
+     */
     @Import(name="name", required=true)
     private Output<String> name;
 
+    /**
+     * @return Unique name for this text template.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
@@ -72,20 +96,44 @@ public final class ProjectAuthenticationOtpTextServiceTemplateArgs extends com.p
             $ = new ProjectAuthenticationOtpTextServiceTemplateArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param active Whether this text template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(@Nullable Output<Boolean> active) {
             $.active = active;
             return this;
         }
 
+        /**
+         * @param active Whether this text template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(Boolean active) {
             return active(Output.of(active));
         }
 
+        /**
+         * @param body The content of the text message.
+         * 
+         * @return builder
+         * 
+         */
         public Builder body(Output<String> body) {
             $.body = body;
             return this;
         }
 
+        /**
+         * @param body The content of the text message.
+         * 
+         * @return builder
+         * 
+         */
         public Builder body(String body) {
             return body(Output.of(body));
         }
@@ -99,11 +147,23 @@ public final class ProjectAuthenticationOtpTextServiceTemplateArgs extends com.p
             return id(Output.of(id));
         }
 
+        /**
+         * @param name Unique name for this text template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Unique name for this text template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }

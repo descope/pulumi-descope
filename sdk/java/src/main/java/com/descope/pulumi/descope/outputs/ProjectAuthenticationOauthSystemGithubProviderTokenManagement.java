@@ -4,23 +4,11 @@
 package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
-import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
-import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOauthSystemGithubProviderTokenManagement {
-    private @Nullable String callbackDomain;
-    private @Nullable String redirectUrl;
-
     private ProjectAuthenticationOauthSystemGithubProviderTokenManagement() {}
-    public Optional<String> callbackDomain() {
-        return Optional.ofNullable(this.callbackDomain);
-    }
-    public Optional<String> redirectUrl() {
-        return Optional.ofNullable(this.redirectUrl);
-    }
 
     public static Builder builder() {
         return new Builder();
@@ -31,31 +19,13 @@ public final class ProjectAuthenticationOauthSystemGithubProviderTokenManagement
     }
     @CustomType.Builder
     public static final class Builder {
-        private @Nullable String callbackDomain;
-        private @Nullable String redirectUrl;
         public Builder() {}
         public Builder(ProjectAuthenticationOauthSystemGithubProviderTokenManagement defaults) {
     	      Objects.requireNonNull(defaults);
-    	      this.callbackDomain = defaults.callbackDomain;
-    	      this.redirectUrl = defaults.redirectUrl;
         }
 
-        @CustomType.Setter
-        public Builder callbackDomain(@Nullable String callbackDomain) {
-
-            this.callbackDomain = callbackDomain;
-            return this;
-        }
-        @CustomType.Setter
-        public Builder redirectUrl(@Nullable String redirectUrl) {
-
-            this.redirectUrl = redirectUrl;
-            return this;
-        }
         public ProjectAuthenticationOauthSystemGithubProviderTokenManagement build() {
             final var _resultValue = new ProjectAuthenticationOauthSystemGithubProviderTokenManagement();
-            _resultValue.callbackDomain = callbackDomain;
-            _resultValue.redirectUrl = redirectUrl;
             return _resultValue;
         }
     }

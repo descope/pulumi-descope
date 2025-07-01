@@ -12,17 +12,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSmtpAuthentication {
+    /**
+     * @return SMTP authentication method (`plain` or `login`).
+     * 
+     */
     private @Nullable String method;
+    /**
+     * @return Password for SMTP server authentication.
+     * 
+     */
     private String password;
+    /**
+     * @return Username for SMTP server authentication.
+     * 
+     */
     private String username;
 
     private ProjectConnectorsSmtpAuthentication() {}
+    /**
+     * @return SMTP authentication method (`plain` or `login`).
+     * 
+     */
     public Optional<String> method() {
         return Optional.ofNullable(this.method);
     }
+    /**
+     * @return Password for SMTP server authentication.
+     * 
+     */
     public String password() {
         return this.password;
     }
+    /**
+     * @return Username for SMTP server authentication.
+     * 
+     */
     public String username() {
         return this.username;
     }

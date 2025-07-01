@@ -5,6 +5,8 @@ package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
+import java.lang.Double;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,6 +14,11 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsRecaptcha {
+    /**
+     * @return When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     * 
+     */
+    private @Nullable Double assessmentScore;
     /**
      * @return A description of what your connector is used for.
      * 
@@ -24,6 +31,11 @@ public final class ProjectConnectorsRecaptcha {
      */
     private String name;
     /**
+     * @return Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     * 
+     */
+    private @Nullable Boolean overrideAssessment;
+    /**
      * @return The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user&#39;s response.
      * 
      */
@@ -35,6 +47,13 @@ public final class ProjectConnectorsRecaptcha {
     private String siteKey;
 
     private ProjectConnectorsRecaptcha() {}
+    /**
+     * @return When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     * 
+     */
+    public Optional<Double> assessmentScore() {
+        return Optional.ofNullable(this.assessmentScore);
+    }
     /**
      * @return A description of what your connector is used for.
      * 
@@ -51,6 +70,13 @@ public final class ProjectConnectorsRecaptcha {
      */
     public String name() {
         return this.name;
+    }
+    /**
+     * @return Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     * 
+     */
+    public Optional<Boolean> overrideAssessment() {
+        return Optional.ofNullable(this.overrideAssessment);
     }
     /**
      * @return The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user&#39;s response.
@@ -76,21 +102,31 @@ public final class ProjectConnectorsRecaptcha {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Double assessmentScore;
         private @Nullable String description;
         private @Nullable String id;
         private String name;
+        private @Nullable Boolean overrideAssessment;
         private String secretKey;
         private String siteKey;
         public Builder() {}
         public Builder(ProjectConnectorsRecaptcha defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.assessmentScore = defaults.assessmentScore;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
+    	      this.overrideAssessment = defaults.overrideAssessment;
     	      this.secretKey = defaults.secretKey;
     	      this.siteKey = defaults.siteKey;
         }
 
+        @CustomType.Setter
+        public Builder assessmentScore(@Nullable Double assessmentScore) {
+
+            this.assessmentScore = assessmentScore;
+            return this;
+        }
         @CustomType.Setter
         public Builder description(@Nullable String description) {
 
@@ -112,6 +148,12 @@ public final class ProjectConnectorsRecaptcha {
             return this;
         }
         @CustomType.Setter
+        public Builder overrideAssessment(@Nullable Boolean overrideAssessment) {
+
+            this.overrideAssessment = overrideAssessment;
+            return this;
+        }
+        @CustomType.Setter
         public Builder secretKey(String secretKey) {
             if (secretKey == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsRecaptcha", "secretKey");
@@ -129,9 +171,11 @@ public final class ProjectConnectorsRecaptcha {
         }
         public ProjectConnectorsRecaptcha build() {
             final var _resultValue = new ProjectConnectorsRecaptcha();
+            _resultValue.assessmentScore = assessmentScore;
             _resultValue.description = description;
             _resultValue.id = id;
             _resultValue.name = name;
+            _resultValue.overrideAssessment = overrideAssessment;
             _resultValue.secretKey = secretKey;
             _resultValue.siteKey = siteKey;
             return _resultValue;

@@ -11,17 +11,41 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectConnectorsSumologicAuditFilter {
+    /**
+     * @return The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+     * 
+     */
     private String key;
+    /**
+     * @return The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+     * 
+     */
     private String operator;
+    /**
+     * @return The list of values to match against for the filter.
+     * 
+     */
     private List<String> values;
 
     private ProjectConnectorsSumologicAuditFilter() {}
+    /**
+     * @return The field name to filter on (either &#39;actions&#39; or &#39;tenants&#39;).
+     * 
+     */
     public String key() {
         return this.key;
     }
+    /**
+     * @return The filter operation to apply (&#39;includes&#39; or &#39;excludes&#39;).
+     * 
+     */
     public String operator() {
         return this.operator;
     }
+    /**
+     * @return The list of values to match against for the filter.
+     * 
+     */
     public List<String> values() {
         return this.values;
     }

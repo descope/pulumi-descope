@@ -16,16 +16,32 @@ public final class ProjectConnectorsSeSenderArgs extends com.pulumi.resources.Re
 
     public static final ProjectConnectorsSeSenderArgs Empty = new ProjectConnectorsSeSenderArgs();
 
+    /**
+     * The email address that will appear as the sender of the email.
+     * 
+     */
     @Import(name="email", required=true)
     private Output<String> email;
 
+    /**
+     * @return The email address that will appear as the sender of the email.
+     * 
+     */
     public Output<String> email() {
         return this.email;
     }
 
+    /**
+     * The display name that will appear as the sender of the email.
+     * 
+     */
     @Import(name="name")
     private @Nullable Output<String> name;
 
+    /**
+     * @return The display name that will appear as the sender of the email.
+     * 
+     */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
     }
@@ -55,20 +71,44 @@ public final class ProjectConnectorsSeSenderArgs extends com.pulumi.resources.Re
             $ = new ProjectConnectorsSeSenderArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param email The email address that will appear as the sender of the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder email(Output<String> email) {
             $.email = email;
             return this;
         }
 
+        /**
+         * @param email The email address that will appear as the sender of the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder email(String email) {
             return email(Output.of(email));
         }
 
+        /**
+         * @param name The display name that will appear as the sender of the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(@Nullable Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name The display name that will appear as the sender of the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }

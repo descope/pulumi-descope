@@ -13,21 +13,45 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpVoiceServiceTemplate {
+    /**
+     * @return Whether this voice template is currently active and in use.
+     * 
+     */
     private @Nullable Boolean active;
+    /**
+     * @return The content of the voice message that will be spoken.
+     * 
+     */
     private String body;
     private @Nullable String id;
+    /**
+     * @return Unique name for this voice template.
+     * 
+     */
     private String name;
 
     private ProjectAuthenticationOtpVoiceServiceTemplate() {}
+    /**
+     * @return Whether this voice template is currently active and in use.
+     * 
+     */
     public Optional<Boolean> active() {
         return Optional.ofNullable(this.active);
     }
+    /**
+     * @return The content of the voice message that will be spoken.
+     * 
+     */
     public String body() {
         return this.body;
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
+    /**
+     * @return Unique name for this voice template.
+     * 
+     */
     public String name() {
         return this.name;
     }

@@ -14,6 +14,10 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAttributesTenant {
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     private @Nullable ProjectAttributesTenantAuthorization authorization;
     /**
      * @return The name of the attribute.
@@ -21,7 +25,7 @@ public final class ProjectAttributesTenant {
      */
     private String name;
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     private @Nullable List<String> selectOptions;
@@ -32,6 +36,10 @@ public final class ProjectAttributesTenant {
     private String type;
 
     private ProjectAttributesTenant() {}
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     public Optional<ProjectAttributesTenantAuthorization> authorization() {
         return Optional.ofNullable(this.authorization);
     }
@@ -43,7 +51,7 @@ public final class ProjectAttributesTenant {
         return this.name;
     }
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     public List<String> selectOptions() {

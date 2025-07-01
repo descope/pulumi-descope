@@ -19,16 +19,32 @@ public final class ProjectConnectorsSumologicArgs extends com.pulumi.resources.R
 
     public static final ProjectConnectorsSumologicArgs Empty = new ProjectConnectorsSumologicArgs();
 
+    /**
+     * Whether to enable streaming of audit events.
+     * 
+     */
     @Import(name="auditEnabled")
     private @Nullable Output<Boolean> auditEnabled;
 
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     public Optional<Output<Boolean>> auditEnabled() {
         return Optional.ofNullable(this.auditEnabled);
     }
 
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     @Import(name="auditFilters")
     private @Nullable Output<List<ProjectConnectorsSumologicAuditFilterArgs>> auditFilters;
 
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSumologicAuditFilterArgs>>> auditFilters() {
         return Optional.ofNullable(this.auditFilters);
     }
@@ -85,9 +101,17 @@ public final class ProjectConnectorsSumologicArgs extends com.pulumi.resources.R
         return this.name;
     }
 
+    /**
+     * Whether to send troubleshooting events.
+     * 
+     */
     @Import(name="troubleshootLogEnabled")
     private @Nullable Output<Boolean> troubleshootLogEnabled;
 
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     public Optional<Output<Boolean>> troubleshootLogEnabled() {
         return Optional.ofNullable(this.troubleshootLogEnabled);
     }
@@ -122,24 +146,54 @@ public final class ProjectConnectorsSumologicArgs extends com.pulumi.resources.R
             $ = new ProjectConnectorsSumologicArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param auditEnabled Whether to enable streaming of audit events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditEnabled(@Nullable Output<Boolean> auditEnabled) {
             $.auditEnabled = auditEnabled;
             return this;
         }
 
+        /**
+         * @param auditEnabled Whether to enable streaming of audit events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditEnabled(Boolean auditEnabled) {
             return auditEnabled(Output.of(auditEnabled));
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(@Nullable Output<List<ProjectConnectorsSumologicAuditFilterArgs>> auditFilters) {
             $.auditFilters = auditFilters;
             return this;
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(List<ProjectConnectorsSumologicAuditFilterArgs> auditFilters) {
             return auditFilters(Output.of(auditFilters));
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(ProjectConnectorsSumologicAuditFilterArgs... auditFilters) {
             return auditFilters(List.of(auditFilters));
         }
@@ -216,11 +270,23 @@ public final class ProjectConnectorsSumologicArgs extends com.pulumi.resources.R
             return name(Output.of(name));
         }
 
+        /**
+         * @param troubleshootLogEnabled Whether to send troubleshooting events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder troubleshootLogEnabled(@Nullable Output<Boolean> troubleshootLogEnabled) {
             $.troubleshootLogEnabled = troubleshootLogEnabled;
             return this;
         }
 
+        /**
+         * @param troubleshootLogEnabled Whether to send troubleshooting events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder troubleshootLogEnabled(Boolean troubleshootLogEnabled) {
             return troubleshootLogEnabled(Output.of(troubleshootLogEnabled));
         }

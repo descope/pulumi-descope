@@ -13,21 +13,45 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpTextServiceTemplate {
+    /**
+     * @return Whether this text template is currently active and in use.
+     * 
+     */
     private @Nullable Boolean active;
+    /**
+     * @return The content of the text message.
+     * 
+     */
     private String body;
     private @Nullable String id;
+    /**
+     * @return Unique name for this text template.
+     * 
+     */
     private String name;
 
     private ProjectAuthenticationOtpTextServiceTemplate() {}
+    /**
+     * @return Whether this text template is currently active and in use.
+     * 
+     */
     public Optional<Boolean> active() {
         return Optional.ofNullable(this.active);
     }
+    /**
+     * @return The content of the text message.
+     * 
+     */
     public String body() {
         return this.body;
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
+    /**
+     * @return Unique name for this text template.
+     * 
+     */
     public String name() {
         return this.name;
     }

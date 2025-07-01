@@ -17,16 +17,32 @@ public final class ProjectConnectorsSmtpServerArgs extends com.pulumi.resources.
 
     public static final ProjectConnectorsSmtpServerArgs Empty = new ProjectConnectorsSmtpServerArgs();
 
+    /**
+     * The hostname or IP address of the SMTP server.
+     * 
+     */
     @Import(name="host", required=true)
     private Output<String> host;
 
+    /**
+     * @return The hostname or IP address of the SMTP server.
+     * 
+     */
     public Output<String> host() {
         return this.host;
     }
 
+    /**
+     * The port number to connect to on the SMTP server.
+     * 
+     */
     @Import(name="port")
     private @Nullable Output<Integer> port;
 
+    /**
+     * @return The port number to connect to on the SMTP server.
+     * 
+     */
     public Optional<Output<Integer>> port() {
         return Optional.ofNullable(this.port);
     }
@@ -56,20 +72,44 @@ public final class ProjectConnectorsSmtpServerArgs extends com.pulumi.resources.
             $ = new ProjectConnectorsSmtpServerArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param host The hostname or IP address of the SMTP server.
+         * 
+         * @return builder
+         * 
+         */
         public Builder host(Output<String> host) {
             $.host = host;
             return this;
         }
 
+        /**
+         * @param host The hostname or IP address of the SMTP server.
+         * 
+         * @return builder
+         * 
+         */
         public Builder host(String host) {
             return host(Output.of(host));
         }
 
+        /**
+         * @param port The port number to connect to on the SMTP server.
+         * 
+         * @return builder
+         * 
+         */
         public Builder port(@Nullable Output<Integer> port) {
             $.port = port;
             return this;
         }
 
+        /**
+         * @param port The port number to connect to on the SMTP server.
+         * 
+         * @return builder
+         * 
+         */
         public Builder port(Integer port) {
             return port(Output.of(port));
         }

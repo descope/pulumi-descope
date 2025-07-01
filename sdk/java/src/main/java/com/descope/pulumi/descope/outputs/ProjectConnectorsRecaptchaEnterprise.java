@@ -29,7 +29,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      * 
      */
     private @Nullable String description;
-    private @Nullable Boolean enterprise;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -73,9 +72,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
-    }
-    public Optional<Boolean> enterprise() {
-        return Optional.ofNullable(this.enterprise);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
@@ -121,7 +117,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         private String apiKey;
         private @Nullable Double assessmentScore;
         private @Nullable String description;
-        private @Nullable Boolean enterprise;
         private @Nullable String id;
         private String name;
         private @Nullable Boolean overrideAssessment;
@@ -133,7 +128,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     	      this.apiKey = defaults.apiKey;
     	      this.assessmentScore = defaults.assessmentScore;
     	      this.description = defaults.description;
-    	      this.enterprise = defaults.enterprise;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.overrideAssessment = defaults.overrideAssessment;
@@ -159,12 +153,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         public Builder description(@Nullable String description) {
 
             this.description = description;
-            return this;
-        }
-        @CustomType.Setter
-        public Builder enterprise(@Nullable Boolean enterprise) {
-
-            this.enterprise = enterprise;
             return this;
         }
         @CustomType.Setter
@@ -208,7 +196,6 @@ public final class ProjectConnectorsRecaptchaEnterprise {
             _resultValue.apiKey = apiKey;
             _resultValue.assessmentScore = assessmentScore;
             _resultValue.description = description;
-            _resultValue.enterprise = enterprise;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.overrideAssessment = overrideAssessment;

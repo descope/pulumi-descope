@@ -16,6 +16,10 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSmtp {
+    /**
+     * @return SMTP server authentication credentials and method.
+     * 
+     */
     private ProjectConnectorsSmtpAuthentication authentication;
     /**
      * @return A description of what your connector is used for.
@@ -33,6 +37,10 @@ public final class ProjectConnectorsSmtp {
      * 
      */
     private ProjectConnectorsSmtpSender sender;
+    /**
+     * @return SMTP server connection details including hostname and port.
+     * 
+     */
     private ProjectConnectorsSmtpServer server;
     /**
      * @return Whether the connector should send all requests from specific static IPs.
@@ -41,6 +49,10 @@ public final class ProjectConnectorsSmtp {
     private @Nullable Boolean useStaticIps;
 
     private ProjectConnectorsSmtp() {}
+    /**
+     * @return SMTP server authentication credentials and method.
+     * 
+     */
     public ProjectConnectorsSmtpAuthentication authentication() {
         return this.authentication;
     }
@@ -68,6 +80,10 @@ public final class ProjectConnectorsSmtp {
     public ProjectConnectorsSmtpSender sender() {
         return this.sender;
     }
+    /**
+     * @return SMTP server connection details including hostname and port.
+     * 
+     */
     public ProjectConnectorsSmtpServer server() {
         return this.server;
     }

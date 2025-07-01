@@ -11,9 +11,17 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAttributesTenantAuthorization {
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     private @Nullable List<String> viewPermissions;
 
     private ProjectAttributesTenantAuthorization() {}
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     public List<String> viewPermissions() {
         return this.viewPermissions == null ? List.of() : this.viewPermissions;
     }

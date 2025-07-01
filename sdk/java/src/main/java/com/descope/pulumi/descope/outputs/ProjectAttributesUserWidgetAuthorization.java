@@ -12,26 +12,26 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAttributesUserWidgetAuthorization {
     /**
-     * @return A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to edit this attribute in the user management widget.
      * 
      */
     private @Nullable List<String> editPermissions;
     /**
-     * @return A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to view this attribute in the user management widget.
      * 
      */
     private @Nullable List<String> viewPermissions;
 
     private ProjectAttributesUserWidgetAuthorization() {}
     /**
-     * @return A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to edit this attribute in the user management widget.
      * 
      */
     public List<String> editPermissions() {
         return this.editPermissions == null ? List.of() : this.editPermissions;
     }
     /**
-     * @return A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to view this attribute in the user management widget.
      * 
      */
     public List<String> viewPermissions() {

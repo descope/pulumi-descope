@@ -182,9 +182,17 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
         return Optional.ofNullable(this.reuse);
     }
 
+    /**
+     * The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+     * 
+     */
     @Import(name="reuseAmount")
     private @Nullable Output<Integer> reuseAmount;
 
+    /**
+     * @return The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+     * 
+     */
     public Optional<Output<Integer>> reuseAmount() {
         return Optional.ofNullable(this.reuseAmount);
     }
@@ -471,11 +479,23 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
             return reuse(Output.of(reuse));
         }
 
+        /**
+         * @param reuseAmount The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+         * 
+         * @return builder
+         * 
+         */
         public Builder reuseAmount(@Nullable Output<Integer> reuseAmount) {
             $.reuseAmount = reuseAmount;
             return this;
         }
 
+        /**
+         * @param reuseAmount The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+         * 
+         * @return builder
+         * 
+         */
         public Builder reuseAmount(Integer reuseAmount) {
             return reuseAmount(Output.of(reuseAmount));
         }

@@ -63,13 +63,6 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
         return Optional.ofNullable(this.description);
     }
 
-    @Import(name="enterprise")
-    private @Nullable Output<Boolean> enterprise;
-
-    public Optional<Output<Boolean>> enterprise() {
-        return Optional.ofNullable(this.enterprise);
-    }
-
     @Import(name="id")
     private @Nullable Output<String> id;
 
@@ -143,7 +136,6 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
         this.apiKey = $.apiKey;
         this.assessmentScore = $.assessmentScore;
         this.description = $.description;
-        this.enterprise = $.enterprise;
         this.id = $.id;
         this.name = $.name;
         this.overrideAssessment = $.overrideAssessment;
@@ -230,15 +222,6 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
          */
         public Builder description(String description) {
             return description(Output.of(description));
-        }
-
-        public Builder enterprise(@Nullable Output<Boolean> enterprise) {
-            $.enterprise = enterprise;
-            return this;
-        }
-
-        public Builder enterprise(Boolean enterprise) {
-            return enterprise(Output.of(enterprise));
         }
 
         public Builder id(@Nullable Output<String> id) {

@@ -14,9 +14,17 @@ public final class ProjectConnectorsTwilioCoreSendersVoiceArgs extends com.pulum
 
     public static final ProjectConnectorsTwilioCoreSendersVoiceArgs Empty = new ProjectConnectorsTwilioCoreSendersVoiceArgs();
 
+    /**
+     * Twilio phone number for making voice calls.
+     * 
+     */
     @Import(name="phoneNumber", required=true)
     private Output<String> phoneNumber;
 
+    /**
+     * @return Twilio phone number for making voice calls.
+     * 
+     */
     public Output<String> phoneNumber() {
         return this.phoneNumber;
     }
@@ -45,11 +53,23 @@ public final class ProjectConnectorsTwilioCoreSendersVoiceArgs extends com.pulum
             $ = new ProjectConnectorsTwilioCoreSendersVoiceArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param phoneNumber Twilio phone number for making voice calls.
+         * 
+         * @return builder
+         * 
+         */
         public Builder phoneNumber(Output<String> phoneNumber) {
             $.phoneNumber = phoneNumber;
             return this;
         }
 
+        /**
+         * @param phoneNumber Twilio phone number for making voice calls.
+         * 
+         * @return builder
+         * 
+         */
         public Builder phoneNumber(String phoneNumber) {
             return phoneNumber(Output.of(phoneNumber));
         }

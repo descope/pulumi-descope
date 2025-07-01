@@ -17,16 +17,32 @@ public final class ProjectAuthenticationOtpVoiceServiceTemplateArgs extends com.
 
     public static final ProjectAuthenticationOtpVoiceServiceTemplateArgs Empty = new ProjectAuthenticationOtpVoiceServiceTemplateArgs();
 
+    /**
+     * Whether this voice template is currently active and in use.
+     * 
+     */
     @Import(name="active")
     private @Nullable Output<Boolean> active;
 
+    /**
+     * @return Whether this voice template is currently active and in use.
+     * 
+     */
     public Optional<Output<Boolean>> active() {
         return Optional.ofNullable(this.active);
     }
 
+    /**
+     * The content of the voice message that will be spoken.
+     * 
+     */
     @Import(name="body", required=true)
     private Output<String> body;
 
+    /**
+     * @return The content of the voice message that will be spoken.
+     * 
+     */
     public Output<String> body() {
         return this.body;
     }
@@ -38,9 +54,17 @@ public final class ProjectAuthenticationOtpVoiceServiceTemplateArgs extends com.
         return Optional.ofNullable(this.id);
     }
 
+    /**
+     * Unique name for this voice template.
+     * 
+     */
     @Import(name="name", required=true)
     private Output<String> name;
 
+    /**
+     * @return Unique name for this voice template.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
@@ -72,20 +96,44 @@ public final class ProjectAuthenticationOtpVoiceServiceTemplateArgs extends com.
             $ = new ProjectAuthenticationOtpVoiceServiceTemplateArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param active Whether this voice template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(@Nullable Output<Boolean> active) {
             $.active = active;
             return this;
         }
 
+        /**
+         * @param active Whether this voice template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(Boolean active) {
             return active(Output.of(active));
         }
 
+        /**
+         * @param body The content of the voice message that will be spoken.
+         * 
+         * @return builder
+         * 
+         */
         public Builder body(Output<String> body) {
             $.body = body;
             return this;
         }
 
+        /**
+         * @param body The content of the voice message that will be spoken.
+         * 
+         * @return builder
+         * 
+         */
         public Builder body(String body) {
             return body(Output.of(body));
         }
@@ -99,11 +147,23 @@ public final class ProjectAuthenticationOtpVoiceServiceTemplateArgs extends com.
             return id(Output.of(id));
         }
 
+        /**
+         * @param name Unique name for this voice template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Unique name for this voice template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }

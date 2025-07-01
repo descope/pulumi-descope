@@ -132,9 +132,17 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.flows);
     }
 
+    /**
+     * User invitation settings and behavior.
+     * 
+     */
     @Import(name="inviteSettings")
     private @Nullable Output<ProjectInviteSettingsArgs> inviteSettings;
 
+    /**
+     * @return User invitation settings and behavior.
+     * 
+     */
     public Optional<Output<ProjectInviteSettingsArgs>> inviteSettings() {
         return Optional.ofNullable(this.inviteSettings);
     }
@@ -397,11 +405,23 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
             return flows(Output.of(flows));
         }
 
+        /**
+         * @param inviteSettings User invitation settings and behavior.
+         * 
+         * @return builder
+         * 
+         */
         public Builder inviteSettings(@Nullable Output<ProjectInviteSettingsArgs> inviteSettings) {
             $.inviteSettings = inviteSettings;
             return this;
         }
 
+        /**
+         * @param inviteSettings User invitation settings and behavior.
+         * 
+         * @return builder
+         * 
+         */
         public Builder inviteSettings(ProjectInviteSettingsArgs inviteSettings) {
             return inviteSettings(Output.of(inviteSettings));
         }

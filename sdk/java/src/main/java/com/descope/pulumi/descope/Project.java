@@ -125,9 +125,17 @@ public class Project extends com.pulumi.resources.CustomResource {
     public Output<Map<String,ProjectFlows>> flows() {
         return this.flows;
     }
+    /**
+     * User invitation settings and behavior.
+     * 
+     */
     @Export(name="inviteSettings", refs={ProjectInviteSettings.class}, tree="[0]")
     private Output<ProjectInviteSettings> inviteSettings;
 
+    /**
+     * @return User invitation settings and behavior.
+     * 
+     */
     public Output<ProjectInviteSettings> inviteSettings() {
         return this.inviteSettings;
     }

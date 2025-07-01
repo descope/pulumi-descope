@@ -48,9 +48,17 @@ public final class ProjectAuthenticationMagicLinkArgs extends com.pulumi.resourc
         return Optional.ofNullable(this.emailService);
     }
 
+    /**
+     * How long the magic link remains valid before it expires.
+     * 
+     */
     @Import(name="expirationTime")
     private @Nullable Output<String> expirationTime;
 
+    /**
+     * @return How long the magic link remains valid before it expires.
+     * 
+     */
     public Optional<Output<String>> expirationTime() {
         return Optional.ofNullable(this.expirationTime);
     }
@@ -155,11 +163,23 @@ public final class ProjectAuthenticationMagicLinkArgs extends com.pulumi.resourc
             return emailService(Output.of(emailService));
         }
 
+        /**
+         * @param expirationTime How long the magic link remains valid before it expires.
+         * 
+         * @return builder
+         * 
+         */
         public Builder expirationTime(@Nullable Output<String> expirationTime) {
             $.expirationTime = expirationTime;
             return this;
         }
 
+        /**
+         * @param expirationTime How long the magic link remains valid before it expires.
+         * 
+         * @return builder
+         * 
+         */
         public Builder expirationTime(String expirationTime) {
             return expirationTime(Output.of(expirationTime));
         }

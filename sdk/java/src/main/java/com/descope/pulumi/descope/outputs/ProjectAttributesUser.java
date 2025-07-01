@@ -20,7 +20,7 @@ public final class ProjectAttributesUser {
      */
     private String name;
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     private @Nullable List<String> selectOptions;
@@ -30,7 +30,7 @@ public final class ProjectAttributesUser {
      */
     private String type;
     /**
-     * @return The `UserAttributeWidgetAuthorization` object. Read the description below.
+     * @return Determines the permissions users are required to have to access this attribute in the user management widget.
      * 
      */
     private @Nullable ProjectAttributesUserWidgetAuthorization widgetAuthorization;
@@ -44,7 +44,7 @@ public final class ProjectAttributesUser {
         return this.name;
     }
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     public List<String> selectOptions() {
@@ -58,7 +58,7 @@ public final class ProjectAttributesUser {
         return this.type;
     }
     /**
-     * @return The `UserAttributeWidgetAuthorization` object. Read the description below.
+     * @return Determines the permissions users are required to have to access this attribute in the user management widget.
      * 
      */
     public Optional<ProjectAttributesUserWidgetAuthorization> widgetAuthorization() {

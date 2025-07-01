@@ -17,16 +17,32 @@ public final class ProjectConnectorsTwilioCoreSendersArgs extends com.pulumi.res
 
     public static final ProjectConnectorsTwilioCoreSendersArgs Empty = new ProjectConnectorsTwilioCoreSendersArgs();
 
+    /**
+     * SMS sender configuration using either a phone number or messaging service.
+     * 
+     */
     @Import(name="sms", required=true)
     private Output<ProjectConnectorsTwilioCoreSendersSmsArgs> sms;
 
+    /**
+     * @return SMS sender configuration using either a phone number or messaging service.
+     * 
+     */
     public Output<ProjectConnectorsTwilioCoreSendersSmsArgs> sms() {
         return this.sms;
     }
 
+    /**
+     * Voice call sender configuration.
+     * 
+     */
     @Import(name="voice")
     private @Nullable Output<ProjectConnectorsTwilioCoreSendersVoiceArgs> voice;
 
+    /**
+     * @return Voice call sender configuration.
+     * 
+     */
     public Optional<Output<ProjectConnectorsTwilioCoreSendersVoiceArgs>> voice() {
         return Optional.ofNullable(this.voice);
     }
@@ -56,20 +72,44 @@ public final class ProjectConnectorsTwilioCoreSendersArgs extends com.pulumi.res
             $ = new ProjectConnectorsTwilioCoreSendersArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param sms SMS sender configuration using either a phone number or messaging service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sms(Output<ProjectConnectorsTwilioCoreSendersSmsArgs> sms) {
             $.sms = sms;
             return this;
         }
 
+        /**
+         * @param sms SMS sender configuration using either a phone number or messaging service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sms(ProjectConnectorsTwilioCoreSendersSmsArgs sms) {
             return sms(Output.of(sms));
         }
 
+        /**
+         * @param voice Voice call sender configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder voice(@Nullable Output<ProjectConnectorsTwilioCoreSendersVoiceArgs> voice) {
             $.voice = voice;
             return this;
         }
 
+        /**
+         * @param voice Voice call sender configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder voice(ProjectConnectorsTwilioCoreSendersVoiceArgs voice) {
             return voice(Output.of(voice));
         }

@@ -16,23 +16,47 @@ public final class ProjectConnectorsSmtpAuthenticationArgs extends com.pulumi.re
 
     public static final ProjectConnectorsSmtpAuthenticationArgs Empty = new ProjectConnectorsSmtpAuthenticationArgs();
 
+    /**
+     * SMTP authentication method (`plain` or `login`).
+     * 
+     */
     @Import(name="method")
     private @Nullable Output<String> method;
 
+    /**
+     * @return SMTP authentication method (`plain` or `login`).
+     * 
+     */
     public Optional<Output<String>> method() {
         return Optional.ofNullable(this.method);
     }
 
+    /**
+     * Password for SMTP server authentication.
+     * 
+     */
     @Import(name="password", required=true)
     private Output<String> password;
 
+    /**
+     * @return Password for SMTP server authentication.
+     * 
+     */
     public Output<String> password() {
         return this.password;
     }
 
+    /**
+     * Username for SMTP server authentication.
+     * 
+     */
     @Import(name="username", required=true)
     private Output<String> username;
 
+    /**
+     * @return Username for SMTP server authentication.
+     * 
+     */
     public Output<String> username() {
         return this.username;
     }
@@ -63,29 +87,65 @@ public final class ProjectConnectorsSmtpAuthenticationArgs extends com.pulumi.re
             $ = new ProjectConnectorsSmtpAuthenticationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param method SMTP authentication method (`plain` or `login`).
+         * 
+         * @return builder
+         * 
+         */
         public Builder method(@Nullable Output<String> method) {
             $.method = method;
             return this;
         }
 
+        /**
+         * @param method SMTP authentication method (`plain` or `login`).
+         * 
+         * @return builder
+         * 
+         */
         public Builder method(String method) {
             return method(Output.of(method));
         }
 
+        /**
+         * @param password Password for SMTP server authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(Output<String> password) {
             $.password = password;
             return this;
         }
 
+        /**
+         * @param password Password for SMTP server authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(String password) {
             return password(Output.of(password));
         }
 
+        /**
+         * @param username Username for SMTP server authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(Output<String> username) {
             $.username = username;
             return this;
         }
 
+        /**
+         * @param username Username for SMTP server authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(String username) {
             return username(Output.of(username));
         }

@@ -12,25 +12,65 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectInviteSettings {
+    /**
+     * @return Whether to include a magic link token in invitation messages.
+     * 
+     */
     private @Nullable Boolean addMagiclinkToken;
+    /**
+     * @return Custom URL to include in the message sent to invited users.
+     * 
+     */
     private @Nullable String inviteUrl;
+    /**
+     * @return Whether users must be invited before they can sign up to the project.
+     * 
+     */
     private @Nullable Boolean requireInvitation;
+    /**
+     * @return Whether to send invitation emails to users.
+     * 
+     */
     private @Nullable Boolean sendEmail;
+    /**
+     * @return Whether to send invitation SMS messages to users.
+     * 
+     */
     private @Nullable Boolean sendText;
 
     private ProjectInviteSettings() {}
+    /**
+     * @return Whether to include a magic link token in invitation messages.
+     * 
+     */
     public Optional<Boolean> addMagiclinkToken() {
         return Optional.ofNullable(this.addMagiclinkToken);
     }
+    /**
+     * @return Custom URL to include in the message sent to invited users.
+     * 
+     */
     public Optional<String> inviteUrl() {
         return Optional.ofNullable(this.inviteUrl);
     }
+    /**
+     * @return Whether users must be invited before they can sign up to the project.
+     * 
+     */
     public Optional<Boolean> requireInvitation() {
         return Optional.ofNullable(this.requireInvitation);
     }
+    /**
+     * @return Whether to send invitation emails to users.
+     * 
+     */
     public Optional<Boolean> sendEmail() {
         return Optional.ofNullable(this.sendEmail);
     }
+    /**
+     * @return Whether to send invitation SMS messages to users.
+     * 
+     */
     public Optional<Boolean> sendText() {
         return Optional.ofNullable(this.sendText);
     }

@@ -32,14 +32,14 @@ public final class ProjectAuthenticationEmbeddedLinkArgs extends com.pulumi.reso
     }
 
     /**
-     * The amount of time that the embedded link will be valid for.
+     * How long the embedded link remains valid before it expires.
      * 
      */
     @Import(name="expirationTime")
     private @Nullable Output<String> expirationTime;
 
     /**
-     * @return The amount of time that the embedded link will be valid for.
+     * @return How long the embedded link remains valid before it expires.
      * 
      */
     public Optional<Output<String>> expirationTime() {
@@ -93,7 +93,7 @@ public final class ProjectAuthenticationEmbeddedLinkArgs extends com.pulumi.reso
         }
 
         /**
-         * @param expirationTime The amount of time that the embedded link will be valid for.
+         * @param expirationTime How long the embedded link remains valid before it expires.
          * 
          * @return builder
          * 
@@ -104,7 +104,7 @@ public final class ProjectAuthenticationEmbeddedLinkArgs extends com.pulumi.reso
         }
 
         /**
-         * @param expirationTime The amount of time that the embedded link will be valid for.
+         * @param expirationTime How long the embedded link remains valid before it expires.
          * 
          * @return builder
          * 

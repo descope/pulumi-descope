@@ -13,13 +13,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpVoiceService {
+    /**
+     * @return The name of the voice connector to use for making voice calls.
+     * 
+     */
     private String connector;
+    /**
+     * @return A list of voice message templates for different purposes.
+     * 
+     */
     private @Nullable List<ProjectAuthenticationOtpVoiceServiceTemplate> templates;
 
     private ProjectAuthenticationOtpVoiceService() {}
+    /**
+     * @return The name of the voice connector to use for making voice calls.
+     * 
+     */
     public String connector() {
         return this.connector;
     }
+    /**
+     * @return A list of voice message templates for different purposes.
+     * 
+     */
     public List<ProjectAuthenticationOtpVoiceServiceTemplate> templates() {
         return this.templates == null ? List.of() : this.templates;
     }

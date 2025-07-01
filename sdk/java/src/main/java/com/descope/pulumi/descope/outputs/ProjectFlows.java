@@ -10,9 +10,17 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectFlows {
+    /**
+     * @return The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+     * 
+     */
     private String data;
 
     private ProjectFlows() {}
+    /**
+     * @return The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+     * 
+     */
     public String data() {
         return this.data;
     }

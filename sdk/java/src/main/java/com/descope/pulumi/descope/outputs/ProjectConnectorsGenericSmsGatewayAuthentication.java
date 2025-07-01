@@ -13,17 +13,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsGenericSmsGatewayAuthentication {
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     private @Nullable ProjectConnectorsGenericSmsGatewayAuthenticationApiKey apiKey;
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     private @Nullable ProjectConnectorsGenericSmsGatewayAuthenticationBasic basic;
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     private @Nullable String bearerToken;
 
     private ProjectConnectorsGenericSmsGatewayAuthentication() {}
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     public Optional<ProjectConnectorsGenericSmsGatewayAuthenticationApiKey> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     public Optional<ProjectConnectorsGenericSmsGatewayAuthenticationBasic> basic() {
         return Optional.ofNullable(this.basic);
     }
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     public Optional<String> bearerToken() {
         return Optional.ofNullable(this.bearerToken);
     }

@@ -17,23 +17,47 @@ public final class ProjectConnectorsAuditWebhookAuthenticationArgs extends com.p
 
     public static final ProjectConnectorsAuditWebhookAuthenticationArgs Empty = new ProjectConnectorsAuditWebhookAuthenticationArgs();
 
+    /**
+     * API key authentication configuration.
+     * 
+     */
     @Import(name="apiKey")
     private @Nullable Output<ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs> apiKey;
 
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     public Optional<Output<ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs>> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
 
+    /**
+     * Basic authentication credentials (username and password).
+     * 
+     */
     @Import(name="basic")
     private @Nullable Output<ProjectConnectorsAuditWebhookAuthenticationBasicArgs> basic;
 
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     public Optional<Output<ProjectConnectorsAuditWebhookAuthenticationBasicArgs>> basic() {
         return Optional.ofNullable(this.basic);
     }
 
+    /**
+     * Bearer token for HTTP authentication.
+     * 
+     */
     @Import(name="bearerToken")
     private @Nullable Output<String> bearerToken;
 
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     public Optional<Output<String>> bearerToken() {
         return Optional.ofNullable(this.bearerToken);
     }
@@ -64,29 +88,65 @@ public final class ProjectConnectorsAuditWebhookAuthenticationArgs extends com.p
             $ = new ProjectConnectorsAuditWebhookAuthenticationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param apiKey API key authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(@Nullable Output<ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs> apiKey) {
             $.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * @param apiKey API key authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs apiKey) {
             return apiKey(Output.of(apiKey));
         }
 
+        /**
+         * @param basic Basic authentication credentials (username and password).
+         * 
+         * @return builder
+         * 
+         */
         public Builder basic(@Nullable Output<ProjectConnectorsAuditWebhookAuthenticationBasicArgs> basic) {
             $.basic = basic;
             return this;
         }
 
+        /**
+         * @param basic Basic authentication credentials (username and password).
+         * 
+         * @return builder
+         * 
+         */
         public Builder basic(ProjectConnectorsAuditWebhookAuthenticationBasicArgs basic) {
             return basic(Output.of(basic));
         }
 
+        /**
+         * @param bearerToken Bearer token for HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder bearerToken(@Nullable Output<String> bearerToken) {
             $.bearerToken = bearerToken;
             return this;
         }
 
+        /**
+         * @param bearerToken Bearer token for HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder bearerToken(String bearerToken) {
             return bearerToken(Output.of(bearerToken));
         }

@@ -18,6 +18,15 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      * 
      */
     private @Nullable String authSchema;
+    /**
+     * @return When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+     * 
+     */
+    private @Nullable Boolean autoTenantClaim;
+    /**
+     * @return Whether to use OIDC conformance for the JWT issuer field.
+     * 
+     */
     private @Nullable Boolean conformanceIssuer;
     /**
      * @return Description of the JWT Template.
@@ -29,6 +38,10 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      * 
      */
     private @Nullable String emptyClaimPolicy;
+    /**
+     * @return Whether to enforce that the JWT issuer matches the project configuration.
+     * 
+     */
     private @Nullable Boolean enforceIssuer;
     private @Nullable String id;
     /**
@@ -36,6 +49,10 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      * 
      */
     private String name;
+    /**
+     * @return The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+     * 
+     */
     private String template;
 
     private ProjectJwtTemplatesAccessKeyTemplate() {}
@@ -46,6 +63,17 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     public Optional<String> authSchema() {
         return Optional.ofNullable(this.authSchema);
     }
+    /**
+     * @return When a user is associated with a single tenant, the tenant will be set as the user&#39;s active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+     * 
+     */
+    public Optional<Boolean> autoTenantClaim() {
+        return Optional.ofNullable(this.autoTenantClaim);
+    }
+    /**
+     * @return Whether to use OIDC conformance for the JWT issuer field.
+     * 
+     */
     public Optional<Boolean> conformanceIssuer() {
         return Optional.ofNullable(this.conformanceIssuer);
     }
@@ -63,6 +91,10 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     public Optional<String> emptyClaimPolicy() {
         return Optional.ofNullable(this.emptyClaimPolicy);
     }
+    /**
+     * @return Whether to enforce that the JWT issuer matches the project configuration.
+     * 
+     */
     public Optional<Boolean> enforceIssuer() {
         return Optional.ofNullable(this.enforceIssuer);
     }
@@ -76,6 +108,10 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     public String name() {
         return this.name;
     }
+    /**
+     * @return The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+     * 
+     */
     public String template() {
         return this.template;
     }
@@ -90,6 +126,7 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable String authSchema;
+        private @Nullable Boolean autoTenantClaim;
         private @Nullable Boolean conformanceIssuer;
         private @Nullable String description;
         private @Nullable String emptyClaimPolicy;
@@ -101,6 +138,7 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
         public Builder(ProjectJwtTemplatesAccessKeyTemplate defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.authSchema = defaults.authSchema;
+    	      this.autoTenantClaim = defaults.autoTenantClaim;
     	      this.conformanceIssuer = defaults.conformanceIssuer;
     	      this.description = defaults.description;
     	      this.emptyClaimPolicy = defaults.emptyClaimPolicy;
@@ -114,6 +152,12 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
         public Builder authSchema(@Nullable String authSchema) {
 
             this.authSchema = authSchema;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder autoTenantClaim(@Nullable Boolean autoTenantClaim) {
+
+            this.autoTenantClaim = autoTenantClaim;
             return this;
         }
         @CustomType.Setter
@@ -165,6 +209,7 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
         public ProjectJwtTemplatesAccessKeyTemplate build() {
             final var _resultValue = new ProjectJwtTemplatesAccessKeyTemplate();
             _resultValue.authSchema = authSchema;
+            _resultValue.autoTenantClaim = autoTenantClaim;
             _resultValue.conformanceIssuer = conformanceIssuer;
             _resultValue.description = description;
             _resultValue.emptyClaimPolicy = emptyClaimPolicy;
