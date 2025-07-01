@@ -3,20 +3,20 @@ module github.com/descope/terraform-provider-descope/shim
 go 1.24.0
 
 require (
-	github.com/descope/terraform-provider-descope v0.1.11
+	github.com/descope/terraform-provider-descope v0.2.0
 	github.com/hashicorp/terraform-plugin-framework v1.15.0
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
-	github.com/descope/go-sdk v1.6.12 // indirect
+	github.com/descope/go-sdk v1.6.13 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.18.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.27.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.28.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.3 // indirect
