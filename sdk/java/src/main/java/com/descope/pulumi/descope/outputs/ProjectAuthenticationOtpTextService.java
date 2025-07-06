@@ -13,13 +13,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpTextService {
+    /**
+     * @return The name of the SMS/text connector to use for sending text messages.
+     * 
+     */
     private String connector;
+    /**
+     * @return A list of text message templates for different authentication flows.
+     * 
+     */
     private @Nullable List<ProjectAuthenticationOtpTextServiceTemplate> templates;
 
     private ProjectAuthenticationOtpTextService() {}
+    /**
+     * @return The name of the SMS/text connector to use for sending text messages.
+     * 
+     */
     public String connector() {
         return this.connector;
     }
+    /**
+     * @return A list of text message templates for different authentication flows.
+     * 
+     */
     public List<ProjectAuthenticationOtpTextServiceTemplate> templates() {
         return this.templates == null ? List.of() : this.templates;
     }

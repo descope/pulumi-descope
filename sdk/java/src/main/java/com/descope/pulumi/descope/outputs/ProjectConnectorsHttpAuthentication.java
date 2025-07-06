@@ -13,17 +13,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsHttpAuthentication {
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     private @Nullable ProjectConnectorsHttpAuthenticationApiKey apiKey;
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     private @Nullable ProjectConnectorsHttpAuthenticationBasic basic;
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     private @Nullable String bearerToken;
 
     private ProjectConnectorsHttpAuthentication() {}
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     public Optional<ProjectConnectorsHttpAuthenticationApiKey> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     public Optional<ProjectConnectorsHttpAuthenticationBasic> basic() {
         return Optional.ofNullable(this.basic);
     }
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     public Optional<String> bearerToken() {
         return Optional.ofNullable(this.bearerToken);
     }

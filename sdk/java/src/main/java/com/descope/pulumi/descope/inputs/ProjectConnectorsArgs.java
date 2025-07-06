@@ -9,14 +9,22 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsAuditWebhookArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsS3Args;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsTranslateArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsClearArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsCybersixgillArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDatadogArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDevrevGrowArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDoceboArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsEightByEightViberArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsEightByEightWhatsappArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsElephantArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsExternalTokenHttpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsFingerprintArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsFingerprintDescopeArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsFirebaseAdminArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsForterArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericEmailGatewayArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudTranslationArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleMapsPlaceArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHibpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHttpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHubspotArgs;
@@ -25,11 +33,13 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsIntercomArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsLokaliseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsMparticleArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsNewrelicArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsRadarArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaEnterpriseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRekognitionArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSalesforceArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSalesforceMarketingCloudArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsSardineArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSegmentArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSendgridArgs;
@@ -38,8 +48,10 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsSmartlingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSmtpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSnArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSumologicArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsSupabaseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTelesignArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTraceableArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsTurnstileArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTwilioCoreArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTwilioVerifyArgs;
 import com.pulumi.core.Output;
@@ -55,14 +67,14 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     public static final ProjectConnectorsArgs Empty = new ProjectConnectorsArgs();
 
     /**
-     * AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+     * Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
      * 
      */
     @Import(name="abuseipdbs")
     private @Nullable Output<List<ProjectConnectorsAbuseipdbArgs>> abuseipdbs;
 
     /**
-     * @return AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+     * @return Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsAbuseipdbArgs>>> abuseipdbs() {
@@ -70,50 +82,74 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
     @Import(name="amplitudes")
     private @Nullable Output<List<ProjectConnectorsAmplitudeArgs>> amplitudes;
 
     /**
-     * @return Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsAmplitudeArgs>>> amplitudes() {
         return Optional.ofNullable(this.amplitudes);
     }
 
+    /**
+     * Send audit events to a custom webhook.
+     * 
+     */
     @Import(name="auditWebhooks")
     private @Nullable Output<List<ProjectConnectorsAuditWebhookArgs>> auditWebhooks;
 
+    /**
+     * @return Send audit events to a custom webhook.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsAuditWebhookArgs>>> auditWebhooks() {
         return Optional.ofNullable(this.auditWebhooks);
     }
 
+    /**
+     * Stream authentication audit logs with the Amazon S3 connector.
+     * 
+     */
     @Import(name="awsS3s")
     private @Nullable Output<List<ProjectConnectorsAwsS3Args>> awsS3s;
 
+    /**
+     * @return Stream authentication audit logs with the Amazon S3 connector.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsAwsS3Args>>> awsS3s() {
         return Optional.ofNullable(this.awsS3s);
     }
 
+    /**
+     * Localize the language of your login and user journey screens with the Amazon Translate connector.
+     * 
+     */
     @Import(name="awsTranslates")
     private @Nullable Output<List<ProjectConnectorsAwsTranslateArgs>> awsTranslates;
 
+    /**
+     * @return Localize the language of your login and user journey screens with the Amazon Translate connector.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsAwsTranslateArgs>>> awsTranslates() {
         return Optional.ofNullable(this.awsTranslates);
     }
 
     /**
-     * An identity verification platform that allow customers to digitally verify their identity from anywhere.
+     * Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
      * 
      */
     @Import(name="clears")
     private @Nullable Output<List<ProjectConnectorsClearArgs>> clears;
 
     /**
-     * @return An identity verification platform that allow customers to digitally verify their identity from anywhere.
+     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsClearArgs>>> clears() {
@@ -121,58 +157,149 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+     * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * 
+     */
+    @Import(name="cybersixgills")
+    private @Nullable Output<List<ProjectConnectorsCybersixgillArgs>> cybersixgills;
+
+    /**
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsCybersixgillArgs>>> cybersixgills() {
+        return Optional.ofNullable(this.cybersixgills);
+    }
+
+    /**
+     * Stream authentication audit logs with the Datadog connector.
      * 
      */
     @Import(name="datadogs")
     private @Nullable Output<List<ProjectConnectorsDatadogArgs>> datadogs;
 
     /**
-     * @return Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+     * @return Stream authentication audit logs with the Datadog connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsDatadogArgs>>> datadogs() {
         return Optional.ofNullable(this.datadogs);
     }
 
+    /**
+     * DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+     * 
+     */
     @Import(name="devrevGrows")
     private @Nullable Output<List<ProjectConnectorsDevrevGrowArgs>> devrevGrows;
 
+    /**
+     * @return DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsDevrevGrowArgs>>> devrevGrows() {
         return Optional.ofNullable(this.devrevGrows);
     }
 
     /**
-     * Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+     * Get user information from Docebo in your Descope user journeys with the Docebo connector.
      * 
      */
     @Import(name="docebos")
     private @Nullable Output<List<ProjectConnectorsDoceboArgs>> docebos;
 
     /**
-     * @return Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+     * @return Get user information from Docebo in your Descope user journeys with the Docebo connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsDoceboArgs>>> docebos() {
         return Optional.ofNullable(this.docebos);
     }
 
+    /**
+     * Send Viber messages to the user.
+     * 
+     */
+    @Import(name="eightByEightVibers")
+    private @Nullable Output<List<ProjectConnectorsEightByEightViberArgs>> eightByEightVibers;
+
+    /**
+     * @return Send Viber messages to the user.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsEightByEightViberArgs>>> eightByEightVibers() {
+        return Optional.ofNullable(this.eightByEightVibers);
+    }
+
+    /**
+     * Send WhatsApp messages to the user.
+     * 
+     */
+    @Import(name="eightByEightWhatsapps")
+    private @Nullable Output<List<ProjectConnectorsEightByEightWhatsappArgs>> eightByEightWhatsapps;
+
+    /**
+     * @return Send WhatsApp messages to the user.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsEightByEightWhatsappArgs>>> eightByEightWhatsapps() {
+        return Optional.ofNullable(this.eightByEightWhatsapps);
+    }
+
+    /**
+     * Use this connector to obtain an identity trust score.
+     * 
+     */
+    @Import(name="elephants")
+    private @Nullable Output<List<ProjectConnectorsElephantArgs>> elephants;
+
+    /**
+     * @return Use this connector to obtain an identity trust score.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsElephantArgs>>> elephants() {
+        return Optional.ofNullable(this.elephants);
+    }
+
+    /**
+     * A generic HTTP token connector.
+     * 
+     */
+    @Import(name="externalTokenHttps")
+    private @Nullable Output<List<ProjectConnectorsExternalTokenHttpArgs>> externalTokenHttps;
+
+    /**
+     * @return A generic HTTP token connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsExternalTokenHttpArgs>>> externalTokenHttps() {
+        return Optional.ofNullable(this.externalTokenHttps);
+    }
+
+    /**
+     * Descope Fingerprint capabilities for fraud detection and risk assessment.
+     * 
+     */
     @Import(name="fingerprintDescopes")
     private @Nullable Output<List<ProjectConnectorsFingerprintDescopeArgs>> fingerprintDescopes;
 
+    /**
+     * @return Descope Fingerprint capabilities for fraud detection and risk assessment.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsFingerprintDescopeArgs>>> fingerprintDescopes() {
         return Optional.ofNullable(this.fingerprintDescopes);
     }
 
     /**
-     * Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+     * Prevent fraud by adding device intelligence with the Fingerprint connector.
      * 
      */
     @Import(name="fingerprints")
     private @Nullable Output<List<ProjectConnectorsFingerprintArgs>> fingerprints;
 
     /**
-     * @return Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+     * @return Prevent fraud by adding device intelligence with the Fingerprint connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsFingerprintArgs>>> fingerprints() {
@@ -180,43 +307,104 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Use the Forter connector for account fraud prevention.
+     * Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+     * 
+     */
+    @Import(name="firebaseAdmins")
+    private @Nullable Output<List<ProjectConnectorsFirebaseAdminArgs>> firebaseAdmins;
+
+    /**
+     * @return Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsFirebaseAdminArgs>>> firebaseAdmins() {
+        return Optional.ofNullable(this.firebaseAdmins);
+    }
+
+    /**
+     * Leverage ML-based risk scores for fraud prevention with the Forter connector.
      * 
      */
     @Import(name="forters")
     private @Nullable Output<List<ProjectConnectorsForterArgs>> forters;
 
     /**
-     * @return Use the Forter connector for account fraud prevention.
+     * @return Leverage ML-based risk scores for fraud prevention with the Forter connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsForterArgs>>> forters() {
         return Optional.ofNullable(this.forters);
     }
 
+    /**
+     * Send emails using a generic Email gateway.
+     * 
+     */
+    @Import(name="genericEmailGateways")
+    private @Nullable Output<List<ProjectConnectorsGenericEmailGatewayArgs>> genericEmailGateways;
+
+    /**
+     * @return Send emails using a generic Email gateway.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsGenericEmailGatewayArgs>>> genericEmailGateways() {
+        return Optional.ofNullable(this.genericEmailGateways);
+    }
+
+    /**
+     * Send messages using a generic SMS gateway.
+     * 
+     */
     @Import(name="genericSmsGateways")
     private @Nullable Output<List<ProjectConnectorsGenericSmsGatewayArgs>> genericSmsGateways;
 
+    /**
+     * @return Send messages using a generic SMS gateway.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsGenericSmsGatewayArgs>>> genericSmsGateways() {
         return Optional.ofNullable(this.genericSmsGateways);
     }
 
+    /**
+     * Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+     * 
+     */
     @Import(name="googleCloudTranslations")
     private @Nullable Output<List<ProjectConnectorsGoogleCloudTranslationArgs>> googleCloudTranslations;
 
+    /**
+     * @return Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsGoogleCloudTranslationArgs>>> googleCloudTranslations() {
         return Optional.ofNullable(this.googleCloudTranslations);
     }
 
     /**
-     * API to check if password appeared previously exposed in data breaches.
+     * Get address autocompletions from Place Autocomplete Data API.
+     * 
+     */
+    @Import(name="googleMapsPlaces")
+    private @Nullable Output<List<ProjectConnectorsGoogleMapsPlaceArgs>> googleMapsPlaces;
+
+    /**
+     * @return Get address autocompletions from Place Autocomplete Data API.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsGoogleMapsPlaceArgs>>> googleMapsPlaces() {
+        return Optional.ofNullable(this.googleMapsPlaces);
+    }
+
+    /**
+     * Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
     @Import(name="hibps")
     private @Nullable Output<List<ProjectConnectorsHibpArgs>> hibps;
 
     /**
-     * @return API to check if password appeared previously exposed in data breaches.
+     * @return Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsHibpArgs>>> hibps() {
@@ -239,14 +427,14 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+     * Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
      * 
      */
     @Import(name="hubspots")
     private @Nullable Output<List<ProjectConnectorsHubspotArgs>> hubspots;
 
     /**
-     * @return HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+     * @return Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsHubspotArgs>>> hubspots() {
@@ -269,14 +457,14 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Intercom is a Conversational Relationship Platform (CRP).
+     * Orchestrate customer identity information from your Descope user journey with the Intercom connector.
      * 
      */
     @Import(name="intercoms")
     private @Nullable Output<List<ProjectConnectorsIntercomArgs>> intercoms;
 
     /**
-     * @return Intercom is a Conversational Relationship Platform (CRP).
+     * @return Orchestrate customer identity information from your Descope user journey with the Intercom connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsIntercomArgs>>> intercoms() {
@@ -314,36 +502,59 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Use this connector to send audit events and troubleshooting logs to New Relic.
+     * Stream authentication audit logs with the New Relic connector.
      * 
      */
     @Import(name="newrelics")
     private @Nullable Output<List<ProjectConnectorsNewrelicArgs>> newrelics;
 
     /**
-     * @return Use this connector to send audit events and troubleshooting logs to New Relic.
+     * @return Stream authentication audit logs with the New Relic connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsNewrelicArgs>>> newrelics() {
         return Optional.ofNullable(this.newrelics);
     }
 
+    /**
+     * Get address autocompletions from Radar Autocomplete API.
+     * 
+     */
+    @Import(name="radars")
+    private @Nullable Output<List<ProjectConnectorsRadarArgs>> radars;
+
+    /**
+     * @return Get address autocompletions from Radar Autocomplete API.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsRadarArgs>>> radars() {
+        return Optional.ofNullable(this.radars);
+    }
+
+    /**
+     * Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+     * 
+     */
     @Import(name="recaptchaEnterprises")
     private @Nullable Output<List<ProjectConnectorsRecaptchaEnterpriseArgs>> recaptchaEnterprises;
 
+    /**
+     * @return Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsRecaptchaEnterpriseArgs>>> recaptchaEnterprises() {
         return Optional.ofNullable(this.recaptchaEnterprises);
     }
 
     /**
-     * reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+     * Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
     @Import(name="recaptchas")
     private @Nullable Output<List<ProjectConnectorsRecaptchaArgs>> recaptchas;
 
     /**
-     * @return reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+     * @return Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsRecaptchaArgs>>> recaptchas() {
@@ -351,36 +562,44 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+     * Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
      * 
      */
     @Import(name="rekognitions")
     private @Nullable Output<List<ProjectConnectorsRekognitionArgs>> rekognitions;
 
     /**
-     * @return AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+     * @return Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsRekognitionArgs>>> rekognitions() {
         return Optional.ofNullable(this.rekognitions);
     }
 
+    /**
+     * Send transactional messages with the Salesforce Marketing Cloud connector.
+     * 
+     */
     @Import(name="salesforceMarketingClouds")
     private @Nullable Output<List<ProjectConnectorsSalesforceMarketingCloudArgs>> salesforceMarketingClouds;
 
+    /**
+     * @return Send transactional messages with the Salesforce Marketing Cloud connector.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSalesforceMarketingCloudArgs>>> salesforceMarketingClouds() {
         return Optional.ofNullable(this.salesforceMarketingClouds);
     }
 
     /**
-     * Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+     * Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
      * 
      */
     @Import(name="salesforces")
     private @Nullable Output<List<ProjectConnectorsSalesforceArgs>> salesforces;
 
     /**
-     * @return Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+     * @return Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsSalesforceArgs>>> salesforces() {
@@ -388,30 +607,61 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * Evaluate customer risk using Sardine
+     * 
+     */
+    @Import(name="sardines")
+    private @Nullable Output<List<ProjectConnectorsSardineArgs>> sardines;
+
+    /**
+     * @return Evaluate customer risk using Sardine
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsSardineArgs>>> sardines() {
+        return Optional.ofNullable(this.sardines);
+    }
+
+    /**
+     * Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      * 
      */
     @Import(name="segments")
     private @Nullable Output<List<ProjectConnectorsSegmentArgs>> segments;
 
     /**
-     * @return Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsSegmentArgs>>> segments() {
         return Optional.ofNullable(this.segments);
     }
 
+    /**
+     * SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+     * 
+     */
     @Import(name="sendgrids")
     private @Nullable Output<List<ProjectConnectorsSendgridArgs>> sendgrids;
 
+    /**
+     * @return SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSendgridArgs>>> sendgrids() {
         return Optional.ofNullable(this.sendgrids);
     }
 
+    /**
+     * Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+     * 
+     */
     @Import(name="ses")
     private @Nullable Output<List<ProjectConnectorsSeArgs>> ses;
 
+    /**
+     * @return Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSeArgs>>> ses() {
         return Optional.ofNullable(this.ses);
     }
@@ -446,29 +696,45 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         return Optional.ofNullable(this.smartlings);
     }
 
+    /**
+     * Simple Mail Transfer Protocol (SMTP) server for sending emails.
+     * 
+     */
     @Import(name="smtps")
     private @Nullable Output<List<ProjectConnectorsSmtpArgs>> smtps;
 
+    /**
+     * @return Simple Mail Transfer Protocol (SMTP) server for sending emails.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSmtpArgs>>> smtps() {
         return Optional.ofNullable(this.smtps);
     }
 
+    /**
+     * Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+     * 
+     */
     @Import(name="sns")
     private @Nullable Output<List<ProjectConnectorsSnArgs>> sns;
 
+    /**
+     * @return Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsSnArgs>>> sns() {
         return Optional.ofNullable(this.sns);
     }
 
     /**
-     * Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+     * Stream logs and audit events with the Sumo Logic connector.
      * 
      */
     @Import(name="sumologics")
     private @Nullable Output<List<ProjectConnectorsSumologicArgs>> sumologics;
 
     /**
-     * @return Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+     * @return Stream logs and audit events with the Sumo Logic connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsSumologicArgs>>> sumologics() {
@@ -476,14 +742,29 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Telesign Phone number intelligence API provides risk score for phone numbers.
+     * Generate external tokens for user authentication in Supabase projects.
+     * 
+     */
+    @Import(name="supabases")
+    private @Nullable Output<List<ProjectConnectorsSupabaseArgs>> supabases;
+
+    /**
+     * @return Generate external tokens for user authentication in Supabase projects.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsSupabaseArgs>>> supabases() {
+        return Optional.ofNullable(this.supabases);
+    }
+
+    /**
+     * Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
      * 
      */
     @Import(name="telesigns")
     private @Nullable Output<List<ProjectConnectorsTelesignArgs>> telesigns;
 
     /**
-     * @return Telesign Phone number intelligence API provides risk score for phone numbers.
+     * @return Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsTelesignArgs>>> telesigns() {
@@ -491,30 +772,61 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * API security for a cloud-first, API-driven world.
+     * Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
      * 
      */
     @Import(name="traceables")
     private @Nullable Output<List<ProjectConnectorsTraceableArgs>> traceables;
 
     /**
-     * @return API security for a cloud-first, API-driven world.
+     * @return Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
      * 
      */
     public Optional<Output<List<ProjectConnectorsTraceableArgs>>> traceables() {
         return Optional.ofNullable(this.traceables);
     }
 
+    /**
+     * Prevent bot attacks on your login pages with the Turnstile connector.
+     * 
+     */
+    @Import(name="turnstiles")
+    private @Nullable Output<List<ProjectConnectorsTurnstileArgs>> turnstiles;
+
+    /**
+     * @return Prevent bot attacks on your login pages with the Turnstile connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsTurnstileArgs>>> turnstiles() {
+        return Optional.ofNullable(this.turnstiles);
+    }
+
+    /**
+     * Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+     * 
+     */
     @Import(name="twilioCores")
     private @Nullable Output<List<ProjectConnectorsTwilioCoreArgs>> twilioCores;
 
+    /**
+     * @return Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsTwilioCoreArgs>>> twilioCores() {
         return Optional.ofNullable(this.twilioCores);
     }
 
+    /**
+     * Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+     * 
+     */
     @Import(name="twilioVerifies")
     private @Nullable Output<List<ProjectConnectorsTwilioVerifyArgs>> twilioVerifies;
 
+    /**
+     * @return Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsTwilioVerifyArgs>>> twilioVerifies() {
         return Optional.ofNullable(this.twilioVerifies);
     }
@@ -528,14 +840,22 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.awsS3s = $.awsS3s;
         this.awsTranslates = $.awsTranslates;
         this.clears = $.clears;
+        this.cybersixgills = $.cybersixgills;
         this.datadogs = $.datadogs;
         this.devrevGrows = $.devrevGrows;
         this.docebos = $.docebos;
+        this.eightByEightVibers = $.eightByEightVibers;
+        this.eightByEightWhatsapps = $.eightByEightWhatsapps;
+        this.elephants = $.elephants;
+        this.externalTokenHttps = $.externalTokenHttps;
         this.fingerprintDescopes = $.fingerprintDescopes;
         this.fingerprints = $.fingerprints;
+        this.firebaseAdmins = $.firebaseAdmins;
         this.forters = $.forters;
+        this.genericEmailGateways = $.genericEmailGateways;
         this.genericSmsGateways = $.genericSmsGateways;
         this.googleCloudTranslations = $.googleCloudTranslations;
+        this.googleMapsPlaces = $.googleMapsPlaces;
         this.hibps = $.hibps;
         this.https = $.https;
         this.hubspots = $.hubspots;
@@ -544,11 +864,13 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.lokalises = $.lokalises;
         this.mparticles = $.mparticles;
         this.newrelics = $.newrelics;
+        this.radars = $.radars;
         this.recaptchaEnterprises = $.recaptchaEnterprises;
         this.recaptchas = $.recaptchas;
         this.rekognitions = $.rekognitions;
         this.salesforceMarketingClouds = $.salesforceMarketingClouds;
         this.salesforces = $.salesforces;
+        this.sardines = $.sardines;
         this.segments = $.segments;
         this.sendgrids = $.sendgrids;
         this.ses = $.ses;
@@ -557,8 +879,10 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.smtps = $.smtps;
         this.sns = $.sns;
         this.sumologics = $.sumologics;
+        this.supabases = $.supabases;
         this.telesigns = $.telesigns;
         this.traceables = $.traceables;
+        this.turnstiles = $.turnstiles;
         this.twilioCores = $.twilioCores;
         this.twilioVerifies = $.twilioVerifies;
     }
@@ -582,7 +906,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param abuseipdbs AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+         * @param abuseipdbs Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
          * 
          * @return builder
          * 
@@ -593,7 +917,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param abuseipdbs AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+         * @param abuseipdbs Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
          * 
          * @return builder
          * 
@@ -603,7 +927,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param abuseipdbs AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+         * @param abuseipdbs Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
          * 
          * @return builder
          * 
@@ -613,7 +937,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param amplitudes Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param amplitudes Track user activity and traits at any point in your user journey with the Amplitude connector.
          * 
          * @return builder
          * 
@@ -624,7 +948,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param amplitudes Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param amplitudes Track user activity and traits at any point in your user journey with the Amplitude connector.
          * 
          * @return builder
          * 
@@ -634,7 +958,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param amplitudes Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param amplitudes Track user activity and traits at any point in your user journey with the Amplitude connector.
          * 
          * @return builder
          * 
@@ -643,47 +967,101 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return amplitudes(List.of(amplitudes));
         }
 
+        /**
+         * @param auditWebhooks Send audit events to a custom webhook.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditWebhooks(@Nullable Output<List<ProjectConnectorsAuditWebhookArgs>> auditWebhooks) {
             $.auditWebhooks = auditWebhooks;
             return this;
         }
 
+        /**
+         * @param auditWebhooks Send audit events to a custom webhook.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditWebhooks(List<ProjectConnectorsAuditWebhookArgs> auditWebhooks) {
             return auditWebhooks(Output.of(auditWebhooks));
         }
 
+        /**
+         * @param auditWebhooks Send audit events to a custom webhook.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditWebhooks(ProjectConnectorsAuditWebhookArgs... auditWebhooks) {
             return auditWebhooks(List.of(auditWebhooks));
         }
 
+        /**
+         * @param awsS3s Stream authentication audit logs with the Amazon S3 connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsS3s(@Nullable Output<List<ProjectConnectorsAwsS3Args>> awsS3s) {
             $.awsS3s = awsS3s;
             return this;
         }
 
+        /**
+         * @param awsS3s Stream authentication audit logs with the Amazon S3 connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsS3s(List<ProjectConnectorsAwsS3Args> awsS3s) {
             return awsS3s(Output.of(awsS3s));
         }
 
+        /**
+         * @param awsS3s Stream authentication audit logs with the Amazon S3 connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsS3s(ProjectConnectorsAwsS3Args... awsS3s) {
             return awsS3s(List.of(awsS3s));
         }
 
+        /**
+         * @param awsTranslates Localize the language of your login and user journey screens with the Amazon Translate connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsTranslates(@Nullable Output<List<ProjectConnectorsAwsTranslateArgs>> awsTranslates) {
             $.awsTranslates = awsTranslates;
             return this;
         }
 
+        /**
+         * @param awsTranslates Localize the language of your login and user journey screens with the Amazon Translate connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsTranslates(List<ProjectConnectorsAwsTranslateArgs> awsTranslates) {
             return awsTranslates(Output.of(awsTranslates));
         }
 
+        /**
+         * @param awsTranslates Localize the language of your login and user journey screens with the Amazon Translate connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder awsTranslates(ProjectConnectorsAwsTranslateArgs... awsTranslates) {
             return awsTranslates(List.of(awsTranslates));
         }
 
         /**
-         * @param clears An identity verification platform that allow customers to digitally verify their identity from anywhere.
+         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
          * 
          * @return builder
          * 
@@ -694,7 +1072,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param clears An identity verification platform that allow customers to digitally verify their identity from anywhere.
+         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
          * 
          * @return builder
          * 
@@ -704,7 +1082,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param clears An identity verification platform that allow customers to digitally verify their identity from anywhere.
+         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
          * 
          * @return builder
          * 
@@ -714,7 +1092,38 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param datadogs Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cybersixgills(@Nullable Output<List<ProjectConnectorsCybersixgillArgs>> cybersixgills) {
+            $.cybersixgills = cybersixgills;
+            return this;
+        }
+
+        /**
+         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cybersixgills(List<ProjectConnectorsCybersixgillArgs> cybersixgills) {
+            return cybersixgills(Output.of(cybersixgills));
+        }
+
+        /**
+         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cybersixgills(ProjectConnectorsCybersixgillArgs... cybersixgills) {
+            return cybersixgills(List.of(cybersixgills));
+        }
+
+        /**
+         * @param datadogs Stream authentication audit logs with the Datadog connector.
          * 
          * @return builder
          * 
@@ -725,7 +1134,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param datadogs Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+         * @param datadogs Stream authentication audit logs with the Datadog connector.
          * 
          * @return builder
          * 
@@ -735,7 +1144,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param datadogs Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+         * @param datadogs Stream authentication audit logs with the Datadog connector.
          * 
          * @return builder
          * 
@@ -744,21 +1153,39 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return datadogs(List.of(datadogs));
         }
 
+        /**
+         * @param devrevGrows DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+         * 
+         * @return builder
+         * 
+         */
         public Builder devrevGrows(@Nullable Output<List<ProjectConnectorsDevrevGrowArgs>> devrevGrows) {
             $.devrevGrows = devrevGrows;
             return this;
         }
 
+        /**
+         * @param devrevGrows DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+         * 
+         * @return builder
+         * 
+         */
         public Builder devrevGrows(List<ProjectConnectorsDevrevGrowArgs> devrevGrows) {
             return devrevGrows(Output.of(devrevGrows));
         }
 
+        /**
+         * @param devrevGrows DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+         * 
+         * @return builder
+         * 
+         */
         public Builder devrevGrows(ProjectConnectorsDevrevGrowArgs... devrevGrows) {
             return devrevGrows(List.of(devrevGrows));
         }
 
         /**
-         * @param docebos Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+         * @param docebos Get user information from Docebo in your Descope user journeys with the Docebo connector.
          * 
          * @return builder
          * 
@@ -769,7 +1196,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param docebos Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+         * @param docebos Get user information from Docebo in your Descope user journeys with the Docebo connector.
          * 
          * @return builder
          * 
@@ -779,7 +1206,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param docebos Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+         * @param docebos Get user information from Docebo in your Descope user journeys with the Docebo connector.
          * 
          * @return builder
          * 
@@ -788,21 +1215,163 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return docebos(List.of(docebos));
         }
 
+        /**
+         * @param eightByEightVibers Send Viber messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightVibers(@Nullable Output<List<ProjectConnectorsEightByEightViberArgs>> eightByEightVibers) {
+            $.eightByEightVibers = eightByEightVibers;
+            return this;
+        }
+
+        /**
+         * @param eightByEightVibers Send Viber messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightVibers(List<ProjectConnectorsEightByEightViberArgs> eightByEightVibers) {
+            return eightByEightVibers(Output.of(eightByEightVibers));
+        }
+
+        /**
+         * @param eightByEightVibers Send Viber messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightVibers(ProjectConnectorsEightByEightViberArgs... eightByEightVibers) {
+            return eightByEightVibers(List.of(eightByEightVibers));
+        }
+
+        /**
+         * @param eightByEightWhatsapps Send WhatsApp messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightWhatsapps(@Nullable Output<List<ProjectConnectorsEightByEightWhatsappArgs>> eightByEightWhatsapps) {
+            $.eightByEightWhatsapps = eightByEightWhatsapps;
+            return this;
+        }
+
+        /**
+         * @param eightByEightWhatsapps Send WhatsApp messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightWhatsapps(List<ProjectConnectorsEightByEightWhatsappArgs> eightByEightWhatsapps) {
+            return eightByEightWhatsapps(Output.of(eightByEightWhatsapps));
+        }
+
+        /**
+         * @param eightByEightWhatsapps Send WhatsApp messages to the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder eightByEightWhatsapps(ProjectConnectorsEightByEightWhatsappArgs... eightByEightWhatsapps) {
+            return eightByEightWhatsapps(List.of(eightByEightWhatsapps));
+        }
+
+        /**
+         * @param elephants Use this connector to obtain an identity trust score.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder elephants(@Nullable Output<List<ProjectConnectorsElephantArgs>> elephants) {
+            $.elephants = elephants;
+            return this;
+        }
+
+        /**
+         * @param elephants Use this connector to obtain an identity trust score.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder elephants(List<ProjectConnectorsElephantArgs> elephants) {
+            return elephants(Output.of(elephants));
+        }
+
+        /**
+         * @param elephants Use this connector to obtain an identity trust score.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder elephants(ProjectConnectorsElephantArgs... elephants) {
+            return elephants(List.of(elephants));
+        }
+
+        /**
+         * @param externalTokenHttps A generic HTTP token connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalTokenHttps(@Nullable Output<List<ProjectConnectorsExternalTokenHttpArgs>> externalTokenHttps) {
+            $.externalTokenHttps = externalTokenHttps;
+            return this;
+        }
+
+        /**
+         * @param externalTokenHttps A generic HTTP token connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalTokenHttps(List<ProjectConnectorsExternalTokenHttpArgs> externalTokenHttps) {
+            return externalTokenHttps(Output.of(externalTokenHttps));
+        }
+
+        /**
+         * @param externalTokenHttps A generic HTTP token connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalTokenHttps(ProjectConnectorsExternalTokenHttpArgs... externalTokenHttps) {
+            return externalTokenHttps(List.of(externalTokenHttps));
+        }
+
+        /**
+         * @param fingerprintDescopes Descope Fingerprint capabilities for fraud detection and risk assessment.
+         * 
+         * @return builder
+         * 
+         */
         public Builder fingerprintDescopes(@Nullable Output<List<ProjectConnectorsFingerprintDescopeArgs>> fingerprintDescopes) {
             $.fingerprintDescopes = fingerprintDescopes;
             return this;
         }
 
+        /**
+         * @param fingerprintDescopes Descope Fingerprint capabilities for fraud detection and risk assessment.
+         * 
+         * @return builder
+         * 
+         */
         public Builder fingerprintDescopes(List<ProjectConnectorsFingerprintDescopeArgs> fingerprintDescopes) {
             return fingerprintDescopes(Output.of(fingerprintDescopes));
         }
 
+        /**
+         * @param fingerprintDescopes Descope Fingerprint capabilities for fraud detection and risk assessment.
+         * 
+         * @return builder
+         * 
+         */
         public Builder fingerprintDescopes(ProjectConnectorsFingerprintDescopeArgs... fingerprintDescopes) {
             return fingerprintDescopes(List.of(fingerprintDescopes));
         }
 
         /**
-         * @param fingerprints Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+         * @param fingerprints Prevent fraud by adding device intelligence with the Fingerprint connector.
          * 
          * @return builder
          * 
@@ -813,7 +1382,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param fingerprints Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+         * @param fingerprints Prevent fraud by adding device intelligence with the Fingerprint connector.
          * 
          * @return builder
          * 
@@ -823,7 +1392,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param fingerprints Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+         * @param fingerprints Prevent fraud by adding device intelligence with the Fingerprint connector.
          * 
          * @return builder
          * 
@@ -833,7 +1402,38 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param forters Use the Forter connector for account fraud prevention.
+         * @param firebaseAdmins Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder firebaseAdmins(@Nullable Output<List<ProjectConnectorsFirebaseAdminArgs>> firebaseAdmins) {
+            $.firebaseAdmins = firebaseAdmins;
+            return this;
+        }
+
+        /**
+         * @param firebaseAdmins Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder firebaseAdmins(List<ProjectConnectorsFirebaseAdminArgs> firebaseAdmins) {
+            return firebaseAdmins(Output.of(firebaseAdmins));
+        }
+
+        /**
+         * @param firebaseAdmins Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder firebaseAdmins(ProjectConnectorsFirebaseAdminArgs... firebaseAdmins) {
+            return firebaseAdmins(List.of(firebaseAdmins));
+        }
+
+        /**
+         * @param forters Leverage ML-based risk scores for fraud prevention with the Forter connector.
          * 
          * @return builder
          * 
@@ -844,7 +1444,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param forters Use the Forter connector for account fraud prevention.
+         * @param forters Leverage ML-based risk scores for fraud prevention with the Forter connector.
          * 
          * @return builder
          * 
@@ -854,7 +1454,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param forters Use the Forter connector for account fraud prevention.
+         * @param forters Leverage ML-based risk scores for fraud prevention with the Forter connector.
          * 
          * @return builder
          * 
@@ -863,34 +1463,132 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return forters(List.of(forters));
         }
 
+        /**
+         * @param genericEmailGateways Send emails using a generic Email gateway.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder genericEmailGateways(@Nullable Output<List<ProjectConnectorsGenericEmailGatewayArgs>> genericEmailGateways) {
+            $.genericEmailGateways = genericEmailGateways;
+            return this;
+        }
+
+        /**
+         * @param genericEmailGateways Send emails using a generic Email gateway.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder genericEmailGateways(List<ProjectConnectorsGenericEmailGatewayArgs> genericEmailGateways) {
+            return genericEmailGateways(Output.of(genericEmailGateways));
+        }
+
+        /**
+         * @param genericEmailGateways Send emails using a generic Email gateway.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder genericEmailGateways(ProjectConnectorsGenericEmailGatewayArgs... genericEmailGateways) {
+            return genericEmailGateways(List.of(genericEmailGateways));
+        }
+
+        /**
+         * @param genericSmsGateways Send messages using a generic SMS gateway.
+         * 
+         * @return builder
+         * 
+         */
         public Builder genericSmsGateways(@Nullable Output<List<ProjectConnectorsGenericSmsGatewayArgs>> genericSmsGateways) {
             $.genericSmsGateways = genericSmsGateways;
             return this;
         }
 
+        /**
+         * @param genericSmsGateways Send messages using a generic SMS gateway.
+         * 
+         * @return builder
+         * 
+         */
         public Builder genericSmsGateways(List<ProjectConnectorsGenericSmsGatewayArgs> genericSmsGateways) {
             return genericSmsGateways(Output.of(genericSmsGateways));
         }
 
+        /**
+         * @param genericSmsGateways Send messages using a generic SMS gateway.
+         * 
+         * @return builder
+         * 
+         */
         public Builder genericSmsGateways(ProjectConnectorsGenericSmsGatewayArgs... genericSmsGateways) {
             return genericSmsGateways(List.of(genericSmsGateways));
         }
 
+        /**
+         * @param googleCloudTranslations Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder googleCloudTranslations(@Nullable Output<List<ProjectConnectorsGoogleCloudTranslationArgs>> googleCloudTranslations) {
             $.googleCloudTranslations = googleCloudTranslations;
             return this;
         }
 
+        /**
+         * @param googleCloudTranslations Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder googleCloudTranslations(List<ProjectConnectorsGoogleCloudTranslationArgs> googleCloudTranslations) {
             return googleCloudTranslations(Output.of(googleCloudTranslations));
         }
 
+        /**
+         * @param googleCloudTranslations Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder googleCloudTranslations(ProjectConnectorsGoogleCloudTranslationArgs... googleCloudTranslations) {
             return googleCloudTranslations(List.of(googleCloudTranslations));
         }
 
         /**
-         * @param hibps API to check if password appeared previously exposed in data breaches.
+         * @param googleMapsPlaces Get address autocompletions from Place Autocomplete Data API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleMapsPlaces(@Nullable Output<List<ProjectConnectorsGoogleMapsPlaceArgs>> googleMapsPlaces) {
+            $.googleMapsPlaces = googleMapsPlaces;
+            return this;
+        }
+
+        /**
+         * @param googleMapsPlaces Get address autocompletions from Place Autocomplete Data API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleMapsPlaces(List<ProjectConnectorsGoogleMapsPlaceArgs> googleMapsPlaces) {
+            return googleMapsPlaces(Output.of(googleMapsPlaces));
+        }
+
+        /**
+         * @param googleMapsPlaces Get address autocompletions from Place Autocomplete Data API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleMapsPlaces(ProjectConnectorsGoogleMapsPlaceArgs... googleMapsPlaces) {
+            return googleMapsPlaces(List.of(googleMapsPlaces));
+        }
+
+        /**
+         * @param hibps Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
          * 
          * @return builder
          * 
@@ -901,7 +1599,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param hibps API to check if password appeared previously exposed in data breaches.
+         * @param hibps Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
          * 
          * @return builder
          * 
@@ -911,7 +1609,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param hibps API to check if password appeared previously exposed in data breaches.
+         * @param hibps Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
          * 
          * @return builder
          * 
@@ -952,7 +1650,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param hubspots HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+         * @param hubspots Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
          * 
          * @return builder
          * 
@@ -963,7 +1661,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param hubspots HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+         * @param hubspots Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
          * 
          * @return builder
          * 
@@ -973,7 +1671,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param hubspots HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+         * @param hubspots Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
          * 
          * @return builder
          * 
@@ -1014,7 +1712,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param intercoms Intercom is a Conversational Relationship Platform (CRP).
+         * @param intercoms Orchestrate customer identity information from your Descope user journey with the Intercom connector.
          * 
          * @return builder
          * 
@@ -1025,7 +1723,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param intercoms Intercom is a Conversational Relationship Platform (CRP).
+         * @param intercoms Orchestrate customer identity information from your Descope user journey with the Intercom connector.
          * 
          * @return builder
          * 
@@ -1035,7 +1733,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param intercoms Intercom is a Conversational Relationship Platform (CRP).
+         * @param intercoms Orchestrate customer identity information from your Descope user journey with the Intercom connector.
          * 
          * @return builder
          * 
@@ -1107,7 +1805,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param newrelics Use this connector to send audit events and troubleshooting logs to New Relic.
+         * @param newrelics Stream authentication audit logs with the New Relic connector.
          * 
          * @return builder
          * 
@@ -1118,7 +1816,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param newrelics Use this connector to send audit events and troubleshooting logs to New Relic.
+         * @param newrelics Stream authentication audit logs with the New Relic connector.
          * 
          * @return builder
          * 
@@ -1128,7 +1826,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param newrelics Use this connector to send audit events and troubleshooting logs to New Relic.
+         * @param newrelics Stream authentication audit logs with the New Relic connector.
          * 
          * @return builder
          * 
@@ -1137,21 +1835,70 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return newrelics(List.of(newrelics));
         }
 
+        /**
+         * @param radars Get address autocompletions from Radar Autocomplete API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder radars(@Nullable Output<List<ProjectConnectorsRadarArgs>> radars) {
+            $.radars = radars;
+            return this;
+        }
+
+        /**
+         * @param radars Get address autocompletions from Radar Autocomplete API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder radars(List<ProjectConnectorsRadarArgs> radars) {
+            return radars(Output.of(radars));
+        }
+
+        /**
+         * @param radars Get address autocompletions from Radar Autocomplete API.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder radars(ProjectConnectorsRadarArgs... radars) {
+            return radars(List.of(radars));
+        }
+
+        /**
+         * @param recaptchaEnterprises Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder recaptchaEnterprises(@Nullable Output<List<ProjectConnectorsRecaptchaEnterpriseArgs>> recaptchaEnterprises) {
             $.recaptchaEnterprises = recaptchaEnterprises;
             return this;
         }
 
+        /**
+         * @param recaptchaEnterprises Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder recaptchaEnterprises(List<ProjectConnectorsRecaptchaEnterpriseArgs> recaptchaEnterprises) {
             return recaptchaEnterprises(Output.of(recaptchaEnterprises));
         }
 
+        /**
+         * @param recaptchaEnterprises Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder recaptchaEnterprises(ProjectConnectorsRecaptchaEnterpriseArgs... recaptchaEnterprises) {
             return recaptchaEnterprises(List.of(recaptchaEnterprises));
         }
 
         /**
-         * @param recaptchas reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+         * @param recaptchas Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
          * 
          * @return builder
          * 
@@ -1162,7 +1909,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param recaptchas reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+         * @param recaptchas Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
          * 
          * @return builder
          * 
@@ -1172,7 +1919,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param recaptchas reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+         * @param recaptchas Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
          * 
          * @return builder
          * 
@@ -1182,7 +1929,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param rekognitions AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+         * @param rekognitions Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
          * 
          * @return builder
          * 
@@ -1193,7 +1940,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param rekognitions AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+         * @param rekognitions Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
          * 
          * @return builder
          * 
@@ -1203,7 +1950,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param rekognitions AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+         * @param rekognitions Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
          * 
          * @return builder
          * 
@@ -1212,21 +1959,39 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return rekognitions(List.of(rekognitions));
         }
 
+        /**
+         * @param salesforceMarketingClouds Send transactional messages with the Salesforce Marketing Cloud connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder salesforceMarketingClouds(@Nullable Output<List<ProjectConnectorsSalesforceMarketingCloudArgs>> salesforceMarketingClouds) {
             $.salesforceMarketingClouds = salesforceMarketingClouds;
             return this;
         }
 
+        /**
+         * @param salesforceMarketingClouds Send transactional messages with the Salesforce Marketing Cloud connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder salesforceMarketingClouds(List<ProjectConnectorsSalesforceMarketingCloudArgs> salesforceMarketingClouds) {
             return salesforceMarketingClouds(Output.of(salesforceMarketingClouds));
         }
 
+        /**
+         * @param salesforceMarketingClouds Send transactional messages with the Salesforce Marketing Cloud connector.
+         * 
+         * @return builder
+         * 
+         */
         public Builder salesforceMarketingClouds(ProjectConnectorsSalesforceMarketingCloudArgs... salesforceMarketingClouds) {
             return salesforceMarketingClouds(List.of(salesforceMarketingClouds));
         }
 
         /**
-         * @param salesforces Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+         * @param salesforces Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
          * 
          * @return builder
          * 
@@ -1237,7 +2002,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param salesforces Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+         * @param salesforces Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
          * 
          * @return builder
          * 
@@ -1247,7 +2012,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param salesforces Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+         * @param salesforces Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
          * 
          * @return builder
          * 
@@ -1257,7 +2022,38 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param segments Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param sardines Evaluate customer risk using Sardine
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sardines(@Nullable Output<List<ProjectConnectorsSardineArgs>> sardines) {
+            $.sardines = sardines;
+            return this;
+        }
+
+        /**
+         * @param sardines Evaluate customer risk using Sardine
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sardines(List<ProjectConnectorsSardineArgs> sardines) {
+            return sardines(Output.of(sardines));
+        }
+
+        /**
+         * @param sardines Evaluate customer risk using Sardine
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sardines(ProjectConnectorsSardineArgs... sardines) {
+            return sardines(List.of(sardines));
+        }
+
+        /**
+         * @param segments Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
          * 
          * @return builder
          * 
@@ -1268,7 +2064,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param segments Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param segments Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
          * 
          * @return builder
          * 
@@ -1278,7 +2074,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param segments Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+         * @param segments Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
          * 
          * @return builder
          * 
@@ -1287,28 +2083,64 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return segments(List.of(segments));
         }
 
+        /**
+         * @param sendgrids SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendgrids(@Nullable Output<List<ProjectConnectorsSendgridArgs>> sendgrids) {
             $.sendgrids = sendgrids;
             return this;
         }
 
+        /**
+         * @param sendgrids SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendgrids(List<ProjectConnectorsSendgridArgs> sendgrids) {
             return sendgrids(Output.of(sendgrids));
         }
 
+        /**
+         * @param sendgrids SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendgrids(ProjectConnectorsSendgridArgs... sendgrids) {
             return sendgrids(List.of(sendgrids));
         }
 
+        /**
+         * @param ses Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+         * 
+         * @return builder
+         * 
+         */
         public Builder ses(@Nullable Output<List<ProjectConnectorsSeArgs>> ses) {
             $.ses = ses;
             return this;
         }
 
+        /**
+         * @param ses Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+         * 
+         * @return builder
+         * 
+         */
         public Builder ses(List<ProjectConnectorsSeArgs> ses) {
             return ses(Output.of(ses));
         }
 
+        /**
+         * @param ses Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+         * 
+         * @return builder
+         * 
+         */
         public Builder ses(ProjectConnectorsSeArgs... ses) {
             return ses(List.of(ses));
         }
@@ -1375,34 +2207,70 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return smartlings(List.of(smartlings));
         }
 
+        /**
+         * @param smtps Simple Mail Transfer Protocol (SMTP) server for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder smtps(@Nullable Output<List<ProjectConnectorsSmtpArgs>> smtps) {
             $.smtps = smtps;
             return this;
         }
 
+        /**
+         * @param smtps Simple Mail Transfer Protocol (SMTP) server for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder smtps(List<ProjectConnectorsSmtpArgs> smtps) {
             return smtps(Output.of(smtps));
         }
 
+        /**
+         * @param smtps Simple Mail Transfer Protocol (SMTP) server for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder smtps(ProjectConnectorsSmtpArgs... smtps) {
             return smtps(List.of(smtps));
         }
 
+        /**
+         * @param sns Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sns(@Nullable Output<List<ProjectConnectorsSnArgs>> sns) {
             $.sns = sns;
             return this;
         }
 
+        /**
+         * @param sns Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sns(List<ProjectConnectorsSnArgs> sns) {
             return sns(Output.of(sns));
         }
 
+        /**
+         * @param sns Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sns(ProjectConnectorsSnArgs... sns) {
             return sns(List.of(sns));
         }
 
         /**
-         * @param sumologics Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+         * @param sumologics Stream logs and audit events with the Sumo Logic connector.
          * 
          * @return builder
          * 
@@ -1413,7 +2281,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param sumologics Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+         * @param sumologics Stream logs and audit events with the Sumo Logic connector.
          * 
          * @return builder
          * 
@@ -1423,7 +2291,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param sumologics Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+         * @param sumologics Stream logs and audit events with the Sumo Logic connector.
          * 
          * @return builder
          * 
@@ -1433,7 +2301,38 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param telesigns Telesign Phone number intelligence API provides risk score for phone numbers.
+         * @param supabases Generate external tokens for user authentication in Supabase projects.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder supabases(@Nullable Output<List<ProjectConnectorsSupabaseArgs>> supabases) {
+            $.supabases = supabases;
+            return this;
+        }
+
+        /**
+         * @param supabases Generate external tokens for user authentication in Supabase projects.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder supabases(List<ProjectConnectorsSupabaseArgs> supabases) {
+            return supabases(Output.of(supabases));
+        }
+
+        /**
+         * @param supabases Generate external tokens for user authentication in Supabase projects.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder supabases(ProjectConnectorsSupabaseArgs... supabases) {
+            return supabases(List.of(supabases));
+        }
+
+        /**
+         * @param telesigns Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
          * 
          * @return builder
          * 
@@ -1444,7 +2343,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param telesigns Telesign Phone number intelligence API provides risk score for phone numbers.
+         * @param telesigns Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
          * 
          * @return builder
          * 
@@ -1454,7 +2353,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param telesigns Telesign Phone number intelligence API provides risk score for phone numbers.
+         * @param telesigns Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
          * 
          * @return builder
          * 
@@ -1464,7 +2363,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param traceables API security for a cloud-first, API-driven world.
+         * @param traceables Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
          * 
          * @return builder
          * 
@@ -1475,7 +2374,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param traceables API security for a cloud-first, API-driven world.
+         * @param traceables Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
          * 
          * @return builder
          * 
@@ -1485,7 +2384,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param traceables API security for a cloud-first, API-driven world.
+         * @param traceables Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
          * 
          * @return builder
          * 
@@ -1494,28 +2393,95 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
             return traceables(List.of(traceables));
         }
 
+        /**
+         * @param turnstiles Prevent bot attacks on your login pages with the Turnstile connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder turnstiles(@Nullable Output<List<ProjectConnectorsTurnstileArgs>> turnstiles) {
+            $.turnstiles = turnstiles;
+            return this;
+        }
+
+        /**
+         * @param turnstiles Prevent bot attacks on your login pages with the Turnstile connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder turnstiles(List<ProjectConnectorsTurnstileArgs> turnstiles) {
+            return turnstiles(Output.of(turnstiles));
+        }
+
+        /**
+         * @param turnstiles Prevent bot attacks on your login pages with the Turnstile connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder turnstiles(ProjectConnectorsTurnstileArgs... turnstiles) {
+            return turnstiles(List.of(turnstiles));
+        }
+
+        /**
+         * @param twilioCores Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioCores(@Nullable Output<List<ProjectConnectorsTwilioCoreArgs>> twilioCores) {
             $.twilioCores = twilioCores;
             return this;
         }
 
+        /**
+         * @param twilioCores Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioCores(List<ProjectConnectorsTwilioCoreArgs> twilioCores) {
             return twilioCores(Output.of(twilioCores));
         }
 
+        /**
+         * @param twilioCores Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioCores(ProjectConnectorsTwilioCoreArgs... twilioCores) {
             return twilioCores(List.of(twilioCores));
         }
 
+        /**
+         * @param twilioVerifies Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioVerifies(@Nullable Output<List<ProjectConnectorsTwilioVerifyArgs>> twilioVerifies) {
             $.twilioVerifies = twilioVerifies;
             return this;
         }
 
+        /**
+         * @param twilioVerifies Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioVerifies(List<ProjectConnectorsTwilioVerifyArgs> twilioVerifies) {
             return twilioVerifies(Output.of(twilioVerifies));
         }
 
+        /**
+         * @param twilioVerifies Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+         * 
+         * @return builder
+         * 
+         */
         public Builder twilioVerifies(ProjectConnectorsTwilioVerifyArgs... twilioVerifies) {
             return twilioVerifies(List.of(twilioVerifies));
         }

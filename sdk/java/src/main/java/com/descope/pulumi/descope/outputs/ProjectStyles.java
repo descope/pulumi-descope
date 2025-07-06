@@ -10,9 +10,17 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectStyles {
+    /**
+     * @return The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+     * 
+     */
     private String data;
 
     private ProjectStyles() {}
+    /**
+     * @return The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+     * 
+     */
     public String data() {
         return this.data;
     }

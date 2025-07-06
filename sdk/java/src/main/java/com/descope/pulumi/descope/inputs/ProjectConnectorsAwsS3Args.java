@@ -23,29 +23,60 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
      * The unique AWS access key ID.
      * 
      */
-    @Import(name="accessKeyId", required=true)
-    private Output<String> accessKeyId;
+    @Import(name="accessKeyId")
+    private @Nullable Output<String> accessKeyId;
 
     /**
      * @return The unique AWS access key ID.
      * 
      */
-    public Output<String> accessKeyId() {
-        return this.accessKeyId;
+    public Optional<Output<String>> accessKeyId() {
+        return Optional.ofNullable(this.accessKeyId);
     }
 
+    /**
+     * Whether to enable streaming of audit events.
+     * 
+     */
     @Import(name="auditEnabled")
     private @Nullable Output<Boolean> auditEnabled;
 
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     public Optional<Output<Boolean>> auditEnabled() {
         return Optional.ofNullable(this.auditEnabled);
     }
 
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     @Import(name="auditFilters")
     private @Nullable Output<List<ProjectConnectorsAwsS3AuditFilterArgs>> auditFilters;
 
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     public Optional<Output<List<ProjectConnectorsAwsS3AuditFilterArgs>>> auditFilters() {
         return Optional.ofNullable(this.auditFilters);
+    }
+
+    /**
+     * The authentication type to use.
+     * 
+     */
+    @Import(name="authType", required=true)
+    private Output<String> authType;
+
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Output<String> authType() {
+        return this.authType;
     }
 
     /**
@@ -76,6 +107,21 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
      */
     public Optional<Output<String>> description() {
         return Optional.ofNullable(this.description);
+    }
+
+    /**
+     * The external ID to use when assuming the role.
+     * 
+     */
+    @Import(name="externalId")
+    private @Nullable Output<String> externalId;
+
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<Output<String>> externalId() {
+        return Optional.ofNullable(this.externalId);
     }
 
     @Import(name="id")
@@ -116,23 +162,46 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
     }
 
     /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    @Import(name="roleArn")
+    private @Nullable Output<String> roleArn;
+
+    /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<Output<String>> roleArn() {
+        return Optional.ofNullable(this.roleArn);
+    }
+
+    /**
      * The secret AWS access key.
      * 
      */
-    @Import(name="secretAccessKey", required=true)
-    private Output<String> secretAccessKey;
+    @Import(name="secretAccessKey")
+    private @Nullable Output<String> secretAccessKey;
 
     /**
      * @return The secret AWS access key.
      * 
      */
-    public Output<String> secretAccessKey() {
-        return this.secretAccessKey;
+    public Optional<Output<String>> secretAccessKey() {
+        return Optional.ofNullable(this.secretAccessKey);
     }
 
+    /**
+     * Whether to send troubleshooting events.
+     * 
+     */
     @Import(name="troubleshootLogEnabled")
     private @Nullable Output<Boolean> troubleshootLogEnabled;
 
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     public Optional<Output<Boolean>> troubleshootLogEnabled() {
         return Optional.ofNullable(this.troubleshootLogEnabled);
     }
@@ -143,11 +212,14 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
         this.accessKeyId = $.accessKeyId;
         this.auditEnabled = $.auditEnabled;
         this.auditFilters = $.auditFilters;
+        this.authType = $.authType;
         this.bucket = $.bucket;
         this.description = $.description;
+        this.externalId = $.externalId;
         this.id = $.id;
         this.name = $.name;
         this.region = $.region;
+        this.roleArn = $.roleArn;
         this.secretAccessKey = $.secretAccessKey;
         this.troubleshootLogEnabled = $.troubleshootLogEnabled;
     }
@@ -176,7 +248,7 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
          * @return builder
          * 
          */
-        public Builder accessKeyId(Output<String> accessKeyId) {
+        public Builder accessKeyId(@Nullable Output<String> accessKeyId) {
             $.accessKeyId = accessKeyId;
             return this;
         }
@@ -191,26 +263,77 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
             return accessKeyId(Output.of(accessKeyId));
         }
 
+        /**
+         * @param auditEnabled Whether to enable streaming of audit events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditEnabled(@Nullable Output<Boolean> auditEnabled) {
             $.auditEnabled = auditEnabled;
             return this;
         }
 
+        /**
+         * @param auditEnabled Whether to enable streaming of audit events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditEnabled(Boolean auditEnabled) {
             return auditEnabled(Output.of(auditEnabled));
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(@Nullable Output<List<ProjectConnectorsAwsS3AuditFilterArgs>> auditFilters) {
             $.auditFilters = auditFilters;
             return this;
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(List<ProjectConnectorsAwsS3AuditFilterArgs> auditFilters) {
             return auditFilters(Output.of(auditFilters));
         }
 
+        /**
+         * @param auditFilters Specify which events will be sent to the external audit service (including tenant selection).
+         * 
+         * @return builder
+         * 
+         */
         public Builder auditFilters(ProjectConnectorsAwsS3AuditFilterArgs... auditFilters) {
             return auditFilters(List.of(auditFilters));
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(Output<String> authType) {
+            $.authType = authType;
+            return this;
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(String authType) {
+            return authType(Output.of(authType));
         }
 
         /**
@@ -253,6 +376,27 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param externalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalId(@Nullable Output<String> externalId) {
+            $.externalId = externalId;
+            return this;
+        }
+
+        /**
+         * @param externalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalId(String externalId) {
+            return externalId(Output.of(externalId));
         }
 
         public Builder id(@Nullable Output<String> id) {
@@ -307,12 +451,33 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
         }
 
         /**
+         * @param roleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder roleArn(@Nullable Output<String> roleArn) {
+            $.roleArn = roleArn;
+            return this;
+        }
+
+        /**
+         * @param roleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder roleArn(String roleArn) {
+            return roleArn(Output.of(roleArn));
+        }
+
+        /**
          * @param secretAccessKey The secret AWS access key.
          * 
          * @return builder
          * 
          */
-        public Builder secretAccessKey(Output<String> secretAccessKey) {
+        public Builder secretAccessKey(@Nullable Output<String> secretAccessKey) {
             $.secretAccessKey = secretAccessKey;
             return this;
         }
@@ -327,18 +492,30 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
             return secretAccessKey(Output.of(secretAccessKey));
         }
 
+        /**
+         * @param troubleshootLogEnabled Whether to send troubleshooting events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder troubleshootLogEnabled(@Nullable Output<Boolean> troubleshootLogEnabled) {
             $.troubleshootLogEnabled = troubleshootLogEnabled;
             return this;
         }
 
+        /**
+         * @param troubleshootLogEnabled Whether to send troubleshooting events.
+         * 
+         * @return builder
+         * 
+         */
         public Builder troubleshootLogEnabled(Boolean troubleshootLogEnabled) {
             return troubleshootLogEnabled(Output.of(troubleshootLogEnabled));
         }
 
         public ProjectConnectorsAwsS3Args build() {
-            if ($.accessKeyId == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "accessKeyId");
+            if ($.authType == null) {
+                throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "authType");
             }
             if ($.bucket == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "bucket");
@@ -348,9 +525,6 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
             }
             if ($.region == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "region");
-            }
-            if ($.secretAccessKey == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "secretAccessKey");
             }
             return $;
         }

@@ -10,9 +10,17 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectConnectorsSendgridAuthentication {
+    /**
+     * @return SendGrid API key for authentication.
+     * 
+     */
     private String apiKey;
 
     private ProjectConnectorsSendgridAuthentication() {}
+    /**
+     * @return SendGrid API key for authentication.
+     * 
+     */
     public String apiKey() {
         return this.apiKey;
     }

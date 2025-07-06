@@ -13,7 +13,15 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsTwilioVerify {
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     private String accountSid;
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     private ProjectConnectorsTwilioVerifyAuthentication authentication;
     /**
      * @return A description of what your connector is used for.
@@ -26,13 +34,29 @@ public final class ProjectConnectorsTwilioVerify {
      * 
      */
     private String name;
+    /**
+     * @return Optional sender identifier for verification messages.
+     * 
+     */
     private @Nullable String sender;
+    /**
+     * @return Twilio Verify Service SID for verification services.
+     * 
+     */
     private String serviceSid;
 
     private ProjectConnectorsTwilioVerify() {}
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     public String accountSid() {
         return this.accountSid;
     }
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     public ProjectConnectorsTwilioVerifyAuthentication authentication() {
         return this.authentication;
     }
@@ -53,9 +77,17 @@ public final class ProjectConnectorsTwilioVerify {
     public String name() {
         return this.name;
     }
+    /**
+     * @return Optional sender identifier for verification messages.
+     * 
+     */
     public Optional<String> sender() {
         return Optional.ofNullable(this.sender);
     }
+    /**
+     * @return Twilio Verify Service SID for verification services.
+     * 
+     */
     public String serviceSid() {
         return this.serviceSid;
     }

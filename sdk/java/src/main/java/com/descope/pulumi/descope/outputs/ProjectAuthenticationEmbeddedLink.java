@@ -18,7 +18,7 @@ public final class ProjectAuthenticationEmbeddedLink {
      */
     private @Nullable Boolean disabled;
     /**
-     * @return The amount of time that the embedded link will be valid for.
+     * @return How long the embedded link remains valid before it expires.
      * 
      */
     private @Nullable String expirationTime;
@@ -32,7 +32,7 @@ public final class ProjectAuthenticationEmbeddedLink {
         return Optional.ofNullable(this.disabled);
     }
     /**
-     * @return The amount of time that the embedded link will be valid for.
+     * @return How long the embedded link remains valid before it expires.
      * 
      */
     public Optional<String> expirationTime() {

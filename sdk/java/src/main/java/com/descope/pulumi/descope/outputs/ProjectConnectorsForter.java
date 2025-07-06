@@ -14,6 +14,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectConnectorsForter {
     /**
+     * @return The Forter API version.
+     * 
+     */
+    private @Nullable String apiVersion;
+    /**
      * @return A description of what your connector is used for.
      * 
      */
@@ -51,6 +56,13 @@ public final class ProjectConnectorsForter {
     private String siteId;
 
     private ProjectConnectorsForter() {}
+    /**
+     * @return The Forter API version.
+     * 
+     */
+    public Optional<String> apiVersion() {
+        return Optional.ofNullable(this.apiVersion);
+    }
     /**
      * @return A description of what your connector is used for.
      * 
@@ -113,6 +125,7 @@ public final class ProjectConnectorsForter {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String apiVersion;
         private @Nullable String description;
         private @Nullable String id;
         private String name;
@@ -124,6 +137,7 @@ public final class ProjectConnectorsForter {
         public Builder() {}
         public Builder(ProjectConnectorsForter defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.apiVersion = defaults.apiVersion;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
@@ -134,6 +148,12 @@ public final class ProjectConnectorsForter {
     	      this.siteId = defaults.siteId;
         }
 
+        @CustomType.Setter
+        public Builder apiVersion(@Nullable String apiVersion) {
+
+            this.apiVersion = apiVersion;
+            return this;
+        }
         @CustomType.Setter
         public Builder description(@Nullable String description) {
 
@@ -190,6 +210,7 @@ public final class ProjectConnectorsForter {
         }
         public ProjectConnectorsForter build() {
             final var _resultValue = new ProjectConnectorsForter();
+            _resultValue.apiVersion = apiVersion;
             _resultValue.description = description;
             _resultValue.id = id;
             _resultValue.name = name;

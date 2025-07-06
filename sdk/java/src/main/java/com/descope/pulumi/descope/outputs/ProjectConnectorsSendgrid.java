@@ -14,6 +14,10 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSendgrid {
+    /**
+     * @return SendGrid API authentication configuration.
+     * 
+     */
     private ProjectConnectorsSendgridAuthentication authentication;
     /**
      * @return A description of what your connector is used for.
@@ -33,6 +37,10 @@ public final class ProjectConnectorsSendgrid {
     private ProjectConnectorsSendgridSender sender;
 
     private ProjectConnectorsSendgrid() {}
+    /**
+     * @return SendGrid API authentication configuration.
+     * 
+     */
     public ProjectConnectorsSendgridAuthentication authentication() {
         return this.authentication;
     }

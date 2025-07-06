@@ -15,7 +15,15 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSumologic {
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     private @Nullable Boolean auditEnabled;
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     private @Nullable List<ProjectConnectorsSumologicAuditFilter> auditFilters;
     /**
      * @return A description of what your connector is used for.
@@ -33,12 +41,24 @@ public final class ProjectConnectorsSumologic {
      * 
      */
     private String name;
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     private @Nullable Boolean troubleshootLogEnabled;
 
     private ProjectConnectorsSumologic() {}
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     public Optional<Boolean> auditEnabled() {
         return Optional.ofNullable(this.auditEnabled);
     }
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     public List<ProjectConnectorsSumologicAuditFilter> auditFilters() {
         return this.auditFilters == null ? List.of() : this.auditFilters;
     }
@@ -66,6 +86,10 @@ public final class ProjectConnectorsSumologic {
     public String name() {
         return this.name;
     }
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     public Optional<Boolean> troubleshootLogEnabled() {
         return Optional.ofNullable(this.troubleshootLogEnabled);
     }

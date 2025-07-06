@@ -9,14 +9,22 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsAuditWebhook;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsS3;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsTranslate;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsClear;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsCybersixgill;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDatadog;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDevrevGrow;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDocebo;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsEightByEightViber;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsEightByEightWhatsapp;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsElephant;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsExternalTokenHttp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsFingerprint;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsFingerprintDescope;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsFirebaseAdmin;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsForter;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericEmailGateway;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericSmsGateway;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudTranslation;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleMapsPlace;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHibp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHttp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHubspot;
@@ -25,11 +33,13 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsIntercom;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsLokalise;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsMparticle;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsNewrelic;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsRadar;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptcha;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptchaEnterprise;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRekognition;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSalesforce;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSalesforceMarketingCloud;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsSardine;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSe;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSegment;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSendgrid;
@@ -38,8 +48,10 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsSmartling;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSmtp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSn;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSumologic;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsSupabase;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTelesign;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTraceable;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsTurnstile;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTwilioCore;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTwilioVerify;
 import com.pulumi.core.annotations.CustomType;
@@ -50,49 +62,117 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectConnectors {
     /**
-     * @return AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+     * @return Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
      * 
      */
     private @Nullable List<ProjectConnectorsAbuseipdb> abuseipdbs;
     /**
-     * @return Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
     private @Nullable List<ProjectConnectorsAmplitude> amplitudes;
+    /**
+     * @return Send audit events to a custom webhook.
+     * 
+     */
     private @Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks;
+    /**
+     * @return Stream authentication audit logs with the Amazon S3 connector.
+     * 
+     */
     private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
+    /**
+     * @return Localize the language of your login and user journey screens with the Amazon Translate connector.
+     * 
+     */
     private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
     /**
-     * @return An identity verification platform that allow customers to digitally verify their identity from anywhere.
+     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
      * 
      */
     private @Nullable List<ProjectConnectorsClear> clears;
     /**
-     * @return Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsCybersixgill> cybersixgills;
+    /**
+     * @return Stream authentication audit logs with the Datadog connector.
      * 
      */
     private @Nullable List<ProjectConnectorsDatadog> datadogs;
+    /**
+     * @return DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+     * 
+     */
     private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
     /**
-     * @return Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+     * @return Get user information from Docebo in your Descope user journeys with the Docebo connector.
      * 
      */
     private @Nullable List<ProjectConnectorsDocebo> docebos;
+    /**
+     * @return Send Viber messages to the user.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsEightByEightViber> eightByEightVibers;
+    /**
+     * @return Send WhatsApp messages to the user.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsEightByEightWhatsapp> eightByEightWhatsapps;
+    /**
+     * @return Use this connector to obtain an identity trust score.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsElephant> elephants;
+    /**
+     * @return A generic HTTP token connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsExternalTokenHttp> externalTokenHttps;
+    /**
+     * @return Descope Fingerprint capabilities for fraud detection and risk assessment.
+     * 
+     */
     private @Nullable List<ProjectConnectorsFingerprintDescope> fingerprintDescopes;
     /**
-     * @return Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+     * @return Prevent fraud by adding device intelligence with the Fingerprint connector.
      * 
      */
     private @Nullable List<ProjectConnectorsFingerprint> fingerprints;
     /**
-     * @return Use the Forter connector for account fraud prevention.
+     * @return Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsFirebaseAdmin> firebaseAdmins;
+    /**
+     * @return Leverage ML-based risk scores for fraud prevention with the Forter connector.
      * 
      */
     private @Nullable List<ProjectConnectorsForter> forters;
+    /**
+     * @return Send emails using a generic Email gateway.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsGenericEmailGateway> genericEmailGateways;
+    /**
+     * @return Send messages using a generic SMS gateway.
+     * 
+     */
     private @Nullable List<ProjectConnectorsGenericSmsGateway> genericSmsGateways;
+    /**
+     * @return Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+     * 
+     */
     private @Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations;
     /**
-     * @return API to check if password appeared previously exposed in data breaches.
+     * @return Get address autocompletions from Place Autocomplete Data API.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
+    /**
+     * @return Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
     private @Nullable List<ProjectConnectorsHibp> hibps;
@@ -102,7 +182,7 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsHttp> https;
     /**
-     * @return HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+     * @return Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
      * 
      */
     private @Nullable List<ProjectConnectorsHubspot> hubspots;
@@ -112,7 +192,7 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsIncode> incodes;
     /**
-     * @return Intercom is a Conversational Relationship Platform (CRP).
+     * @return Orchestrate customer identity information from your Descope user journey with the Intercom connector.
      * 
      */
     private @Nullable List<ProjectConnectorsIntercom> intercoms;
@@ -127,33 +207,59 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsMparticle> mparticles;
     /**
-     * @return Use this connector to send audit events and troubleshooting logs to New Relic.
+     * @return Stream authentication audit logs with the New Relic connector.
      * 
      */
     private @Nullable List<ProjectConnectorsNewrelic> newrelics;
+    /**
+     * @return Get address autocompletions from Radar Autocomplete API.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsRadar> radars;
+    /**
+     * @return Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+     * 
+     */
     private @Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises;
     /**
-     * @return reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+     * @return Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
     private @Nullable List<ProjectConnectorsRecaptcha> recaptchas;
     /**
-     * @return AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+     * @return Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
      * 
      */
     private @Nullable List<ProjectConnectorsRekognition> rekognitions;
+    /**
+     * @return Send transactional messages with the Salesforce Marketing Cloud connector.
+     * 
+     */
     private @Nullable List<ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds;
     /**
-     * @return Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+     * @return Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
      * 
      */
     private @Nullable List<ProjectConnectorsSalesforce> salesforces;
     /**
-     * @return Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Evaluate customer risk using Sardine
+     * 
+     */
+    private @Nullable List<ProjectConnectorsSardine> sardines;
+    /**
+     * @return Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      * 
      */
     private @Nullable List<ProjectConnectorsSegment> segments;
+    /**
+     * @return SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+     * 
+     */
     private @Nullable List<ProjectConnectorsSendgrid> sendgrids;
+    /**
+     * @return Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+     * 
+     */
     private @Nullable List<ProjectConnectorsSe> ses;
     /**
      * @return Send updates to your team on Slack.
@@ -165,99 +271,209 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsSmartling> smartlings;
+    /**
+     * @return Simple Mail Transfer Protocol (SMTP) server for sending emails.
+     * 
+     */
     private @Nullable List<ProjectConnectorsSmtp> smtps;
+    /**
+     * @return Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+     * 
+     */
     private @Nullable List<ProjectConnectorsSn> sns;
     /**
-     * @return Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+     * @return Stream logs and audit events with the Sumo Logic connector.
      * 
      */
     private @Nullable List<ProjectConnectorsSumologic> sumologics;
     /**
-     * @return Telesign Phone number intelligence API provides risk score for phone numbers.
+     * @return Generate external tokens for user authentication in Supabase projects.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsSupabase> supabases;
+    /**
+     * @return Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
      * 
      */
     private @Nullable List<ProjectConnectorsTelesign> telesigns;
     /**
-     * @return API security for a cloud-first, API-driven world.
+     * @return Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
      * 
      */
     private @Nullable List<ProjectConnectorsTraceable> traceables;
+    /**
+     * @return Prevent bot attacks on your login pages with the Turnstile connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsTurnstile> turnstiles;
+    /**
+     * @return Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+     * 
+     */
     private @Nullable List<ProjectConnectorsTwilioCore> twilioCores;
+    /**
+     * @return Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+     * 
+     */
     private @Nullable List<ProjectConnectorsTwilioVerify> twilioVerifies;
 
     private ProjectConnectors() {}
     /**
-     * @return AbuseIPDB provides an API to identify if an IP address has been associated with malicious activities online.
+     * @return Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
      * 
      */
     public List<ProjectConnectorsAbuseipdb> abuseipdbs() {
         return this.abuseipdbs == null ? List.of() : this.abuseipdbs;
     }
     /**
-     * @return Amplitude, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
     public List<ProjectConnectorsAmplitude> amplitudes() {
         return this.amplitudes == null ? List.of() : this.amplitudes;
     }
+    /**
+     * @return Send audit events to a custom webhook.
+     * 
+     */
     public List<ProjectConnectorsAuditWebhook> auditWebhooks() {
         return this.auditWebhooks == null ? List.of() : this.auditWebhooks;
     }
+    /**
+     * @return Stream authentication audit logs with the Amazon S3 connector.
+     * 
+     */
     public List<ProjectConnectorsAwsS3> awsS3s() {
         return this.awsS3s == null ? List.of() : this.awsS3s;
     }
+    /**
+     * @return Localize the language of your login and user journey screens with the Amazon Translate connector.
+     * 
+     */
     public List<ProjectConnectorsAwsTranslate> awsTranslates() {
         return this.awsTranslates == null ? List.of() : this.awsTranslates;
     }
     /**
-     * @return An identity verification platform that allow customers to digitally verify their identity from anywhere.
+     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
      * 
      */
     public List<ProjectConnectorsClear> clears() {
         return this.clears == null ? List.of() : this.clears;
     }
     /**
-     * @return Datadog, an observability service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * 
+     */
+    public List<ProjectConnectorsCybersixgill> cybersixgills() {
+        return this.cybersixgills == null ? List.of() : this.cybersixgills;
+    }
+    /**
+     * @return Stream authentication audit logs with the Datadog connector.
      * 
      */
     public List<ProjectConnectorsDatadog> datadogs() {
         return this.datadogs == null ? List.of() : this.datadogs;
     }
+    /**
+     * @return DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+     * 
+     */
     public List<ProjectConnectorsDevrevGrow> devrevGrows() {
         return this.devrevGrows == null ? List.of() : this.devrevGrows;
     }
     /**
-     * @return Docebo is a cloud-based Learning Management System (LMS) designed to increase performance and learning engagement.
+     * @return Get user information from Docebo in your Descope user journeys with the Docebo connector.
      * 
      */
     public List<ProjectConnectorsDocebo> docebos() {
         return this.docebos == null ? List.of() : this.docebos;
     }
+    /**
+     * @return Send Viber messages to the user.
+     * 
+     */
+    public List<ProjectConnectorsEightByEightViber> eightByEightVibers() {
+        return this.eightByEightVibers == null ? List.of() : this.eightByEightVibers;
+    }
+    /**
+     * @return Send WhatsApp messages to the user.
+     * 
+     */
+    public List<ProjectConnectorsEightByEightWhatsapp> eightByEightWhatsapps() {
+        return this.eightByEightWhatsapps == null ? List.of() : this.eightByEightWhatsapps;
+    }
+    /**
+     * @return Use this connector to obtain an identity trust score.
+     * 
+     */
+    public List<ProjectConnectorsElephant> elephants() {
+        return this.elephants == null ? List.of() : this.elephants;
+    }
+    /**
+     * @return A generic HTTP token connector.
+     * 
+     */
+    public List<ProjectConnectorsExternalTokenHttp> externalTokenHttps() {
+        return this.externalTokenHttps == null ? List.of() : this.externalTokenHttps;
+    }
+    /**
+     * @return Descope Fingerprint capabilities for fraud detection and risk assessment.
+     * 
+     */
     public List<ProjectConnectorsFingerprintDescope> fingerprintDescopes() {
         return this.fingerprintDescopes == null ? List.of() : this.fingerprintDescopes;
     }
     /**
-     * @return Use the Fingerprint (formerly FingerprintJS) connector to add device intelligence and prevent fraud.
+     * @return Prevent fraud by adding device intelligence with the Fingerprint connector.
      * 
      */
     public List<ProjectConnectorsFingerprint> fingerprints() {
         return this.fingerprints == null ? List.of() : this.fingerprints;
     }
     /**
-     * @return Use the Forter connector for account fraud prevention.
+     * @return Firebase connector enables you to utilize Firebase&#39;s APIs to generate a Firebase user token for a given Descope user.
+     * 
+     */
+    public List<ProjectConnectorsFirebaseAdmin> firebaseAdmins() {
+        return this.firebaseAdmins == null ? List.of() : this.firebaseAdmins;
+    }
+    /**
+     * @return Leverage ML-based risk scores for fraud prevention with the Forter connector.
      * 
      */
     public List<ProjectConnectorsForter> forters() {
         return this.forters == null ? List.of() : this.forters;
     }
+    /**
+     * @return Send emails using a generic Email gateway.
+     * 
+     */
+    public List<ProjectConnectorsGenericEmailGateway> genericEmailGateways() {
+        return this.genericEmailGateways == null ? List.of() : this.genericEmailGateways;
+    }
+    /**
+     * @return Send messages using a generic SMS gateway.
+     * 
+     */
     public List<ProjectConnectorsGenericSmsGateway> genericSmsGateways() {
         return this.genericSmsGateways == null ? List.of() : this.genericSmsGateways;
     }
+    /**
+     * @return Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+     * 
+     */
     public List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations() {
         return this.googleCloudTranslations == null ? List.of() : this.googleCloudTranslations;
     }
     /**
-     * @return API to check if password appeared previously exposed in data breaches.
+     * @return Get address autocompletions from Place Autocomplete Data API.
+     * 
+     */
+    public List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces() {
+        return this.googleMapsPlaces == null ? List.of() : this.googleMapsPlaces;
+    }
+    /**
+     * @return Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
     public List<ProjectConnectorsHibp> hibps() {
@@ -271,7 +487,7 @@ public final class ProjectConnectors {
         return this.https == null ? List.of() : this.https;
     }
     /**
-     * @return HubSpot is a CRM platform with software, integrations, and resources needed to connect marketing, sales, content management, and customer service.
+     * @return Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
      * 
      */
     public List<ProjectConnectorsHubspot> hubspots() {
@@ -285,7 +501,7 @@ public final class ProjectConnectors {
         return this.incodes == null ? List.of() : this.incodes;
     }
     /**
-     * @return Intercom is a Conversational Relationship Platform (CRP).
+     * @return Orchestrate customer identity information from your Descope user journey with the Intercom connector.
      * 
      */
     public List<ProjectConnectorsIntercom> intercoms() {
@@ -306,49 +522,79 @@ public final class ProjectConnectors {
         return this.mparticles == null ? List.of() : this.mparticles;
     }
     /**
-     * @return Use this connector to send audit events and troubleshooting logs to New Relic.
+     * @return Stream authentication audit logs with the New Relic connector.
      * 
      */
     public List<ProjectConnectorsNewrelic> newrelics() {
         return this.newrelics == null ? List.of() : this.newrelics;
     }
+    /**
+     * @return Get address autocompletions from Radar Autocomplete API.
+     * 
+     */
+    public List<ProjectConnectorsRadar> radars() {
+        return this.radars == null ? List.of() : this.radars;
+    }
+    /**
+     * @return Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+     * 
+     */
     public List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises() {
         return this.recaptchaEnterprises == null ? List.of() : this.recaptchaEnterprises;
     }
     /**
-     * @return reCAPTCHA is a free google service that protects your site from spam and abuse. It uses advanced risk analysis techniques to tell humans and bots apart.
+     * @return Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
     public List<ProjectConnectorsRecaptcha> recaptchas() {
         return this.recaptchas == null ? List.of() : this.recaptchas;
     }
     /**
-     * @return AWS Rekognition, cloud-based AI service that offers computer vision capabilities for analyzing and processing images. Useful for registration and verification processes, and can be used to detect fraud and prevent identity theft.
+     * @return Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
      * 
      */
     public List<ProjectConnectorsRekognition> rekognitions() {
         return this.rekognitions == null ? List.of() : this.rekognitions;
     }
+    /**
+     * @return Send transactional messages with the Salesforce Marketing Cloud connector.
+     * 
+     */
     public List<ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds() {
         return this.salesforceMarketingClouds == null ? List.of() : this.salesforceMarketingClouds;
     }
     /**
-     * @return Salesforce is a leading cloud-based Customer Relationship Management (CRM) platform that helps businesses streamline their sales, service, and marketing operations.
+     * @return Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
      * 
      */
     public List<ProjectConnectorsSalesforce> salesforces() {
         return this.salesforces == null ? List.of() : this.salesforces;
     }
     /**
-     * @return Segment, an analytics product that allows you to collects events from web and mobile apps, unify those and use those to better understand your customers needs.
+     * @return Evaluate customer risk using Sardine
+     * 
+     */
+    public List<ProjectConnectorsSardine> sardines() {
+        return this.sardines == null ? List.of() : this.sardines;
+    }
+    /**
+     * @return Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      * 
      */
     public List<ProjectConnectorsSegment> segments() {
         return this.segments == null ? List.of() : this.segments;
     }
+    /**
+     * @return SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+     * 
+     */
     public List<ProjectConnectorsSendgrid> sendgrids() {
         return this.sendgrids == null ? List.of() : this.sendgrids;
     }
+    /**
+     * @return Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+     * 
+     */
     public List<ProjectConnectorsSe> ses() {
         return this.ses == null ? List.of() : this.ses;
     }
@@ -366,36 +612,66 @@ public final class ProjectConnectors {
     public List<ProjectConnectorsSmartling> smartlings() {
         return this.smartlings == null ? List.of() : this.smartlings;
     }
+    /**
+     * @return Simple Mail Transfer Protocol (SMTP) server for sending emails.
+     * 
+     */
     public List<ProjectConnectorsSmtp> smtps() {
         return this.smtps == null ? List.of() : this.smtps;
     }
+    /**
+     * @return Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+     * 
+     */
     public List<ProjectConnectorsSn> sns() {
         return this.sns == null ? List.of() : this.sns;
     }
     /**
-     * @return Sumo Logic, fast troubleshooting and investigation with AI/ML-powered log analytics
+     * @return Stream logs and audit events with the Sumo Logic connector.
      * 
      */
     public List<ProjectConnectorsSumologic> sumologics() {
         return this.sumologics == null ? List.of() : this.sumologics;
     }
     /**
-     * @return Telesign Phone number intelligence API provides risk score for phone numbers.
+     * @return Generate external tokens for user authentication in Supabase projects.
+     * 
+     */
+    public List<ProjectConnectorsSupabase> supabases() {
+        return this.supabases == null ? List.of() : this.supabases;
+    }
+    /**
+     * @return Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
      * 
      */
     public List<ProjectConnectorsTelesign> telesigns() {
         return this.telesigns == null ? List.of() : this.telesigns;
     }
     /**
-     * @return API security for a cloud-first, API-driven world.
+     * @return Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
      * 
      */
     public List<ProjectConnectorsTraceable> traceables() {
         return this.traceables == null ? List.of() : this.traceables;
     }
+    /**
+     * @return Prevent bot attacks on your login pages with the Turnstile connector.
+     * 
+     */
+    public List<ProjectConnectorsTurnstile> turnstiles() {
+        return this.turnstiles == null ? List.of() : this.turnstiles;
+    }
+    /**
+     * @return Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+     * 
+     */
     public List<ProjectConnectorsTwilioCore> twilioCores() {
         return this.twilioCores == null ? List.of() : this.twilioCores;
     }
+    /**
+     * @return Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+     * 
+     */
     public List<ProjectConnectorsTwilioVerify> twilioVerifies() {
         return this.twilioVerifies == null ? List.of() : this.twilioVerifies;
     }
@@ -415,14 +691,22 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
         private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
         private @Nullable List<ProjectConnectorsClear> clears;
+        private @Nullable List<ProjectConnectorsCybersixgill> cybersixgills;
         private @Nullable List<ProjectConnectorsDatadog> datadogs;
         private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
         private @Nullable List<ProjectConnectorsDocebo> docebos;
+        private @Nullable List<ProjectConnectorsEightByEightViber> eightByEightVibers;
+        private @Nullable List<ProjectConnectorsEightByEightWhatsapp> eightByEightWhatsapps;
+        private @Nullable List<ProjectConnectorsElephant> elephants;
+        private @Nullable List<ProjectConnectorsExternalTokenHttp> externalTokenHttps;
         private @Nullable List<ProjectConnectorsFingerprintDescope> fingerprintDescopes;
         private @Nullable List<ProjectConnectorsFingerprint> fingerprints;
+        private @Nullable List<ProjectConnectorsFirebaseAdmin> firebaseAdmins;
         private @Nullable List<ProjectConnectorsForter> forters;
+        private @Nullable List<ProjectConnectorsGenericEmailGateway> genericEmailGateways;
         private @Nullable List<ProjectConnectorsGenericSmsGateway> genericSmsGateways;
         private @Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations;
+        private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
         private @Nullable List<ProjectConnectorsHibp> hibps;
         private @Nullable List<ProjectConnectorsHttp> https;
         private @Nullable List<ProjectConnectorsHubspot> hubspots;
@@ -431,11 +715,13 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsLokalise> lokalises;
         private @Nullable List<ProjectConnectorsMparticle> mparticles;
         private @Nullable List<ProjectConnectorsNewrelic> newrelics;
+        private @Nullable List<ProjectConnectorsRadar> radars;
         private @Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises;
         private @Nullable List<ProjectConnectorsRecaptcha> recaptchas;
         private @Nullable List<ProjectConnectorsRekognition> rekognitions;
         private @Nullable List<ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds;
         private @Nullable List<ProjectConnectorsSalesforce> salesforces;
+        private @Nullable List<ProjectConnectorsSardine> sardines;
         private @Nullable List<ProjectConnectorsSegment> segments;
         private @Nullable List<ProjectConnectorsSendgrid> sendgrids;
         private @Nullable List<ProjectConnectorsSe> ses;
@@ -444,8 +730,10 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsSmtp> smtps;
         private @Nullable List<ProjectConnectorsSn> sns;
         private @Nullable List<ProjectConnectorsSumologic> sumologics;
+        private @Nullable List<ProjectConnectorsSupabase> supabases;
         private @Nullable List<ProjectConnectorsTelesign> telesigns;
         private @Nullable List<ProjectConnectorsTraceable> traceables;
+        private @Nullable List<ProjectConnectorsTurnstile> turnstiles;
         private @Nullable List<ProjectConnectorsTwilioCore> twilioCores;
         private @Nullable List<ProjectConnectorsTwilioVerify> twilioVerifies;
         public Builder() {}
@@ -457,14 +745,22 @@ public final class ProjectConnectors {
     	      this.awsS3s = defaults.awsS3s;
     	      this.awsTranslates = defaults.awsTranslates;
     	      this.clears = defaults.clears;
+    	      this.cybersixgills = defaults.cybersixgills;
     	      this.datadogs = defaults.datadogs;
     	      this.devrevGrows = defaults.devrevGrows;
     	      this.docebos = defaults.docebos;
+    	      this.eightByEightVibers = defaults.eightByEightVibers;
+    	      this.eightByEightWhatsapps = defaults.eightByEightWhatsapps;
+    	      this.elephants = defaults.elephants;
+    	      this.externalTokenHttps = defaults.externalTokenHttps;
     	      this.fingerprintDescopes = defaults.fingerprintDescopes;
     	      this.fingerprints = defaults.fingerprints;
+    	      this.firebaseAdmins = defaults.firebaseAdmins;
     	      this.forters = defaults.forters;
+    	      this.genericEmailGateways = defaults.genericEmailGateways;
     	      this.genericSmsGateways = defaults.genericSmsGateways;
     	      this.googleCloudTranslations = defaults.googleCloudTranslations;
+    	      this.googleMapsPlaces = defaults.googleMapsPlaces;
     	      this.hibps = defaults.hibps;
     	      this.https = defaults.https;
     	      this.hubspots = defaults.hubspots;
@@ -473,11 +769,13 @@ public final class ProjectConnectors {
     	      this.lokalises = defaults.lokalises;
     	      this.mparticles = defaults.mparticles;
     	      this.newrelics = defaults.newrelics;
+    	      this.radars = defaults.radars;
     	      this.recaptchaEnterprises = defaults.recaptchaEnterprises;
     	      this.recaptchas = defaults.recaptchas;
     	      this.rekognitions = defaults.rekognitions;
     	      this.salesforceMarketingClouds = defaults.salesforceMarketingClouds;
     	      this.salesforces = defaults.salesforces;
+    	      this.sardines = defaults.sardines;
     	      this.segments = defaults.segments;
     	      this.sendgrids = defaults.sendgrids;
     	      this.ses = defaults.ses;
@@ -486,8 +784,10 @@ public final class ProjectConnectors {
     	      this.smtps = defaults.smtps;
     	      this.sns = defaults.sns;
     	      this.sumologics = defaults.sumologics;
+    	      this.supabases = defaults.supabases;
     	      this.telesigns = defaults.telesigns;
     	      this.traceables = defaults.traceables;
+    	      this.turnstiles = defaults.turnstiles;
     	      this.twilioCores = defaults.twilioCores;
     	      this.twilioVerifies = defaults.twilioVerifies;
         }
@@ -547,6 +847,15 @@ public final class ProjectConnectors {
             return clears(List.of(clears));
         }
         @CustomType.Setter
+        public Builder cybersixgills(@Nullable List<ProjectConnectorsCybersixgill> cybersixgills) {
+
+            this.cybersixgills = cybersixgills;
+            return this;
+        }
+        public Builder cybersixgills(ProjectConnectorsCybersixgill... cybersixgills) {
+            return cybersixgills(List.of(cybersixgills));
+        }
+        @CustomType.Setter
         public Builder datadogs(@Nullable List<ProjectConnectorsDatadog> datadogs) {
 
             this.datadogs = datadogs;
@@ -574,6 +883,42 @@ public final class ProjectConnectors {
             return docebos(List.of(docebos));
         }
         @CustomType.Setter
+        public Builder eightByEightVibers(@Nullable List<ProjectConnectorsEightByEightViber> eightByEightVibers) {
+
+            this.eightByEightVibers = eightByEightVibers;
+            return this;
+        }
+        public Builder eightByEightVibers(ProjectConnectorsEightByEightViber... eightByEightVibers) {
+            return eightByEightVibers(List.of(eightByEightVibers));
+        }
+        @CustomType.Setter
+        public Builder eightByEightWhatsapps(@Nullable List<ProjectConnectorsEightByEightWhatsapp> eightByEightWhatsapps) {
+
+            this.eightByEightWhatsapps = eightByEightWhatsapps;
+            return this;
+        }
+        public Builder eightByEightWhatsapps(ProjectConnectorsEightByEightWhatsapp... eightByEightWhatsapps) {
+            return eightByEightWhatsapps(List.of(eightByEightWhatsapps));
+        }
+        @CustomType.Setter
+        public Builder elephants(@Nullable List<ProjectConnectorsElephant> elephants) {
+
+            this.elephants = elephants;
+            return this;
+        }
+        public Builder elephants(ProjectConnectorsElephant... elephants) {
+            return elephants(List.of(elephants));
+        }
+        @CustomType.Setter
+        public Builder externalTokenHttps(@Nullable List<ProjectConnectorsExternalTokenHttp> externalTokenHttps) {
+
+            this.externalTokenHttps = externalTokenHttps;
+            return this;
+        }
+        public Builder externalTokenHttps(ProjectConnectorsExternalTokenHttp... externalTokenHttps) {
+            return externalTokenHttps(List.of(externalTokenHttps));
+        }
+        @CustomType.Setter
         public Builder fingerprintDescopes(@Nullable List<ProjectConnectorsFingerprintDescope> fingerprintDescopes) {
 
             this.fingerprintDescopes = fingerprintDescopes;
@@ -592,6 +937,15 @@ public final class ProjectConnectors {
             return fingerprints(List.of(fingerprints));
         }
         @CustomType.Setter
+        public Builder firebaseAdmins(@Nullable List<ProjectConnectorsFirebaseAdmin> firebaseAdmins) {
+
+            this.firebaseAdmins = firebaseAdmins;
+            return this;
+        }
+        public Builder firebaseAdmins(ProjectConnectorsFirebaseAdmin... firebaseAdmins) {
+            return firebaseAdmins(List.of(firebaseAdmins));
+        }
+        @CustomType.Setter
         public Builder forters(@Nullable List<ProjectConnectorsForter> forters) {
 
             this.forters = forters;
@@ -599,6 +953,15 @@ public final class ProjectConnectors {
         }
         public Builder forters(ProjectConnectorsForter... forters) {
             return forters(List.of(forters));
+        }
+        @CustomType.Setter
+        public Builder genericEmailGateways(@Nullable List<ProjectConnectorsGenericEmailGateway> genericEmailGateways) {
+
+            this.genericEmailGateways = genericEmailGateways;
+            return this;
+        }
+        public Builder genericEmailGateways(ProjectConnectorsGenericEmailGateway... genericEmailGateways) {
+            return genericEmailGateways(List.of(genericEmailGateways));
         }
         @CustomType.Setter
         public Builder genericSmsGateways(@Nullable List<ProjectConnectorsGenericSmsGateway> genericSmsGateways) {
@@ -617,6 +980,15 @@ public final class ProjectConnectors {
         }
         public Builder googleCloudTranslations(ProjectConnectorsGoogleCloudTranslation... googleCloudTranslations) {
             return googleCloudTranslations(List.of(googleCloudTranslations));
+        }
+        @CustomType.Setter
+        public Builder googleMapsPlaces(@Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces) {
+
+            this.googleMapsPlaces = googleMapsPlaces;
+            return this;
+        }
+        public Builder googleMapsPlaces(ProjectConnectorsGoogleMapsPlace... googleMapsPlaces) {
+            return googleMapsPlaces(List.of(googleMapsPlaces));
         }
         @CustomType.Setter
         public Builder hibps(@Nullable List<ProjectConnectorsHibp> hibps) {
@@ -691,6 +1063,15 @@ public final class ProjectConnectors {
             return newrelics(List.of(newrelics));
         }
         @CustomType.Setter
+        public Builder radars(@Nullable List<ProjectConnectorsRadar> radars) {
+
+            this.radars = radars;
+            return this;
+        }
+        public Builder radars(ProjectConnectorsRadar... radars) {
+            return radars(List.of(radars));
+        }
+        @CustomType.Setter
         public Builder recaptchaEnterprises(@Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises) {
 
             this.recaptchaEnterprises = recaptchaEnterprises;
@@ -734,6 +1115,15 @@ public final class ProjectConnectors {
         }
         public Builder salesforces(ProjectConnectorsSalesforce... salesforces) {
             return salesforces(List.of(salesforces));
+        }
+        @CustomType.Setter
+        public Builder sardines(@Nullable List<ProjectConnectorsSardine> sardines) {
+
+            this.sardines = sardines;
+            return this;
+        }
+        public Builder sardines(ProjectConnectorsSardine... sardines) {
+            return sardines(List.of(sardines));
         }
         @CustomType.Setter
         public Builder segments(@Nullable List<ProjectConnectorsSegment> segments) {
@@ -808,6 +1198,15 @@ public final class ProjectConnectors {
             return sumologics(List.of(sumologics));
         }
         @CustomType.Setter
+        public Builder supabases(@Nullable List<ProjectConnectorsSupabase> supabases) {
+
+            this.supabases = supabases;
+            return this;
+        }
+        public Builder supabases(ProjectConnectorsSupabase... supabases) {
+            return supabases(List.of(supabases));
+        }
+        @CustomType.Setter
         public Builder telesigns(@Nullable List<ProjectConnectorsTelesign> telesigns) {
 
             this.telesigns = telesigns;
@@ -824,6 +1223,15 @@ public final class ProjectConnectors {
         }
         public Builder traceables(ProjectConnectorsTraceable... traceables) {
             return traceables(List.of(traceables));
+        }
+        @CustomType.Setter
+        public Builder turnstiles(@Nullable List<ProjectConnectorsTurnstile> turnstiles) {
+
+            this.turnstiles = turnstiles;
+            return this;
+        }
+        public Builder turnstiles(ProjectConnectorsTurnstile... turnstiles) {
+            return turnstiles(List.of(turnstiles));
         }
         @CustomType.Setter
         public Builder twilioCores(@Nullable List<ProjectConnectorsTwilioCore> twilioCores) {
@@ -851,14 +1259,22 @@ public final class ProjectConnectors {
             _resultValue.awsS3s = awsS3s;
             _resultValue.awsTranslates = awsTranslates;
             _resultValue.clears = clears;
+            _resultValue.cybersixgills = cybersixgills;
             _resultValue.datadogs = datadogs;
             _resultValue.devrevGrows = devrevGrows;
             _resultValue.docebos = docebos;
+            _resultValue.eightByEightVibers = eightByEightVibers;
+            _resultValue.eightByEightWhatsapps = eightByEightWhatsapps;
+            _resultValue.elephants = elephants;
+            _resultValue.externalTokenHttps = externalTokenHttps;
             _resultValue.fingerprintDescopes = fingerprintDescopes;
             _resultValue.fingerprints = fingerprints;
+            _resultValue.firebaseAdmins = firebaseAdmins;
             _resultValue.forters = forters;
+            _resultValue.genericEmailGateways = genericEmailGateways;
             _resultValue.genericSmsGateways = genericSmsGateways;
             _resultValue.googleCloudTranslations = googleCloudTranslations;
+            _resultValue.googleMapsPlaces = googleMapsPlaces;
             _resultValue.hibps = hibps;
             _resultValue.https = https;
             _resultValue.hubspots = hubspots;
@@ -867,11 +1283,13 @@ public final class ProjectConnectors {
             _resultValue.lokalises = lokalises;
             _resultValue.mparticles = mparticles;
             _resultValue.newrelics = newrelics;
+            _resultValue.radars = radars;
             _resultValue.recaptchaEnterprises = recaptchaEnterprises;
             _resultValue.recaptchas = recaptchas;
             _resultValue.rekognitions = rekognitions;
             _resultValue.salesforceMarketingClouds = salesforceMarketingClouds;
             _resultValue.salesforces = salesforces;
+            _resultValue.sardines = sardines;
             _resultValue.segments = segments;
             _resultValue.sendgrids = sendgrids;
             _resultValue.ses = ses;
@@ -880,8 +1298,10 @@ public final class ProjectConnectors {
             _resultValue.smtps = smtps;
             _resultValue.sns = sns;
             _resultValue.sumologics = sumologics;
+            _resultValue.supabases = supabases;
             _resultValue.telesigns = telesigns;
             _resultValue.traceables = traceables;
+            _resultValue.turnstiles = turnstiles;
             _resultValue.twilioCores = twilioCores;
             _resultValue.twilioVerifies = twilioVerifies;
             return _resultValue;

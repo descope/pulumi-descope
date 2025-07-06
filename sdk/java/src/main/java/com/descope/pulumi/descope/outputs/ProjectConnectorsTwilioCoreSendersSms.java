@@ -11,13 +11,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsTwilioCoreSendersSms {
+    /**
+     * @return Twilio Messaging Service SID for sending SMS messages.
+     * 
+     */
     private @Nullable String messagingServiceSid;
+    /**
+     * @return Twilio phone number for sending SMS messages.
+     * 
+     */
     private @Nullable String phoneNumber;
 
     private ProjectConnectorsTwilioCoreSendersSms() {}
+    /**
+     * @return Twilio Messaging Service SID for sending SMS messages.
+     * 
+     */
     public Optional<String> messagingServiceSid() {
         return Optional.ofNullable(this.messagingServiceSid);
     }
+    /**
+     * @return Twilio phone number for sending SMS messages.
+     * 
+     */
     public Optional<String> phoneNumber() {
         return Optional.ofNullable(this.phoneNumber);
     }

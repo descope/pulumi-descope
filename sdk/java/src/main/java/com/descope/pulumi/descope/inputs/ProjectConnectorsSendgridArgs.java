@@ -18,9 +18,17 @@ public final class ProjectConnectorsSendgridArgs extends com.pulumi.resources.Re
 
     public static final ProjectConnectorsSendgridArgs Empty = new ProjectConnectorsSendgridArgs();
 
+    /**
+     * SendGrid API authentication configuration.
+     * 
+     */
     @Import(name="authentication", required=true)
     private Output<ProjectConnectorsSendgridAuthenticationArgs> authentication;
 
+    /**
+     * @return SendGrid API authentication configuration.
+     * 
+     */
     public Output<ProjectConnectorsSendgridAuthenticationArgs> authentication() {
         return this.authentication;
     }
@@ -105,11 +113,23 @@ public final class ProjectConnectorsSendgridArgs extends com.pulumi.resources.Re
             $ = new ProjectConnectorsSendgridArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param authentication SendGrid API authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(Output<ProjectConnectorsSendgridAuthenticationArgs> authentication) {
             $.authentication = authentication;
             return this;
         }
 
+        /**
+         * @param authentication SendGrid API authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(ProjectConnectorsSendgridAuthenticationArgs authentication) {
             return authentication(Output.of(authentication));
         }

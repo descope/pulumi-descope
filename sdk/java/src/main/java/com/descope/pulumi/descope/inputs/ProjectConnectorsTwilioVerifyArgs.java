@@ -17,16 +17,32 @@ public final class ProjectConnectorsTwilioVerifyArgs extends com.pulumi.resource
 
     public static final ProjectConnectorsTwilioVerifyArgs Empty = new ProjectConnectorsTwilioVerifyArgs();
 
+    /**
+     * Twilio Account SID from your Twilio Console.
+     * 
+     */
     @Import(name="accountSid", required=true)
     private Output<String> accountSid;
 
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     public Output<String> accountSid() {
         return this.accountSid;
     }
 
+    /**
+     * Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     @Import(name="authentication", required=true)
     private Output<ProjectConnectorsTwilioVerifyAuthenticationArgs> authentication;
 
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     public Output<ProjectConnectorsTwilioVerifyAuthenticationArgs> authentication() {
         return this.authentication;
     }
@@ -68,16 +84,32 @@ public final class ProjectConnectorsTwilioVerifyArgs extends com.pulumi.resource
         return this.name;
     }
 
+    /**
+     * Optional sender identifier for verification messages.
+     * 
+     */
     @Import(name="sender")
     private @Nullable Output<String> sender;
 
+    /**
+     * @return Optional sender identifier for verification messages.
+     * 
+     */
     public Optional<Output<String>> sender() {
         return Optional.ofNullable(this.sender);
     }
 
+    /**
+     * Twilio Verify Service SID for verification services.
+     * 
+     */
     @Import(name="serviceSid", required=true)
     private Output<String> serviceSid;
 
+    /**
+     * @return Twilio Verify Service SID for verification services.
+     * 
+     */
     public Output<String> serviceSid() {
         return this.serviceSid;
     }
@@ -112,20 +144,44 @@ public final class ProjectConnectorsTwilioVerifyArgs extends com.pulumi.resource
             $ = new ProjectConnectorsTwilioVerifyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param accountSid Twilio Account SID from your Twilio Console.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountSid(Output<String> accountSid) {
             $.accountSid = accountSid;
             return this;
         }
 
+        /**
+         * @param accountSid Twilio Account SID from your Twilio Console.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountSid(String accountSid) {
             return accountSid(Output.of(accountSid));
         }
 
+        /**
+         * @param authentication Twilio authentication credentials (either auth token or API key/secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(Output<ProjectConnectorsTwilioVerifyAuthenticationArgs> authentication) {
             $.authentication = authentication;
             return this;
         }
 
+        /**
+         * @param authentication Twilio authentication credentials (either auth token or API key/secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(ProjectConnectorsTwilioVerifyAuthenticationArgs authentication) {
             return authentication(Output.of(authentication));
         }
@@ -181,20 +237,44 @@ public final class ProjectConnectorsTwilioVerifyArgs extends com.pulumi.resource
             return name(Output.of(name));
         }
 
+        /**
+         * @param sender Optional sender identifier for verification messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sender(@Nullable Output<String> sender) {
             $.sender = sender;
             return this;
         }
 
+        /**
+         * @param sender Optional sender identifier for verification messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sender(String sender) {
             return sender(Output.of(sender));
         }
 
+        /**
+         * @param serviceSid Twilio Verify Service SID for verification services.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceSid(Output<String> serviceSid) {
             $.serviceSid = serviceSid;
             return this;
         }
 
+        /**
+         * @param serviceSid Twilio Verify Service SID for verification services.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceSid(String serviceSid) {
             return serviceSid(Output.of(serviceSid));
         }

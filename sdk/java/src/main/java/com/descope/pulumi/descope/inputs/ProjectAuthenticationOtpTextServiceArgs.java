@@ -18,16 +18,32 @@ public final class ProjectAuthenticationOtpTextServiceArgs extends com.pulumi.re
 
     public static final ProjectAuthenticationOtpTextServiceArgs Empty = new ProjectAuthenticationOtpTextServiceArgs();
 
+    /**
+     * The name of the SMS/text connector to use for sending text messages.
+     * 
+     */
     @Import(name="connector", required=true)
     private Output<String> connector;
 
+    /**
+     * @return The name of the SMS/text connector to use for sending text messages.
+     * 
+     */
     public Output<String> connector() {
         return this.connector;
     }
 
+    /**
+     * A list of text message templates for different authentication flows.
+     * 
+     */
     @Import(name="templates")
     private @Nullable Output<List<ProjectAuthenticationOtpTextServiceTemplateArgs>> templates;
 
+    /**
+     * @return A list of text message templates for different authentication flows.
+     * 
+     */
     public Optional<Output<List<ProjectAuthenticationOtpTextServiceTemplateArgs>>> templates() {
         return Optional.ofNullable(this.templates);
     }
@@ -57,24 +73,54 @@ public final class ProjectAuthenticationOtpTextServiceArgs extends com.pulumi.re
             $ = new ProjectAuthenticationOtpTextServiceArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param connector The name of the SMS/text connector to use for sending text messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(Output<String> connector) {
             $.connector = connector;
             return this;
         }
 
+        /**
+         * @param connector The name of the SMS/text connector to use for sending text messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(String connector) {
             return connector(Output.of(connector));
         }
 
+        /**
+         * @param templates A list of text message templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(@Nullable Output<List<ProjectAuthenticationOtpTextServiceTemplateArgs>> templates) {
             $.templates = templates;
             return this;
         }
 
+        /**
+         * @param templates A list of text message templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(List<ProjectAuthenticationOtpTextServiceTemplateArgs> templates) {
             return templates(Output.of(templates));
         }
 
+        /**
+         * @param templates A list of text message templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(ProjectAuthenticationOtpTextServiceTemplateArgs... templates) {
             return templates(List.of(templates));
         }

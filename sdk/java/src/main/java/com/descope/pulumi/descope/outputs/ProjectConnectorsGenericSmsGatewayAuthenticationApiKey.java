@@ -10,13 +10,29 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectConnectorsGenericSmsGatewayAuthenticationApiKey {
+    /**
+     * @return The API key.
+     * 
+     */
     private String key;
+    /**
+     * @return The API secret.
+     * 
+     */
     private String token;
 
     private ProjectConnectorsGenericSmsGatewayAuthenticationApiKey() {}
+    /**
+     * @return The API key.
+     * 
+     */
     public String key() {
         return this.key;
     }
+    /**
+     * @return The API secret.
+     * 
+     */
     public String token() {
         return this.token;
     }

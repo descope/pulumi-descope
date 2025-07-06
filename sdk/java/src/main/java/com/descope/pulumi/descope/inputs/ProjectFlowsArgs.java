@@ -14,9 +14,17 @@ public final class ProjectFlowsArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectFlowsArgs Empty = new ProjectFlowsArgs();
 
+    /**
+     * The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+     * 
+     */
     @Import(name="data", required=true)
     private Output<String> data;
 
+    /**
+     * @return The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+     * 
+     */
     public Output<String> data() {
         return this.data;
     }
@@ -45,11 +53,23 @@ public final class ProjectFlowsArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ProjectFlowsArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param data The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(Output<String> data) {
             $.data = data;
             return this;
         }
 
+        /**
+         * @param data The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(String data) {
             return data(Output.of(data));
         }

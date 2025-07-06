@@ -16,9 +16,17 @@ public final class ProjectAttributesTenantAuthorizationArgs extends com.pulumi.r
 
     public static final ProjectAttributesTenantAuthorizationArgs Empty = new ProjectAttributesTenantAuthorizationArgs();
 
+    /**
+     * Determines the required permissions for this tenant.
+     * 
+     */
     @Import(name="viewPermissions")
     private @Nullable Output<List<String>> viewPermissions;
 
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     public Optional<Output<List<String>>> viewPermissions() {
         return Optional.ofNullable(this.viewPermissions);
     }
@@ -47,15 +55,33 @@ public final class ProjectAttributesTenantAuthorizationArgs extends com.pulumi.r
             $ = new ProjectAttributesTenantAuthorizationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param viewPermissions Determines the required permissions for this tenant.
+         * 
+         * @return builder
+         * 
+         */
         public Builder viewPermissions(@Nullable Output<List<String>> viewPermissions) {
             $.viewPermissions = viewPermissions;
             return this;
         }
 
+        /**
+         * @param viewPermissions Determines the required permissions for this tenant.
+         * 
+         * @return builder
+         * 
+         */
         public Builder viewPermissions(List<String> viewPermissions) {
             return viewPermissions(Output.of(viewPermissions));
         }
 
+        /**
+         * @param viewPermissions Determines the required permissions for this tenant.
+         * 
+         * @return builder
+         * 
+         */
         public Builder viewPermissions(String... viewPermissions) {
             return viewPermissions(List.of(viewPermissions));
         }

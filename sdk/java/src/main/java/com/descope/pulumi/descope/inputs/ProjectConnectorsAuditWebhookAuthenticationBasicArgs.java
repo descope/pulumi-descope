@@ -14,16 +14,32 @@ public final class ProjectConnectorsAuditWebhookAuthenticationBasicArgs extends 
 
     public static final ProjectConnectorsAuditWebhookAuthenticationBasicArgs Empty = new ProjectConnectorsAuditWebhookAuthenticationBasicArgs();
 
+    /**
+     * Password for basic HTTP authentication.
+     * 
+     */
     @Import(name="password", required=true)
     private Output<String> password;
 
+    /**
+     * @return Password for basic HTTP authentication.
+     * 
+     */
     public Output<String> password() {
         return this.password;
     }
 
+    /**
+     * Username for basic HTTP authentication.
+     * 
+     */
     @Import(name="username", required=true)
     private Output<String> username;
 
+    /**
+     * @return Username for basic HTTP authentication.
+     * 
+     */
     public Output<String> username() {
         return this.username;
     }
@@ -53,20 +69,44 @@ public final class ProjectConnectorsAuditWebhookAuthenticationBasicArgs extends 
             $ = new ProjectConnectorsAuditWebhookAuthenticationBasicArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param password Password for basic HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(Output<String> password) {
             $.password = password;
             return this;
         }
 
+        /**
+         * @param password Password for basic HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(String password) {
             return password(Output.of(password));
         }
 
+        /**
+         * @param username Username for basic HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(Output<String> username) {
             $.username = username;
             return this;
         }
 
+        /**
+         * @param username Username for basic HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(String username) {
             return username(Output.of(username));
         }

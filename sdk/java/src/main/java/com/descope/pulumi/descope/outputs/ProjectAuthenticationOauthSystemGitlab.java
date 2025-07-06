@@ -25,6 +25,15 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      * 
      */
     private @Nullable String authorizationEndpoint;
+    /**
+     * @return Use a custom domain in your OAuth verification screen.
+     * 
+     */
+    private @Nullable String callbackDomain;
+    /**
+     * @return Maps OAuth provider claims to Descope user attributes.
+     * 
+     */
     private @Nullable Map<String,String> claimMapping;
     /**
      * @return The client ID for the OAuth provider, used to identify the application to the provider.
@@ -46,6 +55,10 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      * 
      */
     private @Nullable Boolean disabled;
+    /**
+     * @return The issuer identifier for the OAuth provider.
+     * 
+     */
     private @Nullable String issuer;
     /**
      * @return The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -58,6 +71,11 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      */
     private @Nullable String logo;
     /**
+     * @return Whether to enable provider token management for this OAuth provider.
+     * 
+     */
+    private @Nullable Boolean manageProviderTokens;
+    /**
      * @return Whether to merge existing user accounts with new ones created through OAuth authentication.
      * 
      */
@@ -68,10 +86,15 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      */
     private @Nullable List<String> prompts;
     /**
-     * @return Settings related to token management for the OAuth provider.
+     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
      * 
      */
     private @Nullable ProjectAuthenticationOauthSystemGitlabProviderTokenManagement providerTokenManagement;
+    /**
+     * @return Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+     * 
+     */
+    private @Nullable String redirectUrl;
     /**
      * @return Scopes of access that the application requests from the user&#39;s account on the OAuth provider.
      * 
@@ -103,6 +126,17 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     public Optional<String> authorizationEndpoint() {
         return Optional.ofNullable(this.authorizationEndpoint);
     }
+    /**
+     * @return Use a custom domain in your OAuth verification screen.
+     * 
+     */
+    public Optional<String> callbackDomain() {
+        return Optional.ofNullable(this.callbackDomain);
+    }
+    /**
+     * @return Maps OAuth provider claims to Descope user attributes.
+     * 
+     */
     public Map<String,String> claimMapping() {
         return this.claimMapping == null ? Map.of() : this.claimMapping;
     }
@@ -134,6 +168,10 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     public Optional<Boolean> disabled() {
         return Optional.ofNullable(this.disabled);
     }
+    /**
+     * @return The issuer identifier for the OAuth provider.
+     * 
+     */
     public Optional<String> issuer() {
         return Optional.ofNullable(this.issuer);
     }
@@ -152,6 +190,13 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         return Optional.ofNullable(this.logo);
     }
     /**
+     * @return Whether to enable provider token management for this OAuth provider.
+     * 
+     */
+    public Optional<Boolean> manageProviderTokens() {
+        return Optional.ofNullable(this.manageProviderTokens);
+    }
+    /**
      * @return Whether to merge existing user accounts with new ones created through OAuth authentication.
      * 
      */
@@ -166,11 +211,18 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         return this.prompts == null ? List.of() : this.prompts;
     }
     /**
-     * @return Settings related to token management for the OAuth provider.
+     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
      * 
      */
     public Optional<ProjectAuthenticationOauthSystemGitlabProviderTokenManagement> providerTokenManagement() {
         return Optional.ofNullable(this.providerTokenManagement);
+    }
+    /**
+     * @return Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+     * 
+     */
+    public Optional<String> redirectUrl() {
+        return Optional.ofNullable(this.redirectUrl);
     }
     /**
      * @return Scopes of access that the application requests from the user&#39;s account on the OAuth provider.
@@ -205,6 +257,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     public static final class Builder {
         private @Nullable List<String> allowedGrantTypes;
         private @Nullable String authorizationEndpoint;
+        private @Nullable String callbackDomain;
         private @Nullable Map<String,String> claimMapping;
         private @Nullable String clientId;
         private @Nullable String clientSecret;
@@ -213,9 +266,11 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         private @Nullable String issuer;
         private @Nullable String jwksEndpoint;
         private @Nullable String logo;
+        private @Nullable Boolean manageProviderTokens;
         private @Nullable Boolean mergeUserAccounts;
         private @Nullable List<String> prompts;
         private @Nullable ProjectAuthenticationOauthSystemGitlabProviderTokenManagement providerTokenManagement;
+        private @Nullable String redirectUrl;
         private @Nullable List<String> scopes;
         private @Nullable String tokenEndpoint;
         private @Nullable String userInfoEndpoint;
@@ -224,6 +279,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     	      Objects.requireNonNull(defaults);
     	      this.allowedGrantTypes = defaults.allowedGrantTypes;
     	      this.authorizationEndpoint = defaults.authorizationEndpoint;
+    	      this.callbackDomain = defaults.callbackDomain;
     	      this.claimMapping = defaults.claimMapping;
     	      this.clientId = defaults.clientId;
     	      this.clientSecret = defaults.clientSecret;
@@ -232,9 +288,11 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     	      this.issuer = defaults.issuer;
     	      this.jwksEndpoint = defaults.jwksEndpoint;
     	      this.logo = defaults.logo;
+    	      this.manageProviderTokens = defaults.manageProviderTokens;
     	      this.mergeUserAccounts = defaults.mergeUserAccounts;
     	      this.prompts = defaults.prompts;
     	      this.providerTokenManagement = defaults.providerTokenManagement;
+    	      this.redirectUrl = defaults.redirectUrl;
     	      this.scopes = defaults.scopes;
     	      this.tokenEndpoint = defaults.tokenEndpoint;
     	      this.userInfoEndpoint = defaults.userInfoEndpoint;
@@ -253,6 +311,12 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         public Builder authorizationEndpoint(@Nullable String authorizationEndpoint) {
 
             this.authorizationEndpoint = authorizationEndpoint;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder callbackDomain(@Nullable String callbackDomain) {
+
+            this.callbackDomain = callbackDomain;
             return this;
         }
         @CustomType.Setter
@@ -304,6 +368,12 @@ public final class ProjectAuthenticationOauthSystemGitlab {
             return this;
         }
         @CustomType.Setter
+        public Builder manageProviderTokens(@Nullable Boolean manageProviderTokens) {
+
+            this.manageProviderTokens = manageProviderTokens;
+            return this;
+        }
+        @CustomType.Setter
         public Builder mergeUserAccounts(@Nullable Boolean mergeUserAccounts) {
 
             this.mergeUserAccounts = mergeUserAccounts;
@@ -322,6 +392,12 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         public Builder providerTokenManagement(@Nullable ProjectAuthenticationOauthSystemGitlabProviderTokenManagement providerTokenManagement) {
 
             this.providerTokenManagement = providerTokenManagement;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder redirectUrl(@Nullable String redirectUrl) {
+
+            this.redirectUrl = redirectUrl;
             return this;
         }
         @CustomType.Setter
@@ -349,6 +425,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
             final var _resultValue = new ProjectAuthenticationOauthSystemGitlab();
             _resultValue.allowedGrantTypes = allowedGrantTypes;
             _resultValue.authorizationEndpoint = authorizationEndpoint;
+            _resultValue.callbackDomain = callbackDomain;
             _resultValue.claimMapping = claimMapping;
             _resultValue.clientId = clientId;
             _resultValue.clientSecret = clientSecret;
@@ -357,9 +434,11 @@ public final class ProjectAuthenticationOauthSystemGitlab {
             _resultValue.issuer = issuer;
             _resultValue.jwksEndpoint = jwksEndpoint;
             _resultValue.logo = logo;
+            _resultValue.manageProviderTokens = manageProviderTokens;
             _resultValue.mergeUserAccounts = mergeUserAccounts;
             _resultValue.prompts = prompts;
             _resultValue.providerTokenManagement = providerTokenManagement;
+            _resultValue.redirectUrl = redirectUrl;
             _resultValue.scopes = scopes;
             _resultValue.tokenEndpoint = tokenEndpoint;
             _resultValue.userInfoEndpoint = userInfoEndpoint;

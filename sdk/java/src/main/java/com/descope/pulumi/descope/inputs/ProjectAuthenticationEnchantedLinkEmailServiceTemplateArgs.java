@@ -17,16 +17,32 @@ public final class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs ex
 
     public static final ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs Empty = new ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs();
 
+    /**
+     * Whether this email template is currently active and in use.
+     * 
+     */
     @Import(name="active")
     private @Nullable Output<Boolean> active;
 
+    /**
+     * @return Whether this email template is currently active and in use.
+     * 
+     */
     public Optional<Output<Boolean>> active() {
         return Optional.ofNullable(this.active);
     }
 
+    /**
+     * HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * 
+     */
     @Import(name="htmlBody")
     private @Nullable Output<String> htmlBody;
 
+    /**
+     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * 
+     */
     public Optional<Output<String>> htmlBody() {
         return Optional.ofNullable(this.htmlBody);
     }
@@ -38,30 +54,62 @@ public final class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs ex
         return Optional.ofNullable(this.id);
     }
 
+    /**
+     * Unique name for this email template.
+     * 
+     */
     @Import(name="name", required=true)
     private Output<String> name;
 
+    /**
+     * @return Unique name for this email template.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
 
+    /**
+     * Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * 
+     */
     @Import(name="plainTextBody")
     private @Nullable Output<String> plainTextBody;
 
+    /**
+     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * 
+     */
     public Optional<Output<String>> plainTextBody() {
         return Optional.ofNullable(this.plainTextBody);
     }
 
+    /**
+     * Subject line of the email message.
+     * 
+     */
     @Import(name="subject", required=true)
     private Output<String> subject;
 
+    /**
+     * @return Subject line of the email message.
+     * 
+     */
     public Output<String> subject() {
         return this.subject;
     }
 
+    /**
+     * Whether to use the plain text body instead of HTML for the email.
+     * 
+     */
     @Import(name="usePlainTextBody")
     private @Nullable Output<Boolean> usePlainTextBody;
 
+    /**
+     * @return Whether to use the plain text body instead of HTML for the email.
+     * 
+     */
     public Optional<Output<Boolean>> usePlainTextBody() {
         return Optional.ofNullable(this.usePlainTextBody);
     }
@@ -96,20 +144,44 @@ public final class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs ex
             $ = new ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param active Whether this email template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(@Nullable Output<Boolean> active) {
             $.active = active;
             return this;
         }
 
+        /**
+         * @param active Whether this email template is currently active and in use.
+         * 
+         * @return builder
+         * 
+         */
         public Builder active(Boolean active) {
             return active(Output.of(active));
         }
 
+        /**
+         * @param htmlBody HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+         * 
+         * @return builder
+         * 
+         */
         public Builder htmlBody(@Nullable Output<String> htmlBody) {
             $.htmlBody = htmlBody;
             return this;
         }
 
+        /**
+         * @param htmlBody HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+         * 
+         * @return builder
+         * 
+         */
         public Builder htmlBody(String htmlBody) {
             return htmlBody(Output.of(htmlBody));
         }
@@ -123,38 +195,86 @@ public final class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs ex
             return id(Output.of(id));
         }
 
+        /**
+         * @param name Unique name for this email template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Unique name for this email template.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }
 
+        /**
+         * @param plainTextBody Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder plainTextBody(@Nullable Output<String> plainTextBody) {
             $.plainTextBody = plainTextBody;
             return this;
         }
 
+        /**
+         * @param plainTextBody Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder plainTextBody(String plainTextBody) {
             return plainTextBody(Output.of(plainTextBody));
         }
 
+        /**
+         * @param subject Subject line of the email message.
+         * 
+         * @return builder
+         * 
+         */
         public Builder subject(Output<String> subject) {
             $.subject = subject;
             return this;
         }
 
+        /**
+         * @param subject Subject line of the email message.
+         * 
+         * @return builder
+         * 
+         */
         public Builder subject(String subject) {
             return subject(Output.of(subject));
         }
 
+        /**
+         * @param usePlainTextBody Whether to use the plain text body instead of HTML for the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder usePlainTextBody(@Nullable Output<Boolean> usePlainTextBody) {
             $.usePlainTextBody = usePlainTextBody;
             return this;
         }
 
+        /**
+         * @param usePlainTextBody Whether to use the plain text body instead of HTML for the email.
+         * 
+         * @return builder
+         * 
+         */
         public Builder usePlainTextBody(Boolean usePlainTextBody) {
             return usePlainTextBody(Output.of(usePlainTextBody));
         }

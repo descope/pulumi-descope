@@ -13,13 +13,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsTwilioCoreSenders {
+    /**
+     * @return SMS sender configuration using either a phone number or messaging service.
+     * 
+     */
     private ProjectConnectorsTwilioCoreSendersSms sms;
+    /**
+     * @return Voice call sender configuration.
+     * 
+     */
     private @Nullable ProjectConnectorsTwilioCoreSendersVoice voice;
 
     private ProjectConnectorsTwilioCoreSenders() {}
+    /**
+     * @return SMS sender configuration using either a phone number or messaging service.
+     * 
+     */
     public ProjectConnectorsTwilioCoreSendersSms sms() {
         return this.sms;
     }
+    /**
+     * @return Voice call sender configuration.
+     * 
+     */
     public Optional<ProjectConnectorsTwilioCoreSendersVoice> voice() {
         return Optional.ofNullable(this.voice);
     }

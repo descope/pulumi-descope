@@ -10,9 +10,17 @@ import java.util.Objects;
 
 @CustomType
 public final class ProjectConnectorsTwilioCoreSendersVoice {
+    /**
+     * @return Twilio phone number for making voice calls.
+     * 
+     */
     private String phoneNumber;
 
     private ProjectConnectorsTwilioCoreSendersVoice() {}
+    /**
+     * @return Twilio phone number for making voice calls.
+     * 
+     */
     public String phoneNumber() {
         return this.phoneNumber;
     }

@@ -13,13 +13,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpEmailService {
+    /**
+     * @return The name of the email connector to use for sending emails.
+     * 
+     */
     private String connector;
+    /**
+     * @return A list of email templates for different authentication flows.
+     * 
+     */
     private @Nullable List<ProjectAuthenticationOtpEmailServiceTemplate> templates;
 
     private ProjectAuthenticationOtpEmailService() {}
+    /**
+     * @return The name of the email connector to use for sending emails.
+     * 
+     */
     public String connector() {
         return this.connector;
     }
+    /**
+     * @return A list of email templates for different authentication flows.
+     * 
+     */
     public List<ProjectAuthenticationOtpEmailServiceTemplate> templates() {
         return this.templates == null ? List.of() : this.templates;
     }

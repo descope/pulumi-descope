@@ -18,16 +18,32 @@ public final class ProjectAuthenticationOtpEmailServiceArgs extends com.pulumi.r
 
     public static final ProjectAuthenticationOtpEmailServiceArgs Empty = new ProjectAuthenticationOtpEmailServiceArgs();
 
+    /**
+     * The name of the email connector to use for sending emails.
+     * 
+     */
     @Import(name="connector", required=true)
     private Output<String> connector;
 
+    /**
+     * @return The name of the email connector to use for sending emails.
+     * 
+     */
     public Output<String> connector() {
         return this.connector;
     }
 
+    /**
+     * A list of email templates for different authentication flows.
+     * 
+     */
     @Import(name="templates")
     private @Nullable Output<List<ProjectAuthenticationOtpEmailServiceTemplateArgs>> templates;
 
+    /**
+     * @return A list of email templates for different authentication flows.
+     * 
+     */
     public Optional<Output<List<ProjectAuthenticationOtpEmailServiceTemplateArgs>>> templates() {
         return Optional.ofNullable(this.templates);
     }
@@ -57,24 +73,54 @@ public final class ProjectAuthenticationOtpEmailServiceArgs extends com.pulumi.r
             $ = new ProjectAuthenticationOtpEmailServiceArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param connector The name of the email connector to use for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(Output<String> connector) {
             $.connector = connector;
             return this;
         }
 
+        /**
+         * @param connector The name of the email connector to use for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(String connector) {
             return connector(Output.of(connector));
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(@Nullable Output<List<ProjectAuthenticationOtpEmailServiceTemplateArgs>> templates) {
             $.templates = templates;
             return this;
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(List<ProjectAuthenticationOtpEmailServiceTemplateArgs> templates) {
             return templates(Output.of(templates));
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(ProjectAuthenticationOtpEmailServiceTemplateArgs... templates) {
             return templates(List.of(templates));
         }

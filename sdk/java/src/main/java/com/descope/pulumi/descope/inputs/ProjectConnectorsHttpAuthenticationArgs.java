@@ -17,23 +17,47 @@ public final class ProjectConnectorsHttpAuthenticationArgs extends com.pulumi.re
 
     public static final ProjectConnectorsHttpAuthenticationArgs Empty = new ProjectConnectorsHttpAuthenticationArgs();
 
+    /**
+     * API key authentication configuration.
+     * 
+     */
     @Import(name="apiKey")
     private @Nullable Output<ProjectConnectorsHttpAuthenticationApiKeyArgs> apiKey;
 
+    /**
+     * @return API key authentication configuration.
+     * 
+     */
     public Optional<Output<ProjectConnectorsHttpAuthenticationApiKeyArgs>> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
 
+    /**
+     * Basic authentication credentials (username and password).
+     * 
+     */
     @Import(name="basic")
     private @Nullable Output<ProjectConnectorsHttpAuthenticationBasicArgs> basic;
 
+    /**
+     * @return Basic authentication credentials (username and password).
+     * 
+     */
     public Optional<Output<ProjectConnectorsHttpAuthenticationBasicArgs>> basic() {
         return Optional.ofNullable(this.basic);
     }
 
+    /**
+     * Bearer token for HTTP authentication.
+     * 
+     */
     @Import(name="bearerToken")
     private @Nullable Output<String> bearerToken;
 
+    /**
+     * @return Bearer token for HTTP authentication.
+     * 
+     */
     public Optional<Output<String>> bearerToken() {
         return Optional.ofNullable(this.bearerToken);
     }
@@ -64,29 +88,65 @@ public final class ProjectConnectorsHttpAuthenticationArgs extends com.pulumi.re
             $ = new ProjectConnectorsHttpAuthenticationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param apiKey API key authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(@Nullable Output<ProjectConnectorsHttpAuthenticationApiKeyArgs> apiKey) {
             $.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * @param apiKey API key authentication configuration.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(ProjectConnectorsHttpAuthenticationApiKeyArgs apiKey) {
             return apiKey(Output.of(apiKey));
         }
 
+        /**
+         * @param basic Basic authentication credentials (username and password).
+         * 
+         * @return builder
+         * 
+         */
         public Builder basic(@Nullable Output<ProjectConnectorsHttpAuthenticationBasicArgs> basic) {
             $.basic = basic;
             return this;
         }
 
+        /**
+         * @param basic Basic authentication credentials (username and password).
+         * 
+         * @return builder
+         * 
+         */
         public Builder basic(ProjectConnectorsHttpAuthenticationBasicArgs basic) {
             return basic(Output.of(basic));
         }
 
+        /**
+         * @param bearerToken Bearer token for HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder bearerToken(@Nullable Output<String> bearerToken) {
             $.bearerToken = bearerToken;
             return this;
         }
 
+        /**
+         * @param bearerToken Bearer token for HTTP authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder bearerToken(String bearerToken) {
             return bearerToken(Output.of(bearerToken));
         }

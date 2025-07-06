@@ -23,6 +23,10 @@ public final class ProjectAuthenticationEnchantedLink {
      * 
      */
     private @Nullable ProjectAuthenticationEnchantedLinkEmailService emailService;
+    /**
+     * @return How long the enchanted link remains valid before it expires.
+     * 
+     */
     private @Nullable String expirationTime;
     /**
      * @return The URL to redirect users to after they log in using the enchanted link.
@@ -45,6 +49,10 @@ public final class ProjectAuthenticationEnchantedLink {
     public Optional<ProjectAuthenticationEnchantedLinkEmailService> emailService() {
         return Optional.ofNullable(this.emailService);
     }
+    /**
+     * @return How long the enchanted link remains valid before it expires.
+     * 
+     */
     public Optional<String> expirationTime() {
         return Optional.ofNullable(this.expirationTime);
     }

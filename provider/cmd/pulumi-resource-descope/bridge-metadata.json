@@ -347,6 +347,9 @@
                             "clear": {
                                 "maxItemsOne": false
                             },
+                            "cybersixgill": {
+                                "maxItemsOne": false
+                            },
                             "datadog": {
                                 "maxItemsOne": false,
                                 "elem": {
@@ -370,19 +373,40 @@
                             "docebo": {
                                 "maxItemsOne": false
                             },
+                            "eight_by_eight_viber": {
+                                "maxItemsOne": false
+                            },
+                            "eight_by_eight_whatsapp": {
+                                "maxItemsOne": false
+                            },
+                            "elephant": {
+                                "maxItemsOne": false
+                            },
+                            "external_token_http": {
+                                "maxItemsOne": false
+                            },
                             "fingerprint": {
                                 "maxItemsOne": false
                             },
                             "fingerprint_descope": {
                                 "maxItemsOne": false
                             },
+                            "firebase_admin": {
+                                "maxItemsOne": false
+                            },
                             "forter": {
+                                "maxItemsOne": false
+                            },
+                            "generic_email_gateway": {
                                 "maxItemsOne": false
                             },
                             "generic_sms_gateway": {
                                 "maxItemsOne": false
                             },
                             "google_cloud_translation": {
+                                "maxItemsOne": false
+                            },
+                            "google_maps_places": {
                                 "maxItemsOne": false
                             },
                             "hibp": {
@@ -423,6 +447,9 @@
                                     }
                                 }
                             },
+                            "radar": {
+                                "maxItemsOne": false
+                            },
                             "recaptcha": {
                                 "maxItemsOne": false
                             },
@@ -436,6 +463,9 @@
                                 "maxItemsOne": false
                             },
                             "salesforce_marketing_cloud": {
+                                "maxItemsOne": false
+                            },
+                            "sardine": {
                                 "maxItemsOne": false
                             },
                             "segment": {
@@ -476,10 +506,16 @@
                                     }
                                 }
                             },
+                            "supabase": {
+                                "maxItemsOne": false
+                            },
                             "telesign": {
                                 "maxItemsOne": false
                             },
                             "traceable": {
+                                "maxItemsOne": false
+                            },
+                            "turnstile": {
                                 "maxItemsOne": false
                             },
                             "twilio_core": {
@@ -504,6 +540,13 @@
                         "fields": {
                             "approved_domains": {
                                 "maxItemsOne": false
+                            },
+                            "session_migration": {
+                                "fields": {
+                                    "loginid_matched_attributes": {
+                                        "maxItemsOne": false
+                                    }
+                                }
                             }
                         }
                     },

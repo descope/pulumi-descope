@@ -16,37 +16,77 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
 
     public static final ProjectInviteSettingsArgs Empty = new ProjectInviteSettingsArgs();
 
+    /**
+     * Whether to include a magic link token in invitation messages.
+     * 
+     */
     @Import(name="addMagiclinkToken")
     private @Nullable Output<Boolean> addMagiclinkToken;
 
+    /**
+     * @return Whether to include a magic link token in invitation messages.
+     * 
+     */
     public Optional<Output<Boolean>> addMagiclinkToken() {
         return Optional.ofNullable(this.addMagiclinkToken);
     }
 
+    /**
+     * Custom URL to include in the message sent to invited users.
+     * 
+     */
     @Import(name="inviteUrl")
     private @Nullable Output<String> inviteUrl;
 
+    /**
+     * @return Custom URL to include in the message sent to invited users.
+     * 
+     */
     public Optional<Output<String>> inviteUrl() {
         return Optional.ofNullable(this.inviteUrl);
     }
 
+    /**
+     * Whether users must be invited before they can sign up to the project.
+     * 
+     */
     @Import(name="requireInvitation")
     private @Nullable Output<Boolean> requireInvitation;
 
+    /**
+     * @return Whether users must be invited before they can sign up to the project.
+     * 
+     */
     public Optional<Output<Boolean>> requireInvitation() {
         return Optional.ofNullable(this.requireInvitation);
     }
 
+    /**
+     * Whether to send invitation emails to users.
+     * 
+     */
     @Import(name="sendEmail")
     private @Nullable Output<Boolean> sendEmail;
 
+    /**
+     * @return Whether to send invitation emails to users.
+     * 
+     */
     public Optional<Output<Boolean>> sendEmail() {
         return Optional.ofNullable(this.sendEmail);
     }
 
+    /**
+     * Whether to send invitation SMS messages to users.
+     * 
+     */
     @Import(name="sendText")
     private @Nullable Output<Boolean> sendText;
 
+    /**
+     * @return Whether to send invitation SMS messages to users.
+     * 
+     */
     public Optional<Output<Boolean>> sendText() {
         return Optional.ofNullable(this.sendText);
     }
@@ -79,47 +119,107 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
             $ = new ProjectInviteSettingsArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param addMagiclinkToken Whether to include a magic link token in invitation messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder addMagiclinkToken(@Nullable Output<Boolean> addMagiclinkToken) {
             $.addMagiclinkToken = addMagiclinkToken;
             return this;
         }
 
+        /**
+         * @param addMagiclinkToken Whether to include a magic link token in invitation messages.
+         * 
+         * @return builder
+         * 
+         */
         public Builder addMagiclinkToken(Boolean addMagiclinkToken) {
             return addMagiclinkToken(Output.of(addMagiclinkToken));
         }
 
+        /**
+         * @param inviteUrl Custom URL to include in the message sent to invited users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder inviteUrl(@Nullable Output<String> inviteUrl) {
             $.inviteUrl = inviteUrl;
             return this;
         }
 
+        /**
+         * @param inviteUrl Custom URL to include in the message sent to invited users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder inviteUrl(String inviteUrl) {
             return inviteUrl(Output.of(inviteUrl));
         }
 
+        /**
+         * @param requireInvitation Whether users must be invited before they can sign up to the project.
+         * 
+         * @return builder
+         * 
+         */
         public Builder requireInvitation(@Nullable Output<Boolean> requireInvitation) {
             $.requireInvitation = requireInvitation;
             return this;
         }
 
+        /**
+         * @param requireInvitation Whether users must be invited before they can sign up to the project.
+         * 
+         * @return builder
+         * 
+         */
         public Builder requireInvitation(Boolean requireInvitation) {
             return requireInvitation(Output.of(requireInvitation));
         }
 
+        /**
+         * @param sendEmail Whether to send invitation emails to users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendEmail(@Nullable Output<Boolean> sendEmail) {
             $.sendEmail = sendEmail;
             return this;
         }
 
+        /**
+         * @param sendEmail Whether to send invitation emails to users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendEmail(Boolean sendEmail) {
             return sendEmail(Output.of(sendEmail));
         }
 
+        /**
+         * @param sendText Whether to send invitation SMS messages to users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendText(@Nullable Output<Boolean> sendText) {
             $.sendText = sendText;
             return this;
         }
 
+        /**
+         * @param sendText Whether to send invitation SMS messages to users.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sendText(Boolean sendText) {
             return sendText(Output.of(sendText));
         }

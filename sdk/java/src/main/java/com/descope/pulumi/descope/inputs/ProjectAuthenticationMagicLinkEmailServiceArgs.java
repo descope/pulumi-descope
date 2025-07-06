@@ -18,16 +18,32 @@ public final class ProjectAuthenticationMagicLinkEmailServiceArgs extends com.pu
 
     public static final ProjectAuthenticationMagicLinkEmailServiceArgs Empty = new ProjectAuthenticationMagicLinkEmailServiceArgs();
 
+    /**
+     * The name of the email connector to use for sending emails.
+     * 
+     */
     @Import(name="connector", required=true)
     private Output<String> connector;
 
+    /**
+     * @return The name of the email connector to use for sending emails.
+     * 
+     */
     public Output<String> connector() {
         return this.connector;
     }
 
+    /**
+     * A list of email templates for different authentication flows.
+     * 
+     */
     @Import(name="templates")
     private @Nullable Output<List<ProjectAuthenticationMagicLinkEmailServiceTemplateArgs>> templates;
 
+    /**
+     * @return A list of email templates for different authentication flows.
+     * 
+     */
     public Optional<Output<List<ProjectAuthenticationMagicLinkEmailServiceTemplateArgs>>> templates() {
         return Optional.ofNullable(this.templates);
     }
@@ -57,24 +73,54 @@ public final class ProjectAuthenticationMagicLinkEmailServiceArgs extends com.pu
             $ = new ProjectAuthenticationMagicLinkEmailServiceArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param connector The name of the email connector to use for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(Output<String> connector) {
             $.connector = connector;
             return this;
         }
 
+        /**
+         * @param connector The name of the email connector to use for sending emails.
+         * 
+         * @return builder
+         * 
+         */
         public Builder connector(String connector) {
             return connector(Output.of(connector));
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(@Nullable Output<List<ProjectAuthenticationMagicLinkEmailServiceTemplateArgs>> templates) {
             $.templates = templates;
             return this;
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(List<ProjectAuthenticationMagicLinkEmailServiceTemplateArgs> templates) {
             return templates(Output.of(templates));
         }
 
+        /**
+         * @param templates A list of email templates for different authentication flows.
+         * 
+         * @return builder
+         * 
+         */
         public Builder templates(ProjectAuthenticationMagicLinkEmailServiceTemplateArgs... templates) {
             return templates(List.of(templates));
         }

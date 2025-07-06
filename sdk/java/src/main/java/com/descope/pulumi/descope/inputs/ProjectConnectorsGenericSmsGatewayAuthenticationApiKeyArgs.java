@@ -14,16 +14,32 @@ public final class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs ex
 
     public static final ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs Empty = new ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs();
 
+    /**
+     * The API key.
+     * 
+     */
     @Import(name="key", required=true)
     private Output<String> key;
 
+    /**
+     * @return The API key.
+     * 
+     */
     public Output<String> key() {
         return this.key;
     }
 
+    /**
+     * The API secret.
+     * 
+     */
     @Import(name="token", required=true)
     private Output<String> token;
 
+    /**
+     * @return The API secret.
+     * 
+     */
     public Output<String> token() {
         return this.token;
     }
@@ -53,20 +69,44 @@ public final class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs ex
             $ = new ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param key The API key.
+         * 
+         * @return builder
+         * 
+         */
         public Builder key(Output<String> key) {
             $.key = key;
             return this;
         }
 
+        /**
+         * @param key The API key.
+         * 
+         * @return builder
+         * 
+         */
         public Builder key(String key) {
             return key(Output.of(key));
         }
 
+        /**
+         * @param token The API secret.
+         * 
+         * @return builder
+         * 
+         */
         public Builder token(Output<String> token) {
             $.token = token;
             return this;
         }
 
+        /**
+         * @param token The API secret.
+         * 
+         * @return builder
+         * 
+         */
         public Builder token(String token) {
             return token(Output.of(token));
         }

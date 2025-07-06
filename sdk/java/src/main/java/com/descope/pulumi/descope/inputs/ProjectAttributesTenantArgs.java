@@ -18,9 +18,17 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
 
     public static final ProjectAttributesTenantArgs Empty = new ProjectAttributesTenantArgs();
 
+    /**
+     * Determines the required permissions for this tenant.
+     * 
+     */
     @Import(name="authorization")
     private @Nullable Output<ProjectAttributesTenantAuthorizationArgs> authorization;
 
+    /**
+     * @return Determines the required permissions for this tenant.
+     * 
+     */
     public Optional<Output<ProjectAttributesTenantAuthorizationArgs>> authorization() {
         return Optional.ofNullable(this.authorization);
     }
@@ -41,14 +49,14 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
     }
 
     /**
-     * When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     @Import(name="selectOptions")
     private @Nullable Output<List<String>> selectOptions;
 
     /**
-     * @return When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+     * @return When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
      * 
      */
     public Optional<Output<List<String>>> selectOptions() {
@@ -97,11 +105,23 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
             $ = new ProjectAttributesTenantArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param authorization Determines the required permissions for this tenant.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authorization(@Nullable Output<ProjectAttributesTenantAuthorizationArgs> authorization) {
             $.authorization = authorization;
             return this;
         }
 
+        /**
+         * @param authorization Determines the required permissions for this tenant.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authorization(ProjectAttributesTenantAuthorizationArgs authorization) {
             return authorization(Output.of(authorization));
         }
@@ -128,7 +148,7 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 
@@ -139,7 +159,7 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 
@@ -149,7 +169,7 @@ public final class ProjectAttributesTenantArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to chose from.
+         * @param selectOptions When the attribute type is &#34;multiselect&#34;. A list of options to choose from.
          * 
          * @return builder
          * 

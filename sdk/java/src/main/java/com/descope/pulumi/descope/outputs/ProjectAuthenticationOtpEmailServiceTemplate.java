@@ -13,33 +13,81 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthenticationOtpEmailServiceTemplate {
+    /**
+     * @return Whether this email template is currently active and in use.
+     * 
+     */
     private @Nullable Boolean active;
+    /**
+     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * 
+     */
     private @Nullable String htmlBody;
     private @Nullable String id;
+    /**
+     * @return Unique name for this email template.
+     * 
+     */
     private String name;
+    /**
+     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * 
+     */
     private @Nullable String plainTextBody;
+    /**
+     * @return Subject line of the email message.
+     * 
+     */
     private String subject;
+    /**
+     * @return Whether to use the plain text body instead of HTML for the email.
+     * 
+     */
     private @Nullable Boolean usePlainTextBody;
 
     private ProjectAuthenticationOtpEmailServiceTemplate() {}
+    /**
+     * @return Whether this email template is currently active and in use.
+     * 
+     */
     public Optional<Boolean> active() {
         return Optional.ofNullable(this.active);
     }
+    /**
+     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * 
+     */
     public Optional<String> htmlBody() {
         return Optional.ofNullable(this.htmlBody);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
+    /**
+     * @return Unique name for this email template.
+     * 
+     */
     public String name() {
         return this.name;
     }
+    /**
+     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * 
+     */
     public Optional<String> plainTextBody() {
         return Optional.ofNullable(this.plainTextBody);
     }
+    /**
+     * @return Subject line of the email message.
+     * 
+     */
     public String subject() {
         return this.subject;
     }
+    /**
+     * @return Whether to use the plain text body instead of HTML for the email.
+     * 
+     */
     public Optional<Boolean> usePlainTextBody() {
         return Optional.ofNullable(this.usePlainTextBody);
     }

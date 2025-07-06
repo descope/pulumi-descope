@@ -14,7 +14,15 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsTwilioCore {
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     private String accountSid;
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     private ProjectConnectorsTwilioCoreAuthentication authentication;
     /**
      * @return A description of what your connector is used for.
@@ -27,12 +35,24 @@ public final class ProjectConnectorsTwilioCore {
      * 
      */
     private String name;
+    /**
+     * @return Configuration for SMS and voice message senders.
+     * 
+     */
     private ProjectConnectorsTwilioCoreSenders senders;
 
     private ProjectConnectorsTwilioCore() {}
+    /**
+     * @return Twilio Account SID from your Twilio Console.
+     * 
+     */
     public String accountSid() {
         return this.accountSid;
     }
+    /**
+     * @return Twilio authentication credentials (either auth token or API key/secret).
+     * 
+     */
     public ProjectConnectorsTwilioCoreAuthentication authentication() {
         return this.authentication;
     }
@@ -53,6 +73,10 @@ public final class ProjectConnectorsTwilioCore {
     public String name() {
         return this.name;
     }
+    /**
+     * @return Configuration for SMS and voice message senders.
+     * 
+     */
     public ProjectConnectorsTwilioCoreSenders senders() {
         return this.senders;
     }

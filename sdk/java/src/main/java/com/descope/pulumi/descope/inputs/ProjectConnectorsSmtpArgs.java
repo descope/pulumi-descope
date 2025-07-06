@@ -20,9 +20,17 @@ public final class ProjectConnectorsSmtpArgs extends com.pulumi.resources.Resour
 
     public static final ProjectConnectorsSmtpArgs Empty = new ProjectConnectorsSmtpArgs();
 
+    /**
+     * SMTP server authentication credentials and method.
+     * 
+     */
     @Import(name="authentication", required=true)
     private Output<ProjectConnectorsSmtpAuthenticationArgs> authentication;
 
+    /**
+     * @return SMTP server authentication credentials and method.
+     * 
+     */
     public Output<ProjectConnectorsSmtpAuthenticationArgs> authentication() {
         return this.authentication;
     }
@@ -79,9 +87,17 @@ public final class ProjectConnectorsSmtpArgs extends com.pulumi.resources.Resour
         return this.sender;
     }
 
+    /**
+     * SMTP server connection details including hostname and port.
+     * 
+     */
     @Import(name="server", required=true)
     private Output<ProjectConnectorsSmtpServerArgs> server;
 
+    /**
+     * @return SMTP server connection details including hostname and port.
+     * 
+     */
     public Output<ProjectConnectorsSmtpServerArgs> server() {
         return this.server;
     }
@@ -131,11 +147,23 @@ public final class ProjectConnectorsSmtpArgs extends com.pulumi.resources.Resour
             $ = new ProjectConnectorsSmtpArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param authentication SMTP server authentication credentials and method.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(Output<ProjectConnectorsSmtpAuthenticationArgs> authentication) {
             $.authentication = authentication;
             return this;
         }
 
+        /**
+         * @param authentication SMTP server authentication credentials and method.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authentication(ProjectConnectorsSmtpAuthenticationArgs authentication) {
             return authentication(Output.of(authentication));
         }
@@ -212,11 +240,23 @@ public final class ProjectConnectorsSmtpArgs extends com.pulumi.resources.Resour
             return sender(Output.of(sender));
         }
 
+        /**
+         * @param server SMTP server connection details including hostname and port.
+         * 
+         * @return builder
+         * 
+         */
         public Builder server(Output<ProjectConnectorsSmtpServerArgs> server) {
             $.server = server;
             return this;
         }
 
+        /**
+         * @param server SMTP server connection details including hostname and port.
+         * 
+         * @return builder
+         * 
+         */
         public Builder server(ProjectConnectorsSmtpServerArgs server) {
             return server(Output.of(server));
         }

@@ -14,9 +14,17 @@ public final class ProjectConnectorsSendgridAuthenticationArgs extends com.pulum
 
     public static final ProjectConnectorsSendgridAuthenticationArgs Empty = new ProjectConnectorsSendgridAuthenticationArgs();
 
+    /**
+     * SendGrid API key for authentication.
+     * 
+     */
     @Import(name="apiKey", required=true)
     private Output<String> apiKey;
 
+    /**
+     * @return SendGrid API key for authentication.
+     * 
+     */
     public Output<String> apiKey() {
         return this.apiKey;
     }
@@ -45,11 +53,23 @@ public final class ProjectConnectorsSendgridAuthenticationArgs extends com.pulum
             $ = new ProjectConnectorsSendgridAuthenticationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param apiKey SendGrid API key for authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(Output<String> apiKey) {
             $.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * @param apiKey SendGrid API key for authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(String apiKey) {
             return apiKey(Output.of(apiKey));
         }

@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectProjectSettingsSessionMigrationArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
@@ -78,52 +79,6 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
-     * Deprecated.
-     * 
-     * @deprecated
-     * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-    @Import(name="cookieDomain")
-    private @Nullable Output<String> cookieDomain;
-
-    /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<Output<String>> cookieDomain() {
-        return Optional.ofNullable(this.cookieDomain);
-    }
-
-    /**
-     * Deprecated.
-     * 
-     * @deprecated
-     * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-    @Import(name="cookiePolicy")
-    private @Nullable Output<String> cookiePolicy;
-
-    /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<Output<String>> cookiePolicy() {
-        return Optional.ofNullable(this.cookiePolicy);
-    }
-
-    /**
      * A custom CNAME that&#39;s configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
      * 
      */
@@ -136,6 +91,21 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
      */
     public Optional<Output<String>> customDomain() {
         return Optional.ofNullable(this.customDomain);
+    }
+
+    /**
+     * Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+     * 
+     */
+    @Import(name="defaultNoSsoApps")
+    private @Nullable Output<Boolean> defaultNoSsoApps;
+
+    /**
+     * @return Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+     * 
+     */
+    public Optional<Output<Boolean>> defaultNoSsoApps() {
+        return Optional.ofNullable(this.defaultNoSsoApps);
     }
 
     /**
@@ -241,6 +211,21 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
      */
     public Optional<Output<Boolean>> refreshTokenRotation() {
         return Optional.ofNullable(this.refreshTokenRotation);
+    }
+
+    /**
+     * Configure seamless migration of existing user sessions from another vendor to Descope.
+     * 
+     */
+    @Import(name="sessionMigration")
+    private @Nullable Output<ProjectProjectSettingsSessionMigrationArgs> sessionMigration;
+
+    /**
+     * @return Configure seamless migration of existing user sessions from another vendor to Descope.
+     * 
+     */
+    public Optional<Output<ProjectProjectSettingsSessionMigrationArgs>> sessionMigration() {
+        return Optional.ofNullable(this.sessionMigration);
     }
 
     /**
@@ -364,29 +349,6 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
-     * Deprecated.
-     * 
-     * @deprecated
-     * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-    @Import(name="tokenResponseMethod")
-    private @Nullable Output<String> tokenResponseMethod;
-
-    /**
-     * @return Deprecated.
-     * 
-     * @deprecated
-     * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-     * 
-     */
-    @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-    public Optional<Output<String>> tokenResponseMethod() {
-        return Optional.ofNullable(this.tokenResponseMethod);
-    }
-
-    /**
      * The expiry time for the trusted device token. The minimum value is &#34;3 minutes&#34;.
      * 
      */
@@ -423,9 +385,8 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         this.accessKeySessionTokenExpiration = $.accessKeySessionTokenExpiration;
         this.appUrl = $.appUrl;
         this.approvedDomains = $.approvedDomains;
-        this.cookieDomain = $.cookieDomain;
-        this.cookiePolicy = $.cookiePolicy;
         this.customDomain = $.customDomain;
+        this.defaultNoSsoApps = $.defaultNoSsoApps;
         this.enableInactivity = $.enableInactivity;
         this.inactivityTime = $.inactivityTime;
         this.refreshTokenCookieDomain = $.refreshTokenCookieDomain;
@@ -433,6 +394,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         this.refreshTokenExpiration = $.refreshTokenExpiration;
         this.refreshTokenResponseMethod = $.refreshTokenResponseMethod;
         this.refreshTokenRotation = $.refreshTokenRotation;
+        this.sessionMigration = $.sessionMigration;
         this.sessionTokenCookieDomain = $.sessionTokenCookieDomain;
         this.sessionTokenCookiePolicy = $.sessionTokenCookiePolicy;
         this.sessionTokenExpiration = $.sessionTokenExpiration;
@@ -441,7 +403,6 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         this.testUsersLoginidRegexp = $.testUsersLoginidRegexp;
         this.testUsersStaticOtp = $.testUsersStaticOtp;
         this.testUsersVerifierRegexp = $.testUsersVerifierRegexp;
-        this.tokenResponseMethod = $.tokenResponseMethod;
         this.trustedDeviceTokenExpiration = $.trustedDeviceTokenExpiration;
         this.userJwtTemplate = $.userJwtTemplate;
     }
@@ -559,64 +520,6 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param cookieDomain Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder cookieDomain(@Nullable Output<String> cookieDomain) {
-            $.cookieDomain = cookieDomain;
-            return this;
-        }
-
-        /**
-         * @param cookieDomain Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The cookie_domain attribute has been renamed, set the refresh_token_cookie_domain attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder cookieDomain(String cookieDomain) {
-            return cookieDomain(Output.of(cookieDomain));
-        }
-
-        /**
-         * @param cookiePolicy Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder cookiePolicy(@Nullable Output<String> cookiePolicy) {
-            $.cookiePolicy = cookiePolicy;
-            return this;
-        }
-
-        /**
-         * @param cookiePolicy Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The cookie_policy attribute has been renamed, set the refresh_token_cookie_policy attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder cookiePolicy(String cookiePolicy) {
-            return cookiePolicy(Output.of(cookiePolicy));
-        }
-
-        /**
          * @param customDomain A custom CNAME that&#39;s configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
          * 
          * @return builder
@@ -635,6 +538,27 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
          */
         public Builder customDomain(String customDomain) {
             return customDomain(Output.of(customDomain));
+        }
+
+        /**
+         * @param defaultNoSsoApps Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultNoSsoApps(@Nullable Output<Boolean> defaultNoSsoApps) {
+            $.defaultNoSsoApps = defaultNoSsoApps;
+            return this;
+        }
+
+        /**
+         * @param defaultNoSsoApps Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultNoSsoApps(Boolean defaultNoSsoApps) {
+            return defaultNoSsoApps(Output.of(defaultNoSsoApps));
         }
 
         /**
@@ -782,6 +706,27 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
          */
         public Builder refreshTokenRotation(Boolean refreshTokenRotation) {
             return refreshTokenRotation(Output.of(refreshTokenRotation));
+        }
+
+        /**
+         * @param sessionMigration Configure seamless migration of existing user sessions from another vendor to Descope.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sessionMigration(@Nullable Output<ProjectProjectSettingsSessionMigrationArgs> sessionMigration) {
+            $.sessionMigration = sessionMigration;
+            return this;
+        }
+
+        /**
+         * @param sessionMigration Configure seamless migration of existing user sessions from another vendor to Descope.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sessionMigration(ProjectProjectSettingsSessionMigrationArgs sessionMigration) {
+            return sessionMigration(Output.of(sessionMigration));
         }
 
         /**
@@ -950,35 +895,6 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
          */
         public Builder testUsersVerifierRegexp(String testUsersVerifierRegexp) {
             return testUsersVerifierRegexp(Output.of(testUsersVerifierRegexp));
-        }
-
-        /**
-         * @param tokenResponseMethod Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder tokenResponseMethod(@Nullable Output<String> tokenResponseMethod) {
-            $.tokenResponseMethod = tokenResponseMethod;
-            return this;
-        }
-
-        /**
-         * @param tokenResponseMethod Deprecated.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider.
-         * 
-         */
-        @Deprecated /* The token_response_method attribute has been renamed, set the refresh_token_response_method attribute instead. This attribute will be removed in a future version of the provider. */
-        public Builder tokenResponseMethod(String tokenResponseMethod) {
-            return tokenResponseMethod(Output.of(tokenResponseMethod));
         }
 
         /**

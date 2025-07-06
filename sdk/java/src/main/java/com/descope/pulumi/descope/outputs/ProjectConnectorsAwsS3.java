@@ -19,9 +19,22 @@ public final class ProjectConnectorsAwsS3 {
      * @return The unique AWS access key ID.
      * 
      */
-    private String accessKeyId;
+    private @Nullable String accessKeyId;
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     private @Nullable Boolean auditEnabled;
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     private @Nullable List<ProjectConnectorsAwsS3AuditFilter> auditFilters;
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    private String authType;
     /**
      * @return The AWS S3 bucket. This bucket should already exist for the connector to work.
      * 
@@ -32,6 +45,11 @@ public final class ProjectConnectorsAwsS3 {
      * 
      */
     private @Nullable String description;
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    private @Nullable String externalId;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -44,10 +62,19 @@ public final class ProjectConnectorsAwsS3 {
      */
     private String region;
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    private @Nullable String roleArn;
+    /**
      * @return The secret AWS access key.
      * 
      */
-    private String secretAccessKey;
+    private @Nullable String secretAccessKey;
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     private @Nullable Boolean troubleshootLogEnabled;
 
     private ProjectConnectorsAwsS3() {}
@@ -55,14 +82,29 @@ public final class ProjectConnectorsAwsS3 {
      * @return The unique AWS access key ID.
      * 
      */
-    public String accessKeyId() {
-        return this.accessKeyId;
+    public Optional<String> accessKeyId() {
+        return Optional.ofNullable(this.accessKeyId);
     }
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     public Optional<Boolean> auditEnabled() {
         return Optional.ofNullable(this.auditEnabled);
     }
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     public List<ProjectConnectorsAwsS3AuditFilter> auditFilters() {
         return this.auditFilters == null ? List.of() : this.auditFilters;
+    }
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public String authType() {
+        return this.authType;
     }
     /**
      * @return The AWS S3 bucket. This bucket should already exist for the connector to work.
@@ -77,6 +119,13 @@ public final class ProjectConnectorsAwsS3 {
      */
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
+    }
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<String> externalId() {
+        return Optional.ofNullable(this.externalId);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
@@ -96,12 +145,23 @@ public final class ProjectConnectorsAwsS3 {
         return this.region;
     }
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<String> roleArn() {
+        return Optional.ofNullable(this.roleArn);
+    }
+    /**
      * @return The secret AWS access key.
      * 
      */
-    public String secretAccessKey() {
-        return this.secretAccessKey;
+    public Optional<String> secretAccessKey() {
+        return Optional.ofNullable(this.secretAccessKey);
     }
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     public Optional<Boolean> troubleshootLogEnabled() {
         return Optional.ofNullable(this.troubleshootLogEnabled);
     }
@@ -115,15 +175,18 @@ public final class ProjectConnectorsAwsS3 {
     }
     @CustomType.Builder
     public static final class Builder {
-        private String accessKeyId;
+        private @Nullable String accessKeyId;
         private @Nullable Boolean auditEnabled;
         private @Nullable List<ProjectConnectorsAwsS3AuditFilter> auditFilters;
+        private String authType;
         private String bucket;
         private @Nullable String description;
+        private @Nullable String externalId;
         private @Nullable String id;
         private String name;
         private String region;
-        private String secretAccessKey;
+        private @Nullable String roleArn;
+        private @Nullable String secretAccessKey;
         private @Nullable Boolean troubleshootLogEnabled;
         public Builder() {}
         public Builder(ProjectConnectorsAwsS3 defaults) {
@@ -131,20 +194,21 @@ public final class ProjectConnectorsAwsS3 {
     	      this.accessKeyId = defaults.accessKeyId;
     	      this.auditEnabled = defaults.auditEnabled;
     	      this.auditFilters = defaults.auditFilters;
+    	      this.authType = defaults.authType;
     	      this.bucket = defaults.bucket;
     	      this.description = defaults.description;
+    	      this.externalId = defaults.externalId;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.region = defaults.region;
+    	      this.roleArn = defaults.roleArn;
     	      this.secretAccessKey = defaults.secretAccessKey;
     	      this.troubleshootLogEnabled = defaults.troubleshootLogEnabled;
         }
 
         @CustomType.Setter
-        public Builder accessKeyId(String accessKeyId) {
-            if (accessKeyId == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "accessKeyId");
-            }
+        public Builder accessKeyId(@Nullable String accessKeyId) {
+
             this.accessKeyId = accessKeyId;
             return this;
         }
@@ -164,6 +228,14 @@ public final class ProjectConnectorsAwsS3 {
             return auditFilters(List.of(auditFilters));
         }
         @CustomType.Setter
+        public Builder authType(String authType) {
+            if (authType == null) {
+              throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "authType");
+            }
+            this.authType = authType;
+            return this;
+        }
+        @CustomType.Setter
         public Builder bucket(String bucket) {
             if (bucket == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "bucket");
@@ -175,6 +247,12 @@ public final class ProjectConnectorsAwsS3 {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder externalId(@Nullable String externalId) {
+
+            this.externalId = externalId;
             return this;
         }
         @CustomType.Setter
@@ -200,10 +278,14 @@ public final class ProjectConnectorsAwsS3 {
             return this;
         }
         @CustomType.Setter
-        public Builder secretAccessKey(String secretAccessKey) {
-            if (secretAccessKey == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "secretAccessKey");
-            }
+        public Builder roleArn(@Nullable String roleArn) {
+
+            this.roleArn = roleArn;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder secretAccessKey(@Nullable String secretAccessKey) {
+
             this.secretAccessKey = secretAccessKey;
             return this;
         }
@@ -218,11 +300,14 @@ public final class ProjectConnectorsAwsS3 {
             _resultValue.accessKeyId = accessKeyId;
             _resultValue.auditEnabled = auditEnabled;
             _resultValue.auditFilters = auditFilters;
+            _resultValue.authType = authType;
             _resultValue.bucket = bucket;
             _resultValue.description = description;
+            _resultValue.externalId = externalId;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.region = region;
+            _resultValue.roleArn = roleArn;
             _resultValue.secretAccessKey = secretAccessKey;
             _resultValue.troubleshootLogEnabled = troubleshootLogEnabled;
             return _resultValue;

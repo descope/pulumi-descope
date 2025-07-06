@@ -17,14 +17,14 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
     public static final ProjectAttributesUserWidgetAuthorizationArgs Empty = new ProjectAttributesUserWidgetAuthorizationArgs();
 
     /**
-     * A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * The permissions users are required to have to edit this attribute in the user management widget.
      * 
      */
     @Import(name="editPermissions")
     private @Nullable Output<List<String>> editPermissions;
 
     /**
-     * @return A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to edit this attribute in the user management widget.
      * 
      */
     public Optional<Output<List<String>>> editPermissions() {
@@ -32,14 +32,14 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
     }
 
     /**
-     * A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * The permissions users are required to have to view this attribute in the user management widget.
      * 
      */
     @Import(name="viewPermissions")
     private @Nullable Output<List<String>> viewPermissions;
 
     /**
-     * @return A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+     * @return The permissions users are required to have to view this attribute in the user management widget.
      * 
      */
     public Optional<Output<List<String>>> viewPermissions() {
@@ -72,7 +72,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param editPermissions A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param editPermissions The permissions users are required to have to edit this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -83,7 +83,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param editPermissions A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param editPermissions The permissions users are required to have to edit this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -93,7 +93,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param editPermissions A list of permissions by name to set editing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param editPermissions The permissions users are required to have to edit this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -103,7 +103,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param viewPermissions A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param viewPermissions The permissions users are required to have to view this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -114,7 +114,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param viewPermissions A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param viewPermissions The permissions users are required to have to view this attribute in the user management widget.
          * 
          * @return builder
          * 
@@ -124,7 +124,7 @@ public final class ProjectAttributesUserWidgetAuthorizationArgs extends com.pulu
         }
 
         /**
-         * @param viewPermissions A list of permissions by name to set viewing permissions to the attribute in widgets. e.g &#34;SSO Admin&#34;.
+         * @param viewPermissions The permissions users are required to have to view this attribute in the user management widget.
          * 
          * @return builder
          * 

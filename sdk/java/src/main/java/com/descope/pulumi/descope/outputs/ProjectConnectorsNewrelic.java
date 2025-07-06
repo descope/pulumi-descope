@@ -20,7 +20,15 @@ public final class ProjectConnectorsNewrelic {
      * 
      */
     private String apiKey;
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     private @Nullable Boolean auditEnabled;
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     private @Nullable List<ProjectConnectorsNewrelicAuditFilter> auditFilters;
     /**
      * @return The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
@@ -48,6 +56,10 @@ public final class ProjectConnectorsNewrelic {
      * 
      */
     private @Nullable Boolean overrideLogsPrefix;
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     private @Nullable Boolean troubleshootLogEnabled;
 
     private ProjectConnectorsNewrelic() {}
@@ -58,9 +70,17 @@ public final class ProjectConnectorsNewrelic {
     public String apiKey() {
         return this.apiKey;
     }
+    /**
+     * @return Whether to enable streaming of audit events.
+     * 
+     */
     public Optional<Boolean> auditEnabled() {
         return Optional.ofNullable(this.auditEnabled);
     }
+    /**
+     * @return Specify which events will be sent to the external audit service (including tenant selection).
+     * 
+     */
     public List<ProjectConnectorsNewrelicAuditFilter> auditFilters() {
         return this.auditFilters == null ? List.of() : this.auditFilters;
     }
@@ -102,6 +122,10 @@ public final class ProjectConnectorsNewrelic {
     public Optional<Boolean> overrideLogsPrefix() {
         return Optional.ofNullable(this.overrideLogsPrefix);
     }
+    /**
+     * @return Whether to send troubleshooting events.
+     * 
+     */
     public Optional<Boolean> troubleshootLogEnabled() {
         return Optional.ofNullable(this.troubleshootLogEnabled);
     }

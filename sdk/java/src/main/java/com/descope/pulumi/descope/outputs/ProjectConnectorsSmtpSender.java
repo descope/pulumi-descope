@@ -12,13 +12,29 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSmtpSender {
+    /**
+     * @return The email address that will appear as the sender of the email.
+     * 
+     */
     private String email;
+    /**
+     * @return The display name that will appear as the sender of the email.
+     * 
+     */
     private @Nullable String name;
 
     private ProjectConnectorsSmtpSender() {}
+    /**
+     * @return The email address that will appear as the sender of the email.
+     * 
+     */
     public String email() {
         return this.email;
     }
+    /**
+     * @return The display name that will appear as the sender of the email.
+     * 
+     */
     public Optional<String> name() {
         return Optional.ofNullable(this.name);
     }

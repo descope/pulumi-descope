@@ -15,23 +15,47 @@ public final class ProjectConnectorsTwilioVerifyAuthenticationArgs extends com.p
 
     public static final ProjectConnectorsTwilioVerifyAuthenticationArgs Empty = new ProjectConnectorsTwilioVerifyAuthenticationArgs();
 
+    /**
+     * Twilio API Key for authentication (used with API Secret).
+     * 
+     */
     @Import(name="apiKey")
     private @Nullable Output<String> apiKey;
 
+    /**
+     * @return Twilio API Key for authentication (used with API Secret).
+     * 
+     */
     public Optional<Output<String>> apiKey() {
         return Optional.ofNullable(this.apiKey);
     }
 
+    /**
+     * Twilio API Secret for authentication (used with API Key).
+     * 
+     */
     @Import(name="apiSecret")
     private @Nullable Output<String> apiSecret;
 
+    /**
+     * @return Twilio API Secret for authentication (used with API Key).
+     * 
+     */
     public Optional<Output<String>> apiSecret() {
         return Optional.ofNullable(this.apiSecret);
     }
 
+    /**
+     * Twilio Auth Token for authentication.
+     * 
+     */
     @Import(name="authToken")
     private @Nullable Output<String> authToken;
 
+    /**
+     * @return Twilio Auth Token for authentication.
+     * 
+     */
     public Optional<Output<String>> authToken() {
         return Optional.ofNullable(this.authToken);
     }
@@ -62,29 +86,65 @@ public final class ProjectConnectorsTwilioVerifyAuthenticationArgs extends com.p
             $ = new ProjectConnectorsTwilioVerifyAuthenticationArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param apiKey Twilio API Key for authentication (used with API Secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(@Nullable Output<String> apiKey) {
             $.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * @param apiKey Twilio API Key for authentication (used with API Secret).
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiKey(String apiKey) {
             return apiKey(Output.of(apiKey));
         }
 
+        /**
+         * @param apiSecret Twilio API Secret for authentication (used with API Key).
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiSecret(@Nullable Output<String> apiSecret) {
             $.apiSecret = apiSecret;
             return this;
         }
 
+        /**
+         * @param apiSecret Twilio API Secret for authentication (used with API Key).
+         * 
+         * @return builder
+         * 
+         */
         public Builder apiSecret(String apiSecret) {
             return apiSecret(Output.of(apiSecret));
         }
 
+        /**
+         * @param authToken Twilio Auth Token for authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authToken(@Nullable Output<String> authToken) {
             $.authToken = authToken;
             return this;
         }
 
+        /**
+         * @param authToken Twilio Auth Token for authentication.
+         * 
+         * @return builder
+         * 
+         */
         public Builder authToken(String authToken) {
             return authToken(Output.of(authToken));
         }
