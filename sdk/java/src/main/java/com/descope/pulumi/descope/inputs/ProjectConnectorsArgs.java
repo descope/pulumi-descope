@@ -8,7 +8,6 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsAmplitudeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAuditWebhookArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsS3Args;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsTranslateArgs;
-import com.descope.pulumi.descope.inputs.ProjectConnectorsClearArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsCybersixgillArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDatadogArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDevrevGrowArgs;
@@ -23,6 +22,7 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsFirebaseAdminArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsForterArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericEmailGatewayArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudLoggingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudTranslationArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleMapsPlaceArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHibpArgs;
@@ -139,21 +139,6 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsAwsTranslateArgs>>> awsTranslates() {
         return Optional.ofNullable(this.awsTranslates);
-    }
-
-    /**
-     * Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     * 
-     */
-    @Import(name="clears")
-    private @Nullable Output<List<ProjectConnectorsClearArgs>> clears;
-
-    /**
-     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     * 
-     */
-    public Optional<Output<List<ProjectConnectorsClearArgs>>> clears() {
-        return Optional.ofNullable(this.clears);
     }
 
     /**
@@ -364,6 +349,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsGenericSmsGatewayArgs>>> genericSmsGateways() {
         return Optional.ofNullable(this.genericSmsGateways);
+    }
+
+    /**
+     * Stream logs and audit events with the Google Cloud Logging connector.
+     * 
+     */
+    @Import(name="googleCloudLoggings")
+    private @Nullable Output<List<ProjectConnectorsGoogleCloudLoggingArgs>> googleCloudLoggings;
+
+    /**
+     * @return Stream logs and audit events with the Google Cloud Logging connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsGoogleCloudLoggingArgs>>> googleCloudLoggings() {
+        return Optional.ofNullable(this.googleCloudLoggings);
     }
 
     /**
@@ -839,7 +839,6 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.auditWebhooks = $.auditWebhooks;
         this.awsS3s = $.awsS3s;
         this.awsTranslates = $.awsTranslates;
-        this.clears = $.clears;
         this.cybersixgills = $.cybersixgills;
         this.datadogs = $.datadogs;
         this.devrevGrows = $.devrevGrows;
@@ -854,6 +853,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.forters = $.forters;
         this.genericEmailGateways = $.genericEmailGateways;
         this.genericSmsGateways = $.genericSmsGateways;
+        this.googleCloudLoggings = $.googleCloudLoggings;
         this.googleCloudTranslations = $.googleCloudTranslations;
         this.googleMapsPlaces = $.googleMapsPlaces;
         this.hibps = $.hibps;
@@ -1058,37 +1058,6 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder awsTranslates(ProjectConnectorsAwsTranslateArgs... awsTranslates) {
             return awsTranslates(List.of(awsTranslates));
-        }
-
-        /**
-         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder clears(@Nullable Output<List<ProjectConnectorsClearArgs>> clears) {
-            $.clears = clears;
-            return this;
-        }
-
-        /**
-         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder clears(List<ProjectConnectorsClearArgs> clears) {
-            return clears(Output.of(clears));
-        }
-
-        /**
-         * @param clears Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder clears(ProjectConnectorsClearArgs... clears) {
-            return clears(List.of(clears));
         }
 
         /**
@@ -1523,6 +1492,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder genericSmsGateways(ProjectConnectorsGenericSmsGatewayArgs... genericSmsGateways) {
             return genericSmsGateways(List.of(genericSmsGateways));
+        }
+
+        /**
+         * @param googleCloudLoggings Stream logs and audit events with the Google Cloud Logging connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleCloudLoggings(@Nullable Output<List<ProjectConnectorsGoogleCloudLoggingArgs>> googleCloudLoggings) {
+            $.googleCloudLoggings = googleCloudLoggings;
+            return this;
+        }
+
+        /**
+         * @param googleCloudLoggings Stream logs and audit events with the Google Cloud Logging connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleCloudLoggings(List<ProjectConnectorsGoogleCloudLoggingArgs> googleCloudLoggings) {
+            return googleCloudLoggings(Output.of(googleCloudLoggings));
+        }
+
+        /**
+         * @param googleCloudLoggings Stream logs and audit events with the Google Cloud Logging connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder googleCloudLoggings(ProjectConnectorsGoogleCloudLoggingArgs... googleCloudLoggings) {
+            return googleCloudLoggings(List.of(googleCloudLoggings));
         }
 
         /**

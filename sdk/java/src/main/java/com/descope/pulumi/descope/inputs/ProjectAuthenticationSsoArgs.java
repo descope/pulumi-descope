@@ -6,6 +6,7 @@ package com.descope.pulumi.descope.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -45,11 +46,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         return Optional.ofNullable(this.mergeUsers);
     }
 
+    /**
+     * The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     * 
+     */
+    @Import(name="redirectUrl")
+    private @Nullable Output<String> redirectUrl;
+
+    /**
+     * @return The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     * 
+     */
+    public Optional<Output<String>> redirectUrl() {
+        return Optional.ofNullable(this.redirectUrl);
+    }
+
     private ProjectAuthenticationSsoArgs() {}
 
     private ProjectAuthenticationSsoArgs(ProjectAuthenticationSsoArgs $) {
         this.disabled = $.disabled;
         this.mergeUsers = $.mergeUsers;
+        this.redirectUrl = $.redirectUrl;
     }
 
     public static Builder builder() {
@@ -110,6 +127,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder mergeUsers(Boolean mergeUsers) {
             return mergeUsers(Output.of(mergeUsers));
+        }
+
+        /**
+         * @param redirectUrl The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder redirectUrl(@Nullable Output<String> redirectUrl) {
+            $.redirectUrl = redirectUrl;
+            return this;
+        }
+
+        /**
+         * @param redirectUrl The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder redirectUrl(String redirectUrl) {
+            return redirectUrl(Output.of(redirectUrl));
         }
 
         public ProjectAuthenticationSsoArgs build() {

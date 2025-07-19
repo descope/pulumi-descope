@@ -23,6 +23,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly double? AssessmentScore;
         /// <summary>
+        /// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        /// </summary>
+        public readonly string? BaseUrl;
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
@@ -50,6 +54,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             double? assessmentScore,
 
+            string? baseUrl,
+
             string? description,
 
             string? id,
@@ -64,6 +70,7 @@ namespace Descope.Pulumi.Descope.Outputs
         {
             ApiKey = apiKey;
             AssessmentScore = assessmentScore;
+            BaseUrl = baseUrl;
             Description = description;
             Id = id;
             Name = name;

@@ -156,8 +156,6 @@ __all__ = [
     'ProjectConnectorsAwsS3AuditFilterArgsDict',
     'ProjectConnectorsAwsTranslateArgs',
     'ProjectConnectorsAwsTranslateArgsDict',
-    'ProjectConnectorsClearArgs',
-    'ProjectConnectorsClearArgsDict',
     'ProjectConnectorsCybersixgillArgs',
     'ProjectConnectorsCybersixgillArgsDict',
     'ProjectConnectorsDatadogArgs',
@@ -206,6 +204,10 @@ __all__ = [
     'ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict',
     'ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs',
     'ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict',
+    'ProjectConnectorsGoogleCloudLoggingArgs',
+    'ProjectConnectorsGoogleCloudLoggingArgsDict',
+    'ProjectConnectorsGoogleCloudLoggingAuditFilterArgs',
+    'ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict',
     'ProjectConnectorsGoogleCloudTranslationArgs',
     'ProjectConnectorsGoogleCloudTranslationArgsDict',
     'ProjectConnectorsGoogleMapsPlaceArgs',
@@ -7696,6 +7698,10 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through SSO authentication.
         """
+        redirect_url: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        """
 elif False:
     ProjectAuthenticationSsoArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -7703,15 +7709,19 @@ elif False:
 class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
                  disabled: Optional[pulumi.Input[builtins.bool]] = None,
-                 merge_users: Optional[pulumi.Input[builtins.bool]] = None):
+                 merge_users: Optional[pulumi.Input[builtins.bool]] = None,
+                 redirect_url: Optional[pulumi.Input[builtins.str]] = None):
         """
         :param pulumi.Input[builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        :param pulumi.Input[builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         """
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
             pulumi.set(__self__, "merge_users", merge_users)
+        if redirect_url is not None:
+            pulumi.set(__self__, "redirect_url", redirect_url)
 
     @property
     @pulumi.getter
@@ -7736,6 +7746,18 @@ class ProjectAuthenticationSsoArgs:
     @merge_users.setter
     def merge_users(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "merge_users", value)
+
+    @property
+    @pulumi.getter(name="redirectUrl")
+    def redirect_url(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        """
+        return pulumi.get(self, "redirect_url")
+
+    @redirect_url.setter
+    def redirect_url(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "redirect_url", value)
 
 
 if not MYPY:
@@ -7992,10 +8014,6 @@ if not MYPY:
         """
         Localize the language of your login and user journey screens with the Amazon Translate connector.
         """
-        clears: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgsDict']]]]
-        """
-        Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-        """
         cybersixgills: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgsDict']]]]
         """
         Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
@@ -8051,6 +8069,10 @@ if not MYPY:
         generic_sms_gateways: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgsDict']]]]
         """
         Send messages using a generic SMS gateway.
+        """
+        google_cloud_loggings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgsDict']]]]
+        """
+        Stream logs and audit events with the Google Cloud Logging connector.
         """
         google_cloud_translations: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgsDict']]]]
         """
@@ -8187,7 +8209,6 @@ class ProjectConnectorsArgs:
                  audit_webhooks: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgs']]]] = None,
                  aws_s3s: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3Args']]]] = None,
                  aws_translates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgs']]]] = None,
-                 clears: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]]] = None,
                  cybersixgills: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]]] = None,
                  datadogs: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]]] = None,
                  devrev_grows: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgs']]]] = None,
@@ -8202,6 +8223,7 @@ class ProjectConnectorsArgs:
                  forters: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]]] = None,
                  generic_email_gateways: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericEmailGatewayArgs']]]] = None,
                  generic_sms_gateways: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgs']]]] = None,
+                 google_cloud_loggings: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgs']]]] = None,
                  google_cloud_translations: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgs']]]] = None,
                  google_maps_places: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleMapsPlaceArgs']]]] = None,
                  hibps: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]]] = None,
@@ -8239,7 +8261,6 @@ class ProjectConnectorsArgs:
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgs']]] audit_webhooks: Send audit events to a custom webhook.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3Args']]] aws_s3s: Stream authentication audit logs with the Amazon S3 connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgs']]] aws_translates: Localize the language of your login and user journey screens with the Amazon Translate connector.
-        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]] clears: Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]] cybersixgills: Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]] datadogs: Stream authentication audit logs with the Datadog connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgs']]] devrev_grows: DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -8254,6 +8275,7 @@ class ProjectConnectorsArgs:
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgs']]] forters: Leverage ML-based risk scores for fraud prevention with the Forter connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericEmailGatewayArgs']]] generic_email_gateways: Send emails using a generic Email gateway.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgs']]] generic_sms_gateways: Send messages using a generic SMS gateway.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgs']]] google_cloud_loggings: Stream logs and audit events with the Google Cloud Logging connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgs']]] google_cloud_translations: Localize the language of your login and user journey screens with the Google Cloud Translation connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleMapsPlaceArgs']]] google_maps_places: Get address autocompletions from Place Autocomplete Data API.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgs']]] hibps: Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
@@ -8296,8 +8318,6 @@ class ProjectConnectorsArgs:
             pulumi.set(__self__, "aws_s3s", aws_s3s)
         if aws_translates is not None:
             pulumi.set(__self__, "aws_translates", aws_translates)
-        if clears is not None:
-            pulumi.set(__self__, "clears", clears)
         if cybersixgills is not None:
             pulumi.set(__self__, "cybersixgills", cybersixgills)
         if datadogs is not None:
@@ -8326,6 +8346,8 @@ class ProjectConnectorsArgs:
             pulumi.set(__self__, "generic_email_gateways", generic_email_gateways)
         if generic_sms_gateways is not None:
             pulumi.set(__self__, "generic_sms_gateways", generic_sms_gateways)
+        if google_cloud_loggings is not None:
+            pulumi.set(__self__, "google_cloud_loggings", google_cloud_loggings)
         if google_cloud_translations is not None:
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if google_maps_places is not None:
@@ -8448,18 +8470,6 @@ class ProjectConnectorsArgs:
     @aws_translates.setter
     def aws_translates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgs']]]]):
         pulumi.set(self, "aws_translates", value)
-
-    @property
-    @pulumi.getter
-    def clears(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]]]:
-        """
-        Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-        """
-        return pulumi.get(self, "clears")
-
-    @clears.setter
-    def clears(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsClearArgs']]]]):
-        pulumi.set(self, "clears", value)
 
     @property
     @pulumi.getter
@@ -8628,6 +8638,18 @@ class ProjectConnectorsArgs:
     @generic_sms_gateways.setter
     def generic_sms_gateways(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgs']]]]):
         pulumi.set(self, "generic_sms_gateways", value)
+
+    @property
+    @pulumi.getter(name="googleCloudLoggings")
+    def google_cloud_loggings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgs']]]]:
+        """
+        Stream logs and audit events with the Google Cloud Logging connector.
+        """
+        return pulumi.get(self, "google_cloud_loggings")
+
+    @google_cloud_loggings.setter
+    def google_cloud_loggings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgs']]]]):
+        pulumi.set(self, "google_cloud_loggings", value)
 
     @property
     @pulumi.getter(name="googleCloudTranslations")
@@ -9634,10 +9656,6 @@ class ProjectConnectorsAuditWebhookAuthenticationBasicArgs:
 
 if not MYPY:
     class ProjectConnectorsAwsS3ArgsDict(TypedDict):
-        auth_type: pulumi.Input[builtins.str]
-        """
-        The authentication type to use.
-        """
         bucket: pulumi.Input[builtins.str]
         """
         The AWS S3 bucket. This bucket should already exist for the connector to work.
@@ -9661,6 +9679,10 @@ if not MYPY:
         audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgsDict']]]]
         """
         Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        auth_type: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The authentication type to use.
         """
         description: NotRequired[pulumi.Input[builtins.str]]
         """
@@ -9689,13 +9711,13 @@ elif False:
 @pulumi.input_type
 class ProjectConnectorsAwsS3Args:
     def __init__(__self__, *,
-                 auth_type: pulumi.Input[builtins.str],
                  bucket: pulumi.Input[builtins.str],
                  name: pulumi.Input[builtins.str],
                  region: pulumi.Input[builtins.str],
                  access_key_id: Optional[pulumi.Input[builtins.str]] = None,
                  audit_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  audit_filters: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgs']]]] = None,
+                 auth_type: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  external_id: Optional[pulumi.Input[builtins.str]] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
@@ -9703,20 +9725,19 @@ class ProjectConnectorsAwsS3Args:
                  secret_access_key: Optional[pulumi.Input[builtins.str]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[builtins.bool]] = None):
         """
-        :param pulumi.Input[builtins.str] auth_type: The authentication type to use.
         :param pulumi.Input[builtins.str] bucket: The AWS S3 bucket. This bucket should already exist for the connector to work.
         :param pulumi.Input[builtins.str] name: A custom name for your connector.
         :param pulumi.Input[builtins.str] region: The AWS S3 region, e.g. `us-east-1`.
         :param pulumi.Input[builtins.str] access_key_id: The unique AWS access key ID.
         :param pulumi.Input[builtins.bool] audit_enabled: Whether to enable streaming of audit events.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgs']]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[builtins.str] auth_type: The authentication type to use.
         :param pulumi.Input[builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[builtins.str] external_id: The external ID to use when assuming the role.
         :param pulumi.Input[builtins.str] role_arn: The Amazon Resource Name (ARN) of the role to assume.
         :param pulumi.Input[builtins.str] secret_access_key: The secret AWS access key.
         :param pulumi.Input[builtins.bool] troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
-        pulumi.set(__self__, "auth_type", auth_type)
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
@@ -9726,6 +9747,8 @@ class ProjectConnectorsAwsS3Args:
             pulumi.set(__self__, "audit_enabled", audit_enabled)
         if audit_filters is not None:
             pulumi.set(__self__, "audit_filters", audit_filters)
+        if auth_type is not None:
+            pulumi.set(__self__, "auth_type", auth_type)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if external_id is not None:
@@ -9738,18 +9761,6 @@ class ProjectConnectorsAwsS3Args:
             pulumi.set(__self__, "secret_access_key", secret_access_key)
         if troubleshoot_log_enabled is not None:
             pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
-
-    @property
-    @pulumi.getter(name="authType")
-    def auth_type(self) -> pulumi.Input[builtins.str]:
-        """
-        The authentication type to use.
-        """
-        return pulumi.get(self, "auth_type")
-
-    @auth_type.setter
-    def auth_type(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "auth_type", value)
 
     @property
     @pulumi.getter
@@ -9822,6 +9833,18 @@ class ProjectConnectorsAwsS3Args:
     @audit_filters.setter
     def audit_filters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgs']]]]):
         pulumi.set(self, "audit_filters", value)
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The authentication type to use.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @auth_type.setter
+    def auth_type(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "auth_type", value)
 
     @property
     @pulumi.getter
@@ -10101,108 +10124,6 @@ class ProjectConnectorsAwsTranslateArgs:
     @session_token.setter
     def session_token(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "session_token", value)
-
-
-if not MYPY:
-    class ProjectConnectorsClearArgsDict(TypedDict):
-        api_key: pulumi.Input[builtins.str]
-        """
-        Your CLEAR API key.
-        """
-        name: pulumi.Input[builtins.str]
-        """
-        A custom name for your connector.
-        """
-        project_id: pulumi.Input[builtins.str]
-        """
-        Your CLEAR project ID.
-        """
-        description: NotRequired[pulumi.Input[builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[builtins.str]]
-elif False:
-    ProjectConnectorsClearArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class ProjectConnectorsClearArgs:
-    def __init__(__self__, *,
-                 api_key: pulumi.Input[builtins.str],
-                 name: pulumi.Input[builtins.str],
-                 project_id: pulumi.Input[builtins.str],
-                 description: Optional[pulumi.Input[builtins.str]] = None,
-                 id: Optional[pulumi.Input[builtins.str]] = None):
-        """
-        :param pulumi.Input[builtins.str] api_key: Your CLEAR API key.
-        :param pulumi.Input[builtins.str] name: A custom name for your connector.
-        :param pulumi.Input[builtins.str] project_id: Your CLEAR project ID.
-        :param pulumi.Input[builtins.str] description: A description of what your connector is used for.
-        """
-        pulumi.set(__self__, "api_key", api_key)
-        pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "project_id", project_id)
-        if description is not None:
-            pulumi.set(__self__, "description", description)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
-
-    @property
-    @pulumi.getter(name="apiKey")
-    def api_key(self) -> pulumi.Input[builtins.str]:
-        """
-        Your CLEAR API key.
-        """
-        return pulumi.get(self, "api_key")
-
-    @api_key.setter
-    def api_key(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "api_key", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[builtins.str]:
-        """
-        A custom name for your connector.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "name", value)
-
-    @property
-    @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Input[builtins.str]:
-        """
-        Your CLEAR project ID.
-        """
-        return pulumi.get(self, "project_id")
-
-    @project_id.setter
-    def project_id(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "project_id", value)
-
-    @property
-    @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[builtins.str]]:
-        """
-        A description of what your connector is used for.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "description", value)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[builtins.str]]:
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "id", value)
 
 
 if not MYPY:
@@ -12784,6 +12705,218 @@ class ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs:
 
 
 if not MYPY:
+    class ProjectConnectorsGoogleCloudLoggingArgsDict(TypedDict):
+        name: pulumi.Input[builtins.str]
+        """
+        A custom name for your connector.
+        """
+        service_account_key: pulumi.Input[builtins.str]
+        """
+        A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+        """
+        audit_enabled: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to enable streaming of audit events.
+        """
+        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict']]]]
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        description: NotRequired[pulumi.Input[builtins.str]]
+        """
+        A description of what your connector is used for.
+        """
+        id: NotRequired[pulumi.Input[builtins.str]]
+        troubleshoot_log_enabled: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to send troubleshooting events.
+        """
+elif False:
+    ProjectConnectorsGoogleCloudLoggingArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectConnectorsGoogleCloudLoggingArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[builtins.str],
+                 service_account_key: pulumi.Input[builtins.str],
+                 audit_enabled: Optional[pulumi.Input[builtins.bool]] = None,
+                 audit_filters: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgs']]]] = None,
+                 description: Optional[pulumi.Input[builtins.str]] = None,
+                 id: Optional[pulumi.Input[builtins.str]] = None,
+                 troubleshoot_log_enabled: Optional[pulumi.Input[builtins.bool]] = None):
+        """
+        :param pulumi.Input[builtins.str] name: A custom name for your connector.
+        :param pulumi.Input[builtins.str] service_account_key: A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+        :param pulumi.Input[builtins.bool] audit_enabled: Whether to enable streaming of audit events.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgs']]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[builtins.str] description: A description of what your connector is used for.
+        :param pulumi.Input[builtins.bool] troubleshoot_log_enabled: Whether to send troubleshooting events.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "service_account_key", service_account_key)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
+        if audit_filters is not None:
+            pulumi.set(__self__, "audit_filters", audit_filters)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[builtins.str]:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="serviceAccountKey")
+    def service_account_key(self) -> pulumi.Input[builtins.str]:
+        """
+        A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+        """
+        return pulumi.get(self, "service_account_key")
+
+    @service_account_key.setter
+    def service_account_key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "service_account_key", value)
+
+    @property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to enable streaming of audit events.
+        """
+        return pulumi.get(self, "audit_enabled")
+
+    @audit_enabled.setter
+    def audit_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "audit_enabled", value)
+
+    @property
+    @pulumi.getter(name="auditFilters")
+    def audit_filters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgs']]]]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        return pulumi.get(self, "audit_filters")
+
+    @audit_filters.setter
+    def audit_filters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgs']]]]):
+        pulumi.set(self, "audit_filters", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[builtins.str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to send troubleshooting events.
+        """
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+    @troubleshoot_log_enabled.setter
+    def troubleshoot_log_enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "troubleshoot_log_enabled", value)
+
+
+if not MYPY:
+    class ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        operator: pulumi.Input[builtins.str]
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        values: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
+        """
+        The list of values to match against for the filter.
+        """
+elif False:
+    ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectConnectorsGoogleCloudLoggingAuditFilterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 operator: pulumi.Input[builtins.str],
+                 values: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
+        """
+        :param pulumi.Input[builtins.str] key: The field name to filter on (either 'actions' or 'tenants').
+        :param pulumi.Input[builtins.str] operator: The filter operation to apply ('includes' or 'excludes').
+        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> pulumi.Input[builtins.str]:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "operator", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
+        pulumi.set(self, "values", value)
+
+
+if not MYPY:
     class ProjectConnectorsGoogleCloudTranslationArgsDict(TypedDict):
         name: pulumi.Input[builtins.str]
         """
@@ -14737,6 +14870,10 @@ if not MYPY:
         """
         When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
         """
+        base_url: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        """
         description: NotRequired[pulumi.Input[builtins.str]]
         """
         A description of what your connector is used for.
@@ -14757,6 +14894,7 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
                  project_id: pulumi.Input[builtins.str],
                  site_key: pulumi.Input[builtins.str],
                  assessment_score: Optional[pulumi.Input[builtins.float]] = None,
+                 base_url: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  id: Optional[pulumi.Input[builtins.str]] = None,
                  override_assessment: Optional[pulumi.Input[builtins.bool]] = None):
@@ -14766,6 +14904,7 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
         :param pulumi.Input[builtins.str] project_id: The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
         :param pulumi.Input[builtins.str] site_key: The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
         :param pulumi.Input[builtins.float] assessment_score: When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+        :param pulumi.Input[builtins.str] base_url: Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
         :param pulumi.Input[builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[builtins.bool] override_assessment: Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
         """
@@ -14775,6 +14914,8 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
         pulumi.set(__self__, "site_key", site_key)
         if assessment_score is not None:
             pulumi.set(__self__, "assessment_score", assessment_score)
+        if base_url is not None:
+            pulumi.set(__self__, "base_url", base_url)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
@@ -14841,6 +14982,18 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @assessment_score.setter
     def assessment_score(self, value: Optional[pulumi.Input[builtins.float]]):
         pulumi.set(self, "assessment_score", value)
+
+    @property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        """
+        return pulumi.get(self, "base_url")
+
+    @base_url.setter
+    def base_url(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "base_url", value)
 
     @property
     @pulumi.getter
@@ -15421,10 +15574,6 @@ class ProjectConnectorsSardineArgs:
 
 if not MYPY:
     class ProjectConnectorsSeArgsDict(TypedDict):
-        access_key_id: pulumi.Input[builtins.str]
-        """
-        AWS Access key ID.
-        """
         name: pulumi.Input[builtins.str]
         """
         A custom name for your connector.
@@ -15433,13 +15582,17 @@ if not MYPY:
         """
         AWS region to send requests to (e.g. `us-west-2`).
         """
-        secret: pulumi.Input[builtins.str]
-        """
-        AWS Secret Access Key.
-        """
         sender: pulumi.Input['ProjectConnectorsSeSenderArgsDict']
         """
         The sender details that should be displayed in the email message.
+        """
+        access_key_id: NotRequired[pulumi.Input[builtins.str]]
+        """
+        AWS Access key ID.
+        """
+        auth_type: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The authentication type to use.
         """
         description: NotRequired[pulumi.Input[builtins.str]]
         """
@@ -15449,53 +15602,67 @@ if not MYPY:
         """
         An optional endpoint URL (hostname only or fully qualified URI).
         """
+        external_id: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The external ID to use when assuming the role.
+        """
         id: NotRequired[pulumi.Input[builtins.str]]
+        role_arn: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The Amazon Resource Name (ARN) of the role to assume.
+        """
+        secret: NotRequired[pulumi.Input[builtins.str]]
+        """
+        AWS Secret Access Key.
+        """
 elif False:
     ProjectConnectorsSeArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectConnectorsSeArgs:
     def __init__(__self__, *,
-                 access_key_id: pulumi.Input[builtins.str],
                  name: pulumi.Input[builtins.str],
                  region: pulumi.Input[builtins.str],
-                 secret: pulumi.Input[builtins.str],
                  sender: pulumi.Input['ProjectConnectorsSeSenderArgs'],
+                 access_key_id: Optional[pulumi.Input[builtins.str]] = None,
+                 auth_type: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  endpoint: Optional[pulumi.Input[builtins.str]] = None,
-                 id: Optional[pulumi.Input[builtins.str]] = None):
+                 external_id: Optional[pulumi.Input[builtins.str]] = None,
+                 id: Optional[pulumi.Input[builtins.str]] = None,
+                 role_arn: Optional[pulumi.Input[builtins.str]] = None,
+                 secret: Optional[pulumi.Input[builtins.str]] = None):
         """
-        :param pulumi.Input[builtins.str] access_key_id: AWS Access key ID.
         :param pulumi.Input[builtins.str] name: A custom name for your connector.
         :param pulumi.Input[builtins.str] region: AWS region to send requests to (e.g. `us-west-2`).
-        :param pulumi.Input[builtins.str] secret: AWS Secret Access Key.
         :param pulumi.Input['ProjectConnectorsSeSenderArgs'] sender: The sender details that should be displayed in the email message.
+        :param pulumi.Input[builtins.str] access_key_id: AWS Access key ID.
+        :param pulumi.Input[builtins.str] auth_type: The authentication type to use.
         :param pulumi.Input[builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[builtins.str] endpoint: An optional endpoint URL (hostname only or fully qualified URI).
+        :param pulumi.Input[builtins.str] external_id: The external ID to use when assuming the role.
+        :param pulumi.Input[builtins.str] role_arn: The Amazon Resource Name (ARN) of the role to assume.
+        :param pulumi.Input[builtins.str] secret: AWS Secret Access Key.
         """
-        pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
-        pulumi.set(__self__, "secret", secret)
         pulumi.set(__self__, "sender", sender)
+        if access_key_id is not None:
+            pulumi.set(__self__, "access_key_id", access_key_id)
+        if auth_type is not None:
+            pulumi.set(__self__, "auth_type", auth_type)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
-
-    @property
-    @pulumi.getter(name="accessKeyId")
-    def access_key_id(self) -> pulumi.Input[builtins.str]:
-        """
-        AWS Access key ID.
-        """
-        return pulumi.get(self, "access_key_id")
-
-    @access_key_id.setter
-    def access_key_id(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "access_key_id", value)
+        if role_arn is not None:
+            pulumi.set(__self__, "role_arn", role_arn)
+        if secret is not None:
+            pulumi.set(__self__, "secret", secret)
 
     @property
     @pulumi.getter
@@ -15523,18 +15690,6 @@ class ProjectConnectorsSeArgs:
 
     @property
     @pulumi.getter
-    def secret(self) -> pulumi.Input[builtins.str]:
-        """
-        AWS Secret Access Key.
-        """
-        return pulumi.get(self, "secret")
-
-    @secret.setter
-    def secret(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "secret", value)
-
-    @property
-    @pulumi.getter
     def sender(self) -> pulumi.Input['ProjectConnectorsSeSenderArgs']:
         """
         The sender details that should be displayed in the email message.
@@ -15544,6 +15699,30 @@ class ProjectConnectorsSeArgs:
     @sender.setter
     def sender(self, value: pulumi.Input['ProjectConnectorsSeSenderArgs']):
         pulumi.set(self, "sender", value)
+
+    @property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        AWS Access key ID.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @access_key_id.setter
+    def access_key_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "access_key_id", value)
+
+    @property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The authentication type to use.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @auth_type.setter
+    def auth_type(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "auth_type", value)
 
     @property
     @pulumi.getter
@@ -15570,6 +15749,18 @@ class ProjectConnectorsSeArgs:
         pulumi.set(self, "endpoint", value)
 
     @property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The external ID to use when assuming the role.
+        """
+        return pulumi.get(self, "external_id")
+
+    @external_id.setter
+    def external_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "external_id", value)
+
+    @property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[builtins.str]]:
         return pulumi.get(self, "id")
@@ -15577,6 +15768,30 @@ class ProjectConnectorsSeArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The Amazon Resource Name (ARN) of the role to assume.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "role_arn", value)
+
+    @property
+    @pulumi.getter
+    def secret(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        AWS Secret Access Key.
+        """
+        return pulumi.get(self, "secret")
+
+    @secret.setter
+    def secret(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "secret", value)
 
 
 if not MYPY:

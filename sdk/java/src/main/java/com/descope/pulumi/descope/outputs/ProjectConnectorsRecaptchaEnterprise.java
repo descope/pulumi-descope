@@ -25,6 +25,11 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     private @Nullable Double assessmentScore;
     /**
+     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * 
+     */
+    private @Nullable String baseUrl;
+    /**
      * @return A description of what your connector is used for.
      * 
      */
@@ -65,6 +70,13 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     public Optional<Double> assessmentScore() {
         return Optional.ofNullable(this.assessmentScore);
+    }
+    /**
+     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * 
+     */
+    public Optional<String> baseUrl() {
+        return Optional.ofNullable(this.baseUrl);
     }
     /**
      * @return A description of what your connector is used for.
@@ -116,6 +128,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     public static final class Builder {
         private String apiKey;
         private @Nullable Double assessmentScore;
+        private @Nullable String baseUrl;
         private @Nullable String description;
         private @Nullable String id;
         private String name;
@@ -127,6 +140,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     	      Objects.requireNonNull(defaults);
     	      this.apiKey = defaults.apiKey;
     	      this.assessmentScore = defaults.assessmentScore;
+    	      this.baseUrl = defaults.baseUrl;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
@@ -147,6 +161,12 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         public Builder assessmentScore(@Nullable Double assessmentScore) {
 
             this.assessmentScore = assessmentScore;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder baseUrl(@Nullable String baseUrl) {
+
+            this.baseUrl = baseUrl;
             return this;
         }
         @CustomType.Setter
@@ -195,6 +215,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
             final var _resultValue = new ProjectConnectorsRecaptchaEnterprise();
             _resultValue.apiKey = apiKey;
             _resultValue.assessmentScore = assessmentScore;
+            _resultValue.baseUrl = baseUrl;
             _resultValue.description = description;
             _resultValue.id = id;
             _resultValue.name = name;

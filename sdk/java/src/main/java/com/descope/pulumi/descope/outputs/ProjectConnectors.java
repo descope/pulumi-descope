@@ -8,7 +8,6 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsAmplitude;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAuditWebhook;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsS3;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsTranslate;
-import com.descope.pulumi.descope.outputs.ProjectConnectorsClear;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsCybersixgill;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDatadog;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDevrevGrow;
@@ -23,6 +22,7 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsFirebaseAdmin;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsForter;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericEmailGateway;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericSmsGateway;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudLogging;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudTranslation;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleMapsPlace;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHibp;
@@ -86,11 +86,6 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
-    /**
-     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     * 
-     */
-    private @Nullable List<ProjectConnectorsClear> clears;
     /**
      * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
      * 
@@ -161,6 +156,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsGenericSmsGateway> genericSmsGateways;
+    /**
+     * @return Stream logs and audit events with the Google Cloud Logging connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings;
     /**
      * @return Localize the language of your login and user journey screens with the Google Cloud Translation connector.
      * 
@@ -354,13 +354,6 @@ public final class ProjectConnectors {
         return this.awsTranslates == null ? List.of() : this.awsTranslates;
     }
     /**
-     * @return Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     * 
-     */
-    public List<ProjectConnectorsClear> clears() {
-        return this.clears == null ? List.of() : this.clears;
-    }
-    /**
      * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
      * 
      */
@@ -457,6 +450,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsGenericSmsGateway> genericSmsGateways() {
         return this.genericSmsGateways == null ? List.of() : this.genericSmsGateways;
+    }
+    /**
+     * @return Stream logs and audit events with the Google Cloud Logging connector.
+     * 
+     */
+    public List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings() {
+        return this.googleCloudLoggings == null ? List.of() : this.googleCloudLoggings;
     }
     /**
      * @return Localize the language of your login and user journey screens with the Google Cloud Translation connector.
@@ -690,7 +690,6 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks;
         private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
         private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
-        private @Nullable List<ProjectConnectorsClear> clears;
         private @Nullable List<ProjectConnectorsCybersixgill> cybersixgills;
         private @Nullable List<ProjectConnectorsDatadog> datadogs;
         private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
@@ -705,6 +704,7 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsForter> forters;
         private @Nullable List<ProjectConnectorsGenericEmailGateway> genericEmailGateways;
         private @Nullable List<ProjectConnectorsGenericSmsGateway> genericSmsGateways;
+        private @Nullable List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings;
         private @Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations;
         private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
         private @Nullable List<ProjectConnectorsHibp> hibps;
@@ -744,7 +744,6 @@ public final class ProjectConnectors {
     	      this.auditWebhooks = defaults.auditWebhooks;
     	      this.awsS3s = defaults.awsS3s;
     	      this.awsTranslates = defaults.awsTranslates;
-    	      this.clears = defaults.clears;
     	      this.cybersixgills = defaults.cybersixgills;
     	      this.datadogs = defaults.datadogs;
     	      this.devrevGrows = defaults.devrevGrows;
@@ -759,6 +758,7 @@ public final class ProjectConnectors {
     	      this.forters = defaults.forters;
     	      this.genericEmailGateways = defaults.genericEmailGateways;
     	      this.genericSmsGateways = defaults.genericSmsGateways;
+    	      this.googleCloudLoggings = defaults.googleCloudLoggings;
     	      this.googleCloudTranslations = defaults.googleCloudTranslations;
     	      this.googleMapsPlaces = defaults.googleMapsPlaces;
     	      this.hibps = defaults.hibps;
@@ -836,15 +836,6 @@ public final class ProjectConnectors {
         }
         public Builder awsTranslates(ProjectConnectorsAwsTranslate... awsTranslates) {
             return awsTranslates(List.of(awsTranslates));
-        }
-        @CustomType.Setter
-        public Builder clears(@Nullable List<ProjectConnectorsClear> clears) {
-
-            this.clears = clears;
-            return this;
-        }
-        public Builder clears(ProjectConnectorsClear... clears) {
-            return clears(List.of(clears));
         }
         @CustomType.Setter
         public Builder cybersixgills(@Nullable List<ProjectConnectorsCybersixgill> cybersixgills) {
@@ -971,6 +962,15 @@ public final class ProjectConnectors {
         }
         public Builder genericSmsGateways(ProjectConnectorsGenericSmsGateway... genericSmsGateways) {
             return genericSmsGateways(List.of(genericSmsGateways));
+        }
+        @CustomType.Setter
+        public Builder googleCloudLoggings(@Nullable List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings) {
+
+            this.googleCloudLoggings = googleCloudLoggings;
+            return this;
+        }
+        public Builder googleCloudLoggings(ProjectConnectorsGoogleCloudLogging... googleCloudLoggings) {
+            return googleCloudLoggings(List.of(googleCloudLoggings));
         }
         @CustomType.Setter
         public Builder googleCloudTranslations(@Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations) {
@@ -1258,7 +1258,6 @@ public final class ProjectConnectors {
             _resultValue.auditWebhooks = auditWebhooks;
             _resultValue.awsS3s = awsS3s;
             _resultValue.awsTranslates = awsTranslates;
-            _resultValue.clears = clears;
             _resultValue.cybersixgills = cybersixgills;
             _resultValue.datadogs = datadogs;
             _resultValue.devrevGrows = devrevGrows;
@@ -1273,6 +1272,7 @@ public final class ProjectConnectors {
             _resultValue.forters = forters;
             _resultValue.genericEmailGateways = genericEmailGateways;
             _resultValue.genericSmsGateways = genericSmsGateways;
+            _resultValue.googleCloudLoggings = googleCloudLoggings;
             _resultValue.googleCloudTranslations = googleCloudTranslations;
             _resultValue.googleMapsPlaces = googleMapsPlaces;
             _resultValue.hibps = hibps;
