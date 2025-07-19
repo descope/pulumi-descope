@@ -25,6 +25,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("mergeUsers")]
         public Input<bool>? MergeUsers { get; set; }
 
+        /// <summary>
+        /// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        /// </summary>
+        [Input("redirectUrl")]
+        public Input<string>? RedirectUrl { get; set; }
+
         public ProjectAuthenticationSsoArgs()
         {
         }

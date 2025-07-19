@@ -1515,6 +1515,10 @@ export interface ProjectAuthenticationSso {
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
     mergeUsers?: pulumi.Input<boolean>;
+    /**
+     * The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     */
+    redirectUrl?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationTotp {
@@ -1585,10 +1589,6 @@ export interface ProjectConnectors {
      */
     awsTranslates?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsTranslate>[]>;
     /**
-     * Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     */
-    clears?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsClear>[]>;
-    /**
      * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
      */
     cybersixgills?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCybersixgill>[]>;
@@ -1644,6 +1644,10 @@ export interface ProjectConnectors {
      * Send messages using a generic SMS gateway.
      */
     genericSmsGateways?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGenericSmsGateway>[]>;
+    /**
+     * Stream logs and audit events with the Google Cloud Logging connector.
+     */
+    googleCloudLoggings?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleCloudLogging>[]>;
     /**
      * Localize the language of your login and user journey screens with the Google Cloud Translation connector.
      */
@@ -1914,7 +1918,7 @@ export interface ProjectConnectorsAwsS3 {
     /**
      * The authentication type to use.
      */
-    authType: pulumi.Input<string>;
+    authType?: pulumi.Input<string>;
     /**
      * The AWS S3 bucket. This bucket should already exist for the connector to work.
      */
@@ -1991,26 +1995,6 @@ export interface ProjectConnectorsAwsTranslate {
      * (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
      */
     sessionToken?: pulumi.Input<string>;
-}
-
-export interface ProjectConnectorsClear {
-    /**
-     * Your CLEAR API key.
-     */
-    apiKey: pulumi.Input<string>;
-    /**
-     * A description of what your connector is used for.
-     */
-    description?: pulumi.Input<string>;
-    id?: pulumi.Input<string>;
-    /**
-     * A custom name for your connector.
-     */
-    name: pulumi.Input<string>;
-    /**
-     * Your CLEAR project ID.
-     */
-    projectId: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsCybersixgill {
@@ -2531,6 +2515,49 @@ export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
     username: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsGoogleCloudLogging {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleCloudLoggingAuditFilter>[]>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+     */
+    serviceAccountKey: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsGoogleCloudLoggingAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface ProjectConnectorsGoogleCloudTranslation {
     /**
      * A description of what your connector is used for.
@@ -2925,6 +2952,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      */
     assessmentScore?: pulumi.Input<number>;
     /**
+     * Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     */
+    baseUrl?: pulumi.Input<string>;
+    /**
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
@@ -3059,7 +3090,11 @@ export interface ProjectConnectorsSe {
     /**
      * AWS Access key ID.
      */
-    accessKeyId: pulumi.Input<string>;
+    accessKeyId?: pulumi.Input<string>;
+    /**
+     * The authentication type to use.
+     */
+    authType?: pulumi.Input<string>;
     /**
      * A description of what your connector is used for.
      */
@@ -3068,6 +3103,10 @@ export interface ProjectConnectorsSe {
      * An optional endpoint URL (hostname only or fully qualified URI).
      */
     endpoint?: pulumi.Input<string>;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    externalId?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
     /**
      * A custom name for your connector.
@@ -3078,9 +3117,13 @@ export interface ProjectConnectorsSe {
      */
     region: pulumi.Input<string>;
     /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    roleArn?: pulumi.Input<string>;
+    /**
      * AWS Secret Access Key.
      */
-    secret: pulumi.Input<string>;
+    secret?: pulumi.Input<string>;
     /**
      * The sender details that should be displayed in the email message.
      */

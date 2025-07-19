@@ -50,8 +50,8 @@ namespace Descope.Pulumi.Descope.Inputs
         /// <summary>
         /// The authentication type to use.
         /// </summary>
-        [Input("authType", required: true)]
-        public Input<string> AuthType { get; set; } = null!;
+        [Input("authType")]
+        public Input<string>? AuthType { get; set; }
 
         /// <summary>
         /// The AWS S3 bucket. This bucket should already exist for the connector to work.

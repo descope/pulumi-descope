@@ -73,18 +73,6 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _awsTranslates = value;
         }
 
-        [Input("clears")]
-        private InputList<Inputs.ProjectConnectorsClearGetArgs>? _clears;
-
-        /// <summary>
-        /// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-        /// </summary>
-        public InputList<Inputs.ProjectConnectorsClearGetArgs> Clears
-        {
-            get => _clears ?? (_clears = new InputList<Inputs.ProjectConnectorsClearGetArgs>());
-            set => _clears = value;
-        }
-
         [Input("cybersixgills")]
         private InputList<Inputs.ProjectConnectorsCybersixgillGetArgs>? _cybersixgills;
 
@@ -251,6 +239,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _genericSmsGateways ?? (_genericSmsGateways = new InputList<Inputs.ProjectConnectorsGenericSmsGatewayGetArgs>());
             set => _genericSmsGateways = value;
+        }
+
+        [Input("googleCloudLoggings")]
+        private InputList<Inputs.ProjectConnectorsGoogleCloudLoggingGetArgs>? _googleCloudLoggings;
+
+        /// <summary>
+        /// Stream logs and audit events with the Google Cloud Logging connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsGoogleCloudLoggingGetArgs> GoogleCloudLoggings
+        {
+            get => _googleCloudLoggings ?? (_googleCloudLoggings = new InputList<Inputs.ProjectConnectorsGoogleCloudLoggingGetArgs>());
+            set => _googleCloudLoggings = value;
         }
 
         [Input("googleCloudTranslations")]
