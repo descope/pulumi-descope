@@ -17,7 +17,11 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// AWS Access key ID.
         /// </summary>
-        public readonly string AccessKeyId;
+        public readonly string? AccessKeyId;
+        /// <summary>
+        /// The authentication type to use.
+        /// </summary>
+        public readonly string? AuthType;
         /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
@@ -26,6 +30,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// An optional endpoint URL (hostname only or fully qualified URI).
         /// </summary>
         public readonly string? Endpoint;
+        /// <summary>
+        /// The external ID to use when assuming the role.
+        /// </summary>
+        public readonly string? ExternalId;
         public readonly string? Id;
         /// <summary>
         /// A custom name for your connector.
@@ -36,9 +44,13 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Region;
         /// <summary>
+        /// The Amazon Resource Name (ARN) of the role to assume.
+        /// </summary>
+        public readonly string? RoleArn;
+        /// <summary>
         /// AWS Secret Access Key.
         /// </summary>
-        public readonly string Secret;
+        public readonly string? Secret;
         /// <summary>
         /// The sender details that should be displayed in the email message.
         /// </summary>
@@ -46,11 +58,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectConnectorsSe(
-            string accessKeyId,
+            string? accessKeyId,
+
+            string? authType,
 
             string? description,
 
             string? endpoint,
+
+            string? externalId,
 
             string? id,
 
@@ -58,16 +74,21 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string region,
 
-            string secret,
+            string? roleArn,
+
+            string? secret,
 
             Outputs.ProjectConnectorsSeSender sender)
         {
             AccessKeyId = accessKeyId;
+            AuthType = authType;
             Description = description;
             Endpoint = endpoint;
+            ExternalId = externalId;
             Id = id;
             Name = name;
             Region = region;
+            RoleArn = roleArn;
             Secret = secret;
             Sender = sender;
         }

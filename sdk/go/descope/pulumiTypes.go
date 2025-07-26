@@ -11579,6 +11579,8 @@ type ProjectAuthenticationSso struct {
 	Disabled *bool `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers *bool `pulumi:"mergeUsers"`
+	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+	RedirectUrl *string `pulumi:"redirectUrl"`
 }
 
 // ProjectAuthenticationSsoInput is an input type that accepts ProjectAuthenticationSsoArgs and ProjectAuthenticationSsoOutput values.
@@ -11597,6 +11599,8 @@ type ProjectAuthenticationSsoArgs struct {
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
+	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
 }
 
 func (ProjectAuthenticationSsoArgs) ElementType() reflect.Type {
@@ -11686,6 +11690,11 @@ func (o ProjectAuthenticationSsoOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.MergeUsers }).(pulumi.BoolPtrOutput)
 }
 
+// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+func (o ProjectAuthenticationSsoOutput) RedirectUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
+}
+
 type ProjectAuthenticationSsoPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectAuthenticationSsoPtrOutput) ElementType() reflect.Type {
@@ -11728,6 +11737,16 @@ func (o ProjectAuthenticationSsoPtrOutput) MergeUsers() pulumi.BoolPtrOutput {
 		}
 		return v.MergeUsers
 	}).(pulumi.BoolPtrOutput)
+}
+
+// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+func (o ProjectAuthenticationSsoPtrOutput) RedirectUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectUrl
+	}).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthenticationTotp struct {
@@ -12267,8 +12286,6 @@ type ProjectConnectors struct {
 	AwsS3s []ProjectConnectorsAwsS3 `pulumi:"awsS3s"`
 	// Localize the language of your login and user journey screens with the Amazon Translate connector.
 	AwsTranslates []ProjectConnectorsAwsTranslate `pulumi:"awsTranslates"`
-	// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-	Clears []ProjectConnectorsClear `pulumi:"clears"`
 	// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
 	Cybersixgills []ProjectConnectorsCybersixgill `pulumi:"cybersixgills"`
 	// Stream authentication audit logs with the Datadog connector.
@@ -12297,6 +12314,8 @@ type ProjectConnectors struct {
 	GenericEmailGateways []ProjectConnectorsGenericEmailGateway `pulumi:"genericEmailGateways"`
 	// Send messages using a generic SMS gateway.
 	GenericSmsGateways []ProjectConnectorsGenericSmsGateway `pulumi:"genericSmsGateways"`
+	// Stream logs and audit events with the Google Cloud Logging connector.
+	GoogleCloudLoggings []ProjectConnectorsGoogleCloudLogging `pulumi:"googleCloudLoggings"`
 	// Localize the language of your login and user journey screens with the Google Cloud Translation connector.
 	GoogleCloudTranslations []ProjectConnectorsGoogleCloudTranslation `pulumi:"googleCloudTranslations"`
 	// Get address autocompletions from Place Autocomplete Data API.
@@ -12383,8 +12402,6 @@ type ProjectConnectorsArgs struct {
 	AwsS3s ProjectConnectorsAwsS3ArrayInput `pulumi:"awsS3s"`
 	// Localize the language of your login and user journey screens with the Amazon Translate connector.
 	AwsTranslates ProjectConnectorsAwsTranslateArrayInput `pulumi:"awsTranslates"`
-	// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-	Clears ProjectConnectorsClearArrayInput `pulumi:"clears"`
 	// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
 	Cybersixgills ProjectConnectorsCybersixgillArrayInput `pulumi:"cybersixgills"`
 	// Stream authentication audit logs with the Datadog connector.
@@ -12413,6 +12430,8 @@ type ProjectConnectorsArgs struct {
 	GenericEmailGateways ProjectConnectorsGenericEmailGatewayArrayInput `pulumi:"genericEmailGateways"`
 	// Send messages using a generic SMS gateway.
 	GenericSmsGateways ProjectConnectorsGenericSmsGatewayArrayInput `pulumi:"genericSmsGateways"`
+	// Stream logs and audit events with the Google Cloud Logging connector.
+	GoogleCloudLoggings ProjectConnectorsGoogleCloudLoggingArrayInput `pulumi:"googleCloudLoggings"`
 	// Localize the language of your login and user journey screens with the Google Cloud Translation connector.
 	GoogleCloudTranslations ProjectConnectorsGoogleCloudTranslationArrayInput `pulumi:"googleCloudTranslations"`
 	// Get address autocompletions from Place Autocomplete Data API.
@@ -12579,11 +12598,6 @@ func (o ProjectConnectorsOutput) AwsTranslates() ProjectConnectorsAwsTranslateAr
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAwsTranslate { return v.AwsTranslates }).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
-// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-func (o ProjectConnectorsOutput) Clears() ProjectConnectorsClearArrayOutput {
-	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsClear { return v.Clears }).(ProjectConnectorsClearArrayOutput)
-}
-
 // Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
 func (o ProjectConnectorsOutput) Cybersixgills() ProjectConnectorsCybersixgillArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsCybersixgill { return v.Cybersixgills }).(ProjectConnectorsCybersixgillArrayOutput)
@@ -12652,6 +12666,11 @@ func (o ProjectConnectorsOutput) GenericEmailGateways() ProjectConnectorsGeneric
 // Send messages using a generic SMS gateway.
 func (o ProjectConnectorsOutput) GenericSmsGateways() ProjectConnectorsGenericSmsGatewayArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsGenericSmsGateway { return v.GenericSmsGateways }).(ProjectConnectorsGenericSmsGatewayArrayOutput)
+}
+
+// Stream logs and audit events with the Google Cloud Logging connector.
+func (o ProjectConnectorsOutput) GoogleCloudLoggings() ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsGoogleCloudLogging { return v.GoogleCloudLoggings }).(ProjectConnectorsGoogleCloudLoggingArrayOutput)
 }
 
 // Localize the language of your login and user journey screens with the Google Cloud Translation connector.
@@ -12885,16 +12904,6 @@ func (o ProjectConnectorsPtrOutput) AwsTranslates() ProjectConnectorsAwsTranslat
 	}).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
-// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-func (o ProjectConnectorsPtrOutput) Clears() ProjectConnectorsClearArrayOutput {
-	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsClear {
-		if v == nil {
-			return nil
-		}
-		return v.Clears
-	}).(ProjectConnectorsClearArrayOutput)
-}
-
 // Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
 func (o ProjectConnectorsPtrOutput) Cybersixgills() ProjectConnectorsCybersixgillArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsCybersixgill {
@@ -13033,6 +13042,16 @@ func (o ProjectConnectorsPtrOutput) GenericSmsGateways() ProjectConnectorsGeneri
 		}
 		return v.GenericSmsGateways
 	}).(ProjectConnectorsGenericSmsGatewayArrayOutput)
+}
+
+// Stream logs and audit events with the Google Cloud Logging connector.
+func (o ProjectConnectorsPtrOutput) GoogleCloudLoggings() ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsGoogleCloudLogging {
+		if v == nil {
+			return nil
+		}
+		return v.GoogleCloudLoggings
+	}).(ProjectConnectorsGoogleCloudLoggingArrayOutput)
 }
 
 // Localize the language of your login and user journey screens with the Google Cloud Translation connector.
@@ -14389,7 +14408,7 @@ type ProjectConnectorsAwsS3 struct {
 	// Specify which events will be sent to the external audit service (including tenant selection).
 	AuditFilters []ProjectConnectorsAwsS3AuditFilter `pulumi:"auditFilters"`
 	// The authentication type to use.
-	AuthType string `pulumi:"authType"`
+	AuthType *string `pulumi:"authType"`
 	// The AWS S3 bucket. This bucket should already exist for the connector to work.
 	Bucket string `pulumi:"bucket"`
 	// A description of what your connector is used for.
@@ -14428,7 +14447,7 @@ type ProjectConnectorsAwsS3Args struct {
 	// Specify which events will be sent to the external audit service (including tenant selection).
 	AuditFilters ProjectConnectorsAwsS3AuditFilterArrayInput `pulumi:"auditFilters"`
 	// The authentication type to use.
-	AuthType pulumi.StringInput `pulumi:"authType"`
+	AuthType pulumi.StringPtrInput `pulumi:"authType"`
 	// The AWS S3 bucket. This bucket should already exist for the connector to work.
 	Bucket pulumi.StringInput `pulumi:"bucket"`
 	// A description of what your connector is used for.
@@ -14515,8 +14534,8 @@ func (o ProjectConnectorsAwsS3Output) AuditFilters() ProjectConnectorsAwsS3Audit
 }
 
 // The authentication type to use.
-func (o ProjectConnectorsAwsS3Output) AuthType() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsAwsS3) string { return v.AuthType }).(pulumi.StringOutput)
+func (o ProjectConnectorsAwsS3Output) AuthType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.AuthType }).(pulumi.StringPtrOutput)
 }
 
 // The AWS S3 bucket. This bucket should already exist for the connector to work.
@@ -14844,136 +14863,6 @@ func (o ProjectConnectorsAwsTranslateArrayOutput) Index(i pulumi.IntInput) Proje
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsAwsTranslate {
 		return vs[0].([]ProjectConnectorsAwsTranslate)[vs[1].(int)]
 	}).(ProjectConnectorsAwsTranslateOutput)
-}
-
-type ProjectConnectorsClear struct {
-	// Your CLEAR API key.
-	ApiKey string `pulumi:"apiKey"`
-	// A description of what your connector is used for.
-	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
-	// A custom name for your connector.
-	Name string `pulumi:"name"`
-	// Your CLEAR project ID.
-	ProjectId string `pulumi:"projectId"`
-}
-
-// ProjectConnectorsClearInput is an input type that accepts ProjectConnectorsClearArgs and ProjectConnectorsClearOutput values.
-// You can construct a concrete instance of `ProjectConnectorsClearInput` via:
-//
-//	ProjectConnectorsClearArgs{...}
-type ProjectConnectorsClearInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsClearOutput() ProjectConnectorsClearOutput
-	ToProjectConnectorsClearOutputWithContext(context.Context) ProjectConnectorsClearOutput
-}
-
-type ProjectConnectorsClearArgs struct {
-	// Your CLEAR API key.
-	ApiKey pulumi.StringInput `pulumi:"apiKey"`
-	// A description of what your connector is used for.
-	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
-	// A custom name for your connector.
-	Name pulumi.StringInput `pulumi:"name"`
-	// Your CLEAR project ID.
-	ProjectId pulumi.StringInput `pulumi:"projectId"`
-}
-
-func (ProjectConnectorsClearArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsClear)(nil)).Elem()
-}
-
-func (i ProjectConnectorsClearArgs) ToProjectConnectorsClearOutput() ProjectConnectorsClearOutput {
-	return i.ToProjectConnectorsClearOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsClearArgs) ToProjectConnectorsClearOutputWithContext(ctx context.Context) ProjectConnectorsClearOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsClearOutput)
-}
-
-// ProjectConnectorsClearArrayInput is an input type that accepts ProjectConnectorsClearArray and ProjectConnectorsClearArrayOutput values.
-// You can construct a concrete instance of `ProjectConnectorsClearArrayInput` via:
-//
-//	ProjectConnectorsClearArray{ ProjectConnectorsClearArgs{...} }
-type ProjectConnectorsClearArrayInput interface {
-	pulumi.Input
-
-	ToProjectConnectorsClearArrayOutput() ProjectConnectorsClearArrayOutput
-	ToProjectConnectorsClearArrayOutputWithContext(context.Context) ProjectConnectorsClearArrayOutput
-}
-
-type ProjectConnectorsClearArray []ProjectConnectorsClearInput
-
-func (ProjectConnectorsClearArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsClear)(nil)).Elem()
-}
-
-func (i ProjectConnectorsClearArray) ToProjectConnectorsClearArrayOutput() ProjectConnectorsClearArrayOutput {
-	return i.ToProjectConnectorsClearArrayOutputWithContext(context.Background())
-}
-
-func (i ProjectConnectorsClearArray) ToProjectConnectorsClearArrayOutputWithContext(ctx context.Context) ProjectConnectorsClearArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsClearArrayOutput)
-}
-
-type ProjectConnectorsClearOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsClearOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsClear)(nil)).Elem()
-}
-
-func (o ProjectConnectorsClearOutput) ToProjectConnectorsClearOutput() ProjectConnectorsClearOutput {
-	return o
-}
-
-func (o ProjectConnectorsClearOutput) ToProjectConnectorsClearOutputWithContext(ctx context.Context) ProjectConnectorsClearOutput {
-	return o
-}
-
-// Your CLEAR API key.
-func (o ProjectConnectorsClearOutput) ApiKey() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.ApiKey }).(pulumi.StringOutput)
-}
-
-// A description of what your connector is used for.
-func (o ProjectConnectorsClearOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsClear) *string { return v.Description }).(pulumi.StringPtrOutput)
-}
-
-func (o ProjectConnectorsClearOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsClear) *string { return v.Id }).(pulumi.StringPtrOutput)
-}
-
-// A custom name for your connector.
-func (o ProjectConnectorsClearOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.Name }).(pulumi.StringOutput)
-}
-
-// Your CLEAR project ID.
-func (o ProjectConnectorsClearOutput) ProjectId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsClear) string { return v.ProjectId }).(pulumi.StringOutput)
-}
-
-type ProjectConnectorsClearArrayOutput struct{ *pulumi.OutputState }
-
-func (ProjectConnectorsClearArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsClear)(nil)).Elem()
-}
-
-func (o ProjectConnectorsClearArrayOutput) ToProjectConnectorsClearArrayOutput() ProjectConnectorsClearArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsClearArrayOutput) ToProjectConnectorsClearArrayOutputWithContext(ctx context.Context) ProjectConnectorsClearArrayOutput {
-	return o
-}
-
-func (o ProjectConnectorsClearArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsClearOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsClear {
-		return vs[0].([]ProjectConnectorsClear)[vs[1].(int)]
-	}).(ProjectConnectorsClearOutput)
 }
 
 type ProjectConnectorsCybersixgill struct {
@@ -18642,6 +18531,271 @@ func (o ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrOutput) Username
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsGoogleCloudLogging struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled *bool `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters []ProjectConnectorsGoogleCloudLoggingAuditFilter `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+	ServiceAccountKey string `pulumi:"serviceAccountKey"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
+}
+
+// ProjectConnectorsGoogleCloudLoggingInput is an input type that accepts ProjectConnectorsGoogleCloudLoggingArgs and ProjectConnectorsGoogleCloudLoggingOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGoogleCloudLoggingInput` via:
+//
+//	ProjectConnectorsGoogleCloudLoggingArgs{...}
+type ProjectConnectorsGoogleCloudLoggingInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGoogleCloudLoggingOutput() ProjectConnectorsGoogleCloudLoggingOutput
+	ToProjectConnectorsGoogleCloudLoggingOutputWithContext(context.Context) ProjectConnectorsGoogleCloudLoggingOutput
+}
+
+type ProjectConnectorsGoogleCloudLoggingArgs struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled pulumi.BoolPtrInput `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+	ServiceAccountKey pulumi.StringInput `pulumi:"serviceAccountKey"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
+}
+
+func (ProjectConnectorsGoogleCloudLoggingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGoogleCloudLogging)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingArgs) ToProjectConnectorsGoogleCloudLoggingOutput() ProjectConnectorsGoogleCloudLoggingOutput {
+	return i.ToProjectConnectorsGoogleCloudLoggingOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingArgs) ToProjectConnectorsGoogleCloudLoggingOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGoogleCloudLoggingOutput)
+}
+
+// ProjectConnectorsGoogleCloudLoggingArrayInput is an input type that accepts ProjectConnectorsGoogleCloudLoggingArray and ProjectConnectorsGoogleCloudLoggingArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGoogleCloudLoggingArrayInput` via:
+//
+//	ProjectConnectorsGoogleCloudLoggingArray{ ProjectConnectorsGoogleCloudLoggingArgs{...} }
+type ProjectConnectorsGoogleCloudLoggingArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGoogleCloudLoggingArrayOutput() ProjectConnectorsGoogleCloudLoggingArrayOutput
+	ToProjectConnectorsGoogleCloudLoggingArrayOutputWithContext(context.Context) ProjectConnectorsGoogleCloudLoggingArrayOutput
+}
+
+type ProjectConnectorsGoogleCloudLoggingArray []ProjectConnectorsGoogleCloudLoggingInput
+
+func (ProjectConnectorsGoogleCloudLoggingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsGoogleCloudLogging)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingArray) ToProjectConnectorsGoogleCloudLoggingArrayOutput() ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return i.ToProjectConnectorsGoogleCloudLoggingArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingArray) ToProjectConnectorsGoogleCloudLoggingArrayOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGoogleCloudLoggingArrayOutput)
+}
+
+type ProjectConnectorsGoogleCloudLoggingOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGoogleCloudLoggingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGoogleCloudLogging)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingOutput) ToProjectConnectorsGoogleCloudLoggingOutput() ProjectConnectorsGoogleCloudLoggingOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingOutput) ToProjectConnectorsGoogleCloudLoggingOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingOutput {
+	return o
+}
+
+// Whether to enable streaming of audit events.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Specify which events will be sent to the external audit service (including tenant selection).
+func (o ProjectConnectorsGoogleCloudLoggingOutput) AuditFilters() ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) []ProjectConnectorsGoogleCloudLoggingAuditFilter {
+		return v.AuditFilters
+	}).(ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) ServiceAccountKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) string { return v.ServiceAccountKey }).(pulumi.StringOutput)
+}
+
+// Whether to send troubleshooting events.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsGoogleCloudLoggingArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGoogleCloudLoggingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsGoogleCloudLogging)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingArrayOutput) ToProjectConnectorsGoogleCloudLoggingArrayOutput() ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingArrayOutput) ToProjectConnectorsGoogleCloudLoggingArrayOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsGoogleCloudLoggingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsGoogleCloudLogging {
+		return vs[0].([]ProjectConnectorsGoogleCloudLogging)[vs[1].(int)]
+	}).(ProjectConnectorsGoogleCloudLoggingOutput)
+}
+
+type ProjectConnectorsGoogleCloudLoggingAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// ProjectConnectorsGoogleCloudLoggingAuditFilterInput is an input type that accepts ProjectConnectorsGoogleCloudLoggingAuditFilterArgs and ProjectConnectorsGoogleCloudLoggingAuditFilterOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGoogleCloudLoggingAuditFilterInput` via:
+//
+//	ProjectConnectorsGoogleCloudLoggingAuditFilterArgs{...}
+type ProjectConnectorsGoogleCloudLoggingAuditFilterInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGoogleCloudLoggingAuditFilterOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterOutput
+	ToProjectConnectorsGoogleCloudLoggingAuditFilterOutputWithContext(context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterOutput
+}
+
+type ProjectConnectorsGoogleCloudLoggingAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ProjectConnectorsGoogleCloudLoggingAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingAuditFilterArgs) ToProjectConnectorsGoogleCloudLoggingAuditFilterOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterOutput {
+	return i.ToProjectConnectorsGoogleCloudLoggingAuditFilterOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingAuditFilterArgs) ToProjectConnectorsGoogleCloudLoggingAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGoogleCloudLoggingAuditFilterOutput)
+}
+
+// ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput is an input type that accepts ProjectConnectorsGoogleCloudLoggingAuditFilterArray and ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput` via:
+//
+//	ProjectConnectorsGoogleCloudLoggingAuditFilterArray{ ProjectConnectorsGoogleCloudLoggingAuditFilterArgs{...} }
+type ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput
+	ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutputWithContext(context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput
+}
+
+type ProjectConnectorsGoogleCloudLoggingAuditFilterArray []ProjectConnectorsGoogleCloudLoggingAuditFilterInput
+
+func (ProjectConnectorsGoogleCloudLoggingAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsGoogleCloudLoggingAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingAuditFilterArray) ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput {
+	return i.ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGoogleCloudLoggingAuditFilterArray) ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput)
+}
+
+type ProjectConnectorsGoogleCloudLoggingAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) ToProjectConnectorsGoogleCloudLoggingAuditFilterOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) ToProjectConnectorsGoogleCloudLoggingAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLoggingAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLoggingAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLoggingAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsGoogleCloudLoggingAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput) ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput() ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput) ToProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsGoogleCloudLoggingAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsGoogleCloudLoggingAuditFilter {
+		return vs[0].([]ProjectConnectorsGoogleCloudLoggingAuditFilter)[vs[1].(int)]
+	}).(ProjectConnectorsGoogleCloudLoggingAuditFilterOutput)
+}
+
 type ProjectConnectorsGoogleCloudTranslation struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
@@ -21018,6 +21172,8 @@ type ProjectConnectorsRecaptchaEnterprise struct {
 	ApiKey string `pulumi:"apiKey"`
 	// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
 	AssessmentScore *float64 `pulumi:"assessmentScore"`
+	// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+	BaseUrl *string `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
@@ -21047,6 +21203,8 @@ type ProjectConnectorsRecaptchaEnterpriseArgs struct {
 	ApiKey pulumi.StringInput `pulumi:"apiKey"`
 	// When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
 	AssessmentScore pulumi.Float64PtrInput `pulumi:"assessmentScore"`
+	// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
@@ -21119,6 +21277,11 @@ func (o ProjectConnectorsRecaptchaEnterpriseOutput) ApiKey() pulumi.StringOutput
 // When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) AssessmentScore() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *float64 { return v.AssessmentScore }).(pulumi.Float64PtrOutput)
+}
+
+// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+func (o ProjectConnectorsRecaptchaEnterpriseOutput) BaseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
 }
 
 // A description of what your connector is used for.
@@ -21755,18 +21918,24 @@ func (o ProjectConnectorsSardineArrayOutput) Index(i pulumi.IntInput) ProjectCon
 
 type ProjectConnectorsSe struct {
 	// AWS Access key ID.
-	AccessKeyId string `pulumi:"accessKeyId"`
+	AccessKeyId *string `pulumi:"accessKeyId"`
+	// The authentication type to use.
+	AuthType *string `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	// An optional endpoint URL (hostname only or fully qualified URI).
 	Endpoint *string `pulumi:"endpoint"`
-	Id       *string `pulumi:"id"`
+	// The external ID to use when assuming the role.
+	ExternalId *string `pulumi:"externalId"`
+	Id         *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region string `pulumi:"region"`
+	// The Amazon Resource Name (ARN) of the role to assume.
+	RoleArn *string `pulumi:"roleArn"`
 	// AWS Secret Access Key.
-	Secret string `pulumi:"secret"`
+	Secret *string `pulumi:"secret"`
 	// The sender details that should be displayed in the email message.
 	Sender ProjectConnectorsSeSender `pulumi:"sender"`
 }
@@ -21784,18 +21953,24 @@ type ProjectConnectorsSeInput interface {
 
 type ProjectConnectorsSeArgs struct {
 	// AWS Access key ID.
-	AccessKeyId pulumi.StringInput `pulumi:"accessKeyId"`
+	AccessKeyId pulumi.StringPtrInput `pulumi:"accessKeyId"`
+	// The authentication type to use.
+	AuthType pulumi.StringPtrInput `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// An optional endpoint URL (hostname only or fully qualified URI).
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
-	Id       pulumi.StringPtrInput `pulumi:"id"`
+	// The external ID to use when assuming the role.
+	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region pulumi.StringInput `pulumi:"region"`
+	// The Amazon Resource Name (ARN) of the role to assume.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
 	// AWS Secret Access Key.
-	Secret pulumi.StringInput `pulumi:"secret"`
+	Secret pulumi.StringPtrInput `pulumi:"secret"`
 	// The sender details that should be displayed in the email message.
 	Sender ProjectConnectorsSeSenderInput `pulumi:"sender"`
 }
@@ -21852,8 +22027,13 @@ func (o ProjectConnectorsSeOutput) ToProjectConnectorsSeOutputWithContext(ctx co
 }
 
 // AWS Access key ID.
-func (o ProjectConnectorsSeOutput) AccessKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsSe) string { return v.AccessKeyId }).(pulumi.StringOutput)
+func (o ProjectConnectorsSeOutput) AccessKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.AccessKeyId }).(pulumi.StringPtrOutput)
+}
+
+// The authentication type to use.
+func (o ProjectConnectorsSeOutput) AuthType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.AuthType }).(pulumi.StringPtrOutput)
 }
 
 // A description of what your connector is used for.
@@ -21864,6 +22044,11 @@ func (o ProjectConnectorsSeOutput) Description() pulumi.StringPtrOutput {
 // An optional endpoint URL (hostname only or fully qualified URI).
 func (o ProjectConnectorsSeOutput) Endpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.Endpoint }).(pulumi.StringPtrOutput)
+}
+
+// The external ID to use when assuming the role.
+func (o ProjectConnectorsSeOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsSeOutput) Id() pulumi.StringPtrOutput {
@@ -21880,9 +22065,14 @@ func (o ProjectConnectorsSeOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSe) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// The Amazon Resource Name (ARN) of the role to assume.
+func (o ProjectConnectorsSeOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
 // AWS Secret Access Key.
-func (o ProjectConnectorsSeOutput) Secret() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsSe) string { return v.Secret }).(pulumi.StringOutput)
+func (o ProjectConnectorsSeOutput) Secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSe) *string { return v.Secret }).(pulumi.StringPtrOutput)
 }
 
 // The sender details that should be displayed in the email message.
@@ -26481,8 +26671,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsS3AuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsAwsS3AuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsTranslateInput)(nil)).Elem(), ProjectConnectorsAwsTranslateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsTranslateArrayInput)(nil)).Elem(), ProjectConnectorsAwsTranslateArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsClearInput)(nil)).Elem(), ProjectConnectorsClearArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsClearArrayInput)(nil)).Elem(), ProjectConnectorsClearArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCybersixgillInput)(nil)).Elem(), ProjectConnectorsCybersixgillArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCybersixgillArrayInput)(nil)).Elem(), ProjectConnectorsCybersixgillArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogInput)(nil)).Elem(), ProjectConnectorsDatadogArgs{})
@@ -26531,6 +26719,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingArrayInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingAuditFilterInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudTranslationInput)(nil)).Elem(), ProjectConnectorsGoogleCloudTranslationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudTranslationArrayInput)(nil)).Elem(), ProjectConnectorsGoogleCloudTranslationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleMapsPlaceInput)(nil)).Elem(), ProjectConnectorsGoogleMapsPlaceArgs{})
@@ -26771,8 +26963,6 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsAwsS3AuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsTranslateOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsTranslateArrayOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsClearOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsClearArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsCybersixgillOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsCybersixgillArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogOutput{})
@@ -26821,6 +27011,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingAuditFilterOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudTranslationOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudTranslationArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleMapsPlaceOutput{})

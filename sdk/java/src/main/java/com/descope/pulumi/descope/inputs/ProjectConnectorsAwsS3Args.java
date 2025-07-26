@@ -68,15 +68,15 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
      * The authentication type to use.
      * 
      */
-    @Import(name="authType", required=true)
-    private Output<String> authType;
+    @Import(name="authType")
+    private @Nullable Output<String> authType;
 
     /**
      * @return The authentication type to use.
      * 
      */
-    public Output<String> authType() {
-        return this.authType;
+    public Optional<Output<String>> authType() {
+        return Optional.ofNullable(this.authType);
     }
 
     /**
@@ -321,7 +321,7 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
          * @return builder
          * 
          */
-        public Builder authType(Output<String> authType) {
+        public Builder authType(@Nullable Output<String> authType) {
             $.authType = authType;
             return this;
         }
@@ -514,9 +514,6 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
         }
 
         public ProjectConnectorsAwsS3Args build() {
-            if ($.authType == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "authType");
-            }
             if ($.bucket == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3Args", "bucket");
             }
