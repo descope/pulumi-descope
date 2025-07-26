@@ -1515,6 +1515,10 @@ export interface ProjectAuthenticationSso {
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
     mergeUsers: boolean;
+    /**
+     * The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     */
+    redirectUrl: string;
 }
 
 export interface ProjectAuthenticationTotp {
@@ -1585,10 +1589,6 @@ export interface ProjectConnectors {
      */
     awsTranslates: outputs.ProjectConnectorsAwsTranslate[];
     /**
-     * Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-     */
-    clears: outputs.ProjectConnectorsClear[];
-    /**
      * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
      */
     cybersixgills: outputs.ProjectConnectorsCybersixgill[];
@@ -1644,6 +1644,10 @@ export interface ProjectConnectors {
      * Send messages using a generic SMS gateway.
      */
     genericSmsGateways: outputs.ProjectConnectorsGenericSmsGateway[];
+    /**
+     * Stream logs and audit events with the Google Cloud Logging connector.
+     */
+    googleCloudLoggings: outputs.ProjectConnectorsGoogleCloudLogging[];
     /**
      * Localize the language of your login and user journey screens with the Google Cloud Translation connector.
      */
@@ -1991,26 +1995,6 @@ export interface ProjectConnectorsAwsTranslate {
      * (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
      */
     sessionToken: string;
-}
-
-export interface ProjectConnectorsClear {
-    /**
-     * Your CLEAR API key.
-     */
-    apiKey: string;
-    /**
-     * A description of what your connector is used for.
-     */
-    description: string;
-    id: string;
-    /**
-     * A custom name for your connector.
-     */
-    name: string;
-    /**
-     * Your CLEAR project ID.
-     */
-    projectId: string;
 }
 
 export interface ProjectConnectorsCybersixgill {
@@ -2531,6 +2515,49 @@ export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
     username: string;
 }
 
+export interface ProjectConnectorsGoogleCloudLogging {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled: boolean;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters: outputs.ProjectConnectorsGoogleCloudLoggingAuditFilter[];
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+     */
+    serviceAccountKey: string;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsGoogleCloudLoggingAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
+}
+
 export interface ProjectConnectorsGoogleCloudTranslation {
     /**
      * A description of what your connector is used for.
@@ -2925,6 +2952,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      */
     assessmentScore: number;
     /**
+     * Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     */
+    baseUrl: string;
+    /**
      * A description of what your connector is used for.
      */
     description: string;
@@ -3061,6 +3092,10 @@ export interface ProjectConnectorsSe {
      */
     accessKeyId: string;
     /**
+     * The authentication type to use.
+     */
+    authType: string;
+    /**
      * A description of what your connector is used for.
      */
     description: string;
@@ -3068,6 +3103,10 @@ export interface ProjectConnectorsSe {
      * An optional endpoint URL (hostname only or fully qualified URI).
      */
     endpoint: string;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    externalId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -3077,6 +3116,10 @@ export interface ProjectConnectorsSe {
      * AWS region to send requests to (e.g. `us-west-2`).
      */
     region: string;
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    roleArn: string;
     /**
      * AWS Secret Access Key.
      */

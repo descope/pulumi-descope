@@ -35,10 +35,6 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> AwsTranslates;
         /// <summary>
-        /// Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.
-        /// </summary>
-        public readonly ImmutableArray<Outputs.ProjectConnectorsClear> Clears;
-        /// <summary>
         /// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsCybersixgill> Cybersixgills;
@@ -94,6 +90,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Send messages using a generic SMS gateway.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsGenericSmsGateway> GenericSmsGateways;
+        /// <summary>
+        /// Stream logs and audit events with the Google Cloud Logging connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleCloudLogging> GoogleCloudLoggings;
         /// <summary>
         /// Localize the language of your login and user journey screens with the Google Cloud Translation connector.
         /// </summary>
@@ -231,8 +231,6 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> awsTranslates,
 
-            ImmutableArray<Outputs.ProjectConnectorsClear> clears,
-
             ImmutableArray<Outputs.ProjectConnectorsCybersixgill> cybersixgills,
 
             ImmutableArray<Outputs.ProjectConnectorsDatadog> datadogs,
@@ -260,6 +258,8 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectConnectorsGenericEmailGateway> genericEmailGateways,
 
             ImmutableArray<Outputs.ProjectConnectorsGenericSmsGateway> genericSmsGateways,
+
+            ImmutableArray<Outputs.ProjectConnectorsGoogleCloudLogging> googleCloudLoggings,
 
             ImmutableArray<Outputs.ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations,
 
@@ -328,7 +328,6 @@ namespace Descope.Pulumi.Descope.Outputs
             AuditWebhooks = auditWebhooks;
             AwsS3s = awsS3s;
             AwsTranslates = awsTranslates;
-            Clears = clears;
             Cybersixgills = cybersixgills;
             Datadogs = datadogs;
             DevrevGrows = devrevGrows;
@@ -343,6 +342,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Forters = forters;
             GenericEmailGateways = genericEmailGateways;
             GenericSmsGateways = genericSmsGateways;
+            GoogleCloudLoggings = googleCloudLoggings;
             GoogleCloudTranslations = googleCloudTranslations;
             GoogleMapsPlaces = googleMapsPlaces;
             Hibps = hibps;
