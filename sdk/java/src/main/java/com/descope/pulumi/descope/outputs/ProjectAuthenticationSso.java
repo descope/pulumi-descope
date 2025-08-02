@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -21,6 +22,11 @@ public final class ProjectAuthenticationSso {
      * 
      */
     private @Nullable Boolean mergeUsers;
+    /**
+     * @return The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     * 
+     */
+    private @Nullable String redirectUrl;
 
     private ProjectAuthenticationSso() {}
     /**
@@ -37,6 +43,13 @@ public final class ProjectAuthenticationSso {
     public Optional<Boolean> mergeUsers() {
         return Optional.ofNullable(this.mergeUsers);
     }
+    /**
+     * @return The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+     * 
+     */
+    public Optional<String> redirectUrl() {
+        return Optional.ofNullable(this.redirectUrl);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -49,11 +62,13 @@ public final class ProjectAuthenticationSso {
     public static final class Builder {
         private @Nullable Boolean disabled;
         private @Nullable Boolean mergeUsers;
+        private @Nullable String redirectUrl;
         public Builder() {}
         public Builder(ProjectAuthenticationSso defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.disabled = defaults.disabled;
     	      this.mergeUsers = defaults.mergeUsers;
+    	      this.redirectUrl = defaults.redirectUrl;
         }
 
         @CustomType.Setter
@@ -68,10 +83,17 @@ public final class ProjectAuthenticationSso {
             this.mergeUsers = mergeUsers;
             return this;
         }
+        @CustomType.Setter
+        public Builder redirectUrl(@Nullable String redirectUrl) {
+
+            this.redirectUrl = redirectUrl;
+            return this;
+        }
         public ProjectAuthenticationSso build() {
             final var _resultValue = new ProjectAuthenticationSso();
             _resultValue.disabled = disabled;
             _resultValue.mergeUsers = mergeUsers;
+            _resultValue.redirectUrl = redirectUrl;
             return _resultValue;
         }
     }

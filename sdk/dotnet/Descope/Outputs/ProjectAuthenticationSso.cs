@@ -22,15 +22,22 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
         public readonly bool? MergeUsers;
+        /// <summary>
+        /// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        /// </summary>
+        public readonly string? RedirectUrl;
 
         [OutputConstructor]
         private ProjectAuthenticationSso(
             bool? disabled,
 
-            bool? mergeUsers)
+            bool? mergeUsers,
+
+            string? redirectUrl)
         {
             Disabled = disabled;
             MergeUsers = mergeUsers;
+            RedirectUrl = redirectUrl;
         }
     }
 }

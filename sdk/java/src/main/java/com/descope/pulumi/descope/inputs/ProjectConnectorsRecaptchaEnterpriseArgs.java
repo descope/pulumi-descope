@@ -49,6 +49,21 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     }
 
     /**
+     * Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * 
+     */
+    @Import(name="baseUrl")
+    private @Nullable Output<String> baseUrl;
+
+    /**
+     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * 
+     */
+    public Optional<Output<String>> baseUrl() {
+        return Optional.ofNullable(this.baseUrl);
+    }
+
+    /**
      * A description of what your connector is used for.
      * 
      */
@@ -135,6 +150,7 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     private ProjectConnectorsRecaptchaEnterpriseArgs(ProjectConnectorsRecaptchaEnterpriseArgs $) {
         this.apiKey = $.apiKey;
         this.assessmentScore = $.assessmentScore;
+        this.baseUrl = $.baseUrl;
         this.description = $.description;
         this.id = $.id;
         this.name = $.name;
@@ -201,6 +217,27 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
          */
         public Builder assessmentScore(Double assessmentScore) {
             return assessmentScore(Output.of(assessmentScore));
+        }
+
+        /**
+         * @param baseUrl Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+         * 
+         * @return builder
+         * 
+         */
+        public Builder baseUrl(@Nullable Output<String> baseUrl) {
+            $.baseUrl = baseUrl;
+            return this;
+        }
+
+        /**
+         * @param baseUrl Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+         * 
+         * @return builder
+         * 
+         */
+        public Builder baseUrl(String baseUrl) {
+            return baseUrl(Output.of(baseUrl));
         }
 
         /**

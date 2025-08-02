@@ -13,11 +13,27 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsSeGetArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId")]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// AWS Access key ID.
         /// </summary>
-        [Input("accessKeyId", required: true)]
-        public Input<string> AccessKeyId { get; set; } = null!;
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The authentication type to use.
+        /// </summary>
+        [Input("authType")]
+        public Input<string>? AuthType { get; set; }
 
         /// <summary>
         /// A description of what your connector is used for.
@@ -30,6 +46,12 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("endpoint")]
         public Input<string>? Endpoint { get; set; }
+
+        /// <summary>
+        /// The external ID to use when assuming the role.
+        /// </summary>
+        [Input("externalId")]
+        public Input<string>? ExternalId { get; set; }
 
         [Input("id")]
         public Input<string>? Id { get; set; }
@@ -46,7 +68,13 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
-        [Input("secret", required: true)]
+        /// <summary>
+        /// The Amazon Resource Name (ARN) of the role to assume.
+        /// </summary>
+        [Input("roleArn")]
+        public Input<string>? RoleArn { get; set; }
+
+        [Input("secret")]
         private Input<string>? _secret;
 
         /// <summary>
