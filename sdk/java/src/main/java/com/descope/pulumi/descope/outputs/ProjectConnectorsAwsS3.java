@@ -34,7 +34,7 @@ public final class ProjectConnectorsAwsS3 {
      * @return The authentication type to use.
      * 
      */
-    private String authType;
+    private @Nullable String authType;
     /**
      * @return The AWS S3 bucket. This bucket should already exist for the connector to work.
      * 
@@ -103,8 +103,8 @@ public final class ProjectConnectorsAwsS3 {
      * @return The authentication type to use.
      * 
      */
-    public String authType() {
-        return this.authType;
+    public Optional<String> authType() {
+        return Optional.ofNullable(this.authType);
     }
     /**
      * @return The AWS S3 bucket. This bucket should already exist for the connector to work.
@@ -178,7 +178,7 @@ public final class ProjectConnectorsAwsS3 {
         private @Nullable String accessKeyId;
         private @Nullable Boolean auditEnabled;
         private @Nullable List<ProjectConnectorsAwsS3AuditFilter> auditFilters;
-        private String authType;
+        private @Nullable String authType;
         private String bucket;
         private @Nullable String description;
         private @Nullable String externalId;
@@ -228,10 +228,8 @@ public final class ProjectConnectorsAwsS3 {
             return auditFilters(List.of(auditFilters));
         }
         @CustomType.Setter
-        public Builder authType(String authType) {
-            if (authType == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "authType");
-            }
+        public Builder authType(@Nullable String authType) {
+
             this.authType = authType;
             return this;
         }

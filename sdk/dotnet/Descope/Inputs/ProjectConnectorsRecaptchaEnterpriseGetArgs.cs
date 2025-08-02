@@ -36,6 +36,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<double>? AssessmentScore { get; set; }
 
         /// <summary>
+        /// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        /// </summary>
+        [Input("baseUrl")]
+        public Input<string>? BaseUrl { get; set; }
+
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         [Input("description")]

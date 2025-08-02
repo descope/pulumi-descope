@@ -17,7 +17,12 @@ public final class ProjectConnectorsSe {
      * @return AWS Access key ID.
      * 
      */
-    private String accessKeyId;
+    private @Nullable String accessKeyId;
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    private @Nullable String authType;
     /**
      * @return A description of what your connector is used for.
      * 
@@ -28,6 +33,11 @@ public final class ProjectConnectorsSe {
      * 
      */
     private @Nullable String endpoint;
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    private @Nullable String externalId;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -40,10 +50,15 @@ public final class ProjectConnectorsSe {
      */
     private String region;
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    private @Nullable String roleArn;
+    /**
      * @return AWS Secret Access Key.
      * 
      */
-    private String secret;
+    private @Nullable String secret;
     /**
      * @return The sender details that should be displayed in the email message.
      * 
@@ -55,8 +70,15 @@ public final class ProjectConnectorsSe {
      * @return AWS Access key ID.
      * 
      */
-    public String accessKeyId() {
-        return this.accessKeyId;
+    public Optional<String> accessKeyId() {
+        return Optional.ofNullable(this.accessKeyId);
+    }
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Optional<String> authType() {
+        return Optional.ofNullable(this.authType);
     }
     /**
      * @return A description of what your connector is used for.
@@ -71,6 +93,13 @@ public final class ProjectConnectorsSe {
      */
     public Optional<String> endpoint() {
         return Optional.ofNullable(this.endpoint);
+    }
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<String> externalId() {
+        return Optional.ofNullable(this.externalId);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
@@ -90,11 +119,18 @@ public final class ProjectConnectorsSe {
         return this.region;
     }
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<String> roleArn() {
+        return Optional.ofNullable(this.roleArn);
+    }
+    /**
      * @return AWS Secret Access Key.
      * 
      */
-    public String secret() {
-        return this.secret;
+    public Optional<String> secret() {
+        return Optional.ofNullable(this.secret);
     }
     /**
      * @return The sender details that should be displayed in the email message.
@@ -113,33 +149,43 @@ public final class ProjectConnectorsSe {
     }
     @CustomType.Builder
     public static final class Builder {
-        private String accessKeyId;
+        private @Nullable String accessKeyId;
+        private @Nullable String authType;
         private @Nullable String description;
         private @Nullable String endpoint;
+        private @Nullable String externalId;
         private @Nullable String id;
         private String name;
         private String region;
-        private String secret;
+        private @Nullable String roleArn;
+        private @Nullable String secret;
         private ProjectConnectorsSeSender sender;
         public Builder() {}
         public Builder(ProjectConnectorsSe defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.accessKeyId = defaults.accessKeyId;
+    	      this.authType = defaults.authType;
     	      this.description = defaults.description;
     	      this.endpoint = defaults.endpoint;
+    	      this.externalId = defaults.externalId;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.region = defaults.region;
+    	      this.roleArn = defaults.roleArn;
     	      this.secret = defaults.secret;
     	      this.sender = defaults.sender;
         }
 
         @CustomType.Setter
-        public Builder accessKeyId(String accessKeyId) {
-            if (accessKeyId == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsSe", "accessKeyId");
-            }
+        public Builder accessKeyId(@Nullable String accessKeyId) {
+
             this.accessKeyId = accessKeyId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder authType(@Nullable String authType) {
+
+            this.authType = authType;
             return this;
         }
         @CustomType.Setter
@@ -152,6 +198,12 @@ public final class ProjectConnectorsSe {
         public Builder endpoint(@Nullable String endpoint) {
 
             this.endpoint = endpoint;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder externalId(@Nullable String externalId) {
+
+            this.externalId = externalId;
             return this;
         }
         @CustomType.Setter
@@ -177,10 +229,14 @@ public final class ProjectConnectorsSe {
             return this;
         }
         @CustomType.Setter
-        public Builder secret(String secret) {
-            if (secret == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsSe", "secret");
-            }
+        public Builder roleArn(@Nullable String roleArn) {
+
+            this.roleArn = roleArn;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder secret(@Nullable String secret) {
+
             this.secret = secret;
             return this;
         }
@@ -195,11 +251,14 @@ public final class ProjectConnectorsSe {
         public ProjectConnectorsSe build() {
             final var _resultValue = new ProjectConnectorsSe();
             _resultValue.accessKeyId = accessKeyId;
+            _resultValue.authType = authType;
             _resultValue.description = description;
             _resultValue.endpoint = endpoint;
+            _resultValue.externalId = externalId;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.region = region;
+            _resultValue.roleArn = roleArn;
             _resultValue.secret = secret;
             _resultValue.sender = sender;
             return _resultValue;
