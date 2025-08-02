@@ -2531,6 +2531,10 @@
                 "mergeUsers": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
+                },
+                "redirectUrl": {
+                    "type": "string",
+                    "description": "The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.\n"
                 }
             },
             "type": "object",
@@ -2538,7 +2542,8 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "disabled",
-                        "mergeUsers"
+                        "mergeUsers",
+                        "redirectUrl"
                     ]
                 }
             }
@@ -2687,13 +2692,6 @@
                     },
                     "description": "Localize the language of your login and user journey screens with the Amazon Translate connector.\n"
                 },
-                "clears": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/descope:index/ProjectConnectorsClear:ProjectConnectorsClear"
-                    },
-                    "description": "Add sophisticated identity verification processes to your user journey with the CLEAR Verified connector.\n"
-                },
                 "cybersixgills": {
                     "type": "array",
                     "items": {
@@ -2791,6 +2789,13 @@
                         "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGateway:ProjectConnectorsGenericSmsGateway"
                     },
                     "description": "Send messages using a generic SMS gateway.\n"
+                },
+                "googleCloudLoggings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsGoogleCloudLogging:ProjectConnectorsGoogleCloudLogging"
+                    },
+                    "description": "Stream logs and audit events with the Google Cloud Logging connector.\n"
                 },
                 "googleCloudTranslations": {
                     "type": "array",
@@ -3019,7 +3024,6 @@
                         "auditWebhooks",
                         "awsS3s",
                         "awsTranslates",
-                        "clears",
                         "cybersixgills",
                         "datadogs",
                         "devrevGrows",
@@ -3034,6 +3038,7 @@
                         "forters",
                         "genericEmailGateways",
                         "genericSmsGateways",
+                        "googleCloudLoggings",
                         "googleCloudTranslations",
                         "googleMapsPlaces",
                         "hibps",
@@ -3364,7 +3369,6 @@
             },
             "type": "object",
             "required": [
-                "authType",
                 "bucket",
                 "name",
                 "region"
@@ -3463,47 +3467,6 @@
                         "region",
                         "secretAccessKey",
                         "sessionToken"
-                    ]
-                }
-            }
-        },
-        "descope:index/ProjectConnectorsClear:ProjectConnectorsClear": {
-            "properties": {
-                "apiKey": {
-                    "type": "string",
-                    "description": "Your CLEAR API key.\n",
-                    "secret": true
-                },
-                "description": {
-                    "type": "string",
-                    "description": "A description of what your connector is used for.\n"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "A custom name for your connector.\n"
-                },
-                "projectId": {
-                    "type": "string",
-                    "description": "Your CLEAR project ID.\n"
-                }
-            },
-            "type": "object",
-            "required": [
-                "apiKey",
-                "name",
-                "projectId"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "apiKey",
-                        "description",
-                        "id",
-                        "name",
-                        "projectId"
                     ]
                 }
             }
@@ -4441,6 +4404,84 @@
                 "username"
             ]
         },
+        "descope:index/ProjectConnectorsGoogleCloudLogging:ProjectConnectorsGoogleCloudLogging": {
+            "properties": {
+                "auditEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to enable streaming of audit events.\n"
+                },
+                "auditFilters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectConnectorsGoogleCloudLoggingAuditFilter:ProjectConnectorsGoogleCloudLoggingAuditFilter"
+                    },
+                    "description": "Specify which events will be sent to the external audit service (including tenant selection).\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what your connector is used for.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A custom name for your connector.\n"
+                },
+                "serviceAccountKey": {
+                    "type": "string",
+                    "description": "A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.\n",
+                    "secret": true
+                },
+                "troubleshootLogEnabled": {
+                    "type": "boolean",
+                    "description": "Whether to send troubleshooting events.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "serviceAccountKey"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "auditEnabled",
+                        "auditFilters",
+                        "description",
+                        "id",
+                        "name",
+                        "serviceAccountKey",
+                        "troubleshootLogEnabled"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectConnectorsGoogleCloudLoggingAuditFilter:ProjectConnectorsGoogleCloudLoggingAuditFilter": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The field name to filter on (either 'actions' or 'tenants').\n"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "The filter operation to apply ('includes' or 'excludes').\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of values to match against for the filter.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "operator",
+                "values"
+            ]
+        },
         "descope:index/ProjectConnectorsGoogleCloudTranslation:ProjectConnectorsGoogleCloudTranslation": {
             "properties": {
                 "description": {
@@ -5144,6 +5185,10 @@
                     "type": "number",
                     "description": "When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.\n"
                 },
+                "baseUrl": {
+                    "type": "string",
+                    "description": "Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
@@ -5180,6 +5225,7 @@
                     "requiredOutputs": [
                         "apiKey",
                         "assessmentScore",
+                        "baseUrl",
                         "description",
                         "id",
                         "name",
@@ -5398,7 +5444,12 @@
             "properties": {
                 "accessKeyId": {
                     "type": "string",
-                    "description": "AWS Access key ID.\n"
+                    "description": "AWS Access key ID.\n",
+                    "secret": true
+                },
+                "authType": {
+                    "type": "string",
+                    "description": "The authentication type to use.\n"
                 },
                 "description": {
                     "type": "string",
@@ -5407,6 +5458,10 @@
                 "endpoint": {
                     "type": "string",
                     "description": "An optional endpoint URL (hostname only or fully qualified URI).\n"
+                },
+                "externalId": {
+                    "type": "string",
+                    "description": "The external ID to use when assuming the role.\n"
                 },
                 "id": {
                     "type": "string"
@@ -5418,6 +5473,10 @@
                 "region": {
                     "type": "string",
                     "description": "AWS region to send requests to (e.g. `us-west-2`).\n"
+                },
+                "roleArn": {
+                    "type": "string",
+                    "description": "The Amazon Resource Name (ARN) of the role to assume.\n"
                 },
                 "secret": {
                     "type": "string",
@@ -5431,21 +5490,22 @@
             },
             "type": "object",
             "required": [
-                "accessKeyId",
                 "name",
                 "region",
-                "secret",
                 "sender"
             ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
                         "accessKeyId",
+                        "authType",
                         "description",
                         "endpoint",
+                        "externalId",
                         "id",
                         "name",
                         "region",
+                        "roleArn",
                         "secret",
                         "sender"
                     ]

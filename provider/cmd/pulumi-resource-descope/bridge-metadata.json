@@ -344,9 +344,6 @@
                             "aws_translate": {
                                 "maxItemsOne": false
                             },
-                            "clear": {
-                                "maxItemsOne": false
-                            },
                             "cybersixgill": {
                                 "maxItemsOne": false
                             },
@@ -402,6 +399,23 @@
                             },
                             "generic_sms_gateway": {
                                 "maxItemsOne": false
+                            },
+                            "google_cloud_logging": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "google_cloud_translation": {
                                 "maxItemsOne": false

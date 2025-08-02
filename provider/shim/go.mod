@@ -3,7 +3,7 @@ module github.com/descope/terraform-provider-descope/shim
 go 1.24.0
 
 require (
-	github.com/descope/terraform-provider-descope v0.2.0
+	github.com/descope/terraform-provider-descope v0.2.1
 	github.com/hashicorp/terraform-plugin-framework v1.15.0
 )
 
@@ -32,7 +32,7 @@ require (
 	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/crypto v0.38.0 // indirect
+	golang.org/x/crypto v0.39.0 // indirect
 	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 )
