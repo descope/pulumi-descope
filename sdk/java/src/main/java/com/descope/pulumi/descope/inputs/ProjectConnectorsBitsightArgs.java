@@ -12,19 +12,19 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 
-public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resources.ResourceArgs {
+public final class ProjectConnectorsBitsightArgs extends com.pulumi.resources.ResourceArgs {
 
-    public static final ProjectConnectorsCybersixgillArgs Empty = new ProjectConnectorsCybersixgillArgs();
+    public static final ProjectConnectorsBitsightArgs Empty = new ProjectConnectorsBitsightArgs();
 
     /**
-     * API Client ID issued when you create the credentials in Cybersixgill.
+     * API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     @Import(name="clientId", required=true)
     private Output<String> clientId;
 
     /**
-     * @return API Client ID issued when you create the credentials in Cybersixgill.
+     * @return API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     public Output<String> clientId() {
@@ -32,14 +32,14 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
     }
 
     /**
-     * Client secret issued when you create the credentials in Cybersixgill.
+     * Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     @Import(name="clientSecret", required=true)
     private Output<String> clientSecret;
 
     /**
-     * @return Client secret issued when you create the credentials in Cybersixgill.
+     * @return Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     public Output<String> clientSecret() {
@@ -83,9 +83,9 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
         return this.name;
     }
 
-    private ProjectConnectorsCybersixgillArgs() {}
+    private ProjectConnectorsBitsightArgs() {}
 
-    private ProjectConnectorsCybersixgillArgs(ProjectConnectorsCybersixgillArgs $) {
+    private ProjectConnectorsBitsightArgs(ProjectConnectorsBitsightArgs $) {
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.description = $.description;
@@ -96,23 +96,23 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
     public static Builder builder() {
         return new Builder();
     }
-    public static Builder builder(ProjectConnectorsCybersixgillArgs defaults) {
+    public static Builder builder(ProjectConnectorsBitsightArgs defaults) {
         return new Builder(defaults);
     }
 
     public static final class Builder {
-        private ProjectConnectorsCybersixgillArgs $;
+        private ProjectConnectorsBitsightArgs $;
 
         public Builder() {
-            $ = new ProjectConnectorsCybersixgillArgs();
+            $ = new ProjectConnectorsBitsightArgs();
         }
 
-        public Builder(ProjectConnectorsCybersixgillArgs defaults) {
-            $ = new ProjectConnectorsCybersixgillArgs(Objects.requireNonNull(defaults));
+        public Builder(ProjectConnectorsBitsightArgs defaults) {
+            $ = new ProjectConnectorsBitsightArgs(Objects.requireNonNull(defaults));
         }
 
         /**
-         * @param clientId API Client ID issued when you create the credentials in Cybersixgill.
+         * @param clientId API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
          * 
          * @return builder
          * 
@@ -123,7 +123,7 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
         }
 
         /**
-         * @param clientId API Client ID issued when you create the credentials in Cybersixgill.
+         * @param clientId API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
          * 
          * @return builder
          * 
@@ -133,7 +133,7 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
         }
 
         /**
-         * @param clientSecret Client secret issued when you create the credentials in Cybersixgill.
+         * @param clientSecret Client secret issued when you create the credentials in Bitsight Threat Intelligence.
          * 
          * @return builder
          * 
@@ -144,7 +144,7 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
         }
 
         /**
-         * @param clientSecret Client secret issued when you create the credentials in Cybersixgill.
+         * @param clientSecret Client secret issued when you create the credentials in Bitsight Threat Intelligence.
          * 
          * @return builder
          * 
@@ -204,15 +204,15 @@ public final class ProjectConnectorsCybersixgillArgs extends com.pulumi.resource
             return name(Output.of(name));
         }
 
-        public ProjectConnectorsCybersixgillArgs build() {
+        public ProjectConnectorsBitsightArgs build() {
             if ($.clientId == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgillArgs", "clientId");
+                throw new MissingRequiredPropertyException("ProjectConnectorsBitsightArgs", "clientId");
             }
             if ($.clientSecret == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgillArgs", "clientSecret");
+                throw new MissingRequiredPropertyException("ProjectConnectorsBitsightArgs", "clientSecret");
             }
             if ($.name == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgillArgs", "name");
+                throw new MissingRequiredPropertyException("ProjectConnectorsBitsightArgs", "name");
             }
             return $;
         }

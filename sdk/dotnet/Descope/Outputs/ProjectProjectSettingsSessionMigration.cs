@@ -21,7 +21,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// The unique client ID for the vendor.
         /// </summary>
-        public readonly string ClientId;
+        public readonly string? ClientId;
         /// <summary>
         /// The domain value if needed by the vendor.
         /// </summary>
@@ -37,13 +37,13 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// The name of the vendor the sessions are migrated from, in all lowercase.
         /// </summary>
-        public readonly string Vendor;
+        public readonly string? Vendor;
 
         [OutputConstructor]
         private ProjectProjectSettingsSessionMigration(
             string? audience,
 
-            string clientId,
+            string? clientId,
 
             string? domain,
 
@@ -51,7 +51,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<string> loginidMatchedAttributes,
 
-            string vendor)
+            string? vendor)
         {
             Audience = audience;
             ClientId = clientId;

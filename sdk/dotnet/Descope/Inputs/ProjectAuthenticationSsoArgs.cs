@@ -31,6 +31,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
 
+        /// <summary>
+        /// Configuration block for the SSO Suite.
+        /// </summary>
+        [Input("ssoSuiteSettings")]
+        public Input<Inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs>? SsoSuiteSettings { get; set; }
+
         public ProjectAuthenticationSsoArgs()
         {
         }

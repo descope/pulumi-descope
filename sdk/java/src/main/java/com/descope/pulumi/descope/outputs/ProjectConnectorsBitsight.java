@@ -11,14 +11,14 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 @CustomType
-public final class ProjectConnectorsCybersixgill {
+public final class ProjectConnectorsBitsight {
     /**
-     * @return API Client ID issued when you create the credentials in Cybersixgill.
+     * @return API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     private String clientId;
     /**
-     * @return Client secret issued when you create the credentials in Cybersixgill.
+     * @return Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     private String clientSecret;
@@ -34,16 +34,16 @@ public final class ProjectConnectorsCybersixgill {
      */
     private String name;
 
-    private ProjectConnectorsCybersixgill() {}
+    private ProjectConnectorsBitsight() {}
     /**
-     * @return API Client ID issued when you create the credentials in Cybersixgill.
+     * @return API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     public String clientId() {
         return this.clientId;
     }
     /**
-     * @return Client secret issued when you create the credentials in Cybersixgill.
+     * @return Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      * 
      */
     public String clientSecret() {
@@ -71,7 +71,7 @@ public final class ProjectConnectorsCybersixgill {
         return new Builder();
     }
 
-    public static Builder builder(ProjectConnectorsCybersixgill defaults) {
+    public static Builder builder(ProjectConnectorsBitsight defaults) {
         return new Builder(defaults);
     }
     @CustomType.Builder
@@ -82,7 +82,7 @@ public final class ProjectConnectorsCybersixgill {
         private @Nullable String id;
         private String name;
         public Builder() {}
-        public Builder(ProjectConnectorsCybersixgill defaults) {
+        public Builder(ProjectConnectorsBitsight defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.clientId = defaults.clientId;
     	      this.clientSecret = defaults.clientSecret;
@@ -94,7 +94,7 @@ public final class ProjectConnectorsCybersixgill {
         @CustomType.Setter
         public Builder clientId(String clientId) {
             if (clientId == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgill", "clientId");
+              throw new MissingRequiredPropertyException("ProjectConnectorsBitsight", "clientId");
             }
             this.clientId = clientId;
             return this;
@@ -102,7 +102,7 @@ public final class ProjectConnectorsCybersixgill {
         @CustomType.Setter
         public Builder clientSecret(String clientSecret) {
             if (clientSecret == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgill", "clientSecret");
+              throw new MissingRequiredPropertyException("ProjectConnectorsBitsight", "clientSecret");
             }
             this.clientSecret = clientSecret;
             return this;
@@ -122,13 +122,13 @@ public final class ProjectConnectorsCybersixgill {
         @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsCybersixgill", "name");
+              throw new MissingRequiredPropertyException("ProjectConnectorsBitsight", "name");
             }
             this.name = name;
             return this;
         }
-        public ProjectConnectorsCybersixgill build() {
-            final var _resultValue = new ProjectConnectorsCybersixgill();
+        public ProjectConnectorsBitsight build() {
+            final var _resultValue = new ProjectConnectorsBitsight();
             _resultValue.clientId = clientId;
             _resultValue.clientSecret = clientSecret;
             _resultValue.description = description;

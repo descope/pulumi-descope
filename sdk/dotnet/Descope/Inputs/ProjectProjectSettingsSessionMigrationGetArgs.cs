@@ -22,8 +22,8 @@ namespace Descope.Pulumi.Descope.Inputs
         /// <summary>
         /// The unique client ID for the vendor.
         /// </summary>
-        [Input("clientId", required: true)]
-        public Input<string> ClientId { get; set; } = null!;
+        [Input("clientId")]
+        public Input<string>? ClientId { get; set; }
 
         /// <summary>
         /// The domain value if needed by the vendor.
@@ -37,7 +37,7 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
-        [Input("loginidMatchedAttributes", required: true)]
+        [Input("loginidMatchedAttributes")]
         private InputList<string>? _loginidMatchedAttributes;
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Descope.Pulumi.Descope.Inputs
         /// <summary>
         /// The name of the vendor the sessions are migrated from, in all lowercase.
         /// </summary>
-        [Input("vendor", required: true)]
-        public Input<string> Vendor { get; set; } = null!;
+        [Input("vendor")]
+        public Input<string>? Vendor { get; set; }
 
         public ProjectProjectSettingsSessionMigrationGetArgs()
         {

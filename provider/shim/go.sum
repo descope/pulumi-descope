@@ -12,10 +12,10 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 h1:NMZiJj8QnKe1LgsbDayM4UoHwbvwDRwnI3hwNaAHRnc=
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0/go.mod h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=
-github.com/descope/go-sdk v1.6.13 h1:oN4Hrdks37LRByAgs3Ke5KZFXeXTxfnMDSsJlADBvTg=
-github.com/descope/go-sdk v1.6.13/go.mod h1:khLMD/1zglkkZCRg6xCA6DI8bXj7wAbZEOonwMrUkF4=
-github.com/descope/terraform-provider-descope v0.2.1 h1:/QvitzLjX9Q/Eq+flKU/nzjm9HFEJUW2TQAmWvGxPYc=
-github.com/descope/terraform-provider-descope v0.2.1/go.mod h1:jKskBUc8d3m/YeOqqf7LoqjBALzJOjDOfbZt16j0k/Y=
+github.com/descope/go-sdk v1.6.16 h1:E+ByxR9Hq2W08bSJ7twr6FFsdJYQ2iJ1hh8A4pt7MIc=
+github.com/descope/go-sdk v1.6.16/go.mod h1:khLMD/1zglkkZCRg6xCA6DI8bXj7wAbZEOonwMrUkF4=
+github.com/descope/terraform-provider-descope v0.2.2 h1:Om5wPatJLwMi45Nz4wjMh64kU9SBiWFRUjmEmlfQisM=
+github.com/descope/terraform-provider-descope v0.2.2/go.mod h1:LFal9QSsZoR0Q8YgSKYvveM0ANrvx7ndRlyLKxM9qeo=
 github.com/fatih/color v1.13.0/go.mod h1:kLAiJbzzSOZDVNGyDpeOxJ47H46qBXwg5ILebYFFOfk=
 github.com/fatih/color v1.18.0 h1:S8gINlzdQ840/4pfAwic/ZE0djQEH3wM94VfqLTZcOM=
 github.com/fatih/color v1.18.0/go.mod h1:4FelSpRwEGDpQ12mAdzqdOukCy4u8WUtOY6lkT/6HfU=

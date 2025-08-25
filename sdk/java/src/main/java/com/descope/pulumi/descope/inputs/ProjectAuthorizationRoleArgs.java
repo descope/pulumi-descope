@@ -6,6 +6,7 @@ package com.descope.pulumi.descope.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +17,21 @@ import javax.annotation.Nullable;
 public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectAuthorizationRoleArgs Empty = new ProjectAuthorizationRoleArgs();
+
+    /**
+     * Whether this role should automatically be assigned to users that are created without any roles.
+     * 
+     */
+    @Import(name="default")
+    private @Nullable Output<Boolean> default_;
+
+    /**
+     * @return Whether this role should automatically be assigned to users that are created without any roles.
+     * 
+     */
+    public Optional<Output<Boolean>> default_() {
+        return Optional.ofNullable(this.default_);
+    }
 
     /**
      * A description for the role.
@@ -69,13 +85,30 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
         return Optional.ofNullable(this.permissions);
     }
 
+    /**
+     * Whether this role should not be displayed to tenant admins.
+     * 
+     */
+    @Import(name="private")
+    private @Nullable Output<Boolean> private_;
+
+    /**
+     * @return Whether this role should not be displayed to tenant admins.
+     * 
+     */
+    public Optional<Output<Boolean>> private_() {
+        return Optional.ofNullable(this.private_);
+    }
+
     private ProjectAuthorizationRoleArgs() {}
 
     private ProjectAuthorizationRoleArgs(ProjectAuthorizationRoleArgs $) {
+        this.default_ = $.default_;
         this.description = $.description;
         this.id = $.id;
         this.name = $.name;
         this.permissions = $.permissions;
+        this.private_ = $.private_;
     }
 
     public static Builder builder() {
@@ -94,6 +127,27 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
 
         public Builder(ProjectAuthorizationRoleArgs defaults) {
             $ = new ProjectAuthorizationRoleArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param default_ Whether this role should automatically be assigned to users that are created without any roles.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder default_(@Nullable Output<Boolean> default_) {
+            $.default_ = default_;
+            return this;
+        }
+
+        /**
+         * @param default_ Whether this role should automatically be assigned to users that are created without any roles.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder default_(Boolean default_) {
+            return default_(Output.of(default_));
         }
 
         /**
@@ -176,6 +230,27 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
          */
         public Builder permissions(String... permissions) {
             return permissions(List.of(permissions));
+        }
+
+        /**
+         * @param private_ Whether this role should not be displayed to tenant admins.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder private_(@Nullable Output<Boolean> private_) {
+            $.private_ = private_;
+            return this;
+        }
+
+        /**
+         * @param private_ Whether this role should not be displayed to tenant admins.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder private_(Boolean private_) {
+            return private_(Output.of(private_));
         }
 
         public ProjectAuthorizationRoleArgs build() {

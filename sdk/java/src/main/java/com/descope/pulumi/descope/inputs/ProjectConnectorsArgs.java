@@ -8,7 +8,7 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsAmplitudeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAuditWebhookArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsS3Args;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsTranslateArgs;
-import com.descope.pulumi.descope.inputs.ProjectConnectorsCybersixgillArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsBitsightArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDatadogArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDevrevGrowArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDoceboArgs;
@@ -142,18 +142,18 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      * 
      */
-    @Import(name="cybersixgills")
-    private @Nullable Output<List<ProjectConnectorsCybersixgillArgs>> cybersixgills;
+    @Import(name="bitsights")
+    private @Nullable Output<List<ProjectConnectorsBitsightArgs>> bitsights;
 
     /**
-     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      * 
      */
-    public Optional<Output<List<ProjectConnectorsCybersixgillArgs>>> cybersixgills() {
-        return Optional.ofNullable(this.cybersixgills);
+    public Optional<Output<List<ProjectConnectorsBitsightArgs>>> bitsights() {
+        return Optional.ofNullable(this.bitsights);
     }
 
     /**
@@ -839,7 +839,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.auditWebhooks = $.auditWebhooks;
         this.awsS3s = $.awsS3s;
         this.awsTranslates = $.awsTranslates;
-        this.cybersixgills = $.cybersixgills;
+        this.bitsights = $.bitsights;
         this.datadogs = $.datadogs;
         this.devrevGrows = $.devrevGrows;
         this.docebos = $.docebos;
@@ -1061,34 +1061,34 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * @param bitsights Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
          * 
          * @return builder
          * 
          */
-        public Builder cybersixgills(@Nullable Output<List<ProjectConnectorsCybersixgillArgs>> cybersixgills) {
-            $.cybersixgills = cybersixgills;
+        public Builder bitsights(@Nullable Output<List<ProjectConnectorsBitsightArgs>> bitsights) {
+            $.bitsights = bitsights;
             return this;
         }
 
         /**
-         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * @param bitsights Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
          * 
          * @return builder
          * 
          */
-        public Builder cybersixgills(List<ProjectConnectorsCybersixgillArgs> cybersixgills) {
-            return cybersixgills(Output.of(cybersixgills));
+        public Builder bitsights(List<ProjectConnectorsBitsightArgs> bitsights) {
+            return bitsights(Output.of(bitsights));
         }
 
         /**
-         * @param cybersixgills Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+         * @param bitsights Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
          * 
          * @return builder
          * 
          */
-        public Builder cybersixgills(ProjectConnectorsCybersixgillArgs... cybersixgills) {
-            return cybersixgills(List.of(cybersixgills));
+        public Builder bitsights(ProjectConnectorsBitsightArgs... bitsights) {
+            return bitsights(List.of(bitsights));
         }
 
         /**

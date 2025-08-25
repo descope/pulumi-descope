@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectInviteSettingsEmailServiceArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
@@ -29,6 +30,21 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
      */
     public Optional<Output<Boolean>> addMagiclinkToken() {
         return Optional.ofNullable(this.addMagiclinkToken);
+    }
+
+    /**
+     * Settings related to sending invitation emails.
+     * 
+     */
+    @Import(name="emailService")
+    private @Nullable Output<ProjectInviteSettingsEmailServiceArgs> emailService;
+
+    /**
+     * @return Settings related to sending invitation emails.
+     * 
+     */
+    public Optional<Output<ProjectInviteSettingsEmailServiceArgs>> emailService() {
+        return Optional.ofNullable(this.emailService);
     }
 
     /**
@@ -95,6 +111,7 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
 
     private ProjectInviteSettingsArgs(ProjectInviteSettingsArgs $) {
         this.addMagiclinkToken = $.addMagiclinkToken;
+        this.emailService = $.emailService;
         this.inviteUrl = $.inviteUrl;
         this.requireInvitation = $.requireInvitation;
         this.sendEmail = $.sendEmail;
@@ -138,6 +155,27 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
          */
         public Builder addMagiclinkToken(Boolean addMagiclinkToken) {
             return addMagiclinkToken(Output.of(addMagiclinkToken));
+        }
+
+        /**
+         * @param emailService Settings related to sending invitation emails.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailService(@Nullable Output<ProjectInviteSettingsEmailServiceArgs> emailService) {
+            $.emailService = emailService;
+            return this;
+        }
+
+        /**
+         * @param emailService Settings related to sending invitation emails.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailService(ProjectInviteSettingsEmailServiceArgs emailService) {
+            return emailService(Output.of(emailService));
         }
 
         /**

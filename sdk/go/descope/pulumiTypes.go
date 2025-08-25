@@ -1126,7 +1126,9 @@ func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 type ProjectAttributesTenant struct {
 	// Determines the required permissions for this tenant.
 	Authorization *ProjectAttributesTenantAuthorization `pulumi:"authorization"`
-	// The name of the attribute.
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id *string `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
 	Name string `pulumi:"name"`
 	// When the attribute type is "multiselect". A list of options to choose from.
 	SelectOptions []string `pulumi:"selectOptions"`
@@ -1148,7 +1150,9 @@ type ProjectAttributesTenantInput interface {
 type ProjectAttributesTenantArgs struct {
 	// Determines the required permissions for this tenant.
 	Authorization ProjectAttributesTenantAuthorizationPtrInput `pulumi:"authorization"`
-	// The name of the attribute.
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
 	Name pulumi.StringInput `pulumi:"name"`
 	// When the attribute type is "multiselect". A list of options to choose from.
 	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
@@ -1212,7 +1216,12 @@ func (o ProjectAttributesTenantOutput) Authorization() ProjectAttributesTenantAu
 	return o.ApplyT(func(v ProjectAttributesTenant) *ProjectAttributesTenantAuthorization { return v.Authorization }).(ProjectAttributesTenantAuthorizationPtrOutput)
 }
 
-// The name of the attribute.
+// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+func (o ProjectAttributesTenantOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAttributesTenant) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The name of the attribute. This value is called `Display Name` in the Descope console.
 func (o ProjectAttributesTenantOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesTenant) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -1385,7 +1394,9 @@ func (o ProjectAttributesTenantAuthorizationPtrOutput) ViewPermissions() pulumi.
 }
 
 type ProjectAttributesUser struct {
-	// The name of the attribute.
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id *string `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
 	Name string `pulumi:"name"`
 	// When the attribute type is "multiselect". A list of options to choose from.
 	SelectOptions []string `pulumi:"selectOptions"`
@@ -1407,7 +1418,9 @@ type ProjectAttributesUserInput interface {
 }
 
 type ProjectAttributesUserArgs struct {
-	// The name of the attribute.
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
 	Name pulumi.StringInput `pulumi:"name"`
 	// When the attribute type is "multiselect". A list of options to choose from.
 	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
@@ -1468,7 +1481,12 @@ func (o ProjectAttributesUserOutput) ToProjectAttributesUserOutputWithContext(ct
 	return o
 }
 
-// The name of the attribute.
+// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+func (o ProjectAttributesUserOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAttributesUser) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The name of the attribute. This value is called `Display Name` in the Descope console.
 func (o ProjectAttributesUserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectAttributesUser) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -11581,6 +11599,8 @@ type ProjectAuthenticationSso struct {
 	MergeUsers *bool `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
 	RedirectUrl *string `pulumi:"redirectUrl"`
+	// Configuration block for the SSO Suite.
+	SsoSuiteSettings *ProjectAuthenticationSsoSsoSuiteSettings `pulumi:"ssoSuiteSettings"`
 }
 
 // ProjectAuthenticationSsoInput is an input type that accepts ProjectAuthenticationSsoArgs and ProjectAuthenticationSsoOutput values.
@@ -11601,6 +11621,8 @@ type ProjectAuthenticationSsoArgs struct {
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
 	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
+	// Configuration block for the SSO Suite.
+	SsoSuiteSettings ProjectAuthenticationSsoSsoSuiteSettingsPtrInput `pulumi:"ssoSuiteSettings"`
 }
 
 func (ProjectAuthenticationSsoArgs) ElementType() reflect.Type {
@@ -11695,6 +11717,11 @@ func (o ProjectAuthenticationSsoOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
 }
 
+// Configuration block for the SSO Suite.
+func (o ProjectAuthenticationSsoOutput) SsoSuiteSettings() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *ProjectAuthenticationSsoSsoSuiteSettings { return v.SsoSuiteSettings }).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
+}
+
 type ProjectAuthenticationSsoPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectAuthenticationSsoPtrOutput) ElementType() reflect.Type {
@@ -11746,6 +11773,248 @@ func (o ProjectAuthenticationSsoPtrOutput) RedirectUrl() pulumi.StringPtrOutput 
 			return nil
 		}
 		return v.RedirectUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configuration block for the SSO Suite.
+func (o ProjectAuthenticationSsoPtrOutput) SsoSuiteSettings() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *ProjectAuthenticationSsoSsoSuiteSettings {
+		if v == nil {
+			return nil
+		}
+		return v.SsoSuiteSettings
+	}).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
+}
+
+type ProjectAuthenticationSsoSsoSuiteSettings struct {
+	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+	HideDomains *bool `pulumi:"hideDomains"`
+	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+	HideGroupsMapping *bool `pulumi:"hideGroupsMapping"`
+	// Setting this to `true` will hide the OIDC configuration option.
+	HideOidc *bool `pulumi:"hideOidc"`
+	// Setting this to `true` will hide the SAML configuration option.
+	HideSaml *bool `pulumi:"hideSaml"`
+	// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+	HideScim *bool `pulumi:"hideScim"`
+	// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+	StyleId *string `pulumi:"styleId"`
+}
+
+// ProjectAuthenticationSsoSsoSuiteSettingsInput is an input type that accepts ProjectAuthenticationSsoSsoSuiteSettingsArgs and ProjectAuthenticationSsoSsoSuiteSettingsOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationSsoSsoSuiteSettingsInput` via:
+//
+//	ProjectAuthenticationSsoSsoSuiteSettingsArgs{...}
+type ProjectAuthenticationSsoSsoSuiteSettingsInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationSsoSsoSuiteSettingsOutput() ProjectAuthenticationSsoSsoSuiteSettingsOutput
+	ToProjectAuthenticationSsoSsoSuiteSettingsOutputWithContext(context.Context) ProjectAuthenticationSsoSsoSuiteSettingsOutput
+}
+
+type ProjectAuthenticationSsoSsoSuiteSettingsArgs struct {
+	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+	HideDomains pulumi.BoolPtrInput `pulumi:"hideDomains"`
+	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+	HideGroupsMapping pulumi.BoolPtrInput `pulumi:"hideGroupsMapping"`
+	// Setting this to `true` will hide the OIDC configuration option.
+	HideOidc pulumi.BoolPtrInput `pulumi:"hideOidc"`
+	// Setting this to `true` will hide the SAML configuration option.
+	HideSaml pulumi.BoolPtrInput `pulumi:"hideSaml"`
+	// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+	HideScim pulumi.BoolPtrInput `pulumi:"hideScim"`
+	// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+	StyleId pulumi.StringPtrInput `pulumi:"styleId"`
+}
+
+func (ProjectAuthenticationSsoSsoSuiteSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettings)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationSsoSsoSuiteSettingsArgs) ToProjectAuthenticationSsoSsoSuiteSettingsOutput() ProjectAuthenticationSsoSsoSuiteSettingsOutput {
+	return i.ToProjectAuthenticationSsoSsoSuiteSettingsOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationSsoSsoSuiteSettingsArgs) ToProjectAuthenticationSsoSsoSuiteSettingsOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationSsoSsoSuiteSettingsOutput)
+}
+
+func (i ProjectAuthenticationSsoSsoSuiteSettingsArgs) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutput() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return i.ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationSsoSsoSuiteSettingsArgs) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationSsoSsoSuiteSettingsOutput).ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationSsoSsoSuiteSettingsPtrInput is an input type that accepts ProjectAuthenticationSsoSsoSuiteSettingsArgs, ProjectAuthenticationSsoSsoSuiteSettingsPtr and ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationSsoSsoSuiteSettingsPtrInput` via:
+//
+//	        ProjectAuthenticationSsoSsoSuiteSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationSsoSsoSuiteSettingsPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutput() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput
+	ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(context.Context) ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput
+}
+
+type projectAuthenticationSsoSsoSuiteSettingsPtrType ProjectAuthenticationSsoSsoSuiteSettingsArgs
+
+func ProjectAuthenticationSsoSsoSuiteSettingsPtr(v *ProjectAuthenticationSsoSsoSuiteSettingsArgs) ProjectAuthenticationSsoSsoSuiteSettingsPtrInput {
+	return (*projectAuthenticationSsoSsoSuiteSettingsPtrType)(v)
+}
+
+func (*projectAuthenticationSsoSsoSuiteSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationSsoSsoSuiteSettings)(nil)).Elem()
+}
+
+func (i *projectAuthenticationSsoSsoSuiteSettingsPtrType) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutput() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return i.ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationSsoSsoSuiteSettingsPtrType) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
+}
+
+type ProjectAuthenticationSsoSsoSuiteSettingsOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationSsoSsoSuiteSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettings)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ToProjectAuthenticationSsoSsoSuiteSettingsOutput() ProjectAuthenticationSsoSsoSuiteSettingsOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ToProjectAuthenticationSsoSsoSuiteSettingsOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutput() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o.ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationSsoSsoSuiteSettings) *ProjectAuthenticationSsoSsoSuiteSettings {
+		return &v
+	}).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
+}
+
+// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideDomains }).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideGroupsMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideGroupsMapping }).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the OIDC configuration option.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideOidc() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideOidc }).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the SAML configuration option.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideSaml() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideSaml }).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideScim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideScim }).(pulumi.BoolPtrOutput)
+}
+
+// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) StyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *string { return v.StyleId }).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationSsoSsoSuiteSettings)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutput() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) ToProjectAuthenticationSsoSsoSuiteSettingsPtrOutputWithContext(ctx context.Context) ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) Elem() ProjectAuthenticationSsoSsoSuiteSettingsOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) ProjectAuthenticationSsoSsoSuiteSettings {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationSsoSsoSuiteSettings
+		return ret
+	}).(ProjectAuthenticationSsoSsoSuiteSettingsOutput)
+}
+
+// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideDomains
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideGroupsMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideGroupsMapping
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the OIDC configuration option.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideOidc() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideOidc
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the SAML configuration option.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideSaml() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideSaml
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideScim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideScim
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) StyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StyleId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -12155,6 +12424,8 @@ func (o ProjectAuthorizationPermissionArrayOutput) Index(i pulumi.IntInput) Proj
 }
 
 type ProjectAuthorizationRole struct {
+	// Whether this role should automatically be assigned to users that are created without any roles.
+	Default *bool `pulumi:"default"`
 	// A description for the role.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
@@ -12162,6 +12433,8 @@ type ProjectAuthorizationRole struct {
 	Name string `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
 	Permissions []string `pulumi:"permissions"`
+	// Whether this role should not be displayed to tenant admins.
+	Private *bool `pulumi:"private"`
 }
 
 // ProjectAuthorizationRoleInput is an input type that accepts ProjectAuthorizationRoleArgs and ProjectAuthorizationRoleOutput values.
@@ -12176,6 +12449,8 @@ type ProjectAuthorizationRoleInput interface {
 }
 
 type ProjectAuthorizationRoleArgs struct {
+	// Whether this role should automatically be assigned to users that are created without any roles.
+	Default pulumi.BoolPtrInput `pulumi:"default"`
 	// A description for the role.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
@@ -12183,6 +12458,8 @@ type ProjectAuthorizationRoleArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
 	Permissions pulumi.StringArrayInput `pulumi:"permissions"`
+	// Whether this role should not be displayed to tenant admins.
+	Private pulumi.BoolPtrInput `pulumi:"private"`
 }
 
 func (ProjectAuthorizationRoleArgs) ElementType() reflect.Type {
@@ -12236,6 +12513,11 @@ func (o ProjectAuthorizationRoleOutput) ToProjectAuthorizationRoleOutputWithCont
 	return o
 }
 
+// Whether this role should automatically be assigned to users that are created without any roles.
+func (o ProjectAuthorizationRoleOutput) Default() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthorizationRole) *bool { return v.Default }).(pulumi.BoolPtrOutput)
+}
+
 // A description for the role.
 func (o ProjectAuthorizationRoleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Description }).(pulumi.StringPtrOutput)
@@ -12253,6 +12535,11 @@ func (o ProjectAuthorizationRoleOutput) Name() pulumi.StringOutput {
 // A list of permissions by name to be included in the role.
 func (o ProjectAuthorizationRoleOutput) Permissions() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) []string { return v.Permissions }).(pulumi.StringArrayOutput)
+}
+
+// Whether this role should not be displayed to tenant admins.
+func (o ProjectAuthorizationRoleOutput) Private() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthorizationRole) *bool { return v.Private }).(pulumi.BoolPtrOutput)
 }
 
 type ProjectAuthorizationRoleArrayOutput struct{ *pulumi.OutputState }
@@ -12286,8 +12573,8 @@ type ProjectConnectors struct {
 	AwsS3s []ProjectConnectorsAwsS3 `pulumi:"awsS3s"`
 	// Localize the language of your login and user journey screens with the Amazon Translate connector.
 	AwsTranslates []ProjectConnectorsAwsTranslate `pulumi:"awsTranslates"`
-	// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
-	Cybersixgills []ProjectConnectorsCybersixgill `pulumi:"cybersixgills"`
+	// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
+	Bitsights []ProjectConnectorsBitsight `pulumi:"bitsights"`
 	// Stream authentication audit logs with the Datadog connector.
 	Datadogs []ProjectConnectorsDatadog `pulumi:"datadogs"`
 	// DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -12402,8 +12689,8 @@ type ProjectConnectorsArgs struct {
 	AwsS3s ProjectConnectorsAwsS3ArrayInput `pulumi:"awsS3s"`
 	// Localize the language of your login and user journey screens with the Amazon Translate connector.
 	AwsTranslates ProjectConnectorsAwsTranslateArrayInput `pulumi:"awsTranslates"`
-	// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
-	Cybersixgills ProjectConnectorsCybersixgillArrayInput `pulumi:"cybersixgills"`
+	// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
+	Bitsights ProjectConnectorsBitsightArrayInput `pulumi:"bitsights"`
 	// Stream authentication audit logs with the Datadog connector.
 	Datadogs ProjectConnectorsDatadogArrayInput `pulumi:"datadogs"`
 	// DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -12598,9 +12885,9 @@ func (o ProjectConnectorsOutput) AwsTranslates() ProjectConnectorsAwsTranslateAr
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAwsTranslate { return v.AwsTranslates }).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
-// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
-func (o ProjectConnectorsOutput) Cybersixgills() ProjectConnectorsCybersixgillArrayOutput {
-	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsCybersixgill { return v.Cybersixgills }).(ProjectConnectorsCybersixgillArrayOutput)
+// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
+func (o ProjectConnectorsOutput) Bitsights() ProjectConnectorsBitsightArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsBitsight { return v.Bitsights }).(ProjectConnectorsBitsightArrayOutput)
 }
 
 // Stream authentication audit logs with the Datadog connector.
@@ -12904,14 +13191,14 @@ func (o ProjectConnectorsPtrOutput) AwsTranslates() ProjectConnectorsAwsTranslat
 	}).(ProjectConnectorsAwsTranslateArrayOutput)
 }
 
-// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
-func (o ProjectConnectorsPtrOutput) Cybersixgills() ProjectConnectorsCybersixgillArrayOutput {
-	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsCybersixgill {
+// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
+func (o ProjectConnectorsPtrOutput) Bitsights() ProjectConnectorsBitsightArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsBitsight {
 		if v == nil {
 			return nil
 		}
-		return v.Cybersixgills
-	}).(ProjectConnectorsCybersixgillArrayOutput)
+		return v.Bitsights
+	}).(ProjectConnectorsBitsightArrayOutput)
 }
 
 // Stream authentication audit logs with the Datadog connector.
@@ -14865,10 +15152,10 @@ func (o ProjectConnectorsAwsTranslateArrayOutput) Index(i pulumi.IntInput) Proje
 	}).(ProjectConnectorsAwsTranslateOutput)
 }
 
-type ProjectConnectorsCybersixgill struct {
-	// API Client ID issued when you create the credentials in Cybersixgill.
+type ProjectConnectorsBitsight struct {
+	// API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
 	ClientId string `pulumi:"clientId"`
-	// Client secret issued when you create the credentials in Cybersixgill.
+	// Client secret issued when you create the credentials in Bitsight Threat Intelligence.
 	ClientSecret string `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
@@ -14877,21 +15164,21 @@ type ProjectConnectorsCybersixgill struct {
 	Name string `pulumi:"name"`
 }
 
-// ProjectConnectorsCybersixgillInput is an input type that accepts ProjectConnectorsCybersixgillArgs and ProjectConnectorsCybersixgillOutput values.
-// You can construct a concrete instance of `ProjectConnectorsCybersixgillInput` via:
+// ProjectConnectorsBitsightInput is an input type that accepts ProjectConnectorsBitsightArgs and ProjectConnectorsBitsightOutput values.
+// You can construct a concrete instance of `ProjectConnectorsBitsightInput` via:
 //
-//	ProjectConnectorsCybersixgillArgs{...}
-type ProjectConnectorsCybersixgillInput interface {
+//	ProjectConnectorsBitsightArgs{...}
+type ProjectConnectorsBitsightInput interface {
 	pulumi.Input
 
-	ToProjectConnectorsCybersixgillOutput() ProjectConnectorsCybersixgillOutput
-	ToProjectConnectorsCybersixgillOutputWithContext(context.Context) ProjectConnectorsCybersixgillOutput
+	ToProjectConnectorsBitsightOutput() ProjectConnectorsBitsightOutput
+	ToProjectConnectorsBitsightOutputWithContext(context.Context) ProjectConnectorsBitsightOutput
 }
 
-type ProjectConnectorsCybersixgillArgs struct {
-	// API Client ID issued when you create the credentials in Cybersixgill.
+type ProjectConnectorsBitsightArgs struct {
+	// API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
 	ClientId pulumi.StringInput `pulumi:"clientId"`
-	// Client secret issued when you create the credentials in Cybersixgill.
+	// Client secret issued when you create the credentials in Bitsight Threat Intelligence.
 	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
@@ -14900,99 +15187,99 @@ type ProjectConnectorsCybersixgillArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 }
 
-func (ProjectConnectorsCybersixgillArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsCybersixgill)(nil)).Elem()
+func (ProjectConnectorsBitsightArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsBitsight)(nil)).Elem()
 }
 
-func (i ProjectConnectorsCybersixgillArgs) ToProjectConnectorsCybersixgillOutput() ProjectConnectorsCybersixgillOutput {
-	return i.ToProjectConnectorsCybersixgillOutputWithContext(context.Background())
+func (i ProjectConnectorsBitsightArgs) ToProjectConnectorsBitsightOutput() ProjectConnectorsBitsightOutput {
+	return i.ToProjectConnectorsBitsightOutputWithContext(context.Background())
 }
 
-func (i ProjectConnectorsCybersixgillArgs) ToProjectConnectorsCybersixgillOutputWithContext(ctx context.Context) ProjectConnectorsCybersixgillOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCybersixgillOutput)
+func (i ProjectConnectorsBitsightArgs) ToProjectConnectorsBitsightOutputWithContext(ctx context.Context) ProjectConnectorsBitsightOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsBitsightOutput)
 }
 
-// ProjectConnectorsCybersixgillArrayInput is an input type that accepts ProjectConnectorsCybersixgillArray and ProjectConnectorsCybersixgillArrayOutput values.
-// You can construct a concrete instance of `ProjectConnectorsCybersixgillArrayInput` via:
+// ProjectConnectorsBitsightArrayInput is an input type that accepts ProjectConnectorsBitsightArray and ProjectConnectorsBitsightArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsBitsightArrayInput` via:
 //
-//	ProjectConnectorsCybersixgillArray{ ProjectConnectorsCybersixgillArgs{...} }
-type ProjectConnectorsCybersixgillArrayInput interface {
+//	ProjectConnectorsBitsightArray{ ProjectConnectorsBitsightArgs{...} }
+type ProjectConnectorsBitsightArrayInput interface {
 	pulumi.Input
 
-	ToProjectConnectorsCybersixgillArrayOutput() ProjectConnectorsCybersixgillArrayOutput
-	ToProjectConnectorsCybersixgillArrayOutputWithContext(context.Context) ProjectConnectorsCybersixgillArrayOutput
+	ToProjectConnectorsBitsightArrayOutput() ProjectConnectorsBitsightArrayOutput
+	ToProjectConnectorsBitsightArrayOutputWithContext(context.Context) ProjectConnectorsBitsightArrayOutput
 }
 
-type ProjectConnectorsCybersixgillArray []ProjectConnectorsCybersixgillInput
+type ProjectConnectorsBitsightArray []ProjectConnectorsBitsightInput
 
-func (ProjectConnectorsCybersixgillArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsCybersixgill)(nil)).Elem()
+func (ProjectConnectorsBitsightArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsBitsight)(nil)).Elem()
 }
 
-func (i ProjectConnectorsCybersixgillArray) ToProjectConnectorsCybersixgillArrayOutput() ProjectConnectorsCybersixgillArrayOutput {
-	return i.ToProjectConnectorsCybersixgillArrayOutputWithContext(context.Background())
+func (i ProjectConnectorsBitsightArray) ToProjectConnectorsBitsightArrayOutput() ProjectConnectorsBitsightArrayOutput {
+	return i.ToProjectConnectorsBitsightArrayOutputWithContext(context.Background())
 }
 
-func (i ProjectConnectorsCybersixgillArray) ToProjectConnectorsCybersixgillArrayOutputWithContext(ctx context.Context) ProjectConnectorsCybersixgillArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCybersixgillArrayOutput)
+func (i ProjectConnectorsBitsightArray) ToProjectConnectorsBitsightArrayOutputWithContext(ctx context.Context) ProjectConnectorsBitsightArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsBitsightArrayOutput)
 }
 
-type ProjectConnectorsCybersixgillOutput struct{ *pulumi.OutputState }
+type ProjectConnectorsBitsightOutput struct{ *pulumi.OutputState }
 
-func (ProjectConnectorsCybersixgillOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ProjectConnectorsCybersixgill)(nil)).Elem()
+func (ProjectConnectorsBitsightOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsBitsight)(nil)).Elem()
 }
 
-func (o ProjectConnectorsCybersixgillOutput) ToProjectConnectorsCybersixgillOutput() ProjectConnectorsCybersixgillOutput {
+func (o ProjectConnectorsBitsightOutput) ToProjectConnectorsBitsightOutput() ProjectConnectorsBitsightOutput {
 	return o
 }
 
-func (o ProjectConnectorsCybersixgillOutput) ToProjectConnectorsCybersixgillOutputWithContext(ctx context.Context) ProjectConnectorsCybersixgillOutput {
+func (o ProjectConnectorsBitsightOutput) ToProjectConnectorsBitsightOutputWithContext(ctx context.Context) ProjectConnectorsBitsightOutput {
 	return o
 }
 
-// API Client ID issued when you create the credentials in Cybersixgill.
-func (o ProjectConnectorsCybersixgillOutput) ClientId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsCybersixgill) string { return v.ClientId }).(pulumi.StringOutput)
+// API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
+func (o ProjectConnectorsBitsightOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsBitsight) string { return v.ClientId }).(pulumi.StringOutput)
 }
 
-// Client secret issued when you create the credentials in Cybersixgill.
-func (o ProjectConnectorsCybersixgillOutput) ClientSecret() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsCybersixgill) string { return v.ClientSecret }).(pulumi.StringOutput)
+// Client secret issued when you create the credentials in Bitsight Threat Intelligence.
+func (o ProjectConnectorsBitsightOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsBitsight) string { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
 // A description of what your connector is used for.
-func (o ProjectConnectorsCybersixgillOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsCybersixgill) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o ProjectConnectorsBitsightOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsBitsight) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o ProjectConnectorsCybersixgillOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ProjectConnectorsCybersixgill) *string { return v.Id }).(pulumi.StringPtrOutput)
+func (o ProjectConnectorsBitsightOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsBitsight) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 // A custom name for your connector.
-func (o ProjectConnectorsCybersixgillOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsCybersixgill) string { return v.Name }).(pulumi.StringOutput)
+func (o ProjectConnectorsBitsightOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsBitsight) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type ProjectConnectorsCybersixgillArrayOutput struct{ *pulumi.OutputState }
+type ProjectConnectorsBitsightArrayOutput struct{ *pulumi.OutputState }
 
-func (ProjectConnectorsCybersixgillArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ProjectConnectorsCybersixgill)(nil)).Elem()
+func (ProjectConnectorsBitsightArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsBitsight)(nil)).Elem()
 }
 
-func (o ProjectConnectorsCybersixgillArrayOutput) ToProjectConnectorsCybersixgillArrayOutput() ProjectConnectorsCybersixgillArrayOutput {
+func (o ProjectConnectorsBitsightArrayOutput) ToProjectConnectorsBitsightArrayOutput() ProjectConnectorsBitsightArrayOutput {
 	return o
 }
 
-func (o ProjectConnectorsCybersixgillArrayOutput) ToProjectConnectorsCybersixgillArrayOutputWithContext(ctx context.Context) ProjectConnectorsCybersixgillArrayOutput {
+func (o ProjectConnectorsBitsightArrayOutput) ToProjectConnectorsBitsightArrayOutputWithContext(ctx context.Context) ProjectConnectorsBitsightArrayOutput {
 	return o
 }
 
-func (o ProjectConnectorsCybersixgillArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsCybersixgillOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsCybersixgill {
-		return vs[0].([]ProjectConnectorsCybersixgill)[vs[1].(int)]
-	}).(ProjectConnectorsCybersixgillOutput)
+func (o ProjectConnectorsBitsightArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsBitsightOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsBitsight {
+		return vs[0].([]ProjectConnectorsBitsight)[vs[1].(int)]
+	}).(ProjectConnectorsBitsightOutput)
 }
 
 type ProjectConnectorsDatadog struct {
@@ -21174,6 +21461,8 @@ type ProjectConnectorsRecaptchaEnterprise struct {
 	AssessmentScore *float64 `pulumi:"assessmentScore"`
 	// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
 	BaseUrl *string `pulumi:"baseUrl"`
+	// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+	BotThreshold *float64 `pulumi:"botThreshold"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
@@ -21205,6 +21494,8 @@ type ProjectConnectorsRecaptchaEnterpriseArgs struct {
 	AssessmentScore pulumi.Float64PtrInput `pulumi:"assessmentScore"`
 	// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
 	BaseUrl pulumi.StringPtrInput `pulumi:"baseUrl"`
+	// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+	BotThreshold pulumi.Float64PtrInput `pulumi:"botThreshold"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
@@ -21282,6 +21573,11 @@ func (o ProjectConnectorsRecaptchaEnterpriseOutput) AssessmentScore() pulumi.Flo
 // Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) BaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.BaseUrl }).(pulumi.StringPtrOutput)
+}
+
+// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+func (o ProjectConnectorsRecaptchaEnterpriseOutput) BotThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *float64 { return v.BotThreshold }).(pulumi.Float64PtrOutput)
 }
 
 // A description of what your connector is used for.
@@ -24889,6 +25185,8 @@ func (o ProjectFlowsMapOutput) MapIndex(k pulumi.StringInput) ProjectFlowsOutput
 type ProjectInviteSettings struct {
 	// Whether to include a magic link token in invitation messages.
 	AddMagiclinkToken *bool `pulumi:"addMagiclinkToken"`
+	// Settings related to sending invitation emails.
+	EmailService *ProjectInviteSettingsEmailService `pulumi:"emailService"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl *string `pulumi:"inviteUrl"`
 	// Whether users must be invited before they can sign up to the project.
@@ -24913,6 +25211,8 @@ type ProjectInviteSettingsInput interface {
 type ProjectInviteSettingsArgs struct {
 	// Whether to include a magic link token in invitation messages.
 	AddMagiclinkToken pulumi.BoolPtrInput `pulumi:"addMagiclinkToken"`
+	// Settings related to sending invitation emails.
+	EmailService ProjectInviteSettingsEmailServicePtrInput `pulumi:"emailService"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl pulumi.StringPtrInput `pulumi:"inviteUrl"`
 	// Whether users must be invited before they can sign up to the project.
@@ -25005,6 +25305,11 @@ func (o ProjectInviteSettingsOutput) AddMagiclinkToken() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectInviteSettings) *bool { return v.AddMagiclinkToken }).(pulumi.BoolPtrOutput)
 }
 
+// Settings related to sending invitation emails.
+func (o ProjectInviteSettingsOutput) EmailService() ProjectInviteSettingsEmailServicePtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettings) *ProjectInviteSettingsEmailService { return v.EmailService }).(ProjectInviteSettingsEmailServicePtrOutput)
+}
+
 // Custom URL to include in the message sent to invited users.
 func (o ProjectInviteSettingsOutput) InviteUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectInviteSettings) *string { return v.InviteUrl }).(pulumi.StringPtrOutput)
@@ -25059,6 +25364,16 @@ func (o ProjectInviteSettingsPtrOutput) AddMagiclinkToken() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Settings related to sending invitation emails.
+func (o ProjectInviteSettingsPtrOutput) EmailService() ProjectInviteSettingsEmailServicePtrOutput {
+	return o.ApplyT(func(v *ProjectInviteSettings) *ProjectInviteSettingsEmailService {
+		if v == nil {
+			return nil
+		}
+		return v.EmailService
+	}).(ProjectInviteSettingsEmailServicePtrOutput)
+}
+
 // Custom URL to include in the message sent to invited users.
 func (o ProjectInviteSettingsPtrOutput) InviteUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectInviteSettings) *string {
@@ -25097,6 +25412,312 @@ func (o ProjectInviteSettingsPtrOutput) SendText() pulumi.BoolPtrOutput {
 		}
 		return v.SendText
 	}).(pulumi.BoolPtrOutput)
+}
+
+type ProjectInviteSettingsEmailService struct {
+	// The name of the email connector to use for sending emails.
+	Connector string `pulumi:"connector"`
+	// A list of email templates for different authentication flows.
+	Templates []ProjectInviteSettingsEmailServiceTemplate `pulumi:"templates"`
+}
+
+// ProjectInviteSettingsEmailServiceInput is an input type that accepts ProjectInviteSettingsEmailServiceArgs and ProjectInviteSettingsEmailServiceOutput values.
+// You can construct a concrete instance of `ProjectInviteSettingsEmailServiceInput` via:
+//
+//	ProjectInviteSettingsEmailServiceArgs{...}
+type ProjectInviteSettingsEmailServiceInput interface {
+	pulumi.Input
+
+	ToProjectInviteSettingsEmailServiceOutput() ProjectInviteSettingsEmailServiceOutput
+	ToProjectInviteSettingsEmailServiceOutputWithContext(context.Context) ProjectInviteSettingsEmailServiceOutput
+}
+
+type ProjectInviteSettingsEmailServiceArgs struct {
+	// The name of the email connector to use for sending emails.
+	Connector pulumi.StringInput `pulumi:"connector"`
+	// A list of email templates for different authentication flows.
+	Templates ProjectInviteSettingsEmailServiceTemplateArrayInput `pulumi:"templates"`
+}
+
+func (ProjectInviteSettingsEmailServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectInviteSettingsEmailService)(nil)).Elem()
+}
+
+func (i ProjectInviteSettingsEmailServiceArgs) ToProjectInviteSettingsEmailServiceOutput() ProjectInviteSettingsEmailServiceOutput {
+	return i.ToProjectInviteSettingsEmailServiceOutputWithContext(context.Background())
+}
+
+func (i ProjectInviteSettingsEmailServiceArgs) ToProjectInviteSettingsEmailServiceOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectInviteSettingsEmailServiceOutput)
+}
+
+func (i ProjectInviteSettingsEmailServiceArgs) ToProjectInviteSettingsEmailServicePtrOutput() ProjectInviteSettingsEmailServicePtrOutput {
+	return i.ToProjectInviteSettingsEmailServicePtrOutputWithContext(context.Background())
+}
+
+func (i ProjectInviteSettingsEmailServiceArgs) ToProjectInviteSettingsEmailServicePtrOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectInviteSettingsEmailServiceOutput).ToProjectInviteSettingsEmailServicePtrOutputWithContext(ctx)
+}
+
+// ProjectInviteSettingsEmailServicePtrInput is an input type that accepts ProjectInviteSettingsEmailServiceArgs, ProjectInviteSettingsEmailServicePtr and ProjectInviteSettingsEmailServicePtrOutput values.
+// You can construct a concrete instance of `ProjectInviteSettingsEmailServicePtrInput` via:
+//
+//	        ProjectInviteSettingsEmailServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectInviteSettingsEmailServicePtrInput interface {
+	pulumi.Input
+
+	ToProjectInviteSettingsEmailServicePtrOutput() ProjectInviteSettingsEmailServicePtrOutput
+	ToProjectInviteSettingsEmailServicePtrOutputWithContext(context.Context) ProjectInviteSettingsEmailServicePtrOutput
+}
+
+type projectInviteSettingsEmailServicePtrType ProjectInviteSettingsEmailServiceArgs
+
+func ProjectInviteSettingsEmailServicePtr(v *ProjectInviteSettingsEmailServiceArgs) ProjectInviteSettingsEmailServicePtrInput {
+	return (*projectInviteSettingsEmailServicePtrType)(v)
+}
+
+func (*projectInviteSettingsEmailServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectInviteSettingsEmailService)(nil)).Elem()
+}
+
+func (i *projectInviteSettingsEmailServicePtrType) ToProjectInviteSettingsEmailServicePtrOutput() ProjectInviteSettingsEmailServicePtrOutput {
+	return i.ToProjectInviteSettingsEmailServicePtrOutputWithContext(context.Background())
+}
+
+func (i *projectInviteSettingsEmailServicePtrType) ToProjectInviteSettingsEmailServicePtrOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectInviteSettingsEmailServicePtrOutput)
+}
+
+type ProjectInviteSettingsEmailServiceOutput struct{ *pulumi.OutputState }
+
+func (ProjectInviteSettingsEmailServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectInviteSettingsEmailService)(nil)).Elem()
+}
+
+func (o ProjectInviteSettingsEmailServiceOutput) ToProjectInviteSettingsEmailServiceOutput() ProjectInviteSettingsEmailServiceOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServiceOutput) ToProjectInviteSettingsEmailServiceOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServiceOutput) ToProjectInviteSettingsEmailServicePtrOutput() ProjectInviteSettingsEmailServicePtrOutput {
+	return o.ToProjectInviteSettingsEmailServicePtrOutputWithContext(context.Background())
+}
+
+func (o ProjectInviteSettingsEmailServiceOutput) ToProjectInviteSettingsEmailServicePtrOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectInviteSettingsEmailService) *ProjectInviteSettingsEmailService {
+		return &v
+	}).(ProjectInviteSettingsEmailServicePtrOutput)
+}
+
+// The name of the email connector to use for sending emails.
+func (o ProjectInviteSettingsEmailServiceOutput) Connector() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailService) string { return v.Connector }).(pulumi.StringOutput)
+}
+
+// A list of email templates for different authentication flows.
+func (o ProjectInviteSettingsEmailServiceOutput) Templates() ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailService) []ProjectInviteSettingsEmailServiceTemplate {
+		return v.Templates
+	}).(ProjectInviteSettingsEmailServiceTemplateArrayOutput)
+}
+
+type ProjectInviteSettingsEmailServicePtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectInviteSettingsEmailServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectInviteSettingsEmailService)(nil)).Elem()
+}
+
+func (o ProjectInviteSettingsEmailServicePtrOutput) ToProjectInviteSettingsEmailServicePtrOutput() ProjectInviteSettingsEmailServicePtrOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServicePtrOutput) ToProjectInviteSettingsEmailServicePtrOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServicePtrOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServicePtrOutput) Elem() ProjectInviteSettingsEmailServiceOutput {
+	return o.ApplyT(func(v *ProjectInviteSettingsEmailService) ProjectInviteSettingsEmailService {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectInviteSettingsEmailService
+		return ret
+	}).(ProjectInviteSettingsEmailServiceOutput)
+}
+
+// The name of the email connector to use for sending emails.
+func (o ProjectInviteSettingsEmailServicePtrOutput) Connector() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectInviteSettingsEmailService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Connector
+	}).(pulumi.StringPtrOutput)
+}
+
+// A list of email templates for different authentication flows.
+func (o ProjectInviteSettingsEmailServicePtrOutput) Templates() ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return o.ApplyT(func(v *ProjectInviteSettingsEmailService) []ProjectInviteSettingsEmailServiceTemplate {
+		if v == nil {
+			return nil
+		}
+		return v.Templates
+	}).(ProjectInviteSettingsEmailServiceTemplateArrayOutput)
+}
+
+type ProjectInviteSettingsEmailServiceTemplate struct {
+	// Whether this email template is currently active and in use.
+	Active *bool `pulumi:"active"`
+	// HTML content of the email message body, required if `usePlainTextBody` isn't set.
+	HtmlBody *string `pulumi:"htmlBody"`
+	Id       *string `pulumi:"id"`
+	// Unique name for this email template.
+	Name string `pulumi:"name"`
+	// Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+	PlainTextBody *string `pulumi:"plainTextBody"`
+	// Subject line of the email message.
+	Subject string `pulumi:"subject"`
+	// Whether to use the plain text body instead of HTML for the email.
+	UsePlainTextBody *bool `pulumi:"usePlainTextBody"`
+}
+
+// ProjectInviteSettingsEmailServiceTemplateInput is an input type that accepts ProjectInviteSettingsEmailServiceTemplateArgs and ProjectInviteSettingsEmailServiceTemplateOutput values.
+// You can construct a concrete instance of `ProjectInviteSettingsEmailServiceTemplateInput` via:
+//
+//	ProjectInviteSettingsEmailServiceTemplateArgs{...}
+type ProjectInviteSettingsEmailServiceTemplateInput interface {
+	pulumi.Input
+
+	ToProjectInviteSettingsEmailServiceTemplateOutput() ProjectInviteSettingsEmailServiceTemplateOutput
+	ToProjectInviteSettingsEmailServiceTemplateOutputWithContext(context.Context) ProjectInviteSettingsEmailServiceTemplateOutput
+}
+
+type ProjectInviteSettingsEmailServiceTemplateArgs struct {
+	// Whether this email template is currently active and in use.
+	Active pulumi.BoolPtrInput `pulumi:"active"`
+	// HTML content of the email message body, required if `usePlainTextBody` isn't set.
+	HtmlBody pulumi.StringPtrInput `pulumi:"htmlBody"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	// Unique name for this email template.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+	PlainTextBody pulumi.StringPtrInput `pulumi:"plainTextBody"`
+	// Subject line of the email message.
+	Subject pulumi.StringInput `pulumi:"subject"`
+	// Whether to use the plain text body instead of HTML for the email.
+	UsePlainTextBody pulumi.BoolPtrInput `pulumi:"usePlainTextBody"`
+}
+
+func (ProjectInviteSettingsEmailServiceTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectInviteSettingsEmailServiceTemplate)(nil)).Elem()
+}
+
+func (i ProjectInviteSettingsEmailServiceTemplateArgs) ToProjectInviteSettingsEmailServiceTemplateOutput() ProjectInviteSettingsEmailServiceTemplateOutput {
+	return i.ToProjectInviteSettingsEmailServiceTemplateOutputWithContext(context.Background())
+}
+
+func (i ProjectInviteSettingsEmailServiceTemplateArgs) ToProjectInviteSettingsEmailServiceTemplateOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectInviteSettingsEmailServiceTemplateOutput)
+}
+
+// ProjectInviteSettingsEmailServiceTemplateArrayInput is an input type that accepts ProjectInviteSettingsEmailServiceTemplateArray and ProjectInviteSettingsEmailServiceTemplateArrayOutput values.
+// You can construct a concrete instance of `ProjectInviteSettingsEmailServiceTemplateArrayInput` via:
+//
+//	ProjectInviteSettingsEmailServiceTemplateArray{ ProjectInviteSettingsEmailServiceTemplateArgs{...} }
+type ProjectInviteSettingsEmailServiceTemplateArrayInput interface {
+	pulumi.Input
+
+	ToProjectInviteSettingsEmailServiceTemplateArrayOutput() ProjectInviteSettingsEmailServiceTemplateArrayOutput
+	ToProjectInviteSettingsEmailServiceTemplateArrayOutputWithContext(context.Context) ProjectInviteSettingsEmailServiceTemplateArrayOutput
+}
+
+type ProjectInviteSettingsEmailServiceTemplateArray []ProjectInviteSettingsEmailServiceTemplateInput
+
+func (ProjectInviteSettingsEmailServiceTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectInviteSettingsEmailServiceTemplate)(nil)).Elem()
+}
+
+func (i ProjectInviteSettingsEmailServiceTemplateArray) ToProjectInviteSettingsEmailServiceTemplateArrayOutput() ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return i.ToProjectInviteSettingsEmailServiceTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectInviteSettingsEmailServiceTemplateArray) ToProjectInviteSettingsEmailServiceTemplateArrayOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectInviteSettingsEmailServiceTemplateArrayOutput)
+}
+
+type ProjectInviteSettingsEmailServiceTemplateOutput struct{ *pulumi.OutputState }
+
+func (ProjectInviteSettingsEmailServiceTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectInviteSettingsEmailServiceTemplate)(nil)).Elem()
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) ToProjectInviteSettingsEmailServiceTemplateOutput() ProjectInviteSettingsEmailServiceTemplateOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) ToProjectInviteSettingsEmailServiceTemplateOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceTemplateOutput {
+	return o
+}
+
+// Whether this email template is currently active and in use.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) Active() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) *bool { return v.Active }).(pulumi.BoolPtrOutput)
+}
+
+// HTML content of the email message body, required if `usePlainTextBody` isn't set.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) HtmlBody() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) *string { return v.HtmlBody }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Unique name for this email template.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) PlainTextBody() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) *string { return v.PlainTextBody }).(pulumi.StringPtrOutput)
+}
+
+// Subject line of the email message.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) Subject() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) string { return v.Subject }).(pulumi.StringOutput)
+}
+
+// Whether to use the plain text body instead of HTML for the email.
+func (o ProjectInviteSettingsEmailServiceTemplateOutput) UsePlainTextBody() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettingsEmailServiceTemplate) *bool { return v.UsePlainTextBody }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectInviteSettingsEmailServiceTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectInviteSettingsEmailServiceTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectInviteSettingsEmailServiceTemplate)(nil)).Elem()
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateArrayOutput) ToProjectInviteSettingsEmailServiceTemplateArrayOutput() ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateArrayOutput) ToProjectInviteSettingsEmailServiceTemplateArrayOutputWithContext(ctx context.Context) ProjectInviteSettingsEmailServiceTemplateArrayOutput {
+	return o
+}
+
+func (o ProjectInviteSettingsEmailServiceTemplateArrayOutput) Index(i pulumi.IntInput) ProjectInviteSettingsEmailServiceTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectInviteSettingsEmailServiceTemplate {
+		return vs[0].([]ProjectInviteSettingsEmailServiceTemplate)[vs[1].(int)]
+	}).(ProjectInviteSettingsEmailServiceTemplateOutput)
 }
 
 type ProjectJwtTemplates struct {
@@ -26165,7 +26786,7 @@ type ProjectProjectSettingsSessionMigration struct {
 	// The audience value if needed by the vendor.
 	Audience *string `pulumi:"audience"`
 	// The unique client ID for the vendor.
-	ClientId string `pulumi:"clientId"`
+	ClientId *string `pulumi:"clientId"`
 	// The domain value if needed by the vendor.
 	Domain *string `pulumi:"domain"`
 	// An issuer URL if needed by the vendor.
@@ -26173,7 +26794,7 @@ type ProjectProjectSettingsSessionMigration struct {
 	// A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
 	LoginidMatchedAttributes []string `pulumi:"loginidMatchedAttributes"`
 	// The name of the vendor the sessions are migrated from, in all lowercase.
-	Vendor string `pulumi:"vendor"`
+	Vendor *string `pulumi:"vendor"`
 }
 
 // ProjectProjectSettingsSessionMigrationInput is an input type that accepts ProjectProjectSettingsSessionMigrationArgs and ProjectProjectSettingsSessionMigrationOutput values.
@@ -26191,7 +26812,7 @@ type ProjectProjectSettingsSessionMigrationArgs struct {
 	// The audience value if needed by the vendor.
 	Audience pulumi.StringPtrInput `pulumi:"audience"`
 	// The unique client ID for the vendor.
-	ClientId pulumi.StringInput `pulumi:"clientId"`
+	ClientId pulumi.StringPtrInput `pulumi:"clientId"`
 	// The domain value if needed by the vendor.
 	Domain pulumi.StringPtrInput `pulumi:"domain"`
 	// An issuer URL if needed by the vendor.
@@ -26199,7 +26820,7 @@ type ProjectProjectSettingsSessionMigrationArgs struct {
 	// A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
 	LoginidMatchedAttributes pulumi.StringArrayInput `pulumi:"loginidMatchedAttributes"`
 	// The name of the vendor the sessions are migrated from, in all lowercase.
-	Vendor pulumi.StringInput `pulumi:"vendor"`
+	Vendor pulumi.StringPtrInput `pulumi:"vendor"`
 }
 
 func (ProjectProjectSettingsSessionMigrationArgs) ElementType() reflect.Type {
@@ -26285,8 +26906,8 @@ func (o ProjectProjectSettingsSessionMigrationOutput) Audience() pulumi.StringPt
 }
 
 // The unique client ID for the vendor.
-func (o ProjectProjectSettingsSessionMigrationOutput) ClientId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectProjectSettingsSessionMigration) string { return v.ClientId }).(pulumi.StringOutput)
+func (o ProjectProjectSettingsSessionMigrationOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettingsSessionMigration) *string { return v.ClientId }).(pulumi.StringPtrOutput)
 }
 
 // The domain value if needed by the vendor.
@@ -26305,8 +26926,8 @@ func (o ProjectProjectSettingsSessionMigrationOutput) LoginidMatchedAttributes()
 }
 
 // The name of the vendor the sessions are migrated from, in all lowercase.
-func (o ProjectProjectSettingsSessionMigrationOutput) Vendor() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectProjectSettingsSessionMigration) string { return v.Vendor }).(pulumi.StringOutput)
+func (o ProjectProjectSettingsSessionMigrationOutput) Vendor() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettingsSessionMigration) *string { return v.Vendor }).(pulumi.StringPtrOutput)
 }
 
 type ProjectProjectSettingsSessionMigrationPtrOutput struct{ *pulumi.OutputState }
@@ -26349,7 +26970,7 @@ func (o ProjectProjectSettingsSessionMigrationPtrOutput) ClientId() pulumi.Strin
 		if v == nil {
 			return nil
 		}
-		return &v.ClientId
+		return v.ClientId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -26389,7 +27010,7 @@ func (o ProjectProjectSettingsSessionMigrationPtrOutput) Vendor() pulumi.StringP
 		if v == nil {
 			return nil
 		}
-		return &v.Vendor
+		return v.Vendor
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -26641,6 +27262,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasswordEmailServiceTemplateArrayInput)(nil)).Elem(), ProjectAuthenticationPasswordEmailServiceTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoInput)(nil)).Elem(), ProjectAuthenticationSsoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoPtrInput)(nil)).Elem(), ProjectAuthenticationSsoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettingsInput)(nil)).Elem(), ProjectAuthenticationSsoSsoSuiteSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettingsPtrInput)(nil)).Elem(), ProjectAuthenticationSsoSsoSuiteSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationTotpInput)(nil)).Elem(), ProjectAuthenticationTotpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationTotpPtrInput)(nil)).Elem(), ProjectAuthenticationTotpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthorizationInput)(nil)).Elem(), ProjectAuthorizationArgs{})
@@ -26671,8 +27294,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsS3AuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsAwsS3AuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsTranslateInput)(nil)).Elem(), ProjectConnectorsAwsTranslateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsTranslateArrayInput)(nil)).Elem(), ProjectConnectorsAwsTranslateArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCybersixgillInput)(nil)).Elem(), ProjectConnectorsCybersixgillArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCybersixgillArrayInput)(nil)).Elem(), ProjectConnectorsCybersixgillArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsBitsightInput)(nil)).Elem(), ProjectConnectorsBitsightArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsBitsightArrayInput)(nil)).Elem(), ProjectConnectorsBitsightArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogInput)(nil)).Elem(), ProjectConnectorsDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogArrayInput)(nil)).Elem(), ProjectConnectorsDatadogArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogAuditFilterInput)(nil)).Elem(), ProjectConnectorsDatadogAuditFilterArgs{})
@@ -26811,6 +27434,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsMapInput)(nil)).Elem(), ProjectFlowsMap{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsInput)(nil)).Elem(), ProjectInviteSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsPtrInput)(nil)).Elem(), ProjectInviteSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsEmailServiceInput)(nil)).Elem(), ProjectInviteSettingsEmailServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsEmailServicePtrInput)(nil)).Elem(), ProjectInviteSettingsEmailServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsEmailServiceTemplateInput)(nil)).Elem(), ProjectInviteSettingsEmailServiceTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsEmailServiceTemplateArrayInput)(nil)).Elem(), ProjectInviteSettingsEmailServiceTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesInput)(nil)).Elem(), ProjectJwtTemplatesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesPtrInput)(nil)).Elem(), ProjectJwtTemplatesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplateInput)(nil)).Elem(), ProjectJwtTemplatesAccessKeyTemplateArgs{})
@@ -26933,6 +27560,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationSsoSsoSuiteSettingsOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationTotpOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationTotpPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthorizationOutput{})
@@ -26963,8 +27592,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsAwsS3AuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsTranslateOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsTranslateArrayOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsCybersixgillOutput{})
-	pulumi.RegisterOutputType(ProjectConnectorsCybersixgillArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsBitsightOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsBitsightArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogAuditFilterOutput{})
@@ -27103,6 +27732,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectFlowsMapOutput{})
 	pulumi.RegisterOutputType(ProjectInviteSettingsOutput{})
 	pulumi.RegisterOutputType(ProjectInviteSettingsPtrOutput{})
+	pulumi.RegisterOutputType(ProjectInviteSettingsEmailServiceOutput{})
+	pulumi.RegisterOutputType(ProjectInviteSettingsEmailServicePtrOutput{})
+	pulumi.RegisterOutputType(ProjectInviteSettingsEmailServiceTemplateOutput{})
+	pulumi.RegisterOutputType(ProjectInviteSettingsEmailServiceTemplateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesPtrOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesAccessKeyTemplateOutput{})

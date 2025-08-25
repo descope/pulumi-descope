@@ -125,6 +125,8 @@ __all__ = [
     'ProjectAuthenticationPasswordEmailServiceTemplateArgsDict',
     'ProjectAuthenticationSsoArgs',
     'ProjectAuthenticationSsoArgsDict',
+    'ProjectAuthenticationSsoSsoSuiteSettingsArgs',
+    'ProjectAuthenticationSsoSsoSuiteSettingsArgsDict',
     'ProjectAuthenticationTotpArgs',
     'ProjectAuthenticationTotpArgsDict',
     'ProjectAuthorizationArgs',
@@ -155,8 +157,8 @@ __all__ = [
     'ProjectConnectorsAwsS3AuditFilterArgsDict',
     'ProjectConnectorsAwsTranslateArgs',
     'ProjectConnectorsAwsTranslateArgsDict',
-    'ProjectConnectorsCybersixgillArgs',
-    'ProjectConnectorsCybersixgillArgsDict',
+    'ProjectConnectorsBitsightArgs',
+    'ProjectConnectorsBitsightArgsDict',
     'ProjectConnectorsDatadogArgs',
     'ProjectConnectorsDatadogArgsDict',
     'ProjectConnectorsDatadogAuditFilterArgs',
@@ -305,6 +307,10 @@ __all__ = [
     'ProjectFlowsArgsDict',
     'ProjectInviteSettingsArgs',
     'ProjectInviteSettingsArgsDict',
+    'ProjectInviteSettingsEmailServiceArgs',
+    'ProjectInviteSettingsEmailServiceArgsDict',
+    'ProjectInviteSettingsEmailServiceTemplateArgs',
+    'ProjectInviteSettingsEmailServiceTemplateArgsDict',
     'ProjectJwtTemplatesArgs',
     'ProjectJwtTemplatesArgsDict',
     'ProjectJwtTemplatesAccessKeyTemplateArgs',
@@ -1041,7 +1047,7 @@ if not MYPY:
     class ProjectAttributesTenantArgsDict(TypedDict):
         name: pulumi.Input[_builtins.str]
         """
-        The name of the attribute.
+        The name of the attribute. This value is called `Display Name` in the Descope console.
         """
         type: pulumi.Input[_builtins.str]
         """
@@ -1050,6 +1056,10 @@ if not MYPY:
         authorization: NotRequired[pulumi.Input['ProjectAttributesTenantAuthorizationArgsDict']]
         """
         Determines the required permissions for this tenant.
+        """
+        id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
         """
         select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
@@ -1064,17 +1074,21 @@ class ProjectAttributesTenantArgs:
                  name: pulumi.Input[_builtins.str],
                  type: pulumi.Input[_builtins.str],
                  authorization: Optional[pulumi.Input['ProjectAttributesTenantAuthorizationArgs']] = None,
+                 id: Optional[pulumi.Input[_builtins.str]] = None,
                  select_options: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] name: The name of the attribute.
+        :param pulumi.Input[_builtins.str] name: The name of the attribute. This value is called `Display Name` in the Descope console.
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
         :param pulumi.Input['ProjectAttributesTenantAuthorizationArgs'] authorization: Determines the required permissions for this tenant.
+        :param pulumi.Input[_builtins.str] id: An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: When the attribute type is "multiselect". A list of options to choose from.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
         if authorization is not None:
             pulumi.set(__self__, "authorization", authorization)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
         if select_options is not None:
             pulumi.set(__self__, "select_options", select_options)
 
@@ -1082,7 +1096,7 @@ class ProjectAttributesTenantArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[_builtins.str]:
         """
-        The name of the attribute.
+        The name of the attribute. This value is called `Display Name` in the Descope console.
         """
         return pulumi.get(self, "name")
 
@@ -1113,6 +1127,18 @@ class ProjectAttributesTenantArgs:
     @authorization.setter
     def authorization(self, value: Optional[pulumi.Input['ProjectAttributesTenantAuthorizationArgs']]):
         pulumi.set(self, "authorization", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "id", value)
 
     @_builtins.property
     @pulumi.getter(name="selectOptions")
@@ -1163,11 +1189,15 @@ if not MYPY:
     class ProjectAttributesUserArgsDict(TypedDict):
         name: pulumi.Input[_builtins.str]
         """
-        The name of the attribute.
+        The name of the attribute. This value is called `Display Name` in the Descope console.
         """
         type: pulumi.Input[_builtins.str]
         """
         The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+        """
+        id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
         """
         select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
@@ -1185,16 +1215,20 @@ class ProjectAttributesUserArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[_builtins.str],
                  type: pulumi.Input[_builtins.str],
+                 id: Optional[pulumi.Input[_builtins.str]] = None,
                  select_options: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  widget_authorization: Optional[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgs']] = None):
         """
-        :param pulumi.Input[_builtins.str] name: The name of the attribute.
+        :param pulumi.Input[_builtins.str] name: The name of the attribute. This value is called `Display Name` in the Descope console.
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+        :param pulumi.Input[_builtins.str] id: An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: When the attribute type is "multiselect". A list of options to choose from.
         :param pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgs'] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "type", type)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
         if select_options is not None:
             pulumi.set(__self__, "select_options", select_options)
         if widget_authorization is not None:
@@ -1204,7 +1238,7 @@ class ProjectAttributesUserArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[_builtins.str]:
         """
-        The name of the attribute.
+        The name of the attribute. This value is called `Display Name` in the Descope console.
         """
         return pulumi.get(self, "name")
 
@@ -1223,6 +1257,18 @@ class ProjectAttributesUserArgs:
     @type.setter
     def type(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "id", value)
 
     @_builtins.property
     @pulumi.getter(name="selectOptions")
@@ -7701,6 +7747,10 @@ if not MYPY:
         """
         The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         """
+        sso_suite_settings: NotRequired[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgsDict']]
+        """
+        Configuration block for the SSO Suite.
+        """
 elif False:
     ProjectAuthenticationSsoArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -7709,11 +7759,13 @@ class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_users: Optional[pulumi.Input[_builtins.bool]] = None,
-                 redirect_url: Optional[pulumi.Input[_builtins.str]] = None):
+                 redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
+                 sso_suite_settings: Optional[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs']] = None):
         """
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        :param pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs'] sso_suite_settings: Configuration block for the SSO Suite.
         """
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
@@ -7721,6 +7773,8 @@ class ProjectAuthenticationSsoArgs:
             pulumi.set(__self__, "merge_users", merge_users)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
+        if sso_suite_settings is not None:
+            pulumi.set(__self__, "sso_suite_settings", sso_suite_settings)
 
     @_builtins.property
     @pulumi.getter
@@ -7757,6 +7811,150 @@ class ProjectAuthenticationSsoArgs:
     @redirect_url.setter
     def redirect_url(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "redirect_url", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ssoSuiteSettings")
+    def sso_suite_settings(self) -> Optional[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs']]:
+        """
+        Configuration block for the SSO Suite.
+        """
+        return pulumi.get(self, "sso_suite_settings")
+
+    @sso_suite_settings.setter
+    def sso_suite_settings(self, value: Optional[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs']]):
+        pulumi.set(self, "sso_suite_settings", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationSsoSsoSuiteSettingsArgsDict(TypedDict):
+        hide_domains: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        """
+        hide_groups_mapping: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        """
+        hide_oidc: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Setting this to `true` will hide the OIDC configuration option.
+        """
+        hide_saml: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Setting this to `true` will hide the SAML configuration option.
+        """
+        hide_scim: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        """
+        style_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+        """
+elif False:
+    ProjectAuthenticationSsoSsoSuiteSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationSsoSsoSuiteSettingsArgs:
+    def __init__(__self__, *,
+                 hide_domains: Optional[pulumi.Input[_builtins.bool]] = None,
+                 hide_groups_mapping: Optional[pulumi.Input[_builtins.bool]] = None,
+                 hide_oidc: Optional[pulumi.Input[_builtins.bool]] = None,
+                 hide_saml: Optional[pulumi.Input[_builtins.bool]] = None,
+                 hide_scim: Optional[pulumi.Input[_builtins.bool]] = None,
+                 style_id: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.bool] hide_domains: Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        :param pulumi.Input[_builtins.bool] hide_groups_mapping: Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        :param pulumi.Input[_builtins.bool] hide_oidc: Setting this to `true` will hide the OIDC configuration option.
+        :param pulumi.Input[_builtins.bool] hide_saml: Setting this to `true` will hide the SAML configuration option.
+        :param pulumi.Input[_builtins.bool] hide_scim: Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        :param pulumi.Input[_builtins.str] style_id: Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+        """
+        if hide_domains is not None:
+            pulumi.set(__self__, "hide_domains", hide_domains)
+        if hide_groups_mapping is not None:
+            pulumi.set(__self__, "hide_groups_mapping", hide_groups_mapping)
+        if hide_oidc is not None:
+            pulumi.set(__self__, "hide_oidc", hide_oidc)
+        if hide_saml is not None:
+            pulumi.set(__self__, "hide_saml", hide_saml)
+        if hide_scim is not None:
+            pulumi.set(__self__, "hide_scim", hide_scim)
+        if style_id is not None:
+            pulumi.set(__self__, "style_id", style_id)
+
+    @_builtins.property
+    @pulumi.getter(name="hideDomains")
+    def hide_domains(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_domains")
+
+    @hide_domains.setter
+    def hide_domains(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "hide_domains", value)
+
+    @_builtins.property
+    @pulumi.getter(name="hideGroupsMapping")
+    def hide_groups_mapping(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_groups_mapping")
+
+    @hide_groups_mapping.setter
+    def hide_groups_mapping(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "hide_groups_mapping", value)
+
+    @_builtins.property
+    @pulumi.getter(name="hideOidc")
+    def hide_oidc(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the OIDC configuration option.
+        """
+        return pulumi.get(self, "hide_oidc")
+
+    @hide_oidc.setter
+    def hide_oidc(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "hide_oidc", value)
+
+    @_builtins.property
+    @pulumi.getter(name="hideSaml")
+    def hide_saml(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the SAML configuration option.
+        """
+        return pulumi.get(self, "hide_saml")
+
+    @hide_saml.setter
+    def hide_saml(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "hide_saml", value)
+
+    @_builtins.property
+    @pulumi.getter(name="hideScim")
+    def hide_scim(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_scim")
+
+    @hide_scim.setter
+    def hide_scim(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "hide_scim", value)
+
+    @_builtins.property
+    @pulumi.getter(name="styleId")
+    def style_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+        """
+        return pulumi.get(self, "style_id")
+
+    @style_id.setter
+    def style_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "style_id", value)
 
 
 if not MYPY:
@@ -7913,6 +8111,10 @@ if not MYPY:
         """
         A name for the role.
         """
+        default: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether this role should automatically be assigned to users that are created without any roles.
+        """
         description: NotRequired[pulumi.Input[_builtins.str]]
         """
         A description for the role.
@@ -7922,6 +8124,10 @@ if not MYPY:
         """
         A list of permissions by name to be included in the role.
         """
+        private: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether this role should not be displayed to tenant admins.
+        """
 elif False:
     ProjectAuthorizationRoleArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -7929,21 +8135,29 @@ elif False:
 class ProjectAuthorizationRoleArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[_builtins.str],
+                 default: Optional[pulumi.Input[_builtins.bool]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None,
-                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 private: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.str] name: A name for the role.
+        :param pulumi.Input[_builtins.bool] default: Whether this role should automatically be assigned to users that are created without any roles.
         :param pulumi.Input[_builtins.str] description: A description for the role.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permissions: A list of permissions by name to be included in the role.
+        :param pulumi.Input[_builtins.bool] private: Whether this role should not be displayed to tenant admins.
         """
         pulumi.set(__self__, "name", name)
+        if default is not None:
+            pulumi.set(__self__, "default", default)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if permissions is not None:
             pulumi.set(__self__, "permissions", permissions)
+        if private is not None:
+            pulumi.set(__self__, "private", private)
 
     @_builtins.property
     @pulumi.getter
@@ -7956,6 +8170,18 @@ class ProjectAuthorizationRoleArgs:
     @name.setter
     def name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def default(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether this role should automatically be assigned to users that are created without any roles.
+        """
+        return pulumi.get(self, "default")
+
+    @default.setter
+    def default(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "default", value)
 
     @_builtins.property
     @pulumi.getter
@@ -7990,6 +8216,18 @@ class ProjectAuthorizationRoleArgs:
     def permissions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "permissions", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def private(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether this role should not be displayed to tenant admins.
+        """
+        return pulumi.get(self, "private")
+
+    @private.setter
+    def private(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "private", value)
+
 
 if not MYPY:
     class ProjectConnectorsArgsDict(TypedDict):
@@ -8013,9 +8251,9 @@ if not MYPY:
         """
         Localize the language of your login and user journey screens with the Amazon Translate connector.
         """
-        cybersixgills: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgsDict']]]]
+        bitsights: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgsDict']]]]
         """
-        Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+        Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         """
         datadogs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgsDict']]]]
         """
@@ -8208,7 +8446,7 @@ class ProjectConnectorsArgs:
                  audit_webhooks: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgs']]]] = None,
                  aws_s3s: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3Args']]]] = None,
                  aws_translates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgs']]]] = None,
-                 cybersixgills: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]]] = None,
+                 bitsights: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgs']]]] = None,
                  datadogs: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]]] = None,
                  devrev_grows: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgs']]]] = None,
                  docebos: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgs']]]] = None,
@@ -8260,7 +8498,7 @@ class ProjectConnectorsArgs:
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgs']]] audit_webhooks: Send audit events to a custom webhook.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3Args']]] aws_s3s: Stream authentication audit logs with the Amazon S3 connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgs']]] aws_translates: Localize the language of your login and user journey screens with the Amazon Translate connector.
-        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]] cybersixgills: Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgs']]] bitsights: Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgs']]] datadogs: Stream authentication audit logs with the Datadog connector.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgs']]] devrev_grows: DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgs']]] docebos: Get user information from Docebo in your Descope user journeys with the Docebo connector.
@@ -8317,8 +8555,8 @@ class ProjectConnectorsArgs:
             pulumi.set(__self__, "aws_s3s", aws_s3s)
         if aws_translates is not None:
             pulumi.set(__self__, "aws_translates", aws_translates)
-        if cybersixgills is not None:
-            pulumi.set(__self__, "cybersixgills", cybersixgills)
+        if bitsights is not None:
+            pulumi.set(__self__, "bitsights", bitsights)
         if datadogs is not None:
             pulumi.set(__self__, "datadogs", datadogs)
         if devrev_grows is not None:
@@ -8472,15 +8710,15 @@ class ProjectConnectorsArgs:
 
     @_builtins.property
     @pulumi.getter
-    def cybersixgills(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]]]:
+    def bitsights(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgs']]]]:
         """
-        Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+        Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         """
-        return pulumi.get(self, "cybersixgills")
+        return pulumi.get(self, "bitsights")
 
-    @cybersixgills.setter
-    def cybersixgills(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCybersixgillArgs']]]]):
-        pulumi.set(self, "cybersixgills", value)
+    @bitsights.setter
+    def bitsights(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgs']]]]):
+        pulumi.set(self, "bitsights", value)
 
     @_builtins.property
     @pulumi.getter
@@ -10126,14 +10364,14 @@ class ProjectConnectorsAwsTranslateArgs:
 
 
 if not MYPY:
-    class ProjectConnectorsCybersixgillArgsDict(TypedDict):
+    class ProjectConnectorsBitsightArgsDict(TypedDict):
         client_id: pulumi.Input[_builtins.str]
         """
-        API Client ID issued when you create the credentials in Cybersixgill.
+        API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
         """
         client_secret: pulumi.Input[_builtins.str]
         """
-        Client secret issued when you create the credentials in Cybersixgill.
+        Client secret issued when you create the credentials in Bitsight Threat Intelligence.
         """
         name: pulumi.Input[_builtins.str]
         """
@@ -10145,10 +10383,10 @@ if not MYPY:
         """
         id: NotRequired[pulumi.Input[_builtins.str]]
 elif False:
-    ProjectConnectorsCybersixgillArgsDict: TypeAlias = Mapping[str, Any]
+    ProjectConnectorsBitsightArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
-class ProjectConnectorsCybersixgillArgs:
+class ProjectConnectorsBitsightArgs:
     def __init__(__self__, *,
                  client_id: pulumi.Input[_builtins.str],
                  client_secret: pulumi.Input[_builtins.str],
@@ -10156,8 +10394,8 @@ class ProjectConnectorsCybersixgillArgs:
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] client_id: API Client ID issued when you create the credentials in Cybersixgill.
-        :param pulumi.Input[_builtins.str] client_secret: Client secret issued when you create the credentials in Cybersixgill.
+        :param pulumi.Input[_builtins.str] client_id: API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
+        :param pulumi.Input[_builtins.str] client_secret: Client secret issued when you create the credentials in Bitsight Threat Intelligence.
         :param pulumi.Input[_builtins.str] name: A custom name for your connector.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         """
@@ -10173,7 +10411,7 @@ class ProjectConnectorsCybersixgillArgs:
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Input[_builtins.str]:
         """
-        API Client ID issued when you create the credentials in Cybersixgill.
+        API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
         """
         return pulumi.get(self, "client_id")
 
@@ -10185,7 +10423,7 @@ class ProjectConnectorsCybersixgillArgs:
     @pulumi.getter(name="clientSecret")
     def client_secret(self) -> pulumi.Input[_builtins.str]:
         """
-        Client secret issued when you create the credentials in Cybersixgill.
+        Client secret issued when you create the credentials in Bitsight Threat Intelligence.
         """
         return pulumi.get(self, "client_secret")
 
@@ -14873,6 +15111,10 @@ if not MYPY:
         """
         Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
         """
+        bot_threshold: NotRequired[pulumi.Input[_builtins.float]]
+        """
+        The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+        """
         description: NotRequired[pulumi.Input[_builtins.str]]
         """
         A description of what your connector is used for.
@@ -14894,6 +15136,7 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
                  site_key: pulumi.Input[_builtins.str],
                  assessment_score: Optional[pulumi.Input[_builtins.float]] = None,
                  base_url: Optional[pulumi.Input[_builtins.str]] = None,
+                 bot_threshold: Optional[pulumi.Input[_builtins.float]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None,
                  override_assessment: Optional[pulumi.Input[_builtins.bool]] = None):
@@ -14904,6 +15147,7 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
         :param pulumi.Input[_builtins.str] site_key: The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
         :param pulumi.Input[_builtins.float] assessment_score: When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
         :param pulumi.Input[_builtins.str] base_url: Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        :param pulumi.Input[_builtins.float] bot_threshold: The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] override_assessment: Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
         """
@@ -14915,6 +15159,8 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
             pulumi.set(__self__, "assessment_score", assessment_score)
         if base_url is not None:
             pulumi.set(__self__, "base_url", base_url)
+        if bot_threshold is not None:
+            pulumi.set(__self__, "bot_threshold", bot_threshold)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if id is not None:
@@ -14993,6 +15239,18 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
     @base_url.setter
     def base_url(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "base_url", value)
+
+    @_builtins.property
+    @pulumi.getter(name="botThreshold")
+    def bot_threshold(self) -> Optional[pulumi.Input[_builtins.float]]:
+        """
+        The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+        """
+        return pulumi.get(self, "bot_threshold")
+
+    @bot_threshold.setter
+    def bot_threshold(self, value: Optional[pulumi.Input[_builtins.float]]):
+        pulumi.set(self, "bot_threshold", value)
 
     @_builtins.property
     @pulumi.getter
@@ -18068,6 +18326,10 @@ if not MYPY:
         """
         Whether to include a magic link token in invitation messages.
         """
+        email_service: NotRequired[pulumi.Input['ProjectInviteSettingsEmailServiceArgsDict']]
+        """
+        Settings related to sending invitation emails.
+        """
         invite_url: NotRequired[pulumi.Input[_builtins.str]]
         """
         Custom URL to include in the message sent to invited users.
@@ -18091,12 +18353,14 @@ elif False:
 class ProjectInviteSettingsArgs:
     def __init__(__self__, *,
                  add_magiclink_token: Optional[pulumi.Input[_builtins.bool]] = None,
+                 email_service: Optional[pulumi.Input['ProjectInviteSettingsEmailServiceArgs']] = None,
                  invite_url: Optional[pulumi.Input[_builtins.str]] = None,
                  require_invitation: Optional[pulumi.Input[_builtins.bool]] = None,
                  send_email: Optional[pulumi.Input[_builtins.bool]] = None,
                  send_text: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.bool] add_magiclink_token: Whether to include a magic link token in invitation messages.
+        :param pulumi.Input['ProjectInviteSettingsEmailServiceArgs'] email_service: Settings related to sending invitation emails.
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
@@ -18104,6 +18368,8 @@ class ProjectInviteSettingsArgs:
         """
         if add_magiclink_token is not None:
             pulumi.set(__self__, "add_magiclink_token", add_magiclink_token)
+        if email_service is not None:
+            pulumi.set(__self__, "email_service", email_service)
         if invite_url is not None:
             pulumi.set(__self__, "invite_url", invite_url)
         if require_invitation is not None:
@@ -18124,6 +18390,18 @@ class ProjectInviteSettingsArgs:
     @add_magiclink_token.setter
     def add_magiclink_token(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "add_magiclink_token", value)
+
+    @_builtins.property
+    @pulumi.getter(name="emailService")
+    def email_service(self) -> Optional[pulumi.Input['ProjectInviteSettingsEmailServiceArgs']]:
+        """
+        Settings related to sending invitation emails.
+        """
+        return pulumi.get(self, "email_service")
+
+    @email_service.setter
+    def email_service(self, value: Optional[pulumi.Input['ProjectInviteSettingsEmailServiceArgs']]):
+        pulumi.set(self, "email_service", value)
 
     @_builtins.property
     @pulumi.getter(name="inviteUrl")
@@ -18172,6 +18450,200 @@ class ProjectInviteSettingsArgs:
     @send_text.setter
     def send_text(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "send_text", value)
+
+
+if not MYPY:
+    class ProjectInviteSettingsEmailServiceArgsDict(TypedDict):
+        connector: pulumi.Input[_builtins.str]
+        """
+        The name of the email connector to use for sending emails.
+        """
+        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgsDict']]]]
+        """
+        A list of email templates for different authentication flows.
+        """
+elif False:
+    ProjectInviteSettingsEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectInviteSettingsEmailServiceArgs:
+    def __init__(__self__, *,
+                 connector: pulumi.Input[_builtins.str],
+                 templates: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgs']]]] = None):
+        """
+        :param pulumi.Input[_builtins.str] connector: The name of the email connector to use for sending emails.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgs']]] templates: A list of email templates for different authentication flows.
+        """
+        pulumi.set(__self__, "connector", connector)
+        if templates is not None:
+            pulumi.set(__self__, "templates", templates)
+
+    @_builtins.property
+    @pulumi.getter
+    def connector(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the email connector to use for sending emails.
+        """
+        return pulumi.get(self, "connector")
+
+    @connector.setter
+    def connector(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "connector", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgs']]]]:
+        """
+        A list of email templates for different authentication flows.
+        """
+        return pulumi.get(self, "templates")
+
+    @templates.setter
+    def templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgs']]]]):
+        pulumi.set(self, "templates", value)
+
+
+if not MYPY:
+    class ProjectInviteSettingsEmailServiceTemplateArgsDict(TypedDict):
+        name: pulumi.Input[_builtins.str]
+        """
+        Unique name for this email template.
+        """
+        subject: pulumi.Input[_builtins.str]
+        """
+        Subject line of the email message.
+        """
+        active: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether this email template is currently active and in use.
+        """
+        html_body: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        """
+        id: NotRequired[pulumi.Input[_builtins.str]]
+        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        """
+        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether to use the plain text body instead of HTML for the email.
+        """
+elif False:
+    ProjectInviteSettingsEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectInviteSettingsEmailServiceTemplateArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[_builtins.str],
+                 subject: pulumi.Input[_builtins.str],
+                 active: Optional[pulumi.Input[_builtins.bool]] = None,
+                 html_body: Optional[pulumi.Input[_builtins.str]] = None,
+                 id: Optional[pulumi.Input[_builtins.str]] = None,
+                 plain_text_body: Optional[pulumi.Input[_builtins.str]] = None,
+                 use_plain_text_body: Optional[pulumi.Input[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[_builtins.str] name: Unique name for this email template.
+        :param pulumi.Input[_builtins.str] subject: Subject line of the email message.
+        :param pulumi.Input[_builtins.bool] active: Whether this email template is currently active and in use.
+        :param pulumi.Input[_builtins.str] html_body: HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        :param pulumi.Input[_builtins.str] plain_text_body: Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        :param pulumi.Input[_builtins.bool] use_plain_text_body: Whether to use the plain text body instead of HTML for the email.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subject", subject)
+        if active is not None:
+            pulumi.set(__self__, "active", active)
+        if html_body is not None:
+            pulumi.set(__self__, "html_body", html_body)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if plain_text_body is not None:
+            pulumi.set(__self__, "plain_text_body", plain_text_body)
+        if use_plain_text_body is not None:
+            pulumi.set(__self__, "use_plain_text_body", use_plain_text_body)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Unique name for this email template.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def subject(self) -> pulumi.Input[_builtins.str]:
+        """
+        Subject line of the email message.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "subject", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether this email template is currently active and in use.
+        """
+        return pulumi.get(self, "active")
+
+    @active.setter
+    def active(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "active", value)
+
+    @_builtins.property
+    @pulumi.getter(name="htmlBody")
+    def html_body(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        """
+        return pulumi.get(self, "html_body")
+
+    @html_body.setter
+    def html_body(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "html_body", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="plainTextBody")
+    def plain_text_body(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        """
+        return pulumi.get(self, "plain_text_body")
+
+    @plain_text_body.setter
+    def plain_text_body(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "plain_text_body", value)
+
+    @_builtins.property
+    @pulumi.getter(name="usePlainTextBody")
+    def use_plain_text_body(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether to use the plain text body instead of HTML for the email.
+        """
+        return pulumi.get(self, "use_plain_text_body")
+
+    @use_plain_text_body.setter
+    def use_plain_text_body(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "use_plain_text_body", value)
 
 
 if not MYPY:
@@ -19086,21 +19558,13 @@ class ProjectProjectSettingsArgs:
 
 if not MYPY:
     class ProjectProjectSettingsSessionMigrationArgsDict(TypedDict):
-        client_id: pulumi.Input[_builtins.str]
-        """
-        The unique client ID for the vendor.
-        """
-        loginid_matched_attributes: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
-        """
-        vendor: pulumi.Input[_builtins.str]
-        """
-        The name of the vendor the sessions are migrated from, in all lowercase.
-        """
         audience: NotRequired[pulumi.Input[_builtins.str]]
         """
         The audience value if needed by the vendor.
+        """
+        client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The unique client ID for the vendor.
         """
         domain: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -19110,71 +19574,46 @@ if not MYPY:
         """
         An issuer URL if needed by the vendor.
         """
+        loginid_matched_attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+        """
+        A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
+        """
+        vendor: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The name of the vendor the sessions are migrated from, in all lowercase.
+        """
 elif False:
     ProjectProjectSettingsSessionMigrationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectProjectSettingsSessionMigrationArgs:
     def __init__(__self__, *,
-                 client_id: pulumi.Input[_builtins.str],
-                 loginid_matched_attributes: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
-                 vendor: pulumi.Input[_builtins.str],
                  audience: Optional[pulumi.Input[_builtins.str]] = None,
+                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  domain: Optional[pulumi.Input[_builtins.str]] = None,
-                 issuer: Optional[pulumi.Input[_builtins.str]] = None):
+                 issuer: Optional[pulumi.Input[_builtins.str]] = None,
+                 loginid_matched_attributes: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 vendor: Optional[pulumi.Input[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] client_id: The unique client ID for the vendor.
-        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] loginid_matched_attributes: A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
-        :param pulumi.Input[_builtins.str] vendor: The name of the vendor the sessions are migrated from, in all lowercase.
         :param pulumi.Input[_builtins.str] audience: The audience value if needed by the vendor.
+        :param pulumi.Input[_builtins.str] client_id: The unique client ID for the vendor.
         :param pulumi.Input[_builtins.str] domain: The domain value if needed by the vendor.
         :param pulumi.Input[_builtins.str] issuer: An issuer URL if needed by the vendor.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] loginid_matched_attributes: A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
+        :param pulumi.Input[_builtins.str] vendor: The name of the vendor the sessions are migrated from, in all lowercase.
         """
-        pulumi.set(__self__, "client_id", client_id)
-        pulumi.set(__self__, "loginid_matched_attributes", loginid_matched_attributes)
-        pulumi.set(__self__, "vendor", vendor)
         if audience is not None:
             pulumi.set(__self__, "audience", audience)
+        if client_id is not None:
+            pulumi.set(__self__, "client_id", client_id)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
-
-    @_builtins.property
-    @pulumi.getter(name="clientId")
-    def client_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        The unique client ID for the vendor.
-        """
-        return pulumi.get(self, "client_id")
-
-    @client_id.setter
-    def client_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "client_id", value)
-
-    @_builtins.property
-    @pulumi.getter(name="loginidMatchedAttributes")
-    def loginid_matched_attributes(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
-        """
-        A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
-        """
-        return pulumi.get(self, "loginid_matched_attributes")
-
-    @loginid_matched_attributes.setter
-    def loginid_matched_attributes(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
-        pulumi.set(self, "loginid_matched_attributes", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def vendor(self) -> pulumi.Input[_builtins.str]:
-        """
-        The name of the vendor the sessions are migrated from, in all lowercase.
-        """
-        return pulumi.get(self, "vendor")
-
-    @vendor.setter
-    def vendor(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "vendor", value)
+        if loginid_matched_attributes is not None:
+            pulumi.set(__self__, "loginid_matched_attributes", loginid_matched_attributes)
+        if vendor is not None:
+            pulumi.set(__self__, "vendor", vendor)
 
     @_builtins.property
     @pulumi.getter
@@ -19187,6 +19626,18 @@ class ProjectProjectSettingsSessionMigrationArgs:
     @audience.setter
     def audience(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "audience", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The unique client ID for the vendor.
+        """
+        return pulumi.get(self, "client_id")
+
+    @client_id.setter
+    def client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "client_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -19211,6 +19662,30 @@ class ProjectProjectSettingsSessionMigrationArgs:
     @issuer.setter
     def issuer(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "issuer", value)
+
+    @_builtins.property
+    @pulumi.getter(name="loginidMatchedAttributes")
+    def loginid_matched_attributes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
+        """
+        return pulumi.get(self, "loginid_matched_attributes")
+
+    @loginid_matched_attributes.setter
+    def loginid_matched_attributes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "loginid_matched_attributes", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def vendor(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The name of the vendor the sessions are migrated from, in all lowercase.
+        """
+        return pulumi.get(self, "vendor")
+
+    @vendor.setter
+    def vendor(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "vendor", value)
 
 
 if not MYPY:

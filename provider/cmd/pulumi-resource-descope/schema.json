@@ -332,9 +332,13 @@
                     "$ref": "#/types/descope:index/ProjectAttributesTenantAuthorization:ProjectAttributesTenantAuthorization",
                     "description": "Determines the required permissions for this tenant.\n"
                 },
+                "id": {
+                    "type": "string",
+                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.\n"
+                },
                 "name": {
                     "type": "string",
-                    "description": "The name of the attribute.\n"
+                    "description": "The name of the attribute. This value is called `Display Name` in the Descope console.\n"
                 },
                 "selectOptions": {
                     "type": "array",
@@ -357,6 +361,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "authorization",
+                        "id",
                         "name",
                         "selectOptions",
                         "type"
@@ -385,9 +390,13 @@
         },
         "descope:index/ProjectAttributesUser:ProjectAttributesUser": {
             "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.\n"
+                },
                 "name": {
                     "type": "string",
-                    "description": "The name of the attribute.\n"
+                    "description": "The name of the attribute. This value is called `Display Name` in the Descope console.\n"
                 },
                 "selectOptions": {
                     "type": "array",
@@ -413,6 +422,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "id",
                         "name",
                         "selectOptions",
                         "type",
@@ -2535,6 +2545,10 @@
                 "redirectUrl": {
                     "type": "string",
                     "description": "The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.\n"
+                },
+                "ssoSuiteSettings": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationSsoSsoSuiteSettings:ProjectAuthenticationSsoSsoSuiteSettings",
+                    "description": "Configuration block for the SSO Suite.\n"
                 }
             },
             "type": "object",
@@ -2543,7 +2557,49 @@
                     "requiredOutputs": [
                         "disabled",
                         "mergeUsers",
-                        "redirectUrl"
+                        "redirectUrl",
+                        "ssoSuiteSettings"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectAuthenticationSsoSsoSuiteSettings:ProjectAuthenticationSsoSsoSuiteSettings": {
+            "properties": {
+                "hideDomains": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will hide the domains configuration section in the SSO Suite interface.\n"
+                },
+                "hideGroupsMapping": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.\n"
+                },
+                "hideOidc": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will hide the OIDC configuration option.\n"
+                },
+                "hideSaml": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will hide the SAML configuration option.\n"
+                },
+                "hideScim": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.\n"
+                },
+                "styleId": {
+                    "type": "string",
+                    "description": "Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "hideDomains",
+                        "hideGroupsMapping",
+                        "hideOidc",
+                        "hideSaml",
+                        "hideScim",
+                        "styleId"
                     ]
                 }
             }
@@ -2621,6 +2677,10 @@
         },
         "descope:index/ProjectAuthorizationRole:ProjectAuthorizationRole": {
             "properties": {
+                "default": {
+                    "type": "boolean",
+                    "description": "Whether this role should automatically be assigned to users that are created without any roles.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description for the role.\n"
@@ -2638,6 +2698,10 @@
                         "type": "string"
                     },
                     "description": "A list of permissions by name to be included in the role.\n"
+                },
+                "private": {
+                    "type": "boolean",
+                    "description": "Whether this role should not be displayed to tenant admins.\n"
                 }
             },
             "type": "object",
@@ -2647,10 +2711,12 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "default",
                         "description",
                         "id",
                         "name",
-                        "permissions"
+                        "permissions",
+                        "private"
                     ]
                 }
             }
@@ -2692,12 +2758,12 @@
                     },
                     "description": "Localize the language of your login and user journey screens with the Amazon Translate connector.\n"
                 },
-                "cybersixgills": {
+                "bitsights": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/descope:index/ProjectConnectorsCybersixgill:ProjectConnectorsCybersixgill"
+                        "$ref": "#/types/descope:index/ProjectConnectorsBitsight:ProjectConnectorsBitsight"
                     },
-                    "description": "Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.\n"
+                    "description": "Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.\n"
                 },
                 "datadogs": {
                     "type": "array",
@@ -3024,7 +3090,7 @@
                         "auditWebhooks",
                         "awsS3s",
                         "awsTranslates",
-                        "cybersixgills",
+                        "bitsights",
                         "datadogs",
                         "devrevGrows",
                         "docebos",
@@ -3471,15 +3537,15 @@
                 }
             }
         },
-        "descope:index/ProjectConnectorsCybersixgill:ProjectConnectorsCybersixgill": {
+        "descope:index/ProjectConnectorsBitsight:ProjectConnectorsBitsight": {
             "properties": {
                 "clientId": {
                     "type": "string",
-                    "description": "API Client ID issued when you create the credentials in Cybersixgill.\n"
+                    "description": "API Client ID issued when you create the credentials in Bitsight Threat Intelligence.\n"
                 },
                 "clientSecret": {
                     "type": "string",
-                    "description": "Client secret issued when you create the credentials in Cybersixgill.\n",
+                    "description": "Client secret issued when you create the credentials in Bitsight Threat Intelligence.\n",
                     "secret": true
                 },
                 "description": {
@@ -5189,6 +5255,10 @@
                     "type": "string",
                     "description": "Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com\n"
                 },
+                "botThreshold": {
+                    "type": "number",
+                    "description": "The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
@@ -5226,6 +5296,7 @@
                         "apiKey",
                         "assessmentScore",
                         "baseUrl",
+                        "botThreshold",
                         "description",
                         "id",
                         "name",
@@ -6407,6 +6478,10 @@
                     "type": "boolean",
                     "description": "Whether to include a magic link token in invitation messages.\n"
                 },
+                "emailService": {
+                    "$ref": "#/types/descope:index/ProjectInviteSettingsEmailService:ProjectInviteSettingsEmailService",
+                    "description": "Settings related to sending invitation emails.\n"
+                },
                 "inviteUrl": {
                     "type": "string",
                     "description": "Custom URL to include in the message sent to invited users.\n"
@@ -6429,10 +6504,87 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "addMagiclinkToken",
+                        "emailService",
                         "inviteUrl",
                         "requireInvitation",
                         "sendEmail",
                         "sendText"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectInviteSettingsEmailService:ProjectInviteSettingsEmailService": {
+            "properties": {
+                "connector": {
+                    "type": "string",
+                    "description": "The name of the email connector to use for sending emails.\n"
+                },
+                "templates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectInviteSettingsEmailServiceTemplate:ProjectInviteSettingsEmailServiceTemplate"
+                    },
+                    "description": "A list of email templates for different authentication flows.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "connector"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "connector",
+                        "templates"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectInviteSettingsEmailServiceTemplate:ProjectInviteSettingsEmailServiceTemplate": {
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "Whether this email template is currently active and in use.\n"
+                },
+                "htmlBody": {
+                    "type": "string",
+                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Unique name for this email template.\n"
+                },
+                "plainTextBody": {
+                    "type": "string",
+                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "Subject line of the email message.\n"
+                },
+                "usePlainTextBody": {
+                    "type": "boolean",
+                    "description": "Whether to use the plain text body instead of HTML for the email.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "subject"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "active",
+                        "htmlBody",
+                        "id",
+                        "name",
+                        "plainTextBody",
+                        "subject",
+                        "usePlainTextBody"
                     ]
                 }
             }
@@ -6747,11 +6899,6 @@
                 }
             },
             "type": "object",
-            "required": [
-                "clientId",
-                "loginidMatchedAttributes",
-                "vendor"
-            ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [

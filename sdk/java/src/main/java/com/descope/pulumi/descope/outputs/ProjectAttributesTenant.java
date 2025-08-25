@@ -20,7 +20,12 @@ public final class ProjectAttributesTenant {
      */
     private @Nullable ProjectAttributesTenantAuthorization authorization;
     /**
-     * @return The name of the attribute.
+     * @return An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    private @Nullable String id;
+    /**
+     * @return The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     private String name;
@@ -44,7 +49,14 @@ public final class ProjectAttributesTenant {
         return Optional.ofNullable(this.authorization);
     }
     /**
-     * @return The name of the attribute.
+     * @return An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    public Optional<String> id() {
+        return Optional.ofNullable(this.id);
+    }
+    /**
+     * @return The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     public String name() {
@@ -75,6 +87,7 @@ public final class ProjectAttributesTenant {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable ProjectAttributesTenantAuthorization authorization;
+        private @Nullable String id;
         private String name;
         private @Nullable List<String> selectOptions;
         private String type;
@@ -82,6 +95,7 @@ public final class ProjectAttributesTenant {
         public Builder(ProjectAttributesTenant defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.authorization = defaults.authorization;
+    	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.selectOptions = defaults.selectOptions;
     	      this.type = defaults.type;
@@ -91,6 +105,12 @@ public final class ProjectAttributesTenant {
         public Builder authorization(@Nullable ProjectAttributesTenantAuthorization authorization) {
 
             this.authorization = authorization;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder id(@Nullable String id) {
+
+            this.id = id;
             return this;
         }
         @CustomType.Setter
@@ -121,6 +141,7 @@ public final class ProjectAttributesTenant {
         public ProjectAttributesTenant build() {
             final var _resultValue = new ProjectAttributesTenant();
             _resultValue.authorization = authorization;
+            _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.selectOptions = selectOptions;
             _resultValue.type = type;
