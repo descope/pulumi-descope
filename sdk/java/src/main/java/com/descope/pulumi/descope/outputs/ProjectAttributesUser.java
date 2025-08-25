@@ -15,7 +15,12 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAttributesUser {
     /**
-     * @return The name of the attribute.
+     * @return An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    private @Nullable String id;
+    /**
+     * @return The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     private String name;
@@ -37,7 +42,14 @@ public final class ProjectAttributesUser {
 
     private ProjectAttributesUser() {}
     /**
-     * @return The name of the attribute.
+     * @return An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    public Optional<String> id() {
+        return Optional.ofNullable(this.id);
+    }
+    /**
+     * @return The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     public String name() {
@@ -74,6 +86,7 @@ public final class ProjectAttributesUser {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String id;
         private String name;
         private @Nullable List<String> selectOptions;
         private String type;
@@ -81,12 +94,19 @@ public final class ProjectAttributesUser {
         public Builder() {}
         public Builder(ProjectAttributesUser defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.selectOptions = defaults.selectOptions;
     	      this.type = defaults.type;
     	      this.widgetAuthorization = defaults.widgetAuthorization;
         }
 
+        @CustomType.Setter
+        public Builder id(@Nullable String id) {
+
+            this.id = id;
+            return this;
+        }
         @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
@@ -120,6 +140,7 @@ public final class ProjectAttributesUser {
         }
         public ProjectAttributesUser build() {
             final var _resultValue = new ProjectAttributesUser();
+            _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.selectOptions = selectOptions;
             _resultValue.type = type;

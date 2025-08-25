@@ -20,6 +20,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AddMagiclinkToken { get; set; }
 
         /// <summary>
+        /// Settings related to sending invitation emails.
+        /// </summary>
+        [Input("emailService")]
+        public Input<Inputs.ProjectInviteSettingsEmailServiceArgs>? EmailService { get; set; }
+
+        /// <summary>
         /// Custom URL to include in the message sent to invited users.
         /// </summary>
         [Input("inviteUrl")]
