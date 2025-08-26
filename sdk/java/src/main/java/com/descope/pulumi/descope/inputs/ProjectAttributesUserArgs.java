@@ -19,14 +19,29 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
     public static final ProjectAttributesUserArgs Empty = new ProjectAttributesUserArgs();
 
     /**
-     * The name of the attribute.
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    @Import(name="id")
+    private @Nullable Output<String> id;
+
+    /**
+     * @return An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     * 
+     */
+    public Optional<Output<String>> id() {
+        return Optional.ofNullable(this.id);
+    }
+
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     @Import(name="name", required=true)
     private Output<String> name;
 
     /**
-     * @return The name of the attribute.
+     * @return The name of the attribute. This value is called `Display Name` in the Descope console.
      * 
      */
     public Output<String> name() {
@@ -81,6 +96,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
     private ProjectAttributesUserArgs() {}
 
     private ProjectAttributesUserArgs(ProjectAttributesUserArgs $) {
+        this.id = $.id;
         this.name = $.name;
         this.selectOptions = $.selectOptions;
         this.type = $.type;
@@ -106,7 +122,28 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param name The name of the attribute.
+         * @param id An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder id(@Nullable Output<String> id) {
+            $.id = id;
+            return this;
+        }
+
+        /**
+         * @param id An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder id(String id) {
+            return id(Output.of(id));
+        }
+
+        /**
+         * @param name The name of the attribute. This value is called `Display Name` in the Descope console.
          * 
          * @return builder
          * 
@@ -117,7 +154,7 @@ public final class ProjectAttributesUserArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param name The name of the attribute.
+         * @param name The name of the attribute. This value is called `Display Name` in the Descope console.
          * 
          * @return builder
          * 

@@ -5,7 +5,6 @@ package com.descope.pulumi.descope.inputs;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
-import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -36,15 +35,15 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
      * The unique client ID for the vendor.
      * 
      */
-    @Import(name="clientId", required=true)
-    private Output<String> clientId;
+    @Import(name="clientId")
+    private @Nullable Output<String> clientId;
 
     /**
      * @return The unique client ID for the vendor.
      * 
      */
-    public Output<String> clientId() {
-        return this.clientId;
+    public Optional<Output<String>> clientId() {
+        return Optional.ofNullable(this.clientId);
     }
 
     /**
@@ -81,30 +80,30 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
      * A set of attributes from the vendor&#39;s user that should be used to match with the Descope user&#39;s login ID.
      * 
      */
-    @Import(name="loginidMatchedAttributes", required=true)
-    private Output<List<String>> loginidMatchedAttributes;
+    @Import(name="loginidMatchedAttributes")
+    private @Nullable Output<List<String>> loginidMatchedAttributes;
 
     /**
      * @return A set of attributes from the vendor&#39;s user that should be used to match with the Descope user&#39;s login ID.
      * 
      */
-    public Output<List<String>> loginidMatchedAttributes() {
-        return this.loginidMatchedAttributes;
+    public Optional<Output<List<String>>> loginidMatchedAttributes() {
+        return Optional.ofNullable(this.loginidMatchedAttributes);
     }
 
     /**
      * The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
-    @Import(name="vendor", required=true)
-    private Output<String> vendor;
+    @Import(name="vendor")
+    private @Nullable Output<String> vendor;
 
     /**
      * @return The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
-    public Output<String> vendor() {
-        return this.vendor;
+    public Optional<Output<String>> vendor() {
+        return Optional.ofNullable(this.vendor);
     }
 
     private ProjectProjectSettingsSessionMigrationArgs() {}
@@ -163,7 +162,7 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
          * @return builder
          * 
          */
-        public Builder clientId(Output<String> clientId) {
+        public Builder clientId(@Nullable Output<String> clientId) {
             $.clientId = clientId;
             return this;
         }
@@ -226,7 +225,7 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
          * @return builder
          * 
          */
-        public Builder loginidMatchedAttributes(Output<List<String>> loginidMatchedAttributes) {
+        public Builder loginidMatchedAttributes(@Nullable Output<List<String>> loginidMatchedAttributes) {
             $.loginidMatchedAttributes = loginidMatchedAttributes;
             return this;
         }
@@ -257,7 +256,7 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
          * @return builder
          * 
          */
-        public Builder vendor(Output<String> vendor) {
+        public Builder vendor(@Nullable Output<String> vendor) {
             $.vendor = vendor;
             return this;
         }
@@ -273,15 +272,6 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
         }
 
         public ProjectProjectSettingsSessionMigrationArgs build() {
-            if ($.clientId == null) {
-                throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigrationArgs", "clientId");
-            }
-            if ($.loginidMatchedAttributes == null) {
-                throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigrationArgs", "loginidMatchedAttributes");
-            }
-            if ($.vendor == null) {
-                throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigrationArgs", "vendor");
-            }
             return $;
         }
     }

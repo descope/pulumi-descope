@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthorizationRole
     {
         /// <summary>
+        /// Whether this role should automatically be assigned to users that are created without any roles.
+        /// </summary>
+        public readonly bool? Default;
+        /// <summary>
         /// A description for the role.
         /// </summary>
         public readonly string? Description;
@@ -27,21 +31,31 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A list of permissions by name to be included in the role.
         /// </summary>
         public readonly ImmutableArray<string> Permissions;
+        /// <summary>
+        /// Whether this role should not be displayed to tenant admins.
+        /// </summary>
+        public readonly bool? Private;
 
         [OutputConstructor]
         private ProjectAuthorizationRole(
+            bool? @default,
+
             string? description,
 
             string? id,
 
             string name,
 
-            ImmutableArray<string> permissions)
+            ImmutableArray<string> permissions,
+
+            bool? @private)
         {
+            Default = @default;
             Description = description;
             Id = id;
             Name = name;
             Permissions = permissions;
+            Private = @private;
         }
     }
 }

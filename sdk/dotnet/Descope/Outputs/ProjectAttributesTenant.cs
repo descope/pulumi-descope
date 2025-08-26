@@ -19,7 +19,11 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly Outputs.ProjectAttributesTenantAuthorization? Authorization;
         /// <summary>
-        /// The name of the attribute.
+        /// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        /// </summary>
+        public readonly string? Id;
+        /// <summary>
+        /// The name of the attribute. This value is called `Display Name` in the Descope console.
         /// </summary>
         public readonly string Name;
         /// <summary>
@@ -35,6 +39,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectAttributesTenant(
             Outputs.ProjectAttributesTenantAuthorization? authorization,
 
+            string? id,
+
             string name,
 
             ImmutableArray<string> selectOptions,
@@ -42,6 +48,7 @@ namespace Descope.Pulumi.Descope.Outputs
             string type)
         {
             Authorization = authorization;
+            Id = id;
             Name = name;
             SelectOptions = selectOptions;
             Type = type;

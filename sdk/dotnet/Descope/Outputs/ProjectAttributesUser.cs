@@ -15,7 +15,11 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAttributesUser
     {
         /// <summary>
-        /// The name of the attribute.
+        /// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        /// </summary>
+        public readonly string? Id;
+        /// <summary>
+        /// The name of the attribute. This value is called `Display Name` in the Descope console.
         /// </summary>
         public readonly string Name;
         /// <summary>
@@ -33,6 +37,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAttributesUser(
+            string? id,
+
             string name,
 
             ImmutableArray<string> selectOptions,
@@ -41,6 +47,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectAttributesUserWidgetAuthorization? widgetAuthorization)
         {
+            Id = id;
             Name = name;
             SelectOptions = selectOptions;
             Type = type;
