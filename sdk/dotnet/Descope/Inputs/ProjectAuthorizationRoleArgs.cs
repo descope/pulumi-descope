@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthorizationRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether this role should automatically be assigned to users that are created without any roles.
+        /// </summary>
+        [Input("default")]
+        public Input<bool>? Default { get; set; }
+
+        /// <summary>
         /// A description for the role.
         /// </summary>
         [Input("description")]
@@ -39,6 +45,12 @@ namespace Descope.Pulumi.Descope.Inputs
             get => _permissions ?? (_permissions = new InputList<string>());
             set => _permissions = value;
         }
+
+        /// <summary>
+        /// Whether this role should not be displayed to tenant admins.
+        /// </summary>
+        [Input("private")]
+        public Input<bool>? Private { get; set; }
 
         public ProjectAuthorizationRoleArgs()
         {

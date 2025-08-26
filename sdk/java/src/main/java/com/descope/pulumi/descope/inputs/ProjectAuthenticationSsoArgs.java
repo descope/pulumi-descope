@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
@@ -61,12 +62,28 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         return Optional.ofNullable(this.redirectUrl);
     }
 
+    /**
+     * Configuration block for the SSO Suite.
+     * 
+     */
+    @Import(name="ssoSuiteSettings")
+    private @Nullable Output<ProjectAuthenticationSsoSsoSuiteSettingsArgs> ssoSuiteSettings;
+
+    /**
+     * @return Configuration block for the SSO Suite.
+     * 
+     */
+    public Optional<Output<ProjectAuthenticationSsoSsoSuiteSettingsArgs>> ssoSuiteSettings() {
+        return Optional.ofNullable(this.ssoSuiteSettings);
+    }
+
     private ProjectAuthenticationSsoArgs() {}
 
     private ProjectAuthenticationSsoArgs(ProjectAuthenticationSsoArgs $) {
         this.disabled = $.disabled;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
+        this.ssoSuiteSettings = $.ssoSuiteSettings;
     }
 
     public static Builder builder() {
@@ -148,6 +165,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder redirectUrl(String redirectUrl) {
             return redirectUrl(Output.of(redirectUrl));
+        }
+
+        /**
+         * @param ssoSuiteSettings Configuration block for the SSO Suite.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ssoSuiteSettings(@Nullable Output<ProjectAuthenticationSsoSsoSuiteSettingsArgs> ssoSuiteSettings) {
+            $.ssoSuiteSettings = ssoSuiteSettings;
+            return this;
+        }
+
+        /**
+         * @param ssoSuiteSettings Configuration block for the SSO Suite.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ssoSuiteSettings(ProjectAuthenticationSsoSsoSuiteSettingsArgs ssoSuiteSettings) {
+            return ssoSuiteSettings(Output.of(ssoSuiteSettings));
         }
 
         public ProjectAuthenticationSsoArgs build() {

@@ -26,6 +26,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         /// </summary>
         public readonly string? RedirectUrl;
+        /// <summary>
+        /// Configuration block for the SSO Suite.
+        /// </summary>
+        public readonly Outputs.ProjectAuthenticationSsoSsoSuiteSettings? SsoSuiteSettings;
 
         [OutputConstructor]
         private ProjectAuthenticationSso(
@@ -33,11 +37,14 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? mergeUsers,
 
-            string? redirectUrl)
+            string? redirectUrl,
+
+            Outputs.ProjectAuthenticationSsoSsoSuiteSettings? ssoSuiteSettings)
         {
             Disabled = disabled;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;
+            SsoSuiteSettings = ssoSuiteSettings;
         }
     }
 }

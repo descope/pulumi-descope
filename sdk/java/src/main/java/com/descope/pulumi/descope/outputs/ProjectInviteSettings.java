@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectInviteSettingsEmailService;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
 import java.lang.String;
@@ -17,6 +18,11 @@ public final class ProjectInviteSettings {
      * 
      */
     private @Nullable Boolean addMagiclinkToken;
+    /**
+     * @return Settings related to sending invitation emails.
+     * 
+     */
+    private @Nullable ProjectInviteSettingsEmailService emailService;
     /**
      * @return Custom URL to include in the message sent to invited users.
      * 
@@ -45,6 +51,13 @@ public final class ProjectInviteSettings {
      */
     public Optional<Boolean> addMagiclinkToken() {
         return Optional.ofNullable(this.addMagiclinkToken);
+    }
+    /**
+     * @return Settings related to sending invitation emails.
+     * 
+     */
+    public Optional<ProjectInviteSettingsEmailService> emailService() {
+        return Optional.ofNullable(this.emailService);
     }
     /**
      * @return Custom URL to include in the message sent to invited users.
@@ -85,6 +98,7 @@ public final class ProjectInviteSettings {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable Boolean addMagiclinkToken;
+        private @Nullable ProjectInviteSettingsEmailService emailService;
         private @Nullable String inviteUrl;
         private @Nullable Boolean requireInvitation;
         private @Nullable Boolean sendEmail;
@@ -93,6 +107,7 @@ public final class ProjectInviteSettings {
         public Builder(ProjectInviteSettings defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.addMagiclinkToken = defaults.addMagiclinkToken;
+    	      this.emailService = defaults.emailService;
     	      this.inviteUrl = defaults.inviteUrl;
     	      this.requireInvitation = defaults.requireInvitation;
     	      this.sendEmail = defaults.sendEmail;
@@ -103,6 +118,12 @@ public final class ProjectInviteSettings {
         public Builder addMagiclinkToken(@Nullable Boolean addMagiclinkToken) {
 
             this.addMagiclinkToken = addMagiclinkToken;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder emailService(@Nullable ProjectInviteSettingsEmailService emailService) {
+
+            this.emailService = emailService;
             return this;
         }
         @CustomType.Setter
@@ -132,6 +153,7 @@ public final class ProjectInviteSettings {
         public ProjectInviteSettings build() {
             final var _resultValue = new ProjectInviteSettings();
             _resultValue.addMagiclinkToken = addMagiclinkToken;
+            _resultValue.emailService = emailService;
             _resultValue.inviteUrl = inviteUrl;
             _resultValue.requireInvitation = requireInvitation;
             _resultValue.sendEmail = sendEmail;

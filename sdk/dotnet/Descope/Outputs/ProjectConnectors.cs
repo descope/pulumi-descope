@@ -35,9 +35,9 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> AwsTranslates;
         /// <summary>
-        /// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+        /// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         /// </summary>
-        public readonly ImmutableArray<Outputs.ProjectConnectorsCybersixgill> Cybersixgills;
+        public readonly ImmutableArray<Outputs.ProjectConnectorsBitsight> Bitsights;
         /// <summary>
         /// Stream authentication audit logs with the Datadog connector.
         /// </summary>
@@ -231,7 +231,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> awsTranslates,
 
-            ImmutableArray<Outputs.ProjectConnectorsCybersixgill> cybersixgills,
+            ImmutableArray<Outputs.ProjectConnectorsBitsight> bitsights,
 
             ImmutableArray<Outputs.ProjectConnectorsDatadog> datadogs,
 
@@ -328,7 +328,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AuditWebhooks = auditWebhooks;
             AwsS3s = awsS3s;
             AwsTranslates = awsTranslates;
-            Cybersixgills = cybersixgills;
+            Bitsights = bitsights;
             Datadogs = datadogs;
             DevrevGrows = devrevGrows;
             Docebos = docebos;

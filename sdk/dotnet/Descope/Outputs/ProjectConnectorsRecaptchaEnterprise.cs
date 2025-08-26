@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? BaseUrl;
         /// <summary>
+        /// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+        /// </summary>
+        public readonly double? BotThreshold;
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
@@ -56,6 +60,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? baseUrl,
 
+            double? botThreshold,
+
             string? description,
 
             string? id,
@@ -71,6 +77,7 @@ namespace Descope.Pulumi.Descope.Outputs
             ApiKey = apiKey;
             AssessmentScore = assessmentScore;
             BaseUrl = baseUrl;
+            BotThreshold = botThreshold;
             Description = description;
             Id = id;
             Name = name;
