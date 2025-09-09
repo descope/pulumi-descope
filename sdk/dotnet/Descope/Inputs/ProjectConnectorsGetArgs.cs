@@ -73,16 +73,16 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _awsTranslates = value;
         }
 
-        [Input("cybersixgills")]
-        private InputList<Inputs.ProjectConnectorsCybersixgillGetArgs>? _cybersixgills;
+        [Input("bitsights")]
+        private InputList<Inputs.ProjectConnectorsBitsightGetArgs>? _bitsights;
 
         /// <summary>
-        /// Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+        /// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         /// </summary>
-        public InputList<Inputs.ProjectConnectorsCybersixgillGetArgs> Cybersixgills
+        public InputList<Inputs.ProjectConnectorsBitsightGetArgs> Bitsights
         {
-            get => _cybersixgills ?? (_cybersixgills = new InputList<Inputs.ProjectConnectorsCybersixgillGetArgs>());
-            set => _cybersixgills = value;
+            get => _bitsights ?? (_bitsights = new InputList<Inputs.ProjectConnectorsBitsightGetArgs>());
+            set => _bitsights = value;
         }
 
         [Input("datadogs")]

@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectAuthenticationSsoSsoSuiteSettings;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
 import java.lang.String;
@@ -27,6 +28,11 @@ public final class ProjectAuthenticationSso {
      * 
      */
     private @Nullable String redirectUrl;
+    /**
+     * @return Configuration block for the SSO Suite.
+     * 
+     */
+    private @Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings;
 
     private ProjectAuthenticationSso() {}
     /**
@@ -50,6 +56,13 @@ public final class ProjectAuthenticationSso {
     public Optional<String> redirectUrl() {
         return Optional.ofNullable(this.redirectUrl);
     }
+    /**
+     * @return Configuration block for the SSO Suite.
+     * 
+     */
+    public Optional<ProjectAuthenticationSsoSsoSuiteSettings> ssoSuiteSettings() {
+        return Optional.ofNullable(this.ssoSuiteSettings);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -63,12 +76,14 @@ public final class ProjectAuthenticationSso {
         private @Nullable Boolean disabled;
         private @Nullable Boolean mergeUsers;
         private @Nullable String redirectUrl;
+        private @Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings;
         public Builder() {}
         public Builder(ProjectAuthenticationSso defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.disabled = defaults.disabled;
     	      this.mergeUsers = defaults.mergeUsers;
     	      this.redirectUrl = defaults.redirectUrl;
+    	      this.ssoSuiteSettings = defaults.ssoSuiteSettings;
         }
 
         @CustomType.Setter
@@ -89,11 +104,18 @@ public final class ProjectAuthenticationSso {
             this.redirectUrl = redirectUrl;
             return this;
         }
+        @CustomType.Setter
+        public Builder ssoSuiteSettings(@Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings) {
+
+            this.ssoSuiteSettings = ssoSuiteSettings;
+            return this;
+        }
         public ProjectAuthenticationSso build() {
             final var _resultValue = new ProjectAuthenticationSso();
             _resultValue.disabled = disabled;
             _resultValue.mergeUsers = mergeUsers;
             _resultValue.redirectUrl = redirectUrl;
+            _resultValue.ssoSuiteSettings = ssoSuiteSettings;
             return _resultValue;
         }
     }

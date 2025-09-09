@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,11 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthorizationRole {
+    /**
+     * @return Whether this role should automatically be assigned to users that are created without any roles.
+     * 
+     */
+    private @Nullable Boolean default_;
     /**
      * @return A description for the role.
      * 
@@ -29,8 +35,20 @@ public final class ProjectAuthorizationRole {
      * 
      */
     private @Nullable List<String> permissions;
+    /**
+     * @return Whether this role should not be displayed to tenant admins.
+     * 
+     */
+    private @Nullable Boolean private_;
 
     private ProjectAuthorizationRole() {}
+    /**
+     * @return Whether this role should automatically be assigned to users that are created without any roles.
+     * 
+     */
+    public Optional<Boolean> default_() {
+        return Optional.ofNullable(this.default_);
+    }
     /**
      * @return A description for the role.
      * 
@@ -55,6 +73,13 @@ public final class ProjectAuthorizationRole {
     public List<String> permissions() {
         return this.permissions == null ? List.of() : this.permissions;
     }
+    /**
+     * @return Whether this role should not be displayed to tenant admins.
+     * 
+     */
+    public Optional<Boolean> private_() {
+        return Optional.ofNullable(this.private_);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -65,19 +90,29 @@ public final class ProjectAuthorizationRole {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Boolean default_;
         private @Nullable String description;
         private @Nullable String id;
         private String name;
         private @Nullable List<String> permissions;
+        private @Nullable Boolean private_;
         public Builder() {}
         public Builder(ProjectAuthorizationRole defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.default_ = defaults.default_;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.permissions = defaults.permissions;
+    	      this.private_ = defaults.private_;
         }
 
+        @CustomType.Setter("default")
+        public Builder default_(@Nullable Boolean default_) {
+
+            this.default_ = default_;
+            return this;
+        }
         @CustomType.Setter
         public Builder description(@Nullable String description) {
 
@@ -107,12 +142,20 @@ public final class ProjectAuthorizationRole {
         public Builder permissions(String... permissions) {
             return permissions(List.of(permissions));
         }
+        @CustomType.Setter("private")
+        public Builder private_(@Nullable Boolean private_) {
+
+            this.private_ = private_;
+            return this;
+        }
         public ProjectAuthorizationRole build() {
             final var _resultValue = new ProjectAuthorizationRole();
+            _resultValue.default_ = default_;
             _resultValue.description = description;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.permissions = permissions;
+            _resultValue.private_ = private_;
             return _resultValue;
         }
     }

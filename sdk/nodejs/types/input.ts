@@ -160,7 +160,11 @@ export interface ProjectAttributesTenant {
      */
     authorization?: pulumi.Input<inputs.ProjectAttributesTenantAuthorization>;
     /**
-     * The name of the attribute.
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
      */
     name: pulumi.Input<string>;
     /**
@@ -182,7 +186,11 @@ export interface ProjectAttributesTenantAuthorization {
 
 export interface ProjectAttributesUser {
     /**
-     * The name of the attribute.
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
      */
     name: pulumi.Input<string>;
     /**
@@ -1442,6 +1450,10 @@ export interface ProjectAuthenticationPassword {
      */
     lowercase?: pulumi.Input<boolean>;
     /**
+     * Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     */
+    maskErrors?: pulumi.Input<boolean>;
+    /**
      * The minimum length of the password that users are required to use. The maximum length is always `64`.
      */
     minLength?: pulumi.Input<number>;
@@ -1519,6 +1531,37 @@ export interface ProjectAuthenticationSso {
      * The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
      */
     redirectUrl?: pulumi.Input<string>;
+    /**
+     * Configuration block for the SSO Suite.
+     */
+    ssoSuiteSettings?: pulumi.Input<inputs.ProjectAuthenticationSsoSsoSuiteSettings>;
+}
+
+export interface ProjectAuthenticationSsoSsoSuiteSettings {
+    /**
+     * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+     */
+    hideDomains?: pulumi.Input<boolean>;
+    /**
+     * Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+     */
+    hideGroupsMapping?: pulumi.Input<boolean>;
+    /**
+     * Setting this to `true` will hide the OIDC configuration option.
+     */
+    hideOidc?: pulumi.Input<boolean>;
+    /**
+     * Setting this to `true` will hide the SAML configuration option.
+     */
+    hideSaml?: pulumi.Input<boolean>;
+    /**
+     * Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+     */
+    hideScim?: pulumi.Input<boolean>;
+    /**
+     * Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+     */
+    styleId?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationTotp {
@@ -1553,6 +1596,10 @@ export interface ProjectAuthorizationPermission {
 
 export interface ProjectAuthorizationRole {
     /**
+     * Whether this role should automatically be assigned to users that are created without any roles.
+     */
+    default?: pulumi.Input<boolean>;
+    /**
      * A description for the role.
      */
     description?: pulumi.Input<string>;
@@ -1565,6 +1612,10 @@ export interface ProjectAuthorizationRole {
      * A list of permissions by name to be included in the role.
      */
     permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether this role should not be displayed to tenant admins.
+     */
+    private?: pulumi.Input<boolean>;
 }
 
 export interface ProjectConnectors {
@@ -1589,9 +1640,9 @@ export interface ProjectConnectors {
      */
     awsTranslates?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsTranslate>[]>;
     /**
-     * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      */
-    cybersixgills?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCybersixgill>[]>;
+    bitsights?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsBitsight>[]>;
     /**
      * Stream authentication audit logs with the Datadog connector.
      */
@@ -1997,13 +2048,13 @@ export interface ProjectConnectorsAwsTranslate {
     sessionToken?: pulumi.Input<string>;
 }
 
-export interface ProjectConnectorsCybersixgill {
+export interface ProjectConnectorsBitsight {
     /**
-     * API Client ID issued when you create the credentials in Cybersixgill.
+     * API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      */
     clientId: pulumi.Input<string>;
     /**
-     * Client secret issued when you create the credentials in Cybersixgill.
+     * Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      */
     clientSecret: pulumi.Input<string>;
     /**
@@ -2956,6 +3007,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      */
     baseUrl?: pulumi.Input<string>;
     /**
+     * The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     */
+    botThreshold?: pulumi.Input<number>;
+    /**
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
@@ -3595,6 +3650,10 @@ export interface ProjectInviteSettings {
      */
     addMagiclinkToken?: pulumi.Input<boolean>;
     /**
+     * Settings related to sending invitation emails.
+     */
+    emailService?: pulumi.Input<inputs.ProjectInviteSettingsEmailService>;
+    /**
      * Custom URL to include in the message sent to invited users.
      */
     inviteUrl?: pulumi.Input<string>;
@@ -3610,6 +3669,45 @@ export interface ProjectInviteSettings {
      * Whether to send invitation SMS messages to users.
      */
     sendText?: pulumi.Input<boolean>;
+}
+
+export interface ProjectInviteSettingsEmailService {
+    /**
+     * The name of the email connector to use for sending emails.
+     */
+    connector: pulumi.Input<string>;
+    /**
+     * A list of email templates for different authentication flows.
+     */
+    templates?: pulumi.Input<pulumi.Input<inputs.ProjectInviteSettingsEmailServiceTemplate>[]>;
+}
+
+export interface ProjectInviteSettingsEmailServiceTemplate {
+    /**
+     * Whether this email template is currently active and in use.
+     */
+    active?: pulumi.Input<boolean>;
+    /**
+     * HTML content of the email message body, required if `usePlainTextBody` isn't set.
+     */
+    htmlBody?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Unique name for this email template.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+     */
+    plainTextBody?: pulumi.Input<string>;
+    /**
+     * Subject line of the email message.
+     */
+    subject: pulumi.Input<string>;
+    /**
+     * Whether to use the plain text body instead of HTML for the email.
+     */
+    usePlainTextBody?: pulumi.Input<boolean>;
 }
 
 export interface ProjectJwtTemplates {
@@ -3802,7 +3900,7 @@ export interface ProjectProjectSettingsSessionMigration {
     /**
      * The unique client ID for the vendor.
      */
-    clientId: pulumi.Input<string>;
+    clientId?: pulumi.Input<string>;
     /**
      * The domain value if needed by the vendor.
      */
@@ -3814,11 +3912,11 @@ export interface ProjectProjectSettingsSessionMigration {
     /**
      * A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
      */
-    loginidMatchedAttributes: pulumi.Input<pulumi.Input<string>[]>;
+    loginidMatchedAttributes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the vendor the sessions are migrated from, in all lowercase.
      */
-    vendor: pulumi.Input<string>;
+    vendor?: pulumi.Input<string>;
 }
 
 export interface ProjectStyles {

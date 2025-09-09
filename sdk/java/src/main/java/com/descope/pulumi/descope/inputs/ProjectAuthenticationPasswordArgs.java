@@ -123,6 +123,21 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
     }
 
     /**
+     * Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     * 
+     */
+    @Import(name="maskErrors")
+    private @Nullable Output<Boolean> maskErrors;
+
+    /**
+     * @return Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     * 
+     */
+    public Optional<Output<Boolean>> maskErrors() {
+        return Optional.ofNullable(this.maskErrors);
+    }
+
+    /**
      * The minimum length of the password that users are required to use. The maximum length is always `64`.
      * 
      */
@@ -222,6 +237,7 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
         this.lock = $.lock;
         this.lockAttempts = $.lockAttempts;
         this.lowercase = $.lowercase;
+        this.maskErrors = $.maskErrors;
         this.minLength = $.minLength;
         this.nonAlphanumeric = $.nonAlphanumeric;
         this.number = $.number;
@@ -393,6 +409,27 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
          */
         public Builder lowercase(Boolean lowercase) {
             return lowercase(Output.of(lowercase));
+        }
+
+        /**
+         * @param maskErrors Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskErrors(@Nullable Output<Boolean> maskErrors) {
+            $.maskErrors = maskErrors;
+            return this;
+        }
+
+        /**
+         * @param maskErrors Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskErrors(Boolean maskErrors) {
+            return maskErrors(Output.of(maskErrors));
         }
 
         /**
