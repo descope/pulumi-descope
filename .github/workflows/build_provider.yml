@@ -19,7 +19,8 @@ on:
               {"os": "linux",   "arch": "arm64"},
               {"os": "darwin",  "arch": "amd64"},
               {"os": "darwin",  "arch": "arm64"},
-              {"os": "windows", "arch": "amd64"}
+              {"os": "windows", "arch": "amd64"},
+              {"os": "windows", "arch": "arm64"}
             ]
           }
 
@@ -35,7 +36,7 @@ jobs:
       matrix: ${{ fromJSON(inputs.matrix) }}
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
       # Without ldid cross-compiling Node binaries on a Linux worker intended to work on darwin-arm64 fails to sign the
@@ -71,6 +72,8 @@ jobs:
             go-provider-${{ matrix.platform.os }}-${{ matrix.platform.arch }}-
       - name: Prepare local workspace before restoring previously built
         run: make prepare_local_workspace
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore prerequisites
         uses: ./.github/actions/download-prerequisites
       - name: Restore makefile progress
