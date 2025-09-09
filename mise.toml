@@ -8,7 +8,7 @@ node = '20'
 python = '3.11.8'
 dotnet = '8.0'
 # Corretto version used as Java SE/OpenJDK version no longer offered
-java = 'corretto-11'
+java = 'corretto-21.0.8+9.0.LTS'
 
 # Executable tools
 pulumi = 'latest'
