@@ -64,6 +64,21 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     }
 
     /**
+     * The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     * 
+     */
+    @Import(name="botThreshold")
+    private @Nullable Output<Double> botThreshold;
+
+    /**
+     * @return The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     * 
+     */
+    public Optional<Output<Double>> botThreshold() {
+        return Optional.ofNullable(this.botThreshold);
+    }
+
+    /**
      * A description of what your connector is used for.
      * 
      */
@@ -151,6 +166,7 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
         this.apiKey = $.apiKey;
         this.assessmentScore = $.assessmentScore;
         this.baseUrl = $.baseUrl;
+        this.botThreshold = $.botThreshold;
         this.description = $.description;
         this.id = $.id;
         this.name = $.name;
@@ -238,6 +254,27 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
          */
         public Builder baseUrl(String baseUrl) {
             return baseUrl(Output.of(baseUrl));
+        }
+
+        /**
+         * @param botThreshold The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder botThreshold(@Nullable Output<Double> botThreshold) {
+            $.botThreshold = botThreshold;
+            return this;
+        }
+
+        /**
+         * @param botThreshold The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder botThreshold(Double botThreshold) {
+            return botThreshold(Output.of(botThreshold));
         }
 
         /**

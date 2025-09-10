@@ -37,55 +37,55 @@ export class Project extends pulumi.CustomResource {
     /**
      * Applications that are registered with the project.
      */
-    public readonly applications!: pulumi.Output<outputs.ProjectApplications>;
+    declare public readonly applications: pulumi.Output<outputs.ProjectApplications>;
     /**
      * Custom attributes that can be attached to users and tenants.
      */
-    public readonly attributes!: pulumi.Output<outputs.ProjectAttributes>;
+    declare public readonly attributes: pulumi.Output<outputs.ProjectAttributes>;
     /**
      * Settings for each authentication method.
      */
-    public readonly authentication!: pulumi.Output<outputs.ProjectAuthentication>;
+    declare public readonly authentication: pulumi.Output<outputs.ProjectAuthentication>;
     /**
      * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
      */
-    public readonly authorization!: pulumi.Output<outputs.ProjectAuthorization>;
+    declare public readonly authorization: pulumi.Output<outputs.ProjectAuthorization>;
     /**
      * Enrich your flows by interacting with third party services.
      */
-    public readonly connectors!: pulumi.Output<outputs.ProjectConnectors>;
+    declare public readonly connectors: pulumi.Output<outputs.ProjectConnectors>;
     /**
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
-    public readonly environment!: pulumi.Output<string>;
+    declare public readonly environment: pulumi.Output<string>;
     /**
      * Custom authentication flows to use in this project.
      */
-    public readonly flows!: pulumi.Output<{[key: string]: outputs.ProjectFlows}>;
+    declare public readonly flows: pulumi.Output<{[key: string]: outputs.ProjectFlows}>;
     /**
      * User invitation settings and behavior.
      */
-    public readonly inviteSettings!: pulumi.Output<outputs.ProjectInviteSettings>;
+    declare public readonly inviteSettings: pulumi.Output<outputs.ProjectInviteSettings>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
-    public readonly jwtTemplates!: pulumi.Output<outputs.ProjectJwtTemplates>;
+    declare public readonly jwtTemplates: pulumi.Output<outputs.ProjectJwtTemplates>;
     /**
      * The name of the Descope project.
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
      * General settings for the Descope project.
      */
-    public readonly projectSettings!: pulumi.Output<outputs.ProjectProjectSettings>;
+    declare public readonly projectSettings: pulumi.Output<outputs.ProjectProjectSettings>;
     /**
      * Custom styles that can be applied to the project's authentication flows.
      */
-    public readonly styles!: pulumi.Output<outputs.ProjectStyles>;
+    declare public readonly styles: pulumi.Output<outputs.ProjectStyles>;
     /**
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    declare public readonly tags: pulumi.Output<string[]>;
 
     /**
      * Create a Project resource with the given unique name, arguments, and options.
@@ -100,34 +100,34 @@ export class Project extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ProjectState | undefined;
-            resourceInputs["applications"] = state ? state.applications : undefined;
-            resourceInputs["attributes"] = state ? state.attributes : undefined;
-            resourceInputs["authentication"] = state ? state.authentication : undefined;
-            resourceInputs["authorization"] = state ? state.authorization : undefined;
-            resourceInputs["connectors"] = state ? state.connectors : undefined;
-            resourceInputs["environment"] = state ? state.environment : undefined;
-            resourceInputs["flows"] = state ? state.flows : undefined;
-            resourceInputs["inviteSettings"] = state ? state.inviteSettings : undefined;
-            resourceInputs["jwtTemplates"] = state ? state.jwtTemplates : undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["projectSettings"] = state ? state.projectSettings : undefined;
-            resourceInputs["styles"] = state ? state.styles : undefined;
-            resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["applications"] = state?.applications;
+            resourceInputs["attributes"] = state?.attributes;
+            resourceInputs["authentication"] = state?.authentication;
+            resourceInputs["authorization"] = state?.authorization;
+            resourceInputs["connectors"] = state?.connectors;
+            resourceInputs["environment"] = state?.environment;
+            resourceInputs["flows"] = state?.flows;
+            resourceInputs["inviteSettings"] = state?.inviteSettings;
+            resourceInputs["jwtTemplates"] = state?.jwtTemplates;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["projectSettings"] = state?.projectSettings;
+            resourceInputs["styles"] = state?.styles;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
-            resourceInputs["applications"] = args ? args.applications : undefined;
-            resourceInputs["attributes"] = args ? args.attributes : undefined;
-            resourceInputs["authentication"] = args ? args.authentication : undefined;
-            resourceInputs["authorization"] = args ? args.authorization : undefined;
-            resourceInputs["connectors"] = args ? args.connectors : undefined;
-            resourceInputs["environment"] = args ? args.environment : undefined;
-            resourceInputs["flows"] = args ? args.flows : undefined;
-            resourceInputs["inviteSettings"] = args ? args.inviteSettings : undefined;
-            resourceInputs["jwtTemplates"] = args ? args.jwtTemplates : undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["projectSettings"] = args ? args.projectSettings : undefined;
-            resourceInputs["styles"] = args ? args.styles : undefined;
-            resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["applications"] = args?.applications;
+            resourceInputs["attributes"] = args?.attributes;
+            resourceInputs["authentication"] = args?.authentication;
+            resourceInputs["authorization"] = args?.authorization;
+            resourceInputs["connectors"] = args?.connectors;
+            resourceInputs["environment"] = args?.environment;
+            resourceInputs["flows"] = args?.flows;
+            resourceInputs["inviteSettings"] = args?.inviteSettings;
+            resourceInputs["jwtTemplates"] = args?.jwtTemplates;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["projectSettings"] = args?.projectSettings;
+            resourceInputs["styles"] = args?.styles;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Project.__pulumiType, name, resourceInputs, opts);

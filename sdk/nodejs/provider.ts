@@ -25,9 +25,9 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
-    public readonly baseUrl!: pulumi.Output<string | undefined>;
-    public readonly managementKey!: pulumi.Output<string | undefined>;
-    public readonly projectId!: pulumi.Output<string | undefined>;
+    declare public readonly baseUrl: pulumi.Output<string | undefined>;
+    declare public readonly managementKey: pulumi.Output<string | undefined>;
+    declare public readonly projectId: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -40,9 +40,9 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["baseUrl"] = args ? args.baseUrl : undefined;
+            resourceInputs["baseUrl"] = args?.baseUrl;
             resourceInputs["managementKey"] = args?.managementKey ? pulumi.secret(args.managementKey) : undefined;
-            resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["projectId"] = args?.projectId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["managementKey"] };

@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? AddMagiclinkToken;
         /// <summary>
+        /// Settings related to sending invitation emails.
+        /// </summary>
+        public readonly Outputs.ProjectInviteSettingsEmailService? EmailService;
+        /// <summary>
         /// Custom URL to include in the message sent to invited users.
         /// </summary>
         public readonly string? InviteUrl;
@@ -39,6 +43,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectInviteSettings(
             bool? addMagiclinkToken,
 
+            Outputs.ProjectInviteSettingsEmailService? emailService,
+
             string? inviteUrl,
 
             bool? requireInvitation,
@@ -48,6 +54,7 @@ namespace Descope.Pulumi.Descope.Outputs
             bool? sendText)
         {
             AddMagiclinkToken = addMagiclinkToken;
+            EmailService = emailService;
             InviteUrl = inviteUrl;
             RequireInvitation = requireInvitation;
             SendEmail = sendEmail;

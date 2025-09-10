@@ -8,7 +8,7 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsAmplitude;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAuditWebhook;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsS3;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsTranslate;
-import com.descope.pulumi.descope.outputs.ProjectConnectorsCybersixgill;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsBitsight;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDatadog;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDevrevGrow;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDocebo;
@@ -87,10 +87,10 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
     /**
-     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      * 
      */
-    private @Nullable List<ProjectConnectorsCybersixgill> cybersixgills;
+    private @Nullable List<ProjectConnectorsBitsight> bitsights;
     /**
      * @return Stream authentication audit logs with the Datadog connector.
      * 
@@ -354,11 +354,11 @@ public final class ProjectConnectors {
         return this.awsTranslates == null ? List.of() : this.awsTranslates;
     }
     /**
-     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * @return Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      * 
      */
-    public List<ProjectConnectorsCybersixgill> cybersixgills() {
-        return this.cybersixgills == null ? List.of() : this.cybersixgills;
+    public List<ProjectConnectorsBitsight> bitsights() {
+        return this.bitsights == null ? List.of() : this.bitsights;
     }
     /**
      * @return Stream authentication audit logs with the Datadog connector.
@@ -690,7 +690,7 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks;
         private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
         private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
-        private @Nullable List<ProjectConnectorsCybersixgill> cybersixgills;
+        private @Nullable List<ProjectConnectorsBitsight> bitsights;
         private @Nullable List<ProjectConnectorsDatadog> datadogs;
         private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
         private @Nullable List<ProjectConnectorsDocebo> docebos;
@@ -744,7 +744,7 @@ public final class ProjectConnectors {
     	      this.auditWebhooks = defaults.auditWebhooks;
     	      this.awsS3s = defaults.awsS3s;
     	      this.awsTranslates = defaults.awsTranslates;
-    	      this.cybersixgills = defaults.cybersixgills;
+    	      this.bitsights = defaults.bitsights;
     	      this.datadogs = defaults.datadogs;
     	      this.devrevGrows = defaults.devrevGrows;
     	      this.docebos = defaults.docebos;
@@ -838,13 +838,13 @@ public final class ProjectConnectors {
             return awsTranslates(List.of(awsTranslates));
         }
         @CustomType.Setter
-        public Builder cybersixgills(@Nullable List<ProjectConnectorsCybersixgill> cybersixgills) {
+        public Builder bitsights(@Nullable List<ProjectConnectorsBitsight> bitsights) {
 
-            this.cybersixgills = cybersixgills;
+            this.bitsights = bitsights;
             return this;
         }
-        public Builder cybersixgills(ProjectConnectorsCybersixgill... cybersixgills) {
-            return cybersixgills(List.of(cybersixgills));
+        public Builder bitsights(ProjectConnectorsBitsight... bitsights) {
+            return bitsights(List.of(bitsights));
         }
         @CustomType.Setter
         public Builder datadogs(@Nullable List<ProjectConnectorsDatadog> datadogs) {
@@ -1258,7 +1258,7 @@ public final class ProjectConnectors {
             _resultValue.auditWebhooks = auditWebhooks;
             _resultValue.awsS3s = awsS3s;
             _resultValue.awsTranslates = awsTranslates;
-            _resultValue.cybersixgills = cybersixgills;
+            _resultValue.bitsights = bitsights;
             _resultValue.datadogs = datadogs;
             _resultValue.devrevGrows = devrevGrows;
             _resultValue.docebos = docebos;
