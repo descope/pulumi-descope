@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/descope/terraform-provider-descope v0.2.3
-	github.com/hashicorp/terraform-plugin-framework v1.15.0
+	github.com/hashicorp/terraform-plugin-framework v1.15.1
 )
 
 require (
