@@ -14,7 +14,13 @@ goBuildParallelism: 2
 major-version: 1
 testMasterAndReleaseWorkflows: false
 publish:
+  sdk: "all,!java"
   cdn: false
 generate-nightly-test-workflow: true
 registryDocs: true
 publishRegistry: false
+languages:
+  - dotnet
+  - go
+  - nodejs
+  - python
