@@ -344,7 +344,7 @@
                             "aws_translate": {
                                 "maxItemsOne": false
                             },
-                            "cybersixgill": {
+                            "bitsight": {
                                 "maxItemsOne": false
                             },
                             "datadog": {
@@ -537,6 +537,17 @@
                             },
                             "twilio_verify": {
                                 "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "invite_settings": {
+                        "fields": {
+                            "email_service": {
+                                "fields": {
+                                    "templates": {
+                                        "maxItemsOne": false
+                                    }
+                                }
                             }
                         }
                     },

@@ -330,10 +330,10 @@ github.com/deckarep/golang-set/v2 v2.5.0 h1:hn6cEZtQ0h3J8kFrHR/NrzyOoTnjgW1+FmNJ
 github.com/deckarep/golang-set/v2 v2.5.0/go.mod h1:VAky9rY/yGXJOLEDv3OMci+7wtDpOF4IN+y82NBOac4=
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 h1:NMZiJj8QnKe1LgsbDayM4UoHwbvwDRwnI3hwNaAHRnc=
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0/go.mod h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=
-github.com/descope/go-sdk v1.6.13 h1:oN4Hrdks37LRByAgs3Ke5KZFXeXTxfnMDSsJlADBvTg=
-github.com/descope/go-sdk v1.6.13/go.mod h1:khLMD/1zglkkZCRg6xCA6DI8bXj7wAbZEOonwMrUkF4=
-github.com/descope/terraform-provider-descope v0.2.1 h1:/QvitzLjX9Q/Eq+flKU/nzjm9HFEJUW2TQAmWvGxPYc=
-github.com/descope/terraform-provider-descope v0.2.1/go.mod h1:jKskBUc8d3m/YeOqqf7LoqjBALzJOjDOfbZt16j0k/Y=
+github.com/descope/go-sdk v1.6.16 h1:E+ByxR9Hq2W08bSJ7twr6FFsdJYQ2iJ1hh8A4pt7MIc=
+github.com/descope/go-sdk v1.6.16/go.mod h1:khLMD/1zglkkZCRg6xCA6DI8bXj7wAbZEOonwMrUkF4=
+github.com/descope/terraform-provider-descope v0.2.3 h1:Od7K6NvbRm1upt3RI1drvlkhHk6F+5bzhr9TEoxhb3s=
+github.com/descope/terraform-provider-descope v0.2.3/go.mod h1:LFal9QSsZoR0Q8YgSKYvveM0ANrvx7ndRlyLKxM9qeo=
 github.com/djherbis/times v1.5.0 h1:79myA211VwPhFTqUk8xehWrsEO+zcIZj0zT8mXPVARU=
 github.com/djherbis/times v1.5.0/go.mod h1:5q7FDLvbNg1L/KaBmPcWlVR9NmoKo3+ucqUA3ijQhA0=
 github.com/edsrzf/mmap-go v1.1.0 h1:6EUwBLQ/Mcr1EYLE4Tn1VdW1A4ckqCQWZBw8Hr0kjpQ=
