@@ -1,3 +1,4 @@
+template: external-bridged-provider
 organization: descope
 provider: descope
 env:
@@ -8,19 +9,17 @@ env:
   DESCOPE_MANAGEMENT_KEY: ${{ secrets.DESCOPE_MANAGEMENT_KEY }}
   DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
 providerDefaultBranch: main
-template: external-bridged-provider
 pulumiConvert: 1
 goBuildParallelism: 2
 major-version: 1
 testMasterAndReleaseWorkflows: false
 publish:
-  sdk: "all,!java"
   cdn: false
 generate-nightly-test-workflow: true
 registryDocs: true
 publishRegistry: false
-languages:
-  - dotnet
-  - go
-  - nodejs
-  - python
+plugins:
+  - name: terraform
+    version: "1.0.16"
+    kind: converter
+autoMergeProviderUpgrades: true
