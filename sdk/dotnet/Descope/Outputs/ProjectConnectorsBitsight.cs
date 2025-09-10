@@ -12,14 +12,14 @@ namespace Descope.Pulumi.Descope.Outputs
 {
 
     [OutputType]
-    public sealed class ProjectConnectorsCybersixgill
+    public sealed class ProjectConnectorsBitsight
     {
         /// <summary>
-        /// API Client ID issued when you create the credentials in Cybersixgill.
+        /// API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
         /// </summary>
         public readonly string ClientId;
         /// <summary>
-        /// Client secret issued when you create the credentials in Cybersixgill.
+        /// Client secret issued when you create the credentials in Bitsight Threat Intelligence.
         /// </summary>
         public readonly string ClientSecret;
         /// <summary>
@@ -33,7 +33,7 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string Name;
 
         [OutputConstructor]
-        private ProjectConnectorsCybersixgill(
+        private ProjectConnectorsBitsight(
             string clientId,
 
             string clientSecret,

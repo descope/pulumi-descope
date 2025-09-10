@@ -160,7 +160,11 @@ export interface ProjectAttributesTenant {
      */
     authorization: outputs.ProjectAttributesTenantAuthorization;
     /**
-     * The name of the attribute.
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id: string;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
      */
     name: string;
     /**
@@ -182,7 +186,11 @@ export interface ProjectAttributesTenantAuthorization {
 
 export interface ProjectAttributesUser {
     /**
-     * The name of the attribute.
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id: string;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
      */
     name: string;
     /**
@@ -1442,6 +1450,10 @@ export interface ProjectAuthenticationPassword {
      */
     lowercase: boolean;
     /**
+     * Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     */
+    maskErrors: boolean;
+    /**
      * The minimum length of the password that users are required to use. The maximum length is always `64`.
      */
     minLength: number;
@@ -1519,6 +1531,37 @@ export interface ProjectAuthenticationSso {
      * The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
      */
     redirectUrl: string;
+    /**
+     * Configuration block for the SSO Suite.
+     */
+    ssoSuiteSettings: outputs.ProjectAuthenticationSsoSsoSuiteSettings;
+}
+
+export interface ProjectAuthenticationSsoSsoSuiteSettings {
+    /**
+     * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+     */
+    hideDomains: boolean;
+    /**
+     * Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+     */
+    hideGroupsMapping: boolean;
+    /**
+     * Setting this to `true` will hide the OIDC configuration option.
+     */
+    hideOidc: boolean;
+    /**
+     * Setting this to `true` will hide the SAML configuration option.
+     */
+    hideSaml: boolean;
+    /**
+     * Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+     */
+    hideScim: boolean;
+    /**
+     * Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+     */
+    styleId: string;
 }
 
 export interface ProjectAuthenticationTotp {
@@ -1553,6 +1596,10 @@ export interface ProjectAuthorizationPermission {
 
 export interface ProjectAuthorizationRole {
     /**
+     * Whether this role should automatically be assigned to users that are created without any roles.
+     */
+    default: boolean;
+    /**
      * A description for the role.
      */
     description: string;
@@ -1565,6 +1612,10 @@ export interface ProjectAuthorizationRole {
      * A list of permissions by name to be included in the role.
      */
     permissions: string[];
+    /**
+     * Whether this role should not be displayed to tenant admins.
+     */
+    private: boolean;
 }
 
 export interface ProjectConnectors {
@@ -1589,9 +1640,9 @@ export interface ProjectConnectors {
      */
     awsTranslates: outputs.ProjectConnectorsAwsTranslate[];
     /**
-     * Utilize threat intelligence to block malicious login attempts or check leaks with the Cybersixgill connector.
+     * Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      */
-    cybersixgills: outputs.ProjectConnectorsCybersixgill[];
+    bitsights: outputs.ProjectConnectorsBitsight[];
     /**
      * Stream authentication audit logs with the Datadog connector.
      */
@@ -1997,13 +2048,13 @@ export interface ProjectConnectorsAwsTranslate {
     sessionToken: string;
 }
 
-export interface ProjectConnectorsCybersixgill {
+export interface ProjectConnectorsBitsight {
     /**
-     * API Client ID issued when you create the credentials in Cybersixgill.
+     * API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
      */
     clientId: string;
     /**
-     * Client secret issued when you create the credentials in Cybersixgill.
+     * Client secret issued when you create the credentials in Bitsight Threat Intelligence.
      */
     clientSecret: string;
     /**
@@ -2956,6 +3007,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      */
     baseUrl: string;
     /**
+     * The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     */
+    botThreshold: number;
+    /**
      * A description of what your connector is used for.
      */
     description: string;
@@ -3595,6 +3650,10 @@ export interface ProjectInviteSettings {
      */
     addMagiclinkToken: boolean;
     /**
+     * Settings related to sending invitation emails.
+     */
+    emailService: outputs.ProjectInviteSettingsEmailService;
+    /**
      * Custom URL to include in the message sent to invited users.
      */
     inviteUrl: string;
@@ -3610,6 +3669,45 @@ export interface ProjectInviteSettings {
      * Whether to send invitation SMS messages to users.
      */
     sendText: boolean;
+}
+
+export interface ProjectInviteSettingsEmailService {
+    /**
+     * The name of the email connector to use for sending emails.
+     */
+    connector: string;
+    /**
+     * A list of email templates for different authentication flows.
+     */
+    templates: outputs.ProjectInviteSettingsEmailServiceTemplate[];
+}
+
+export interface ProjectInviteSettingsEmailServiceTemplate {
+    /**
+     * Whether this email template is currently active and in use.
+     */
+    active: boolean;
+    /**
+     * HTML content of the email message body, required if `usePlainTextBody` isn't set.
+     */
+    htmlBody: string;
+    id: string;
+    /**
+     * Unique name for this email template.
+     */
+    name: string;
+    /**
+     * Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+     */
+    plainTextBody: string;
+    /**
+     * Subject line of the email message.
+     */
+    subject: string;
+    /**
+     * Whether to use the plain text body instead of HTML for the email.
+     */
+    usePlainTextBody: boolean;
 }
 
 export interface ProjectJwtTemplates {

@@ -30,6 +30,11 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     private @Nullable String baseUrl;
     /**
+     * @return The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     * 
+     */
+    private @Nullable Double botThreshold;
+    /**
      * @return A description of what your connector is used for.
      * 
      */
@@ -77,6 +82,13 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     public Optional<String> baseUrl() {
         return Optional.ofNullable(this.baseUrl);
+    }
+    /**
+     * @return The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     * 
+     */
+    public Optional<Double> botThreshold() {
+        return Optional.ofNullable(this.botThreshold);
     }
     /**
      * @return A description of what your connector is used for.
@@ -129,6 +141,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         private String apiKey;
         private @Nullable Double assessmentScore;
         private @Nullable String baseUrl;
+        private @Nullable Double botThreshold;
         private @Nullable String description;
         private @Nullable String id;
         private String name;
@@ -141,6 +154,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     	      this.apiKey = defaults.apiKey;
     	      this.assessmentScore = defaults.assessmentScore;
     	      this.baseUrl = defaults.baseUrl;
+    	      this.botThreshold = defaults.botThreshold;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
@@ -167,6 +181,12 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         public Builder baseUrl(@Nullable String baseUrl) {
 
             this.baseUrl = baseUrl;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder botThreshold(@Nullable Double botThreshold) {
+
+            this.botThreshold = botThreshold;
             return this;
         }
         @CustomType.Setter
@@ -216,6 +236,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
             _resultValue.apiKey = apiKey;
             _resultValue.assessmentScore = assessmentScore;
             _resultValue.baseUrl = baseUrl;
+            _resultValue.botThreshold = botThreshold;
             _resultValue.description = description;
             _resultValue.id = id;
             _resultValue.name = name;

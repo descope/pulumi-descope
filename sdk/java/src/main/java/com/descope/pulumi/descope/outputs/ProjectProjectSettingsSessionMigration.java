@@ -4,7 +4,6 @@
 package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
-import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +21,7 @@ public final class ProjectProjectSettingsSessionMigration {
      * @return The unique client ID for the vendor.
      * 
      */
-    private String clientId;
+    private @Nullable String clientId;
     /**
      * @return The domain value if needed by the vendor.
      * 
@@ -37,12 +36,12 @@ public final class ProjectProjectSettingsSessionMigration {
      * @return A set of attributes from the vendor&#39;s user that should be used to match with the Descope user&#39;s login ID.
      * 
      */
-    private List<String> loginidMatchedAttributes;
+    private @Nullable List<String> loginidMatchedAttributes;
     /**
      * @return The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
-    private String vendor;
+    private @Nullable String vendor;
 
     private ProjectProjectSettingsSessionMigration() {}
     /**
@@ -56,8 +55,8 @@ public final class ProjectProjectSettingsSessionMigration {
      * @return The unique client ID for the vendor.
      * 
      */
-    public String clientId() {
-        return this.clientId;
+    public Optional<String> clientId() {
+        return Optional.ofNullable(this.clientId);
     }
     /**
      * @return The domain value if needed by the vendor.
@@ -78,14 +77,14 @@ public final class ProjectProjectSettingsSessionMigration {
      * 
      */
     public List<String> loginidMatchedAttributes() {
-        return this.loginidMatchedAttributes;
+        return this.loginidMatchedAttributes == null ? List.of() : this.loginidMatchedAttributes;
     }
     /**
      * @return The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
-    public String vendor() {
-        return this.vendor;
+    public Optional<String> vendor() {
+        return Optional.ofNullable(this.vendor);
     }
 
     public static Builder builder() {
@@ -98,11 +97,11 @@ public final class ProjectProjectSettingsSessionMigration {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable String audience;
-        private String clientId;
+        private @Nullable String clientId;
         private @Nullable String domain;
         private @Nullable String issuer;
-        private List<String> loginidMatchedAttributes;
-        private String vendor;
+        private @Nullable List<String> loginidMatchedAttributes;
+        private @Nullable String vendor;
         public Builder() {}
         public Builder(ProjectProjectSettingsSessionMigration defaults) {
     	      Objects.requireNonNull(defaults);
@@ -121,10 +120,8 @@ public final class ProjectProjectSettingsSessionMigration {
             return this;
         }
         @CustomType.Setter
-        public Builder clientId(String clientId) {
-            if (clientId == null) {
-              throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigration", "clientId");
-            }
+        public Builder clientId(@Nullable String clientId) {
+
             this.clientId = clientId;
             return this;
         }
@@ -141,10 +138,8 @@ public final class ProjectProjectSettingsSessionMigration {
             return this;
         }
         @CustomType.Setter
-        public Builder loginidMatchedAttributes(List<String> loginidMatchedAttributes) {
-            if (loginidMatchedAttributes == null) {
-              throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigration", "loginidMatchedAttributes");
-            }
+        public Builder loginidMatchedAttributes(@Nullable List<String> loginidMatchedAttributes) {
+
             this.loginidMatchedAttributes = loginidMatchedAttributes;
             return this;
         }
@@ -152,10 +147,8 @@ public final class ProjectProjectSettingsSessionMigration {
             return loginidMatchedAttributes(List.of(loginidMatchedAttributes));
         }
         @CustomType.Setter
-        public Builder vendor(String vendor) {
-            if (vendor == null) {
-              throw new MissingRequiredPropertyException("ProjectProjectSettingsSessionMigration", "vendor");
-            }
+        public Builder vendor(@Nullable String vendor) {
+
             this.vendor = vendor;
             return this;
         }

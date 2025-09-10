@@ -43,6 +43,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? Lowercase;
         /// <summary>
+        /// Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+        /// </summary>
+        public readonly bool? MaskErrors;
+        /// <summary>
         /// The minimum length of the password that users are required to use. The maximum length is always `64`.
         /// </summary>
         public readonly int? MinLength;
@@ -83,6 +87,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? lowercase,
 
+            bool? maskErrors,
+
             int? minLength,
 
             bool? nonAlphanumeric,
@@ -102,6 +108,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Lock = @lock;
             LockAttempts = lockAttempts;
             Lowercase = lowercase;
+            MaskErrors = maskErrors;
             MinLength = minLength;
             NonAlphanumeric = nonAlphanumeric;
             Number = number;

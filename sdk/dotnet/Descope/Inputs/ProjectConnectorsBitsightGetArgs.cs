@@ -11,10 +11,10 @@ using Pulumi;
 namespace Descope.Pulumi.Descope.Inputs
 {
 
-    public sealed class ProjectConnectorsCybersixgillArgs : global::Pulumi.ResourceArgs
+    public sealed class ProjectConnectorsBitsightGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// API Client ID issued when you create the credentials in Cybersixgill.
+        /// API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
         /// </summary>
         [Input("clientId", required: true)]
         public Input<string> ClientId { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private Input<string>? _clientSecret;
 
         /// <summary>
-        /// Client secret issued when you create the credentials in Cybersixgill.
+        /// Client secret issued when you create the credentials in Bitsight Threat Intelligence.
         /// </summary>
         public Input<string>? ClientSecret
         {
@@ -50,9 +50,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        public ProjectConnectorsCybersixgillArgs()
+        public ProjectConnectorsBitsightGetArgs()
         {
         }
-        public static new ProjectConnectorsCybersixgillArgs Empty => new ProjectConnectorsCybersixgillArgs();
+        public static new ProjectConnectorsBitsightGetArgs Empty => new ProjectConnectorsBitsightGetArgs();
     }
 }

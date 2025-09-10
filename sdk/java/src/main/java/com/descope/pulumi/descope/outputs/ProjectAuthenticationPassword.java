@@ -49,6 +49,11 @@ public final class ProjectAuthenticationPassword {
      */
     private @Nullable Boolean lowercase;
     /**
+     * @return Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     * 
+     */
+    private @Nullable Boolean maskErrors;
+    /**
      * @return The minimum length of the password that users are required to use. The maximum length is always `64`.
      * 
      */
@@ -130,6 +135,13 @@ public final class ProjectAuthenticationPassword {
         return Optional.ofNullable(this.lowercase);
     }
     /**
+     * @return Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+     * 
+     */
+    public Optional<Boolean> maskErrors() {
+        return Optional.ofNullable(this.maskErrors);
+    }
+    /**
      * @return The minimum length of the password that users are required to use. The maximum length is always `64`.
      * 
      */
@@ -188,6 +200,7 @@ public final class ProjectAuthenticationPassword {
         private @Nullable Boolean lock;
         private @Nullable Integer lockAttempts;
         private @Nullable Boolean lowercase;
+        private @Nullable Boolean maskErrors;
         private @Nullable Integer minLength;
         private @Nullable Boolean nonAlphanumeric;
         private @Nullable Boolean number;
@@ -204,6 +217,7 @@ public final class ProjectAuthenticationPassword {
     	      this.lock = defaults.lock;
     	      this.lockAttempts = defaults.lockAttempts;
     	      this.lowercase = defaults.lowercase;
+    	      this.maskErrors = defaults.maskErrors;
     	      this.minLength = defaults.minLength;
     	      this.nonAlphanumeric = defaults.nonAlphanumeric;
     	      this.number = defaults.number;
@@ -255,6 +269,12 @@ public final class ProjectAuthenticationPassword {
             return this;
         }
         @CustomType.Setter
+        public Builder maskErrors(@Nullable Boolean maskErrors) {
+
+            this.maskErrors = maskErrors;
+            return this;
+        }
+        @CustomType.Setter
         public Builder minLength(@Nullable Integer minLength) {
 
             this.minLength = minLength;
@@ -299,6 +319,7 @@ public final class ProjectAuthenticationPassword {
             _resultValue.lock = lock;
             _resultValue.lockAttempts = lockAttempts;
             _resultValue.lowercase = lowercase;
+            _resultValue.maskErrors = maskErrors;
             _resultValue.minLength = minLength;
             _resultValue.nonAlphanumeric = nonAlphanumeric;
             _resultValue.number = number;

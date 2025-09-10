@@ -56,6 +56,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? Lowercase { get; set; }
 
         /// <summary>
+        /// Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+        /// </summary>
+        [Input("maskErrors")]
+        public Input<bool>? MaskErrors { get; set; }
+
+        /// <summary>
         /// The minimum length of the password that users are required to use. The maximum length is always `64`.
         /// </summary>
         [Input("minLength")]

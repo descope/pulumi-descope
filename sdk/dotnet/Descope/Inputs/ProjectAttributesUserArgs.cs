@@ -14,7 +14,13 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAttributesUserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the attribute.
+        /// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        /// </summary>
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// The name of the attribute. This value is called `Display Name` in the Descope console.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
