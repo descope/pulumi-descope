@@ -6,7 +6,7 @@ replace github.com/descope/terraform-provider-descope/shim => ./shim
 
 require (
 	github.com/descope/terraform-provider-descope/shim v0.2.3
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.113.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.114.0
 	golang.org/x/text v0.29.0
 )
 
