@@ -4,7 +4,7 @@
 
 # Runtimes
 go = '1.25.1'
-node = '20'
+node = '22'
 python = '3.13.7'
 dotnet = '8.0'
 # Corretto version used as Java SE/OpenJDK version no longer offered
