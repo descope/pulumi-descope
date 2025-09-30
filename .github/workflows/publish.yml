@@ -140,7 +140,7 @@ jobs:
       if: inputs.skipJavaSdk == false
       uses: pulumi/pulumi-package-publisher@c1672c7928591d563dccb12729e05e315c21f8c2 # v0.0.22
       with:
-        sdk: all,!java
+        sdk: all
         version: ${{ inputs.version }}
       env:
         PYPI_USERNAME: __token__
@@ -156,7 +156,7 @@ jobs:
       if: inputs.skipJavaSdk == true
       uses: pulumi/pulumi-package-publisher@c1672c7928591d563dccb12729e05e315c21f8c2 # v0.0.22
       with:
-        sdk: all,!java,!java
+        sdk: all,!java
         version: ${{ inputs.version }}
       env:
         PYPI_USERNAME: __token__

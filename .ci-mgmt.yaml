@@ -14,7 +14,6 @@ goBuildParallelism: 2
 testMasterAndReleaseWorkflows: false
 publish:
     cdn: false
-    sdk: all,!java
 generate-nightly-test-workflow: true
 registryDocs: true
 publishRegistry: false
