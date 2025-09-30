@@ -50,8 +50,7 @@ env:
   PULUMI_API: https://api.pulumi-staging.io
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
-  PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-  PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+  PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }}
   TF_APPEND_USER_AGENT: pulumi
 
 jobs:
@@ -115,6 +114,6 @@ jobs:
             *.sum
           cache: true
       - name: Install Pulumi CLI
-        uses: pulumi/actions@cc7494be991dba0978f7ffafaf995b0449a0998e # v6
+        uses: pulumi/actions@d7ceb0215da5a14ec84f50b703365ddf0194a9c8 # v6
         with:
           pulumi-version: "dev"

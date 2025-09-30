@@ -32,7 +32,7 @@ env:
   PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
   PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
   PULUMI_PROVIDER_AUTOMATION_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
-  PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+  PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }}
   TF_APPEND_USER_AGENT: pulumi
 
 permissions:
