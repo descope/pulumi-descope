@@ -156,6 +156,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? TokenEndpoint { get; set; }
 
         /// <summary>
+        /// Use private key JWT (client assertion) instead of client secret.
+        /// </summary>
+        [Input("useClientAssertion")]
+        public Input<bool>? UseClientAssertion { get; set; }
+
+        /// <summary>
         /// The URL where the application retrieves user information from the OAuth provider.
         /// </summary>
         [Input("userInfoEndpoint")]

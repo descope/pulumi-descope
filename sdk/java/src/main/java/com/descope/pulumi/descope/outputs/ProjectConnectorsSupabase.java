@@ -5,14 +5,31 @@ package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.String;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectConnectorsSupabase {
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    private @Nullable String authType;
+    /**
+     * @return Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+     * 
+     */
+    private @Nullable Boolean createUsers;
+    /**
+     * @return A mapping of Descope user fields or JWT claims to Supabase custom claims
+     * 
+     */
+    private @Nullable Map<String,String> customClaimsMapping;
     /**
      * @return A description of what your connector is used for.
      * 
@@ -30,12 +47,48 @@ public final class ProjectConnectorsSupabase {
      */
     private String name;
     /**
+     * @return The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+     * 
+     */
+    private @Nullable String privateKey;
+    /**
+     * @return Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+     * 
+     */
+    private @Nullable String projectBaseUrl;
+    /**
+     * @return The service role API key for your Supabase project, required to create users.
+     * 
+     */
+    private @Nullable String serviceRoleApiKey;
+    /**
      * @return The signing secret for your Supabase project.
      * 
      */
-    private String signingSecret;
+    private @Nullable String signingSecret;
 
     private ProjectConnectorsSupabase() {}
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Optional<String> authType() {
+        return Optional.ofNullable(this.authType);
+    }
+    /**
+     * @return Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+     * 
+     */
+    public Optional<Boolean> createUsers() {
+        return Optional.ofNullable(this.createUsers);
+    }
+    /**
+     * @return A mapping of Descope user fields or JWT claims to Supabase custom claims
+     * 
+     */
+    public Map<String,String> customClaimsMapping() {
+        return this.customClaimsMapping == null ? Map.of() : this.customClaimsMapping;
+    }
     /**
      * @return A description of what your connector is used for.
      * 
@@ -61,11 +114,32 @@ public final class ProjectConnectorsSupabase {
         return this.name;
     }
     /**
+     * @return The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+     * 
+     */
+    public Optional<String> privateKey() {
+        return Optional.ofNullable(this.privateKey);
+    }
+    /**
+     * @return Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+     * 
+     */
+    public Optional<String> projectBaseUrl() {
+        return Optional.ofNullable(this.projectBaseUrl);
+    }
+    /**
+     * @return The service role API key for your Supabase project, required to create users.
+     * 
+     */
+    public Optional<String> serviceRoleApiKey() {
+        return Optional.ofNullable(this.serviceRoleApiKey);
+    }
+    /**
      * @return The signing secret for your Supabase project.
      * 
      */
-    public String signingSecret() {
-        return this.signingSecret;
+    public Optional<String> signingSecret() {
+        return Optional.ofNullable(this.signingSecret);
     }
 
     public static Builder builder() {
@@ -77,21 +151,51 @@ public final class ProjectConnectorsSupabase {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String authType;
+        private @Nullable Boolean createUsers;
+        private @Nullable Map<String,String> customClaimsMapping;
         private @Nullable String description;
         private @Nullable Double expirationTime;
         private @Nullable String id;
         private String name;
-        private String signingSecret;
+        private @Nullable String privateKey;
+        private @Nullable String projectBaseUrl;
+        private @Nullable String serviceRoleApiKey;
+        private @Nullable String signingSecret;
         public Builder() {}
         public Builder(ProjectConnectorsSupabase defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.authType = defaults.authType;
+    	      this.createUsers = defaults.createUsers;
+    	      this.customClaimsMapping = defaults.customClaimsMapping;
     	      this.description = defaults.description;
     	      this.expirationTime = defaults.expirationTime;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
+    	      this.privateKey = defaults.privateKey;
+    	      this.projectBaseUrl = defaults.projectBaseUrl;
+    	      this.serviceRoleApiKey = defaults.serviceRoleApiKey;
     	      this.signingSecret = defaults.signingSecret;
         }
 
+        @CustomType.Setter
+        public Builder authType(@Nullable String authType) {
+
+            this.authType = authType;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder createUsers(@Nullable Boolean createUsers) {
+
+            this.createUsers = createUsers;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder customClaimsMapping(@Nullable Map<String,String> customClaimsMapping) {
+
+            this.customClaimsMapping = customClaimsMapping;
+            return this;
+        }
         @CustomType.Setter
         public Builder description(@Nullable String description) {
 
@@ -119,19 +223,41 @@ public final class ProjectConnectorsSupabase {
             return this;
         }
         @CustomType.Setter
-        public Builder signingSecret(String signingSecret) {
-            if (signingSecret == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsSupabase", "signingSecret");
-            }
+        public Builder privateKey(@Nullable String privateKey) {
+
+            this.privateKey = privateKey;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder projectBaseUrl(@Nullable String projectBaseUrl) {
+
+            this.projectBaseUrl = projectBaseUrl;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder serviceRoleApiKey(@Nullable String serviceRoleApiKey) {
+
+            this.serviceRoleApiKey = serviceRoleApiKey;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder signingSecret(@Nullable String signingSecret) {
+
             this.signingSecret = signingSecret;
             return this;
         }
         public ProjectConnectorsSupabase build() {
             final var _resultValue = new ProjectConnectorsSupabase();
+            _resultValue.authType = authType;
+            _resultValue.createUsers = createUsers;
+            _resultValue.customClaimsMapping = customClaimsMapping;
             _resultValue.description = description;
             _resultValue.expirationTime = expirationTime;
             _resultValue.id = id;
             _resultValue.name = name;
+            _resultValue.privateKey = privateKey;
+            _resultValue.projectBaseUrl = projectBaseUrl;
+            _resultValue.serviceRoleApiKey = serviceRoleApiKey;
             _resultValue.signingSecret = signingSecret;
             return _resultValue;
         }

@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationSsoSsoSuiteSettings
     {
         /// <summary>
+        /// Setting this to `true` will allow only verified domains to be used.
+        /// </summary>
+        public readonly bool? ForceDomainVerification;
+        /// <summary>
         /// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideDomains;
@@ -41,6 +45,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationSsoSsoSuiteSettings(
+            bool? forceDomainVerification,
+
             bool? hideDomains,
 
             bool? hideGroupsMapping,
@@ -53,6 +59,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? styleId)
         {
+            ForceDomainVerification = forceDomainVerification;
             HideDomains = hideDomains;
             HideGroupsMapping = hideGroupsMapping;
             HideOidc = hideOidc;

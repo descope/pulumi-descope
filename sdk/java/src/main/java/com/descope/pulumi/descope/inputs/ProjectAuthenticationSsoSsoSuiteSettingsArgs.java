@@ -17,6 +17,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     public static final ProjectAuthenticationSsoSsoSuiteSettingsArgs Empty = new ProjectAuthenticationSsoSsoSuiteSettingsArgs();
 
     /**
+     * Setting this to `true` will allow only verified domains to be used.
+     * 
+     */
+    @Import(name="forceDomainVerification")
+    private @Nullable Output<Boolean> forceDomainVerification;
+
+    /**
+     * @return Setting this to `true` will allow only verified domains to be used.
+     * 
+     */
+    public Optional<Output<Boolean>> forceDomainVerification() {
+        return Optional.ofNullable(this.forceDomainVerification);
+    }
+
+    /**
      * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      * 
      */
@@ -109,6 +124,7 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     private ProjectAuthenticationSsoSsoSuiteSettingsArgs() {}
 
     private ProjectAuthenticationSsoSsoSuiteSettingsArgs(ProjectAuthenticationSsoSsoSuiteSettingsArgs $) {
+        this.forceDomainVerification = $.forceDomainVerification;
         this.hideDomains = $.hideDomains;
         this.hideGroupsMapping = $.hideGroupsMapping;
         this.hideOidc = $.hideOidc;
@@ -133,6 +149,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
 
         public Builder(ProjectAuthenticationSsoSsoSuiteSettingsArgs defaults) {
             $ = new ProjectAuthenticationSsoSsoSuiteSettingsArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param forceDomainVerification Setting this to `true` will allow only verified domains to be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forceDomainVerification(@Nullable Output<Boolean> forceDomainVerification) {
+            $.forceDomainVerification = forceDomainVerification;
+            return this;
+        }
+
+        /**
+         * @param forceDomainVerification Setting this to `true` will allow only verified domains to be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forceDomainVerification(Boolean forceDomainVerification) {
+            return forceDomainVerification(Output.of(forceDomainVerification));
         }
 
         /**

@@ -13,11 +13,21 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsSnGetArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId", required: true)]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// AWS Access key ID.
         /// </summary>
-        [Input("accessKeyId", required: true)]
-        public Input<string> AccessKeyId { get; set; } = null!;
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// A description of what your connector is used for.
@@ -47,10 +57,16 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        /// Use the `origination_number` attribute instead.
         /// </summary>
         [Input("organizationNumber")]
         public Input<string>? OrganizationNumber { get; set; }
+
+        /// <summary>
+        /// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        /// </summary>
+        [Input("originationNumber")]
+        public Input<string>? OriginationNumber { get; set; }
 
         /// <summary>
         /// AWS region to send requests to (e.g. `us-west-2`).

@@ -39,10 +39,19 @@ public final class ProjectConnectorsSn {
      */
     private String name;
     /**
+     * @return Use the `origination_number` attribute instead.
+     * 
+     * @deprecated
+     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * 
+     */
+    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    private @Nullable String organizationNumber;
+    /**
      * @return An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
      * 
      */
-    private @Nullable String organizationNumber;
+    private @Nullable String originationNumber;
     /**
      * @return AWS region to send requests to (e.g. `us-west-2`).
      * 
@@ -104,11 +113,22 @@ public final class ProjectConnectorsSn {
         return this.name;
     }
     /**
+     * @return Use the `origination_number` attribute instead.
+     * 
+     * @deprecated
+     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * 
+     */
+    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    public Optional<String> organizationNumber() {
+        return Optional.ofNullable(this.organizationNumber);
+    }
+    /**
      * @return An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
      * 
      */
-    public Optional<String> organizationNumber() {
-        return Optional.ofNullable(this.organizationNumber);
+    public Optional<String> originationNumber() {
+        return Optional.ofNullable(this.originationNumber);
     }
     /**
      * @return AWS region to send requests to (e.g. `us-west-2`).
@@ -155,6 +175,7 @@ public final class ProjectConnectorsSn {
         private @Nullable String id;
         private String name;
         private @Nullable String organizationNumber;
+        private @Nullable String originationNumber;
         private String region;
         private String secret;
         private @Nullable String senderId;
@@ -169,6 +190,7 @@ public final class ProjectConnectorsSn {
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.organizationNumber = defaults.organizationNumber;
+    	      this.originationNumber = defaults.originationNumber;
     	      this.region = defaults.region;
     	      this.secret = defaults.secret;
     	      this.senderId = defaults.senderId;
@@ -222,6 +244,12 @@ public final class ProjectConnectorsSn {
             return this;
         }
         @CustomType.Setter
+        public Builder originationNumber(@Nullable String originationNumber) {
+
+            this.originationNumber = originationNumber;
+            return this;
+        }
+        @CustomType.Setter
         public Builder region(String region) {
             if (region == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsSn", "region");
@@ -258,6 +286,7 @@ public final class ProjectConnectorsSn {
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.organizationNumber = organizationNumber;
+            _resultValue.originationNumber = originationNumber;
             _resultValue.region = region;
             _resultValue.secret = secret;
             _resultValue.senderId = senderId;

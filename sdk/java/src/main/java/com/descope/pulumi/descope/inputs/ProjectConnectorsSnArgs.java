@@ -99,18 +99,41 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
     }
 
     /**
+     * Use the `origination_number` attribute instead.
+     * 
+     * @deprecated
+     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * 
+     */
+    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    @Import(name="organizationNumber")
+    private @Nullable Output<String> organizationNumber;
+
+    /**
+     * @return Use the `origination_number` attribute instead.
+     * 
+     * @deprecated
+     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * 
+     */
+    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    public Optional<Output<String>> organizationNumber() {
+        return Optional.ofNullable(this.organizationNumber);
+    }
+
+    /**
      * An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
      * 
      */
-    @Import(name="organizationNumber")
-    private @Nullable Output<String> organizationNumber;
+    @Import(name="originationNumber")
+    private @Nullable Output<String> originationNumber;
 
     /**
      * @return An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
      * 
      */
-    public Optional<Output<String>> organizationNumber() {
-        return Optional.ofNullable(this.organizationNumber);
+    public Optional<Output<String>> originationNumber() {
+        return Optional.ofNullable(this.originationNumber);
     }
 
     /**
@@ -183,6 +206,7 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
         this.id = $.id;
         this.name = $.name;
         this.organizationNumber = $.organizationNumber;
+        this.originationNumber = $.originationNumber;
         this.region = $.region;
         this.secret = $.secret;
         this.senderId = $.senderId;
@@ -322,24 +346,53 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
         }
 
         /**
-         * @param organizationNumber An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+         * @param organizationNumber Use the `origination_number` attribute instead.
          * 
          * @return builder
          * 
+         * @deprecated
+         * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+         * 
          */
+        @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
         public Builder organizationNumber(@Nullable Output<String> organizationNumber) {
             $.organizationNumber = organizationNumber;
             return this;
         }
 
         /**
-         * @param organizationNumber An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+         * @param organizationNumber Use the `origination_number` attribute instead.
+         * 
+         * @return builder
+         * 
+         * @deprecated
+         * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+         * 
+         */
+        @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+        public Builder organizationNumber(String organizationNumber) {
+            return organizationNumber(Output.of(organizationNumber));
+        }
+
+        /**
+         * @param originationNumber An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
          * 
          * @return builder
          * 
          */
-        public Builder organizationNumber(String organizationNumber) {
-            return organizationNumber(Output.of(organizationNumber));
+        public Builder originationNumber(@Nullable Output<String> originationNumber) {
+            $.originationNumber = originationNumber;
+            return this;
+        }
+
+        /**
+         * @param originationNumber An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder originationNumber(String originationNumber) {
+            return originationNumber(Output.of(originationNumber));
         }
 
         /**

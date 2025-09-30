@@ -40,6 +40,8 @@ type Project struct {
 	Styles ProjectStylesOutput `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+	Widgets ProjectWidgetsMapOutput `pulumi:"widgets"`
 }
 
 // NewProject registers a new resource with the given unique name, arguments, and options.
@@ -98,6 +100,8 @@ type projectState struct {
 	Styles *ProjectStyles `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags []string `pulumi:"tags"`
+	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+	Widgets map[string]ProjectWidgets `pulumi:"widgets"`
 }
 
 type ProjectState struct {
@@ -127,6 +131,8 @@ type ProjectState struct {
 	Styles ProjectStylesPtrInput
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayInput
+	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+	Widgets ProjectWidgetsMapInput
 }
 
 func (ProjectState) ElementType() reflect.Type {
@@ -160,6 +166,8 @@ type projectArgs struct {
 	Styles *ProjectStyles `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags []string `pulumi:"tags"`
+	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+	Widgets map[string]ProjectWidgets `pulumi:"widgets"`
 }
 
 // The set of arguments for constructing a Project resource.
@@ -190,6 +198,8 @@ type ProjectArgs struct {
 	Styles ProjectStylesPtrInput
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayInput
+	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+	Widgets ProjectWidgetsMapInput
 }
 
 func (ProjectArgs) ElementType() reflect.Type {
@@ -342,6 +352,11 @@ func (o ProjectOutput) Styles() ProjectStylesOutput {
 // Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 func (o ProjectOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+func (o ProjectOutput) Widgets() ProjectWidgetsMapOutput {
+	return o.ApplyT(func(v *Project) ProjectWidgetsMapOutput { return v.Widgets }).(ProjectWidgetsMapOutput)
 }
 
 type ProjectArrayOutput struct{ *pulumi.OutputState }

@@ -14,6 +14,30 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectConnectorsSupabaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The authentication type to use.
+        /// </summary>
+        [Input("authType")]
+        public Input<string>? AuthType { get; set; }
+
+        /// <summary>
+        /// Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+        /// </summary>
+        [Input("createUsers")]
+        public Input<bool>? CreateUsers { get; set; }
+
+        [Input("customClaimsMapping")]
+        private InputMap<string>? _customClaimsMapping;
+
+        /// <summary>
+        /// A mapping of Descope user fields or JWT claims to Supabase custom claims
+        /// </summary>
+        public InputMap<string> CustomClaimsMapping
+        {
+            get => _customClaimsMapping ?? (_customClaimsMapping = new InputMap<string>());
+            set => _customClaimsMapping = value;
+        }
+
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         [Input("description")]
@@ -34,7 +58,45 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        [Input("signingSecret", required: true)]
+        [Input("privateKey")]
+        private Input<string>? _privateKey;
+
+        /// <summary>
+        /// The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+        /// </summary>
+        public Input<string>? PrivateKey
+        {
+            get => _privateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Your Supabase Project's API base URL, e.g.: https://\n\n.supabase.co.
+        /// </summary>
+        [Input("projectBaseUrl")]
+        public Input<string>? ProjectBaseUrl { get; set; }
+
+        [Input("serviceRoleApiKey")]
+        private Input<string>? _serviceRoleApiKey;
+
+        /// <summary>
+        /// The service role API key for your Supabase project, required to create users.
+        /// </summary>
+        public Input<string>? ServiceRoleApiKey
+        {
+            get => _serviceRoleApiKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serviceRoleApiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("signingSecret")]
         private Input<string>? _signingSecret;
 
         /// <summary>

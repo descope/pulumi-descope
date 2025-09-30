@@ -87,6 +87,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? TokenEndpoint;
         /// <summary>
+        /// Use private key JWT (client assertion) instead of client secret.
+        /// </summary>
+        public readonly bool? UseClientAssertion;
+        /// <summary>
         /// The URL where the application retrieves user information from the OAuth provider.
         /// </summary>
         public readonly string? UserInfoEndpoint;
@@ -129,6 +133,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? tokenEndpoint,
 
+            bool? useClientAssertion,
+
             string? userInfoEndpoint)
         {
             AllowedGrantTypes = allowedGrantTypes;
@@ -149,6 +155,7 @@ namespace Descope.Pulumi.Descope.Outputs
             RedirectUrl = redirectUrl;
             Scopes = scopes;
             TokenEndpoint = tokenEndpoint;
+            UseClientAssertion = useClientAssertion;
             UserInfoEndpoint = userInfoEndpoint;
         }
     }

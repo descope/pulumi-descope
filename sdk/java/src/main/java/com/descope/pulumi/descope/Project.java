@@ -16,6 +16,7 @@ import com.descope.pulumi.descope.outputs.ProjectInviteSettings;
 import com.descope.pulumi.descope.outputs.ProjectJwtTemplates;
 import com.descope.pulumi.descope.outputs.ProjectProjectSettings;
 import com.descope.pulumi.descope.outputs.ProjectStyles;
+import com.descope.pulumi.descope.outputs.ProjectWidgets;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Export;
 import com.pulumi.core.annotations.ResourceType;
@@ -208,6 +209,20 @@ public class Project extends com.pulumi.resources.CustomResource {
      */
     public Output<List<String>> tags() {
         return this.tags;
+    }
+    /**
+     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     * 
+     */
+    @Export(name="widgets", refs={Map.class,String.class,ProjectWidgets.class}, tree="[0,1,2]")
+    private Output<Map<String,ProjectWidgets>> widgets;
+
+    /**
+     * @return Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     * 
+     */
+    public Output<Map<String,ProjectWidgets>> widgets() {
+        return this.widgets;
     }
 
     /**

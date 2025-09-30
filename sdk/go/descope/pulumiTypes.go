@@ -3643,6 +3643,8 @@ type ProjectAuthenticationOauthCustom struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -3695,6 +3697,8 @@ type ProjectAuthenticationOauthCustomArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -3840,6 +3844,11 @@ func (o ProjectAuthenticationOauthCustomOutput) Scopes() pulumi.StringArrayOutpu
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthCustomOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -4313,6 +4322,8 @@ type ProjectAuthenticationOauthSystemApple struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -4365,6 +4376,8 @@ type ProjectAuthenticationOauthSystemAppleArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -4536,6 +4549,11 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) Scopes() pulumi.StringArray
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemAppleOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -4747,6 +4765,16 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) TokenEndpoint() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
@@ -4912,6 +4940,8 @@ type ProjectAuthenticationOauthSystemDiscord struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -4964,6 +4994,8 @@ type ProjectAuthenticationOauthSystemDiscordArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -5135,6 +5167,11 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) Scopes() pulumi.StringArr
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -5346,6 +5383,16 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) TokenEndpoint() pulumi
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
@@ -5511,6 +5558,8 @@ type ProjectAuthenticationOauthSystemFacebook struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -5563,6 +5612,8 @@ type ProjectAuthenticationOauthSystemFacebookArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -5734,6 +5785,11 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) Scopes() pulumi.StringAr
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -5945,6 +6001,16 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) TokenEndpoint() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
@@ -6110,6 +6176,8 @@ type ProjectAuthenticationOauthSystemGithub struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -6162,6 +6230,8 @@ type ProjectAuthenticationOauthSystemGithubArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -6333,6 +6403,11 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) Scopes() pulumi.StringArra
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGithubOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -6544,6 +6619,16 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
@@ -6709,6 +6794,8 @@ type ProjectAuthenticationOauthSystemGitlab struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -6761,6 +6848,8 @@ type ProjectAuthenticationOauthSystemGitlabArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -6932,6 +7021,11 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) Scopes() pulumi.StringArra
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -7143,6 +7237,16 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
@@ -7308,6 +7412,8 @@ type ProjectAuthenticationOauthSystemGoogle struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -7360,6 +7466,8 @@ type ProjectAuthenticationOauthSystemGoogleArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -7531,6 +7639,11 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) Scopes() pulumi.StringArra
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -7742,6 +7855,16 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) TokenEndpoint() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
@@ -7907,6 +8030,8 @@ type ProjectAuthenticationOauthSystemLinkedin struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -7959,6 +8084,8 @@ type ProjectAuthenticationOauthSystemLinkedinArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -8130,6 +8257,11 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) Scopes() pulumi.StringAr
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -8341,6 +8473,16 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) TokenEndpoint() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
@@ -8506,6 +8648,8 @@ type ProjectAuthenticationOauthSystemMicrosoft struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -8558,6 +8702,8 @@ type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -8729,6 +8875,11 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Scopes() pulumi.StringA
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -8940,6 +9091,16 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) TokenEndpoint() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
+}
+
 // The URL where the application retrieves user information from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) UserInfoEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
@@ -9105,6 +9266,8 @@ type ProjectAuthenticationOauthSystemSlack struct {
 	Scopes []string `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint *string `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion *bool `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint *string `pulumi:"userInfoEndpoint"`
 }
@@ -9157,6 +9320,8 @@ type ProjectAuthenticationOauthSystemSlackArgs struct {
 	Scopes pulumi.StringArrayInput `pulumi:"scopes"`
 	// The URL where the application requests an access token from the OAuth provider.
 	TokenEndpoint pulumi.StringPtrInput `pulumi:"tokenEndpoint"`
+	// Use private key JWT (client assertion) instead of client secret.
+	UseClientAssertion pulumi.BoolPtrInput `pulumi:"useClientAssertion"`
 	// The URL where the application retrieves user information from the OAuth provider.
 	UserInfoEndpoint pulumi.StringPtrInput `pulumi:"userInfoEndpoint"`
 }
@@ -9328,6 +9493,11 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) Scopes() pulumi.StringArray
 // The URL where the application requests an access token from the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) TokenEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.TokenEndpoint }).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemSlackOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.UseClientAssertion }).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -9537,6 +9707,16 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) TokenEndpoint() pulumi.S
 		}
 		return v.TokenEndpoint
 	}).(pulumi.StringPtrOutput)
+}
+
+// Use private key JWT (client assertion) instead of client secret.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) UseClientAssertion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UseClientAssertion
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The URL where the application retrieves user information from the OAuth provider.
@@ -11806,6 +11986,8 @@ func (o ProjectAuthenticationSsoPtrOutput) SsoSuiteSettings() ProjectAuthenticat
 }
 
 type ProjectAuthenticationSsoSsoSuiteSettings struct {
+	// Setting this to `true` will allow only verified domains to be used.
+	ForceDomainVerification *bool `pulumi:"forceDomainVerification"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains *bool `pulumi:"hideDomains"`
 	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
@@ -11832,6 +12014,8 @@ type ProjectAuthenticationSsoSsoSuiteSettingsInput interface {
 }
 
 type ProjectAuthenticationSsoSsoSuiteSettingsArgs struct {
+	// Setting this to `true` will allow only verified domains to be used.
+	ForceDomainVerification pulumi.BoolPtrInput `pulumi:"forceDomainVerification"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains pulumi.BoolPtrInput `pulumi:"hideDomains"`
 	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
@@ -11923,6 +12107,11 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ToProjectAuthenticationS
 	}).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
 }
 
+// Setting this to `true` will allow only verified domains to be used.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) ForceDomainVerification() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.ForceDomainVerification }).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideDomains() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideDomains }).(pulumi.BoolPtrOutput)
@@ -11975,6 +12164,16 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) Elem() ProjectAuthent
 		var ret ProjectAuthenticationSsoSsoSuiteSettings
 		return ret
 	}).(ProjectAuthenticationSsoSsoSuiteSettingsOutput)
+}
+
+// Setting this to `true` will allow only verified domains to be used.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) ForceDomainVerification() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ForceDomainVerification
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
@@ -23461,8 +23660,12 @@ type ProjectConnectorsSn struct {
 	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
-	// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+	// Use the `originationNumber` attribute instead.
+	//
+	// Deprecated: The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
 	OrganizationNumber *string `pulumi:"organizationNumber"`
+	// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+	OriginationNumber *string `pulumi:"originationNumber"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region string `pulumi:"region"`
 	// AWS Secret Access Key.
@@ -23496,8 +23699,12 @@ type ProjectConnectorsSnArgs struct {
 	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
-	// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+	// Use the `originationNumber` attribute instead.
+	//
+	// Deprecated: The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
 	OrganizationNumber pulumi.StringPtrInput `pulumi:"organizationNumber"`
+	// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+	OriginationNumber pulumi.StringPtrInput `pulumi:"originationNumber"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region pulumi.StringInput `pulumi:"region"`
 	// AWS Secret Access Key.
@@ -23588,9 +23795,16 @@ func (o ProjectConnectorsSnOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSn) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+// Use the `originationNumber` attribute instead.
+//
+// Deprecated: The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
 func (o ProjectConnectorsSnOutput) OrganizationNumber() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.OrganizationNumber }).(pulumi.StringPtrOutput)
+}
+
+// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+func (o ProjectConnectorsSnOutput) OriginationNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.OriginationNumber }).(pulumi.StringPtrOutput)
 }
 
 // AWS region to send requests to (e.g. `us-west-2`).
@@ -23897,6 +24111,12 @@ func (o ProjectConnectorsSumologicAuditFilterArrayOutput) Index(i pulumi.IntInpu
 }
 
 type ProjectConnectorsSupabase struct {
+	// The authentication type to use.
+	AuthType *string `pulumi:"authType"`
+	// Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+	CreateUsers *bool `pulumi:"createUsers"`
+	// A mapping of Descope user fields or JWT claims to Supabase custom claims
+	CustomClaimsMapping map[string]string `pulumi:"customClaimsMapping"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	// The duration in minutes for which the token is valid.
@@ -23904,8 +24124,14 @@ type ProjectConnectorsSupabase struct {
 	Id             *string  `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
+	// The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+	PrivateKey *string `pulumi:"privateKey"`
+	// Your Supabase Project's API base URL, e.g.: https://\n\n.supabase.co.
+	ProjectBaseUrl *string `pulumi:"projectBaseUrl"`
+	// The service role API key for your Supabase project, required to create users.
+	ServiceRoleApiKey *string `pulumi:"serviceRoleApiKey"`
 	// The signing secret for your Supabase project.
-	SigningSecret string `pulumi:"signingSecret"`
+	SigningSecret *string `pulumi:"signingSecret"`
 }
 
 // ProjectConnectorsSupabaseInput is an input type that accepts ProjectConnectorsSupabaseArgs and ProjectConnectorsSupabaseOutput values.
@@ -23920,6 +24146,12 @@ type ProjectConnectorsSupabaseInput interface {
 }
 
 type ProjectConnectorsSupabaseArgs struct {
+	// The authentication type to use.
+	AuthType pulumi.StringPtrInput `pulumi:"authType"`
+	// Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+	CreateUsers pulumi.BoolPtrInput `pulumi:"createUsers"`
+	// A mapping of Descope user fields or JWT claims to Supabase custom claims
+	CustomClaimsMapping pulumi.StringMapInput `pulumi:"customClaimsMapping"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// The duration in minutes for which the token is valid.
@@ -23927,8 +24159,14 @@ type ProjectConnectorsSupabaseArgs struct {
 	Id             pulumi.StringPtrInput  `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
+	// Your Supabase Project's API base URL, e.g.: https://\n\n.supabase.co.
+	ProjectBaseUrl pulumi.StringPtrInput `pulumi:"projectBaseUrl"`
+	// The service role API key for your Supabase project, required to create users.
+	ServiceRoleApiKey pulumi.StringPtrInput `pulumi:"serviceRoleApiKey"`
 	// The signing secret for your Supabase project.
-	SigningSecret pulumi.StringInput `pulumi:"signingSecret"`
+	SigningSecret pulumi.StringPtrInput `pulumi:"signingSecret"`
 }
 
 func (ProjectConnectorsSupabaseArgs) ElementType() reflect.Type {
@@ -23982,6 +24220,21 @@ func (o ProjectConnectorsSupabaseOutput) ToProjectConnectorsSupabaseOutputWithCo
 	return o
 }
 
+// The authentication type to use.
+func (o ProjectConnectorsSupabaseOutput) AuthType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.AuthType }).(pulumi.StringPtrOutput)
+}
+
+// Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+func (o ProjectConnectorsSupabaseOutput) CreateUsers() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *bool { return v.CreateUsers }).(pulumi.BoolPtrOutput)
+}
+
+// A mapping of Descope user fields or JWT claims to Supabase custom claims
+func (o ProjectConnectorsSupabaseOutput) CustomClaimsMapping() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) map[string]string { return v.CustomClaimsMapping }).(pulumi.StringMapOutput)
+}
+
 // A description of what your connector is used for.
 func (o ProjectConnectorsSupabaseOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.Description }).(pulumi.StringPtrOutput)
@@ -24001,9 +24254,24 @@ func (o ProjectConnectorsSupabaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSupabase) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+func (o ProjectConnectorsSupabaseOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+}
+
+// Your Supabase Project's API base URL, e.g.: https://\n\n.supabase.co.
+func (o ProjectConnectorsSupabaseOutput) ProjectBaseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.ProjectBaseUrl }).(pulumi.StringPtrOutput)
+}
+
+// The service role API key for your Supabase project, required to create users.
+func (o ProjectConnectorsSupabaseOutput) ServiceRoleApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.ServiceRoleApiKey }).(pulumi.StringPtrOutput)
+}
+
 // The signing secret for your Supabase project.
-func (o ProjectConnectorsSupabaseOutput) SigningSecret() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsSupabase) string { return v.SigningSecret }).(pulumi.StringOutput)
+func (o ProjectConnectorsSupabaseOutput) SigningSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSupabase) *string { return v.SigningSecret }).(pulumi.StringPtrOutput)
 }
 
 type ProjectConnectorsSupabaseArrayOutput struct{ *pulumi.OutputState }
@@ -27170,6 +27438,103 @@ func (o ProjectStylesPtrOutput) Data() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectWidgets struct {
+	// The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	Data string `pulumi:"data"`
+}
+
+// ProjectWidgetsInput is an input type that accepts ProjectWidgetsArgs and ProjectWidgetsOutput values.
+// You can construct a concrete instance of `ProjectWidgetsInput` via:
+//
+//	ProjectWidgetsArgs{...}
+type ProjectWidgetsInput interface {
+	pulumi.Input
+
+	ToProjectWidgetsOutput() ProjectWidgetsOutput
+	ToProjectWidgetsOutputWithContext(context.Context) ProjectWidgetsOutput
+}
+
+type ProjectWidgetsArgs struct {
+	// The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	Data pulumi.StringInput `pulumi:"data"`
+}
+
+func (ProjectWidgetsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectWidgets)(nil)).Elem()
+}
+
+func (i ProjectWidgetsArgs) ToProjectWidgetsOutput() ProjectWidgetsOutput {
+	return i.ToProjectWidgetsOutputWithContext(context.Background())
+}
+
+func (i ProjectWidgetsArgs) ToProjectWidgetsOutputWithContext(ctx context.Context) ProjectWidgetsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectWidgetsOutput)
+}
+
+// ProjectWidgetsMapInput is an input type that accepts ProjectWidgetsMap and ProjectWidgetsMapOutput values.
+// You can construct a concrete instance of `ProjectWidgetsMapInput` via:
+//
+//	ProjectWidgetsMap{ "key": ProjectWidgetsArgs{...} }
+type ProjectWidgetsMapInput interface {
+	pulumi.Input
+
+	ToProjectWidgetsMapOutput() ProjectWidgetsMapOutput
+	ToProjectWidgetsMapOutputWithContext(context.Context) ProjectWidgetsMapOutput
+}
+
+type ProjectWidgetsMap map[string]ProjectWidgetsInput
+
+func (ProjectWidgetsMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]ProjectWidgets)(nil)).Elem()
+}
+
+func (i ProjectWidgetsMap) ToProjectWidgetsMapOutput() ProjectWidgetsMapOutput {
+	return i.ToProjectWidgetsMapOutputWithContext(context.Background())
+}
+
+func (i ProjectWidgetsMap) ToProjectWidgetsMapOutputWithContext(ctx context.Context) ProjectWidgetsMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectWidgetsMapOutput)
+}
+
+type ProjectWidgetsOutput struct{ *pulumi.OutputState }
+
+func (ProjectWidgetsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectWidgets)(nil)).Elem()
+}
+
+func (o ProjectWidgetsOutput) ToProjectWidgetsOutput() ProjectWidgetsOutput {
+	return o
+}
+
+func (o ProjectWidgetsOutput) ToProjectWidgetsOutputWithContext(ctx context.Context) ProjectWidgetsOutput {
+	return o
+}
+
+// The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+func (o ProjectWidgetsOutput) Data() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectWidgets) string { return v.Data }).(pulumi.StringOutput)
+}
+
+type ProjectWidgetsMapOutput struct{ *pulumi.OutputState }
+
+func (ProjectWidgetsMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]ProjectWidgets)(nil)).Elem()
+}
+
+func (o ProjectWidgetsMapOutput) ToProjectWidgetsMapOutput() ProjectWidgetsMapOutput {
+	return o
+}
+
+func (o ProjectWidgetsMapOutput) ToProjectWidgetsMapOutputWithContext(ctx context.Context) ProjectWidgetsMapOutput {
+	return o
+}
+
+func (o ProjectWidgetsMapOutput) MapIndex(k pulumi.StringInput) ProjectWidgetsOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) ProjectWidgets {
+		return vs[0].(map[string]ProjectWidgets)[vs[1].(string)]
+	}).(ProjectWidgetsOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsInput)(nil)).Elem(), ProjectApplicationsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsPtrInput)(nil)).Elem(), ProjectApplicationsArgs{})
@@ -27469,6 +27834,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsSessionMigrationPtrInput)(nil)).Elem(), ProjectProjectSettingsSessionMigrationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectStylesInput)(nil)).Elem(), ProjectStylesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectStylesPtrInput)(nil)).Elem(), ProjectStylesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectWidgetsInput)(nil)).Elem(), ProjectWidgetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectWidgetsMapInput)(nil)).Elem(), ProjectWidgetsMap{})
 	pulumi.RegisterOutputType(ProjectApplicationsOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsOidcApplicationOutput{})
@@ -27767,4 +28134,6 @@ func init() {
 	pulumi.RegisterOutputType(ProjectProjectSettingsSessionMigrationPtrOutput{})
 	pulumi.RegisterOutputType(ProjectStylesOutput{})
 	pulumi.RegisterOutputType(ProjectStylesPtrOutput{})
+	pulumi.RegisterOutputType(ProjectWidgetsOutput{})
+	pulumi.RegisterOutputType(ProjectWidgetsMapOutput{})
 }

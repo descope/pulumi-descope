@@ -504,6 +504,10 @@ export interface ProjectAuthenticationOauthCustom {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -625,6 +629,10 @@ export interface ProjectAuthenticationOauthSystemApple {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -706,6 +714,10 @@ export interface ProjectAuthenticationOauthSystemDiscord {
      * The URL where the application requests an access token from the OAuth provider.
      */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
     /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
@@ -789,6 +801,10 @@ export interface ProjectAuthenticationOauthSystemFacebook {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -870,6 +886,10 @@ export interface ProjectAuthenticationOauthSystemGithub {
      * The URL where the application requests an access token from the OAuth provider.
      */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
     /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
@@ -953,6 +973,10 @@ export interface ProjectAuthenticationOauthSystemGitlab {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -1034,6 +1058,10 @@ export interface ProjectAuthenticationOauthSystemGoogle {
      * The URL where the application requests an access token from the OAuth provider.
      */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
     /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
@@ -1117,6 +1145,10 @@ export interface ProjectAuthenticationOauthSystemLinkedin {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -1199,6 +1231,10 @@ export interface ProjectAuthenticationOauthSystemMicrosoft {
      */
     tokenEndpoint?: pulumi.Input<string>;
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
@@ -1280,6 +1316,10 @@ export interface ProjectAuthenticationOauthSystemSlack {
      * The URL where the application requests an access token from the OAuth provider.
      */
     tokenEndpoint?: pulumi.Input<string>;
+    /**
+     * Use private key JWT (client assertion) instead of client secret.
+     */
+    useClientAssertion?: pulumi.Input<boolean>;
     /**
      * The URL where the application retrieves user information from the OAuth provider.
      */
@@ -1538,6 +1578,10 @@ export interface ProjectAuthenticationSso {
 }
 
 export interface ProjectAuthenticationSsoSsoSuiteSettings {
+    /**
+     * Setting this to `true` will allow only verified domains to be used.
+     */
+    forceDomainVerification?: pulumi.Input<boolean>;
     /**
      * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      */
@@ -3382,9 +3426,15 @@ export interface ProjectConnectorsSn {
      */
     name: pulumi.Input<string>;
     /**
-     * An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+     * Use the `originationNumber` attribute instead.
+     *
+     * @deprecated The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
      */
     organizationNumber?: pulumi.Input<string>;
+    /**
+     * An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+     */
+    originationNumber?: pulumi.Input<string>;
     /**
      * AWS region to send requests to (e.g. `us-west-2`).
      */
@@ -3448,6 +3498,18 @@ export interface ProjectConnectorsSumologicAuditFilter {
 
 export interface ProjectConnectorsSupabase {
     /**
+     * The authentication type to use.
+     */
+    authType?: pulumi.Input<string>;
+    /**
+     * Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+     */
+    createUsers?: pulumi.Input<boolean>;
+    /**
+     * A mapping of Descope user fields or JWT claims to Supabase custom claims
+     */
+    customClaimsMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string>;
@@ -3461,9 +3523,21 @@ export interface ProjectConnectorsSupabase {
      */
     name: pulumi.Input<string>;
     /**
+     * The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+     */
+    privateKey?: pulumi.Input<string>;
+    /**
+     * Your Supabase Project's API base URL, e.g.: https://\n\n.supabase.co.
+     */
+    projectBaseUrl?: pulumi.Input<string>;
+    /**
+     * The service role API key for your Supabase project, required to create users.
+     */
+    serviceRoleApiKey?: pulumi.Input<string>;
+    /**
      * The signing secret for your Supabase project.
      */
-    signingSecret: pulumi.Input<string>;
+    signingSecret?: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsTelesign {
@@ -3922,6 +3996,13 @@ export interface ProjectProjectSettingsSessionMigration {
 export interface ProjectStyles {
     /**
      * The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+     */
+    data: pulumi.Input<string>;
+}
+
+export interface ProjectWidgets {
+    /**
+     * The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
      */
     data: pulumi.Input<string>;
 }

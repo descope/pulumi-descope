@@ -86,6 +86,10 @@ export class Project extends pulumi.CustomResource {
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
     declare public readonly tags: pulumi.Output<string[]>;
+    /**
+     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     */
+    declare public readonly widgets: pulumi.Output<{[key: string]: outputs.ProjectWidgets}>;
 
     /**
      * Create a Project resource with the given unique name, arguments, and options.
@@ -113,6 +117,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["projectSettings"] = state?.projectSettings;
             resourceInputs["styles"] = state?.styles;
             resourceInputs["tags"] = state?.tags;
+            resourceInputs["widgets"] = state?.widgets;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
             resourceInputs["applications"] = args?.applications;
@@ -128,6 +133,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["projectSettings"] = args?.projectSettings;
             resourceInputs["styles"] = args?.styles;
             resourceInputs["tags"] = args?.tags;
+            resourceInputs["widgets"] = args?.widgets;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Project.__pulumiType, name, resourceInputs, opts);
@@ -190,6 +196,10 @@ export interface ProjectState {
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     */
+    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>}>;
 }
 
 /**
@@ -248,4 +258,8 @@ export interface ProjectArgs {
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
     tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     */
+    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>}>;
 }

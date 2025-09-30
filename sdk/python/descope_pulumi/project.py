@@ -33,7 +33,8 @@ class ProjectArgs:
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         The set of arguments for constructing a Project resource.
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
@@ -49,6 +50,7 @@ class ProjectArgs:
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -76,6 +78,8 @@ class ProjectArgs:
             pulumi.set(__self__, "styles", styles)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if widgets is not None:
+            pulumi.set(__self__, "widgets", widgets)
 
     @_builtins.property
     @pulumi.getter
@@ -232,6 +236,18 @@ class ProjectArgs:
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def widgets(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
+        """
+        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        """
+        return pulumi.get(self, "widgets")
+
+    @widgets.setter
+    def widgets(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
+        pulumi.set(self, "widgets", value)
 
 
 @pulumi.input_type
@@ -249,7 +265,8 @@ class _ProjectState:
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
@@ -265,6 +282,7 @@ class _ProjectState:
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
@@ -292,6 +310,8 @@ class _ProjectState:
             pulumi.set(__self__, "styles", styles)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
+        if widgets is not None:
+            pulumi.set(__self__, "widgets", widgets)
 
     @_builtins.property
     @pulumi.getter
@@ -448,6 +468,18 @@ class _ProjectState:
     @tags.setter
     def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def widgets(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
+        """
+        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        """
+        return pulumi.get(self, "widgets")
+
+    @widgets.setter
+    def widgets(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
+        pulumi.set(self, "widgets", value)
 
 
 @pulumi.type_token("descope:index/project:Project")
@@ -469,6 +501,7 @@ class Project(pulumi.CustomResource):
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         """
         Create a Project resource with the given unique name, props, and options.
@@ -487,6 +520,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         ...
     @overload
@@ -524,6 +558,7 @@ class Project(pulumi.CustomResource):
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -546,6 +581,7 @@ class Project(pulumi.CustomResource):
             __props__.__dict__["project_settings"] = project_settings
             __props__.__dict__["styles"] = styles
             __props__.__dict__["tags"] = tags
+            __props__.__dict__["widgets"] = widgets
         super(Project, __self__).__init__(
             'descope:index/project:Project',
             resource_name,
@@ -568,7 +604,8 @@ class Project(pulumi.CustomResource):
             name: Optional[pulumi.Input[_builtins.str]] = None,
             project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
             styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Project':
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None) -> 'Project':
         """
         Get an existing Project resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -589,6 +626,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
+        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -607,6 +645,7 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["project_settings"] = project_settings
         __props__.__dict__["styles"] = styles
         __props__.__dict__["tags"] = tags
+        __props__.__dict__["widgets"] = widgets
         return Project(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -712,4 +751,12 @@ class Project(pulumi.CustomResource):
         Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         return pulumi.get(self, "tags")
+
+    @_builtins.property
+    @pulumi.getter
+    def widgets(self) -> pulumi.Output[Mapping[str, 'outputs.ProjectWidgets']]:
+        """
+        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        """
+        return pulumi.get(self, "widgets")
 
