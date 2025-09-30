@@ -13,6 +13,7 @@ import com.descope.pulumi.descope.inputs.ProjectInviteSettingsArgs;
 import com.descope.pulumi.descope.inputs.ProjectJwtTemplatesArgs;
 import com.descope.pulumi.descope.inputs.ProjectProjectSettingsArgs;
 import com.descope.pulumi.descope.inputs.ProjectStylesArgs;
+import com.descope.pulumi.descope.inputs.ProjectWidgetsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.String;
@@ -222,6 +223,21 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.tags);
     }
 
+    /**
+     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     * 
+     */
+    @Import(name="widgets")
+    private @Nullable Output<Map<String,ProjectWidgetsArgs>> widgets;
+
+    /**
+     * @return Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+     * 
+     */
+    public Optional<Output<Map<String,ProjectWidgetsArgs>>> widgets() {
+        return Optional.ofNullable(this.widgets);
+    }
+
     private ProjectState() {}
 
     private ProjectState(ProjectState $) {
@@ -238,6 +254,7 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
         this.projectSettings = $.projectSettings;
         this.styles = $.styles;
         this.tags = $.tags;
+        this.widgets = $.widgets;
     }
 
     public static Builder builder() {
@@ -539,6 +556,27 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder tags(String... tags) {
             return tags(List.of(tags));
+        }
+
+        /**
+         * @param widgets Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder widgets(@Nullable Output<Map<String,ProjectWidgetsArgs>> widgets) {
+            $.widgets = widgets;
+            return this;
+        }
+
+        /**
+         * @param widgets Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder widgets(Map<String,ProjectWidgetsArgs> widgets) {
+            return widgets(Output.of(widgets));
         }
 
         public ProjectState build() {

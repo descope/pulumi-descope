@@ -91,6 +91,12 @@ namespace Descope.Pulumi.Descope
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        /// </summary>
+        [Output("widgets")]
+        public Output<ImmutableDictionary<string, Outputs.ProjectWidgets>> Widgets { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Project resource with the given unique name, arguments, and options.
@@ -228,6 +234,18 @@ namespace Descope.Pulumi.Descope
             set => _tags = value;
         }
 
+        [Input("widgets")]
+        private InputMap<Inputs.ProjectWidgetsArgs>? _widgets;
+
+        /// <summary>
+        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        /// </summary>
+        public InputMap<Inputs.ProjectWidgetsArgs> Widgets
+        {
+            get => _widgets ?? (_widgets = new InputMap<Inputs.ProjectWidgetsArgs>());
+            set => _widgets = value;
+        }
+
         public ProjectArgs()
         {
         }
@@ -324,6 +342,18 @@ namespace Descope.Pulumi.Descope
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
+        }
+
+        [Input("widgets")]
+        private InputMap<Inputs.ProjectWidgetsGetArgs>? _widgets;
+
+        /// <summary>
+        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
+        /// </summary>
+        public InputMap<Inputs.ProjectWidgetsGetArgs> Widgets
+        {
+            get => _widgets ?? (_widgets = new InputMap<Inputs.ProjectWidgetsGetArgs>());
+            set => _widgets = value;
         }
 
         public ProjectState()

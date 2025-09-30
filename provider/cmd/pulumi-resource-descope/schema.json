@@ -927,6 +927,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -954,6 +958,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1105,6 +1110,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1132,6 +1141,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1227,6 +1237,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1254,6 +1268,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1349,6 +1364,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1376,6 +1395,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1471,6 +1491,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1498,6 +1522,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1593,6 +1618,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1620,6 +1649,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1715,6 +1745,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1742,6 +1776,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1837,6 +1872,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1864,6 +1903,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -1959,6 +1999,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -1986,6 +2030,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -2081,6 +2126,10 @@
                     "type": "string",
                     "description": "The URL where the application requests an access token from the OAuth provider.\n"
                 },
+                "useClientAssertion": {
+                    "type": "boolean",
+                    "description": "Use private key JWT (client assertion) instead of client secret.\n"
+                },
                 "userInfoEndpoint": {
                     "type": "string",
                     "description": "The URL where the application retrieves user information from the OAuth provider.\n"
@@ -2108,6 +2157,7 @@
                         "redirectUrl",
                         "scopes",
                         "tokenEndpoint",
+                        "useClientAssertion",
                         "userInfoEndpoint"
                     ]
                 }
@@ -2566,6 +2616,10 @@
         },
         "descope:index/ProjectAuthenticationSsoSsoSuiteSettings:ProjectAuthenticationSsoSsoSuiteSettings": {
             "properties": {
+                "forceDomainVerification": {
+                    "type": "boolean",
+                    "description": "Setting this to `true` will allow only verified domains to be used.\n"
+                },
                 "hideDomains": {
                     "type": "boolean",
                     "description": "Setting this to `true` will hide the domains configuration section in the SSO Suite interface.\n"
@@ -2595,6 +2649,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "forceDomainVerification",
                         "hideDomains",
                         "hideGroupsMapping",
                         "hideOidc",
@@ -5941,7 +5996,8 @@
             "properties": {
                 "accessKeyId": {
                     "type": "string",
-                    "description": "AWS Access key ID.\n"
+                    "description": "AWS Access key ID.\n",
+                    "secret": true
                 },
                 "description": {
                     "type": "string",
@@ -5963,6 +6019,11 @@
                     "description": "A custom name for your connector.\n"
                 },
                 "organizationNumber": {
+                    "type": "string",
+                    "description": "Use the `origination_number` attribute instead.\n",
+                    "deprecationMessage": "The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider."
+                },
+                "originationNumber": {
                     "type": "string",
                     "description": "An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.\n"
                 },
@@ -6001,6 +6062,7 @@
                         "id",
                         "name",
                         "organizationNumber",
+                        "originationNumber",
                         "region",
                         "secret",
                         "senderId",
@@ -6089,6 +6151,21 @@
         },
         "descope:index/ProjectConnectorsSupabase:ProjectConnectorsSupabase": {
             "properties": {
+                "authType": {
+                    "type": "string",
+                    "description": "The authentication type to use.\n"
+                },
+                "createUsers": {
+                    "type": "boolean",
+                    "description": "Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.\n"
+                },
+                "customClaimsMapping": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "A mapping of Descope user fields or JWT claims to Supabase custom claims\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
@@ -6104,6 +6181,20 @@
                     "type": "string",
                     "description": "A custom name for your connector.\n"
                 },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.\n",
+                    "secret": true
+                },
+                "projectBaseUrl": {
+                    "type": "string",
+                    "description": "Your Supabase Project's API base URL, e.g.: https://\\n\\n.supabase.co.\n"
+                },
+                "serviceRoleApiKey": {
+                    "type": "string",
+                    "description": "The service role API key for your Supabase project, required to create users.\n",
+                    "secret": true
+                },
                 "signingSecret": {
                     "type": "string",
                     "description": "The signing secret for your Supabase project.\n",
@@ -6112,16 +6203,21 @@
             },
             "type": "object",
             "required": [
-                "name",
-                "signingSecret"
+                "name"
             ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "authType",
+                        "createUsers",
+                        "customClaimsMapping",
                         "description",
                         "expirationTime",
                         "id",
                         "name",
+                        "privateKey",
+                        "projectBaseUrl",
+                        "serviceRoleApiKey",
                         "signingSecret"
                     ]
                 }
@@ -6924,6 +7020,18 @@
             "required": [
                 "data"
             ]
+        },
+        "descope:index/ProjectWidgets:ProjectWidgets": {
+            "properties": {
+                "data": {
+                    "type": "string",
+                    "description": "The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file(\"...\")` syntax.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
         }
     },
     "provider": {
@@ -7016,6 +7124,13 @@
                         "type": "string"
                     },
                     "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
+                },
+                "widgets": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/types/descope:index/ProjectWidgets:ProjectWidgets"
+                    },
+                    "description": "Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.\n"
                 }
             },
             "required": [
@@ -7031,7 +7146,8 @@
                 "name",
                 "projectSettings",
                 "styles",
-                "tags"
+                "tags",
+                "widgets"
             ],
             "inputProperties": {
                 "applications": {
@@ -7091,6 +7207,13 @@
                         "type": "string"
                     },
                     "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
+                },
+                "widgets": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/types/descope:index/ProjectWidgets:ProjectWidgets"
+                    },
+                    "description": "Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.\n"
                 }
             },
             "stateInputs": {
@@ -7153,6 +7276,13 @@
                             "type": "string"
                         },
                         "description": "Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.\n"
+                    },
+                    "widgets": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/types/descope:index/ProjectWidgets:ProjectWidgets"
+                        },
+                        "description": "Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.\n"
                     }
                 },
                 "type": "object"

@@ -13,6 +13,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAuthenticationSsoSsoSuiteSettings {
     /**
+     * @return Setting this to `true` will allow only verified domains to be used.
+     * 
+     */
+    private @Nullable Boolean forceDomainVerification;
+    /**
      * @return Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      * 
      */
@@ -44,6 +49,13 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
     private @Nullable String styleId;
 
     private ProjectAuthenticationSsoSsoSuiteSettings() {}
+    /**
+     * @return Setting this to `true` will allow only verified domains to be used.
+     * 
+     */
+    public Optional<Boolean> forceDomainVerification() {
+        return Optional.ofNullable(this.forceDomainVerification);
+    }
     /**
      * @return Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      * 
@@ -96,6 +108,7 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Boolean forceDomainVerification;
         private @Nullable Boolean hideDomains;
         private @Nullable Boolean hideGroupsMapping;
         private @Nullable Boolean hideOidc;
@@ -105,6 +118,7 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         public Builder() {}
         public Builder(ProjectAuthenticationSsoSsoSuiteSettings defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.forceDomainVerification = defaults.forceDomainVerification;
     	      this.hideDomains = defaults.hideDomains;
     	      this.hideGroupsMapping = defaults.hideGroupsMapping;
     	      this.hideOidc = defaults.hideOidc;
@@ -113,6 +127,12 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
     	      this.styleId = defaults.styleId;
         }
 
+        @CustomType.Setter
+        public Builder forceDomainVerification(@Nullable Boolean forceDomainVerification) {
+
+            this.forceDomainVerification = forceDomainVerification;
+            return this;
+        }
         @CustomType.Setter
         public Builder hideDomains(@Nullable Boolean hideDomains) {
 
@@ -151,6 +171,7 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         }
         public ProjectAuthenticationSsoSsoSuiteSettings build() {
             final var _resultValue = new ProjectAuthenticationSsoSsoSuiteSettings();
+            _resultValue.forceDomainVerification = forceDomainVerification;
             _resultValue.hideDomains = hideDomains;
             _resultValue.hideGroupsMapping = hideGroupsMapping;
             _resultValue.hideOidc = hideOidc;

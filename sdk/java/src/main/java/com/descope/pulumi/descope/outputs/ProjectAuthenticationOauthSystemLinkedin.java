@@ -106,6 +106,11 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
      */
     private @Nullable String tokenEndpoint;
     /**
+     * @return Use private key JWT (client assertion) instead of client secret.
+     * 
+     */
+    private @Nullable Boolean useClientAssertion;
+    /**
      * @return The URL where the application retrieves user information from the OAuth provider.
      * 
      */
@@ -239,6 +244,13 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
         return Optional.ofNullable(this.tokenEndpoint);
     }
     /**
+     * @return Use private key JWT (client assertion) instead of client secret.
+     * 
+     */
+    public Optional<Boolean> useClientAssertion() {
+        return Optional.ofNullable(this.useClientAssertion);
+    }
+    /**
      * @return The URL where the application retrieves user information from the OAuth provider.
      * 
      */
@@ -273,6 +285,7 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
         private @Nullable String redirectUrl;
         private @Nullable List<String> scopes;
         private @Nullable String tokenEndpoint;
+        private @Nullable Boolean useClientAssertion;
         private @Nullable String userInfoEndpoint;
         public Builder() {}
         public Builder(ProjectAuthenticationOauthSystemLinkedin defaults) {
@@ -295,6 +308,7 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
     	      this.redirectUrl = defaults.redirectUrl;
     	      this.scopes = defaults.scopes;
     	      this.tokenEndpoint = defaults.tokenEndpoint;
+    	      this.useClientAssertion = defaults.useClientAssertion;
     	      this.userInfoEndpoint = defaults.userInfoEndpoint;
         }
 
@@ -416,6 +430,12 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
             return this;
         }
         @CustomType.Setter
+        public Builder useClientAssertion(@Nullable Boolean useClientAssertion) {
+
+            this.useClientAssertion = useClientAssertion;
+            return this;
+        }
+        @CustomType.Setter
         public Builder userInfoEndpoint(@Nullable String userInfoEndpoint) {
 
             this.userInfoEndpoint = userInfoEndpoint;
@@ -441,6 +461,7 @@ public final class ProjectAuthenticationOauthSystemLinkedin {
             _resultValue.redirectUrl = redirectUrl;
             _resultValue.scopes = scopes;
             _resultValue.tokenEndpoint = tokenEndpoint;
+            _resultValue.useClientAssertion = useClientAssertion;
             _resultValue.userInfoEndpoint = userInfoEndpoint;
             return _resultValue;
         }

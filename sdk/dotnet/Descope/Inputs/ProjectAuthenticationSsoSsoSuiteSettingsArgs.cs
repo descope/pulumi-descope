@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationSsoSsoSuiteSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Setting this to `true` will allow only verified domains to be used.
+        /// </summary>
+        [Input("forceDomainVerification")]
+        public Input<bool>? ForceDomainVerification { get; set; }
+
+        /// <summary>
         /// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         [Input("hideDomains")]

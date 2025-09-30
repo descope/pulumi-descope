@@ -290,6 +290,21 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
     }
 
     /**
+     * Use private key JWT (client assertion) instead of client secret.
+     * 
+     */
+    @Import(name="useClientAssertion")
+    private @Nullable Output<Boolean> useClientAssertion;
+
+    /**
+     * @return Use private key JWT (client assertion) instead of client secret.
+     * 
+     */
+    public Optional<Output<Boolean>> useClientAssertion() {
+        return Optional.ofNullable(this.useClientAssertion);
+    }
+
+    /**
      * The URL where the application retrieves user information from the OAuth provider.
      * 
      */
@@ -325,6 +340,7 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
         this.redirectUrl = $.redirectUrl;
         this.scopes = $.scopes;
         this.tokenEndpoint = $.tokenEndpoint;
+        this.useClientAssertion = $.useClientAssertion;
         this.userInfoEndpoint = $.userInfoEndpoint;
     }
 
@@ -752,6 +768,27 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
          */
         public Builder tokenEndpoint(String tokenEndpoint) {
             return tokenEndpoint(Output.of(tokenEndpoint));
+        }
+
+        /**
+         * @param useClientAssertion Use private key JWT (client assertion) instead of client secret.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder useClientAssertion(@Nullable Output<Boolean> useClientAssertion) {
+            $.useClientAssertion = useClientAssertion;
+            return this;
+        }
+
+        /**
+         * @param useClientAssertion Use private key JWT (client assertion) instead of client secret.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder useClientAssertion(Boolean useClientAssertion) {
+            return useClientAssertion(Output.of(useClientAssertion));
         }
 
         /**

@@ -6,8 +6,10 @@ package com.descope.pulumi.descope.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
+import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.String;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -16,6 +18,51 @@ import javax.annotation.Nullable;
 public final class ProjectConnectorsSupabaseArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectConnectorsSupabaseArgs Empty = new ProjectConnectorsSupabaseArgs();
+
+    /**
+     * The authentication type to use.
+     * 
+     */
+    @Import(name="authType")
+    private @Nullable Output<String> authType;
+
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Optional<Output<String>> authType() {
+        return Optional.ofNullable(this.authType);
+    }
+
+    /**
+     * Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+     * 
+     */
+    @Import(name="createUsers")
+    private @Nullable Output<Boolean> createUsers;
+
+    /**
+     * @return Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+     * 
+     */
+    public Optional<Output<Boolean>> createUsers() {
+        return Optional.ofNullable(this.createUsers);
+    }
+
+    /**
+     * A mapping of Descope user fields or JWT claims to Supabase custom claims
+     * 
+     */
+    @Import(name="customClaimsMapping")
+    private @Nullable Output<Map<String,String>> customClaimsMapping;
+
+    /**
+     * @return A mapping of Descope user fields or JWT claims to Supabase custom claims
+     * 
+     */
+    public Optional<Output<Map<String,String>>> customClaimsMapping() {
+        return Optional.ofNullable(this.customClaimsMapping);
+    }
 
     /**
      * A description of what your connector is used for.
@@ -70,27 +117,78 @@ public final class ProjectConnectorsSupabaseArgs extends com.pulumi.resources.Re
     }
 
     /**
+     * The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+     * 
+     */
+    @Import(name="privateKey")
+    private @Nullable Output<String> privateKey;
+
+    /**
+     * @return The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+     * 
+     */
+    public Optional<Output<String>> privateKey() {
+        return Optional.ofNullable(this.privateKey);
+    }
+
+    /**
+     * Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+     * 
+     */
+    @Import(name="projectBaseUrl")
+    private @Nullable Output<String> projectBaseUrl;
+
+    /**
+     * @return Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+     * 
+     */
+    public Optional<Output<String>> projectBaseUrl() {
+        return Optional.ofNullable(this.projectBaseUrl);
+    }
+
+    /**
+     * The service role API key for your Supabase project, required to create users.
+     * 
+     */
+    @Import(name="serviceRoleApiKey")
+    private @Nullable Output<String> serviceRoleApiKey;
+
+    /**
+     * @return The service role API key for your Supabase project, required to create users.
+     * 
+     */
+    public Optional<Output<String>> serviceRoleApiKey() {
+        return Optional.ofNullable(this.serviceRoleApiKey);
+    }
+
+    /**
      * The signing secret for your Supabase project.
      * 
      */
-    @Import(name="signingSecret", required=true)
-    private Output<String> signingSecret;
+    @Import(name="signingSecret")
+    private @Nullable Output<String> signingSecret;
 
     /**
      * @return The signing secret for your Supabase project.
      * 
      */
-    public Output<String> signingSecret() {
-        return this.signingSecret;
+    public Optional<Output<String>> signingSecret() {
+        return Optional.ofNullable(this.signingSecret);
     }
 
     private ProjectConnectorsSupabaseArgs() {}
 
     private ProjectConnectorsSupabaseArgs(ProjectConnectorsSupabaseArgs $) {
+        this.authType = $.authType;
+        this.createUsers = $.createUsers;
+        this.customClaimsMapping = $.customClaimsMapping;
         this.description = $.description;
         this.expirationTime = $.expirationTime;
         this.id = $.id;
         this.name = $.name;
+        this.privateKey = $.privateKey;
+        this.projectBaseUrl = $.projectBaseUrl;
+        this.serviceRoleApiKey = $.serviceRoleApiKey;
         this.signingSecret = $.signingSecret;
     }
 
@@ -110,6 +208,69 @@ public final class ProjectConnectorsSupabaseArgs extends com.pulumi.resources.Re
 
         public Builder(ProjectConnectorsSupabaseArgs defaults) {
             $ = new ProjectConnectorsSupabaseArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(@Nullable Output<String> authType) {
+            $.authType = authType;
+            return this;
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(String authType) {
+            return authType(Output.of(authType));
+        }
+
+        /**
+         * @param createUsers Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder createUsers(@Nullable Output<Boolean> createUsers) {
+            $.createUsers = createUsers;
+            return this;
+        }
+
+        /**
+         * @param createUsers Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder createUsers(Boolean createUsers) {
+            return createUsers(Output.of(createUsers));
+        }
+
+        /**
+         * @param customClaimsMapping A mapping of Descope user fields or JWT claims to Supabase custom claims
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customClaimsMapping(@Nullable Output<Map<String,String>> customClaimsMapping) {
+            $.customClaimsMapping = customClaimsMapping;
+            return this;
+        }
+
+        /**
+         * @param customClaimsMapping A mapping of Descope user fields or JWT claims to Supabase custom claims
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customClaimsMapping(Map<String,String> customClaimsMapping) {
+            return customClaimsMapping(Output.of(customClaimsMapping));
         }
 
         /**
@@ -185,12 +346,75 @@ public final class ProjectConnectorsSupabaseArgs extends com.pulumi.resources.Re
         }
 
         /**
+         * @param privateKey The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKey(@Nullable Output<String> privateKey) {
+            $.privateKey = privateKey;
+            return this;
+        }
+
+        /**
+         * @param privateKey The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKey(String privateKey) {
+            return privateKey(Output.of(privateKey));
+        }
+
+        /**
+         * @param projectBaseUrl Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder projectBaseUrl(@Nullable Output<String> projectBaseUrl) {
+            $.projectBaseUrl = projectBaseUrl;
+            return this;
+        }
+
+        /**
+         * @param projectBaseUrl Your Supabase Project&#39;s API base URL, e.g.: https://\n\n.supabase.co.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder projectBaseUrl(String projectBaseUrl) {
+            return projectBaseUrl(Output.of(projectBaseUrl));
+        }
+
+        /**
+         * @param serviceRoleApiKey The service role API key for your Supabase project, required to create users.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder serviceRoleApiKey(@Nullable Output<String> serviceRoleApiKey) {
+            $.serviceRoleApiKey = serviceRoleApiKey;
+            return this;
+        }
+
+        /**
+         * @param serviceRoleApiKey The service role API key for your Supabase project, required to create users.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder serviceRoleApiKey(String serviceRoleApiKey) {
+            return serviceRoleApiKey(Output.of(serviceRoleApiKey));
+        }
+
+        /**
          * @param signingSecret The signing secret for your Supabase project.
          * 
          * @return builder
          * 
          */
-        public Builder signingSecret(Output<String> signingSecret) {
+        public Builder signingSecret(@Nullable Output<String> signingSecret) {
             $.signingSecret = signingSecret;
             return this;
         }
@@ -208,9 +432,6 @@ public final class ProjectConnectorsSupabaseArgs extends com.pulumi.resources.Re
         public ProjectConnectorsSupabaseArgs build() {
             if ($.name == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsSupabaseArgs", "name");
-            }
-            if ($.signingSecret == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsSupabaseArgs", "signingSecret");
             }
             return $;
         }

@@ -36,9 +36,13 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        /// Use the `origination_number` attribute instead.
         /// </summary>
         public readonly string? OrganizationNumber;
+        /// <summary>
+        /// An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        /// </summary>
+        public readonly string? OriginationNumber;
         /// <summary>
         /// AWS region to send requests to (e.g. `us-west-2`).
         /// </summary>
@@ -72,6 +76,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? organizationNumber,
 
+            string? originationNumber,
+
             string region,
 
             string secret,
@@ -87,6 +93,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Id = id;
             Name = name;
             OrganizationNumber = organizationNumber;
+            OriginationNumber = originationNumber;
             Region = region;
             Secret = secret;
             SenderId = senderId;

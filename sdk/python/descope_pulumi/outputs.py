@@ -170,6 +170,7 @@ __all__ = [
     'ProjectProjectSettings',
     'ProjectProjectSettingsSessionMigration',
     'ProjectStyles',
+    'ProjectWidgets',
 ]
 
 @pulumi.output_type
@@ -1729,6 +1730,8 @@ class ProjectAuthenticationOauthCustom(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -1762,6 +1765,7 @@ class ProjectAuthenticationOauthCustom(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -1782,6 +1786,7 @@ class ProjectAuthenticationOauthCustom(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -1820,6 +1825,8 @@ class ProjectAuthenticationOauthCustom(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -1966,6 +1973,14 @@ class ProjectAuthenticationOauthCustom(dict):
         The URL where the application requests an access token from the OAuth provider.
         """
         return pulumi.get(self, "token_endpoint")
+
+    @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
 
     @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
@@ -2126,6 +2141,8 @@ class ProjectAuthenticationOauthSystemApple(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -2159,6 +2176,7 @@ class ProjectAuthenticationOauthSystemApple(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -2179,6 +2197,7 @@ class ProjectAuthenticationOauthSystemApple(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -2217,6 +2236,8 @@ class ProjectAuthenticationOauthSystemApple(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -2365,6 +2386,14 @@ class ProjectAuthenticationOauthSystemApple(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -2408,6 +2437,8 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -2441,6 +2472,7 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -2461,6 +2493,7 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -2499,6 +2532,8 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -2647,6 +2682,14 @@ class ProjectAuthenticationOauthSystemDiscord(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -2690,6 +2733,8 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -2723,6 +2768,7 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -2743,6 +2789,7 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -2781,6 +2828,8 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -2929,6 +2978,14 @@ class ProjectAuthenticationOauthSystemFacebook(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -2972,6 +3029,8 @@ class ProjectAuthenticationOauthSystemGithub(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -3005,6 +3064,7 @@ class ProjectAuthenticationOauthSystemGithub(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -3025,6 +3085,7 @@ class ProjectAuthenticationOauthSystemGithub(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -3063,6 +3124,8 @@ class ProjectAuthenticationOauthSystemGithub(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -3211,6 +3274,14 @@ class ProjectAuthenticationOauthSystemGithub(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -3254,6 +3325,8 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -3287,6 +3360,7 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -3307,6 +3381,7 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -3345,6 +3420,8 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -3493,6 +3570,14 @@ class ProjectAuthenticationOauthSystemGitlab(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -3536,6 +3621,8 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -3569,6 +3656,7 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -3589,6 +3677,7 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -3627,6 +3716,8 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -3775,6 +3866,14 @@ class ProjectAuthenticationOauthSystemGoogle(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -3818,6 +3917,8 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -3851,6 +3952,7 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -3871,6 +3973,7 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -3909,6 +4012,8 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -4057,6 +4162,14 @@ class ProjectAuthenticationOauthSystemLinkedin(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -4100,6 +4213,8 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -4133,6 +4248,7 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -4153,6 +4269,7 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -4191,6 +4308,8 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -4339,6 +4458,14 @@ class ProjectAuthenticationOauthSystemMicrosoft(dict):
         return pulumi.get(self, "token_endpoint")
 
     @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
+
+    @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
     def user_info_endpoint(self) -> Optional[_builtins.str]:
         """
@@ -4382,6 +4509,8 @@ class ProjectAuthenticationOauthSystemSlack(dict):
             suggest = "redirect_url"
         elif key == "tokenEndpoint":
             suggest = "token_endpoint"
+        elif key == "useClientAssertion":
+            suggest = "use_client_assertion"
         elif key == "userInfoEndpoint":
             suggest = "user_info_endpoint"
 
@@ -4415,6 +4544,7 @@ class ProjectAuthenticationOauthSystemSlack(dict):
                  redirect_url: Optional[_builtins.str] = None,
                  scopes: Optional[Sequence[_builtins.str]] = None,
                  token_endpoint: Optional[_builtins.str] = None,
+                 use_client_assertion: Optional[_builtins.bool] = None,
                  user_info_endpoint: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
@@ -4435,6 +4565,7 @@ class ProjectAuthenticationOauthSystemSlack(dict):
         :param _builtins.str redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
         :param Sequence[_builtins.str] scopes: Scopes of access that the application requests from the user's account on the OAuth provider.
         :param _builtins.str token_endpoint: The URL where the application requests an access token from the OAuth provider.
+        :param _builtins.bool use_client_assertion: Use private key JWT (client assertion) instead of client secret.
         :param _builtins.str user_info_endpoint: The URL where the application retrieves user information from the OAuth provider.
         """
         if allowed_grant_types is not None:
@@ -4473,6 +4604,8 @@ class ProjectAuthenticationOauthSystemSlack(dict):
             pulumi.set(__self__, "scopes", scopes)
         if token_endpoint is not None:
             pulumi.set(__self__, "token_endpoint", token_endpoint)
+        if use_client_assertion is not None:
+            pulumi.set(__self__, "use_client_assertion", use_client_assertion)
         if user_info_endpoint is not None:
             pulumi.set(__self__, "user_info_endpoint", user_info_endpoint)
 
@@ -4619,6 +4752,14 @@ class ProjectAuthenticationOauthSystemSlack(dict):
         The URL where the application requests an access token from the OAuth provider.
         """
         return pulumi.get(self, "token_endpoint")
+
+    @_builtins.property
+    @pulumi.getter(name="useClientAssertion")
+    def use_client_assertion(self) -> Optional[_builtins.bool]:
+        """
+        Use private key JWT (client assertion) instead of client secret.
+        """
+        return pulumi.get(self, "use_client_assertion")
 
     @_builtins.property
     @pulumi.getter(name="userInfoEndpoint")
@@ -5500,7 +5641,9 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "hideDomains":
+        if key == "forceDomainVerification":
+            suggest = "force_domain_verification"
+        elif key == "hideDomains":
             suggest = "hide_domains"
         elif key == "hideGroupsMapping":
             suggest = "hide_groups_mapping"
@@ -5525,6 +5668,7 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 force_domain_verification: Optional[_builtins.bool] = None,
                  hide_domains: Optional[_builtins.bool] = None,
                  hide_groups_mapping: Optional[_builtins.bool] = None,
                  hide_oidc: Optional[_builtins.bool] = None,
@@ -5532,6 +5676,7 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
                  hide_scim: Optional[_builtins.bool] = None,
                  style_id: Optional[_builtins.str] = None):
         """
+        :param _builtins.bool force_domain_verification: Setting this to `true` will allow only verified domains to be used.
         :param _builtins.bool hide_domains: Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
         :param _builtins.bool hide_groups_mapping: Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
         :param _builtins.bool hide_oidc: Setting this to `true` will hide the OIDC configuration option.
@@ -5539,6 +5684,8 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         :param _builtins.bool hide_scim: Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
         :param _builtins.str style_id: Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
         """
+        if force_domain_verification is not None:
+            pulumi.set(__self__, "force_domain_verification", force_domain_verification)
         if hide_domains is not None:
             pulumi.set(__self__, "hide_domains", hide_domains)
         if hide_groups_mapping is not None:
@@ -5551,6 +5698,14 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
             pulumi.set(__self__, "hide_scim", hide_scim)
         if style_id is not None:
             pulumi.set(__self__, "style_id", style_id)
+
+    @_builtins.property
+    @pulumi.getter(name="forceDomainVerification")
+    def force_domain_verification(self) -> Optional[_builtins.bool]:
+        """
+        Setting this to `true` will allow only verified domains to be used.
+        """
+        return pulumi.get(self, "force_domain_verification")
 
     @_builtins.property
     @pulumi.getter(name="hideDomains")
@@ -11908,6 +12063,8 @@ class ProjectConnectorsSn(dict):
             suggest = "entity_id"
         elif key == "organizationNumber":
             suggest = "organization_number"
+        elif key == "originationNumber":
+            suggest = "origination_number"
         elif key == "senderId":
             suggest = "sender_id"
         elif key == "templateId":
@@ -11934,6 +12091,7 @@ class ProjectConnectorsSn(dict):
                  entity_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  organization_number: Optional[_builtins.str] = None,
+                 origination_number: Optional[_builtins.str] = None,
                  sender_id: Optional[_builtins.str] = None,
                  template_id: Optional[_builtins.str] = None):
         """
@@ -11944,7 +12102,8 @@ class ProjectConnectorsSn(dict):
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.str endpoint: An optional endpoint URL (hostname only or fully qualified URI).
         :param _builtins.str entity_id: The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
-        :param _builtins.str organization_number: An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        :param _builtins.str organization_number: Use the `origination_number` attribute instead.
+        :param _builtins.str origination_number: An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
         :param _builtins.str sender_id: The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
         :param _builtins.str template_id: The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
         """
@@ -11962,6 +12121,8 @@ class ProjectConnectorsSn(dict):
             pulumi.set(__self__, "id", id)
         if organization_number is not None:
             pulumi.set(__self__, "organization_number", organization_number)
+        if origination_number is not None:
+            pulumi.set(__self__, "origination_number", origination_number)
         if sender_id is not None:
             pulumi.set(__self__, "sender_id", sender_id)
         if template_id is not None:
@@ -12030,11 +12191,20 @@ class ProjectConnectorsSn(dict):
 
     @_builtins.property
     @pulumi.getter(name="organizationNumber")
+    @_utilities.deprecated("""The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.""")
     def organization_number(self) -> Optional[_builtins.str]:
+        """
+        Use the `origination_number` attribute instead.
+        """
+        return pulumi.get(self, "organization_number")
+
+    @_builtins.property
+    @pulumi.getter(name="originationNumber")
+    def origination_number(self) -> Optional[_builtins.str]:
         """
         An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
         """
-        return pulumi.get(self, "organization_number")
+        return pulumi.get(self, "origination_number")
 
     @_builtins.property
     @pulumi.getter(name="senderId")
@@ -12206,10 +12376,22 @@ class ProjectConnectorsSupabase(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "signingSecret":
-            suggest = "signing_secret"
+        if key == "authType":
+            suggest = "auth_type"
+        elif key == "createUsers":
+            suggest = "create_users"
+        elif key == "customClaimsMapping":
+            suggest = "custom_claims_mapping"
         elif key == "expirationTime":
             suggest = "expiration_time"
+        elif key == "privateKey":
+            suggest = "private_key"
+        elif key == "projectBaseUrl":
+            suggest = "project_base_url"
+        elif key == "serviceRoleApiKey":
+            suggest = "service_role_api_key"
+        elif key == "signingSecret":
+            suggest = "signing_secret"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSupabase. Access the value via the '{suggest}' property getter instead.")
@@ -12224,24 +12406,49 @@ class ProjectConnectorsSupabase(dict):
 
     def __init__(__self__, *,
                  name: _builtins.str,
-                 signing_secret: _builtins.str,
+                 auth_type: Optional[_builtins.str] = None,
+                 create_users: Optional[_builtins.bool] = None,
+                 custom_claims_mapping: Optional[Mapping[str, _builtins.str]] = None,
                  description: Optional[_builtins.str] = None,
                  expiration_time: Optional[_builtins.float] = None,
-                 id: Optional[_builtins.str] = None):
+                 id: Optional[_builtins.str] = None,
+                 private_key: Optional[_builtins.str] = None,
+                 project_base_url: Optional[_builtins.str] = None,
+                 service_role_api_key: Optional[_builtins.str] = None,
+                 signing_secret: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
-        :param _builtins.str signing_secret: The signing secret for your Supabase project.
+        :param _builtins.str auth_type: The authentication type to use.
+        :param _builtins.bool create_users: Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+        :param Mapping[str, _builtins.str] custom_claims_mapping: A mapping of Descope user fields or JWT claims to Supabase custom claims
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.float expiration_time: The duration in minutes for which the token is valid.
+        :param _builtins.str private_key: The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+        :param _builtins.str project_base_url: Your Supabase Project's API base URL, e.g.: https://\\n\\n.supabase.co.
+        :param _builtins.str service_role_api_key: The service role API key for your Supabase project, required to create users.
+        :param _builtins.str signing_secret: The signing secret for your Supabase project.
         """
         pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "signing_secret", signing_secret)
+        if auth_type is not None:
+            pulumi.set(__self__, "auth_type", auth_type)
+        if create_users is not None:
+            pulumi.set(__self__, "create_users", create_users)
+        if custom_claims_mapping is not None:
+            pulumi.set(__self__, "custom_claims_mapping", custom_claims_mapping)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if private_key is not None:
+            pulumi.set(__self__, "private_key", private_key)
+        if project_base_url is not None:
+            pulumi.set(__self__, "project_base_url", project_base_url)
+        if service_role_api_key is not None:
+            pulumi.set(__self__, "service_role_api_key", service_role_api_key)
+        if signing_secret is not None:
+            pulumi.set(__self__, "signing_secret", signing_secret)
 
     @_builtins.property
     @pulumi.getter
@@ -12252,12 +12459,28 @@ class ProjectConnectorsSupabase(dict):
         return pulumi.get(self, "name")
 
     @_builtins.property
-    @pulumi.getter(name="signingSecret")
-    def signing_secret(self) -> _builtins.str:
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> Optional[_builtins.str]:
         """
-        The signing secret for your Supabase project.
+        The authentication type to use.
         """
-        return pulumi.get(self, "signing_secret")
+        return pulumi.get(self, "auth_type")
+
+    @_builtins.property
+    @pulumi.getter(name="createUsers")
+    def create_users(self) -> Optional[_builtins.bool]:
+        """
+        Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+        """
+        return pulumi.get(self, "create_users")
+
+    @_builtins.property
+    @pulumi.getter(name="customClaimsMapping")
+    def custom_claims_mapping(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        A mapping of Descope user fields or JWT claims to Supabase custom claims
+        """
+        return pulumi.get(self, "custom_claims_mapping")
 
     @_builtins.property
     @pulumi.getter
@@ -12279,6 +12502,38 @@ class ProjectConnectorsSupabase(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> Optional[_builtins.str]:
+        """
+        The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+        """
+        return pulumi.get(self, "private_key")
+
+    @_builtins.property
+    @pulumi.getter(name="projectBaseUrl")
+    def project_base_url(self) -> Optional[_builtins.str]:
+        """
+        Your Supabase Project's API base URL, e.g.: https://\\n\\n.supabase.co.
+        """
+        return pulumi.get(self, "project_base_url")
+
+    @_builtins.property
+    @pulumi.getter(name="serviceRoleApiKey")
+    def service_role_api_key(self) -> Optional[_builtins.str]:
+        """
+        The service role API key for your Supabase project, required to create users.
+        """
+        return pulumi.get(self, "service_role_api_key")
+
+    @_builtins.property
+    @pulumi.getter(name="signingSecret")
+    def signing_secret(self) -> Optional[_builtins.str]:
+        """
+        The signing secret for your Supabase project.
+        """
+        return pulumi.get(self, "signing_secret")
 
 
 @pulumi.output_type
@@ -14000,6 +14255,24 @@ class ProjectStyles(dict):
     def data(self) -> _builtins.str:
         """
         The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+        """
+        return pulumi.get(self, "data")
+
+
+@pulumi.output_type
+class ProjectWidgets(dict):
+    def __init__(__self__, *,
+                 data: _builtins.str):
+        """
+        :param _builtins.str data: The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+        """
+        pulumi.set(__self__, "data", data)
+
+    @_builtins.property
+    @pulumi.getter
+    def data(self) -> _builtins.str:
+        """
+        The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
         """
         return pulumi.get(self, "data")
 
