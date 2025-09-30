@@ -67,11 +67,6 @@ func Provider() tfbridge.ProviderInfo {
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: fmt.Sprintf("@%s/pulumi-%s", publisher, mainPkg),
 			// List any npm dependencies and their versions
-
-			DevDependencies: map[string]string{
-				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
-				"@types/mime": "^2.0.0",
-			},
 			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
