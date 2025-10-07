@@ -12,6 +12,8 @@ on:
 
 env:
   PR_COMMIT_SHA: ${{ github.event.client_payload.pull_request.head.sha }}
+  MISE_ENV: test
+
   DESCOPE_MANAGEMENT_KEY: ${{ secrets.DESCOPE_MANAGEMENT_KEY }}
   DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
   NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
