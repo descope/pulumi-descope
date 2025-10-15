@@ -11,11 +11,35 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  DESCOPE_MANAGEMENT_KEY: ${{ secrets.DESCOPE_MANAGEMENT_KEY }}
+  DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
+  NODE_AUTH_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
+  NPM_TOKEN: ${{ secrets.CI_NPM_REGISTRY }}
+  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_ORG_KEY }}
+  PULUMI_API: https://api.pulumi-staging.io
+  PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/..
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_PROVIDER_AUTOMATION_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
+  PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }}
+  TF_APPEND_USER_AGENT: pulumi
+
 jobs:
   upgrade_provider:
     name: pull-workflow-changes
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
+        id: gh-app-token
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PEM }}
+      - name: Set up GitHub App authentication
+        run: |
+          echo "PULUMI_PROVIDER_AUTOMATION_TOKEN=${{ steps.gh-app-token.outputs.token }}" >> $GITHUB_ENV      
+      - id: esc-secrets
+        name: Map environment to ESC outputs
+        uses: ./.github/actions/esc-action
       - name: Checkout Repo
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
@@ -36,7 +60,8 @@ jobs:
         with:
           author: pulumi-bot <bot@pulumi.com>
           base: main
-          body: This pull request was generated automatically by the resync-build workflow
+          body:
+            This pull request was generated automatically by the resync-build workflow
             in this repository.
           branch: chore/resync-${{ github.run_id }}
           commit-message: Regenerate workflows for pulumi-descope
@@ -45,4 +70,4 @@ jobs:
           title: Regenerate Github Actions workflows for pulumi-descope
           token: ${{ env.GITHUB_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN || secrets.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.esc-secrets.outputs.PULUMI_PROVIDER_AUTOMATION_TOKEN || steps.esc-secrets.outputs.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
