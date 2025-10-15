@@ -14,7 +14,7 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationMagicLinkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }

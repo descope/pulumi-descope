@@ -17,7 +17,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<string>? _claims;
 
         /// <summary>
-        /// A list of supported claims. e.g. `sub`, `email`, `exp`.
+        /// A list of supported claims. e.g. `Sub`, `Email`, `Exp`.
         /// </summary>
         public InputList<string> Claims
         {

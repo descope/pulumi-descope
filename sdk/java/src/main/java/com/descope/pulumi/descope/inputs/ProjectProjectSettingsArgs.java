@@ -184,14 +184,14 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
-     * Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     @Import(name="refreshTokenResponseMethod")
     private @Nullable Output<String> refreshTokenResponseMethod;
 
     /**
-     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     public Optional<Output<String>> refreshTokenResponseMethod() {
@@ -274,14 +274,14 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
-     * Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     @Import(name="sessionTokenResponseMethod")
     private @Nullable Output<String> sessionTokenResponseMethod;
 
     /**
-     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     public Optional<Output<String>> sessionTokenResponseMethod() {
@@ -667,7 +667,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param refreshTokenResponseMethod Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+         * @param refreshTokenResponseMethod Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
          * 
          * @return builder
          * 
@@ -678,7 +678,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param refreshTokenResponseMethod Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+         * @param refreshTokenResponseMethod Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
          * 
          * @return builder
          * 
@@ -793,7 +793,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param sessionTokenResponseMethod Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+         * @param sessionTokenResponseMethod Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
          * 
          * @return builder
          * 
@@ -804,7 +804,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param sessionTokenResponseMethod Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+         * @param sessionTokenResponseMethod Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
          * 
          * @return builder
          * 
