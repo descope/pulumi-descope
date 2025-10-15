@@ -19,7 +19,7 @@ public final class ProjectInviteSettingsEmailServiceTemplate {
      */
     private @Nullable Boolean active;
     /**
-     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * @return HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
      * 
      */
     private @Nullable String htmlBody;
@@ -30,7 +30,7 @@ public final class ProjectInviteSettingsEmailServiceTemplate {
      */
     private String name;
     /**
-     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * @return Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
      * 
      */
     private @Nullable String plainTextBody;
@@ -54,7 +54,7 @@ public final class ProjectInviteSettingsEmailServiceTemplate {
         return Optional.ofNullable(this.active);
     }
     /**
-     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * @return HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
      * 
      */
     public Optional<String> htmlBody() {
@@ -71,7 +71,7 @@ public final class ProjectInviteSettingsEmailServiceTemplate {
         return this.name;
     }
     /**
-     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * @return Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
      * 
      */
     public Optional<String> plainTextBody() {

@@ -14,37 +14,37 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationSsoSsoSuiteSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Setting this to `true` will allow only verified domains to be used.
+        /// Setting this to `True` will allow only verified domains to be used.
         /// </summary>
         [Input("forceDomainVerification")]
         public Input<bool>? ForceDomainVerification { get; set; }
 
         /// <summary>
-        /// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        /// Setting this to `True` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         [Input("hideDomains")]
         public Input<bool>? HideDomains { get; set; }
 
         /// <summary>
-        /// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        /// Setting this to `True` will hide the groups mapping configuration section in the SSO Suite interface.
         /// </summary>
         [Input("hideGroupsMapping")]
         public Input<bool>? HideGroupsMapping { get; set; }
 
         /// <summary>
-        /// Setting this to `true` will hide the OIDC configuration option.
+        /// Setting this to `True` will hide the OIDC configuration option.
         /// </summary>
         [Input("hideOidc")]
         public Input<bool>? HideOidc { get; set; }
 
         /// <summary>
-        /// Setting this to `true` will hide the SAML configuration option.
+        /// Setting this to `True` will hide the SAML configuration option.
         /// </summary>
         [Input("hideSaml")]
         public Input<bool>? HideSaml { get; set; }
 
         /// <summary>
-        /// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        /// Setting this to `True` will hide the SCIM configuration in the SSO Suite interface.
         /// </summary>
         [Input("hideScim")]
         public Input<bool>? HideScim { get; set; }

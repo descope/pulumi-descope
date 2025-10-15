@@ -44,7 +44,7 @@ namespace Descope.Pulumi.Descope
         public Output<Outputs.ProjectConnectors> Connectors { get; private set; } = null!;
 
         /// <summary>
-        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
         /// </summary>
         [Output("environment")]
         public Output<string> Environment { get; private set; } = null!;
@@ -175,7 +175,7 @@ namespace Descope.Pulumi.Descope
         public Input<Inputs.ProjectConnectorsArgs>? Connectors { get; set; }
 
         /// <summary>
-        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
         /// </summary>
         [Input("environment")]
         public Input<string>? Environment { get; set; }
@@ -285,7 +285,7 @@ namespace Descope.Pulumi.Descope
         public Input<Inputs.ProjectConnectorsGetArgs>? Connectors { get; set; }
 
         /// <summary>
-        /// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
+        /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
         /// </summary>
         [Input("environment")]
         public Input<string>? Environment { get; set; }

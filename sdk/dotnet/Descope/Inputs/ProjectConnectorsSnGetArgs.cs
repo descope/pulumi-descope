@@ -57,7 +57,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// Use the `origination_number` attribute instead.
+        /// Use the `OriginationNumber` attribute instead.
         /// </summary>
         [Input("organizationNumber")]
         public Input<string>? OrganizationNumber { get; set; }

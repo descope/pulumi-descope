@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsSmtpAuthentication
     {
         /// <summary>
-        /// SMTP authentication method (`plain` or `login`).
+        /// SMTP authentication method (`Plain` or `Login`).
         /// </summary>
         public readonly string? Method;
         /// <summary>
