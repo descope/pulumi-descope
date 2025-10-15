@@ -104,7 +104,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of supported claims. e.g. `sub`, `email`, `exp`.\n"
+                    "description": "A list of supported claims. e.g. \u003cspan pulumi-lang-nodejs=\"`sub`\" pulumi-lang-dotnet=\"`Sub`\" pulumi-lang-go=\"`sub`\" pulumi-lang-python=\"`sub`\" pulumi-lang-yaml=\"`sub`\" pulumi-lang-java=\"`sub`\"\u003e`sub`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`email`\" pulumi-lang-dotnet=\"`Email`\" pulumi-lang-go=\"`email`\" pulumi-lang-python=\"`email`\" pulumi-lang-yaml=\"`email`\" pulumi-lang-java=\"`email`\"\u003e`email`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`exp`\" pulumi-lang-dotnet=\"`Exp`\" pulumi-lang-go=\"`exp`\" pulumi-lang-python=\"`exp`\" pulumi-lang-yaml=\"`exp`\" pulumi-lang-java=\"`exp`\"\u003e`exp`\u003c/span\u003e.\n"
                 },
                 "description": {
                     "type": "string",
@@ -330,7 +330,7 @@
                 },
                 "id": {
                     "type": "string",
-                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.\n"
+                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\"\u003e`name`\u003c/span\u003e.\n"
                 },
                 "name": {
                     "type": "string",
@@ -388,7 +388,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.\n"
+                    "description": "An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of \u003cspan pulumi-lang-nodejs=\"`name`\" pulumi-lang-dotnet=\"`Name`\" pulumi-lang-go=\"`name`\" pulumi-lang-python=\"`name`\" pulumi-lang-yaml=\"`name`\" pulumi-lang-java=\"`name`\"\u003e`name`\u003c/span\u003e.\n"
                 },
                 "name": {
                     "type": "string",
@@ -514,7 +514,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "expirationTime": {
                     "type": "string",
@@ -535,7 +535,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationEnchantedLinkEmailService:ProjectAuthenticationEnchantedLinkEmailService",
@@ -597,7 +597,7 @@
                 },
                 "htmlBody": {
                     "type": "string",
-                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                    "description": "HTML content of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e isn't set.\n"
                 },
                 "id": {
                     "type": "string"
@@ -608,7 +608,7 @@
                 },
                 "plainTextBody": {
                     "type": "string",
-                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                    "description": "Plain text version of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e is set to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "subject": {
                     "type": "string",
@@ -642,7 +642,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationMagicLinkEmailService:ProjectAuthenticationMagicLinkEmailService",
@@ -709,7 +709,7 @@
                 },
                 "htmlBody": {
                     "type": "string",
-                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                    "description": "HTML content of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e isn't set.\n"
                 },
                 "id": {
                     "type": "string"
@@ -720,7 +720,7 @@
                 },
                 "plainTextBody": {
                     "type": "string",
-                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                    "description": "Plain text version of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e is set to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "subject": {
                     "type": "string",
@@ -822,7 +822,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "system": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystem:ProjectAuthenticationOauthSystem",
@@ -847,7 +847,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -879,7 +879,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -910,7 +910,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustomProviderTokenManagement:ProjectAuthenticationOauthCustomProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1030,7 +1030,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1062,7 +1062,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1093,7 +1093,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemAppleProviderTokenManagement:ProjectAuthenticationOauthSystemAppleProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1157,7 +1157,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1189,7 +1189,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1220,7 +1220,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscordProviderTokenManagement:ProjectAuthenticationOauthSystemDiscordProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1284,7 +1284,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1316,7 +1316,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1347,7 +1347,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebookProviderTokenManagement:ProjectAuthenticationOauthSystemFacebookProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1411,7 +1411,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1443,7 +1443,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1474,7 +1474,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithubProviderTokenManagement:ProjectAuthenticationOauthSystemGithubProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1538,7 +1538,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1570,7 +1570,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1601,7 +1601,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlabProviderTokenManagement:ProjectAuthenticationOauthSystemGitlabProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1665,7 +1665,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1697,7 +1697,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1728,7 +1728,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogleProviderTokenManagement:ProjectAuthenticationOauthSystemGoogleProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1792,7 +1792,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1824,7 +1824,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1855,7 +1855,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement:ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -1919,7 +1919,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1951,7 +1951,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -1982,7 +1982,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement:ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -2046,7 +2046,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.\n"
+                    "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -2078,7 +2078,7 @@
                 },
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -2109,7 +2109,7 @@
                 },
                 "providerTokenManagement": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlackProviderTokenManagement:ProjectAuthenticationOauthSystemSlackProviderTokenManagement",
-                    "description": "This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.\n"
+                    "description": "This attribute is deprecated, use the \u003cspan pulumi-lang-nodejs=\"`manageProviderTokens`\" pulumi-lang-dotnet=\"`ManageProviderTokens`\" pulumi-lang-go=\"`manageProviderTokens`\" pulumi-lang-python=\"`manage_provider_tokens`\" pulumi-lang-yaml=\"`manageProviderTokens`\" pulumi-lang-java=\"`manageProviderTokens`\"\u003e`manage_provider_tokens`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`callbackDomain`\" pulumi-lang-dotnet=\"`CallbackDomain`\" pulumi-lang-go=\"`callbackDomain`\" pulumi-lang-python=\"`callback_domain`\" pulumi-lang-yaml=\"`callbackDomain`\" pulumi-lang-java=\"`callbackDomain`\"\u003e`callback_domain`\u003c/span\u003e, and \u003cspan pulumi-lang-nodejs=\"`redirectUrl`\" pulumi-lang-dotnet=\"`RedirectUrl`\" pulumi-lang-go=\"`redirectUrl`\" pulumi-lang-python=\"`redirect_url`\" pulumi-lang-yaml=\"`redirectUrl`\" pulumi-lang-java=\"`redirectUrl`\"\u003e`redirect_url`\u003c/span\u003e fields instead.\n"
                 },
                 "redirectUrl": {
                     "type": "string",
@@ -2170,7 +2170,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "domain": {
                     "type": "string",
@@ -2242,7 +2242,7 @@
                 },
                 "htmlBody": {
                     "type": "string",
-                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                    "description": "HTML content of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e isn't set.\n"
                 },
                 "id": {
                     "type": "string"
@@ -2253,7 +2253,7 @@
                 },
                 "plainTextBody": {
                     "type": "string",
-                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                    "description": "Plain text version of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e is set to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "subject": {
                     "type": "string",
@@ -2409,7 +2409,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "topLevelDomain": {
                     "type": "string",
@@ -2430,7 +2430,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "emailService": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationPasswordEmailService:ProjectAuthenticationPasswordEmailService",
@@ -2462,7 +2462,7 @@
                 },
                 "minLength": {
                     "type": "integer",
-                    "description": "The minimum length of the password that users are required to use. The maximum length is always `64`.\n"
+                    "description": "The minimum length of the password that users are required to use. The maximum length is always \u003cspan pulumi-lang-nodejs=\"`64`\" pulumi-lang-dotnet=\"`64`\" pulumi-lang-go=\"`64`\" pulumi-lang-python=\"`64`\" pulumi-lang-yaml=\"`64`\" pulumi-lang-java=\"`64`\"\u003e`64`\u003c/span\u003e.\n"
                 },
                 "nonAlphanumeric": {
                     "type": "boolean",
@@ -2542,7 +2542,7 @@
                 },
                 "htmlBody": {
                     "type": "string",
-                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                    "description": "HTML content of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e isn't set.\n"
                 },
                 "id": {
                     "type": "string"
@@ -2553,7 +2553,7 @@
                 },
                 "plainTextBody": {
                     "type": "string",
-                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                    "description": "Plain text version of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e is set to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "subject": {
                     "type": "string",
@@ -2587,7 +2587,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 },
                 "mergeUsers": {
                     "type": "boolean",
@@ -2618,27 +2618,27 @@
             "properties": {
                 "forceDomainVerification": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will allow only verified domains to be used.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will allow only verified domains to be used.\n"
                 },
                 "hideDomains": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will hide the domains configuration section in the SSO Suite interface.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will hide the domains configuration section in the SSO Suite interface.\n"
                 },
                 "hideGroupsMapping": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will hide the groups mapping configuration section in the SSO Suite interface.\n"
                 },
                 "hideOidc": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will hide the OIDC configuration option.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will hide the OIDC configuration option.\n"
                 },
                 "hideSaml": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will hide the SAML configuration option.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will hide the SAML configuration option.\n"
                 },
                 "hideScim": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will hide the SCIM configuration in the SSO Suite interface.\n"
                 },
                 "styleId": {
                     "type": "string",
@@ -2664,7 +2664,7 @@
             "properties": {
                 "disabled": {
                     "type": "boolean",
-                    "description": "Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
                 }
             },
             "type": "object",
@@ -5917,7 +5917,7 @@
             "properties": {
                 "method": {
                     "type": "string",
-                    "description": "SMTP authentication method (`plain` or `login`).\n"
+                    "description": "SMTP authentication method (\u003cspan pulumi-lang-nodejs=\"`plain`\" pulumi-lang-dotnet=\"`Plain`\" pulumi-lang-go=\"`plain`\" pulumi-lang-python=\"`plain`\" pulumi-lang-yaml=\"`plain`\" pulumi-lang-java=\"`plain`\"\u003e`plain`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`login`\" pulumi-lang-dotnet=\"`Login`\" pulumi-lang-go=\"`login`\" pulumi-lang-python=\"`login`\" pulumi-lang-yaml=\"`login`\" pulumi-lang-java=\"`login`\"\u003e`login`\u003c/span\u003e).\n"
                 },
                 "password": {
                     "type": "string",
@@ -6020,8 +6020,8 @@
                 },
                 "organizationNumber": {
                     "type": "string",
-                    "description": "Use the `origination_number` attribute instead.\n",
-                    "deprecationMessage": "The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider."
+                    "description": "Use the \u003cspan pulumi-lang-nodejs=\"`originationNumber`\" pulumi-lang-dotnet=\"`OriginationNumber`\" pulumi-lang-go=\"`originationNumber`\" pulumi-lang-python=\"`origination_number`\" pulumi-lang-yaml=\"`originationNumber`\" pulumi-lang-java=\"`originationNumber`\"\u003e`origination_number`\u003c/span\u003e attribute instead.\n",
+                    "deprecationMessage": "The\u003cspan pulumi-lang-nodejs=\" organizationNumber \" pulumi-lang-dotnet=\" OrganizationNumber \" pulumi-lang-go=\" organizationNumber \" pulumi-lang-python=\" organization_number \" pulumi-lang-yaml=\" organizationNumber \" pulumi-lang-java=\" organizationNumber \"\u003e organization_number \u003c/span\u003eattribute has been renamed, set the\u003cspan pulumi-lang-nodejs=\" originationNumber \" pulumi-lang-dotnet=\" OriginationNumber \" pulumi-lang-go=\" originationNumber \" pulumi-lang-python=\" origination_number \" pulumi-lang-yaml=\" originationNumber \" pulumi-lang-java=\" originationNumber \"\u003e origination_number \u003c/span\u003eattribute instead. This attribute will be removed in a future version of the provider."
                 },
                 "originationNumber": {
                     "type": "string",
@@ -6645,7 +6645,7 @@
                 },
                 "htmlBody": {
                     "type": "string",
-                    "description": "HTML content of the email message body, required if `use_plain_text_body` isn't set.\n"
+                    "description": "HTML content of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e isn't set.\n"
                 },
                 "id": {
                     "type": "string"
@@ -6656,7 +6656,7 @@
                 },
                 "plainTextBody": {
                     "type": "string",
-                    "description": "Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.\n"
+                    "description": "Plain text version of the email message body, required if \u003cspan pulumi-lang-nodejs=\"`usePlainTextBody`\" pulumi-lang-dotnet=\"`UsePlainTextBody`\" pulumi-lang-go=\"`usePlainTextBody`\" pulumi-lang-python=\"`use_plain_text_body`\" pulumi-lang-yaml=\"`usePlainTextBody`\" pulumi-lang-java=\"`usePlainTextBody`\"\u003e`use_plain_text_body`\u003c/span\u003e is set to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e.\n"
                 },
                 "subject": {
                     "type": "string",
@@ -6717,11 +6717,11 @@
             "properties": {
                 "authSchema": {
                     "type": "string",
-                    "description": "The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
+                    "description": "The authorization claims format - \u003cspan pulumi-lang-nodejs=\"`default`\" pulumi-lang-dotnet=\"`Default`\" pulumi-lang-go=\"`default`\" pulumi-lang-python=\"`default`\" pulumi-lang-yaml=\"`default`\" pulumi-lang-java=\"`default`\"\u003e`default`\u003c/span\u003e, `tenantOnly` or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "autoTenantClaim": {
                     "type": "boolean",
-                    "description": "When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.\n"
+                    "description": "When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the \u003cspan pulumi-lang-nodejs=\"`dct`\" pulumi-lang-dotnet=\"`Dct`\" pulumi-lang-go=\"`dct`\" pulumi-lang-python=\"`dct`\" pulumi-lang-yaml=\"`dct`\" pulumi-lang-java=\"`dct`\"\u003e`dct`\u003c/span\u003e (Descope Current Tenant) claim in their JWT.\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean",
@@ -6733,7 +6733,7 @@
                 },
                 "emptyClaimPolicy": {
                     "type": "string",
-                    "description": "Policy for empty claims - `none`, `nil` or `delete`.\n"
+                    "description": "Policy for empty claims - \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`nil`\" pulumi-lang-dotnet=\"`Nil`\" pulumi-lang-go=\"`nil`\" pulumi-lang-python=\"`nil`\" pulumi-lang-yaml=\"`nil`\" pulumi-lang-java=\"`nil`\"\u003e`nil`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`delete`\" pulumi-lang-dotnet=\"`Delete`\" pulumi-lang-go=\"`delete`\" pulumi-lang-python=\"`delete`\" pulumi-lang-yaml=\"`delete`\" pulumi-lang-java=\"`delete`\"\u003e`delete`\u003c/span\u003e.\n"
                 },
                 "enforceIssuer": {
                     "type": "boolean",
@@ -6748,7 +6748,7 @@
                 },
                 "template": {
                     "type": "string",
-                    "description": "The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.\n"
+                    "description": "The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a \u003cspan pulumi-lang-nodejs=\"`string`\" pulumi-lang-dotnet=\"`String`\" pulumi-lang-go=\"`string`\" pulumi-lang-python=\"`string`\" pulumi-lang-yaml=\"`string`\" pulumi-lang-java=\"`string`\"\u003e`string`\u003c/span\u003e value.\n"
                 }
             },
             "type": "object",
@@ -6776,11 +6776,11 @@
             "properties": {
                 "authSchema": {
                     "type": "string",
-                    "description": "The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
+                    "description": "The authorization claims format - \u003cspan pulumi-lang-nodejs=\"`default`\" pulumi-lang-dotnet=\"`Default`\" pulumi-lang-go=\"`default`\" pulumi-lang-python=\"`default`\" pulumi-lang-yaml=\"`default`\" pulumi-lang-java=\"`default`\"\u003e`default`\u003c/span\u003e, `tenantOnly` or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
                 },
                 "autoTenantClaim": {
                     "type": "boolean",
-                    "description": "When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.\n"
+                    "description": "When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the \u003cspan pulumi-lang-nodejs=\"`dct`\" pulumi-lang-dotnet=\"`Dct`\" pulumi-lang-go=\"`dct`\" pulumi-lang-python=\"`dct`\" pulumi-lang-yaml=\"`dct`\" pulumi-lang-java=\"`dct`\"\u003e`dct`\u003c/span\u003e (Descope Current Tenant) claim in their JWT.\n"
                 },
                 "conformanceIssuer": {
                     "type": "boolean",
@@ -6792,7 +6792,7 @@
                 },
                 "emptyClaimPolicy": {
                     "type": "string",
-                    "description": "Policy for empty claims - `none`, `nil` or `delete`.\n"
+                    "description": "Policy for empty claims - \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`nil`\" pulumi-lang-dotnet=\"`Nil`\" pulumi-lang-go=\"`nil`\" pulumi-lang-python=\"`nil`\" pulumi-lang-yaml=\"`nil`\" pulumi-lang-java=\"`nil`\"\u003e`nil`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`delete`\" pulumi-lang-dotnet=\"`Delete`\" pulumi-lang-go=\"`delete`\" pulumi-lang-python=\"`delete`\" pulumi-lang-yaml=\"`delete`\" pulumi-lang-java=\"`delete`\"\u003e`delete`\u003c/span\u003e.\n"
                 },
                 "enforceIssuer": {
                     "type": "boolean",
@@ -6807,7 +6807,7 @@
                 },
                 "template": {
                     "type": "string",
-                    "description": "The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.\n"
+                    "description": "The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a \u003cspan pulumi-lang-nodejs=\"`string`\" pulumi-lang-dotnet=\"`String`\" pulumi-lang-go=\"`string`\" pulumi-lang-python=\"`string`\" pulumi-lang-yaml=\"`string`\" pulumi-lang-java=\"`string`\"\u003e`string`\u003c/span\u003e value.\n"
                 }
             },
             "type": "object",
@@ -6874,7 +6874,7 @@
                 },
                 "refreshTokenCookiePolicy": {
                     "type": "string",
-                    "description": "Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                    "description": "Use \u003cspan pulumi-lang-nodejs=\"`strict`\" pulumi-lang-dotnet=\"`Strict`\" pulumi-lang-go=\"`strict`\" pulumi-lang-python=\"`strict`\" pulumi-lang-yaml=\"`strict`\" pulumi-lang-java=\"`strict`\"\u003e`strict`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`lax`\" pulumi-lang-dotnet=\"`Lax`\" pulumi-lang-go=\"`lax`\" pulumi-lang-python=\"`lax`\" pulumi-lang-yaml=\"`lax`\" pulumi-lang-java=\"`lax`\"\u003e`lax`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
                 "refreshTokenExpiration": {
                     "type": "string",
@@ -6882,7 +6882,7 @@
                 },
                 "refreshTokenResponseMethod": {
                     "type": "string",
-                    "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
+                    "description": "Configure how refresh tokens are managed by the Descope SDKs. Must be either \u003cspan pulumi-lang-nodejs=\"`responseBody`\" pulumi-lang-dotnet=\"`ResponseBody`\" pulumi-lang-go=\"`responseBody`\" pulumi-lang-python=\"`response_body`\" pulumi-lang-yaml=\"`responseBody`\" pulumi-lang-java=\"`responseBody`\"\u003e`response_body`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`cookies`\" pulumi-lang-dotnet=\"`Cookies`\" pulumi-lang-go=\"`cookies`\" pulumi-lang-python=\"`cookies`\" pulumi-lang-yaml=\"`cookies`\" pulumi-lang-java=\"`cookies`\"\u003e`cookies`\u003c/span\u003e. The default value is \u003cspan pulumi-lang-nodejs=\"`responseBody`\" pulumi-lang-dotnet=\"`ResponseBody`\" pulumi-lang-go=\"`responseBody`\" pulumi-lang-python=\"`response_body`\" pulumi-lang-yaml=\"`responseBody`\" pulumi-lang-java=\"`responseBody`\"\u003e`response_body`\u003c/span\u003e.\n"
                 },
                 "refreshTokenRotation": {
                     "type": "boolean",
@@ -6898,7 +6898,7 @@
                 },
                 "sessionTokenCookiePolicy": {
                     "type": "string",
-                    "description": "Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
+                    "description": "Use \u003cspan pulumi-lang-nodejs=\"`strict`\" pulumi-lang-dotnet=\"`Strict`\" pulumi-lang-go=\"`strict`\" pulumi-lang-python=\"`strict`\" pulumi-lang-yaml=\"`strict`\" pulumi-lang-java=\"`strict`\"\u003e`strict`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`lax`\" pulumi-lang-dotnet=\"`Lax`\" pulumi-lang-go=\"`lax`\" pulumi-lang-python=\"`lax`\" pulumi-lang-yaml=\"`lax`\" pulumi-lang-java=\"`lax`\"\u003e`lax`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).\n"
                 },
                 "sessionTokenExpiration": {
                     "type": "string",
@@ -6906,7 +6906,7 @@
                 },
                 "sessionTokenResponseMethod": {
                     "type": "string",
-                    "description": "Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.\n"
+                    "description": "Configure how sessions tokens are managed by the Descope SDKs. Must be either \u003cspan pulumi-lang-nodejs=\"`responseBody`\" pulumi-lang-dotnet=\"`ResponseBody`\" pulumi-lang-go=\"`responseBody`\" pulumi-lang-python=\"`response_body`\" pulumi-lang-yaml=\"`responseBody`\" pulumi-lang-java=\"`responseBody`\"\u003e`response_body`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`cookies`\" pulumi-lang-dotnet=\"`Cookies`\" pulumi-lang-go=\"`cookies`\" pulumi-lang-python=\"`cookies`\" pulumi-lang-yaml=\"`cookies`\" pulumi-lang-java=\"`cookies`\"\u003e`cookies`\u003c/span\u003e. The default value is \u003cspan pulumi-lang-nodejs=\"`responseBody`\" pulumi-lang-dotnet=\"`ResponseBody`\" pulumi-lang-go=\"`responseBody`\" pulumi-lang-python=\"`response_body`\" pulumi-lang-yaml=\"`responseBody`\" pulumi-lang-java=\"`responseBody`\"\u003e`response_body`\u003c/span\u003e.\n"
                 },
                 "stepUpTokenExpiration": {
                     "type": "string",
@@ -7089,7 +7089,7 @@
                 },
                 "environment": {
                     "type": "string",
-                    "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
+                    "description": "This can be set to \u003cspan pulumi-lang-nodejs=\"`production`\" pulumi-lang-dotnet=\"`Production`\" pulumi-lang-go=\"`production`\" pulumi-lang-python=\"`production`\" pulumi-lang-yaml=\"`production`\" pulumi-lang-java=\"`production`\"\u003e`production`\u003c/span\u003e to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                 },
                 "flows": {
                     "type": "object",
@@ -7172,7 +7172,7 @@
                 },
                 "environment": {
                     "type": "string",
-                    "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
+                    "description": "This can be set to \u003cspan pulumi-lang-nodejs=\"`production`\" pulumi-lang-dotnet=\"`Production`\" pulumi-lang-go=\"`production`\" pulumi-lang-python=\"`production`\" pulumi-lang-yaml=\"`production`\" pulumi-lang-java=\"`production`\"\u003e`production`\u003c/span\u003e to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                 },
                 "flows": {
                     "type": "object",
@@ -7241,7 +7241,7 @@
                     },
                     "environment": {
                         "type": "string",
-                        "description": "This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.\n"
+                        "description": "This can be set to \u003cspan pulumi-lang-nodejs=\"`production`\" pulumi-lang-dotnet=\"`Production`\" pulumi-lang-go=\"`production`\" pulumi-lang-python=\"`production`\" pulumi-lang-yaml=\"`production`\" pulumi-lang-java=\"`production`\"\u003e`production`\u003c/span\u003e to mark production projects, otherwise this should be left unset for development or staging projects.\n"
                     },
                     "flows": {
                         "type": "object",
