@@ -20,12 +20,12 @@ on:
         default: "latest"
       target-pulumi-version:
         description: |
-             Set the version of `pulumi/pkg` and `pulumi/sdk` to depend on for bridged providers. Currently,
-             these versions inform the linked runtime and SDK generation in all languages except Java. Valid
-             options are:
-             - "": Use the same version as pulumi-terraform-bridge
-             - A go version such as "v3.90.1"
-             - A commit SHA in pulumi/pulumi such as "ac71ebc1d34e5ccfd1a7fed61e6ff43a3160f3cb"
+          Set the version of `pulumi/pkg` and `pulumi/sdk` to depend on for bridged providers. Currently,
+          these versions inform the linked runtime and SDK generation in all languages except Java. Valid
+          options are:
+          - "": Use the same version as pulumi-terraform-bridge
+          - A go version such as "v3.90.1"
+          - A commit SHA in pulumi/pulumi such as "ac71ebc1d34e5ccfd1a7fed61e6ff43a3160f3cb"
         required: false
         type: string
         default: ""
@@ -79,49 +79,57 @@ jobs:
     name: upgrade-provider
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      with:
-        persist-credentials: false    
-    - id: esc-secrets
-      name: Map environment to ESC outputs
-      uses: ./.github/actions/esc-action
-    - name: Setup mise
-      uses: jdx/mise-action@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        cache_key: "mise-{{platform}}-{{file_hash}}"
-        # only saving the cache in the prerequisites job
-        cache_save: false
-    - name: Call upgrade provider action
-      if: github.event_name == 'workflow_dispatch'
-      uses: pulumi/pulumi-upgrade-provider-action@e247104aede3eb4641f48c8ad0ea9de9346f2457 # v0.0.18
-      with:
-        kind: ${{ inputs.kind }}
-        email: bot@pulumi.com
-        username: pulumi-bot
-        automerge: ${{ inputs.automerge }}
-        target-bridge-version: ${{ inputs.target-bridge-version }}
-        target-pulumi-version: ${{ inputs.target-pulumi-version }}
-        pr-reviewers: ${{ inputs.pr-reviewers }}
-        pr-description: ${{ inputs.pr-description }}
-        pr-title-prefix: ${{ inputs.pr-title-prefix }}
-        patch-release: ${{ github.event.client_payload.patch-release }}
-      env:
-        GH_TOKEN: ${{ steps.esc-secrets.outputs.PULUMI_PROVIDER_AUTOMATION_TOKEN || steps.esc-secrets.outputs.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
-    - name: Call upgrade provider action
-      if: github.event_name == 'repository_dispatch'
-      uses: pulumi/pulumi-upgrade-provider-action@e247104aede3eb4641f48c8ad0ea9de9346f2457 # v0.0.18
-      with:
-        kind: ${{ github.event.client_payload.kind || 'bridge' }}
-        email: bot@pulumi.com
-        username: pulumi-bot
-        automerge: ${{ github.event.client_payload.automerge }}
-        target-pulumi-version: ${{ github.event.client_payload.target-pulumi-version }}
-        target-bridge-version: ${{ github.event.client_payload.target-bridge-version }}
-        pr-reviewers: ${{ github.event.client_payload.pr-reviewers }}
-        pr-description: ${{ github.event.client_payload.pr-description }}
-        pr-title-prefix: ${{ github.event.client_payload.pr-title-prefix }}
-        patch-release: ${{ github.event.client_payload.patch-release }}
-      env:
-        GH_TOKEN: ${{ steps.esc-secrets.outputs.PULUMI_PROVIDER_AUTOMATION_TOKEN || steps.esc-secrets.outputs.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
+        id: gh-app-token
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PEM }}
+      - name: Set up GitHub App authentication
+        run: |
+          echo "PULUMI_PROVIDER_AUTOMATION_TOKEN=${{ steps.gh-app-token.outputs.token }}" >> $GITHUB_ENV
+      - name: Checkout Repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false      
+      - id: esc-secrets
+        name: Map environment to ESC outputs
+        uses: ./.github/actions/esc-action
+      - name: Setup mise
+        uses: jdx/mise-action@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          cache_key: "mise-{{platform}}-{{file_hash}}"
+          # only saving the cache in the prerequisites job
+          cache_save: false
+      - name: Call upgrade provider action
+        if: github.event_name == 'workflow_dispatch'
+        uses: pulumi/pulumi-upgrade-provider-action@e247104aede3eb4641f48c8ad0ea9de9346f2457 # v0.0.18
+        with:
+          kind: ${{ inputs.kind }}
+          email: bot@pulumi.com
+          username: pulumi-bot
+          automerge: ${{ inputs.automerge }}
+          target-bridge-version: ${{ inputs.target-bridge-version }}
+          target-pulumi-version: ${{ inputs.target-pulumi-version }}
+          pr-reviewers: ${{ inputs.pr-reviewers }}
+          pr-description: ${{ inputs.pr-description }}
+          pr-title-prefix: ${{ inputs.pr-title-prefix }}
+          patch-release: ${{ github.event.client_payload.patch-release }}
+        env:
+          GH_TOKEN: ${{ steps.esc-secrets.outputs.PULUMI_PROVIDER_AUTOMATION_TOKEN || steps.esc-secrets.outputs.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: Call upgrade provider action
+        if: github.event_name == 'repository_dispatch'
+        uses: pulumi/pulumi-upgrade-provider-action@e247104aede3eb4641f48c8ad0ea9de9346f2457 # v0.0.18
+        with:
+          kind: ${{ github.event.client_payload.kind || 'bridge' }}
+          email: bot@pulumi.com
+          username: pulumi-bot
+          automerge: ${{ github.event.client_payload.automerge }}
+          target-pulumi-version: ${{ github.event.client_payload.target-pulumi-version }}
+          target-bridge-version: ${{ github.event.client_payload.target-bridge-version }}
+          pr-reviewers: ${{ github.event.client_payload.pr-reviewers }}
+          pr-description: ${{ github.event.client_payload.pr-description }}
+          pr-title-prefix: ${{ github.event.client_payload.pr-title-prefix }}
+          patch-release: ${{ github.event.client_payload.patch-release }}
+        env:
+          GH_TOKEN: ${{ steps.esc-secrets.outputs.PULUMI_PROVIDER_AUTOMATION_TOKEN || steps.esc-secrets.outputs.PULUMI_BOT_TOKEN || secrets.GITHUB_TOKEN }}
