@@ -13,7 +13,7 @@ node = '20.19.5'
 python = '3.11.8'
 dotnet = '8.0.414'
 # Corretto version used as Java SE/OpenJDK version no longer offered
-java = 'corretto-11'
+java = 'corretto-21.0.9+10.0.LTS'
 
 # Executable tools
 pulumi = "{{ get_env(name='PULUMI_VERSION_MISE', default='latest') }}"
