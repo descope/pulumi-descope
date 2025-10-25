@@ -14,7 +14,7 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectConnectorsSmtpAuthenticationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// SMTP authentication method (`plain` or `login`).
+        /// SMTP authentication method (`Plain` or `Login`).
         /// </summary>
         [Input("method")]
         public Input<string>? Method { get; set; }

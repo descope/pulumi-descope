@@ -33,14 +33,14 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
     }
 
     /**
-     * HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
      * 
      */
     @Import(name="htmlBody")
     private @Nullable Output<String> htmlBody;
 
     /**
-     * @return HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+     * @return HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
      * 
      */
     public Optional<Output<String>> htmlBody() {
@@ -70,14 +70,14 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
     }
 
     /**
-     * Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
      * 
      */
     @Import(name="plainTextBody")
     private @Nullable Output<String> plainTextBody;
 
     /**
-     * @return Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+     * @return Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
      * 
      */
     public Optional<Output<String>> plainTextBody() {
@@ -166,7 +166,7 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
         }
 
         /**
-         * @param htmlBody HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+         * @param htmlBody HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
          * 
          * @return builder
          * 
@@ -177,7 +177,7 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
         }
 
         /**
-         * @param htmlBody HTML content of the email message body, required if `use_plain_text_body` isn&#39;t set.
+         * @param htmlBody HTML content of the email message body, required if `usePlainTextBody` isn&#39;t set.
          * 
          * @return builder
          * 
@@ -217,7 +217,7 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
         }
 
         /**
-         * @param plainTextBody Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+         * @param plainTextBody Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
          * 
          * @return builder
          * 
@@ -228,7 +228,7 @@ public final class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs extend
         }
 
         /**
-         * @param plainTextBody Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+         * @param plainTextBody Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
          * 
          * @return builder
          * 

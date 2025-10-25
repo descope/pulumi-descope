@@ -20,14 +20,14 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
     public static final ProjectAuthenticationOauthSystemLinkedinArgs Empty = new ProjectAuthenticationOauthSystemLinkedinArgs();
 
     /**
-     * The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+     * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      * 
      */
     @Import(name="allowedGrantTypes")
     private @Nullable Output<List<String>> allowedGrantTypes;
 
     /**
-     * @return The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+     * @return The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      * 
      */
     public Optional<Output<List<String>>> allowedGrantTypes() {
@@ -230,14 +230,14 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
     }
 
     /**
-     * This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+     * This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
      * 
      */
     @Import(name="providerTokenManagement")
     private @Nullable Output<ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs> providerTokenManagement;
 
     /**
-     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+     * @return This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
      * 
      */
     public Optional<Output<ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs>> providerTokenManagement() {
@@ -363,7 +363,7 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
         }
 
         /**
-         * @param allowedGrantTypes The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+         * @param allowedGrantTypes The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
          * 
          * @return builder
          * 
@@ -374,7 +374,7 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
         }
 
         /**
-         * @param allowedGrantTypes The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+         * @param allowedGrantTypes The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
          * 
          * @return builder
          * 
@@ -384,7 +384,7 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
         }
 
         /**
-         * @param allowedGrantTypes The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+         * @param allowedGrantTypes The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
          * 
          * @return builder
          * 
@@ -677,7 +677,7 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
         }
 
         /**
-         * @param providerTokenManagement This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+         * @param providerTokenManagement This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
          * 
          * @return builder
          * 
@@ -688,7 +688,7 @@ public final class ProjectAuthenticationOauthSystemLinkedinArgs extends com.pulu
         }
 
         /**
-         * @param providerTokenManagement This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+         * @param providerTokenManagement This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
          * 
          * @return builder
          * 

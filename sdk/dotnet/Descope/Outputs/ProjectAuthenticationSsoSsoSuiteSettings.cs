@@ -15,27 +15,27 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationSsoSsoSuiteSettings
     {
         /// <summary>
-        /// Setting this to `true` will allow only verified domains to be used.
+        /// Setting this to `True` will allow only verified domains to be used.
         /// </summary>
         public readonly bool? ForceDomainVerification;
         /// <summary>
-        /// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        /// Setting this to `True` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideDomains;
         /// <summary>
-        /// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        /// Setting this to `True` will hide the groups mapping configuration section in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideGroupsMapping;
         /// <summary>
-        /// Setting this to `true` will hide the OIDC configuration option.
+        /// Setting this to `True` will hide the OIDC configuration option.
         /// </summary>
         public readonly bool? HideOidc;
         /// <summary>
-        /// Setting this to `true` will hide the SAML configuration option.
+        /// Setting this to `True` will hide the SAML configuration option.
         /// </summary>
         public readonly bool? HideSaml;
         /// <summary>
-        /// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        /// Setting this to `True` will hide the SCIM configuration in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideScim;
         /// <summary>

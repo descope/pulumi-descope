@@ -70,7 +70,7 @@ public final class ProjectProjectSettings {
      */
     private @Nullable String refreshTokenExpiration;
     /**
-     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     private @Nullable String refreshTokenResponseMethod;
@@ -100,7 +100,7 @@ public final class ProjectProjectSettings {
      */
     private @Nullable String sessionTokenExpiration;
     /**
-     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     private @Nullable String sessionTokenResponseMethod;
@@ -214,7 +214,7 @@ public final class ProjectProjectSettings {
         return Optional.ofNullable(this.refreshTokenExpiration);
     }
     /**
-     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how refresh tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     public Optional<String> refreshTokenResponseMethod() {
@@ -256,7 +256,7 @@ public final class ProjectProjectSettings {
         return Optional.ofNullable(this.sessionTokenExpiration);
     }
     /**
-     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+     * @return Configure how sessions tokens are managed by the Descope SDKs. Must be either `responseBody` or `cookies`. The default value is `responseBody`.
      * 
      */
     public Optional<String> sessionTokenResponseMethod() {

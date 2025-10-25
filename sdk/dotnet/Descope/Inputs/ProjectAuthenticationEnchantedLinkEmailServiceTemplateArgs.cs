@@ -20,7 +20,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        /// HTML content of the email message body, required if `UsePlainTextBody` isn't set.
         /// </summary>
         [Input("htmlBody")]
         public Input<string>? HtmlBody { get; set; }
@@ -35,7 +35,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        /// Plain text version of the email message body, required if `UsePlainTextBody` is set to `True`.
         /// </summary>
         [Input("plainTextBody")]
         public Input<string>? PlainTextBody { get; set; }

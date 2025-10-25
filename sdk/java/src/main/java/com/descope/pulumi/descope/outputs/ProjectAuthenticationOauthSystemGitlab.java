@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAuthenticationOauthSystemGitlab {
     /**
-     * @return The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+     * @return The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      * 
      */
     private @Nullable List<String> allowedGrantTypes;
@@ -86,7 +86,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      */
     private @Nullable List<String> prompts;
     /**
-     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+     * @return This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
      * 
      */
     private @Nullable ProjectAuthenticationOauthSystemGitlabProviderTokenManagement providerTokenManagement;
@@ -118,7 +118,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
 
     private ProjectAuthenticationOauthSystemGitlab() {}
     /**
-     * @return The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+     * @return The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      * 
      */
     public List<String> allowedGrantTypes() {
@@ -216,7 +216,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         return this.prompts == null ? List.of() : this.prompts;
     }
     /**
-     * @return This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+     * @return This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
      * 
      */
     public Optional<ProjectAuthenticationOauthSystemGitlabProviderTokenManagement> providerTokenManagement() {

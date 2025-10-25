@@ -20,7 +20,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<Inputs.ProjectAttributesTenantAuthorizationArgs>? Authorization { get; set; }
 
         /// <summary>
-        /// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+        /// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `Name`.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
