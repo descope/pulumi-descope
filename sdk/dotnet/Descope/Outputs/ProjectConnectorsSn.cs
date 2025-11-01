@@ -36,7 +36,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Use the `origination_number` attribute instead.
+        /// Use the `OriginationNumber` attribute instead.
         /// </summary>
         public readonly string? OrganizationNumber;
         /// <summary>

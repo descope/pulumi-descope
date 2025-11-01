@@ -15,11 +15,11 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectJwtTemplatesUserTemplate
     {
         /// <summary>
-        /// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// The authorization claims format - `Default`, `tenantOnly` or `None`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         public readonly string? AuthSchema;
         /// <summary>
-        /// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+        /// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `Dct` (Descope Current Tenant) claim in their JWT.
         /// </summary>
         public readonly bool? AutoTenantClaim;
         /// <summary>
@@ -31,7 +31,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// Policy for empty claims - `none`, `nil` or `delete`.
+        /// Policy for empty claims - `None`, `Nil` or `Delete`.
         /// </summary>
         public readonly string? EmptyClaimPolicy;
         /// <summary>
@@ -44,7 +44,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `String` value.
         /// </summary>
         public readonly string Template;
 

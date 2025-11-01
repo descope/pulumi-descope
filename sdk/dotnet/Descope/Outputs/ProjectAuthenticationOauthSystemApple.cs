@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationOauthSystemApple
     {
         /// <summary>
-        /// The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        /// The type of grants (`AuthorizationCode` or `Implicit`) to allow when requesting access tokens from the OAuth provider.
         /// </summary>
         public readonly ImmutableArray<string> AllowedGrantTypes;
         /// <summary>
@@ -43,7 +43,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
@@ -71,7 +71,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Prompts;
         /// <summary>
-        /// This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+        /// This attribute is deprecated, use the `ManageProviderTokens`, `CallbackDomain`, and `RedirectUrl` fields instead.
         /// </summary>
         public readonly Outputs.ProjectAuthenticationOauthSystemAppleProviderTokenManagement? ProviderTokenManagement;
         /// <summary>
