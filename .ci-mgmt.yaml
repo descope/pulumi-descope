@@ -23,3 +23,6 @@ plugins:
       kind: converter
 autoMergeProviderUpgrades: true
 major-version: 1
+ghAppAuth:
+    app-id: ${{ secrets.RELEASE_APP_ID }}
+    private-key: ${{ secrets.RELEASE_APP_PEM }}
