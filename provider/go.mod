@@ -2,7 +2,7 @@ module github.com/descope/pulumi-descope/provider
 
 go 1.24.6
 
-toolchain go1.25.3
+toolchain go1.25.4
 
 replace github.com/descope/terraform-provider-descope/shim => ./shim
 
@@ -84,7 +84,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.24.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.15.1 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.16.1 // indirect
 	github.com/hashicorp/terraform-plugin-framework-validators v0.18.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.29.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
