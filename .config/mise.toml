@@ -20,7 +20,7 @@ pulumi = "{{ get_env(name='PULUMI_VERSION_MISE', default='latest') }}"
 "github:pulumi/pulumictl" = 'latest'
 "github:pulumi/schema-tools" = "latest"
 gradle = '7.6'
-golangci-lint = "2.6.1" # See note about about overrides if you need to customize this.
+golangci-lint = "2.6.2" # See note about about overrides if you need to customize this.
 "npm:yarn" = "1.22.22"
 
 [settings]
