@@ -26,6 +26,12 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         /// <summary>
+        /// The apple key generator object describing how to create a dynamic apple client secret for applications.
+        /// </summary>
+        [Input("appleKeyGenerator")]
+        public Input<Inputs.ProjectAuthenticationOauthCustomAppleKeyGeneratorGetArgs>? AppleKeyGenerator { get; set; }
+
+        /// <summary>
         /// The URL that users are redirected to for authorization with the OAuth provider.
         /// </summary>
         [Input("authorizationEndpoint")]
@@ -112,6 +118,34 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("mergeUserAccounts")]
         public Input<bool>? MergeUserAccounts { get; set; }
+
+        /// <summary>
+        /// The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        /// </summary>
+        [Input("nativeAppleKeyGenerator")]
+        public Input<Inputs.ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorGetArgs>? NativeAppleKeyGenerator { get; set; }
+
+        /// <summary>
+        /// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        /// </summary>
+        [Input("nativeClientId")]
+        public Input<string>? NativeClientId { get; set; }
+
+        [Input("nativeClientSecret")]
+        private Input<string>? _nativeClientSecret;
+
+        /// <summary>
+        /// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        /// </summary>
+        public Input<string>? NativeClientSecret
+        {
+            get => _nativeClientSecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _nativeClientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("prompts")]
         private InputList<string>? _prompts;

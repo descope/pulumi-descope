@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<string> AllowedGrantTypes;
         /// <summary>
+        /// The apple key generator object describing how to create a dynamic apple client secret for applications.
+        /// </summary>
+        public readonly Outputs.ProjectAuthenticationOauthSystemAppleAppleKeyGenerator? AppleKeyGenerator;
+        /// <summary>
         /// The URL that users are redirected to for authorization with the OAuth provider.
         /// </summary>
         public readonly string? AuthorizationEndpoint;
@@ -67,6 +71,18 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? MergeUserAccounts;
         /// <summary>
+        /// The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        /// </summary>
+        public readonly Outputs.ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator? NativeAppleKeyGenerator;
+        /// <summary>
+        /// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        /// </summary>
+        public readonly string? NativeClientId;
+        /// <summary>
+        /// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        /// </summary>
+        public readonly string? NativeClientSecret;
+        /// <summary>
         /// Custom prompts or consent screens that users may see during OAuth authentication.
         /// </summary>
         public readonly ImmutableArray<string> Prompts;
@@ -99,6 +115,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectAuthenticationOauthSystemApple(
             ImmutableArray<string> allowedGrantTypes,
 
+            Outputs.ProjectAuthenticationOauthSystemAppleAppleKeyGenerator? appleKeyGenerator,
+
             string? authorizationEndpoint,
 
             string? callbackDomain,
@@ -123,6 +141,12 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? mergeUserAccounts,
 
+            Outputs.ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator? nativeAppleKeyGenerator,
+
+            string? nativeClientId,
+
+            string? nativeClientSecret,
+
             ImmutableArray<string> prompts,
 
             Outputs.ProjectAuthenticationOauthSystemAppleProviderTokenManagement? providerTokenManagement,
@@ -138,6 +162,7 @@ namespace Descope.Pulumi.Descope.Outputs
             string? userInfoEndpoint)
         {
             AllowedGrantTypes = allowedGrantTypes;
+            AppleKeyGenerator = appleKeyGenerator;
             AuthorizationEndpoint = authorizationEndpoint;
             CallbackDomain = callbackDomain;
             ClaimMapping = claimMapping;
@@ -150,6 +175,9 @@ namespace Descope.Pulumi.Descope.Outputs
             Logo = logo;
             ManageProviderTokens = manageProviderTokens;
             MergeUserAccounts = mergeUserAccounts;
+            NativeAppleKeyGenerator = nativeAppleKeyGenerator;
+            NativeClientId = nativeClientId;
+            NativeClientSecret = nativeClientSecret;
             Prompts = prompts;
             ProviderTokenManagement = providerTokenManagement;
             RedirectUrl = redirectUrl;

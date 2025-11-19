@@ -25,6 +25,7 @@ public final class ProjectAuthorizationRole {
      */
     private @Nullable String description;
     private @Nullable String id;
+    private @Nullable String key;
     /**
      * @return A name for the role.
      * 
@@ -58,6 +59,9 @@ public final class ProjectAuthorizationRole {
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
+    }
+    public Optional<String> key() {
+        return Optional.ofNullable(this.key);
     }
     /**
      * @return A name for the role.
@@ -93,6 +97,7 @@ public final class ProjectAuthorizationRole {
         private @Nullable Boolean default_;
         private @Nullable String description;
         private @Nullable String id;
+        private @Nullable String key;
         private String name;
         private @Nullable List<String> permissions;
         private @Nullable Boolean private_;
@@ -102,6 +107,7 @@ public final class ProjectAuthorizationRole {
     	      this.default_ = defaults.default_;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
+    	      this.key = defaults.key;
     	      this.name = defaults.name;
     	      this.permissions = defaults.permissions;
     	      this.private_ = defaults.private_;
@@ -123,6 +129,12 @@ public final class ProjectAuthorizationRole {
         public Builder id(@Nullable String id) {
 
             this.id = id;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder key(@Nullable String key) {
+
+            this.key = key;
             return this;
         }
         @CustomType.Setter
@@ -153,6 +165,7 @@ public final class ProjectAuthorizationRole {
             _resultValue.default_ = default_;
             _resultValue.description = description;
             _resultValue.id = id;
+            _resultValue.key = key;
             _resultValue.name = name;
             _resultValue.permissions = permissions;
             _resultValue.private_ = private_;
