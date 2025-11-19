@@ -14,13 +14,13 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectJwtTemplatesAccessKeyTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+        /// The authorization claims format - `Default`, `tenantOnly` or `None`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         [Input("authSchema")]
         public Input<string>? AuthSchema { get; set; }
 
         /// <summary>
-        /// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+        /// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `Dct` (Descope Current Tenant) claim in their JWT.
         /// </summary>
         [Input("autoTenantClaim")]
         public Input<bool>? AutoTenantClaim { get; set; }
@@ -38,7 +38,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Policy for empty claims - `none`, `nil` or `delete`.
+        /// Policy for empty claims - `None`, `Nil` or `Delete`.
         /// </summary>
         [Input("emptyClaimPolicy")]
         public Input<string>? EmptyClaimPolicy { get; set; }
@@ -59,7 +59,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `String` value.
         /// </summary>
         [Input("template", required: true)]
         public Input<string> Template { get; set; } = null!;
