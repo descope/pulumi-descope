@@ -19,7 +19,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? Active;
         /// <summary>
-        /// HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        /// HTML content of the email message body, required if `UsePlainTextBody` isn't set.
         /// </summary>
         public readonly string? HtmlBody;
         public readonly string? Id;
@@ -28,7 +28,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        /// Plain text version of the email message body, required if `UsePlainTextBody` is set to `True`.
         /// </summary>
         public readonly string? PlainTextBody;
         /// <summary>

@@ -39,13 +39,13 @@ public final class ProjectConnectorsSn {
      */
     private String name;
     /**
-     * @return Use the `origination_number` attribute instead.
+     * @return Use the `originationNumber` attribute instead.
      * 
      * @deprecated
-     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
      * 
      */
-    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
     private @Nullable String organizationNumber;
     /**
      * @return An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
@@ -113,13 +113,13 @@ public final class ProjectConnectorsSn {
         return this.name;
     }
     /**
-     * @return Use the `origination_number` attribute instead.
+     * @return Use the `originationNumber` attribute instead.
      * 
      * @deprecated
-     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
      * 
      */
-    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
     public Optional<String> organizationNumber() {
         return Optional.ofNullable(this.organizationNumber);
     }

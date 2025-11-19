@@ -7,6 +7,9 @@ on:
       version:
         required: true
         type: string
+      setLatestRelease:
+        required: true
+        type: boolean
       isPrerelease:
         required: true
         type: boolean
@@ -58,20 +61,22 @@ jobs:
     - name: Setup mise
       uses: jdx/mise-action@v3
       with:
+        # Latest working version. See https://github.com/jdx/mise/discussions/6781
+        version: 2025.10.16
         github_token: ${{ secrets.GITHUB_TOKEN }}
         cache_key: "mise-{{platform}}-${{ hashFiles('mise.lock') }}"
         cache_save: false
     - name: Create dist directory
       run: mkdir -p dist
     - name: Download provider assets
-      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+      uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
         pattern: pulumi-resource-descope-v${{ inputs.version }}-*
         path: dist
         # Don't create a directory for each artifact
         merge-multiple: true
     - name: Download schema
-      uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+      uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
         # Use a pattern to avoid failing if the artifact doesn't exist
         pattern: schema-embed.*
@@ -102,6 +107,8 @@ jobs:
         prerelease: ${{ inputs.isPrerelease }}
         # We keep pre-releases as drafts so they're not visible until we manually publish them.
         draft: ${{ inputs.isPrerelease }}
+        # Explicitly set make_latest to account for backported releases
+        make_latest: ${{ inputs.setLatestRelease }}
         body: ${{ steps.schema-summary.outputs.summary }}
         generate_release_notes: true
         files: dist/*
@@ -126,12 +133,14 @@ jobs:
     - name: Setup mise
       uses: jdx/mise-action@v3
       with:
+        # Latest working version. See https://github.com/jdx/mise/discussions/6781
+        version: 2025.10.16
         github_token: ${{ secrets.GITHUB_TOKEN }}
         cache_key: "mise-{{platform}}-{{file_hash}}"
         # only saving the cache in the prerequisites job
         cache_save: false
     - name: Setup Node
-      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
       with:
         # we don't set node-version because we install with mise.
         # this step is needed to setup npm auth

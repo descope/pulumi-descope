@@ -99,24 +99,24 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
     }
 
     /**
-     * Use the `origination_number` attribute instead.
+     * Use the `originationNumber` attribute instead.
      * 
      * @deprecated
-     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
      * 
      */
-    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
     @Import(name="organizationNumber")
     private @Nullable Output<String> organizationNumber;
 
     /**
-     * @return Use the `origination_number` attribute instead.
+     * @return Use the `originationNumber` attribute instead.
      * 
      * @deprecated
-     * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+     * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
      * 
      */
-    @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+    @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
     public Optional<Output<String>> organizationNumber() {
         return Optional.ofNullable(this.organizationNumber);
     }
@@ -346,30 +346,30 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
         }
 
         /**
-         * @param organizationNumber Use the `origination_number` attribute instead.
+         * @param organizationNumber Use the `originationNumber` attribute instead.
          * 
          * @return builder
          * 
          * @deprecated
-         * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+         * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
          * 
          */
-        @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+        @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
         public Builder organizationNumber(@Nullable Output<String> organizationNumber) {
             $.organizationNumber = organizationNumber;
             return this;
         }
 
         /**
-         * @param organizationNumber Use the `origination_number` attribute instead.
+         * @param organizationNumber Use the `originationNumber` attribute instead.
          * 
          * @return builder
          * 
          * @deprecated
-         * The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider.
+         * The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider.
          * 
          */
-        @Deprecated /* The organization_number attribute has been renamed, set the origination_number attribute instead. This attribute will be removed in a future version of the provider. */
+        @Deprecated /* The organizationNumber attribute has been renamed, set the originationNumber attribute instead. This attribute will be removed in a future version of the provider. */
         public Builder organizationNumber(String organizationNumber) {
             return organizationNumber(Output.of(organizationNumber));
         }

@@ -51,7 +51,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? RefreshTokenCookieDomain;
         /// <summary>
-        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Use `Strict`, `Lax` or `None`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         /// </summary>
         public readonly string? RefreshTokenCookiePolicy;
         /// <summary>
@@ -59,7 +59,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? RefreshTokenExpiration;
         /// <summary>
-        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// Configure how refresh tokens are managed by the Descope SDKs. Must be either `ResponseBody` or `Cookies`. The default value is `ResponseBody`.
         /// </summary>
         public readonly string? RefreshTokenResponseMethod;
         /// <summary>
@@ -75,7 +75,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? SessionTokenCookieDomain;
         /// <summary>
-        /// Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+        /// Use `Strict`, `Lax` or `None`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
         /// </summary>
         public readonly string? SessionTokenCookiePolicy;
         /// <summary>
@@ -83,7 +83,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? SessionTokenExpiration;
         /// <summary>
-        /// Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+        /// Configure how sessions tokens are managed by the Descope SDKs. Must be either `ResponseBody` or `Cookies`. The default value is `ResponseBody`.
         /// </summary>
         public readonly string? SessionTokenResponseMethod;
         /// <summary>

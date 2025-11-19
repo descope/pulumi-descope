@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectApplicationsOidcApplication
     {
         /// <summary>
-        /// A list of supported claims. e.g. `sub`, `email`, `exp`.
+        /// A list of supported claims. e.g. `Sub`, `Email`, `Exp`.
         /// </summary>
         public readonly ImmutableArray<string> Claims;
         /// <summary>
