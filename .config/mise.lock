@@ -15,7 +15,7 @@ version = "1.25.4"
 backend = "core:go"
 
 [[tools.golangci-lint]]
-version = "1.64.8"
+version = "2.6.2"
 backend = "aqua:golangci/golangci-lint"
 
 [[tools.gradle]]
