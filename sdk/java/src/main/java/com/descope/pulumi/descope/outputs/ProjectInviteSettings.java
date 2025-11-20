@@ -24,6 +24,16 @@ public final class ProjectInviteSettings {
      */
     private @Nullable ProjectInviteSettingsEmailService emailService;
     /**
+     * @return Expire the user account if the invitation is not accepted within the expiration time.
+     * 
+     */
+    private @Nullable Boolean expireInvitedUsers;
+    /**
+     * @return The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+     * 
+     */
+    private @Nullable String inviteExpiration;
+    /**
      * @return Custom URL to include in the message sent to invited users.
      * 
      */
@@ -58,6 +68,20 @@ public final class ProjectInviteSettings {
      */
     public Optional<ProjectInviteSettingsEmailService> emailService() {
         return Optional.ofNullable(this.emailService);
+    }
+    /**
+     * @return Expire the user account if the invitation is not accepted within the expiration time.
+     * 
+     */
+    public Optional<Boolean> expireInvitedUsers() {
+        return Optional.ofNullable(this.expireInvitedUsers);
+    }
+    /**
+     * @return The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+     * 
+     */
+    public Optional<String> inviteExpiration() {
+        return Optional.ofNullable(this.inviteExpiration);
     }
     /**
      * @return Custom URL to include in the message sent to invited users.
@@ -99,6 +123,8 @@ public final class ProjectInviteSettings {
     public static final class Builder {
         private @Nullable Boolean addMagiclinkToken;
         private @Nullable ProjectInviteSettingsEmailService emailService;
+        private @Nullable Boolean expireInvitedUsers;
+        private @Nullable String inviteExpiration;
         private @Nullable String inviteUrl;
         private @Nullable Boolean requireInvitation;
         private @Nullable Boolean sendEmail;
@@ -108,6 +134,8 @@ public final class ProjectInviteSettings {
     	      Objects.requireNonNull(defaults);
     	      this.addMagiclinkToken = defaults.addMagiclinkToken;
     	      this.emailService = defaults.emailService;
+    	      this.expireInvitedUsers = defaults.expireInvitedUsers;
+    	      this.inviteExpiration = defaults.inviteExpiration;
     	      this.inviteUrl = defaults.inviteUrl;
     	      this.requireInvitation = defaults.requireInvitation;
     	      this.sendEmail = defaults.sendEmail;
@@ -124,6 +152,18 @@ public final class ProjectInviteSettings {
         public Builder emailService(@Nullable ProjectInviteSettingsEmailService emailService) {
 
             this.emailService = emailService;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder expireInvitedUsers(@Nullable Boolean expireInvitedUsers) {
+
+            this.expireInvitedUsers = expireInvitedUsers;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder inviteExpiration(@Nullable String inviteExpiration) {
+
+            this.inviteExpiration = inviteExpiration;
             return this;
         }
         @CustomType.Setter
@@ -154,6 +194,8 @@ public final class ProjectInviteSettings {
             final var _resultValue = new ProjectInviteSettings();
             _resultValue.addMagiclinkToken = addMagiclinkToken;
             _resultValue.emailService = emailService;
+            _resultValue.expireInvitedUsers = expireInvitedUsers;
+            _resultValue.inviteExpiration = inviteExpiration;
             _resultValue.inviteUrl = inviteUrl;
             _resultValue.requireInvitation = requireInvitation;
             _resultValue.sendEmail = sendEmail;

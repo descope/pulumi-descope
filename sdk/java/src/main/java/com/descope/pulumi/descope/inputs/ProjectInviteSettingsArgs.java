@@ -48,6 +48,36 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
     }
 
     /**
+     * Expire the user account if the invitation is not accepted within the expiration time.
+     * 
+     */
+    @Import(name="expireInvitedUsers")
+    private @Nullable Output<Boolean> expireInvitedUsers;
+
+    /**
+     * @return Expire the user account if the invitation is not accepted within the expiration time.
+     * 
+     */
+    public Optional<Output<Boolean>> expireInvitedUsers() {
+        return Optional.ofNullable(this.expireInvitedUsers);
+    }
+
+    /**
+     * The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+     * 
+     */
+    @Import(name="inviteExpiration")
+    private @Nullable Output<String> inviteExpiration;
+
+    /**
+     * @return The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+     * 
+     */
+    public Optional<Output<String>> inviteExpiration() {
+        return Optional.ofNullable(this.inviteExpiration);
+    }
+
+    /**
      * Custom URL to include in the message sent to invited users.
      * 
      */
@@ -112,6 +142,8 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
     private ProjectInviteSettingsArgs(ProjectInviteSettingsArgs $) {
         this.addMagiclinkToken = $.addMagiclinkToken;
         this.emailService = $.emailService;
+        this.expireInvitedUsers = $.expireInvitedUsers;
+        this.inviteExpiration = $.inviteExpiration;
         this.inviteUrl = $.inviteUrl;
         this.requireInvitation = $.requireInvitation;
         this.sendEmail = $.sendEmail;
@@ -176,6 +208,48 @@ public final class ProjectInviteSettingsArgs extends com.pulumi.resources.Resour
          */
         public Builder emailService(ProjectInviteSettingsEmailServiceArgs emailService) {
             return emailService(Output.of(emailService));
+        }
+
+        /**
+         * @param expireInvitedUsers Expire the user account if the invitation is not accepted within the expiration time.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder expireInvitedUsers(@Nullable Output<Boolean> expireInvitedUsers) {
+            $.expireInvitedUsers = expireInvitedUsers;
+            return this;
+        }
+
+        /**
+         * @param expireInvitedUsers Expire the user account if the invitation is not accepted within the expiration time.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder expireInvitedUsers(Boolean expireInvitedUsers) {
+            return expireInvitedUsers(Output.of(expireInvitedUsers));
+        }
+
+        /**
+         * @param inviteExpiration The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder inviteExpiration(@Nullable Output<String> inviteExpiration) {
+            $.inviteExpiration = inviteExpiration;
+            return this;
+        }
+
+        /**
+         * @param inviteExpiration The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as &#34;2 weeks&#34;, &#34;4 days&#34;, etc. The minimum value is &#34;1 hour&#34;.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder inviteExpiration(String inviteExpiration) {
+            return inviteExpiration(Output.of(inviteExpiration));
         }
 
         /**

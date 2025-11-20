@@ -23,6 +23,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        public readonly string? Key;
         /// <summary>
         /// A name for the role.
         /// </summary>
@@ -44,6 +45,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
+            string? key,
+
             string name,
 
             ImmutableArray<string> permissions,
@@ -53,6 +56,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Default = @default;
             Description = description;
             Id = id;
+            Key = key;
             Name = name;
             Permissions = permissions;
             Private = @private;
