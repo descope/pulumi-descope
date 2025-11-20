@@ -19,6 +19,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
+        /// <summary>
+        /// The template for the service issuer label (issuer) shown in the authenticator app.
+        /// </summary>
+        [Input("serviceLabel")]
+        public Input<string>? ServiceLabel { get; set; }
+
         public ProjectAuthenticationTotpArgs()
         {
         }

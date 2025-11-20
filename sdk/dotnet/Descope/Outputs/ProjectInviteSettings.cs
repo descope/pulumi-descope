@@ -23,6 +23,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly Outputs.ProjectInviteSettingsEmailService? EmailService;
         /// <summary>
+        /// Expire the user account if the invitation is not accepted within the expiration time.
+        /// </summary>
+        public readonly bool? ExpireInvitedUsers;
+        /// <summary>
+        /// The expiry time for the invitation, meant to be used together with `ExpireInvitedUsers` and/or `AddMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+        /// </summary>
+        public readonly string? InviteExpiration;
+        /// <summary>
         /// Custom URL to include in the message sent to invited users.
         /// </summary>
         public readonly string? InviteUrl;
@@ -45,6 +53,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectInviteSettingsEmailService? emailService,
 
+            bool? expireInvitedUsers,
+
+            string? inviteExpiration,
+
             string? inviteUrl,
 
             bool? requireInvitation,
@@ -55,6 +67,8 @@ namespace Descope.Pulumi.Descope.Outputs
         {
             AddMagiclinkToken = addMagiclinkToken;
             EmailService = emailService;
+            ExpireInvitedUsers = expireInvitedUsers;
+            InviteExpiration = inviteExpiration;
             InviteUrl = inviteUrl;
             RequireInvitation = requireInvitation;
             SendEmail = sendEmail;

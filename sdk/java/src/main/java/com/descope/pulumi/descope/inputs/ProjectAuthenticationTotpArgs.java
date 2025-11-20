@@ -6,6 +6,7 @@ package com.descope.pulumi.descope.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -30,10 +31,26 @@ public final class ProjectAuthenticationTotpArgs extends com.pulumi.resources.Re
         return Optional.ofNullable(this.disabled);
     }
 
+    /**
+     * The template for the service issuer label (issuer) shown in the authenticator app.
+     * 
+     */
+    @Import(name="serviceLabel")
+    private @Nullable Output<String> serviceLabel;
+
+    /**
+     * @return The template for the service issuer label (issuer) shown in the authenticator app.
+     * 
+     */
+    public Optional<Output<String>> serviceLabel() {
+        return Optional.ofNullable(this.serviceLabel);
+    }
+
     private ProjectAuthenticationTotpArgs() {}
 
     private ProjectAuthenticationTotpArgs(ProjectAuthenticationTotpArgs $) {
         this.disabled = $.disabled;
+        this.serviceLabel = $.serviceLabel;
     }
 
     public static Builder builder() {
@@ -73,6 +90,27 @@ public final class ProjectAuthenticationTotpArgs extends com.pulumi.resources.Re
          */
         public Builder disabled(Boolean disabled) {
             return disabled(Output.of(disabled));
+        }
+
+        /**
+         * @param serviceLabel The template for the service issuer label (issuer) shown in the authenticator app.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder serviceLabel(@Nullable Output<String> serviceLabel) {
+            $.serviceLabel = serviceLabel;
+            return this;
+        }
+
+        /**
+         * @param serviceLabel The template for the service issuer label (issuer) shown in the authenticator app.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder serviceLabel(String serviceLabel) {
+            return serviceLabel(Output.of(serviceLabel));
         }
 
         public ProjectAuthenticationTotpArgs build() {

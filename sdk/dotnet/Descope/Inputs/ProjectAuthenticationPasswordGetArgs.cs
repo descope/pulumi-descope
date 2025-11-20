@@ -92,6 +92,24 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<int>? ReuseAmount { get; set; }
 
         /// <summary>
+        /// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+        /// </summary>
+        [Input("temporaryLock")]
+        public Input<bool>? TemporaryLock { get; set; }
+
+        /// <summary>
+        /// The number of failed login attempts allowed before an account is temporarily locked.
+        /// </summary>
+        [Input("temporaryLockAttempts")]
+        public Input<int>? TemporaryLockAttempts { get; set; }
+
+        /// <summary>
+        /// The amount of time before the user can sign in again after the account is temporarily locked.
+        /// </summary>
+        [Input("temporaryLockDuration")]
+        public Input<string>? TemporaryLockDuration { get; set; }
+
+        /// <summary>
         /// Whether passwords must contain at least one uppercase letter.
         /// </summary>
         [Input("uppercase")]

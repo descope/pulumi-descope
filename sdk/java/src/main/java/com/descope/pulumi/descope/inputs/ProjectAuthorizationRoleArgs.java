@@ -55,6 +55,13 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
         return Optional.ofNullable(this.id);
     }
 
+    @Import(name="key")
+    private @Nullable Output<String> key;
+
+    public Optional<Output<String>> key() {
+        return Optional.ofNullable(this.key);
+    }
+
     /**
      * A name for the role.
      * 
@@ -106,6 +113,7 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
         this.default_ = $.default_;
         this.description = $.description;
         this.id = $.id;
+        this.key = $.key;
         this.name = $.name;
         this.permissions = $.permissions;
         this.private_ = $.private_;
@@ -178,6 +186,15 @@ public final class ProjectAuthorizationRoleArgs extends com.pulumi.resources.Res
 
         public Builder id(String id) {
             return id(Output.of(id));
+        }
+
+        public Builder key(@Nullable Output<String> key) {
+            $.key = key;
+            return this;
+        }
+
+        public Builder key(String key) {
+            return key(Output.of(key));
         }
 
         /**

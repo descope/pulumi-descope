@@ -3,6 +3,8 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs;
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs;
 import com.descope.pulumi.descope.inputs.ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
@@ -32,6 +34,21 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
      */
     public Optional<Output<List<String>>> allowedGrantTypes() {
         return Optional.ofNullable(this.allowedGrantTypes);
+    }
+
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     * 
+     */
+    @Import(name="appleKeyGenerator")
+    private @Nullable Output<ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs> appleKeyGenerator;
+
+    /**
+     * @return The apple key generator object describing how to create a dynamic apple client secret for applications.
+     * 
+     */
+    public Optional<Output<ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs>> appleKeyGenerator() {
+        return Optional.ofNullable(this.appleKeyGenerator);
     }
 
     /**
@@ -215,6 +232,51 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
     }
 
     /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     * 
+     */
+    @Import(name="nativeAppleKeyGenerator")
+    private @Nullable Output<ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs> nativeAppleKeyGenerator;
+
+    /**
+     * @return The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     * 
+     */
+    public Optional<Output<ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs>> nativeAppleKeyGenerator() {
+        return Optional.ofNullable(this.nativeAppleKeyGenerator);
+    }
+
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    @Import(name="nativeClientId")
+    private @Nullable Output<String> nativeClientId;
+
+    /**
+     * @return The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    public Optional<Output<String>> nativeClientId() {
+        return Optional.ofNullable(this.nativeClientId);
+    }
+
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    @Import(name="nativeClientSecret")
+    private @Nullable Output<String> nativeClientSecret;
+
+    /**
+     * @return The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    public Optional<Output<String>> nativeClientSecret() {
+        return Optional.ofNullable(this.nativeClientSecret);
+    }
+
+    /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      * 
      */
@@ -323,6 +385,7 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
 
     private ProjectAuthenticationOauthSystemGoogleArgs(ProjectAuthenticationOauthSystemGoogleArgs $) {
         this.allowedGrantTypes = $.allowedGrantTypes;
+        this.appleKeyGenerator = $.appleKeyGenerator;
         this.authorizationEndpoint = $.authorizationEndpoint;
         this.callbackDomain = $.callbackDomain;
         this.claimMapping = $.claimMapping;
@@ -335,6 +398,9 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
         this.logo = $.logo;
         this.manageProviderTokens = $.manageProviderTokens;
         this.mergeUserAccounts = $.mergeUserAccounts;
+        this.nativeAppleKeyGenerator = $.nativeAppleKeyGenerator;
+        this.nativeClientId = $.nativeClientId;
+        this.nativeClientSecret = $.nativeClientSecret;
         this.prompts = $.prompts;
         this.providerTokenManagement = $.providerTokenManagement;
         this.redirectUrl = $.redirectUrl;
@@ -391,6 +457,27 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
          */
         public Builder allowedGrantTypes(String... allowedGrantTypes) {
             return allowedGrantTypes(List.of(allowedGrantTypes));
+        }
+
+        /**
+         * @param appleKeyGenerator The apple key generator object describing how to create a dynamic apple client secret for applications.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder appleKeyGenerator(@Nullable Output<ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs> appleKeyGenerator) {
+            $.appleKeyGenerator = appleKeyGenerator;
+            return this;
+        }
+
+        /**
+         * @param appleKeyGenerator The apple key generator object describing how to create a dynamic apple client secret for applications.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder appleKeyGenerator(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs appleKeyGenerator) {
+            return appleKeyGenerator(Output.of(appleKeyGenerator));
         }
 
         /**
@@ -643,6 +730,69 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
          */
         public Builder mergeUserAccounts(Boolean mergeUserAccounts) {
             return mergeUserAccounts(Output.of(mergeUserAccounts));
+        }
+
+        /**
+         * @param nativeAppleKeyGenerator The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeAppleKeyGenerator(@Nullable Output<ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs> nativeAppleKeyGenerator) {
+            $.nativeAppleKeyGenerator = nativeAppleKeyGenerator;
+            return this;
+        }
+
+        /**
+         * @param nativeAppleKeyGenerator The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeAppleKeyGenerator(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs nativeAppleKeyGenerator) {
+            return nativeAppleKeyGenerator(Output.of(nativeAppleKeyGenerator));
+        }
+
+        /**
+         * @param nativeClientId The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeClientId(@Nullable Output<String> nativeClientId) {
+            $.nativeClientId = nativeClientId;
+            return this;
+        }
+
+        /**
+         * @param nativeClientId The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeClientId(String nativeClientId) {
+            return nativeClientId(Output.of(nativeClientId));
+        }
+
+        /**
+         * @param nativeClientSecret The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeClientSecret(@Nullable Output<String> nativeClientSecret) {
+            $.nativeClientSecret = nativeClientSecret;
+            return this;
+        }
+
+        /**
+         * @param nativeClientSecret The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder nativeClientSecret(String nativeClientSecret) {
+            return nativeClientSecret(Output.of(nativeClientSecret));
         }
 
         /**

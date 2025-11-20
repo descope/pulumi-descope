@@ -7,6 +7,7 @@ import com.descope.pulumi.descope.outputs.ProjectAuthenticationPasswordEmailServ
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -78,6 +79,21 @@ public final class ProjectAuthenticationPassword {
      * 
      */
     private @Nullable Integer reuseAmount;
+    /**
+     * @return Whether the user account should be temporarily locked after a specified number of failed login attempts.
+     * 
+     */
+    private @Nullable Boolean temporaryLock;
+    /**
+     * @return The number of failed login attempts allowed before an account is temporarily locked.
+     * 
+     */
+    private @Nullable Integer temporaryLockAttempts;
+    /**
+     * @return The amount of time before the user can sign in again after the account is temporarily locked.
+     * 
+     */
+    private @Nullable String temporaryLockDuration;
     /**
      * @return Whether passwords must contain at least one uppercase letter.
      * 
@@ -177,6 +193,27 @@ public final class ProjectAuthenticationPassword {
         return Optional.ofNullable(this.reuseAmount);
     }
     /**
+     * @return Whether the user account should be temporarily locked after a specified number of failed login attempts.
+     * 
+     */
+    public Optional<Boolean> temporaryLock() {
+        return Optional.ofNullable(this.temporaryLock);
+    }
+    /**
+     * @return The number of failed login attempts allowed before an account is temporarily locked.
+     * 
+     */
+    public Optional<Integer> temporaryLockAttempts() {
+        return Optional.ofNullable(this.temporaryLockAttempts);
+    }
+    /**
+     * @return The amount of time before the user can sign in again after the account is temporarily locked.
+     * 
+     */
+    public Optional<String> temporaryLockDuration() {
+        return Optional.ofNullable(this.temporaryLockDuration);
+    }
+    /**
      * @return Whether passwords must contain at least one uppercase letter.
      * 
      */
@@ -206,6 +243,9 @@ public final class ProjectAuthenticationPassword {
         private @Nullable Boolean number;
         private @Nullable Boolean reuse;
         private @Nullable Integer reuseAmount;
+        private @Nullable Boolean temporaryLock;
+        private @Nullable Integer temporaryLockAttempts;
+        private @Nullable String temporaryLockDuration;
         private @Nullable Boolean uppercase;
         public Builder() {}
         public Builder(ProjectAuthenticationPassword defaults) {
@@ -223,6 +263,9 @@ public final class ProjectAuthenticationPassword {
     	      this.number = defaults.number;
     	      this.reuse = defaults.reuse;
     	      this.reuseAmount = defaults.reuseAmount;
+    	      this.temporaryLock = defaults.temporaryLock;
+    	      this.temporaryLockAttempts = defaults.temporaryLockAttempts;
+    	      this.temporaryLockDuration = defaults.temporaryLockDuration;
     	      this.uppercase = defaults.uppercase;
         }
 
@@ -305,6 +348,24 @@ public final class ProjectAuthenticationPassword {
             return this;
         }
         @CustomType.Setter
+        public Builder temporaryLock(@Nullable Boolean temporaryLock) {
+
+            this.temporaryLock = temporaryLock;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder temporaryLockAttempts(@Nullable Integer temporaryLockAttempts) {
+
+            this.temporaryLockAttempts = temporaryLockAttempts;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder temporaryLockDuration(@Nullable String temporaryLockDuration) {
+
+            this.temporaryLockDuration = temporaryLockDuration;
+            return this;
+        }
+        @CustomType.Setter
         public Builder uppercase(@Nullable Boolean uppercase) {
 
             this.uppercase = uppercase;
@@ -325,6 +386,9 @@ public final class ProjectAuthenticationPassword {
             _resultValue.number = number;
             _resultValue.reuse = reuse;
             _resultValue.reuseAmount = reuseAmount;
+            _resultValue.temporaryLock = temporaryLock;
+            _resultValue.temporaryLockAttempts = temporaryLockAttempts;
+            _resultValue.temporaryLockDuration = temporaryLockDuration;
             _resultValue.uppercase = uppercase;
             return _resultValue;
         }
