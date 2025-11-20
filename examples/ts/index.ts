@@ -35,7 +35,6 @@ export const project = new descope.Project("pulumi-ts-test", {
     ],
     roles: [
       {
-        key: "role1",
         name: "role1",
         permissions: ["perm1"],
       },
