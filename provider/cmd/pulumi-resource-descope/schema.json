@@ -849,6 +849,10 @@
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustomAppleKeyGenerator:ProjectAuthenticationOauthCustomAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -901,6 +905,19 @@
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthCustomNativeAppleKeyGenerator:ProjectAuthenticationOauthCustomNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
+                },
                 "prompts": {
                     "type": "array",
                     "items": {
@@ -941,6 +958,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -953,6 +971,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -963,6 +984,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthCustomAppleKeyGenerator:ProjectAuthenticationOauthCustomAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthCustomNativeAppleKeyGenerator:ProjectAuthenticationOauthCustomNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthCustomProviderTokenManagement:ProjectAuthenticationOauthCustomProviderTokenManagement": {
             "type": "object"
@@ -1032,6 +1099,10 @@
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
                 },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemAppleAppleKeyGenerator:ProjectAuthenticationOauthSystemAppleAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
+                },
                 "authorizationEndpoint": {
                     "type": "string",
                     "description": "The URL that users are redirected to for authorization with the OAuth provider.\n"
@@ -1083,6 +1154,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1124,6 +1208,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1136,6 +1221,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1146,6 +1234,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemAppleAppleKeyGenerator:ProjectAuthenticationOauthSystemAppleAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemAppleProviderTokenManagement:ProjectAuthenticationOauthSystemAppleProviderTokenManagement": {
             "type": "object"
@@ -1158,6 +1292,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator:ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1210,6 +1348,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1251,6 +1402,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1263,6 +1415,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1273,6 +1428,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator:ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemDiscordProviderTokenManagement:ProjectAuthenticationOauthSystemDiscordProviderTokenManagement": {
             "type": "object"
@@ -1285,6 +1486,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator:ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1337,6 +1542,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1378,6 +1596,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1390,6 +1609,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1400,6 +1622,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator:ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemFacebookProviderTokenManagement:ProjectAuthenticationOauthSystemFacebookProviderTokenManagement": {
             "type": "object"
@@ -1412,6 +1680,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithubAppleKeyGenerator:ProjectAuthenticationOauthSystemGithubAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1464,6 +1736,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1505,6 +1790,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1517,6 +1803,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1527,6 +1816,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGithubAppleKeyGenerator:ProjectAuthenticationOauthSystemGithubAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemGithubProviderTokenManagement:ProjectAuthenticationOauthSystemGithubProviderTokenManagement": {
             "type": "object"
@@ -1539,6 +1874,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator:ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1591,6 +1930,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1632,6 +1984,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1644,6 +1997,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1654,6 +2010,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator:ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemGitlabProviderTokenManagement:ProjectAuthenticationOauthSystemGitlabProviderTokenManagement": {
             "type": "object"
@@ -1666,6 +2068,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator:ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1718,6 +2124,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1759,6 +2178,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1771,6 +2191,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1781,6 +2204,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator:ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemGoogleProviderTokenManagement:ProjectAuthenticationOauthSystemGoogleProviderTokenManagement": {
             "type": "object"
@@ -1793,6 +2262,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator:ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1845,6 +2318,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -1886,6 +2372,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -1898,6 +2385,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -1908,6 +2398,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator:ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement:ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement": {
             "type": "object"
@@ -1920,6 +2456,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator:ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -1972,6 +2512,19 @@
                 "mergeUserAccounts": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
+                },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
                 },
                 "prompts": {
                     "type": "array",
@@ -2013,6 +2566,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -2025,6 +2579,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -2035,6 +2592,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator:ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement:ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement": {
             "type": "object"
@@ -2047,6 +2650,10 @@
                         "type": "string"
                     },
                     "description": "The type of grants (\u003cspan pulumi-lang-nodejs=\"`authorizationCode`\" pulumi-lang-dotnet=\"`AuthorizationCode`\" pulumi-lang-go=\"`authorizationCode`\" pulumi-lang-python=\"`authorization_code`\" pulumi-lang-yaml=\"`authorizationCode`\" pulumi-lang-java=\"`authorizationCode`\"\u003e`authorization_code`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`implicit`\" pulumi-lang-dotnet=\"`Implicit`\" pulumi-lang-go=\"`implicit`\" pulumi-lang-python=\"`implicit`\" pulumi-lang-yaml=\"`implicit`\" pulumi-lang-java=\"`implicit`\"\u003e`implicit`\u003c/span\u003e) to allow when requesting access tokens from the OAuth provider.\n"
+                },
+                "appleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlackAppleKeyGenerator:ProjectAuthenticationOauthSystemSlackAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic apple client secret for applications.\n"
                 },
                 "authorizationEndpoint": {
                     "type": "string",
@@ -2100,6 +2707,19 @@
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through OAuth authentication.\n"
                 },
+                "nativeAppleKeyGenerator": {
+                    "$ref": "#/types/descope:index/ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator",
+                    "description": "The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.\n"
+                },
+                "nativeClientId": {
+                    "type": "string",
+                    "description": "The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.\n"
+                },
+                "nativeClientSecret": {
+                    "type": "string",
+                    "description": "The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.\n",
+                    "secret": true
+                },
                 "prompts": {
                     "type": "array",
                     "items": {
@@ -2140,6 +2760,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowedGrantTypes",
+                        "appleKeyGenerator",
                         "authorizationEndpoint",
                         "callbackDomain",
                         "claimMapping",
@@ -2152,6 +2773,9 @@
                         "logo",
                         "manageProviderTokens",
                         "mergeUserAccounts",
+                        "nativeAppleKeyGenerator",
+                        "nativeClientId",
+                        "nativeClientSecret",
                         "prompts",
                         "providerTokenManagement",
                         "redirectUrl",
@@ -2162,6 +2786,52 @@
                     ]
                 }
             }
+        },
+        "descope:index/ProjectAuthenticationOauthSystemSlackAppleKeyGenerator:ProjectAuthenticationOauthSystemSlackAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
+        },
+        "descope:index/ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator:ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator": {
+            "properties": {
+                "keyId": {
+                    "type": "string",
+                    "description": "The apple generator key id produced by Apple.\n"
+                },
+                "privateKey": {
+                    "type": "string",
+                    "description": "The apple generator private key produced by Apple.\n",
+                    "secret": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "The apple generator team id assigned to the key by Apple.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "keyId",
+                "privateKey",
+                "teamId"
+            ]
         },
         "descope:index/ProjectAuthenticationOauthSystemSlackProviderTokenManagement:ProjectAuthenticationOauthSystemSlackProviderTokenManagement": {
             "type": "object"
@@ -2665,13 +3335,18 @@
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
+                },
+                "serviceLabel": {
+                    "type": "string",
+                    "description": "The template for the service issuer label (issuer) shown in the authenticator app.\n"
                 }
             },
             "type": "object",
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "disabled"
+                        "disabled",
+                        "serviceLabel"
                     ]
                 }
             }
@@ -2744,6 +3419,9 @@
                 "id": {
                     "type": "string"
                 },
+                "key": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string",
                     "description": "A name for the role.\n"
@@ -2770,6 +3448,7 @@
                         "default",
                         "description",
                         "id",
+                        "key",
                         "name",
                         "permissions",
                         "private"
@@ -6579,6 +7258,14 @@
                     "$ref": "#/types/descope:index/ProjectInviteSettingsEmailService:ProjectInviteSettingsEmailService",
                     "description": "Settings related to sending invitation emails.\n"
                 },
+                "expireInvitedUsers": {
+                    "type": "boolean",
+                    "description": "Expire the user account if the invitation is not accepted within the expiration time.\n"
+                },
+                "inviteExpiration": {
+                    "type": "string",
+                    "description": "The expiry time for the invitation, meant to be used together with \u003cspan pulumi-lang-nodejs=\"`expireInvitedUsers`\" pulumi-lang-dotnet=\"`ExpireInvitedUsers`\" pulumi-lang-go=\"`expireInvitedUsers`\" pulumi-lang-python=\"`expire_invited_users`\" pulumi-lang-yaml=\"`expireInvitedUsers`\" pulumi-lang-java=\"`expireInvitedUsers`\"\u003e`expire_invited_users`\u003c/span\u003e and/or \u003cspan pulumi-lang-nodejs=\"`addMagiclinkToken`\" pulumi-lang-dotnet=\"`AddMagiclinkToken`\" pulumi-lang-go=\"`addMagiclinkToken`\" pulumi-lang-python=\"`add_magiclink_token`\" pulumi-lang-yaml=\"`addMagiclinkToken`\" pulumi-lang-java=\"`addMagiclinkToken`\"\u003e`add_magiclink_token`\u003c/span\u003e. Use values such as \"2 weeks\", \"4 days\", etc. The minimum value is \"1 hour\".\n"
+                },
                 "inviteUrl": {
                     "type": "string",
                     "description": "Custom URL to include in the message sent to invited users.\n"
@@ -6602,6 +7289,8 @@
                     "requiredOutputs": [
                         "addMagiclinkToken",
                         "emailService",
+                        "expireInvitedUsers",
+                        "inviteExpiration",
                         "inviteUrl",
                         "requireInvitation",
                         "sendEmail",
