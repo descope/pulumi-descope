@@ -39,7 +39,7 @@ export const project = new descope.Project("pulumi-ts-test", {
         permissions: ["perm1"],
       },
     ],
-  },  
+  },
   connectors: {
     https: [{ name: "my_https", baseUrl: "https://example.com" }],
   },
