@@ -61,44 +61,84 @@ __all__ = [
     'ProjectAuthenticationOauthArgsDict',
     'ProjectAuthenticationOauthCustomArgs',
     'ProjectAuthenticationOauthCustomArgsDict',
+    'ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthCustomProviderTokenManagementArgs',
     'ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemArgs',
     'ProjectAuthenticationOauthSystemArgsDict',
     'ProjectAuthenticationOauthSystemAppleArgs',
     'ProjectAuthenticationOauthSystemAppleArgsDict',
+    'ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemDiscordArgs',
     'ProjectAuthenticationOauthSystemDiscordArgsDict',
+    'ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemFacebookArgs',
     'ProjectAuthenticationOauthSystemFacebookArgsDict',
+    'ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGithubArgs',
     'ProjectAuthenticationOauthSystemGithubArgsDict',
+    'ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGitlabArgs',
     'ProjectAuthenticationOauthSystemGitlabArgsDict',
+    'ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemGoogleArgs',
     'ProjectAuthenticationOauthSystemGoogleArgsDict',
+    'ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemLinkedinArgs',
     'ProjectAuthenticationOauthSystemLinkedinArgsDict',
+    'ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemMicrosoftArgs',
     'ProjectAuthenticationOauthSystemMicrosoftArgsDict',
+    'ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict',
     'ProjectAuthenticationOauthSystemSlackArgs',
     'ProjectAuthenticationOauthSystemSlackArgsDict',
+    'ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict',
+    'ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs',
+    'ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict',
     'ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs',
     'ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict',
     'ProjectAuthenticationOtpArgs',
@@ -2397,6 +2437,10 @@ if not MYPY:
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
         The URL that users are redirected to for authorization with the OAuth provider.
@@ -2445,6 +2489,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -2480,6 +2536,7 @@ elif False:
 class ProjectAuthenticationOauthCustomArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -2492,6 +2549,9 @@ class ProjectAuthenticationOauthCustomArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -2501,6 +2561,7 @@ class ProjectAuthenticationOauthCustomArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -2513,6 +2574,9 @@ class ProjectAuthenticationOauthCustomArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -2523,6 +2587,8 @@ class ProjectAuthenticationOauthCustomArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -2547,6 +2613,12 @@ class ProjectAuthenticationOauthCustomArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -2573,6 +2645,18 @@ class ProjectAuthenticationOauthCustomArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -2719,6 +2803,42 @@ class ProjectAuthenticationOauthCustomArgs:
         pulumi.set(self, "merge_user_accounts", value)
 
     @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
+
+    @_builtins.property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
         """
@@ -2801,6 +2921,144 @@ class ProjectAuthenticationOauthCustomArgs:
     @user_info_endpoint.setter
     def user_info_endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "user_info_endpoint", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
 
 
 if not MYPY:
@@ -3013,6 +3271,10 @@ if not MYPY:
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
         """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
         The URL that users are redirected to for authorization with the OAuth provider.
@@ -3061,6 +3323,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -3096,6 +3370,7 @@ elif False:
 class ProjectAuthenticationOauthSystemAppleArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -3108,6 +3383,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -3117,6 +3395,7 @@ class ProjectAuthenticationOauthSystemAppleArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -3129,6 +3408,9 @@ class ProjectAuthenticationOauthSystemAppleArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -3139,6 +3421,8 @@ class ProjectAuthenticationOauthSystemAppleArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -3163,6 +3447,12 @@ class ProjectAuthenticationOauthSystemAppleArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -3189,6 +3479,18 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -3333,6 +3635,42 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -3420,6 +3758,144 @@ class ProjectAuthenticationOauthSystemAppleArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -3436,6 +3912,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -3485,6 +3965,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -3520,6 +4012,7 @@ elif False:
 class ProjectAuthenticationOauthSystemDiscordArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -3532,6 +4025,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -3541,6 +4037,7 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -3553,6 +4050,9 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -3563,6 +4063,8 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -3587,6 +4089,12 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -3613,6 +4121,18 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -3757,6 +4277,42 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -3844,6 +4400,144 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -3860,6 +4554,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -3909,6 +4607,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -3944,6 +4654,7 @@ elif False:
 class ProjectAuthenticationOauthSystemFacebookArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -3956,6 +4667,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -3965,6 +4679,7 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -3977,6 +4692,9 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -3987,6 +4705,8 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -4011,6 +4731,12 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -4037,6 +4763,18 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -4181,6 +4919,42 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -4268,6 +5042,144 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -4284,6 +5196,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -4333,6 +5249,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -4368,6 +5296,7 @@ elif False:
 class ProjectAuthenticationOauthSystemGithubArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -4380,6 +5309,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -4389,6 +5321,7 @@ class ProjectAuthenticationOauthSystemGithubArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -4401,6 +5334,9 @@ class ProjectAuthenticationOauthSystemGithubArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -4411,6 +5347,8 @@ class ProjectAuthenticationOauthSystemGithubArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -4435,6 +5373,12 @@ class ProjectAuthenticationOauthSystemGithubArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -4461,6 +5405,18 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -4605,6 +5561,42 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -4692,6 +5684,144 @@ class ProjectAuthenticationOauthSystemGithubArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -4708,6 +5838,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -4757,6 +5891,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -4792,6 +5938,7 @@ elif False:
 class ProjectAuthenticationOauthSystemGitlabArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -4804,6 +5951,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -4813,6 +5963,7 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -4825,6 +5976,9 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -4835,6 +5989,8 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -4859,6 +6015,12 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -4885,6 +6047,18 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -5029,6 +6203,42 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -5116,6 +6326,144 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -5132,6 +6480,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -5181,6 +6533,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -5216,6 +6580,7 @@ elif False:
 class ProjectAuthenticationOauthSystemGoogleArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -5228,6 +6593,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -5237,6 +6605,7 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -5249,6 +6618,9 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -5259,6 +6631,8 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -5283,6 +6657,12 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -5309,6 +6689,18 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -5453,6 +6845,42 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -5540,6 +6968,144 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -5556,6 +7122,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -5605,6 +7175,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -5640,6 +7222,7 @@ elif False:
 class ProjectAuthenticationOauthSystemLinkedinArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -5652,6 +7235,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -5661,6 +7247,7 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -5673,6 +7260,9 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -5683,6 +7273,8 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -5707,6 +7299,12 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -5733,6 +7331,18 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -5877,6 +7487,42 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -5964,6 +7610,144 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -5980,6 +7764,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -6029,6 +7817,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -6064,6 +7864,7 @@ elif False:
 class ProjectAuthenticationOauthSystemMicrosoftArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -6076,6 +7877,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -6085,6 +7889,7 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -6097,6 +7902,9 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -6107,6 +7915,8 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -6131,6 +7941,12 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -6157,6 +7973,18 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -6301,6 +8129,42 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @merge_user_accounts.setter
     def merge_user_accounts(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "merge_user_accounts", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
 
     @_builtins.property
     @pulumi.getter
@@ -6388,6 +8252,144 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
 
 
 if not MYPY:
+    class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
     class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict(TypedDict):
         pass
 elif False:
@@ -6404,6 +8406,10 @@ if not MYPY:
         allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        """
+        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
         """
         authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
         """
@@ -6453,6 +8459,18 @@ if not MYPY:
         """
         Whether to merge existing user accounts with new ones created through OAuth authentication.
         """
+        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict']]
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
         prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         Custom prompts or consent screens that users may see during OAuth authentication.
@@ -6488,6 +8506,7 @@ elif False:
 class ProjectAuthenticationOauthSystemSlackArgs:
     def __init__(__self__, *,
                  allowed_grant_types: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs']] = None,
                  authorization_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
                  callback_domain: Optional[pulumi.Input[_builtins.str]] = None,
                  claim_mapping: Optional[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -6500,6 +8519,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
                  logo: Optional[pulumi.Input[_builtins.str]] = None,
                  manage_provider_tokens: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_user_accounts: Optional[pulumi.Input[_builtins.bool]] = None,
+                 native_apple_key_generator: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs']] = None,
+                 native_client_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 native_client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  prompts: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  provider_token_management: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs']] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
@@ -6509,6 +8531,7 @@ class ProjectAuthenticationOauthSystemSlackArgs:
                  user_info_endpoint: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs'] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -6521,6 +8544,9 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
+        :param pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs'] native_apple_key_generator: The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: Custom prompts or consent screens that users may see during OAuth authentication.
         :param pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs'] provider_token_management: This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
         :param pulumi.Input[_builtins.str] redirect_url: Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
@@ -6531,6 +8557,8 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         """
         if allowed_grant_types is not None:
             pulumi.set(__self__, "allowed_grant_types", allowed_grant_types)
+        if apple_key_generator is not None:
+            pulumi.set(__self__, "apple_key_generator", apple_key_generator)
         if authorization_endpoint is not None:
             pulumi.set(__self__, "authorization_endpoint", authorization_endpoint)
         if callback_domain is not None:
@@ -6555,6 +8583,12 @@ class ProjectAuthenticationOauthSystemSlackArgs:
             pulumi.set(__self__, "manage_provider_tokens", manage_provider_tokens)
         if merge_user_accounts is not None:
             pulumi.set(__self__, "merge_user_accounts", merge_user_accounts)
+        if native_apple_key_generator is not None:
+            pulumi.set(__self__, "native_apple_key_generator", native_apple_key_generator)
+        if native_client_id is not None:
+            pulumi.set(__self__, "native_client_id", native_client_id)
+        if native_client_secret is not None:
+            pulumi.set(__self__, "native_client_secret", native_client_secret)
         if prompts is not None:
             pulumi.set(__self__, "prompts", prompts)
         if provider_token_management is not None:
@@ -6581,6 +8615,18 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @allowed_grant_types.setter
     def allowed_grant_types(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_grant_types", value)
+
+    @_builtins.property
+    @pulumi.getter(name="appleKeyGenerator")
+    def apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic apple client secret for applications.
+        """
+        return pulumi.get(self, "apple_key_generator")
+
+    @apple_key_generator.setter
+    def apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "apple_key_generator", value)
 
     @_builtins.property
     @pulumi.getter(name="authorizationEndpoint")
@@ -6727,6 +8773,42 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         pulumi.set(self, "merge_user_accounts", value)
 
     @_builtins.property
+    @pulumi.getter(name="nativeAppleKeyGenerator")
+    def native_apple_key_generator(self) -> Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs']]:
+        """
+        The apple key generator object describing how to create a dynamic naive apple client secret for mobile apps.
+        """
+        return pulumi.get(self, "native_apple_key_generator")
+
+    @native_apple_key_generator.setter
+    def native_apple_key_generator(self, value: Optional[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs']]):
+        pulumi.set(self, "native_apple_key_generator", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientId")
+    def native_client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_id")
+
+    @native_client_id.setter
+    def native_client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nativeClientSecret")
+    def native_client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+        """
+        return pulumi.get(self, "native_client_secret")
+
+    @native_client_secret.setter
+    def native_client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "native_client_secret", value)
+
+    @_builtins.property
     @pulumi.getter
     def prompts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
         """
@@ -6809,6 +8891,144 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @user_info_endpoint.setter
     def user_info_endpoint(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "user_info_endpoint", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
+
+
+if not MYPY:
+    class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict(TypedDict):
+        key_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator key id produced by Apple.
+        """
+        private_key: pulumi.Input[_builtins.str]
+        """
+        The apple generator private key produced by Apple.
+        """
+        team_id: pulumi.Input[_builtins.str]
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+elif False:
+    ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs:
+    def __init__(__self__, *,
+                 key_id: pulumi.Input[_builtins.str],
+                 private_key: pulumi.Input[_builtins.str],
+                 team_id: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] key_id: The apple generator key id produced by Apple.
+        :param pulumi.Input[_builtins.str] private_key: The apple generator private key produced by Apple.
+        :param pulumi.Input[_builtins.str] team_id: The apple generator team id assigned to the key by Apple.
+        """
+        pulumi.set(__self__, "key_id", key_id)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "team_id", team_id)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator key id produced by Apple.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator private key produced by Apple.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "private_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="teamId")
+    def team_id(self) -> pulumi.Input[_builtins.str]:
+        """
+        The apple generator team id assigned to the key by Apple.
+        """
+        return pulumi.get(self, "team_id")
+
+    @team_id.setter
+    def team_id(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "team_id", value)
 
 
 if not MYPY:
@@ -8205,18 +10425,26 @@ if not MYPY:
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         """
+        service_label: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The template for the service issuer label (issuer) shown in the authenticator app.
+        """
 elif False:
     ProjectAuthenticationTotpArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ProjectAuthenticationTotpArgs:
     def __init__(__self__, *,
-                 disabled: Optional[pulumi.Input[_builtins.bool]] = None):
+                 disabled: Optional[pulumi.Input[_builtins.bool]] = None,
+                 service_label: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        :param pulumi.Input[_builtins.str] service_label: The template for the service issuer label (issuer) shown in the authenticator app.
         """
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if service_label is not None:
+            pulumi.set(__self__, "service_label", service_label)
 
     @_builtins.property
     @pulumi.getter
@@ -8229,6 +10457,18 @@ class ProjectAuthenticationTotpArgs:
     @disabled.setter
     def disabled(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "disabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="serviceLabel")
+    def service_label(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The template for the service issuer label (issuer) shown in the authenticator app.
+        """
+        return pulumi.get(self, "service_label")
+
+    @service_label.setter
+    def service_label(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "service_label", value)
 
 
 if not MYPY:
@@ -8362,6 +10602,7 @@ if not MYPY:
         A description for the role.
         """
         id: NotRequired[pulumi.Input[_builtins.str]]
+        key: NotRequired[pulumi.Input[_builtins.str]]
         permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         """
         A list of permissions by name to be included in the role.
@@ -8380,6 +10621,7 @@ class ProjectAuthorizationRoleArgs:
                  default: Optional[pulumi.Input[_builtins.bool]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None,
+                 key: Optional[pulumi.Input[_builtins.str]] = None,
                  permissions: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  private: Optional[pulumi.Input[_builtins.bool]] = None):
         """
@@ -8396,6 +10638,8 @@ class ProjectAuthorizationRoleArgs:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
         if permissions is not None:
             pulumi.set(__self__, "permissions", permissions)
         if private is not None:
@@ -8445,6 +10689,15 @@ class ProjectAuthorizationRoleArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[_builtins.str]]:
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "key", value)
 
     @_builtins.property
     @pulumi.getter
@@ -18717,6 +20970,14 @@ if not MYPY:
         """
         Settings related to sending invitation emails.
         """
+        expire_invited_users: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Expire the user account if the invitation is not accepted within the expiration time.
+        """
+        invite_expiration: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+        """
         invite_url: NotRequired[pulumi.Input[_builtins.str]]
         """
         Custom URL to include in the message sent to invited users.
@@ -18741,6 +21002,8 @@ class ProjectInviteSettingsArgs:
     def __init__(__self__, *,
                  add_magiclink_token: Optional[pulumi.Input[_builtins.bool]] = None,
                  email_service: Optional[pulumi.Input['ProjectInviteSettingsEmailServiceArgs']] = None,
+                 expire_invited_users: Optional[pulumi.Input[_builtins.bool]] = None,
+                 invite_expiration: Optional[pulumi.Input[_builtins.str]] = None,
                  invite_url: Optional[pulumi.Input[_builtins.str]] = None,
                  require_invitation: Optional[pulumi.Input[_builtins.bool]] = None,
                  send_email: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -18748,6 +21011,8 @@ class ProjectInviteSettingsArgs:
         """
         :param pulumi.Input[_builtins.bool] add_magiclink_token: Whether to include a magic link token in invitation messages.
         :param pulumi.Input['ProjectInviteSettingsEmailServiceArgs'] email_service: Settings related to sending invitation emails.
+        :param pulumi.Input[_builtins.bool] expire_invited_users: Expire the user account if the invitation is not accepted within the expiration time.
+        :param pulumi.Input[_builtins.str] invite_expiration: The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
@@ -18757,6 +21022,10 @@ class ProjectInviteSettingsArgs:
             pulumi.set(__self__, "add_magiclink_token", add_magiclink_token)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
+        if expire_invited_users is not None:
+            pulumi.set(__self__, "expire_invited_users", expire_invited_users)
+        if invite_expiration is not None:
+            pulumi.set(__self__, "invite_expiration", invite_expiration)
         if invite_url is not None:
             pulumi.set(__self__, "invite_url", invite_url)
         if require_invitation is not None:
@@ -18789,6 +21058,30 @@ class ProjectInviteSettingsArgs:
     @email_service.setter
     def email_service(self, value: Optional[pulumi.Input['ProjectInviteSettingsEmailServiceArgs']]):
         pulumi.set(self, "email_service", value)
+
+    @_builtins.property
+    @pulumi.getter(name="expireInvitedUsers")
+    def expire_invited_users(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Expire the user account if the invitation is not accepted within the expiration time.
+        """
+        return pulumi.get(self, "expire_invited_users")
+
+    @expire_invited_users.setter
+    def expire_invited_users(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "expire_invited_users", value)
+
+    @_builtins.property
+    @pulumi.getter(name="inviteExpiration")
+    def invite_expiration(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+        """
+        return pulumi.get(self, "invite_expiration")
+
+    @invite_expiration.setter
+    def invite_expiration(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "invite_expiration", value)
 
     @_builtins.property
     @pulumi.getter(name="inviteUrl")

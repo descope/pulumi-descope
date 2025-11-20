@@ -18,11 +18,19 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
+        /// <summary>
+        /// The template for the service issuer label (issuer) shown in the authenticator app.
+        /// </summary>
+        public readonly string? ServiceLabel;
 
         [OutputConstructor]
-        private ProjectAuthenticationTotp(bool? disabled)
+        private ProjectAuthenticationTotp(
+            bool? disabled,
+
+            string? serviceLabel)
         {
             Disabled = disabled;
+            ServiceLabel = serviceLabel;
         }
     }
 }

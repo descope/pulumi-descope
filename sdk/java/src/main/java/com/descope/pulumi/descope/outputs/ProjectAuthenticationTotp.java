@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.outputs;
 
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -16,6 +17,11 @@ public final class ProjectAuthenticationTotp {
      * 
      */
     private @Nullable Boolean disabled;
+    /**
+     * @return The template for the service issuer label (issuer) shown in the authenticator app.
+     * 
+     */
+    private @Nullable String serviceLabel;
 
     private ProjectAuthenticationTotp() {}
     /**
@@ -24,6 +30,13 @@ public final class ProjectAuthenticationTotp {
      */
     public Optional<Boolean> disabled() {
         return Optional.ofNullable(this.disabled);
+    }
+    /**
+     * @return The template for the service issuer label (issuer) shown in the authenticator app.
+     * 
+     */
+    public Optional<String> serviceLabel() {
+        return Optional.ofNullable(this.serviceLabel);
     }
 
     public static Builder builder() {
@@ -36,10 +49,12 @@ public final class ProjectAuthenticationTotp {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable Boolean disabled;
+        private @Nullable String serviceLabel;
         public Builder() {}
         public Builder(ProjectAuthenticationTotp defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.disabled = defaults.disabled;
+    	      this.serviceLabel = defaults.serviceLabel;
         }
 
         @CustomType.Setter
@@ -48,9 +63,16 @@ public final class ProjectAuthenticationTotp {
             this.disabled = disabled;
             return this;
         }
+        @CustomType.Setter
+        public Builder serviceLabel(@Nullable String serviceLabel) {
+
+            this.serviceLabel = serviceLabel;
+            return this;
+        }
         public ProjectAuthenticationTotp build() {
             final var _resultValue = new ProjectAuthenticationTotp();
             _resultValue.disabled = disabled;
+            _resultValue.serviceLabel = serviceLabel;
             return _resultValue;
         }
     }

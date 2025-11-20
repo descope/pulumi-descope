@@ -28,6 +28,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        [Input("key")]
+        public Input<string>? Key { get; set; }
+
         /// <summary>
         /// A name for the role.
         /// </summary>
