@@ -3,6 +3,8 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectAuthenticationOauthSystemSlackAppleKeyGenerator;
+import com.descope.pulumi.descope.outputs.ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator;
 import com.descope.pulumi.descope.outputs.ProjectAuthenticationOauthSystemSlackProviderTokenManagement;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
@@ -20,6 +22,11 @@ public final class ProjectAuthenticationOauthSystemSlack {
      * 
      */
     private @Nullable List<String> allowedGrantTypes;
+    /**
+     * @return The apple key generator object describing how to create a dynamic apple client secret for applications.
+     * 
+     */
+    private @Nullable ProjectAuthenticationOauthSystemSlackAppleKeyGenerator appleKeyGenerator;
     /**
      * @return The URL that users are redirected to for authorization with the OAuth provider.
      * 
@@ -81,6 +88,21 @@ public final class ProjectAuthenticationOauthSystemSlack {
      */
     private @Nullable Boolean mergeUserAccounts;
     /**
+     * @return The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     * 
+     */
+    private @Nullable ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator nativeAppleKeyGenerator;
+    /**
+     * @return The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    private @Nullable String nativeClientId;
+    /**
+     * @return The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    private @Nullable String nativeClientSecret;
+    /**
      * @return Custom prompts or consent screens that users may see during OAuth authentication.
      * 
      */
@@ -123,6 +145,13 @@ public final class ProjectAuthenticationOauthSystemSlack {
      */
     public List<String> allowedGrantTypes() {
         return this.allowedGrantTypes == null ? List.of() : this.allowedGrantTypes;
+    }
+    /**
+     * @return The apple key generator object describing how to create a dynamic apple client secret for applications.
+     * 
+     */
+    public Optional<ProjectAuthenticationOauthSystemSlackAppleKeyGenerator> appleKeyGenerator() {
+        return Optional.ofNullable(this.appleKeyGenerator);
     }
     /**
      * @return The URL that users are redirected to for authorization with the OAuth provider.
@@ -209,6 +238,27 @@ public final class ProjectAuthenticationOauthSystemSlack {
         return Optional.ofNullable(this.mergeUserAccounts);
     }
     /**
+     * @return The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     * 
+     */
+    public Optional<ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator> nativeAppleKeyGenerator() {
+        return Optional.ofNullable(this.nativeAppleKeyGenerator);
+    }
+    /**
+     * @return The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    public Optional<String> nativeClientId() {
+        return Optional.ofNullable(this.nativeClientId);
+    }
+    /**
+     * @return The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     * 
+     */
+    public Optional<String> nativeClientSecret() {
+        return Optional.ofNullable(this.nativeClientSecret);
+    }
+    /**
      * @return Custom prompts or consent screens that users may see during OAuth authentication.
      * 
      */
@@ -268,6 +318,7 @@ public final class ProjectAuthenticationOauthSystemSlack {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable List<String> allowedGrantTypes;
+        private @Nullable ProjectAuthenticationOauthSystemSlackAppleKeyGenerator appleKeyGenerator;
         private @Nullable String authorizationEndpoint;
         private @Nullable String callbackDomain;
         private @Nullable Map<String,String> claimMapping;
@@ -280,6 +331,9 @@ public final class ProjectAuthenticationOauthSystemSlack {
         private @Nullable String logo;
         private @Nullable Boolean manageProviderTokens;
         private @Nullable Boolean mergeUserAccounts;
+        private @Nullable ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator nativeAppleKeyGenerator;
+        private @Nullable String nativeClientId;
+        private @Nullable String nativeClientSecret;
         private @Nullable List<String> prompts;
         private @Nullable ProjectAuthenticationOauthSystemSlackProviderTokenManagement providerTokenManagement;
         private @Nullable String redirectUrl;
@@ -291,6 +345,7 @@ public final class ProjectAuthenticationOauthSystemSlack {
         public Builder(ProjectAuthenticationOauthSystemSlack defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.allowedGrantTypes = defaults.allowedGrantTypes;
+    	      this.appleKeyGenerator = defaults.appleKeyGenerator;
     	      this.authorizationEndpoint = defaults.authorizationEndpoint;
     	      this.callbackDomain = defaults.callbackDomain;
     	      this.claimMapping = defaults.claimMapping;
@@ -303,6 +358,9 @@ public final class ProjectAuthenticationOauthSystemSlack {
     	      this.logo = defaults.logo;
     	      this.manageProviderTokens = defaults.manageProviderTokens;
     	      this.mergeUserAccounts = defaults.mergeUserAccounts;
+    	      this.nativeAppleKeyGenerator = defaults.nativeAppleKeyGenerator;
+    	      this.nativeClientId = defaults.nativeClientId;
+    	      this.nativeClientSecret = defaults.nativeClientSecret;
     	      this.prompts = defaults.prompts;
     	      this.providerTokenManagement = defaults.providerTokenManagement;
     	      this.redirectUrl = defaults.redirectUrl;
@@ -320,6 +378,12 @@ public final class ProjectAuthenticationOauthSystemSlack {
         }
         public Builder allowedGrantTypes(String... allowedGrantTypes) {
             return allowedGrantTypes(List.of(allowedGrantTypes));
+        }
+        @CustomType.Setter
+        public Builder appleKeyGenerator(@Nullable ProjectAuthenticationOauthSystemSlackAppleKeyGenerator appleKeyGenerator) {
+
+            this.appleKeyGenerator = appleKeyGenerator;
+            return this;
         }
         @CustomType.Setter
         public Builder authorizationEndpoint(@Nullable String authorizationEndpoint) {
@@ -394,6 +458,24 @@ public final class ProjectAuthenticationOauthSystemSlack {
             return this;
         }
         @CustomType.Setter
+        public Builder nativeAppleKeyGenerator(@Nullable ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator nativeAppleKeyGenerator) {
+
+            this.nativeAppleKeyGenerator = nativeAppleKeyGenerator;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder nativeClientId(@Nullable String nativeClientId) {
+
+            this.nativeClientId = nativeClientId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder nativeClientSecret(@Nullable String nativeClientSecret) {
+
+            this.nativeClientSecret = nativeClientSecret;
+            return this;
+        }
+        @CustomType.Setter
         public Builder prompts(@Nullable List<String> prompts) {
 
             this.prompts = prompts;
@@ -444,6 +526,7 @@ public final class ProjectAuthenticationOauthSystemSlack {
         public ProjectAuthenticationOauthSystemSlack build() {
             final var _resultValue = new ProjectAuthenticationOauthSystemSlack();
             _resultValue.allowedGrantTypes = allowedGrantTypes;
+            _resultValue.appleKeyGenerator = appleKeyGenerator;
             _resultValue.authorizationEndpoint = authorizationEndpoint;
             _resultValue.callbackDomain = callbackDomain;
             _resultValue.claimMapping = claimMapping;
@@ -456,6 +539,9 @@ public final class ProjectAuthenticationOauthSystemSlack {
             _resultValue.logo = logo;
             _resultValue.manageProviderTokens = manageProviderTokens;
             _resultValue.mergeUserAccounts = mergeUserAccounts;
+            _resultValue.nativeAppleKeyGenerator = nativeAppleKeyGenerator;
+            _resultValue.nativeClientId = nativeClientId;
+            _resultValue.nativeClientSecret = nativeClientSecret;
             _resultValue.prompts = prompts;
             _resultValue.providerTokenManagement = providerTokenManagement;
             _resultValue.redirectUrl = redirectUrl;

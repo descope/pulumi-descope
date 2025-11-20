@@ -67,6 +67,18 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly int? ReuseAmount;
         /// <summary>
+        /// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+        /// </summary>
+        public readonly bool? TemporaryLock;
+        /// <summary>
+        /// The number of failed login attempts allowed before an account is temporarily locked.
+        /// </summary>
+        public readonly int? TemporaryLockAttempts;
+        /// <summary>
+        /// The amount of time before the user can sign in again after the account is temporarily locked.
+        /// </summary>
+        public readonly string? TemporaryLockDuration;
+        /// <summary>
         /// Whether passwords must contain at least one uppercase letter.
         /// </summary>
         public readonly bool? Uppercase;
@@ -99,6 +111,12 @@ namespace Descope.Pulumi.Descope.Outputs
 
             int? reuseAmount,
 
+            bool? temporaryLock,
+
+            int? temporaryLockAttempts,
+
+            string? temporaryLockDuration,
+
             bool? uppercase)
         {
             Disabled = disabled;
@@ -114,6 +132,9 @@ namespace Descope.Pulumi.Descope.Outputs
             Number = number;
             Reuse = reuse;
             ReuseAmount = reuseAmount;
+            TemporaryLock = temporaryLock;
+            TemporaryLockAttempts = temporaryLockAttempts;
+            TemporaryLockDuration = temporaryLockDuration;
             Uppercase = uppercase;
         }
     }

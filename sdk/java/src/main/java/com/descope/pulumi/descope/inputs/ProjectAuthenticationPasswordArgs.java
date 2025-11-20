@@ -8,6 +8,7 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -213,6 +214,51 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
     }
 
     /**
+     * Whether the user account should be temporarily locked after a specified number of failed login attempts.
+     * 
+     */
+    @Import(name="temporaryLock")
+    private @Nullable Output<Boolean> temporaryLock;
+
+    /**
+     * @return Whether the user account should be temporarily locked after a specified number of failed login attempts.
+     * 
+     */
+    public Optional<Output<Boolean>> temporaryLock() {
+        return Optional.ofNullable(this.temporaryLock);
+    }
+
+    /**
+     * The number of failed login attempts allowed before an account is temporarily locked.
+     * 
+     */
+    @Import(name="temporaryLockAttempts")
+    private @Nullable Output<Integer> temporaryLockAttempts;
+
+    /**
+     * @return The number of failed login attempts allowed before an account is temporarily locked.
+     * 
+     */
+    public Optional<Output<Integer>> temporaryLockAttempts() {
+        return Optional.ofNullable(this.temporaryLockAttempts);
+    }
+
+    /**
+     * The amount of time before the user can sign in again after the account is temporarily locked.
+     * 
+     */
+    @Import(name="temporaryLockDuration")
+    private @Nullable Output<String> temporaryLockDuration;
+
+    /**
+     * @return The amount of time before the user can sign in again after the account is temporarily locked.
+     * 
+     */
+    public Optional<Output<String>> temporaryLockDuration() {
+        return Optional.ofNullable(this.temporaryLockDuration);
+    }
+
+    /**
      * Whether passwords must contain at least one uppercase letter.
      * 
      */
@@ -243,6 +289,9 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
         this.number = $.number;
         this.reuse = $.reuse;
         this.reuseAmount = $.reuseAmount;
+        this.temporaryLock = $.temporaryLock;
+        this.temporaryLockAttempts = $.temporaryLockAttempts;
+        this.temporaryLockDuration = $.temporaryLockDuration;
         this.uppercase = $.uppercase;
     }
 
@@ -535,6 +584,69 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
          */
         public Builder reuseAmount(Integer reuseAmount) {
             return reuseAmount(Output.of(reuseAmount));
+        }
+
+        /**
+         * @param temporaryLock Whether the user account should be temporarily locked after a specified number of failed login attempts.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLock(@Nullable Output<Boolean> temporaryLock) {
+            $.temporaryLock = temporaryLock;
+            return this;
+        }
+
+        /**
+         * @param temporaryLock Whether the user account should be temporarily locked after a specified number of failed login attempts.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLock(Boolean temporaryLock) {
+            return temporaryLock(Output.of(temporaryLock));
+        }
+
+        /**
+         * @param temporaryLockAttempts The number of failed login attempts allowed before an account is temporarily locked.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLockAttempts(@Nullable Output<Integer> temporaryLockAttempts) {
+            $.temporaryLockAttempts = temporaryLockAttempts;
+            return this;
+        }
+
+        /**
+         * @param temporaryLockAttempts The number of failed login attempts allowed before an account is temporarily locked.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLockAttempts(Integer temporaryLockAttempts) {
+            return temporaryLockAttempts(Output.of(temporaryLockAttempts));
+        }
+
+        /**
+         * @param temporaryLockDuration The amount of time before the user can sign in again after the account is temporarily locked.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLockDuration(@Nullable Output<String> temporaryLockDuration) {
+            $.temporaryLockDuration = temporaryLockDuration;
+            return this;
+        }
+
+        /**
+         * @param temporaryLockDuration The amount of time before the user can sign in again after the account is temporarily locked.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder temporaryLockDuration(String temporaryLockDuration) {
+            return temporaryLockDuration(Output.of(temporaryLockDuration));
         }
 
         /**

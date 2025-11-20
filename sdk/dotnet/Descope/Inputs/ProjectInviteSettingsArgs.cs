@@ -26,6 +26,18 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<Inputs.ProjectInviteSettingsEmailServiceArgs>? EmailService { get; set; }
 
         /// <summary>
+        /// Expire the user account if the invitation is not accepted within the expiration time.
+        /// </summary>
+        [Input("expireInvitedUsers")]
+        public Input<bool>? ExpireInvitedUsers { get; set; }
+
+        /// <summary>
+        /// The expiry time for the invitation, meant to be used together with `ExpireInvitedUsers` and/or `AddMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+        /// </summary>
+        [Input("inviteExpiration")]
+        public Input<string>? InviteExpiration { get; set; }
+
+        /// <summary>
         /// Custom URL to include in the message sent to invited users.
         /// </summary>
         [Input("inviteUrl")]

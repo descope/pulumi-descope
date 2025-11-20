@@ -436,6 +436,10 @@ export interface ProjectAuthenticationOauthCustom {
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthCustomAppleKeyGenerator>;
+    /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
     authorizationEndpoint?: pulumi.Input<string>;
@@ -484,6 +488,18 @@ export interface ProjectAuthenticationOauthCustom {
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
     /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthCustomNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
+    /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
@@ -511,6 +527,36 @@ export interface ProjectAuthenticationOauthCustom {
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthCustomAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthCustomNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationOauthCustomProviderTokenManagement {
@@ -561,6 +607,10 @@ export interface ProjectAuthenticationOauthSystemApple {
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemAppleAppleKeyGenerator>;
+    /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
     authorizationEndpoint?: pulumi.Input<string>;
@@ -608,6 +658,18 @@ export interface ProjectAuthenticationOauthSystemApple {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -638,6 +700,36 @@ export interface ProjectAuthenticationOauthSystemApple {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemAppleAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemAppleProviderTokenManagement {
 }
 
@@ -646,6 +738,10 @@ export interface ProjectAuthenticationOauthSystemDiscord {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -694,6 +790,18 @@ export interface ProjectAuthenticationOauthSystemDiscord {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -724,6 +832,36 @@ export interface ProjectAuthenticationOauthSystemDiscord {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemDiscordProviderTokenManagement {
 }
 
@@ -732,6 +870,10 @@ export interface ProjectAuthenticationOauthSystemFacebook {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -780,6 +922,18 @@ export interface ProjectAuthenticationOauthSystemFacebook {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -810,6 +964,36 @@ export interface ProjectAuthenticationOauthSystemFacebook {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemFacebookProviderTokenManagement {
 }
 
@@ -818,6 +1002,10 @@ export interface ProjectAuthenticationOauthSystemGithub {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGithubAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -866,6 +1054,18 @@ export interface ProjectAuthenticationOauthSystemGithub {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -896,6 +1096,36 @@ export interface ProjectAuthenticationOauthSystemGithub {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemGithubAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemGithubProviderTokenManagement {
 }
 
@@ -904,6 +1134,10 @@ export interface ProjectAuthenticationOauthSystemGitlab {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -952,6 +1186,18 @@ export interface ProjectAuthenticationOauthSystemGitlab {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -982,6 +1228,36 @@ export interface ProjectAuthenticationOauthSystemGitlab {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemGitlabProviderTokenManagement {
 }
 
@@ -990,6 +1266,10 @@ export interface ProjectAuthenticationOauthSystemGoogle {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -1038,6 +1318,18 @@ export interface ProjectAuthenticationOauthSystemGoogle {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -1068,6 +1360,36 @@ export interface ProjectAuthenticationOauthSystemGoogle {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemGoogleProviderTokenManagement {
 }
 
@@ -1076,6 +1398,10 @@ export interface ProjectAuthenticationOauthSystemLinkedin {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -1124,6 +1450,18 @@ export interface ProjectAuthenticationOauthSystemLinkedin {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -1154,6 +1492,36 @@ export interface ProjectAuthenticationOauthSystemLinkedin {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemLinkedinProviderTokenManagement {
 }
 
@@ -1162,6 +1530,10 @@ export interface ProjectAuthenticationOauthSystemMicrosoft {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -1210,6 +1582,18 @@ export interface ProjectAuthenticationOauthSystemMicrosoft {
      * Whether to merge existing user accounts with new ones created through OAuth authentication.
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
+    /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
     /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
@@ -1240,6 +1624,36 @@ export interface ProjectAuthenticationOauthSystemMicrosoft {
     userInfoEndpoint?: pulumi.Input<string>;
 }
 
+export interface ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
 export interface ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagement {
 }
 
@@ -1248,6 +1662,10 @@ export interface ProjectAuthenticationOauthSystemSlack {
      * The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
      */
     allowedGrantTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The apple key generator object describing how to create a dynamic apple client secret for applications.
+     */
+    appleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemSlackAppleKeyGenerator>;
     /**
      * The URL that users are redirected to for authorization with the OAuth provider.
      */
@@ -1297,6 +1715,18 @@ export interface ProjectAuthenticationOauthSystemSlack {
      */
     mergeUserAccounts?: pulumi.Input<boolean>;
     /**
+     * The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+     */
+    nativeAppleKeyGenerator?: pulumi.Input<inputs.ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator>;
+    /**
+     * The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientId?: pulumi.Input<string>;
+    /**
+     * The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+     */
+    nativeClientSecret?: pulumi.Input<string>;
+    /**
      * Custom prompts or consent screens that users may see during OAuth authentication.
      */
     prompts?: pulumi.Input<pulumi.Input<string>[]>;
@@ -1324,6 +1754,36 @@ export interface ProjectAuthenticationOauthSystemSlack {
      * The URL where the application retrieves user information from the OAuth provider.
      */
     userInfoEndpoint?: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemSlackAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
+}
+
+export interface ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator {
+    /**
+     * The apple generator key id produced by Apple.
+     */
+    keyId: pulumi.Input<string>;
+    /**
+     * The apple generator private key produced by Apple.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The apple generator team id assigned to the key by Apple.
+     */
+    teamId: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationOauthSystemSlackProviderTokenManagement {
@@ -1514,6 +1974,18 @@ export interface ProjectAuthenticationPassword {
      */
     reuseAmount?: pulumi.Input<number>;
     /**
+     * Whether the user account should be temporarily locked after a specified number of failed login attempts.
+     */
+    temporaryLock?: pulumi.Input<boolean>;
+    /**
+     * The number of failed login attempts allowed before an account is temporarily locked.
+     */
+    temporaryLockAttempts?: pulumi.Input<number>;
+    /**
+     * The amount of time before the user can sign in again after the account is temporarily locked.
+     */
+    temporaryLockDuration?: pulumi.Input<string>;
+    /**
      * Whether passwords must contain at least one uppercase letter.
      */
     uppercase?: pulumi.Input<boolean>;
@@ -1613,6 +2085,10 @@ export interface ProjectAuthenticationTotp {
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The template for the service issuer label (issuer) shown in the authenticator app.
+     */
+    serviceLabel?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthorization {
@@ -1648,6 +2124,7 @@ export interface ProjectAuthorizationRole {
      */
     description?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
+    key?: pulumi.Input<string>;
     /**
      * A name for the role.
      */
@@ -3727,6 +4204,14 @@ export interface ProjectInviteSettings {
      * Settings related to sending invitation emails.
      */
     emailService?: pulumi.Input<inputs.ProjectInviteSettingsEmailService>;
+    /**
+     * Expire the user account if the invitation is not accepted within the expiration time.
+     */
+    expireInvitedUsers?: pulumi.Input<boolean>;
+    /**
+     * The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+     */
+    inviteExpiration?: pulumi.Input<string>;
     /**
      * Custom URL to include in the message sent to invited users.
      */

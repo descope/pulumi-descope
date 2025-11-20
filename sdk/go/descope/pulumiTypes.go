@@ -3609,6 +3609,8 @@ func (o ProjectAuthenticationOauthPtrOutput) System() ProjectAuthenticationOauth
 type ProjectAuthenticationOauthCustom struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthCustomAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -3633,6 +3635,12 @@ type ProjectAuthenticationOauthCustom struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -3663,6 +3671,8 @@ type ProjectAuthenticationOauthCustomInput interface {
 type ProjectAuthenticationOauthCustomArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -3687,6 +3697,12 @@ type ProjectAuthenticationOauthCustomArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -3759,6 +3775,13 @@ func (o ProjectAuthenticationOauthCustomOutput) AllowedGrantTypes() pulumi.Strin
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthCustomOutput) AppleKeyGenerator() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *ProjectAuthenticationOauthCustomAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -3819,6 +3842,23 @@ func (o ProjectAuthenticationOauthCustomOutput) MergeUserAccounts() pulumi.BoolP
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthCustomOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthCustomOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthCustomOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthCustomOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) []string { return v.Prompts }).(pulumi.StringArrayOutput)
@@ -3874,6 +3914,356 @@ func (o ProjectAuthenticationOauthCustomMapOutput) MapIndex(k pulumi.StringInput
 	return pulumi.All(o, k).ApplyT(func(vs []interface{}) ProjectAuthenticationOauthCustom {
 		return vs[0].(map[string]ProjectAuthenticationOauthCustom)[vs[1].(string)]
 	}).(ProjectAuthenticationOauthCustomOutput)
+}
+
+type ProjectAuthenticationOauthCustomAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthCustomAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs and ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthCustomAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthCustomAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthCustomAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput).ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs, ProjectAuthenticationOauthCustomAppleKeyGeneratorPtr and ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthCustomAppleKeyGeneratorPtrType ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthCustomAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthCustomAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthCustomAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthCustomAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthCustomAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthCustomAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthCustomAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthCustomAppleKeyGenerator) *ProjectAuthenticationOauthCustomAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthCustomAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomAppleKeyGenerator) ProjectAuthenticationOauthCustomAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthCustomAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthCustomNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthCustomNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthCustomNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthCustomNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthCustomNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) ProjectAuthenticationOauthCustomNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthCustomNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthCustomNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthenticationOauthCustomProviderTokenManagement struct {
@@ -4288,6 +4678,8 @@ func (o ProjectAuthenticationOauthSystemPtrOutput) Slack() ProjectAuthentication
 type ProjectAuthenticationOauthSystemApple struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -4312,6 +4704,12 @@ type ProjectAuthenticationOauthSystemApple struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -4342,6 +4740,8 @@ type ProjectAuthenticationOauthSystemAppleInput interface {
 type ProjectAuthenticationOauthSystemAppleArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -4366,6 +4766,12 @@ type ProjectAuthenticationOauthSystemAppleArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -4464,6 +4870,13 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) AllowedGrantTypes() pulumi.
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemAppleOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -4522,6 +4935,23 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) ManageProviderTokens() pulu
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemAppleOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemAppleOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemAppleOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemAppleOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -4593,6 +5023,16 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) AllowedGrantTypes() pulu
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -4715,6 +5155,36 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) MergeUserAccounts() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemApplePtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) []string {
@@ -4782,6 +5252,356 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) UserInfoEndpoint() pulum
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemAppleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemAppleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) ProjectAuthenticationOauthSystemAppleAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemAppleAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemAppleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4906,6 +5726,8 @@ func (o ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput) E
 type ProjectAuthenticationOauthSystemDiscord struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -4930,6 +5752,12 @@ type ProjectAuthenticationOauthSystemDiscord struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -4960,6 +5788,8 @@ type ProjectAuthenticationOauthSystemDiscordInput interface {
 type ProjectAuthenticationOauthSystemDiscordArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -4984,6 +5814,12 @@ type ProjectAuthenticationOauthSystemDiscordArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -5082,6 +5918,13 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) AllowedGrantTypes() pulum
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -5140,6 +5983,23 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) ManageProviderTokens() pu
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -5211,6 +6071,16 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) AllowedGrantTypes() pu
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -5333,6 +6203,36 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) MergeUserAccounts() pu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) []string {
@@ -5400,6 +6300,356 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) UserInfoEndpoint() pul
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -5524,6 +6774,8 @@ func (o ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput)
 type ProjectAuthenticationOauthSystemFacebook struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -5548,6 +6800,12 @@ type ProjectAuthenticationOauthSystemFacebook struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -5578,6 +6836,8 @@ type ProjectAuthenticationOauthSystemFacebookInput interface {
 type ProjectAuthenticationOauthSystemFacebookArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -5602,6 +6862,12 @@ type ProjectAuthenticationOauthSystemFacebookArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -5700,6 +6966,13 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) AllowedGrantTypes() pulu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -5758,6 +7031,23 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) ManageProviderTokens() p
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -5829,6 +7119,16 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) AllowedGrantTypes() p
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -5951,6 +7251,36 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) MergeUserAccounts() p
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) []string {
@@ -6018,6 +7348,356 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) UserInfoEndpoint() pu
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -6142,6 +7822,8 @@ func (o ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput
 type ProjectAuthenticationOauthSystemGithub struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -6166,6 +7848,12 @@ type ProjectAuthenticationOauthSystemGithub struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -6196,6 +7884,8 @@ type ProjectAuthenticationOauthSystemGithubInput interface {
 type ProjectAuthenticationOauthSystemGithubArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -6220,6 +7910,12 @@ type ProjectAuthenticationOauthSystemGithubArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -6318,6 +8014,13 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) AllowedGrantTypes() pulumi
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGithubOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -6376,6 +8079,23 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) ManageProviderTokens() pul
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -6447,6 +8167,16 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) AllowedGrantTypes() pul
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -6569,6 +8299,36 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) []string {
@@ -6636,6 +8396,356 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) UserInfoEndpoint() pulu
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGithubAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGithubAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) ProjectAuthenticationOauthSystemGithubAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGithubAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithubNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -6760,6 +8870,8 @@ func (o ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput) 
 type ProjectAuthenticationOauthSystemGitlab struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -6784,6 +8896,12 @@ type ProjectAuthenticationOauthSystemGitlab struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -6814,6 +8932,8 @@ type ProjectAuthenticationOauthSystemGitlabInput interface {
 type ProjectAuthenticationOauthSystemGitlabArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -6838,6 +8958,12 @@ type ProjectAuthenticationOauthSystemGitlabArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -6936,6 +9062,13 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) AllowedGrantTypes() pulumi
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -6994,6 +9127,23 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) ManageProviderTokens() pul
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -7065,6 +9215,16 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) AllowedGrantTypes() pul
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -7187,6 +9347,36 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) []string {
@@ -7254,6 +9444,356 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) UserInfoEndpoint() pulu
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -7378,6 +9918,8 @@ func (o ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput) 
 type ProjectAuthenticationOauthSystemGoogle struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -7402,6 +9944,12 @@ type ProjectAuthenticationOauthSystemGoogle struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -7432,6 +9980,8 @@ type ProjectAuthenticationOauthSystemGoogleInput interface {
 type ProjectAuthenticationOauthSystemGoogleArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -7456,6 +10006,12 @@ type ProjectAuthenticationOauthSystemGoogleArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -7554,6 +10110,13 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) AllowedGrantTypes() pulumi
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -7612,6 +10175,23 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) ManageProviderTokens() pul
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -7683,6 +10263,16 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) AllowedGrantTypes() pul
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -7805,6 +10395,36 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) MergeUserAccounts() pul
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) []string {
@@ -7872,6 +10492,356 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) UserInfoEndpoint() pulu
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -7996,6 +10966,8 @@ func (o ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput) 
 type ProjectAuthenticationOauthSystemLinkedin struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -8020,6 +10992,12 @@ type ProjectAuthenticationOauthSystemLinkedin struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -8050,6 +11028,8 @@ type ProjectAuthenticationOauthSystemLinkedinInput interface {
 type ProjectAuthenticationOauthSystemLinkedinArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -8074,6 +11054,12 @@ type ProjectAuthenticationOauthSystemLinkedinArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -8172,6 +11158,13 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) AllowedGrantTypes() pulu
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -8230,6 +11223,23 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) ManageProviderTokens() p
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -8301,6 +11311,16 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) AllowedGrantTypes() p
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -8423,6 +11443,36 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) MergeUserAccounts() p
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) []string {
@@ -8490,6 +11540,356 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) UserInfoEndpoint() pu
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -8614,6 +12014,8 @@ func (o ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput
 type ProjectAuthenticationOauthSystemMicrosoft struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -8638,6 +12040,12 @@ type ProjectAuthenticationOauthSystemMicrosoft struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -8668,6 +12076,8 @@ type ProjectAuthenticationOauthSystemMicrosoftInput interface {
 type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -8692,6 +12102,12 @@ type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -8790,6 +12206,13 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AllowedGrantTypes() pul
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -8848,6 +12271,23 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ManageProviderTokens() 
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -8919,6 +12359,16 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) AllowedGrantTypes() 
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -9041,6 +12491,36 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) MergeUserAccounts() 
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) []string {
@@ -9108,6 +12588,356 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) UserInfoEndpoint() p
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -9232,6 +13062,8 @@ func (o ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutpu
 type ProjectAuthenticationOauthSystemSlack struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes []string `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint *string `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -9256,6 +13088,12 @@ type ProjectAuthenticationOauthSystemSlack struct {
 	ManageProviderTokens *bool `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts *bool `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId *string `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret *string `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts []string `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -9286,6 +13124,8 @@ type ProjectAuthenticationOauthSystemSlackInput interface {
 type ProjectAuthenticationOauthSystemSlackArgs struct {
 	// The type of grants (`authorizationCode` or `implicit`) to allow when requesting access tokens from the OAuth provider.
 	AllowedGrantTypes pulumi.StringArrayInput `pulumi:"allowedGrantTypes"`
+	// The apple key generator object describing how to create a dynamic apple client secret for applications.
+	AppleKeyGenerator ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput `pulumi:"appleKeyGenerator"`
 	// The URL that users are redirected to for authorization with the OAuth provider.
 	AuthorizationEndpoint pulumi.StringPtrInput `pulumi:"authorizationEndpoint"`
 	// Use a custom domain in your OAuth verification screen.
@@ -9310,6 +13150,12 @@ type ProjectAuthenticationOauthSystemSlackArgs struct {
 	ManageProviderTokens pulumi.BoolPtrInput `pulumi:"manageProviderTokens"`
 	// Whether to merge existing user accounts with new ones created through OAuth authentication.
 	MergeUserAccounts pulumi.BoolPtrInput `pulumi:"mergeUserAccounts"`
+	// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+	NativeAppleKeyGenerator ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput `pulumi:"nativeAppleKeyGenerator"`
+	// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientId pulumi.StringPtrInput `pulumi:"nativeClientId"`
+	// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+	NativeClientSecret pulumi.StringPtrInput `pulumi:"nativeClientSecret"`
 	// Custom prompts or consent screens that users may see during OAuth authentication.
 	Prompts pulumi.StringArrayInput `pulumi:"prompts"`
 	// This attribute is deprecated, use the `manageProviderTokens`, `callbackDomain`, and `redirectUrl` fields instead.
@@ -9408,6 +13254,13 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) AllowedGrantTypes() pulumi.
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) []string { return v.AllowedGrantTypes }).(pulumi.StringArrayOutput)
 }
 
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemSlackOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator {
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput)
+}
+
 // The URL that users are redirected to for authorization with the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) AuthorizationEndpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.AuthorizationEndpoint }).(pulumi.StringPtrOutput)
@@ -9466,6 +13319,23 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) ManageProviderTokens() pulu
 // Whether to merge existing user accounts with new ones created through OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackOutput) MergeUserAccounts() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.MergeUserAccounts }).(pulumi.BoolPtrOutput)
+}
+
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator {
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.NativeClientId }).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.NativeClientSecret }).(pulumi.StringPtrOutput)
 }
 
 // Custom prompts or consent screens that users may see during OAuth authentication.
@@ -9537,6 +13407,16 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) AllowedGrantTypes() pulu
 		}
 		return v.AllowedGrantTypes
 	}).(pulumi.StringArrayOutput)
+}
+
+// The apple key generator object describing how to create a dynamic apple client secret for applications.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) AppleKeyGenerator() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.AppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput)
 }
 
 // The URL that users are redirected to for authorization with the OAuth provider.
@@ -9659,6 +13539,36 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) MergeUserAccounts() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) NativeAppleKeyGenerator() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator {
+		if v == nil {
+			return nil
+		}
+		return v.NativeAppleKeyGenerator
+	}).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) NativeClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) NativeClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NativeClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
 // Custom prompts or consent screens that users may see during OAuth authentication.
 func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Prompts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) []string {
@@ -9726,6 +13636,356 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) UserInfoEndpoint() pulum
 			return nil
 		}
 		return v.UserInfoEndpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemSlackAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemSlackAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) ProjectAuthenticationOauthSystemSlackAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemSlackAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator struct {
+	// The apple generator key id produced by Apple.
+	KeyId string `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey string `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId string `pulumi:"teamId"`
+}
+
+// ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorInput is an input type that accepts ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs and ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorInput` via:
+//
+//	ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs{...}
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput
+	ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutputWithContext(context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput
+}
+
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs struct {
+	// The apple generator key id produced by Apple.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// The apple generator private key produced by Apple.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The apple generator team id assigned to the key by Apple.
+	TeamId pulumi.StringInput `pulumi:"teamId"`
+}
+
+func (ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput)
+}
+
+func (i ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput).ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(ctx)
+}
+
+// ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput is an input type that accepts ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs, ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtr and ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput` via:
+//
+//	        ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput
+	ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput
+}
+
+type projectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrType ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs
+
+func ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtr(v *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput {
+	return (*projectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrType)(v)
+}
+
+func (*projectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (i *projectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return i.ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrType) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o.ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator {
+		return &v
+	}).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput) TeamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) string { return v.TeamId }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) ToProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutputWithContext(ctx context.Context) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput {
+	return o
+}
+
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) Elem() ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator
+		return ret
+	}).(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput)
+}
+
+// The apple generator key id produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator private key produced by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrivateKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// The apple generator team id assigned to the key by Apple.
+func (o ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput) TeamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlackNativeAppleKeyGenerator) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TeamId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -11126,6 +15386,12 @@ type ProjectAuthenticationPassword struct {
 	Reuse *bool `pulumi:"reuse"`
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount *int `pulumi:"reuseAmount"`
+	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+	TemporaryLock *bool `pulumi:"temporaryLock"`
+	// The number of failed login attempts allowed before an account is temporarily locked.
+	TemporaryLockAttempts *int `pulumi:"temporaryLockAttempts"`
+	// The amount of time before the user can sign in again after the account is temporarily locked.
+	TemporaryLockDuration *string `pulumi:"temporaryLockDuration"`
 	// Whether passwords must contain at least one uppercase letter.
 	Uppercase *bool `pulumi:"uppercase"`
 }
@@ -11168,6 +15434,12 @@ type ProjectAuthenticationPasswordArgs struct {
 	Reuse pulumi.BoolPtrInput `pulumi:"reuse"`
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount pulumi.IntPtrInput `pulumi:"reuseAmount"`
+	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+	TemporaryLock pulumi.BoolPtrInput `pulumi:"temporaryLock"`
+	// The number of failed login attempts allowed before an account is temporarily locked.
+	TemporaryLockAttempts pulumi.IntPtrInput `pulumi:"temporaryLockAttempts"`
+	// The amount of time before the user can sign in again after the account is temporarily locked.
+	TemporaryLockDuration pulumi.StringPtrInput `pulumi:"temporaryLockDuration"`
 	// Whether passwords must contain at least one uppercase letter.
 	Uppercase pulumi.BoolPtrInput `pulumi:"uppercase"`
 }
@@ -11314,6 +15586,21 @@ func (o ProjectAuthenticationPasswordOutput) Reuse() pulumi.BoolPtrOutput {
 // The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 func (o ProjectAuthenticationPasswordOutput) ReuseAmount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.ReuseAmount }).(pulumi.IntPtrOutput)
+}
+
+// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+func (o ProjectAuthenticationPasswordOutput) TemporaryLock() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPassword) *bool { return v.TemporaryLock }).(pulumi.BoolPtrOutput)
+}
+
+// The number of failed login attempts allowed before an account is temporarily locked.
+func (o ProjectAuthenticationPasswordOutput) TemporaryLockAttempts() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPassword) *int { return v.TemporaryLockAttempts }).(pulumi.IntPtrOutput)
+}
+
+// The amount of time before the user can sign in again after the account is temporarily locked.
+func (o ProjectAuthenticationPasswordOutput) TemporaryLockDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationPassword) *string { return v.TemporaryLockDuration }).(pulumi.StringPtrOutput)
 }
 
 // Whether passwords must contain at least one uppercase letter.
@@ -11473,6 +15760,36 @@ func (o ProjectAuthenticationPasswordPtrOutput) ReuseAmount() pulumi.IntPtrOutpu
 		}
 		return v.ReuseAmount
 	}).(pulumi.IntPtrOutput)
+}
+
+// Whether the user account should be temporarily locked after a specified number of failed login attempts.
+func (o ProjectAuthenticationPasswordPtrOutput) TemporaryLock() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPassword) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.TemporaryLock
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The number of failed login attempts allowed before an account is temporarily locked.
+func (o ProjectAuthenticationPasswordPtrOutput) TemporaryLockAttempts() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPassword) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TemporaryLockAttempts
+	}).(pulumi.IntPtrOutput)
+}
+
+// The amount of time before the user can sign in again after the account is temporarily locked.
+func (o ProjectAuthenticationPasswordPtrOutput) TemporaryLockDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationPassword) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TemporaryLockDuration
+	}).(pulumi.StringPtrOutput)
 }
 
 // Whether passwords must contain at least one uppercase letter.
@@ -12239,6 +16556,8 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) StyleId() pulumi.Stri
 type ProjectAuthenticationTotp struct {
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
+	// The template for the service issuer label (issuer) shown in the authenticator app.
+	ServiceLabel *string `pulumi:"serviceLabel"`
 }
 
 // ProjectAuthenticationTotpInput is an input type that accepts ProjectAuthenticationTotpArgs and ProjectAuthenticationTotpOutput values.
@@ -12255,6 +16574,8 @@ type ProjectAuthenticationTotpInput interface {
 type ProjectAuthenticationTotpArgs struct {
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
+	// The template for the service issuer label (issuer) shown in the authenticator app.
+	ServiceLabel pulumi.StringPtrInput `pulumi:"serviceLabel"`
 }
 
 func (ProjectAuthenticationTotpArgs) ElementType() reflect.Type {
@@ -12339,6 +16660,11 @@ func (o ProjectAuthenticationTotpOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationTotp) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// The template for the service issuer label (issuer) shown in the authenticator app.
+func (o ProjectAuthenticationTotpOutput) ServiceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationTotp) *string { return v.ServiceLabel }).(pulumi.StringPtrOutput)
+}
+
 type ProjectAuthenticationTotpPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectAuthenticationTotpPtrOutput) ElementType() reflect.Type {
@@ -12371,6 +16697,16 @@ func (o ProjectAuthenticationTotpPtrOutput) Disabled() pulumi.BoolPtrOutput {
 		}
 		return v.Disabled
 	}).(pulumi.BoolPtrOutput)
+}
+
+// The template for the service issuer label (issuer) shown in the authenticator app.
+func (o ProjectAuthenticationTotpPtrOutput) ServiceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationTotp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceLabel
+	}).(pulumi.StringPtrOutput)
 }
 
 type ProjectAuthorization struct {
@@ -12647,6 +16983,7 @@ type ProjectAuthorizationRole struct {
 	// A description for the role.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
+	Key         *string `pulumi:"key"`
 	// A name for the role.
 	Name string `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
@@ -12672,6 +17009,7 @@ type ProjectAuthorizationRoleArgs struct {
 	// A description for the role.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
+	Key         pulumi.StringPtrInput `pulumi:"key"`
 	// A name for the role.
 	Name pulumi.StringInput `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
@@ -12743,6 +17081,10 @@ func (o ProjectAuthorizationRoleOutput) Description() pulumi.StringPtrOutput {
 
 func (o ProjectAuthorizationRoleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectAuthorizationRoleOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
 // A name for the role.
@@ -25474,6 +29816,10 @@ type ProjectInviteSettings struct {
 	AddMagiclinkToken *bool `pulumi:"addMagiclinkToken"`
 	// Settings related to sending invitation emails.
 	EmailService *ProjectInviteSettingsEmailService `pulumi:"emailService"`
+	// Expire the user account if the invitation is not accepted within the expiration time.
+	ExpireInvitedUsers *bool `pulumi:"expireInvitedUsers"`
+	// The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+	InviteExpiration *string `pulumi:"inviteExpiration"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl *string `pulumi:"inviteUrl"`
 	// Whether users must be invited before they can sign up to the project.
@@ -25500,6 +29846,10 @@ type ProjectInviteSettingsArgs struct {
 	AddMagiclinkToken pulumi.BoolPtrInput `pulumi:"addMagiclinkToken"`
 	// Settings related to sending invitation emails.
 	EmailService ProjectInviteSettingsEmailServicePtrInput `pulumi:"emailService"`
+	// Expire the user account if the invitation is not accepted within the expiration time.
+	ExpireInvitedUsers pulumi.BoolPtrInput `pulumi:"expireInvitedUsers"`
+	// The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+	InviteExpiration pulumi.StringPtrInput `pulumi:"inviteExpiration"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl pulumi.StringPtrInput `pulumi:"inviteUrl"`
 	// Whether users must be invited before they can sign up to the project.
@@ -25597,6 +29947,16 @@ func (o ProjectInviteSettingsOutput) EmailService() ProjectInviteSettingsEmailSe
 	return o.ApplyT(func(v ProjectInviteSettings) *ProjectInviteSettingsEmailService { return v.EmailService }).(ProjectInviteSettingsEmailServicePtrOutput)
 }
 
+// Expire the user account if the invitation is not accepted within the expiration time.
+func (o ProjectInviteSettingsOutput) ExpireInvitedUsers() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettings) *bool { return v.ExpireInvitedUsers }).(pulumi.BoolPtrOutput)
+}
+
+// The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+func (o ProjectInviteSettingsOutput) InviteExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectInviteSettings) *string { return v.InviteExpiration }).(pulumi.StringPtrOutput)
+}
+
 // Custom URL to include in the message sent to invited users.
 func (o ProjectInviteSettingsOutput) InviteUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectInviteSettings) *string { return v.InviteUrl }).(pulumi.StringPtrOutput)
@@ -25659,6 +30019,26 @@ func (o ProjectInviteSettingsPtrOutput) EmailService() ProjectInviteSettingsEmai
 		}
 		return v.EmailService
 	}).(ProjectInviteSettingsEmailServicePtrOutput)
+}
+
+// Expire the user account if the invitation is not accepted within the expiration time.
+func (o ProjectInviteSettingsPtrOutput) ExpireInvitedUsers() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectInviteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ExpireInvitedUsers
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The expiry time for the invitation, meant to be used together with `expireInvitedUsers` and/or `addMagiclinkToken`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+func (o ProjectInviteSettingsPtrOutput) InviteExpiration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectInviteSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InviteExpiration
+	}).(pulumi.StringPtrOutput)
 }
 
 // Custom URL to include in the message sent to invited users.
@@ -27582,44 +31962,84 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthPtrInput)(nil)).Elem(), ProjectAuthenticationOauthArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomInput)(nil)).Elem(), ProjectAuthenticationOauthCustomArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomMapInput)(nil)).Elem(), ProjectAuthenticationOauthCustomMap{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthCustomProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthCustomProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthCustomProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemInput)(nil)).Elem(), ProjectAuthenticationOauthSystemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemApplePtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGooglePtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackProviderTokenManagementInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrInput)(nil)).Elem(), ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationOtpInput)(nil)).Elem(), ProjectAuthenticationOtpArgs{})
@@ -27882,44 +32302,84 @@ func init() {
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomMapOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthCustomProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemApplePtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemAppleProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemDiscordProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemFacebookProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGithubProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGitlabProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGooglePtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemGoogleProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackProviderTokenManagementOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOauthSystemSlackProviderTokenManagementPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationOtpOutput{})
