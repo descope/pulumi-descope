@@ -26,21 +26,6 @@ export const project = new descope.Project("pulumi-ts-test", {
       disabled: false,
     },
   },
-  authorization: {
-    permissions: [
-      {
-        name: "perm1",
-        description: "Permission 1",
-      },
-    ],
-    roles: [
-      {
-        key: "role1",
-        name: "role1",
-        permissions: ["perm1"],
-      },
-    ],
-  },
   connectors: {
     https: [{ name: "my_https", baseUrl: "https://example.com" }],
   },
