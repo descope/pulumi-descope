@@ -7,6 +7,8 @@ import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
+import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectApplicationsSamlApplicationManualConfiguration {
@@ -19,7 +21,7 @@ public final class ProjectApplicationsSamlApplicationManualConfiguration {
      * @return Enter the `Certificate` from the SP.
      * 
      */
-    private String certificate;
+    private @Nullable String certificate;
     /**
      * @return Enter the `Entity Id` from the SP.
      * 
@@ -38,8 +40,8 @@ public final class ProjectApplicationsSamlApplicationManualConfiguration {
      * @return Enter the `Certificate` from the SP.
      * 
      */
-    public String certificate() {
-        return this.certificate;
+    public Optional<String> certificate() {
+        return Optional.ofNullable(this.certificate);
     }
     /**
      * @return Enter the `Entity Id` from the SP.
@@ -59,7 +61,7 @@ public final class ProjectApplicationsSamlApplicationManualConfiguration {
     @CustomType.Builder
     public static final class Builder {
         private String acsUrl;
-        private String certificate;
+        private @Nullable String certificate;
         private String entityId;
         public Builder() {}
         public Builder(ProjectApplicationsSamlApplicationManualConfiguration defaults) {
@@ -78,10 +80,8 @@ public final class ProjectApplicationsSamlApplicationManualConfiguration {
             return this;
         }
         @CustomType.Setter
-        public Builder certificate(String certificate) {
-            if (certificate == null) {
-              throw new MissingRequiredPropertyException("ProjectApplicationsSamlApplicationManualConfiguration", "certificate");
-            }
+        public Builder certificate(@Nullable String certificate) {
+
             this.certificate = certificate;
             return this;
         }

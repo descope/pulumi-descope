@@ -291,9 +291,17 @@
             "type": "object",
             "required": [
                 "acsUrl",
-                "certificate",
                 "entityId"
-            ]
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "acsUrl",
+                        "certificate",
+                        "entityId"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectAttributes:ProjectAttributes": {
             "properties": {
@@ -3270,6 +3278,10 @@
         },
         "descope:index/ProjectAuthenticationSso:ProjectAuthenticationSso": {
             "properties": {
+                "allowDuplicateDomains": {
+                    "type": "boolean",
+                    "description": "Whether to allow duplicate SSO domains across tenants.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -3291,6 +3303,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "allowDuplicateDomains",
                         "disabled",
                         "mergeUsers",
                         "redirectUrl",

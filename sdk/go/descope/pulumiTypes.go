@@ -796,7 +796,7 @@ type ProjectApplicationsSamlApplicationManualConfiguration struct {
 	// Enter the `ACS URL` from the SP.
 	AcsUrl string `pulumi:"acsUrl"`
 	// Enter the `Certificate` from the SP.
-	Certificate string `pulumi:"certificate"`
+	Certificate *string `pulumi:"certificate"`
 	// Enter the `Entity Id` from the SP.
 	EntityId string `pulumi:"entityId"`
 }
@@ -816,7 +816,7 @@ type ProjectApplicationsSamlApplicationManualConfigurationArgs struct {
 	// Enter the `ACS URL` from the SP.
 	AcsUrl pulumi.StringInput `pulumi:"acsUrl"`
 	// Enter the `Certificate` from the SP.
-	Certificate pulumi.StringInput `pulumi:"certificate"`
+	Certificate pulumi.StringPtrInput `pulumi:"certificate"`
 	// Enter the `Entity Id` from the SP.
 	EntityId pulumi.StringInput `pulumi:"entityId"`
 }
@@ -904,8 +904,8 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) AcsUrl() pu
 }
 
 // Enter the `Certificate` from the SP.
-func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) Certificate() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) string { return v.Certificate }).(pulumi.StringOutput)
+func (o ProjectApplicationsSamlApplicationManualConfigurationOutput) Certificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectApplicationsSamlApplicationManualConfiguration) *string { return v.Certificate }).(pulumi.StringPtrOutput)
 }
 
 // Enter the `Entity Id` from the SP.
@@ -953,7 +953,7 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) Certific
 		if v == nil {
 			return nil
 		}
-		return &v.Certificate
+		return v.Certificate
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -16109,6 +16109,8 @@ func (o ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput) Index(i pu
 }
 
 type ProjectAuthenticationSso struct {
+	// Whether to allow duplicate SSO domains across tenants.
+	AllowDuplicateDomains *bool `pulumi:"allowDuplicateDomains"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -16131,6 +16133,8 @@ type ProjectAuthenticationSsoInput interface {
 }
 
 type ProjectAuthenticationSsoArgs struct {
+	// Whether to allow duplicate SSO domains across tenants.
+	AllowDuplicateDomains pulumi.BoolPtrInput `pulumi:"allowDuplicateDomains"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -16218,6 +16222,11 @@ func (o ProjectAuthenticationSsoOutput) ToProjectAuthenticationSsoPtrOutputWithC
 	}).(ProjectAuthenticationSsoPtrOutput)
 }
 
+// Whether to allow duplicate SSO domains across tenants.
+func (o ProjectAuthenticationSsoOutput) AllowDuplicateDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.AllowDuplicateDomains }).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationSsoOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
@@ -16260,6 +16269,16 @@ func (o ProjectAuthenticationSsoPtrOutput) Elem() ProjectAuthenticationSsoOutput
 		var ret ProjectAuthenticationSso
 		return ret
 	}).(ProjectAuthenticationSsoOutput)
+}
+
+// Whether to allow duplicate SSO domains across tenants.
+func (o ProjectAuthenticationSsoPtrOutput) AllowDuplicateDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowDuplicateDomains
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.

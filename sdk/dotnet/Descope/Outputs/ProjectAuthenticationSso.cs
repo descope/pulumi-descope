@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationSso
     {
         /// <summary>
+        /// Whether to allow duplicate SSO domains across tenants.
+        /// </summary>
+        public readonly bool? AllowDuplicateDomains;
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
@@ -33,6 +37,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationSso(
+            bool? allowDuplicateDomains,
+
             bool? disabled,
 
             bool? mergeUsers,
@@ -41,6 +47,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectAuthenticationSsoSsoSuiteSettings? ssoSuiteSettings)
         {
+            AllowDuplicateDomains = allowDuplicateDomains;
             Disabled = disabled;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;

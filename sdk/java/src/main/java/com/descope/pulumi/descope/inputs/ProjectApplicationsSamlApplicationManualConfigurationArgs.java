@@ -8,6 +8,8 @@ import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
+import javax.annotation.Nullable;
 
 
 public final class ProjectApplicationsSamlApplicationManualConfigurationArgs extends com.pulumi.resources.ResourceArgs {
@@ -33,15 +35,15 @@ public final class ProjectApplicationsSamlApplicationManualConfigurationArgs ext
      * Enter the `Certificate` from the SP.
      * 
      */
-    @Import(name="certificate", required=true)
-    private Output<String> certificate;
+    @Import(name="certificate")
+    private @Nullable Output<String> certificate;
 
     /**
      * @return Enter the `Certificate` from the SP.
      * 
      */
-    public Output<String> certificate() {
-        return this.certificate;
+    public Optional<Output<String>> certificate() {
+        return Optional.ofNullable(this.certificate);
     }
 
     /**
@@ -112,7 +114,7 @@ public final class ProjectApplicationsSamlApplicationManualConfigurationArgs ext
          * @return builder
          * 
          */
-        public Builder certificate(Output<String> certificate) {
+        public Builder certificate(@Nullable Output<String> certificate) {
             $.certificate = certificate;
             return this;
         }
@@ -151,9 +153,6 @@ public final class ProjectApplicationsSamlApplicationManualConfigurationArgs ext
         public ProjectApplicationsSamlApplicationManualConfigurationArgs build() {
             if ($.acsUrl == null) {
                 throw new MissingRequiredPropertyException("ProjectApplicationsSamlApplicationManualConfigurationArgs", "acsUrl");
-            }
-            if ($.certificate == null) {
-                throw new MissingRequiredPropertyException("ProjectApplicationsSamlApplicationManualConfigurationArgs", "certificate");
             }
             if ($.entityId == null) {
                 throw new MissingRequiredPropertyException("ProjectApplicationsSamlApplicationManualConfigurationArgs", "entityId");
