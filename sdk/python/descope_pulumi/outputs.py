@@ -658,16 +658,17 @@ class ProjectApplicationsSamlApplicationManualConfiguration(dict):
 
     def __init__(__self__, *,
                  acs_url: _builtins.str,
-                 certificate: _builtins.str,
-                 entity_id: _builtins.str):
+                 entity_id: _builtins.str,
+                 certificate: Optional[_builtins.str] = None):
         """
         :param _builtins.str acs_url: Enter the `ACS URL` from the SP.
-        :param _builtins.str certificate: Enter the `Certificate` from the SP.
         :param _builtins.str entity_id: Enter the `Entity Id` from the SP.
+        :param _builtins.str certificate: Enter the `Certificate` from the SP.
         """
         pulumi.set(__self__, "acs_url", acs_url)
-        pulumi.set(__self__, "certificate", certificate)
         pulumi.set(__self__, "entity_id", entity_id)
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
 
     @_builtins.property
     @pulumi.getter(name="acsUrl")
@@ -678,20 +679,20 @@ class ProjectApplicationsSamlApplicationManualConfiguration(dict):
         return pulumi.get(self, "acs_url")
 
     @_builtins.property
-    @pulumi.getter
-    def certificate(self) -> _builtins.str:
-        """
-        Enter the `Certificate` from the SP.
-        """
-        return pulumi.get(self, "certificate")
-
-    @_builtins.property
     @pulumi.getter(name="entityId")
     def entity_id(self) -> _builtins.str:
         """
         Enter the `Entity Id` from the SP.
         """
         return pulumi.get(self, "entity_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def certificate(self) -> Optional[_builtins.str]:
+        """
+        Enter the `Certificate` from the SP.
+        """
+        return pulumi.get(self, "certificate")
 
 
 @pulumi.output_type
@@ -7407,7 +7408,9 @@ class ProjectAuthenticationSso(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "mergeUsers":
+        if key == "allowDuplicateDomains":
+            suggest = "allow_duplicate_domains"
+        elif key == "mergeUsers":
             suggest = "merge_users"
         elif key == "redirectUrl":
             suggest = "redirect_url"
@@ -7426,16 +7429,20 @@ class ProjectAuthenticationSso(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 allow_duplicate_domains: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
                  merge_users: Optional[_builtins.bool] = None,
                  redirect_url: Optional[_builtins.str] = None,
                  sso_suite_settings: Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings'] = None):
         """
+        :param _builtins.bool allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param _builtins.bool merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param _builtins.str redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param 'ProjectAuthenticationSsoSsoSuiteSettingsArgs' sso_suite_settings: Configuration block for the SSO Suite.
         """
+        if allow_duplicate_domains is not None:
+            pulumi.set(__self__, "allow_duplicate_domains", allow_duplicate_domains)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
@@ -7444,6 +7451,14 @@ class ProjectAuthenticationSso(dict):
             pulumi.set(__self__, "redirect_url", redirect_url)
         if sso_suite_settings is not None:
             pulumi.set(__self__, "sso_suite_settings", sso_suite_settings)
+
+    @_builtins.property
+    @pulumi.getter(name="allowDuplicateDomains")
+    def allow_duplicate_domains(self) -> Optional[_builtins.bool]:
+        """
+        Whether to allow duplicate SSO domains across tenants.
+        """
+        return pulumi.get(self, "allow_duplicate_domains")
 
     @_builtins.property
     @pulumi.getter

@@ -136,7 +136,7 @@ export interface ProjectApplicationsSamlApplicationManualConfiguration {
     /**
      * Enter the `Certificate` from the SP.
      */
-    certificate: pulumi.Input<string>;
+    certificate?: pulumi.Input<string>;
     /**
      * Enter the `Entity Id` from the SP.
      */
@@ -2031,6 +2031,10 @@ export interface ProjectAuthenticationPasswordEmailServiceTemplate {
 }
 
 export interface ProjectAuthenticationSso {
+    /**
+     * Whether to allow duplicate SSO domains across tenants.
+     */
+    allowDuplicateDomains?: pulumi.Input<boolean>;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */

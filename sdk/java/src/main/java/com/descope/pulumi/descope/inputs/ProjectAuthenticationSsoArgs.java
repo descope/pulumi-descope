@@ -18,6 +18,21 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     public static final ProjectAuthenticationSsoArgs Empty = new ProjectAuthenticationSsoArgs();
 
     /**
+     * Whether to allow duplicate SSO domains across tenants.
+     * 
+     */
+    @Import(name="allowDuplicateDomains")
+    private @Nullable Output<Boolean> allowDuplicateDomains;
+
+    /**
+     * @return Whether to allow duplicate SSO domains across tenants.
+     * 
+     */
+    public Optional<Output<Boolean>> allowDuplicateDomains() {
+        return Optional.ofNullable(this.allowDuplicateDomains);
+    }
+
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -80,6 +95,7 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     private ProjectAuthenticationSsoArgs() {}
 
     private ProjectAuthenticationSsoArgs(ProjectAuthenticationSsoArgs $) {
+        this.allowDuplicateDomains = $.allowDuplicateDomains;
         this.disabled = $.disabled;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
@@ -102,6 +118,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
 
         public Builder(ProjectAuthenticationSsoArgs defaults) {
             $ = new ProjectAuthenticationSsoArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param allowDuplicateDomains Whether to allow duplicate SSO domains across tenants.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowDuplicateDomains(@Nullable Output<Boolean> allowDuplicateDomains) {
+            $.allowDuplicateDomains = allowDuplicateDomains;
+            return this;
+        }
+
+        /**
+         * @param allowDuplicateDomains Whether to allow duplicate SSO domains across tenants.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowDuplicateDomains(Boolean allowDuplicateDomains) {
+            return allowDuplicateDomains(Output.of(allowDuplicateDomains));
         }
 
         /**

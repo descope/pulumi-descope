@@ -22,8 +22,8 @@ namespace Descope.Pulumi.Descope.Inputs
         /// <summary>
         /// Enter the `Certificate` from the SP.
         /// </summary>
-        [Input("certificate", required: true)]
-        public Input<string> Certificate { get; set; } = null!;
+        [Input("certificate")]
+        public Input<string>? Certificate { get; set; }
 
         /// <summary>
         /// Enter the `Entity Id` from the SP.

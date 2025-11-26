@@ -970,13 +970,13 @@ if not MYPY:
         """
         Enter the `ACS URL` from the SP.
         """
-        certificate: pulumi.Input[_builtins.str]
-        """
-        Enter the `Certificate` from the SP.
-        """
         entity_id: pulumi.Input[_builtins.str]
         """
         Enter the `Entity Id` from the SP.
+        """
+        certificate: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        Enter the `Certificate` from the SP.
         """
 elif False:
     ProjectApplicationsSamlApplicationManualConfigurationArgsDict: TypeAlias = Mapping[str, Any]
@@ -985,16 +985,17 @@ elif False:
 class ProjectApplicationsSamlApplicationManualConfigurationArgs:
     def __init__(__self__, *,
                  acs_url: pulumi.Input[_builtins.str],
-                 certificate: pulumi.Input[_builtins.str],
-                 entity_id: pulumi.Input[_builtins.str]):
+                 entity_id: pulumi.Input[_builtins.str],
+                 certificate: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] acs_url: Enter the `ACS URL` from the SP.
-        :param pulumi.Input[_builtins.str] certificate: Enter the `Certificate` from the SP.
         :param pulumi.Input[_builtins.str] entity_id: Enter the `Entity Id` from the SP.
+        :param pulumi.Input[_builtins.str] certificate: Enter the `Certificate` from the SP.
         """
         pulumi.set(__self__, "acs_url", acs_url)
-        pulumi.set(__self__, "certificate", certificate)
         pulumi.set(__self__, "entity_id", entity_id)
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
 
     @_builtins.property
     @pulumi.getter(name="acsUrl")
@@ -1009,18 +1010,6 @@ class ProjectApplicationsSamlApplicationManualConfigurationArgs:
         pulumi.set(self, "acs_url", value)
 
     @_builtins.property
-    @pulumi.getter
-    def certificate(self) -> pulumi.Input[_builtins.str]:
-        """
-        Enter the `Certificate` from the SP.
-        """
-        return pulumi.get(self, "certificate")
-
-    @certificate.setter
-    def certificate(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "certificate", value)
-
-    @_builtins.property
     @pulumi.getter(name="entityId")
     def entity_id(self) -> pulumi.Input[_builtins.str]:
         """
@@ -1031,6 +1020,18 @@ class ProjectApplicationsSamlApplicationManualConfigurationArgs:
     @entity_id.setter
     def entity_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "entity_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def certificate(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        Enter the `Certificate` from the SP.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "certificate", value)
 
 
 if not MYPY:
@@ -10237,6 +10238,10 @@ class ProjectAuthenticationPasswordEmailServiceTemplateArgs:
 
 if not MYPY:
     class ProjectAuthenticationSsoArgsDict(TypedDict):
+        allow_duplicate_domains: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether to allow duplicate SSO domains across tenants.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -10259,16 +10264,20 @@ elif False:
 @pulumi.input_type
 class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
+                 allow_duplicate_domains: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_users: Optional[pulumi.Input[_builtins.bool]] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
                  sso_suite_settings: Optional[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs']] = None):
         """
+        :param pulumi.Input[_builtins.bool] allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs'] sso_suite_settings: Configuration block for the SSO Suite.
         """
+        if allow_duplicate_domains is not None:
+            pulumi.set(__self__, "allow_duplicate_domains", allow_duplicate_domains)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
@@ -10277,6 +10286,18 @@ class ProjectAuthenticationSsoArgs:
             pulumi.set(__self__, "redirect_url", redirect_url)
         if sso_suite_settings is not None:
             pulumi.set(__self__, "sso_suite_settings", sso_suite_settings)
+
+    @_builtins.property
+    @pulumi.getter(name="allowDuplicateDomains")
+    def allow_duplicate_domains(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether to allow duplicate SSO domains across tenants.
+        """
+        return pulumi.get(self, "allow_duplicate_domains")
+
+    @allow_duplicate_domains.setter
+    def allow_duplicate_domains(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "allow_duplicate_domains", value)
 
     @_builtins.property
     @pulumi.getter

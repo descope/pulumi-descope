@@ -21,7 +21,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// Enter the `Certificate` from the SP.
         /// </summary>
-        public readonly string Certificate;
+        public readonly string? Certificate;
         /// <summary>
         /// Enter the `Entity Id` from the SP.
         /// </summary>
@@ -31,7 +31,7 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectApplicationsSamlApplicationManualConfiguration(
             string acsUrl,
 
-            string certificate,
+            string? certificate,
 
             string entityId)
         {

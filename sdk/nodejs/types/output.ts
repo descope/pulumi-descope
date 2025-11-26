@@ -2032,6 +2032,10 @@ export interface ProjectAuthenticationPasswordEmailServiceTemplate {
 
 export interface ProjectAuthenticationSso {
     /**
+     * Whether to allow duplicate SSO domains across tenants.
+     */
+    allowDuplicateDomains: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;

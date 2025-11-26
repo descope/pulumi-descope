@@ -14,6 +14,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAuthenticationSso {
     /**
+     * @return Whether to allow duplicate SSO domains across tenants.
+     * 
+     */
+    private @Nullable Boolean allowDuplicateDomains;
+    /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -35,6 +40,13 @@ public final class ProjectAuthenticationSso {
     private @Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings;
 
     private ProjectAuthenticationSso() {}
+    /**
+     * @return Whether to allow duplicate SSO domains across tenants.
+     * 
+     */
+    public Optional<Boolean> allowDuplicateDomains() {
+        return Optional.ofNullable(this.allowDuplicateDomains);
+    }
     /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
@@ -73,6 +85,7 @@ public final class ProjectAuthenticationSso {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Boolean allowDuplicateDomains;
         private @Nullable Boolean disabled;
         private @Nullable Boolean mergeUsers;
         private @Nullable String redirectUrl;
@@ -80,12 +93,19 @@ public final class ProjectAuthenticationSso {
         public Builder() {}
         public Builder(ProjectAuthenticationSso defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.allowDuplicateDomains = defaults.allowDuplicateDomains;
     	      this.disabled = defaults.disabled;
     	      this.mergeUsers = defaults.mergeUsers;
     	      this.redirectUrl = defaults.redirectUrl;
     	      this.ssoSuiteSettings = defaults.ssoSuiteSettings;
         }
 
+        @CustomType.Setter
+        public Builder allowDuplicateDomains(@Nullable Boolean allowDuplicateDomains) {
+
+            this.allowDuplicateDomains = allowDuplicateDomains;
+            return this;
+        }
         @CustomType.Setter
         public Builder disabled(@Nullable Boolean disabled) {
 
@@ -112,6 +132,7 @@ public final class ProjectAuthenticationSso {
         }
         public ProjectAuthenticationSso build() {
             final var _resultValue = new ProjectAuthenticationSso();
+            _resultValue.allowDuplicateDomains = allowDuplicateDomains;
             _resultValue.disabled = disabled;
             _resultValue.mergeUsers = mergeUsers;
             _resultValue.redirectUrl = redirectUrl;
