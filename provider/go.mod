@@ -2,12 +2,12 @@ module github.com/descope/pulumi-descope/provider
 
 go 1.24.7
 
-toolchain go1.24.8
+toolchain go1.25.4
 
 replace github.com/descope/terraform-provider-descope/shim => ./shim
 
 require (
-	github.com/descope/terraform-provider-descope/shim v0.2.4
+	github.com/descope/terraform-provider-descope/shim v0.3.2
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.117.0
 	golang.org/x/text v0.31.0
 )
