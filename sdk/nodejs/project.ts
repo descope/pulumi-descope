@@ -70,6 +70,7 @@ export class Project extends pulumi.CustomResource {
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
     declare public readonly jwtTemplates: pulumi.Output<outputs.ProjectJwtTemplates>;
+    declare public readonly lists: pulumi.Output<outputs.ProjectList[]>;
     /**
      * The name of the Descope project.
      */
@@ -113,6 +114,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["flows"] = state?.flows;
             resourceInputs["inviteSettings"] = state?.inviteSettings;
             resourceInputs["jwtTemplates"] = state?.jwtTemplates;
+            resourceInputs["lists"] = state?.lists;
             resourceInputs["name"] = state?.name;
             resourceInputs["projectSettings"] = state?.projectSettings;
             resourceInputs["styles"] = state?.styles;
@@ -129,6 +131,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["flows"] = args?.flows;
             resourceInputs["inviteSettings"] = args?.inviteSettings;
             resourceInputs["jwtTemplates"] = args?.jwtTemplates;
+            resourceInputs["lists"] = args?.lists;
             resourceInputs["name"] = args?.name;
             resourceInputs["projectSettings"] = args?.projectSettings;
             resourceInputs["styles"] = args?.styles;
@@ -180,6 +183,7 @@ export interface ProjectState {
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
     /**
      * The name of the Descope project.
      */
@@ -242,6 +246,7 @@ export interface ProjectArgs {
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
     /**
      * The name of the Descope project.
      */

@@ -23,18 +23,40 @@ import javax.annotation.Nullable;
  */
 @ResourceType(type="pulumi:providers:descope")
 public class Provider extends com.pulumi.resources.ProviderResource {
+    /**
+     * An optional base URL for the Descope API
+     * 
+     */
     @Export(name="baseUrl", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> baseUrl;
 
+    /**
+     * @return An optional base URL for the Descope API
+     * 
+     */
     public Output<Optional<String>> baseUrl() {
         return Codegen.optional(this.baseUrl);
     }
+    /**
+     * A valid management key for your Descope company
+     * 
+     */
     @Export(name="managementKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> managementKey;
 
+    /**
+     * @return A valid management key for your Descope company
+     * 
+     */
     public Output<Optional<String>> managementKey() {
         return Codegen.optional(this.managementKey);
     }
+    /**
+     * @deprecated
+     * The projectId attribute in the &#39;descope&#39; provider block is no longer required and can be safely removed
+     * 
+     */
+    @Deprecated /* The projectId attribute in the 'descope' provider block is no longer required and can be safely removed */
     @Export(name="projectId", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> projectId;
 

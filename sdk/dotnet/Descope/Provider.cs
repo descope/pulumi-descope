@@ -19,9 +19,15 @@ namespace Descope.Pulumi.Descope
     [DescopeResourceType("pulumi:providers:descope")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
+        /// <summary>
+        /// An optional base URL for the Descope API
+        /// </summary>
         [Output("baseUrl")]
         public Output<string?> BaseUrl { get; private set; } = null!;
 
+        /// <summary>
+        /// A valid management key for your Descope company
+        /// </summary>
         [Output("managementKey")]
         public Output<string?> ManagementKey { get; private set; } = null!;
 
@@ -67,11 +73,18 @@ namespace Descope.Pulumi.Descope
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// An optional base URL for the Descope API
+        /// </summary>
         [Input("baseUrl")]
         public Input<string>? BaseUrl { get; set; }
 
         [Input("managementKey")]
         private Input<string>? _managementKey;
+
+        /// <summary>
+        /// A valid management key for your Descope company
+        /// </summary>
         public Input<string>? ManagementKey
         {
             get => _managementKey;

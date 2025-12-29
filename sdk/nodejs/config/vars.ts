@@ -7,6 +7,9 @@ import * as utilities from "../utilities";
 declare var exports: any;
 const __config = new pulumi.Config("descope");
 
+/**
+ * An optional base URL for the Descope API
+ */
 export declare const baseUrl: string | undefined;
 Object.defineProperty(exports, "baseUrl", {
     get() {
@@ -15,6 +18,9 @@ Object.defineProperty(exports, "baseUrl", {
     enumerable: true,
 });
 
+/**
+ * A valid management key for your Descope company
+ */
 export declare const managementKey: string | undefined;
 Object.defineProperty(exports, "managementKey", {
     get() {

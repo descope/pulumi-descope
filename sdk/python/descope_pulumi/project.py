@@ -30,6 +30,7 @@ class ProjectArgs:
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
@@ -70,6 +71,8 @@ class ProjectArgs:
             pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
+        if lists is not None:
+            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if project_settings is not None:
@@ -188,6 +191,15 @@ class ProjectArgs:
     @jwt_templates.setter
     def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+        return pulumi.get(self, "lists")
+
+    @lists.setter
+    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+        pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
@@ -262,6 +274,7 @@ class _ProjectState:
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
@@ -302,6 +315,8 @@ class _ProjectState:
             pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
+        if lists is not None:
+            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if project_settings is not None:
@@ -420,6 +435,15 @@ class _ProjectState:
     @jwt_templates.setter
     def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+        return pulumi.get(self, "lists")
+
+    @lists.setter
+    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+        pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
@@ -497,6 +521,7 @@ class Project(pulumi.CustomResource):
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -554,6 +579,7 @@ class Project(pulumi.CustomResource):
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -577,6 +603,7 @@ class Project(pulumi.CustomResource):
             __props__.__dict__["flows"] = flows
             __props__.__dict__["invite_settings"] = invite_settings
             __props__.__dict__["jwt_templates"] = jwt_templates
+            __props__.__dict__["lists"] = lists
             __props__.__dict__["name"] = name
             __props__.__dict__["project_settings"] = project_settings
             __props__.__dict__["styles"] = styles
@@ -601,6 +628,7 @@ class Project(pulumi.CustomResource):
             flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
             invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
             jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+            lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
             name: Optional[pulumi.Input[_builtins.str]] = None,
             project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
             styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -641,6 +669,7 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["flows"] = flows
         __props__.__dict__["invite_settings"] = invite_settings
         __props__.__dict__["jwt_templates"] = jwt_templates
+        __props__.__dict__["lists"] = lists
         __props__.__dict__["name"] = name
         __props__.__dict__["project_settings"] = project_settings
         __props__.__dict__["styles"] = styles
@@ -719,6 +748,11 @@ class Project(pulumi.CustomResource):
         Defines templates for JSON Web Tokens (JWT) used for authentication.
         """
         return pulumi.get(self, "jwt_templates")
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> pulumi.Output[Sequence['outputs.ProjectList']]:
+        return pulumi.get(self, "lists")
 
     @_builtins.property
     @pulumi.getter

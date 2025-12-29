@@ -20,6 +20,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AllowDuplicateDomains { get; set; }
 
         /// <summary>
+        /// Whether to allow overriding user's roles with SSO related roles.
+        /// </summary>
+        [Input("allowOverrideRoles")]
+        public Input<bool>? AllowOverrideRoles { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         [Input("disabled")]

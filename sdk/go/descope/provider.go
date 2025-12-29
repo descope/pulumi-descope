@@ -18,9 +18,12 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	BaseUrl       pulumi.StringPtrOutput `pulumi:"baseUrl"`
+	// An optional base URL for the Descope API
+	BaseUrl pulumi.StringPtrOutput `pulumi:"baseUrl"`
+	// A valid management key for your Descope company
 	ManagementKey pulumi.StringPtrOutput `pulumi:"managementKey"`
-	ProjectId     pulumi.StringPtrOutput `pulumi:"projectId"`
+	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
+	ProjectId pulumi.StringPtrOutput `pulumi:"projectId"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -47,16 +50,22 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	BaseUrl       *string `pulumi:"baseUrl"`
+	// An optional base URL for the Descope API
+	BaseUrl *string `pulumi:"baseUrl"`
+	// A valid management key for your Descope company
 	ManagementKey *string `pulumi:"managementKey"`
-	ProjectId     *string `pulumi:"projectId"`
+	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
+	ProjectId *string `pulumi:"projectId"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	BaseUrl       pulumi.StringPtrInput
+	// An optional base URL for the Descope API
+	BaseUrl pulumi.StringPtrInput
+	// A valid management key for your Descope company
 	ManagementKey pulumi.StringPtrInput
-	ProjectId     pulumi.StringPtrInput
+	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
+	ProjectId pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -119,14 +128,17 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
+// An optional base URL for the Descope API
 func (o ProviderOutput) BaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BaseUrl }).(pulumi.StringPtrOutput)
 }
 
+// A valid management key for your Descope company
 func (o ProviderOutput) ManagementKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ManagementKey }).(pulumi.StringPtrOutput)
 }
 
+// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
 func (o ProviderOutput) ProjectId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ProjectId }).(pulumi.StringPtrOutput)
 }

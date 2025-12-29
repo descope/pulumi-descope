@@ -15,23 +15,51 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProviderArgs Empty = new ProviderArgs();
 
+    /**
+     * An optional base URL for the Descope API
+     * 
+     */
     @Import(name="baseUrl")
     private @Nullable Output<String> baseUrl;
 
+    /**
+     * @return An optional base URL for the Descope API
+     * 
+     */
     public Optional<Output<String>> baseUrl() {
         return Optional.ofNullable(this.baseUrl);
     }
 
+    /**
+     * A valid management key for your Descope company
+     * 
+     */
     @Import(name="managementKey")
     private @Nullable Output<String> managementKey;
 
+    /**
+     * @return A valid management key for your Descope company
+     * 
+     */
     public Optional<Output<String>> managementKey() {
         return Optional.ofNullable(this.managementKey);
     }
 
+    /**
+     * @deprecated
+     * The projectId attribute in the &#39;descope&#39; provider block is no longer required and can be safely removed
+     * 
+     */
+    @Deprecated /* The projectId attribute in the 'descope' provider block is no longer required and can be safely removed */
     @Import(name="projectId")
     private @Nullable Output<String> projectId;
 
+    /**
+     * @deprecated
+     * The projectId attribute in the &#39;descope&#39; provider block is no longer required and can be safely removed
+     * 
+     */
+    @Deprecated /* The projectId attribute in the 'descope' provider block is no longer required and can be safely removed */
     public Optional<Output<String>> projectId() {
         return Optional.ofNullable(this.projectId);
     }
@@ -62,29 +90,69 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ProviderArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param baseUrl An optional base URL for the Descope API
+         * 
+         * @return builder
+         * 
+         */
         public Builder baseUrl(@Nullable Output<String> baseUrl) {
             $.baseUrl = baseUrl;
             return this;
         }
 
+        /**
+         * @param baseUrl An optional base URL for the Descope API
+         * 
+         * @return builder
+         * 
+         */
         public Builder baseUrl(String baseUrl) {
             return baseUrl(Output.of(baseUrl));
         }
 
+        /**
+         * @param managementKey A valid management key for your Descope company
+         * 
+         * @return builder
+         * 
+         */
         public Builder managementKey(@Nullable Output<String> managementKey) {
             $.managementKey = managementKey;
             return this;
         }
 
+        /**
+         * @param managementKey A valid management key for your Descope company
+         * 
+         * @return builder
+         * 
+         */
         public Builder managementKey(String managementKey) {
             return managementKey(Output.of(managementKey));
         }
 
+        /**
+         * @return builder
+         * 
+         * @deprecated
+         * The projectId attribute in the &#39;descope&#39; provider block is no longer required and can be safely removed
+         * 
+         */
+        @Deprecated /* The projectId attribute in the 'descope' provider block is no longer required and can be safely removed */
         public Builder projectId(@Nullable Output<String> projectId) {
             $.projectId = projectId;
             return this;
         }
 
+        /**
+         * @return builder
+         * 
+         * @deprecated
+         * The projectId attribute in the &#39;descope&#39; provider block is no longer required and can be safely removed
+         * 
+         */
+        @Deprecated /* The projectId attribute in the 'descope' provider block is no longer required and can be safely removed */
         public Builder projectId(String projectId) {
             return projectId(Output.of(projectId));
         }

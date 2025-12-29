@@ -24,17 +24,25 @@ class ProviderArgs:
                  project_id: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[_builtins.str] base_url: An optional base URL for the Descope API
+        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company
         """
         if base_url is not None:
             pulumi.set(__self__, "base_url", base_url)
         if management_key is not None:
             pulumi.set(__self__, "management_key", management_key)
         if project_id is not None:
+            warnings.warn("""The project_id attribute in the 'descope' provider block is no longer required and can be safely removed""", DeprecationWarning)
+            pulumi.log.warn("""project_id is deprecated: The project_id attribute in the 'descope' provider block is no longer required and can be safely removed""")
+        if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
 
     @_builtins.property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        An optional base URL for the Descope API
+        """
         return pulumi.get(self, "base_url")
 
     @base_url.setter
@@ -44,6 +52,9 @@ class ProviderArgs:
     @_builtins.property
     @pulumi.getter(name="managementKey")
     def management_key(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        A valid management key for your Descope company
+        """
         return pulumi.get(self, "management_key")
 
     @management_key.setter
@@ -52,6 +63,7 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter(name="projectId")
+    @_utilities.deprecated("""The project_id attribute in the 'descope' provider block is no longer required and can be safely removed""")
     def project_id(self) -> Optional[pulumi.Input[_builtins.str]]:
         return pulumi.get(self, "project_id")
 
@@ -78,6 +90,8 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] base_url: An optional base URL for the Descope API
+        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company
         """
         ...
     @overload
@@ -132,15 +146,22 @@ class Provider(pulumi.ProviderResource):
     @_builtins.property
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        An optional base URL for the Descope API
+        """
         return pulumi.get(self, "base_url")
 
     @_builtins.property
     @pulumi.getter(name="managementKey")
     def management_key(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        A valid management key for your Descope company
+        """
         return pulumi.get(self, "management_key")
 
     @_builtins.property
     @pulumi.getter(name="projectId")
+    @_utilities.deprecated("""The project_id attribute in the 'descope' provider block is no longer required and can be safely removed""")
     def project_id(self) -> pulumi.Output[Optional[_builtins.str]]:
         return pulumi.get(self, "project_id")
 

@@ -16111,6 +16111,8 @@ func (o ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput) Index(i pu
 type ProjectAuthenticationSso struct {
 	// Whether to allow duplicate SSO domains across tenants.
 	AllowDuplicateDomains *bool `pulumi:"allowDuplicateDomains"`
+	// Whether to allow overriding user's roles with SSO related roles.
+	AllowOverrideRoles *bool `pulumi:"allowOverrideRoles"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -16135,6 +16137,8 @@ type ProjectAuthenticationSsoInput interface {
 type ProjectAuthenticationSsoArgs struct {
 	// Whether to allow duplicate SSO domains across tenants.
 	AllowDuplicateDomains pulumi.BoolPtrInput `pulumi:"allowDuplicateDomains"`
+	// Whether to allow overriding user's roles with SSO related roles.
+	AllowOverrideRoles pulumi.BoolPtrInput `pulumi:"allowOverrideRoles"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -16227,6 +16231,11 @@ func (o ProjectAuthenticationSsoOutput) AllowDuplicateDomains() pulumi.BoolPtrOu
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.AllowDuplicateDomains }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to allow overriding user's roles with SSO related roles.
+func (o ProjectAuthenticationSsoOutput) AllowOverrideRoles() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.AllowOverrideRoles }).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 func (o ProjectAuthenticationSsoOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
@@ -16278,6 +16287,16 @@ func (o ProjectAuthenticationSsoPtrOutput) AllowDuplicateDomains() pulumi.BoolPt
 			return nil
 		}
 		return v.AllowDuplicateDomains
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to allow overriding user's roles with SSO related roles.
+func (o ProjectAuthenticationSsoPtrOutput) AllowOverrideRoles() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowOverrideRoles
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -30894,6 +30913,130 @@ func (o ProjectJwtTemplatesUserTemplateArrayOutput) Index(i pulumi.IntInput) Pro
 	}).(ProjectJwtTemplatesUserTemplateOutput)
 }
 
+type ProjectList struct {
+	Data        string  `pulumi:"data"`
+	Description *string `pulumi:"description"`
+	// The ID of this resource.
+	Id *string `pulumi:"id"`
+	// The name of the Descope project.
+	Name string `pulumi:"name"`
+	Type string `pulumi:"type"`
+}
+
+// ProjectListInput is an input type that accepts ProjectListArgs and ProjectListOutput values.
+// You can construct a concrete instance of `ProjectListInput` via:
+//
+//	ProjectListArgs{...}
+type ProjectListInput interface {
+	pulumi.Input
+
+	ToProjectListOutput() ProjectListOutput
+	ToProjectListOutputWithContext(context.Context) ProjectListOutput
+}
+
+type ProjectListArgs struct {
+	Data        pulumi.StringInput    `pulumi:"data"`
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of this resource.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the Descope project.
+	Name pulumi.StringInput `pulumi:"name"`
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (ProjectListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectList)(nil)).Elem()
+}
+
+func (i ProjectListArgs) ToProjectListOutput() ProjectListOutput {
+	return i.ToProjectListOutputWithContext(context.Background())
+}
+
+func (i ProjectListArgs) ToProjectListOutputWithContext(ctx context.Context) ProjectListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectListOutput)
+}
+
+// ProjectListArrayInput is an input type that accepts ProjectListArray and ProjectListArrayOutput values.
+// You can construct a concrete instance of `ProjectListArrayInput` via:
+//
+//	ProjectListArray{ ProjectListArgs{...} }
+type ProjectListArrayInput interface {
+	pulumi.Input
+
+	ToProjectListArrayOutput() ProjectListArrayOutput
+	ToProjectListArrayOutputWithContext(context.Context) ProjectListArrayOutput
+}
+
+type ProjectListArray []ProjectListInput
+
+func (ProjectListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectList)(nil)).Elem()
+}
+
+func (i ProjectListArray) ToProjectListArrayOutput() ProjectListArrayOutput {
+	return i.ToProjectListArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectListArray) ToProjectListArrayOutputWithContext(ctx context.Context) ProjectListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectListArrayOutput)
+}
+
+type ProjectListOutput struct{ *pulumi.OutputState }
+
+func (ProjectListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectList)(nil)).Elem()
+}
+
+func (o ProjectListOutput) ToProjectListOutput() ProjectListOutput {
+	return o
+}
+
+func (o ProjectListOutput) ToProjectListOutputWithContext(ctx context.Context) ProjectListOutput {
+	return o
+}
+
+func (o ProjectListOutput) Data() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectList) string { return v.Data }).(pulumi.StringOutput)
+}
+
+func (o ProjectListOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectList) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of this resource.
+func (o ProjectListOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectList) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The name of the Descope project.
+func (o ProjectListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o ProjectListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type ProjectListArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectList)(nil)).Elem()
+}
+
+func (o ProjectListArrayOutput) ToProjectListArrayOutput() ProjectListArrayOutput {
+	return o
+}
+
+func (o ProjectListArrayOutput) ToProjectListArrayOutputWithContext(ctx context.Context) ProjectListArrayOutput {
+	return o
+}
+
+func (o ProjectListArrayOutput) Index(i pulumi.IntInput) ProjectListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectList {
+		return vs[0].([]ProjectList)[vs[1].(int)]
+	}).(ProjectListOutput)
+}
+
 type ProjectProjectSettings struct {
 	// Name of the access key JWT Template.
 	AccessKeyJwtTemplate *string `pulumi:"accessKeyJwtTemplate"`
@@ -32267,6 +32410,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesAccessKeyTemplateArrayInput)(nil)).Elem(), ProjectJwtTemplatesAccessKeyTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesUserTemplateInput)(nil)).Elem(), ProjectJwtTemplatesUserTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectJwtTemplatesUserTemplateArrayInput)(nil)).Elem(), ProjectJwtTemplatesUserTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectListInput)(nil)).Elem(), ProjectListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectListArrayInput)(nil)).Elem(), ProjectListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsInput)(nil)).Elem(), ProjectProjectSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsPtrInput)(nil)).Elem(), ProjectProjectSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectSettingsSessionMigrationInput)(nil)).Elem(), ProjectProjectSettingsSessionMigrationArgs{})
@@ -32607,6 +32752,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectJwtTemplatesAccessKeyTemplateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesUserTemplateOutput{})
 	pulumi.RegisterOutputType(ProjectJwtTemplatesUserTemplateArrayOutput{})
+	pulumi.RegisterOutputType(ProjectListOutput{})
+	pulumi.RegisterOutputType(ProjectListArrayOutput{})
 	pulumi.RegisterOutputType(ProjectProjectSettingsOutput{})
 	pulumi.RegisterOutputType(ProjectProjectSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectProjectSettingsSessionMigrationOutput{})

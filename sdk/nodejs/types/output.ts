@@ -2036,6 +2036,10 @@ export interface ProjectAuthenticationSso {
      */
     allowDuplicateDomains: boolean;
     /**
+     * Whether to allow overriding user's roles with SSO related roles.
+     */
+    allowOverrideRoles: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -4354,6 +4358,20 @@ export interface ProjectJwtTemplatesUserTemplate {
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
     template: string;
+}
+
+export interface ProjectList {
+    data: string;
+    description: string;
+    /**
+     * The ID of this resource.
+     */
+    id: string;
+    /**
+     * The name of the Descope project.
+     */
+    name: string;
+    type: string;
 }
 
 export interface ProjectProjectSettings {

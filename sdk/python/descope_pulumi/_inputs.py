@@ -357,6 +357,8 @@ __all__ = [
     'ProjectJwtTemplatesAccessKeyTemplateArgsDict',
     'ProjectJwtTemplatesUserTemplateArgs',
     'ProjectJwtTemplatesUserTemplateArgsDict',
+    'ProjectListArgs',
+    'ProjectListArgsDict',
     'ProjectProjectSettingsArgs',
     'ProjectProjectSettingsArgsDict',
     'ProjectProjectSettingsSessionMigrationArgs',
@@ -10242,6 +10244,10 @@ if not MYPY:
         """
         Whether to allow duplicate SSO domains across tenants.
         """
+        allow_override_roles: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether to allow overriding user's roles with SSO related roles.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -10265,12 +10271,14 @@ elif False:
 class ProjectAuthenticationSsoArgs:
     def __init__(__self__, *,
                  allow_duplicate_domains: Optional[pulumi.Input[_builtins.bool]] = None,
+                 allow_override_roles: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  merge_users: Optional[pulumi.Input[_builtins.bool]] = None,
                  redirect_url: Optional[pulumi.Input[_builtins.str]] = None,
                  sso_suite_settings: Optional[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgs']] = None):
         """
         :param pulumi.Input[_builtins.bool] allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
+        :param pulumi.Input[_builtins.bool] allow_override_roles: Whether to allow overriding user's roles with SSO related roles.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
@@ -10278,6 +10286,8 @@ class ProjectAuthenticationSsoArgs:
         """
         if allow_duplicate_domains is not None:
             pulumi.set(__self__, "allow_duplicate_domains", allow_duplicate_domains)
+        if allow_override_roles is not None:
+            pulumi.set(__self__, "allow_override_roles", allow_override_roles)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
@@ -10298,6 +10308,18 @@ class ProjectAuthenticationSsoArgs:
     @allow_duplicate_domains.setter
     def allow_duplicate_domains(self, value: Optional[pulumi.Input[_builtins.bool]]):
         pulumi.set(self, "allow_duplicate_domains", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowOverrideRoles")
+    def allow_override_roles(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether to allow overriding user's roles with SSO related roles.
+        """
+        return pulumi.get(self, "allow_override_roles")
+
+    @allow_override_roles.setter
+    def allow_override_roles(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "allow_override_roles", value)
 
     @_builtins.property
     @pulumi.getter
@@ -21818,6 +21840,94 @@ class ProjectJwtTemplatesUserTemplateArgs:
     @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "id", value)
+
+
+if not MYPY:
+    class ProjectListArgsDict(TypedDict):
+        data: pulumi.Input[_builtins.str]
+        name: pulumi.Input[_builtins.str]
+        """
+        The name of the Descope project.
+        """
+        type: pulumi.Input[_builtins.str]
+        description: NotRequired[pulumi.Input[_builtins.str]]
+        id: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        The ID of this resource.
+        """
+elif False:
+    ProjectListArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ProjectListArgs:
+    def __init__(__self__, *,
+                 data: pulumi.Input[_builtins.str],
+                 name: pulumi.Input[_builtins.str],
+                 type: pulumi.Input[_builtins.str],
+                 description: Optional[pulumi.Input[_builtins.str]] = None,
+                 id: Optional[pulumi.Input[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] name: The name of the Descope project.
+        :param pulumi.Input[_builtins.str] id: The ID of this resource.
+        """
+        pulumi.set(__self__, "data", data)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def data(self) -> pulumi.Input[_builtins.str]:
+        return pulumi.get(self, "data")
+
+    @data.setter
+    def data(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "data", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the Descope project.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[_builtins.str]:
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
     @id.setter
