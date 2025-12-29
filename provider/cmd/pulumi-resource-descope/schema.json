@@ -58,14 +58,17 @@
     "config": {
         "variables": {
             "baseUrl": {
-                "type": "string"
+                "type": "string",
+                "description": "An optional base URL for the Descope API"
             },
             "managementKey": {
                 "type": "string",
+                "description": "A valid management key for your Descope company",
                 "secret": true
             },
             "projectId": {
-                "type": "string"
+                "type": "string",
+                "deprecationMessage": "The\u003cspan pulumi-lang-nodejs=\" projectId \" pulumi-lang-dotnet=\" ProjectId \" pulumi-lang-go=\" projectId \" pulumi-lang-python=\" project_id \" pulumi-lang-yaml=\" projectId \" pulumi-lang-java=\" projectId \"\u003e project_id \u003c/span\u003eattribute in the 'descope' provider block is no longer required and can be safely removed"
             }
         }
     },
@@ -3282,6 +3285,10 @@
                     "type": "boolean",
                     "description": "Whether to allow duplicate SSO domains across tenants.\n"
                 },
+                "allowOverrideRoles": {
+                    "type": "boolean",
+                    "description": "Whether to allow overriding user's roles with SSO related roles.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -3304,6 +3311,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "allowDuplicateDomains",
+                        "allowOverrideRoles",
                         "disabled",
                         "mergeUsers",
                         "redirectUrl",
@@ -7548,6 +7556,44 @@
                 }
             }
         },
+        "descope:index/ProjectList:ProjectList": {
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Descope project.\n"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "data",
+                "name",
+                "type"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "data",
+                        "description",
+                        "id",
+                        "name",
+                        "type"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectProjectSettings:ProjectProjectSettings": {
             "properties": {
                 "accessKeyJwtTemplate": {
@@ -7755,26 +7801,32 @@
         "description": "The provider type for the descope package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "properties": {
             "baseUrl": {
-                "type": "string"
+                "type": "string",
+                "description": "An optional base URL for the Descope API"
             },
             "managementKey": {
                 "type": "string",
+                "description": "A valid management key for your Descope company",
                 "secret": true
             },
             "projectId": {
-                "type": "string"
+                "type": "string",
+                "deprecationMessage": "The\u003cspan pulumi-lang-nodejs=\" projectId \" pulumi-lang-dotnet=\" ProjectId \" pulumi-lang-go=\" projectId \" pulumi-lang-python=\" project_id \" pulumi-lang-yaml=\" projectId \" pulumi-lang-java=\" projectId \"\u003e project_id \u003c/span\u003eattribute in the 'descope' provider block is no longer required and can be safely removed"
             }
         },
         "inputProperties": {
             "baseUrl": {
-                "type": "string"
+                "type": "string",
+                "description": "An optional base URL for the Descope API"
             },
             "managementKey": {
                 "type": "string",
+                "description": "A valid management key for your Descope company",
                 "secret": true
             },
             "projectId": {
-                "type": "string"
+                "type": "string",
+                "deprecationMessage": "The\u003cspan pulumi-lang-nodejs=\" projectId \" pulumi-lang-dotnet=\" ProjectId \" pulumi-lang-go=\" projectId \" pulumi-lang-python=\" project_id \" pulumi-lang-yaml=\" projectId \" pulumi-lang-java=\" projectId \"\u003e project_id \u003c/span\u003eattribute in the 'descope' provider block is no longer required and can be safely removed"
             }
         },
         "methods": {
@@ -7823,6 +7875,12 @@
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                     "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
                 },
+                "lists": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectList:ProjectList"
+                    }
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Descope project.\n"
@@ -7860,6 +7918,7 @@
                 "flows",
                 "inviteSettings",
                 "jwtTemplates",
+                "lists",
                 "name",
                 "projectSettings",
                 "styles",
@@ -7905,6 +7964,12 @@
                 "jwtTemplates": {
                     "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                     "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
+                },
+                "lists": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectList:ProjectList"
+                    }
                 },
                 "name": {
                     "type": "string",
@@ -7974,6 +8039,12 @@
                     "jwtTemplates": {
                         "$ref": "#/types/descope:index/ProjectJwtTemplates:ProjectJwtTemplates",
                         "description": "Defines templates for JSON Web Tokens (JWT) used for authentication.\n"
+                    },
+                    "lists": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/descope:index/ProjectList:ProjectList"
+                        }
                     },
                     "name": {
                         "type": "string",
