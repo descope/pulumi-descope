@@ -155,9 +155,17 @@ public class Project extends com.pulumi.resources.CustomResource {
     public Output<ProjectJwtTemplates> jwtTemplates() {
         return this.jwtTemplates;
     }
+    /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
     @Export(name="lists", refs={List.class,ProjectList.class}, tree="[0,1]")
     private Output<List<ProjectList>> lists;
 
+    /**
+     * @return Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
     public Output<List<ProjectList>> lists() {
         return this.lists;
     }

@@ -32,7 +32,8 @@ type Project struct {
 	InviteSettings ProjectInviteSettingsOutput `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
-	Lists        ProjectListArrayOutput    `pulumi:"lists"`
+	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+	Lists ProjectListArrayOutput `pulumi:"lists"`
 	// The name of the Descope project.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// General settings for the Descope project.
@@ -93,7 +94,8 @@ type projectState struct {
 	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
-	Lists        []ProjectList        `pulumi:"lists"`
+	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+	Lists []ProjectList `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
 	// General settings for the Descope project.
@@ -125,7 +127,8 @@ type ProjectState struct {
 	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
-	Lists        ProjectListArrayInput
+	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+	Lists ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
 	// General settings for the Descope project.
@@ -161,7 +164,8 @@ type projectArgs struct {
 	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
-	Lists        []ProjectList        `pulumi:"lists"`
+	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+	Lists []ProjectList `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
 	// General settings for the Descope project.
@@ -194,7 +198,8 @@ type ProjectArgs struct {
 	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
-	Lists        ProjectListArrayInput
+	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+	Lists ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
 	// General settings for the Descope project.
@@ -339,6 +344,7 @@ func (o ProjectOutput) JwtTemplates() ProjectJwtTemplatesOutput {
 	return o.ApplyT(func(v *Project) ProjectJwtTemplatesOutput { return v.JwtTemplates }).(ProjectJwtTemplatesOutput)
 }
 
+// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
 func (o ProjectOutput) Lists() ProjectListArrayOutput {
 	return o.ApplyT(func(v *Project) ProjectListArrayOutput { return v.Lists }).(ProjectListArrayOutput)
 }

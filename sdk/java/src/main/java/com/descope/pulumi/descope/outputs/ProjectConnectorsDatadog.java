@@ -37,6 +37,11 @@ public final class ProjectConnectorsDatadog {
     private @Nullable String description;
     private @Nullable String id;
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    private @Nullable Boolean maskPii;
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -85,6 +90,13 @@ public final class ProjectConnectorsDatadog {
         return Optional.ofNullable(this.id);
     }
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    public Optional<Boolean> maskPii() {
+        return Optional.ofNullable(this.maskPii);
+    }
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -120,6 +132,7 @@ public final class ProjectConnectorsDatadog {
         private @Nullable List<ProjectConnectorsDatadogAuditFilter> auditFilters;
         private @Nullable String description;
         private @Nullable String id;
+        private @Nullable Boolean maskPii;
         private String name;
         private @Nullable String site;
         private @Nullable Boolean troubleshootLogEnabled;
@@ -131,6 +144,7 @@ public final class ProjectConnectorsDatadog {
     	      this.auditFilters = defaults.auditFilters;
     	      this.description = defaults.description;
     	      this.id = defaults.id;
+    	      this.maskPii = defaults.maskPii;
     	      this.name = defaults.name;
     	      this.site = defaults.site;
     	      this.troubleshootLogEnabled = defaults.troubleshootLogEnabled;
@@ -172,6 +186,12 @@ public final class ProjectConnectorsDatadog {
             return this;
         }
         @CustomType.Setter
+        public Builder maskPii(@Nullable Boolean maskPii) {
+
+            this.maskPii = maskPii;
+            return this;
+        }
+        @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsDatadog", "name");
@@ -198,6 +218,7 @@ public final class ProjectConnectorsDatadog {
             _resultValue.auditFilters = auditFilters;
             _resultValue.description = description;
             _resultValue.id = id;
+            _resultValue.maskPii = maskPii;
             _resultValue.name = name;
             _resultValue.site = site;
             _resultValue.troubleshootLogEnabled = troubleshootLogEnabled;

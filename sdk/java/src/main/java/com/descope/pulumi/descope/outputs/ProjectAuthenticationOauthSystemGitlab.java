@@ -58,6 +58,11 @@ public final class ProjectAuthenticationOauthSystemGitlab {
      */
     private @Nullable String description;
     /**
+     * @return By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     * 
+     */
+    private @Nullable Boolean disableJitUpdates;
+    /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -196,6 +201,13 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         return Optional.ofNullable(this.description);
     }
     /**
+     * @return By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     * 
+     */
+    public Optional<Boolean> disableJitUpdates() {
+        return Optional.ofNullable(this.disableJitUpdates);
+    }
+    /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -325,6 +337,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         private @Nullable String clientId;
         private @Nullable String clientSecret;
         private @Nullable String description;
+        private @Nullable Boolean disableJitUpdates;
         private @Nullable Boolean disabled;
         private @Nullable String issuer;
         private @Nullable String jwksEndpoint;
@@ -352,6 +365,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
     	      this.clientId = defaults.clientId;
     	      this.clientSecret = defaults.clientSecret;
     	      this.description = defaults.description;
+    	      this.disableJitUpdates = defaults.disableJitUpdates;
     	      this.disabled = defaults.disabled;
     	      this.issuer = defaults.issuer;
     	      this.jwksEndpoint = defaults.jwksEndpoint;
@@ -419,6 +433,12 @@ public final class ProjectAuthenticationOauthSystemGitlab {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder disableJitUpdates(@Nullable Boolean disableJitUpdates) {
+
+            this.disableJitUpdates = disableJitUpdates;
             return this;
         }
         @CustomType.Setter
@@ -533,6 +553,7 @@ public final class ProjectAuthenticationOauthSystemGitlab {
             _resultValue.clientId = clientId;
             _resultValue.clientSecret = clientSecret;
             _resultValue.description = description;
+            _resultValue.disableJitUpdates = disableJitUpdates;
             _resultValue.disabled = disabled;
             _resultValue.issuer = issuer;
             _resultValue.jwksEndpoint = jwksEndpoint;
