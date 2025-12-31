@@ -33,6 +33,9 @@ namespace Descope.Pulumi.Descope
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("descope");
 
         private static readonly __Value<string?> _baseUrl = new __Value<string?>(() => __config.Get("baseUrl"));
+        /// <summary>
+        /// An optional base URL for the Descope API
+        /// </summary>
         public static string? BaseUrl
         {
             get => _baseUrl.Get();
@@ -40,6 +43,9 @@ namespace Descope.Pulumi.Descope
         }
 
         private static readonly __Value<string?> _managementKey = new __Value<string?>(() => __config.Get("managementKey"));
+        /// <summary>
+        /// A valid management key for your Descope company
+        /// </summary>
         public static string? ManagementKey
         {
             get => _managementKey.Get();

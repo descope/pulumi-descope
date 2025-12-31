@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? AllowDuplicateDomains;
         /// <summary>
+        /// Whether to allow overriding user's roles with SSO related roles.
+        /// </summary>
+        public readonly bool? AllowOverrideRoles;
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
@@ -39,6 +43,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectAuthenticationSso(
             bool? allowDuplicateDomains,
 
+            bool? allowOverrideRoles,
+
             bool? disabled,
 
             bool? mergeUsers,
@@ -48,6 +54,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Outputs.ProjectAuthenticationSsoSsoSuiteSettings? ssoSuiteSettings)
         {
             AllowDuplicateDomains = allowDuplicateDomains;
+            AllowOverrideRoles = allowOverrideRoles;
             Disabled = disabled;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;

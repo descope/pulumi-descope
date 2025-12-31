@@ -32,6 +32,7 @@ type Project struct {
 	InviteSettings ProjectInviteSettingsOutput `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
+	Lists        ProjectListArrayOutput    `pulumi:"lists"`
 	// The name of the Descope project.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// General settings for the Descope project.
@@ -92,6 +93,7 @@ type projectState struct {
 	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
+	Lists        []ProjectList        `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
 	// General settings for the Descope project.
@@ -123,6 +125,7 @@ type ProjectState struct {
 	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
+	Lists        ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
 	// General settings for the Descope project.
@@ -158,6 +161,7 @@ type projectArgs struct {
 	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
+	Lists        []ProjectList        `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
 	// General settings for the Descope project.
@@ -190,6 +194,7 @@ type ProjectArgs struct {
 	InviteSettings ProjectInviteSettingsPtrInput
 	// Defines templates for JSON Web Tokens (JWT) used for authentication.
 	JwtTemplates ProjectJwtTemplatesPtrInput
+	Lists        ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
 	// General settings for the Descope project.
@@ -332,6 +337,10 @@ func (o ProjectOutput) InviteSettings() ProjectInviteSettingsOutput {
 // Defines templates for JSON Web Tokens (JWT) used for authentication.
 func (o ProjectOutput) JwtTemplates() ProjectJwtTemplatesOutput {
 	return o.ApplyT(func(v *Project) ProjectJwtTemplatesOutput { return v.JwtTemplates }).(ProjectJwtTemplatesOutput)
+}
+
+func (o ProjectOutput) Lists() ProjectListArrayOutput {
+	return o.ApplyT(func(v *Project) ProjectListArrayOutput { return v.Lists }).(ProjectListArrayOutput)
 }
 
 // The name of the Descope project.

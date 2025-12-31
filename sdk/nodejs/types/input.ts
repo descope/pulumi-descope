@@ -2036,6 +2036,10 @@ export interface ProjectAuthenticationSso {
      */
     allowDuplicateDomains?: pulumi.Input<boolean>;
     /**
+     * Whether to allow overriding user's roles with SSO related roles.
+     */
+    allowOverrideRoles?: pulumi.Input<boolean>;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled?: pulumi.Input<boolean>;
@@ -4354,6 +4358,20 @@ export interface ProjectJwtTemplatesUserTemplate {
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
     template: pulumi.Input<string>;
+}
+
+export interface ProjectList {
+    data: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
+    /**
+     * The ID of this resource.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the Descope project.
+     */
+    name: pulumi.Input<string>;
+    type: pulumi.Input<string>;
 }
 
 export interface ProjectProjectSettings {

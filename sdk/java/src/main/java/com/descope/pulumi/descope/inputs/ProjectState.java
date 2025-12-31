@@ -11,6 +11,7 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsArgs;
 import com.descope.pulumi.descope.inputs.ProjectFlowsArgs;
 import com.descope.pulumi.descope.inputs.ProjectInviteSettingsArgs;
 import com.descope.pulumi.descope.inputs.ProjectJwtTemplatesArgs;
+import com.descope.pulumi.descope.inputs.ProjectListArgs;
 import com.descope.pulumi.descope.inputs.ProjectProjectSettingsArgs;
 import com.descope.pulumi.descope.inputs.ProjectStylesArgs;
 import com.descope.pulumi.descope.inputs.ProjectWidgetsArgs;
@@ -163,6 +164,13 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.jwtTemplates);
     }
 
+    @Import(name="lists")
+    private @Nullable Output<List<ProjectListArgs>> lists;
+
+    public Optional<Output<List<ProjectListArgs>>> lists() {
+        return Optional.ofNullable(this.lists);
+    }
+
     /**
      * The name of the Descope project.
      * 
@@ -250,6 +258,7 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
         this.flows = $.flows;
         this.inviteSettings = $.inviteSettings;
         this.jwtTemplates = $.jwtTemplates;
+        this.lists = $.lists;
         this.name = $.name;
         this.projectSettings = $.projectSettings;
         this.styles = $.styles;
@@ -462,6 +471,19 @@ public final class ProjectState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder jwtTemplates(ProjectJwtTemplatesArgs jwtTemplates) {
             return jwtTemplates(Output.of(jwtTemplates));
+        }
+
+        public Builder lists(@Nullable Output<List<ProjectListArgs>> lists) {
+            $.lists = lists;
+            return this;
+        }
+
+        public Builder lists(List<ProjectListArgs> lists) {
+            return lists(Output.of(lists));
+        }
+
+        public Builder lists(ProjectListArgs... lists) {
+            return lists(List.of(lists));
         }
 
         /**

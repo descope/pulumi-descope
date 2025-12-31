@@ -25,8 +25,17 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
+    /**
+     * An optional base URL for the Descope API
+     */
     declare public readonly baseUrl: pulumi.Output<string | undefined>;
+    /**
+     * A valid management key for your Descope company
+     */
     declare public readonly managementKey: pulumi.Output<string | undefined>;
+    /**
+     * @deprecated The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
+     */
     declare public readonly projectId: pulumi.Output<string | undefined>;
 
     /**
@@ -64,8 +73,17 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * An optional base URL for the Descope API
+     */
     baseUrl?: pulumi.Input<string>;
+    /**
+     * A valid management key for your Descope company
+     */
     managementKey?: pulumi.Input<string>;
+    /**
+     * @deprecated The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
+     */
     projectId?: pulumi.Input<string>;
 }
 

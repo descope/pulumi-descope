@@ -15,8 +15,14 @@ else:
 from .. import _utilities
 
 baseUrl: Optional[str]
+"""
+An optional base URL for the Descope API
+"""
 
 managementKey: Optional[str]
+"""
+A valid management key for your Descope company
+"""
 
 projectId: Optional[str]
 

@@ -187,6 +187,7 @@ __all__ = [
     'ProjectJwtTemplates',
     'ProjectJwtTemplatesAccessKeyTemplate',
     'ProjectJwtTemplatesUserTemplate',
+    'ProjectList',
     'ProjectProjectSettings',
     'ProjectProjectSettingsSessionMigration',
     'ProjectStyles',
@@ -7410,6 +7411,8 @@ class ProjectAuthenticationSso(dict):
         suggest = None
         if key == "allowDuplicateDomains":
             suggest = "allow_duplicate_domains"
+        elif key == "allowOverrideRoles":
+            suggest = "allow_override_roles"
         elif key == "mergeUsers":
             suggest = "merge_users"
         elif key == "redirectUrl":
@@ -7430,12 +7433,14 @@ class ProjectAuthenticationSso(dict):
 
     def __init__(__self__, *,
                  allow_duplicate_domains: Optional[_builtins.bool] = None,
+                 allow_override_roles: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
                  merge_users: Optional[_builtins.bool] = None,
                  redirect_url: Optional[_builtins.str] = None,
                  sso_suite_settings: Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings'] = None):
         """
         :param _builtins.bool allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
+        :param _builtins.bool allow_override_roles: Whether to allow overriding user's roles with SSO related roles.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param _builtins.bool merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param _builtins.str redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
@@ -7443,6 +7448,8 @@ class ProjectAuthenticationSso(dict):
         """
         if allow_duplicate_domains is not None:
             pulumi.set(__self__, "allow_duplicate_domains", allow_duplicate_domains)
+        if allow_override_roles is not None:
+            pulumi.set(__self__, "allow_override_roles", allow_override_roles)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if merge_users is not None:
@@ -7459,6 +7466,14 @@ class ProjectAuthenticationSso(dict):
         Whether to allow duplicate SSO domains across tenants.
         """
         return pulumi.get(self, "allow_duplicate_domains")
+
+    @_builtins.property
+    @pulumi.getter(name="allowOverrideRoles")
+    def allow_override_roles(self) -> Optional[_builtins.bool]:
+        """
+        Whether to allow overriding user's roles with SSO related roles.
+        """
+        return pulumi.get(self, "allow_override_roles")
 
     @_builtins.property
     @pulumi.getter
@@ -15704,6 +15719,58 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectList(dict):
+    def __init__(__self__, *,
+                 data: _builtins.str,
+                 name: _builtins.str,
+                 type: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str name: The name of the Descope project.
+        :param _builtins.str id: The ID of this resource.
+        """
+        pulumi.set(__self__, "data", data)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def data(self) -> _builtins.str:
+        return pulumi.get(self, "data")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the Descope project.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        return pulumi.get(self, "type")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        """
+        The ID of this resource.
+        """
         return pulumi.get(self, "id")
 
 

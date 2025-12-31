@@ -67,6 +67,9 @@ namespace Descope.Pulumi.Descope
         [Output("jwtTemplates")]
         public Output<Outputs.ProjectJwtTemplates> JwtTemplates { get; private set; } = null!;
 
+        [Output("lists")]
+        public Output<ImmutableArray<Outputs.ProjectList>> Lists { get; private set; } = null!;
+
         /// <summary>
         /// The name of the Descope project.
         /// </summary>
@@ -204,6 +207,14 @@ namespace Descope.Pulumi.Descope
         [Input("jwtTemplates")]
         public Input<Inputs.ProjectJwtTemplatesArgs>? JwtTemplates { get; set; }
 
+        [Input("lists")]
+        private InputList<Inputs.ProjectListArgs>? _lists;
+        public InputList<Inputs.ProjectListArgs> Lists
+        {
+            get => _lists ?? (_lists = new InputList<Inputs.ProjectListArgs>());
+            set => _lists = value;
+        }
+
         /// <summary>
         /// The name of the Descope project.
         /// </summary>
@@ -313,6 +324,14 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("jwtTemplates")]
         public Input<Inputs.ProjectJwtTemplatesGetArgs>? JwtTemplates { get; set; }
+
+        [Input("lists")]
+        private InputList<Inputs.ProjectListGetArgs>? _lists;
+        public InputList<Inputs.ProjectListGetArgs> Lists
+        {
+            get => _lists ?? (_lists = new InputList<Inputs.ProjectListGetArgs>());
+            set => _lists = value;
+        }
 
         /// <summary>
         /// The name of the Descope project.
