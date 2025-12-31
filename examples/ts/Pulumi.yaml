@@ -1,7 +1,0 @@
-name: pulumi-descope-ts
-runtime: nodejs
-description: A minimal TypeScript Pulumi program that uses the Pulumi descope package.
-config:
-  pulumi:tags:
-    value:
-      pulumi:template: typescript
