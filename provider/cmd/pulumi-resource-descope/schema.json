@@ -892,6 +892,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -976,6 +980,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -1142,6 +1147,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -1226,6 +1235,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -1336,6 +1346,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -1420,6 +1434,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -1530,6 +1545,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -1614,6 +1633,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -1724,6 +1744,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -1808,6 +1832,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -1918,6 +1943,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -2002,6 +2031,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -2112,6 +2142,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -2196,6 +2230,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -2306,6 +2341,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -2390,6 +2429,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -2500,6 +2540,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -2584,6 +2628,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -2694,6 +2739,10 @@
                     "type": "string",
                     "description": "A brief description of the OAuth provider.\n"
                 },
+                "disableJitUpdates": {
+                    "type": "boolean",
+                    "description": "By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.\n"
+                },
                 "disabled": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.\n"
@@ -2778,6 +2827,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "disableJitUpdates",
                         "disabled",
                         "issuer",
                         "jwksEndpoint",
@@ -4374,6 +4424,10 @@
                 "id": {
                     "type": "string"
                 },
+                "maskPii": {
+                    "type": "boolean",
+                    "description": "Whether to mask personally identifiable information in the logs.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "A custom name for your connector.\n"
@@ -4400,6 +4454,7 @@
                         "auditFilters",
                         "description",
                         "id",
+                        "maskPii",
                         "name",
                         "site",
                         "troubleshootLogEnabled"
@@ -7559,21 +7614,23 @@
         "descope:index/ProjectList:ProjectList": {
             "properties": {
                 "data": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The JSON data for the list. The format depends on the \u003cspan pulumi-lang-nodejs=\"`type`\" pulumi-lang-dotnet=\"`Type`\" pulumi-lang-go=\"`type`\" pulumi-lang-python=\"`type`\" pulumi-lang-yaml=\"`type`\" pulumi-lang-java=\"`type`\"\u003e`type`\u003c/span\u003e: - For `\"texts\"` and `\"ips\"` types: Must be a JSON array of strings (e.g., `[\"item1\", \"item2\"]`) - For `\"ips\"` type: Each string must be a valid IP address or CIDR range - For `\"json\"` type: Must be a JSON object (e.g., `{\"key\": \"value\"}`)\n"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "An optional description for the list. Defaults to an empty string if not provided.\n"
                 },
                 "id": {
-                    "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "type": "string"
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of the Descope project.\n"
+                    "description": "The name of the list. Maximum length is 100 characters.\n"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The type of list. Must be one of: - `\"texts\"` - A list of text strings - `\"ips\"` - A list of IP addresses or CIDR ranges - `\"json\"` - A JSON object\n"
                 }
             },
             "type": "object",
@@ -7879,7 +7936,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectList:ProjectList"
-                    }
+                    },
+                    "description": "Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.\n"
                 },
                 "name": {
                     "type": "string",
@@ -7969,7 +8027,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/descope:index/ProjectList:ProjectList"
-                    }
+                    },
+                    "description": "Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.\n"
                 },
                 "name": {
                     "type": "string",
@@ -8044,7 +8103,8 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/types/descope:index/ProjectList:ProjectList"
-                        }
+                        },
+                        "description": "Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.\n"
                     },
                     "name": {
                         "type": "string",
