@@ -18,12 +18,17 @@ java = 'corretto-11'
 
 # Executable tools
 pulumi = "{{ get_env(name='PULUMI_VERSION_MISE', default='latest') }}"
-"github:pulumi/pulumictl" = 'latest'
-"github:pulumi/schema-tools" = "latest"
-gradle = '7.6.0'
-golangci-lint = "2.6.2" # See note about about overrides if you need to customize this.
+"github:pulumi/pulumictl" = '0.0.50'
+"github:pulumi/schema-tools" = "0.6.0"
+"aqua:gradle/gradle-distributions" = '7.6.6'
+golangci-lint = "1.64.8" # See note about about overrides if you need to customize this.
 "npm:yarn" = "1.22.22"
 
 [settings]
 experimental = true # Required for Go binaries (e.g. pulumictl).
-lockfile = true
+lockfile = false
+http_retries = 3
+pin = true # `mise use` should pin versions instead of defaulting to latest.
+
+[plugins]
+vfox-pulumi = "https://github.com/pulumi/vfox-pulumi"

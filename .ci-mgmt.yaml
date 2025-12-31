@@ -19,3 +19,8 @@ registryDocs: true
 publishRegistry: false
 autoMergeProviderUpgrades: true
 major-version: 1
+
+github-app:
+  enabled: true
+  id: ${{ secrets.RELEASE_APP_ID }}
+  private-key: ${{ secrets.RELEASE_APP_PEM }}
