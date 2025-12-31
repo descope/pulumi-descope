@@ -3623,6 +3623,8 @@ type ProjectAuthenticationOauthCustom struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -3685,6 +3687,8 @@ type ProjectAuthenticationOauthCustomArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -3810,6 +3814,11 @@ func (o ProjectAuthenticationOauthCustomOutput) ClientSecret() pulumi.StringPtrO
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthCustomOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthCustomOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthCustom) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -4692,6 +4701,8 @@ type ProjectAuthenticationOauthSystemApple struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -4754,6 +4765,8 @@ type ProjectAuthenticationOauthSystemAppleArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -4905,6 +4918,11 @@ func (o ProjectAuthenticationOauthSystemAppleOutput) ClientSecret() pulumi.Strin
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemAppleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemAppleOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemApple) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -5093,6 +5111,16 @@ func (o ProjectAuthenticationOauthSystemApplePtrOutput) Description() pulumi.Str
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemApplePtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemApple) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -5740,6 +5768,8 @@ type ProjectAuthenticationOauthSystemDiscord struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -5802,6 +5832,8 @@ type ProjectAuthenticationOauthSystemDiscordArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -5953,6 +5985,11 @@ func (o ProjectAuthenticationOauthSystemDiscordOutput) ClientSecret() pulumi.Str
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemDiscordOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemDiscordOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemDiscord) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -6141,6 +6178,16 @@ func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) Description() pulumi.S
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemDiscordPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemDiscord) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -6788,6 +6835,8 @@ type ProjectAuthenticationOauthSystemFacebook struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -6850,6 +6899,8 @@ type ProjectAuthenticationOauthSystemFacebookArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -7001,6 +7052,11 @@ func (o ProjectAuthenticationOauthSystemFacebookOutput) ClientSecret() pulumi.St
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemFacebookOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemFacebookOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemFacebook) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -7189,6 +7245,16 @@ func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) Description() pulumi.
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemFacebookPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemFacebook) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -7836,6 +7902,8 @@ type ProjectAuthenticationOauthSystemGithub struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -7898,6 +7966,8 @@ type ProjectAuthenticationOauthSystemGithubArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -8049,6 +8119,11 @@ func (o ProjectAuthenticationOauthSystemGithubOutput) ClientSecret() pulumi.Stri
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGithubOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGithubOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGithub) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -8237,6 +8312,16 @@ func (o ProjectAuthenticationOauthSystemGithubPtrOutput) Description() pulumi.St
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGithubPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGithub) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -8884,6 +8969,8 @@ type ProjectAuthenticationOauthSystemGitlab struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -8946,6 +9033,8 @@ type ProjectAuthenticationOauthSystemGitlabArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -9097,6 +9186,11 @@ func (o ProjectAuthenticationOauthSystemGitlabOutput) ClientSecret() pulumi.Stri
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGitlabOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGitlabOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGitlab) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -9285,6 +9379,16 @@ func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) Description() pulumi.St
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGitlabPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGitlab) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -9932,6 +10036,8 @@ type ProjectAuthenticationOauthSystemGoogle struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -9994,6 +10100,8 @@ type ProjectAuthenticationOauthSystemGoogleArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -10145,6 +10253,11 @@ func (o ProjectAuthenticationOauthSystemGoogleOutput) ClientSecret() pulumi.Stri
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemGoogleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGoogleOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemGoogle) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -10333,6 +10446,16 @@ func (o ProjectAuthenticationOauthSystemGooglePtrOutput) Description() pulumi.St
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemGooglePtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemGoogle) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -10980,6 +11103,8 @@ type ProjectAuthenticationOauthSystemLinkedin struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -11042,6 +11167,8 @@ type ProjectAuthenticationOauthSystemLinkedinArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -11193,6 +11320,11 @@ func (o ProjectAuthenticationOauthSystemLinkedinOutput) ClientSecret() pulumi.St
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemLinkedinOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemLinkedinOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemLinkedin) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -11381,6 +11513,16 @@ func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) Description() pulumi.
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemLinkedinPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemLinkedin) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -12028,6 +12170,8 @@ type ProjectAuthenticationOauthSystemMicrosoft struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -12090,6 +12234,8 @@ type ProjectAuthenticationOauthSystemMicrosoftArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -12241,6 +12387,11 @@ func (o ProjectAuthenticationOauthSystemMicrosoftOutput) ClientSecret() pulumi.S
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemMicrosoftOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemMicrosoftOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemMicrosoft) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -12429,6 +12580,16 @@ func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) Description() pulumi
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemMicrosoftPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemMicrosoft) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -13076,6 +13237,8 @@ type ProjectAuthenticationOauthSystemSlack struct {
 	ClientSecret *string `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description *string `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates *bool `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -13138,6 +13301,8 @@ type ProjectAuthenticationOauthSystemSlackArgs struct {
 	ClientSecret pulumi.StringPtrInput `pulumi:"clientSecret"`
 	// A brief description of the OAuth provider.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+	DisableJitUpdates pulumi.BoolPtrInput `pulumi:"disableJitUpdates"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// The issuer identifier for the OAuth provider.
@@ -13289,6 +13454,11 @@ func (o ProjectAuthenticationOauthSystemSlackOutput) ClientSecret() pulumi.Strin
 // A brief description of the OAuth provider.
 func (o ProjectAuthenticationOauthSystemSlackOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemSlackOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationOauthSystemSlack) *bool { return v.DisableJitUpdates }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -13477,6 +13647,16 @@ func (o ProjectAuthenticationOauthSystemSlackPtrOutput) Description() pulumi.Str
 		}
 		return v.Description
 	}).(pulumi.StringPtrOutput)
+}
+
+// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+func (o ProjectAuthenticationOauthSystemSlackPtrOutput) DisableJitUpdates() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationOauthSystemSlack) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DisableJitUpdates
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -19890,6 +20070,8 @@ type ProjectConnectorsDatadog struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
+	// Whether to mask personally identifiable information in the logs.
+	MaskPii *bool `pulumi:"maskPii"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
@@ -19919,6 +20101,8 @@ type ProjectConnectorsDatadogArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// Whether to mask personally identifiable information in the logs.
+	MaskPii pulumi.BoolPtrInput `pulumi:"maskPii"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
@@ -20000,6 +20184,11 @@ func (o ProjectConnectorsDatadogOutput) Description() pulumi.StringPtrOutput {
 
 func (o ProjectConnectorsDatadogOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Whether to mask personally identifiable information in the logs.
+func (o ProjectConnectorsDatadogOutput) MaskPii() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDatadog) *bool { return v.MaskPii }).(pulumi.BoolPtrOutput)
 }
 
 // A custom name for your connector.
@@ -30914,12 +31103,14 @@ func (o ProjectJwtTemplatesUserTemplateArrayOutput) Index(i pulumi.IntInput) Pro
 }
 
 type ProjectList struct {
-	Data        string  `pulumi:"data"`
+	// The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+	Data string `pulumi:"data"`
+	// An optional description for the list. Defaults to an empty string if not provided.
 	Description *string `pulumi:"description"`
-	// The ID of this resource.
-	Id *string `pulumi:"id"`
-	// The name of the Descope project.
+	Id          *string `pulumi:"id"`
+	// The name of the list. Maximum length is 100 characters.
 	Name string `pulumi:"name"`
+	// The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
 	Type string `pulumi:"type"`
 }
 
@@ -30935,12 +31126,14 @@ type ProjectListInput interface {
 }
 
 type ProjectListArgs struct {
-	Data        pulumi.StringInput    `pulumi:"data"`
+	// The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+	Data pulumi.StringInput `pulumi:"data"`
+	// An optional description for the list. Defaults to an empty string if not provided.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// The ID of this resource.
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	// The name of the Descope project.
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the list. Maximum length is 100 characters.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
 	Type pulumi.StringInput `pulumi:"type"`
 }
 
@@ -30995,24 +31188,26 @@ func (o ProjectListOutput) ToProjectListOutputWithContext(ctx context.Context) P
 	return o
 }
 
+// The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
 func (o ProjectListOutput) Data() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectList) string { return v.Data }).(pulumi.StringOutput)
 }
 
+// An optional description for the list. Defaults to an empty string if not provided.
 func (o ProjectListOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectList) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The ID of this resource.
 func (o ProjectListOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectList) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// The name of the Descope project.
+// The name of the list. Maximum length is 100 characters.
 func (o ProjectListOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectList) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
 func (o ProjectListOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectList) string { return v.Type }).(pulumi.StringOutput)
 }

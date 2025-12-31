@@ -16,53 +16,69 @@ public final class ProjectListArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectListArgs Empty = new ProjectListArgs();
 
+    /**
+     * The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
+     * 
+     */
     @Import(name="data", required=true)
     private Output<String> data;
 
+    /**
+     * @return The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
+     * 
+     */
     public Output<String> data() {
         return this.data;
     }
 
+    /**
+     * An optional description for the list. Defaults to an empty string if not provided.
+     * 
+     */
     @Import(name="description")
     private @Nullable Output<String> description;
 
+    /**
+     * @return An optional description for the list. Defaults to an empty string if not provided.
+     * 
+     */
     public Optional<Output<String>> description() {
         return Optional.ofNullable(this.description);
     }
 
-    /**
-     * The ID of this resource.
-     * 
-     */
     @Import(name="id")
     private @Nullable Output<String> id;
 
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public Optional<Output<String>> id() {
         return Optional.ofNullable(this.id);
     }
 
     /**
-     * The name of the Descope project.
+     * The name of the list. Maximum length is 100 characters.
      * 
      */
     @Import(name="name", required=true)
     private Output<String> name;
 
     /**
-     * @return The name of the Descope project.
+     * @return The name of the list. Maximum length is 100 characters.
      * 
      */
     public Output<String> name() {
         return this.name;
     }
 
+    /**
+     * The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+     * 
+     */
     @Import(name="type", required=true)
     private Output<String> type;
 
+    /**
+     * @return The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+     * 
+     */
     public Output<String> type() {
         return this.type;
     }
@@ -95,47 +111,59 @@ public final class ProjectListArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ProjectListArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param data The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(Output<String> data) {
             $.data = data;
             return this;
         }
 
+        /**
+         * @param data The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
+         * 
+         * @return builder
+         * 
+         */
         public Builder data(String data) {
             return data(Output.of(data));
         }
 
+        /**
+         * @param description An optional description for the list. Defaults to an empty string if not provided.
+         * 
+         * @return builder
+         * 
+         */
         public Builder description(@Nullable Output<String> description) {
             $.description = description;
             return this;
         }
 
-        public Builder description(String description) {
-            return description(Output.of(description));
-        }
-
         /**
-         * @param id The ID of this resource.
+         * @param description An optional description for the list. Defaults to an empty string if not provided.
          * 
          * @return builder
          * 
          */
+        public Builder description(String description) {
+            return description(Output.of(description));
+        }
+
         public Builder id(@Nullable Output<String> id) {
             $.id = id;
             return this;
         }
 
-        /**
-         * @param id The ID of this resource.
-         * 
-         * @return builder
-         * 
-         */
         public Builder id(String id) {
             return id(Output.of(id));
         }
 
         /**
-         * @param name The name of the Descope project.
+         * @param name The name of the list. Maximum length is 100 characters.
          * 
          * @return builder
          * 
@@ -146,7 +174,7 @@ public final class ProjectListArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param name The name of the Descope project.
+         * @param name The name of the list. Maximum length is 100 characters.
          * 
          * @return builder
          * 
@@ -155,11 +183,23 @@ public final class ProjectListArgs extends com.pulumi.resources.ResourceArgs {
             return name(Output.of(name));
         }
 
+        /**
+         * @param type The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+         * 
+         * @return builder
+         * 
+         */
         public Builder type(Output<String> type) {
             $.type = type;
             return this;
         }
 
+        /**
+         * @param type The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+         * 
+         * @return builder
+         * 
+         */
         public Builder type(String type) {
             return type(Output.of(type));
         }

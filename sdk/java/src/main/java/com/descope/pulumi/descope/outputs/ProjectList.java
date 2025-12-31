@@ -12,41 +12,57 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectList {
-    private String data;
-    private @Nullable String description;
     /**
-     * @return The ID of this resource.
+     * @return The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
      * 
      */
+    private String data;
+    /**
+     * @return An optional description for the list. Defaults to an empty string if not provided.
+     * 
+     */
+    private @Nullable String description;
     private @Nullable String id;
     /**
-     * @return The name of the Descope project.
+     * @return The name of the list. Maximum length is 100 characters.
      * 
      */
     private String name;
+    /**
+     * @return The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+     * 
+     */
     private String type;
 
     private ProjectList() {}
+    /**
+     * @return The JSON data for the list. The format depends on the `type`: - For `&#34;texts&#34;` and `&#34;ips&#34;` types: Must be a JSON array of strings (e.g., `[&#34;item1&#34;, &#34;item2&#34;]`) - For `&#34;ips&#34;` type: Each string must be a valid IP address or CIDR range - For `&#34;json&#34;` type: Must be a JSON object (e.g., `{&#34;key&#34;: &#34;value&#34;}`)
+     * 
+     */
     public String data() {
         return this.data;
     }
+    /**
+     * @return An optional description for the list. Defaults to an empty string if not provided.
+     * 
+     */
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
     }
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
     /**
-     * @return The name of the Descope project.
+     * @return The name of the list. Maximum length is 100 characters.
      * 
      */
     public String name() {
         return this.name;
     }
+    /**
+     * @return The type of list. Must be one of: - `&#34;texts&#34;` - A list of text strings - `&#34;ips&#34;` - A list of IP addresses or CIDR ranges - `&#34;json&#34;` - A JSON object
+     * 
+     */
     public String type() {
         return this.type;
     }

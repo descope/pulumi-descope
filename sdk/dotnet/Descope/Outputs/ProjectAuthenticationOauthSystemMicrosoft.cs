@@ -47,6 +47,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        /// </summary>
+        public readonly bool? DisableJitUpdates;
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
@@ -129,6 +133,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            bool? disableJitUpdates,
+
             bool? disabled,
 
             string? issuer,
@@ -169,6 +175,7 @@ namespace Descope.Pulumi.Descope.Outputs
             ClientId = clientId;
             ClientSecret = clientSecret;
             Description = description;
+            DisableJitUpdates = disableJitUpdates;
             Disabled = disabled;
             Issuer = issuer;
             JwksEndpoint = jwksEndpoint;

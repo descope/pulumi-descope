@@ -14,8 +14,8 @@ github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 h1:NMZiJj8QnKe1LgsbDayM4UoHwbvw
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0/go.mod h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=
 github.com/descope/go-sdk v1.6.21 h1:QS6EnDHrUs1+26+cqqc22QVp3SFmOztrLui5ZB0IdB0=
 github.com/descope/go-sdk v1.6.21/go.mod h1:C24zAs76uTyLcFjhvBJd5X8QL+wdbSJ86GUJVFJ8Pvo=
-github.com/descope/terraform-provider-descope v0.3.3 h1:oLlLFj+Jwh69tSN49lwWWTarf0MihFKUxd1Aor9qDvo=
-github.com/descope/terraform-provider-descope v0.3.3/go.mod h1:JqTPdX6B5XjCIRmQfRn8lHpBtp9iPE1C32op5eLHUMs=
+github.com/descope/terraform-provider-descope v0.3.4 h1:vNRUFE6WuZCDcayDMAiSmW5n0MbTwtduk+l0QQ4DsPE=
+github.com/descope/terraform-provider-descope v0.3.4/go.mod h1:JqTPdX6B5XjCIRmQfRn8lHpBtp9iPE1C32op5eLHUMs=
 github.com/fatih/color v1.13.0/go.mod h1:kLAiJbzzSOZDVNGyDpeOxJ47H46qBXwg5ILebYFFOfk=
 github.com/fatih/color v1.18.0 h1:S8gINlzdQ840/4pfAwic/ZE0djQEH3wM94VfqLTZcOM=
 github.com/fatih/color v1.18.0/go.mod h1:4FelSpRwEGDpQ12mAdzqdOukCy4u8WUtOY6lkT/6HfU=

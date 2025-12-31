@@ -67,6 +67,9 @@ namespace Descope.Pulumi.Descope
         [Output("jwtTemplates")]
         public Output<Outputs.ProjectJwtTemplates> JwtTemplates { get; private set; } = null!;
 
+        /// <summary>
+        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        /// </summary>
         [Output("lists")]
         public Output<ImmutableArray<Outputs.ProjectList>> Lists { get; private set; } = null!;
 
@@ -209,6 +212,10 @@ namespace Descope.Pulumi.Descope
 
         [Input("lists")]
         private InputList<Inputs.ProjectListArgs>? _lists;
+
+        /// <summary>
+        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        /// </summary>
         public InputList<Inputs.ProjectListArgs> Lists
         {
             get => _lists ?? (_lists = new InputList<Inputs.ProjectListArgs>());
@@ -327,6 +334,10 @@ namespace Descope.Pulumi.Descope
 
         [Input("lists")]
         private InputList<Inputs.ProjectListGetArgs>? _lists;
+
+        /// <summary>
+        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        /// </summary>
         public InputList<Inputs.ProjectListGetArgs> Lists
         {
             get => _lists ?? (_lists = new InputList<Inputs.ProjectListGetArgs>());

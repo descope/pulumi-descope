@@ -2468,6 +2468,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -2546,6 +2550,7 @@ class ProjectAuthenticationOauthCustomArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -2571,6 +2576,7 @@ class ProjectAuthenticationOauthCustomArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -2604,6 +2610,8 @@ class ProjectAuthenticationOauthCustomArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -2732,6 +2740,18 @@ class ProjectAuthenticationOauthCustomArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -3302,6 +3322,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -3380,6 +3404,7 @@ class ProjectAuthenticationOauthSystemAppleArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -3405,6 +3430,7 @@ class ProjectAuthenticationOauthSystemAppleArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -3438,6 +3464,8 @@ class ProjectAuthenticationOauthSystemAppleArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -3566,6 +3594,18 @@ class ProjectAuthenticationOauthSystemAppleArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -3944,6 +3984,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -4022,6 +4066,7 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -4047,6 +4092,7 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -4080,6 +4126,8 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -4208,6 +4256,18 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -4586,6 +4646,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -4664,6 +4728,7 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -4689,6 +4754,7 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -4722,6 +4788,8 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -4850,6 +4918,18 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -5228,6 +5308,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -5306,6 +5390,7 @@ class ProjectAuthenticationOauthSystemGithubArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -5331,6 +5416,7 @@ class ProjectAuthenticationOauthSystemGithubArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -5364,6 +5450,8 @@ class ProjectAuthenticationOauthSystemGithubArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -5492,6 +5580,18 @@ class ProjectAuthenticationOauthSystemGithubArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -5870,6 +5970,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -5948,6 +6052,7 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -5973,6 +6078,7 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -6006,6 +6112,8 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -6134,6 +6242,18 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -6512,6 +6632,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -6590,6 +6714,7 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -6615,6 +6740,7 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -6648,6 +6774,8 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -6776,6 +6904,18 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -7154,6 +7294,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -7232,6 +7376,7 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -7257,6 +7402,7 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -7290,6 +7436,8 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -7418,6 +7566,18 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -7796,6 +7956,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -7874,6 +8038,7 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -7899,6 +8064,7 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -7932,6 +8098,8 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -8060,6 +8228,18 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -8438,6 +8618,10 @@ if not MYPY:
         """
         A brief description of the OAuth provider.
         """
+        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
         disabled: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -8516,6 +8700,7 @@ class ProjectAuthenticationOauthSystemSlackArgs:
                  client_id: Optional[pulumi.Input[_builtins.str]] = None,
                  client_secret: Optional[pulumi.Input[_builtins.str]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
+                 disable_jit_updates: Optional[pulumi.Input[_builtins.bool]] = None,
                  disabled: Optional[pulumi.Input[_builtins.bool]] = None,
                  issuer: Optional[pulumi.Input[_builtins.str]] = None,
                  jwks_endpoint: Optional[pulumi.Input[_builtins.str]] = None,
@@ -8541,6 +8726,7 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
+        :param pulumi.Input[_builtins.bool] disable_jit_updates: By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param pulumi.Input[_builtins.str] issuer: The issuer identifier for the OAuth provider.
         :param pulumi.Input[_builtins.str] jwks_endpoint: The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
@@ -8574,6 +8760,8 @@ class ProjectAuthenticationOauthSystemSlackArgs:
             pulumi.set(__self__, "client_secret", client_secret)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if disable_jit_updates is not None:
+            pulumi.set(__self__, "disable_jit_updates", disable_jit_updates)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if issuer is not None:
@@ -8702,6 +8890,18 @@ class ProjectAuthenticationOauthSystemSlackArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableJitUpdates")
+    def disable_jit_updates(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+        """
+        return pulumi.get(self, "disable_jit_updates")
+
+    @disable_jit_updates.setter
+    def disable_jit_updates(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "disable_jit_updates", value)
 
     @_builtins.property
     @pulumi.getter
@@ -13086,6 +13286,10 @@ if not MYPY:
         A description of what your connector is used for.
         """
         id: NotRequired[pulumi.Input[_builtins.str]]
+        mask_pii: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
         site: NotRequired[pulumi.Input[_builtins.str]]
         """
         The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
@@ -13106,6 +13310,7 @@ class ProjectConnectorsDatadogArgs:
                  audit_filters: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogAuditFilterArgs']]]] = None,
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None,
+                 mask_pii: Optional[pulumi.Input[_builtins.bool]] = None,
                  site: Optional[pulumi.Input[_builtins.str]] = None,
                  troubleshoot_log_enabled: Optional[pulumi.Input[_builtins.bool]] = None):
         """
@@ -13114,6 +13319,7 @@ class ProjectConnectorsDatadogArgs:
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
         :param pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogAuditFilterArgs']]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
+        :param pulumi.Input[_builtins.bool] mask_pii: Whether to mask personally identifiable information in the logs.
         :param pulumi.Input[_builtins.str] site: The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
         :param pulumi.Input[_builtins.bool] troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
@@ -13127,6 +13333,8 @@ class ProjectConnectorsDatadogArgs:
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
         if site is not None:
             pulumi.set(__self__, "site", site)
         if troubleshoot_log_enabled is not None:
@@ -13200,6 +13408,18 @@ class ProjectConnectorsDatadogArgs:
     @id.setter
     def id(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @mask_pii.setter
+    def mask_pii(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "mask_pii", value)
 
     @_builtins.property
     @pulumi.getter
@@ -21850,16 +22070,22 @@ class ProjectJwtTemplatesUserTemplateArgs:
 if not MYPY:
     class ProjectListArgsDict(TypedDict):
         data: pulumi.Input[_builtins.str]
+        """
+        The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+        """
         name: pulumi.Input[_builtins.str]
         """
-        The name of the Descope project.
+        The name of the list. Maximum length is 100 characters.
         """
         type: pulumi.Input[_builtins.str]
+        """
+        The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+        """
         description: NotRequired[pulumi.Input[_builtins.str]]
+        """
+        An optional description for the list. Defaults to an empty string if not provided.
+        """
         id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The ID of this resource.
-        """
 elif False:
     ProjectListArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -21872,8 +22098,10 @@ class ProjectListArgs:
                  description: Optional[pulumi.Input[_builtins.str]] = None,
                  id: Optional[pulumi.Input[_builtins.str]] = None):
         """
-        :param pulumi.Input[_builtins.str] name: The name of the Descope project.
-        :param pulumi.Input[_builtins.str] id: The ID of this resource.
+        :param pulumi.Input[_builtins.str] data: The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+        :param pulumi.Input[_builtins.str] name: The name of the list. Maximum length is 100 characters.
+        :param pulumi.Input[_builtins.str] type: The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+        :param pulumi.Input[_builtins.str] description: An optional description for the list. Defaults to an empty string if not provided.
         """
         pulumi.set(__self__, "data", data)
         pulumi.set(__self__, "name", name)
@@ -21886,6 +22114,9 @@ class ProjectListArgs:
     @_builtins.property
     @pulumi.getter
     def data(self) -> pulumi.Input[_builtins.str]:
+        """
+        The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+        """
         return pulumi.get(self, "data")
 
     @data.setter
@@ -21896,7 +22127,7 @@ class ProjectListArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[_builtins.str]:
         """
-        The name of the Descope project.
+        The name of the list. Maximum length is 100 characters.
         """
         return pulumi.get(self, "name")
 
@@ -21907,6 +22138,9 @@ class ProjectListArgs:
     @_builtins.property
     @pulumi.getter
     def type(self) -> pulumi.Input[_builtins.str]:
+        """
+        The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+        """
         return pulumi.get(self, "type")
 
     @type.setter
@@ -21916,6 +22150,9 @@ class ProjectListArgs:
     @_builtins.property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+        """
+        An optional description for the list. Defaults to an empty string if not provided.
+        """
         return pulumi.get(self, "description")
 
     @description.setter
@@ -21925,9 +22162,6 @@ class ProjectListArgs:
     @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[_builtins.str]]:
-        """
-        The ID of this resource.
-        """
         return pulumi.get(self, "id")
 
     @id.setter

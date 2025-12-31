@@ -14,16 +14,22 @@ namespace Descope.Pulumi.Descope.Outputs
     [OutputType]
     public sealed class ProjectList
     {
-        public readonly string Data;
-        public readonly string? Description;
         /// <summary>
-        /// The ID of this resource.
+        /// The JSON data for the list. The format depends on the `Type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
         /// </summary>
+        public readonly string Data;
+        /// <summary>
+        /// An optional description for the list. Defaults to an empty string if not provided.
+        /// </summary>
+        public readonly string? Description;
         public readonly string? Id;
         /// <summary>
-        /// The name of the Descope project.
+        /// The name of the list. Maximum length is 100 characters.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]

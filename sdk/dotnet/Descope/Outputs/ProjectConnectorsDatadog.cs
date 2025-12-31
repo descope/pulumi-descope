@@ -32,6 +32,10 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string? Description;
         public readonly string? Id;
         /// <summary>
+        /// Whether to mask personally identifiable information in the logs.
+        /// </summary>
+        public readonly bool? MaskPii;
+        /// <summary>
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
@@ -56,6 +60,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
+            bool? maskPii,
+
             string name,
 
             string? site,
@@ -67,6 +73,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AuditFilters = auditFilters;
             Description = description;
             Id = id;
+            MaskPii = maskPii;
             Name = name;
             Site = site;
             TroubleshootLogEnabled = troubleshootLogEnabled;

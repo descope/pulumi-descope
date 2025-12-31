@@ -164,9 +164,17 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.jwtTemplates);
     }
 
+    /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
     @Import(name="lists")
     private @Nullable Output<List<ProjectListArgs>> lists;
 
+    /**
+     * @return Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
     public Optional<Output<List<ProjectListArgs>>> lists() {
         return Optional.ofNullable(this.lists);
     }
@@ -473,15 +481,33 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
             return jwtTemplates(Output.of(jwtTemplates));
         }
 
+        /**
+         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+         * 
+         * @return builder
+         * 
+         */
         public Builder lists(@Nullable Output<List<ProjectListArgs>> lists) {
             $.lists = lists;
             return this;
         }
 
+        /**
+         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+         * 
+         * @return builder
+         * 
+         */
         public Builder lists(List<ProjectListArgs> lists) {
             return lists(Output.of(lists));
         }
 
+        /**
+         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+         * 
+         * @return builder
+         * 
+         */
         public Builder lists(ProjectListArgs... lists) {
             return lists(List.of(lists));
         }
