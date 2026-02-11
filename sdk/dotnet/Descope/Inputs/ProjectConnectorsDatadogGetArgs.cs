@@ -57,6 +57,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Id { get; set; }
 
         /// <summary>
+        /// Whether to mask personally identifiable information in the logs.
+        /// </summary>
+        [Input("maskPii")]
+        public Input<bool>? MaskPii { get; set; }
+
+        /// <summary>
         /// A custom name for your connector.
         /// </summary>
         [Input("name", required: true)]

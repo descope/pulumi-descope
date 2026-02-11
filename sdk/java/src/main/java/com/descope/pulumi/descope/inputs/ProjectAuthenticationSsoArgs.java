@@ -33,6 +33,21 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * Whether to allow overriding user&#39;s roles with SSO related roles.
+     * 
+     */
+    @Import(name="allowOverrideRoles")
+    private @Nullable Output<Boolean> allowOverrideRoles;
+
+    /**
+     * @return Whether to allow overriding user&#39;s roles with SSO related roles.
+     * 
+     */
+    public Optional<Output<Boolean>> allowOverrideRoles() {
+        return Optional.ofNullable(this.allowOverrideRoles);
+    }
+
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -96,6 +111,7 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
 
     private ProjectAuthenticationSsoArgs(ProjectAuthenticationSsoArgs $) {
         this.allowDuplicateDomains = $.allowDuplicateDomains;
+        this.allowOverrideRoles = $.allowOverrideRoles;
         this.disabled = $.disabled;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
@@ -139,6 +155,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder allowDuplicateDomains(Boolean allowDuplicateDomains) {
             return allowDuplicateDomains(Output.of(allowDuplicateDomains));
+        }
+
+        /**
+         * @param allowOverrideRoles Whether to allow overriding user&#39;s roles with SSO related roles.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowOverrideRoles(@Nullable Output<Boolean> allowOverrideRoles) {
+            $.allowOverrideRoles = allowOverrideRoles;
+            return this;
+        }
+
+        /**
+         * @param allowOverrideRoles Whether to allow overriding user&#39;s roles with SSO related roles.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowOverrideRoles(Boolean allowOverrideRoles) {
+            return allowOverrideRoles(Output.of(allowOverrideRoles));
         }
 
         /**

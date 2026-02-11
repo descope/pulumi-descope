@@ -142,6 +142,21 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
     }
 
     /**
+     * By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     * 
+     */
+    @Import(name="disableJitUpdates")
+    private @Nullable Output<Boolean> disableJitUpdates;
+
+    /**
+     * @return By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     * 
+     */
+    public Optional<Output<Boolean>> disableJitUpdates() {
+        return Optional.ofNullable(this.disableJitUpdates);
+    }
+
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -392,6 +407,7 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.description = $.description;
+        this.disableJitUpdates = $.disableJitUpdates;
         this.disabled = $.disabled;
         this.issuer = $.issuer;
         this.jwksEndpoint = $.jwksEndpoint;
@@ -604,6 +620,27 @@ public final class ProjectAuthenticationOauthSystemGoogleArgs extends com.pulumi
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param disableJitUpdates By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disableJitUpdates(@Nullable Output<Boolean> disableJitUpdates) {
+            $.disableJitUpdates = disableJitUpdates;
+            return this;
+        }
+
+        /**
+         * @param disableJitUpdates By default the user attribute mapping configuration is used to update the user&#39;s attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disableJitUpdates(Boolean disableJitUpdates) {
+            return disableJitUpdates(Output.of(disableJitUpdates));
         }
 
         /**

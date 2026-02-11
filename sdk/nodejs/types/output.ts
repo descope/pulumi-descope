@@ -464,6 +464,10 @@ export interface ProjectAuthenticationOauthCustom {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -635,6 +639,10 @@ export interface ProjectAuthenticationOauthSystemApple {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -766,6 +774,10 @@ export interface ProjectAuthenticationOauthSystemDiscord {
      * A brief description of the OAuth provider.
      */
     description: string;
+    /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
@@ -899,6 +911,10 @@ export interface ProjectAuthenticationOauthSystemFacebook {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -1030,6 +1046,10 @@ export interface ProjectAuthenticationOauthSystemGithub {
      * A brief description of the OAuth provider.
      */
     description: string;
+    /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
@@ -1163,6 +1183,10 @@ export interface ProjectAuthenticationOauthSystemGitlab {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -1294,6 +1318,10 @@ export interface ProjectAuthenticationOauthSystemGoogle {
      * A brief description of the OAuth provider.
      */
     description: string;
+    /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
@@ -1427,6 +1455,10 @@ export interface ProjectAuthenticationOauthSystemLinkedin {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -1559,6 +1591,10 @@ export interface ProjectAuthenticationOauthSystemMicrosoft {
      */
     description: string;
     /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled: boolean;
@@ -1690,6 +1726,10 @@ export interface ProjectAuthenticationOauthSystemSlack {
      * A brief description of the OAuth provider.
      */
     description: string;
+    /**
+     * By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+     */
+    disableJitUpdates: boolean;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
@@ -2035,6 +2075,10 @@ export interface ProjectAuthenticationSso {
      * Whether to allow duplicate SSO domains across tenants.
      */
     allowDuplicateDomains: boolean;
+    /**
+     * Whether to allow overriding user's roles with SSO related roles.
+     */
+    allowOverrideRoles: boolean;
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
@@ -2611,6 +2655,10 @@ export interface ProjectConnectorsDatadog {
      */
     description: string;
     id: string;
+    /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii: boolean;
     /**
      * A custom name for your connector.
      */
@@ -4354,6 +4402,26 @@ export interface ProjectJwtTemplatesUserTemplate {
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
     template: string;
+}
+
+export interface ProjectList {
+    /**
+     * The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+     */
+    data: string;
+    /**
+     * An optional description for the list. Defaults to an empty string if not provided.
+     */
+    description: string;
+    id: string;
+    /**
+     * The name of the list. Maximum length is 100 characters.
+     */
+    name: string;
+    /**
+     * The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+     */
+    type: string;
 }
 
 export interface ProjectProjectSettings {

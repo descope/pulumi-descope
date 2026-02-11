@@ -14,6 +14,7 @@ import com.descope.pulumi.descope.outputs.ProjectConnectors;
 import com.descope.pulumi.descope.outputs.ProjectFlows;
 import com.descope.pulumi.descope.outputs.ProjectInviteSettings;
 import com.descope.pulumi.descope.outputs.ProjectJwtTemplates;
+import com.descope.pulumi.descope.outputs.ProjectList;
 import com.descope.pulumi.descope.outputs.ProjectProjectSettings;
 import com.descope.pulumi.descope.outputs.ProjectStyles;
 import com.descope.pulumi.descope.outputs.ProjectWidgets;
@@ -153,6 +154,20 @@ public class Project extends com.pulumi.resources.CustomResource {
      */
     public Output<ProjectJwtTemplates> jwtTemplates() {
         return this.jwtTemplates;
+    }
+    /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
+    @Export(name="lists", refs={List.class,ProjectList.class}, tree="[0,1]")
+    private Output<List<ProjectList>> lists;
+
+    /**
+     * @return Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     * 
+     */
+    public Output<List<ProjectList>> lists() {
+        return this.lists;
     }
     /**
      * The name of the Descope project.

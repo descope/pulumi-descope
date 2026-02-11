@@ -561,6 +561,9 @@
                             }
                         }
                     },
+                    "lists": {
+                        "maxItemsOne": false
+                    },
                     "project_settings": {
                         "fields": {
                             "approved_domains": {

@@ -22,10 +22,16 @@ __config__ = pulumi.Config('descope')
 class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def base_url(self) -> Optional[str]:
+        """
+        An optional base URL for the Descope API
+        """
         return __config__.get('baseUrl')
 
     @_builtins.property
     def management_key(self) -> Optional[str]:
+        """
+        A valid management key for your Descope company
+        """
         return __config__.get('managementKey')
 
     @_builtins.property

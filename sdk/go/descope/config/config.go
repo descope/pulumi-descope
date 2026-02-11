@@ -11,12 +11,17 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+// An optional base URL for the Descope API
 func GetBaseUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "descope:baseUrl")
 }
+
+// A valid management key for your Descope company
 func GetManagementKey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "descope:managementKey")
 }
+
+// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
 func GetProjectId(ctx *pulumi.Context) string {
 	return config.Get(ctx, "descope:projectId")
 }

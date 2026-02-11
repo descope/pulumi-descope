@@ -30,6 +30,7 @@ class ProjectArgs:
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
@@ -46,6 +47,7 @@ class ProjectArgs:
         :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input['ProjectInviteSettingsArgs'] invite_settings: User invitation settings and behavior.
         :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
@@ -70,6 +72,8 @@ class ProjectArgs:
             pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
+        if lists is not None:
+            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if project_settings is not None:
@@ -188,6 +192,18 @@ class ProjectArgs:
     @jwt_templates.setter
     def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+        """
+        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        """
+        return pulumi.get(self, "lists")
+
+    @lists.setter
+    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+        pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
@@ -262,6 +278,7 @@ class _ProjectState:
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
                  invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
                  jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
                  styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
@@ -278,6 +295,7 @@ class _ProjectState:
         :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input['ProjectInviteSettingsArgs'] invite_settings: User invitation settings and behavior.
         :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
         :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
         :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
@@ -302,6 +320,8 @@ class _ProjectState:
             pulumi.set(__self__, "invite_settings", invite_settings)
         if jwt_templates is not None:
             pulumi.set(__self__, "jwt_templates", jwt_templates)
+        if lists is not None:
+            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if project_settings is not None:
@@ -420,6 +440,18 @@ class _ProjectState:
     @jwt_templates.setter
     def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+        """
+        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        """
+        return pulumi.get(self, "lists")
+
+    @lists.setter
+    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+        pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
@@ -497,6 +529,7 @@ class Project(pulumi.CustomResource):
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -516,6 +549,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']] invite_settings: User invitation settings and behavior.
         :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
@@ -554,6 +588,7 @@ class Project(pulumi.CustomResource):
                  flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
                  invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
                  jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: Optional[pulumi.Input[_builtins.str]] = None,
                  project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
                  styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -577,6 +612,7 @@ class Project(pulumi.CustomResource):
             __props__.__dict__["flows"] = flows
             __props__.__dict__["invite_settings"] = invite_settings
             __props__.__dict__["jwt_templates"] = jwt_templates
+            __props__.__dict__["lists"] = lists
             __props__.__dict__["name"] = name
             __props__.__dict__["project_settings"] = project_settings
             __props__.__dict__["styles"] = styles
@@ -601,6 +637,7 @@ class Project(pulumi.CustomResource):
             flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
             invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
             jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+            lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
             name: Optional[pulumi.Input[_builtins.str]] = None,
             project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
             styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
@@ -622,6 +659,7 @@ class Project(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
         :param pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']] invite_settings: User invitation settings and behavior.
         :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
         :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
         :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
@@ -641,6 +679,7 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["flows"] = flows
         __props__.__dict__["invite_settings"] = invite_settings
         __props__.__dict__["jwt_templates"] = jwt_templates
+        __props__.__dict__["lists"] = lists
         __props__.__dict__["name"] = name
         __props__.__dict__["project_settings"] = project_settings
         __props__.__dict__["styles"] = styles
@@ -719,6 +758,14 @@ class Project(pulumi.CustomResource):
         Defines templates for JSON Web Tokens (JWT) used for authentication.
         """
         return pulumi.get(self, "jwt_templates")
+
+    @_builtins.property
+    @pulumi.getter
+    def lists(self) -> pulumi.Output[Sequence['outputs.ProjectList']]:
+        """
+        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+        """
+        return pulumi.get(self, "lists")
 
     @_builtins.property
     @pulumi.getter

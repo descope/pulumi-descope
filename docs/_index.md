@@ -17,6 +17,6 @@ The Descope provider is available as a package in all Pulumi languages:
 
 ## Configuration Reference
 
-- `baseUrl` (String)
-- `managementKey` (String, Sensitive)
-- `projectId` (String)
+- `baseUrl` (String) An optional base URL for the Descope API
+- `managementKey` (String, Sensitive) A valid management key for your Descope company
+- `projectId` (String, Deprecated)

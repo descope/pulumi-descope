@@ -71,6 +71,10 @@ export class Project extends pulumi.CustomResource {
      */
     declare public readonly jwtTemplates: pulumi.Output<outputs.ProjectJwtTemplates>;
     /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     */
+    declare public readonly lists: pulumi.Output<outputs.ProjectList[]>;
+    /**
      * The name of the Descope project.
      */
     declare public readonly name: pulumi.Output<string>;
@@ -113,6 +117,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["flows"] = state?.flows;
             resourceInputs["inviteSettings"] = state?.inviteSettings;
             resourceInputs["jwtTemplates"] = state?.jwtTemplates;
+            resourceInputs["lists"] = state?.lists;
             resourceInputs["name"] = state?.name;
             resourceInputs["projectSettings"] = state?.projectSettings;
             resourceInputs["styles"] = state?.styles;
@@ -129,6 +134,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["flows"] = args?.flows;
             resourceInputs["inviteSettings"] = args?.inviteSettings;
             resourceInputs["jwtTemplates"] = args?.jwtTemplates;
+            resourceInputs["lists"] = args?.lists;
             resourceInputs["name"] = args?.name;
             resourceInputs["projectSettings"] = args?.projectSettings;
             resourceInputs["styles"] = args?.styles;
@@ -180,6 +186,10 @@ export interface ProjectState {
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     */
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
     /**
      * The name of the Descope project.
      */
@@ -242,6 +252,10 @@ export interface ProjectArgs {
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
     jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    /**
+     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
+     */
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
     /**
      * The name of the Descope project.
      */
