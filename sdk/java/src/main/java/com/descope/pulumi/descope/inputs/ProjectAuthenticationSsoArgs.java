@@ -63,6 +63,21 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * Whether to enable groups priority.
+     * 
+     */
+    @Import(name="groupsPriority")
+    private @Nullable Output<Boolean> groupsPriority;
+
+    /**
+     * @return Whether to enable groups priority.
+     * 
+     */
+    public Optional<Output<Boolean>> groupsPriority() {
+        return Optional.ofNullable(this.groupsPriority);
+    }
+
+    /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -113,6 +128,7 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         this.allowDuplicateDomains = $.allowDuplicateDomains;
         this.allowOverrideRoles = $.allowOverrideRoles;
         this.disabled = $.disabled;
+        this.groupsPriority = $.groupsPriority;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
         this.ssoSuiteSettings = $.ssoSuiteSettings;
@@ -197,6 +213,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder disabled(Boolean disabled) {
             return disabled(Output.of(disabled));
+        }
+
+        /**
+         * @param groupsPriority Whether to enable groups priority.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder groupsPriority(@Nullable Output<Boolean> groupsPriority) {
+            $.groupsPriority = groupsPriority;
+            return this;
+        }
+
+        /**
+         * @param groupsPriority Whether to enable groups priority.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder groupsPriority(Boolean groupsPriority) {
+            return groupsPriority(Output.of(groupsPriority));
         }
 
         /**

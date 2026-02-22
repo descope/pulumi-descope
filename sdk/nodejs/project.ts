@@ -35,6 +35,10 @@ export class Project extends pulumi.CustomResource {
     }
 
     /**
+     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     */
+    declare public readonly adminPortal: pulumi.Output<outputs.ProjectAdminPortal>;
+    /**
      * Applications that are registered with the project.
      */
     declare public readonly applications: pulumi.Output<outputs.ProjectApplications>;
@@ -108,6 +112,7 @@ export class Project extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ProjectState | undefined;
+            resourceInputs["adminPortal"] = state?.adminPortal;
             resourceInputs["applications"] = state?.applications;
             resourceInputs["attributes"] = state?.attributes;
             resourceInputs["authentication"] = state?.authentication;
@@ -125,6 +130,7 @@ export class Project extends pulumi.CustomResource {
             resourceInputs["widgets"] = state?.widgets;
         } else {
             const args = argsOrState as ProjectArgs | undefined;
+            resourceInputs["adminPortal"] = args?.adminPortal;
             resourceInputs["applications"] = args?.applications;
             resourceInputs["attributes"] = args?.attributes;
             resourceInputs["authentication"] = args?.authentication;
@@ -150,6 +156,10 @@ export class Project extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Project resources.
  */
 export interface ProjectState {
+    /**
+     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     */
+    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal>;
     /**
      * Applications that are registered with the project.
      */
@@ -216,6 +226,10 @@ export interface ProjectState {
  * The set of arguments for constructing a Project resource.
  */
 export interface ProjectArgs {
+    /**
+     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     */
+    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal>;
     /**
      * Applications that are registered with the project.
      */

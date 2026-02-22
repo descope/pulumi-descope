@@ -1,10 +1,89 @@
 {
     "auto-aliasing": {
         "resources": {
+            "descope_descoper": {
+                "current": "descope:index/descoper:Descoper",
+                "majorVersion": 1,
+                "fields": {
+                    "rbac": {
+                        "fields": {
+                            "project_roles": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "project_ids": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            },
+                            "tag_roles": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_management_key": {
+                "current": "descope:index/managementKey:ManagementKey",
+                "majorVersion": 1,
+                "fields": {
+                    "permitted_ips": {
+                        "maxItemsOne": false
+                    },
+                    "rebac": {
+                        "fields": {
+                            "company_roles": {
+                                "maxItemsOne": false
+                            },
+                            "project_roles": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "project_ids": {
+                                            "maxItemsOne": false
+                                        },
+                                        "roles": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            },
+                            "tag_roles": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "roles": {
+                                            "maxItemsOne": false
+                                        },
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "descope_project": {
                 "current": "descope:index/project:Project",
                 "majorVersion": 1,
                 "fields": {
+                    "admin_portal": {
+                        "fields": {
+                            "widgets": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
                     "applications": {
                         "fields": {
                             "oidc_applications": {
@@ -34,6 +113,26 @@
                     },
                     "attributes": {
                         "fields": {
+                            "access_key": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "select_options": {
+                                            "maxItemsOne": false
+                                        },
+                                        "widget_authorization": {
+                                            "fields": {
+                                                "edit_permissions": {
+                                                    "maxItemsOne": false
+                                                },
+                                                "view_permissions": {
+                                                    "maxItemsOne": false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
                             "tenant": {
                                 "maxItemsOne": false,
                                 "elem": {
@@ -307,6 +406,9 @@
                             "amplitude": {
                                 "maxItemsOne": false
                             },
+                            "arkose": {
+                                "maxItemsOne": false
+                            },
                             "audit_webhook": {
                                 "maxItemsOne": false,
                                 "elem": {
@@ -345,6 +447,26 @@
                                 "maxItemsOne": false
                             },
                             "bitsight": {
+                                "maxItemsOne": false
+                            },
+                            "coralogix": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "darwinium": {
                                 "maxItemsOne": false
                             },
                             "datadog": {
@@ -423,6 +545,9 @@
                             "google_maps_places": {
                                 "maxItemsOne": false
                             },
+                            "hcaptcha": {
+                                "maxItemsOne": false
+                            },
                             "hibp": {
                                 "maxItemsOne": false
                             },
@@ -438,8 +563,28 @@
                             "intercom": {
                                 "maxItemsOne": false
                             },
+                            "ldap": {
+                                "maxItemsOne": false
+                            },
                             "lokalise": {
                                 "maxItemsOne": false
+                            },
+                            "mixpanel": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "mparticle": {
                                 "maxItemsOne": false
@@ -460,6 +605,29 @@
                                         }
                                     }
                                 }
+                            },
+                            "opentelemetry": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "ping_directory": {
+                                "maxItemsOne": false
+                            },
+                            "postmark": {
+                                "maxItemsOne": false
                             },
                             "radar": {
                                 "maxItemsOne": false
@@ -503,6 +671,26 @@
                             "sns": {
                                 "maxItemsOne": false
                             },
+                            "splunk": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "sql": {
+                                "maxItemsOne": false
+                            },
                             "sumologic": {
                                 "maxItemsOne": false,
                                 "elem": {
@@ -536,6 +724,12 @@
                                 "maxItemsOne": false
                             },
                             "twilio_verify": {
+                                "maxItemsOne": false
+                            },
+                            "unibeam": {
+                                "maxItemsOne": false
+                            },
+                            "zerobounce": {
                                 "maxItemsOne": false
                             }
                         }

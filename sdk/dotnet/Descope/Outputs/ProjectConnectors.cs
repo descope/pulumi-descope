@@ -23,6 +23,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAmplitude> Amplitudes;
         /// <summary>
+        /// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsArkose> Arkoses;
+        /// <summary>
         /// Send audit events to a custom webhook.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAuditWebhook> AuditWebhooks;
@@ -38,6 +42,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsBitsight> Bitsights;
+        /// <summary>
+        /// Send audit events and troubleshooting logs to Coralogix.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsCoralogix> Coralogixes;
+        /// <summary>
+        /// Connect to Darwinium API for fraud detection and device intelligence.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsDarwinium> Darwinia;
         /// <summary>
         /// Stream authentication audit logs with the Datadog connector.
         /// </summary>
@@ -103,6 +115,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleMapsPlace> GoogleMapsPlaces;
         /// <summary>
+        /// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsHcaptcha> Hcaptchas;
+        /// <summary>
         /// Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHibp> Hibps;
@@ -123,9 +139,17 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsIntercom> Intercoms;
         /// <summary>
+        /// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsLdap> Ldaps;
+        /// <summary>
         /// Localize the language of your login and user journey screens with the Lokalise connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsLokalise> Lokalises;
+        /// <summary>
+        /// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsMixpanel> Mixpanels;
         /// <summary>
         /// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
         /// </summary>
@@ -134,6 +158,18 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Stream authentication audit logs with the New Relic connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsNewrelic> Newrelics;
+        /// <summary>
+        /// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsOpentelemetry> Opentelemetries;
+        /// <summary>
+        /// Authenticate against PingDirectory.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsPingDirectory> PingDirectories;
+        /// <summary>
+        /// Send emails using Postmark
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsPostmark> Postmarks;
         /// <summary>
         /// Get address autocompletions from Radar Autocomplete API.
         /// </summary>
@@ -191,6 +227,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSn> Sns;
         /// <summary>
+        /// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSplunk> Splunks;
+        /// <summary>
+        /// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSql> Sqls;
+        /// <summary>
         /// Stream logs and audit events with the Sumo Logic connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSumologic> Sumologics;
@@ -218,12 +262,22 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> TwilioVerifies;
+        /// <summary>
+        /// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsUnibeam> Unibeams;
+        /// <summary>
+        /// Email validation with ZeroBounce
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsZerobounce> Zerobounces;
 
         [OutputConstructor]
         private ProjectConnectors(
             ImmutableArray<Outputs.ProjectConnectorsAbuseipdb> abuseipdbs,
 
             ImmutableArray<Outputs.ProjectConnectorsAmplitude> amplitudes,
+
+            ImmutableArray<Outputs.ProjectConnectorsArkose> arkoses,
 
             ImmutableArray<Outputs.ProjectConnectorsAuditWebhook> auditWebhooks,
 
@@ -232,6 +286,10 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> awsTranslates,
 
             ImmutableArray<Outputs.ProjectConnectorsBitsight> bitsights,
+
+            ImmutableArray<Outputs.ProjectConnectorsCoralogix> coralogixes,
+
+            ImmutableArray<Outputs.ProjectConnectorsDarwinium> darwinia,
 
             ImmutableArray<Outputs.ProjectConnectorsDatadog> datadogs,
 
@@ -265,6 +323,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsGoogleMapsPlace> googleMapsPlaces,
 
+            ImmutableArray<Outputs.ProjectConnectorsHcaptcha> hcaptchas,
+
             ImmutableArray<Outputs.ProjectConnectorsHibp> hibps,
 
             ImmutableArray<Outputs.ProjectConnectorsHttp> https,
@@ -275,11 +335,21 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsIntercom> intercoms,
 
+            ImmutableArray<Outputs.ProjectConnectorsLdap> ldaps,
+
             ImmutableArray<Outputs.ProjectConnectorsLokalise> lokalises,
+
+            ImmutableArray<Outputs.ProjectConnectorsMixpanel> mixpanels,
 
             ImmutableArray<Outputs.ProjectConnectorsMparticle> mparticles,
 
             ImmutableArray<Outputs.ProjectConnectorsNewrelic> newrelics,
+
+            ImmutableArray<Outputs.ProjectConnectorsOpentelemetry> opentelemetries,
+
+            ImmutableArray<Outputs.ProjectConnectorsPingDirectory> pingDirectories,
+
+            ImmutableArray<Outputs.ProjectConnectorsPostmark> postmarks,
 
             ImmutableArray<Outputs.ProjectConnectorsRadar> radars,
 
@@ -309,6 +379,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsSn> sns,
 
+            ImmutableArray<Outputs.ProjectConnectorsSplunk> splunks,
+
+            ImmutableArray<Outputs.ProjectConnectorsSql> sqls,
+
             ImmutableArray<Outputs.ProjectConnectorsSumologic> sumologics,
 
             ImmutableArray<Outputs.ProjectConnectorsSupabase> supabases,
@@ -321,14 +395,21 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsTwilioCore> twilioCores,
 
-            ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> twilioVerifies)
+            ImmutableArray<Outputs.ProjectConnectorsTwilioVerify> twilioVerifies,
+
+            ImmutableArray<Outputs.ProjectConnectorsUnibeam> unibeams,
+
+            ImmutableArray<Outputs.ProjectConnectorsZerobounce> zerobounces)
         {
             Abuseipdbs = abuseipdbs;
             Amplitudes = amplitudes;
+            Arkoses = arkoses;
             AuditWebhooks = auditWebhooks;
             AwsS3s = awsS3s;
             AwsTranslates = awsTranslates;
             Bitsights = bitsights;
+            Coralogixes = coralogixes;
+            Darwinia = darwinia;
             Datadogs = datadogs;
             DevrevGrows = devrevGrows;
             Docebos = docebos;
@@ -345,14 +426,20 @@ namespace Descope.Pulumi.Descope.Outputs
             GoogleCloudLoggings = googleCloudLoggings;
             GoogleCloudTranslations = googleCloudTranslations;
             GoogleMapsPlaces = googleMapsPlaces;
+            Hcaptchas = hcaptchas;
             Hibps = hibps;
             Https = https;
             Hubspots = hubspots;
             Incodes = incodes;
             Intercoms = intercoms;
+            Ldaps = ldaps;
             Lokalises = lokalises;
+            Mixpanels = mixpanels;
             Mparticles = mparticles;
             Newrelics = newrelics;
+            Opentelemetries = opentelemetries;
+            PingDirectories = pingDirectories;
+            Postmarks = postmarks;
             Radars = radars;
             RecaptchaEnterprises = recaptchaEnterprises;
             Recaptchas = recaptchas;
@@ -367,6 +454,8 @@ namespace Descope.Pulumi.Descope.Outputs
             Smartlings = smartlings;
             Smtps = smtps;
             Sns = sns;
+            Splunks = splunks;
+            Sqls = sqls;
             Sumologics = sumologics;
             Supabases = supabases;
             Telesigns = telesigns;
@@ -374,6 +463,8 @@ namespace Descope.Pulumi.Descope.Outputs
             Turnstiles = turnstiles;
             TwilioCores = twilioCores;
             TwilioVerifies = twilioVerifies;
+            Unibeams = unibeams;
+            Zerobounces = zerobounces;
         }
     }
 }

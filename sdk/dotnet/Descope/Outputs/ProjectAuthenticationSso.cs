@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
+        /// Whether to enable groups priority.
+        /// </summary>
+        public readonly bool? GroupsPriority;
+        /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
         public readonly bool? MergeUsers;
@@ -47,6 +51,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? disabled,
 
+            bool? groupsPriority,
+
             bool? mergeUsers,
 
             string? redirectUrl,
@@ -56,6 +62,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AllowDuplicateDomains = allowDuplicateDomains;
             AllowOverrideRoles = allowOverrideRoles;
             Disabled = disabled;
+            GroupsPriority = groupsPriority;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;
             SsoSuiteSettings = ssoSuiteSettings;

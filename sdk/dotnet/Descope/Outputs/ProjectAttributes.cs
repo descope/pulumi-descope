@@ -15,20 +15,27 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAttributes
     {
         /// <summary>
-        /// A list of `TenantAttribute`. Read the description below.
+        /// A list of custom attributes for storing additional details about each access key in the project.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectAttributesAccessKey> AccessKeys;
+        /// <summary>
+        /// A list of custom attributes for storing additional details about each tenant in the project.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAttributesTenant> Tenants;
         /// <summary>
-        /// A list of `UserAttribute`. Read the description below.
+        /// A list of custom attributes for storing additional details about each user in the project.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAttributesUser> Users;
 
         [OutputConstructor]
         private ProjectAttributes(
+            ImmutableArray<Outputs.ProjectAttributesAccessKey> accessKeys,
+
             ImmutableArray<Outputs.ProjectAttributesTenant> tenants,
 
             ImmutableArray<Outputs.ProjectAttributesUser> users)
         {
+            AccessKeys = accessKeys;
             Tenants = tenants;
             Users = users;
         }

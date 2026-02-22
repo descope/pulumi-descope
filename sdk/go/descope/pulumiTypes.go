@@ -13,6 +13,1061 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type DescoperRbac struct {
+	// Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+	IsCompanyAdmin *bool `pulumi:"isCompanyAdmin"`
+	// A list of roles that are granted to the descoper for specific projects by their project ID.
+	ProjectRoles []DescoperRbacProjectRole `pulumi:"projectRoles"`
+	// A list of roles that are granted to the descoper for all projects that have a specific tag.
+	TagRoles []DescoperRbacTagRole `pulumi:"tagRoles"`
+}
+
+// DescoperRbacInput is an input type that accepts DescoperRbacArgs and DescoperRbacOutput values.
+// You can construct a concrete instance of `DescoperRbacInput` via:
+//
+//	DescoperRbacArgs{...}
+type DescoperRbacInput interface {
+	pulumi.Input
+
+	ToDescoperRbacOutput() DescoperRbacOutput
+	ToDescoperRbacOutputWithContext(context.Context) DescoperRbacOutput
+}
+
+type DescoperRbacArgs struct {
+	// Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+	IsCompanyAdmin pulumi.BoolPtrInput `pulumi:"isCompanyAdmin"`
+	// A list of roles that are granted to the descoper for specific projects by their project ID.
+	ProjectRoles DescoperRbacProjectRoleArrayInput `pulumi:"projectRoles"`
+	// A list of roles that are granted to the descoper for all projects that have a specific tag.
+	TagRoles DescoperRbacTagRoleArrayInput `pulumi:"tagRoles"`
+}
+
+func (DescoperRbacArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbac)(nil)).Elem()
+}
+
+func (i DescoperRbacArgs) ToDescoperRbacOutput() DescoperRbacOutput {
+	return i.ToDescoperRbacOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacArgs) ToDescoperRbacOutputWithContext(ctx context.Context) DescoperRbacOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacOutput)
+}
+
+func (i DescoperRbacArgs) ToDescoperRbacPtrOutput() DescoperRbacPtrOutput {
+	return i.ToDescoperRbacPtrOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacArgs) ToDescoperRbacPtrOutputWithContext(ctx context.Context) DescoperRbacPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacOutput).ToDescoperRbacPtrOutputWithContext(ctx)
+}
+
+// DescoperRbacPtrInput is an input type that accepts DescoperRbacArgs, DescoperRbacPtr and DescoperRbacPtrOutput values.
+// You can construct a concrete instance of `DescoperRbacPtrInput` via:
+//
+//	        DescoperRbacArgs{...}
+//
+//	or:
+//
+//	        nil
+type DescoperRbacPtrInput interface {
+	pulumi.Input
+
+	ToDescoperRbacPtrOutput() DescoperRbacPtrOutput
+	ToDescoperRbacPtrOutputWithContext(context.Context) DescoperRbacPtrOutput
+}
+
+type descoperRbacPtrType DescoperRbacArgs
+
+func DescoperRbacPtr(v *DescoperRbacArgs) DescoperRbacPtrInput {
+	return (*descoperRbacPtrType)(v)
+}
+
+func (*descoperRbacPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DescoperRbac)(nil)).Elem()
+}
+
+func (i *descoperRbacPtrType) ToDescoperRbacPtrOutput() DescoperRbacPtrOutput {
+	return i.ToDescoperRbacPtrOutputWithContext(context.Background())
+}
+
+func (i *descoperRbacPtrType) ToDescoperRbacPtrOutputWithContext(ctx context.Context) DescoperRbacPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacPtrOutput)
+}
+
+type DescoperRbacOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbac)(nil)).Elem()
+}
+
+func (o DescoperRbacOutput) ToDescoperRbacOutput() DescoperRbacOutput {
+	return o
+}
+
+func (o DescoperRbacOutput) ToDescoperRbacOutputWithContext(ctx context.Context) DescoperRbacOutput {
+	return o
+}
+
+func (o DescoperRbacOutput) ToDescoperRbacPtrOutput() DescoperRbacPtrOutput {
+	return o.ToDescoperRbacPtrOutputWithContext(context.Background())
+}
+
+func (o DescoperRbacOutput) ToDescoperRbacPtrOutputWithContext(ctx context.Context) DescoperRbacPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DescoperRbac) *DescoperRbac {
+		return &v
+	}).(DescoperRbacPtrOutput)
+}
+
+// Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+func (o DescoperRbacOutput) IsCompanyAdmin() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DescoperRbac) *bool { return v.IsCompanyAdmin }).(pulumi.BoolPtrOutput)
+}
+
+// A list of roles that are granted to the descoper for specific projects by their project ID.
+func (o DescoperRbacOutput) ProjectRoles() DescoperRbacProjectRoleArrayOutput {
+	return o.ApplyT(func(v DescoperRbac) []DescoperRbacProjectRole { return v.ProjectRoles }).(DescoperRbacProjectRoleArrayOutput)
+}
+
+// A list of roles that are granted to the descoper for all projects that have a specific tag.
+func (o DescoperRbacOutput) TagRoles() DescoperRbacTagRoleArrayOutput {
+	return o.ApplyT(func(v DescoperRbac) []DescoperRbacTagRole { return v.TagRoles }).(DescoperRbacTagRoleArrayOutput)
+}
+
+type DescoperRbacPtrOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DescoperRbac)(nil)).Elem()
+}
+
+func (o DescoperRbacPtrOutput) ToDescoperRbacPtrOutput() DescoperRbacPtrOutput {
+	return o
+}
+
+func (o DescoperRbacPtrOutput) ToDescoperRbacPtrOutputWithContext(ctx context.Context) DescoperRbacPtrOutput {
+	return o
+}
+
+func (o DescoperRbacPtrOutput) Elem() DescoperRbacOutput {
+	return o.ApplyT(func(v *DescoperRbac) DescoperRbac {
+		if v != nil {
+			return *v
+		}
+		var ret DescoperRbac
+		return ret
+	}).(DescoperRbacOutput)
+}
+
+// Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+func (o DescoperRbacPtrOutput) IsCompanyAdmin() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DescoperRbac) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsCompanyAdmin
+	}).(pulumi.BoolPtrOutput)
+}
+
+// A list of roles that are granted to the descoper for specific projects by their project ID.
+func (o DescoperRbacPtrOutput) ProjectRoles() DescoperRbacProjectRoleArrayOutput {
+	return o.ApplyT(func(v *DescoperRbac) []DescoperRbacProjectRole {
+		if v == nil {
+			return nil
+		}
+		return v.ProjectRoles
+	}).(DescoperRbacProjectRoleArrayOutput)
+}
+
+// A list of roles that are granted to the descoper for all projects that have a specific tag.
+func (o DescoperRbacPtrOutput) TagRoles() DescoperRbacTagRoleArrayOutput {
+	return o.ApplyT(func(v *DescoperRbac) []DescoperRbacTagRole {
+		if v == nil {
+			return nil
+		}
+		return v.TagRoles
+	}).(DescoperRbacTagRoleArrayOutput)
+}
+
+type DescoperRbacProjectRole struct {
+	// The project IDs this role grant applies to.
+	ProjectIds []string `pulumi:"projectIds"`
+	// The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+	Role string `pulumi:"role"`
+}
+
+// DescoperRbacProjectRoleInput is an input type that accepts DescoperRbacProjectRoleArgs and DescoperRbacProjectRoleOutput values.
+// You can construct a concrete instance of `DescoperRbacProjectRoleInput` via:
+//
+//	DescoperRbacProjectRoleArgs{...}
+type DescoperRbacProjectRoleInput interface {
+	pulumi.Input
+
+	ToDescoperRbacProjectRoleOutput() DescoperRbacProjectRoleOutput
+	ToDescoperRbacProjectRoleOutputWithContext(context.Context) DescoperRbacProjectRoleOutput
+}
+
+type DescoperRbacProjectRoleArgs struct {
+	// The project IDs this role grant applies to.
+	ProjectIds pulumi.StringArrayInput `pulumi:"projectIds"`
+	// The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+	Role pulumi.StringInput `pulumi:"role"`
+}
+
+func (DescoperRbacProjectRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbacProjectRole)(nil)).Elem()
+}
+
+func (i DescoperRbacProjectRoleArgs) ToDescoperRbacProjectRoleOutput() DescoperRbacProjectRoleOutput {
+	return i.ToDescoperRbacProjectRoleOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacProjectRoleArgs) ToDescoperRbacProjectRoleOutputWithContext(ctx context.Context) DescoperRbacProjectRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacProjectRoleOutput)
+}
+
+// DescoperRbacProjectRoleArrayInput is an input type that accepts DescoperRbacProjectRoleArray and DescoperRbacProjectRoleArrayOutput values.
+// You can construct a concrete instance of `DescoperRbacProjectRoleArrayInput` via:
+//
+//	DescoperRbacProjectRoleArray{ DescoperRbacProjectRoleArgs{...} }
+type DescoperRbacProjectRoleArrayInput interface {
+	pulumi.Input
+
+	ToDescoperRbacProjectRoleArrayOutput() DescoperRbacProjectRoleArrayOutput
+	ToDescoperRbacProjectRoleArrayOutputWithContext(context.Context) DescoperRbacProjectRoleArrayOutput
+}
+
+type DescoperRbacProjectRoleArray []DescoperRbacProjectRoleInput
+
+func (DescoperRbacProjectRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DescoperRbacProjectRole)(nil)).Elem()
+}
+
+func (i DescoperRbacProjectRoleArray) ToDescoperRbacProjectRoleArrayOutput() DescoperRbacProjectRoleArrayOutput {
+	return i.ToDescoperRbacProjectRoleArrayOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacProjectRoleArray) ToDescoperRbacProjectRoleArrayOutputWithContext(ctx context.Context) DescoperRbacProjectRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacProjectRoleArrayOutput)
+}
+
+type DescoperRbacProjectRoleOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacProjectRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbacProjectRole)(nil)).Elem()
+}
+
+func (o DescoperRbacProjectRoleOutput) ToDescoperRbacProjectRoleOutput() DescoperRbacProjectRoleOutput {
+	return o
+}
+
+func (o DescoperRbacProjectRoleOutput) ToDescoperRbacProjectRoleOutputWithContext(ctx context.Context) DescoperRbacProjectRoleOutput {
+	return o
+}
+
+// The project IDs this role grant applies to.
+func (o DescoperRbacProjectRoleOutput) ProjectIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DescoperRbacProjectRole) []string { return v.ProjectIds }).(pulumi.StringArrayOutput)
+}
+
+// The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+func (o DescoperRbacProjectRoleOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v DescoperRbacProjectRole) string { return v.Role }).(pulumi.StringOutput)
+}
+
+type DescoperRbacProjectRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacProjectRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DescoperRbacProjectRole)(nil)).Elem()
+}
+
+func (o DescoperRbacProjectRoleArrayOutput) ToDescoperRbacProjectRoleArrayOutput() DescoperRbacProjectRoleArrayOutput {
+	return o
+}
+
+func (o DescoperRbacProjectRoleArrayOutput) ToDescoperRbacProjectRoleArrayOutputWithContext(ctx context.Context) DescoperRbacProjectRoleArrayOutput {
+	return o
+}
+
+func (o DescoperRbacProjectRoleArrayOutput) Index(i pulumi.IntInput) DescoperRbacProjectRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DescoperRbacProjectRole {
+		return vs[0].([]DescoperRbacProjectRole)[vs[1].(int)]
+	}).(DescoperRbacProjectRoleOutput)
+}
+
+type DescoperRbacTagRole struct {
+	// The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+	Role string `pulumi:"role"`
+	// The project tags this role assignment applies to.
+	Tags []string `pulumi:"tags"`
+}
+
+// DescoperRbacTagRoleInput is an input type that accepts DescoperRbacTagRoleArgs and DescoperRbacTagRoleOutput values.
+// You can construct a concrete instance of `DescoperRbacTagRoleInput` via:
+//
+//	DescoperRbacTagRoleArgs{...}
+type DescoperRbacTagRoleInput interface {
+	pulumi.Input
+
+	ToDescoperRbacTagRoleOutput() DescoperRbacTagRoleOutput
+	ToDescoperRbacTagRoleOutputWithContext(context.Context) DescoperRbacTagRoleOutput
+}
+
+type DescoperRbacTagRoleArgs struct {
+	// The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+	Role pulumi.StringInput `pulumi:"role"`
+	// The project tags this role assignment applies to.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (DescoperRbacTagRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbacTagRole)(nil)).Elem()
+}
+
+func (i DescoperRbacTagRoleArgs) ToDescoperRbacTagRoleOutput() DescoperRbacTagRoleOutput {
+	return i.ToDescoperRbacTagRoleOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacTagRoleArgs) ToDescoperRbacTagRoleOutputWithContext(ctx context.Context) DescoperRbacTagRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacTagRoleOutput)
+}
+
+// DescoperRbacTagRoleArrayInput is an input type that accepts DescoperRbacTagRoleArray and DescoperRbacTagRoleArrayOutput values.
+// You can construct a concrete instance of `DescoperRbacTagRoleArrayInput` via:
+//
+//	DescoperRbacTagRoleArray{ DescoperRbacTagRoleArgs{...} }
+type DescoperRbacTagRoleArrayInput interface {
+	pulumi.Input
+
+	ToDescoperRbacTagRoleArrayOutput() DescoperRbacTagRoleArrayOutput
+	ToDescoperRbacTagRoleArrayOutputWithContext(context.Context) DescoperRbacTagRoleArrayOutput
+}
+
+type DescoperRbacTagRoleArray []DescoperRbacTagRoleInput
+
+func (DescoperRbacTagRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DescoperRbacTagRole)(nil)).Elem()
+}
+
+func (i DescoperRbacTagRoleArray) ToDescoperRbacTagRoleArrayOutput() DescoperRbacTagRoleArrayOutput {
+	return i.ToDescoperRbacTagRoleArrayOutputWithContext(context.Background())
+}
+
+func (i DescoperRbacTagRoleArray) ToDescoperRbacTagRoleArrayOutputWithContext(ctx context.Context) DescoperRbacTagRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DescoperRbacTagRoleArrayOutput)
+}
+
+type DescoperRbacTagRoleOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacTagRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DescoperRbacTagRole)(nil)).Elem()
+}
+
+func (o DescoperRbacTagRoleOutput) ToDescoperRbacTagRoleOutput() DescoperRbacTagRoleOutput {
+	return o
+}
+
+func (o DescoperRbacTagRoleOutput) ToDescoperRbacTagRoleOutputWithContext(ctx context.Context) DescoperRbacTagRoleOutput {
+	return o
+}
+
+// The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+func (o DescoperRbacTagRoleOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v DescoperRbacTagRole) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The project tags this role assignment applies to.
+func (o DescoperRbacTagRoleOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DescoperRbacTagRole) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type DescoperRbacTagRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (DescoperRbacTagRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DescoperRbacTagRole)(nil)).Elem()
+}
+
+func (o DescoperRbacTagRoleArrayOutput) ToDescoperRbacTagRoleArrayOutput() DescoperRbacTagRoleArrayOutput {
+	return o
+}
+
+func (o DescoperRbacTagRoleArrayOutput) ToDescoperRbacTagRoleArrayOutputWithContext(ctx context.Context) DescoperRbacTagRoleArrayOutput {
+	return o
+}
+
+func (o DescoperRbacTagRoleArrayOutput) Index(i pulumi.IntInput) DescoperRbacTagRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DescoperRbacTagRole {
+		return vs[0].([]DescoperRbacTagRole)[vs[1].(int)]
+	}).(DescoperRbacTagRoleOutput)
+}
+
+type ManagementKeyRebac struct {
+	// A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+	CompanyRoles []string `pulumi:"companyRoles"`
+	// A list of project-level role names that are granted to the management key for specific projects by their project ID.
+	ProjectRoles []ManagementKeyRebacProjectRole `pulumi:"projectRoles"`
+	// A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+	TagRoles []ManagementKeyRebacTagRole `pulumi:"tagRoles"`
+}
+
+// ManagementKeyRebacInput is an input type that accepts ManagementKeyRebacArgs and ManagementKeyRebacOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacInput` via:
+//
+//	ManagementKeyRebacArgs{...}
+type ManagementKeyRebacInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacOutput() ManagementKeyRebacOutput
+	ToManagementKeyRebacOutputWithContext(context.Context) ManagementKeyRebacOutput
+}
+
+type ManagementKeyRebacArgs struct {
+	// A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+	CompanyRoles pulumi.StringArrayInput `pulumi:"companyRoles"`
+	// A list of project-level role names that are granted to the management key for specific projects by their project ID.
+	ProjectRoles ManagementKeyRebacProjectRoleArrayInput `pulumi:"projectRoles"`
+	// A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+	TagRoles ManagementKeyRebacTagRoleArrayInput `pulumi:"tagRoles"`
+}
+
+func (ManagementKeyRebacArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebac)(nil)).Elem()
+}
+
+func (i ManagementKeyRebacArgs) ToManagementKeyRebacOutput() ManagementKeyRebacOutput {
+	return i.ToManagementKeyRebacOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacArgs) ToManagementKeyRebacOutputWithContext(ctx context.Context) ManagementKeyRebacOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacOutput)
+}
+
+func (i ManagementKeyRebacArgs) ToManagementKeyRebacPtrOutput() ManagementKeyRebacPtrOutput {
+	return i.ToManagementKeyRebacPtrOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacArgs) ToManagementKeyRebacPtrOutputWithContext(ctx context.Context) ManagementKeyRebacPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacOutput).ToManagementKeyRebacPtrOutputWithContext(ctx)
+}
+
+// ManagementKeyRebacPtrInput is an input type that accepts ManagementKeyRebacArgs, ManagementKeyRebacPtr and ManagementKeyRebacPtrOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacPtrInput` via:
+//
+//	        ManagementKeyRebacArgs{...}
+//
+//	or:
+//
+//	        nil
+type ManagementKeyRebacPtrInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacPtrOutput() ManagementKeyRebacPtrOutput
+	ToManagementKeyRebacPtrOutputWithContext(context.Context) ManagementKeyRebacPtrOutput
+}
+
+type managementKeyRebacPtrType ManagementKeyRebacArgs
+
+func ManagementKeyRebacPtr(v *ManagementKeyRebacArgs) ManagementKeyRebacPtrInput {
+	return (*managementKeyRebacPtrType)(v)
+}
+
+func (*managementKeyRebacPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManagementKeyRebac)(nil)).Elem()
+}
+
+func (i *managementKeyRebacPtrType) ToManagementKeyRebacPtrOutput() ManagementKeyRebacPtrOutput {
+	return i.ToManagementKeyRebacPtrOutputWithContext(context.Background())
+}
+
+func (i *managementKeyRebacPtrType) ToManagementKeyRebacPtrOutputWithContext(ctx context.Context) ManagementKeyRebacPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacPtrOutput)
+}
+
+type ManagementKeyRebacOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebac)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacOutput) ToManagementKeyRebacOutput() ManagementKeyRebacOutput {
+	return o
+}
+
+func (o ManagementKeyRebacOutput) ToManagementKeyRebacOutputWithContext(ctx context.Context) ManagementKeyRebacOutput {
+	return o
+}
+
+func (o ManagementKeyRebacOutput) ToManagementKeyRebacPtrOutput() ManagementKeyRebacPtrOutput {
+	return o.ToManagementKeyRebacPtrOutputWithContext(context.Background())
+}
+
+func (o ManagementKeyRebacOutput) ToManagementKeyRebacPtrOutputWithContext(ctx context.Context) ManagementKeyRebacPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManagementKeyRebac) *ManagementKeyRebac {
+		return &v
+	}).(ManagementKeyRebacPtrOutput)
+}
+
+// A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+func (o ManagementKeyRebacOutput) CompanyRoles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebac) []string { return v.CompanyRoles }).(pulumi.StringArrayOutput)
+}
+
+// A list of project-level role names that are granted to the management key for specific projects by their project ID.
+func (o ManagementKeyRebacOutput) ProjectRoles() ManagementKeyRebacProjectRoleArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebac) []ManagementKeyRebacProjectRole { return v.ProjectRoles }).(ManagementKeyRebacProjectRoleArrayOutput)
+}
+
+// A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+func (o ManagementKeyRebacOutput) TagRoles() ManagementKeyRebacTagRoleArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebac) []ManagementKeyRebacTagRole { return v.TagRoles }).(ManagementKeyRebacTagRoleArrayOutput)
+}
+
+type ManagementKeyRebacPtrOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ManagementKeyRebac)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacPtrOutput) ToManagementKeyRebacPtrOutput() ManagementKeyRebacPtrOutput {
+	return o
+}
+
+func (o ManagementKeyRebacPtrOutput) ToManagementKeyRebacPtrOutputWithContext(ctx context.Context) ManagementKeyRebacPtrOutput {
+	return o
+}
+
+func (o ManagementKeyRebacPtrOutput) Elem() ManagementKeyRebacOutput {
+	return o.ApplyT(func(v *ManagementKeyRebac) ManagementKeyRebac {
+		if v != nil {
+			return *v
+		}
+		var ret ManagementKeyRebac
+		return ret
+	}).(ManagementKeyRebacOutput)
+}
+
+// A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+func (o ManagementKeyRebacPtrOutput) CompanyRoles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ManagementKeyRebac) []string {
+		if v == nil {
+			return nil
+		}
+		return v.CompanyRoles
+	}).(pulumi.StringArrayOutput)
+}
+
+// A list of project-level role names that are granted to the management key for specific projects by their project ID.
+func (o ManagementKeyRebacPtrOutput) ProjectRoles() ManagementKeyRebacProjectRoleArrayOutput {
+	return o.ApplyT(func(v *ManagementKeyRebac) []ManagementKeyRebacProjectRole {
+		if v == nil {
+			return nil
+		}
+		return v.ProjectRoles
+	}).(ManagementKeyRebacProjectRoleArrayOutput)
+}
+
+// A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+func (o ManagementKeyRebacPtrOutput) TagRoles() ManagementKeyRebacTagRoleArrayOutput {
+	return o.ApplyT(func(v *ManagementKeyRebac) []ManagementKeyRebacTagRole {
+		if v == nil {
+			return nil
+		}
+		return v.TagRoles
+	}).(ManagementKeyRebacTagRoleArrayOutput)
+}
+
+type ManagementKeyRebacProjectRole struct {
+	// The project IDs this role grant applies to.
+	ProjectIds []string `pulumi:"projectIds"`
+	// The roles the management key will be granted in the applicable projects.
+	Roles []string `pulumi:"roles"`
+}
+
+// ManagementKeyRebacProjectRoleInput is an input type that accepts ManagementKeyRebacProjectRoleArgs and ManagementKeyRebacProjectRoleOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacProjectRoleInput` via:
+//
+//	ManagementKeyRebacProjectRoleArgs{...}
+type ManagementKeyRebacProjectRoleInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacProjectRoleOutput() ManagementKeyRebacProjectRoleOutput
+	ToManagementKeyRebacProjectRoleOutputWithContext(context.Context) ManagementKeyRebacProjectRoleOutput
+}
+
+type ManagementKeyRebacProjectRoleArgs struct {
+	// The project IDs this role grant applies to.
+	ProjectIds pulumi.StringArrayInput `pulumi:"projectIds"`
+	// The roles the management key will be granted in the applicable projects.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+}
+
+func (ManagementKeyRebacProjectRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebacProjectRole)(nil)).Elem()
+}
+
+func (i ManagementKeyRebacProjectRoleArgs) ToManagementKeyRebacProjectRoleOutput() ManagementKeyRebacProjectRoleOutput {
+	return i.ToManagementKeyRebacProjectRoleOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacProjectRoleArgs) ToManagementKeyRebacProjectRoleOutputWithContext(ctx context.Context) ManagementKeyRebacProjectRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacProjectRoleOutput)
+}
+
+// ManagementKeyRebacProjectRoleArrayInput is an input type that accepts ManagementKeyRebacProjectRoleArray and ManagementKeyRebacProjectRoleArrayOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacProjectRoleArrayInput` via:
+//
+//	ManagementKeyRebacProjectRoleArray{ ManagementKeyRebacProjectRoleArgs{...} }
+type ManagementKeyRebacProjectRoleArrayInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacProjectRoleArrayOutput() ManagementKeyRebacProjectRoleArrayOutput
+	ToManagementKeyRebacProjectRoleArrayOutputWithContext(context.Context) ManagementKeyRebacProjectRoleArrayOutput
+}
+
+type ManagementKeyRebacProjectRoleArray []ManagementKeyRebacProjectRoleInput
+
+func (ManagementKeyRebacProjectRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManagementKeyRebacProjectRole)(nil)).Elem()
+}
+
+func (i ManagementKeyRebacProjectRoleArray) ToManagementKeyRebacProjectRoleArrayOutput() ManagementKeyRebacProjectRoleArrayOutput {
+	return i.ToManagementKeyRebacProjectRoleArrayOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacProjectRoleArray) ToManagementKeyRebacProjectRoleArrayOutputWithContext(ctx context.Context) ManagementKeyRebacProjectRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacProjectRoleArrayOutput)
+}
+
+type ManagementKeyRebacProjectRoleOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacProjectRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebacProjectRole)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacProjectRoleOutput) ToManagementKeyRebacProjectRoleOutput() ManagementKeyRebacProjectRoleOutput {
+	return o
+}
+
+func (o ManagementKeyRebacProjectRoleOutput) ToManagementKeyRebacProjectRoleOutputWithContext(ctx context.Context) ManagementKeyRebacProjectRoleOutput {
+	return o
+}
+
+// The project IDs this role grant applies to.
+func (o ManagementKeyRebacProjectRoleOutput) ProjectIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebacProjectRole) []string { return v.ProjectIds }).(pulumi.StringArrayOutput)
+}
+
+// The roles the management key will be granted in the applicable projects.
+func (o ManagementKeyRebacProjectRoleOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebacProjectRole) []string { return v.Roles }).(pulumi.StringArrayOutput)
+}
+
+type ManagementKeyRebacProjectRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacProjectRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManagementKeyRebacProjectRole)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacProjectRoleArrayOutput) ToManagementKeyRebacProjectRoleArrayOutput() ManagementKeyRebacProjectRoleArrayOutput {
+	return o
+}
+
+func (o ManagementKeyRebacProjectRoleArrayOutput) ToManagementKeyRebacProjectRoleArrayOutputWithContext(ctx context.Context) ManagementKeyRebacProjectRoleArrayOutput {
+	return o
+}
+
+func (o ManagementKeyRebacProjectRoleArrayOutput) Index(i pulumi.IntInput) ManagementKeyRebacProjectRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ManagementKeyRebacProjectRole {
+		return vs[0].([]ManagementKeyRebacProjectRole)[vs[1].(int)]
+	}).(ManagementKeyRebacProjectRoleOutput)
+}
+
+type ManagementKeyRebacTagRole struct {
+	// The roles the management key will be granted in the applicable projects.
+	Roles []string `pulumi:"roles"`
+	// The project tags this role grant applies to.
+	Tags []string `pulumi:"tags"`
+}
+
+// ManagementKeyRebacTagRoleInput is an input type that accepts ManagementKeyRebacTagRoleArgs and ManagementKeyRebacTagRoleOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacTagRoleInput` via:
+//
+//	ManagementKeyRebacTagRoleArgs{...}
+type ManagementKeyRebacTagRoleInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacTagRoleOutput() ManagementKeyRebacTagRoleOutput
+	ToManagementKeyRebacTagRoleOutputWithContext(context.Context) ManagementKeyRebacTagRoleOutput
+}
+
+type ManagementKeyRebacTagRoleArgs struct {
+	// The roles the management key will be granted in the applicable projects.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// The project tags this role grant applies to.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (ManagementKeyRebacTagRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebacTagRole)(nil)).Elem()
+}
+
+func (i ManagementKeyRebacTagRoleArgs) ToManagementKeyRebacTagRoleOutput() ManagementKeyRebacTagRoleOutput {
+	return i.ToManagementKeyRebacTagRoleOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacTagRoleArgs) ToManagementKeyRebacTagRoleOutputWithContext(ctx context.Context) ManagementKeyRebacTagRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacTagRoleOutput)
+}
+
+// ManagementKeyRebacTagRoleArrayInput is an input type that accepts ManagementKeyRebacTagRoleArray and ManagementKeyRebacTagRoleArrayOutput values.
+// You can construct a concrete instance of `ManagementKeyRebacTagRoleArrayInput` via:
+//
+//	ManagementKeyRebacTagRoleArray{ ManagementKeyRebacTagRoleArgs{...} }
+type ManagementKeyRebacTagRoleArrayInput interface {
+	pulumi.Input
+
+	ToManagementKeyRebacTagRoleArrayOutput() ManagementKeyRebacTagRoleArrayOutput
+	ToManagementKeyRebacTagRoleArrayOutputWithContext(context.Context) ManagementKeyRebacTagRoleArrayOutput
+}
+
+type ManagementKeyRebacTagRoleArray []ManagementKeyRebacTagRoleInput
+
+func (ManagementKeyRebacTagRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManagementKeyRebacTagRole)(nil)).Elem()
+}
+
+func (i ManagementKeyRebacTagRoleArray) ToManagementKeyRebacTagRoleArrayOutput() ManagementKeyRebacTagRoleArrayOutput {
+	return i.ToManagementKeyRebacTagRoleArrayOutputWithContext(context.Background())
+}
+
+func (i ManagementKeyRebacTagRoleArray) ToManagementKeyRebacTagRoleArrayOutputWithContext(ctx context.Context) ManagementKeyRebacTagRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ManagementKeyRebacTagRoleArrayOutput)
+}
+
+type ManagementKeyRebacTagRoleOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacTagRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ManagementKeyRebacTagRole)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacTagRoleOutput) ToManagementKeyRebacTagRoleOutput() ManagementKeyRebacTagRoleOutput {
+	return o
+}
+
+func (o ManagementKeyRebacTagRoleOutput) ToManagementKeyRebacTagRoleOutputWithContext(ctx context.Context) ManagementKeyRebacTagRoleOutput {
+	return o
+}
+
+// The roles the management key will be granted in the applicable projects.
+func (o ManagementKeyRebacTagRoleOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebacTagRole) []string { return v.Roles }).(pulumi.StringArrayOutput)
+}
+
+// The project tags this role grant applies to.
+func (o ManagementKeyRebacTagRoleOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ManagementKeyRebacTagRole) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type ManagementKeyRebacTagRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (ManagementKeyRebacTagRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ManagementKeyRebacTagRole)(nil)).Elem()
+}
+
+func (o ManagementKeyRebacTagRoleArrayOutput) ToManagementKeyRebacTagRoleArrayOutput() ManagementKeyRebacTagRoleArrayOutput {
+	return o
+}
+
+func (o ManagementKeyRebacTagRoleArrayOutput) ToManagementKeyRebacTagRoleArrayOutputWithContext(ctx context.Context) ManagementKeyRebacTagRoleArrayOutput {
+	return o
+}
+
+func (o ManagementKeyRebacTagRoleArrayOutput) Index(i pulumi.IntInput) ManagementKeyRebacTagRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ManagementKeyRebacTagRole {
+		return vs[0].([]ManagementKeyRebacTagRole)[vs[1].(int)]
+	}).(ManagementKeyRebacTagRoleOutput)
+}
+
+type ProjectAdminPortal struct {
+	// Whether the Admin Portal is enabled
+	Enabled *bool `pulumi:"enabled"`
+	// The style id to use
+	StyleId *string `pulumi:"styleId"`
+	// The widgets to show in the Admin Portal
+	Widgets []ProjectAdminPortalWidget `pulumi:"widgets"`
+}
+
+// ProjectAdminPortalInput is an input type that accepts ProjectAdminPortalArgs and ProjectAdminPortalOutput values.
+// You can construct a concrete instance of `ProjectAdminPortalInput` via:
+//
+//	ProjectAdminPortalArgs{...}
+type ProjectAdminPortalInput interface {
+	pulumi.Input
+
+	ToProjectAdminPortalOutput() ProjectAdminPortalOutput
+	ToProjectAdminPortalOutputWithContext(context.Context) ProjectAdminPortalOutput
+}
+
+type ProjectAdminPortalArgs struct {
+	// Whether the Admin Portal is enabled
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// The style id to use
+	StyleId pulumi.StringPtrInput `pulumi:"styleId"`
+	// The widgets to show in the Admin Portal
+	Widgets ProjectAdminPortalWidgetArrayInput `pulumi:"widgets"`
+}
+
+func (ProjectAdminPortalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAdminPortal)(nil)).Elem()
+}
+
+func (i ProjectAdminPortalArgs) ToProjectAdminPortalOutput() ProjectAdminPortalOutput {
+	return i.ToProjectAdminPortalOutputWithContext(context.Background())
+}
+
+func (i ProjectAdminPortalArgs) ToProjectAdminPortalOutputWithContext(ctx context.Context) ProjectAdminPortalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAdminPortalOutput)
+}
+
+func (i ProjectAdminPortalArgs) ToProjectAdminPortalPtrOutput() ProjectAdminPortalPtrOutput {
+	return i.ToProjectAdminPortalPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAdminPortalArgs) ToProjectAdminPortalPtrOutputWithContext(ctx context.Context) ProjectAdminPortalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAdminPortalOutput).ToProjectAdminPortalPtrOutputWithContext(ctx)
+}
+
+// ProjectAdminPortalPtrInput is an input type that accepts ProjectAdminPortalArgs, ProjectAdminPortalPtr and ProjectAdminPortalPtrOutput values.
+// You can construct a concrete instance of `ProjectAdminPortalPtrInput` via:
+//
+//	        ProjectAdminPortalArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAdminPortalPtrInput interface {
+	pulumi.Input
+
+	ToProjectAdminPortalPtrOutput() ProjectAdminPortalPtrOutput
+	ToProjectAdminPortalPtrOutputWithContext(context.Context) ProjectAdminPortalPtrOutput
+}
+
+type projectAdminPortalPtrType ProjectAdminPortalArgs
+
+func ProjectAdminPortalPtr(v *ProjectAdminPortalArgs) ProjectAdminPortalPtrInput {
+	return (*projectAdminPortalPtrType)(v)
+}
+
+func (*projectAdminPortalPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAdminPortal)(nil)).Elem()
+}
+
+func (i *projectAdminPortalPtrType) ToProjectAdminPortalPtrOutput() ProjectAdminPortalPtrOutput {
+	return i.ToProjectAdminPortalPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAdminPortalPtrType) ToProjectAdminPortalPtrOutputWithContext(ctx context.Context) ProjectAdminPortalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAdminPortalPtrOutput)
+}
+
+type ProjectAdminPortalOutput struct{ *pulumi.OutputState }
+
+func (ProjectAdminPortalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAdminPortal)(nil)).Elem()
+}
+
+func (o ProjectAdminPortalOutput) ToProjectAdminPortalOutput() ProjectAdminPortalOutput {
+	return o
+}
+
+func (o ProjectAdminPortalOutput) ToProjectAdminPortalOutputWithContext(ctx context.Context) ProjectAdminPortalOutput {
+	return o
+}
+
+func (o ProjectAdminPortalOutput) ToProjectAdminPortalPtrOutput() ProjectAdminPortalPtrOutput {
+	return o.ToProjectAdminPortalPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAdminPortalOutput) ToProjectAdminPortalPtrOutputWithContext(ctx context.Context) ProjectAdminPortalPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAdminPortal) *ProjectAdminPortal {
+		return &v
+	}).(ProjectAdminPortalPtrOutput)
+}
+
+// Whether the Admin Portal is enabled
+func (o ProjectAdminPortalOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAdminPortal) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// The style id to use
+func (o ProjectAdminPortalOutput) StyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAdminPortal) *string { return v.StyleId }).(pulumi.StringPtrOutput)
+}
+
+// The widgets to show in the Admin Portal
+func (o ProjectAdminPortalOutput) Widgets() ProjectAdminPortalWidgetArrayOutput {
+	return o.ApplyT(func(v ProjectAdminPortal) []ProjectAdminPortalWidget { return v.Widgets }).(ProjectAdminPortalWidgetArrayOutput)
+}
+
+type ProjectAdminPortalPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAdminPortalPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAdminPortal)(nil)).Elem()
+}
+
+func (o ProjectAdminPortalPtrOutput) ToProjectAdminPortalPtrOutput() ProjectAdminPortalPtrOutput {
+	return o
+}
+
+func (o ProjectAdminPortalPtrOutput) ToProjectAdminPortalPtrOutputWithContext(ctx context.Context) ProjectAdminPortalPtrOutput {
+	return o
+}
+
+func (o ProjectAdminPortalPtrOutput) Elem() ProjectAdminPortalOutput {
+	return o.ApplyT(func(v *ProjectAdminPortal) ProjectAdminPortal {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAdminPortal
+		return ret
+	}).(ProjectAdminPortalOutput)
+}
+
+// Whether the Admin Portal is enabled
+func (o ProjectAdminPortalPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAdminPortal) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The style id to use
+func (o ProjectAdminPortalPtrOutput) StyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectAdminPortal) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StyleId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The widgets to show in the Admin Portal
+func (o ProjectAdminPortalPtrOutput) Widgets() ProjectAdminPortalWidgetArrayOutput {
+	return o.ApplyT(func(v *ProjectAdminPortal) []ProjectAdminPortalWidget {
+		if v == nil {
+			return nil
+		}
+		return v.Widgets
+	}).(ProjectAdminPortalWidgetArrayOutput)
+}
+
+type ProjectAdminPortalWidget struct {
+	// The type of the Widget
+	Type string `pulumi:"type"`
+	// The unique identifier of the Widget
+	WidgetId string `pulumi:"widgetId"`
+}
+
+// ProjectAdminPortalWidgetInput is an input type that accepts ProjectAdminPortalWidgetArgs and ProjectAdminPortalWidgetOutput values.
+// You can construct a concrete instance of `ProjectAdminPortalWidgetInput` via:
+//
+//	ProjectAdminPortalWidgetArgs{...}
+type ProjectAdminPortalWidgetInput interface {
+	pulumi.Input
+
+	ToProjectAdminPortalWidgetOutput() ProjectAdminPortalWidgetOutput
+	ToProjectAdminPortalWidgetOutputWithContext(context.Context) ProjectAdminPortalWidgetOutput
+}
+
+type ProjectAdminPortalWidgetArgs struct {
+	// The type of the Widget
+	Type pulumi.StringInput `pulumi:"type"`
+	// The unique identifier of the Widget
+	WidgetId pulumi.StringInput `pulumi:"widgetId"`
+}
+
+func (ProjectAdminPortalWidgetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAdminPortalWidget)(nil)).Elem()
+}
+
+func (i ProjectAdminPortalWidgetArgs) ToProjectAdminPortalWidgetOutput() ProjectAdminPortalWidgetOutput {
+	return i.ToProjectAdminPortalWidgetOutputWithContext(context.Background())
+}
+
+func (i ProjectAdminPortalWidgetArgs) ToProjectAdminPortalWidgetOutputWithContext(ctx context.Context) ProjectAdminPortalWidgetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAdminPortalWidgetOutput)
+}
+
+// ProjectAdminPortalWidgetArrayInput is an input type that accepts ProjectAdminPortalWidgetArray and ProjectAdminPortalWidgetArrayOutput values.
+// You can construct a concrete instance of `ProjectAdminPortalWidgetArrayInput` via:
+//
+//	ProjectAdminPortalWidgetArray{ ProjectAdminPortalWidgetArgs{...} }
+type ProjectAdminPortalWidgetArrayInput interface {
+	pulumi.Input
+
+	ToProjectAdminPortalWidgetArrayOutput() ProjectAdminPortalWidgetArrayOutput
+	ToProjectAdminPortalWidgetArrayOutputWithContext(context.Context) ProjectAdminPortalWidgetArrayOutput
+}
+
+type ProjectAdminPortalWidgetArray []ProjectAdminPortalWidgetInput
+
+func (ProjectAdminPortalWidgetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAdminPortalWidget)(nil)).Elem()
+}
+
+func (i ProjectAdminPortalWidgetArray) ToProjectAdminPortalWidgetArrayOutput() ProjectAdminPortalWidgetArrayOutput {
+	return i.ToProjectAdminPortalWidgetArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectAdminPortalWidgetArray) ToProjectAdminPortalWidgetArrayOutputWithContext(ctx context.Context) ProjectAdminPortalWidgetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAdminPortalWidgetArrayOutput)
+}
+
+type ProjectAdminPortalWidgetOutput struct{ *pulumi.OutputState }
+
+func (ProjectAdminPortalWidgetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAdminPortalWidget)(nil)).Elem()
+}
+
+func (o ProjectAdminPortalWidgetOutput) ToProjectAdminPortalWidgetOutput() ProjectAdminPortalWidgetOutput {
+	return o
+}
+
+func (o ProjectAdminPortalWidgetOutput) ToProjectAdminPortalWidgetOutputWithContext(ctx context.Context) ProjectAdminPortalWidgetOutput {
+	return o
+}
+
+// The type of the Widget
+func (o ProjectAdminPortalWidgetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAdminPortalWidget) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The unique identifier of the Widget
+func (o ProjectAdminPortalWidgetOutput) WidgetId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAdminPortalWidget) string { return v.WidgetId }).(pulumi.StringOutput)
+}
+
+type ProjectAdminPortalWidgetArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectAdminPortalWidgetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAdminPortalWidget)(nil)).Elem()
+}
+
+func (o ProjectAdminPortalWidgetArrayOutput) ToProjectAdminPortalWidgetArrayOutput() ProjectAdminPortalWidgetArrayOutput {
+	return o
+}
+
+func (o ProjectAdminPortalWidgetArrayOutput) ToProjectAdminPortalWidgetArrayOutputWithContext(ctx context.Context) ProjectAdminPortalWidgetArrayOutput {
+	return o
+}
+
+func (o ProjectAdminPortalWidgetArrayOutput) Index(i pulumi.IntInput) ProjectAdminPortalWidgetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectAdminPortalWidget {
+		return vs[0].([]ProjectAdminPortalWidget)[vs[1].(int)]
+	}).(ProjectAdminPortalWidgetOutput)
+}
+
 type ProjectApplications struct {
 	// Applications using OpenID Connect (OIDC) for authentication.
 	OidcApplications []ProjectApplicationsOidcApplication `pulumi:"oidcApplications"`
@@ -968,9 +2023,11 @@ func (o ProjectApplicationsSamlApplicationManualConfigurationPtrOutput) EntityId
 }
 
 type ProjectAttributes struct {
-	// A list of `TenantAttribute`. Read the description below.
+	// A list of custom attributes for storing additional details about each access key in the project.
+	AccessKeys []ProjectAttributesAccessKey `pulumi:"accessKeys"`
+	// A list of custom attributes for storing additional details about each tenant in the project.
 	Tenants []ProjectAttributesTenant `pulumi:"tenants"`
-	// A list of `UserAttribute`. Read the description below.
+	// A list of custom attributes for storing additional details about each user in the project.
 	Users []ProjectAttributesUser `pulumi:"users"`
 }
 
@@ -986,9 +2043,11 @@ type ProjectAttributesInput interface {
 }
 
 type ProjectAttributesArgs struct {
-	// A list of `TenantAttribute`. Read the description below.
+	// A list of custom attributes for storing additional details about each access key in the project.
+	AccessKeys ProjectAttributesAccessKeyArrayInput `pulumi:"accessKeys"`
+	// A list of custom attributes for storing additional details about each tenant in the project.
 	Tenants ProjectAttributesTenantArrayInput `pulumi:"tenants"`
-	// A list of `UserAttribute`. Read the description below.
+	// A list of custom attributes for storing additional details about each user in the project.
 	Users ProjectAttributesUserArrayInput `pulumi:"users"`
 }
 
@@ -1069,12 +2128,17 @@ func (o ProjectAttributesOutput) ToProjectAttributesPtrOutputWithContext(ctx con
 	}).(ProjectAttributesPtrOutput)
 }
 
-// A list of `TenantAttribute`. Read the description below.
+// A list of custom attributes for storing additional details about each access key in the project.
+func (o ProjectAttributesOutput) AccessKeys() ProjectAttributesAccessKeyArrayOutput {
+	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesAccessKey { return v.AccessKeys }).(ProjectAttributesAccessKeyArrayOutput)
+}
+
+// A list of custom attributes for storing additional details about each tenant in the project.
 func (o ProjectAttributesOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesTenant { return v.Tenants }).(ProjectAttributesTenantArrayOutput)
 }
 
-// A list of `UserAttribute`. Read the description below.
+// A list of custom attributes for storing additional details about each user in the project.
 func (o ProjectAttributesOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v ProjectAttributes) []ProjectAttributesUser { return v.Users }).(ProjectAttributesUserArrayOutput)
 }
@@ -1103,7 +2167,17 @@ func (o ProjectAttributesPtrOutput) Elem() ProjectAttributesOutput {
 	}).(ProjectAttributesOutput)
 }
 
-// A list of `TenantAttribute`. Read the description below.
+// A list of custom attributes for storing additional details about each access key in the project.
+func (o ProjectAttributesPtrOutput) AccessKeys() ProjectAttributesAccessKeyArrayOutput {
+	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesAccessKey {
+		if v == nil {
+			return nil
+		}
+		return v.AccessKeys
+	}).(ProjectAttributesAccessKeyArrayOutput)
+}
+
+// A list of custom attributes for storing additional details about each tenant in the project.
 func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesTenant {
 		if v == nil {
@@ -1113,7 +2187,7 @@ func (o ProjectAttributesPtrOutput) Tenants() ProjectAttributesTenantArrayOutput
 	}).(ProjectAttributesTenantArrayOutput)
 }
 
-// A list of `UserAttribute`. Read the description below.
+// A list of custom attributes for storing additional details about each user in the project.
 func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 	return o.ApplyT(func(v *ProjectAttributes) []ProjectAttributesUser {
 		if v == nil {
@@ -1121,6 +2195,297 @@ func (o ProjectAttributesPtrOutput) Users() ProjectAttributesUserArrayOutput {
 		}
 		return v.Users
 	}).(ProjectAttributesUserArrayOutput)
+}
+
+type ProjectAttributesAccessKey struct {
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id *string `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
+	Name string `pulumi:"name"`
+	// When the attribute type is "multiselect". A list of options to choose from.
+	SelectOptions []string `pulumi:"selectOptions"`
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+	Type string `pulumi:"type"`
+	// Determines the permissions access key are required to have to access this attribute in the access key management widget.
+	WidgetAuthorization *ProjectAttributesAccessKeyWidgetAuthorization `pulumi:"widgetAuthorization"`
+}
+
+// ProjectAttributesAccessKeyInput is an input type that accepts ProjectAttributesAccessKeyArgs and ProjectAttributesAccessKeyOutput values.
+// You can construct a concrete instance of `ProjectAttributesAccessKeyInput` via:
+//
+//	ProjectAttributesAccessKeyArgs{...}
+type ProjectAttributesAccessKeyInput interface {
+	pulumi.Input
+
+	ToProjectAttributesAccessKeyOutput() ProjectAttributesAccessKeyOutput
+	ToProjectAttributesAccessKeyOutputWithContext(context.Context) ProjectAttributesAccessKeyOutput
+}
+
+type ProjectAttributesAccessKeyArgs struct {
+	// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the attribute. This value is called `Display Name` in the Descope console.
+	Name pulumi.StringInput `pulumi:"name"`
+	// When the attribute type is "multiselect". A list of options to choose from.
+	SelectOptions pulumi.StringArrayInput `pulumi:"selectOptions"`
+	// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+	Type pulumi.StringInput `pulumi:"type"`
+	// Determines the permissions access key are required to have to access this attribute in the access key management widget.
+	WidgetAuthorization ProjectAttributesAccessKeyWidgetAuthorizationPtrInput `pulumi:"widgetAuthorization"`
+}
+
+func (ProjectAttributesAccessKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAttributesAccessKey)(nil)).Elem()
+}
+
+func (i ProjectAttributesAccessKeyArgs) ToProjectAttributesAccessKeyOutput() ProjectAttributesAccessKeyOutput {
+	return i.ToProjectAttributesAccessKeyOutputWithContext(context.Background())
+}
+
+func (i ProjectAttributesAccessKeyArgs) ToProjectAttributesAccessKeyOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAttributesAccessKeyOutput)
+}
+
+// ProjectAttributesAccessKeyArrayInput is an input type that accepts ProjectAttributesAccessKeyArray and ProjectAttributesAccessKeyArrayOutput values.
+// You can construct a concrete instance of `ProjectAttributesAccessKeyArrayInput` via:
+//
+//	ProjectAttributesAccessKeyArray{ ProjectAttributesAccessKeyArgs{...} }
+type ProjectAttributesAccessKeyArrayInput interface {
+	pulumi.Input
+
+	ToProjectAttributesAccessKeyArrayOutput() ProjectAttributesAccessKeyArrayOutput
+	ToProjectAttributesAccessKeyArrayOutputWithContext(context.Context) ProjectAttributesAccessKeyArrayOutput
+}
+
+type ProjectAttributesAccessKeyArray []ProjectAttributesAccessKeyInput
+
+func (ProjectAttributesAccessKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAttributesAccessKey)(nil)).Elem()
+}
+
+func (i ProjectAttributesAccessKeyArray) ToProjectAttributesAccessKeyArrayOutput() ProjectAttributesAccessKeyArrayOutput {
+	return i.ToProjectAttributesAccessKeyArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectAttributesAccessKeyArray) ToProjectAttributesAccessKeyArrayOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAttributesAccessKeyArrayOutput)
+}
+
+type ProjectAttributesAccessKeyOutput struct{ *pulumi.OutputState }
+
+func (ProjectAttributesAccessKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAttributesAccessKey)(nil)).Elem()
+}
+
+func (o ProjectAttributesAccessKeyOutput) ToProjectAttributesAccessKeyOutput() ProjectAttributesAccessKeyOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyOutput) ToProjectAttributesAccessKeyOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyOutput {
+	return o
+}
+
+// An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+func (o ProjectAttributesAccessKeyOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKey) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The name of the attribute. This value is called `Display Name` in the Descope console.
+func (o ProjectAttributesAccessKeyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKey) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// When the attribute type is "multiselect". A list of options to choose from.
+func (o ProjectAttributesAccessKeyOutput) SelectOptions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKey) []string { return v.SelectOptions }).(pulumi.StringArrayOutput)
+}
+
+// The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+func (o ProjectAttributesAccessKeyOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKey) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Determines the permissions access key are required to have to access this attribute in the access key management widget.
+func (o ProjectAttributesAccessKeyOutput) WidgetAuthorization() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKey) *ProjectAttributesAccessKeyWidgetAuthorization {
+		return v.WidgetAuthorization
+	}).(ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput)
+}
+
+type ProjectAttributesAccessKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectAttributesAccessKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAttributesAccessKey)(nil)).Elem()
+}
+
+func (o ProjectAttributesAccessKeyArrayOutput) ToProjectAttributesAccessKeyArrayOutput() ProjectAttributesAccessKeyArrayOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyArrayOutput) ToProjectAttributesAccessKeyArrayOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyArrayOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyArrayOutput) Index(i pulumi.IntInput) ProjectAttributesAccessKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectAttributesAccessKey {
+		return vs[0].([]ProjectAttributesAccessKey)[vs[1].(int)]
+	}).(ProjectAttributesAccessKeyOutput)
+}
+
+type ProjectAttributesAccessKeyWidgetAuthorization struct {
+	// The permissions users are required to have to edit this attribute in the access key management widget.
+	EditPermissions []string `pulumi:"editPermissions"`
+	// The permissions users are required to have to view this attribute in the access key management widget.
+	ViewPermissions []string `pulumi:"viewPermissions"`
+}
+
+// ProjectAttributesAccessKeyWidgetAuthorizationInput is an input type that accepts ProjectAttributesAccessKeyWidgetAuthorizationArgs and ProjectAttributesAccessKeyWidgetAuthorizationOutput values.
+// You can construct a concrete instance of `ProjectAttributesAccessKeyWidgetAuthorizationInput` via:
+//
+//	ProjectAttributesAccessKeyWidgetAuthorizationArgs{...}
+type ProjectAttributesAccessKeyWidgetAuthorizationInput interface {
+	pulumi.Input
+
+	ToProjectAttributesAccessKeyWidgetAuthorizationOutput() ProjectAttributesAccessKeyWidgetAuthorizationOutput
+	ToProjectAttributesAccessKeyWidgetAuthorizationOutputWithContext(context.Context) ProjectAttributesAccessKeyWidgetAuthorizationOutput
+}
+
+type ProjectAttributesAccessKeyWidgetAuthorizationArgs struct {
+	// The permissions users are required to have to edit this attribute in the access key management widget.
+	EditPermissions pulumi.StringArrayInput `pulumi:"editPermissions"`
+	// The permissions users are required to have to view this attribute in the access key management widget.
+	ViewPermissions pulumi.StringArrayInput `pulumi:"viewPermissions"`
+}
+
+func (ProjectAttributesAccessKeyWidgetAuthorizationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAttributesAccessKeyWidgetAuthorization)(nil)).Elem()
+}
+
+func (i ProjectAttributesAccessKeyWidgetAuthorizationArgs) ToProjectAttributesAccessKeyWidgetAuthorizationOutput() ProjectAttributesAccessKeyWidgetAuthorizationOutput {
+	return i.ToProjectAttributesAccessKeyWidgetAuthorizationOutputWithContext(context.Background())
+}
+
+func (i ProjectAttributesAccessKeyWidgetAuthorizationArgs) ToProjectAttributesAccessKeyWidgetAuthorizationOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAttributesAccessKeyWidgetAuthorizationOutput)
+}
+
+func (i ProjectAttributesAccessKeyWidgetAuthorizationArgs) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutput() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return i.ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectAttributesAccessKeyWidgetAuthorizationArgs) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAttributesAccessKeyWidgetAuthorizationOutput).ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(ctx)
+}
+
+// ProjectAttributesAccessKeyWidgetAuthorizationPtrInput is an input type that accepts ProjectAttributesAccessKeyWidgetAuthorizationArgs, ProjectAttributesAccessKeyWidgetAuthorizationPtr and ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput values.
+// You can construct a concrete instance of `ProjectAttributesAccessKeyWidgetAuthorizationPtrInput` via:
+//
+//	        ProjectAttributesAccessKeyWidgetAuthorizationArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectAttributesAccessKeyWidgetAuthorizationPtrInput interface {
+	pulumi.Input
+
+	ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutput() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput
+	ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(context.Context) ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput
+}
+
+type projectAttributesAccessKeyWidgetAuthorizationPtrType ProjectAttributesAccessKeyWidgetAuthorizationArgs
+
+func ProjectAttributesAccessKeyWidgetAuthorizationPtr(v *ProjectAttributesAccessKeyWidgetAuthorizationArgs) ProjectAttributesAccessKeyWidgetAuthorizationPtrInput {
+	return (*projectAttributesAccessKeyWidgetAuthorizationPtrType)(v)
+}
+
+func (*projectAttributesAccessKeyWidgetAuthorizationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAttributesAccessKeyWidgetAuthorization)(nil)).Elem()
+}
+
+func (i *projectAttributesAccessKeyWidgetAuthorizationPtrType) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutput() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return i.ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(context.Background())
+}
+
+func (i *projectAttributesAccessKeyWidgetAuthorizationPtrType) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput)
+}
+
+type ProjectAttributesAccessKeyWidgetAuthorizationOutput struct{ *pulumi.OutputState }
+
+func (ProjectAttributesAccessKeyWidgetAuthorizationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAttributesAccessKeyWidgetAuthorization)(nil)).Elem()
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) ToProjectAttributesAccessKeyWidgetAuthorizationOutput() ProjectAttributesAccessKeyWidgetAuthorizationOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) ToProjectAttributesAccessKeyWidgetAuthorizationOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutput() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return o.ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectAttributesAccessKeyWidgetAuthorization) *ProjectAttributesAccessKeyWidgetAuthorization {
+		return &v
+	}).(ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput)
+}
+
+// The permissions users are required to have to edit this attribute in the access key management widget.
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) EditPermissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKeyWidgetAuthorization) []string { return v.EditPermissions }).(pulumi.StringArrayOutput)
+}
+
+// The permissions users are required to have to view this attribute in the access key management widget.
+func (o ProjectAttributesAccessKeyWidgetAuthorizationOutput) ViewPermissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectAttributesAccessKeyWidgetAuthorization) []string { return v.ViewPermissions }).(pulumi.StringArrayOutput)
+}
+
+type ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectAttributesAccessKeyWidgetAuthorization)(nil)).Elem()
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutput() ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) ToProjectAttributesAccessKeyWidgetAuthorizationPtrOutputWithContext(ctx context.Context) ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput {
+	return o
+}
+
+func (o ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) Elem() ProjectAttributesAccessKeyWidgetAuthorizationOutput {
+	return o.ApplyT(func(v *ProjectAttributesAccessKeyWidgetAuthorization) ProjectAttributesAccessKeyWidgetAuthorization {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectAttributesAccessKeyWidgetAuthorization
+		return ret
+	}).(ProjectAttributesAccessKeyWidgetAuthorizationOutput)
+}
+
+// The permissions users are required to have to edit this attribute in the access key management widget.
+func (o ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) EditPermissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAttributesAccessKeyWidgetAuthorization) []string {
+		if v == nil {
+			return nil
+		}
+		return v.EditPermissions
+	}).(pulumi.StringArrayOutput)
+}
+
+// The permissions users are required to have to view this attribute in the access key management widget.
+func (o ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput) ViewPermissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ProjectAttributesAccessKeyWidgetAuthorization) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ViewPermissions
+	}).(pulumi.StringArrayOutput)
 }
 
 type ProjectAttributesTenant struct {
@@ -16295,6 +17660,8 @@ type ProjectAuthenticationSso struct {
 	AllowOverrideRoles *bool `pulumi:"allowOverrideRoles"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled *bool `pulumi:"disabled"`
+	// Whether to enable groups priority.
+	GroupsPriority *bool `pulumi:"groupsPriority"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
@@ -16321,6 +17688,8 @@ type ProjectAuthenticationSsoArgs struct {
 	AllowOverrideRoles pulumi.BoolPtrInput `pulumi:"allowOverrideRoles"`
 	// Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
+	// Whether to enable groups priority.
+	GroupsPriority pulumi.BoolPtrInput `pulumi:"groupsPriority"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
@@ -16421,6 +17790,11 @@ func (o ProjectAuthenticationSsoOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to enable groups priority.
+func (o ProjectAuthenticationSsoOutput) GroupsPriority() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.GroupsPriority }).(pulumi.BoolPtrOutput)
+}
+
 // Whether to merge existing user accounts with new ones created through SSO authentication.
 func (o ProjectAuthenticationSsoOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.MergeUsers }).(pulumi.BoolPtrOutput)
@@ -16487,6 +17861,16 @@ func (o ProjectAuthenticationSsoPtrOutput) Disabled() pulumi.BoolPtrOutput {
 			return nil
 		}
 		return v.Disabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable groups priority.
+func (o ProjectAuthenticationSsoPtrOutput) GroupsPriority() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.GroupsPriority
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -17345,6 +18729,8 @@ type ProjectConnectors struct {
 	Abuseipdbs []ProjectConnectorsAbuseipdb `pulumi:"abuseipdbs"`
 	// Track user activity and traits at any point in your user journey with the Amplitude connector.
 	Amplitudes []ProjectConnectorsAmplitude `pulumi:"amplitudes"`
+	// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+	Arkoses []ProjectConnectorsArkose `pulumi:"arkoses"`
 	// Send audit events to a custom webhook.
 	AuditWebhooks []ProjectConnectorsAuditWebhook `pulumi:"auditWebhooks"`
 	// Stream authentication audit logs with the Amazon S3 connector.
@@ -17353,6 +18739,10 @@ type ProjectConnectors struct {
 	AwsTranslates []ProjectConnectorsAwsTranslate `pulumi:"awsTranslates"`
 	// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
 	Bitsights []ProjectConnectorsBitsight `pulumi:"bitsights"`
+	// Send audit events and troubleshooting logs to Coralogix.
+	Coralogixes []ProjectConnectorsCoralogix `pulumi:"coralogixes"`
+	// Connect to Darwinium API for fraud detection and device intelligence.
+	Darwinia []ProjectConnectorsDarwinium `pulumi:"darwinia"`
 	// Stream authentication audit logs with the Datadog connector.
 	Datadogs []ProjectConnectorsDatadog `pulumi:"datadogs"`
 	// DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -17385,6 +18775,8 @@ type ProjectConnectors struct {
 	GoogleCloudTranslations []ProjectConnectorsGoogleCloudTranslation `pulumi:"googleCloudTranslations"`
 	// Get address autocompletions from Place Autocomplete Data API.
 	GoogleMapsPlaces []ProjectConnectorsGoogleMapsPlace `pulumi:"googleMapsPlaces"`
+	// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+	Hcaptchas []ProjectConnectorsHcaptcha `pulumi:"hcaptchas"`
 	// Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
 	Hibps []ProjectConnectorsHibp `pulumi:"hibps"`
 	// A general purpose HTTP client
@@ -17395,12 +18787,22 @@ type ProjectConnectors struct {
 	Incodes []ProjectConnectorsIncode `pulumi:"incodes"`
 	// Orchestrate customer identity information from your Descope user journey with the Intercom connector.
 	Intercoms []ProjectConnectorsIntercom `pulumi:"intercoms"`
+	// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+	Ldaps []ProjectConnectorsLdap `pulumi:"ldaps"`
 	// Localize the language of your login and user journey screens with the Lokalise connector.
 	Lokalises []ProjectConnectorsLokalise `pulumi:"lokalises"`
+	// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+	Mixpanels []ProjectConnectorsMixpanel `pulumi:"mixpanels"`
 	// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
 	Mparticles []ProjectConnectorsMparticle `pulumi:"mparticles"`
 	// Stream authentication audit logs with the New Relic connector.
 	Newrelics []ProjectConnectorsNewrelic `pulumi:"newrelics"`
+	// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+	Opentelemetries []ProjectConnectorsOpentelemetry `pulumi:"opentelemetries"`
+	// Authenticate against PingDirectory.
+	PingDirectories []ProjectConnectorsPingDirectory `pulumi:"pingDirectories"`
+	// Send emails using Postmark
+	Postmarks []ProjectConnectorsPostmark `pulumi:"postmarks"`
 	// Get address autocompletions from Radar Autocomplete API.
 	Radars []ProjectConnectorsRadar `pulumi:"radars"`
 	// Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
@@ -17429,6 +18831,10 @@ type ProjectConnectors struct {
 	Smtps []ProjectConnectorsSmtp `pulumi:"smtps"`
 	// Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
 	Sns []ProjectConnectorsSn `pulumi:"sns"`
+	// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+	Splunks []ProjectConnectorsSplunk `pulumi:"splunks"`
+	// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+	Sqls []ProjectConnectorsSql `pulumi:"sqls"`
 	// Stream logs and audit events with the Sumo Logic connector.
 	Sumologics []ProjectConnectorsSumologic `pulumi:"sumologics"`
 	// Generate external tokens for user authentication in Supabase projects.
@@ -17443,6 +18849,10 @@ type ProjectConnectors struct {
 	TwilioCores []ProjectConnectorsTwilioCore `pulumi:"twilioCores"`
 	// Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
 	TwilioVerifies []ProjectConnectorsTwilioVerify `pulumi:"twilioVerifies"`
+	// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+	Unibeams []ProjectConnectorsUnibeam `pulumi:"unibeams"`
+	// Email validation with ZeroBounce
+	Zerobounces []ProjectConnectorsZerobounce `pulumi:"zerobounces"`
 }
 
 // ProjectConnectorsInput is an input type that accepts ProjectConnectorsArgs and ProjectConnectorsOutput values.
@@ -17461,6 +18871,8 @@ type ProjectConnectorsArgs struct {
 	Abuseipdbs ProjectConnectorsAbuseipdbArrayInput `pulumi:"abuseipdbs"`
 	// Track user activity and traits at any point in your user journey with the Amplitude connector.
 	Amplitudes ProjectConnectorsAmplitudeArrayInput `pulumi:"amplitudes"`
+	// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+	Arkoses ProjectConnectorsArkoseArrayInput `pulumi:"arkoses"`
 	// Send audit events to a custom webhook.
 	AuditWebhooks ProjectConnectorsAuditWebhookArrayInput `pulumi:"auditWebhooks"`
 	// Stream authentication audit logs with the Amazon S3 connector.
@@ -17469,6 +18881,10 @@ type ProjectConnectorsArgs struct {
 	AwsTranslates ProjectConnectorsAwsTranslateArrayInput `pulumi:"awsTranslates"`
 	// Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
 	Bitsights ProjectConnectorsBitsightArrayInput `pulumi:"bitsights"`
+	// Send audit events and troubleshooting logs to Coralogix.
+	Coralogixes ProjectConnectorsCoralogixArrayInput `pulumi:"coralogixes"`
+	// Connect to Darwinium API for fraud detection and device intelligence.
+	Darwinia ProjectConnectorsDarwiniumArrayInput `pulumi:"darwinia"`
 	// Stream authentication audit logs with the Datadog connector.
 	Datadogs ProjectConnectorsDatadogArrayInput `pulumi:"datadogs"`
 	// DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -17501,6 +18917,8 @@ type ProjectConnectorsArgs struct {
 	GoogleCloudTranslations ProjectConnectorsGoogleCloudTranslationArrayInput `pulumi:"googleCloudTranslations"`
 	// Get address autocompletions from Place Autocomplete Data API.
 	GoogleMapsPlaces ProjectConnectorsGoogleMapsPlaceArrayInput `pulumi:"googleMapsPlaces"`
+	// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+	Hcaptchas ProjectConnectorsHcaptchaArrayInput `pulumi:"hcaptchas"`
 	// Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
 	Hibps ProjectConnectorsHibpArrayInput `pulumi:"hibps"`
 	// A general purpose HTTP client
@@ -17511,12 +18929,22 @@ type ProjectConnectorsArgs struct {
 	Incodes ProjectConnectorsIncodeArrayInput `pulumi:"incodes"`
 	// Orchestrate customer identity information from your Descope user journey with the Intercom connector.
 	Intercoms ProjectConnectorsIntercomArrayInput `pulumi:"intercoms"`
+	// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+	Ldaps ProjectConnectorsLdapArrayInput `pulumi:"ldaps"`
 	// Localize the language of your login and user journey screens with the Lokalise connector.
 	Lokalises ProjectConnectorsLokaliseArrayInput `pulumi:"lokalises"`
+	// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+	Mixpanels ProjectConnectorsMixpanelArrayInput `pulumi:"mixpanels"`
 	// Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
 	Mparticles ProjectConnectorsMparticleArrayInput `pulumi:"mparticles"`
 	// Stream authentication audit logs with the New Relic connector.
 	Newrelics ProjectConnectorsNewrelicArrayInput `pulumi:"newrelics"`
+	// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+	Opentelemetries ProjectConnectorsOpentelemetryArrayInput `pulumi:"opentelemetries"`
+	// Authenticate against PingDirectory.
+	PingDirectories ProjectConnectorsPingDirectoryArrayInput `pulumi:"pingDirectories"`
+	// Send emails using Postmark
+	Postmarks ProjectConnectorsPostmarkArrayInput `pulumi:"postmarks"`
 	// Get address autocompletions from Radar Autocomplete API.
 	Radars ProjectConnectorsRadarArrayInput `pulumi:"radars"`
 	// Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
@@ -17545,6 +18973,10 @@ type ProjectConnectorsArgs struct {
 	Smtps ProjectConnectorsSmtpArrayInput `pulumi:"smtps"`
 	// Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
 	Sns ProjectConnectorsSnArrayInput `pulumi:"sns"`
+	// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+	Splunks ProjectConnectorsSplunkArrayInput `pulumi:"splunks"`
+	// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+	Sqls ProjectConnectorsSqlArrayInput `pulumi:"sqls"`
 	// Stream logs and audit events with the Sumo Logic connector.
 	Sumologics ProjectConnectorsSumologicArrayInput `pulumi:"sumologics"`
 	// Generate external tokens for user authentication in Supabase projects.
@@ -17559,6 +18991,10 @@ type ProjectConnectorsArgs struct {
 	TwilioCores ProjectConnectorsTwilioCoreArrayInput `pulumi:"twilioCores"`
 	// Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
 	TwilioVerifies ProjectConnectorsTwilioVerifyArrayInput `pulumi:"twilioVerifies"`
+	// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+	Unibeams ProjectConnectorsUnibeamArrayInput `pulumi:"unibeams"`
+	// Email validation with ZeroBounce
+	Zerobounces ProjectConnectorsZerobounceArrayInput `pulumi:"zerobounces"`
 }
 
 func (ProjectConnectorsArgs) ElementType() reflect.Type {
@@ -17648,6 +19084,11 @@ func (o ProjectConnectorsOutput) Amplitudes() ProjectConnectorsAmplitudeArrayOut
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAmplitude { return v.Amplitudes }).(ProjectConnectorsAmplitudeArrayOutput)
 }
 
+// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+func (o ProjectConnectorsOutput) Arkoses() ProjectConnectorsArkoseArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsArkose { return v.Arkoses }).(ProjectConnectorsArkoseArrayOutput)
+}
+
 // Send audit events to a custom webhook.
 func (o ProjectConnectorsOutput) AuditWebhooks() ProjectConnectorsAuditWebhookArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsAuditWebhook { return v.AuditWebhooks }).(ProjectConnectorsAuditWebhookArrayOutput)
@@ -17666,6 +19107,16 @@ func (o ProjectConnectorsOutput) AwsTranslates() ProjectConnectorsAwsTranslateAr
 // Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
 func (o ProjectConnectorsOutput) Bitsights() ProjectConnectorsBitsightArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsBitsight { return v.Bitsights }).(ProjectConnectorsBitsightArrayOutput)
+}
+
+// Send audit events and troubleshooting logs to Coralogix.
+func (o ProjectConnectorsOutput) Coralogixes() ProjectConnectorsCoralogixArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsCoralogix { return v.Coralogixes }).(ProjectConnectorsCoralogixArrayOutput)
+}
+
+// Connect to Darwinium API for fraud detection and device intelligence.
+func (o ProjectConnectorsOutput) Darwinia() ProjectConnectorsDarwiniumArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsDarwinium { return v.Darwinia }).(ProjectConnectorsDarwiniumArrayOutput)
 }
 
 // Stream authentication audit logs with the Datadog connector.
@@ -17748,6 +19199,11 @@ func (o ProjectConnectorsOutput) GoogleMapsPlaces() ProjectConnectorsGoogleMapsP
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsGoogleMapsPlace { return v.GoogleMapsPlaces }).(ProjectConnectorsGoogleMapsPlaceArrayOutput)
 }
 
+// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+func (o ProjectConnectorsOutput) Hcaptchas() ProjectConnectorsHcaptchaArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHcaptcha { return v.Hcaptchas }).(ProjectConnectorsHcaptchaArrayOutput)
+}
+
 // Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
 func (o ProjectConnectorsOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsHibp { return v.Hibps }).(ProjectConnectorsHibpArrayOutput)
@@ -17773,9 +19229,19 @@ func (o ProjectConnectorsOutput) Intercoms() ProjectConnectorsIntercomArrayOutpu
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsIntercom { return v.Intercoms }).(ProjectConnectorsIntercomArrayOutput)
 }
 
+// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+func (o ProjectConnectorsOutput) Ldaps() ProjectConnectorsLdapArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsLdap { return v.Ldaps }).(ProjectConnectorsLdapArrayOutput)
+}
+
 // Localize the language of your login and user journey screens with the Lokalise connector.
 func (o ProjectConnectorsOutput) Lokalises() ProjectConnectorsLokaliseArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsLokalise { return v.Lokalises }).(ProjectConnectorsLokaliseArrayOutput)
+}
+
+// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+func (o ProjectConnectorsOutput) Mixpanels() ProjectConnectorsMixpanelArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsMixpanel { return v.Mixpanels }).(ProjectConnectorsMixpanelArrayOutput)
 }
 
 // Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
@@ -17786,6 +19252,21 @@ func (o ProjectConnectorsOutput) Mparticles() ProjectConnectorsMparticleArrayOut
 // Stream authentication audit logs with the New Relic connector.
 func (o ProjectConnectorsOutput) Newrelics() ProjectConnectorsNewrelicArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsNewrelic { return v.Newrelics }).(ProjectConnectorsNewrelicArrayOutput)
+}
+
+// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+func (o ProjectConnectorsOutput) Opentelemetries() ProjectConnectorsOpentelemetryArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsOpentelemetry { return v.Opentelemetries }).(ProjectConnectorsOpentelemetryArrayOutput)
+}
+
+// Authenticate against PingDirectory.
+func (o ProjectConnectorsOutput) PingDirectories() ProjectConnectorsPingDirectoryArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsPingDirectory { return v.PingDirectories }).(ProjectConnectorsPingDirectoryArrayOutput)
+}
+
+// Send emails using Postmark
+func (o ProjectConnectorsOutput) Postmarks() ProjectConnectorsPostmarkArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsPostmark { return v.Postmarks }).(ProjectConnectorsPostmarkArrayOutput)
 }
 
 // Get address autocompletions from Radar Autocomplete API.
@@ -17860,6 +19341,16 @@ func (o ProjectConnectorsOutput) Sns() ProjectConnectorsSnArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSn { return v.Sns }).(ProjectConnectorsSnArrayOutput)
 }
 
+// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+func (o ProjectConnectorsOutput) Splunks() ProjectConnectorsSplunkArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSplunk { return v.Splunks }).(ProjectConnectorsSplunkArrayOutput)
+}
+
+// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+func (o ProjectConnectorsOutput) Sqls() ProjectConnectorsSqlArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSql { return v.Sqls }).(ProjectConnectorsSqlArrayOutput)
+}
+
 // Stream logs and audit events with the Sumo Logic connector.
 func (o ProjectConnectorsOutput) Sumologics() ProjectConnectorsSumologicArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsSumologic { return v.Sumologics }).(ProjectConnectorsSumologicArrayOutput)
@@ -17893,6 +19384,16 @@ func (o ProjectConnectorsOutput) TwilioCores() ProjectConnectorsTwilioCoreArrayO
 // Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
 func (o ProjectConnectorsOutput) TwilioVerifies() ProjectConnectorsTwilioVerifyArrayOutput {
 	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsTwilioVerify { return v.TwilioVerifies }).(ProjectConnectorsTwilioVerifyArrayOutput)
+}
+
+// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+func (o ProjectConnectorsOutput) Unibeams() ProjectConnectorsUnibeamArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsUnibeam { return v.Unibeams }).(ProjectConnectorsUnibeamArrayOutput)
+}
+
+// Email validation with ZeroBounce
+func (o ProjectConnectorsOutput) Zerobounces() ProjectConnectorsZerobounceArrayOutput {
+	return o.ApplyT(func(v ProjectConnectors) []ProjectConnectorsZerobounce { return v.Zerobounces }).(ProjectConnectorsZerobounceArrayOutput)
 }
 
 type ProjectConnectorsPtrOutput struct{ *pulumi.OutputState }
@@ -17939,6 +19440,16 @@ func (o ProjectConnectorsPtrOutput) Amplitudes() ProjectConnectorsAmplitudeArray
 	}).(ProjectConnectorsAmplitudeArrayOutput)
 }
 
+// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+func (o ProjectConnectorsPtrOutput) Arkoses() ProjectConnectorsArkoseArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsArkose {
+		if v == nil {
+			return nil
+		}
+		return v.Arkoses
+	}).(ProjectConnectorsArkoseArrayOutput)
+}
+
 // Send audit events to a custom webhook.
 func (o ProjectConnectorsPtrOutput) AuditWebhooks() ProjectConnectorsAuditWebhookArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsAuditWebhook {
@@ -17977,6 +19488,26 @@ func (o ProjectConnectorsPtrOutput) Bitsights() ProjectConnectorsBitsightArrayOu
 		}
 		return v.Bitsights
 	}).(ProjectConnectorsBitsightArrayOutput)
+}
+
+// Send audit events and troubleshooting logs to Coralogix.
+func (o ProjectConnectorsPtrOutput) Coralogixes() ProjectConnectorsCoralogixArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsCoralogix {
+		if v == nil {
+			return nil
+		}
+		return v.Coralogixes
+	}).(ProjectConnectorsCoralogixArrayOutput)
+}
+
+// Connect to Darwinium API for fraud detection and device intelligence.
+func (o ProjectConnectorsPtrOutput) Darwinia() ProjectConnectorsDarwiniumArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsDarwinium {
+		if v == nil {
+			return nil
+		}
+		return v.Darwinia
+	}).(ProjectConnectorsDarwiniumArrayOutput)
 }
 
 // Stream authentication audit logs with the Datadog connector.
@@ -18139,6 +19670,16 @@ func (o ProjectConnectorsPtrOutput) GoogleMapsPlaces() ProjectConnectorsGoogleMa
 	}).(ProjectConnectorsGoogleMapsPlaceArrayOutput)
 }
 
+// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+func (o ProjectConnectorsPtrOutput) Hcaptchas() ProjectConnectorsHcaptchaArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHcaptcha {
+		if v == nil {
+			return nil
+		}
+		return v.Hcaptchas
+	}).(ProjectConnectorsHcaptchaArrayOutput)
+}
+
 // Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
 func (o ProjectConnectorsPtrOutput) Hibps() ProjectConnectorsHibpArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsHibp {
@@ -18189,6 +19730,16 @@ func (o ProjectConnectorsPtrOutput) Intercoms() ProjectConnectorsIntercomArrayOu
 	}).(ProjectConnectorsIntercomArrayOutput)
 }
 
+// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+func (o ProjectConnectorsPtrOutput) Ldaps() ProjectConnectorsLdapArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsLdap {
+		if v == nil {
+			return nil
+		}
+		return v.Ldaps
+	}).(ProjectConnectorsLdapArrayOutput)
+}
+
 // Localize the language of your login and user journey screens with the Lokalise connector.
 func (o ProjectConnectorsPtrOutput) Lokalises() ProjectConnectorsLokaliseArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsLokalise {
@@ -18197,6 +19748,16 @@ func (o ProjectConnectorsPtrOutput) Lokalises() ProjectConnectorsLokaliseArrayOu
 		}
 		return v.Lokalises
 	}).(ProjectConnectorsLokaliseArrayOutput)
+}
+
+// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+func (o ProjectConnectorsPtrOutput) Mixpanels() ProjectConnectorsMixpanelArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsMixpanel {
+		if v == nil {
+			return nil
+		}
+		return v.Mixpanels
+	}).(ProjectConnectorsMixpanelArrayOutput)
 }
 
 // Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
@@ -18217,6 +19778,36 @@ func (o ProjectConnectorsPtrOutput) Newrelics() ProjectConnectorsNewrelicArrayOu
 		}
 		return v.Newrelics
 	}).(ProjectConnectorsNewrelicArrayOutput)
+}
+
+// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+func (o ProjectConnectorsPtrOutput) Opentelemetries() ProjectConnectorsOpentelemetryArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsOpentelemetry {
+		if v == nil {
+			return nil
+		}
+		return v.Opentelemetries
+	}).(ProjectConnectorsOpentelemetryArrayOutput)
+}
+
+// Authenticate against PingDirectory.
+func (o ProjectConnectorsPtrOutput) PingDirectories() ProjectConnectorsPingDirectoryArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsPingDirectory {
+		if v == nil {
+			return nil
+		}
+		return v.PingDirectories
+	}).(ProjectConnectorsPingDirectoryArrayOutput)
+}
+
+// Send emails using Postmark
+func (o ProjectConnectorsPtrOutput) Postmarks() ProjectConnectorsPostmarkArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsPostmark {
+		if v == nil {
+			return nil
+		}
+		return v.Postmarks
+	}).(ProjectConnectorsPostmarkArrayOutput)
 }
 
 // Get address autocompletions from Radar Autocomplete API.
@@ -18359,6 +19950,26 @@ func (o ProjectConnectorsPtrOutput) Sns() ProjectConnectorsSnArrayOutput {
 	}).(ProjectConnectorsSnArrayOutput)
 }
 
+// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+func (o ProjectConnectorsPtrOutput) Splunks() ProjectConnectorsSplunkArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSplunk {
+		if v == nil {
+			return nil
+		}
+		return v.Splunks
+	}).(ProjectConnectorsSplunkArrayOutput)
+}
+
+// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+func (o ProjectConnectorsPtrOutput) Sqls() ProjectConnectorsSqlArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSql {
+		if v == nil {
+			return nil
+		}
+		return v.Sqls
+	}).(ProjectConnectorsSqlArrayOutput)
+}
+
 // Stream logs and audit events with the Sumo Logic connector.
 func (o ProjectConnectorsPtrOutput) Sumologics() ProjectConnectorsSumologicArrayOutput {
 	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsSumologic {
@@ -18427,6 +20038,26 @@ func (o ProjectConnectorsPtrOutput) TwilioVerifies() ProjectConnectorsTwilioVeri
 		}
 		return v.TwilioVerifies
 	}).(ProjectConnectorsTwilioVerifyArrayOutput)
+}
+
+// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+func (o ProjectConnectorsPtrOutput) Unibeams() ProjectConnectorsUnibeamArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsUnibeam {
+		if v == nil {
+			return nil
+		}
+		return v.Unibeams
+	}).(ProjectConnectorsUnibeamArrayOutput)
+}
+
+// Email validation with ZeroBounce
+func (o ProjectConnectorsPtrOutput) Zerobounces() ProjectConnectorsZerobounceArrayOutput {
+	return o.ApplyT(func(v *ProjectConnectors) []ProjectConnectorsZerobounce {
+		if v == nil {
+			return nil
+		}
+		return v.Zerobounces
+	}).(ProjectConnectorsZerobounceArrayOutput)
 }
 
 type ProjectConnectorsAbuseipdb struct {
@@ -18687,6 +20318,154 @@ func (o ProjectConnectorsAmplitudeArrayOutput) Index(i pulumi.IntInput) ProjectC
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsAmplitude {
 		return vs[0].([]ProjectConnectorsAmplitude)[vs[1].(int)]
 	}).(ProjectConnectorsAmplitudeOutput)
+}
+
+type ProjectConnectorsArkose struct {
+	// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+	ClientBaseUrl *string `pulumi:"clientBaseUrl"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The private key that can be copied from the Keys screen in the Arkose portal.
+	PrivateKey string `pulumi:"privateKey"`
+	// The public key that's shown in the Keys screen in the Arkose portal.
+	PublicKey string `pulumi:"publicKey"`
+	// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+	VerifyBaseUrl *string `pulumi:"verifyBaseUrl"`
+}
+
+// ProjectConnectorsArkoseInput is an input type that accepts ProjectConnectorsArkoseArgs and ProjectConnectorsArkoseOutput values.
+// You can construct a concrete instance of `ProjectConnectorsArkoseInput` via:
+//
+//	ProjectConnectorsArkoseArgs{...}
+type ProjectConnectorsArkoseInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsArkoseOutput() ProjectConnectorsArkoseOutput
+	ToProjectConnectorsArkoseOutputWithContext(context.Context) ProjectConnectorsArkoseOutput
+}
+
+type ProjectConnectorsArkoseArgs struct {
+	// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+	ClientBaseUrl pulumi.StringPtrInput `pulumi:"clientBaseUrl"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The private key that can be copied from the Keys screen in the Arkose portal.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The public key that's shown in the Keys screen in the Arkose portal.
+	PublicKey pulumi.StringInput `pulumi:"publicKey"`
+	// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+	VerifyBaseUrl pulumi.StringPtrInput `pulumi:"verifyBaseUrl"`
+}
+
+func (ProjectConnectorsArkoseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsArkose)(nil)).Elem()
+}
+
+func (i ProjectConnectorsArkoseArgs) ToProjectConnectorsArkoseOutput() ProjectConnectorsArkoseOutput {
+	return i.ToProjectConnectorsArkoseOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsArkoseArgs) ToProjectConnectorsArkoseOutputWithContext(ctx context.Context) ProjectConnectorsArkoseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsArkoseOutput)
+}
+
+// ProjectConnectorsArkoseArrayInput is an input type that accepts ProjectConnectorsArkoseArray and ProjectConnectorsArkoseArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsArkoseArrayInput` via:
+//
+//	ProjectConnectorsArkoseArray{ ProjectConnectorsArkoseArgs{...} }
+type ProjectConnectorsArkoseArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsArkoseArrayOutput() ProjectConnectorsArkoseArrayOutput
+	ToProjectConnectorsArkoseArrayOutputWithContext(context.Context) ProjectConnectorsArkoseArrayOutput
+}
+
+type ProjectConnectorsArkoseArray []ProjectConnectorsArkoseInput
+
+func (ProjectConnectorsArkoseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsArkose)(nil)).Elem()
+}
+
+func (i ProjectConnectorsArkoseArray) ToProjectConnectorsArkoseArrayOutput() ProjectConnectorsArkoseArrayOutput {
+	return i.ToProjectConnectorsArkoseArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsArkoseArray) ToProjectConnectorsArkoseArrayOutputWithContext(ctx context.Context) ProjectConnectorsArkoseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsArkoseArrayOutput)
+}
+
+type ProjectConnectorsArkoseOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsArkoseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsArkose)(nil)).Elem()
+}
+
+func (o ProjectConnectorsArkoseOutput) ToProjectConnectorsArkoseOutput() ProjectConnectorsArkoseOutput {
+	return o
+}
+
+func (o ProjectConnectorsArkoseOutput) ToProjectConnectorsArkoseOutputWithContext(ctx context.Context) ProjectConnectorsArkoseOutput {
+	return o
+}
+
+// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+func (o ProjectConnectorsArkoseOutput) ClientBaseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.ClientBaseUrl }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsArkoseOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsArkoseOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsArkoseOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The private key that can be copied from the Keys screen in the Arkose portal.
+func (o ProjectConnectorsArkoseOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The public key that's shown in the Keys screen in the Arkose portal.
+func (o ProjectConnectorsArkoseOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+func (o ProjectConnectorsArkoseOutput) VerifyBaseUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.VerifyBaseUrl }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsArkoseArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsArkoseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsArkose)(nil)).Elem()
+}
+
+func (o ProjectConnectorsArkoseArrayOutput) ToProjectConnectorsArkoseArrayOutput() ProjectConnectorsArkoseArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsArkoseArrayOutput) ToProjectConnectorsArkoseArrayOutputWithContext(ctx context.Context) ProjectConnectorsArkoseArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsArkoseArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsArkoseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsArkose {
+		return vs[0].([]ProjectConnectorsArkose)[vs[1].(int)]
+	}).(ProjectConnectorsArkoseOutput)
 }
 
 type ProjectConnectorsAuditWebhook struct {
@@ -20058,6 +21837,480 @@ func (o ProjectConnectorsBitsightArrayOutput) Index(i pulumi.IntInput) ProjectCo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsBitsight {
 		return vs[0].([]ProjectConnectorsBitsight)[vs[1].(int)]
 	}).(ProjectConnectorsBitsightOutput)
+}
+
+type ProjectConnectorsCoralogix struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled *bool `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters []ProjectConnectorsCoralogixAuditFilter `pulumi:"auditFilters"`
+	// Bearer token issued by Coralogix as Send-Your-Data API key
+	BearerToken string `pulumi:"bearerToken"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The ingress OpenTelemetry endpoint URL.
+	Endpoint string  `pulumi:"endpoint"`
+	Id       *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
+}
+
+// ProjectConnectorsCoralogixInput is an input type that accepts ProjectConnectorsCoralogixArgs and ProjectConnectorsCoralogixOutput values.
+// You can construct a concrete instance of `ProjectConnectorsCoralogixInput` via:
+//
+//	ProjectConnectorsCoralogixArgs{...}
+type ProjectConnectorsCoralogixInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsCoralogixOutput() ProjectConnectorsCoralogixOutput
+	ToProjectConnectorsCoralogixOutputWithContext(context.Context) ProjectConnectorsCoralogixOutput
+}
+
+type ProjectConnectorsCoralogixArgs struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled pulumi.BoolPtrInput `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters ProjectConnectorsCoralogixAuditFilterArrayInput `pulumi:"auditFilters"`
+	// Bearer token issued by Coralogix as Send-Your-Data API key
+	BearerToken pulumi.StringInput `pulumi:"bearerToken"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ingress OpenTelemetry endpoint URL.
+	Endpoint pulumi.StringInput    `pulumi:"endpoint"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
+}
+
+func (ProjectConnectorsCoralogixArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsCoralogix)(nil)).Elem()
+}
+
+func (i ProjectConnectorsCoralogixArgs) ToProjectConnectorsCoralogixOutput() ProjectConnectorsCoralogixOutput {
+	return i.ToProjectConnectorsCoralogixOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsCoralogixArgs) ToProjectConnectorsCoralogixOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCoralogixOutput)
+}
+
+// ProjectConnectorsCoralogixArrayInput is an input type that accepts ProjectConnectorsCoralogixArray and ProjectConnectorsCoralogixArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsCoralogixArrayInput` via:
+//
+//	ProjectConnectorsCoralogixArray{ ProjectConnectorsCoralogixArgs{...} }
+type ProjectConnectorsCoralogixArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsCoralogixArrayOutput() ProjectConnectorsCoralogixArrayOutput
+	ToProjectConnectorsCoralogixArrayOutputWithContext(context.Context) ProjectConnectorsCoralogixArrayOutput
+}
+
+type ProjectConnectorsCoralogixArray []ProjectConnectorsCoralogixInput
+
+func (ProjectConnectorsCoralogixArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsCoralogix)(nil)).Elem()
+}
+
+func (i ProjectConnectorsCoralogixArray) ToProjectConnectorsCoralogixArrayOutput() ProjectConnectorsCoralogixArrayOutput {
+	return i.ToProjectConnectorsCoralogixArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsCoralogixArray) ToProjectConnectorsCoralogixArrayOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCoralogixArrayOutput)
+}
+
+type ProjectConnectorsCoralogixOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsCoralogixOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsCoralogix)(nil)).Elem()
+}
+
+func (o ProjectConnectorsCoralogixOutput) ToProjectConnectorsCoralogixOutput() ProjectConnectorsCoralogixOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixOutput) ToProjectConnectorsCoralogixOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixOutput {
+	return o
+}
+
+// Whether to enable streaming of audit events.
+func (o ProjectConnectorsCoralogixOutput) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Specify which events will be sent to the external audit service (including tenant selection).
+func (o ProjectConnectorsCoralogixOutput) AuditFilters() ProjectConnectorsCoralogixAuditFilterArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) []ProjectConnectorsCoralogixAuditFilter { return v.AuditFilters }).(ProjectConnectorsCoralogixAuditFilterArrayOutput)
+}
+
+// Bearer token issued by Coralogix as Send-Your-Data API key
+func (o ProjectConnectorsCoralogixOutput) BearerToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) string { return v.BearerToken }).(pulumi.StringOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsCoralogixOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ingress OpenTelemetry endpoint URL.
+func (o ProjectConnectorsCoralogixOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) string { return v.Endpoint }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsCoralogixOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsCoralogixOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Whether to send troubleshooting events.
+func (o ProjectConnectorsCoralogixOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogix) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsCoralogixArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsCoralogixArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsCoralogix)(nil)).Elem()
+}
+
+func (o ProjectConnectorsCoralogixArrayOutput) ToProjectConnectorsCoralogixArrayOutput() ProjectConnectorsCoralogixArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixArrayOutput) ToProjectConnectorsCoralogixArrayOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsCoralogixOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsCoralogix {
+		return vs[0].([]ProjectConnectorsCoralogix)[vs[1].(int)]
+	}).(ProjectConnectorsCoralogixOutput)
+}
+
+type ProjectConnectorsCoralogixAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// ProjectConnectorsCoralogixAuditFilterInput is an input type that accepts ProjectConnectorsCoralogixAuditFilterArgs and ProjectConnectorsCoralogixAuditFilterOutput values.
+// You can construct a concrete instance of `ProjectConnectorsCoralogixAuditFilterInput` via:
+//
+//	ProjectConnectorsCoralogixAuditFilterArgs{...}
+type ProjectConnectorsCoralogixAuditFilterInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsCoralogixAuditFilterOutput() ProjectConnectorsCoralogixAuditFilterOutput
+	ToProjectConnectorsCoralogixAuditFilterOutputWithContext(context.Context) ProjectConnectorsCoralogixAuditFilterOutput
+}
+
+type ProjectConnectorsCoralogixAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ProjectConnectorsCoralogixAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsCoralogixAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsCoralogixAuditFilterArgs) ToProjectConnectorsCoralogixAuditFilterOutput() ProjectConnectorsCoralogixAuditFilterOutput {
+	return i.ToProjectConnectorsCoralogixAuditFilterOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsCoralogixAuditFilterArgs) ToProjectConnectorsCoralogixAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCoralogixAuditFilterOutput)
+}
+
+// ProjectConnectorsCoralogixAuditFilterArrayInput is an input type that accepts ProjectConnectorsCoralogixAuditFilterArray and ProjectConnectorsCoralogixAuditFilterArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsCoralogixAuditFilterArrayInput` via:
+//
+//	ProjectConnectorsCoralogixAuditFilterArray{ ProjectConnectorsCoralogixAuditFilterArgs{...} }
+type ProjectConnectorsCoralogixAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsCoralogixAuditFilterArrayOutput() ProjectConnectorsCoralogixAuditFilterArrayOutput
+	ToProjectConnectorsCoralogixAuditFilterArrayOutputWithContext(context.Context) ProjectConnectorsCoralogixAuditFilterArrayOutput
+}
+
+type ProjectConnectorsCoralogixAuditFilterArray []ProjectConnectorsCoralogixAuditFilterInput
+
+func (ProjectConnectorsCoralogixAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsCoralogixAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsCoralogixAuditFilterArray) ToProjectConnectorsCoralogixAuditFilterArrayOutput() ProjectConnectorsCoralogixAuditFilterArrayOutput {
+	return i.ToProjectConnectorsCoralogixAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsCoralogixAuditFilterArray) ToProjectConnectorsCoralogixAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsCoralogixAuditFilterArrayOutput)
+}
+
+type ProjectConnectorsCoralogixAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsCoralogixAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsCoralogixAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsCoralogixAuditFilterOutput) ToProjectConnectorsCoralogixAuditFilterOutput() ProjectConnectorsCoralogixAuditFilterOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixAuditFilterOutput) ToProjectConnectorsCoralogixAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o ProjectConnectorsCoralogixAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogixAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o ProjectConnectorsCoralogixAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogixAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o ProjectConnectorsCoralogixAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsCoralogixAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ProjectConnectorsCoralogixAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsCoralogixAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsCoralogixAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsCoralogixAuditFilterArrayOutput) ToProjectConnectorsCoralogixAuditFilterArrayOutput() ProjectConnectorsCoralogixAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixAuditFilterArrayOutput) ToProjectConnectorsCoralogixAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsCoralogixAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsCoralogixAuditFilterArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsCoralogixAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsCoralogixAuditFilter {
+		return vs[0].([]ProjectConnectorsCoralogixAuditFilter)[vs[1].(int)]
+	}).(ProjectConnectorsCoralogixAuditFilterOutput)
+}
+
+type ProjectConnectorsDarwinium struct {
+	// The default result to return if no result is available.
+	DefaultResult *string `pulumi:"defaultResult"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// The name of the Darwinium journey to use for profiling.
+	JourneyName string `pulumi:"journeyName"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The name of the Darwinium Native Mobile API to use.
+	NativeApiName *string `pulumi:"nativeApiName"`
+	// The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+	NativeBlobKeyName *string `pulumi:"nativeBlobKeyName"`
+	// The name of the Darwinium node.
+	NodeName string `pulumi:"nodeName"`
+	// The passphrase for the PEM certificate, if applicable.
+	Passphrase *string `pulumi:"passphrase"`
+	// The PEM certificate for client authentication.
+	PemCertificate string `pulumi:"pemCertificate"`
+	// The private key for client authentication.
+	PrivateKey string `pulumi:"privateKey"`
+	// The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+	ProfilingTagsScriptUrl *string `pulumi:"profilingTagsScriptUrl"`
+	// The name of the Darwinium Web API to use.
+	WebApiName string `pulumi:"webApiName"`
+}
+
+// ProjectConnectorsDarwiniumInput is an input type that accepts ProjectConnectorsDarwiniumArgs and ProjectConnectorsDarwiniumOutput values.
+// You can construct a concrete instance of `ProjectConnectorsDarwiniumInput` via:
+//
+//	ProjectConnectorsDarwiniumArgs{...}
+type ProjectConnectorsDarwiniumInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsDarwiniumOutput() ProjectConnectorsDarwiniumOutput
+	ToProjectConnectorsDarwiniumOutputWithContext(context.Context) ProjectConnectorsDarwiniumOutput
+}
+
+type ProjectConnectorsDarwiniumArgs struct {
+	// The default result to return if no result is available.
+	DefaultResult pulumi.StringPtrInput `pulumi:"defaultResult"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the Darwinium journey to use for profiling.
+	JourneyName pulumi.StringInput `pulumi:"journeyName"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The name of the Darwinium Native Mobile API to use.
+	NativeApiName pulumi.StringPtrInput `pulumi:"nativeApiName"`
+	// The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+	NativeBlobKeyName pulumi.StringPtrInput `pulumi:"nativeBlobKeyName"`
+	// The name of the Darwinium node.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// The passphrase for the PEM certificate, if applicable.
+	Passphrase pulumi.StringPtrInput `pulumi:"passphrase"`
+	// The PEM certificate for client authentication.
+	PemCertificate pulumi.StringInput `pulumi:"pemCertificate"`
+	// The private key for client authentication.
+	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	// The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+	ProfilingTagsScriptUrl pulumi.StringPtrInput `pulumi:"profilingTagsScriptUrl"`
+	// The name of the Darwinium Web API to use.
+	WebApiName pulumi.StringInput `pulumi:"webApiName"`
+}
+
+func (ProjectConnectorsDarwiniumArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsDarwinium)(nil)).Elem()
+}
+
+func (i ProjectConnectorsDarwiniumArgs) ToProjectConnectorsDarwiniumOutput() ProjectConnectorsDarwiniumOutput {
+	return i.ToProjectConnectorsDarwiniumOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsDarwiniumArgs) ToProjectConnectorsDarwiniumOutputWithContext(ctx context.Context) ProjectConnectorsDarwiniumOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsDarwiniumOutput)
+}
+
+// ProjectConnectorsDarwiniumArrayInput is an input type that accepts ProjectConnectorsDarwiniumArray and ProjectConnectorsDarwiniumArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsDarwiniumArrayInput` via:
+//
+//	ProjectConnectorsDarwiniumArray{ ProjectConnectorsDarwiniumArgs{...} }
+type ProjectConnectorsDarwiniumArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsDarwiniumArrayOutput() ProjectConnectorsDarwiniumArrayOutput
+	ToProjectConnectorsDarwiniumArrayOutputWithContext(context.Context) ProjectConnectorsDarwiniumArrayOutput
+}
+
+type ProjectConnectorsDarwiniumArray []ProjectConnectorsDarwiniumInput
+
+func (ProjectConnectorsDarwiniumArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsDarwinium)(nil)).Elem()
+}
+
+func (i ProjectConnectorsDarwiniumArray) ToProjectConnectorsDarwiniumArrayOutput() ProjectConnectorsDarwiniumArrayOutput {
+	return i.ToProjectConnectorsDarwiniumArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsDarwiniumArray) ToProjectConnectorsDarwiniumArrayOutputWithContext(ctx context.Context) ProjectConnectorsDarwiniumArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsDarwiniumArrayOutput)
+}
+
+type ProjectConnectorsDarwiniumOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsDarwiniumOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsDarwinium)(nil)).Elem()
+}
+
+func (o ProjectConnectorsDarwiniumOutput) ToProjectConnectorsDarwiniumOutput() ProjectConnectorsDarwiniumOutput {
+	return o
+}
+
+func (o ProjectConnectorsDarwiniumOutput) ToProjectConnectorsDarwiniumOutputWithContext(ctx context.Context) ProjectConnectorsDarwiniumOutput {
+	return o
+}
+
+// The default result to return if no result is available.
+func (o ProjectConnectorsDarwiniumOutput) DefaultResult() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.DefaultResult }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsDarwiniumOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsDarwiniumOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The name of the Darwinium journey to use for profiling.
+func (o ProjectConnectorsDarwiniumOutput) JourneyName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.JourneyName }).(pulumi.StringOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsDarwiniumOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The name of the Darwinium Native Mobile API to use.
+func (o ProjectConnectorsDarwiniumOutput) NativeApiName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.NativeApiName }).(pulumi.StringPtrOutput)
+}
+
+// The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+func (o ProjectConnectorsDarwiniumOutput) NativeBlobKeyName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.NativeBlobKeyName }).(pulumi.StringPtrOutput)
+}
+
+// The name of the Darwinium node.
+func (o ProjectConnectorsDarwiniumOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// The passphrase for the PEM certificate, if applicable.
+func (o ProjectConnectorsDarwiniumOutput) Passphrase() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.Passphrase }).(pulumi.StringPtrOutput)
+}
+
+// The PEM certificate for client authentication.
+func (o ProjectConnectorsDarwiniumOutput) PemCertificate() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.PemCertificate }).(pulumi.StringOutput)
+}
+
+// The private key for client authentication.
+func (o ProjectConnectorsDarwiniumOutput) PrivateKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.PrivateKey }).(pulumi.StringOutput)
+}
+
+// The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+func (o ProjectConnectorsDarwiniumOutput) ProfilingTagsScriptUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) *string { return v.ProfilingTagsScriptUrl }).(pulumi.StringPtrOutput)
+}
+
+// The name of the Darwinium Web API to use.
+func (o ProjectConnectorsDarwiniumOutput) WebApiName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsDarwinium) string { return v.WebApiName }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsDarwiniumArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsDarwiniumArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsDarwinium)(nil)).Elem()
+}
+
+func (o ProjectConnectorsDarwiniumArrayOutput) ToProjectConnectorsDarwiniumArrayOutput() ProjectConnectorsDarwiniumArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsDarwiniumArrayOutput) ToProjectConnectorsDarwiniumArrayOutputWithContext(ctx context.Context) ProjectConnectorsDarwiniumArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsDarwiniumArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsDarwiniumOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsDarwinium {
+		return vs[0].([]ProjectConnectorsDarwinium)[vs[1].(int)]
+	}).(ProjectConnectorsDarwiniumOutput)
 }
 
 type ProjectConnectorsDatadog struct {
@@ -24148,6 +26401,163 @@ func (o ProjectConnectorsGoogleMapsPlaceArrayOutput) Index(i pulumi.IntInput) Pr
 	}).(ProjectConnectorsGoogleMapsPlaceOutput)
 }
 
+type ProjectConnectorsHcaptcha struct {
+	// When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+	AssessmentScore *float64 `pulumi:"assessmentScore"`
+	// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+	BotThreshold *float64 `pulumi:"botThreshold"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+	OverrideAssessment *bool `pulumi:"overrideAssessment"`
+	// The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+	SecretKey string `pulumi:"secretKey"`
+	// The site key is used to invoke hCaptcha service on your site or mobile application.
+	SiteKey string `pulumi:"siteKey"`
+}
+
+// ProjectConnectorsHcaptchaInput is an input type that accepts ProjectConnectorsHcaptchaArgs and ProjectConnectorsHcaptchaOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHcaptchaInput` via:
+//
+//	ProjectConnectorsHcaptchaArgs{...}
+type ProjectConnectorsHcaptchaInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHcaptchaOutput() ProjectConnectorsHcaptchaOutput
+	ToProjectConnectorsHcaptchaOutputWithContext(context.Context) ProjectConnectorsHcaptchaOutput
+}
+
+type ProjectConnectorsHcaptchaArgs struct {
+	// When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+	AssessmentScore pulumi.Float64PtrInput `pulumi:"assessmentScore"`
+	// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+	BotThreshold pulumi.Float64PtrInput `pulumi:"botThreshold"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+	OverrideAssessment pulumi.BoolPtrInput `pulumi:"overrideAssessment"`
+	// The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	// The site key is used to invoke hCaptcha service on your site or mobile application.
+	SiteKey pulumi.StringInput `pulumi:"siteKey"`
+}
+
+func (ProjectConnectorsHcaptchaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHcaptcha)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHcaptchaArgs) ToProjectConnectorsHcaptchaOutput() ProjectConnectorsHcaptchaOutput {
+	return i.ToProjectConnectorsHcaptchaOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHcaptchaArgs) ToProjectConnectorsHcaptchaOutputWithContext(ctx context.Context) ProjectConnectorsHcaptchaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHcaptchaOutput)
+}
+
+// ProjectConnectorsHcaptchaArrayInput is an input type that accepts ProjectConnectorsHcaptchaArray and ProjectConnectorsHcaptchaArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHcaptchaArrayInput` via:
+//
+//	ProjectConnectorsHcaptchaArray{ ProjectConnectorsHcaptchaArgs{...} }
+type ProjectConnectorsHcaptchaArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHcaptchaArrayOutput() ProjectConnectorsHcaptchaArrayOutput
+	ToProjectConnectorsHcaptchaArrayOutputWithContext(context.Context) ProjectConnectorsHcaptchaArrayOutput
+}
+
+type ProjectConnectorsHcaptchaArray []ProjectConnectorsHcaptchaInput
+
+func (ProjectConnectorsHcaptchaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsHcaptcha)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHcaptchaArray) ToProjectConnectorsHcaptchaArrayOutput() ProjectConnectorsHcaptchaArrayOutput {
+	return i.ToProjectConnectorsHcaptchaArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHcaptchaArray) ToProjectConnectorsHcaptchaArrayOutputWithContext(ctx context.Context) ProjectConnectorsHcaptchaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHcaptchaArrayOutput)
+}
+
+type ProjectConnectorsHcaptchaOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHcaptchaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHcaptcha)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHcaptchaOutput) ToProjectConnectorsHcaptchaOutput() ProjectConnectorsHcaptchaOutput {
+	return o
+}
+
+func (o ProjectConnectorsHcaptchaOutput) ToProjectConnectorsHcaptchaOutputWithContext(ctx context.Context) ProjectConnectorsHcaptchaOutput {
+	return o
+}
+
+// When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+func (o ProjectConnectorsHcaptchaOutput) AssessmentScore() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) *float64 { return v.AssessmentScore }).(pulumi.Float64PtrOutput)
+}
+
+// The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+func (o ProjectConnectorsHcaptchaOutput) BotThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) *float64 { return v.BotThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsHcaptchaOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsHcaptchaOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsHcaptchaOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+func (o ProjectConnectorsHcaptchaOutput) OverrideAssessment() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) *bool { return v.OverrideAssessment }).(pulumi.BoolPtrOutput)
+}
+
+// The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+func (o ProjectConnectorsHcaptchaOutput) SecretKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) string { return v.SecretKey }).(pulumi.StringOutput)
+}
+
+// The site key is used to invoke hCaptcha service on your site or mobile application.
+func (o ProjectConnectorsHcaptchaOutput) SiteKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHcaptcha) string { return v.SiteKey }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsHcaptchaArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHcaptchaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsHcaptcha)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHcaptchaArrayOutput) ToProjectConnectorsHcaptchaArrayOutput() ProjectConnectorsHcaptchaArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsHcaptchaArrayOutput) ToProjectConnectorsHcaptchaArrayOutputWithContext(ctx context.Context) ProjectConnectorsHcaptchaArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsHcaptchaArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsHcaptchaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsHcaptcha {
+		return vs[0].([]ProjectConnectorsHcaptcha)[vs[1].(int)]
+	}).(ProjectConnectorsHcaptchaOutput)
+}
+
 type ProjectConnectorsHibp struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
@@ -25332,6 +27742,190 @@ func (o ProjectConnectorsIntercomArrayOutput) Index(i pulumi.IntInput) ProjectCo
 	}).(ProjectConnectorsIntercomOutput)
 }
 
+type ProjectConnectorsLdap struct {
+	// The Distinguished Name to bind with for searching.
+	BindDn *string `pulumi:"bindDn"`
+	// The password for the bind DN.
+	BindPassword *string `pulumi:"bindPassword"`
+	// The Certificate Authority certificate in PEM format for validating the server certificate.
+	CaCertificate *string `pulumi:"caCertificate"`
+	// The client certificate in PEM format for mTLS authentication.
+	ClientCertificate *string `pulumi:"clientCertificate"`
+	// The client private key in PEM format for mTLS authentication.
+	ClientKey *string `pulumi:"clientKey"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Reject connections to LDAP servers with invalid certificates.
+	RejectUnauthorized *bool `pulumi:"rejectUnauthorized"`
+	// The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+	ServerUrl string `pulumi:"serverUrl"`
+	// Enable mutual TLS authentication for LDAP connection.
+	UseMtls *bool `pulumi:"useMtls"`
+}
+
+// ProjectConnectorsLdapInput is an input type that accepts ProjectConnectorsLdapArgs and ProjectConnectorsLdapOutput values.
+// You can construct a concrete instance of `ProjectConnectorsLdapInput` via:
+//
+//	ProjectConnectorsLdapArgs{...}
+type ProjectConnectorsLdapInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsLdapOutput() ProjectConnectorsLdapOutput
+	ToProjectConnectorsLdapOutputWithContext(context.Context) ProjectConnectorsLdapOutput
+}
+
+type ProjectConnectorsLdapArgs struct {
+	// The Distinguished Name to bind with for searching.
+	BindDn pulumi.StringPtrInput `pulumi:"bindDn"`
+	// The password for the bind DN.
+	BindPassword pulumi.StringPtrInput `pulumi:"bindPassword"`
+	// The Certificate Authority certificate in PEM format for validating the server certificate.
+	CaCertificate pulumi.StringPtrInput `pulumi:"caCertificate"`
+	// The client certificate in PEM format for mTLS authentication.
+	ClientCertificate pulumi.StringPtrInput `pulumi:"clientCertificate"`
+	// The client private key in PEM format for mTLS authentication.
+	ClientKey pulumi.StringPtrInput `pulumi:"clientKey"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Reject connections to LDAP servers with invalid certificates.
+	RejectUnauthorized pulumi.BoolPtrInput `pulumi:"rejectUnauthorized"`
+	// The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+	ServerUrl pulumi.StringInput `pulumi:"serverUrl"`
+	// Enable mutual TLS authentication for LDAP connection.
+	UseMtls pulumi.BoolPtrInput `pulumi:"useMtls"`
+}
+
+func (ProjectConnectorsLdapArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsLdap)(nil)).Elem()
+}
+
+func (i ProjectConnectorsLdapArgs) ToProjectConnectorsLdapOutput() ProjectConnectorsLdapOutput {
+	return i.ToProjectConnectorsLdapOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsLdapArgs) ToProjectConnectorsLdapOutputWithContext(ctx context.Context) ProjectConnectorsLdapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsLdapOutput)
+}
+
+// ProjectConnectorsLdapArrayInput is an input type that accepts ProjectConnectorsLdapArray and ProjectConnectorsLdapArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsLdapArrayInput` via:
+//
+//	ProjectConnectorsLdapArray{ ProjectConnectorsLdapArgs{...} }
+type ProjectConnectorsLdapArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsLdapArrayOutput() ProjectConnectorsLdapArrayOutput
+	ToProjectConnectorsLdapArrayOutputWithContext(context.Context) ProjectConnectorsLdapArrayOutput
+}
+
+type ProjectConnectorsLdapArray []ProjectConnectorsLdapInput
+
+func (ProjectConnectorsLdapArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsLdap)(nil)).Elem()
+}
+
+func (i ProjectConnectorsLdapArray) ToProjectConnectorsLdapArrayOutput() ProjectConnectorsLdapArrayOutput {
+	return i.ToProjectConnectorsLdapArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsLdapArray) ToProjectConnectorsLdapArrayOutputWithContext(ctx context.Context) ProjectConnectorsLdapArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsLdapArrayOutput)
+}
+
+type ProjectConnectorsLdapOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsLdapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsLdap)(nil)).Elem()
+}
+
+func (o ProjectConnectorsLdapOutput) ToProjectConnectorsLdapOutput() ProjectConnectorsLdapOutput {
+	return o
+}
+
+func (o ProjectConnectorsLdapOutput) ToProjectConnectorsLdapOutputWithContext(ctx context.Context) ProjectConnectorsLdapOutput {
+	return o
+}
+
+// The Distinguished Name to bind with for searching.
+func (o ProjectConnectorsLdapOutput) BindDn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.BindDn }).(pulumi.StringPtrOutput)
+}
+
+// The password for the bind DN.
+func (o ProjectConnectorsLdapOutput) BindPassword() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.BindPassword }).(pulumi.StringPtrOutput)
+}
+
+// The Certificate Authority certificate in PEM format for validating the server certificate.
+func (o ProjectConnectorsLdapOutput) CaCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.CaCertificate }).(pulumi.StringPtrOutput)
+}
+
+// The client certificate in PEM format for mTLS authentication.
+func (o ProjectConnectorsLdapOutput) ClientCertificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.ClientCertificate }).(pulumi.StringPtrOutput)
+}
+
+// The client private key in PEM format for mTLS authentication.
+func (o ProjectConnectorsLdapOutput) ClientKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.ClientKey }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsLdapOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsLdapOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsLdapOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Reject connections to LDAP servers with invalid certificates.
+func (o ProjectConnectorsLdapOutput) RejectUnauthorized() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *bool { return v.RejectUnauthorized }).(pulumi.BoolPtrOutput)
+}
+
+// The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+func (o ProjectConnectorsLdapOutput) ServerUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) string { return v.ServerUrl }).(pulumi.StringOutput)
+}
+
+// Enable mutual TLS authentication for LDAP connection.
+func (o ProjectConnectorsLdapOutput) UseMtls() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsLdap) *bool { return v.UseMtls }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsLdapArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsLdapArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsLdap)(nil)).Elem()
+}
+
+func (o ProjectConnectorsLdapArrayOutput) ToProjectConnectorsLdapArrayOutput() ProjectConnectorsLdapArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsLdapArrayOutput) ToProjectConnectorsLdapArrayOutputWithContext(ctx context.Context) ProjectConnectorsLdapArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsLdapArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsLdapOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsLdap {
+		return vs[0].([]ProjectConnectorsLdap)[vs[1].(int)]
+	}).(ProjectConnectorsLdapOutput)
+}
+
 type ProjectConnectorsLokalise struct {
 	// Lokalise API token.
 	ApiToken string `pulumi:"apiToken"`
@@ -25487,6 +28081,332 @@ func (o ProjectConnectorsLokaliseArrayOutput) Index(i pulumi.IntInput) ProjectCo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsLokalise {
 		return vs[0].([]ProjectConnectorsLokalise)[vs[1].(int)]
 	}).(ProjectConnectorsLokaliseOutput)
+}
+
+type ProjectConnectorsMixpanel struct {
+	// The Mixpanel API secret key used for authenticating API requests.
+	ApiSecret *string `pulumi:"apiSecret"`
+	// Whether to enable streaming of audit events.
+	AuditEnabled *bool `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters []ProjectConnectorsMixpanelAuditFilter `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// Indicates if your Mixpanel project data is stored in the EU region.
+	EuResidency *bool   `pulumi:"euResidency"`
+	Id          *string `pulumi:"id"`
+	// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+	LogsPrefix *string `pulumi:"logsPrefix"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Enable this option to use a custom prefix for log fields.
+	OverrideLogsPrefix *bool `pulumi:"overrideLogsPrefix"`
+	// The unique identifier for your Mixpanel project.
+	ProjectId *string `pulumi:"projectId"`
+	// The unique Mixpanel project token used to identify the project where data will be sent.
+	ProjectToken string `pulumi:"projectToken"`
+	// The Mixpanel service account secret used for integration.
+	ServiceAccountSecret *string `pulumi:"serviceAccountSecret"`
+	// The Mixpanel service account username used for integration.
+	ServiceAccountUsername *string `pulumi:"serviceAccountUsername"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
+}
+
+// ProjectConnectorsMixpanelInput is an input type that accepts ProjectConnectorsMixpanelArgs and ProjectConnectorsMixpanelOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMixpanelInput` via:
+//
+//	ProjectConnectorsMixpanelArgs{...}
+type ProjectConnectorsMixpanelInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMixpanelOutput() ProjectConnectorsMixpanelOutput
+	ToProjectConnectorsMixpanelOutputWithContext(context.Context) ProjectConnectorsMixpanelOutput
+}
+
+type ProjectConnectorsMixpanelArgs struct {
+	// The Mixpanel API secret key used for authenticating API requests.
+	ApiSecret pulumi.StringPtrInput `pulumi:"apiSecret"`
+	// Whether to enable streaming of audit events.
+	AuditEnabled pulumi.BoolPtrInput `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters ProjectConnectorsMixpanelAuditFilterArrayInput `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Indicates if your Mixpanel project data is stored in the EU region.
+	EuResidency pulumi.BoolPtrInput   `pulumi:"euResidency"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+	LogsPrefix pulumi.StringPtrInput `pulumi:"logsPrefix"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Enable this option to use a custom prefix for log fields.
+	OverrideLogsPrefix pulumi.BoolPtrInput `pulumi:"overrideLogsPrefix"`
+	// The unique identifier for your Mixpanel project.
+	ProjectId pulumi.StringPtrInput `pulumi:"projectId"`
+	// The unique Mixpanel project token used to identify the project where data will be sent.
+	ProjectToken pulumi.StringInput `pulumi:"projectToken"`
+	// The Mixpanel service account secret used for integration.
+	ServiceAccountSecret pulumi.StringPtrInput `pulumi:"serviceAccountSecret"`
+	// The Mixpanel service account username used for integration.
+	ServiceAccountUsername pulumi.StringPtrInput `pulumi:"serviceAccountUsername"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
+}
+
+func (ProjectConnectorsMixpanelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMixpanel)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMixpanelArgs) ToProjectConnectorsMixpanelOutput() ProjectConnectorsMixpanelOutput {
+	return i.ToProjectConnectorsMixpanelOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMixpanelArgs) ToProjectConnectorsMixpanelOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMixpanelOutput)
+}
+
+// ProjectConnectorsMixpanelArrayInput is an input type that accepts ProjectConnectorsMixpanelArray and ProjectConnectorsMixpanelArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMixpanelArrayInput` via:
+//
+//	ProjectConnectorsMixpanelArray{ ProjectConnectorsMixpanelArgs{...} }
+type ProjectConnectorsMixpanelArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMixpanelArrayOutput() ProjectConnectorsMixpanelArrayOutput
+	ToProjectConnectorsMixpanelArrayOutputWithContext(context.Context) ProjectConnectorsMixpanelArrayOutput
+}
+
+type ProjectConnectorsMixpanelArray []ProjectConnectorsMixpanelInput
+
+func (ProjectConnectorsMixpanelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMixpanel)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMixpanelArray) ToProjectConnectorsMixpanelArrayOutput() ProjectConnectorsMixpanelArrayOutput {
+	return i.ToProjectConnectorsMixpanelArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMixpanelArray) ToProjectConnectorsMixpanelArrayOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMixpanelArrayOutput)
+}
+
+type ProjectConnectorsMixpanelOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMixpanelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMixpanel)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMixpanelOutput) ToProjectConnectorsMixpanelOutput() ProjectConnectorsMixpanelOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelOutput) ToProjectConnectorsMixpanelOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelOutput {
+	return o
+}
+
+// The Mixpanel API secret key used for authenticating API requests.
+func (o ProjectConnectorsMixpanelOutput) ApiSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.ApiSecret }).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable streaming of audit events.
+func (o ProjectConnectorsMixpanelOutput) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Specify which events will be sent to the external audit service (including tenant selection).
+func (o ProjectConnectorsMixpanelOutput) AuditFilters() ProjectConnectorsMixpanelAuditFilterArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) []ProjectConnectorsMixpanelAuditFilter { return v.AuditFilters }).(ProjectConnectorsMixpanelAuditFilterArrayOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsMixpanelOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Indicates if your Mixpanel project data is stored in the EU region.
+func (o ProjectConnectorsMixpanelOutput) EuResidency() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *bool { return v.EuResidency }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProjectConnectorsMixpanelOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Specify a custom prefix for all log fields. The default prefix is `descope.`.
+func (o ProjectConnectorsMixpanelOutput) LogsPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.LogsPrefix }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsMixpanelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Enable this option to use a custom prefix for log fields.
+func (o ProjectConnectorsMixpanelOutput) OverrideLogsPrefix() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *bool { return v.OverrideLogsPrefix }).(pulumi.BoolPtrOutput)
+}
+
+// The unique identifier for your Mixpanel project.
+func (o ProjectConnectorsMixpanelOutput) ProjectId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.ProjectId }).(pulumi.StringPtrOutput)
+}
+
+// The unique Mixpanel project token used to identify the project where data will be sent.
+func (o ProjectConnectorsMixpanelOutput) ProjectToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) string { return v.ProjectToken }).(pulumi.StringOutput)
+}
+
+// The Mixpanel service account secret used for integration.
+func (o ProjectConnectorsMixpanelOutput) ServiceAccountSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.ServiceAccountSecret }).(pulumi.StringPtrOutput)
+}
+
+// The Mixpanel service account username used for integration.
+func (o ProjectConnectorsMixpanelOutput) ServiceAccountUsername() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *string { return v.ServiceAccountUsername }).(pulumi.StringPtrOutput)
+}
+
+// Whether to send troubleshooting events.
+func (o ProjectConnectorsMixpanelOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanel) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsMixpanelArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMixpanelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMixpanel)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMixpanelArrayOutput) ToProjectConnectorsMixpanelArrayOutput() ProjectConnectorsMixpanelArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelArrayOutput) ToProjectConnectorsMixpanelArrayOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsMixpanelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsMixpanel {
+		return vs[0].([]ProjectConnectorsMixpanel)[vs[1].(int)]
+	}).(ProjectConnectorsMixpanelOutput)
+}
+
+type ProjectConnectorsMixpanelAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// ProjectConnectorsMixpanelAuditFilterInput is an input type that accepts ProjectConnectorsMixpanelAuditFilterArgs and ProjectConnectorsMixpanelAuditFilterOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMixpanelAuditFilterInput` via:
+//
+//	ProjectConnectorsMixpanelAuditFilterArgs{...}
+type ProjectConnectorsMixpanelAuditFilterInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMixpanelAuditFilterOutput() ProjectConnectorsMixpanelAuditFilterOutput
+	ToProjectConnectorsMixpanelAuditFilterOutputWithContext(context.Context) ProjectConnectorsMixpanelAuditFilterOutput
+}
+
+type ProjectConnectorsMixpanelAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ProjectConnectorsMixpanelAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMixpanelAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMixpanelAuditFilterArgs) ToProjectConnectorsMixpanelAuditFilterOutput() ProjectConnectorsMixpanelAuditFilterOutput {
+	return i.ToProjectConnectorsMixpanelAuditFilterOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMixpanelAuditFilterArgs) ToProjectConnectorsMixpanelAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMixpanelAuditFilterOutput)
+}
+
+// ProjectConnectorsMixpanelAuditFilterArrayInput is an input type that accepts ProjectConnectorsMixpanelAuditFilterArray and ProjectConnectorsMixpanelAuditFilterArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsMixpanelAuditFilterArrayInput` via:
+//
+//	ProjectConnectorsMixpanelAuditFilterArray{ ProjectConnectorsMixpanelAuditFilterArgs{...} }
+type ProjectConnectorsMixpanelAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsMixpanelAuditFilterArrayOutput() ProjectConnectorsMixpanelAuditFilterArrayOutput
+	ToProjectConnectorsMixpanelAuditFilterArrayOutputWithContext(context.Context) ProjectConnectorsMixpanelAuditFilterArrayOutput
+}
+
+type ProjectConnectorsMixpanelAuditFilterArray []ProjectConnectorsMixpanelAuditFilterInput
+
+func (ProjectConnectorsMixpanelAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMixpanelAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsMixpanelAuditFilterArray) ToProjectConnectorsMixpanelAuditFilterArrayOutput() ProjectConnectorsMixpanelAuditFilterArrayOutput {
+	return i.ToProjectConnectorsMixpanelAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsMixpanelAuditFilterArray) ToProjectConnectorsMixpanelAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsMixpanelAuditFilterArrayOutput)
+}
+
+type ProjectConnectorsMixpanelAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMixpanelAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsMixpanelAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMixpanelAuditFilterOutput) ToProjectConnectorsMixpanelAuditFilterOutput() ProjectConnectorsMixpanelAuditFilterOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelAuditFilterOutput) ToProjectConnectorsMixpanelAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o ProjectConnectorsMixpanelAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanelAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o ProjectConnectorsMixpanelAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanelAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o ProjectConnectorsMixpanelAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsMixpanelAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ProjectConnectorsMixpanelAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsMixpanelAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsMixpanelAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsMixpanelAuditFilterArrayOutput) ToProjectConnectorsMixpanelAuditFilterArrayOutput() ProjectConnectorsMixpanelAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelAuditFilterArrayOutput) ToProjectConnectorsMixpanelAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsMixpanelAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsMixpanelAuditFilterArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsMixpanelAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsMixpanelAuditFilter {
+		return vs[0].([]ProjectConnectorsMixpanelAuditFilter)[vs[1].(int)]
+	}).(ProjectConnectorsMixpanelAuditFilterOutput)
 }
 
 type ProjectConnectorsMparticle struct {
@@ -25934,6 +28854,1069 @@ func (o ProjectConnectorsNewrelicAuditFilterArrayOutput) Index(i pulumi.IntInput
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsNewrelicAuditFilter {
 		return vs[0].([]ProjectConnectorsNewrelicAuditFilter)[vs[1].(int)]
 	}).(ProjectConnectorsNewrelicAuditFilterOutput)
+}
+
+type ProjectConnectorsOpentelemetry struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled *bool `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters []ProjectConnectorsOpentelemetryAuditFilter `pulumi:"auditFilters"`
+	// Authentication Information
+	Authentication *ProjectConnectorsOpentelemetryAuthentication `pulumi:"authentication"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The OTLP endpoint URL.
+	Endpoint string `pulumi:"endpoint"`
+	// The headers to send with the request
+	Headers map[string]string `pulumi:"headers"`
+	Id      *string           `pulumi:"id"`
+	// Will ignore certificate errors raised by the client
+	Insecure *bool `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Protocol to use for OTLP: http or grpc.
+	Protocol *string `pulumi:"protocol"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
+}
+
+// ProjectConnectorsOpentelemetryInput is an input type that accepts ProjectConnectorsOpentelemetryArgs and ProjectConnectorsOpentelemetryOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryInput` via:
+//
+//	ProjectConnectorsOpentelemetryArgs{...}
+type ProjectConnectorsOpentelemetryInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryOutput() ProjectConnectorsOpentelemetryOutput
+	ToProjectConnectorsOpentelemetryOutputWithContext(context.Context) ProjectConnectorsOpentelemetryOutput
+}
+
+type ProjectConnectorsOpentelemetryArgs struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled pulumi.BoolPtrInput `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters ProjectConnectorsOpentelemetryAuditFilterArrayInput `pulumi:"auditFilters"`
+	// Authentication Information
+	Authentication ProjectConnectorsOpentelemetryAuthenticationPtrInput `pulumi:"authentication"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The OTLP endpoint URL.
+	Endpoint pulumi.StringInput `pulumi:"endpoint"`
+	// The headers to send with the request
+	Headers pulumi.StringMapInput `pulumi:"headers"`
+	Id      pulumi.StringPtrInput `pulumi:"id"`
+	// Will ignore certificate errors raised by the client
+	Insecure pulumi.BoolPtrInput `pulumi:"insecure"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Protocol to use for OTLP: http or grpc.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
+}
+
+func (ProjectConnectorsOpentelemetryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetry)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryArgs) ToProjectConnectorsOpentelemetryOutput() ProjectConnectorsOpentelemetryOutput {
+	return i.ToProjectConnectorsOpentelemetryOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryArgs) ToProjectConnectorsOpentelemetryOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryOutput)
+}
+
+// ProjectConnectorsOpentelemetryArrayInput is an input type that accepts ProjectConnectorsOpentelemetryArray and ProjectConnectorsOpentelemetryArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryArrayInput` via:
+//
+//	ProjectConnectorsOpentelemetryArray{ ProjectConnectorsOpentelemetryArgs{...} }
+type ProjectConnectorsOpentelemetryArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryArrayOutput() ProjectConnectorsOpentelemetryArrayOutput
+	ToProjectConnectorsOpentelemetryArrayOutputWithContext(context.Context) ProjectConnectorsOpentelemetryArrayOutput
+}
+
+type ProjectConnectorsOpentelemetryArray []ProjectConnectorsOpentelemetryInput
+
+func (ProjectConnectorsOpentelemetryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsOpentelemetry)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryArray) ToProjectConnectorsOpentelemetryArrayOutput() ProjectConnectorsOpentelemetryArrayOutput {
+	return i.ToProjectConnectorsOpentelemetryArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryArray) ToProjectConnectorsOpentelemetryArrayOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryArrayOutput)
+}
+
+type ProjectConnectorsOpentelemetryOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetry)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryOutput) ToProjectConnectorsOpentelemetryOutput() ProjectConnectorsOpentelemetryOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryOutput) ToProjectConnectorsOpentelemetryOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryOutput {
+	return o
+}
+
+// Whether to enable streaming of audit events.
+func (o ProjectConnectorsOpentelemetryOutput) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Specify which events will be sent to the external audit service (including tenant selection).
+func (o ProjectConnectorsOpentelemetryOutput) AuditFilters() ProjectConnectorsOpentelemetryAuditFilterArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) []ProjectConnectorsOpentelemetryAuditFilter {
+		return v.AuditFilters
+	}).(ProjectConnectorsOpentelemetryAuditFilterArrayOutput)
+}
+
+// Authentication Information
+func (o ProjectConnectorsOpentelemetryOutput) Authentication() ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *ProjectConnectorsOpentelemetryAuthentication {
+		return v.Authentication
+	}).(ProjectConnectorsOpentelemetryAuthenticationPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsOpentelemetryOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The OTLP endpoint URL.
+func (o ProjectConnectorsOpentelemetryOutput) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) string { return v.Endpoint }).(pulumi.StringOutput)
+}
+
+// The headers to send with the request
+func (o ProjectConnectorsOpentelemetryOutput) Headers() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) map[string]string { return v.Headers }).(pulumi.StringMapOutput)
+}
+
+func (o ProjectConnectorsOpentelemetryOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Will ignore certificate errors raised by the client
+func (o ProjectConnectorsOpentelemetryOutput) Insecure() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *bool { return v.Insecure }).(pulumi.BoolPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsOpentelemetryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Protocol to use for OTLP: http or grpc.
+func (o ProjectConnectorsOpentelemetryOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// Whether to send troubleshooting events.
+func (o ProjectConnectorsOpentelemetryOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetry) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsOpentelemetry)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryArrayOutput) ToProjectConnectorsOpentelemetryArrayOutput() ProjectConnectorsOpentelemetryArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryArrayOutput) ToProjectConnectorsOpentelemetryArrayOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsOpentelemetryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsOpentelemetry {
+		return vs[0].([]ProjectConnectorsOpentelemetry)[vs[1].(int)]
+	}).(ProjectConnectorsOpentelemetryOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// ProjectConnectorsOpentelemetryAuditFilterInput is an input type that accepts ProjectConnectorsOpentelemetryAuditFilterArgs and ProjectConnectorsOpentelemetryAuditFilterOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuditFilterInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuditFilterArgs{...}
+type ProjectConnectorsOpentelemetryAuditFilterInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuditFilterOutput() ProjectConnectorsOpentelemetryAuditFilterOutput
+	ToProjectConnectorsOpentelemetryAuditFilterOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuditFilterOutput
+}
+
+type ProjectConnectorsOpentelemetryAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ProjectConnectorsOpentelemetryAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuditFilterArgs) ToProjectConnectorsOpentelemetryAuditFilterOutput() ProjectConnectorsOpentelemetryAuditFilterOutput {
+	return i.ToProjectConnectorsOpentelemetryAuditFilterOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuditFilterArgs) ToProjectConnectorsOpentelemetryAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuditFilterOutput)
+}
+
+// ProjectConnectorsOpentelemetryAuditFilterArrayInput is an input type that accepts ProjectConnectorsOpentelemetryAuditFilterArray and ProjectConnectorsOpentelemetryAuditFilterArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuditFilterArrayInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuditFilterArray{ ProjectConnectorsOpentelemetryAuditFilterArgs{...} }
+type ProjectConnectorsOpentelemetryAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuditFilterArrayOutput() ProjectConnectorsOpentelemetryAuditFilterArrayOutput
+	ToProjectConnectorsOpentelemetryAuditFilterArrayOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuditFilterArrayOutput
+}
+
+type ProjectConnectorsOpentelemetryAuditFilterArray []ProjectConnectorsOpentelemetryAuditFilterInput
+
+func (ProjectConnectorsOpentelemetryAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsOpentelemetryAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuditFilterArray) ToProjectConnectorsOpentelemetryAuditFilterArrayOutput() ProjectConnectorsOpentelemetryAuditFilterArrayOutput {
+	return i.ToProjectConnectorsOpentelemetryAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuditFilterArray) ToProjectConnectorsOpentelemetryAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuditFilterArrayOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuditFilterOutput) ToProjectConnectorsOpentelemetryAuditFilterOutput() ProjectConnectorsOpentelemetryAuditFilterOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuditFilterOutput) ToProjectConnectorsOpentelemetryAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o ProjectConnectorsOpentelemetryAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o ProjectConnectorsOpentelemetryAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o ProjectConnectorsOpentelemetryAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsOpentelemetryAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuditFilterArrayOutput) ToProjectConnectorsOpentelemetryAuditFilterArrayOutput() ProjectConnectorsOpentelemetryAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuditFilterArrayOutput) ToProjectConnectorsOpentelemetryAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuditFilterArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsOpentelemetryAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsOpentelemetryAuditFilter {
+		return vs[0].([]ProjectConnectorsOpentelemetryAuditFilter)[vs[1].(int)]
+	}).(ProjectConnectorsOpentelemetryAuditFilterOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthentication struct {
+	// API key authentication configuration.
+	ApiKey *ProjectConnectorsOpentelemetryAuthenticationApiKey `pulumi:"apiKey"`
+	// Basic authentication credentials (username and password).
+	Basic *ProjectConnectorsOpentelemetryAuthenticationBasic `pulumi:"basic"`
+	// Bearer token for HTTP authentication.
+	BearerToken *string `pulumi:"bearerToken"`
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationArgs and ProjectConnectorsOpentelemetryAuthenticationOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuthenticationArgs{...}
+type ProjectConnectorsOpentelemetryAuthenticationInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationOutput() ProjectConnectorsOpentelemetryAuthenticationOutput
+	ToProjectConnectorsOpentelemetryAuthenticationOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationOutput
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationArgs struct {
+	// API key authentication configuration.
+	ApiKey ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput `pulumi:"apiKey"`
+	// Basic authentication credentials (username and password).
+	Basic ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput `pulumi:"basic"`
+	// Bearer token for HTTP authentication.
+	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+}
+
+func (ProjectConnectorsOpentelemetryAuthenticationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthentication)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationArgs) ToProjectConnectorsOpentelemetryAuthenticationOutput() ProjectConnectorsOpentelemetryAuthenticationOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationArgs) ToProjectConnectorsOpentelemetryAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationOutput)
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationArgs) ToProjectConnectorsOpentelemetryAuthenticationPtrOutput() ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationArgs) ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationOutput).ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationPtrInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationArgs, ProjectConnectorsOpentelemetryAuthenticationPtr and ProjectConnectorsOpentelemetryAuthenticationPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationPtrInput` via:
+//
+//	        ProjectConnectorsOpentelemetryAuthenticationArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsOpentelemetryAuthenticationPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationPtrOutput() ProjectConnectorsOpentelemetryAuthenticationPtrOutput
+	ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationPtrOutput
+}
+
+type projectConnectorsOpentelemetryAuthenticationPtrType ProjectConnectorsOpentelemetryAuthenticationArgs
+
+func ProjectConnectorsOpentelemetryAuthenticationPtr(v *ProjectConnectorsOpentelemetryAuthenticationArgs) ProjectConnectorsOpentelemetryAuthenticationPtrInput {
+	return (*projectConnectorsOpentelemetryAuthenticationPtrType)(v)
+}
+
+func (*projectConnectorsOpentelemetryAuthenticationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthentication)(nil)).Elem()
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationPtrType) ToProjectConnectorsOpentelemetryAuthenticationPtrOutput() ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationPtrType) ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthentication)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) ToProjectConnectorsOpentelemetryAuthenticationOutput() ProjectConnectorsOpentelemetryAuthenticationOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) ToProjectConnectorsOpentelemetryAuthenticationOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) ToProjectConnectorsOpentelemetryAuthenticationPtrOutput() ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return o.ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthentication {
+		return &v
+	}).(ProjectConnectorsOpentelemetryAuthenticationPtrOutput)
+}
+
+// API key authentication configuration.
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) ApiKey() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationApiKey {
+		return v.ApiKey
+	}).(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput)
+}
+
+// Basic authentication credentials (username and password).
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) Basic() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationBasic {
+		return v.Basic
+	}).(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput)
+}
+
+// Bearer token for HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) BearerToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthentication)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationPtrOutput() ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) Elem() ProjectConnectorsOpentelemetryAuthenticationOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthentication) ProjectConnectorsOpentelemetryAuthentication {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsOpentelemetryAuthentication
+		return ret
+	}).(ProjectConnectorsOpentelemetryAuthenticationOutput)
+}
+
+// API key authentication configuration.
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) ApiKey() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationApiKey {
+		if v == nil {
+			return nil
+		}
+		return v.ApiKey
+	}).(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput)
+}
+
+// Basic authentication credentials (username and password).
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) Basic() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationBasic {
+		if v == nil {
+			return nil
+		}
+		return v.Basic
+	}).(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput)
+}
+
+// Bearer token for HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) BearerToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthentication) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BearerToken
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationApiKey struct {
+	// The API key.
+	Key string `pulumi:"key"`
+	// The API secret.
+	Token string `pulumi:"token"`
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationApiKeyInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs and ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationApiKeyInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs{...}
+type ProjectConnectorsOpentelemetryAuthenticationApiKeyInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput
+	ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs struct {
+	// The API key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The API secret.
+	Token pulumi.StringInput `pulumi:"token"`
+}
+
+func (ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationApiKey)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput)
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput).ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs, ProjectConnectorsOpentelemetryAuthenticationApiKeyPtr and ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput` via:
+//
+//	        ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput
+	ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput
+}
+
+type projectConnectorsOpentelemetryAuthenticationApiKeyPtrType ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs
+
+func ProjectConnectorsOpentelemetryAuthenticationApiKeyPtr(v *ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput {
+	return (*projectConnectorsOpentelemetryAuthenticationApiKeyPtrType)(v)
+}
+
+func (*projectConnectorsOpentelemetryAuthenticationApiKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationApiKey)(nil)).Elem()
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationApiKeyPtrType) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationApiKeyPtrType) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationApiKey)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o.ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsOpentelemetryAuthenticationApiKey) *ProjectConnectorsOpentelemetryAuthenticationApiKey {
+		return &v
+	}).(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput)
+}
+
+// The API key.
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationApiKey) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The API secret.
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationApiKey) string { return v.Token }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationApiKey)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput() ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) Elem() ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationApiKey) ProjectConnectorsOpentelemetryAuthenticationApiKey {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsOpentelemetryAuthenticationApiKey
+		return ret
+	}).(ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput)
+}
+
+// The API key.
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationApiKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// The API secret.
+func (o ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationApiKey) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Token
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationBasic struct {
+	// Password for basic HTTP authentication.
+	Password string `pulumi:"password"`
+	// Username for basic HTTP authentication.
+	Username string `pulumi:"username"`
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationBasicInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationBasicArgs and ProjectConnectorsOpentelemetryAuthenticationBasicOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationBasicInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuthenticationBasicArgs{...}
+type ProjectConnectorsOpentelemetryAuthenticationBasicInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationBasicOutput() ProjectConnectorsOpentelemetryAuthenticationBasicOutput
+	ToProjectConnectorsOpentelemetryAuthenticationBasicOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicOutput
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationBasicArgs struct {
+	// Password for basic HTTP authentication.
+	Password pulumi.StringInput `pulumi:"password"`
+	// Username for basic HTTP authentication.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasic)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ToProjectConnectorsOpentelemetryAuthenticationBasicOutput() ProjectConnectorsOpentelemetryAuthenticationBasicOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationBasicOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ToProjectConnectorsOpentelemetryAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationBasicOutput)
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationBasicOutput).ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationBasicArgs, ProjectConnectorsOpentelemetryAuthenticationBasicPtr and ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput` via:
+//
+//	        ProjectConnectorsOpentelemetryAuthenticationBasicArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput
+	ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput
+}
+
+type projectConnectorsOpentelemetryAuthenticationBasicPtrType ProjectConnectorsOpentelemetryAuthenticationBasicArgs
+
+func ProjectConnectorsOpentelemetryAuthenticationBasicPtr(v *ProjectConnectorsOpentelemetryAuthenticationBasicArgs) ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput {
+	return (*projectConnectorsOpentelemetryAuthenticationBasicPtrType)(v)
+}
+
+func (*projectConnectorsOpentelemetryAuthenticationBasicPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationBasic)(nil)).Elem()
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationBasicPtrType) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationBasicPtrType) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationBasicOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationBasicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasic)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicOutput() ProjectConnectorsOpentelemetryAuthenticationBasicOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o.ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsOpentelemetryAuthenticationBasic) *ProjectConnectorsOpentelemetryAuthenticationBasic {
+		return &v
+	}).(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput)
+}
+
+// Password for basic HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationBasic) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// Username for basic HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationBasic) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationBasic)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput() ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationBasicPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) Elem() ProjectConnectorsOpentelemetryAuthenticationBasicOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationBasic) ProjectConnectorsOpentelemetryAuthenticationBasic {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsOpentelemetryAuthenticationBasic
+		return ret
+	}).(ProjectConnectorsOpentelemetryAuthenticationBasicOutput)
+}
+
+// Password for basic HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Username for basic HTTP authentication.
+func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationBasic) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsPingDirectory struct {
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// PingDirectory's REST API host.
+	Host string  `pulumi:"host"`
+	Id   *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// PingDirectory's REST API port.
+	Port float64 `pulumi:"port"`
+}
+
+// ProjectConnectorsPingDirectoryInput is an input type that accepts ProjectConnectorsPingDirectoryArgs and ProjectConnectorsPingDirectoryOutput values.
+// You can construct a concrete instance of `ProjectConnectorsPingDirectoryInput` via:
+//
+//	ProjectConnectorsPingDirectoryArgs{...}
+type ProjectConnectorsPingDirectoryInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsPingDirectoryOutput() ProjectConnectorsPingDirectoryOutput
+	ToProjectConnectorsPingDirectoryOutputWithContext(context.Context) ProjectConnectorsPingDirectoryOutput
+}
+
+type ProjectConnectorsPingDirectoryArgs struct {
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// PingDirectory's REST API host.
+	Host pulumi.StringInput    `pulumi:"host"`
+	Id   pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// PingDirectory's REST API port.
+	Port pulumi.Float64Input `pulumi:"port"`
+}
+
+func (ProjectConnectorsPingDirectoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsPingDirectory)(nil)).Elem()
+}
+
+func (i ProjectConnectorsPingDirectoryArgs) ToProjectConnectorsPingDirectoryOutput() ProjectConnectorsPingDirectoryOutput {
+	return i.ToProjectConnectorsPingDirectoryOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsPingDirectoryArgs) ToProjectConnectorsPingDirectoryOutputWithContext(ctx context.Context) ProjectConnectorsPingDirectoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsPingDirectoryOutput)
+}
+
+// ProjectConnectorsPingDirectoryArrayInput is an input type that accepts ProjectConnectorsPingDirectoryArray and ProjectConnectorsPingDirectoryArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsPingDirectoryArrayInput` via:
+//
+//	ProjectConnectorsPingDirectoryArray{ ProjectConnectorsPingDirectoryArgs{...} }
+type ProjectConnectorsPingDirectoryArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsPingDirectoryArrayOutput() ProjectConnectorsPingDirectoryArrayOutput
+	ToProjectConnectorsPingDirectoryArrayOutputWithContext(context.Context) ProjectConnectorsPingDirectoryArrayOutput
+}
+
+type ProjectConnectorsPingDirectoryArray []ProjectConnectorsPingDirectoryInput
+
+func (ProjectConnectorsPingDirectoryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsPingDirectory)(nil)).Elem()
+}
+
+func (i ProjectConnectorsPingDirectoryArray) ToProjectConnectorsPingDirectoryArrayOutput() ProjectConnectorsPingDirectoryArrayOutput {
+	return i.ToProjectConnectorsPingDirectoryArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsPingDirectoryArray) ToProjectConnectorsPingDirectoryArrayOutputWithContext(ctx context.Context) ProjectConnectorsPingDirectoryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsPingDirectoryArrayOutput)
+}
+
+type ProjectConnectorsPingDirectoryOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsPingDirectoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsPingDirectory)(nil)).Elem()
+}
+
+func (o ProjectConnectorsPingDirectoryOutput) ToProjectConnectorsPingDirectoryOutput() ProjectConnectorsPingDirectoryOutput {
+	return o
+}
+
+func (o ProjectConnectorsPingDirectoryOutput) ToProjectConnectorsPingDirectoryOutputWithContext(ctx context.Context) ProjectConnectorsPingDirectoryOutput {
+	return o
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsPingDirectoryOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// PingDirectory's REST API host.
+func (o ProjectConnectorsPingDirectoryOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) string { return v.Host }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsPingDirectoryOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsPingDirectoryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// PingDirectory's REST API port.
+func (o ProjectConnectorsPingDirectoryOutput) Port() pulumi.Float64Output {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) float64 { return v.Port }).(pulumi.Float64Output)
+}
+
+type ProjectConnectorsPingDirectoryArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsPingDirectoryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsPingDirectory)(nil)).Elem()
+}
+
+func (o ProjectConnectorsPingDirectoryArrayOutput) ToProjectConnectorsPingDirectoryArrayOutput() ProjectConnectorsPingDirectoryArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsPingDirectoryArrayOutput) ToProjectConnectorsPingDirectoryArrayOutputWithContext(ctx context.Context) ProjectConnectorsPingDirectoryArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsPingDirectoryArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsPingDirectoryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsPingDirectory {
+		return vs[0].([]ProjectConnectorsPingDirectory)[vs[1].(int)]
+	}).(ProjectConnectorsPingDirectoryOutput)
+}
+
+type ProjectConnectorsPostmark struct {
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The email address that will appear in the 'From' field of the sent email
+	EmailFrom string  `pulumi:"emailFrom"`
+	Id        *string `pulumi:"id"`
+	// The ID of the message stream to use for the email
+	MessageStreamId string `pulumi:"messageStreamId"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The API token for authenticating with the Postmark server
+	ServerApiToken string `pulumi:"serverApiToken"`
+}
+
+// ProjectConnectorsPostmarkInput is an input type that accepts ProjectConnectorsPostmarkArgs and ProjectConnectorsPostmarkOutput values.
+// You can construct a concrete instance of `ProjectConnectorsPostmarkInput` via:
+//
+//	ProjectConnectorsPostmarkArgs{...}
+type ProjectConnectorsPostmarkInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsPostmarkOutput() ProjectConnectorsPostmarkOutput
+	ToProjectConnectorsPostmarkOutputWithContext(context.Context) ProjectConnectorsPostmarkOutput
+}
+
+type ProjectConnectorsPostmarkArgs struct {
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The email address that will appear in the 'From' field of the sent email
+	EmailFrom pulumi.StringInput    `pulumi:"emailFrom"`
+	Id        pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the message stream to use for the email
+	MessageStreamId pulumi.StringInput `pulumi:"messageStreamId"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The API token for authenticating with the Postmark server
+	ServerApiToken pulumi.StringInput `pulumi:"serverApiToken"`
+}
+
+func (ProjectConnectorsPostmarkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsPostmark)(nil)).Elem()
+}
+
+func (i ProjectConnectorsPostmarkArgs) ToProjectConnectorsPostmarkOutput() ProjectConnectorsPostmarkOutput {
+	return i.ToProjectConnectorsPostmarkOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsPostmarkArgs) ToProjectConnectorsPostmarkOutputWithContext(ctx context.Context) ProjectConnectorsPostmarkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsPostmarkOutput)
+}
+
+// ProjectConnectorsPostmarkArrayInput is an input type that accepts ProjectConnectorsPostmarkArray and ProjectConnectorsPostmarkArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsPostmarkArrayInput` via:
+//
+//	ProjectConnectorsPostmarkArray{ ProjectConnectorsPostmarkArgs{...} }
+type ProjectConnectorsPostmarkArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsPostmarkArrayOutput() ProjectConnectorsPostmarkArrayOutput
+	ToProjectConnectorsPostmarkArrayOutputWithContext(context.Context) ProjectConnectorsPostmarkArrayOutput
+}
+
+type ProjectConnectorsPostmarkArray []ProjectConnectorsPostmarkInput
+
+func (ProjectConnectorsPostmarkArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsPostmark)(nil)).Elem()
+}
+
+func (i ProjectConnectorsPostmarkArray) ToProjectConnectorsPostmarkArrayOutput() ProjectConnectorsPostmarkArrayOutput {
+	return i.ToProjectConnectorsPostmarkArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsPostmarkArray) ToProjectConnectorsPostmarkArrayOutputWithContext(ctx context.Context) ProjectConnectorsPostmarkArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsPostmarkArrayOutput)
+}
+
+type ProjectConnectorsPostmarkOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsPostmarkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsPostmark)(nil)).Elem()
+}
+
+func (o ProjectConnectorsPostmarkOutput) ToProjectConnectorsPostmarkOutput() ProjectConnectorsPostmarkOutput {
+	return o
+}
+
+func (o ProjectConnectorsPostmarkOutput) ToProjectConnectorsPostmarkOutputWithContext(ctx context.Context) ProjectConnectorsPostmarkOutput {
+	return o
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsPostmarkOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The email address that will appear in the 'From' field of the sent email
+func (o ProjectConnectorsPostmarkOutput) EmailFrom() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) string { return v.EmailFrom }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsPostmarkOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the message stream to use for the email
+func (o ProjectConnectorsPostmarkOutput) MessageStreamId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) string { return v.MessageStreamId }).(pulumi.StringOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsPostmarkOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The API token for authenticating with the Postmark server
+func (o ProjectConnectorsPostmarkOutput) ServerApiToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsPostmark) string { return v.ServerApiToken }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsPostmarkArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsPostmarkArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsPostmark)(nil)).Elem()
+}
+
+func (o ProjectConnectorsPostmarkArrayOutput) ToProjectConnectorsPostmarkArrayOutput() ProjectConnectorsPostmarkArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsPostmarkArrayOutput) ToProjectConnectorsPostmarkArrayOutputWithContext(ctx context.Context) ProjectConnectorsPostmarkArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsPostmarkArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsPostmarkOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsPostmark {
+		return vs[0].([]ProjectConnectorsPostmark)[vs[1].(int)]
+	}).(ProjectConnectorsPostmarkOutput)
 }
 
 type ProjectConnectorsRadar struct {
@@ -28416,6 +32399,462 @@ func (o ProjectConnectorsSnArrayOutput) Index(i pulumi.IntInput) ProjectConnecto
 	}).(ProjectConnectorsSnOutput)
 }
 
+type ProjectConnectorsSplunk struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled *bool `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters []ProjectConnectorsSplunkAuditFilter `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// An HTTP Event Collector token configured on your Splunk project.
+	HecToken string `pulumi:"hecToken"`
+	// The URL to be used accessing your Splunk system, including the appropriate port
+	HecUrl string  `pulumi:"hecUrl"`
+	Id     *string `pulumi:"id"`
+	// An optional index to use for all sent events
+	Index *string `pulumi:"index"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled *bool `pulumi:"troubleshootLogEnabled"`
+}
+
+// ProjectConnectorsSplunkInput is an input type that accepts ProjectConnectorsSplunkArgs and ProjectConnectorsSplunkOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSplunkInput` via:
+//
+//	ProjectConnectorsSplunkArgs{...}
+type ProjectConnectorsSplunkInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSplunkOutput() ProjectConnectorsSplunkOutput
+	ToProjectConnectorsSplunkOutputWithContext(context.Context) ProjectConnectorsSplunkOutput
+}
+
+type ProjectConnectorsSplunkArgs struct {
+	// Whether to enable streaming of audit events.
+	AuditEnabled pulumi.BoolPtrInput `pulumi:"auditEnabled"`
+	// Specify which events will be sent to the external audit service (including tenant selection).
+	AuditFilters ProjectConnectorsSplunkAuditFilterArrayInput `pulumi:"auditFilters"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// An HTTP Event Collector token configured on your Splunk project.
+	HecToken pulumi.StringInput `pulumi:"hecToken"`
+	// The URL to be used accessing your Splunk system, including the appropriate port
+	HecUrl pulumi.StringInput    `pulumi:"hecUrl"`
+	Id     pulumi.StringPtrInput `pulumi:"id"`
+	// An optional index to use for all sent events
+	Index pulumi.StringPtrInput `pulumi:"index"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Whether to send troubleshooting events.
+	TroubleshootLogEnabled pulumi.BoolPtrInput `pulumi:"troubleshootLogEnabled"`
+}
+
+func (ProjectConnectorsSplunkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSplunk)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSplunkArgs) ToProjectConnectorsSplunkOutput() ProjectConnectorsSplunkOutput {
+	return i.ToProjectConnectorsSplunkOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSplunkArgs) ToProjectConnectorsSplunkOutputWithContext(ctx context.Context) ProjectConnectorsSplunkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSplunkOutput)
+}
+
+// ProjectConnectorsSplunkArrayInput is an input type that accepts ProjectConnectorsSplunkArray and ProjectConnectorsSplunkArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSplunkArrayInput` via:
+//
+//	ProjectConnectorsSplunkArray{ ProjectConnectorsSplunkArgs{...} }
+type ProjectConnectorsSplunkArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSplunkArrayOutput() ProjectConnectorsSplunkArrayOutput
+	ToProjectConnectorsSplunkArrayOutputWithContext(context.Context) ProjectConnectorsSplunkArrayOutput
+}
+
+type ProjectConnectorsSplunkArray []ProjectConnectorsSplunkInput
+
+func (ProjectConnectorsSplunkArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSplunk)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSplunkArray) ToProjectConnectorsSplunkArrayOutput() ProjectConnectorsSplunkArrayOutput {
+	return i.ToProjectConnectorsSplunkArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSplunkArray) ToProjectConnectorsSplunkArrayOutputWithContext(ctx context.Context) ProjectConnectorsSplunkArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSplunkArrayOutput)
+}
+
+type ProjectConnectorsSplunkOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSplunkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSplunk)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSplunkOutput) ToProjectConnectorsSplunkOutput() ProjectConnectorsSplunkOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkOutput) ToProjectConnectorsSplunkOutputWithContext(ctx context.Context) ProjectConnectorsSplunkOutput {
+	return o
+}
+
+// Whether to enable streaming of audit events.
+func (o ProjectConnectorsSplunkOutput) AuditEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *bool { return v.AuditEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Specify which events will be sent to the external audit service (including tenant selection).
+func (o ProjectConnectorsSplunkOutput) AuditFilters() ProjectConnectorsSplunkAuditFilterArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) []ProjectConnectorsSplunkAuditFilter { return v.AuditFilters }).(ProjectConnectorsSplunkAuditFilterArrayOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsSplunkOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// An HTTP Event Collector token configured on your Splunk project.
+func (o ProjectConnectorsSplunkOutput) HecToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) string { return v.HecToken }).(pulumi.StringOutput)
+}
+
+// The URL to be used accessing your Splunk system, including the appropriate port
+func (o ProjectConnectorsSplunkOutput) HecUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) string { return v.HecUrl }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsSplunkOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// An optional index to use for all sent events
+func (o ProjectConnectorsSplunkOutput) Index() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *string { return v.Index }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsSplunkOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Whether to send troubleshooting events.
+func (o ProjectConnectorsSplunkOutput) TroubleshootLogEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *bool { return v.TroubleshootLogEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type ProjectConnectorsSplunkArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSplunkArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSplunk)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSplunkArrayOutput) ToProjectConnectorsSplunkArrayOutput() ProjectConnectorsSplunkArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkArrayOutput) ToProjectConnectorsSplunkArrayOutputWithContext(ctx context.Context) ProjectConnectorsSplunkArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsSplunkOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsSplunk {
+		return vs[0].([]ProjectConnectorsSplunk)[vs[1].(int)]
+	}).(ProjectConnectorsSplunkOutput)
+}
+
+type ProjectConnectorsSplunkAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// ProjectConnectorsSplunkAuditFilterInput is an input type that accepts ProjectConnectorsSplunkAuditFilterArgs and ProjectConnectorsSplunkAuditFilterOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSplunkAuditFilterInput` via:
+//
+//	ProjectConnectorsSplunkAuditFilterArgs{...}
+type ProjectConnectorsSplunkAuditFilterInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSplunkAuditFilterOutput() ProjectConnectorsSplunkAuditFilterOutput
+	ToProjectConnectorsSplunkAuditFilterOutputWithContext(context.Context) ProjectConnectorsSplunkAuditFilterOutput
+}
+
+type ProjectConnectorsSplunkAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ProjectConnectorsSplunkAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSplunkAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSplunkAuditFilterArgs) ToProjectConnectorsSplunkAuditFilterOutput() ProjectConnectorsSplunkAuditFilterOutput {
+	return i.ToProjectConnectorsSplunkAuditFilterOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSplunkAuditFilterArgs) ToProjectConnectorsSplunkAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsSplunkAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSplunkAuditFilterOutput)
+}
+
+// ProjectConnectorsSplunkAuditFilterArrayInput is an input type that accepts ProjectConnectorsSplunkAuditFilterArray and ProjectConnectorsSplunkAuditFilterArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSplunkAuditFilterArrayInput` via:
+//
+//	ProjectConnectorsSplunkAuditFilterArray{ ProjectConnectorsSplunkAuditFilterArgs{...} }
+type ProjectConnectorsSplunkAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSplunkAuditFilterArrayOutput() ProjectConnectorsSplunkAuditFilterArrayOutput
+	ToProjectConnectorsSplunkAuditFilterArrayOutputWithContext(context.Context) ProjectConnectorsSplunkAuditFilterArrayOutput
+}
+
+type ProjectConnectorsSplunkAuditFilterArray []ProjectConnectorsSplunkAuditFilterInput
+
+func (ProjectConnectorsSplunkAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSplunkAuditFilter)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSplunkAuditFilterArray) ToProjectConnectorsSplunkAuditFilterArrayOutput() ProjectConnectorsSplunkAuditFilterArrayOutput {
+	return i.ToProjectConnectorsSplunkAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSplunkAuditFilterArray) ToProjectConnectorsSplunkAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsSplunkAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSplunkAuditFilterArrayOutput)
+}
+
+type ProjectConnectorsSplunkAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSplunkAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSplunkAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSplunkAuditFilterOutput) ToProjectConnectorsSplunkAuditFilterOutput() ProjectConnectorsSplunkAuditFilterOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkAuditFilterOutput) ToProjectConnectorsSplunkAuditFilterOutputWithContext(ctx context.Context) ProjectConnectorsSplunkAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o ProjectConnectorsSplunkAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunkAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o ProjectConnectorsSplunkAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunkAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o ProjectConnectorsSplunkAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunkAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ProjectConnectorsSplunkAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSplunkAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSplunkAuditFilter)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSplunkAuditFilterArrayOutput) ToProjectConnectorsSplunkAuditFilterArrayOutput() ProjectConnectorsSplunkAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkAuditFilterArrayOutput) ToProjectConnectorsSplunkAuditFilterArrayOutputWithContext(ctx context.Context) ProjectConnectorsSplunkAuditFilterArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSplunkAuditFilterArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsSplunkAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsSplunkAuditFilter {
+		return vs[0].([]ProjectConnectorsSplunkAuditFilter)[vs[1].(int)]
+	}).(ProjectConnectorsSplunkAuditFilterOutput)
+}
+
+type ProjectConnectorsSql struct {
+	// The database name.
+	DatabaseName *string `pulumi:"databaseName"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// The database engine type.
+	EngineName string `pulumi:"engineName"`
+	// The database host.
+	Host string  `pulumi:"host"`
+	Id   *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// The database password.
+	Password string `pulumi:"password"`
+	// The database port. If not specified, the default port for the selected engine will be used.
+	Port *float64 `pulumi:"port"`
+	// The Oracle service name (required for Oracle only).
+	ServiceName *string `pulumi:"serviceName"`
+	// The database username.
+	Username string `pulumi:"username"`
+}
+
+// ProjectConnectorsSqlInput is an input type that accepts ProjectConnectorsSqlArgs and ProjectConnectorsSqlOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSqlInput` via:
+//
+//	ProjectConnectorsSqlArgs{...}
+type ProjectConnectorsSqlInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSqlOutput() ProjectConnectorsSqlOutput
+	ToProjectConnectorsSqlOutputWithContext(context.Context) ProjectConnectorsSqlOutput
+}
+
+type ProjectConnectorsSqlArgs struct {
+	// The database name.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The database engine type.
+	EngineName pulumi.StringInput `pulumi:"engineName"`
+	// The database host.
+	Host pulumi.StringInput    `pulumi:"host"`
+	Id   pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The database password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// The database port. If not specified, the default port for the selected engine will be used.
+	Port pulumi.Float64PtrInput `pulumi:"port"`
+	// The Oracle service name (required for Oracle only).
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
+	// The database username.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (ProjectConnectorsSqlArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSql)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSqlArgs) ToProjectConnectorsSqlOutput() ProjectConnectorsSqlOutput {
+	return i.ToProjectConnectorsSqlOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSqlArgs) ToProjectConnectorsSqlOutputWithContext(ctx context.Context) ProjectConnectorsSqlOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSqlOutput)
+}
+
+// ProjectConnectorsSqlArrayInput is an input type that accepts ProjectConnectorsSqlArray and ProjectConnectorsSqlArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsSqlArrayInput` via:
+//
+//	ProjectConnectorsSqlArray{ ProjectConnectorsSqlArgs{...} }
+type ProjectConnectorsSqlArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsSqlArrayOutput() ProjectConnectorsSqlArrayOutput
+	ToProjectConnectorsSqlArrayOutputWithContext(context.Context) ProjectConnectorsSqlArrayOutput
+}
+
+type ProjectConnectorsSqlArray []ProjectConnectorsSqlInput
+
+func (ProjectConnectorsSqlArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSql)(nil)).Elem()
+}
+
+func (i ProjectConnectorsSqlArray) ToProjectConnectorsSqlArrayOutput() ProjectConnectorsSqlArrayOutput {
+	return i.ToProjectConnectorsSqlArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsSqlArray) ToProjectConnectorsSqlArrayOutputWithContext(ctx context.Context) ProjectConnectorsSqlArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsSqlArrayOutput)
+}
+
+type ProjectConnectorsSqlOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSqlOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsSql)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSqlOutput) ToProjectConnectorsSqlOutput() ProjectConnectorsSqlOutput {
+	return o
+}
+
+func (o ProjectConnectorsSqlOutput) ToProjectConnectorsSqlOutputWithContext(ctx context.Context) ProjectConnectorsSqlOutput {
+	return o
+}
+
+// The database name.
+func (o ProjectConnectorsSqlOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) *string { return v.DatabaseName }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsSqlOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The database engine type.
+func (o ProjectConnectorsSqlOutput) EngineName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) string { return v.EngineName }).(pulumi.StringOutput)
+}
+
+// The database host.
+func (o ProjectConnectorsSqlOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) string { return v.Host }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsSqlOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsSqlOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The database password.
+func (o ProjectConnectorsSqlOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// The database port. If not specified, the default port for the selected engine will be used.
+func (o ProjectConnectorsSqlOutput) Port() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) *float64 { return v.Port }).(pulumi.Float64PtrOutput)
+}
+
+// The Oracle service name (required for Oracle only).
+func (o ProjectConnectorsSqlOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+// The database username.
+func (o ProjectConnectorsSqlOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsSql) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsSqlArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsSqlArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsSql)(nil)).Elem()
+}
+
+func (o ProjectConnectorsSqlArrayOutput) ToProjectConnectorsSqlArrayOutput() ProjectConnectorsSqlArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSqlArrayOutput) ToProjectConnectorsSqlArrayOutputWithContext(ctx context.Context) ProjectConnectorsSqlArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsSqlArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsSqlOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsSql {
+		return vs[0].([]ProjectConnectorsSql)[vs[1].(int)]
+	}).(ProjectConnectorsSqlOutput)
+}
+
 type ProjectConnectorsSumologic struct {
 	// Whether to enable streaming of audit events.
 	AuditEnabled *bool `pulumi:"auditEnabled"`
@@ -29939,6 +34378,293 @@ func (o ProjectConnectorsTwilioVerifyAuthenticationOutput) ApiSecret() pulumi.St
 // Twilio Auth Token for authentication.
 func (o ProjectConnectorsTwilioVerifyAuthenticationOutput) AuthToken() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsTwilioVerifyAuthentication) *string { return v.AuthToken }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsUnibeam struct {
+	// OAuth2 client ID for authentication.
+	ClientId string `pulumi:"clientId"`
+	// OAuth2 client secret for authentication.
+	ClientSecret string `pulumi:"clientSecret"`
+	// Your Unibeam customer ID.
+	CustomerId string `pulumi:"customerId"`
+	// Default message to display when no message is provided in the command.
+	DefaultMessage *string `pulumi:"defaultMessage"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	// HMAC secret supplied by Unibeam for securing communications.
+	HmacSecret string  `pulumi:"hmacSecret"`
+	Id         *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+}
+
+// ProjectConnectorsUnibeamInput is an input type that accepts ProjectConnectorsUnibeamArgs and ProjectConnectorsUnibeamOutput values.
+// You can construct a concrete instance of `ProjectConnectorsUnibeamInput` via:
+//
+//	ProjectConnectorsUnibeamArgs{...}
+type ProjectConnectorsUnibeamInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsUnibeamOutput() ProjectConnectorsUnibeamOutput
+	ToProjectConnectorsUnibeamOutputWithContext(context.Context) ProjectConnectorsUnibeamOutput
+}
+
+type ProjectConnectorsUnibeamArgs struct {
+	// OAuth2 client ID for authentication.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// OAuth2 client secret for authentication.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// Your Unibeam customer ID.
+	CustomerId pulumi.StringInput `pulumi:"customerId"`
+	// Default message to display when no message is provided in the command.
+	DefaultMessage pulumi.StringPtrInput `pulumi:"defaultMessage"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// HMAC secret supplied by Unibeam for securing communications.
+	HmacSecret pulumi.StringInput    `pulumi:"hmacSecret"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (ProjectConnectorsUnibeamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsUnibeam)(nil)).Elem()
+}
+
+func (i ProjectConnectorsUnibeamArgs) ToProjectConnectorsUnibeamOutput() ProjectConnectorsUnibeamOutput {
+	return i.ToProjectConnectorsUnibeamOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsUnibeamArgs) ToProjectConnectorsUnibeamOutputWithContext(ctx context.Context) ProjectConnectorsUnibeamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsUnibeamOutput)
+}
+
+// ProjectConnectorsUnibeamArrayInput is an input type that accepts ProjectConnectorsUnibeamArray and ProjectConnectorsUnibeamArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsUnibeamArrayInput` via:
+//
+//	ProjectConnectorsUnibeamArray{ ProjectConnectorsUnibeamArgs{...} }
+type ProjectConnectorsUnibeamArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsUnibeamArrayOutput() ProjectConnectorsUnibeamArrayOutput
+	ToProjectConnectorsUnibeamArrayOutputWithContext(context.Context) ProjectConnectorsUnibeamArrayOutput
+}
+
+type ProjectConnectorsUnibeamArray []ProjectConnectorsUnibeamInput
+
+func (ProjectConnectorsUnibeamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsUnibeam)(nil)).Elem()
+}
+
+func (i ProjectConnectorsUnibeamArray) ToProjectConnectorsUnibeamArrayOutput() ProjectConnectorsUnibeamArrayOutput {
+	return i.ToProjectConnectorsUnibeamArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsUnibeamArray) ToProjectConnectorsUnibeamArrayOutputWithContext(ctx context.Context) ProjectConnectorsUnibeamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsUnibeamArrayOutput)
+}
+
+type ProjectConnectorsUnibeamOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsUnibeamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsUnibeam)(nil)).Elem()
+}
+
+func (o ProjectConnectorsUnibeamOutput) ToProjectConnectorsUnibeamOutput() ProjectConnectorsUnibeamOutput {
+	return o
+}
+
+func (o ProjectConnectorsUnibeamOutput) ToProjectConnectorsUnibeamOutputWithContext(ctx context.Context) ProjectConnectorsUnibeamOutput {
+	return o
+}
+
+// OAuth2 client ID for authentication.
+func (o ProjectConnectorsUnibeamOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// OAuth2 client secret for authentication.
+func (o ProjectConnectorsUnibeamOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.ClientSecret }).(pulumi.StringOutput)
+}
+
+// Your Unibeam customer ID.
+func (o ProjectConnectorsUnibeamOutput) CustomerId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.CustomerId }).(pulumi.StringOutput)
+}
+
+// Default message to display when no message is provided in the command.
+func (o ProjectConnectorsUnibeamOutput) DefaultMessage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) *string { return v.DefaultMessage }).(pulumi.StringPtrOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsUnibeamOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// HMAC secret supplied by Unibeam for securing communications.
+func (o ProjectConnectorsUnibeamOutput) HmacSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.HmacSecret }).(pulumi.StringOutput)
+}
+
+func (o ProjectConnectorsUnibeamOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsUnibeamOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ProjectConnectorsUnibeamArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsUnibeamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsUnibeam)(nil)).Elem()
+}
+
+func (o ProjectConnectorsUnibeamArrayOutput) ToProjectConnectorsUnibeamArrayOutput() ProjectConnectorsUnibeamArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsUnibeamArrayOutput) ToProjectConnectorsUnibeamArrayOutputWithContext(ctx context.Context) ProjectConnectorsUnibeamArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsUnibeamArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsUnibeamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsUnibeam {
+		return vs[0].([]ProjectConnectorsUnibeam)[vs[1].(int)]
+	}).(ProjectConnectorsUnibeamOutput)
+}
+
+type ProjectConnectorsZerobounce struct {
+	// The ZeroBounce API key.
+	ApiKey string `pulumi:"apiKey"`
+	// A description of what your connector is used for.
+	Description *string `pulumi:"description"`
+	Id          *string `pulumi:"id"`
+	// A custom name for your connector.
+	Name string `pulumi:"name"`
+	// ZeroBounce platform region.
+	Region *string `pulumi:"region"`
+}
+
+// ProjectConnectorsZerobounceInput is an input type that accepts ProjectConnectorsZerobounceArgs and ProjectConnectorsZerobounceOutput values.
+// You can construct a concrete instance of `ProjectConnectorsZerobounceInput` via:
+//
+//	ProjectConnectorsZerobounceArgs{...}
+type ProjectConnectorsZerobounceInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsZerobounceOutput() ProjectConnectorsZerobounceOutput
+	ToProjectConnectorsZerobounceOutputWithContext(context.Context) ProjectConnectorsZerobounceOutput
+}
+
+type ProjectConnectorsZerobounceArgs struct {
+	// The ZeroBounce API key.
+	ApiKey pulumi.StringInput `pulumi:"apiKey"`
+	// A description of what your connector is used for.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// A custom name for your connector.
+	Name pulumi.StringInput `pulumi:"name"`
+	// ZeroBounce platform region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+}
+
+func (ProjectConnectorsZerobounceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsZerobounce)(nil)).Elem()
+}
+
+func (i ProjectConnectorsZerobounceArgs) ToProjectConnectorsZerobounceOutput() ProjectConnectorsZerobounceOutput {
+	return i.ToProjectConnectorsZerobounceOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsZerobounceArgs) ToProjectConnectorsZerobounceOutputWithContext(ctx context.Context) ProjectConnectorsZerobounceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsZerobounceOutput)
+}
+
+// ProjectConnectorsZerobounceArrayInput is an input type that accepts ProjectConnectorsZerobounceArray and ProjectConnectorsZerobounceArrayOutput values.
+// You can construct a concrete instance of `ProjectConnectorsZerobounceArrayInput` via:
+//
+//	ProjectConnectorsZerobounceArray{ ProjectConnectorsZerobounceArgs{...} }
+type ProjectConnectorsZerobounceArrayInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsZerobounceArrayOutput() ProjectConnectorsZerobounceArrayOutput
+	ToProjectConnectorsZerobounceArrayOutputWithContext(context.Context) ProjectConnectorsZerobounceArrayOutput
+}
+
+type ProjectConnectorsZerobounceArray []ProjectConnectorsZerobounceInput
+
+func (ProjectConnectorsZerobounceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsZerobounce)(nil)).Elem()
+}
+
+func (i ProjectConnectorsZerobounceArray) ToProjectConnectorsZerobounceArrayOutput() ProjectConnectorsZerobounceArrayOutput {
+	return i.ToProjectConnectorsZerobounceArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsZerobounceArray) ToProjectConnectorsZerobounceArrayOutputWithContext(ctx context.Context) ProjectConnectorsZerobounceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsZerobounceArrayOutput)
+}
+
+type ProjectConnectorsZerobounceOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsZerobounceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsZerobounce)(nil)).Elem()
+}
+
+func (o ProjectConnectorsZerobounceOutput) ToProjectConnectorsZerobounceOutput() ProjectConnectorsZerobounceOutput {
+	return o
+}
+
+func (o ProjectConnectorsZerobounceOutput) ToProjectConnectorsZerobounceOutputWithContext(ctx context.Context) ProjectConnectorsZerobounceOutput {
+	return o
+}
+
+// The ZeroBounce API key.
+func (o ProjectConnectorsZerobounceOutput) ApiKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsZerobounce) string { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// A description of what your connector is used for.
+func (o ProjectConnectorsZerobounceOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsZerobounce) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+func (o ProjectConnectorsZerobounceOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsZerobounce) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// A custom name for your connector.
+func (o ProjectConnectorsZerobounceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsZerobounce) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// ZeroBounce platform region.
+func (o ProjectConnectorsZerobounceOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsZerobounce) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsZerobounceArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsZerobounceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectConnectorsZerobounce)(nil)).Elem()
+}
+
+func (o ProjectConnectorsZerobounceArrayOutput) ToProjectConnectorsZerobounceArrayOutput() ProjectConnectorsZerobounceArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsZerobounceArrayOutput) ToProjectConnectorsZerobounceArrayOutputWithContext(ctx context.Context) ProjectConnectorsZerobounceArrayOutput {
+	return o
+}
+
+func (o ProjectConnectorsZerobounceArrayOutput) Index(i pulumi.IntInput) ProjectConnectorsZerobounceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectConnectorsZerobounce {
+		return vs[0].([]ProjectConnectorsZerobounce)[vs[1].(int)]
+	}).(ProjectConnectorsZerobounceOutput)
 }
 
 type ProjectFlows struct {
@@ -32273,6 +36999,22 @@ func (o ProjectWidgetsMapOutput) MapIndex(k pulumi.StringInput) ProjectWidgetsOu
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacInput)(nil)).Elem(), DescoperRbacArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacPtrInput)(nil)).Elem(), DescoperRbacArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacProjectRoleInput)(nil)).Elem(), DescoperRbacProjectRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacProjectRoleArrayInput)(nil)).Elem(), DescoperRbacProjectRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacTagRoleInput)(nil)).Elem(), DescoperRbacTagRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DescoperRbacTagRoleArrayInput)(nil)).Elem(), DescoperRbacTagRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacInput)(nil)).Elem(), ManagementKeyRebacArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacPtrInput)(nil)).Elem(), ManagementKeyRebacArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacProjectRoleInput)(nil)).Elem(), ManagementKeyRebacProjectRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacProjectRoleArrayInput)(nil)).Elem(), ManagementKeyRebacProjectRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacTagRoleInput)(nil)).Elem(), ManagementKeyRebacTagRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacTagRoleArrayInput)(nil)).Elem(), ManagementKeyRebacTagRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAdminPortalInput)(nil)).Elem(), ProjectAdminPortalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAdminPortalPtrInput)(nil)).Elem(), ProjectAdminPortalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAdminPortalWidgetInput)(nil)).Elem(), ProjectAdminPortalWidgetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAdminPortalWidgetArrayInput)(nil)).Elem(), ProjectAdminPortalWidgetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsInput)(nil)).Elem(), ProjectApplicationsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsPtrInput)(nil)).Elem(), ProjectApplicationsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsOidcApplicationInput)(nil)).Elem(), ProjectApplicationsOidcApplicationArgs{})
@@ -32287,6 +37029,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectApplicationsSamlApplicationManualConfigurationPtrInput)(nil)).Elem(), ProjectApplicationsSamlApplicationManualConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesInput)(nil)).Elem(), ProjectAttributesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesPtrInput)(nil)).Elem(), ProjectAttributesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesAccessKeyInput)(nil)).Elem(), ProjectAttributesAccessKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesAccessKeyArrayInput)(nil)).Elem(), ProjectAttributesAccessKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesAccessKeyWidgetAuthorizationInput)(nil)).Elem(), ProjectAttributesAccessKeyWidgetAuthorizationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesAccessKeyWidgetAuthorizationPtrInput)(nil)).Elem(), ProjectAttributesAccessKeyWidgetAuthorizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesTenantInput)(nil)).Elem(), ProjectAttributesTenantArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesTenantArrayInput)(nil)).Elem(), ProjectAttributesTenantArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAttributesTenantAuthorizationInput)(nil)).Elem(), ProjectAttributesTenantAuthorizationArgs{})
@@ -32439,6 +37185,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAbuseipdbArrayInput)(nil)).Elem(), ProjectConnectorsAbuseipdbArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAmplitudeInput)(nil)).Elem(), ProjectConnectorsAmplitudeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAmplitudeArrayInput)(nil)).Elem(), ProjectConnectorsAmplitudeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsArkoseInput)(nil)).Elem(), ProjectConnectorsArkoseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsArkoseArrayInput)(nil)).Elem(), ProjectConnectorsArkoseArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookInput)(nil)).Elem(), ProjectConnectorsAuditWebhookArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookArrayInput)(nil)).Elem(), ProjectConnectorsAuditWebhookArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuditFilterInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuditFilterArgs{})
@@ -32457,6 +37205,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsTranslateArrayInput)(nil)).Elem(), ProjectConnectorsAwsTranslateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsBitsightInput)(nil)).Elem(), ProjectConnectorsBitsightArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsBitsightArrayInput)(nil)).Elem(), ProjectConnectorsBitsightArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCoralogixInput)(nil)).Elem(), ProjectConnectorsCoralogixArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCoralogixArrayInput)(nil)).Elem(), ProjectConnectorsCoralogixArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCoralogixAuditFilterInput)(nil)).Elem(), ProjectConnectorsCoralogixAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsCoralogixAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsCoralogixAuditFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDarwiniumInput)(nil)).Elem(), ProjectConnectorsDarwiniumArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDarwiniumArrayInput)(nil)).Elem(), ProjectConnectorsDarwiniumArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogInput)(nil)).Elem(), ProjectConnectorsDatadogArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogArrayInput)(nil)).Elem(), ProjectConnectorsDatadogArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsDatadogAuditFilterInput)(nil)).Elem(), ProjectConnectorsDatadogAuditFilterArgs{})
@@ -32511,6 +37265,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudTranslationArrayInput)(nil)).Elem(), ProjectConnectorsGoogleCloudTranslationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleMapsPlaceInput)(nil)).Elem(), ProjectConnectorsGoogleMapsPlaceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleMapsPlaceArrayInput)(nil)).Elem(), ProjectConnectorsGoogleMapsPlaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHcaptchaInput)(nil)).Elem(), ProjectConnectorsHcaptchaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHcaptchaArrayInput)(nil)).Elem(), ProjectConnectorsHcaptchaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHibpInput)(nil)).Elem(), ProjectConnectorsHibpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHibpArrayInput)(nil)).Elem(), ProjectConnectorsHibpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpInput)(nil)).Elem(), ProjectConnectorsHttpArgs{})
@@ -32527,14 +37283,34 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIncodeArrayInput)(nil)).Elem(), ProjectConnectorsIncodeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIntercomInput)(nil)).Elem(), ProjectConnectorsIntercomArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIntercomArrayInput)(nil)).Elem(), ProjectConnectorsIntercomArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLdapInput)(nil)).Elem(), ProjectConnectorsLdapArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLdapArrayInput)(nil)).Elem(), ProjectConnectorsLdapArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLokaliseInput)(nil)).Elem(), ProjectConnectorsLokaliseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsLokaliseArrayInput)(nil)).Elem(), ProjectConnectorsLokaliseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMixpanelInput)(nil)).Elem(), ProjectConnectorsMixpanelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMixpanelArrayInput)(nil)).Elem(), ProjectConnectorsMixpanelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMixpanelAuditFilterInput)(nil)).Elem(), ProjectConnectorsMixpanelAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMixpanelAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsMixpanelAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMparticleInput)(nil)).Elem(), ProjectConnectorsMparticleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsMparticleArrayInput)(nil)).Elem(), ProjectConnectorsMparticleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicInput)(nil)).Elem(), ProjectConnectorsNewrelicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicArrayInput)(nil)).Elem(), ProjectConnectorsNewrelicArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicAuditFilterInput)(nil)).Elem(), ProjectConnectorsNewrelicAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsNewrelicAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsNewrelicAuditFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryInput)(nil)).Elem(), ProjectConnectorsOpentelemetryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryArrayInput)(nil)).Elem(), ProjectConnectorsOpentelemetryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuditFilterInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuditFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationApiKeyInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPingDirectoryInput)(nil)).Elem(), ProjectConnectorsPingDirectoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPingDirectoryArrayInput)(nil)).Elem(), ProjectConnectorsPingDirectoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPostmarkInput)(nil)).Elem(), ProjectConnectorsPostmarkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPostmarkArrayInput)(nil)).Elem(), ProjectConnectorsPostmarkArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsRadarInput)(nil)).Elem(), ProjectConnectorsRadarArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsRadarArrayInput)(nil)).Elem(), ProjectConnectorsRadarArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsRecaptchaInput)(nil)).Elem(), ProjectConnectorsRecaptchaArgs{})
@@ -32569,6 +37345,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSmtpServerInput)(nil)).Elem(), ProjectConnectorsSmtpServerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSnInput)(nil)).Elem(), ProjectConnectorsSnArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSnArrayInput)(nil)).Elem(), ProjectConnectorsSnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSplunkInput)(nil)).Elem(), ProjectConnectorsSplunkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSplunkArrayInput)(nil)).Elem(), ProjectConnectorsSplunkArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSplunkAuditFilterInput)(nil)).Elem(), ProjectConnectorsSplunkAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSplunkAuditFilterArrayInput)(nil)).Elem(), ProjectConnectorsSplunkAuditFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSqlInput)(nil)).Elem(), ProjectConnectorsSqlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSqlArrayInput)(nil)).Elem(), ProjectConnectorsSqlArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSumologicInput)(nil)).Elem(), ProjectConnectorsSumologicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSumologicArrayInput)(nil)).Elem(), ProjectConnectorsSumologicArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSumologicAuditFilterInput)(nil)).Elem(), ProjectConnectorsSumologicAuditFilterArgs{})
@@ -32591,6 +37373,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyArrayInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsTwilioVerifyAuthenticationInput)(nil)).Elem(), ProjectConnectorsTwilioVerifyAuthenticationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsUnibeamInput)(nil)).Elem(), ProjectConnectorsUnibeamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsUnibeamArrayInput)(nil)).Elem(), ProjectConnectorsUnibeamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsZerobounceInput)(nil)).Elem(), ProjectConnectorsZerobounceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsZerobounceArrayInput)(nil)).Elem(), ProjectConnectorsZerobounceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsInput)(nil)).Elem(), ProjectFlowsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectFlowsMapInput)(nil)).Elem(), ProjectFlowsMap{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectInviteSettingsInput)(nil)).Elem(), ProjectInviteSettingsArgs{})
@@ -32615,6 +37401,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectStylesPtrInput)(nil)).Elem(), ProjectStylesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectWidgetsInput)(nil)).Elem(), ProjectWidgetsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectWidgetsMapInput)(nil)).Elem(), ProjectWidgetsMap{})
+	pulumi.RegisterOutputType(DescoperRbacOutput{})
+	pulumi.RegisterOutputType(DescoperRbacPtrOutput{})
+	pulumi.RegisterOutputType(DescoperRbacProjectRoleOutput{})
+	pulumi.RegisterOutputType(DescoperRbacProjectRoleArrayOutput{})
+	pulumi.RegisterOutputType(DescoperRbacTagRoleOutput{})
+	pulumi.RegisterOutputType(DescoperRbacTagRoleArrayOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacPtrOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacProjectRoleOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacProjectRoleArrayOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacTagRoleOutput{})
+	pulumi.RegisterOutputType(ManagementKeyRebacTagRoleArrayOutput{})
+	pulumi.RegisterOutputType(ProjectAdminPortalOutput{})
+	pulumi.RegisterOutputType(ProjectAdminPortalPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAdminPortalWidgetOutput{})
+	pulumi.RegisterOutputType(ProjectAdminPortalWidgetArrayOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectApplicationsOidcApplicationOutput{})
@@ -32629,6 +37431,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectApplicationsSamlApplicationManualConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAttributesAccessKeyOutput{})
+	pulumi.RegisterOutputType(ProjectAttributesAccessKeyArrayOutput{})
+	pulumi.RegisterOutputType(ProjectAttributesAccessKeyWidgetAuthorizationOutput{})
+	pulumi.RegisterOutputType(ProjectAttributesAccessKeyWidgetAuthorizationPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesTenantOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesTenantArrayOutput{})
 	pulumi.RegisterOutputType(ProjectAttributesTenantAuthorizationOutput{})
@@ -32781,6 +37587,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsAbuseipdbArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAmplitudeOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAmplitudeArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsArkoseOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsArkoseArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuditFilterOutput{})
@@ -32799,6 +37607,12 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsAwsTranslateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsBitsightOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsBitsightArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsCoralogixOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsCoralogixArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsCoralogixAuditFilterOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsCoralogixAuditFilterArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsDarwiniumOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsDarwiniumArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsDatadogAuditFilterOutput{})
@@ -32853,6 +37667,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudTranslationArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleMapsPlaceOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleMapsPlaceArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHcaptchaOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHcaptchaArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHibpOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHibpArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpOutput{})
@@ -32869,14 +37685,34 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsIncodeArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIntercomOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIntercomArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsLdapOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsLdapArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsLokaliseOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsLokaliseArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMixpanelOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMixpanelArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMixpanelAuditFilterOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsMixpanelAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsMparticleOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsMparticleArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicAuditFilterOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsNewrelicAuditFilterArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuditFilterOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuditFilterArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationApiKeyOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationBasicOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsPingDirectoryOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsPingDirectoryArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsPostmarkOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsPostmarkArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsRadarOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsRadarArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsRecaptchaOutput{})
@@ -32911,6 +37747,12 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsSmtpServerOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSnOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSnArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSplunkOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSplunkArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSplunkAuditFilterOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSplunkAuditFilterArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSqlOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsSqlArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSumologicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSumologicArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSumologicAuditFilterOutput{})
@@ -32933,6 +37775,10 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsTwilioVerifyAuthenticationOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsUnibeamOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsUnibeamArrayOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsZerobounceOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsZerobounceArrayOutput{})
 	pulumi.RegisterOutputType(ProjectFlowsOutput{})
 	pulumi.RegisterOutputType(ProjectFlowsMapOutput{})
 	pulumi.RegisterOutputType(ProjectInviteSettingsOutput{})

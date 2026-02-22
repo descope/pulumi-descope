@@ -14,6 +14,8 @@ import (
 type Project struct {
 	pulumi.CustomResourceState
 
+	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+	AdminPortal ProjectAdminPortalOutput `pulumi:"adminPortal"`
 	// Applications that are registered with the project.
 	Applications ProjectApplicationsOutput `pulumi:"applications"`
 	// Custom attributes that can be attached to users and tenants.
@@ -76,6 +78,8 @@ func GetProject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Project resources.
 type projectState struct {
+	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+	AdminPortal *ProjectAdminPortal `pulumi:"adminPortal"`
 	// Applications that are registered with the project.
 	Applications *ProjectApplications `pulumi:"applications"`
 	// Custom attributes that can be attached to users and tenants.
@@ -109,6 +113,8 @@ type projectState struct {
 }
 
 type ProjectState struct {
+	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+	AdminPortal ProjectAdminPortalPtrInput
 	// Applications that are registered with the project.
 	Applications ProjectApplicationsPtrInput
 	// Custom attributes that can be attached to users and tenants.
@@ -146,6 +152,8 @@ func (ProjectState) ElementType() reflect.Type {
 }
 
 type projectArgs struct {
+	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+	AdminPortal *ProjectAdminPortal `pulumi:"adminPortal"`
 	// Applications that are registered with the project.
 	Applications *ProjectApplications `pulumi:"applications"`
 	// Custom attributes that can be attached to users and tenants.
@@ -180,6 +188,8 @@ type projectArgs struct {
 
 // The set of arguments for constructing a Project resource.
 type ProjectArgs struct {
+	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+	AdminPortal ProjectAdminPortalPtrInput
 	// Applications that are registered with the project.
 	Applications ProjectApplicationsPtrInput
 	// Custom attributes that can be attached to users and tenants.
@@ -297,6 +307,11 @@ func (o ProjectOutput) ToProjectOutput() ProjectOutput {
 
 func (o ProjectOutput) ToProjectOutputWithContext(ctx context.Context) ProjectOutput {
 	return o
+}
+
+// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+func (o ProjectOutput) AdminPortal() ProjectAdminPortalOutput {
+	return o.ApplyT(func(v *Project) ProjectAdminPortalOutput { return v.AdminPortal }).(ProjectAdminPortalOutput)
 }
 
 // Applications that are registered with the project.

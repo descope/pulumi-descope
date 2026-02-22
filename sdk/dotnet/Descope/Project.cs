@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope
     public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// </summary>
+        [Output("adminPortal")]
+        public Output<Outputs.ProjectAdminPortal> AdminPortal { get; private set; } = null!;
+
+        /// <summary>
         /// Applications that are registered with the project.
         /// </summary>
         [Output("applications")]
@@ -151,6 +157,12 @@ namespace Descope.Pulumi.Descope
     public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// </summary>
+        [Input("adminPortal")]
+        public Input<Inputs.ProjectAdminPortalArgs>? AdminPortal { get; set; }
+
+        /// <summary>
         /// Applications that are registered with the project.
         /// </summary>
         [Input("applications")]
@@ -272,6 +284,12 @@ namespace Descope.Pulumi.Descope
 
     public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// </summary>
+        [Input("adminPortal")]
+        public Input<Inputs.ProjectAdminPortalGetArgs>? AdminPortal { get; set; }
+
         /// <summary>
         /// Applications that are registered with the project.
         /// </summary>
