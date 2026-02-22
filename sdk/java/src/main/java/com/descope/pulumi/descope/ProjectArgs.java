@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope;
 
+import com.descope.pulumi.descope.inputs.ProjectAdminPortalArgs;
 import com.descope.pulumi.descope.inputs.ProjectApplicationsArgs;
 import com.descope.pulumi.descope.inputs.ProjectAttributesArgs;
 import com.descope.pulumi.descope.inputs.ProjectAuthenticationArgs;
@@ -28,6 +29,21 @@ import javax.annotation.Nullable;
 public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectArgs Empty = new ProjectArgs();
+
+    /**
+     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * 
+     */
+    @Import(name="adminPortal")
+    private @Nullable Output<ProjectAdminPortalArgs> adminPortal;
+
+    /**
+     * @return Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * 
+     */
+    public Optional<Output<ProjectAdminPortalArgs>> adminPortal() {
+        return Optional.ofNullable(this.adminPortal);
+    }
 
     /**
      * Applications that are registered with the project.
@@ -257,6 +273,7 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
     private ProjectArgs() {}
 
     private ProjectArgs(ProjectArgs $) {
+        this.adminPortal = $.adminPortal;
         this.applications = $.applications;
         this.attributes = $.attributes;
         this.authentication = $.authentication;
@@ -290,6 +307,27 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
 
         public Builder(ProjectArgs defaults) {
             $ = new ProjectArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param adminPortal Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+         * 
+         * @return builder
+         * 
+         */
+        public Builder adminPortal(@Nullable Output<ProjectAdminPortalArgs> adminPortal) {
+            $.adminPortal = adminPortal;
+            return this;
+        }
+
+        /**
+         * @param adminPortal Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+         * 
+         * @return builder
+         * 
+         */
+        public Builder adminPortal(ProjectAdminPortalArgs adminPortal) {
+            return adminPortal(Output.of(adminPortal));
         }
 
         /**

@@ -5,6 +5,106 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface DescoperRbac {
+    /**
+     * Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+     */
+    isCompanyAdmin?: pulumi.Input<boolean>;
+    /**
+     * A list of roles that are granted to the descoper for specific projects by their project ID.
+     */
+    projectRoles?: pulumi.Input<pulumi.Input<inputs.DescoperRbacProjectRole>[]>;
+    /**
+     * A list of roles that are granted to the descoper for all projects that have a specific tag.
+     */
+    tagRoles?: pulumi.Input<pulumi.Input<inputs.DescoperRbacTagRole>[]>;
+}
+
+export interface DescoperRbacProjectRole {
+    /**
+     * The project IDs this role grant applies to.
+     */
+    projectIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+     */
+    role: pulumi.Input<string>;
+}
+
+export interface DescoperRbacTagRole {
+    /**
+     * The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+     */
+    role: pulumi.Input<string>;
+    /**
+     * The project tags this role assignment applies to.
+     */
+    tags: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ManagementKeyRebac {
+    /**
+     * A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+     */
+    companyRoles?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of project-level role names that are granted to the management key for specific projects by their project ID.
+     */
+    projectRoles?: pulumi.Input<pulumi.Input<inputs.ManagementKeyRebacProjectRole>[]>;
+    /**
+     * A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+     */
+    tagRoles?: pulumi.Input<pulumi.Input<inputs.ManagementKeyRebacTagRole>[]>;
+}
+
+export interface ManagementKeyRebacProjectRole {
+    /**
+     * The project IDs this role grant applies to.
+     */
+    projectIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The roles the management key will be granted in the applicable projects.
+     */
+    roles: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ManagementKeyRebacTagRole {
+    /**
+     * The roles the management key will be granted in the applicable projects.
+     */
+    roles: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The project tags this role grant applies to.
+     */
+    tags: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectAdminPortal {
+    /**
+     * Whether the Admin Portal is enabled
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * The style id to use
+     */
+    styleId?: pulumi.Input<string>;
+    /**
+     * The widgets to show in the Admin Portal
+     */
+    widgets?: pulumi.Input<pulumi.Input<inputs.ProjectAdminPortalWidget>[]>;
+}
+
+export interface ProjectAdminPortalWidget {
+    /**
+     * The type of the Widget
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The unique identifier of the Widget
+     */
+    widgetId: pulumi.Input<string>;
+}
+
 export interface ProjectApplications {
     /**
      * Applications using OpenID Connect (OIDC) for authentication.
@@ -145,13 +245,51 @@ export interface ProjectApplicationsSamlApplicationManualConfiguration {
 
 export interface ProjectAttributes {
     /**
-     * A list of `TenantAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each access key in the project.
+     */
+    accessKeys?: pulumi.Input<pulumi.Input<inputs.ProjectAttributesAccessKey>[]>;
+    /**
+     * A list of custom attributes for storing additional details about each tenant in the project.
      */
     tenants?: pulumi.Input<pulumi.Input<inputs.ProjectAttributesTenant>[]>;
     /**
-     * A list of `UserAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each user in the project.
      */
     users?: pulumi.Input<pulumi.Input<inputs.ProjectAttributesUser>[]>;
+}
+
+export interface ProjectAttributesAccessKey {
+    /**
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * When the attribute type is "multiselect". A list of options to choose from.
+     */
+    selectOptions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+     */
+    type: pulumi.Input<string>;
+    /**
+     * Determines the permissions access key are required to have to access this attribute in the access key management widget.
+     */
+    widgetAuthorization?: pulumi.Input<inputs.ProjectAttributesAccessKeyWidgetAuthorization>;
+}
+
+export interface ProjectAttributesAccessKeyWidgetAuthorization {
+    /**
+     * The permissions users are required to have to edit this attribute in the access key management widget.
+     */
+    editPermissions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The permissions users are required to have to view this attribute in the access key management widget.
+     */
+    viewPermissions?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectAttributesTenant {
@@ -2084,6 +2222,10 @@ export interface ProjectAuthenticationSso {
      */
     disabled?: pulumi.Input<boolean>;
     /**
+     * Whether to enable groups priority.
+     */
+    groupsPriority?: pulumi.Input<boolean>;
+    /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
     mergeUsers?: pulumi.Input<boolean>;
@@ -2197,6 +2339,10 @@ export interface ProjectConnectors {
      */
     amplitudes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAmplitude>[]>;
     /**
+     * Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+     */
+    arkoses?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsArkose>[]>;
+    /**
      * Send audit events to a custom webhook.
      */
     auditWebhooks?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAuditWebhook>[]>;
@@ -2212,6 +2358,14 @@ export interface ProjectConnectors {
      * Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      */
     bitsights?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsBitsight>[]>;
+    /**
+     * Send audit events and troubleshooting logs to Coralogix.
+     */
+    coralogixes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCoralogix>[]>;
+    /**
+     * Connect to Darwinium API for fraud detection and device intelligence.
+     */
+    darwinia?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsDarwinium>[]>;
     /**
      * Stream authentication audit logs with the Datadog connector.
      */
@@ -2277,6 +2431,10 @@ export interface ProjectConnectors {
      */
     googleMapsPlaces?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleMapsPlace>[]>;
     /**
+     * hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     */
+    hcaptchas?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHcaptcha>[]>;
+    /**
      * Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      */
     hibps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHibp>[]>;
@@ -2297,9 +2455,17 @@ export interface ProjectConnectors {
      */
     intercoms?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsIntercom>[]>;
     /**
+     * Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     */
+    ldaps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsLdap>[]>;
+    /**
      * Localize the language of your login and user journey screens with the Lokalise connector.
      */
     lokalises?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsLokalise>[]>;
+    /**
+     * Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     */
+    mixpanels?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsMixpanel>[]>;
     /**
      * Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
      */
@@ -2308,6 +2474,18 @@ export interface ProjectConnectors {
      * Stream authentication audit logs with the New Relic connector.
      */
     newrelics?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsNewrelic>[]>;
+    /**
+     * Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     */
+    opentelemetries?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsOpentelemetry>[]>;
+    /**
+     * Authenticate against PingDirectory.
+     */
+    pingDirectories?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsPingDirectory>[]>;
+    /**
+     * Send emails using Postmark
+     */
+    postmarks?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsPostmark>[]>;
     /**
      * Get address autocompletions from Radar Autocomplete API.
      */
@@ -2365,6 +2543,14 @@ export interface ProjectConnectors {
      */
     sns?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSn>[]>;
     /**
+     * Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     */
+    splunks?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSplunk>[]>;
+    /**
+     * SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     */
+    sqls?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSql>[]>;
+    /**
      * Stream logs and audit events with the Sumo Logic connector.
      */
     sumologics?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSumologic>[]>;
@@ -2392,6 +2578,14 @@ export interface ProjectConnectors {
      * Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
      */
     twilioVerifies?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsTwilioVerify>[]>;
+    /**
+     * SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+     */
+    unibeams?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsUnibeam>[]>;
+    /**
+     * Email validation with ZeroBounce
+     */
+    zerobounces?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsZerobounce>[]>;
 }
 
 export interface ProjectConnectorsAbuseipdb {
@@ -2432,6 +2626,34 @@ export interface ProjectConnectorsAmplitude {
      * `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
      */
     serverZone?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsArkose {
+    /**
+     * A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     */
+    clientBaseUrl?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The private key that can be copied from the Keys screen in the Arkose portal.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The public key that's shown in the Keys screen in the Arkose portal.
+     */
+    publicKey: pulumi.Input<string>;
+    /**
+     * A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     */
+    verifyBaseUrl?: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsAuditWebhook {
@@ -2635,6 +2857,105 @@ export interface ProjectConnectorsBitsight {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsCoralogix {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCoralogixAuditFilter>[]>;
+    /**
+     * Bearer token issued by Coralogix as Send-Your-Data API key
+     */
+    bearerToken: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The ingress OpenTelemetry endpoint URL.
+     */
+    endpoint: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsCoralogixAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsDarwinium {
+    /**
+     * The default result to return if no result is available.
+     */
+    defaultResult?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the Darwinium journey to use for profiling.
+     */
+    journeyName: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The name of the Darwinium Native Mobile API to use.
+     */
+    nativeApiName?: pulumi.Input<string>;
+    /**
+     * The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+     */
+    nativeBlobKeyName?: pulumi.Input<string>;
+    /**
+     * The name of the Darwinium node.
+     */
+    nodeName: pulumi.Input<string>;
+    /**
+     * The passphrase for the PEM certificate, if applicable.
+     */
+    passphrase?: pulumi.Input<string>;
+    /**
+     * The PEM certificate for client authentication.
+     */
+    pemCertificate: pulumi.Input<string>;
+    /**
+     * The private key for client authentication.
+     */
+    privateKey: pulumi.Input<string>;
+    /**
+     * The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+     */
+    profilingTagsScriptUrl?: pulumi.Input<string>;
+    /**
+     * The name of the Darwinium Web API to use.
+     */
+    webApiName: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsDatadog {
@@ -3230,6 +3551,38 @@ export interface ProjectConnectorsGoogleMapsPlace {
     region?: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsHcaptcha {
+    /**
+     * When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     */
+    assessmentScore?: pulumi.Input<number>;
+    /**
+     * The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     */
+    botThreshold?: pulumi.Input<number>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     */
+    overrideAssessment?: pulumi.Input<boolean>;
+    /**
+     * The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+     */
+    secretKey: pulumi.Input<string>;
+    /**
+     * The site key is used to invoke hCaptcha service on your site or mobile application.
+     */
+    siteKey: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsHibp {
     /**
      * A description of what your connector is used for.
@@ -3387,6 +3740,50 @@ export interface ProjectConnectorsIntercom {
     token: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsLdap {
+    /**
+     * The Distinguished Name to bind with for searching.
+     */
+    bindDn?: pulumi.Input<string>;
+    /**
+     * The password for the bind DN.
+     */
+    bindPassword?: pulumi.Input<string>;
+    /**
+     * The Certificate Authority certificate in PEM format for validating the server certificate.
+     */
+    caCertificate?: pulumi.Input<string>;
+    /**
+     * The client certificate in PEM format for mTLS authentication.
+     */
+    clientCertificate?: pulumi.Input<string>;
+    /**
+     * The client private key in PEM format for mTLS authentication.
+     */
+    clientKey?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Reject connections to LDAP servers with invalid certificates.
+     */
+    rejectUnauthorized?: pulumi.Input<boolean>;
+    /**
+     * The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+     */
+    serverUrl: pulumi.Input<string>;
+    /**
+     * Enable mutual TLS authentication for LDAP connection.
+     */
+    useMtls?: pulumi.Input<boolean>;
+}
+
 export interface ProjectConnectorsLokalise {
     /**
      * Lokalise API token.
@@ -3417,6 +3814,77 @@ export interface ProjectConnectorsLokalise {
      * The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
      */
     translationProvider?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsMixpanel {
+    /**
+     * The Mixpanel API secret key used for authenticating API requests.
+     */
+    apiSecret?: pulumi.Input<string>;
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsMixpanelAuditFilter>[]>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Indicates if your Mixpanel project data is stored in the EU region.
+     */
+    euResidency?: pulumi.Input<boolean>;
+    id?: pulumi.Input<string>;
+    /**
+     * Specify a custom prefix for all log fields. The default prefix is `descope.`.
+     */
+    logsPrefix?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Enable this option to use a custom prefix for log fields.
+     */
+    overrideLogsPrefix?: pulumi.Input<boolean>;
+    /**
+     * The unique identifier for your Mixpanel project.
+     */
+    projectId?: pulumi.Input<string>;
+    /**
+     * The unique Mixpanel project token used to identify the project where data will be sent.
+     */
+    projectToken: pulumi.Input<string>;
+    /**
+     * The Mixpanel service account secret used for integration.
+     */
+    serviceAccountSecret?: pulumi.Input<string>;
+    /**
+     * The Mixpanel service account username used for integration.
+     */
+    serviceAccountUsername?: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsMixpanelAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsMparticle {
@@ -3504,6 +3972,146 @@ export interface ProjectConnectorsNewrelicAuditFilter {
      * The list of values to match against for the filter.
      */
     values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsOpentelemetry {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsOpentelemetryAuditFilter>[]>;
+    /**
+     * Authentication Information
+     */
+    authentication?: pulumi.Input<inputs.ProjectConnectorsOpentelemetryAuthentication>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The OTLP endpoint URL.
+     */
+    endpoint: pulumi.Input<string>;
+    /**
+     * The headers to send with the request
+     */
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    id?: pulumi.Input<string>;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
+    insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Protocol to use for OTLP: http or grpc.
+     */
+    protocol?: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsOpentelemetryAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthentication {
+    /**
+     * API key authentication configuration.
+     */
+    apiKey?: pulumi.Input<inputs.ProjectConnectorsOpentelemetryAuthenticationApiKey>;
+    /**
+     * Basic authentication credentials (username and password).
+     */
+    basic?: pulumi.Input<inputs.ProjectConnectorsOpentelemetryAuthenticationBasic>;
+    /**
+     * Bearer token for HTTP authentication.
+     */
+    bearerToken?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationApiKey {
+    /**
+     * The API key.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The API secret.
+     */
+    token: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationBasic {
+    /**
+     * Password for basic HTTP authentication.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Username for basic HTTP authentication.
+     */
+    username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsPingDirectory {
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * PingDirectory's REST API host.
+     */
+    host: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * PingDirectory's REST API port.
+     */
+    port: pulumi.Input<number>;
+}
+
+export interface ProjectConnectorsPostmark {
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The email address that will appear in the 'From' field of the sent email
+     */
+    emailFrom: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The ID of the message stream to use for the email
+     */
+    messageStreamId: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The API token for authenticating with the Postmark server
+     */
+    serverApiToken: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsRadar {
@@ -3982,6 +4590,97 @@ export interface ProjectConnectorsSn {
     templateId?: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsSplunk {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSplunkAuditFilter>[]>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * An HTTP Event Collector token configured on your Splunk project.
+     */
+    hecToken: pulumi.Input<string>;
+    /**
+     * The URL to be used accessing your Splunk system, including the appropriate port
+     */
+    hecUrl: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * An optional index to use for all sent events
+     */
+    index?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsSplunkAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsSql {
+    /**
+     * The database name.
+     */
+    databaseName?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The database engine type.
+     */
+    engineName: pulumi.Input<string>;
+    /**
+     * The database host.
+     */
+    host: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The database password.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * The database port. If not specified, the default port for the selected engine will be used.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * The Oracle service name (required for Oracle only).
+     */
+    serviceName?: pulumi.Input<string>;
+    /**
+     * The database username.
+     */
+    username: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsSumologic {
     /**
      * Whether to enable streaming of audit events.
@@ -4238,6 +4937,58 @@ export interface ProjectConnectorsTwilioVerifyAuthentication {
      * Twilio Auth Token for authentication.
      */
     authToken?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsUnibeam {
+    /**
+     * OAuth2 client ID for authentication.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * OAuth2 client secret for authentication.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * Your Unibeam customer ID.
+     */
+    customerId: pulumi.Input<string>;
+    /**
+     * Default message to display when no message is provided in the command.
+     */
+    defaultMessage?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * HMAC secret supplied by Unibeam for securing communications.
+     */
+    hmacSecret: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsZerobounce {
+    /**
+     * The ZeroBounce API key.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * ZeroBounce platform region.
+     */
+    region?: pulumi.Input<string>;
 }
 
 export interface ProjectFlows {

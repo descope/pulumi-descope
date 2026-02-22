@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectAttributesAccessKeyArgs;
 import com.descope.pulumi.descope.inputs.ProjectAttributesTenantArgs;
 import com.descope.pulumi.descope.inputs.ProjectAttributesUserArgs;
 import com.pulumi.core.Output;
@@ -18,14 +19,29 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
     public static final ProjectAttributesArgs Empty = new ProjectAttributesArgs();
 
     /**
-     * A list of `TenantAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each access key in the project.
+     * 
+     */
+    @Import(name="accessKeys")
+    private @Nullable Output<List<ProjectAttributesAccessKeyArgs>> accessKeys;
+
+    /**
+     * @return A list of custom attributes for storing additional details about each access key in the project.
+     * 
+     */
+    public Optional<Output<List<ProjectAttributesAccessKeyArgs>>> accessKeys() {
+        return Optional.ofNullable(this.accessKeys);
+    }
+
+    /**
+     * A list of custom attributes for storing additional details about each tenant in the project.
      * 
      */
     @Import(name="tenants")
     private @Nullable Output<List<ProjectAttributesTenantArgs>> tenants;
 
     /**
-     * @return A list of `TenantAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each tenant in the project.
      * 
      */
     public Optional<Output<List<ProjectAttributesTenantArgs>>> tenants() {
@@ -33,14 +49,14 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * A list of `UserAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each user in the project.
      * 
      */
     @Import(name="users")
     private @Nullable Output<List<ProjectAttributesUserArgs>> users;
 
     /**
-     * @return A list of `UserAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each user in the project.
      * 
      */
     public Optional<Output<List<ProjectAttributesUserArgs>>> users() {
@@ -50,6 +66,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
     private ProjectAttributesArgs() {}
 
     private ProjectAttributesArgs(ProjectAttributesArgs $) {
+        this.accessKeys = $.accessKeys;
         this.tenants = $.tenants;
         this.users = $.users;
     }
@@ -73,7 +90,38 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param tenants A list of `TenantAttribute`. Read the description below.
+         * @param accessKeys A list of custom attributes for storing additional details about each access key in the project.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder accessKeys(@Nullable Output<List<ProjectAttributesAccessKeyArgs>> accessKeys) {
+            $.accessKeys = accessKeys;
+            return this;
+        }
+
+        /**
+         * @param accessKeys A list of custom attributes for storing additional details about each access key in the project.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder accessKeys(List<ProjectAttributesAccessKeyArgs> accessKeys) {
+            return accessKeys(Output.of(accessKeys));
+        }
+
+        /**
+         * @param accessKeys A list of custom attributes for storing additional details about each access key in the project.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder accessKeys(ProjectAttributesAccessKeyArgs... accessKeys) {
+            return accessKeys(List.of(accessKeys));
+        }
+
+        /**
+         * @param tenants A list of custom attributes for storing additional details about each tenant in the project.
          * 
          * @return builder
          * 
@@ -84,7 +132,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param tenants A list of `TenantAttribute`. Read the description below.
+         * @param tenants A list of custom attributes for storing additional details about each tenant in the project.
          * 
          * @return builder
          * 
@@ -94,7 +142,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param tenants A list of `TenantAttribute`. Read the description below.
+         * @param tenants A list of custom attributes for storing additional details about each tenant in the project.
          * 
          * @return builder
          * 
@@ -104,7 +152,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param users A list of `UserAttribute`. Read the description below.
+         * @param users A list of custom attributes for storing additional details about each user in the project.
          * 
          * @return builder
          * 
@@ -115,7 +163,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param users A list of `UserAttribute`. Read the description below.
+         * @param users A list of custom attributes for storing additional details about each user in the project.
          * 
          * @return builder
          * 
@@ -125,7 +173,7 @@ public final class ProjectAttributesArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param users A list of `UserAttribute`. Read the description below.
+         * @param users A list of custom attributes for storing additional details about each user in the project.
          * 
          * @return builder
          * 

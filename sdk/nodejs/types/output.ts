@@ -5,6 +5,106 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface DescoperRbac {
+    /**
+     * Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
+     */
+    isCompanyAdmin: boolean;
+    /**
+     * A list of roles that are granted to the descoper for specific projects by their project ID.
+     */
+    projectRoles: outputs.DescoperRbacProjectRole[];
+    /**
+     * A list of roles that are granted to the descoper for all projects that have a specific tag.
+     */
+    tagRoles: outputs.DescoperRbacTagRole[];
+}
+
+export interface DescoperRbacProjectRole {
+    /**
+     * The project IDs this role grant applies to.
+     */
+    projectIds: string[];
+    /**
+     * The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+     */
+    role: string;
+}
+
+export interface DescoperRbacTagRole {
+    /**
+     * The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+     */
+    role: string;
+    /**
+     * The project tags this role assignment applies to.
+     */
+    tags: string[];
+}
+
+export interface ManagementKeyRebac {
+    /**
+     * A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
+     */
+    companyRoles: string[];
+    /**
+     * A list of project-level role names that are granted to the management key for specific projects by their project ID.
+     */
+    projectRoles: outputs.ManagementKeyRebacProjectRole[];
+    /**
+     * A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+     */
+    tagRoles: outputs.ManagementKeyRebacTagRole[];
+}
+
+export interface ManagementKeyRebacProjectRole {
+    /**
+     * The project IDs this role grant applies to.
+     */
+    projectIds: string[];
+    /**
+     * The roles the management key will be granted in the applicable projects.
+     */
+    roles: string[];
+}
+
+export interface ManagementKeyRebacTagRole {
+    /**
+     * The roles the management key will be granted in the applicable projects.
+     */
+    roles: string[];
+    /**
+     * The project tags this role grant applies to.
+     */
+    tags: string[];
+}
+
+export interface ProjectAdminPortal {
+    /**
+     * Whether the Admin Portal is enabled
+     */
+    enabled: boolean;
+    /**
+     * The style id to use
+     */
+    styleId: string;
+    /**
+     * The widgets to show in the Admin Portal
+     */
+    widgets: outputs.ProjectAdminPortalWidget[];
+}
+
+export interface ProjectAdminPortalWidget {
+    /**
+     * The type of the Widget
+     */
+    type: string;
+    /**
+     * The unique identifier of the Widget
+     */
+    widgetId: string;
+}
+
 export interface ProjectApplications {
     /**
      * Applications using OpenID Connect (OIDC) for authentication.
@@ -145,13 +245,51 @@ export interface ProjectApplicationsSamlApplicationManualConfiguration {
 
 export interface ProjectAttributes {
     /**
-     * A list of `TenantAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each access key in the project.
+     */
+    accessKeys: outputs.ProjectAttributesAccessKey[];
+    /**
+     * A list of custom attributes for storing additional details about each tenant in the project.
      */
     tenants: outputs.ProjectAttributesTenant[];
     /**
-     * A list of `UserAttribute`. Read the description below.
+     * A list of custom attributes for storing additional details about each user in the project.
      */
     users: outputs.ProjectAttributesUser[];
+}
+
+export interface ProjectAttributesAccessKey {
+    /**
+     * An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+     */
+    id: string;
+    /**
+     * The name of the attribute. This value is called `Display Name` in the Descope console.
+     */
+    name: string;
+    /**
+     * When the attribute type is "multiselect". A list of options to choose from.
+     */
+    selectOptions: string[];
+    /**
+     * The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+     */
+    type: string;
+    /**
+     * Determines the permissions access key are required to have to access this attribute in the access key management widget.
+     */
+    widgetAuthorization: outputs.ProjectAttributesAccessKeyWidgetAuthorization;
+}
+
+export interface ProjectAttributesAccessKeyWidgetAuthorization {
+    /**
+     * The permissions users are required to have to edit this attribute in the access key management widget.
+     */
+    editPermissions: string[];
+    /**
+     * The permissions users are required to have to view this attribute in the access key management widget.
+     */
+    viewPermissions: string[];
 }
 
 export interface ProjectAttributesTenant {
@@ -2084,6 +2222,10 @@ export interface ProjectAuthenticationSso {
      */
     disabled: boolean;
     /**
+     * Whether to enable groups priority.
+     */
+    groupsPriority: boolean;
+    /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
     mergeUsers: boolean;
@@ -2197,6 +2339,10 @@ export interface ProjectConnectors {
      */
     amplitudes: outputs.ProjectConnectorsAmplitude[];
     /**
+     * Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+     */
+    arkoses: outputs.ProjectConnectorsArkose[];
+    /**
      * Send audit events to a custom webhook.
      */
     auditWebhooks: outputs.ProjectConnectorsAuditWebhook[];
@@ -2212,6 +2358,14 @@ export interface ProjectConnectors {
      * Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
      */
     bitsights: outputs.ProjectConnectorsBitsight[];
+    /**
+     * Send audit events and troubleshooting logs to Coralogix.
+     */
+    coralogixes: outputs.ProjectConnectorsCoralogix[];
+    /**
+     * Connect to Darwinium API for fraud detection and device intelligence.
+     */
+    darwinia: outputs.ProjectConnectorsDarwinium[];
     /**
      * Stream authentication audit logs with the Datadog connector.
      */
@@ -2277,6 +2431,10 @@ export interface ProjectConnectors {
      */
     googleMapsPlaces: outputs.ProjectConnectorsGoogleMapsPlace[];
     /**
+     * hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     */
+    hcaptchas: outputs.ProjectConnectorsHcaptcha[];
+    /**
      * Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      */
     hibps: outputs.ProjectConnectorsHibp[];
@@ -2297,9 +2455,17 @@ export interface ProjectConnectors {
      */
     intercoms: outputs.ProjectConnectorsIntercom[];
     /**
+     * Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     */
+    ldaps: outputs.ProjectConnectorsLdap[];
+    /**
      * Localize the language of your login and user journey screens with the Lokalise connector.
      */
     lokalises: outputs.ProjectConnectorsLokalise[];
+    /**
+     * Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     */
+    mixpanels: outputs.ProjectConnectorsMixpanel[];
     /**
      * Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
      */
@@ -2308,6 +2474,18 @@ export interface ProjectConnectors {
      * Stream authentication audit logs with the New Relic connector.
      */
     newrelics: outputs.ProjectConnectorsNewrelic[];
+    /**
+     * Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     */
+    opentelemetries: outputs.ProjectConnectorsOpentelemetry[];
+    /**
+     * Authenticate against PingDirectory.
+     */
+    pingDirectories: outputs.ProjectConnectorsPingDirectory[];
+    /**
+     * Send emails using Postmark
+     */
+    postmarks: outputs.ProjectConnectorsPostmark[];
     /**
      * Get address autocompletions from Radar Autocomplete API.
      */
@@ -2365,6 +2543,14 @@ export interface ProjectConnectors {
      */
     sns: outputs.ProjectConnectorsSn[];
     /**
+     * Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     */
+    splunks: outputs.ProjectConnectorsSplunk[];
+    /**
+     * SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     */
+    sqls: outputs.ProjectConnectorsSql[];
+    /**
      * Stream logs and audit events with the Sumo Logic connector.
      */
     sumologics: outputs.ProjectConnectorsSumologic[];
@@ -2392,6 +2578,14 @@ export interface ProjectConnectors {
      * Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
      */
     twilioVerifies: outputs.ProjectConnectorsTwilioVerify[];
+    /**
+     * SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+     */
+    unibeams: outputs.ProjectConnectorsUnibeam[];
+    /**
+     * Email validation with ZeroBounce
+     */
+    zerobounces: outputs.ProjectConnectorsZerobounce[];
 }
 
 export interface ProjectConnectorsAbuseipdb {
@@ -2432,6 +2626,34 @@ export interface ProjectConnectorsAmplitude {
      * `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
      */
     serverZone: string;
+}
+
+export interface ProjectConnectorsArkose {
+    /**
+     * A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     */
+    clientBaseUrl: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The private key that can be copied from the Keys screen in the Arkose portal.
+     */
+    privateKey: string;
+    /**
+     * The public key that's shown in the Keys screen in the Arkose portal.
+     */
+    publicKey: string;
+    /**
+     * A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     */
+    verifyBaseUrl: string;
 }
 
 export interface ProjectConnectorsAuditWebhook {
@@ -2635,6 +2857,105 @@ export interface ProjectConnectorsBitsight {
      * A custom name for your connector.
      */
     name: string;
+}
+
+export interface ProjectConnectorsCoralogix {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled: boolean;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters: outputs.ProjectConnectorsCoralogixAuditFilter[];
+    /**
+     * Bearer token issued by Coralogix as Send-Your-Data API key
+     */
+    bearerToken: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * The ingress OpenTelemetry endpoint URL.
+     */
+    endpoint: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsCoralogixAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
+}
+
+export interface ProjectConnectorsDarwinium {
+    /**
+     * The default result to return if no result is available.
+     */
+    defaultResult: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * The name of the Darwinium journey to use for profiling.
+     */
+    journeyName: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The name of the Darwinium Native Mobile API to use.
+     */
+    nativeApiName: string;
+    /**
+     * The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+     */
+    nativeBlobKeyName: string;
+    /**
+     * The name of the Darwinium node.
+     */
+    nodeName: string;
+    /**
+     * The passphrase for the PEM certificate, if applicable.
+     */
+    passphrase: string;
+    /**
+     * The PEM certificate for client authentication.
+     */
+    pemCertificate: string;
+    /**
+     * The private key for client authentication.
+     */
+    privateKey: string;
+    /**
+     * The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+     */
+    profilingTagsScriptUrl: string;
+    /**
+     * The name of the Darwinium Web API to use.
+     */
+    webApiName: string;
 }
 
 export interface ProjectConnectorsDatadog {
@@ -3230,6 +3551,38 @@ export interface ProjectConnectorsGoogleMapsPlace {
     region: string;
 }
 
+export interface ProjectConnectorsHcaptcha {
+    /**
+     * When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+     */
+    assessmentScore: number;
+    /**
+     * The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+     */
+    botThreshold: number;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+     */
+    overrideAssessment: boolean;
+    /**
+     * The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+     */
+    secretKey: string;
+    /**
+     * The site key is used to invoke hCaptcha service on your site or mobile application.
+     */
+    siteKey: string;
+}
+
 export interface ProjectConnectorsHibp {
     /**
      * A description of what your connector is used for.
@@ -3387,6 +3740,50 @@ export interface ProjectConnectorsIntercom {
     token: string;
 }
 
+export interface ProjectConnectorsLdap {
+    /**
+     * The Distinguished Name to bind with for searching.
+     */
+    bindDn: string;
+    /**
+     * The password for the bind DN.
+     */
+    bindPassword: string;
+    /**
+     * The Certificate Authority certificate in PEM format for validating the server certificate.
+     */
+    caCertificate: string;
+    /**
+     * The client certificate in PEM format for mTLS authentication.
+     */
+    clientCertificate: string;
+    /**
+     * The client private key in PEM format for mTLS authentication.
+     */
+    clientKey: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Reject connections to LDAP servers with invalid certificates.
+     */
+    rejectUnauthorized: boolean;
+    /**
+     * The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+     */
+    serverUrl: string;
+    /**
+     * Enable mutual TLS authentication for LDAP connection.
+     */
+    useMtls: boolean;
+}
+
 export interface ProjectConnectorsLokalise {
     /**
      * Lokalise API token.
@@ -3417,6 +3814,77 @@ export interface ProjectConnectorsLokalise {
      * The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
      */
     translationProvider: string;
+}
+
+export interface ProjectConnectorsMixpanel {
+    /**
+     * The Mixpanel API secret key used for authenticating API requests.
+     */
+    apiSecret: string;
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled: boolean;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters: outputs.ProjectConnectorsMixpanelAuditFilter[];
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * Indicates if your Mixpanel project data is stored in the EU region.
+     */
+    euResidency: boolean;
+    id: string;
+    /**
+     * Specify a custom prefix for all log fields. The default prefix is `descope.`.
+     */
+    logsPrefix: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Enable this option to use a custom prefix for log fields.
+     */
+    overrideLogsPrefix: boolean;
+    /**
+     * The unique identifier for your Mixpanel project.
+     */
+    projectId: string;
+    /**
+     * The unique Mixpanel project token used to identify the project where data will be sent.
+     */
+    projectToken: string;
+    /**
+     * The Mixpanel service account secret used for integration.
+     */
+    serviceAccountSecret: string;
+    /**
+     * The Mixpanel service account username used for integration.
+     */
+    serviceAccountUsername: string;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsMixpanelAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
 }
 
 export interface ProjectConnectorsMparticle {
@@ -3504,6 +3972,146 @@ export interface ProjectConnectorsNewrelicAuditFilter {
      * The list of values to match against for the filter.
      */
     values: string[];
+}
+
+export interface ProjectConnectorsOpentelemetry {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled: boolean;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters: outputs.ProjectConnectorsOpentelemetryAuditFilter[];
+    /**
+     * Authentication Information
+     */
+    authentication: outputs.ProjectConnectorsOpentelemetryAuthentication;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * The OTLP endpoint URL.
+     */
+    endpoint: string;
+    /**
+     * The headers to send with the request
+     */
+    headers: {[key: string]: string};
+    id: string;
+    /**
+     * Will ignore certificate errors raised by the client
+     */
+    insecure: boolean;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Protocol to use for OTLP: http or grpc.
+     */
+    protocol: string;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsOpentelemetryAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
+}
+
+export interface ProjectConnectorsOpentelemetryAuthentication {
+    /**
+     * API key authentication configuration.
+     */
+    apiKey: outputs.ProjectConnectorsOpentelemetryAuthenticationApiKey;
+    /**
+     * Basic authentication credentials (username and password).
+     */
+    basic: outputs.ProjectConnectorsOpentelemetryAuthenticationBasic;
+    /**
+     * Bearer token for HTTP authentication.
+     */
+    bearerToken: string;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationApiKey {
+    /**
+     * The API key.
+     */
+    key: string;
+    /**
+     * The API secret.
+     */
+    token: string;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationBasic {
+    /**
+     * Password for basic HTTP authentication.
+     */
+    password: string;
+    /**
+     * Username for basic HTTP authentication.
+     */
+    username: string;
+}
+
+export interface ProjectConnectorsPingDirectory {
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * PingDirectory's REST API host.
+     */
+    host: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * PingDirectory's REST API port.
+     */
+    port: number;
+}
+
+export interface ProjectConnectorsPostmark {
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * The email address that will appear in the 'From' field of the sent email
+     */
+    emailFrom: string;
+    id: string;
+    /**
+     * The ID of the message stream to use for the email
+     */
+    messageStreamId: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The API token for authenticating with the Postmark server
+     */
+    serverApiToken: string;
 }
 
 export interface ProjectConnectorsRadar {
@@ -3982,6 +4590,97 @@ export interface ProjectConnectorsSn {
     templateId: string;
 }
 
+export interface ProjectConnectorsSplunk {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled: boolean;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters: outputs.ProjectConnectorsSplunkAuditFilter[];
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * An HTTP Event Collector token configured on your Splunk project.
+     */
+    hecToken: string;
+    /**
+     * The URL to be used accessing your Splunk system, including the appropriate port
+     */
+    hecUrl: string;
+    id: string;
+    /**
+     * An optional index to use for all sent events
+     */
+    index: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled: boolean;
+}
+
+export interface ProjectConnectorsSplunkAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
+}
+
+export interface ProjectConnectorsSql {
+    /**
+     * The database name.
+     */
+    databaseName: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * The database engine type.
+     */
+    engineName: string;
+    /**
+     * The database host.
+     */
+    host: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * The database password.
+     */
+    password: string;
+    /**
+     * The database port. If not specified, the default port for the selected engine will be used.
+     */
+    port: number;
+    /**
+     * The Oracle service name (required for Oracle only).
+     */
+    serviceName: string;
+    /**
+     * The database username.
+     */
+    username: string;
+}
+
 export interface ProjectConnectorsSumologic {
     /**
      * Whether to enable streaming of audit events.
@@ -4238,6 +4937,58 @@ export interface ProjectConnectorsTwilioVerifyAuthentication {
      * Twilio Auth Token for authentication.
      */
     authToken: string;
+}
+
+export interface ProjectConnectorsUnibeam {
+    /**
+     * OAuth2 client ID for authentication.
+     */
+    clientId: string;
+    /**
+     * OAuth2 client secret for authentication.
+     */
+    clientSecret: string;
+    /**
+     * Your Unibeam customer ID.
+     */
+    customerId: string;
+    /**
+     * Default message to display when no message is provided in the command.
+     */
+    defaultMessage: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    /**
+     * HMAC secret supplied by Unibeam for securing communications.
+     */
+    hmacSecret: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+}
+
+export interface ProjectConnectorsZerobounce {
+    /**
+     * The ZeroBounce API key.
+     */
+    apiKey: string;
+    /**
+     * A description of what your connector is used for.
+     */
+    description: string;
+    id: string;
+    /**
+     * A custom name for your connector.
+     */
+    name: string;
+    /**
+     * ZeroBounce platform region.
+     */
+    region: string;
 }
 
 export interface ProjectFlows {

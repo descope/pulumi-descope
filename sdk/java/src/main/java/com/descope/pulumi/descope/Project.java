@@ -6,6 +6,7 @@ package com.descope.pulumi.descope;
 import com.descope.pulumi.descope.ProjectArgs;
 import com.descope.pulumi.descope.Utilities;
 import com.descope.pulumi.descope.inputs.ProjectState;
+import com.descope.pulumi.descope.outputs.ProjectAdminPortal;
 import com.descope.pulumi.descope.outputs.ProjectApplications;
 import com.descope.pulumi.descope.outputs.ProjectAttributes;
 import com.descope.pulumi.descope.outputs.ProjectAuthentication;
@@ -29,6 +30,20 @@ import javax.annotation.Nullable;
 
 @ResourceType(type="descope:index/project:Project")
 public class Project extends com.pulumi.resources.CustomResource {
+    /**
+     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * 
+     */
+    @Export(name="adminPortal", refs={ProjectAdminPortal.class}, tree="[0]")
+    private Output<ProjectAdminPortal> adminPortal;
+
+    /**
+     * @return Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * 
+     */
+    public Output<ProjectAdminPortal> adminPortal() {
+        return this.adminPortal;
+    }
     /**
      * Applications that are registered with the project.
      * 

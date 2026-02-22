@@ -13,11 +13,23 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectAttributesGetArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeys")]
+        private InputList<Inputs.ProjectAttributesAccessKeyGetArgs>? _accessKeys;
+
+        /// <summary>
+        /// A list of custom attributes for storing additional details about each access key in the project.
+        /// </summary>
+        public InputList<Inputs.ProjectAttributesAccessKeyGetArgs> AccessKeys
+        {
+            get => _accessKeys ?? (_accessKeys = new InputList<Inputs.ProjectAttributesAccessKeyGetArgs>());
+            set => _accessKeys = value;
+        }
+
         [Input("tenants")]
         private InputList<Inputs.ProjectAttributesTenantGetArgs>? _tenants;
 
         /// <summary>
-        /// A list of `TenantAttribute`. Read the description below.
+        /// A list of custom attributes for storing additional details about each tenant in the project.
         /// </summary>
         public InputList<Inputs.ProjectAttributesTenantGetArgs> Tenants
         {
@@ -29,7 +41,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private InputList<Inputs.ProjectAttributesUserGetArgs>? _users;
 
         /// <summary>
-        /// A list of `UserAttribute`. Read the description below.
+        /// A list of custom attributes for storing additional details about each user in the project.
         /// </summary>
         public InputList<Inputs.ProjectAttributesUserGetArgs> Users
         {

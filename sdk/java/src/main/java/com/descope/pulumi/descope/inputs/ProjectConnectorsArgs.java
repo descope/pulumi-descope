@@ -5,10 +5,13 @@ package com.descope.pulumi.descope.inputs;
 
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAbuseipdbArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAmplitudeArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsArkoseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAuditWebhookArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsS3Args;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsTranslateArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsBitsightArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsCoralogixArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsDarwiniumArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDatadogArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDevrevGrowArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDoceboArgs;
@@ -25,14 +28,20 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudLoggingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudTranslationArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleMapsPlaceArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsHcaptchaArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHibpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHttpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHubspotArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsIncodeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsIntercomArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsLdapArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsLokaliseArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsMixpanelArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsMparticleArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsNewrelicArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsOpentelemetryArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsPingDirectoryArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsPostmarkArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRadarArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaEnterpriseArgs;
@@ -47,6 +56,8 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsSlackArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSmartlingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSmtpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSnArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsSplunkArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsSqlArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSumologicArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSupabaseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTelesignArgs;
@@ -54,6 +65,8 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsTraceableArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTurnstileArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTwilioCoreArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsTwilioVerifyArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsUnibeamArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsZerobounceArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.util.List;
@@ -94,6 +107,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsAmplitudeArgs>>> amplitudes() {
         return Optional.ofNullable(this.amplitudes);
+    }
+
+    /**
+     * Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+     * 
+     */
+    @Import(name="arkoses")
+    private @Nullable Output<List<ProjectConnectorsArkoseArgs>> arkoses;
+
+    /**
+     * @return Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsArkoseArgs>>> arkoses() {
+        return Optional.ofNullable(this.arkoses);
     }
 
     /**
@@ -154,6 +182,36 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsBitsightArgs>>> bitsights() {
         return Optional.ofNullable(this.bitsights);
+    }
+
+    /**
+     * Send audit events and troubleshooting logs to Coralogix.
+     * 
+     */
+    @Import(name="coralogixes")
+    private @Nullable Output<List<ProjectConnectorsCoralogixArgs>> coralogixes;
+
+    /**
+     * @return Send audit events and troubleshooting logs to Coralogix.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsCoralogixArgs>>> coralogixes() {
+        return Optional.ofNullable(this.coralogixes);
+    }
+
+    /**
+     * Connect to Darwinium API for fraud detection and device intelligence.
+     * 
+     */
+    @Import(name="darwinia")
+    private @Nullable Output<List<ProjectConnectorsDarwiniumArgs>> darwinia;
+
+    /**
+     * @return Connect to Darwinium API for fraud detection and device intelligence.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsDarwiniumArgs>>> darwinia() {
+        return Optional.ofNullable(this.darwinia);
     }
 
     /**
@@ -397,6 +455,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     * 
+     */
+    @Import(name="hcaptchas")
+    private @Nullable Output<List<ProjectConnectorsHcaptchaArgs>> hcaptchas;
+
+    /**
+     * @return hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsHcaptchaArgs>>> hcaptchas() {
+        return Optional.ofNullable(this.hcaptchas);
+    }
+
+    /**
      * Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
@@ -472,6 +545,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     * 
+     */
+    @Import(name="ldaps")
+    private @Nullable Output<List<ProjectConnectorsLdapArgs>> ldaps;
+
+    /**
+     * @return Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsLdapArgs>>> ldaps() {
+        return Optional.ofNullable(this.ldaps);
+    }
+
+    /**
      * Localize the language of your login and user journey screens with the Lokalise connector.
      * 
      */
@@ -484,6 +572,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsLokaliseArgs>>> lokalises() {
         return Optional.ofNullable(this.lokalises);
+    }
+
+    /**
+     * Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     * 
+     */
+    @Import(name="mixpanels")
+    private @Nullable Output<List<ProjectConnectorsMixpanelArgs>> mixpanels;
+
+    /**
+     * @return Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsMixpanelArgs>>> mixpanels() {
+        return Optional.ofNullable(this.mixpanels);
     }
 
     /**
@@ -514,6 +617,51 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsNewrelicArgs>>> newrelics() {
         return Optional.ofNullable(this.newrelics);
+    }
+
+    /**
+     * Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     * 
+     */
+    @Import(name="opentelemetries")
+    private @Nullable Output<List<ProjectConnectorsOpentelemetryArgs>> opentelemetries;
+
+    /**
+     * @return Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsOpentelemetryArgs>>> opentelemetries() {
+        return Optional.ofNullable(this.opentelemetries);
+    }
+
+    /**
+     * Authenticate against PingDirectory.
+     * 
+     */
+    @Import(name="pingDirectories")
+    private @Nullable Output<List<ProjectConnectorsPingDirectoryArgs>> pingDirectories;
+
+    /**
+     * @return Authenticate against PingDirectory.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsPingDirectoryArgs>>> pingDirectories() {
+        return Optional.ofNullable(this.pingDirectories);
+    }
+
+    /**
+     * Send emails using Postmark
+     * 
+     */
+    @Import(name="postmarks")
+    private @Nullable Output<List<ProjectConnectorsPostmarkArgs>> postmarks;
+
+    /**
+     * @return Send emails using Postmark
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsPostmarkArgs>>> postmarks() {
+        return Optional.ofNullable(this.postmarks);
     }
 
     /**
@@ -727,6 +875,36 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     * 
+     */
+    @Import(name="splunks")
+    private @Nullable Output<List<ProjectConnectorsSplunkArgs>> splunks;
+
+    /**
+     * @return Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsSplunkArgs>>> splunks() {
+        return Optional.ofNullable(this.splunks);
+    }
+
+    /**
+     * SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     * 
+     */
+    @Import(name="sqls")
+    private @Nullable Output<List<ProjectConnectorsSqlArgs>> sqls;
+
+    /**
+     * @return SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsSqlArgs>>> sqls() {
+        return Optional.ofNullable(this.sqls);
+    }
+
+    /**
      * Stream logs and audit events with the Sumo Logic connector.
      * 
      */
@@ -831,15 +1009,48 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         return Optional.ofNullable(this.twilioVerifies);
     }
 
+    /**
+     * SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+     * 
+     */
+    @Import(name="unibeams")
+    private @Nullable Output<List<ProjectConnectorsUnibeamArgs>> unibeams;
+
+    /**
+     * @return SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsUnibeamArgs>>> unibeams() {
+        return Optional.ofNullable(this.unibeams);
+    }
+
+    /**
+     * Email validation with ZeroBounce
+     * 
+     */
+    @Import(name="zerobounces")
+    private @Nullable Output<List<ProjectConnectorsZerobounceArgs>> zerobounces;
+
+    /**
+     * @return Email validation with ZeroBounce
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsZerobounceArgs>>> zerobounces() {
+        return Optional.ofNullable(this.zerobounces);
+    }
+
     private ProjectConnectorsArgs() {}
 
     private ProjectConnectorsArgs(ProjectConnectorsArgs $) {
         this.abuseipdbs = $.abuseipdbs;
         this.amplitudes = $.amplitudes;
+        this.arkoses = $.arkoses;
         this.auditWebhooks = $.auditWebhooks;
         this.awsS3s = $.awsS3s;
         this.awsTranslates = $.awsTranslates;
         this.bitsights = $.bitsights;
+        this.coralogixes = $.coralogixes;
+        this.darwinia = $.darwinia;
         this.datadogs = $.datadogs;
         this.devrevGrows = $.devrevGrows;
         this.docebos = $.docebos;
@@ -856,14 +1067,20 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.googleCloudLoggings = $.googleCloudLoggings;
         this.googleCloudTranslations = $.googleCloudTranslations;
         this.googleMapsPlaces = $.googleMapsPlaces;
+        this.hcaptchas = $.hcaptchas;
         this.hibps = $.hibps;
         this.https = $.https;
         this.hubspots = $.hubspots;
         this.incodes = $.incodes;
         this.intercoms = $.intercoms;
+        this.ldaps = $.ldaps;
         this.lokalises = $.lokalises;
+        this.mixpanels = $.mixpanels;
         this.mparticles = $.mparticles;
         this.newrelics = $.newrelics;
+        this.opentelemetries = $.opentelemetries;
+        this.pingDirectories = $.pingDirectories;
+        this.postmarks = $.postmarks;
         this.radars = $.radars;
         this.recaptchaEnterprises = $.recaptchaEnterprises;
         this.recaptchas = $.recaptchas;
@@ -878,6 +1095,8 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.smartlings = $.smartlings;
         this.smtps = $.smtps;
         this.sns = $.sns;
+        this.splunks = $.splunks;
+        this.sqls = $.sqls;
         this.sumologics = $.sumologics;
         this.supabases = $.supabases;
         this.telesigns = $.telesigns;
@@ -885,6 +1104,8 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.turnstiles = $.turnstiles;
         this.twilioCores = $.twilioCores;
         this.twilioVerifies = $.twilioVerifies;
+        this.unibeams = $.unibeams;
+        this.zerobounces = $.zerobounces;
     }
 
     public static Builder builder() {
@@ -965,6 +1186,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder amplitudes(ProjectConnectorsAmplitudeArgs... amplitudes) {
             return amplitudes(List.of(amplitudes));
+        }
+
+        /**
+         * @param arkoses Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder arkoses(@Nullable Output<List<ProjectConnectorsArkoseArgs>> arkoses) {
+            $.arkoses = arkoses;
+            return this;
+        }
+
+        /**
+         * @param arkoses Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder arkoses(List<ProjectConnectorsArkoseArgs> arkoses) {
+            return arkoses(Output.of(arkoses));
+        }
+
+        /**
+         * @param arkoses Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder arkoses(ProjectConnectorsArkoseArgs... arkoses) {
+            return arkoses(List.of(arkoses));
         }
 
         /**
@@ -1089,6 +1341,68 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder bitsights(ProjectConnectorsBitsightArgs... bitsights) {
             return bitsights(List.of(bitsights));
+        }
+
+        /**
+         * @param coralogixes Send audit events and troubleshooting logs to Coralogix.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder coralogixes(@Nullable Output<List<ProjectConnectorsCoralogixArgs>> coralogixes) {
+            $.coralogixes = coralogixes;
+            return this;
+        }
+
+        /**
+         * @param coralogixes Send audit events and troubleshooting logs to Coralogix.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder coralogixes(List<ProjectConnectorsCoralogixArgs> coralogixes) {
+            return coralogixes(Output.of(coralogixes));
+        }
+
+        /**
+         * @param coralogixes Send audit events and troubleshooting logs to Coralogix.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder coralogixes(ProjectConnectorsCoralogixArgs... coralogixes) {
+            return coralogixes(List.of(coralogixes));
+        }
+
+        /**
+         * @param darwinia Connect to Darwinium API for fraud detection and device intelligence.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder darwinia(@Nullable Output<List<ProjectConnectorsDarwiniumArgs>> darwinia) {
+            $.darwinia = darwinia;
+            return this;
+        }
+
+        /**
+         * @param darwinia Connect to Darwinium API for fraud detection and device intelligence.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder darwinia(List<ProjectConnectorsDarwiniumArgs> darwinia) {
+            return darwinia(Output.of(darwinia));
+        }
+
+        /**
+         * @param darwinia Connect to Darwinium API for fraud detection and device intelligence.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder darwinia(ProjectConnectorsDarwiniumArgs... darwinia) {
+            return darwinia(List.of(darwinia));
         }
 
         /**
@@ -1588,6 +1902,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param hcaptchas hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hcaptchas(@Nullable Output<List<ProjectConnectorsHcaptchaArgs>> hcaptchas) {
+            $.hcaptchas = hcaptchas;
+            return this;
+        }
+
+        /**
+         * @param hcaptchas hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hcaptchas(List<ProjectConnectorsHcaptchaArgs> hcaptchas) {
+            return hcaptchas(Output.of(hcaptchas));
+        }
+
+        /**
+         * @param hcaptchas hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hcaptchas(ProjectConnectorsHcaptchaArgs... hcaptchas) {
+            return hcaptchas(List.of(hcaptchas));
+        }
+
+        /**
          * @param hibps Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
          * 
          * @return builder
@@ -1743,6 +2088,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param ldaps Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ldaps(@Nullable Output<List<ProjectConnectorsLdapArgs>> ldaps) {
+            $.ldaps = ldaps;
+            return this;
+        }
+
+        /**
+         * @param ldaps Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ldaps(List<ProjectConnectorsLdapArgs> ldaps) {
+            return ldaps(Output.of(ldaps));
+        }
+
+        /**
+         * @param ldaps Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ldaps(ProjectConnectorsLdapArgs... ldaps) {
+            return ldaps(List.of(ldaps));
+        }
+
+        /**
          * @param lokalises Localize the language of your login and user journey screens with the Lokalise connector.
          * 
          * @return builder
@@ -1771,6 +2147,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder lokalises(ProjectConnectorsLokaliseArgs... lokalises) {
             return lokalises(List.of(lokalises));
+        }
+
+        /**
+         * @param mixpanels Stream authentication audit logs and troubleshoot logs to Mixpanel.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mixpanels(@Nullable Output<List<ProjectConnectorsMixpanelArgs>> mixpanels) {
+            $.mixpanels = mixpanels;
+            return this;
+        }
+
+        /**
+         * @param mixpanels Stream authentication audit logs and troubleshoot logs to Mixpanel.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mixpanels(List<ProjectConnectorsMixpanelArgs> mixpanels) {
+            return mixpanels(Output.of(mixpanels));
+        }
+
+        /**
+         * @param mixpanels Stream authentication audit logs and troubleshoot logs to Mixpanel.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mixpanels(ProjectConnectorsMixpanelArgs... mixpanels) {
+            return mixpanels(List.of(mixpanels));
         }
 
         /**
@@ -1833,6 +2240,99 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder newrelics(ProjectConnectorsNewrelicArgs... newrelics) {
             return newrelics(List.of(newrelics));
+        }
+
+        /**
+         * @param opentelemetries Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder opentelemetries(@Nullable Output<List<ProjectConnectorsOpentelemetryArgs>> opentelemetries) {
+            $.opentelemetries = opentelemetries;
+            return this;
+        }
+
+        /**
+         * @param opentelemetries Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder opentelemetries(List<ProjectConnectorsOpentelemetryArgs> opentelemetries) {
+            return opentelemetries(Output.of(opentelemetries));
+        }
+
+        /**
+         * @param opentelemetries Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder opentelemetries(ProjectConnectorsOpentelemetryArgs... opentelemetries) {
+            return opentelemetries(List.of(opentelemetries));
+        }
+
+        /**
+         * @param pingDirectories Authenticate against PingDirectory.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pingDirectories(@Nullable Output<List<ProjectConnectorsPingDirectoryArgs>> pingDirectories) {
+            $.pingDirectories = pingDirectories;
+            return this;
+        }
+
+        /**
+         * @param pingDirectories Authenticate against PingDirectory.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pingDirectories(List<ProjectConnectorsPingDirectoryArgs> pingDirectories) {
+            return pingDirectories(Output.of(pingDirectories));
+        }
+
+        /**
+         * @param pingDirectories Authenticate against PingDirectory.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pingDirectories(ProjectConnectorsPingDirectoryArgs... pingDirectories) {
+            return pingDirectories(List.of(pingDirectories));
+        }
+
+        /**
+         * @param postmarks Send emails using Postmark
+         * 
+         * @return builder
+         * 
+         */
+        public Builder postmarks(@Nullable Output<List<ProjectConnectorsPostmarkArgs>> postmarks) {
+            $.postmarks = postmarks;
+            return this;
+        }
+
+        /**
+         * @param postmarks Send emails using Postmark
+         * 
+         * @return builder
+         * 
+         */
+        public Builder postmarks(List<ProjectConnectorsPostmarkArgs> postmarks) {
+            return postmarks(Output.of(postmarks));
+        }
+
+        /**
+         * @param postmarks Send emails using Postmark
+         * 
+         * @return builder
+         * 
+         */
+        public Builder postmarks(ProjectConnectorsPostmarkArgs... postmarks) {
+            return postmarks(List.of(postmarks));
         }
 
         /**
@@ -2270,6 +2770,68 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param splunks Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder splunks(@Nullable Output<List<ProjectConnectorsSplunkArgs>> splunks) {
+            $.splunks = splunks;
+            return this;
+        }
+
+        /**
+         * @param splunks Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder splunks(List<ProjectConnectorsSplunkArgs> splunks) {
+            return splunks(Output.of(splunks));
+        }
+
+        /**
+         * @param splunks Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder splunks(ProjectConnectorsSplunkArgs... splunks) {
+            return splunks(List.of(splunks));
+        }
+
+        /**
+         * @param sqls SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sqls(@Nullable Output<List<ProjectConnectorsSqlArgs>> sqls) {
+            $.sqls = sqls;
+            return this;
+        }
+
+        /**
+         * @param sqls SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sqls(List<ProjectConnectorsSqlArgs> sqls) {
+            return sqls(Output.of(sqls));
+        }
+
+        /**
+         * @param sqls SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder sqls(ProjectConnectorsSqlArgs... sqls) {
+            return sqls(List.of(sqls));
+        }
+
+        /**
          * @param sumologics Stream logs and audit events with the Sumo Logic connector.
          * 
          * @return builder
@@ -2484,6 +3046,68 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder twilioVerifies(ProjectConnectorsTwilioVerifyArgs... twilioVerifies) {
             return twilioVerifies(List.of(twilioVerifies));
+        }
+
+        /**
+         * @param unibeams SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder unibeams(@Nullable Output<List<ProjectConnectorsUnibeamArgs>> unibeams) {
+            $.unibeams = unibeams;
+            return this;
+        }
+
+        /**
+         * @param unibeams SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder unibeams(List<ProjectConnectorsUnibeamArgs> unibeams) {
+            return unibeams(Output.of(unibeams));
+        }
+
+        /**
+         * @param unibeams SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder unibeams(ProjectConnectorsUnibeamArgs... unibeams) {
+            return unibeams(List.of(unibeams));
+        }
+
+        /**
+         * @param zerobounces Email validation with ZeroBounce
+         * 
+         * @return builder
+         * 
+         */
+        public Builder zerobounces(@Nullable Output<List<ProjectConnectorsZerobounceArgs>> zerobounces) {
+            $.zerobounces = zerobounces;
+            return this;
+        }
+
+        /**
+         * @param zerobounces Email validation with ZeroBounce
+         * 
+         * @return builder
+         * 
+         */
+        public Builder zerobounces(List<ProjectConnectorsZerobounceArgs> zerobounces) {
+            return zerobounces(Output.of(zerobounces));
+        }
+
+        /**
+         * @param zerobounces Email validation with ZeroBounce
+         * 
+         * @return builder
+         * 
+         */
+        public Builder zerobounces(ProjectConnectorsZerobounceArgs... zerobounces) {
+            return zerobounces(List.of(zerobounces));
         }
 
         public ProjectConnectorsArgs build() {

@@ -5,6 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { DescoperArgs, DescoperState } from "./descoper";
+export type Descoper = import("./descoper").Descoper;
+export const Descoper: typeof import("./descoper").Descoper = null as any;
+utilities.lazyLoad(exports, ["Descoper"], () => require("./descoper"));
+
+export { ManagementKeyArgs, ManagementKeyState } from "./managementKey";
+export type ManagementKey = import("./managementKey").ManagementKey;
+export const ManagementKey: typeof import("./managementKey").ManagementKey = null as any;
+utilities.lazyLoad(exports, ["ManagementKey"], () => require("./managementKey"));
+
 export { ProjectArgs, ProjectState } from "./project";
 export type Project = import("./project").Project;
 export const Project: typeof import("./project").Project = null as any;
@@ -27,6 +37,10 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "descope:index/descoper:Descoper":
+                return new Descoper(name, <any>undefined, { urn })
+            case "descope:index/managementKey:ManagementKey":
+                return new ManagementKey(name, <any>undefined, { urn })
             case "descope:index/project:Project":
                 return new Project(name, <any>undefined, { urn })
             default:
@@ -34,6 +48,8 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("descope", "index/descoper", _module)
+pulumi.runtime.registerResourceModule("descope", "index/managementKey", _module)
 pulumi.runtime.registerResourceModule("descope", "index/project", _module)
 pulumi.runtime.registerResourcePackage("descope", {
     version: utilities.getVersion(),

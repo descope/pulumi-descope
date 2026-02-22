@@ -21,6 +21,7 @@ __all__ = ['ProjectArgs', 'Project']
 @pulumi.input_type
 class ProjectArgs:
     def __init__(__self__, *,
+                 admin_portal: Optional[pulumi.Input['ProjectAdminPortalArgs']] = None,
                  applications: Optional[pulumi.Input['ProjectApplicationsArgs']] = None,
                  attributes: Optional[pulumi.Input['ProjectAttributesArgs']] = None,
                  authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
@@ -38,6 +39,7 @@ class ProjectArgs:
                  widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         The set of arguments for constructing a Project resource.
+        :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
         :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
@@ -54,6 +56,8 @@ class ProjectArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
+        if admin_portal is not None:
+            pulumi.set(__self__, "admin_portal", admin_portal)
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
         if attributes is not None:
@@ -84,6 +88,18 @@ class ProjectArgs:
             pulumi.set(__self__, "tags", tags)
         if widgets is not None:
             pulumi.set(__self__, "widgets", widgets)
+
+    @_builtins.property
+    @pulumi.getter(name="adminPortal")
+    def admin_portal(self) -> Optional[pulumi.Input['ProjectAdminPortalArgs']]:
+        """
+        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        """
+        return pulumi.get(self, "admin_portal")
+
+    @admin_portal.setter
+    def admin_portal(self, value: Optional[pulumi.Input['ProjectAdminPortalArgs']]):
+        pulumi.set(self, "admin_portal", value)
 
     @_builtins.property
     @pulumi.getter
@@ -269,6 +285,7 @@ class ProjectArgs:
 @pulumi.input_type
 class _ProjectState:
     def __init__(__self__, *,
+                 admin_portal: Optional[pulumi.Input['ProjectAdminPortalArgs']] = None,
                  applications: Optional[pulumi.Input['ProjectApplicationsArgs']] = None,
                  attributes: Optional[pulumi.Input['ProjectAttributesArgs']] = None,
                  authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
@@ -286,6 +303,7 @@ class _ProjectState:
                  widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
+        :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
         :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
@@ -302,6 +320,8 @@ class _ProjectState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
+        if admin_portal is not None:
+            pulumi.set(__self__, "admin_portal", admin_portal)
         if applications is not None:
             pulumi.set(__self__, "applications", applications)
         if attributes is not None:
@@ -332,6 +352,18 @@ class _ProjectState:
             pulumi.set(__self__, "tags", tags)
         if widgets is not None:
             pulumi.set(__self__, "widgets", widgets)
+
+    @_builtins.property
+    @pulumi.getter(name="adminPortal")
+    def admin_portal(self) -> Optional[pulumi.Input['ProjectAdminPortalArgs']]:
+        """
+        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        """
+        return pulumi.get(self, "admin_portal")
+
+    @admin_portal.setter
+    def admin_portal(self, value: Optional[pulumi.Input['ProjectAdminPortalArgs']]):
+        pulumi.set(self, "admin_portal", value)
 
     @_builtins.property
     @pulumi.getter
@@ -520,6 +552,7 @@ class Project(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
                  applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
                  attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
                  authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
@@ -540,6 +573,7 @@ class Project(pulumi.CustomResource):
         Create a Project resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
         :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
         :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
@@ -579,6 +613,7 @@ class Project(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
                  applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
                  attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
                  authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
@@ -603,6 +638,7 @@ class Project(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProjectArgs.__new__(ProjectArgs)
 
+            __props__.__dict__["admin_portal"] = admin_portal
             __props__.__dict__["applications"] = applications
             __props__.__dict__["attributes"] = attributes
             __props__.__dict__["authentication"] = authentication
@@ -628,6 +664,7 @@ class Project(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
             applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
             attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
             authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
@@ -650,6 +687,7 @@ class Project(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
         :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
         :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
@@ -670,6 +708,7 @@ class Project(pulumi.CustomResource):
 
         __props__ = _ProjectState.__new__(_ProjectState)
 
+        __props__.__dict__["admin_portal"] = admin_portal
         __props__.__dict__["applications"] = applications
         __props__.__dict__["attributes"] = attributes
         __props__.__dict__["authentication"] = authentication
@@ -686,6 +725,14 @@ class Project(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         __props__.__dict__["widgets"] = widgets
         return Project(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="adminPortal")
+    def admin_portal(self) -> pulumi.Output['outputs.ProjectAdminPortal']:
+        """
+        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        """
+        return pulumi.get(self, "admin_portal")
 
     @_builtins.property
     @pulumi.getter

@@ -37,6 +37,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _amplitudes = value;
         }
 
+        [Input("arkoses")]
+        private InputList<Inputs.ProjectConnectorsArkoseArgs>? _arkoses;
+
+        /// <summary>
+        /// Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsArkoseArgs> Arkoses
+        {
+            get => _arkoses ?? (_arkoses = new InputList<Inputs.ProjectConnectorsArkoseArgs>());
+            set => _arkoses = value;
+        }
+
         [Input("auditWebhooks")]
         private InputList<Inputs.ProjectConnectorsAuditWebhookArgs>? _auditWebhooks;
 
@@ -83,6 +95,30 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _bitsights ?? (_bitsights = new InputList<Inputs.ProjectConnectorsBitsightArgs>());
             set => _bitsights = value;
+        }
+
+        [Input("coralogixes")]
+        private InputList<Inputs.ProjectConnectorsCoralogixArgs>? _coralogixes;
+
+        /// <summary>
+        /// Send audit events and troubleshooting logs to Coralogix.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsCoralogixArgs> Coralogixes
+        {
+            get => _coralogixes ?? (_coralogixes = new InputList<Inputs.ProjectConnectorsCoralogixArgs>());
+            set => _coralogixes = value;
+        }
+
+        [Input("darwinia")]
+        private InputList<Inputs.ProjectConnectorsDarwiniumArgs>? _darwinia;
+
+        /// <summary>
+        /// Connect to Darwinium API for fraud detection and device intelligence.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsDarwiniumArgs> Darwinia
+        {
+            get => _darwinia ?? (_darwinia = new InputList<Inputs.ProjectConnectorsDarwiniumArgs>());
+            set => _darwinia = value;
         }
 
         [Input("datadogs")]
@@ -277,6 +313,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _googleMapsPlaces = value;
         }
 
+        [Input("hcaptchas")]
+        private InputList<Inputs.ProjectConnectorsHcaptchaArgs>? _hcaptchas;
+
+        /// <summary>
+        /// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsHcaptchaArgs> Hcaptchas
+        {
+            get => _hcaptchas ?? (_hcaptchas = new InputList<Inputs.ProjectConnectorsHcaptchaArgs>());
+            set => _hcaptchas = value;
+        }
+
         [Input("hibps")]
         private InputList<Inputs.ProjectConnectorsHibpArgs>? _hibps;
 
@@ -337,6 +385,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _intercoms = value;
         }
 
+        [Input("ldaps")]
+        private InputList<Inputs.ProjectConnectorsLdapArgs>? _ldaps;
+
+        /// <summary>
+        /// Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsLdapArgs> Ldaps
+        {
+            get => _ldaps ?? (_ldaps = new InputList<Inputs.ProjectConnectorsLdapArgs>());
+            set => _ldaps = value;
+        }
+
         [Input("lokalises")]
         private InputList<Inputs.ProjectConnectorsLokaliseArgs>? _lokalises;
 
@@ -347,6 +407,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _lokalises ?? (_lokalises = new InputList<Inputs.ProjectConnectorsLokaliseArgs>());
             set => _lokalises = value;
+        }
+
+        [Input("mixpanels")]
+        private InputList<Inputs.ProjectConnectorsMixpanelArgs>? _mixpanels;
+
+        /// <summary>
+        /// Stream authentication audit logs and troubleshoot logs to Mixpanel.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsMixpanelArgs> Mixpanels
+        {
+            get => _mixpanels ?? (_mixpanels = new InputList<Inputs.ProjectConnectorsMixpanelArgs>());
+            set => _mixpanels = value;
         }
 
         [Input("mparticles")]
@@ -371,6 +443,42 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _newrelics ?? (_newrelics = new InputList<Inputs.ProjectConnectorsNewrelicArgs>());
             set => _newrelics = value;
+        }
+
+        [Input("opentelemetries")]
+        private InputList<Inputs.ProjectConnectorsOpentelemetryArgs>? _opentelemetries;
+
+        /// <summary>
+        /// Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsOpentelemetryArgs> Opentelemetries
+        {
+            get => _opentelemetries ?? (_opentelemetries = new InputList<Inputs.ProjectConnectorsOpentelemetryArgs>());
+            set => _opentelemetries = value;
+        }
+
+        [Input("pingDirectories")]
+        private InputList<Inputs.ProjectConnectorsPingDirectoryArgs>? _pingDirectories;
+
+        /// <summary>
+        /// Authenticate against PingDirectory.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsPingDirectoryArgs> PingDirectories
+        {
+            get => _pingDirectories ?? (_pingDirectories = new InputList<Inputs.ProjectConnectorsPingDirectoryArgs>());
+            set => _pingDirectories = value;
+        }
+
+        [Input("postmarks")]
+        private InputList<Inputs.ProjectConnectorsPostmarkArgs>? _postmarks;
+
+        /// <summary>
+        /// Send emails using Postmark
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsPostmarkArgs> Postmarks
+        {
+            get => _postmarks ?? (_postmarks = new InputList<Inputs.ProjectConnectorsPostmarkArgs>());
+            set => _postmarks = value;
         }
 
         [Input("radars")]
@@ -541,6 +649,30 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _sns = value;
         }
 
+        [Input("splunks")]
+        private InputList<Inputs.ProjectConnectorsSplunkArgs>? _splunks;
+
+        /// <summary>
+        /// Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsSplunkArgs> Splunks
+        {
+            get => _splunks ?? (_splunks = new InputList<Inputs.ProjectConnectorsSplunkArgs>());
+            set => _splunks = value;
+        }
+
+        [Input("sqls")]
+        private InputList<Inputs.ProjectConnectorsSqlArgs>? _sqls;
+
+        /// <summary>
+        /// SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsSqlArgs> Sqls
+        {
+            get => _sqls ?? (_sqls = new InputList<Inputs.ProjectConnectorsSqlArgs>());
+            set => _sqls = value;
+        }
+
         [Input("sumologics")]
         private InputList<Inputs.ProjectConnectorsSumologicArgs>? _sumologics;
 
@@ -623,6 +755,30 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _twilioVerifies ?? (_twilioVerifies = new InputList<Inputs.ProjectConnectorsTwilioVerifyArgs>());
             set => _twilioVerifies = value;
+        }
+
+        [Input("unibeams")]
+        private InputList<Inputs.ProjectConnectorsUnibeamArgs>? _unibeams;
+
+        /// <summary>
+        /// SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsUnibeamArgs> Unibeams
+        {
+            get => _unibeams ?? (_unibeams = new InputList<Inputs.ProjectConnectorsUnibeamArgs>());
+            set => _unibeams = value;
+        }
+
+        [Input("zerobounces")]
+        private InputList<Inputs.ProjectConnectorsZerobounceArgs>? _zerobounces;
+
+        /// <summary>
+        /// Email validation with ZeroBounce
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsZerobounceArgs> Zerobounces
+        {
+            get => _zerobounces ?? (_zerobounces = new InputList<Inputs.ProjectConnectorsZerobounceArgs>());
+            set => _zerobounces = value;
         }
 
         public ProjectConnectorsArgs()

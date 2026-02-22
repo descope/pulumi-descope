@@ -32,6 +32,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
+        /// Whether to enable groups priority.
+        /// </summary>
+        [Input("groupsPriority")]
+        public Input<bool>? GroupsPriority { get; set; }
+
+        /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
         [Input("mergeUsers")]

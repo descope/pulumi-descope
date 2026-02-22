@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectAttributesAccessKey;
 import com.descope.pulumi.descope.outputs.ProjectAttributesTenant;
 import com.descope.pulumi.descope.outputs.ProjectAttributesUser;
 import com.pulumi.core.annotations.CustomType;
@@ -13,26 +14,38 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAttributes {
     /**
-     * @return A list of `TenantAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each access key in the project.
+     * 
+     */
+    private @Nullable List<ProjectAttributesAccessKey> accessKeys;
+    /**
+     * @return A list of custom attributes for storing additional details about each tenant in the project.
      * 
      */
     private @Nullable List<ProjectAttributesTenant> tenants;
     /**
-     * @return A list of `UserAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each user in the project.
      * 
      */
     private @Nullable List<ProjectAttributesUser> users;
 
     private ProjectAttributes() {}
     /**
-     * @return A list of `TenantAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each access key in the project.
+     * 
+     */
+    public List<ProjectAttributesAccessKey> accessKeys() {
+        return this.accessKeys == null ? List.of() : this.accessKeys;
+    }
+    /**
+     * @return A list of custom attributes for storing additional details about each tenant in the project.
      * 
      */
     public List<ProjectAttributesTenant> tenants() {
         return this.tenants == null ? List.of() : this.tenants;
     }
     /**
-     * @return A list of `UserAttribute`. Read the description below.
+     * @return A list of custom attributes for storing additional details about each user in the project.
      * 
      */
     public List<ProjectAttributesUser> users() {
@@ -48,15 +61,26 @@ public final class ProjectAttributes {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable List<ProjectAttributesAccessKey> accessKeys;
         private @Nullable List<ProjectAttributesTenant> tenants;
         private @Nullable List<ProjectAttributesUser> users;
         public Builder() {}
         public Builder(ProjectAttributes defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.accessKeys = defaults.accessKeys;
     	      this.tenants = defaults.tenants;
     	      this.users = defaults.users;
         }
 
+        @CustomType.Setter
+        public Builder accessKeys(@Nullable List<ProjectAttributesAccessKey> accessKeys) {
+
+            this.accessKeys = accessKeys;
+            return this;
+        }
+        public Builder accessKeys(ProjectAttributesAccessKey... accessKeys) {
+            return accessKeys(List.of(accessKeys));
+        }
         @CustomType.Setter
         public Builder tenants(@Nullable List<ProjectAttributesTenant> tenants) {
 
@@ -77,6 +101,7 @@ public final class ProjectAttributes {
         }
         public ProjectAttributes build() {
             final var _resultValue = new ProjectAttributes();
+            _resultValue.accessKeys = accessKeys;
             _resultValue.tenants = tenants;
             _resultValue.users = users;
             return _resultValue;

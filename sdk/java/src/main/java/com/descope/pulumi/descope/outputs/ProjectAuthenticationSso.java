@@ -29,6 +29,11 @@ public final class ProjectAuthenticationSso {
      */
     private @Nullable Boolean disabled;
     /**
+     * @return Whether to enable groups priority.
+     * 
+     */
+    private @Nullable Boolean groupsPriority;
+    /**
      * @return Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -67,6 +72,13 @@ public final class ProjectAuthenticationSso {
         return Optional.ofNullable(this.disabled);
     }
     /**
+     * @return Whether to enable groups priority.
+     * 
+     */
+    public Optional<Boolean> groupsPriority() {
+        return Optional.ofNullable(this.groupsPriority);
+    }
+    /**
      * @return Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -100,6 +112,7 @@ public final class ProjectAuthenticationSso {
         private @Nullable Boolean allowDuplicateDomains;
         private @Nullable Boolean allowOverrideRoles;
         private @Nullable Boolean disabled;
+        private @Nullable Boolean groupsPriority;
         private @Nullable Boolean mergeUsers;
         private @Nullable String redirectUrl;
         private @Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings;
@@ -109,6 +122,7 @@ public final class ProjectAuthenticationSso {
     	      this.allowDuplicateDomains = defaults.allowDuplicateDomains;
     	      this.allowOverrideRoles = defaults.allowOverrideRoles;
     	      this.disabled = defaults.disabled;
+    	      this.groupsPriority = defaults.groupsPriority;
     	      this.mergeUsers = defaults.mergeUsers;
     	      this.redirectUrl = defaults.redirectUrl;
     	      this.ssoSuiteSettings = defaults.ssoSuiteSettings;
@@ -130,6 +144,12 @@ public final class ProjectAuthenticationSso {
         public Builder disabled(@Nullable Boolean disabled) {
 
             this.disabled = disabled;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder groupsPriority(@Nullable Boolean groupsPriority) {
+
+            this.groupsPriority = groupsPriority;
             return this;
         }
         @CustomType.Setter
@@ -155,6 +175,7 @@ public final class ProjectAuthenticationSso {
             _resultValue.allowDuplicateDomains = allowDuplicateDomains;
             _resultValue.allowOverrideRoles = allowOverrideRoles;
             _resultValue.disabled = disabled;
+            _resultValue.groupsPriority = groupsPriority;
             _resultValue.mergeUsers = mergeUsers;
             _resultValue.redirectUrl = redirectUrl;
             _resultValue.ssoSuiteSettings = ssoSuiteSettings;

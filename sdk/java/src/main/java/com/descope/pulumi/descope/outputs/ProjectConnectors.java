@@ -5,10 +5,13 @@ package com.descope.pulumi.descope.outputs;
 
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAbuseipdb;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAmplitude;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsArkose;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAuditWebhook;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsS3;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsTranslate;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsBitsight;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsCoralogix;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsDarwinium;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDatadog;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDevrevGrow;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDocebo;
@@ -25,14 +28,20 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericSmsGateway;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudLogging;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudTranslation;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleMapsPlace;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsHcaptcha;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHibp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHttp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHubspot;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsIncode;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsIntercom;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsLdap;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsLokalise;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsMixpanel;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsMparticle;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsNewrelic;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsOpentelemetry;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsPingDirectory;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsPostmark;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRadar;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptcha;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptchaEnterprise;
@@ -47,6 +56,8 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsSlack;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSmartling;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSmtp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSn;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsSplunk;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsSql;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSumologic;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSupabase;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTelesign;
@@ -54,6 +65,8 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsTraceable;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTurnstile;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTwilioCore;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsTwilioVerify;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsUnibeam;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsZerobounce;
 import com.pulumi.core.annotations.CustomType;
 import java.util.List;
 import java.util.Objects;
@@ -71,6 +84,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsAmplitude> amplitudes;
+    /**
+     * @return Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsArkose> arkoses;
     /**
      * @return Send audit events to a custom webhook.
      * 
@@ -91,6 +109,16 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsBitsight> bitsights;
+    /**
+     * @return Send audit events and troubleshooting logs to Coralogix.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsCoralogix> coralogixes;
+    /**
+     * @return Connect to Darwinium API for fraud detection and device intelligence.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsDarwinium> darwinia;
     /**
      * @return Stream authentication audit logs with the Datadog connector.
      * 
@@ -172,6 +200,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
     /**
+     * @return hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsHcaptcha> hcaptchas;
+    /**
      * @return Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
@@ -197,10 +230,20 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsIntercom> intercoms;
     /**
+     * @return Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsLdap> ldaps;
+    /**
      * @return Localize the language of your login and user journey screens with the Lokalise connector.
      * 
      */
     private @Nullable List<ProjectConnectorsLokalise> lokalises;
+    /**
+     * @return Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsMixpanel> mixpanels;
     /**
      * @return Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
      * 
@@ -211,6 +254,21 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsNewrelic> newrelics;
+    /**
+     * @return Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsOpentelemetry> opentelemetries;
+    /**
+     * @return Authenticate against PingDirectory.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsPingDirectory> pingDirectories;
+    /**
+     * @return Send emails using Postmark
+     * 
+     */
+    private @Nullable List<ProjectConnectorsPostmark> postmarks;
     /**
      * @return Get address autocompletions from Radar Autocomplete API.
      * 
@@ -282,6 +340,16 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsSn> sns;
     /**
+     * @return Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     * 
+     */
+    private @Nullable List<ProjectConnectorsSplunk> splunks;
+    /**
+     * @return SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsSql> sqls;
+    /**
      * @return Stream logs and audit events with the Sumo Logic connector.
      * 
      */
@@ -316,6 +384,16 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsTwilioVerify> twilioVerifies;
+    /**
+     * @return SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsUnibeam> unibeams;
+    /**
+     * @return Email validation with ZeroBounce
+     * 
+     */
+    private @Nullable List<ProjectConnectorsZerobounce> zerobounces;
 
     private ProjectConnectors() {}
     /**
@@ -331,6 +409,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsAmplitude> amplitudes() {
         return this.amplitudes == null ? List.of() : this.amplitudes;
+    }
+    /**
+     * @return Use the Arkose connector to integrate with Arkose&#39;s bot and fraud detection.
+     * 
+     */
+    public List<ProjectConnectorsArkose> arkoses() {
+        return this.arkoses == null ? List.of() : this.arkoses;
     }
     /**
      * @return Send audit events to a custom webhook.
@@ -359,6 +444,20 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsBitsight> bitsights() {
         return this.bitsights == null ? List.of() : this.bitsights;
+    }
+    /**
+     * @return Send audit events and troubleshooting logs to Coralogix.
+     * 
+     */
+    public List<ProjectConnectorsCoralogix> coralogixes() {
+        return this.coralogixes == null ? List.of() : this.coralogixes;
+    }
+    /**
+     * @return Connect to Darwinium API for fraud detection and device intelligence.
+     * 
+     */
+    public List<ProjectConnectorsDarwinium> darwinia() {
+        return this.darwinia == null ? List.of() : this.darwinia;
     }
     /**
      * @return Stream authentication audit logs with the Datadog connector.
@@ -473,6 +572,13 @@ public final class ProjectConnectors {
         return this.googleMapsPlaces == null ? List.of() : this.googleMapsPlaces;
     }
     /**
+     * @return hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+     * 
+     */
+    public List<ProjectConnectorsHcaptcha> hcaptchas() {
+        return this.hcaptchas == null ? List.of() : this.hcaptchas;
+    }
+    /**
      * @return Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
      * 
      */
@@ -508,11 +614,25 @@ public final class ProjectConnectors {
         return this.intercoms == null ? List.of() : this.intercoms;
     }
     /**
+     * @return Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+     * 
+     */
+    public List<ProjectConnectorsLdap> ldaps() {
+        return this.ldaps == null ? List.of() : this.ldaps;
+    }
+    /**
      * @return Localize the language of your login and user journey screens with the Lokalise connector.
      * 
      */
     public List<ProjectConnectorsLokalise> lokalises() {
         return this.lokalises == null ? List.of() : this.lokalises;
+    }
+    /**
+     * @return Stream authentication audit logs and troubleshoot logs to Mixpanel.
+     * 
+     */
+    public List<ProjectConnectorsMixpanel> mixpanels() {
+        return this.mixpanels == null ? List.of() : this.mixpanels;
     }
     /**
      * @return Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
@@ -527,6 +647,27 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsNewrelic> newrelics() {
         return this.newrelics == null ? List.of() : this.newrelics;
+    }
+    /**
+     * @return Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+     * 
+     */
+    public List<ProjectConnectorsOpentelemetry> opentelemetries() {
+        return this.opentelemetries == null ? List.of() : this.opentelemetries;
+    }
+    /**
+     * @return Authenticate against PingDirectory.
+     * 
+     */
+    public List<ProjectConnectorsPingDirectory> pingDirectories() {
+        return this.pingDirectories == null ? List.of() : this.pingDirectories;
+    }
+    /**
+     * @return Send emails using Postmark
+     * 
+     */
+    public List<ProjectConnectorsPostmark> postmarks() {
+        return this.postmarks == null ? List.of() : this.postmarks;
     }
     /**
      * @return Get address autocompletions from Radar Autocomplete API.
@@ -627,6 +768,20 @@ public final class ProjectConnectors {
         return this.sns == null ? List.of() : this.sns;
     }
     /**
+     * @return Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+     * 
+     */
+    public List<ProjectConnectorsSplunk> splunks() {
+        return this.splunks == null ? List.of() : this.splunks;
+    }
+    /**
+     * @return SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+     * 
+     */
+    public List<ProjectConnectorsSql> sqls() {
+        return this.sqls == null ? List.of() : this.sqls;
+    }
+    /**
      * @return Stream logs and audit events with the Sumo Logic connector.
      * 
      */
@@ -675,6 +830,20 @@ public final class ProjectConnectors {
     public List<ProjectConnectorsTwilioVerify> twilioVerifies() {
         return this.twilioVerifies == null ? List.of() : this.twilioVerifies;
     }
+    /**
+     * @return SIM-based authentication and approval using Unibeam&#39;s OnSim technology for passwordless authentication and transaction approval.
+     * 
+     */
+    public List<ProjectConnectorsUnibeam> unibeams() {
+        return this.unibeams == null ? List.of() : this.unibeams;
+    }
+    /**
+     * @return Email validation with ZeroBounce
+     * 
+     */
+    public List<ProjectConnectorsZerobounce> zerobounces() {
+        return this.zerobounces == null ? List.of() : this.zerobounces;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -687,10 +856,13 @@ public final class ProjectConnectors {
     public static final class Builder {
         private @Nullable List<ProjectConnectorsAbuseipdb> abuseipdbs;
         private @Nullable List<ProjectConnectorsAmplitude> amplitudes;
+        private @Nullable List<ProjectConnectorsArkose> arkoses;
         private @Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks;
         private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
         private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
         private @Nullable List<ProjectConnectorsBitsight> bitsights;
+        private @Nullable List<ProjectConnectorsCoralogix> coralogixes;
+        private @Nullable List<ProjectConnectorsDarwinium> darwinia;
         private @Nullable List<ProjectConnectorsDatadog> datadogs;
         private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
         private @Nullable List<ProjectConnectorsDocebo> docebos;
@@ -707,14 +879,20 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings;
         private @Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations;
         private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
+        private @Nullable List<ProjectConnectorsHcaptcha> hcaptchas;
         private @Nullable List<ProjectConnectorsHibp> hibps;
         private @Nullable List<ProjectConnectorsHttp> https;
         private @Nullable List<ProjectConnectorsHubspot> hubspots;
         private @Nullable List<ProjectConnectorsIncode> incodes;
         private @Nullable List<ProjectConnectorsIntercom> intercoms;
+        private @Nullable List<ProjectConnectorsLdap> ldaps;
         private @Nullable List<ProjectConnectorsLokalise> lokalises;
+        private @Nullable List<ProjectConnectorsMixpanel> mixpanels;
         private @Nullable List<ProjectConnectorsMparticle> mparticles;
         private @Nullable List<ProjectConnectorsNewrelic> newrelics;
+        private @Nullable List<ProjectConnectorsOpentelemetry> opentelemetries;
+        private @Nullable List<ProjectConnectorsPingDirectory> pingDirectories;
+        private @Nullable List<ProjectConnectorsPostmark> postmarks;
         private @Nullable List<ProjectConnectorsRadar> radars;
         private @Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises;
         private @Nullable List<ProjectConnectorsRecaptcha> recaptchas;
@@ -729,6 +907,8 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsSmartling> smartlings;
         private @Nullable List<ProjectConnectorsSmtp> smtps;
         private @Nullable List<ProjectConnectorsSn> sns;
+        private @Nullable List<ProjectConnectorsSplunk> splunks;
+        private @Nullable List<ProjectConnectorsSql> sqls;
         private @Nullable List<ProjectConnectorsSumologic> sumologics;
         private @Nullable List<ProjectConnectorsSupabase> supabases;
         private @Nullable List<ProjectConnectorsTelesign> telesigns;
@@ -736,15 +916,20 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsTurnstile> turnstiles;
         private @Nullable List<ProjectConnectorsTwilioCore> twilioCores;
         private @Nullable List<ProjectConnectorsTwilioVerify> twilioVerifies;
+        private @Nullable List<ProjectConnectorsUnibeam> unibeams;
+        private @Nullable List<ProjectConnectorsZerobounce> zerobounces;
         public Builder() {}
         public Builder(ProjectConnectors defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.abuseipdbs = defaults.abuseipdbs;
     	      this.amplitudes = defaults.amplitudes;
+    	      this.arkoses = defaults.arkoses;
     	      this.auditWebhooks = defaults.auditWebhooks;
     	      this.awsS3s = defaults.awsS3s;
     	      this.awsTranslates = defaults.awsTranslates;
     	      this.bitsights = defaults.bitsights;
+    	      this.coralogixes = defaults.coralogixes;
+    	      this.darwinia = defaults.darwinia;
     	      this.datadogs = defaults.datadogs;
     	      this.devrevGrows = defaults.devrevGrows;
     	      this.docebos = defaults.docebos;
@@ -761,14 +946,20 @@ public final class ProjectConnectors {
     	      this.googleCloudLoggings = defaults.googleCloudLoggings;
     	      this.googleCloudTranslations = defaults.googleCloudTranslations;
     	      this.googleMapsPlaces = defaults.googleMapsPlaces;
+    	      this.hcaptchas = defaults.hcaptchas;
     	      this.hibps = defaults.hibps;
     	      this.https = defaults.https;
     	      this.hubspots = defaults.hubspots;
     	      this.incodes = defaults.incodes;
     	      this.intercoms = defaults.intercoms;
+    	      this.ldaps = defaults.ldaps;
     	      this.lokalises = defaults.lokalises;
+    	      this.mixpanels = defaults.mixpanels;
     	      this.mparticles = defaults.mparticles;
     	      this.newrelics = defaults.newrelics;
+    	      this.opentelemetries = defaults.opentelemetries;
+    	      this.pingDirectories = defaults.pingDirectories;
+    	      this.postmarks = defaults.postmarks;
     	      this.radars = defaults.radars;
     	      this.recaptchaEnterprises = defaults.recaptchaEnterprises;
     	      this.recaptchas = defaults.recaptchas;
@@ -783,6 +974,8 @@ public final class ProjectConnectors {
     	      this.smartlings = defaults.smartlings;
     	      this.smtps = defaults.smtps;
     	      this.sns = defaults.sns;
+    	      this.splunks = defaults.splunks;
+    	      this.sqls = defaults.sqls;
     	      this.sumologics = defaults.sumologics;
     	      this.supabases = defaults.supabases;
     	      this.telesigns = defaults.telesigns;
@@ -790,6 +983,8 @@ public final class ProjectConnectors {
     	      this.turnstiles = defaults.turnstiles;
     	      this.twilioCores = defaults.twilioCores;
     	      this.twilioVerifies = defaults.twilioVerifies;
+    	      this.unibeams = defaults.unibeams;
+    	      this.zerobounces = defaults.zerobounces;
         }
 
         @CustomType.Setter
@@ -809,6 +1004,15 @@ public final class ProjectConnectors {
         }
         public Builder amplitudes(ProjectConnectorsAmplitude... amplitudes) {
             return amplitudes(List.of(amplitudes));
+        }
+        @CustomType.Setter
+        public Builder arkoses(@Nullable List<ProjectConnectorsArkose> arkoses) {
+
+            this.arkoses = arkoses;
+            return this;
+        }
+        public Builder arkoses(ProjectConnectorsArkose... arkoses) {
+            return arkoses(List.of(arkoses));
         }
         @CustomType.Setter
         public Builder auditWebhooks(@Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks) {
@@ -845,6 +1049,24 @@ public final class ProjectConnectors {
         }
         public Builder bitsights(ProjectConnectorsBitsight... bitsights) {
             return bitsights(List.of(bitsights));
+        }
+        @CustomType.Setter
+        public Builder coralogixes(@Nullable List<ProjectConnectorsCoralogix> coralogixes) {
+
+            this.coralogixes = coralogixes;
+            return this;
+        }
+        public Builder coralogixes(ProjectConnectorsCoralogix... coralogixes) {
+            return coralogixes(List.of(coralogixes));
+        }
+        @CustomType.Setter
+        public Builder darwinia(@Nullable List<ProjectConnectorsDarwinium> darwinia) {
+
+            this.darwinia = darwinia;
+            return this;
+        }
+        public Builder darwinia(ProjectConnectorsDarwinium... darwinia) {
+            return darwinia(List.of(darwinia));
         }
         @CustomType.Setter
         public Builder datadogs(@Nullable List<ProjectConnectorsDatadog> datadogs) {
@@ -991,6 +1213,15 @@ public final class ProjectConnectors {
             return googleMapsPlaces(List.of(googleMapsPlaces));
         }
         @CustomType.Setter
+        public Builder hcaptchas(@Nullable List<ProjectConnectorsHcaptcha> hcaptchas) {
+
+            this.hcaptchas = hcaptchas;
+            return this;
+        }
+        public Builder hcaptchas(ProjectConnectorsHcaptcha... hcaptchas) {
+            return hcaptchas(List.of(hcaptchas));
+        }
+        @CustomType.Setter
         public Builder hibps(@Nullable List<ProjectConnectorsHibp> hibps) {
 
             this.hibps = hibps;
@@ -1036,6 +1267,15 @@ public final class ProjectConnectors {
             return intercoms(List.of(intercoms));
         }
         @CustomType.Setter
+        public Builder ldaps(@Nullable List<ProjectConnectorsLdap> ldaps) {
+
+            this.ldaps = ldaps;
+            return this;
+        }
+        public Builder ldaps(ProjectConnectorsLdap... ldaps) {
+            return ldaps(List.of(ldaps));
+        }
+        @CustomType.Setter
         public Builder lokalises(@Nullable List<ProjectConnectorsLokalise> lokalises) {
 
             this.lokalises = lokalises;
@@ -1043,6 +1283,15 @@ public final class ProjectConnectors {
         }
         public Builder lokalises(ProjectConnectorsLokalise... lokalises) {
             return lokalises(List.of(lokalises));
+        }
+        @CustomType.Setter
+        public Builder mixpanels(@Nullable List<ProjectConnectorsMixpanel> mixpanels) {
+
+            this.mixpanels = mixpanels;
+            return this;
+        }
+        public Builder mixpanels(ProjectConnectorsMixpanel... mixpanels) {
+            return mixpanels(List.of(mixpanels));
         }
         @CustomType.Setter
         public Builder mparticles(@Nullable List<ProjectConnectorsMparticle> mparticles) {
@@ -1061,6 +1310,33 @@ public final class ProjectConnectors {
         }
         public Builder newrelics(ProjectConnectorsNewrelic... newrelics) {
             return newrelics(List.of(newrelics));
+        }
+        @CustomType.Setter
+        public Builder opentelemetries(@Nullable List<ProjectConnectorsOpentelemetry> opentelemetries) {
+
+            this.opentelemetries = opentelemetries;
+            return this;
+        }
+        public Builder opentelemetries(ProjectConnectorsOpentelemetry... opentelemetries) {
+            return opentelemetries(List.of(opentelemetries));
+        }
+        @CustomType.Setter
+        public Builder pingDirectories(@Nullable List<ProjectConnectorsPingDirectory> pingDirectories) {
+
+            this.pingDirectories = pingDirectories;
+            return this;
+        }
+        public Builder pingDirectories(ProjectConnectorsPingDirectory... pingDirectories) {
+            return pingDirectories(List.of(pingDirectories));
+        }
+        @CustomType.Setter
+        public Builder postmarks(@Nullable List<ProjectConnectorsPostmark> postmarks) {
+
+            this.postmarks = postmarks;
+            return this;
+        }
+        public Builder postmarks(ProjectConnectorsPostmark... postmarks) {
+            return postmarks(List.of(postmarks));
         }
         @CustomType.Setter
         public Builder radars(@Nullable List<ProjectConnectorsRadar> radars) {
@@ -1189,6 +1465,24 @@ public final class ProjectConnectors {
             return sns(List.of(sns));
         }
         @CustomType.Setter
+        public Builder splunks(@Nullable List<ProjectConnectorsSplunk> splunks) {
+
+            this.splunks = splunks;
+            return this;
+        }
+        public Builder splunks(ProjectConnectorsSplunk... splunks) {
+            return splunks(List.of(splunks));
+        }
+        @CustomType.Setter
+        public Builder sqls(@Nullable List<ProjectConnectorsSql> sqls) {
+
+            this.sqls = sqls;
+            return this;
+        }
+        public Builder sqls(ProjectConnectorsSql... sqls) {
+            return sqls(List.of(sqls));
+        }
+        @CustomType.Setter
         public Builder sumologics(@Nullable List<ProjectConnectorsSumologic> sumologics) {
 
             this.sumologics = sumologics;
@@ -1251,14 +1545,35 @@ public final class ProjectConnectors {
         public Builder twilioVerifies(ProjectConnectorsTwilioVerify... twilioVerifies) {
             return twilioVerifies(List.of(twilioVerifies));
         }
+        @CustomType.Setter
+        public Builder unibeams(@Nullable List<ProjectConnectorsUnibeam> unibeams) {
+
+            this.unibeams = unibeams;
+            return this;
+        }
+        public Builder unibeams(ProjectConnectorsUnibeam... unibeams) {
+            return unibeams(List.of(unibeams));
+        }
+        @CustomType.Setter
+        public Builder zerobounces(@Nullable List<ProjectConnectorsZerobounce> zerobounces) {
+
+            this.zerobounces = zerobounces;
+            return this;
+        }
+        public Builder zerobounces(ProjectConnectorsZerobounce... zerobounces) {
+            return zerobounces(List.of(zerobounces));
+        }
         public ProjectConnectors build() {
             final var _resultValue = new ProjectConnectors();
             _resultValue.abuseipdbs = abuseipdbs;
             _resultValue.amplitudes = amplitudes;
+            _resultValue.arkoses = arkoses;
             _resultValue.auditWebhooks = auditWebhooks;
             _resultValue.awsS3s = awsS3s;
             _resultValue.awsTranslates = awsTranslates;
             _resultValue.bitsights = bitsights;
+            _resultValue.coralogixes = coralogixes;
+            _resultValue.darwinia = darwinia;
             _resultValue.datadogs = datadogs;
             _resultValue.devrevGrows = devrevGrows;
             _resultValue.docebos = docebos;
@@ -1275,14 +1590,20 @@ public final class ProjectConnectors {
             _resultValue.googleCloudLoggings = googleCloudLoggings;
             _resultValue.googleCloudTranslations = googleCloudTranslations;
             _resultValue.googleMapsPlaces = googleMapsPlaces;
+            _resultValue.hcaptchas = hcaptchas;
             _resultValue.hibps = hibps;
             _resultValue.https = https;
             _resultValue.hubspots = hubspots;
             _resultValue.incodes = incodes;
             _resultValue.intercoms = intercoms;
+            _resultValue.ldaps = ldaps;
             _resultValue.lokalises = lokalises;
+            _resultValue.mixpanels = mixpanels;
             _resultValue.mparticles = mparticles;
             _resultValue.newrelics = newrelics;
+            _resultValue.opentelemetries = opentelemetries;
+            _resultValue.pingDirectories = pingDirectories;
+            _resultValue.postmarks = postmarks;
             _resultValue.radars = radars;
             _resultValue.recaptchaEnterprises = recaptchaEnterprises;
             _resultValue.recaptchas = recaptchas;
@@ -1297,6 +1618,8 @@ public final class ProjectConnectors {
             _resultValue.smartlings = smartlings;
             _resultValue.smtps = smtps;
             _resultValue.sns = sns;
+            _resultValue.splunks = splunks;
+            _resultValue.sqls = sqls;
             _resultValue.sumologics = sumologics;
             _resultValue.supabases = supabases;
             _resultValue.telesigns = telesigns;
@@ -1304,6 +1627,8 @@ public final class ProjectConnectors {
             _resultValue.turnstiles = turnstiles;
             _resultValue.twilioCores = twilioCores;
             _resultValue.twilioVerifies = twilioVerifies;
+            _resultValue.unibeams = unibeams;
+            _resultValue.zerobounces = zerobounces;
             return _resultValue;
         }
     }

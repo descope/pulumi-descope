@@ -21,6 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "descope:index/descoper:Descoper":
+		r = &Descoper{}
+	case "descope:index/managementKey:ManagementKey":
+		r = &ManagementKey{}
 	case "descope:index/project:Project":
 		r = &Project{}
 	default:
@@ -54,6 +58,16 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/descoper",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/managementKey",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"descope",
 		"index/project",

@@ -6,6 +6,8 @@ import builtins as _builtins
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .descoper import *
+from .management_key import *
 from .project import *
 from .provider import *
 from ._inputs import *
@@ -21,6 +23,22 @@ else:
 _utilities.register(
     resource_modules="""
 [
+ {
+  "pkg": "descope",
+  "mod": "index/descoper",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/descoper:Descoper": "Descoper"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/managementKey",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/managementKey:ManagementKey": "ManagementKey"
+  }
+ },
  {
   "pkg": "descope",
   "mod": "index/project",

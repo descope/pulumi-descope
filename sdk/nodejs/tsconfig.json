@@ -15,7 +15,9 @@
     "files": [
         "config/index.ts",
         "config/vars.ts",
+        "descoper.ts",
         "index.ts",
+        "managementKey.ts",
         "project.ts",
         "provider.ts",
         "types/index.ts",
