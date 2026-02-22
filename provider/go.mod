@@ -45,8 +45,8 @@ require (
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
 	github.com/deckarep/golang-set/v2 v2.5.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
-	github.com/descope/go-sdk v1.6.21 // indirect
-	github.com/descope/terraform-provider-descope v0.3.4 // indirect
+	github.com/descope/go-sdk v1.9.0 // indirect
+	github.com/descope/terraform-provider-descope v0.3.5 // indirect
 	github.com/djherbis/times v1.5.0 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect

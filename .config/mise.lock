@@ -23,13 +23,13 @@ version = "7.6.0"
 backend = "aqua:gradle/gradle"
 
 [[tools.java]]
-version = "corretto-11.0.29.7.1"
+version = "corretto-11.0.30.7.1"
 backend = "core:java"
 
 [tools.java.platforms.linux-x64]
-checksum = "sha256:279c6d3124f8b0251b16297b16687fe8b3946410b05ed27de1259b5e5cea02ba"
-size = 195379320
-url = "https://corretto.aws/downloads/resources/11.0.29.7.1/amazon-corretto-11.0.29.7.1-linux-x64.tar.gz"
+checksum = "sha256:c4843d67b7c8f5f8ffbab43b90b8595243f48aa545b713e30e1d29a5f23b364c"
+size = 195460057
+url = "https://corretto.aws/downloads/resources/11.0.30.7.1/amazon-corretto-11.0.30.7.1-linux-x64.tar.gz"
 
 [[tools.node]]
 version = "20.19.5"

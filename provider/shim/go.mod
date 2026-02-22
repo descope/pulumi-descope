@@ -5,13 +5,13 @@ go 1.24.6
 toolchain go1.25.4
 
 require (
-	github.com/descope/terraform-provider-descope v0.3.4
+	github.com/descope/terraform-provider-descope v0.3.5
 	github.com/hashicorp/terraform-plugin-framework v1.17.0
 )
 
 require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
-	github.com/descope/go-sdk v1.6.21 // indirect
+	github.com/descope/go-sdk v1.9.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/google/uuid v1.6.0 // indirect
