@@ -10,18 +10,18 @@ PULUMI_HOME = "{{config_root}}/.pulumi"
 # Runtimes
 # TODO: we may not need 'get_env' once https://github.com/jdx/mise/discussions/6339 is fixed
 go = "{{ get_env(name='GO_VERSION_MISE', default='latest') }}"
-node = '20.19.5'
-python = '3.11.8'
+node = '20.20.0'
+python = '3.14.3'
 dotnet = '8.0.414'
 # Corretto version used as Java SE/OpenJDK version no longer offered
-java = 'corretto-11'
+java = 'corretto-11.0.30+7'
 
 # Executable tools
 pulumi = "{{ get_env(name='PULUMI_VERSION_MISE', default='latest') }}"
 "github:pulumi/pulumictl" = 'latest'
 "github:pulumi/schema-tools" = "latest"
 gradle = '7.6.0'
-golangci-lint = "2.6.2" # See note about about overrides if you need to customize this.
+golangci-lint = "2.10.1" # See note about about overrides if you need to customize this.
 "npm:yarn" = "1.22.22"
 
 [settings]
