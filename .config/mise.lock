@@ -46,4 +46,3 @@ backend = "aqua:pulumi/pulumi"
 [[tools.python]]
 version = "3.11.8"
 backend = "core:python"
-
