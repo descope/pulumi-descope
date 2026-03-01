@@ -14,6 +14,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectJwtTemplatesAccessKeyTemplate {
     /**
+     * @return When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     * 
+     */
+    private @Nullable Boolean addJtiClaim;
+    /**
      * @return The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      * 
      */
@@ -43,6 +48,11 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      * 
      */
     private @Nullable Boolean enforceIssuer;
+    /**
+     * @return When enabled, permissions will not be included in the JWT token.
+     * 
+     */
+    private @Nullable Boolean excludePermissionClaim;
     private @Nullable String id;
     /**
      * @return Name of the JWT Template.
@@ -50,12 +60,24 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      */
     private String name;
     /**
+     * @return Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     * 
+     */
+    private @Nullable Boolean overrideSubjectClaim;
+    /**
      * @return The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      * 
      */
     private String template;
 
     private ProjectJwtTemplatesAccessKeyTemplate() {}
+    /**
+     * @return When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     * 
+     */
+    public Optional<Boolean> addJtiClaim() {
+        return Optional.ofNullable(this.addJtiClaim);
+    }
     /**
      * @return The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      * 
@@ -98,6 +120,13 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     public Optional<Boolean> enforceIssuer() {
         return Optional.ofNullable(this.enforceIssuer);
     }
+    /**
+     * @return When enabled, permissions will not be included in the JWT token.
+     * 
+     */
+    public Optional<Boolean> excludePermissionClaim() {
+        return Optional.ofNullable(this.excludePermissionClaim);
+    }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
@@ -107,6 +136,13 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
      */
     public String name() {
         return this.name;
+    }
+    /**
+     * @return Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     * 
+     */
+    public Optional<Boolean> overrideSubjectClaim() {
+        return Optional.ofNullable(this.overrideSubjectClaim);
     }
     /**
      * @return The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
@@ -125,29 +161,41 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Boolean addJtiClaim;
         private @Nullable String authSchema;
         private @Nullable Boolean autoTenantClaim;
         private @Nullable Boolean conformanceIssuer;
         private @Nullable String description;
         private @Nullable String emptyClaimPolicy;
         private @Nullable Boolean enforceIssuer;
+        private @Nullable Boolean excludePermissionClaim;
         private @Nullable String id;
         private String name;
+        private @Nullable Boolean overrideSubjectClaim;
         private String template;
         public Builder() {}
         public Builder(ProjectJwtTemplatesAccessKeyTemplate defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.addJtiClaim = defaults.addJtiClaim;
     	      this.authSchema = defaults.authSchema;
     	      this.autoTenantClaim = defaults.autoTenantClaim;
     	      this.conformanceIssuer = defaults.conformanceIssuer;
     	      this.description = defaults.description;
     	      this.emptyClaimPolicy = defaults.emptyClaimPolicy;
     	      this.enforceIssuer = defaults.enforceIssuer;
+    	      this.excludePermissionClaim = defaults.excludePermissionClaim;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
+    	      this.overrideSubjectClaim = defaults.overrideSubjectClaim;
     	      this.template = defaults.template;
         }
 
+        @CustomType.Setter
+        public Builder addJtiClaim(@Nullable Boolean addJtiClaim) {
+
+            this.addJtiClaim = addJtiClaim;
+            return this;
+        }
         @CustomType.Setter
         public Builder authSchema(@Nullable String authSchema) {
 
@@ -185,6 +233,12 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
             return this;
         }
         @CustomType.Setter
+        public Builder excludePermissionClaim(@Nullable Boolean excludePermissionClaim) {
+
+            this.excludePermissionClaim = excludePermissionClaim;
+            return this;
+        }
+        @CustomType.Setter
         public Builder id(@Nullable String id) {
 
             this.id = id;
@@ -199,6 +253,12 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
             return this;
         }
         @CustomType.Setter
+        public Builder overrideSubjectClaim(@Nullable Boolean overrideSubjectClaim) {
+
+            this.overrideSubjectClaim = overrideSubjectClaim;
+            return this;
+        }
+        @CustomType.Setter
         public Builder template(String template) {
             if (template == null) {
               throw new MissingRequiredPropertyException("ProjectJwtTemplatesAccessKeyTemplate", "template");
@@ -208,14 +268,17 @@ public final class ProjectJwtTemplatesAccessKeyTemplate {
         }
         public ProjectJwtTemplatesAccessKeyTemplate build() {
             final var _resultValue = new ProjectJwtTemplatesAccessKeyTemplate();
+            _resultValue.addJtiClaim = addJtiClaim;
             _resultValue.authSchema = authSchema;
             _resultValue.autoTenantClaim = autoTenantClaim;
             _resultValue.conformanceIssuer = conformanceIssuer;
             _resultValue.description = description;
             _resultValue.emptyClaimPolicy = emptyClaimPolicy;
             _resultValue.enforceIssuer = enforceIssuer;
+            _resultValue.excludePermissionClaim = excludePermissionClaim;
             _resultValue.id = id;
             _resultValue.name = name;
+            _resultValue.overrideSubjectClaim = overrideSubjectClaim;
             _resultValue.template = template;
             return _resultValue;
         }

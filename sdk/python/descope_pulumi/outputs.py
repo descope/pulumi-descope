@@ -101,6 +101,7 @@ __all__ = [
     'ProjectAuthenticationPasswordEmailService',
     'ProjectAuthenticationPasswordEmailServiceTemplate',
     'ProjectAuthenticationSso',
+    'ProjectAuthenticationSsoMandatoryUserAttribute',
     'ProjectAuthenticationSsoSsoSuiteSettings',
     'ProjectAuthenticationTotp',
     'ProjectAuthorization',
@@ -8132,10 +8133,18 @@ class ProjectAuthenticationSso(dict):
             suggest = "allow_override_roles"
         elif key == "groupsPriority":
             suggest = "groups_priority"
+        elif key == "limitMappingToMandatoryAttributes":
+            suggest = "limit_mapping_to_mandatory_attributes"
+        elif key == "mandatoryUserAttributes":
+            suggest = "mandatory_user_attributes"
         elif key == "mergeUsers":
             suggest = "merge_users"
         elif key == "redirectUrl":
             suggest = "redirect_url"
+        elif key == "requireGroupsAttributeName":
+            suggest = "require_groups_attribute_name"
+        elif key == "requireSsoDomains":
+            suggest = "require_sso_domains"
         elif key == "ssoSuiteSettings":
             suggest = "sso_suite_settings"
 
@@ -8155,16 +8164,24 @@ class ProjectAuthenticationSso(dict):
                  allow_override_roles: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
                  groups_priority: Optional[_builtins.bool] = None,
+                 limit_mapping_to_mandatory_attributes: Optional[_builtins.bool] = None,
+                 mandatory_user_attributes: Optional[Sequence['outputs.ProjectAuthenticationSsoMandatoryUserAttribute']] = None,
                  merge_users: Optional[_builtins.bool] = None,
                  redirect_url: Optional[_builtins.str] = None,
+                 require_groups_attribute_name: Optional[_builtins.bool] = None,
+                 require_sso_domains: Optional[_builtins.bool] = None,
                  sso_suite_settings: Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings'] = None):
         """
         :param _builtins.bool allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
         :param _builtins.bool allow_override_roles: Whether to allow overriding user's roles with SSO related roles.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         :param _builtins.bool groups_priority: Whether to enable groups priority.
+        :param _builtins.bool limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
+        :param Sequence['ProjectAuthenticationSsoMandatoryUserAttributeArgs'] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param _builtins.bool merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param _builtins.str redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        :param _builtins.bool require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
+        :param _builtins.bool require_sso_domains: When configuring SSO an SSO domain must be specified.
         :param 'ProjectAuthenticationSsoSsoSuiteSettingsArgs' sso_suite_settings: Configuration block for the SSO Suite.
         """
         if allow_duplicate_domains is not None:
@@ -8175,10 +8192,18 @@ class ProjectAuthenticationSso(dict):
             pulumi.set(__self__, "disabled", disabled)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
+        if limit_mapping_to_mandatory_attributes is not None:
+            pulumi.set(__self__, "limit_mapping_to_mandatory_attributes", limit_mapping_to_mandatory_attributes)
+        if mandatory_user_attributes is not None:
+            pulumi.set(__self__, "mandatory_user_attributes", mandatory_user_attributes)
         if merge_users is not None:
             pulumi.set(__self__, "merge_users", merge_users)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
+        if require_groups_attribute_name is not None:
+            pulumi.set(__self__, "require_groups_attribute_name", require_groups_attribute_name)
+        if require_sso_domains is not None:
+            pulumi.set(__self__, "require_sso_domains", require_sso_domains)
         if sso_suite_settings is not None:
             pulumi.set(__self__, "sso_suite_settings", sso_suite_settings)
 
@@ -8215,6 +8240,22 @@ class ProjectAuthenticationSso(dict):
         return pulumi.get(self, "groups_priority")
 
     @_builtins.property
+    @pulumi.getter(name="limitMappingToMandatoryAttributes")
+    def limit_mapping_to_mandatory_attributes(self) -> Optional[_builtins.bool]:
+        """
+        Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
+        """
+        return pulumi.get(self, "limit_mapping_to_mandatory_attributes")
+
+    @_builtins.property
+    @pulumi.getter(name="mandatoryUserAttributes")
+    def mandatory_user_attributes(self) -> Optional[Sequence['outputs.ProjectAuthenticationSsoMandatoryUserAttribute']]:
+        """
+        Define the required Descope attributes that must be populated when receiving SSO information.
+        """
+        return pulumi.get(self, "mandatory_user_attributes")
+
+    @_builtins.property
     @pulumi.getter(name="mergeUsers")
     def merge_users(self) -> Optional[_builtins.bool]:
         """
@@ -8231,12 +8272,58 @@ class ProjectAuthenticationSso(dict):
         return pulumi.get(self, "redirect_url")
 
     @_builtins.property
+    @pulumi.getter(name="requireGroupsAttributeName")
+    def require_groups_attribute_name(self) -> Optional[_builtins.bool]:
+        """
+        When configuring SSO the groups attribute name must be specified.
+        """
+        return pulumi.get(self, "require_groups_attribute_name")
+
+    @_builtins.property
+    @pulumi.getter(name="requireSsoDomains")
+    def require_sso_domains(self) -> Optional[_builtins.bool]:
+        """
+        When configuring SSO an SSO domain must be specified.
+        """
+        return pulumi.get(self, "require_sso_domains")
+
+    @_builtins.property
     @pulumi.getter(name="ssoSuiteSettings")
     def sso_suite_settings(self) -> Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings']:
         """
         Configuration block for the SSO Suite.
         """
         return pulumi.get(self, "sso_suite_settings")
+
+
+@pulumi.output_type
+class ProjectAuthenticationSsoMandatoryUserAttribute(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 custom: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str id: The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+        :param _builtins.bool custom: Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+        """
+        pulumi.set(__self__, "id", id)
+        if custom is not None:
+            pulumi.set(__self__, "custom", custom)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def custom(self) -> Optional[_builtins.bool]:
+        """
+        Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+        """
+        return pulumi.get(self, "custom")
 
 
 @pulumi.output_type
@@ -9581,11 +9668,11 @@ class ProjectConnectorsArkose(dict):
                  verify_base_url: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
-        :param _builtins.str private_key: The private key that can be copied from the Keys screen in the Arkose portal.
-        :param _builtins.str public_key: The public key that's shown in the Keys screen in the Arkose portal.
-        :param _builtins.str client_base_url: A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        :param _builtins.str private_key: The private key that can be copied from the Keys screen in the Arkose Labs portal.
+        :param _builtins.str public_key: The public key that's shown in the Keys screen in the Arkose Labs portal.
+        :param _builtins.str client_base_url: A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         :param _builtins.str description: A description of what your connector is used for.
-        :param _builtins.str verify_base_url: A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        :param _builtins.str verify_base_url: A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "private_key", private_key)
@@ -9611,7 +9698,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="privateKey")
     def private_key(self) -> _builtins.str:
         """
-        The private key that can be copied from the Keys screen in the Arkose portal.
+        The private key that can be copied from the Keys screen in the Arkose Labs portal.
         """
         return pulumi.get(self, "private_key")
 
@@ -9619,7 +9706,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="publicKey")
     def public_key(self) -> _builtins.str:
         """
-        The public key that's shown in the Keys screen in the Arkose portal.
+        The public key that's shown in the Keys screen in the Arkose Labs portal.
         """
         return pulumi.get(self, "public_key")
 
@@ -9627,7 +9714,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="clientBaseUrl")
     def client_base_url(self) -> Optional[_builtins.str]:
         """
-        A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         """
         return pulumi.get(self, "client_base_url")
 
@@ -9648,7 +9735,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="verifyBaseUrl")
     def verify_base_url(self) -> Optional[_builtins.str]:
         """
-        A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         """
         return pulumi.get(self, "verify_base_url")
 
@@ -17785,7 +17872,9 @@ class ProjectConnectorsUnibeam(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "clientId":
+        if key == "baseUrl":
+            suggest = "base_url"
+        elif key == "clientId":
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
@@ -17808,6 +17897,7 @@ class ProjectConnectorsUnibeam(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 base_url: _builtins.str,
                  client_id: _builtins.str,
                  client_secret: _builtins.str,
                  customer_id: _builtins.str,
@@ -17817,6 +17907,7 @@ class ProjectConnectorsUnibeam(dict):
                  description: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
+        :param _builtins.str base_url: Unibeam API base URL.
         :param _builtins.str client_id: OAuth2 client ID for authentication.
         :param _builtins.str client_secret: OAuth2 client secret for authentication.
         :param _builtins.str customer_id: Your Unibeam customer ID.
@@ -17825,6 +17916,7 @@ class ProjectConnectorsUnibeam(dict):
         :param _builtins.str default_message: Default message to display when no message is provided in the command.
         :param _builtins.str description: A description of what your connector is used for.
         """
+        pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "client_id", client_id)
         pulumi.set(__self__, "client_secret", client_secret)
         pulumi.set(__self__, "customer_id", customer_id)
@@ -17836,6 +17928,14 @@ class ProjectConnectorsUnibeam(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> _builtins.str:
+        """
+        Unibeam API base URL.
+        """
+        return pulumi.get(self, "base_url")
 
     @_builtins.property
     @pulumi.getter(name="clientId")
@@ -18320,7 +18420,9 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authSchema":
+        if key == "addJtiClaim":
+            suggest = "add_jti_claim"
+        elif key == "authSchema":
             suggest = "auth_schema"
         elif key == "autoTenantClaim":
             suggest = "auto_tenant_claim"
@@ -18330,6 +18432,10 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             suggest = "empty_claim_policy"
         elif key == "enforceIssuer":
             suggest = "enforce_issuer"
+        elif key == "excludePermissionClaim":
+            suggest = "exclude_permission_claim"
+        elif key == "overrideSubjectClaim":
+            suggest = "override_subject_claim"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesAccessKeyTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -18345,25 +18451,33 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     def __init__(__self__, *,
                  name: _builtins.str,
                  template: _builtins.str,
+                 add_jti_claim: Optional[_builtins.bool] = None,
                  auth_schema: Optional[_builtins.str] = None,
                  auto_tenant_claim: Optional[_builtins.bool] = None,
                  conformance_issuer: Optional[_builtins.bool] = None,
                  description: Optional[_builtins.str] = None,
                  empty_claim_policy: Optional[_builtins.str] = None,
                  enforce_issuer: Optional[_builtins.bool] = None,
-                 id: Optional[_builtins.str] = None):
+                 exclude_permission_claim: Optional[_builtins.bool] = None,
+                 id: Optional[_builtins.str] = None,
+                 override_subject_claim: Optional[_builtins.bool] = None):
         """
         :param _builtins.str name: Name of the JWT Template.
         :param _builtins.str template: The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        :param _builtins.bool add_jti_claim: When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
         :param _builtins.str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param _builtins.bool auto_tenant_claim: When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
         :param _builtins.bool conformance_issuer: Whether to use OIDC conformance for the JWT issuer field.
         :param _builtins.str description: Description of the JWT Template.
         :param _builtins.str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         :param _builtins.bool enforce_issuer: Whether to enforce that the JWT issuer matches the project configuration.
+        :param _builtins.bool exclude_permission_claim: When enabled, permissions will not be included in the JWT token.
+        :param _builtins.bool override_subject_claim: Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
+        if add_jti_claim is not None:
+            pulumi.set(__self__, "add_jti_claim", add_jti_claim)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if auto_tenant_claim is not None:
@@ -18376,8 +18490,12 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
         if enforce_issuer is not None:
             pulumi.set(__self__, "enforce_issuer", enforce_issuer)
+        if exclude_permission_claim is not None:
+            pulumi.set(__self__, "exclude_permission_claim", exclude_permission_claim)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if override_subject_claim is not None:
+            pulumi.set(__self__, "override_subject_claim", override_subject_claim)
 
     @_builtins.property
     @pulumi.getter
@@ -18394,6 +18512,14 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
         The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
         """
         return pulumi.get(self, "template")
+
+    @_builtins.property
+    @pulumi.getter(name="addJtiClaim")
+    def add_jti_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        """
+        return pulumi.get(self, "add_jti_claim")
 
     @_builtins.property
     @pulumi.getter(name="authSchema")
@@ -18444,9 +18570,25 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
         return pulumi.get(self, "enforce_issuer")
 
     @_builtins.property
+    @pulumi.getter(name="excludePermissionClaim")
+    def exclude_permission_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, permissions will not be included in the JWT token.
+        """
+        return pulumi.get(self, "exclude_permission_claim")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="overrideSubjectClaim")
+    def override_subject_claim(self) -> Optional[_builtins.bool]:
+        """
+        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+        """
+        return pulumi.get(self, "override_subject_claim")
 
 
 @pulumi.output_type
@@ -18454,7 +18596,9 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authSchema":
+        if key == "addJtiClaim":
+            suggest = "add_jti_claim"
+        elif key == "authSchema":
             suggest = "auth_schema"
         elif key == "autoTenantClaim":
             suggest = "auto_tenant_claim"
@@ -18464,6 +18608,10 @@ class ProjectJwtTemplatesUserTemplate(dict):
             suggest = "empty_claim_policy"
         elif key == "enforceIssuer":
             suggest = "enforce_issuer"
+        elif key == "excludePermissionClaim":
+            suggest = "exclude_permission_claim"
+        elif key == "overrideSubjectClaim":
+            suggest = "override_subject_claim"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesUserTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -18479,25 +18627,33 @@ class ProjectJwtTemplatesUserTemplate(dict):
     def __init__(__self__, *,
                  name: _builtins.str,
                  template: _builtins.str,
+                 add_jti_claim: Optional[_builtins.bool] = None,
                  auth_schema: Optional[_builtins.str] = None,
                  auto_tenant_claim: Optional[_builtins.bool] = None,
                  conformance_issuer: Optional[_builtins.bool] = None,
                  description: Optional[_builtins.str] = None,
                  empty_claim_policy: Optional[_builtins.str] = None,
                  enforce_issuer: Optional[_builtins.bool] = None,
-                 id: Optional[_builtins.str] = None):
+                 exclude_permission_claim: Optional[_builtins.bool] = None,
+                 id: Optional[_builtins.str] = None,
+                 override_subject_claim: Optional[_builtins.bool] = None):
         """
         :param _builtins.str name: Name of the JWT Template.
         :param _builtins.str template: The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        :param _builtins.bool add_jti_claim: When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
         :param _builtins.str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param _builtins.bool auto_tenant_claim: When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
         :param _builtins.bool conformance_issuer: Whether to use OIDC conformance for the JWT issuer field.
         :param _builtins.str description: Description of the JWT Template.
         :param _builtins.str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         :param _builtins.bool enforce_issuer: Whether to enforce that the JWT issuer matches the project configuration.
+        :param _builtins.bool exclude_permission_claim: When enabled, permissions will not be included in the JWT token.
+        :param _builtins.bool override_subject_claim: Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
+        if add_jti_claim is not None:
+            pulumi.set(__self__, "add_jti_claim", add_jti_claim)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if auto_tenant_claim is not None:
@@ -18510,8 +18666,12 @@ class ProjectJwtTemplatesUserTemplate(dict):
             pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
         if enforce_issuer is not None:
             pulumi.set(__self__, "enforce_issuer", enforce_issuer)
+        if exclude_permission_claim is not None:
+            pulumi.set(__self__, "exclude_permission_claim", exclude_permission_claim)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if override_subject_claim is not None:
+            pulumi.set(__self__, "override_subject_claim", override_subject_claim)
 
     @_builtins.property
     @pulumi.getter
@@ -18528,6 +18688,14 @@ class ProjectJwtTemplatesUserTemplate(dict):
         The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
         """
         return pulumi.get(self, "template")
+
+    @_builtins.property
+    @pulumi.getter(name="addJtiClaim")
+    def add_jti_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        """
+        return pulumi.get(self, "add_jti_claim")
 
     @_builtins.property
     @pulumi.getter(name="authSchema")
@@ -18578,9 +18746,25 @@ class ProjectJwtTemplatesUserTemplate(dict):
         return pulumi.get(self, "enforce_issuer")
 
     @_builtins.property
+    @pulumi.getter(name="excludePermissionClaim")
+    def exclude_permission_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, permissions will not be included in the JWT token.
+        """
+        return pulumi.get(self, "exclude_permission_claim")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="overrideSubjectClaim")
+    def override_subject_claim(self) -> Optional[_builtins.bool]:
+        """
+        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+        """
+        return pulumi.get(self, "override_subject_claim")
 
 
 @pulumi.output_type

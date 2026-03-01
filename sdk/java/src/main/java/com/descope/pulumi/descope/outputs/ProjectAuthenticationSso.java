@@ -3,10 +3,12 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectAuthenticationSsoMandatoryUserAttribute;
 import com.descope.pulumi.descope.outputs.ProjectAuthenticationSsoSsoSuiteSettings;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -34,6 +36,16 @@ public final class ProjectAuthenticationSso {
      */
     private @Nullable Boolean groupsPriority;
     /**
+     * @return Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    private @Nullable Boolean limitMappingToMandatoryAttributes;
+    /**
+     * @return Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    private @Nullable List<ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes;
+    /**
      * @return Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -43,6 +55,16 @@ public final class ProjectAuthenticationSso {
      * 
      */
     private @Nullable String redirectUrl;
+    /**
+     * @return When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    private @Nullable Boolean requireGroupsAttributeName;
+    /**
+     * @return When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    private @Nullable Boolean requireSsoDomains;
     /**
      * @return Configuration block for the SSO Suite.
      * 
@@ -79,6 +101,20 @@ public final class ProjectAuthenticationSso {
         return Optional.ofNullable(this.groupsPriority);
     }
     /**
+     * @return Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    public Optional<Boolean> limitMappingToMandatoryAttributes() {
+        return Optional.ofNullable(this.limitMappingToMandatoryAttributes);
+    }
+    /**
+     * @return Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    public List<ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes() {
+        return this.mandatoryUserAttributes == null ? List.of() : this.mandatoryUserAttributes;
+    }
+    /**
      * @return Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -91,6 +127,20 @@ public final class ProjectAuthenticationSso {
      */
     public Optional<String> redirectUrl() {
         return Optional.ofNullable(this.redirectUrl);
+    }
+    /**
+     * @return When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    public Optional<Boolean> requireGroupsAttributeName() {
+        return Optional.ofNullable(this.requireGroupsAttributeName);
+    }
+    /**
+     * @return When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    public Optional<Boolean> requireSsoDomains() {
+        return Optional.ofNullable(this.requireSsoDomains);
     }
     /**
      * @return Configuration block for the SSO Suite.
@@ -113,8 +163,12 @@ public final class ProjectAuthenticationSso {
         private @Nullable Boolean allowOverrideRoles;
         private @Nullable Boolean disabled;
         private @Nullable Boolean groupsPriority;
+        private @Nullable Boolean limitMappingToMandatoryAttributes;
+        private @Nullable List<ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes;
         private @Nullable Boolean mergeUsers;
         private @Nullable String redirectUrl;
+        private @Nullable Boolean requireGroupsAttributeName;
+        private @Nullable Boolean requireSsoDomains;
         private @Nullable ProjectAuthenticationSsoSsoSuiteSettings ssoSuiteSettings;
         public Builder() {}
         public Builder(ProjectAuthenticationSso defaults) {
@@ -123,8 +177,12 @@ public final class ProjectAuthenticationSso {
     	      this.allowOverrideRoles = defaults.allowOverrideRoles;
     	      this.disabled = defaults.disabled;
     	      this.groupsPriority = defaults.groupsPriority;
+    	      this.limitMappingToMandatoryAttributes = defaults.limitMappingToMandatoryAttributes;
+    	      this.mandatoryUserAttributes = defaults.mandatoryUserAttributes;
     	      this.mergeUsers = defaults.mergeUsers;
     	      this.redirectUrl = defaults.redirectUrl;
+    	      this.requireGroupsAttributeName = defaults.requireGroupsAttributeName;
+    	      this.requireSsoDomains = defaults.requireSsoDomains;
     	      this.ssoSuiteSettings = defaults.ssoSuiteSettings;
         }
 
@@ -153,6 +211,21 @@ public final class ProjectAuthenticationSso {
             return this;
         }
         @CustomType.Setter
+        public Builder limitMappingToMandatoryAttributes(@Nullable Boolean limitMappingToMandatoryAttributes) {
+
+            this.limitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder mandatoryUserAttributes(@Nullable List<ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes) {
+
+            this.mandatoryUserAttributes = mandatoryUserAttributes;
+            return this;
+        }
+        public Builder mandatoryUserAttributes(ProjectAuthenticationSsoMandatoryUserAttribute... mandatoryUserAttributes) {
+            return mandatoryUserAttributes(List.of(mandatoryUserAttributes));
+        }
+        @CustomType.Setter
         public Builder mergeUsers(@Nullable Boolean mergeUsers) {
 
             this.mergeUsers = mergeUsers;
@@ -162,6 +235,18 @@ public final class ProjectAuthenticationSso {
         public Builder redirectUrl(@Nullable String redirectUrl) {
 
             this.redirectUrl = redirectUrl;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder requireGroupsAttributeName(@Nullable Boolean requireGroupsAttributeName) {
+
+            this.requireGroupsAttributeName = requireGroupsAttributeName;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder requireSsoDomains(@Nullable Boolean requireSsoDomains) {
+
+            this.requireSsoDomains = requireSsoDomains;
             return this;
         }
         @CustomType.Setter
@@ -176,8 +261,12 @@ public final class ProjectAuthenticationSso {
             _resultValue.allowOverrideRoles = allowOverrideRoles;
             _resultValue.disabled = disabled;
             _resultValue.groupsPriority = groupsPriority;
+            _resultValue.limitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            _resultValue.mandatoryUserAttributes = mandatoryUserAttributes;
             _resultValue.mergeUsers = mergeUsers;
             _resultValue.redirectUrl = redirectUrl;
+            _resultValue.requireGroupsAttributeName = requireGroupsAttributeName;
+            _resultValue.requireSsoDomains = requireSsoDomains;
             _resultValue.ssoSuiteSettings = ssoSuiteSettings;
             return _resultValue;
         }

@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectJwtTemplatesUserTemplate
     {
         /// <summary>
+        /// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        /// </summary>
+        public readonly bool? AddJtiClaim;
+        /// <summary>
         /// The authorization claims format - `Default`, `tenantOnly` or `None`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         public readonly string? AuthSchema;
@@ -38,11 +42,19 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Whether to enforce that the JWT issuer matches the project configuration.
         /// </summary>
         public readonly bool? EnforceIssuer;
+        /// <summary>
+        /// When enabled, permissions will not be included in the JWT token.
+        /// </summary>
+        public readonly bool? ExcludePermissionClaim;
         public readonly string? Id;
         /// <summary>
         /// Name of the JWT Template.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Switching on will allow you to add a custom subject claim to the JWT. A default new `Dsub` claim will be added with the user ID.
+        /// </summary>
+        public readonly bool? OverrideSubjectClaim;
         /// <summary>
         /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `String` value.
         /// </summary>
@@ -50,6 +62,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectJwtTemplatesUserTemplate(
+            bool? addJtiClaim,
+
             string? authSchema,
 
             bool? autoTenantClaim,
@@ -62,20 +76,27 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? enforceIssuer,
 
+            bool? excludePermissionClaim,
+
             string? id,
 
             string name,
 
+            bool? overrideSubjectClaim,
+
             string template)
         {
+            AddJtiClaim = addJtiClaim;
             AuthSchema = authSchema;
             AutoTenantClaim = autoTenantClaim;
             ConformanceIssuer = conformanceIssuer;
             Description = description;
             EmptyClaimPolicy = emptyClaimPolicy;
             EnforceIssuer = enforceIssuer;
+            ExcludePermissionClaim = excludePermissionClaim;
             Id = id;
             Name = name;
+            OverrideSubjectClaim = overrideSubjectClaim;
             Template = template;
         }
     }

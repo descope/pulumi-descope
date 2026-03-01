@@ -378,6 +378,13 @@
                                         }
                                     }
                                 }
+                            },
+                            "sso": {
+                                "fields": {
+                                    "mandatory_user_attributes": {
+                                        "maxItemsOne": false
+                                    }
+                                }
                             }
                         }
                     },

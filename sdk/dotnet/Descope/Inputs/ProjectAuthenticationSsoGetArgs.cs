@@ -38,6 +38,24 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? GroupsPriority { get; set; }
 
         /// <summary>
+        /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
+        /// </summary>
+        [Input("limitMappingToMandatoryAttributes")]
+        public Input<bool>? LimitMappingToMandatoryAttributes { get; set; }
+
+        [Input("mandatoryUserAttributes")]
+        private InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeGetArgs>? _mandatoryUserAttributes;
+
+        /// <summary>
+        /// Define the required Descope attributes that must be populated when receiving SSO information.
+        /// </summary>
+        public InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeGetArgs> MandatoryUserAttributes
+        {
+            get => _mandatoryUserAttributes ?? (_mandatoryUserAttributes = new InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeGetArgs>());
+            set => _mandatoryUserAttributes = value;
+        }
+
+        /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
         [Input("mergeUsers")]
@@ -48,6 +66,18 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
+
+        /// <summary>
+        /// When configuring SSO the groups attribute name must be specified.
+        /// </summary>
+        [Input("requireGroupsAttributeName")]
+        public Input<bool>? RequireGroupsAttributeName { get; set; }
+
+        /// <summary>
+        /// When configuring SSO an SSO domain must be specified.
+        /// </summary>
+        [Input("requireSsoDomains")]
+        public Input<bool>? RequireSsoDomains { get; set; }
 
         /// <summary>
         /// Configuration block for the SSO Suite.

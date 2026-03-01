@@ -17662,10 +17662,18 @@ type ProjectAuthenticationSso struct {
 	Disabled *bool `pulumi:"disabled"`
 	// Whether to enable groups priority.
 	GroupsPriority *bool `pulumi:"groupsPriority"`
+	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+	LimitMappingToMandatoryAttributes *bool `pulumi:"limitMappingToMandatoryAttributes"`
+	// Define the required Descope attributes that must be populated when receiving SSO information.
+	MandatoryUserAttributes []ProjectAuthenticationSsoMandatoryUserAttribute `pulumi:"mandatoryUserAttributes"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
 	RedirectUrl *string `pulumi:"redirectUrl"`
+	// When configuring SSO the groups attribute name must be specified.
+	RequireGroupsAttributeName *bool `pulumi:"requireGroupsAttributeName"`
+	// When configuring SSO an SSO domain must be specified.
+	RequireSsoDomains *bool `pulumi:"requireSsoDomains"`
 	// Configuration block for the SSO Suite.
 	SsoSuiteSettings *ProjectAuthenticationSsoSsoSuiteSettings `pulumi:"ssoSuiteSettings"`
 }
@@ -17690,10 +17698,18 @@ type ProjectAuthenticationSsoArgs struct {
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolPtrInput `pulumi:"groupsPriority"`
+	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+	LimitMappingToMandatoryAttributes pulumi.BoolPtrInput `pulumi:"limitMappingToMandatoryAttributes"`
+	// Define the required Descope attributes that must be populated when receiving SSO information.
+	MandatoryUserAttributes ProjectAuthenticationSsoMandatoryUserAttributeArrayInput `pulumi:"mandatoryUserAttributes"`
 	// Whether to merge existing user accounts with new ones created through SSO authentication.
 	MergeUsers pulumi.BoolPtrInput `pulumi:"mergeUsers"`
 	// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
 	RedirectUrl pulumi.StringPtrInput `pulumi:"redirectUrl"`
+	// When configuring SSO the groups attribute name must be specified.
+	RequireGroupsAttributeName pulumi.BoolPtrInput `pulumi:"requireGroupsAttributeName"`
+	// When configuring SSO an SSO domain must be specified.
+	RequireSsoDomains pulumi.BoolPtrInput `pulumi:"requireSsoDomains"`
 	// Configuration block for the SSO Suite.
 	SsoSuiteSettings ProjectAuthenticationSsoSsoSuiteSettingsPtrInput `pulumi:"ssoSuiteSettings"`
 }
@@ -17795,6 +17811,18 @@ func (o ProjectAuthenticationSsoOutput) GroupsPriority() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.GroupsPriority }).(pulumi.BoolPtrOutput)
 }
 
+// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+func (o ProjectAuthenticationSsoOutput) LimitMappingToMandatoryAttributes() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.LimitMappingToMandatoryAttributes }).(pulumi.BoolPtrOutput)
+}
+
+// Define the required Descope attributes that must be populated when receiving SSO information.
+func (o ProjectAuthenticationSsoOutput) MandatoryUserAttributes() ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) []ProjectAuthenticationSsoMandatoryUserAttribute {
+		return v.MandatoryUserAttributes
+	}).(ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput)
+}
+
 // Whether to merge existing user accounts with new ones created through SSO authentication.
 func (o ProjectAuthenticationSsoOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.MergeUsers }).(pulumi.BoolPtrOutput)
@@ -17803,6 +17831,16 @@ func (o ProjectAuthenticationSsoOutput) MergeUsers() pulumi.BoolPtrOutput {
 // The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
 func (o ProjectAuthenticationSsoOutput) RedirectUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSso) *string { return v.RedirectUrl }).(pulumi.StringPtrOutput)
+}
+
+// When configuring SSO the groups attribute name must be specified.
+func (o ProjectAuthenticationSsoOutput) RequireGroupsAttributeName() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.RequireGroupsAttributeName }).(pulumi.BoolPtrOutput)
+}
+
+// When configuring SSO an SSO domain must be specified.
+func (o ProjectAuthenticationSsoOutput) RequireSsoDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSso) *bool { return v.RequireSsoDomains }).(pulumi.BoolPtrOutput)
 }
 
 // Configuration block for the SSO Suite.
@@ -17874,6 +17912,26 @@ func (o ProjectAuthenticationSsoPtrOutput) GroupsPriority() pulumi.BoolPtrOutput
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+func (o ProjectAuthenticationSsoPtrOutput) LimitMappingToMandatoryAttributes() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.LimitMappingToMandatoryAttributes
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Define the required Descope attributes that must be populated when receiving SSO information.
+func (o ProjectAuthenticationSsoPtrOutput) MandatoryUserAttributes() ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) []ProjectAuthenticationSsoMandatoryUserAttribute {
+		if v == nil {
+			return nil
+		}
+		return v.MandatoryUserAttributes
+	}).(ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput)
+}
+
 // Whether to merge existing user accounts with new ones created through SSO authentication.
 func (o ProjectAuthenticationSsoPtrOutput) MergeUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
@@ -17894,6 +17952,26 @@ func (o ProjectAuthenticationSsoPtrOutput) RedirectUrl() pulumi.StringPtrOutput 
 	}).(pulumi.StringPtrOutput)
 }
 
+// When configuring SSO the groups attribute name must be specified.
+func (o ProjectAuthenticationSsoPtrOutput) RequireGroupsAttributeName() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RequireGroupsAttributeName
+	}).(pulumi.BoolPtrOutput)
+}
+
+// When configuring SSO an SSO domain must be specified.
+func (o ProjectAuthenticationSsoPtrOutput) RequireSsoDomains() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSso) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RequireSsoDomains
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Configuration block for the SSO Suite.
 func (o ProjectAuthenticationSsoPtrOutput) SsoSuiteSettings() ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationSso) *ProjectAuthenticationSsoSsoSuiteSettings {
@@ -17902,6 +17980,112 @@ func (o ProjectAuthenticationSsoPtrOutput) SsoSuiteSettings() ProjectAuthenticat
 		}
 		return v.SsoSuiteSettings
 	}).(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput)
+}
+
+type ProjectAuthenticationSsoMandatoryUserAttribute struct {
+	// Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+	Custom *bool `pulumi:"custom"`
+	// The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+	Id string `pulumi:"id"`
+}
+
+// ProjectAuthenticationSsoMandatoryUserAttributeInput is an input type that accepts ProjectAuthenticationSsoMandatoryUserAttributeArgs and ProjectAuthenticationSsoMandatoryUserAttributeOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationSsoMandatoryUserAttributeInput` via:
+//
+//	ProjectAuthenticationSsoMandatoryUserAttributeArgs{...}
+type ProjectAuthenticationSsoMandatoryUserAttributeInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationSsoMandatoryUserAttributeOutput() ProjectAuthenticationSsoMandatoryUserAttributeOutput
+	ToProjectAuthenticationSsoMandatoryUserAttributeOutputWithContext(context.Context) ProjectAuthenticationSsoMandatoryUserAttributeOutput
+}
+
+type ProjectAuthenticationSsoMandatoryUserAttributeArgs struct {
+	// Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+	Custom pulumi.BoolPtrInput `pulumi:"custom"`
+	// The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+	Id pulumi.StringInput `pulumi:"id"`
+}
+
+func (ProjectAuthenticationSsoMandatoryUserAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationSsoMandatoryUserAttribute)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationSsoMandatoryUserAttributeArgs) ToProjectAuthenticationSsoMandatoryUserAttributeOutput() ProjectAuthenticationSsoMandatoryUserAttributeOutput {
+	return i.ToProjectAuthenticationSsoMandatoryUserAttributeOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationSsoMandatoryUserAttributeArgs) ToProjectAuthenticationSsoMandatoryUserAttributeOutputWithContext(ctx context.Context) ProjectAuthenticationSsoMandatoryUserAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationSsoMandatoryUserAttributeOutput)
+}
+
+// ProjectAuthenticationSsoMandatoryUserAttributeArrayInput is an input type that accepts ProjectAuthenticationSsoMandatoryUserAttributeArray and ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput values.
+// You can construct a concrete instance of `ProjectAuthenticationSsoMandatoryUserAttributeArrayInput` via:
+//
+//	ProjectAuthenticationSsoMandatoryUserAttributeArray{ ProjectAuthenticationSsoMandatoryUserAttributeArgs{...} }
+type ProjectAuthenticationSsoMandatoryUserAttributeArrayInput interface {
+	pulumi.Input
+
+	ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutput() ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput
+	ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutputWithContext(context.Context) ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput
+}
+
+type ProjectAuthenticationSsoMandatoryUserAttributeArray []ProjectAuthenticationSsoMandatoryUserAttributeInput
+
+func (ProjectAuthenticationSsoMandatoryUserAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAuthenticationSsoMandatoryUserAttribute)(nil)).Elem()
+}
+
+func (i ProjectAuthenticationSsoMandatoryUserAttributeArray) ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutput() ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return i.ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i ProjectAuthenticationSsoMandatoryUserAttributeArray) ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutputWithContext(ctx context.Context) ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput)
+}
+
+type ProjectAuthenticationSsoMandatoryUserAttributeOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationSsoMandatoryUserAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectAuthenticationSsoMandatoryUserAttribute)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationSsoMandatoryUserAttributeOutput) ToProjectAuthenticationSsoMandatoryUserAttributeOutput() ProjectAuthenticationSsoMandatoryUserAttributeOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoMandatoryUserAttributeOutput) ToProjectAuthenticationSsoMandatoryUserAttributeOutputWithContext(ctx context.Context) ProjectAuthenticationSsoMandatoryUserAttributeOutput {
+	return o
+}
+
+// Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+func (o ProjectAuthenticationSsoMandatoryUserAttributeOutput) Custom() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoMandatoryUserAttribute) *bool { return v.Custom }).(pulumi.BoolPtrOutput)
+}
+
+// The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+func (o ProjectAuthenticationSsoMandatoryUserAttributeOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoMandatoryUserAttribute) string { return v.Id }).(pulumi.StringOutput)
+}
+
+type ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProjectAuthenticationSsoMandatoryUserAttribute)(nil)).Elem()
+}
+
+func (o ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput) ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutput() ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput) ToProjectAuthenticationSsoMandatoryUserAttributeArrayOutputWithContext(ctx context.Context) ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput {
+	return o
+}
+
+func (o ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput) Index(i pulumi.IntInput) ProjectAuthenticationSsoMandatoryUserAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProjectAuthenticationSsoMandatoryUserAttribute {
+		return vs[0].([]ProjectAuthenticationSsoMandatoryUserAttribute)[vs[1].(int)]
+	}).(ProjectAuthenticationSsoMandatoryUserAttributeOutput)
 }
 
 type ProjectAuthenticationSsoSsoSuiteSettings struct {
@@ -20321,18 +20505,18 @@ func (o ProjectConnectorsAmplitudeArrayOutput) Index(i pulumi.IntInput) ProjectC
 }
 
 type ProjectConnectorsArkose struct {
-	// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+	// A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
 	ClientBaseUrl *string `pulumi:"clientBaseUrl"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
-	// The private key that can be copied from the Keys screen in the Arkose portal.
+	// The private key that can be copied from the Keys screen in the Arkose Labs portal.
 	PrivateKey string `pulumi:"privateKey"`
-	// The public key that's shown in the Keys screen in the Arkose portal.
+	// The public key that's shown in the Keys screen in the Arkose Labs portal.
 	PublicKey string `pulumi:"publicKey"`
-	// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+	// A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
 	VerifyBaseUrl *string `pulumi:"verifyBaseUrl"`
 }
 
@@ -20348,18 +20532,18 @@ type ProjectConnectorsArkoseInput interface {
 }
 
 type ProjectConnectorsArkoseArgs struct {
-	// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+	// A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
 	ClientBaseUrl pulumi.StringPtrInput `pulumi:"clientBaseUrl"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
-	// The private key that can be copied from the Keys screen in the Arkose portal.
+	// The private key that can be copied from the Keys screen in the Arkose Labs portal.
 	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
-	// The public key that's shown in the Keys screen in the Arkose portal.
+	// The public key that's shown in the Keys screen in the Arkose Labs portal.
 	PublicKey pulumi.StringInput `pulumi:"publicKey"`
-	// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+	// A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
 	VerifyBaseUrl pulumi.StringPtrInput `pulumi:"verifyBaseUrl"`
 }
 
@@ -20414,7 +20598,7 @@ func (o ProjectConnectorsArkoseOutput) ToProjectConnectorsArkoseOutputWithContex
 	return o
 }
 
-// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+// A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
 func (o ProjectConnectorsArkoseOutput) ClientBaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.ClientBaseUrl }).(pulumi.StringPtrOutput)
 }
@@ -20433,17 +20617,17 @@ func (o ProjectConnectorsArkoseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The private key that can be copied from the Keys screen in the Arkose portal.
+// The private key that can be copied from the Keys screen in the Arkose Labs portal.
 func (o ProjectConnectorsArkoseOutput) PrivateKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.PrivateKey }).(pulumi.StringOutput)
 }
 
-// The public key that's shown in the Keys screen in the Arkose portal.
+// The public key that's shown in the Keys screen in the Arkose Labs portal.
 func (o ProjectConnectorsArkoseOutput) PublicKey() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsArkose) string { return v.PublicKey }).(pulumi.StringOutput)
 }
 
-// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+// A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
 func (o ProjectConnectorsArkoseOutput) VerifyBaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsArkose) *string { return v.VerifyBaseUrl }).(pulumi.StringPtrOutput)
 }
@@ -34381,6 +34565,8 @@ func (o ProjectConnectorsTwilioVerifyAuthenticationOutput) AuthToken() pulumi.St
 }
 
 type ProjectConnectorsUnibeam struct {
+	// Unibeam API base URL.
+	BaseUrl string `pulumi:"baseUrl"`
 	// OAuth2 client ID for authentication.
 	ClientId string `pulumi:"clientId"`
 	// OAuth2 client secret for authentication.
@@ -34410,6 +34596,8 @@ type ProjectConnectorsUnibeamInput interface {
 }
 
 type ProjectConnectorsUnibeamArgs struct {
+	// Unibeam API base URL.
+	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
 	// OAuth2 client ID for authentication.
 	ClientId pulumi.StringInput `pulumi:"clientId"`
 	// OAuth2 client secret for authentication.
@@ -34476,6 +34664,11 @@ func (o ProjectConnectorsUnibeamOutput) ToProjectConnectorsUnibeamOutput() Proje
 
 func (o ProjectConnectorsUnibeamOutput) ToProjectConnectorsUnibeamOutputWithContext(ctx context.Context) ProjectConnectorsUnibeamOutput {
 	return o
+}
+
+// Unibeam API base URL.
+func (o ProjectConnectorsUnibeamOutput) BaseUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsUnibeam) string { return v.BaseUrl }).(pulumi.StringOutput)
 }
 
 // OAuth2 client ID for authentication.
@@ -35497,6 +35690,8 @@ func (o ProjectJwtTemplatesPtrOutput) UserTemplates() ProjectJwtTemplatesUserTem
 }
 
 type ProjectJwtTemplatesAccessKeyTemplate struct {
+	// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+	AddJtiClaim *bool `pulumi:"addJtiClaim"`
 	// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema *string `pulumi:"authSchema"`
 	// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
@@ -35508,10 +35703,14 @@ type ProjectJwtTemplatesAccessKeyTemplate struct {
 	// Policy for empty claims - `none`, `nil` or `delete`.
 	EmptyClaimPolicy *string `pulumi:"emptyClaimPolicy"`
 	// Whether to enforce that the JWT issuer matches the project configuration.
-	EnforceIssuer *bool   `pulumi:"enforceIssuer"`
-	Id            *string `pulumi:"id"`
+	EnforceIssuer *bool `pulumi:"enforceIssuer"`
+	// When enabled, permissions will not be included in the JWT token.
+	ExcludePermissionClaim *bool   `pulumi:"excludePermissionClaim"`
+	Id                     *string `pulumi:"id"`
 	// Name of the JWT Template.
 	Name string `pulumi:"name"`
+	// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+	OverrideSubjectClaim *bool `pulumi:"overrideSubjectClaim"`
 	// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
 	Template string `pulumi:"template"`
 }
@@ -35528,6 +35727,8 @@ type ProjectJwtTemplatesAccessKeyTemplateInput interface {
 }
 
 type ProjectJwtTemplatesAccessKeyTemplateArgs struct {
+	// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+	AddJtiClaim pulumi.BoolPtrInput `pulumi:"addJtiClaim"`
 	// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema pulumi.StringPtrInput `pulumi:"authSchema"`
 	// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
@@ -35539,10 +35740,14 @@ type ProjectJwtTemplatesAccessKeyTemplateArgs struct {
 	// Policy for empty claims - `none`, `nil` or `delete`.
 	EmptyClaimPolicy pulumi.StringPtrInput `pulumi:"emptyClaimPolicy"`
 	// Whether to enforce that the JWT issuer matches the project configuration.
-	EnforceIssuer pulumi.BoolPtrInput   `pulumi:"enforceIssuer"`
-	Id            pulumi.StringPtrInput `pulumi:"id"`
+	EnforceIssuer pulumi.BoolPtrInput `pulumi:"enforceIssuer"`
+	// When enabled, permissions will not be included in the JWT token.
+	ExcludePermissionClaim pulumi.BoolPtrInput   `pulumi:"excludePermissionClaim"`
+	Id                     pulumi.StringPtrInput `pulumi:"id"`
 	// Name of the JWT Template.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+	OverrideSubjectClaim pulumi.BoolPtrInput `pulumi:"overrideSubjectClaim"`
 	// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
 	Template pulumi.StringInput `pulumi:"template"`
 }
@@ -35598,6 +35803,11 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ToProjectJwtTemplatesAccessK
 	return o
 }
 
+// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) AddJtiClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.AddJtiClaim }).(pulumi.BoolPtrOutput)
+}
+
 // The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
@@ -35628,6 +35838,11 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) EnforceIssuer() pulumi.BoolP
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.EnforceIssuer }).(pulumi.BoolPtrOutput)
 }
 
+// When enabled, permissions will not be included in the JWT token.
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) ExcludePermissionClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.ExcludePermissionClaim }).(pulumi.BoolPtrOutput)
+}
+
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -35635,6 +35850,11 @@ func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Id() pulumi.StringPtrOutput 
 // Name of the JWT Template.
 func (o ProjectJwtTemplatesAccessKeyTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+func (o ProjectJwtTemplatesAccessKeyTemplateOutput) OverrideSubjectClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesAccessKeyTemplate) *bool { return v.OverrideSubjectClaim }).(pulumi.BoolPtrOutput)
 }
 
 // The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
@@ -35663,6 +35883,8 @@ func (o ProjectJwtTemplatesAccessKeyTemplateArrayOutput) Index(i pulumi.IntInput
 }
 
 type ProjectJwtTemplatesUserTemplate struct {
+	// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+	AddJtiClaim *bool `pulumi:"addJtiClaim"`
 	// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema *string `pulumi:"authSchema"`
 	// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
@@ -35674,10 +35896,14 @@ type ProjectJwtTemplatesUserTemplate struct {
 	// Policy for empty claims - `none`, `nil` or `delete`.
 	EmptyClaimPolicy *string `pulumi:"emptyClaimPolicy"`
 	// Whether to enforce that the JWT issuer matches the project configuration.
-	EnforceIssuer *bool   `pulumi:"enforceIssuer"`
-	Id            *string `pulumi:"id"`
+	EnforceIssuer *bool `pulumi:"enforceIssuer"`
+	// When enabled, permissions will not be included in the JWT token.
+	ExcludePermissionClaim *bool   `pulumi:"excludePermissionClaim"`
+	Id                     *string `pulumi:"id"`
 	// Name of the JWT Template.
 	Name string `pulumi:"name"`
+	// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+	OverrideSubjectClaim *bool `pulumi:"overrideSubjectClaim"`
 	// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
 	Template string `pulumi:"template"`
 }
@@ -35694,6 +35920,8 @@ type ProjectJwtTemplatesUserTemplateInput interface {
 }
 
 type ProjectJwtTemplatesUserTemplateArgs struct {
+	// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+	AddJtiClaim pulumi.BoolPtrInput `pulumi:"addJtiClaim"`
 	// The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 	AuthSchema pulumi.StringPtrInput `pulumi:"authSchema"`
 	// When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
@@ -35705,10 +35933,14 @@ type ProjectJwtTemplatesUserTemplateArgs struct {
 	// Policy for empty claims - `none`, `nil` or `delete`.
 	EmptyClaimPolicy pulumi.StringPtrInput `pulumi:"emptyClaimPolicy"`
 	// Whether to enforce that the JWT issuer matches the project configuration.
-	EnforceIssuer pulumi.BoolPtrInput   `pulumi:"enforceIssuer"`
-	Id            pulumi.StringPtrInput `pulumi:"id"`
+	EnforceIssuer pulumi.BoolPtrInput `pulumi:"enforceIssuer"`
+	// When enabled, permissions will not be included in the JWT token.
+	ExcludePermissionClaim pulumi.BoolPtrInput   `pulumi:"excludePermissionClaim"`
+	Id                     pulumi.StringPtrInput `pulumi:"id"`
 	// Name of the JWT Template.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+	OverrideSubjectClaim pulumi.BoolPtrInput `pulumi:"overrideSubjectClaim"`
 	// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
 	Template pulumi.StringInput `pulumi:"template"`
 }
@@ -35764,6 +35996,11 @@ func (o ProjectJwtTemplatesUserTemplateOutput) ToProjectJwtTemplatesUserTemplate
 	return o
 }
 
+// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+func (o ProjectJwtTemplatesUserTemplateOutput) AddJtiClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.AddJtiClaim }).(pulumi.BoolPtrOutput)
+}
+
 // The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
 func (o ProjectJwtTemplatesUserTemplateOutput) AuthSchema() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.AuthSchema }).(pulumi.StringPtrOutput)
@@ -35794,6 +36031,11 @@ func (o ProjectJwtTemplatesUserTemplateOutput) EnforceIssuer() pulumi.BoolPtrOut
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.EnforceIssuer }).(pulumi.BoolPtrOutput)
 }
 
+// When enabled, permissions will not be included in the JWT token.
+func (o ProjectJwtTemplatesUserTemplateOutput) ExcludePermissionClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.ExcludePermissionClaim }).(pulumi.BoolPtrOutput)
+}
+
 func (o ProjectJwtTemplatesUserTemplateOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -35801,6 +36043,11 @@ func (o ProjectJwtTemplatesUserTemplateOutput) Id() pulumi.StringPtrOutput {
 // Name of the JWT Template.
 func (o ProjectJwtTemplatesUserTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+func (o ProjectJwtTemplatesUserTemplateOutput) OverrideSubjectClaim() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectJwtTemplatesUserTemplate) *bool { return v.OverrideSubjectClaim }).(pulumi.BoolPtrOutput)
 }
 
 // The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
@@ -37169,6 +37416,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationPasswordEmailServiceTemplateArrayInput)(nil)).Elem(), ProjectAuthenticationPasswordEmailServiceTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoInput)(nil)).Elem(), ProjectAuthenticationSsoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoPtrInput)(nil)).Elem(), ProjectAuthenticationSsoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoMandatoryUserAttributeInput)(nil)).Elem(), ProjectAuthenticationSsoMandatoryUserAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoMandatoryUserAttributeArrayInput)(nil)).Elem(), ProjectAuthenticationSsoMandatoryUserAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettingsInput)(nil)).Elem(), ProjectAuthenticationSsoSsoSuiteSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationSsoSsoSuiteSettingsPtrInput)(nil)).Elem(), ProjectAuthenticationSsoSsoSuiteSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectAuthenticationTotpInput)(nil)).Elem(), ProjectAuthenticationTotpArgs{})
@@ -37571,6 +37820,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectAuthenticationPasswordEmailServiceTemplateArrayOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoPtrOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationSsoMandatoryUserAttributeOutput{})
+	pulumi.RegisterOutputType(ProjectAuthenticationSsoMandatoryUserAttributeArrayOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoSsoSuiteSettingsOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectAuthenticationTotpOutput{})
