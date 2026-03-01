@@ -13,6 +13,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectConnectorsUnibeam {
     /**
+     * @return Unibeam API base URL.
+     * 
+     */
+    private String baseUrl;
+    /**
      * @return OAuth2 client ID for authentication.
      * 
      */
@@ -50,6 +55,13 @@ public final class ProjectConnectorsUnibeam {
     private String name;
 
     private ProjectConnectorsUnibeam() {}
+    /**
+     * @return Unibeam API base URL.
+     * 
+     */
+    public String baseUrl() {
+        return this.baseUrl;
+    }
     /**
      * @return OAuth2 client ID for authentication.
      * 
@@ -112,6 +124,7 @@ public final class ProjectConnectorsUnibeam {
     }
     @CustomType.Builder
     public static final class Builder {
+        private String baseUrl;
         private String clientId;
         private String clientSecret;
         private String customerId;
@@ -123,6 +136,7 @@ public final class ProjectConnectorsUnibeam {
         public Builder() {}
         public Builder(ProjectConnectorsUnibeam defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.baseUrl = defaults.baseUrl;
     	      this.clientId = defaults.clientId;
     	      this.clientSecret = defaults.clientSecret;
     	      this.customerId = defaults.customerId;
@@ -133,6 +147,14 @@ public final class ProjectConnectorsUnibeam {
     	      this.name = defaults.name;
         }
 
+        @CustomType.Setter
+        public Builder baseUrl(String baseUrl) {
+            if (baseUrl == null) {
+              throw new MissingRequiredPropertyException("ProjectConnectorsUnibeam", "baseUrl");
+            }
+            this.baseUrl = baseUrl;
+            return this;
+        }
         @CustomType.Setter
         public Builder clientId(String clientId) {
             if (clientId == null) {
@@ -193,6 +215,7 @@ public final class ProjectConnectorsUnibeam {
         }
         public ProjectConnectorsUnibeam build() {
             final var _resultValue = new ProjectConnectorsUnibeam();
+            _resultValue.baseUrl = baseUrl;
             _resultValue.clientId = clientId;
             _resultValue.clientSecret = clientSecret;
             _resultValue.customerId = customerId;

@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectConnectorsUnibeamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Unibeam API base URL.
+        /// </summary>
+        [Input("baseUrl", required: true)]
+        public Input<string> BaseUrl { get; set; } = null!;
+
+        /// <summary>
         /// OAuth2 client ID for authentication.
         /// </summary>
         [Input("clientId", required: true)]
