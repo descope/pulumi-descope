@@ -10,7 +10,7 @@ PULUMI_HOME = "{{config_root}}/.pulumi"
 # Runtimes
 # TODO: we may not need 'get_env' once https://github.com/jdx/mise/discussions/6339 is fixed
 go = "{{ get_env(name='GO_VERSION_MISE', default='latest') }}"
-node = '20.19.5'
+node = '24.14.0'
 python = '3.11.8'
 dotnet = '8.0.414'
 # Corretto version used as Java SE/OpenJDK version no longer offered
