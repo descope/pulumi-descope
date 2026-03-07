@@ -18,6 +18,21 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
     public static final ProjectJwtTemplatesUserTemplateArgs Empty = new ProjectJwtTemplatesUserTemplateArgs();
 
     /**
+     * When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     * 
+     */
+    @Import(name="addJtiClaim")
+    private @Nullable Output<Boolean> addJtiClaim;
+
+    /**
+     * @return When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     * 
+     */
+    public Optional<Output<Boolean>> addJtiClaim() {
+        return Optional.ofNullable(this.addJtiClaim);
+    }
+
+    /**
      * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      * 
      */
@@ -107,6 +122,21 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
         return Optional.ofNullable(this.enforceIssuer);
     }
 
+    /**
+     * When enabled, permissions will not be included in the JWT token.
+     * 
+     */
+    @Import(name="excludePermissionClaim")
+    private @Nullable Output<Boolean> excludePermissionClaim;
+
+    /**
+     * @return When enabled, permissions will not be included in the JWT token.
+     * 
+     */
+    public Optional<Output<Boolean>> excludePermissionClaim() {
+        return Optional.ofNullable(this.excludePermissionClaim);
+    }
+
     @Import(name="id")
     private @Nullable Output<String> id;
 
@@ -130,6 +160,21 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
     }
 
     /**
+     * Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     * 
+     */
+    @Import(name="overrideSubjectClaim")
+    private @Nullable Output<Boolean> overrideSubjectClaim;
+
+    /**
+     * @return Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     * 
+     */
+    public Optional<Output<Boolean>> overrideSubjectClaim() {
+        return Optional.ofNullable(this.overrideSubjectClaim);
+    }
+
+    /**
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      * 
      */
@@ -147,14 +192,17 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
     private ProjectJwtTemplatesUserTemplateArgs() {}
 
     private ProjectJwtTemplatesUserTemplateArgs(ProjectJwtTemplatesUserTemplateArgs $) {
+        this.addJtiClaim = $.addJtiClaim;
         this.authSchema = $.authSchema;
         this.autoTenantClaim = $.autoTenantClaim;
         this.conformanceIssuer = $.conformanceIssuer;
         this.description = $.description;
         this.emptyClaimPolicy = $.emptyClaimPolicy;
         this.enforceIssuer = $.enforceIssuer;
+        this.excludePermissionClaim = $.excludePermissionClaim;
         this.id = $.id;
         this.name = $.name;
+        this.overrideSubjectClaim = $.overrideSubjectClaim;
         this.template = $.template;
     }
 
@@ -174,6 +222,27 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
 
         public Builder(ProjectJwtTemplatesUserTemplateArgs defaults) {
             $ = new ProjectJwtTemplatesUserTemplateArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param addJtiClaim When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder addJtiClaim(@Nullable Output<Boolean> addJtiClaim) {
+            $.addJtiClaim = addJtiClaim;
+            return this;
+        }
+
+        /**
+         * @param addJtiClaim When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder addJtiClaim(Boolean addJtiClaim) {
+            return addJtiClaim(Output.of(addJtiClaim));
         }
 
         /**
@@ -302,6 +371,27 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
             return enforceIssuer(Output.of(enforceIssuer));
         }
 
+        /**
+         * @param excludePermissionClaim When enabled, permissions will not be included in the JWT token.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder excludePermissionClaim(@Nullable Output<Boolean> excludePermissionClaim) {
+            $.excludePermissionClaim = excludePermissionClaim;
+            return this;
+        }
+
+        /**
+         * @param excludePermissionClaim When enabled, permissions will not be included in the JWT token.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder excludePermissionClaim(Boolean excludePermissionClaim) {
+            return excludePermissionClaim(Output.of(excludePermissionClaim));
+        }
+
         public Builder id(@Nullable Output<String> id) {
             $.id = id;
             return this;
@@ -330,6 +420,27 @@ public final class ProjectJwtTemplatesUserTemplateArgs extends com.pulumi.resour
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param overrideSubjectClaim Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder overrideSubjectClaim(@Nullable Output<Boolean> overrideSubjectClaim) {
+            $.overrideSubjectClaim = overrideSubjectClaim;
+            return this;
+        }
+
+        /**
+         * @param overrideSubjectClaim Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder overrideSubjectClaim(Boolean overrideSubjectClaim) {
+            return overrideSubjectClaim(Output.of(overrideSubjectClaim));
         }
 
         /**

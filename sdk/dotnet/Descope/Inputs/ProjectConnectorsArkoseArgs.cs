@@ -14,7 +14,7 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectConnectorsArkoseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        /// A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         /// </summary>
         [Input("clientBaseUrl")]
         public Input<string>? ClientBaseUrl { get; set; }
@@ -38,7 +38,7 @@ namespace Descope.Pulumi.Descope.Inputs
         private Input<string>? _privateKey;
 
         /// <summary>
-        /// The private key that can be copied from the Keys screen in the Arkose portal.
+        /// The private key that can be copied from the Keys screen in the Arkose Labs portal.
         /// </summary>
         public Input<string>? PrivateKey
         {
@@ -51,13 +51,13 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         /// <summary>
-        /// The public key that's shown in the Keys screen in the Arkose portal.
+        /// The public key that's shown in the Keys screen in the Arkose Labs portal.
         /// </summary>
         [Input("publicKey", required: true)]
         public Input<string> PublicKey { get; set; } = null!;
 
         /// <summary>
-        /// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        /// A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         /// </summary>
         [Input("verifyBaseUrl")]
         public Input<string>? VerifyBaseUrl { get; set; }
