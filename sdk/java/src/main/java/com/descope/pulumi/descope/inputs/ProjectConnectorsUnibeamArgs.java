@@ -17,6 +17,21 @@ public final class ProjectConnectorsUnibeamArgs extends com.pulumi.resources.Res
     public static final ProjectConnectorsUnibeamArgs Empty = new ProjectConnectorsUnibeamArgs();
 
     /**
+     * Unibeam API base URL.
+     * 
+     */
+    @Import(name="baseUrl", required=true)
+    private Output<String> baseUrl;
+
+    /**
+     * @return Unibeam API base URL.
+     * 
+     */
+    public Output<String> baseUrl() {
+        return this.baseUrl;
+    }
+
+    /**
      * OAuth2 client ID for authentication.
      * 
      */
@@ -131,6 +146,7 @@ public final class ProjectConnectorsUnibeamArgs extends com.pulumi.resources.Res
     private ProjectConnectorsUnibeamArgs() {}
 
     private ProjectConnectorsUnibeamArgs(ProjectConnectorsUnibeamArgs $) {
+        this.baseUrl = $.baseUrl;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.customerId = $.customerId;
@@ -157,6 +173,27 @@ public final class ProjectConnectorsUnibeamArgs extends com.pulumi.resources.Res
 
         public Builder(ProjectConnectorsUnibeamArgs defaults) {
             $ = new ProjectConnectorsUnibeamArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param baseUrl Unibeam API base URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder baseUrl(Output<String> baseUrl) {
+            $.baseUrl = baseUrl;
+            return this;
+        }
+
+        /**
+         * @param baseUrl Unibeam API base URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder baseUrl(String baseUrl) {
+            return baseUrl(Output.of(baseUrl));
         }
 
         /**
@@ -316,6 +353,9 @@ public final class ProjectConnectorsUnibeamArgs extends com.pulumi.resources.Res
         }
 
         public ProjectConnectorsUnibeamArgs build() {
+            if ($.baseUrl == null) {
+                throw new MissingRequiredPropertyException("ProjectConnectorsUnibeamArgs", "baseUrl");
+            }
             if ($.clientId == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsUnibeamArgs", "clientId");
             }

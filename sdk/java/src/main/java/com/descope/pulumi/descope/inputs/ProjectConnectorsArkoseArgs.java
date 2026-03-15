@@ -17,14 +17,14 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
     public static final ProjectConnectorsArkoseArgs Empty = new ProjectConnectorsArkoseArgs();
 
     /**
-     * A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      * 
      */
     @Import(name="clientBaseUrl")
     private @Nullable Output<String> clientBaseUrl;
 
     /**
-     * @return A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * @return A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      * 
      */
     public Optional<Output<String>> clientBaseUrl() {
@@ -69,14 +69,14 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
     }
 
     /**
-     * The private key that can be copied from the Keys screen in the Arkose portal.
+     * The private key that can be copied from the Keys screen in the Arkose Labs portal.
      * 
      */
     @Import(name="privateKey", required=true)
     private Output<String> privateKey;
 
     /**
-     * @return The private key that can be copied from the Keys screen in the Arkose portal.
+     * @return The private key that can be copied from the Keys screen in the Arkose Labs portal.
      * 
      */
     public Output<String> privateKey() {
@@ -84,14 +84,14 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
     }
 
     /**
-     * The public key that&#39;s shown in the Keys screen in the Arkose portal.
+     * The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
      * 
      */
     @Import(name="publicKey", required=true)
     private Output<String> publicKey;
 
     /**
-     * @return The public key that&#39;s shown in the Keys screen in the Arkose portal.
+     * @return The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
      * 
      */
     public Output<String> publicKey() {
@@ -99,14 +99,14 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
     }
 
     /**
-     * A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      * 
      */
     @Import(name="verifyBaseUrl")
     private @Nullable Output<String> verifyBaseUrl;
 
     /**
-     * @return A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * @return A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      * 
      */
     public Optional<Output<String>> verifyBaseUrl() {
@@ -144,7 +144,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param clientBaseUrl A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+         * @param clientBaseUrl A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
          * 
          * @return builder
          * 
@@ -155,7 +155,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param clientBaseUrl A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+         * @param clientBaseUrl A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
          * 
          * @return builder
          * 
@@ -216,7 +216,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param privateKey The private key that can be copied from the Keys screen in the Arkose portal.
+         * @param privateKey The private key that can be copied from the Keys screen in the Arkose Labs portal.
          * 
          * @return builder
          * 
@@ -227,7 +227,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param privateKey The private key that can be copied from the Keys screen in the Arkose portal.
+         * @param privateKey The private key that can be copied from the Keys screen in the Arkose Labs portal.
          * 
          * @return builder
          * 
@@ -237,7 +237,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param publicKey The public key that&#39;s shown in the Keys screen in the Arkose portal.
+         * @param publicKey The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
          * 
          * @return builder
          * 
@@ -248,7 +248,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param publicKey The public key that&#39;s shown in the Keys screen in the Arkose portal.
+         * @param publicKey The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
          * 
          * @return builder
          * 
@@ -258,7 +258,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param verifyBaseUrl A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+         * @param verifyBaseUrl A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
          * 
          * @return builder
          * 
@@ -269,7 +269,7 @@ public final class ProjectConnectorsArkoseArgs extends com.pulumi.resources.Reso
         }
 
         /**
-         * @param verifyBaseUrl A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+         * @param verifyBaseUrl A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
          * 
          * @return builder
          * 
