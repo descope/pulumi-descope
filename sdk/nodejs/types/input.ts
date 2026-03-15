@@ -2226,6 +2226,14 @@ export interface ProjectAuthenticationSso {
      */
     groupsPriority?: pulumi.Input<boolean>;
     /**
+     * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     */
+    limitMappingToMandatoryAttributes?: pulumi.Input<boolean>;
+    /**
+     * Define the required Descope attributes that must be populated when receiving SSO information.
+     */
+    mandatoryUserAttributes?: pulumi.Input<pulumi.Input<inputs.ProjectAuthenticationSsoMandatoryUserAttribute>[]>;
+    /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
     mergeUsers?: pulumi.Input<boolean>;
@@ -2234,9 +2242,28 @@ export interface ProjectAuthenticationSso {
      */
     redirectUrl?: pulumi.Input<string>;
     /**
+     * When configuring SSO the groups attribute name must be specified.
+     */
+    requireGroupsAttributeName?: pulumi.Input<boolean>;
+    /**
+     * When configuring SSO an SSO domain must be specified.
+     */
+    requireSsoDomains?: pulumi.Input<boolean>;
+    /**
      * Configuration block for the SSO Suite.
      */
     ssoSuiteSettings?: pulumi.Input<inputs.ProjectAuthenticationSsoSsoSuiteSettings>;
+}
+
+export interface ProjectAuthenticationSsoMandatoryUserAttribute {
+    /**
+     * Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+     */
+    custom?: pulumi.Input<boolean>;
+    /**
+     * The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+     */
+    id: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationSsoSsoSuiteSettings {
@@ -2630,7 +2657,7 @@ export interface ProjectConnectorsAmplitude {
 
 export interface ProjectConnectorsArkose {
     /**
-     * A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      */
     clientBaseUrl?: pulumi.Input<string>;
     /**
@@ -2643,15 +2670,15 @@ export interface ProjectConnectorsArkose {
      */
     name: pulumi.Input<string>;
     /**
-     * The private key that can be copied from the Keys screen in the Arkose portal.
+     * The private key that can be copied from the Keys screen in the Arkose Labs portal.
      */
     privateKey: pulumi.Input<string>;
     /**
-     * The public key that's shown in the Keys screen in the Arkose portal.
+     * The public key that's shown in the Keys screen in the Arkose Labs portal.
      */
     publicKey: pulumi.Input<string>;
     /**
-     * A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      */
     verifyBaseUrl?: pulumi.Input<string>;
 }
@@ -4941,6 +4968,10 @@ export interface ProjectConnectorsTwilioVerifyAuthentication {
 
 export interface ProjectConnectorsUnibeam {
     /**
+     * Unibeam API base URL.
+     */
+    baseUrl: pulumi.Input<string>;
+    /**
      * OAuth2 client ID for authentication.
      */
     clientId: pulumi.Input<string>;
@@ -5085,6 +5116,10 @@ export interface ProjectJwtTemplates {
 
 export interface ProjectJwtTemplatesAccessKeyTemplate {
     /**
+     * When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     */
+    addJtiClaim?: pulumi.Input<boolean>;
+    /**
      * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
@@ -5108,11 +5143,19 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
      * Whether to enforce that the JWT issuer matches the project configuration.
      */
     enforceIssuer?: pulumi.Input<boolean>;
+    /**
+     * When enabled, permissions will not be included in the JWT token.
+     */
+    excludePermissionClaim?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
      */
     name: pulumi.Input<string>;
+    /**
+     * Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     */
+    overrideSubjectClaim?: pulumi.Input<boolean>;
     /**
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
@@ -5121,6 +5164,10 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
 
 export interface ProjectJwtTemplatesUserTemplate {
     /**
+     * When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     */
+    addJtiClaim?: pulumi.Input<boolean>;
+    /**
      * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
@@ -5144,11 +5191,19 @@ export interface ProjectJwtTemplatesUserTemplate {
      * Whether to enforce that the JWT issuer matches the project configuration.
      */
     enforceIssuer?: pulumi.Input<boolean>;
+    /**
+     * When enabled, permissions will not be included in the JWT token.
+     */
+    excludePermissionClaim?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
      */
     name: pulumi.Input<string>;
+    /**
+     * Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     */
+    overrideSubjectClaim?: pulumi.Input<boolean>;
     /**
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */

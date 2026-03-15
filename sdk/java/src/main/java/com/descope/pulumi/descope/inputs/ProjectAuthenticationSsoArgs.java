@@ -3,11 +3,13 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs;
 import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -78,6 +80,36 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    @Import(name="limitMappingToMandatoryAttributes")
+    private @Nullable Output<Boolean> limitMappingToMandatoryAttributes;
+
+    /**
+     * @return Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    public Optional<Output<Boolean>> limitMappingToMandatoryAttributes() {
+        return Optional.ofNullable(this.limitMappingToMandatoryAttributes);
+    }
+
+    /**
+     * Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    @Import(name="mandatoryUserAttributes")
+    private @Nullable Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>> mandatoryUserAttributes;
+
+    /**
+     * @return Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    public Optional<Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>>> mandatoryUserAttributes() {
+        return Optional.ofNullable(this.mandatoryUserAttributes);
+    }
+
+    /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      * 
      */
@@ -108,6 +140,36 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    @Import(name="requireGroupsAttributeName")
+    private @Nullable Output<Boolean> requireGroupsAttributeName;
+
+    /**
+     * @return When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    public Optional<Output<Boolean>> requireGroupsAttributeName() {
+        return Optional.ofNullable(this.requireGroupsAttributeName);
+    }
+
+    /**
+     * When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    @Import(name="requireSsoDomains")
+    private @Nullable Output<Boolean> requireSsoDomains;
+
+    /**
+     * @return When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    public Optional<Output<Boolean>> requireSsoDomains() {
+        return Optional.ofNullable(this.requireSsoDomains);
+    }
+
+    /**
      * Configuration block for the SSO Suite.
      * 
      */
@@ -129,8 +191,12 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         this.allowOverrideRoles = $.allowOverrideRoles;
         this.disabled = $.disabled;
         this.groupsPriority = $.groupsPriority;
+        this.limitMappingToMandatoryAttributes = $.limitMappingToMandatoryAttributes;
+        this.mandatoryUserAttributes = $.mandatoryUserAttributes;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
+        this.requireGroupsAttributeName = $.requireGroupsAttributeName;
+        this.requireSsoDomains = $.requireSsoDomains;
         this.ssoSuiteSettings = $.ssoSuiteSettings;
     }
 
@@ -237,6 +303,58 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         }
 
         /**
+         * @param limitMappingToMandatoryAttributes Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder limitMappingToMandatoryAttributes(@Nullable Output<Boolean> limitMappingToMandatoryAttributes) {
+            $.limitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            return this;
+        }
+
+        /**
+         * @param limitMappingToMandatoryAttributes Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder limitMappingToMandatoryAttributes(Boolean limitMappingToMandatoryAttributes) {
+            return limitMappingToMandatoryAttributes(Output.of(limitMappingToMandatoryAttributes));
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(@Nullable Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>> mandatoryUserAttributes) {
+            $.mandatoryUserAttributes = mandatoryUserAttributes;
+            return this;
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(List<ProjectAuthenticationSsoMandatoryUserAttributeArgs> mandatoryUserAttributes) {
+            return mandatoryUserAttributes(Output.of(mandatoryUserAttributes));
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(ProjectAuthenticationSsoMandatoryUserAttributeArgs... mandatoryUserAttributes) {
+            return mandatoryUserAttributes(List.of(mandatoryUserAttributes));
+        }
+
+        /**
          * @param mergeUsers Whether to merge existing user accounts with new ones created through SSO authentication.
          * 
          * @return builder
@@ -276,6 +394,48 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder redirectUrl(String redirectUrl) {
             return redirectUrl(Output.of(redirectUrl));
+        }
+
+        /**
+         * @param requireGroupsAttributeName When configuring SSO the groups attribute name must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireGroupsAttributeName(@Nullable Output<Boolean> requireGroupsAttributeName) {
+            $.requireGroupsAttributeName = requireGroupsAttributeName;
+            return this;
+        }
+
+        /**
+         * @param requireGroupsAttributeName When configuring SSO the groups attribute name must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireGroupsAttributeName(Boolean requireGroupsAttributeName) {
+            return requireGroupsAttributeName(Output.of(requireGroupsAttributeName));
+        }
+
+        /**
+         * @param requireSsoDomains When configuring SSO an SSO domain must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireSsoDomains(@Nullable Output<Boolean> requireSsoDomains) {
+            $.requireSsoDomains = requireSsoDomains;
+            return this;
+        }
+
+        /**
+         * @param requireSsoDomains When configuring SSO an SSO domain must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireSsoDomains(Boolean requireSsoDomains) {
+            return requireSsoDomains(Output.of(requireSsoDomains));
         }
 
         /**
