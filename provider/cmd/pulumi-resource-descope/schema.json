@@ -3624,6 +3624,17 @@
                     "type": "boolean",
                     "description": "Whether to enable groups priority.\n"
                 },
+                "limitMappingToMandatoryAttributes": {
+                    "type": "boolean",
+                    "description": "Mapping to attributes not specified in \u003cspan pulumi-lang-nodejs=\"`mandatoryUserAttributes`\" pulumi-lang-dotnet=\"`MandatoryUserAttributes`\" pulumi-lang-go=\"`mandatoryUserAttributes`\" pulumi-lang-python=\"`mandatory_user_attributes`\" pulumi-lang-yaml=\"`mandatoryUserAttributes`\" pulumi-lang-java=\"`mandatoryUserAttributes`\"\u003e`mandatory_user_attributes`\u003c/span\u003e is not allowed.\n"
+                },
+                "mandatoryUserAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/descope:index/ProjectAuthenticationSsoMandatoryUserAttribute:ProjectAuthenticationSsoMandatoryUserAttribute"
+                    },
+                    "description": "Define the required Descope attributes that must be populated when receiving SSO information.\n"
+                },
                 "mergeUsers": {
                     "type": "boolean",
                     "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
@@ -3631,6 +3642,14 @@
                 "redirectUrl": {
                     "type": "string",
                     "description": "The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.\n"
+                },
+                "requireGroupsAttributeName": {
+                    "type": "boolean",
+                    "description": "When configuring SSO the groups attribute name must be specified.\n"
+                },
+                "requireSsoDomains": {
+                    "type": "boolean",
+                    "description": "When configuring SSO an SSO domain must be specified.\n"
                 },
                 "ssoSuiteSettings": {
                     "$ref": "#/types/descope:index/ProjectAuthenticationSsoSsoSuiteSettings:ProjectAuthenticationSsoSsoSuiteSettings",
@@ -3645,9 +3664,37 @@
                         "allowOverrideRoles",
                         "disabled",
                         "groupsPriority",
+                        "limitMappingToMandatoryAttributes",
+                        "mandatoryUserAttributes",
                         "mergeUsers",
                         "redirectUrl",
+                        "requireGroupsAttributeName",
+                        "requireSsoDomains",
                         "ssoSuiteSettings"
+                    ]
+                }
+            }
+        },
+        "descope:index/ProjectAuthenticationSsoMandatoryUserAttribute:ProjectAuthenticationSsoMandatoryUserAttribute": {
+            "properties": {
+                "custom": {
+                    "type": "boolean",
+                    "description": "Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The identifier for the attribute. This value is called `Machine Name` in the Descope console.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "custom",
+                        "id"
                     ]
                 }
             }
@@ -4431,7 +4478,7 @@
             "properties": {
                 "clientBaseUrl": {
                     "type": "string",
-                    "description": "A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.\n"
+                    "description": "A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.\n"
                 },
                 "description": {
                     "type": "string",
@@ -4446,16 +4493,16 @@
                 },
                 "privateKey": {
                     "type": "string",
-                    "description": "The private key that can be copied from the Keys screen in the Arkose portal.\n",
+                    "description": "The private key that can be copied from the Keys screen in the Arkose Labs portal.\n",
                     "secret": true
                 },
                 "publicKey": {
                     "type": "string",
-                    "description": "The public key that's shown in the Keys screen in the Arkose portal.\n"
+                    "description": "The public key that's shown in the Keys screen in the Arkose Labs portal.\n"
                 },
                 "verifyBaseUrl": {
                     "type": "string",
-                    "description": "A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.\n"
+                    "description": "A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.\n"
                 }
             },
             "type": "object",
@@ -8586,6 +8633,10 @@
         },
         "descope:index/ProjectConnectorsUnibeam:ProjectConnectorsUnibeam": {
             "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "Unibeam API base URL.\n"
+                },
                 "clientId": {
                     "type": "string",
                     "description": "OAuth2 client ID for authentication.\n"
@@ -8622,6 +8673,7 @@
             },
             "type": "object",
             "required": [
+                "baseUrl",
                 "clientId",
                 "clientSecret",
                 "customerId",
@@ -8631,6 +8683,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "baseUrl",
                         "clientId",
                         "clientSecret",
                         "customerId",
@@ -8851,6 +8904,10 @@
         },
         "descope:index/ProjectJwtTemplatesAccessKeyTemplate:ProjectJwtTemplatesAccessKeyTemplate": {
             "properties": {
+                "addJtiClaim": {
+                    "type": "boolean",
+                    "description": "When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.\n"
+                },
                 "authSchema": {
                     "type": "string",
                     "description": "The authorization claims format - \u003cspan pulumi-lang-nodejs=\"`default`\" pulumi-lang-dotnet=\"`Default`\" pulumi-lang-go=\"`default`\" pulumi-lang-python=\"`default`\" pulumi-lang-yaml=\"`default`\" pulumi-lang-java=\"`default`\"\u003e`default`\u003c/span\u003e, `tenantOnly` or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
@@ -8875,12 +8932,20 @@
                     "type": "boolean",
                     "description": "Whether to enforce that the JWT issuer matches the project configuration.\n"
                 },
+                "excludePermissionClaim": {
+                    "type": "boolean",
+                    "description": "When enabled, permissions will not be included in the JWT token.\n"
+                },
                 "id": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string",
                     "description": "Name of the JWT Template.\n"
+                },
+                "overrideSubjectClaim": {
+                    "type": "boolean",
+                    "description": "Switching on will allow you to add a custom subject claim to the JWT. A default new \u003cspan pulumi-lang-nodejs=\"`dsub`\" pulumi-lang-dotnet=\"`Dsub`\" pulumi-lang-go=\"`dsub`\" pulumi-lang-python=\"`dsub`\" pulumi-lang-yaml=\"`dsub`\" pulumi-lang-java=\"`dsub`\"\u003e`dsub`\u003c/span\u003e claim will be added with the user ID.\n"
                 },
                 "template": {
                     "type": "string",
@@ -8895,14 +8960,17 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "addJtiClaim",
                         "authSchema",
                         "autoTenantClaim",
                         "conformanceIssuer",
                         "description",
                         "emptyClaimPolicy",
                         "enforceIssuer",
+                        "excludePermissionClaim",
                         "id",
                         "name",
+                        "overrideSubjectClaim",
                         "template"
                     ]
                 }
@@ -8910,6 +8978,10 @@
         },
         "descope:index/ProjectJwtTemplatesUserTemplate:ProjectJwtTemplatesUserTemplate": {
             "properties": {
+                "addJtiClaim": {
+                    "type": "boolean",
+                    "description": "When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.\n"
+                },
                 "authSchema": {
                     "type": "string",
                     "description": "The authorization claims format - \u003cspan pulumi-lang-nodejs=\"`default`\" pulumi-lang-dotnet=\"`Default`\" pulumi-lang-go=\"`default`\" pulumi-lang-python=\"`default`\" pulumi-lang-yaml=\"`default`\" pulumi-lang-java=\"`default`\"\u003e`default`\u003c/span\u003e, `tenantOnly` or \u003cspan pulumi-lang-nodejs=\"`none`\" pulumi-lang-dotnet=\"`None`\" pulumi-lang-go=\"`none`\" pulumi-lang-python=\"`none`\" pulumi-lang-yaml=\"`none`\" pulumi-lang-java=\"`none`\"\u003e`none`\u003c/span\u003e. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).\n"
@@ -8934,12 +9006,20 @@
                     "type": "boolean",
                     "description": "Whether to enforce that the JWT issuer matches the project configuration.\n"
                 },
+                "excludePermissionClaim": {
+                    "type": "boolean",
+                    "description": "When enabled, permissions will not be included in the JWT token.\n"
+                },
                 "id": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string",
                     "description": "Name of the JWT Template.\n"
+                },
+                "overrideSubjectClaim": {
+                    "type": "boolean",
+                    "description": "Switching on will allow you to add a custom subject claim to the JWT. A default new \u003cspan pulumi-lang-nodejs=\"`dsub`\" pulumi-lang-dotnet=\"`Dsub`\" pulumi-lang-go=\"`dsub`\" pulumi-lang-python=\"`dsub`\" pulumi-lang-yaml=\"`dsub`\" pulumi-lang-java=\"`dsub`\"\u003e`dsub`\u003c/span\u003e claim will be added with the user ID.\n"
                 },
                 "template": {
                     "type": "string",
@@ -8954,14 +9034,17 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "addJtiClaim",
                         "authSchema",
                         "autoTenantClaim",
                         "conformanceIssuer",
                         "description",
                         "emptyClaimPolicy",
                         "enforceIssuer",
+                        "excludePermissionClaim",
                         "id",
                         "name",
+                        "overrideSubjectClaim",
                         "template"
                     ]
                 }
