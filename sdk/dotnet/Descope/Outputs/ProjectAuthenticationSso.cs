@@ -31,6 +31,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? GroupsPriority;
         /// <summary>
+        /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
+        /// </summary>
+        public readonly bool? LimitMappingToMandatoryAttributes;
+        /// <summary>
+        /// Define the required Descope attributes that must be populated when receiving SSO information.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectAuthenticationSsoMandatoryUserAttribute> MandatoryUserAttributes;
+        /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
         public readonly bool? MergeUsers;
@@ -38,6 +46,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         /// </summary>
         public readonly string? RedirectUrl;
+        /// <summary>
+        /// When configuring SSO the groups attribute name must be specified.
+        /// </summary>
+        public readonly bool? RequireGroupsAttributeName;
+        /// <summary>
+        /// When configuring SSO an SSO domain must be specified.
+        /// </summary>
+        public readonly bool? RequireSsoDomains;
         /// <summary>
         /// Configuration block for the SSO Suite.
         /// </summary>
@@ -53,9 +69,17 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? groupsPriority,
 
+            bool? limitMappingToMandatoryAttributes,
+
+            ImmutableArray<Outputs.ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes,
+
             bool? mergeUsers,
 
             string? redirectUrl,
+
+            bool? requireGroupsAttributeName,
+
+            bool? requireSsoDomains,
 
             Outputs.ProjectAuthenticationSsoSsoSuiteSettings? ssoSuiteSettings)
         {
@@ -63,8 +87,12 @@ namespace Descope.Pulumi.Descope.Outputs
             AllowOverrideRoles = allowOverrideRoles;
             Disabled = disabled;
             GroupsPriority = groupsPriority;
+            LimitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            MandatoryUserAttributes = mandatoryUserAttributes;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;
+            RequireGroupsAttributeName = requireGroupsAttributeName;
+            RequireSsoDomains = requireSsoDomains;
             SsoSuiteSettings = ssoSuiteSettings;
         }
     }

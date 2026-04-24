@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectJwtTemplatesAccessKeyTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        /// </summary>
+        [Input("addJtiClaim")]
+        public Input<bool>? AddJtiClaim { get; set; }
+
+        /// <summary>
         /// The authorization claims format - `Default`, `tenantOnly` or `None`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         /// </summary>
         [Input("authSchema")]
@@ -49,6 +55,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("enforceIssuer")]
         public Input<bool>? EnforceIssuer { get; set; }
 
+        /// <summary>
+        /// When enabled, permissions will not be included in the JWT token.
+        /// </summary>
+        [Input("excludePermissionClaim")]
+        public Input<bool>? ExcludePermissionClaim { get; set; }
+
         [Input("id")]
         public Input<string>? Id { get; set; }
 
@@ -57,6 +69,12 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        /// <summary>
+        /// Switching on will allow you to add a custom subject claim to the JWT. A default new `Dsub` claim will be added with the user ID.
+        /// </summary>
+        [Input("overrideSubjectClaim")]
+        public Input<bool>? OverrideSubjectClaim { get; set; }
 
         /// <summary>
         /// The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `String` value.

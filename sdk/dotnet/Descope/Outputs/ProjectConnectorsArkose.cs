@@ -15,7 +15,7 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsArkose
     {
         /// <summary>
-        /// A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        /// A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         /// </summary>
         public readonly string? ClientBaseUrl;
         /// <summary>
@@ -28,15 +28,15 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The private key that can be copied from the Keys screen in the Arkose portal.
+        /// The private key that can be copied from the Keys screen in the Arkose Labs portal.
         /// </summary>
         public readonly string PrivateKey;
         /// <summary>
-        /// The public key that's shown in the Keys screen in the Arkose portal.
+        /// The public key that's shown in the Keys screen in the Arkose Labs portal.
         /// </summary>
         public readonly string PublicKey;
         /// <summary>
-        /// A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        /// A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         /// </summary>
         public readonly string? VerifyBaseUrl;
 
