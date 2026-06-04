@@ -431,24 +431,19 @@ __all__ = [
     'ProjectWidgetsArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class DescoperRbacArgsDict(TypedDict):
-        is_company_admin: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tag_roles` or `project_roles`.
-        """
-        project_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['DescoperRbacProjectRoleArgsDict']]]]
-        """
-        A list of roles that are granted to the descoper for specific projects by their project ID.
-        """
-        tag_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['DescoperRbacTagRoleArgsDict']]]]
-        """
-        A list of roles that are granted to the descoper for all projects that have a specific tag.
-        """
-elif False:
-    DescoperRbacArgsDict: TypeAlias = Mapping[str, Any]
+class DescoperRbacArgsDict(TypedDict):
+    is_company_admin: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tag_roles` or `project_roles`.
+    """
+    project_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['DescoperRbacProjectRoleArgsDict']]]]
+    """
+    A list of roles that are granted to the descoper for specific projects by their project ID.
+    """
+    tag_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['DescoperRbacTagRoleArgsDict']]]]
+    """
+    A list of roles that are granted to the descoper for all projects that have a specific tag.
+    """
 
 @pulumi.input_type
 class DescoperRbacArgs:
@@ -505,18 +500,15 @@ class DescoperRbacArgs:
         pulumi.set(self, "tag_roles", value)
 
 
-if not MYPY:
-    class DescoperRbacProjectRoleArgsDict(TypedDict):
-        project_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The project IDs this role grant applies to.
-        """
-        role: pulumi.Input[_builtins.str]
-        """
-        The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
-        """
-elif False:
-    DescoperRbacProjectRoleArgsDict: TypeAlias = Mapping[str, Any]
+class DescoperRbacProjectRoleArgsDict(TypedDict):
+    project_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The project IDs this role grant applies to.
+    """
+    role: pulumi.Input[_builtins.str]
+    """
+    The roles the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+    """
 
 @pulumi.input_type
 class DescoperRbacProjectRoleArgs:
@@ -555,18 +547,15 @@ class DescoperRbacProjectRoleArgs:
         pulumi.set(self, "role", value)
 
 
-if not MYPY:
-    class DescoperRbacTagRoleArgsDict(TypedDict):
-        role: pulumi.Input[_builtins.str]
-        """
-        The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
-        """
-        tags: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The project tags this role assignment applies to.
-        """
-elif False:
-    DescoperRbacTagRoleArgsDict: TypeAlias = Mapping[str, Any]
+class DescoperRbacTagRoleArgsDict(TypedDict):
+    role: pulumi.Input[_builtins.str]
+    """
+    The role the descoper will be granted in the applicable projects. Must be one of: `admin`, `developer`, `support`, `auditor`.
+    """
+    tags: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The project tags this role assignment applies to.
+    """
 
 @pulumi.input_type
 class DescoperRbacTagRoleArgs:
@@ -605,22 +594,19 @@ class DescoperRbacTagRoleArgs:
         pulumi.set(self, "tags", value)
 
 
-if not MYPY:
-    class ManagementKeyRebacArgsDict(TypedDict):
-        company_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tag_roles` and `project_roles`.
-        """
-        project_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ManagementKeyRebacProjectRoleArgsDict']]]]
-        """
-        A list of project-level role names that are granted to the management key for specific projects by their project ID.
-        """
-        tag_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ManagementKeyRebacTagRoleArgsDict']]]]
-        """
-        A list of project-level role names that are granted to the management key for all projects that have a specific tag.
-        """
-elif False:
-    ManagementKeyRebacArgsDict: TypeAlias = Mapping[str, Any]
+class ManagementKeyRebacArgsDict(TypedDict):
+    company_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tag_roles` and `project_roles`.
+    """
+    project_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ManagementKeyRebacProjectRoleArgsDict']]]]
+    """
+    A list of project-level role names that are granted to the management key for specific projects by their project ID.
+    """
+    tag_roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ManagementKeyRebacTagRoleArgsDict']]]]
+    """
+    A list of project-level role names that are granted to the management key for all projects that have a specific tag.
+    """
 
 @pulumi.input_type
 class ManagementKeyRebacArgs:
@@ -677,18 +663,15 @@ class ManagementKeyRebacArgs:
         pulumi.set(self, "tag_roles", value)
 
 
-if not MYPY:
-    class ManagementKeyRebacProjectRoleArgsDict(TypedDict):
-        project_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The project IDs this role grant applies to.
-        """
-        roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The roles the management key will be granted in the applicable projects.
-        """
-elif False:
-    ManagementKeyRebacProjectRoleArgsDict: TypeAlias = Mapping[str, Any]
+class ManagementKeyRebacProjectRoleArgsDict(TypedDict):
+    project_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The project IDs this role grant applies to.
+    """
+    roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The roles the management key will be granted in the applicable projects.
+    """
 
 @pulumi.input_type
 class ManagementKeyRebacProjectRoleArgs:
@@ -727,18 +710,15 @@ class ManagementKeyRebacProjectRoleArgs:
         pulumi.set(self, "roles", value)
 
 
-if not MYPY:
-    class ManagementKeyRebacTagRoleArgsDict(TypedDict):
-        roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The roles the management key will be granted in the applicable projects.
-        """
-        tags: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The project tags this role grant applies to.
-        """
-elif False:
-    ManagementKeyRebacTagRoleArgsDict: TypeAlias = Mapping[str, Any]
+class ManagementKeyRebacTagRoleArgsDict(TypedDict):
+    roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The roles the management key will be granted in the applicable projects.
+    """
+    tags: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The project tags this role grant applies to.
+    """
 
 @pulumi.input_type
 class ManagementKeyRebacTagRoleArgs:
@@ -777,22 +757,19 @@ class ManagementKeyRebacTagRoleArgs:
         pulumi.set(self, "tags", value)
 
 
-if not MYPY:
-    class ProjectAdminPortalArgsDict(TypedDict):
-        enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the Admin Portal is enabled
-        """
-        style_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The style id to use
-        """
-        widgets: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAdminPortalWidgetArgsDict']]]]
-        """
-        The widgets to show in the Admin Portal
-        """
-elif False:
-    ProjectAdminPortalArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAdminPortalArgsDict(TypedDict):
+    enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the Admin Portal is enabled
+    """
+    style_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The style id to use
+    """
+    widgets: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAdminPortalWidgetArgsDict']]]]
+    """
+    The widgets to show in the Admin Portal
+    """
 
 @pulumi.input_type
 class ProjectAdminPortalArgs:
@@ -849,18 +826,15 @@ class ProjectAdminPortalArgs:
         pulumi.set(self, "widgets", value)
 
 
-if not MYPY:
-    class ProjectAdminPortalWidgetArgsDict(TypedDict):
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of the Widget
-        """
-        widget_id: pulumi.Input[_builtins.str]
-        """
-        The unique identifier of the Widget
-        """
-elif False:
-    ProjectAdminPortalWidgetArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAdminPortalWidgetArgsDict(TypedDict):
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of the Widget
+    """
+    widget_id: pulumi.Input[_builtins.str]
+    """
+    The unique identifier of the Widget
+    """
 
 @pulumi.input_type
 class ProjectAdminPortalWidgetArgs:
@@ -899,18 +873,15 @@ class ProjectAdminPortalWidgetArgs:
         pulumi.set(self, "widget_id", value)
 
 
-if not MYPY:
-    class ProjectApplicationsArgsDict(TypedDict):
-        oidc_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgsDict']]]]
-        """
-        Applications using OpenID Connect (OIDC) for authentication.
-        """
-        saml_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgsDict']]]]
-        """
-        Applications using SAML for authentication.
-        """
-elif False:
-    ProjectApplicationsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsArgsDict(TypedDict):
+    oidc_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsOidcApplicationArgsDict']]]]
+    """
+    Applications using OpenID Connect (OIDC) for authentication.
+    """
+    saml_applications: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationArgsDict']]]]
+    """
+    Applications using SAML for authentication.
+    """
 
 @pulumi.input_type
 class ProjectApplicationsArgs:
@@ -951,42 +922,39 @@ class ProjectApplicationsArgs:
         pulumi.set(self, "saml_applications", value)
 
 
-if not MYPY:
-    class ProjectApplicationsOidcApplicationArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A name for the OIDC application.
-        """
-        claims: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        A list of supported claims. e.g. `sub`, `email`, `exp`.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description for the OIDC application.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the application should be enabled or disabled.
-        """
-        force_authentication: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional identifier for the OIDC application.
-        """
-        login_page_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A logo for the OIDC application. Should be a hosted image URL.
-        """
-elif False:
-    ProjectApplicationsOidcApplicationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsOidcApplicationArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A name for the OIDC application.
+    """
+    claims: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    A list of supported claims. e.g. `sub`, `email`, `exp`.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description for the OIDC application.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the application should be enabled or disabled.
+    """
+    force_authentication: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional identifier for the OIDC application.
+    """
+    login_page_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A logo for the OIDC application. Should be a hosted image URL.
+    """
 
 @pulumi.input_type
 class ProjectApplicationsOidcApplicationArgs:
@@ -1122,66 +1090,63 @@ class ProjectApplicationsOidcApplicationArgs:
         pulumi.set(self, "logo", value)
 
 
-if not MYPY:
-    class ProjectApplicationsSamlApplicationArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A name for the SAML application.
-        """
-        acs_allowed_callback_urls: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
-        """
-        attribute_mappings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgsDict']]]]
-        """
-        The `AttributeMapping` object. Read the description below.
-        """
-        default_relay_state: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description for the SAML application.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the application should be enabled or disabled.
-        """
-        dynamic_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict']]
-        """
-        The `DynamicConfiguration` object. Read the description below.
-        """
-        force_authentication: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional identifier for the SAML application.
-        """
-        login_page_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A logo for the SAML application. Should be a hosted image URL.
-        """
-        manual_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgsDict']]
-        """
-        The `ManualConfiguration` object. Read the description below.
-        """
-        subject_name_id_format: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
-        """
-        subject_name_id_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
-        """
-elif False:
-    ProjectApplicationsSamlApplicationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsSamlApplicationArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A name for the SAML application.
+    """
+    acs_allowed_callback_urls: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
+    """
+    attribute_mappings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectApplicationsSamlApplicationAttributeMappingArgsDict']]]]
+    """
+    The `AttributeMapping` object. Read the description below.
+    """
+    default_relay_state: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description for the SAML application.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the application should be enabled or disabled.
+    """
+    dynamic_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict']]
+    """
+    The `DynamicConfiguration` object. Read the description below.
+    """
+    force_authentication: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional identifier for the SAML application.
+    """
+    login_page_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A logo for the SAML application. Should be a hosted image URL.
+    """
+    manual_configuration: NotRequired[pulumi.Input['ProjectApplicationsSamlApplicationManualConfigurationArgsDict']]
+    """
+    The `ManualConfiguration` object. Read the description below.
+    """
+    subject_name_id_format: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+    """
+    subject_name_id_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The subject name id type. Choose one of "", "email", "phone". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
+    """
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationArgs:
@@ -1413,18 +1378,15 @@ class ProjectApplicationsSamlApplicationArgs:
         pulumi.set(self, "subject_name_id_type", value)
 
 
-if not MYPY:
-    class ProjectApplicationsSamlApplicationAttributeMappingArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the attribute.
-        """
-        value: pulumi.Input[_builtins.str]
-        """
-        The value of the attribute.
-        """
-elif False:
-    ProjectApplicationsSamlApplicationAttributeMappingArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsSamlApplicationAttributeMappingArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the attribute.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    The value of the attribute.
+    """
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationAttributeMappingArgs:
@@ -1463,14 +1425,11 @@ class ProjectApplicationsSamlApplicationAttributeMappingArgs:
         pulumi.set(self, "value", value)
 
 
-if not MYPY:
-    class ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict(TypedDict):
-        metadata_url: pulumi.Input[_builtins.str]
-        """
-        The metadata URL when retrieving the connection details dynamically.
-        """
-elif False:
-    ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsSamlApplicationDynamicConfigurationArgsDict(TypedDict):
+    metadata_url: pulumi.Input[_builtins.str]
+    """
+    The metadata URL when retrieving the connection details dynamically.
+    """
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationDynamicConfigurationArgs:
@@ -1494,22 +1453,19 @@ class ProjectApplicationsSamlApplicationDynamicConfigurationArgs:
         pulumi.set(self, "metadata_url", value)
 
 
-if not MYPY:
-    class ProjectApplicationsSamlApplicationManualConfigurationArgsDict(TypedDict):
-        acs_url: pulumi.Input[_builtins.str]
-        """
-        Enter the `ACS URL` from the SP.
-        """
-        entity_id: pulumi.Input[_builtins.str]
-        """
-        Enter the `Entity Id` from the SP.
-        """
-        certificate: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Enter the `Certificate` from the SP.
-        """
-elif False:
-    ProjectApplicationsSamlApplicationManualConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectApplicationsSamlApplicationManualConfigurationArgsDict(TypedDict):
+    acs_url: pulumi.Input[_builtins.str]
+    """
+    Enter the `ACS URL` from the SP.
+    """
+    entity_id: pulumi.Input[_builtins.str]
+    """
+    Enter the `Entity Id` from the SP.
+    """
+    certificate: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Enter the `Certificate` from the SP.
+    """
 
 @pulumi.input_type
 class ProjectApplicationsSamlApplicationManualConfigurationArgs:
@@ -1564,22 +1520,19 @@ class ProjectApplicationsSamlApplicationManualConfigurationArgs:
         pulumi.set(self, "certificate", value)
 
 
-if not MYPY:
-    class ProjectAttributesArgsDict(TypedDict):
-        access_keys: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesAccessKeyArgsDict']]]]
-        """
-        A list of custom attributes for storing additional details about each access key in the project.
-        """
-        tenants: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgsDict']]]]
-        """
-        A list of custom attributes for storing additional details about each tenant in the project.
-        """
-        users: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgsDict']]]]
-        """
-        A list of custom attributes for storing additional details about each user in the project.
-        """
-elif False:
-    ProjectAttributesArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesArgsDict(TypedDict):
+    access_keys: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesAccessKeyArgsDict']]]]
+    """
+    A list of custom attributes for storing additional details about each access key in the project.
+    """
+    tenants: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesTenantArgsDict']]]]
+    """
+    A list of custom attributes for storing additional details about each tenant in the project.
+    """
+    users: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAttributesUserArgsDict']]]]
+    """
+    A list of custom attributes for storing additional details about each user in the project.
+    """
 
 @pulumi.input_type
 class ProjectAttributesArgs:
@@ -1636,30 +1589,27 @@ class ProjectAttributesArgs:
         pulumi.set(self, "users", value)
 
 
-if not MYPY:
-    class ProjectAttributesAccessKeyArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the attribute. This value is called `Display Name` in the Descope console.
-        """
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
-        """
-        select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        When the attribute type is "multiselect". A list of options to choose from.
-        """
-        widget_authorization: NotRequired[pulumi.Input['ProjectAttributesAccessKeyWidgetAuthorizationArgsDict']]
-        """
-        Determines the permissions access key are required to have to access this attribute in the access key management widget.
-        """
-elif False:
-    ProjectAttributesAccessKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesAccessKeyArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the attribute. This value is called `Display Name` in the Descope console.
+    """
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+    """
+    select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    When the attribute type is "multiselect". A list of options to choose from.
+    """
+    widget_authorization: NotRequired[pulumi.Input['ProjectAttributesAccessKeyWidgetAuthorizationArgsDict']]
+    """
+    Determines the permissions access key are required to have to access this attribute in the access key management widget.
+    """
 
 @pulumi.input_type
 class ProjectAttributesAccessKeyArgs:
@@ -1746,18 +1696,15 @@ class ProjectAttributesAccessKeyArgs:
         pulumi.set(self, "widget_authorization", value)
 
 
-if not MYPY:
-    class ProjectAttributesAccessKeyWidgetAuthorizationArgsDict(TypedDict):
-        edit_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The permissions users are required to have to edit this attribute in the access key management widget.
-        """
-        view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The permissions users are required to have to view this attribute in the access key management widget.
-        """
-elif False:
-    ProjectAttributesAccessKeyWidgetAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesAccessKeyWidgetAuthorizationArgsDict(TypedDict):
+    edit_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The permissions users are required to have to edit this attribute in the access key management widget.
+    """
+    view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The permissions users are required to have to view this attribute in the access key management widget.
+    """
 
 @pulumi.input_type
 class ProjectAttributesAccessKeyWidgetAuthorizationArgs:
@@ -1798,30 +1745,27 @@ class ProjectAttributesAccessKeyWidgetAuthorizationArgs:
         pulumi.set(self, "view_permissions", value)
 
 
-if not MYPY:
-    class ProjectAttributesTenantArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the attribute. This value is called `Display Name` in the Descope console.
-        """
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
-        """
-        authorization: NotRequired[pulumi.Input['ProjectAttributesTenantAuthorizationArgsDict']]
-        """
-        Determines the required permissions for this tenant.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
-        """
-        select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        When the attribute type is "multiselect". A list of options to choose from.
-        """
-elif False:
-    ProjectAttributesTenantArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesTenantArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the attribute. This value is called `Display Name` in the Descope console.
+    """
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+    """
+    authorization: NotRequired[pulumi.Input['ProjectAttributesTenantAuthorizationArgsDict']]
+    """
+    Determines the required permissions for this tenant.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+    """
+    select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    When the attribute type is "multiselect". A list of options to choose from.
+    """
 
 @pulumi.input_type
 class ProjectAttributesTenantArgs:
@@ -1908,14 +1852,11 @@ class ProjectAttributesTenantArgs:
         pulumi.set(self, "select_options", value)
 
 
-if not MYPY:
-    class ProjectAttributesTenantAuthorizationArgsDict(TypedDict):
-        view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Determines the required permissions for this tenant.
-        """
-elif False:
-    ProjectAttributesTenantAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesTenantAuthorizationArgsDict(TypedDict):
+    view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Determines the required permissions for this tenant.
+    """
 
 @pulumi.input_type
 class ProjectAttributesTenantAuthorizationArgs:
@@ -1940,30 +1881,27 @@ class ProjectAttributesTenantAuthorizationArgs:
         pulumi.set(self, "view_permissions", value)
 
 
-if not MYPY:
-    class ProjectAttributesUserArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the attribute. This value is called `Display Name` in the Descope console.
-        """
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
-        """
-        select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        When the attribute type is "multiselect". A list of options to choose from.
-        """
-        widget_authorization: NotRequired[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgsDict']]
-        """
-        Determines the permissions users are required to have to access this attribute in the user management widget.
-        """
-elif False:
-    ProjectAttributesUserArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesUserArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the attribute. This value is called `Display Name` in the Descope console.
+    """
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date".
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional identifier for the attribute. This value is called `Machine Name` in the Descope console. If a value is not provided then an appropriate one will be created from the value of `name`.
+    """
+    select_options: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    When the attribute type is "multiselect". A list of options to choose from.
+    """
+    widget_authorization: NotRequired[pulumi.Input['ProjectAttributesUserWidgetAuthorizationArgsDict']]
+    """
+    Determines the permissions users are required to have to access this attribute in the user management widget.
+    """
 
 @pulumi.input_type
 class ProjectAttributesUserArgs:
@@ -2050,18 +1988,15 @@ class ProjectAttributesUserArgs:
         pulumi.set(self, "widget_authorization", value)
 
 
-if not MYPY:
-    class ProjectAttributesUserWidgetAuthorizationArgsDict(TypedDict):
-        edit_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The permissions users are required to have to edit this attribute in the user management widget.
-        """
-        view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The permissions users are required to have to view this attribute in the user management widget.
-        """
-elif False:
-    ProjectAttributesUserWidgetAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAttributesUserWidgetAuthorizationArgsDict(TypedDict):
+    edit_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The permissions users are required to have to edit this attribute in the user management widget.
+    """
+    view_permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The permissions users are required to have to view this attribute in the user management widget.
+    """
 
 @pulumi.input_type
 class ProjectAttributesUserWidgetAuthorizationArgs:
@@ -2102,46 +2037,43 @@ class ProjectAttributesUserWidgetAuthorizationArgs:
         pulumi.set(self, "view_permissions", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationArgsDict(TypedDict):
-        embedded_link: NotRequired[pulumi.Input['ProjectAuthenticationEmbeddedLinkArgsDict']]
-        """
-        Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
-        """
-        enchanted_link: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkArgsDict']]
-        """
-        An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
-        """
-        magic_link: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkArgsDict']]
-        """
-        An authentication method where a user receives a unique link via email to log in.
-        """
-        oauth: NotRequired[pulumi.Input['ProjectAuthenticationOauthArgsDict']]
-        """
-        Authentication using Open Authorization, which allows users to authenticate with various external services.
-        """
-        otp: NotRequired[pulumi.Input['ProjectAuthenticationOtpArgsDict']]
-        """
-        A dynamically generated set of numbers, granting the user one-time access.
-        """
-        passkeys: NotRequired[pulumi.Input['ProjectAuthenticationPasskeysArgsDict']]
-        """
-        Device-based passwordless authentication, using fingerprint, face scan, and more.
-        """
-        password: NotRequired[pulumi.Input['ProjectAuthenticationPasswordArgsDict']]
-        """
-        The classic username and password combination used for authentication.
-        """
-        sso: NotRequired[pulumi.Input['ProjectAuthenticationSsoArgsDict']]
-        """
-        Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
-        """
-        totp: NotRequired[pulumi.Input['ProjectAuthenticationTotpArgsDict']]
-        """
-        A one-time code generated for the user using a shared secret and time.
-        """
-elif False:
-    ProjectAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationArgsDict(TypedDict):
+    embedded_link: NotRequired[pulumi.Input['ProjectAuthenticationEmbeddedLinkArgsDict']]
+    """
+    Make the authentication experience smoother for the user by generating their initial token in a way that does not require the end user to initiate the process, requiring only verification.
+    """
+    enchanted_link: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkArgsDict']]
+    """
+    An enhanced and more secure version of Magic Link, enabling users to start the authentication process on one device and execute the verification on another.
+    """
+    magic_link: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkArgsDict']]
+    """
+    An authentication method where a user receives a unique link via email to log in.
+    """
+    oauth: NotRequired[pulumi.Input['ProjectAuthenticationOauthArgsDict']]
+    """
+    Authentication using Open Authorization, which allows users to authenticate with various external services.
+    """
+    otp: NotRequired[pulumi.Input['ProjectAuthenticationOtpArgsDict']]
+    """
+    A dynamically generated set of numbers, granting the user one-time access.
+    """
+    passkeys: NotRequired[pulumi.Input['ProjectAuthenticationPasskeysArgsDict']]
+    """
+    Device-based passwordless authentication, using fingerprint, face scan, and more.
+    """
+    password: NotRequired[pulumi.Input['ProjectAuthenticationPasswordArgsDict']]
+    """
+    The classic username and password combination used for authentication.
+    """
+    sso: NotRequired[pulumi.Input['ProjectAuthenticationSsoArgsDict']]
+    """
+    Single Sign-On (SSO) authentication method that enables users to access multiple applications with a single set of credentials.
+    """
+    totp: NotRequired[pulumi.Input['ProjectAuthenticationTotpArgsDict']]
+    """
+    A one-time code generated for the user using a shared secret and time.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationArgs:
@@ -2294,18 +2226,15 @@ class ProjectAuthenticationArgs:
         pulumi.set(self, "totp", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationEmbeddedLinkArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        expiration_time: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        How long the embedded link remains valid before it expires.
-        """
-elif False:
-    ProjectAuthenticationEmbeddedLinkArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationEmbeddedLinkArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    expiration_time: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    How long the embedded link remains valid before it expires.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationEmbeddedLinkArgs:
@@ -2346,26 +2275,23 @@ class ProjectAuthenticationEmbeddedLinkArgs:
         pulumi.set(self, "expiration_time", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationEnchantedLinkArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        email_service: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceArgsDict']]
-        """
-        Settings related to sending emails as part of the enchanted link authentication.
-        """
-        expiration_time: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        How long the enchanted link remains valid before it expires.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL to redirect users to after they log in using the enchanted link.
-        """
-elif False:
-    ProjectAuthenticationEnchantedLinkArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationEnchantedLinkArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    email_service: NotRequired[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceArgsDict']]
+    """
+    Settings related to sending emails as part of the enchanted link authentication.
+    """
+    expiration_time: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    How long the enchanted link remains valid before it expires.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL to redirect users to after they log in using the enchanted link.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkArgs:
@@ -2438,18 +2364,15 @@ class ProjectAuthenticationEnchantedLinkArgs:
         pulumi.set(self, "redirect_url", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationEnchantedLinkEmailServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the email connector to use for sending emails.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict']]]]
-        """
-        A list of email templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationEnchantedLinkEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationEnchantedLinkEmailServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the email connector to use for sending emails.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict']]]]
+    """
+    A list of email templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkEmailServiceArgs:
@@ -2489,35 +2412,32 @@ class ProjectAuthenticationEnchantedLinkEmailServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this email template.
-        """
-        subject: pulumi.Input[_builtins.str]
-        """
-        Subject line of the email message.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this email template is currently active and in use.
-        """
-        html_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HTML content of the email message body, required if `use_plain_text_body` isn't set.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
-        """
-        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use the plain text body instead of HTML for the email.
-        """
-elif False:
-    ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this email template.
+    """
+    subject: pulumi.Input[_builtins.str]
+    """
+    Subject line of the email message.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this email template is currently active and in use.
+    """
+    html_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HTML content of the email message body, required if `use_plain_text_body` isn't set.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+    """
+    use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use the plain text body instead of HTML for the email.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs:
@@ -2632,30 +2552,27 @@ class ProjectAuthenticationEnchantedLinkEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationMagicLinkArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        email_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceArgsDict']]
-        """
-        Settings related to sending emails as part of the magic link authentication.
-        """
-        expiration_time: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        How long the magic link remains valid before it expires.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL to redirect users to after they log in using the magic link.
-        """
-        text_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgsDict']]
-        """
-        Settings related to sending SMS messages as part of the magic link authentication.
-        """
-elif False:
-    ProjectAuthenticationMagicLinkArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationMagicLinkArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    email_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceArgsDict']]
+    """
+    Settings related to sending emails as part of the magic link authentication.
+    """
+    expiration_time: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    How long the magic link remains valid before it expires.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL to redirect users to after they log in using the magic link.
+    """
+    text_service: NotRequired[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceArgsDict']]
+    """
+    Settings related to sending SMS messages as part of the magic link authentication.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkArgs:
@@ -2744,18 +2661,15 @@ class ProjectAuthenticationMagicLinkArgs:
         pulumi.set(self, "text_service", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationMagicLinkEmailServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the email connector to use for sending emails.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict']]]]
-        """
-        A list of email templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationMagicLinkEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationMagicLinkEmailServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the email connector to use for sending emails.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict']]]]
+    """
+    A list of email templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkEmailServiceArgs:
@@ -2795,35 +2709,32 @@ class ProjectAuthenticationMagicLinkEmailServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this email template.
-        """
-        subject: pulumi.Input[_builtins.str]
-        """
-        Subject line of the email message.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this email template is currently active and in use.
-        """
-        html_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HTML content of the email message body, required if `use_plain_text_body` isn't set.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
-        """
-        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use the plain text body instead of HTML for the email.
-        """
-elif False:
-    ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationMagicLinkEmailServiceTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this email template.
+    """
+    subject: pulumi.Input[_builtins.str]
+    """
+    Subject line of the email message.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this email template is currently active and in use.
+    """
+    html_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HTML content of the email message body, required if `use_plain_text_body` isn't set.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+    """
+    use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use the plain text body instead of HTML for the email.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs:
@@ -2938,18 +2849,15 @@ class ProjectAuthenticationMagicLinkEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationMagicLinkTextServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the SMS/text connector to use for sending text messages.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict']]]]
-        """
-        A list of text message templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationMagicLinkTextServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationMagicLinkTextServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the SMS/text connector to use for sending text messages.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict']]]]
+    """
+    A list of text message templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkTextServiceArgs:
@@ -2989,23 +2897,20 @@ class ProjectAuthenticationMagicLinkTextServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict(TypedDict):
-        body: pulumi.Input[_builtins.str]
-        """
-        The content of the text message.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this text template.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this text template is currently active and in use.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationMagicLinkTextServiceTemplateArgsDict(TypedDict):
+    body: pulumi.Input[_builtins.str]
+    """
+    The content of the text message.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this text template.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this text template is currently active and in use.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectAuthenticationMagicLinkTextServiceTemplateArgs:
@@ -3072,22 +2977,19 @@ class ProjectAuthenticationMagicLinkTextServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthArgsDict(TypedDict):
-        custom: NotRequired[pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgsDict']]]]
-        """
-        Custom OAuth providers configured for this project.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        system: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemArgsDict']]
-        """
-        Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
-        """
-elif False:
-    ProjectAuthenticationOauthArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthArgsDict(TypedDict):
+    custom: NotRequired[pulumi.Input[Mapping[str, pulumi.Input['ProjectAuthenticationOauthCustomArgsDict']]]]
+    """
+    Custom OAuth providers configured for this project.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    system: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemArgsDict']]
+    """
+    Custom configurations for builtin OAuth providers such as Apple, Google, GitHub, Facebook, etc.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthArgs:
@@ -3144,110 +3046,107 @@ class ProjectAuthenticationOauthArgs:
         pulumi.set(self, "system", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthCustomArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthCustomArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthCustomArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomArgs:
@@ -3656,22 +3555,19 @@ class ProjectAuthenticationOauthCustomArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs:
@@ -3725,22 +3621,19 @@ class ProjectAuthenticationOauthCustomAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs:
@@ -3794,11 +3687,8 @@ class ProjectAuthenticationOauthCustomNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthCustomProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthCustomProviderTokenManagementArgs:
@@ -3806,46 +3696,43 @@ class ProjectAuthenticationOauthCustomProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemArgsDict(TypedDict):
-        apple: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleArgsDict']]
-        """
-        Apple's OAuth provider, allowing users to authenticate with their Apple Account.
-        """
-        discord: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordArgsDict']]
-        """
-        Discord's OAuth provider, allowing users to authenticate with their Discord account.
-        """
-        facebook: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookArgsDict']]
-        """
-        Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
-        """
-        github: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubArgsDict']]
-        """
-        GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
-        """
-        gitlab: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabArgsDict']]
-        """
-        GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
-        """
-        google: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleArgsDict']]
-        """
-        Google's OAuth provider, allowing users to authenticate with their Google account.
-        """
-        linkedin: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgsDict']]
-        """
-        LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
-        """
-        microsoft: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgsDict']]
-        """
-        Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
-        """
-        slack: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgsDict']]
-        """
-        Slack's OAuth provider, allowing users to authenticate with their Slack account.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemArgsDict(TypedDict):
+    apple: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleArgsDict']]
+    """
+    Apple's OAuth provider, allowing users to authenticate with their Apple Account.
+    """
+    discord: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordArgsDict']]
+    """
+    Discord's OAuth provider, allowing users to authenticate with their Discord account.
+    """
+    facebook: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookArgsDict']]
+    """
+    Facebook's OAuth provider, allowing users to authenticate with their Facebook account.
+    """
+    github: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubArgsDict']]
+    """
+    GitHub's OAuth provider, allowing users to authenticate with their GitHub account.
+    """
+    gitlab: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabArgsDict']]
+    """
+    GitLab's OAuth provider, allowing users to authenticate with their GitLab account.
+    """
+    google: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleArgsDict']]
+    """
+    Google's OAuth provider, allowing users to authenticate with their Google account.
+    """
+    linkedin: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinArgsDict']]
+    """
+    LinkedIn's OAuth provider, allowing users to authenticate with their LinkedIn account.
+    """
+    microsoft: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftArgsDict']]
+    """
+    Microsoft's OAuth provider, allowing users to authenticate with their Microsoft account.
+    """
+    slack: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackArgsDict']]
+    """
+    Slack's OAuth provider, allowing users to authenticate with their Slack account.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemArgs:
@@ -3998,110 +3885,107 @@ class ProjectAuthenticationOauthSystemArgs:
         pulumi.set(self, "slack", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemAppleArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemAppleArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemAppleArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleArgs:
@@ -4510,22 +4394,19 @@ class ProjectAuthenticationOauthSystemAppleArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs:
@@ -4579,22 +4460,19 @@ class ProjectAuthenticationOauthSystemAppleAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs:
@@ -4648,11 +4526,8 @@ class ProjectAuthenticationOauthSystemAppleNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs:
@@ -4660,110 +4535,107 @@ class ProjectAuthenticationOauthSystemAppleProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemDiscordArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemDiscordArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemDiscordArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordArgs:
@@ -5172,22 +5044,19 @@ class ProjectAuthenticationOauthSystemDiscordArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs:
@@ -5241,22 +5110,19 @@ class ProjectAuthenticationOauthSystemDiscordAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs:
@@ -5310,11 +5176,8 @@ class ProjectAuthenticationOauthSystemDiscordNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs:
@@ -5322,110 +5185,107 @@ class ProjectAuthenticationOauthSystemDiscordProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemFacebookArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemFacebookArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemFacebookArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookArgs:
@@ -5834,22 +5694,19 @@ class ProjectAuthenticationOauthSystemFacebookArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs:
@@ -5903,22 +5760,19 @@ class ProjectAuthenticationOauthSystemFacebookAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs:
@@ -5972,11 +5826,8 @@ class ProjectAuthenticationOauthSystemFacebookNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs:
@@ -5984,110 +5835,107 @@ class ProjectAuthenticationOauthSystemFacebookProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGithubArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGithubArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGithubArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubArgs:
@@ -6496,22 +6344,19 @@ class ProjectAuthenticationOauthSystemGithubArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs:
@@ -6565,22 +6410,19 @@ class ProjectAuthenticationOauthSystemGithubAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs:
@@ -6634,11 +6476,8 @@ class ProjectAuthenticationOauthSystemGithubNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs:
@@ -6646,110 +6485,107 @@ class ProjectAuthenticationOauthSystemGithubProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGitlabArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGitlabArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGitlabArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabArgs:
@@ -7158,22 +6994,19 @@ class ProjectAuthenticationOauthSystemGitlabArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs:
@@ -7227,22 +7060,19 @@ class ProjectAuthenticationOauthSystemGitlabAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs:
@@ -7296,11 +7126,8 @@ class ProjectAuthenticationOauthSystemGitlabNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs:
@@ -7308,110 +7135,107 @@ class ProjectAuthenticationOauthSystemGitlabProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGoogleArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGoogleArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGoogleArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleArgs:
@@ -7820,22 +7644,19 @@ class ProjectAuthenticationOauthSystemGoogleArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs:
@@ -7889,22 +7710,19 @@ class ProjectAuthenticationOauthSystemGoogleAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs:
@@ -7958,11 +7776,8 @@ class ProjectAuthenticationOauthSystemGoogleNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs:
@@ -7970,110 +7785,107 @@ class ProjectAuthenticationOauthSystemGoogleProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemLinkedinArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemLinkedinArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemLinkedinArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinArgs:
@@ -8482,22 +8294,19 @@ class ProjectAuthenticationOauthSystemLinkedinArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs:
@@ -8551,22 +8360,19 @@ class ProjectAuthenticationOauthSystemLinkedinAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs:
@@ -8620,11 +8426,8 @@ class ProjectAuthenticationOauthSystemLinkedinNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs:
@@ -8632,110 +8435,107 @@ class ProjectAuthenticationOauthSystemLinkedinProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemMicrosoftArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemMicrosoftArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemMicrosoftArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftArgs:
@@ -9144,22 +8944,19 @@ class ProjectAuthenticationOauthSystemMicrosoftArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs:
@@ -9213,22 +9010,19 @@ class ProjectAuthenticationOauthSystemMicrosoftAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs:
@@ -9282,11 +9076,8 @@ class ProjectAuthenticationOauthSystemMicrosoftNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs:
@@ -9294,110 +9085,107 @@ class ProjectAuthenticationOauthSystemMicrosoftProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemSlackArgsDict(TypedDict):
-        allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        """
-        apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic apple client secret for applications.
-        """
-        authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL that users are redirected to for authorization with the OAuth provider.
-        """
-        callback_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use a custom domain in your OAuth verification screen.
-        """
-        claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        Maps OAuth provider claims to Descope user attributes.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used to identify the application to the provider.
-        """
-        client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used to authenticate the application with the provider.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A brief description of the OAuth provider.
-        """
-        disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The issuer identifier for the OAuth provider.
-        """
-        jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
-        """
-        logo: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL of the logo associated with the OAuth provider.
-        """
-        manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable provider token management for this OAuth provider.
-        """
-        merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through OAuth authentication.
-        """
-        native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict']]
-        """
-        The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
-        """
-        native_client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
-        """
-        prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Custom prompts or consent screens that users may see during OAuth authentication.
-        """
-        provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict']]
-        """
-        This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
-        """
-        scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Scopes of access that the application requests from the user's account on the OAuth provider.
-        """
-        token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application requests an access token from the OAuth provider.
-        """
-        use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use private key JWT (client assertion) instead of client secret.
-        """
-        user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL where the application retrieves user information from the OAuth provider.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemSlackArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemSlackArgsDict(TypedDict):
+    allowed_grant_types: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
+    """
+    apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic apple client secret for applications.
+    """
+    authorization_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL that users are redirected to for authorization with the OAuth provider.
+    """
+    callback_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use a custom domain in your OAuth verification screen.
+    """
+    claim_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    Maps OAuth provider claims to Descope user attributes.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used to identify the application to the provider.
+    """
+    client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used to authenticate the application with the provider.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A brief description of the OAuth provider.
+    """
+    disable_jit_updates: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    By default the user attribute mapping configuration is used to update the user's attributes automatically during sign in. Disable this if you want this to happen only during user creation.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The issuer identifier for the OAuth provider.
+    """
+    jwks_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application can retrieve JSON Web Key Sets (JWKS) for the OAuth provider.
+    """
+    logo: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL of the logo associated with the OAuth provider.
+    """
+    manage_provider_tokens: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable provider token management for this OAuth provider.
+    """
+    merge_user_accounts: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through OAuth authentication.
+    """
+    native_apple_key_generator: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict']]
+    """
+    The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+    """
+    native_client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    native_client_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
+    """
+    prompts: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Custom prompts or consent screens that users may see during OAuth authentication.
+    """
+    provider_token_management: NotRequired[pulumi.Input['ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict']]
+    """
+    This attribute is deprecated, use the `manage_provider_tokens`, `callback_domain`, and `redirect_url` fields instead.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Users will be directed to this URL after authentication. If redirect URL is specified in the SDK/API call, it will override this value.
+    """
+    scopes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Scopes of access that the application requests from the user's account on the OAuth provider.
+    """
+    token_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application requests an access token from the OAuth provider.
+    """
+    use_client_assertion: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use private key JWT (client assertion) instead of client secret.
+    """
+    user_info_endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL where the application retrieves user information from the OAuth provider.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackArgs:
@@ -9806,22 +9594,19 @@ class ProjectAuthenticationOauthSystemSlackArgs:
         pulumi.set(self, "user_info_endpoint", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs:
@@ -9875,22 +9660,19 @@ class ProjectAuthenticationOauthSystemSlackAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict(TypedDict):
-        key_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator key id produced by Apple.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The apple generator private key produced by Apple.
-        """
-        team_id: pulumi.Input[_builtins.str]
-        """
-        The apple generator team id assigned to the key by Apple.
-        """
-elif False:
-    ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgsDict(TypedDict):
+    key_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator key id produced by Apple.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The apple generator private key produced by Apple.
+    """
+    team_id: pulumi.Input[_builtins.str]
+    """
+    The apple generator team id assigned to the key by Apple.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs:
@@ -9944,11 +9726,8 @@ class ProjectAuthenticationOauthSystemSlackNativeAppleKeyGeneratorArgs:
         pulumi.set(self, "team_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict(TypedDict):
-        pass
-elif False:
-    ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgsDict(TypedDict):
+    pass
 
 @pulumi.input_type
 class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs:
@@ -9956,34 +9735,31 @@ class ProjectAuthenticationOauthSystemSlackProviderTokenManagementArgs:
         pass
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The domain to embed in OTP messages.
-        """
-        email_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpEmailServiceArgsDict']]
-        """
-        Settings related to sending emails with OTP codes.
-        """
-        expiration_time: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The amount of time that an OTP code will be valid for.
-        """
-        text_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpTextServiceArgsDict']]
-        """
-        Settings related to sending SMS messages with OTP codes.
-        """
-        voice_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgsDict']]
-        """
-        Settings related to voice calls with OTP codes.
-        """
-elif False:
-    ProjectAuthenticationOtpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The domain to embed in OTP messages.
+    """
+    email_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpEmailServiceArgsDict']]
+    """
+    Settings related to sending emails with OTP codes.
+    """
+    expiration_time: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The amount of time that an OTP code will be valid for.
+    """
+    text_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpTextServiceArgsDict']]
+    """
+    Settings related to sending SMS messages with OTP codes.
+    """
+    voice_service: NotRequired[pulumi.Input['ProjectAuthenticationOtpVoiceServiceArgsDict']]
+    """
+    Settings related to voice calls with OTP codes.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOtpArgs:
@@ -10088,18 +9864,15 @@ class ProjectAuthenticationOtpArgs:
         pulumi.set(self, "voice_service", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpEmailServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the email connector to use for sending emails.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpEmailServiceTemplateArgsDict']]]]
-        """
-        A list of email templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationOtpEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpEmailServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the email connector to use for sending emails.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpEmailServiceTemplateArgsDict']]]]
+    """
+    A list of email templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOtpEmailServiceArgs:
@@ -10139,35 +9912,32 @@ class ProjectAuthenticationOtpEmailServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpEmailServiceTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this email template.
-        """
-        subject: pulumi.Input[_builtins.str]
-        """
-        Subject line of the email message.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this email template is currently active and in use.
-        """
-        html_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HTML content of the email message body, required if `use_plain_text_body` isn't set.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
-        """
-        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use the plain text body instead of HTML for the email.
-        """
-elif False:
-    ProjectAuthenticationOtpEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpEmailServiceTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this email template.
+    """
+    subject: pulumi.Input[_builtins.str]
+    """
+    Subject line of the email message.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this email template is currently active and in use.
+    """
+    html_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HTML content of the email message body, required if `use_plain_text_body` isn't set.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+    """
+    use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use the plain text body instead of HTML for the email.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOtpEmailServiceTemplateArgs:
@@ -10282,18 +10052,15 @@ class ProjectAuthenticationOtpEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpTextServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the SMS/text connector to use for sending text messages.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpTextServiceTemplateArgsDict']]]]
-        """
-        A list of text message templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationOtpTextServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpTextServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the SMS/text connector to use for sending text messages.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpTextServiceTemplateArgsDict']]]]
+    """
+    A list of text message templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOtpTextServiceArgs:
@@ -10333,23 +10100,20 @@ class ProjectAuthenticationOtpTextServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpTextServiceTemplateArgsDict(TypedDict):
-        body: pulumi.Input[_builtins.str]
-        """
-        The content of the text message.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this text template.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this text template is currently active and in use.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectAuthenticationOtpTextServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpTextServiceTemplateArgsDict(TypedDict):
+    body: pulumi.Input[_builtins.str]
+    """
+    The content of the text message.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this text template.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this text template is currently active and in use.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpTextServiceTemplateArgs:
@@ -10416,18 +10180,15 @@ class ProjectAuthenticationOtpTextServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpVoiceServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the voice connector to use for making voice calls.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpVoiceServiceTemplateArgsDict']]]]
-        """
-        A list of voice message templates for different purposes.
-        """
-elif False:
-    ProjectAuthenticationOtpVoiceServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpVoiceServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the voice connector to use for making voice calls.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationOtpVoiceServiceTemplateArgsDict']]]]
+    """
+    A list of voice message templates for different purposes.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationOtpVoiceServiceArgs:
@@ -10467,23 +10228,20 @@ class ProjectAuthenticationOtpVoiceServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationOtpVoiceServiceTemplateArgsDict(TypedDict):
-        body: pulumi.Input[_builtins.str]
-        """
-        The content of the voice message that will be spoken.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this voice template.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this voice template is currently active and in use.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectAuthenticationOtpVoiceServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationOtpVoiceServiceTemplateArgsDict(TypedDict):
+    body: pulumi.Input[_builtins.str]
+    """
+    The content of the voice message that will be spoken.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this voice template.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this voice template is currently active and in use.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectAuthenticationOtpVoiceServiceTemplateArgs:
@@ -10550,18 +10308,15 @@ class ProjectAuthenticationOtpVoiceServiceTemplateArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationPasskeysArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        top_level_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Passkeys will be usable in the following domain and all its subdomains.
-        """
-elif False:
-    ProjectAuthenticationPasskeysArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationPasskeysArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    top_level_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Passkeys will be usable in the following domain and all its subdomains.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationPasskeysArgs:
@@ -10602,78 +10357,75 @@ class ProjectAuthenticationPasskeysArgs:
         pulumi.set(self, "top_level_domain", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationPasswordArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        email_service: NotRequired[pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgsDict']]
-        """
-        Settings related to sending password reset emails as part of the password feature.
-        """
-        expiration: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether users are required to change their password periodically.
-        """
-        expiration_weeks: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The number of weeks after which a user's password expires and they need to replace it.
-        """
-        lock: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the user account should be locked after a specified number of failed login attempts.
-        """
-        lock_attempts: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The number of failed login attempts allowed before an account is locked.
-        """
-        lowercase: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether passwords must contain at least one lowercase letter.
-        """
-        mask_errors: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
-        """
-        min_length: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The minimum length of the password that users are required to use. The maximum length is always `64`.
-        """
-        non_alphanumeric: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
-        """
-        number: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether passwords must contain at least one number.
-        """
-        reuse: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to forbid password reuse when users change their password.
-        """
-        reuse_amount: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
-        """
-        temporary_lock: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the user account should be temporarily locked after a specified number of failed login attempts.
-        """
-        temporary_lock_attempts: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The number of failed login attempts allowed before an account is temporarily locked.
-        """
-        temporary_lock_duration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The amount of time before the user can sign in again after the account is temporarily locked.
-        """
-        uppercase: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether passwords must contain at least one uppercase letter.
-        """
-elif False:
-    ProjectAuthenticationPasswordArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationPasswordArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    email_service: NotRequired[pulumi.Input['ProjectAuthenticationPasswordEmailServiceArgsDict']]
+    """
+    Settings related to sending password reset emails as part of the password feature.
+    """
+    expiration: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether users are required to change their password periodically.
+    """
+    expiration_weeks: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The number of weeks after which a user's password expires and they need to replace it.
+    """
+    lock: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the user account should be locked after a specified number of failed login attempts.
+    """
+    lock_attempts: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The number of failed login attempts allowed before an account is locked.
+    """
+    lowercase: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether passwords must contain at least one lowercase letter.
+    """
+    mask_errors: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Prevents information about user accounts from being revealed in error messages, e.g., whether a user already exists.
+    """
+    min_length: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The minimum length of the password that users are required to use. The maximum length is always `64`.
+    """
+    non_alphanumeric: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+    """
+    number: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether passwords must contain at least one number.
+    """
+    reuse: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to forbid password reuse when users change their password.
+    """
+    reuse_amount: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+    """
+    temporary_lock: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the user account should be temporarily locked after a specified number of failed login attempts.
+    """
+    temporary_lock_attempts: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The number of failed login attempts allowed before an account is temporarily locked.
+    """
+    temporary_lock_duration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The amount of time before the user can sign in again after the account is temporarily locked.
+    """
+    uppercase: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether passwords must contain at least one uppercase letter.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationPasswordArgs:
@@ -10954,18 +10706,15 @@ class ProjectAuthenticationPasswordArgs:
         pulumi.set(self, "uppercase", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationPasswordEmailServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the email connector to use for sending emails.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationPasswordEmailServiceTemplateArgsDict']]]]
-        """
-        A list of email templates for different authentication flows.
-        """
-elif False:
-    ProjectAuthenticationPasswordEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationPasswordEmailServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the email connector to use for sending emails.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationPasswordEmailServiceTemplateArgsDict']]]]
+    """
+    A list of email templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationPasswordEmailServiceArgs:
@@ -11005,35 +10754,32 @@ class ProjectAuthenticationPasswordEmailServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationPasswordEmailServiceTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this email template.
-        """
-        subject: pulumi.Input[_builtins.str]
-        """
-        Subject line of the email message.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this email template is currently active and in use.
-        """
-        html_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HTML content of the email message body, required if `use_plain_text_body` isn't set.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
-        """
-        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use the plain text body instead of HTML for the email.
-        """
-elif False:
-    ProjectAuthenticationPasswordEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationPasswordEmailServiceTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this email template.
+    """
+    subject: pulumi.Input[_builtins.str]
+    """
+    Subject line of the email message.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this email template is currently active and in use.
+    """
+    html_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HTML content of the email message body, required if `use_plain_text_body` isn't set.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+    """
+    use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use the plain text body instead of HTML for the email.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationPasswordEmailServiceTemplateArgs:
@@ -11148,54 +10894,51 @@ class ProjectAuthenticationPasswordEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationSsoArgsDict(TypedDict):
-        allow_duplicate_domains: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to allow duplicate SSO domains across tenants.
-        """
-        allow_override_roles: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to allow overriding user's roles with SSO related roles.
-        """
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        groups_priority: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable groups priority.
-        """
-        limit_mapping_to_mandatory_attributes: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
-        """
-        mandatory_user_attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationSsoMandatoryUserAttributeArgsDict']]]]
-        """
-        Define the required Descope attributes that must be populated when receiving SSO information.
-        """
-        merge_users: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to merge existing user accounts with new ones created through SSO authentication.
-        """
-        redirect_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
-        """
-        require_groups_attribute_name: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When configuring SSO the groups attribute name must be specified.
-        """
-        require_sso_domains: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When configuring SSO an SSO domain must be specified.
-        """
-        sso_suite_settings: NotRequired[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgsDict']]
-        """
-        Configuration block for the SSO Suite.
-        """
-elif False:
-    ProjectAuthenticationSsoArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationSsoArgsDict(TypedDict):
+    allow_duplicate_domains: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to allow duplicate SSO domains across tenants.
+    """
+    allow_override_roles: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to allow overriding user's roles with SSO related roles.
+    """
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    groups_priority: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable groups priority.
+    """
+    limit_mapping_to_mandatory_attributes: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
+    """
+    mandatory_user_attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthenticationSsoMandatoryUserAttributeArgsDict']]]]
+    """
+    Define the required Descope attributes that must be populated when receiving SSO information.
+    """
+    merge_users: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to merge existing user accounts with new ones created through SSO authentication.
+    """
+    redirect_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+    """
+    require_groups_attribute_name: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When configuring SSO the groups attribute name must be specified.
+    """
+    require_sso_domains: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When configuring SSO an SSO domain must be specified.
+    """
+    sso_suite_settings: NotRequired[pulumi.Input['ProjectAuthenticationSsoSsoSuiteSettingsArgsDict']]
+    """
+    Configuration block for the SSO Suite.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationSsoArgs:
@@ -11380,18 +11123,15 @@ class ProjectAuthenticationSsoArgs:
         pulumi.set(self, "sso_suite_settings", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationSsoMandatoryUserAttributeArgsDict(TypedDict):
-        id: pulumi.Input[_builtins.str]
-        """
-        The identifier for the attribute. This value is called `Machine Name` in the Descope console.
-        """
-        custom: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
-        """
-elif False:
-    ProjectAuthenticationSsoMandatoryUserAttributeArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationSsoMandatoryUserAttributeArgsDict(TypedDict):
+    id: pulumi.Input[_builtins.str]
+    """
+    The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+    """
+    custom: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationSsoMandatoryUserAttributeArgs:
@@ -11431,38 +11171,35 @@ class ProjectAuthenticationSsoMandatoryUserAttributeArgs:
         pulumi.set(self, "custom", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationSsoSsoSuiteSettingsArgsDict(TypedDict):
-        force_domain_verification: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will allow only verified domains to be used.
-        """
-        hide_domains: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
-        """
-        hide_groups_mapping: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
-        """
-        hide_oidc: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will hide the OIDC configuration option.
-        """
-        hide_saml: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will hide the SAML configuration option.
-        """
-        hide_scim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
-        """
-        style_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
-        """
-elif False:
-    ProjectAuthenticationSsoSsoSuiteSettingsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationSsoSsoSuiteSettingsArgsDict(TypedDict):
+    force_domain_verification: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will allow only verified domains to be used.
+    """
+    hide_domains: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+    """
+    hide_groups_mapping: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+    """
+    hide_oidc: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will hide the OIDC configuration option.
+    """
+    hide_saml: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will hide the SAML configuration option.
+    """
+    hide_scim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+    """
+    style_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationSsoSsoSuiteSettingsArgs:
@@ -11583,18 +11320,15 @@ class ProjectAuthenticationSsoSsoSuiteSettingsArgs:
         pulumi.set(self, "style_id", value)
 
 
-if not MYPY:
-    class ProjectAuthenticationTotpArgsDict(TypedDict):
-        disabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
-        """
-        service_label: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The template for the service issuer label (issuer) shown in the authenticator app.
-        """
-elif False:
-    ProjectAuthenticationTotpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthenticationTotpArgsDict(TypedDict):
+    disabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+    """
+    service_label: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The template for the service issuer label (issuer) shown in the authenticator app.
+    """
 
 @pulumi.input_type
 class ProjectAuthenticationTotpArgs:
@@ -11635,18 +11369,15 @@ class ProjectAuthenticationTotpArgs:
         pulumi.set(self, "service_label", value)
 
 
-if not MYPY:
-    class ProjectAuthorizationArgsDict(TypedDict):
-        permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationPermissionArgsDict']]]]
-        """
-        A list of `Permission` objects.
-        """
-        roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationRoleArgsDict']]]]
-        """
-        A list of `Role` objects.
-        """
-elif False:
-    ProjectAuthorizationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthorizationArgsDict(TypedDict):
+    permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationPermissionArgsDict']]]]
+    """
+    A list of `Permission` objects.
+    """
+    roles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectAuthorizationRoleArgsDict']]]]
+    """
+    A list of `Role` objects.
+    """
 
 @pulumi.input_type
 class ProjectAuthorizationArgs:
@@ -11687,19 +11418,16 @@ class ProjectAuthorizationArgs:
         pulumi.set(self, "roles", value)
 
 
-if not MYPY:
-    class ProjectAuthorizationPermissionArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A name for the permission.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description for the permission.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectAuthorizationPermissionArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthorizationPermissionArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A name for the permission.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description for the permission.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectAuthorizationPermissionArgs:
@@ -11751,32 +11479,29 @@ class ProjectAuthorizationPermissionArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectAuthorizationRoleArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A name for the role.
-        """
-        default: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this role should automatically be assigned to users that are created without any roles.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description for the role.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        key: NotRequired[pulumi.Input[_builtins.str]]
-        permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        A list of permissions by name to be included in the role.
-        """
-        private: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this role should not be displayed to tenant admins.
-        """
-elif False:
-    ProjectAuthorizationRoleArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectAuthorizationRoleArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A name for the role.
+    """
+    default: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this role should automatically be assigned to users that are created without any roles.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description for the role.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    key: NotRequired[pulumi.Input[_builtins.str]]
+    permissions: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    A list of permissions by name to be included in the role.
+    """
+    private: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this role should not be displayed to tenant admins.
+    """
 
 @pulumi.input_type
 class ProjectAuthorizationRoleArgs:
@@ -11888,266 +11613,263 @@ class ProjectAuthorizationRoleArgs:
         pulumi.set(self, "private", value)
 
 
-if not MYPY:
-    class ProjectConnectorsArgsDict(TypedDict):
-        abuseipdbs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAbuseipdbArgsDict']]]]
-        """
-        Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
-        """
-        amplitudes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAmplitudeArgsDict']]]]
-        """
-        Track user activity and traits at any point in your user journey with the Amplitude connector.
-        """
-        arkoses: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsArkoseArgsDict']]]]
-        """
-        Use the Arkose connector to integrate with Arkose's bot and fraud detection.
-        """
-        audit_webhooks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgsDict']]]]
-        """
-        Send audit events to a custom webhook.
-        """
-        aws_s3s: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3ArgsDict']]]]
-        """
-        Stream authentication audit logs with the Amazon S3 connector.
-        """
-        aws_translates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgsDict']]]]
-        """
-        Localize the language of your login and user journey screens with the Amazon Translate connector.
-        """
-        bitsights: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgsDict']]]]
-        """
-        Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
-        """
-        coralogixes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCoralogixArgsDict']]]]
-        """
-        Send audit events and troubleshooting logs to Coralogix.
-        """
-        darwinia: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDarwiniumArgsDict']]]]
-        """
-        Connect to Darwinium API for fraud detection and device intelligence.
-        """
-        datadogs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgsDict']]]]
-        """
-        Stream authentication audit logs with the Datadog connector.
-        """
-        devrev_grows: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgsDict']]]]
-        """
-        DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
-        """
-        docebos: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgsDict']]]]
-        """
-        Get user information from Docebo in your Descope user journeys with the Docebo connector.
-        """
-        eight_by_eight_vibers: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsEightByEightViberArgsDict']]]]
-        """
-        Send Viber messages to the user.
-        """
-        eight_by_eight_whatsapps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsEightByEightWhatsappArgsDict']]]]
-        """
-        Send WhatsApp messages to the user.
-        """
-        elephants: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsElephantArgsDict']]]]
-        """
-        Use this connector to obtain an identity trust score.
-        """
-        external_token_https: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsExternalTokenHttpArgsDict']]]]
-        """
-        A generic HTTP token connector.
-        """
-        fingerprint_descopes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgsDict']]]]
-        """
-        Descope Fingerprint capabilities for fraud detection and risk assessment.
-        """
-        fingerprints: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgsDict']]]]
-        """
-        Prevent fraud by adding device intelligence with the Fingerprint connector.
-        """
-        firebase_admins: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFirebaseAdminArgsDict']]]]
-        """
-        Firebase connector enables you to utilize Firebase's APIs to generate a Firebase user token for a given Descope user.
-        """
-        forters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgsDict']]]]
-        """
-        Leverage ML-based risk scores for fraud prevention with the Forter connector.
-        """
-        generic_email_gateways: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericEmailGatewayArgsDict']]]]
-        """
-        Send emails using a generic Email gateway.
-        """
-        generic_sms_gateways: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgsDict']]]]
-        """
-        Send messages using a generic SMS gateway.
-        """
-        google_cloud_loggings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgsDict']]]]
-        """
-        Stream logs and audit events with the Google Cloud Logging connector.
-        """
-        google_cloud_translations: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgsDict']]]]
-        """
-        Localize the language of your login and user journey screens with the Google Cloud Translation connector.
-        """
-        google_maps_places: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleMapsPlaceArgsDict']]]]
-        """
-        Get address autocompletions from Place Autocomplete Data API.
-        """
-        hcaptchas: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHcaptchaArgsDict']]]]
-        """
-        hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
-        """
-        hibps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgsDict']]]]
-        """
-        Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
-        """
-        https: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgsDict']]]]
-        """
-        A general purpose HTTP client
-        """
-        hubspots: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgsDict']]]]
-        """
-        Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
-        """
-        incodes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIncodeArgsDict']]]]
-        """
-        Use the Incode connection to run identity verification processes like document checks or facial recognition.
-        """
-        intercoms: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgsDict']]]]
-        """
-        Orchestrate customer identity information from your Descope user journey with the Intercom connector.
-        """
-        ldaps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsLdapArgsDict']]]]
-        """
-        Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
-        """
-        lokalises: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsLokaliseArgsDict']]]]
-        """
-        Localize the language of your login and user journey screens with the Lokalise connector.
-        """
-        mixpanels: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMixpanelArgsDict']]]]
-        """
-        Stream authentication audit logs and troubleshoot logs to Mixpanel.
-        """
-        mparticles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMparticleArgsDict']]]]
-        """
-        Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
-        """
-        newrelics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicArgsDict']]]]
-        """
-        Stream authentication audit logs with the New Relic connector.
-        """
-        opentelemetries: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsOpentelemetryArgsDict']]]]
-        """
-        Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
-        """
-        ping_directories: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsPingDirectoryArgsDict']]]]
-        """
-        Authenticate against PingDirectory.
-        """
-        postmarks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsPostmarkArgsDict']]]]
-        """
-        Send emails using Postmark
-        """
-        radars: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRadarArgsDict']]]]
-        """
-        Get address autocompletions from Radar Autocomplete API.
-        """
-        recaptcha_enterprises: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaEnterpriseArgsDict']]]]
-        """
-        Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
-        """
-        recaptchas: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaArgsDict']]]]
-        """
-        Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
-        """
-        rekognitions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRekognitionArgsDict']]]]
-        """
-        Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
-        """
-        salesforce_marketing_clouds: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceMarketingCloudArgsDict']]]]
-        """
-        Send transactional messages with the Salesforce Marketing Cloud connector.
-        """
-        salesforces: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceArgsDict']]]]
-        """
-        Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
-        """
-        sardines: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSardineArgsDict']]]]
-        """
-        Evaluate customer risk using Sardine
-        """
-        segments: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSegmentArgsDict']]]]
-        """
-        Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
-        """
-        sendgrids: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSendgridArgsDict']]]]
-        """
-        SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
-        """
-        ses: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSeArgsDict']]]]
-        """
-        Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
-        """
-        slacks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSlackArgsDict']]]]
-        """
-        Send updates to your team on Slack.
-        """
-        smartlings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSmartlingArgsDict']]]]
-        """
-        Localize the language of your login and user journey screens with the Smartling connector.
-        """
-        smtps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSmtpArgsDict']]]]
-        """
-        Simple Mail Transfer Protocol (SMTP) server for sending emails.
-        """
-        sns: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSnArgsDict']]]]
-        """
-        Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
-        """
-        splunks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSplunkArgsDict']]]]
-        """
-        Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
-        """
-        sqls: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSqlArgsDict']]]]
-        """
-        SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
-        """
-        sumologics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicArgsDict']]]]
-        """
-        Stream logs and audit events with the Sumo Logic connector.
-        """
-        supabases: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSupabaseArgsDict']]]]
-        """
-        Generate external tokens for user authentication in Supabase projects.
-        """
-        telesigns: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTelesignArgsDict']]]]
-        """
-        Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
-        """
-        traceables: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTraceableArgsDict']]]]
-        """
-        Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
-        """
-        turnstiles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTurnstileArgsDict']]]]
-        """
-        Prevent bot attacks on your login pages with the Turnstile connector.
-        """
-        twilio_cores: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioCoreArgsDict']]]]
-        """
-        Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
-        """
-        twilio_verifies: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioVerifyArgsDict']]]]
-        """
-        Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
-        """
-        unibeams: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsUnibeamArgsDict']]]]
-        """
-        SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
-        """
-        zerobounces: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsZerobounceArgsDict']]]]
-        """
-        Email validation with ZeroBounce
-        """
-elif False:
-    ProjectConnectorsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsArgsDict(TypedDict):
+    abuseipdbs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAbuseipdbArgsDict']]]]
+    """
+    Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
+    """
+    amplitudes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAmplitudeArgsDict']]]]
+    """
+    Track user activity and traits at any point in your user journey with the Amplitude connector.
+    """
+    arkoses: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsArkoseArgsDict']]]]
+    """
+    Use the Arkose connector to integrate with Arkose's bot and fraud detection.
+    """
+    audit_webhooks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookArgsDict']]]]
+    """
+    Send audit events to a custom webhook.
+    """
+    aws_s3s: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3ArgsDict']]]]
+    """
+    Stream authentication audit logs with the Amazon S3 connector.
+    """
+    aws_translates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsTranslateArgsDict']]]]
+    """
+    Localize the language of your login and user journey screens with the Amazon Translate connector.
+    """
+    bitsights: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsBitsightArgsDict']]]]
+    """
+    Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
+    """
+    coralogixes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCoralogixArgsDict']]]]
+    """
+    Send audit events and troubleshooting logs to Coralogix.
+    """
+    darwinia: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDarwiniumArgsDict']]]]
+    """
+    Connect to Darwinium API for fraud detection and device intelligence.
+    """
+    datadogs: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogArgsDict']]]]
+    """
+    Stream authentication audit logs with the Datadog connector.
+    """
+    devrev_grows: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDevrevGrowArgsDict']]]]
+    """
+    DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
+    """
+    docebos: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDoceboArgsDict']]]]
+    """
+    Get user information from Docebo in your Descope user journeys with the Docebo connector.
+    """
+    eight_by_eight_vibers: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsEightByEightViberArgsDict']]]]
+    """
+    Send Viber messages to the user.
+    """
+    eight_by_eight_whatsapps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsEightByEightWhatsappArgsDict']]]]
+    """
+    Send WhatsApp messages to the user.
+    """
+    elephants: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsElephantArgsDict']]]]
+    """
+    Use this connector to obtain an identity trust score.
+    """
+    external_token_https: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsExternalTokenHttpArgsDict']]]]
+    """
+    A generic HTTP token connector.
+    """
+    fingerprint_descopes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintDescopeArgsDict']]]]
+    """
+    Descope Fingerprint capabilities for fraud detection and risk assessment.
+    """
+    fingerprints: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFingerprintArgsDict']]]]
+    """
+    Prevent fraud by adding device intelligence with the Fingerprint connector.
+    """
+    firebase_admins: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsFirebaseAdminArgsDict']]]]
+    """
+    Firebase connector enables you to utilize Firebase's APIs to generate a Firebase user token for a given Descope user.
+    """
+    forters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsForterArgsDict']]]]
+    """
+    Leverage ML-based risk scores for fraud prevention with the Forter connector.
+    """
+    generic_email_gateways: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericEmailGatewayArgsDict']]]]
+    """
+    Send emails using a generic Email gateway.
+    """
+    generic_sms_gateways: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGenericSmsGatewayArgsDict']]]]
+    """
+    Send messages using a generic SMS gateway.
+    """
+    google_cloud_loggings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingArgsDict']]]]
+    """
+    Stream logs and audit events with the Google Cloud Logging connector.
+    """
+    google_cloud_translations: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudTranslationArgsDict']]]]
+    """
+    Localize the language of your login and user journey screens with the Google Cloud Translation connector.
+    """
+    google_maps_places: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleMapsPlaceArgsDict']]]]
+    """
+    Get address autocompletions from Place Autocomplete Data API.
+    """
+    hcaptchas: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHcaptchaArgsDict']]]]
+    """
+    hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
+    """
+    hibps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHibpArgsDict']]]]
+    """
+    Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
+    """
+    https: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHttpArgsDict']]]]
+    """
+    A general purpose HTTP client
+    """
+    hubspots: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsHubspotArgsDict']]]]
+    """
+    Orchestrate customer identity information from your Descope user journey with the HubSpot connector.
+    """
+    incodes: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIncodeArgsDict']]]]
+    """
+    Use the Incode connection to run identity verification processes like document checks or facial recognition.
+    """
+    intercoms: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsIntercomArgsDict']]]]
+    """
+    Orchestrate customer identity information from your Descope user journey with the Intercom connector.
+    """
+    ldaps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsLdapArgsDict']]]]
+    """
+    Use this connector to authenticate users against an LDAP directory server with support for both password and mTLS authentication.
+    """
+    lokalises: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsLokaliseArgsDict']]]]
+    """
+    Localize the language of your login and user journey screens with the Lokalise connector.
+    """
+    mixpanels: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMixpanelArgsDict']]]]
+    """
+    Stream authentication audit logs and troubleshoot logs to Mixpanel.
+    """
+    mparticles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMparticleArgsDict']]]]
+    """
+    Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
+    """
+    newrelics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicArgsDict']]]]
+    """
+    Stream authentication audit logs with the New Relic connector.
+    """
+    opentelemetries: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsOpentelemetryArgsDict']]]]
+    """
+    Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+    """
+    ping_directories: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsPingDirectoryArgsDict']]]]
+    """
+    Authenticate against PingDirectory.
+    """
+    postmarks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsPostmarkArgsDict']]]]
+    """
+    Send emails using Postmark
+    """
+    radars: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRadarArgsDict']]]]
+    """
+    Get address autocompletions from Radar Autocomplete API.
+    """
+    recaptcha_enterprises: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaEnterpriseArgsDict']]]]
+    """
+    Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+    """
+    recaptchas: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRecaptchaArgsDict']]]]
+    """
+    Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
+    """
+    rekognitions: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsRekognitionArgsDict']]]]
+    """
+    Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
+    """
+    salesforce_marketing_clouds: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceMarketingCloudArgsDict']]]]
+    """
+    Send transactional messages with the Salesforce Marketing Cloud connector.
+    """
+    salesforces: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSalesforceArgsDict']]]]
+    """
+    Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
+    """
+    sardines: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSardineArgsDict']]]]
+    """
+    Evaluate customer risk using Sardine
+    """
+    segments: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSegmentArgsDict']]]]
+    """
+    Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
+    """
+    sendgrids: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSendgridArgsDict']]]]
+    """
+    SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
+    """
+    ses: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSeArgsDict']]]]
+    """
+    Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
+    """
+    slacks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSlackArgsDict']]]]
+    """
+    Send updates to your team on Slack.
+    """
+    smartlings: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSmartlingArgsDict']]]]
+    """
+    Localize the language of your login and user journey screens with the Smartling connector.
+    """
+    smtps: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSmtpArgsDict']]]]
+    """
+    Simple Mail Transfer Protocol (SMTP) server for sending emails.
+    """
+    sns: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSnArgsDict']]]]
+    """
+    Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
+    """
+    splunks: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSplunkArgsDict']]]]
+    """
+    Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
+    """
+    sqls: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSqlArgsDict']]]]
+    """
+    SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
+    """
+    sumologics: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicArgsDict']]]]
+    """
+    Stream logs and audit events with the Sumo Logic connector.
+    """
+    supabases: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSupabaseArgsDict']]]]
+    """
+    Generate external tokens for user authentication in Supabase projects.
+    """
+    telesigns: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTelesignArgsDict']]]]
+    """
+    Verify phone numbers and leverage granular risk scores for adaptive MFA with the Telesign Intelligence connector.
+    """
+    traceables: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTraceableArgsDict']]]]
+    """
+    Identify and respond to fraudulent login activity with the Traceable Digital Fraud Prevention connector.
+    """
+    turnstiles: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTurnstileArgsDict']]]]
+    """
+    Prevent bot attacks on your login pages with the Turnstile connector.
+    """
+    twilio_cores: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioCoreArgsDict']]]]
+    """
+    Twilio is a cloud-based communication provider of communication tools for making and receiving phone calls, sending and receiving text messages, and performing other communication functions.
+    """
+    twilio_verifies: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsTwilioVerifyArgsDict']]]]
+    """
+    Twilio Verify is an OTP service that can be used via text messages, instant messaging platforms, voice and e-mail. Choose this connector only if you are a Twilio Verify customer.
+    """
+    unibeams: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsUnibeamArgsDict']]]]
+    """
+    SIM-based authentication and approval using Unibeam's OnSim technology for passwordless authentication and transaction approval.
+    """
+    zerobounces: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsZerobounceArgsDict']]]]
+    """
+    Email validation with ZeroBounce
+    """
 
 @pulumi.input_type
 class ProjectConnectorsArgs:
@@ -13180,23 +12902,20 @@ class ProjectConnectorsArgs:
         pulumi.set(self, "zerobounces", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAbuseipdbArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The unique AbuseIPDB API key.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsAbuseipdbArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAbuseipdbArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The unique AbuseIPDB API key.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsAbuseipdbArgs:
@@ -13263,31 +12982,28 @@ class ProjectConnectorsAbuseipdbArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAmplitudeArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The Amplitude API Key generated for the Descope service.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        server_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
-        """
-        server_zone: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
-        """
-elif False:
-    ProjectConnectorsAmplitudeArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAmplitudeArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The Amplitude API Key generated for the Descope service.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    server_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The server URL of the Amplitude API, when using different api or a custom domain in Amplitude.
+    """
+    server_zone: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    `EU` or `US`. Sets the Amplitude server zone. Set this to `EU` for Amplitude projects created in `EU` data center. Default is `US`.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAmplitudeArgs:
@@ -13386,35 +13102,32 @@ class ProjectConnectorsAmplitudeArgs:
         pulumi.set(self, "server_zone", value)
 
 
-if not MYPY:
-    class ProjectConnectorsArkoseArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The private key that can be copied from the Keys screen in the Arkose Labs portal.
-        """
-        public_key: pulumi.Input[_builtins.str]
-        """
-        The public key that's shown in the Keys screen in the Arkose Labs portal.
-        """
-        client_base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        verify_base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
-        """
-elif False:
-    ProjectConnectorsArkoseArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsArkoseArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The private key that can be copied from the Keys screen in the Arkose Labs portal.
+    """
+    public_key: pulumi.Input[_builtins.str]
+    """
+    The public key that's shown in the Keys screen in the Arkose Labs portal.
+    """
+    client_base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    verify_base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsArkoseArgs:
@@ -13528,43 +13241,40 @@ class ProjectConnectorsArkoseArgs:
         pulumi.set(self, "verify_base_url", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAuditWebhookArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        The base URL to fetch
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-elif False:
-    ProjectConnectorsAuditWebhookArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAuditWebhookArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    The base URL to fetch
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAuditWebhookAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookArgs:
@@ -13711,22 +13421,19 @@ class ProjectConnectorsAuditWebhookArgs:
         pulumi.set(self, "insecure", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAuditWebhookAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsAuditWebhookAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAuditWebhookAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuditFilterArgs:
@@ -13780,22 +13487,19 @@ class ProjectConnectorsAuditWebhookAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAuditWebhookAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsAuditWebhookAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAuditWebhookAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationArgs:
@@ -13852,18 +13556,15 @@ class ProjectConnectorsAuditWebhookAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs:
@@ -13902,18 +13603,15 @@ class ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAuditWebhookAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAuditWebhookAuthenticationBasicArgs:
@@ -13952,59 +13650,56 @@ class ProjectConnectorsAuditWebhookAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAwsS3ArgsDict(TypedDict):
-        bucket: pulumi.Input[_builtins.str]
-        """
-        The AWS S3 bucket. This bucket should already exist for the connector to work.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        region: pulumi.Input[_builtins.str]
-        """
-        The AWS S3 region, e.g. `us-east-1`.
-        """
-        access_key_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The unique AWS access key ID.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        auth_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The authentication type to use.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        external_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The external ID to use when assuming the role.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        role_arn: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Amazon Resource Name (ARN) of the role to assume.
-        """
-        secret_access_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The secret AWS access key.
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsAwsS3ArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAwsS3ArgsDict(TypedDict):
+    bucket: pulumi.Input[_builtins.str]
+    """
+    The AWS S3 bucket. This bucket should already exist for the connector to work.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    The AWS S3 region, e.g. `us-east-1`.
+    """
+    access_key_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The unique AWS access key ID.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsAwsS3AuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    auth_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The authentication type to use.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    external_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The external ID to use when assuming the role.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    role_arn: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Amazon Resource Name (ARN) of the role to assume.
+    """
+    secret_access_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The secret AWS access key.
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAwsS3Args:
@@ -14214,22 +13909,19 @@ class ProjectConnectorsAwsS3Args:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAwsS3AuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsAwsS3AuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAwsS3AuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAwsS3AuditFilterArgs:
@@ -14283,35 +13975,32 @@ class ProjectConnectorsAwsS3AuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsAwsTranslateArgsDict(TypedDict):
-        access_key_id: pulumi.Input[_builtins.str]
-        """
-        AWS access key ID.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        region: pulumi.Input[_builtins.str]
-        """
-        The AWS region to which this client will send requests. (e.g. us-east-1.)
-        """
-        secret_access_key: pulumi.Input[_builtins.str]
-        """
-        AWS secret access key.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        session_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
-        """
-elif False:
-    ProjectConnectorsAwsTranslateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsAwsTranslateArgsDict(TypedDict):
+    access_key_id: pulumi.Input[_builtins.str]
+    """
+    AWS access key ID.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    The AWS region to which this client will send requests. (e.g. us-east-1.)
+    """
+    secret_access_key: pulumi.Input[_builtins.str]
+    """
+    AWS secret access key.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    session_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsAwsTranslateArgs:
@@ -14424,27 +14113,24 @@ class ProjectConnectorsAwsTranslateArgs:
         pulumi.set(self, "session_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsBitsightArgsDict(TypedDict):
-        client_id: pulumi.Input[_builtins.str]
-        """
-        API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        Client secret issued when you create the credentials in Bitsight Threat Intelligence.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsBitsightArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsBitsightArgsDict(TypedDict):
+    client_id: pulumi.Input[_builtins.str]
+    """
+    API Client ID issued when you create the credentials in Bitsight Threat Intelligence.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    Client secret issued when you create the credentials in Bitsight Threat Intelligence.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsBitsightArgs:
@@ -14526,39 +14212,36 @@ class ProjectConnectorsBitsightArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsCoralogixArgsDict(TypedDict):
-        bearer_token: pulumi.Input[_builtins.str]
-        """
-        Bearer token issued by Coralogix as Send-Your-Data API key
-        """
-        endpoint: pulumi.Input[_builtins.str]
-        """
-        The ingress OpenTelemetry endpoint URL.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCoralogixAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsCoralogixArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsCoralogixArgsDict(TypedDict):
+    bearer_token: pulumi.Input[_builtins.str]
+    """
+    Bearer token issued by Coralogix as Send-Your-Data API key
+    """
+    endpoint: pulumi.Input[_builtins.str]
+    """
+    The ingress OpenTelemetry endpoint URL.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsCoralogixAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsCoralogixArgs:
@@ -14688,22 +14371,19 @@ class ProjectConnectorsCoralogixArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsCoralogixAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsCoralogixAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsCoralogixAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsCoralogixAuditFilterArgs:
@@ -14757,59 +14437,56 @@ class ProjectConnectorsCoralogixAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsDarwiniumArgsDict(TypedDict):
-        journey_name: pulumi.Input[_builtins.str]
-        """
-        The name of the Darwinium journey to use for profiling.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        node_name: pulumi.Input[_builtins.str]
-        """
-        The name of the Darwinium node.
-        """
-        pem_certificate: pulumi.Input[_builtins.str]
-        """
-        The PEM certificate for client authentication.
-        """
-        private_key: pulumi.Input[_builtins.str]
-        """
-        The private key for client authentication.
-        """
-        web_api_name: pulumi.Input[_builtins.str]
-        """
-        The name of the Darwinium Web API to use.
-        """
-        default_result: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The default result to return if no result is available.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        native_api_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The name of the Darwinium Native Mobile API to use.
-        """
-        native_blob_key_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
-        """
-        passphrase: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The passphrase for the PEM certificate, if applicable.
-        """
-        profiling_tags_script_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
-        """
-elif False:
-    ProjectConnectorsDarwiniumArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsDarwiniumArgsDict(TypedDict):
+    journey_name: pulumi.Input[_builtins.str]
+    """
+    The name of the Darwinium journey to use for profiling.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    node_name: pulumi.Input[_builtins.str]
+    """
+    The name of the Darwinium node.
+    """
+    pem_certificate: pulumi.Input[_builtins.str]
+    """
+    The PEM certificate for client authentication.
+    """
+    private_key: pulumi.Input[_builtins.str]
+    """
+    The private key for client authentication.
+    """
+    web_api_name: pulumi.Input[_builtins.str]
+    """
+    The name of the Darwinium Web API to use.
+    """
+    default_result: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The default result to return if no result is available.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    native_api_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The name of the Darwinium Native Mobile API to use.
+    """
+    native_blob_key_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The key name for the native profiling blob sent via the client parameter. If not provided, the default key of 'nativeProfilingBlob' will be used.
+    """
+    passphrase: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The passphrase for the PEM certificate, if applicable.
+    """
+    profiling_tags_script_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The custom URL where the Darwinium Tags script is hosted. If not provided, the default Darwinium script URL will be used.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsDarwiniumArgs:
@@ -15016,43 +14693,40 @@ class ProjectConnectorsDarwiniumArgs:
         pulumi.set(self, "profiling_tags_script_url", value)
 
 
-if not MYPY:
-    class ProjectConnectorsDatadogArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The unique Datadog organization key.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        mask_pii: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to mask personally identifiable information in the logs.
-        """
-        site: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsDatadogArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsDatadogArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The unique Datadog organization key.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsDatadogAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    mask_pii: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to mask personally identifiable information in the logs.
+    """
+    site: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsDatadogArgs:
@@ -15199,22 +14873,19 @@ class ProjectConnectorsDatadogArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsDatadogAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsDatadogAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsDatadogAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsDatadogAuditFilterArgs:
@@ -15268,23 +14939,20 @@ class ProjectConnectorsDatadogAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsDevrevGrowArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        Authentication to DevRev APIs requires a personal access token (PAT).
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsDevrevGrowArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsDevrevGrowArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    Authentication to DevRev APIs requires a personal access token (PAT).
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsDevrevGrowArgs:
@@ -15351,39 +15019,36 @@ class ProjectConnectorsDevrevGrowArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsDoceboArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        The Docebo api base url.
-        """
-        client_id: pulumi.Input[_builtins.str]
-        """
-        The Docebo OAuth 2.0 app client ID.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        The Docebo OAuth 2.0 app client secret.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        password: pulumi.Input[_builtins.str]
-        """
-        The Docebo user's password.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        The Docebo username.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsDoceboArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsDoceboArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    The Docebo api base url.
+    """
+    client_id: pulumi.Input[_builtins.str]
+    """
+    The Docebo OAuth 2.0 app client ID.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    The Docebo OAuth 2.0 app client secret.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    password: pulumi.Input[_builtins.str]
+    """
+    The Docebo user's password.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The Docebo username.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsDoceboArgs:
@@ -15510,35 +15175,32 @@ class ProjectConnectorsDoceboArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsEightByEightViberArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The 8x8 API key for authentication.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        sub_account_id: pulumi.Input[_builtins.str]
-        """
-        The 8x8 sub-account ID is required for the Messaging API.
-        """
-        country: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The country code or region where your Viber messaging service is configured.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsEightByEightViberArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsEightByEightViberArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The 8x8 API key for authentication.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    sub_account_id: pulumi.Input[_builtins.str]
+    """
+    The 8x8 sub-account ID is required for the Messaging API.
+    """
+    country: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The country code or region where your Viber messaging service is configured.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsEightByEightViberArgs:
@@ -15652,39 +15314,36 @@ class ProjectConnectorsEightByEightViberArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsEightByEightWhatsappArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The 8x8 API key for authentication.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        sub_account_id: pulumi.Input[_builtins.str]
-        """
-        The 8x8 sub-account ID is required for the Messaging API.
-        """
-        template_id: pulumi.Input[_builtins.str]
-        """
-        The ID of a WhatsApp message template.
-        """
-        country: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The country code or region where your Viber messaging service is configured.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsEightByEightWhatsappArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsEightByEightWhatsappArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The 8x8 API key for authentication.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    sub_account_id: pulumi.Input[_builtins.str]
+    """
+    The 8x8 sub-account ID is required for the Messaging API.
+    """
+    template_id: pulumi.Input[_builtins.str]
+    """
+    The ID of a WhatsApp message template.
+    """
+    country: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The country code or region where your Viber messaging service is configured.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsEightByEightWhatsappArgs:
@@ -15813,23 +15472,20 @@ class ProjectConnectorsEightByEightWhatsappArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsElephantArgsDict(TypedDict):
-        access_key: pulumi.Input[_builtins.str]
-        """
-        The Elephant access key.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsElephantArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsElephantArgsDict(TypedDict):
+    access_key: pulumi.Input[_builtins.str]
+    """
+    The Elephant access key.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsElephantArgs:
@@ -15896,43 +15552,40 @@ class ProjectConnectorsElephantArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsExternalTokenHttpArgsDict(TypedDict):
-        endpoint: pulumi.Input[_builtins.str]
-        """
-        The endpoint to get the token from (Using POST method). Descope will send the user information in the body of the request, and should return a JSON response with a 'token' string field.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsExternalTokenHttpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsExternalTokenHttpArgsDict(TypedDict):
+    endpoint: pulumi.Input[_builtins.str]
+    """
+    The endpoint to get the token from (Using POST method). Descope will send the user information in the body of the request, and should return a JSON response with a 'token' string field.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsExternalTokenHttpArgs:
@@ -16079,22 +15732,19 @@ class ProjectConnectorsExternalTokenHttpArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsExternalTokenHttpAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsExternalTokenHttpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsExternalTokenHttpAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsExternalTokenHttpAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsExternalTokenHttpAuthenticationArgs:
@@ -16151,18 +15801,15 @@ class ProjectConnectorsExternalTokenHttpAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgs:
@@ -16201,18 +15848,15 @@ class ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsExternalTokenHttpAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsExternalTokenHttpAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsExternalTokenHttpAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsExternalTokenHttpAuthenticationBasicArgs:
@@ -16251,39 +15895,36 @@ class ProjectConnectorsExternalTokenHttpAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsFingerprintArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        public_api_key: pulumi.Input[_builtins.str]
-        """
-        The Fingerprint public API key.
-        """
-        secret_api_key: pulumi.Input[_builtins.str]
-        """
-        The Fingerprint secret API key.
-        """
-        cloudflare_endpoint_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Cloudflare integration Endpoint URL.
-        """
-        cloudflare_script_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Cloudflare integration Script URL.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_cloudflare_integration: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
-        """
-elif False:
-    ProjectConnectorsFingerprintArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsFingerprintArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    public_api_key: pulumi.Input[_builtins.str]
+    """
+    The Fingerprint public API key.
+    """
+    secret_api_key: pulumi.Input[_builtins.str]
+    """
+    The Fingerprint secret API key.
+    """
+    cloudflare_endpoint_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Cloudflare integration Endpoint URL.
+    """
+    cloudflare_script_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Cloudflare integration Script URL.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_cloudflare_integration: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Enable to configure the relevant Cloudflare integration parameters if Cloudflare integration is set in your Fingerprint account.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsFingerprintArgs:
@@ -16413,23 +16054,20 @@ class ProjectConnectorsFingerprintArgs:
         pulumi.set(self, "use_cloudflare_integration", value)
 
 
-if not MYPY:
-    class ProjectConnectorsFingerprintDescopeArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        custom_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The custom domain to fetch
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsFingerprintDescopeArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsFingerprintDescopeArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    custom_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The custom domain to fetch
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsFingerprintDescopeArgs:
@@ -16497,23 +16135,20 @@ class ProjectConnectorsFingerprintDescopeArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsFirebaseAdminArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        service_account: pulumi.Input[_builtins.str]
-        """
-        The Firebase service account JSON.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsFirebaseAdminArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsFirebaseAdminArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    service_account: pulumi.Input[_builtins.str]
+    """
+    The Firebase service account JSON.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsFirebaseAdminArgs:
@@ -16580,43 +16215,40 @@ class ProjectConnectorsFirebaseAdminArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsForterArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        The Forter secret key.
-        """
-        site_id: pulumi.Input[_builtins.str]
-        """
-        The Forter site ID.
-        """
-        api_version: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Forter API version.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_ip_address: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Override the user IP address.
-        """
-        override_user_email: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Override the user email.
-        """
-        overrides: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
-        """
-elif False:
-    ProjectConnectorsForterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsForterArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_key: pulumi.Input[_builtins.str]
+    """
+    The Forter secret key.
+    """
+    site_id: pulumi.Input[_builtins.str]
+    """
+    The Forter site ID.
+    """
+    api_version: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Forter API version.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_ip_address: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Override the user IP address.
+    """
+    override_user_email: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Override the user email.
+    """
+    overrides: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Override the user's IP address or email so that Forter can provide a specific decision or recommendation. Contact the Forter team for further details. Note: Overriding the user IP address or email is intended for testing purpose and should not be utilized in production environments.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsForterArgs:
@@ -16762,47 +16394,44 @@ class ProjectConnectorsForterArgs:
         pulumi.set(self, "overrides", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericEmailGatewayArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        post_url: pulumi.Input[_builtins.str]
-        """
-        The URL of the post email request
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-        sender: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The sender address
-        """
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsGenericEmailGatewayArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericEmailGatewayArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    post_url: pulumi.Input[_builtins.str]
+    """
+    The URL of the post email request
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
+    sender: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The sender address
+    """
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericEmailGatewayArgs:
@@ -16965,22 +16594,19 @@ class ProjectConnectorsGenericEmailGatewayArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericEmailGatewayAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsGenericEmailGatewayAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericEmailGatewayAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericEmailGatewayAuthenticationArgs:
@@ -17037,18 +16663,15 @@ class ProjectConnectorsGenericEmailGatewayAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgs:
@@ -17087,18 +16710,15 @@ class ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgs:
@@ -17137,47 +16757,44 @@ class ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericSmsGatewayArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        post_url: pulumi.Input[_builtins.str]
-        """
-        The URL of the post message request
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-        sender: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The sender number
-        """
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsGenericSmsGatewayArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericSmsGatewayArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    post_url: pulumi.Input[_builtins.str]
+    """
+    The URL of the post message request
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
+    sender: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The sender number
+    """
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericSmsGatewayArgs:
@@ -17340,22 +16957,19 @@ class ProjectConnectorsGenericSmsGatewayArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericSmsGatewayAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsGenericSmsGatewayAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericSmsGatewayAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericSmsGatewayAuthenticationArgs:
@@ -17412,18 +17026,15 @@ class ProjectConnectorsGenericSmsGatewayAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs:
@@ -17462,18 +17073,15 @@ class ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs:
@@ -17512,35 +17120,32 @@ class ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGoogleCloudLoggingArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        service_account_key: pulumi.Input[_builtins.str]
-        """
-        A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsGoogleCloudLoggingArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGoogleCloudLoggingArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    service_account_key: pulumi.Input[_builtins.str]
+    """
+    A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGoogleCloudLoggingArgs:
@@ -17655,22 +17260,19 @@ class ProjectConnectorsGoogleCloudLoggingArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGoogleCloudLoggingAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGoogleCloudLoggingAuditFilterArgs:
@@ -17724,27 +17326,24 @@ class ProjectConnectorsGoogleCloudLoggingAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGoogleCloudTranslationArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        project_id: pulumi.Input[_builtins.str]
-        """
-        The Google Cloud project ID where the Google Cloud Translation is managed.
-        """
-        service_account_json: pulumi.Input[_builtins.str]
-        """
-        Service Account JSON associated with the current project.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsGoogleCloudTranslationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGoogleCloudTranslationArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    project_id: pulumi.Input[_builtins.str]
+    """
+    The Google Cloud project ID where the Google Cloud Translation is managed.
+    """
+    service_account_json: pulumi.Input[_builtins.str]
+    """
+    Service Account JSON associated with the current project.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsGoogleCloudTranslationArgs:
@@ -17826,35 +17425,32 @@ class ProjectConnectorsGoogleCloudTranslationArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsGoogleMapsPlaceArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        public_api_key: pulumi.Input[_builtins.str]
-        """
-        The Google Maps Places public API key.
-        """
-        address_types: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The address types to return.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        language: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The language in which to return results.
-        """
-        region: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The region code, specified as a CLDR two-character region code.
-        """
-elif False:
-    ProjectConnectorsGoogleMapsPlaceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsGoogleMapsPlaceArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    public_api_key: pulumi.Input[_builtins.str]
+    """
+    The Google Maps Places public API key.
+    """
+    address_types: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The address types to return.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    language: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The language in which to return results.
+    """
+    region: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The region code, specified as a CLDR two-character region code.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsGoogleMapsPlaceArgs:
@@ -17969,39 +17565,36 @@ class ProjectConnectorsGoogleMapsPlaceArgs:
         pulumi.set(self, "region", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHcaptchaArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
-        """
-        site_key: pulumi.Input[_builtins.str]
-        """
-        The site key is used to invoke hCaptcha service on your site or mobile application.
-        """
-        assessment_score: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
-        """
-        bot_threshold: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
-        """
-elif False:
-    ProjectConnectorsHcaptchaArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHcaptchaArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_key: pulumi.Input[_builtins.str]
+    """
+    The secret key authorizes communication between Descope backend and the hCaptcha server to verify the user's response.
+    """
+    site_key: pulumi.Input[_builtins.str]
+    """
+    The site key is used to invoke hCaptcha service on your site or mobile application.
+    """
+    assessment_score: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+    """
+    bot_threshold: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHcaptchaArgs:
@@ -18131,19 +17724,16 @@ class ProjectConnectorsHcaptchaArgs:
         pulumi.set(self, "override_assessment", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHibpArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsHibpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHibpArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsHibpArgs:
@@ -18195,47 +17785,44 @@ class ProjectConnectorsHibpArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHttpArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        The base URL to fetch
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        include_headers_in_context: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
-        """
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsHttpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHttpArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    The base URL to fetch
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    hmac_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    include_headers_in_context: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+    """
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHttpArgs:
@@ -18398,22 +17985,19 @@ class ProjectConnectorsHttpArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHttpAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsHttpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHttpAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsHttpAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationArgs:
@@ -18470,18 +18054,15 @@ class ProjectConnectorsHttpAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHttpAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsHttpAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHttpAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationApiKeyArgs:
@@ -18520,18 +18101,15 @@ class ProjectConnectorsHttpAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHttpAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsHttpAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHttpAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHttpAuthenticationBasicArgs:
@@ -18570,31 +18148,28 @@ class ProjectConnectorsHttpAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsHubspotArgsDict(TypedDict):
-        access_token: pulumi.Input[_builtins.str]
-        """
-        The HubSpot private API access token generated for the Descope service.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsHubspotArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsHubspotArgsDict(TypedDict):
+    access_token: pulumi.Input[_builtins.str]
+    """
+    The HubSpot private API access token generated for the Descope service.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The base URL of the HubSpot API, when using a custom domain in HubSpot, default value is https://api.hubapi.com .
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsHubspotArgs:
@@ -18693,31 +18268,28 @@ class ProjectConnectorsHubspotArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsIncodeArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        Your InCode API key.
-        """
-        api_url: pulumi.Input[_builtins.str]
-        """
-        The base URL of the Incode API
-        """
-        flow_id: pulumi.Input[_builtins.str]
-        """
-        Your wanted InCode's flow ID.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsIncodeArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsIncodeArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    Your InCode API key.
+    """
+    api_url: pulumi.Input[_builtins.str]
+    """
+    The base URL of the Incode API
+    """
+    flow_id: pulumi.Input[_builtins.str]
+    """
+    Your wanted InCode's flow ID.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsIncodeArgs:
@@ -18814,27 +18386,24 @@ class ProjectConnectorsIncodeArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsIntercomArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The Intercom access token.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        region: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Regional Hosting - US, EU, or AU. default: US
-        """
-elif False:
-    ProjectConnectorsIntercomArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsIntercomArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The Intercom access token.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    region: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Regional Hosting - US, EU, or AU. default: US
+    """
 
 @pulumi.input_type
 class ProjectConnectorsIntercomArgs:
@@ -18917,51 +18486,48 @@ class ProjectConnectorsIntercomArgs:
         pulumi.set(self, "region", value)
 
 
-if not MYPY:
-    class ProjectConnectorsLdapArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        server_url: pulumi.Input[_builtins.str]
-        """
-        The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
-        """
-        bind_dn: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Distinguished Name to bind with for searching.
-        """
-        bind_password: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The password for the bind DN.
-        """
-        ca_certificate: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Certificate Authority certificate in PEM format for validating the server certificate.
-        """
-        client_certificate: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client certificate in PEM format for mTLS authentication.
-        """
-        client_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The client private key in PEM format for mTLS authentication.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        reject_unauthorized: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Reject connections to LDAP servers with invalid certificates.
-        """
-        use_mtls: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enable mutual TLS authentication for LDAP connection.
-        """
-elif False:
-    ProjectConnectorsLdapArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsLdapArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    server_url: pulumi.Input[_builtins.str]
+    """
+    The LDAP server URL (e.g., ldap://localhost:389 or ldaps://localhost:636 for SSL/TLS).
+    """
+    bind_dn: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Distinguished Name to bind with for searching.
+    """
+    bind_password: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The password for the bind DN.
+    """
+    ca_certificate: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Certificate Authority certificate in PEM format for validating the server certificate.
+    """
+    client_certificate: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client certificate in PEM format for mTLS authentication.
+    """
+    client_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The client private key in PEM format for mTLS authentication.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    reject_unauthorized: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Reject connections to LDAP servers with invalid certificates.
+    """
+    use_mtls: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Enable mutual TLS authentication for LDAP connection.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsLdapArgs:
@@ -19140,39 +18706,36 @@ class ProjectConnectorsLdapArgs:
         pulumi.set(self, "use_mtls", value)
 
 
-if not MYPY:
-    class ProjectConnectorsLokaliseArgsDict(TypedDict):
-        api_token: pulumi.Input[_builtins.str]
-        """
-        Lokalise API token.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        project_id: pulumi.Input[_builtins.str]
-        """
-        Lokalise project ID.
-        """
-        card_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        team_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Lokalise team ID. If not provided, the oldest available team will be used.
-        """
-        translation_provider: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
-        """
-elif False:
-    ProjectConnectorsLokaliseArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsLokaliseArgsDict(TypedDict):
+    api_token: pulumi.Input[_builtins.str]
+    """
+    Lokalise API token.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    project_id: pulumi.Input[_builtins.str]
+    """
+    Lokalise project ID.
+    """
+    card_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    (Optional) The ID of the payment card to use for translation orders. If not provided, the team credit will be used.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    team_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Lokalise team ID. If not provided, the oldest available team will be used.
+    """
+    translation_provider: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The translation provider to use ('gengo', 'google', 'lokalise', 'deepl'), default is 'deepl'.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsLokaliseArgs:
@@ -19302,63 +18865,60 @@ class ProjectConnectorsLokaliseArgs:
         pulumi.set(self, "translation_provider", value)
 
 
-if not MYPY:
-    class ProjectConnectorsMixpanelArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        project_token: pulumi.Input[_builtins.str]
-        """
-        The unique Mixpanel project token used to identify the project where data will be sent.
-        """
-        api_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Mixpanel API secret key used for authenticating API requests.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMixpanelAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        eu_residency: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Indicates if your Mixpanel project data is stored in the EU region.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        logs_prefix: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Specify a custom prefix for all log fields. The default prefix is `descope.`.
-        """
-        override_logs_prefix: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enable this option to use a custom prefix for log fields.
-        """
-        project_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The unique identifier for your Mixpanel project.
-        """
-        service_account_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Mixpanel service account secret used for integration.
-        """
-        service_account_username: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Mixpanel service account username used for integration.
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsMixpanelArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsMixpanelArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    project_token: pulumi.Input[_builtins.str]
+    """
+    The unique Mixpanel project token used to identify the project where data will be sent.
+    """
+    api_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Mixpanel API secret key used for authenticating API requests.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsMixpanelAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    eu_residency: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Indicates if your Mixpanel project data is stored in the EU region.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    logs_prefix: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Specify a custom prefix for all log fields. The default prefix is `descope.`.
+    """
+    override_logs_prefix: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Enable this option to use a custom prefix for log fields.
+    """
+    project_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The unique identifier for your Mixpanel project.
+    """
+    service_account_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Mixpanel service account secret used for integration.
+    """
+    service_account_username: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Mixpanel service account username used for integration.
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsMixpanelArgs:
@@ -19585,22 +19145,19 @@ class ProjectConnectorsMixpanelArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsMixpanelAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsMixpanelAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsMixpanelAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsMixpanelAuditFilterArgs:
@@ -19654,39 +19211,36 @@ class ProjectConnectorsMixpanelAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsMparticleArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The mParticle Server to Server Key generated for the Descope service.
-        """
-        api_secret: pulumi.Input[_builtins.str]
-        """
-        The mParticle Server to Server Secret generated for the Descope service.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
-        """
-        default_environment: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsMparticleArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsMparticleArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The mParticle Server to Server Key generated for the Descope service.
+    """
+    api_secret: pulumi.Input[_builtins.str]
+    """
+    The mParticle Server to Server Secret generated for the Descope service.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The base URL of the mParticle API, when using a custom domain in mParticle. default value is https://s2s.mparticle.com/
+    """
+    default_environment: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The default environment of which connector send data to, either “production” or “development“. default value: production. This field can be overridden per event (see at flows).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsMparticleArgs:
@@ -19816,47 +19370,44 @@ class ProjectConnectorsMparticleArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsNewrelicArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        Ingest License Key of the account you want to report data to.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        data_center: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        logs_prefix: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Specify a custom prefix for all log fields. The default prefix is `descope.`.
-        """
-        override_logs_prefix: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enable this option to use a custom prefix for log fields.
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsNewrelicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsNewrelicArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    Ingest License Key of the account you want to report data to.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsNewrelicAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    data_center: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    logs_prefix: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Specify a custom prefix for all log fields. The default prefix is `descope.`.
+    """
+    override_logs_prefix: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Enable this option to use a custom prefix for log fields.
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsNewrelicArgs:
@@ -20019,22 +19570,19 @@ class ProjectConnectorsNewrelicArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsNewrelicAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsNewrelicAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsNewrelicAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsNewrelicAuditFilterArgs:
@@ -20088,51 +19636,48 @@ class ProjectConnectorsNewrelicAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsOpentelemetryArgsDict(TypedDict):
-        endpoint: pulumi.Input[_builtins.str]
-        """
-        The OTLP endpoint URL.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsOpentelemetryAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        authentication: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationArgsDict']]
-        """
-        Authentication Information
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        The headers to send with the request
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        insecure: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Will ignore certificate errors raised by the client
-        """
-        protocol: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Protocol to use for OTLP: http or grpc.
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsOpentelemetryArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsOpentelemetryArgsDict(TypedDict):
+    endpoint: pulumi.Input[_builtins.str]
+    """
+    The OTLP endpoint URL.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsOpentelemetryAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    authentication: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationArgsDict']]
+    """
+    Authentication Information
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    headers: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    The headers to send with the request
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    insecure: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Will ignore certificate errors raised by the client
+    """
+    protocol: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Protocol to use for OTLP: http or grpc.
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsOpentelemetryArgs:
@@ -20311,22 +19856,19 @@ class ProjectConnectorsOpentelemetryArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsOpentelemetryAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsOpentelemetryAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsOpentelemetryAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsOpentelemetryAuditFilterArgs:
@@ -20380,22 +19922,19 @@ class ProjectConnectorsOpentelemetryAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsOpentelemetryAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationApiKeyArgsDict']]
-        """
-        API key authentication configuration.
-        """
-        basic: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationBasicArgsDict']]
-        """
-        Basic authentication credentials (username and password).
-        """
-        bearer_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Bearer token for HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsOpentelemetryAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsOpentelemetryAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationApiKeyArgsDict']]
+    """
+    API key authentication configuration.
+    """
+    basic: NotRequired[pulumi.Input['ProjectConnectorsOpentelemetryAuthenticationBasicArgsDict']]
+    """
+    Basic authentication credentials (username and password).
+    """
+    bearer_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Bearer token for HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsOpentelemetryAuthenticationArgs:
@@ -20452,18 +19991,15 @@ class ProjectConnectorsOpentelemetryAuthenticationArgs:
         pulumi.set(self, "bearer_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsOpentelemetryAuthenticationApiKeyArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The API key.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The API secret.
-        """
-elif False:
-    ProjectConnectorsOpentelemetryAuthenticationApiKeyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsOpentelemetryAuthenticationApiKeyArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The API key.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The API secret.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs:
@@ -20502,18 +20038,15 @@ class ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs:
         pulumi.set(self, "token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsOpentelemetryAuthenticationBasicArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for basic HTTP authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for basic HTTP authentication.
-        """
-elif False:
-    ProjectConnectorsOpentelemetryAuthenticationBasicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsOpentelemetryAuthenticationBasicArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for basic HTTP authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for basic HTTP authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsOpentelemetryAuthenticationBasicArgs:
@@ -20552,27 +20085,24 @@ class ProjectConnectorsOpentelemetryAuthenticationBasicArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class ProjectConnectorsPingDirectoryArgsDict(TypedDict):
-        host: pulumi.Input[_builtins.str]
-        """
-        PingDirectory's REST API host.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        port: pulumi.Input[_builtins.float]
-        """
-        PingDirectory's REST API port.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsPingDirectoryArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsPingDirectoryArgsDict(TypedDict):
+    host: pulumi.Input[_builtins.str]
+    """
+    PingDirectory's REST API host.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    port: pulumi.Input[_builtins.float]
+    """
+    PingDirectory's REST API port.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsPingDirectoryArgs:
@@ -20654,31 +20184,28 @@ class ProjectConnectorsPingDirectoryArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsPostmarkArgsDict(TypedDict):
-        email_from: pulumi.Input[_builtins.str]
-        """
-        The email address that will appear in the 'From' field of the sent email
-        """
-        message_stream_id: pulumi.Input[_builtins.str]
-        """
-        The ID of the message stream to use for the email
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        server_api_token: pulumi.Input[_builtins.str]
-        """
-        The API token for authenticating with the Postmark server
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsPostmarkArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsPostmarkArgsDict(TypedDict):
+    email_from: pulumi.Input[_builtins.str]
+    """
+    The email address that will appear in the 'From' field of the sent email
+    """
+    message_stream_id: pulumi.Input[_builtins.str]
+    """
+    The ID of the message stream to use for the email
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    server_api_token: pulumi.Input[_builtins.str]
+    """
+    The API token for authenticating with the Postmark server
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsPostmarkArgs:
@@ -20775,39 +20302,36 @@ class ProjectConnectorsPostmarkArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsRadarArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        public_api_key: pulumi.Input[_builtins.str]
-        """
-        The Radar publishable API key.
-        """
-        address_types: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The address types to return.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        language: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The language in which to return results.
-        """
-        limit: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        The maximum number of results to return.
-        """
-        region: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The region code, specified as a two-letter ISO 3166 code.
-        """
-elif False:
-    ProjectConnectorsRadarArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsRadarArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    public_api_key: pulumi.Input[_builtins.str]
+    """
+    The Radar publishable API key.
+    """
+    address_types: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The address types to return.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    language: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The language in which to return results.
+    """
+    limit: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    The maximum number of results to return.
+    """
+    region: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The region code, specified as a two-letter ISO 3166 code.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsRadarArgs:
@@ -20938,35 +20462,32 @@ class ProjectConnectorsRadarArgs:
         pulumi.set(self, "region", value)
 
 
-if not MYPY:
-    class ProjectConnectorsRecaptchaArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
-        """
-        site_key: pulumi.Input[_builtins.str]
-        """
-        The site key is used to invoke reCAPTCHA service on your site or mobile application.
-        """
-        assessment_score: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
-        """
-elif False:
-    ProjectConnectorsRecaptchaArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsRecaptchaArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_key: pulumi.Input[_builtins.str]
+    """
+    The secret key authorizes communication between Descope backend and the reCAPTCHA server to verify the user's response.
+    """
+    site_key: pulumi.Input[_builtins.str]
+    """
+    The site key is used to invoke reCAPTCHA service on your site or mobile application.
+    """
+    assessment_score: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsRecaptchaArgs:
@@ -21080,47 +20601,44 @@ class ProjectConnectorsRecaptchaArgs:
         pulumi.set(self, "override_assessment", value)
 
 
-if not MYPY:
-    class ProjectConnectorsRecaptchaEnterpriseArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        API key associated with the current project.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        project_id: pulumi.Input[_builtins.str]
-        """
-        The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
-        """
-        site_key: pulumi.Input[_builtins.str]
-        """
-        The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
-        """
-        assessment_score: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
-        """
-        base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
-        """
-        bot_threshold: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
-        """
-elif False:
-    ProjectConnectorsRecaptchaEnterpriseArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsRecaptchaEnterpriseArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    API key associated with the current project.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    project_id: pulumi.Input[_builtins.str]
+    """
+    The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
+    """
+    site_key: pulumi.Input[_builtins.str]
+    """
+    The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+    """
+    assessment_score: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
+    """
+    base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+    """
+    bot_threshold: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_assessment: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsRecaptchaEnterpriseArgs:
@@ -21281,31 +20799,28 @@ class ProjectConnectorsRecaptchaEnterpriseArgs:
         pulumi.set(self, "override_assessment", value)
 
 
-if not MYPY:
-    class ProjectConnectorsRekognitionArgsDict(TypedDict):
-        access_key_id: pulumi.Input[_builtins.str]
-        """
-        The AWS access key ID
-        """
-        collection_id: pulumi.Input[_builtins.str]
-        """
-        The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_access_key: pulumi.Input[_builtins.str]
-        """
-        The AWS secret access key
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsRekognitionArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsRekognitionArgsDict(TypedDict):
+    access_key_id: pulumi.Input[_builtins.str]
+    """
+    The AWS access key ID
+    """
+    collection_id: pulumi.Input[_builtins.str]
+    """
+    The collection to store registered users in. Should match `[a-zA-Z0-9_.-]+` pattern. Changing this will cause losing existing users.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_access_key: pulumi.Input[_builtins.str]
+    """
+    The AWS secret access key
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsRekognitionArgs:
@@ -21402,35 +20917,32 @@ class ProjectConnectorsRekognitionArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSalesforceArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        The Salesforce API base URL.
-        """
-        client_id: pulumi.Input[_builtins.str]
-        """
-        The consumer key of the connected app.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        The consumer secret of the connected app.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        version: pulumi.Input[_builtins.str]
-        """
-        REST API Version.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSalesforceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSalesforceArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    The Salesforce API base URL.
+    """
+    client_id: pulumi.Input[_builtins.str]
+    """
+    The consumer key of the connected app.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    The consumer secret of the connected app.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    version: pulumi.Input[_builtins.str]
+    """
+    REST API Version.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSalesforceArgs:
@@ -21542,39 +21054,36 @@ class ProjectConnectorsSalesforceArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSalesforceMarketingCloudArgsDict(TypedDict):
-        client_id: pulumi.Input[_builtins.str]
-        """
-        Client ID issued when you create the API integration in Installed Packages.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        Client secret issued when you create the API integration in Installed Packages.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        subdomain: pulumi.Input[_builtins.str]
-        """
-        The Salesforce Marketing Cloud endpoint subdomain.
-        """
-        account_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Account identifier, or MID, of the target business unit.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        scope: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Space-separated list of data-access permissions for your connector.
-        """
-elif False:
-    ProjectConnectorsSalesforceMarketingCloudArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSalesforceMarketingCloudArgsDict(TypedDict):
+    client_id: pulumi.Input[_builtins.str]
+    """
+    Client ID issued when you create the API integration in Installed Packages.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    Client secret issued when you create the API integration in Installed Packages.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    subdomain: pulumi.Input[_builtins.str]
+    """
+    The Salesforce Marketing Cloud endpoint subdomain.
+    """
+    account_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Account identifier, or MID, of the target business unit.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    scope: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Space-separated list of data-access permissions for your connector.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSalesforceMarketingCloudArgs:
@@ -21703,31 +21212,28 @@ class ProjectConnectorsSalesforceMarketingCloudArgs:
         pulumi.set(self, "scope", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSardineArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        The base URL for the Sardine API, e.g.: https://api.sandbox.sardine.ai, https://api.sardine.ai, https://api.eu.sardine.ai.
-        """
-        client_id: pulumi.Input[_builtins.str]
-        """
-        The Sardine Client ID.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        The Sardine Client Secret.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSardineArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSardineArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    The base URL for the Sardine API, e.g.: https://api.sandbox.sardine.ai, https://api.sardine.ai, https://api.eu.sardine.ai.
+    """
+    client_id: pulumi.Input[_builtins.str]
+    """
+    The Sardine Client ID.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    The Sardine Client Secret.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSardineArgs:
@@ -21824,51 +21330,48 @@ class ProjectConnectorsSardineArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSeArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        region: pulumi.Input[_builtins.str]
-        """
-        AWS region to send requests to (e.g. `us-west-2`).
-        """
-        sender: pulumi.Input['ProjectConnectorsSeSenderArgsDict']
-        """
-        The sender details that should be displayed in the email message.
-        """
-        access_key_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        AWS Access key ID.
-        """
-        auth_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The authentication type to use.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional endpoint URL (hostname only or fully qualified URI).
-        """
-        external_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The external ID to use when assuming the role.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        role_arn: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Amazon Resource Name (ARN) of the role to assume.
-        """
-        secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        AWS Secret Access Key.
-        """
-elif False:
-    ProjectConnectorsSeArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSeArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    AWS region to send requests to (e.g. `us-west-2`).
+    """
+    sender: pulumi.Input['ProjectConnectorsSeSenderArgsDict']
+    """
+    The sender details that should be displayed in the email message.
+    """
+    access_key_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    AWS Access key ID.
+    """
+    auth_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The authentication type to use.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional endpoint URL (hostname only or fully qualified URI).
+    """
+    external_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The external ID to use when assuming the role.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    role_arn: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Amazon Resource Name (ARN) of the role to assume.
+    """
+    secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    AWS Secret Access Key.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSeArgs:
@@ -22046,18 +21549,15 @@ class ProjectConnectorsSeArgs:
         pulumi.set(self, "secret", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSeSenderArgsDict(TypedDict):
-        email: pulumi.Input[_builtins.str]
-        """
-        The email address that will appear as the sender of the email.
-        """
-        name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The display name that will appear as the sender of the email.
-        """
-elif False:
-    ProjectConnectorsSeSenderArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSeSenderArgsDict(TypedDict):
+    email: pulumi.Input[_builtins.str]
+    """
+    The email address that will appear as the sender of the email.
+    """
+    name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The display name that will appear as the sender of the email.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSeSenderArgs:
@@ -22097,27 +21597,24 @@ class ProjectConnectorsSeSenderArgs:
         pulumi.set(self, "name", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSegmentArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        write_key: pulumi.Input[_builtins.str]
-        """
-        The Segment Write Key generated for the Descope service.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        host: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The base URL of the Segment API, when using a custom domain in Segment.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSegmentArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSegmentArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    write_key: pulumi.Input[_builtins.str]
+    """
+    The Segment Write Key generated for the Descope service.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    host: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The base URL of the Segment API, when using a custom domain in Segment.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSegmentArgs:
@@ -22200,27 +21697,24 @@ class ProjectConnectorsSegmentArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSendgridArgsDict(TypedDict):
-        authentication: pulumi.Input['ProjectConnectorsSendgridAuthenticationArgsDict']
-        """
-        SendGrid API authentication configuration.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        sender: pulumi.Input['ProjectConnectorsSendgridSenderArgsDict']
-        """
-        The sender details that should be displayed in the email message.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSendgridArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSendgridArgsDict(TypedDict):
+    authentication: pulumi.Input['ProjectConnectorsSendgridAuthenticationArgsDict']
+    """
+    SendGrid API authentication configuration.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    sender: pulumi.Input['ProjectConnectorsSendgridSenderArgsDict']
+    """
+    The sender details that should be displayed in the email message.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSendgridArgs:
@@ -22302,14 +21796,11 @@ class ProjectConnectorsSendgridArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSendgridAuthenticationArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        SendGrid API key for authentication.
-        """
-elif False:
-    ProjectConnectorsSendgridAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSendgridAuthenticationArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    SendGrid API key for authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSendgridAuthenticationArgs:
@@ -22333,18 +21824,15 @@ class ProjectConnectorsSendgridAuthenticationArgs:
         pulumi.set(self, "api_key", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSendgridSenderArgsDict(TypedDict):
-        email: pulumi.Input[_builtins.str]
-        """
-        The email address that will appear as the sender of the email.
-        """
-        name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The display name that will appear as the sender of the email.
-        """
-elif False:
-    ProjectConnectorsSendgridSenderArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSendgridSenderArgsDict(TypedDict):
+    email: pulumi.Input[_builtins.str]
+    """
+    The email address that will appear as the sender of the email.
+    """
+    name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The display name that will appear as the sender of the email.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSendgridSenderArgs:
@@ -22384,23 +21872,20 @@ class ProjectConnectorsSendgridSenderArgs:
         pulumi.set(self, "name", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSlackArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        token: pulumi.Input[_builtins.str]
-        """
-        The OAuth token for Slack's Bot User, used to authenticate API requests.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSlackArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSlackArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    token: pulumi.Input[_builtins.str]
+    """
+    The OAuth token for Slack's Bot User, used to authenticate API requests.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSlackArgs:
@@ -22467,31 +21952,28 @@ class ProjectConnectorsSlackArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSmartlingArgsDict(TypedDict):
-        account_uid: pulumi.Input[_builtins.str]
-        """
-        The account UID for the Smartling account.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        user_identifier: pulumi.Input[_builtins.str]
-        """
-        The user identifier for the Smartling account.
-        """
-        user_secret: pulumi.Input[_builtins.str]
-        """
-        The user secret for the Smartling account.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsSmartlingArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSmartlingArgsDict(TypedDict):
+    account_uid: pulumi.Input[_builtins.str]
+    """
+    The account UID for the Smartling account.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    user_identifier: pulumi.Input[_builtins.str]
+    """
+    The user identifier for the Smartling account.
+    """
+    user_secret: pulumi.Input[_builtins.str]
+    """
+    The user secret for the Smartling account.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsSmartlingArgs:
@@ -22588,35 +22070,32 @@ class ProjectConnectorsSmartlingArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSmtpArgsDict(TypedDict):
-        authentication: pulumi.Input['ProjectConnectorsSmtpAuthenticationArgsDict']
-        """
-        SMTP server authentication credentials and method.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        sender: pulumi.Input['ProjectConnectorsSmtpSenderArgsDict']
-        """
-        The sender details that should be displayed in the email message.
-        """
-        server: pulumi.Input['ProjectConnectorsSmtpServerArgsDict']
-        """
-        SMTP server connection details including hostname and port.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether the connector should send all requests from specific static IPs.
-        """
-elif False:
-    ProjectConnectorsSmtpArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSmtpArgsDict(TypedDict):
+    authentication: pulumi.Input['ProjectConnectorsSmtpAuthenticationArgsDict']
+    """
+    SMTP server authentication credentials and method.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    sender: pulumi.Input['ProjectConnectorsSmtpSenderArgsDict']
+    """
+    The sender details that should be displayed in the email message.
+    """
+    server: pulumi.Input['ProjectConnectorsSmtpServerArgsDict']
+    """
+    SMTP server connection details including hostname and port.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    use_static_ips: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether the connector should send all requests from specific static IPs.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSmtpArgs:
@@ -22729,22 +22208,19 @@ class ProjectConnectorsSmtpArgs:
         pulumi.set(self, "use_static_ips", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSmtpAuthenticationArgsDict(TypedDict):
-        password: pulumi.Input[_builtins.str]
-        """
-        Password for SMTP server authentication.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        Username for SMTP server authentication.
-        """
-        method: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        SMTP authentication method (`plain` or `login`).
-        """
-elif False:
-    ProjectConnectorsSmtpAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSmtpAuthenticationArgsDict(TypedDict):
+    password: pulumi.Input[_builtins.str]
+    """
+    Password for SMTP server authentication.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    Username for SMTP server authentication.
+    """
+    method: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    SMTP authentication method (`plain` or `login`).
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSmtpAuthenticationArgs:
@@ -22799,18 +22275,15 @@ class ProjectConnectorsSmtpAuthenticationArgs:
         pulumi.set(self, "method", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSmtpSenderArgsDict(TypedDict):
-        email: pulumi.Input[_builtins.str]
-        """
-        The email address that will appear as the sender of the email.
-        """
-        name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The display name that will appear as the sender of the email.
-        """
-elif False:
-    ProjectConnectorsSmtpSenderArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSmtpSenderArgsDict(TypedDict):
+    email: pulumi.Input[_builtins.str]
+    """
+    The email address that will appear as the sender of the email.
+    """
+    name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The display name that will appear as the sender of the email.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSmtpSenderArgs:
@@ -22850,18 +22323,15 @@ class ProjectConnectorsSmtpSenderArgs:
         pulumi.set(self, "name", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSmtpServerArgsDict(TypedDict):
-        host: pulumi.Input[_builtins.str]
-        """
-        The hostname or IP address of the SMTP server.
-        """
-        port: NotRequired[pulumi.Input[_builtins.int]]
-        """
-        The port number to connect to on the SMTP server.
-        """
-elif False:
-    ProjectConnectorsSmtpServerArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSmtpServerArgsDict(TypedDict):
+    host: pulumi.Input[_builtins.str]
+    """
+    The hostname or IP address of the SMTP server.
+    """
+    port: NotRequired[pulumi.Input[_builtins.int]]
+    """
+    The port number to connect to on the SMTP server.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSmtpServerArgs:
@@ -22901,55 +22371,52 @@ class ProjectConnectorsSmtpServerArgs:
         pulumi.set(self, "port", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSnArgsDict(TypedDict):
-        access_key_id: pulumi.Input[_builtins.str]
-        """
-        AWS Access key ID.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        region: pulumi.Input[_builtins.str]
-        """
-        AWS region to send requests to (e.g. `us-west-2`).
-        """
-        secret: pulumi.Input[_builtins.str]
-        """
-        AWS Secret Access Key.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        endpoint: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional endpoint URL (hostname only or fully qualified URI).
-        """
-        entity_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        organization_number: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use the `origination_number` attribute instead.
-        """
-        origination_number: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
-        """
-        sender_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
-        """
-        template_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
-        """
-elif False:
-    ProjectConnectorsSnArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSnArgsDict(TypedDict):
+    access_key_id: pulumi.Input[_builtins.str]
+    """
+    AWS Access key ID.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    region: pulumi.Input[_builtins.str]
+    """
+    AWS region to send requests to (e.g. `us-west-2`).
+    """
+    secret: pulumi.Input[_builtins.str]
+    """
+    AWS Secret Access Key.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    endpoint: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional endpoint URL (hostname only or fully qualified URI).
+    """
+    entity_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    organization_number: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use the `origination_number` attribute instead.
+    """
+    origination_number: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+    """
+    sender_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
+    """
+    template_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSnArgs:
@@ -23146,43 +22613,40 @@ class ProjectConnectorsSnArgs:
         pulumi.set(self, "template_id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSplunkArgsDict(TypedDict):
-        hec_token: pulumi.Input[_builtins.str]
-        """
-        An HTTP Event Collector token configured on your Splunk project.
-        """
-        hec_url: pulumi.Input[_builtins.str]
-        """
-        The URL to be used accessing your Splunk system, including the appropriate port
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSplunkAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        index: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional index to use for all sent events
-        """
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsSplunkArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSplunkArgsDict(TypedDict):
+    hec_token: pulumi.Input[_builtins.str]
+    """
+    An HTTP Event Collector token configured on your Splunk project.
+    """
+    hec_url: pulumi.Input[_builtins.str]
+    """
+    The URL to be used accessing your Splunk system, including the appropriate port
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSplunkAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    index: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional index to use for all sent events
+    """
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSplunkArgs:
@@ -23328,22 +22792,19 @@ class ProjectConnectorsSplunkArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSplunkAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsSplunkAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSplunkAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSplunkAuditFilterArgs:
@@ -23397,47 +22858,44 @@ class ProjectConnectorsSplunkAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSqlArgsDict(TypedDict):
-        engine_name: pulumi.Input[_builtins.str]
-        """
-        The database engine type.
-        """
-        host: pulumi.Input[_builtins.str]
-        """
-        The database host.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        password: pulumi.Input[_builtins.str]
-        """
-        The database password.
-        """
-        username: pulumi.Input[_builtins.str]
-        """
-        The database username.
-        """
-        database_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The database name.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        port: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        The database port. If not specified, the default port for the selected engine will be used.
-        """
-        service_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The Oracle service name (required for Oracle only).
-        """
-elif False:
-    ProjectConnectorsSqlArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSqlArgsDict(TypedDict):
+    engine_name: pulumi.Input[_builtins.str]
+    """
+    The database engine type.
+    """
+    host: pulumi.Input[_builtins.str]
+    """
+    The database host.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    password: pulumi.Input[_builtins.str]
+    """
+    The database password.
+    """
+    username: pulumi.Input[_builtins.str]
+    """
+    The database username.
+    """
+    database_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The database name.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    port: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    The database port. If not specified, the default port for the selected engine will be used.
+    """
+    service_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The Oracle service name (required for Oracle only).
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSqlArgs:
@@ -23597,35 +23055,32 @@ class ProjectConnectorsSqlArgs:
         pulumi.set(self, "service_name", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSumologicArgsDict(TypedDict):
-        http_source_url: pulumi.Input[_builtins.str]
-        """
-        The URL associated with an HTTP Hosted collector
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enable streaming of audit events.
-        """
-        audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicAuditFilterArgsDict']]]]
-        """
-        Specify which events will be sent to the external audit service (including tenant selection).
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send troubleshooting events.
-        """
-elif False:
-    ProjectConnectorsSumologicArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSumologicArgsDict(TypedDict):
+    http_source_url: pulumi.Input[_builtins.str]
+    """
+    The URL associated with an HTTP Hosted collector
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    audit_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enable streaming of audit events.
+    """
+    audit_filters: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectConnectorsSumologicAuditFilterArgsDict']]]]
+    """
+    Specify which events will be sent to the external audit service (including tenant selection).
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    troubleshoot_log_enabled: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send troubleshooting events.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSumologicArgs:
@@ -23740,22 +23195,19 @@ class ProjectConnectorsSumologicArgs:
         pulumi.set(self, "troubleshoot_log_enabled", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSumologicAuditFilterArgsDict(TypedDict):
-        key: pulumi.Input[_builtins.str]
-        """
-        The field name to filter on (either 'actions' or 'tenants').
-        """
-        operator: pulumi.Input[_builtins.str]
-        """
-        The filter operation to apply ('includes' or 'excludes').
-        """
-        values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
-        """
-        The list of values to match against for the filter.
-        """
-elif False:
-    ProjectConnectorsSumologicAuditFilterArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSumologicAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSumologicAuditFilterArgs:
@@ -23809,51 +23261,48 @@ class ProjectConnectorsSumologicAuditFilterArgs:
         pulumi.set(self, "values", value)
 
 
-if not MYPY:
-    class ProjectConnectorsSupabaseArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        auth_type: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The authentication type to use.
-        """
-        create_users: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
-        """
-        custom_claims_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
-        """
-        A mapping of Descope user fields or JWT claims to Supabase custom claims
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        expiration_time: NotRequired[pulumi.Input[_builtins.float]]
-        """
-        The duration in minutes for which the token is valid.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        private_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
-        """
-        project_base_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Your Supabase Project's API base URL, e.g.: https://\\n\\n.supabase.co.
-        """
-        service_role_api_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The service role API key for your Supabase project, required to create users.
-        """
-        signing_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The signing secret for your Supabase project.
-        """
-elif False:
-    ProjectConnectorsSupabaseArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsSupabaseArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    auth_type: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The authentication type to use.
+    """
+    create_users: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Enable to automatically create users in Supabase when generating tokens. Will only create a new user if one does not already exist. When disabled, only JWT tokens will be generated, WITHOUT user creation.
+    """
+    custom_claims_mapping: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]]]
+    """
+    A mapping of Descope user fields or JWT claims to Supabase custom claims
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    expiration_time: NotRequired[pulumi.Input[_builtins.float]]
+    """
+    The duration in minutes for which the token is valid.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    private_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The private key in JWK format used to sign the JWT. You can generate a key using tools like `npx supabase gen signing-key --algorithm ES256`. Make sure to use the ES256 algorithm.
+    """
+    project_base_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Your Supabase Project's API base URL, e.g.: https://\\n\\n.supabase.co.
+    """
+    service_role_api_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The service role API key for your Supabase project, required to create users.
+    """
+    signing_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The signing secret for your Supabase project.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsSupabaseArgs:
@@ -24033,27 +23482,24 @@ class ProjectConnectorsSupabaseArgs:
         pulumi.set(self, "signing_secret", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTelesignArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The unique Telesign API key
-        """
-        customer_id: pulumi.Input[_builtins.str]
-        """
-        The unique Telesign account Customer ID
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsTelesignArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTelesignArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The unique Telesign API key
+    """
+    customer_id: pulumi.Input[_builtins.str]
+    """
+    The unique Telesign account Customer ID
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsTelesignArgs:
@@ -24135,27 +23581,24 @@ class ProjectConnectorsTelesignArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTraceableArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        The Traceable secret key.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        eu_region: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        EU(Europe) Region deployment of Traceable platform.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsTraceableArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTraceableArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_key: pulumi.Input[_builtins.str]
+    """
+    The Traceable secret key.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    eu_region: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    EU(Europe) Region deployment of Traceable platform.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsTraceableArgs:
@@ -24238,27 +23681,24 @@ class ProjectConnectorsTraceableArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTurnstileArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        secret_key: pulumi.Input[_builtins.str]
-        """
-        The secret key authorizes communication between Descope backend and the Turnstile server to verify the user's response.
-        """
-        site_key: pulumi.Input[_builtins.str]
-        """
-        The site key is used to invoke Turnstile service on your site or mobile application.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsTurnstileArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTurnstileArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    secret_key: pulumi.Input[_builtins.str]
+    """
+    The secret key authorizes communication between Descope backend and the Turnstile server to verify the user's response.
+    """
+    site_key: pulumi.Input[_builtins.str]
+    """
+    The site key is used to invoke Turnstile service on your site or mobile application.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsTurnstileArgs:
@@ -24340,31 +23780,28 @@ class ProjectConnectorsTurnstileArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioCoreArgsDict(TypedDict):
-        account_sid: pulumi.Input[_builtins.str]
-        """
-        Twilio Account SID from your Twilio Console.
-        """
-        authentication: pulumi.Input['ProjectConnectorsTwilioCoreAuthenticationArgsDict']
-        """
-        Twilio authentication credentials (either auth token or API key/secret).
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        senders: pulumi.Input['ProjectConnectorsTwilioCoreSendersArgsDict']
-        """
-        Configuration for SMS and voice message senders.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsTwilioCoreArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioCoreArgsDict(TypedDict):
+    account_sid: pulumi.Input[_builtins.str]
+    """
+    Twilio Account SID from your Twilio Console.
+    """
+    authentication: pulumi.Input['ProjectConnectorsTwilioCoreAuthenticationArgsDict']
+    """
+    Twilio authentication credentials (either auth token or API key/secret).
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    senders: pulumi.Input['ProjectConnectorsTwilioCoreSendersArgsDict']
+    """
+    Configuration for SMS and voice message senders.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreArgs:
@@ -24461,22 +23898,19 @@ class ProjectConnectorsTwilioCoreArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioCoreAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio API Key for authentication (used with API Secret).
-        """
-        api_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio API Secret for authentication (used with API Key).
-        """
-        auth_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio Auth Token for authentication.
-        """
-elif False:
-    ProjectConnectorsTwilioCoreAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioCoreAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio API Key for authentication (used with API Secret).
+    """
+    api_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio API Secret for authentication (used with API Key).
+    """
+    auth_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio Auth Token for authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreAuthenticationArgs:
@@ -24533,18 +23967,15 @@ class ProjectConnectorsTwilioCoreAuthenticationArgs:
         pulumi.set(self, "auth_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioCoreSendersArgsDict(TypedDict):
-        sms: pulumi.Input['ProjectConnectorsTwilioCoreSendersSmsArgsDict']
-        """
-        SMS sender configuration using either a phone number or messaging service.
-        """
-        voice: NotRequired[pulumi.Input['ProjectConnectorsTwilioCoreSendersVoiceArgsDict']]
-        """
-        Voice call sender configuration.
-        """
-elif False:
-    ProjectConnectorsTwilioCoreSendersArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioCoreSendersArgsDict(TypedDict):
+    sms: pulumi.Input['ProjectConnectorsTwilioCoreSendersSmsArgsDict']
+    """
+    SMS sender configuration using either a phone number or messaging service.
+    """
+    voice: NotRequired[pulumi.Input['ProjectConnectorsTwilioCoreSendersVoiceArgsDict']]
+    """
+    Voice call sender configuration.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersArgs:
@@ -24584,18 +24015,15 @@ class ProjectConnectorsTwilioCoreSendersArgs:
         pulumi.set(self, "voice", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioCoreSendersSmsArgsDict(TypedDict):
-        messaging_service_sid: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio Messaging Service SID for sending SMS messages.
-        """
-        phone_number: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio phone number for sending SMS messages.
-        """
-elif False:
-    ProjectConnectorsTwilioCoreSendersSmsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioCoreSendersSmsArgsDict(TypedDict):
+    messaging_service_sid: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio Messaging Service SID for sending SMS messages.
+    """
+    phone_number: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio phone number for sending SMS messages.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersSmsArgs:
@@ -24636,14 +24064,11 @@ class ProjectConnectorsTwilioCoreSendersSmsArgs:
         pulumi.set(self, "phone_number", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioCoreSendersVoiceArgsDict(TypedDict):
-        phone_number: pulumi.Input[_builtins.str]
-        """
-        Twilio phone number for making voice calls.
-        """
-elif False:
-    ProjectConnectorsTwilioCoreSendersVoiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioCoreSendersVoiceArgsDict(TypedDict):
+    phone_number: pulumi.Input[_builtins.str]
+    """
+    Twilio phone number for making voice calls.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioCoreSendersVoiceArgs:
@@ -24667,35 +24092,32 @@ class ProjectConnectorsTwilioCoreSendersVoiceArgs:
         pulumi.set(self, "phone_number", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioVerifyArgsDict(TypedDict):
-        account_sid: pulumi.Input[_builtins.str]
-        """
-        Twilio Account SID from your Twilio Console.
-        """
-        authentication: pulumi.Input['ProjectConnectorsTwilioVerifyAuthenticationArgsDict']
-        """
-        Twilio authentication credentials (either auth token or API key/secret).
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        service_sid: pulumi.Input[_builtins.str]
-        """
-        Twilio Verify Service SID for verification services.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        sender: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Optional sender identifier for verification messages.
-        """
-elif False:
-    ProjectConnectorsTwilioVerifyArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioVerifyArgsDict(TypedDict):
+    account_sid: pulumi.Input[_builtins.str]
+    """
+    Twilio Account SID from your Twilio Console.
+    """
+    authentication: pulumi.Input['ProjectConnectorsTwilioVerifyAuthenticationArgsDict']
+    """
+    Twilio authentication credentials (either auth token or API key/secret).
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    service_sid: pulumi.Input[_builtins.str]
+    """
+    Twilio Verify Service SID for verification services.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    sender: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Optional sender identifier for verification messages.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioVerifyArgs:
@@ -24808,22 +24230,19 @@ class ProjectConnectorsTwilioVerifyArgs:
         pulumi.set(self, "sender", value)
 
 
-if not MYPY:
-    class ProjectConnectorsTwilioVerifyAuthenticationArgsDict(TypedDict):
-        api_key: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio API Key for authentication (used with API Secret).
-        """
-        api_secret: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio API Secret for authentication (used with API Key).
-        """
-        auth_token: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Twilio Auth Token for authentication.
-        """
-elif False:
-    ProjectConnectorsTwilioVerifyAuthenticationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsTwilioVerifyAuthenticationArgsDict(TypedDict):
+    api_key: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio API Key for authentication (used with API Secret).
+    """
+    api_secret: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio API Secret for authentication (used with API Key).
+    """
+    auth_token: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Twilio Auth Token for authentication.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsTwilioVerifyAuthenticationArgs:
@@ -24880,43 +24299,40 @@ class ProjectConnectorsTwilioVerifyAuthenticationArgs:
         pulumi.set(self, "auth_token", value)
 
 
-if not MYPY:
-    class ProjectConnectorsUnibeamArgsDict(TypedDict):
-        base_url: pulumi.Input[_builtins.str]
-        """
-        Unibeam API base URL.
-        """
-        client_id: pulumi.Input[_builtins.str]
-        """
-        OAuth2 client ID for authentication.
-        """
-        client_secret: pulumi.Input[_builtins.str]
-        """
-        OAuth2 client secret for authentication.
-        """
-        customer_id: pulumi.Input[_builtins.str]
-        """
-        Your Unibeam customer ID.
-        """
-        hmac_secret: pulumi.Input[_builtins.str]
-        """
-        HMAC secret supplied by Unibeam for securing communications.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        default_message: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Default message to display when no message is provided in the command.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectConnectorsUnibeamArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsUnibeamArgsDict(TypedDict):
+    base_url: pulumi.Input[_builtins.str]
+    """
+    Unibeam API base URL.
+    """
+    client_id: pulumi.Input[_builtins.str]
+    """
+    OAuth2 client ID for authentication.
+    """
+    client_secret: pulumi.Input[_builtins.str]
+    """
+    OAuth2 client secret for authentication.
+    """
+    customer_id: pulumi.Input[_builtins.str]
+    """
+    Your Unibeam customer ID.
+    """
+    hmac_secret: pulumi.Input[_builtins.str]
+    """
+    HMAC secret supplied by Unibeam for securing communications.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    default_message: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Default message to display when no message is provided in the command.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectConnectorsUnibeamArgs:
@@ -25059,27 +24475,24 @@ class ProjectConnectorsUnibeamArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectConnectorsZerobounceArgsDict(TypedDict):
-        api_key: pulumi.Input[_builtins.str]
-        """
-        The ZeroBounce API key.
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        A custom name for your connector.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A description of what your connector is used for.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        region: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        ZeroBounce platform region.
-        """
-elif False:
-    ProjectConnectorsZerobounceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectConnectorsZerobounceArgsDict(TypedDict):
+    api_key: pulumi.Input[_builtins.str]
+    """
+    The ZeroBounce API key.
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    A custom name for your connector.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A description of what your connector is used for.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    region: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    ZeroBounce platform region.
+    """
 
 @pulumi.input_type
 class ProjectConnectorsZerobounceArgs:
@@ -25162,14 +24575,11 @@ class ProjectConnectorsZerobounceArgs:
         pulumi.set(self, "region", value)
 
 
-if not MYPY:
-    class ProjectFlowsArgsDict(TypedDict):
-        data: pulumi.Input[_builtins.str]
-        """
-        The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
-        """
-elif False:
-    ProjectFlowsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectFlowsArgsDict(TypedDict):
+    data: pulumi.Input[_builtins.str]
+    """
+    The JSON data defining the authentication flow configuration, including metadata, screens, contents, and references.
+    """
 
 @pulumi.input_type
 class ProjectFlowsArgs:
@@ -25193,42 +24603,39 @@ class ProjectFlowsArgs:
         pulumi.set(self, "data", value)
 
 
-if not MYPY:
-    class ProjectInviteSettingsArgsDict(TypedDict):
-        add_magiclink_token: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to include a magic link token in invitation messages.
-        """
-        email_service: NotRequired[pulumi.Input['ProjectInviteSettingsEmailServiceArgsDict']]
-        """
-        Settings related to sending invitation emails.
-        """
-        expire_invited_users: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Expire the user account if the invitation is not accepted within the expiration time.
-        """
-        invite_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
-        """
-        invite_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Custom URL to include in the message sent to invited users.
-        """
-        require_invitation: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether users must be invited before they can sign up to the project.
-        """
-        send_email: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send invitation emails to users.
-        """
-        send_text: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to send invitation SMS messages to users.
-        """
-elif False:
-    ProjectInviteSettingsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectInviteSettingsArgsDict(TypedDict):
+    add_magiclink_token: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to include a magic link token in invitation messages.
+    """
+    email_service: NotRequired[pulumi.Input['ProjectInviteSettingsEmailServiceArgsDict']]
+    """
+    Settings related to sending invitation emails.
+    """
+    expire_invited_users: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Expire the user account if the invitation is not accepted within the expiration time.
+    """
+    invite_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
+    """
+    invite_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Custom URL to include in the message sent to invited users.
+    """
+    require_invitation: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether users must be invited before they can sign up to the project.
+    """
+    send_email: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send invitation emails to users.
+    """
+    send_text: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to send invitation SMS messages to users.
+    """
 
 @pulumi.input_type
 class ProjectInviteSettingsArgs:
@@ -25365,18 +24772,15 @@ class ProjectInviteSettingsArgs:
         pulumi.set(self, "send_text", value)
 
 
-if not MYPY:
-    class ProjectInviteSettingsEmailServiceArgsDict(TypedDict):
-        connector: pulumi.Input[_builtins.str]
-        """
-        The name of the email connector to use for sending emails.
-        """
-        templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgsDict']]]]
-        """
-        A list of email templates for different authentication flows.
-        """
-elif False:
-    ProjectInviteSettingsEmailServiceArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectInviteSettingsEmailServiceArgsDict(TypedDict):
+    connector: pulumi.Input[_builtins.str]
+    """
+    The name of the email connector to use for sending emails.
+    """
+    templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectInviteSettingsEmailServiceTemplateArgsDict']]]]
+    """
+    A list of email templates for different authentication flows.
+    """
 
 @pulumi.input_type
 class ProjectInviteSettingsEmailServiceArgs:
@@ -25416,35 +24820,32 @@ class ProjectInviteSettingsEmailServiceArgs:
         pulumi.set(self, "templates", value)
 
 
-if not MYPY:
-    class ProjectInviteSettingsEmailServiceTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Unique name for this email template.
-        """
-        subject: pulumi.Input[_builtins.str]
-        """
-        Subject line of the email message.
-        """
-        active: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether this email template is currently active and in use.
-        """
-        html_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        HTML content of the email message body, required if `use_plain_text_body` isn't set.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
-        """
-        use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use the plain text body instead of HTML for the email.
-        """
-elif False:
-    ProjectInviteSettingsEmailServiceTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectInviteSettingsEmailServiceTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Unique name for this email template.
+    """
+    subject: pulumi.Input[_builtins.str]
+    """
+    Subject line of the email message.
+    """
+    active: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether this email template is currently active and in use.
+    """
+    html_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    HTML content of the email message body, required if `use_plain_text_body` isn't set.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    plain_text_body: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+    """
+    use_plain_text_body: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use the plain text body instead of HTML for the email.
+    """
 
 @pulumi.input_type
 class ProjectInviteSettingsEmailServiceTemplateArgs:
@@ -25559,18 +24960,15 @@ class ProjectInviteSettingsEmailServiceTemplateArgs:
         pulumi.set(self, "use_plain_text_body", value)
 
 
-if not MYPY:
-    class ProjectJwtTemplatesArgsDict(TypedDict):
-        access_key_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgsDict']]]]
-        """
-        A list of `Access Key` type JWT Templates.
-        """
-        user_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgsDict']]]]
-        """
-        A list of `User` type JWT Templates.
-        """
-elif False:
-    ProjectJwtTemplatesArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectJwtTemplatesArgsDict(TypedDict):
+    access_key_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesAccessKeyTemplateArgsDict']]]]
+    """
+    A list of `Access Key` type JWT Templates.
+    """
+    user_templates: NotRequired[pulumi.Input[Sequence[pulumi.Input['ProjectJwtTemplatesUserTemplateArgsDict']]]]
+    """
+    A list of `User` type JWT Templates.
+    """
 
 @pulumi.input_type
 class ProjectJwtTemplatesArgs:
@@ -25611,55 +25009,52 @@ class ProjectJwtTemplatesArgs:
         pulumi.set(self, "user_templates", value)
 
 
-if not MYPY:
-    class ProjectJwtTemplatesAccessKeyTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Name of the JWT Template.
-        """
-        template: pulumi.Input[_builtins.str]
-        """
-        The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
-        """
-        add_jti_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
-        """
-        auth_schema: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
-        """
-        auto_tenant_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
-        """
-        conformance_issuer: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use OIDC conformance for the JWT issuer field.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Description of the JWT Template.
-        """
-        empty_claim_policy: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Policy for empty claims - `none`, `nil` or `delete`.
-        """
-        enforce_issuer: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enforce that the JWT issuer matches the project configuration.
-        """
-        exclude_permission_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When enabled, permissions will not be included in the JWT token.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_subject_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
-        """
-elif False:
-    ProjectJwtTemplatesAccessKeyTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectJwtTemplatesAccessKeyTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Name of the JWT Template.
+    """
+    template: pulumi.Input[_builtins.str]
+    """
+    The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+    """
+    add_jti_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+    """
+    auth_schema: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+    """
+    auto_tenant_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+    """
+    conformance_issuer: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use OIDC conformance for the JWT issuer field.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Description of the JWT Template.
+    """
+    empty_claim_policy: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Policy for empty claims - `none`, `nil` or `delete`.
+    """
+    enforce_issuer: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enforce that the JWT issuer matches the project configuration.
+    """
+    exclude_permission_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When enabled, permissions will not be included in the JWT token.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_subject_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+    """
 
 @pulumi.input_type
 class ProjectJwtTemplatesAccessKeyTemplateArgs:
@@ -25854,55 +25249,52 @@ class ProjectJwtTemplatesAccessKeyTemplateArgs:
         pulumi.set(self, "override_subject_claim", value)
 
 
-if not MYPY:
-    class ProjectJwtTemplatesUserTemplateArgsDict(TypedDict):
-        name: pulumi.Input[_builtins.str]
-        """
-        Name of the JWT Template.
-        """
-        template: pulumi.Input[_builtins.str]
-        """
-        The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
-        """
-        add_jti_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
-        """
-        auth_schema: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
-        """
-        auto_tenant_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
-        """
-        conformance_issuer: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to use OIDC conformance for the JWT issuer field.
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Description of the JWT Template.
-        """
-        empty_claim_policy: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Policy for empty claims - `none`, `nil` or `delete`.
-        """
-        enforce_issuer: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Whether to enforce that the JWT issuer matches the project configuration.
-        """
-        exclude_permission_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When enabled, permissions will not be included in the JWT token.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-        override_subject_claim: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
-        """
-elif False:
-    ProjectJwtTemplatesUserTemplateArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectJwtTemplatesUserTemplateArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Name of the JWT Template.
+    """
+    template: pulumi.Input[_builtins.str]
+    """
+    The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+    """
+    add_jti_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+    """
+    auth_schema: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
+    """
+    auto_tenant_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
+    """
+    conformance_issuer: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to use OIDC conformance for the JWT issuer field.
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Description of the JWT Template.
+    """
+    empty_claim_policy: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Policy for empty claims - `none`, `nil` or `delete`.
+    """
+    enforce_issuer: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Whether to enforce that the JWT issuer matches the project configuration.
+    """
+    exclude_permission_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When enabled, permissions will not be included in the JWT token.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
+    override_subject_claim: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+    """
 
 @pulumi.input_type
 class ProjectJwtTemplatesUserTemplateArgs:
@@ -26097,27 +25489,24 @@ class ProjectJwtTemplatesUserTemplateArgs:
         pulumi.set(self, "override_subject_claim", value)
 
 
-if not MYPY:
-    class ProjectListArgsDict(TypedDict):
-        data: pulumi.Input[_builtins.str]
-        """
-        The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
-        """
-        name: pulumi.Input[_builtins.str]
-        """
-        The name of the list. Maximum length is 100 characters.
-        """
-        type: pulumi.Input[_builtins.str]
-        """
-        The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
-        """
-        description: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An optional description for the list. Defaults to an empty string if not provided.
-        """
-        id: NotRequired[pulumi.Input[_builtins.str]]
-elif False:
-    ProjectListArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectListArgsDict(TypedDict):
+    data: pulumi.Input[_builtins.str]
+    """
+    The JSON data for the list. The format depends on the `type`: - For `"texts"` and `"ips"` types: Must be a JSON array of strings (e.g., `["item1", "item2"]`) - For `"ips"` type: Each string must be a valid IP address or CIDR range - For `"json"` type: Must be a JSON object (e.g., `{"key": "value"}`)
+    """
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the list. Maximum length is 100 characters.
+    """
+    type: pulumi.Input[_builtins.str]
+    """
+    The type of list. Must be one of: - `"texts"` - A list of text strings - `"ips"` - A list of IP addresses or CIDR ranges - `"json"` - A JSON object
+    """
+    description: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An optional description for the list. Defaults to an empty string if not provided.
+    """
+    id: NotRequired[pulumi.Input[_builtins.str]]
 
 @pulumi.input_type
 class ProjectListArgs:
@@ -26199,106 +25588,103 @@ class ProjectListArgs:
         pulumi.set(self, "id", value)
 
 
-if not MYPY:
-    class ProjectProjectSettingsArgsDict(TypedDict):
-        access_key_jwt_template: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Name of the access key JWT Template.
-        """
-        access_key_session_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
-        """
-        app_url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The URL which your application resides on.
-        """
-        approved_domains: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
-        """
-        custom_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        """
-        default_no_sso_apps: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
-        """
-        enable_inactivity: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
-        """
-        inactivity_time: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
-        """
-        refresh_token_cookie_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        """
-        refresh_token_cookie_policy: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        """
-        refresh_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
-        """
-        refresh_token_response_method: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
-        """
-        refresh_token_rotation: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
-        """
-        session_migration: NotRequired[pulumi.Input['ProjectProjectSettingsSessionMigrationArgsDict']]
-        """
-        Configure seamless migration of existing user sessions from another vendor to Descope.
-        """
-        session_token_cookie_domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        """
-        session_token_cookie_policy: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
-        """
-        session_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
-        """
-        session_token_response_method: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
-        """
-        step_up_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
-        """
-        test_users_loginid_regexp: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
-        """
-        test_users_static_otp: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        A 6 digit static OTP code for use with test users.
-        """
-        test_users_verifier_regexp: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The pattern of the verifiers that will be used for testing.
-        """
-        trusted_device_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The expiry time for the trusted device token. The minimum value is "3 minutes".
-        """
-        user_jwt_template: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Name of the user JWT Template.
-        """
-elif False:
-    ProjectProjectSettingsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectProjectSettingsArgsDict(TypedDict):
+    access_key_jwt_template: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Name of the access key JWT Template.
+    """
+    access_key_session_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+    """
+    app_url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The URL which your application resides on.
+    """
+    approved_domains: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+    """
+    custom_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+    """
+    default_no_sso_apps: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Define whether a user created with no federated apps, will have access to all apps, or will not have access to any app.
+    """
+    enable_inactivity: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Use `True` to enable session inactivity. To read more about session inactivity click [here](https://docs.descope.com/project-settings#session-inactivity).
+    """
+    inactivity_time: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The session inactivity time. Use values such as "15 minutes", "1 hour", etc. The minimum value is "10 minutes".
+    """
+    refresh_token_cookie_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The domain name for refresh token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+    """
+    refresh_token_cookie_policy: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+    """
+    refresh_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time for the refresh token, after which the user must log in again. Use values such as "4 weeks", "14 days", etc. The minimum value is "3 minutes".
+    """
+    refresh_token_response_method: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Configure how refresh tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+    """
+    refresh_token_rotation: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    Every time the user refreshes their session token via their refresh token, the refresh token itself is also updated to a new one.
+    """
+    session_migration: NotRequired[pulumi.Input['ProjectProjectSettingsSessionMigrationArgsDict']]
+    """
+    Configure seamless migration of existing user sessions from another vendor to Descope.
+    """
+    session_token_cookie_domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The domain name for session token cookies. To read more about custom domain and cookie policy click [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+    """
+    session_token_cookie_policy: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Use `strict`, `lax` or `none`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
+    """
+    session_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
+    """
+    session_token_response_method: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
+    """
+    step_up_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+    """
+    test_users_loginid_regexp: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
+    """
+    test_users_static_otp: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    A 6 digit static OTP code for use with test users.
+    """
+    test_users_verifier_regexp: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The pattern of the verifiers that will be used for testing.
+    """
+    trusted_device_token_expiration: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The expiry time for the trusted device token. The minimum value is "3 minutes".
+    """
+    user_jwt_template: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Name of the user JWT Template.
+    """
 
 @pulumi.input_type
 class ProjectProjectSettingsArgs:
@@ -26691,34 +26077,31 @@ class ProjectProjectSettingsArgs:
         pulumi.set(self, "user_jwt_template", value)
 
 
-if not MYPY:
-    class ProjectProjectSettingsSessionMigrationArgsDict(TypedDict):
-        audience: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The audience value if needed by the vendor.
-        """
-        client_id: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The unique client ID for the vendor.
-        """
-        domain: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The domain value if needed by the vendor.
-        """
-        issuer: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        An issuer URL if needed by the vendor.
-        """
-        loginid_matched_attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
-        """
-        vendor: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        The name of the vendor the sessions are migrated from, in all lowercase.
-        """
-elif False:
-    ProjectProjectSettingsSessionMigrationArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectProjectSettingsSessionMigrationArgsDict(TypedDict):
+    audience: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The audience value if needed by the vendor.
+    """
+    client_id: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The unique client ID for the vendor.
+    """
+    domain: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The domain value if needed by the vendor.
+    """
+    issuer: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    An issuer URL if needed by the vendor.
+    """
+    loginid_matched_attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
+    """
+    vendor: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    The name of the vendor the sessions are migrated from, in all lowercase.
+    """
 
 @pulumi.input_type
 class ProjectProjectSettingsSessionMigrationArgs:
@@ -26823,14 +26206,11 @@ class ProjectProjectSettingsSessionMigrationArgs:
         pulumi.set(self, "vendor", value)
 
 
-if not MYPY:
-    class ProjectStylesArgsDict(TypedDict):
-        data: pulumi.Input[_builtins.str]
-        """
-        The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
-        """
-elif False:
-    ProjectStylesArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectStylesArgsDict(TypedDict):
+    data: pulumi.Input[_builtins.str]
+    """
+    The JSON data defining the visual styling and theme configuration used for authentication, widgets, etc.
+    """
 
 @pulumi.input_type
 class ProjectStylesArgs:
@@ -26854,14 +26234,11 @@ class ProjectStylesArgs:
         pulumi.set(self, "data", value)
 
 
-if not MYPY:
-    class ProjectWidgetsArgsDict(TypedDict):
-        data: pulumi.Input[_builtins.str]
-        """
-        The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
-        """
-elif False:
-    ProjectWidgetsArgsDict: TypeAlias = Mapping[str, Any]
+class ProjectWidgetsArgsDict(TypedDict):
+    data: pulumi.Input[_builtins.str]
+    """
+    The JSON data defining the widget. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+    """
 
 @pulumi.input_type
 class ProjectWidgetsArgs:

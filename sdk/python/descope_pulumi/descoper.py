@@ -27,6 +27,7 @@ class DescoperArgs:
                  phone: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a Descoper resource.
+
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input['DescoperRbacArgs'] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
@@ -97,6 +98,7 @@ class _DescoperState:
                  rbac: Optional[pulumi.Input['DescoperRbacArgs']] = None):
         """
         Input properties used for looking up and filtering Descoper resources.
+
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
         :param pulumi.Input[_builtins.str] phone: The phone number of the Descope console user.
@@ -173,6 +175,7 @@ class Descoper(pulumi.CustomResource):
                  __props__=None):
         """
         Create a Descoper resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
@@ -188,6 +191,7 @@ class Descoper(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a Descoper resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param DescoperArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
