@@ -29,7 +29,6 @@ class ManagementKeyArgs:
                  status: Optional[pulumi.Input[_builtins.str]] = None):
         """
         The set of arguments for constructing a ManagementKey resource.
-
         :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
@@ -134,7 +133,6 @@ class _ManagementKeyState:
                  status: Optional[pulumi.Input[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ManagementKey resources.
-
         :param pulumi.Input[_builtins.str] cleartext: The plaintext value of the management key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to authenticate API requests.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
@@ -258,7 +256,6 @@ class ManagementKey(pulumi.CustomResource):
                  __props__=None):
         """
         Create a ManagementKey resource with the given unique name, props, and options.
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
@@ -276,7 +273,6 @@ class ManagementKey(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a ManagementKey resource with the given unique name, props, and options.
-
         :param str resource_name: The name of the resource.
         :param ManagementKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

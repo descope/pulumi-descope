@@ -39,7 +39,6 @@ class ProjectArgs:
                  widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         The set of arguments for constructing a Project resource.
-
         :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
@@ -304,7 +303,6 @@ class _ProjectState:
                  widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
-
         :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
@@ -573,7 +571,6 @@ class Project(pulumi.CustomResource):
                  __props__=None):
         """
         Create a Project resource with the given unique name, props, and options.
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
@@ -601,7 +598,6 @@ class Project(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a Project resource with the given unique name, props, and options.
-
         :param str resource_name: The name of the resource.
         :param ProjectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
