@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectConnectorsArkose {
     /**
-     * @return A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * @return A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      * 
      */
     private @Nullable String clientBaseUrl;
@@ -29,24 +29,24 @@ public final class ProjectConnectorsArkose {
      */
     private String name;
     /**
-     * @return The private key that can be copied from the Keys screen in the Arkose portal.
+     * @return The private key that can be copied from the Keys screen in the Arkose Labs portal.
      * 
      */
     private String privateKey;
     /**
-     * @return The public key that&#39;s shown in the Keys screen in the Arkose portal.
+     * @return The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
      * 
      */
     private String publicKey;
     /**
-     * @return A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * @return A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      * 
      */
     private @Nullable String verifyBaseUrl;
 
     private ProjectConnectorsArkose() {}
     /**
-     * @return A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * @return A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      * 
      */
     public Optional<String> clientBaseUrl() {
@@ -70,21 +70,21 @@ public final class ProjectConnectorsArkose {
         return this.name;
     }
     /**
-     * @return The private key that can be copied from the Keys screen in the Arkose portal.
+     * @return The private key that can be copied from the Keys screen in the Arkose Labs portal.
      * 
      */
     public String privateKey() {
         return this.privateKey;
     }
     /**
-     * @return The public key that&#39;s shown in the Keys screen in the Arkose portal.
+     * @return The public key that&#39;s shown in the Keys screen in the Arkose Labs portal.
      * 
      */
     public String publicKey() {
         return this.publicKey;
     }
     /**
-     * @return A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * @return A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      * 
      */
     public Optional<String> verifyBaseUrl() {

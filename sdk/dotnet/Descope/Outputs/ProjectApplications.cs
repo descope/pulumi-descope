@@ -22,15 +22,22 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Applications using SAML for authentication.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplication> SamlApplications;
+        /// <summary>
+        /// Applications using WS-Federation for authentication.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectApplicationsWsfedApplication> WsfedApplications;
 
         [OutputConstructor]
         private ProjectApplications(
             ImmutableArray<Outputs.ProjectApplicationsOidcApplication> oidcApplications,
 
-            ImmutableArray<Outputs.ProjectApplicationsSamlApplication> samlApplications)
+            ImmutableArray<Outputs.ProjectApplicationsSamlApplication> samlApplications,
+
+            ImmutableArray<Outputs.ProjectApplicationsWsfedApplication> wsfedApplications)
         {
             OidcApplications = oidcApplications;
             SamlApplications = samlApplications;
+            WsfedApplications = wsfedApplications;
         }
     }
 }

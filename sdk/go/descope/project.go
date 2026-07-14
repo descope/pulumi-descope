@@ -11,6 +11,409 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+//
+// This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+//
+// For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+//
+// ## Example Usage
+//
+// ### Basic Project
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name:        pulumi.String("my-app"),
+//				Environment: pulumi.String("production"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("prod"),
+//					pulumi.String("v2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Authentication Methods
+//
+// Enable and configure the authentication methods your users will use:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				Authentication: &descope.ProjectAuthenticationArgs{
+//					MagicLink: &descope.ProjectAuthenticationMagicLinkArgs{
+//						ExpirationTime: pulumi.String("1 hour"),
+//					},
+//					Password: &descope.ProjectAuthenticationPasswordArgs{
+//						Lock:         pulumi.Bool(true),
+//						LockAttempts: pulumi.Int(5),
+//						MinLength:    pulumi.Int(12),
+//					},
+//					Otp: &descope.ProjectAuthenticationOtpArgs{
+//						ExpirationTime: pulumi.String("5 minutes"),
+//					},
+//					Passkeys: &descope.ProjectAuthenticationPasskeysArgs{
+//						Disabled: pulumi.Bool(false),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Roles and Permissions (RBAC)
+//
+// Define roles and permissions for your users:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				Authorization: &descope.ProjectAuthorizationArgs{
+//					Permissions: descope.ProjectAuthorizationPermissionArray{
+//						&descope.ProjectAuthorizationPermissionArgs{
+//							Name:        pulumi.String("read:data"),
+//							Description: pulumi.String("Read access to application data"),
+//						},
+//						&descope.ProjectAuthorizationPermissionArgs{
+//							Name:        pulumi.String("write:data"),
+//							Description: pulumi.String("Write access to application data"),
+//						},
+//						&descope.ProjectAuthorizationPermissionArgs{
+//							Name:        pulumi.String("admin:panel"),
+//							Description: pulumi.String("Access to the admin panel"),
+//						},
+//					},
+//					Roles: descope.ProjectAuthorizationRoleArray{
+//						&descope.ProjectAuthorizationRoleArgs{
+//							Name:        pulumi.String("viewer"),
+//							Description: pulumi.String("Can read data"),
+//							Permissions: pulumi.StringArray{
+//								pulumi.String("read:data"),
+//							},
+//						},
+//						&descope.ProjectAuthorizationRoleArgs{
+//							Name:        pulumi.String("editor"),
+//							Description: pulumi.String("Can read and write data"),
+//							Permissions: pulumi.StringArray{
+//								pulumi.String("read:data"),
+//								pulumi.String("write:data"),
+//							},
+//						},
+//						&descope.ProjectAuthorizationRoleArgs{
+//							Name:        pulumi.String("admin"),
+//							Description: pulumi.String("Full access"),
+//							Permissions: pulumi.StringArray{
+//								pulumi.String("read:data"),
+//								pulumi.String("write:data"),
+//								pulumi.String("admin:panel"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Connectors
+//
+// Integrate with third-party services to enrich flows and send notifications:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				Connectors: &descope.ProjectConnectorsArgs{
+//					Https: descope.ProjectConnectorsHttpArray{
+//						&descope.ProjectConnectorsHttpArgs{
+//							Name:        pulumi.String("User Eligibility Check"),
+//							Description: pulumi.String("Checks if a new user is allowed to register"),
+//							BaseUrl:     pulumi.String("https://api.example.com"),
+//							Authentication: &descope.ProjectConnectorsHttpAuthenticationArgs{
+//								BearerToken: pulumi.Any(webhookSecret),
+//							},
+//						},
+//					},
+//					Sendgrids: descope.ProjectConnectorsSendgridArray{
+//						&descope.ProjectConnectorsSendgridArgs{
+//							Name: pulumi.String("Transactional Email"),
+//							Sender: &descope.ProjectConnectorsSendgridSenderArgs{
+//								Email: pulumi.String("noreply@example.com"),
+//								Name:  pulumi.String("My App"),
+//							},
+//							Authentication: &descope.ProjectConnectorsSendgridAuthenticationArgs{
+//								ApiKey: pulumi.Any(sendgridApiKey),
+//							},
+//						},
+//					},
+//					TwilioCores: descope.ProjectConnectorsTwilioCoreArray{
+//						&descope.ProjectConnectorsTwilioCoreArgs{
+//							Name:       pulumi.String("SMS OTP"),
+//							AccountSid: pulumi.Any(twilioAccountSid),
+//							Senders: &descope.ProjectConnectorsTwilioCoreSendersArgs{
+//								Sms: &descope.ProjectConnectorsTwilioCoreSendersSmsArgs{
+//									PhoneNumber: pulumi.String("+15551234567"),
+//								},
+//							},
+//							Authentication: &descope.ProjectConnectorsTwilioCoreAuthenticationArgs{
+//								AuthToken: pulumi.Any(twilioAuthToken),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Session Settings
+//
+// Configure token lifetimes and session behavior:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				ProjectSettings: &descope.ProjectProjectSettingsArgs{
+//					RefreshTokenExpiration: pulumi.String("3 weeks"),
+//					SessionTokenExpiration: pulumi.String("15 minutes"),
+//					RefreshTokenRotation:   pulumi.Bool(true),
+//					EnableInactivity:       pulumi.Bool(true),
+//					InactivityTime:         pulumi.String("30 minutes"),
+//					CustomDomain:           pulumi.String("auth.example.com"),
+//					ApprovedDomains: pulumi.StringArray{
+//						pulumi.String("example.com"),
+//						pulumi.String("app.example.com"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### OIDC Applications
+//
+// Register an OIDC application for SSO:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				Applications: &descope.ProjectApplicationsArgs{
+//					OidcApplications: descope.ProjectApplicationsOidcApplicationArray{
+//						&descope.ProjectApplicationsOidcApplicationArgs{
+//							Name:         pulumi.String("My Web App"),
+//							Description:  pulumi.String("Primary web application"),
+//							LoginPageUrl: pulumi.String("https://app.example.com/login"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### JWT Templates
+//
+// Customize the JWT claims added to session tokens:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"encoding/json"
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"tier":   "@user.customAttributes.subscriptionTier",
+//				"org_id": "@user.tenants[0].tenantId",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				JwtTemplates: &descope.ProjectJwtTemplatesArgs{
+//					UserTemplates: descope.ProjectJwtTemplatesUserTemplateArray{
+//						&descope.ProjectJwtTemplatesUserTemplateArgs{
+//							Name:                   pulumi.String("app-claims"),
+//							Description:            pulumi.String("Adds subscription tier and org context to user JWTs"),
+//							Template:               pulumi.String(json0),
+//							ExcludePermissionClaim: pulumi.Bool(true),
+//							AddJtiClaim:            pulumi.Bool(true),
+//							OverrideSubjectClaim:   pulumi.Bool(true),
+//						},
+//					},
+//				},
+//				ProjectSettings: &descope.ProjectProjectSettingsArgs{
+//					UserJwtTemplate: pulumi.String("app-claims"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### SSO Settings
+//
+// Configure global settings for Single Sign-On across tenants:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//				Authentication: &descope.ProjectAuthenticationArgs{
+//					Sso: &descope.ProjectAuthenticationSsoArgs{
+//						MergeUsers:                 pulumi.Bool(true),
+//						AllowOverrideRoles:         pulumi.Bool(true),
+//						GroupsPriority:             pulumi.Bool(true),
+//						RequireSsoDomains:          pulumi.Bool(true),
+//						RequireGroupsAttributeName: pulumi.Bool(true),
+//						MandatoryUserAttributes: descope.ProjectAuthenticationSsoMandatoryUserAttributeArray{
+//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
+//								Id: pulumi.String("email"),
+//							},
+//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
+//								Id: pulumi.String("name"),
+//							},
+//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
+//								Id:     pulumi.String("department"),
+//								Custom: pulumi.Bool(true),
+//							},
+//						},
+//						SsoSuiteSettings: &descope.ProjectAuthenticationSsoSsoSuiteSettingsArgs{
+//							StyleId:  pulumi.String("my-brand-style"),
+//							HideScim: pulumi.Bool(false),
+//							HideSaml: pulumi.Bool(false),
+//							HideOidc: pulumi.Bool(false),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Project struct {
 	pulumi.CustomResourceState
 

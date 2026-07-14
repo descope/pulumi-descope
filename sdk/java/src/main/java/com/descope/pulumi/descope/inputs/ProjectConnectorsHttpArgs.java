@@ -8,6 +8,7 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
+import java.lang.Double;
 import java.lang.String;
 import java.util.Map;
 import java.util.Objects;
@@ -32,6 +33,111 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
      */
     public Optional<Output<ProjectConnectorsHttpAuthenticationArgs>> authentication() {
         return Optional.ofNullable(this.authentication);
+    }
+
+    /**
+     * The unique AWS access key ID.
+     * 
+     */
+    @Import(name="awsAccessKeyId")
+    private @Nullable Output<String> awsAccessKeyId;
+
+    /**
+     * @return The unique AWS access key ID.
+     * 
+     */
+    public Optional<Output<String>> awsAccessKeyId() {
+        return Optional.ofNullable(this.awsAccessKeyId);
+    }
+
+    /**
+     * Apply AWS signature version 4 authentication to the request.
+     * 
+     */
+    @Import(name="awsAuthType")
+    private @Nullable Output<String> awsAuthType;
+
+    /**
+     * @return Apply AWS signature version 4 authentication to the request.
+     * 
+     */
+    public Optional<Output<String>> awsAuthType() {
+        return Optional.ofNullable(this.awsAuthType);
+    }
+
+    /**
+     * The external ID to use when assuming the role.
+     * 
+     */
+    @Import(name="awsExternalId")
+    private @Nullable Output<String> awsExternalId;
+
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<Output<String>> awsExternalId() {
+        return Optional.ofNullable(this.awsExternalId);
+    }
+
+    /**
+     * The AWS region, e.g. `us-east-1`.
+     * 
+     */
+    @Import(name="awsRegion")
+    private @Nullable Output<String> awsRegion;
+
+    /**
+     * @return The AWS region, e.g. `us-east-1`.
+     * 
+     */
+    public Optional<Output<String>> awsRegion() {
+        return Optional.ofNullable(this.awsRegion);
+    }
+
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    @Import(name="awsRoleArn")
+    private @Nullable Output<String> awsRoleArn;
+
+    /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<Output<String>> awsRoleArn() {
+        return Optional.ofNullable(this.awsRoleArn);
+    }
+
+    /**
+     * The secret AWS access key.
+     * 
+     */
+    @Import(name="awsSecretAccessKey")
+    private @Nullable Output<String> awsSecretAccessKey;
+
+    /**
+     * @return The secret AWS access key.
+     * 
+     */
+    public Optional<Output<String>> awsSecretAccessKey() {
+        return Optional.ofNullable(this.awsSecretAccessKey);
+    }
+
+    /**
+     * The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+     * 
+     */
+    @Import(name="awsService")
+    private @Nullable Output<String> awsService;
+
+    /**
+     * @return The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+     * 
+     */
+    public Optional<Output<String>> awsService() {
+        return Optional.ofNullable(this.awsService);
     }
 
     /**
@@ -102,14 +208,14 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
     }
 
     /**
-     * The connector response context will also include the headers. The context will have a &#34;body&#34; attribute and a &#34;headers&#34; attribute. See more details in the help guide
+     * The connector response context will also include the headers and status code. The context will have a &#34;body&#34; attribute, a &#34;headers&#34; attribute, and a &#34;statusCode&#34; attribute. See more details in the help guide
      * 
      */
     @Import(name="includeHeadersInContext")
     private @Nullable Output<Boolean> includeHeadersInContext;
 
     /**
-     * @return The connector response context will also include the headers. The context will have a &#34;body&#34; attribute and a &#34;headers&#34; attribute. See more details in the help guide
+     * @return The connector response context will also include the headers and status code. The context will have a &#34;body&#34; attribute, a &#34;headers&#34; attribute, and a &#34;statusCode&#34; attribute. See more details in the help guide
      * 
      */
     public Optional<Output<Boolean>> includeHeadersInContext() {
@@ -147,6 +253,81 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
     }
 
     /**
+     * HTTP message components to include in the signature (e.g., {@literal @}method, {@literal @}target-uri, {@literal @}authority, content-type, content-digest). Leave empty to use defaults: {@literal @}method, {@literal @}target-uri, {@literal @}authority
+     * 
+     */
+    @Import(name="rfc9421Components")
+    private @Nullable Output<String> rfc9421Components;
+
+    /**
+     * @return HTTP message components to include in the signature (e.g., {@literal @}method, {@literal @}target-uri, {@literal @}authority, content-type, content-digest). Leave empty to use defaults: {@literal @}method, {@literal @}target-uri, {@literal @}authority
+     * 
+     */
+    public Optional<Output<String>> rfc9421Components() {
+        return Optional.ofNullable(this.rfc9421Components);
+    }
+
+    /**
+     * Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+     * 
+     */
+    @Import(name="rfc9421KeyId")
+    private @Nullable Output<String> rfc9421KeyId;
+
+    /**
+     * @return Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+     * 
+     */
+    public Optional<Output<String>> rfc9421KeyId() {
+        return Optional.ofNullable(this.rfc9421KeyId);
+    }
+
+    /**
+     * Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+     * 
+     */
+    @Import(name="rfc9421PrivateKey")
+    private @Nullable Output<String> rfc9421PrivateKey;
+
+    /**
+     * @return Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+     * 
+     */
+    public Optional<Output<String>> rfc9421PrivateKey() {
+        return Optional.ofNullable(this.rfc9421PrivateKey);
+    }
+
+    /**
+     * How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+     * 
+     */
+    @Import(name="rfc9421SignatureTtl")
+    private @Nullable Output<Double> rfc9421SignatureTtl;
+
+    /**
+     * @return How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+     * 
+     */
+    public Optional<Output<Double>> rfc9421SignatureTtl() {
+        return Optional.ofNullable(this.rfc9421SignatureTtl);
+    }
+
+    /**
+     * Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+     * 
+     */
+    @Import(name="rfc9421SigningEnabled")
+    private @Nullable Output<Boolean> rfc9421SigningEnabled;
+
+    /**
+     * @return Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+     * 
+     */
+    public Optional<Output<Boolean>> rfc9421SigningEnabled() {
+        return Optional.ofNullable(this.rfc9421SigningEnabled);
+    }
+
+    /**
      * Whether the connector should send all requests from specific static IPs.
      * 
      */
@@ -165,6 +346,13 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
 
     private ProjectConnectorsHttpArgs(ProjectConnectorsHttpArgs $) {
         this.authentication = $.authentication;
+        this.awsAccessKeyId = $.awsAccessKeyId;
+        this.awsAuthType = $.awsAuthType;
+        this.awsExternalId = $.awsExternalId;
+        this.awsRegion = $.awsRegion;
+        this.awsRoleArn = $.awsRoleArn;
+        this.awsSecretAccessKey = $.awsSecretAccessKey;
+        this.awsService = $.awsService;
         this.baseUrl = $.baseUrl;
         this.description = $.description;
         this.headers = $.headers;
@@ -173,6 +361,11 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         this.includeHeadersInContext = $.includeHeadersInContext;
         this.insecure = $.insecure;
         this.name = $.name;
+        this.rfc9421Components = $.rfc9421Components;
+        this.rfc9421KeyId = $.rfc9421KeyId;
+        this.rfc9421PrivateKey = $.rfc9421PrivateKey;
+        this.rfc9421SignatureTtl = $.rfc9421SignatureTtl;
+        this.rfc9421SigningEnabled = $.rfc9421SigningEnabled;
         this.useStaticIps = $.useStaticIps;
     }
 
@@ -213,6 +406,153 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
          */
         public Builder authentication(ProjectConnectorsHttpAuthenticationArgs authentication) {
             return authentication(Output.of(authentication));
+        }
+
+        /**
+         * @param awsAccessKeyId The unique AWS access key ID.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsAccessKeyId(@Nullable Output<String> awsAccessKeyId) {
+            $.awsAccessKeyId = awsAccessKeyId;
+            return this;
+        }
+
+        /**
+         * @param awsAccessKeyId The unique AWS access key ID.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsAccessKeyId(String awsAccessKeyId) {
+            return awsAccessKeyId(Output.of(awsAccessKeyId));
+        }
+
+        /**
+         * @param awsAuthType Apply AWS signature version 4 authentication to the request.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsAuthType(@Nullable Output<String> awsAuthType) {
+            $.awsAuthType = awsAuthType;
+            return this;
+        }
+
+        /**
+         * @param awsAuthType Apply AWS signature version 4 authentication to the request.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsAuthType(String awsAuthType) {
+            return awsAuthType(Output.of(awsAuthType));
+        }
+
+        /**
+         * @param awsExternalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsExternalId(@Nullable Output<String> awsExternalId) {
+            $.awsExternalId = awsExternalId;
+            return this;
+        }
+
+        /**
+         * @param awsExternalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsExternalId(String awsExternalId) {
+            return awsExternalId(Output.of(awsExternalId));
+        }
+
+        /**
+         * @param awsRegion The AWS region, e.g. `us-east-1`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsRegion(@Nullable Output<String> awsRegion) {
+            $.awsRegion = awsRegion;
+            return this;
+        }
+
+        /**
+         * @param awsRegion The AWS region, e.g. `us-east-1`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsRegion(String awsRegion) {
+            return awsRegion(Output.of(awsRegion));
+        }
+
+        /**
+         * @param awsRoleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsRoleArn(@Nullable Output<String> awsRoleArn) {
+            $.awsRoleArn = awsRoleArn;
+            return this;
+        }
+
+        /**
+         * @param awsRoleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsRoleArn(String awsRoleArn) {
+            return awsRoleArn(Output.of(awsRoleArn));
+        }
+
+        /**
+         * @param awsSecretAccessKey The secret AWS access key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsSecretAccessKey(@Nullable Output<String> awsSecretAccessKey) {
+            $.awsSecretAccessKey = awsSecretAccessKey;
+            return this;
+        }
+
+        /**
+         * @param awsSecretAccessKey The secret AWS access key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsSecretAccessKey(String awsSecretAccessKey) {
+            return awsSecretAccessKey(Output.of(awsSecretAccessKey));
+        }
+
+        /**
+         * @param awsService The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsService(@Nullable Output<String> awsService) {
+            $.awsService = awsService;
+            return this;
+        }
+
+        /**
+         * @param awsService The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsService(String awsService) {
+            return awsService(Output.of(awsService));
         }
 
         /**
@@ -309,7 +649,7 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param includeHeadersInContext The connector response context will also include the headers. The context will have a &#34;body&#34; attribute and a &#34;headers&#34; attribute. See more details in the help guide
+         * @param includeHeadersInContext The connector response context will also include the headers and status code. The context will have a &#34;body&#34; attribute, a &#34;headers&#34; attribute, and a &#34;statusCode&#34; attribute. See more details in the help guide
          * 
          * @return builder
          * 
@@ -320,7 +660,7 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param includeHeadersInContext The connector response context will also include the headers. The context will have a &#34;body&#34; attribute and a &#34;headers&#34; attribute. See more details in the help guide
+         * @param includeHeadersInContext The connector response context will also include the headers and status code. The context will have a &#34;body&#34; attribute, a &#34;headers&#34; attribute, and a &#34;statusCode&#34; attribute. See more details in the help guide
          * 
          * @return builder
          * 
@@ -369,6 +709,111 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param rfc9421Components HTTP message components to include in the signature (e.g., {@literal @}method, {@literal @}target-uri, {@literal @}authority, content-type, content-digest). Leave empty to use defaults: {@literal @}method, {@literal @}target-uri, {@literal @}authority
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421Components(@Nullable Output<String> rfc9421Components) {
+            $.rfc9421Components = rfc9421Components;
+            return this;
+        }
+
+        /**
+         * @param rfc9421Components HTTP message components to include in the signature (e.g., {@literal @}method, {@literal @}target-uri, {@literal @}authority, content-type, content-digest). Leave empty to use defaults: {@literal @}method, {@literal @}target-uri, {@literal @}authority
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421Components(String rfc9421Components) {
+            return rfc9421Components(Output.of(rfc9421Components));
+        }
+
+        /**
+         * @param rfc9421KeyId Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421KeyId(@Nullable Output<String> rfc9421KeyId) {
+            $.rfc9421KeyId = rfc9421KeyId;
+            return this;
+        }
+
+        /**
+         * @param rfc9421KeyId Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421KeyId(String rfc9421KeyId) {
+            return rfc9421KeyId(Output.of(rfc9421KeyId));
+        }
+
+        /**
+         * @param rfc9421PrivateKey Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421PrivateKey(@Nullable Output<String> rfc9421PrivateKey) {
+            $.rfc9421PrivateKey = rfc9421PrivateKey;
+            return this;
+        }
+
+        /**
+         * @param rfc9421PrivateKey Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421PrivateKey(String rfc9421PrivateKey) {
+            return rfc9421PrivateKey(Output.of(rfc9421PrivateKey));
+        }
+
+        /**
+         * @param rfc9421SignatureTtl How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421SignatureTtl(@Nullable Output<Double> rfc9421SignatureTtl) {
+            $.rfc9421SignatureTtl = rfc9421SignatureTtl;
+            return this;
+        }
+
+        /**
+         * @param rfc9421SignatureTtl How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421SignatureTtl(Double rfc9421SignatureTtl) {
+            return rfc9421SignatureTtl(Output.of(rfc9421SignatureTtl));
+        }
+
+        /**
+         * @param rfc9421SigningEnabled Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421SigningEnabled(@Nullable Output<Boolean> rfc9421SigningEnabled) {
+            $.rfc9421SigningEnabled = rfc9421SigningEnabled;
+            return this;
+        }
+
+        /**
+         * @param rfc9421SigningEnabled Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rfc9421SigningEnabled(Boolean rfc9421SigningEnabled) {
+            return rfc9421SigningEnabled(Output.of(rfc9421SigningEnabled));
         }
 
         /**

@@ -6,7 +6,10 @@ import builtins as _builtins
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .access_key import *
 from .descoper import *
+from .engine import *
+from .inbound_app import *
 from .management_key import *
 from .project import *
 from .provider import *
@@ -25,10 +28,34 @@ _utilities.register(
 [
  {
   "pkg": "descope",
+  "mod": "index/accessKey",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/accessKey:AccessKey": "AccessKey"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/descoper",
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/descoper:Descoper": "Descoper"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/engine",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/engine:Engine": "Engine"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/inboundApp",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/inboundApp:InboundApp": "InboundApp"
   }
  },
  {

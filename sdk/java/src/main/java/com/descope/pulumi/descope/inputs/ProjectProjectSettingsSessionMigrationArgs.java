@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectProjectSettingsSessionMigrationUserMappingArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.String;
@@ -15,6 +16,21 @@ import javax.annotation.Nullable;
 public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectProjectSettingsSessionMigrationArgs Empty = new ProjectProjectSettingsSessionMigrationArgs();
+
+    /**
+     * An API token for the vendor, required when `vendor` is set to `okta`.
+     * 
+     */
+    @Import(name="apiToken")
+    private @Nullable Output<String> apiToken;
+
+    /**
+     * @return An API token for the vendor, required when `vendor` is set to `okta`.
+     * 
+     */
+    public Optional<Output<String>> apiToken() {
+        return Optional.ofNullable(this.apiToken);
+    }
 
     /**
      * The audience value if needed by the vendor.
@@ -92,6 +108,36 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
     }
 
     /**
+     * A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+     * 
+     */
+    @Import(name="userMappings")
+    private @Nullable Output<List<ProjectProjectSettingsSessionMigrationUserMappingArgs>> userMappings;
+
+    /**
+     * @return A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+     * 
+     */
+    public Optional<Output<List<ProjectProjectSettingsSessionMigrationUserMappingArgs>>> userMappings() {
+        return Optional.ofNullable(this.userMappings);
+    }
+
+    /**
+     * The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+     * 
+     */
+    @Import(name="userSyncType")
+    private @Nullable Output<String> userSyncType;
+
+    /**
+     * @return The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+     * 
+     */
+    public Optional<Output<String>> userSyncType() {
+        return Optional.ofNullable(this.userSyncType);
+    }
+
+    /**
      * The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
@@ -109,11 +155,14 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
     private ProjectProjectSettingsSessionMigrationArgs() {}
 
     private ProjectProjectSettingsSessionMigrationArgs(ProjectProjectSettingsSessionMigrationArgs $) {
+        this.apiToken = $.apiToken;
         this.audience = $.audience;
         this.clientId = $.clientId;
         this.domain = $.domain;
         this.issuer = $.issuer;
         this.loginidMatchedAttributes = $.loginidMatchedAttributes;
+        this.userMappings = $.userMappings;
+        this.userSyncType = $.userSyncType;
         this.vendor = $.vendor;
     }
 
@@ -133,6 +182,27 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
 
         public Builder(ProjectProjectSettingsSessionMigrationArgs defaults) {
             $ = new ProjectProjectSettingsSessionMigrationArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param apiToken An API token for the vendor, required when `vendor` is set to `okta`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder apiToken(@Nullable Output<String> apiToken) {
+            $.apiToken = apiToken;
+            return this;
+        }
+
+        /**
+         * @param apiToken An API token for the vendor, required when `vendor` is set to `okta`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder apiToken(String apiToken) {
+            return apiToken(Output.of(apiToken));
         }
 
         /**
@@ -248,6 +318,58 @@ public final class ProjectProjectSettingsSessionMigrationArgs extends com.pulumi
          */
         public Builder loginidMatchedAttributes(String... loginidMatchedAttributes) {
             return loginidMatchedAttributes(List.of(loginidMatchedAttributes));
+        }
+
+        /**
+         * @param userMappings A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder userMappings(@Nullable Output<List<ProjectProjectSettingsSessionMigrationUserMappingArgs>> userMappings) {
+            $.userMappings = userMappings;
+            return this;
+        }
+
+        /**
+         * @param userMappings A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder userMappings(List<ProjectProjectSettingsSessionMigrationUserMappingArgs> userMappings) {
+            return userMappings(Output.of(userMappings));
+        }
+
+        /**
+         * @param userMappings A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder userMappings(ProjectProjectSettingsSessionMigrationUserMappingArgs... userMappings) {
+            return userMappings(List.of(userMappings));
+        }
+
+        /**
+         * @param userSyncType The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder userSyncType(@Nullable Output<String> userSyncType) {
+            $.userSyncType = userSyncType;
+            return this;
+        }
+
+        /**
+         * @param userSyncType The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder userSyncType(String userSyncType) {
+            return userSyncType(Output.of(userSyncType));
         }
 
         /**

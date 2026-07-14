@@ -52,6 +52,16 @@ public final class ProjectConnectorsDatadog {
      */
     private @Nullable String site;
     /**
+     * @return An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+     * 
+     */
+    private @Nullable String source;
+    /**
+     * @return An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+     * 
+     */
+    private @Nullable String tags;
+    /**
      * @return Whether to send troubleshooting events.
      * 
      */
@@ -111,6 +121,20 @@ public final class ProjectConnectorsDatadog {
         return Optional.ofNullable(this.site);
     }
     /**
+     * @return An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+     * 
+     */
+    public Optional<String> source() {
+        return Optional.ofNullable(this.source);
+    }
+    /**
+     * @return An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+     * 
+     */
+    public Optional<String> tags() {
+        return Optional.ofNullable(this.tags);
+    }
+    /**
      * @return Whether to send troubleshooting events.
      * 
      */
@@ -135,6 +159,8 @@ public final class ProjectConnectorsDatadog {
         private @Nullable Boolean maskPii;
         private String name;
         private @Nullable String site;
+        private @Nullable String source;
+        private @Nullable String tags;
         private @Nullable Boolean troubleshootLogEnabled;
         public Builder() {}
         public Builder(ProjectConnectorsDatadog defaults) {
@@ -147,6 +173,8 @@ public final class ProjectConnectorsDatadog {
     	      this.maskPii = defaults.maskPii;
     	      this.name = defaults.name;
     	      this.site = defaults.site;
+    	      this.source = defaults.source;
+    	      this.tags = defaults.tags;
     	      this.troubleshootLogEnabled = defaults.troubleshootLogEnabled;
         }
 
@@ -206,6 +234,18 @@ public final class ProjectConnectorsDatadog {
             return this;
         }
         @CustomType.Setter
+        public Builder source(@Nullable String source) {
+
+            this.source = source;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder tags(@Nullable String tags) {
+
+            this.tags = tags;
+            return this;
+        }
+        @CustomType.Setter
         public Builder troubleshootLogEnabled(@Nullable Boolean troubleshootLogEnabled) {
 
             this.troubleshootLogEnabled = troubleshootLogEnabled;
@@ -221,6 +261,8 @@ public final class ProjectConnectorsDatadog {
             _resultValue.maskPii = maskPii;
             _resultValue.name = name;
             _resultValue.site = site;
+            _resultValue.source = source;
+            _resultValue.tags = tags;
             _resultValue.troubleshootLogEnabled = troubleshootLogEnabled;
             return _resultValue;
         }

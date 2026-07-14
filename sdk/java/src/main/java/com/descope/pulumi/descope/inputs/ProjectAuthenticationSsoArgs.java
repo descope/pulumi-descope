@@ -3,11 +3,14 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoEmailServiceArgs;
+import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs;
 import com.descope.pulumi.descope.inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -48,6 +51,21 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * Whether to block SSO login if the user&#39;s email domain doesn&#39;t match the configured SSO domains.
+     * 
+     */
+    @Import(name="blockIfEmailDomainMismatch")
+    private @Nullable Output<Boolean> blockIfEmailDomainMismatch;
+
+    /**
+     * @return Whether to block SSO login if the user&#39;s email domain doesn&#39;t match the configured SSO domains.
+     * 
+     */
+    public Optional<Output<Boolean>> blockIfEmailDomainMismatch() {
+        return Optional.ofNullable(this.blockIfEmailDomainMismatch);
+    }
+
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -63,6 +81,21 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * Settings related to sending SSO invite emails as part of the SSO feature.
+     * 
+     */
+    @Import(name="emailService")
+    private @Nullable Output<ProjectAuthenticationSsoEmailServiceArgs> emailService;
+
+    /**
+     * @return Settings related to sending SSO invite emails as part of the SSO feature.
+     * 
+     */
+    public Optional<Output<ProjectAuthenticationSsoEmailServiceArgs>> emailService() {
+        return Optional.ofNullable(this.emailService);
+    }
+
+    /**
      * Whether to enable groups priority.
      * 
      */
@@ -75,6 +108,51 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
      */
     public Optional<Output<Boolean>> groupsPriority() {
         return Optional.ofNullable(this.groupsPriority);
+    }
+
+    /**
+     * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    @Import(name="limitMappingToMandatoryAttributes")
+    private @Nullable Output<Boolean> limitMappingToMandatoryAttributes;
+
+    /**
+     * @return Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     * 
+     */
+    public Optional<Output<Boolean>> limitMappingToMandatoryAttributes() {
+        return Optional.ofNullable(this.limitMappingToMandatoryAttributes);
+    }
+
+    /**
+     * Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    @Import(name="mandatoryUserAttributes")
+    private @Nullable Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>> mandatoryUserAttributes;
+
+    /**
+     * @return Define the required Descope attributes that must be populated when receiving SSO information.
+     * 
+     */
+    public Optional<Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>>> mandatoryUserAttributes() {
+        return Optional.ofNullable(this.mandatoryUserAttributes);
+    }
+
+    /**
+     * Whether to mark the user&#39;s email as unverified when logging in via SSO.
+     * 
+     */
+    @Import(name="markEmailAsUnverified")
+    private @Nullable Output<Boolean> markEmailAsUnverified;
+
+    /**
+     * @return Whether to mark the user&#39;s email as unverified when logging in via SSO.
+     * 
+     */
+    public Optional<Output<Boolean>> markEmailAsUnverified() {
+        return Optional.ofNullable(this.markEmailAsUnverified);
     }
 
     /**
@@ -108,6 +186,36 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    @Import(name="requireGroupsAttributeName")
+    private @Nullable Output<Boolean> requireGroupsAttributeName;
+
+    /**
+     * @return When configuring SSO the groups attribute name must be specified.
+     * 
+     */
+    public Optional<Output<Boolean>> requireGroupsAttributeName() {
+        return Optional.ofNullable(this.requireGroupsAttributeName);
+    }
+
+    /**
+     * When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    @Import(name="requireSsoDomains")
+    private @Nullable Output<Boolean> requireSsoDomains;
+
+    /**
+     * @return When configuring SSO an SSO domain must be specified.
+     * 
+     */
+    public Optional<Output<Boolean>> requireSsoDomains() {
+        return Optional.ofNullable(this.requireSsoDomains);
+    }
+
+    /**
      * Configuration block for the SSO Suite.
      * 
      */
@@ -127,10 +235,17 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
     private ProjectAuthenticationSsoArgs(ProjectAuthenticationSsoArgs $) {
         this.allowDuplicateDomains = $.allowDuplicateDomains;
         this.allowOverrideRoles = $.allowOverrideRoles;
+        this.blockIfEmailDomainMismatch = $.blockIfEmailDomainMismatch;
         this.disabled = $.disabled;
+        this.emailService = $.emailService;
         this.groupsPriority = $.groupsPriority;
+        this.limitMappingToMandatoryAttributes = $.limitMappingToMandatoryAttributes;
+        this.mandatoryUserAttributes = $.mandatoryUserAttributes;
+        this.markEmailAsUnverified = $.markEmailAsUnverified;
         this.mergeUsers = $.mergeUsers;
         this.redirectUrl = $.redirectUrl;
+        this.requireGroupsAttributeName = $.requireGroupsAttributeName;
+        this.requireSsoDomains = $.requireSsoDomains;
         this.ssoSuiteSettings = $.ssoSuiteSettings;
     }
 
@@ -195,6 +310,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         }
 
         /**
+         * @param blockIfEmailDomainMismatch Whether to block SSO login if the user&#39;s email domain doesn&#39;t match the configured SSO domains.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder blockIfEmailDomainMismatch(@Nullable Output<Boolean> blockIfEmailDomainMismatch) {
+            $.blockIfEmailDomainMismatch = blockIfEmailDomainMismatch;
+            return this;
+        }
+
+        /**
+         * @param blockIfEmailDomainMismatch Whether to block SSO login if the user&#39;s email domain doesn&#39;t match the configured SSO domains.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder blockIfEmailDomainMismatch(Boolean blockIfEmailDomainMismatch) {
+            return blockIfEmailDomainMismatch(Output.of(blockIfEmailDomainMismatch));
+        }
+
+        /**
          * @param disabled Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
          * 
          * @return builder
@@ -216,6 +352,27 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
         }
 
         /**
+         * @param emailService Settings related to sending SSO invite emails as part of the SSO feature.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailService(@Nullable Output<ProjectAuthenticationSsoEmailServiceArgs> emailService) {
+            $.emailService = emailService;
+            return this;
+        }
+
+        /**
+         * @param emailService Settings related to sending SSO invite emails as part of the SSO feature.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailService(ProjectAuthenticationSsoEmailServiceArgs emailService) {
+            return emailService(Output.of(emailService));
+        }
+
+        /**
          * @param groupsPriority Whether to enable groups priority.
          * 
          * @return builder
@@ -234,6 +391,79 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder groupsPriority(Boolean groupsPriority) {
             return groupsPriority(Output.of(groupsPriority));
+        }
+
+        /**
+         * @param limitMappingToMandatoryAttributes Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder limitMappingToMandatoryAttributes(@Nullable Output<Boolean> limitMappingToMandatoryAttributes) {
+            $.limitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            return this;
+        }
+
+        /**
+         * @param limitMappingToMandatoryAttributes Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder limitMappingToMandatoryAttributes(Boolean limitMappingToMandatoryAttributes) {
+            return limitMappingToMandatoryAttributes(Output.of(limitMappingToMandatoryAttributes));
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(@Nullable Output<List<ProjectAuthenticationSsoMandatoryUserAttributeArgs>> mandatoryUserAttributes) {
+            $.mandatoryUserAttributes = mandatoryUserAttributes;
+            return this;
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(List<ProjectAuthenticationSsoMandatoryUserAttributeArgs> mandatoryUserAttributes) {
+            return mandatoryUserAttributes(Output.of(mandatoryUserAttributes));
+        }
+
+        /**
+         * @param mandatoryUserAttributes Define the required Descope attributes that must be populated when receiving SSO information.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder mandatoryUserAttributes(ProjectAuthenticationSsoMandatoryUserAttributeArgs... mandatoryUserAttributes) {
+            return mandatoryUserAttributes(List.of(mandatoryUserAttributes));
+        }
+
+        /**
+         * @param markEmailAsUnverified Whether to mark the user&#39;s email as unverified when logging in via SSO.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder markEmailAsUnverified(@Nullable Output<Boolean> markEmailAsUnverified) {
+            $.markEmailAsUnverified = markEmailAsUnverified;
+            return this;
+        }
+
+        /**
+         * @param markEmailAsUnverified Whether to mark the user&#39;s email as unverified when logging in via SSO.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder markEmailAsUnverified(Boolean markEmailAsUnverified) {
+            return markEmailAsUnverified(Output.of(markEmailAsUnverified));
         }
 
         /**
@@ -276,6 +506,48 @@ public final class ProjectAuthenticationSsoArgs extends com.pulumi.resources.Res
          */
         public Builder redirectUrl(String redirectUrl) {
             return redirectUrl(Output.of(redirectUrl));
+        }
+
+        /**
+         * @param requireGroupsAttributeName When configuring SSO the groups attribute name must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireGroupsAttributeName(@Nullable Output<Boolean> requireGroupsAttributeName) {
+            $.requireGroupsAttributeName = requireGroupsAttributeName;
+            return this;
+        }
+
+        /**
+         * @param requireGroupsAttributeName When configuring SSO the groups attribute name must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireGroupsAttributeName(Boolean requireGroupsAttributeName) {
+            return requireGroupsAttributeName(Output.of(requireGroupsAttributeName));
+        }
+
+        /**
+         * @param requireSsoDomains When configuring SSO an SSO domain must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireSsoDomains(@Nullable Output<Boolean> requireSsoDomains) {
+            $.requireSsoDomains = requireSsoDomains;
+            return this;
+        }
+
+        /**
+         * @param requireSsoDomains When configuring SSO an SSO domain must be specified.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder requireSsoDomains(Boolean requireSsoDomains) {
+            return requireSsoDomains(Output.of(requireSsoDomains));
         }
 
         /**

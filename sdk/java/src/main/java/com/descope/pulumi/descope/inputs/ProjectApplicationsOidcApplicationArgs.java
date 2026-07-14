@@ -3,6 +3,8 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.ProjectApplicationsOidcApplicationPermissionArgs;
+import com.descope.pulumi.descope.inputs.ProjectApplicationsOidcApplicationRoleArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
@@ -17,6 +19,36 @@ import javax.annotation.Nullable;
 public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectApplicationsOidcApplicationArgs Empty = new ProjectApplicationsOidcApplicationArgs();
+
+    /**
+     * A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project&#39;s approved/trusted domains.
+     * 
+     */
+    @Import(name="approvedRedirectUrls")
+    private @Nullable Output<List<String>> approvedRedirectUrls;
+
+    /**
+     * @return A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project&#39;s approved/trusted domains.
+     * 
+     */
+    public Optional<Output<List<String>>> approvedRedirectUrls() {
+        return Optional.ofNullable(this.approvedRedirectUrls);
+    }
+
+    /**
+     * Disables the `authorizationCode` grant type for this application.
+     * 
+     */
+    @Import(name="authorizationCodeDisabled")
+    private @Nullable Output<Boolean> authorizationCodeDisabled;
+
+    /**
+     * @return Disables the `authorizationCode` grant type for this application.
+     * 
+     */
+    public Optional<Output<Boolean>> authorizationCodeDisabled() {
+        return Optional.ofNullable(this.authorizationCodeDisabled);
+    }
 
     /**
      * A list of supported claims. e.g. `sub`, `email`, `exp`.
@@ -34,6 +66,81 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
     }
 
     /**
+     * Disables the `clientCredentials` grant type for this application.
+     * 
+     */
+    @Import(name="clientCredentialsDisabled")
+    private @Nullable Output<Boolean> clientCredentialsDisabled;
+
+    /**
+     * @return Disables the `clientCredentials` grant type for this application.
+     * 
+     */
+    public Optional<Output<Boolean>> clientCredentialsDisabled() {
+        return Optional.ofNullable(this.clientCredentialsDisabled);
+    }
+
+    /**
+     * A dedicated OIDC `clientId` to import for this application. When omitted, the `clientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+     * 
+     */
+    @Import(name="clientId")
+    private @Nullable Output<String> clientId;
+
+    /**
+     * @return A dedicated OIDC `clientId` to import for this application. When omitted, the `clientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+     * 
+     */
+    public Optional<Output<String>> clientId() {
+        return Optional.ofNullable(this.clientId);
+    }
+
+    /**
+     * A dedicated OIDC `clientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+     * 
+     */
+    @Import(name="clientSecret")
+    private @Nullable Output<String> clientSecret;
+
+    /**
+     * @return A dedicated OIDC `clientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+     * 
+     */
+    public Optional<Output<String>> clientSecret() {
+        return Optional.ofNullable(this.clientSecret);
+    }
+
+    /**
+     * OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;`.
+     * 
+     */
+    @Import(name="clientType")
+    private @Nullable Output<String> clientType;
+
+    /**
+     * @return OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;`.
+     * 
+     */
+    public Optional<Output<String>> clientType() {
+        return Optional.ofNullable(this.clientType);
+    }
+
+    /**
+     * Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * 
+     */
+    @Import(name="defaultAudience")
+    private @Nullable Output<String> defaultAudience;
+
+    /**
+     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * 
+     */
+    public Optional<Output<String>> defaultAudience() {
+        return Optional.ofNullable(this.defaultAudience);
+    }
+
+    /**
      * A description for the OIDC application.
      * 
      */
@@ -46,6 +153,21 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
      */
     public Optional<Output<String>> description() {
         return Optional.ofNullable(this.description);
+    }
+
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+     * 
+     */
+    @Import(name="deviceCodeDisabled")
+    private @Nullable Output<Boolean> deviceCodeDisabled;
+
+    /**
+     * @return Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+     * 
+     */
+    public Optional<Output<Boolean>> deviceCodeDisabled() {
+        return Optional.ofNullable(this.deviceCodeDisabled);
     }
 
     /**
@@ -79,6 +201,21 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
     }
 
     /**
+     * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
+     * 
+     */
+    @Import(name="forcePkce")
+    private @Nullable Output<Boolean> forcePkce;
+
+    /**
+     * @return When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
+     * 
+     */
+    public Optional<Output<Boolean>> forcePkce() {
+        return Optional.ofNullable(this.forcePkce);
+    }
+
+    /**
      * An optional identifier for the OIDC application.
      * 
      */
@@ -91,6 +228,21 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
      */
     public Optional<Output<String>> id() {
         return Optional.ofNullable(this.id);
+    }
+
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+     * 
+     */
+    @Import(name="jwtBearerDisabled")
+    private @Nullable Output<Boolean> jwtBearerDisabled;
+
+    /**
+     * @return Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+     * 
+     */
+    public Optional<Output<Boolean>> jwtBearerDisabled() {
+        return Optional.ofNullable(this.jwtBearerDisabled);
     }
 
     /**
@@ -138,17 +290,59 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         return this.name;
     }
 
+    @Import(name="permissions")
+    private @Nullable Output<List<ProjectApplicationsOidcApplicationPermissionArgs>> permissions;
+
+    public Optional<Output<List<ProjectApplicationsOidcApplicationPermissionArgs>>> permissions() {
+        return Optional.ofNullable(this.permissions);
+    }
+
+    /**
+     * Disables the `refreshToken` grant type for this application.
+     * 
+     */
+    @Import(name="refreshTokenDisabled")
+    private @Nullable Output<Boolean> refreshTokenDisabled;
+
+    /**
+     * @return Disables the `refreshToken` grant type for this application.
+     * 
+     */
+    public Optional<Output<Boolean>> refreshTokenDisabled() {
+        return Optional.ofNullable(this.refreshTokenDisabled);
+    }
+
+    @Import(name="roles")
+    private @Nullable Output<List<ProjectApplicationsOidcApplicationRoleArgs>> roles;
+
+    public Optional<Output<List<ProjectApplicationsOidcApplicationRoleArgs>>> roles() {
+        return Optional.ofNullable(this.roles);
+    }
+
     private ProjectApplicationsOidcApplicationArgs() {}
 
     private ProjectApplicationsOidcApplicationArgs(ProjectApplicationsOidcApplicationArgs $) {
+        this.approvedRedirectUrls = $.approvedRedirectUrls;
+        this.authorizationCodeDisabled = $.authorizationCodeDisabled;
         this.claims = $.claims;
+        this.clientCredentialsDisabled = $.clientCredentialsDisabled;
+        this.clientId = $.clientId;
+        this.clientSecret = $.clientSecret;
+        this.clientType = $.clientType;
+        this.defaultAudience = $.defaultAudience;
         this.description = $.description;
+        this.deviceCodeDisabled = $.deviceCodeDisabled;
         this.disabled = $.disabled;
         this.forceAuthentication = $.forceAuthentication;
+        this.forcePkce = $.forcePkce;
         this.id = $.id;
+        this.jwtBearerDisabled = $.jwtBearerDisabled;
         this.loginPageUrl = $.loginPageUrl;
         this.logo = $.logo;
         this.name = $.name;
+        this.permissions = $.permissions;
+        this.refreshTokenDisabled = $.refreshTokenDisabled;
+        this.roles = $.roles;
     }
 
     public static Builder builder() {
@@ -167,6 +361,58 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
 
         public Builder(ProjectApplicationsOidcApplicationArgs defaults) {
             $ = new ProjectApplicationsOidcApplicationArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param approvedRedirectUrls A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project&#39;s approved/trusted domains.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder approvedRedirectUrls(@Nullable Output<List<String>> approvedRedirectUrls) {
+            $.approvedRedirectUrls = approvedRedirectUrls;
+            return this;
+        }
+
+        /**
+         * @param approvedRedirectUrls A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project&#39;s approved/trusted domains.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder approvedRedirectUrls(List<String> approvedRedirectUrls) {
+            return approvedRedirectUrls(Output.of(approvedRedirectUrls));
+        }
+
+        /**
+         * @param approvedRedirectUrls A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project&#39;s approved/trusted domains.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder approvedRedirectUrls(String... approvedRedirectUrls) {
+            return approvedRedirectUrls(List.of(approvedRedirectUrls));
+        }
+
+        /**
+         * @param authorizationCodeDisabled Disables the `authorizationCode` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authorizationCodeDisabled(@Nullable Output<Boolean> authorizationCodeDisabled) {
+            $.authorizationCodeDisabled = authorizationCodeDisabled;
+            return this;
+        }
+
+        /**
+         * @param authorizationCodeDisabled Disables the `authorizationCode` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authorizationCodeDisabled(Boolean authorizationCodeDisabled) {
+            return authorizationCodeDisabled(Output.of(authorizationCodeDisabled));
         }
 
         /**
@@ -201,6 +447,111 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         }
 
         /**
+         * @param clientCredentialsDisabled Disables the `clientCredentials` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientCredentialsDisabled(@Nullable Output<Boolean> clientCredentialsDisabled) {
+            $.clientCredentialsDisabled = clientCredentialsDisabled;
+            return this;
+        }
+
+        /**
+         * @param clientCredentialsDisabled Disables the `clientCredentials` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientCredentialsDisabled(Boolean clientCredentialsDisabled) {
+            return clientCredentialsDisabled(Output.of(clientCredentialsDisabled));
+        }
+
+        /**
+         * @param clientId A dedicated OIDC `clientId` to import for this application. When omitted, the `clientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientId(@Nullable Output<String> clientId) {
+            $.clientId = clientId;
+            return this;
+        }
+
+        /**
+         * @param clientId A dedicated OIDC `clientId` to import for this application. When omitted, the `clientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientId(String clientId) {
+            return clientId(Output.of(clientId));
+        }
+
+        /**
+         * @param clientSecret A dedicated OIDC `clientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientSecret(@Nullable Output<String> clientSecret) {
+            $.clientSecret = clientSecret;
+            return this;
+        }
+
+        /**
+         * @param clientSecret A dedicated OIDC `clientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientSecret(String clientSecret) {
+            return clientSecret(Output.of(clientSecret));
+        }
+
+        /**
+         * @param clientType OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientType(@Nullable Output<String> clientType) {
+            $.clientType = clientType;
+            return this;
+        }
+
+        /**
+         * @param clientType OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientType(String clientType) {
+            return clientType(Output.of(clientType));
+        }
+
+        /**
+         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultAudience(@Nullable Output<String> defaultAudience) {
+            $.defaultAudience = defaultAudience;
+            return this;
+        }
+
+        /**
+         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultAudience(String defaultAudience) {
+            return defaultAudience(Output.of(defaultAudience));
+        }
+
+        /**
          * @param description A description for the OIDC application.
          * 
          * @return builder
@@ -219,6 +570,27 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param deviceCodeDisabled Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deviceCodeDisabled(@Nullable Output<Boolean> deviceCodeDisabled) {
+            $.deviceCodeDisabled = deviceCodeDisabled;
+            return this;
+        }
+
+        /**
+         * @param deviceCodeDisabled Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deviceCodeDisabled(Boolean deviceCodeDisabled) {
+            return deviceCodeDisabled(Output.of(deviceCodeDisabled));
         }
 
         /**
@@ -264,6 +636,27 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         }
 
         /**
+         * @param forcePkce When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forcePkce(@Nullable Output<Boolean> forcePkce) {
+            $.forcePkce = forcePkce;
+            return this;
+        }
+
+        /**
+         * @param forcePkce When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forcePkce(Boolean forcePkce) {
+            return forcePkce(Output.of(forcePkce));
+        }
+
+        /**
          * @param id An optional identifier for the OIDC application.
          * 
          * @return builder
@@ -282,6 +675,27 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
          */
         public Builder id(String id) {
             return id(Output.of(id));
+        }
+
+        /**
+         * @param jwtBearerDisabled Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder jwtBearerDisabled(@Nullable Output<Boolean> jwtBearerDisabled) {
+            $.jwtBearerDisabled = jwtBearerDisabled;
+            return this;
+        }
+
+        /**
+         * @param jwtBearerDisabled Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder jwtBearerDisabled(Boolean jwtBearerDisabled) {
+            return jwtBearerDisabled(Output.of(jwtBearerDisabled));
         }
 
         /**
@@ -345,6 +759,53 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        public Builder permissions(@Nullable Output<List<ProjectApplicationsOidcApplicationPermissionArgs>> permissions) {
+            $.permissions = permissions;
+            return this;
+        }
+
+        public Builder permissions(List<ProjectApplicationsOidcApplicationPermissionArgs> permissions) {
+            return permissions(Output.of(permissions));
+        }
+
+        public Builder permissions(ProjectApplicationsOidcApplicationPermissionArgs... permissions) {
+            return permissions(List.of(permissions));
+        }
+
+        /**
+         * @param refreshTokenDisabled Disables the `refreshToken` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder refreshTokenDisabled(@Nullable Output<Boolean> refreshTokenDisabled) {
+            $.refreshTokenDisabled = refreshTokenDisabled;
+            return this;
+        }
+
+        /**
+         * @param refreshTokenDisabled Disables the `refreshToken` grant type for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder refreshTokenDisabled(Boolean refreshTokenDisabled) {
+            return refreshTokenDisabled(Output.of(refreshTokenDisabled));
+        }
+
+        public Builder roles(@Nullable Output<List<ProjectApplicationsOidcApplicationRoleArgs>> roles) {
+            $.roles = roles;
+            return this;
+        }
+
+        public Builder roles(List<ProjectApplicationsOidcApplicationRoleArgs> roles) {
+            return roles(Output.of(roles));
+        }
+
+        public Builder roles(ProjectApplicationsOidcApplicationRoleArgs... roles) {
+            return roles(List.of(roles));
         }
 
         public ProjectApplicationsOidcApplicationArgs build() {

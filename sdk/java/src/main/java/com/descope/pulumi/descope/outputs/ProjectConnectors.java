@@ -4,13 +4,16 @@
 package com.descope.pulumi.descope.outputs;
 
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAbuseipdb;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsAlloy;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAmplitude;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsArkose;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAuditWebhook;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsS3;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsSesEmailValidation;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsAwsTranslate;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsBitsight;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsCoralogix;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsCribl;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDarwinium;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDatadog;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsDevrevGrow;
@@ -28,6 +31,7 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsGenericSmsGateway;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudLogging;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleCloudTranslation;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsGoogleMapsPlace;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsGroundcover;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHcaptcha;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHibp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsHttp;
@@ -40,15 +44,19 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsMixpanel;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsMparticle;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsNewrelic;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsOpentelemetry;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsPendo;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsPingDirectory;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsPostmark;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRadar;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptcha;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptchaEnterprise;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsRecaptchaV2;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsRekognition;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsRndReassigned;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSalesforce;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSalesforceMarketingCloud;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSardine;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsScim;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSe;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSegment;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSendgrid;
@@ -56,6 +64,7 @@ import com.descope.pulumi.descope.outputs.ProjectConnectorsSlack;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSmartling;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSmtp;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSn;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsSnowflake;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSplunk;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSql;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsSumologic;
@@ -80,6 +89,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsAbuseipdb> abuseipdbs;
     /**
+     * @return Streamline identity verification and fraud monitoring with the Alloy connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsAlloy> alloys;
+    /**
      * @return Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
@@ -100,6 +114,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
     /**
+     * @return Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsAwsSesEmailValidation> awsSesEmailValidations;
+    /**
      * @return Localize the language of your login and user journey screens with the Amazon Translate connector.
      * 
      */
@@ -114,6 +133,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsCoralogix> coralogixes;
+    /**
+     * @return Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+     * 
+     */
+    private @Nullable List<ProjectConnectorsCribl> cribls;
     /**
      * @return Connect to Darwinium API for fraud detection and device intelligence.
      * 
@@ -200,6 +224,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
     /**
+     * @return Send audit events and troubleshooting logs to groundcover.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsGroundcover> groundcovers;
+    /**
      * @return hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
      * 
      */
@@ -260,6 +289,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsOpentelemetry> opentelemetries;
     /**
+     * @return Stream authentication audit logs with the Pendo connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsPendo> pendos;
+    /**
      * @return Authenticate against PingDirectory.
      * 
      */
@@ -280,6 +314,11 @@ public final class ProjectConnectors {
      */
     private @Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises;
     /**
+     * @return Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsRecaptchaV2> recaptchaV2s;
+    /**
      * @return Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
@@ -289,6 +328,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsRekognition> rekognitions;
+    /**
+     * @return Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsRndReassigned> rndReassigneds;
     /**
      * @return Send transactional messages with the Salesforce Marketing Cloud connector.
      * 
@@ -304,6 +348,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsSardine> sardines;
+    /**
+     * @return Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsScim> scims;
     /**
      * @return Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      * 
@@ -334,6 +383,11 @@ public final class ProjectConnectors {
      * 
      */
     private @Nullable List<ProjectConnectorsSmtp> smtps;
+    /**
+     * @return Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+     * 
+     */
+    private @Nullable List<ProjectConnectorsSnowflake> snowflakes;
     /**
      * @return Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
      * 
@@ -404,6 +458,13 @@ public final class ProjectConnectors {
         return this.abuseipdbs == null ? List.of() : this.abuseipdbs;
     }
     /**
+     * @return Streamline identity verification and fraud monitoring with the Alloy connector.
+     * 
+     */
+    public List<ProjectConnectorsAlloy> alloys() {
+        return this.alloys == null ? List.of() : this.alloys;
+    }
+    /**
      * @return Track user activity and traits at any point in your user journey with the Amplitude connector.
      * 
      */
@@ -432,6 +493,13 @@ public final class ProjectConnectors {
         return this.awsS3s == null ? List.of() : this.awsS3s;
     }
     /**
+     * @return Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+     * 
+     */
+    public List<ProjectConnectorsAwsSesEmailValidation> awsSesEmailValidations() {
+        return this.awsSesEmailValidations == null ? List.of() : this.awsSesEmailValidations;
+    }
+    /**
      * @return Localize the language of your login and user journey screens with the Amazon Translate connector.
      * 
      */
@@ -451,6 +519,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsCoralogix> coralogixes() {
         return this.coralogixes == null ? List.of() : this.coralogixes;
+    }
+    /**
+     * @return Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+     * 
+     */
+    public List<ProjectConnectorsCribl> cribls() {
+        return this.cribls == null ? List.of() : this.cribls;
     }
     /**
      * @return Connect to Darwinium API for fraud detection and device intelligence.
@@ -572,6 +647,13 @@ public final class ProjectConnectors {
         return this.googleMapsPlaces == null ? List.of() : this.googleMapsPlaces;
     }
     /**
+     * @return Send audit events and troubleshooting logs to groundcover.
+     * 
+     */
+    public List<ProjectConnectorsGroundcover> groundcovers() {
+        return this.groundcovers == null ? List.of() : this.groundcovers;
+    }
+    /**
      * @return hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
      * 
      */
@@ -656,6 +738,13 @@ public final class ProjectConnectors {
         return this.opentelemetries == null ? List.of() : this.opentelemetries;
     }
     /**
+     * @return Stream authentication audit logs with the Pendo connector.
+     * 
+     */
+    public List<ProjectConnectorsPendo> pendos() {
+        return this.pendos == null ? List.of() : this.pendos;
+    }
+    /**
      * @return Authenticate against PingDirectory.
      * 
      */
@@ -684,6 +773,13 @@ public final class ProjectConnectors {
         return this.recaptchaEnterprises == null ? List.of() : this.recaptchaEnterprises;
     }
     /**
+     * @return Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+     * 
+     */
+    public List<ProjectConnectorsRecaptchaV2> recaptchaV2s() {
+        return this.recaptchaV2s == null ? List.of() : this.recaptchaV2s;
+    }
+    /**
      * @return Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
@@ -696,6 +792,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsRekognition> rekognitions() {
         return this.rekognitions == null ? List.of() : this.rekognitions;
+    }
+    /**
+     * @return Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+     * 
+     */
+    public List<ProjectConnectorsRndReassigned> rndReassigneds() {
+        return this.rndReassigneds == null ? List.of() : this.rndReassigneds;
     }
     /**
      * @return Send transactional messages with the Salesforce Marketing Cloud connector.
@@ -717,6 +820,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsSardine> sardines() {
         return this.sardines == null ? List.of() : this.sardines;
+    }
+    /**
+     * @return Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+     * 
+     */
+    public List<ProjectConnectorsScim> scims() {
+        return this.scims == null ? List.of() : this.scims;
     }
     /**
      * @return Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
@@ -759,6 +869,13 @@ public final class ProjectConnectors {
      */
     public List<ProjectConnectorsSmtp> smtps() {
         return this.smtps == null ? List.of() : this.smtps;
+    }
+    /**
+     * @return Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+     * 
+     */
+    public List<ProjectConnectorsSnowflake> snowflakes() {
+        return this.snowflakes == null ? List.of() : this.snowflakes;
     }
     /**
      * @return Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
@@ -855,13 +972,16 @@ public final class ProjectConnectors {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable List<ProjectConnectorsAbuseipdb> abuseipdbs;
+        private @Nullable List<ProjectConnectorsAlloy> alloys;
         private @Nullable List<ProjectConnectorsAmplitude> amplitudes;
         private @Nullable List<ProjectConnectorsArkose> arkoses;
         private @Nullable List<ProjectConnectorsAuditWebhook> auditWebhooks;
         private @Nullable List<ProjectConnectorsAwsS3> awsS3s;
+        private @Nullable List<ProjectConnectorsAwsSesEmailValidation> awsSesEmailValidations;
         private @Nullable List<ProjectConnectorsAwsTranslate> awsTranslates;
         private @Nullable List<ProjectConnectorsBitsight> bitsights;
         private @Nullable List<ProjectConnectorsCoralogix> coralogixes;
+        private @Nullable List<ProjectConnectorsCribl> cribls;
         private @Nullable List<ProjectConnectorsDarwinium> darwinia;
         private @Nullable List<ProjectConnectorsDatadog> datadogs;
         private @Nullable List<ProjectConnectorsDevrevGrow> devrevGrows;
@@ -879,6 +999,7 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsGoogleCloudLogging> googleCloudLoggings;
         private @Nullable List<ProjectConnectorsGoogleCloudTranslation> googleCloudTranslations;
         private @Nullable List<ProjectConnectorsGoogleMapsPlace> googleMapsPlaces;
+        private @Nullable List<ProjectConnectorsGroundcover> groundcovers;
         private @Nullable List<ProjectConnectorsHcaptcha> hcaptchas;
         private @Nullable List<ProjectConnectorsHibp> hibps;
         private @Nullable List<ProjectConnectorsHttp> https;
@@ -891,21 +1012,26 @@ public final class ProjectConnectors {
         private @Nullable List<ProjectConnectorsMparticle> mparticles;
         private @Nullable List<ProjectConnectorsNewrelic> newrelics;
         private @Nullable List<ProjectConnectorsOpentelemetry> opentelemetries;
+        private @Nullable List<ProjectConnectorsPendo> pendos;
         private @Nullable List<ProjectConnectorsPingDirectory> pingDirectories;
         private @Nullable List<ProjectConnectorsPostmark> postmarks;
         private @Nullable List<ProjectConnectorsRadar> radars;
         private @Nullable List<ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises;
+        private @Nullable List<ProjectConnectorsRecaptchaV2> recaptchaV2s;
         private @Nullable List<ProjectConnectorsRecaptcha> recaptchas;
         private @Nullable List<ProjectConnectorsRekognition> rekognitions;
+        private @Nullable List<ProjectConnectorsRndReassigned> rndReassigneds;
         private @Nullable List<ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds;
         private @Nullable List<ProjectConnectorsSalesforce> salesforces;
         private @Nullable List<ProjectConnectorsSardine> sardines;
+        private @Nullable List<ProjectConnectorsScim> scims;
         private @Nullable List<ProjectConnectorsSegment> segments;
         private @Nullable List<ProjectConnectorsSendgrid> sendgrids;
         private @Nullable List<ProjectConnectorsSe> ses;
         private @Nullable List<ProjectConnectorsSlack> slacks;
         private @Nullable List<ProjectConnectorsSmartling> smartlings;
         private @Nullable List<ProjectConnectorsSmtp> smtps;
+        private @Nullable List<ProjectConnectorsSnowflake> snowflakes;
         private @Nullable List<ProjectConnectorsSn> sns;
         private @Nullable List<ProjectConnectorsSplunk> splunks;
         private @Nullable List<ProjectConnectorsSql> sqls;
@@ -922,13 +1048,16 @@ public final class ProjectConnectors {
         public Builder(ProjectConnectors defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.abuseipdbs = defaults.abuseipdbs;
+    	      this.alloys = defaults.alloys;
     	      this.amplitudes = defaults.amplitudes;
     	      this.arkoses = defaults.arkoses;
     	      this.auditWebhooks = defaults.auditWebhooks;
     	      this.awsS3s = defaults.awsS3s;
+    	      this.awsSesEmailValidations = defaults.awsSesEmailValidations;
     	      this.awsTranslates = defaults.awsTranslates;
     	      this.bitsights = defaults.bitsights;
     	      this.coralogixes = defaults.coralogixes;
+    	      this.cribls = defaults.cribls;
     	      this.darwinia = defaults.darwinia;
     	      this.datadogs = defaults.datadogs;
     	      this.devrevGrows = defaults.devrevGrows;
@@ -946,6 +1075,7 @@ public final class ProjectConnectors {
     	      this.googleCloudLoggings = defaults.googleCloudLoggings;
     	      this.googleCloudTranslations = defaults.googleCloudTranslations;
     	      this.googleMapsPlaces = defaults.googleMapsPlaces;
+    	      this.groundcovers = defaults.groundcovers;
     	      this.hcaptchas = defaults.hcaptchas;
     	      this.hibps = defaults.hibps;
     	      this.https = defaults.https;
@@ -958,21 +1088,26 @@ public final class ProjectConnectors {
     	      this.mparticles = defaults.mparticles;
     	      this.newrelics = defaults.newrelics;
     	      this.opentelemetries = defaults.opentelemetries;
+    	      this.pendos = defaults.pendos;
     	      this.pingDirectories = defaults.pingDirectories;
     	      this.postmarks = defaults.postmarks;
     	      this.radars = defaults.radars;
     	      this.recaptchaEnterprises = defaults.recaptchaEnterprises;
+    	      this.recaptchaV2s = defaults.recaptchaV2s;
     	      this.recaptchas = defaults.recaptchas;
     	      this.rekognitions = defaults.rekognitions;
+    	      this.rndReassigneds = defaults.rndReassigneds;
     	      this.salesforceMarketingClouds = defaults.salesforceMarketingClouds;
     	      this.salesforces = defaults.salesforces;
     	      this.sardines = defaults.sardines;
+    	      this.scims = defaults.scims;
     	      this.segments = defaults.segments;
     	      this.sendgrids = defaults.sendgrids;
     	      this.ses = defaults.ses;
     	      this.slacks = defaults.slacks;
     	      this.smartlings = defaults.smartlings;
     	      this.smtps = defaults.smtps;
+    	      this.snowflakes = defaults.snowflakes;
     	      this.sns = defaults.sns;
     	      this.splunks = defaults.splunks;
     	      this.sqls = defaults.sqls;
@@ -995,6 +1130,15 @@ public final class ProjectConnectors {
         }
         public Builder abuseipdbs(ProjectConnectorsAbuseipdb... abuseipdbs) {
             return abuseipdbs(List.of(abuseipdbs));
+        }
+        @CustomType.Setter
+        public Builder alloys(@Nullable List<ProjectConnectorsAlloy> alloys) {
+
+            this.alloys = alloys;
+            return this;
+        }
+        public Builder alloys(ProjectConnectorsAlloy... alloys) {
+            return alloys(List.of(alloys));
         }
         @CustomType.Setter
         public Builder amplitudes(@Nullable List<ProjectConnectorsAmplitude> amplitudes) {
@@ -1033,6 +1177,15 @@ public final class ProjectConnectors {
             return awsS3s(List.of(awsS3s));
         }
         @CustomType.Setter
+        public Builder awsSesEmailValidations(@Nullable List<ProjectConnectorsAwsSesEmailValidation> awsSesEmailValidations) {
+
+            this.awsSesEmailValidations = awsSesEmailValidations;
+            return this;
+        }
+        public Builder awsSesEmailValidations(ProjectConnectorsAwsSesEmailValidation... awsSesEmailValidations) {
+            return awsSesEmailValidations(List.of(awsSesEmailValidations));
+        }
+        @CustomType.Setter
         public Builder awsTranslates(@Nullable List<ProjectConnectorsAwsTranslate> awsTranslates) {
 
             this.awsTranslates = awsTranslates;
@@ -1058,6 +1211,15 @@ public final class ProjectConnectors {
         }
         public Builder coralogixes(ProjectConnectorsCoralogix... coralogixes) {
             return coralogixes(List.of(coralogixes));
+        }
+        @CustomType.Setter
+        public Builder cribls(@Nullable List<ProjectConnectorsCribl> cribls) {
+
+            this.cribls = cribls;
+            return this;
+        }
+        public Builder cribls(ProjectConnectorsCribl... cribls) {
+            return cribls(List.of(cribls));
         }
         @CustomType.Setter
         public Builder darwinia(@Nullable List<ProjectConnectorsDarwinium> darwinia) {
@@ -1213,6 +1375,15 @@ public final class ProjectConnectors {
             return googleMapsPlaces(List.of(googleMapsPlaces));
         }
         @CustomType.Setter
+        public Builder groundcovers(@Nullable List<ProjectConnectorsGroundcover> groundcovers) {
+
+            this.groundcovers = groundcovers;
+            return this;
+        }
+        public Builder groundcovers(ProjectConnectorsGroundcover... groundcovers) {
+            return groundcovers(List.of(groundcovers));
+        }
+        @CustomType.Setter
         public Builder hcaptchas(@Nullable List<ProjectConnectorsHcaptcha> hcaptchas) {
 
             this.hcaptchas = hcaptchas;
@@ -1321,6 +1492,15 @@ public final class ProjectConnectors {
             return opentelemetries(List.of(opentelemetries));
         }
         @CustomType.Setter
+        public Builder pendos(@Nullable List<ProjectConnectorsPendo> pendos) {
+
+            this.pendos = pendos;
+            return this;
+        }
+        public Builder pendos(ProjectConnectorsPendo... pendos) {
+            return pendos(List.of(pendos));
+        }
+        @CustomType.Setter
         public Builder pingDirectories(@Nullable List<ProjectConnectorsPingDirectory> pingDirectories) {
 
             this.pingDirectories = pingDirectories;
@@ -1357,6 +1537,15 @@ public final class ProjectConnectors {
             return recaptchaEnterprises(List.of(recaptchaEnterprises));
         }
         @CustomType.Setter
+        public Builder recaptchaV2s(@Nullable List<ProjectConnectorsRecaptchaV2> recaptchaV2s) {
+
+            this.recaptchaV2s = recaptchaV2s;
+            return this;
+        }
+        public Builder recaptchaV2s(ProjectConnectorsRecaptchaV2... recaptchaV2s) {
+            return recaptchaV2s(List.of(recaptchaV2s));
+        }
+        @CustomType.Setter
         public Builder recaptchas(@Nullable List<ProjectConnectorsRecaptcha> recaptchas) {
 
             this.recaptchas = recaptchas;
@@ -1373,6 +1562,15 @@ public final class ProjectConnectors {
         }
         public Builder rekognitions(ProjectConnectorsRekognition... rekognitions) {
             return rekognitions(List.of(rekognitions));
+        }
+        @CustomType.Setter
+        public Builder rndReassigneds(@Nullable List<ProjectConnectorsRndReassigned> rndReassigneds) {
+
+            this.rndReassigneds = rndReassigneds;
+            return this;
+        }
+        public Builder rndReassigneds(ProjectConnectorsRndReassigned... rndReassigneds) {
+            return rndReassigneds(List.of(rndReassigneds));
         }
         @CustomType.Setter
         public Builder salesforceMarketingClouds(@Nullable List<ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds) {
@@ -1400,6 +1598,15 @@ public final class ProjectConnectors {
         }
         public Builder sardines(ProjectConnectorsSardine... sardines) {
             return sardines(List.of(sardines));
+        }
+        @CustomType.Setter
+        public Builder scims(@Nullable List<ProjectConnectorsScim> scims) {
+
+            this.scims = scims;
+            return this;
+        }
+        public Builder scims(ProjectConnectorsScim... scims) {
+            return scims(List.of(scims));
         }
         @CustomType.Setter
         public Builder segments(@Nullable List<ProjectConnectorsSegment> segments) {
@@ -1454,6 +1661,15 @@ public final class ProjectConnectors {
         }
         public Builder smtps(ProjectConnectorsSmtp... smtps) {
             return smtps(List.of(smtps));
+        }
+        @CustomType.Setter
+        public Builder snowflakes(@Nullable List<ProjectConnectorsSnowflake> snowflakes) {
+
+            this.snowflakes = snowflakes;
+            return this;
+        }
+        public Builder snowflakes(ProjectConnectorsSnowflake... snowflakes) {
+            return snowflakes(List.of(snowflakes));
         }
         @CustomType.Setter
         public Builder sns(@Nullable List<ProjectConnectorsSn> sns) {
@@ -1566,13 +1782,16 @@ public final class ProjectConnectors {
         public ProjectConnectors build() {
             final var _resultValue = new ProjectConnectors();
             _resultValue.abuseipdbs = abuseipdbs;
+            _resultValue.alloys = alloys;
             _resultValue.amplitudes = amplitudes;
             _resultValue.arkoses = arkoses;
             _resultValue.auditWebhooks = auditWebhooks;
             _resultValue.awsS3s = awsS3s;
+            _resultValue.awsSesEmailValidations = awsSesEmailValidations;
             _resultValue.awsTranslates = awsTranslates;
             _resultValue.bitsights = bitsights;
             _resultValue.coralogixes = coralogixes;
+            _resultValue.cribls = cribls;
             _resultValue.darwinia = darwinia;
             _resultValue.datadogs = datadogs;
             _resultValue.devrevGrows = devrevGrows;
@@ -1590,6 +1809,7 @@ public final class ProjectConnectors {
             _resultValue.googleCloudLoggings = googleCloudLoggings;
             _resultValue.googleCloudTranslations = googleCloudTranslations;
             _resultValue.googleMapsPlaces = googleMapsPlaces;
+            _resultValue.groundcovers = groundcovers;
             _resultValue.hcaptchas = hcaptchas;
             _resultValue.hibps = hibps;
             _resultValue.https = https;
@@ -1602,21 +1822,26 @@ public final class ProjectConnectors {
             _resultValue.mparticles = mparticles;
             _resultValue.newrelics = newrelics;
             _resultValue.opentelemetries = opentelemetries;
+            _resultValue.pendos = pendos;
             _resultValue.pingDirectories = pingDirectories;
             _resultValue.postmarks = postmarks;
             _resultValue.radars = radars;
             _resultValue.recaptchaEnterprises = recaptchaEnterprises;
+            _resultValue.recaptchaV2s = recaptchaV2s;
             _resultValue.recaptchas = recaptchas;
             _resultValue.rekognitions = rekognitions;
+            _resultValue.rndReassigneds = rndReassigneds;
             _resultValue.salesforceMarketingClouds = salesforceMarketingClouds;
             _resultValue.salesforces = salesforces;
             _resultValue.sardines = sardines;
+            _resultValue.scims = scims;
             _resultValue.segments = segments;
             _resultValue.sendgrids = sendgrids;
             _resultValue.ses = ses;
             _resultValue.slacks = slacks;
             _resultValue.smartlings = smartlings;
             _resultValue.smtps = smtps;
+            _resultValue.snowflakes = snowflakes;
             _resultValue.sns = sns;
             _resultValue.splunks = splunks;
             _resultValue.sqls = sqls;

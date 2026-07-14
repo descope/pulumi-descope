@@ -7,6 +7,7 @@ import com.descope.pulumi.descope.inputs.ProjectAuthorizationPermissionArgs;
 import com.descope.pulumi.descope.inputs.ProjectAuthorizationRoleArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,6 +17,21 @@ import javax.annotation.Nullable;
 public final class ProjectAuthorizationArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectAuthorizationArgs Empty = new ProjectAuthorizationArgs();
+
+    /**
+     * The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+     * 
+     */
+    @Import(name="fga")
+    private @Nullable Output<String> fga;
+
+    /**
+     * @return The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+     * 
+     */
+    public Optional<Output<String>> fga() {
+        return Optional.ofNullable(this.fga);
+    }
 
     /**
      * A list of `Permission` objects.
@@ -50,6 +66,7 @@ public final class ProjectAuthorizationArgs extends com.pulumi.resources.Resourc
     private ProjectAuthorizationArgs() {}
 
     private ProjectAuthorizationArgs(ProjectAuthorizationArgs $) {
+        this.fga = $.fga;
         this.permissions = $.permissions;
         this.roles = $.roles;
     }
@@ -70,6 +87,27 @@ public final class ProjectAuthorizationArgs extends com.pulumi.resources.Resourc
 
         public Builder(ProjectAuthorizationArgs defaults) {
             $ = new ProjectAuthorizationArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param fga The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder fga(@Nullable Output<String> fga) {
+            $.fga = fga;
+            return this;
+        }
+
+        /**
+         * @param fga The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder fga(String fga) {
+            return fga(Output.of(fga));
         }
 
         /**

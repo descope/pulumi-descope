@@ -6,6 +6,76 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+ *
+ * > **Important:** The `cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+ *
+ * Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+ * - **Company roles** – Access to all projects in the company
+ * - **Project roles** – Scoped to specific project IDs
+ * - **Tag roles** – Scoped to all projects with a given tag
+ *
+ * See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+ *
+ * ## Example Usage
+ *
+ * ### Company-Level Key
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const companyKey = new descope.ManagementKey("company_key", {
+ *     name: "CI/CD Pipeline Key",
+ *     description: "Used by the deployment pipeline to manage users",
+ *     rebac: {
+ *         companyRoles: ["<role-name>"],
+ *     },
+ * });
+ * export const managementKeyValue = companyKey.cleartext;
+ * ```
+ *
+ * ### Project-Scoped Key with Expiration
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const projectKey = new descope.ManagementKey("project_key", {
+ *     name: "Staging Key",
+ *     description: "Limited access to staging project only",
+ *     expireTime: 1893456000,
+ *     rebac: {
+ *         projectRoles: [{
+ *             projectIds: ["<project-id>"],
+ *             roles: ["<role-name>"],
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ### Tag-Scoped Key with IP Restriction
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const restrictedKey = new descope.ManagementKey("restricted_key", {
+ *     name: "Office Network Key",
+ *     permittedIps: [
+ *         "203.0.113.0/24",
+ *         "198.51.100.10",
+ *     ],
+ *     rebac: {
+ *         tagRoles: [{
+ *             tags: ["production"],
+ *             roles: ["<role-name>"],
+ *         }],
+ *     },
+ * });
+ * ```
+ */
 export class ManagementKey extends pulumi.CustomResource {
     /**
      * Get an existing ManagementKey resource's state with the given name, ID, and optional extra

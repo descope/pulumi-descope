@@ -25,6 +25,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _abuseipdbs = value;
         }
 
+        [Input("alloys")]
+        private InputList<Inputs.ProjectConnectorsAlloyArgs>? _alloys;
+
+        /// <summary>
+        /// Streamline identity verification and fraud monitoring with the Alloy connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsAlloyArgs> Alloys
+        {
+            get => _alloys ?? (_alloys = new InputList<Inputs.ProjectConnectorsAlloyArgs>());
+            set => _alloys = value;
+        }
+
         [Input("amplitudes")]
         private InputList<Inputs.ProjectConnectorsAmplitudeArgs>? _amplitudes;
 
@@ -73,6 +85,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _awsS3s = value;
         }
 
+        [Input("awsSesEmailValidations")]
+        private InputList<Inputs.ProjectConnectorsAwsSesEmailValidationArgs>? _awsSesEmailValidations;
+
+        /// <summary>
+        /// Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsAwsSesEmailValidationArgs> AwsSesEmailValidations
+        {
+            get => _awsSesEmailValidations ?? (_awsSesEmailValidations = new InputList<Inputs.ProjectConnectorsAwsSesEmailValidationArgs>());
+            set => _awsSesEmailValidations = value;
+        }
+
         [Input("awsTranslates")]
         private InputList<Inputs.ProjectConnectorsAwsTranslateArgs>? _awsTranslates;
 
@@ -107,6 +131,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _coralogixes ?? (_coralogixes = new InputList<Inputs.ProjectConnectorsCoralogixArgs>());
             set => _coralogixes = value;
+        }
+
+        [Input("cribls")]
+        private InputList<Inputs.ProjectConnectorsCriblArgs>? _cribls;
+
+        /// <summary>
+        /// Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl's HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsCriblArgs> Cribls
+        {
+            get => _cribls ?? (_cribls = new InputList<Inputs.ProjectConnectorsCriblArgs>());
+            set => _cribls = value;
         }
 
         [Input("darwinia")]
@@ -313,6 +349,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _googleMapsPlaces = value;
         }
 
+        [Input("groundcovers")]
+        private InputList<Inputs.ProjectConnectorsGroundcoverArgs>? _groundcovers;
+
+        /// <summary>
+        /// Send audit events and troubleshooting logs to groundcover.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsGroundcoverArgs> Groundcovers
+        {
+            get => _groundcovers ?? (_groundcovers = new InputList<Inputs.ProjectConnectorsGroundcoverArgs>());
+            set => _groundcovers = value;
+        }
+
         [Input("hcaptchas")]
         private InputList<Inputs.ProjectConnectorsHcaptchaArgs>? _hcaptchas;
 
@@ -457,6 +505,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _opentelemetries = value;
         }
 
+        [Input("pendos")]
+        private InputList<Inputs.ProjectConnectorsPendoArgs>? _pendos;
+
+        /// <summary>
+        /// Stream authentication audit logs with the Pendo connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsPendoArgs> Pendos
+        {
+            get => _pendos ?? (_pendos = new InputList<Inputs.ProjectConnectorsPendoArgs>());
+            set => _pendos = value;
+        }
+
         [Input("pingDirectories")]
         private InputList<Inputs.ProjectConnectorsPingDirectoryArgs>? _pingDirectories;
 
@@ -505,6 +565,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _recaptchaEnterprises = value;
         }
 
+        [Input("recaptchaV2s")]
+        private InputList<Inputs.ProjectConnectorsRecaptchaV2Args>? _recaptchaV2s;
+
+        /// <summary>
+        /// Use the reCAPTCHA v2 "I'm not a robot" checkbox widget with your flows.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsRecaptchaV2Args> RecaptchaV2s
+        {
+            get => _recaptchaV2s ?? (_recaptchaV2s = new InputList<Inputs.ProjectConnectorsRecaptchaV2Args>());
+            set => _recaptchaV2s = value;
+        }
+
         [Input("recaptchas")]
         private InputList<Inputs.ProjectConnectorsRecaptchaArgs>? _recaptchas;
 
@@ -527,6 +599,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _rekognitions ?? (_rekognitions = new InputList<Inputs.ProjectConnectorsRekognitionArgs>());
             set => _rekognitions = value;
+        }
+
+        [Input("rndReassigneds")]
+        private InputList<Inputs.ProjectConnectorsRndReassignedArgs>? _rndReassigneds;
+
+        /// <summary>
+        /// Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsRndReassignedArgs> RndReassigneds
+        {
+            get => _rndReassigneds ?? (_rndReassigneds = new InputList<Inputs.ProjectConnectorsRndReassignedArgs>());
+            set => _rndReassigneds = value;
         }
 
         [Input("salesforceMarketingClouds")]
@@ -563,6 +647,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _sardines ?? (_sardines = new InputList<Inputs.ProjectConnectorsSardineArgs>());
             set => _sardines = value;
+        }
+
+        [Input("scims")]
+        private InputList<Inputs.ProjectConnectorsScimArgs>? _scims;
+
+        /// <summary>
+        /// Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsScimArgs> Scims
+        {
+            get => _scims ?? (_scims = new InputList<Inputs.ProjectConnectorsScimArgs>());
+            set => _scims = value;
         }
 
         [Input("segments")]
@@ -635,6 +731,18 @@ namespace Descope.Pulumi.Descope.Inputs
         {
             get => _smtps ?? (_smtps = new InputList<Inputs.ProjectConnectorsSmtpArgs>());
             set => _smtps = value;
+        }
+
+        [Input("snowflakes")]
+        private InputList<Inputs.ProjectConnectorsSnowflakeArgs>? _snowflakes;
+
+        /// <summary>
+        /// Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+        /// </summary>
+        public InputList<Inputs.ProjectConnectorsSnowflakeArgs> Snowflakes
+        {
+            get => _snowflakes ?? (_snowflakes = new InputList<Inputs.ProjectConnectorsSnowflakeArgs>());
+            set => _snowflakes = value;
         }
 
         [Input("sns")]

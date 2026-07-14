@@ -570,7 +570,264 @@ class Project(pulumi.CustomResource):
                  widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         """
-        Create a Project resource with the given unique name, props, and options.
+        Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+
+        This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+
+        For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+
+        ## Example Usage
+
+        ### Basic Project
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            environment="production",
+            tags=[
+                "prod",
+                "v2",
+            ])
+        ```
+
+        ### Authentication Methods
+
+        Enable and configure the authentication methods your users will use:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authentication={
+                "magic_link": {
+                    "expiration_time": "1 hour",
+                },
+                "password": {
+                    "lock": True,
+                    "lock_attempts": 5,
+                    "min_length": 12,
+                },
+                "otp": {
+                    "expiration_time": "5 minutes",
+                },
+                "passkeys": {
+                    "disabled": False,
+                },
+            })
+        ```
+
+        ### Roles and Permissions (RBAC)
+
+        Define roles and permissions for your users:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authorization={
+                "permissions": [
+                    {
+                        "name": "read:data",
+                        "description": "Read access to application data",
+                    },
+                    {
+                        "name": "write:data",
+                        "description": "Write access to application data",
+                    },
+                    {
+                        "name": "admin:panel",
+                        "description": "Access to the admin panel",
+                    },
+                ],
+                "roles": [
+                    {
+                        "name": "viewer",
+                        "description": "Can read data",
+                        "permissions": ["read:data"],
+                    },
+                    {
+                        "name": "editor",
+                        "description": "Can read and write data",
+                        "permissions": [
+                            "read:data",
+                            "write:data",
+                        ],
+                    },
+                    {
+                        "name": "admin",
+                        "description": "Full access",
+                        "permissions": [
+                            "read:data",
+                            "write:data",
+                            "admin:panel",
+                        ],
+                    },
+                ],
+            })
+        ```
+
+        ### Connectors
+
+        Integrate with third-party services to enrich flows and send notifications:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            connectors={
+                "https": [{
+                    "name": "User Eligibility Check",
+                    "description": "Checks if a new user is allowed to register",
+                    "base_url": "https://api.example.com",
+                    "authentication": {
+                        "bearer_token": webhook_secret,
+                    },
+                }],
+                "sendgrids": [{
+                    "name": "Transactional Email",
+                    "sender": {
+                        "email": "noreply@example.com",
+                        "name": "My App",
+                    },
+                    "authentication": {
+                        "api_key": sendgrid_api_key,
+                    },
+                }],
+                "twilio_cores": [{
+                    "name": "SMS OTP",
+                    "account_sid": twilio_account_sid,
+                    "senders": {
+                        "sms": {
+                            "phone_number": "+15551234567",
+                        },
+                    },
+                    "authentication": {
+                        "auth_token": twilio_auth_token,
+                    },
+                }],
+            })
+        ```
+
+        ### Session Settings
+
+        Configure token lifetimes and session behavior:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            project_settings={
+                "refresh_token_expiration": "3 weeks",
+                "session_token_expiration": "15 minutes",
+                "refresh_token_rotation": True,
+                "enable_inactivity": True,
+                "inactivity_time": "30 minutes",
+                "custom_domain": "auth.example.com",
+                "approved_domains": [
+                    "example.com",
+                    "app.example.com",
+                ],
+            })
+        ```
+
+        ### OIDC Applications
+
+        Register an OIDC application for SSO:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            applications={
+                "oidc_applications": [{
+                    "name": "My Web App",
+                    "description": "Primary web application",
+                    "login_page_url": "https://app.example.com/login",
+                }],
+            })
+        ```
+
+        ### JWT Templates
+
+        Customize the JWT claims added to session tokens:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+        import json
+
+        example = descope.Project("example",
+            name="my-app",
+            jwt_templates={
+                "user_templates": [{
+                    "name": "app-claims",
+                    "description": "Adds subscription tier and org context to user JWTs",
+                    "template": json.dumps({
+                        "tier": "@user.customAttributes.subscriptionTier",
+                        "org_id": "@user.tenants[0].tenantId",
+                    }),
+                    "exclude_permission_claim": True,
+                    "add_jti_claim": True,
+                    "override_subject_claim": True,
+                }],
+            },
+            project_settings={
+                "user_jwt_template": "app-claims",
+            })
+        ```
+
+        ### SSO Settings
+
+        Configure global settings for Single Sign-On across tenants:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authentication={
+                "sso": {
+                    "merge_users": True,
+                    "allow_override_roles": True,
+                    "groups_priority": True,
+                    "require_sso_domains": True,
+                    "require_groups_attribute_name": True,
+                    "mandatory_user_attributes": [
+                        {
+                            "id": "email",
+                        },
+                        {
+                            "id": "name",
+                        },
+                        {
+                            "id": "department",
+                            "custom": True,
+                        },
+                    ],
+                    "sso_suite_settings": {
+                        "style_id": "my-brand-style",
+                        "hide_scim": False,
+                        "hide_saml": False,
+                        "hide_oidc": False,
+                    },
+                },
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
@@ -597,7 +854,264 @@ class Project(pulumi.CustomResource):
                  args: Optional[ProjectArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Project resource with the given unique name, props, and options.
+        Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+
+        This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+
+        For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+
+        ## Example Usage
+
+        ### Basic Project
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            environment="production",
+            tags=[
+                "prod",
+                "v2",
+            ])
+        ```
+
+        ### Authentication Methods
+
+        Enable and configure the authentication methods your users will use:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authentication={
+                "magic_link": {
+                    "expiration_time": "1 hour",
+                },
+                "password": {
+                    "lock": True,
+                    "lock_attempts": 5,
+                    "min_length": 12,
+                },
+                "otp": {
+                    "expiration_time": "5 minutes",
+                },
+                "passkeys": {
+                    "disabled": False,
+                },
+            })
+        ```
+
+        ### Roles and Permissions (RBAC)
+
+        Define roles and permissions for your users:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authorization={
+                "permissions": [
+                    {
+                        "name": "read:data",
+                        "description": "Read access to application data",
+                    },
+                    {
+                        "name": "write:data",
+                        "description": "Write access to application data",
+                    },
+                    {
+                        "name": "admin:panel",
+                        "description": "Access to the admin panel",
+                    },
+                ],
+                "roles": [
+                    {
+                        "name": "viewer",
+                        "description": "Can read data",
+                        "permissions": ["read:data"],
+                    },
+                    {
+                        "name": "editor",
+                        "description": "Can read and write data",
+                        "permissions": [
+                            "read:data",
+                            "write:data",
+                        ],
+                    },
+                    {
+                        "name": "admin",
+                        "description": "Full access",
+                        "permissions": [
+                            "read:data",
+                            "write:data",
+                            "admin:panel",
+                        ],
+                    },
+                ],
+            })
+        ```
+
+        ### Connectors
+
+        Integrate with third-party services to enrich flows and send notifications:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            connectors={
+                "https": [{
+                    "name": "User Eligibility Check",
+                    "description": "Checks if a new user is allowed to register",
+                    "base_url": "https://api.example.com",
+                    "authentication": {
+                        "bearer_token": webhook_secret,
+                    },
+                }],
+                "sendgrids": [{
+                    "name": "Transactional Email",
+                    "sender": {
+                        "email": "noreply@example.com",
+                        "name": "My App",
+                    },
+                    "authentication": {
+                        "api_key": sendgrid_api_key,
+                    },
+                }],
+                "twilio_cores": [{
+                    "name": "SMS OTP",
+                    "account_sid": twilio_account_sid,
+                    "senders": {
+                        "sms": {
+                            "phone_number": "+15551234567",
+                        },
+                    },
+                    "authentication": {
+                        "auth_token": twilio_auth_token,
+                    },
+                }],
+            })
+        ```
+
+        ### Session Settings
+
+        Configure token lifetimes and session behavior:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            project_settings={
+                "refresh_token_expiration": "3 weeks",
+                "session_token_expiration": "15 minutes",
+                "refresh_token_rotation": True,
+                "enable_inactivity": True,
+                "inactivity_time": "30 minutes",
+                "custom_domain": "auth.example.com",
+                "approved_domains": [
+                    "example.com",
+                    "app.example.com",
+                ],
+            })
+        ```
+
+        ### OIDC Applications
+
+        Register an OIDC application for SSO:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            applications={
+                "oidc_applications": [{
+                    "name": "My Web App",
+                    "description": "Primary web application",
+                    "login_page_url": "https://app.example.com/login",
+                }],
+            })
+        ```
+
+        ### JWT Templates
+
+        Customize the JWT claims added to session tokens:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+        import json
+
+        example = descope.Project("example",
+            name="my-app",
+            jwt_templates={
+                "user_templates": [{
+                    "name": "app-claims",
+                    "description": "Adds subscription tier and org context to user JWTs",
+                    "template": json.dumps({
+                        "tier": "@user.customAttributes.subscriptionTier",
+                        "org_id": "@user.tenants[0].tenantId",
+                    }),
+                    "exclude_permission_claim": True,
+                    "add_jti_claim": True,
+                    "override_subject_claim": True,
+                }],
+            },
+            project_settings={
+                "user_jwt_template": "app-claims",
+            })
+        ```
+
+        ### SSO Settings
+
+        Configure global settings for Single Sign-On across tenants:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        example = descope.Project("example",
+            name="my-app",
+            authentication={
+                "sso": {
+                    "merge_users": True,
+                    "allow_override_roles": True,
+                    "groups_priority": True,
+                    "require_sso_domains": True,
+                    "require_groups_attribute_name": True,
+                    "mandatory_user_attributes": [
+                        {
+                            "id": "email",
+                        },
+                        {
+                            "id": "name",
+                        },
+                        {
+                            "id": "department",
+                            "custom": True,
+                        },
+                    ],
+                    "sso_suite_settings": {
+                        "style_id": "my-brand-style",
+                        "hide_scim": False,
+                        "hide_saml": False,
+                        "hide_oidc": False,
+                    },
+                },
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param ProjectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

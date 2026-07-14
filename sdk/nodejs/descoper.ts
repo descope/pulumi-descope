@@ -6,6 +6,97 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
+ *
+ * Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+ * - `admin` – Full access to project settings
+ * - `developer` – Can edit flows and configurations
+ * - `support` – Can view user data and audit logs
+ * - `auditor` – Read-only access to audit logs
+ *
+ * Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+ *
+ * ## Example Usage
+ *
+ * ### Company Admin
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const admin = new descope.Descoper("admin", {
+ *     email: "admin@example.com",
+ *     name: "Alice Admin",
+ *     rbac: {
+ *         isCompanyAdmin: true,
+ *     },
+ * });
+ * ```
+ *
+ * ### Developer for Specific Projects
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const developer = new descope.Descoper("developer", {
+ *     email: "dev@example.com",
+ *     name: "Bob Dev",
+ *     rbac: {
+ *         projectRoles: [{
+ *             role: "developer",
+ *             projectIds: [
+ *                 "P123abc",
+ *                 "P456def",
+ *             ],
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ### Support Access via Project Tags
+ *
+ * Grant a support engineer access to all projects tagged `production`:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const support = new descope.Descoper("support", {
+ *     email: "support@example.com",
+ *     rbac: {
+ *         tagRoles: [{
+ *             role: "support",
+ *             tags: ["production"],
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ### Multi-Role Access
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const multiRole = new descope.Descoper("multi_role", {
+ *     email: "lead@example.com",
+ *     rbac: {
+ *         projectRoles: [
+ *             {
+ *                 role: "admin",
+ *                 projectIds: ["P123abc"],
+ *             },
+ *             {
+ *                 role: "developer",
+ *                 projectIds: ["P789ghi"],
+ *             },
+ *         ],
+ *     },
+ * });
+ * ```
+ */
 export class Descoper extends pulumi.CustomResource {
     /**
      * Get an existing Descoper resource's state with the given name, ID, and optional extra

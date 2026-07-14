@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsRecaptchaEnterprise
     {
         /// <summary>
+        /// The user-initiated action for this assessment.
+        /// </summary>
+        public readonly string? Action;
+        /// <summary>
         /// API key associated with the current project.
         /// </summary>
         public readonly string ApiKey;
@@ -23,7 +27,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly double? AssessmentScore;
         /// <summary>
-        /// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        /// The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
         /// </summary>
         public readonly string? BaseUrl;
         /// <summary>
@@ -54,6 +58,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectConnectorsRecaptchaEnterprise(
+            string? action,
+
             string apiKey,
 
             double? assessmentScore,
@@ -74,6 +80,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string siteKey)
         {
+            Action = action;
             ApiKey = apiKey;
             AssessmentScore = assessmentScore;
             BaseUrl = baseUrl;

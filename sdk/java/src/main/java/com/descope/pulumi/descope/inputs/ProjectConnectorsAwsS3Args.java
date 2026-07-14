@@ -132,6 +132,21 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
     }
 
     /**
+     * Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    @Import(name="maskPii")
+    private @Nullable Output<Boolean> maskPii;
+
+    /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    public Optional<Output<Boolean>> maskPii() {
+        return Optional.ofNullable(this.maskPii);
+    }
+
+    /**
      * A custom name for your connector.
      * 
      */
@@ -217,6 +232,7 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
         this.description = $.description;
         this.externalId = $.externalId;
         this.id = $.id;
+        this.maskPii = $.maskPii;
         this.name = $.name;
         this.region = $.region;
         this.roleArn = $.roleArn;
@@ -406,6 +422,27 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
 
         public Builder id(String id) {
             return id(Output.of(id));
+        }
+
+        /**
+         * @param maskPii Whether to mask personally identifiable information in the logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskPii(@Nullable Output<Boolean> maskPii) {
+            $.maskPii = maskPii;
+            return this;
+        }
+
+        /**
+         * @param maskPii Whether to mask personally identifiable information in the logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskPii(Boolean maskPii) {
+            return maskPii(Output.of(maskPii));
         }
 
         /**

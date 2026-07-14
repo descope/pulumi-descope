@@ -23,13 +23,33 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? AllowOverrideRoles;
         /// <summary>
+        /// Whether to block SSO login if the user's email domain doesn't match the configured SSO domains.
+        /// </summary>
+        public readonly bool? BlockIfEmailDomainMismatch;
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
+        /// Settings related to sending SSO invite emails as part of the SSO feature.
+        /// </summary>
+        public readonly Outputs.ProjectAuthenticationSsoEmailService? EmailService;
+        /// <summary>
         /// Whether to enable groups priority.
         /// </summary>
         public readonly bool? GroupsPriority;
+        /// <summary>
+        /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
+        /// </summary>
+        public readonly bool? LimitMappingToMandatoryAttributes;
+        /// <summary>
+        /// Define the required Descope attributes that must be populated when receiving SSO information.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectAuthenticationSsoMandatoryUserAttribute> MandatoryUserAttributes;
+        /// <summary>
+        /// Whether to mark the user's email as unverified when logging in via SSO.
+        /// </summary>
+        public readonly bool? MarkEmailAsUnverified;
         /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
         /// </summary>
@@ -38,6 +58,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         /// </summary>
         public readonly string? RedirectUrl;
+        /// <summary>
+        /// When configuring SSO the groups attribute name must be specified.
+        /// </summary>
+        public readonly bool? RequireGroupsAttributeName;
+        /// <summary>
+        /// When configuring SSO an SSO domain must be specified.
+        /// </summary>
+        public readonly bool? RequireSsoDomains;
         /// <summary>
         /// Configuration block for the SSO Suite.
         /// </summary>
@@ -49,22 +77,43 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? allowOverrideRoles,
 
+            bool? blockIfEmailDomainMismatch,
+
             bool? disabled,
 
+            Outputs.ProjectAuthenticationSsoEmailService? emailService,
+
             bool? groupsPriority,
+
+            bool? limitMappingToMandatoryAttributes,
+
+            ImmutableArray<Outputs.ProjectAuthenticationSsoMandatoryUserAttribute> mandatoryUserAttributes,
+
+            bool? markEmailAsUnverified,
 
             bool? mergeUsers,
 
             string? redirectUrl,
 
+            bool? requireGroupsAttributeName,
+
+            bool? requireSsoDomains,
+
             Outputs.ProjectAuthenticationSsoSsoSuiteSettings? ssoSuiteSettings)
         {
             AllowDuplicateDomains = allowDuplicateDomains;
             AllowOverrideRoles = allowOverrideRoles;
+            BlockIfEmailDomainMismatch = blockIfEmailDomainMismatch;
             Disabled = disabled;
+            EmailService = emailService;
             GroupsPriority = groupsPriority;
+            LimitMappingToMandatoryAttributes = limitMappingToMandatoryAttributes;
+            MandatoryUserAttributes = mandatoryUserAttributes;
+            MarkEmailAsUnverified = markEmailAsUnverified;
             MergeUsers = mergeUsers;
             RedirectUrl = redirectUrl;
+            RequireGroupsAttributeName = requireGroupsAttributeName;
+            RequireSsoDomains = requireSsoDomains;
             SsoSuiteSettings = ssoSuiteSettings;
         }
     }

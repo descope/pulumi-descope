@@ -5,10 +5,25 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { AccessKeyArgs, AccessKeyState } from "./accessKey";
+export type AccessKey = import("./accessKey").AccessKey;
+export const AccessKey: typeof import("./accessKey").AccessKey = null as any;
+utilities.lazyLoad(exports, ["AccessKey"], () => require("./accessKey"));
+
 export { DescoperArgs, DescoperState } from "./descoper";
 export type Descoper = import("./descoper").Descoper;
 export const Descoper: typeof import("./descoper").Descoper = null as any;
 utilities.lazyLoad(exports, ["Descoper"], () => require("./descoper"));
+
+export { EngineArgs, EngineState } from "./engine";
+export type Engine = import("./engine").Engine;
+export const Engine: typeof import("./engine").Engine = null as any;
+utilities.lazyLoad(exports, ["Engine"], () => require("./engine"));
+
+export { InboundAppArgs, InboundAppState } from "./inboundApp";
+export type InboundApp = import("./inboundApp").InboundApp;
+export const InboundApp: typeof import("./inboundApp").InboundApp = null as any;
+utilities.lazyLoad(exports, ["InboundApp"], () => require("./inboundApp"));
 
 export { ManagementKeyArgs, ManagementKeyState } from "./managementKey";
 export type ManagementKey = import("./managementKey").ManagementKey;
@@ -37,8 +52,14 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "descope:index/accessKey:AccessKey":
+                return new AccessKey(name, <any>undefined, { urn })
             case "descope:index/descoper:Descoper":
                 return new Descoper(name, <any>undefined, { urn })
+            case "descope:index/engine:Engine":
+                return new Engine(name, <any>undefined, { urn })
+            case "descope:index/inboundApp:InboundApp":
+                return new InboundApp(name, <any>undefined, { urn })
             case "descope:index/managementKey:ManagementKey":
                 return new ManagementKey(name, <any>undefined, { urn })
             case "descope:index/project:Project":
@@ -48,7 +69,10 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("descope", "index/accessKey", _module)
 pulumi.runtime.registerResourceModule("descope", "index/descoper", _module)
+pulumi.runtime.registerResourceModule("descope", "index/engine", _module)
+pulumi.runtime.registerResourceModule("descope", "index/inboundApp", _module)
 pulumi.runtime.registerResourceModule("descope", "index/managementKey", _module)
 pulumi.runtime.registerResourceModule("descope", "index/project", _module)
 pulumi.runtime.registerResourcePackage("descope", {

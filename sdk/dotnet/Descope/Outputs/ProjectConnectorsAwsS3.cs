@@ -44,6 +44,10 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string? ExternalId;
         public readonly string? Id;
         /// <summary>
+        /// Whether to mask personally identifiable information in the logs.
+        /// </summary>
+        public readonly bool? MaskPii;
+        /// <summary>
         /// A custom name for your connector.
         /// </summary>
         public readonly string Name;
@@ -82,6 +86,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? id,
 
+            bool? maskPii,
+
             string name,
 
             string region,
@@ -100,6 +106,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Description = description;
             ExternalId = externalId;
             Id = id;
+            MaskPii = maskPii;
             Name = name;
             Region = region;
             RoleArn = roleArn;

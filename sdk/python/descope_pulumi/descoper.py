@@ -172,7 +172,92 @@ class Descoper(pulumi.CustomResource):
                  rbac: Optional[pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
                  __props__=None):
         """
-        Create a Descoper resource with the given unique name, props, and options.
+        Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
+
+        Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+        - `admin` – Full access to project settings
+        - `developer` – Can edit flows and configurations
+        - `support` – Can view user data and audit logs
+        - `auditor` – Read-only access to audit logs
+
+        Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+
+        ## Example Usage
+
+        ### Company Admin
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        admin = descope.Descoper("admin",
+            email="admin@example.com",
+            name="Alice Admin",
+            rbac={
+                "is_company_admin": True,
+            })
+        ```
+
+        ### Developer for Specific Projects
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        developer = descope.Descoper("developer",
+            email="dev@example.com",
+            name="Bob Dev",
+            rbac={
+                "project_roles": [{
+                    "role": "developer",
+                    "project_ids": [
+                        "P123abc",
+                        "P456def",
+                    ],
+                }],
+            })
+        ```
+
+        ### Support Access via Project Tags
+
+        Grant a support engineer access to all projects tagged `production`:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        support = descope.Descoper("support",
+            email="support@example.com",
+            rbac={
+                "tag_roles": [{
+                    "role": "support",
+                    "tags": ["production"],
+                }],
+            })
+        ```
+
+        ### Multi-Role Access
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        multi_role = descope.Descoper("multi_role",
+            email="lead@example.com",
+            rbac={
+                "project_roles": [
+                    {
+                        "role": "admin",
+                        "project_ids": ["P123abc"],
+                    },
+                    {
+                        "role": "developer",
+                        "project_ids": ["P789ghi"],
+                    },
+                ],
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
@@ -187,7 +272,92 @@ class Descoper(pulumi.CustomResource):
                  args: DescoperArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Descoper resource with the given unique name, props, and options.
+        Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
+
+        Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+        - `admin` – Full access to project settings
+        - `developer` – Can edit flows and configurations
+        - `support` – Can view user data and audit logs
+        - `auditor` – Read-only access to audit logs
+
+        Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+
+        ## Example Usage
+
+        ### Company Admin
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        admin = descope.Descoper("admin",
+            email="admin@example.com",
+            name="Alice Admin",
+            rbac={
+                "is_company_admin": True,
+            })
+        ```
+
+        ### Developer for Specific Projects
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        developer = descope.Descoper("developer",
+            email="dev@example.com",
+            name="Bob Dev",
+            rbac={
+                "project_roles": [{
+                    "role": "developer",
+                    "project_ids": [
+                        "P123abc",
+                        "P456def",
+                    ],
+                }],
+            })
+        ```
+
+        ### Support Access via Project Tags
+
+        Grant a support engineer access to all projects tagged `production`:
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        support = descope.Descoper("support",
+            email="support@example.com",
+            rbac={
+                "tag_roles": [{
+                    "role": "support",
+                    "tags": ["production"],
+                }],
+            })
+        ```
+
+        ### Multi-Role Access
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        multi_role = descope.Descoper("multi_role",
+            email="lead@example.com",
+            rbac={
+                "project_roles": [
+                    {
+                        "role": "admin",
+                        "project_ids": ["P123abc"],
+                    },
+                    {
+                        "role": "developer",
+                        "project_ids": ["P789ghi"],
+                    },
+                ],
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param DescoperArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

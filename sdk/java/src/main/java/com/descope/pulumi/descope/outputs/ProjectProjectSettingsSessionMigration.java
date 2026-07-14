@@ -3,6 +3,7 @@
 
 package com.descope.pulumi.descope.outputs;
 
+import com.descope.pulumi.descope.outputs.ProjectProjectSettingsSessionMigrationUserMapping;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.String;
 import java.util.List;
@@ -12,6 +13,11 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectProjectSettingsSessionMigration {
+    /**
+     * @return An API token for the vendor, required when `vendor` is set to `okta`.
+     * 
+     */
+    private @Nullable String apiToken;
     /**
      * @return The audience value if needed by the vendor.
      * 
@@ -38,12 +44,29 @@ public final class ProjectProjectSettingsSessionMigration {
      */
     private @Nullable List<String> loginidMatchedAttributes;
     /**
+     * @return A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+     * 
+     */
+    private @Nullable List<ProjectProjectSettingsSessionMigrationUserMapping> userMappings;
+    /**
+     * @return The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+     * 
+     */
+    private @Nullable String userSyncType;
+    /**
      * @return The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
     private @Nullable String vendor;
 
     private ProjectProjectSettingsSessionMigration() {}
+    /**
+     * @return An API token for the vendor, required when `vendor` is set to `okta`.
+     * 
+     */
+    public Optional<String> apiToken() {
+        return Optional.ofNullable(this.apiToken);
+    }
     /**
      * @return The audience value if needed by the vendor.
      * 
@@ -80,6 +103,20 @@ public final class ProjectProjectSettingsSessionMigration {
         return this.loginidMatchedAttributes == null ? List.of() : this.loginidMatchedAttributes;
     }
     /**
+     * @return A list of attribute mappings from the external vendor&#39;s user to Descope user attributes.
+     * 
+     */
+    public List<ProjectProjectSettingsSessionMigrationUserMapping> userMappings() {
+        return this.userMappings == null ? List.of() : this.userMappings;
+    }
+    /**
+     * @return The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+     * 
+     */
+    public Optional<String> userSyncType() {
+        return Optional.ofNullable(this.userSyncType);
+    }
+    /**
      * @return The name of the vendor the sessions are migrated from, in all lowercase.
      * 
      */
@@ -96,23 +133,35 @@ public final class ProjectProjectSettingsSessionMigration {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String apiToken;
         private @Nullable String audience;
         private @Nullable String clientId;
         private @Nullable String domain;
         private @Nullable String issuer;
         private @Nullable List<String> loginidMatchedAttributes;
+        private @Nullable List<ProjectProjectSettingsSessionMigrationUserMapping> userMappings;
+        private @Nullable String userSyncType;
         private @Nullable String vendor;
         public Builder() {}
         public Builder(ProjectProjectSettingsSessionMigration defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.apiToken = defaults.apiToken;
     	      this.audience = defaults.audience;
     	      this.clientId = defaults.clientId;
     	      this.domain = defaults.domain;
     	      this.issuer = defaults.issuer;
     	      this.loginidMatchedAttributes = defaults.loginidMatchedAttributes;
+    	      this.userMappings = defaults.userMappings;
+    	      this.userSyncType = defaults.userSyncType;
     	      this.vendor = defaults.vendor;
         }
 
+        @CustomType.Setter
+        public Builder apiToken(@Nullable String apiToken) {
+
+            this.apiToken = apiToken;
+            return this;
+        }
         @CustomType.Setter
         public Builder audience(@Nullable String audience) {
 
@@ -147,6 +196,21 @@ public final class ProjectProjectSettingsSessionMigration {
             return loginidMatchedAttributes(List.of(loginidMatchedAttributes));
         }
         @CustomType.Setter
+        public Builder userMappings(@Nullable List<ProjectProjectSettingsSessionMigrationUserMapping> userMappings) {
+
+            this.userMappings = userMappings;
+            return this;
+        }
+        public Builder userMappings(ProjectProjectSettingsSessionMigrationUserMapping... userMappings) {
+            return userMappings(List.of(userMappings));
+        }
+        @CustomType.Setter
+        public Builder userSyncType(@Nullable String userSyncType) {
+
+            this.userSyncType = userSyncType;
+            return this;
+        }
+        @CustomType.Setter
         public Builder vendor(@Nullable String vendor) {
 
             this.vendor = vendor;
@@ -154,11 +218,14 @@ public final class ProjectProjectSettingsSessionMigration {
         }
         public ProjectProjectSettingsSessionMigration build() {
             final var _resultValue = new ProjectProjectSettingsSessionMigration();
+            _resultValue.apiToken = apiToken;
             _resultValue.audience = audience;
             _resultValue.clientId = clientId;
             _resultValue.domain = domain;
             _resultValue.issuer = issuer;
             _resultValue.loginidMatchedAttributes = loginidMatchedAttributes;
+            _resultValue.userMappings = userMappings;
+            _resultValue.userSyncType = userSyncType;
             _resultValue.vendor = vendor;
             return _resultValue;
         }

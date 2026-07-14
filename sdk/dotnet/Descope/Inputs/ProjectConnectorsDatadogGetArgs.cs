@@ -75,6 +75,18 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Site { get; set; }
 
         /// <summary>
+        /// An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `Production`, `Staging`). If left empty, the default Descope source will be used.
+        /// </summary>
+        [Input("source")]
+        public Input<string>? Source { get; set; }
+
+        /// <summary>
+        /// An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+        /// </summary>
+        [Input("tags")]
+        public Input<string>? Tags { get; set; }
+
+        /// <summary>
         /// Whether to send troubleshooting events.
         /// </summary>
         [Input("troubleshootLogEnabled")]

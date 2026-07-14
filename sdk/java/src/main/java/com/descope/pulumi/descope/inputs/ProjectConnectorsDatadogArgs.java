@@ -132,6 +132,36 @@ public final class ProjectConnectorsDatadogArgs extends com.pulumi.resources.Res
     }
 
     /**
+     * An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+     * 
+     */
+    @Import(name="source")
+    private @Nullable Output<String> source;
+
+    /**
+     * @return An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+     * 
+     */
+    public Optional<Output<String>> source() {
+        return Optional.ofNullable(this.source);
+    }
+
+    /**
+     * An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+     * 
+     */
+    @Import(name="tags")
+    private @Nullable Output<String> tags;
+
+    /**
+     * @return An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+     * 
+     */
+    public Optional<Output<String>> tags() {
+        return Optional.ofNullable(this.tags);
+    }
+
+    /**
      * Whether to send troubleshooting events.
      * 
      */
@@ -157,6 +187,8 @@ public final class ProjectConnectorsDatadogArgs extends com.pulumi.resources.Res
         this.maskPii = $.maskPii;
         this.name = $.name;
         this.site = $.site;
+        this.source = $.source;
+        this.tags = $.tags;
         this.troubleshootLogEnabled = $.troubleshootLogEnabled;
     }
 
@@ -342,6 +374,48 @@ public final class ProjectConnectorsDatadogArgs extends com.pulumi.resources.Res
          */
         public Builder site(String site) {
             return site(Output.of(site));
+        }
+
+        /**
+         * @param source An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder source(@Nullable Output<String> source) {
+            $.source = source;
+            return this;
+        }
+
+        /**
+         * @param source An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder source(String source) {
+            return source(Output.of(source));
+        }
+
+        /**
+         * @param tags An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(@Nullable Output<String> tags) {
+            $.tags = tags;
+            return this;
+        }
+
+        /**
+         * @param tags An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(String tags) {
+            return tags(Output.of(tags));
         }
 
         /**

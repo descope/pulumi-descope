@@ -14,16 +14,40 @@ namespace Descope.Pulumi.Descope.Inputs
     public sealed class ProjectAuthenticationPasswordArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether passwords must contain at least one letter, either uppercase or lowercase.
+        /// </summary>
+        [Input("anyLetter")]
+        public Input<bool>? AnyLetter { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
+        /// Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively. The check is skipped if the user's email is not known at validation time.
+        /// </summary>
+        [Input("disallowEmailMatch")]
+        public Input<bool>? DisallowEmailMatch { get; set; }
+
+        /// <summary>
+        /// Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `"'"` to reject single and double quotes).
+        /// </summary>
+        [Input("disallowedCharacters")]
+        public Input<string>? DisallowedCharacters { get; set; }
+
+        /// <summary>
         /// Settings related to sending password reset emails as part of the password feature.
         /// </summary>
         [Input("emailService")]
         public Input<Inputs.ProjectAuthenticationPasswordEmailServiceArgs>? EmailService { get; set; }
+
+        /// <summary>
+        /// Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+        /// </summary>
+        [Input("enforceStrength")]
+        public Input<string>? EnforceStrength { get; set; }
 
         /// <summary>
         /// Whether users are required to change their password periodically.

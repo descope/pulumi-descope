@@ -7,6 +7,7 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -15,6 +16,21 @@ import javax.annotation.Nullable;
 public final class ProjectAuthenticationPasskeysArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProjectAuthenticationPasskeysArgs Empty = new ProjectAuthenticationPasskeysArgs();
+
+    /**
+     * A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+     * 
+     */
+    @Import(name="androidFingerprints")
+    private @Nullable Output<List<String>> androidFingerprints;
+
+    /**
+     * @return A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+     * 
+     */
+    public Optional<Output<List<String>>> androidFingerprints() {
+        return Optional.ofNullable(this.androidFingerprints);
+    }
 
     /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
@@ -29,6 +45,21 @@ public final class ProjectAuthenticationPasskeysArgs extends com.pulumi.resource
      */
     public Optional<Output<Boolean>> disabled() {
         return Optional.ofNullable(this.disabled);
+    }
+
+    /**
+     * The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+     * 
+     */
+    @Import(name="displayName")
+    private @Nullable Output<String> displayName;
+
+    /**
+     * @return The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+     * 
+     */
+    public Optional<Output<String>> displayName() {
+        return Optional.ofNullable(this.displayName);
     }
 
     /**
@@ -49,7 +80,9 @@ public final class ProjectAuthenticationPasskeysArgs extends com.pulumi.resource
     private ProjectAuthenticationPasskeysArgs() {}
 
     private ProjectAuthenticationPasskeysArgs(ProjectAuthenticationPasskeysArgs $) {
+        this.androidFingerprints = $.androidFingerprints;
         this.disabled = $.disabled;
+        this.displayName = $.displayName;
         this.topLevelDomain = $.topLevelDomain;
     }
 
@@ -72,6 +105,37 @@ public final class ProjectAuthenticationPasskeysArgs extends com.pulumi.resource
         }
 
         /**
+         * @param androidFingerprints A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder androidFingerprints(@Nullable Output<List<String>> androidFingerprints) {
+            $.androidFingerprints = androidFingerprints;
+            return this;
+        }
+
+        /**
+         * @param androidFingerprints A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder androidFingerprints(List<String> androidFingerprints) {
+            return androidFingerprints(Output.of(androidFingerprints));
+        }
+
+        /**
+         * @param androidFingerprints A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder androidFingerprints(String... androidFingerprints) {
+            return androidFingerprints(List.of(androidFingerprints));
+        }
+
+        /**
          * @param disabled Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
          * 
          * @return builder
@@ -90,6 +154,27 @@ public final class ProjectAuthenticationPasskeysArgs extends com.pulumi.resource
          */
         public Builder disabled(Boolean disabled) {
             return disabled(Output.of(disabled));
+        }
+
+        /**
+         * @param displayName The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder displayName(@Nullable Output<String> displayName) {
+            $.displayName = displayName;
+            return this;
+        }
+
+        /**
+         * @param displayName The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder displayName(String displayName) {
+            return displayName(Output.of(displayName));
         }
 
         /**

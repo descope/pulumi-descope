@@ -1,6 +1,28 @@
 {
     "auto-aliasing": {
         "resources": {
+            "descope_access_key": {
+                "current": "descope:index/accessKey:AccessKey",
+                "majorVersion": 1,
+                "fields": {
+                    "permitted_ips": {
+                        "maxItemsOne": false
+                    },
+                    "roles": {
+                        "maxItemsOne": false
+                    },
+                    "tenants": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "roles": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "descope_descoper": {
                 "current": "descope:index/descoper:Descoper",
                 "majorVersion": 1,
@@ -25,6 +47,52 @@
                                             "maxItemsOne": false
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_engine": {
+                "current": "descope:index/engine:Engine",
+                "majorVersion": 1
+            },
+            "descope_inbound_app": {
+                "current": "descope:index/inboundApp:InboundApp",
+                "majorVersion": 1,
+                "fields": {
+                    "approved_callback_urls": {
+                        "maxItemsOne": false
+                    },
+                    "attributes_scopes": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "audience_whitelist": {
+                        "maxItemsOne": false
+                    },
+                    "connections_scopes": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "permissions_scopes": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
                                 }
                             }
                         }
@@ -90,8 +158,27 @@
                                 "maxItemsOne": false,
                                 "elem": {
                                     "fields": {
+                                        "approved_redirect_urls": {
+                                            "maxItemsOne": false
+                                        },
                                         "claims": {
                                             "maxItemsOne": false
+                                        },
+                                        "permissions": {
+                                            "maxItemsOne": false
+                                        },
+                                        "roles": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "permissions": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "role_mappings": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -105,6 +192,61 @@
                                         },
                                         "attribute_mapping": {
                                             "maxItemsOne": false
+                                        },
+                                        "permissions": {
+                                            "maxItemsOne": false
+                                        },
+                                        "roles": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "permissions": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "role_mappings": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "wsfed_applications": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "attribute_mapping": {
+                                            "maxItemsOne": false
+                                        },
+                                        "groups_mapping": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "roles": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "permissions": {
+                                            "maxItemsOne": false
+                                        },
+                                        "reply_allowed_callback_urls": {
+                                            "maxItemsOne": false
+                                        },
+                                        "roles": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "permissions": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "role_mappings": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -368,6 +510,13 @@
                                     }
                                 }
                             },
+                            "passkeys": {
+                                "fields": {
+                                    "android_fingerprints": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            },
                             "password": {
                                 "fields": {
                                     "email_service": {
@@ -376,6 +525,20 @@
                                                 "maxItemsOne": false
                                             }
                                         }
+                                    }
+                                }
+                            },
+                            "sso": {
+                                "fields": {
+                                    "email_service": {
+                                        "fields": {
+                                            "templates": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    },
+                                    "mandatory_user_attributes": {
+                                        "maxItemsOne": false
                                     }
                                 }
                             }
@@ -401,6 +564,9 @@
                     "connectors": {
                         "fields": {
                             "abuseipdb": {
+                                "maxItemsOne": false
+                            },
+                            "alloy": {
                                 "maxItemsOne": false
                             },
                             "amplitude": {
@@ -443,6 +609,9 @@
                                     }
                                 }
                             },
+                            "aws_ses_email_validation": {
+                                "maxItemsOne": false
+                            },
                             "aws_translate": {
                                 "maxItemsOne": false
                             },
@@ -450,6 +619,23 @@
                                 "maxItemsOne": false
                             },
                             "coralogix": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "cribl": {
                                 "maxItemsOne": false,
                                 "elem": {
                                     "fields": {
@@ -545,6 +731,23 @@
                             "google_maps_places": {
                                 "maxItemsOne": false
                             },
+                            "groundcover": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
                             "hcaptcha": {
                                 "maxItemsOne": false
                             },
@@ -623,6 +826,23 @@
                                     }
                                 }
                             },
+                            "pendo": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
                             "ping_directory": {
                                 "maxItemsOne": false
                             },
@@ -638,7 +858,13 @@
                             "recaptcha_enterprise": {
                                 "maxItemsOne": false
                             },
+                            "recaptcha_v2": {
+                                "maxItemsOne": false
+                            },
                             "rekognition": {
+                                "maxItemsOne": false
+                            },
+                            "rnd_reassigned": {
                                 "maxItemsOne": false
                             },
                             "salesforce": {
@@ -648,6 +874,9 @@
                                 "maxItemsOne": false
                             },
                             "sardine": {
+                                "maxItemsOne": false
+                            },
+                            "scim": {
                                 "maxItemsOne": false
                             },
                             "segment": {
@@ -667,6 +896,23 @@
                             },
                             "smtp": {
                                 "maxItemsOne": false
+                            },
+                            "snowflake": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "audit_filters": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "values": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             "sns": {
                                 "maxItemsOne": false
@@ -766,6 +1012,9 @@
                             "session_migration": {
                                 "fields": {
                                     "loginid_matched_attributes": {
+                                        "maxItemsOne": false
+                                    },
+                                    "user_mapping": {
                                         "maxItemsOne": false
                                     }
                                 }
