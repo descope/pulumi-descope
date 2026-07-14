@@ -6,6 +6,8 @@ package com.descope.pulumi.descope.inputs;
 import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationAttributeMappingArgs;
 import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationDynamicConfigurationArgs;
 import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationManualConfigurationArgs;
+import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationPermissionArgs;
+import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationRoleArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
@@ -64,6 +66,21 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
      */
     public Optional<Output<String>> defaultRelayState() {
         return Optional.ofNullable(this.defaultRelayState);
+    }
+
+    /**
+     * The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+     * 
+     */
+    @Import(name="defaultSignatureAlgorithm")
+    private @Nullable Output<String> defaultSignatureAlgorithm;
+
+    /**
+     * @return The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+     * 
+     */
+    public Optional<Output<String>> defaultSignatureAlgorithm() {
+        return Optional.ofNullable(this.defaultSignatureAlgorithm);
     }
 
     /**
@@ -201,6 +218,20 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
         return this.name;
     }
 
+    @Import(name="permissions")
+    private @Nullable Output<List<ProjectApplicationsSamlApplicationPermissionArgs>> permissions;
+
+    public Optional<Output<List<ProjectApplicationsSamlApplicationPermissionArgs>>> permissions() {
+        return Optional.ofNullable(this.permissions);
+    }
+
+    @Import(name="roles")
+    private @Nullable Output<List<ProjectApplicationsSamlApplicationRoleArgs>> roles;
+
+    public Optional<Output<List<ProjectApplicationsSamlApplicationRoleArgs>>> roles() {
+        return Optional.ofNullable(this.roles);
+    }
+
     /**
      * The subject name id format. Choose one of &#34;&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;. Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      * 
@@ -237,6 +268,7 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
         this.acsAllowedCallbackUrls = $.acsAllowedCallbackUrls;
         this.attributeMappings = $.attributeMappings;
         this.defaultRelayState = $.defaultRelayState;
+        this.defaultSignatureAlgorithm = $.defaultSignatureAlgorithm;
         this.description = $.description;
         this.disabled = $.disabled;
         this.dynamicConfiguration = $.dynamicConfiguration;
@@ -246,6 +278,8 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
         this.logo = $.logo;
         this.manualConfiguration = $.manualConfiguration;
         this.name = $.name;
+        this.permissions = $.permissions;
+        this.roles = $.roles;
         this.subjectNameIdFormat = $.subjectNameIdFormat;
         this.subjectNameIdType = $.subjectNameIdType;
     }
@@ -349,6 +383,27 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
          */
         public Builder defaultRelayState(String defaultRelayState) {
             return defaultRelayState(Output.of(defaultRelayState));
+        }
+
+        /**
+         * @param defaultSignatureAlgorithm The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultSignatureAlgorithm(@Nullable Output<String> defaultSignatureAlgorithm) {
+            $.defaultSignatureAlgorithm = defaultSignatureAlgorithm;
+            return this;
+        }
+
+        /**
+         * @param defaultSignatureAlgorithm The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder defaultSignatureAlgorithm(String defaultSignatureAlgorithm) {
+            return defaultSignatureAlgorithm(Output.of(defaultSignatureAlgorithm));
         }
 
         /**
@@ -538,6 +593,32 @@ public final class ProjectApplicationsSamlApplicationArgs extends com.pulumi.res
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        public Builder permissions(@Nullable Output<List<ProjectApplicationsSamlApplicationPermissionArgs>> permissions) {
+            $.permissions = permissions;
+            return this;
+        }
+
+        public Builder permissions(List<ProjectApplicationsSamlApplicationPermissionArgs> permissions) {
+            return permissions(Output.of(permissions));
+        }
+
+        public Builder permissions(ProjectApplicationsSamlApplicationPermissionArgs... permissions) {
+            return permissions(List.of(permissions));
+        }
+
+        public Builder roles(@Nullable Output<List<ProjectApplicationsSamlApplicationRoleArgs>> roles) {
+            $.roles = roles;
+            return this;
+        }
+
+        public Builder roles(List<ProjectApplicationsSamlApplicationRoleArgs> roles) {
+            return roles(Output.of(roles));
+        }
+
+        public Builder roles(ProjectApplicationsSamlApplicationRoleArgs... roles) {
+            return roles(List.of(roles));
         }
 
         /**

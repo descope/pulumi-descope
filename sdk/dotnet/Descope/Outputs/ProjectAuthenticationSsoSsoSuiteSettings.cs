@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? HideGroupsMapping;
         /// <summary>
+        /// Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+        /// </summary>
+        public readonly bool? HideJitGuide;
+        /// <summary>
         /// Setting this to `True` will hide the OIDC configuration option.
         /// </summary>
         public readonly bool? HideOidc;
@@ -39,9 +43,17 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? HideScim;
         /// <summary>
+        /// Whether to display the help/support contact link in the SSO Suite UI.
+        /// </summary>
+        public readonly bool? ShowHelpContact;
+        /// <summary>
         /// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
         /// </summary>
         public readonly string? StyleId;
+        /// <summary>
+        /// Email address shown to end-users in the SSO Suite UI as a support contact.
+        /// </summary>
+        public readonly string? SupportEmail;
 
         [OutputConstructor]
         private ProjectAuthenticationSsoSsoSuiteSettings(
@@ -51,21 +63,30 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? hideGroupsMapping,
 
+            bool? hideJitGuide,
+
             bool? hideOidc,
 
             bool? hideSaml,
 
             bool? hideScim,
 
-            string? styleId)
+            bool? showHelpContact,
+
+            string? styleId,
+
+            string? supportEmail)
         {
             ForceDomainVerification = forceDomainVerification;
             HideDomains = hideDomains;
             HideGroupsMapping = hideGroupsMapping;
+            HideJitGuide = hideJitGuide;
             HideOidc = hideOidc;
             HideSaml = hideSaml;
             HideScim = hideScim;
+            ShowHelpContact = showHelpContact;
             StyleId = styleId;
+            SupportEmail = supportEmail;
         }
     }
 }

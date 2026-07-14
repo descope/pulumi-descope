@@ -28,6 +28,458 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 
+/**
+ * Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+ * 
+ * This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+ * 
+ * For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+ * 
+ * ## Example Usage
+ * 
+ * ### Basic Project
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .environment("production")
+ *             .tags(            
+ *                 "prod",
+ *                 "v2")
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### Authentication Methods
+ * 
+ * Enable and configure the authentication methods your users will use:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationMagicLinkArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationPasswordArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationOtpArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationPasskeysArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .authentication(ProjectAuthenticationArgs.builder()
+ *                 .magicLink(ProjectAuthenticationMagicLinkArgs.builder()
+ *                     .expirationTime("1 hour")
+ *                     .build())
+ *                 .password(ProjectAuthenticationPasswordArgs.builder()
+ *                     .lock(true)
+ *                     .lockAttempts(5)
+ *                     .minLength(12)
+ *                     .build())
+ *                 .otp(ProjectAuthenticationOtpArgs.builder()
+ *                     .expirationTime("5 minutes")
+ *                     .build())
+ *                 .passkeys(ProjectAuthenticationPasskeysArgs.builder()
+ *                     .disabled(false)
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### Roles and Permissions (RBAC)
+ * 
+ * Define roles and permissions for your users:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthorizationArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .authorization(ProjectAuthorizationArgs.builder()
+ *                 .permissions(                
+ *                     ProjectAuthorizationPermissionArgs.builder()
+ *                         .name("read:data")
+ *                         .description("Read access to application data")
+ *                         .build(),
+ *                     ProjectAuthorizationPermissionArgs.builder()
+ *                         .name("write:data")
+ *                         .description("Write access to application data")
+ *                         .build(),
+ *                     ProjectAuthorizationPermissionArgs.builder()
+ *                         .name("admin:panel")
+ *                         .description("Access to the admin panel")
+ *                         .build())
+ *                 .roles(                
+ *                     ProjectAuthorizationRoleArgs.builder()
+ *                         .name("viewer")
+ *                         .description("Can read data")
+ *                         .permissions("read:data")
+ *                         .build(),
+ *                     ProjectAuthorizationRoleArgs.builder()
+ *                         .name("editor")
+ *                         .description("Can read and write data")
+ *                         .permissions(                        
+ *                             "read:data",
+ *                             "write:data")
+ *                         .build(),
+ *                     ProjectAuthorizationRoleArgs.builder()
+ *                         .name("admin")
+ *                         .description("Full access")
+ *                         .permissions(                        
+ *                             "read:data",
+ *                             "write:data",
+ *                             "admin:panel")
+ *                         .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### Connectors
+ * 
+ * Integrate with third-party services to enrich flows and send notifications:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectConnectorsArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .connectors(ProjectConnectorsArgs.builder()
+ *                 .https(ProjectConnectorsHttpArgs.builder()
+ *                     .name("User Eligibility Check")
+ *                     .description("Checks if a new user is allowed to register")
+ *                     .baseUrl("https://api.example.com")
+ *                     .authentication(ProjectConnectorsHttpAuthenticationArgs.builder()
+ *                         .bearerToken(webhookSecret)
+ *                         .build())
+ *                     .build())
+ *                 .sendgrids(ProjectConnectorsSendgridArgs.builder()
+ *                     .name("Transactional Email")
+ *                     .sender(ProjectConnectorsSendgridSenderArgs.builder()
+ *                         .email("noreply}{@literal @}{@code example.com")
+ *                         .name("My App")
+ *                         .build())
+ *                     .authentication(ProjectConnectorsSendgridAuthenticationArgs.builder()
+ *                         .apiKey(sendgridApiKey)
+ *                         .build())
+ *                     .build())
+ *                 .twilioCores(ProjectConnectorsTwilioCoreArgs.builder()
+ *                     .name("SMS OTP")
+ *                     .accountSid(twilioAccountSid)
+ *                     .senders(ProjectConnectorsTwilioCoreSendersArgs.builder()
+ *                         .sms(ProjectConnectorsTwilioCoreSendersSmsArgs.builder()
+ *                             .phoneNumber("+15551234567")
+ *                             .build())
+ *                         .build())
+ *                     .authentication(ProjectConnectorsTwilioCoreAuthenticationArgs.builder()
+ *                         .authToken(twilioAuthToken)
+ *                         .build())
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ * ### Session Settings
+ * 
+ * Configure token lifetimes and session behavior:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectProjectSettingsArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .projectSettings(ProjectProjectSettingsArgs.builder()
+ *                 .refreshTokenExpiration("3 weeks")
+ *                 .sessionTokenExpiration("15 minutes")
+ *                 .refreshTokenRotation(true)
+ *                 .enableInactivity(true)
+ *                 .inactivityTime("30 minutes")
+ *                 .customDomain("auth.example.com")
+ *                 .approvedDomains(                
+ *                     "example.com",
+ *                     "app.example.com")
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### OIDC Applications
+ * 
+ * Register an OIDC application for SSO:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectApplicationsArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .applications(ProjectApplicationsArgs.builder()
+ *                 .oidcApplications(ProjectApplicationsOidcApplicationArgs.builder()
+ *                     .name("My Web App")
+ *                     .description("Primary web application")
+ *                     .loginPageUrl("https://app.example.com/login")
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### JWT Templates
+ * 
+ * Customize the JWT claims added to session tokens:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectJwtTemplatesArgs;
+ * import com.pulumi.descope.inputs.ProjectProjectSettingsArgs;
+ * import static com.pulumi.codegen.internal.Serialization.*;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .jwtTemplates(ProjectJwtTemplatesArgs.builder()
+ *                 .userTemplates(ProjectJwtTemplatesUserTemplateArgs.builder()
+ *                     .name("app-claims")
+ *                     .description("Adds subscription tier and org context to user JWTs")
+ *                     .template(serializeJson(
+ *                         jsonObject(
+ *                             jsonProperty("tier", "}{@literal @}{@code user.customAttributes.subscriptionTier"),
+ *                             jsonProperty("org_id", "}{@literal @}{@code user.tenants[0].tenantId")
+ *                         )))
+ *                     .excludePermissionClaim(true)
+ *                     .addJtiClaim(true)
+ *                     .overrideSubjectClaim(true)
+ *                     .build())
+ *                 .build())
+ *             .projectSettings(ProjectProjectSettingsArgs.builder()
+ *                 .userJwtTemplate("app-claims")
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ * ### SSO Settings
+ * 
+ * Configure global settings for Single Sign-On across tenants:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Project;
+ * import com.descope.pulumi.descope.ProjectArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationSsoArgs;
+ * import com.pulumi.descope.inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new Project("example", ProjectArgs.builder()
+ *             .name("my-app")
+ *             .authentication(ProjectAuthenticationArgs.builder()
+ *                 .sso(ProjectAuthenticationSsoArgs.builder()
+ *                     .mergeUsers(true)
+ *                     .allowOverrideRoles(true)
+ *                     .groupsPriority(true)
+ *                     .requireSsoDomains(true)
+ *                     .requireGroupsAttributeName(true)
+ *                     .mandatoryUserAttributes(                    
+ *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
+ *                             .id("email")
+ *                             .build(),
+ *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
+ *                             .id("name")
+ *                             .build(),
+ *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
+ *                             .id("department")
+ *                             .custom(true)
+ *                             .build())
+ *                     .ssoSuiteSettings(ProjectAuthenticationSsoSsoSuiteSettingsArgs.builder()
+ *                         .styleId("my-brand-style")
+ *                         .hideScim(false)
+ *                         .hideSaml(false)
+ *                         .hideOidc(false)
+ *                         .build())
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ */
 @ResourceType(type="descope:index/project:Project")
 public class Project extends com.pulumi.resources.CustomResource {
     /**

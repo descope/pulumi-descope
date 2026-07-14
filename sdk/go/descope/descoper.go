@@ -12,6 +12,165 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
+//
+// Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+// - `admin` – Full access to project settings
+// - `developer` – Can edit flows and configurations
+// - `support` – Can view user data and audit logs
+// - `auditor` – Read-only access to audit logs
+//
+// Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+//
+// ## Example Usage
+//
+// ### Company Admin
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewDescoper(ctx, "admin", &descope.DescoperArgs{
+//				Email: pulumi.String("admin@example.com"),
+//				Name:  pulumi.String("Alice Admin"),
+//				Rbac: &descope.DescoperRbacArgs{
+//					IsCompanyAdmin: pulumi.Bool(true),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Developer for Specific Projects
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewDescoper(ctx, "developer", &descope.DescoperArgs{
+//				Email: pulumi.String("dev@example.com"),
+//				Name:  pulumi.String("Bob Dev"),
+//				Rbac: &descope.DescoperRbacArgs{
+//					ProjectRoles: descope.DescoperRbacProjectRoleArray{
+//						&descope.DescoperRbacProjectRoleArgs{
+//							Role: pulumi.String("developer"),
+//							ProjectIds: pulumi.StringArray{
+//								pulumi.String("P123abc"),
+//								pulumi.String("P456def"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Support Access via Project Tags
+//
+// Grant a support engineer access to all projects tagged `production`:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewDescoper(ctx, "support", &descope.DescoperArgs{
+//				Email: pulumi.String("support@example.com"),
+//				Rbac: &descope.DescoperRbacArgs{
+//					TagRoles: descope.DescoperRbacTagRoleArray{
+//						&descope.DescoperRbacTagRoleArgs{
+//							Role: pulumi.String("support"),
+//							Tags: pulumi.StringArray{
+//								pulumi.String("production"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Multi-Role Access
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewDescoper(ctx, "multi_role", &descope.DescoperArgs{
+//				Email: pulumi.String("lead@example.com"),
+//				Rbac: &descope.DescoperRbacArgs{
+//					ProjectRoles: descope.DescoperRbacProjectRoleArray{
+//						&descope.DescoperRbacProjectRoleArgs{
+//							Role: pulumi.String("admin"),
+//							ProjectIds: pulumi.StringArray{
+//								pulumi.String("P123abc"),
+//							},
+//						},
+//						&descope.DescoperRbacProjectRoleArgs{
+//							Role: pulumi.String("developer"),
+//							ProjectIds: pulumi.StringArray{
+//								pulumi.String("P789ghi"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Descoper struct {
 	pulumi.CustomResourceState
 

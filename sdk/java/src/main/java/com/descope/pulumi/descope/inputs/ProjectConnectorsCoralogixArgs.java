@@ -102,6 +102,21 @@ public final class ProjectConnectorsCoralogixArgs extends com.pulumi.resources.R
     }
 
     /**
+     * Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    @Import(name="maskPii")
+    private @Nullable Output<Boolean> maskPii;
+
+    /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    public Optional<Output<Boolean>> maskPii() {
+        return Optional.ofNullable(this.maskPii);
+    }
+
+    /**
      * A custom name for your connector.
      * 
      */
@@ -140,6 +155,7 @@ public final class ProjectConnectorsCoralogixArgs extends com.pulumi.resources.R
         this.description = $.description;
         this.endpoint = $.endpoint;
         this.id = $.id;
+        this.maskPii = $.maskPii;
         this.name = $.name;
         this.troubleshootLogEnabled = $.troubleshootLogEnabled;
     }
@@ -284,6 +300,27 @@ public final class ProjectConnectorsCoralogixArgs extends com.pulumi.resources.R
 
         public Builder id(String id) {
             return id(Output.of(id));
+        }
+
+        /**
+         * @param maskPii Whether to mask personally identifiable information in the logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskPii(@Nullable Output<Boolean> maskPii) {
+            $.maskPii = maskPii;
+            return this;
+        }
+
+        /**
+         * @param maskPii Whether to mask personally identifiable information in the logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maskPii(Boolean maskPii) {
+            return maskPii(Output.of(maskPii));
         }
 
         /**

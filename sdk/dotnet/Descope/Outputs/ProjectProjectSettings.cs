@@ -91,6 +91,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? StepUpTokenExpiration;
         /// <summary>
+        /// When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+        /// </summary>
+        public readonly bool? TenantUserIsolation;
+        /// <summary>
         /// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
         /// </summary>
         public readonly string? TestUsersLoginidRegexp;
@@ -151,6 +155,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? stepUpTokenExpiration,
 
+            bool? tenantUserIsolation,
+
             string? testUsersLoginidRegexp,
 
             string? testUsersStaticOtp,
@@ -180,6 +186,7 @@ namespace Descope.Pulumi.Descope.Outputs
             SessionTokenExpiration = sessionTokenExpiration;
             SessionTokenResponseMethod = sessionTokenResponseMethod;
             StepUpTokenExpiration = stepUpTokenExpiration;
+            TenantUserIsolation = tenantUserIsolation;
             TestUsersLoginidRegexp = testUsersLoginidRegexp;
             TestUsersStaticOtp = testUsersStaticOtp;
             TestUsersVerifierRegexp = testUsersVerifierRegexp;

@@ -44,6 +44,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? DefaultRelayState { get; set; }
 
         /// <summary>
+        /// The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
+        /// </summary>
+        [Input("defaultSignatureAlgorithm")]
+        public Input<string>? DefaultSignatureAlgorithm { get; set; }
+
+        /// <summary>
         /// A description for the SAML application.
         /// </summary>
         [Input("description")]
@@ -96,6 +102,22 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        [Input("permissions")]
+        private InputList<Inputs.ProjectApplicationsSamlApplicationPermissionArgs>? _permissions;
+        public InputList<Inputs.ProjectApplicationsSamlApplicationPermissionArgs> Permissions
+        {
+            get => _permissions ?? (_permissions = new InputList<Inputs.ProjectApplicationsSamlApplicationPermissionArgs>());
+            set => _permissions = value;
+        }
+
+        [Input("roles")]
+        private InputList<Inputs.ProjectApplicationsSamlApplicationRoleArgs>? _roles;
+        public InputList<Inputs.ProjectApplicationsSamlApplicationRoleArgs> Roles
+        {
+            get => _roles ?? (_roles = new InputList<Inputs.ProjectApplicationsSamlApplicationRoleArgs>());
+            set => _roles = value;
+        }
 
         /// <summary>
         /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).

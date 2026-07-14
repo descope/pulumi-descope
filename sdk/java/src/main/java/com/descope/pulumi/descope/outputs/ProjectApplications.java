@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.outputs;
 
 import com.descope.pulumi.descope.outputs.ProjectApplicationsOidcApplication;
 import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplication;
+import com.descope.pulumi.descope.outputs.ProjectApplicationsWsfedApplication;
 import com.pulumi.core.annotations.CustomType;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,11 @@ public final class ProjectApplications {
      * 
      */
     private @Nullable List<ProjectApplicationsSamlApplication> samlApplications;
+    /**
+     * @return Applications using WS-Federation for authentication.
+     * 
+     */
+    private @Nullable List<ProjectApplicationsWsfedApplication> wsfedApplications;
 
     private ProjectApplications() {}
     /**
@@ -38,6 +44,13 @@ public final class ProjectApplications {
     public List<ProjectApplicationsSamlApplication> samlApplications() {
         return this.samlApplications == null ? List.of() : this.samlApplications;
     }
+    /**
+     * @return Applications using WS-Federation for authentication.
+     * 
+     */
+    public List<ProjectApplicationsWsfedApplication> wsfedApplications() {
+        return this.wsfedApplications == null ? List.of() : this.wsfedApplications;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -50,11 +63,13 @@ public final class ProjectApplications {
     public static final class Builder {
         private @Nullable List<ProjectApplicationsOidcApplication> oidcApplications;
         private @Nullable List<ProjectApplicationsSamlApplication> samlApplications;
+        private @Nullable List<ProjectApplicationsWsfedApplication> wsfedApplications;
         public Builder() {}
         public Builder(ProjectApplications defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.oidcApplications = defaults.oidcApplications;
     	      this.samlApplications = defaults.samlApplications;
+    	      this.wsfedApplications = defaults.wsfedApplications;
         }
 
         @CustomType.Setter
@@ -75,10 +90,20 @@ public final class ProjectApplications {
         public Builder samlApplications(ProjectApplicationsSamlApplication... samlApplications) {
             return samlApplications(List.of(samlApplications));
         }
+        @CustomType.Setter
+        public Builder wsfedApplications(@Nullable List<ProjectApplicationsWsfedApplication> wsfedApplications) {
+
+            this.wsfedApplications = wsfedApplications;
+            return this;
+        }
+        public Builder wsfedApplications(ProjectApplicationsWsfedApplication... wsfedApplications) {
+            return wsfedApplications(List.of(wsfedApplications));
+        }
         public ProjectApplications build() {
             final var _resultValue = new ProjectApplications();
             _resultValue.oidcApplications = oidcApplications;
             _resultValue.samlApplications = samlApplications;
+            _resultValue.wsfedApplications = wsfedApplications;
             return _resultValue;
         }
     }

@@ -10,6 +10,389 @@ using Pulumi;
 
 namespace Descope.Pulumi.Descope
 {
+    /// <summary>
+    /// Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+    /// 
+    /// This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+    /// 
+    /// For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ### Basic Project
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Environment = "production",
+    ///         Tags = new[]
+    ///         {
+    ///             "prod",
+    ///             "v2",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Authentication Methods
+    /// 
+    /// Enable and configure the authentication methods your users will use:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Authentication = new Descope.Inputs.ProjectAuthenticationArgs
+    ///         {
+    ///             MagicLink = new Descope.Inputs.ProjectAuthenticationMagicLinkArgs
+    ///             {
+    ///                 ExpirationTime = "1 hour",
+    ///             },
+    ///             Password = new Descope.Inputs.ProjectAuthenticationPasswordArgs
+    ///             {
+    ///                 Lock = true,
+    ///                 LockAttempts = 5,
+    ///                 MinLength = 12,
+    ///             },
+    ///             Otp = new Descope.Inputs.ProjectAuthenticationOtpArgs
+    ///             {
+    ///                 ExpirationTime = "5 minutes",
+    ///             },
+    ///             Passkeys = new Descope.Inputs.ProjectAuthenticationPasskeysArgs
+    ///             {
+    ///                 Disabled = false,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Roles and Permissions (RBAC)
+    /// 
+    /// Define roles and permissions for your users:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Authorization = new Descope.Inputs.ProjectAuthorizationArgs
+    ///         {
+    ///             Permissions = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
+    ///                 {
+    ///                     Name = "read:data",
+    ///                     Description = "Read access to application data",
+    ///                 },
+    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
+    ///                 {
+    ///                     Name = "write:data",
+    ///                     Description = "Write access to application data",
+    ///                 },
+    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
+    ///                 {
+    ///                     Name = "admin:panel",
+    ///                     Description = "Access to the admin panel",
+    ///                 },
+    ///             },
+    ///             Roles = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
+    ///                 {
+    ///                     Name = "viewer",
+    ///                     Description = "Can read data",
+    ///                     Permissions = new[]
+    ///                     {
+    ///                         "read:data",
+    ///                     },
+    ///                 },
+    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
+    ///                 {
+    ///                     Name = "editor",
+    ///                     Description = "Can read and write data",
+    ///                     Permissions = new[]
+    ///                     {
+    ///                         "read:data",
+    ///                         "write:data",
+    ///                     },
+    ///                 },
+    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
+    ///                 {
+    ///                     Name = "admin",
+    ///                     Description = "Full access",
+    ///                     Permissions = new[]
+    ///                     {
+    ///                         "read:data",
+    ///                         "write:data",
+    ///                         "admin:panel",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Connectors
+    /// 
+    /// Integrate with third-party services to enrich flows and send notifications:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Connectors = new Descope.Inputs.ProjectConnectorsArgs
+    ///         {
+    ///             Https = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectConnectorsHttpArgs
+    ///                 {
+    ///                     Name = "User Eligibility Check",
+    ///                     Description = "Checks if a new user is allowed to register",
+    ///                     BaseUrl = "https://api.example.com",
+    ///                     Authentication = new Descope.Inputs.ProjectConnectorsHttpAuthenticationArgs
+    ///                     {
+    ///                         BearerToken = webhookSecret,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Sendgrids = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectConnectorsSendgridArgs
+    ///                 {
+    ///                     Name = "Transactional Email",
+    ///                     Sender = new Descope.Inputs.ProjectConnectorsSendgridSenderArgs
+    ///                     {
+    ///                         Email = "noreply@example.com",
+    ///                         Name = "My App",
+    ///                     },
+    ///                     Authentication = new Descope.Inputs.ProjectConnectorsSendgridAuthenticationArgs
+    ///                     {
+    ///                         ApiKey = sendgridApiKey,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             TwilioCores = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectConnectorsTwilioCoreArgs
+    ///                 {
+    ///                     Name = "SMS OTP",
+    ///                     AccountSid = twilioAccountSid,
+    ///                     Senders = new Descope.Inputs.ProjectConnectorsTwilioCoreSendersArgs
+    ///                     {
+    ///                         Sms = new Descope.Inputs.ProjectConnectorsTwilioCoreSendersSmsArgs
+    ///                         {
+    ///                             PhoneNumber = "+15551234567",
+    ///                         },
+    ///                     },
+    ///                     Authentication = new Descope.Inputs.ProjectConnectorsTwilioCoreAuthenticationArgs
+    ///                     {
+    ///                         AuthToken = twilioAuthToken,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Session Settings
+    /// 
+    /// Configure token lifetimes and session behavior:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         ProjectSettings = new Descope.Inputs.ProjectProjectSettingsArgs
+    ///         {
+    ///             RefreshTokenExpiration = "3 weeks",
+    ///             SessionTokenExpiration = "15 minutes",
+    ///             RefreshTokenRotation = true,
+    ///             EnableInactivity = true,
+    ///             InactivityTime = "30 minutes",
+    ///             CustomDomain = "auth.example.com",
+    ///             ApprovedDomains = new[]
+    ///             {
+    ///                 "example.com",
+    ///                 "app.example.com",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### OIDC Applications
+    /// 
+    /// Register an OIDC application for SSO:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Applications = new Descope.Inputs.ProjectApplicationsArgs
+    ///         {
+    ///             OidcApplications = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectApplicationsOidcApplicationArgs
+    ///                 {
+    ///                     Name = "My Web App",
+    ///                     Description = "Primary web application",
+    ///                     LoginPageUrl = "https://app.example.com/login",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### JWT Templates
+    /// 
+    /// Customize the JWT claims added to session tokens:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         JwtTemplates = new Descope.Inputs.ProjectJwtTemplatesArgs
+    ///         {
+    ///             UserTemplates = new[]
+    ///             {
+    ///                 new Descope.Inputs.ProjectJwtTemplatesUserTemplateArgs
+    ///                 {
+    ///                     Name = "app-claims",
+    ///                     Description = "Adds subscription tier and org context to user JWTs",
+    ///                     Template = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["tier"] = "@user.customAttributes.subscriptionTier",
+    ///                         ["org_id"] = "@user.tenants[0].tenantId",
+    ///                     }),
+    ///                     ExcludePermissionClaim = true,
+    ///                     AddJtiClaim = true,
+    ///                     OverrideSubjectClaim = true,
+    ///                 },
+    ///             },
+    ///         },
+    ///         ProjectSettings = new Descope.Inputs.ProjectProjectSettingsArgs
+    ///         {
+    ///             UserJwtTemplate = "app-claims",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### SSO Settings
+    /// 
+    /// Configure global settings for Single Sign-On across tenants:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Descope.Project("example", new()
+    ///     {
+    ///         Name = "my-app",
+    ///         Authentication = new Descope.Inputs.ProjectAuthenticationArgs
+    ///         {
+    ///             Sso = new Descope.Inputs.ProjectAuthenticationSsoArgs
+    ///             {
+    ///                 MergeUsers = true,
+    ///                 AllowOverrideRoles = true,
+    ///                 GroupsPriority = true,
+    ///                 RequireSsoDomains = true,
+    ///                 RequireGroupsAttributeName = true,
+    ///                 MandatoryUserAttributes = new[]
+    ///                 {
+    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
+    ///                     {
+    ///                         Id = "email",
+    ///                     },
+    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
+    ///                     {
+    ///                         Id = "name",
+    ///                     },
+    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
+    ///                     {
+    ///                         Id = "department",
+    ///                         Custom = true,
+    ///                     },
+    ///                 },
+    ///                 SsoSuiteSettings = new Descope.Inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs
+    ///                 {
+    ///                     StyleId = "my-brand-style",
+    ///                     HideScim = false,
+    ///                     HideSaml = false,
+    ///                     HideOidc = false,
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DescopeResourceType("descope:index/project:Project")]
     public partial class Project : global::Pulumi.CustomResource
     {

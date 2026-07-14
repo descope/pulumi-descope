@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthorization
     {
         /// <summary>
+        /// The project's FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+        /// </summary>
+        public readonly string? Fga;
+        /// <summary>
         /// A list of `Permission` objects.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectAuthorizationPermission> Permissions;
@@ -25,10 +29,13 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthorization(
+            string? fga,
+
             ImmutableArray<Outputs.ProjectAuthorizationPermission> permissions,
 
             ImmutableArray<Outputs.ProjectAuthorizationRole> roles)
         {
+            Fga = fga;
             Permissions = permissions;
             Roles = roles;
         }

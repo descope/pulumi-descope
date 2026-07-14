@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAbuseipdb> Abuseipdbs;
         /// <summary>
+        /// Streamline identity verification and fraud monitoring with the Alloy connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsAlloy> Alloys;
+        /// <summary>
         /// Track user activity and traits at any point in your user journey with the Amplitude connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAmplitude> Amplitudes;
@@ -35,6 +39,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsS3> AwsS3s;
         /// <summary>
+        /// Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsAwsSesEmailValidation> AwsSesEmailValidations;
+        /// <summary>
         /// Localize the language of your login and user journey screens with the Amazon Translate connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> AwsTranslates;
@@ -46,6 +54,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Send audit events and troubleshooting logs to Coralogix.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsCoralogix> Coralogixes;
+        /// <summary>
+        /// Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl's HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsCribl> Cribls;
         /// <summary>
         /// Connect to Darwinium API for fraud detection and device intelligence.
         /// </summary>
@@ -115,6 +127,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsGoogleMapsPlace> GoogleMapsPlaces;
         /// <summary>
+        /// Send audit events and troubleshooting logs to groundcover.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsGroundcover> Groundcovers;
+        /// <summary>
         /// hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsHcaptcha> Hcaptchas;
@@ -163,6 +179,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsOpentelemetry> Opentelemetries;
         /// <summary>
+        /// Stream authentication audit logs with the Pendo connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsPendo> Pendos;
+        /// <summary>
         /// Authenticate against PingDirectory.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsPingDirectory> PingDirectories;
@@ -179,6 +199,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRecaptchaEnterprise> RecaptchaEnterprises;
         /// <summary>
+        /// Use the reCAPTCHA v2 "I'm not a robot" checkbox widget with your flows.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsRecaptchaV2> RecaptchaV2s;
+        /// <summary>
         /// Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRecaptcha> Recaptchas;
@@ -186,6 +210,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsRekognition> Rekognitions;
+        /// <summary>
+        /// Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsRndReassigned> RndReassigneds;
         /// <summary>
         /// Send transactional messages with the Salesforce Marketing Cloud connector.
         /// </summary>
@@ -198,6 +226,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Evaluate customer risk using Sardine
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSardine> Sardines;
+        /// <summary>
+        /// Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsScim> Scims;
         /// <summary>
         /// Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
         /// </summary>
@@ -222,6 +254,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Simple Mail Transfer Protocol (SMTP) server for sending emails.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProjectConnectorsSmtp> Smtps;
+        /// <summary>
+        /// Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectConnectorsSnowflake> Snowflakes;
         /// <summary>
         /// Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
         /// </summary>
@@ -275,6 +311,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectConnectors(
             ImmutableArray<Outputs.ProjectConnectorsAbuseipdb> abuseipdbs,
 
+            ImmutableArray<Outputs.ProjectConnectorsAlloy> alloys,
+
             ImmutableArray<Outputs.ProjectConnectorsAmplitude> amplitudes,
 
             ImmutableArray<Outputs.ProjectConnectorsArkose> arkoses,
@@ -283,11 +321,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsAwsS3> awsS3s,
 
+            ImmutableArray<Outputs.ProjectConnectorsAwsSesEmailValidation> awsSesEmailValidations,
+
             ImmutableArray<Outputs.ProjectConnectorsAwsTranslate> awsTranslates,
 
             ImmutableArray<Outputs.ProjectConnectorsBitsight> bitsights,
 
             ImmutableArray<Outputs.ProjectConnectorsCoralogix> coralogixes,
+
+            ImmutableArray<Outputs.ProjectConnectorsCribl> cribls,
 
             ImmutableArray<Outputs.ProjectConnectorsDarwinium> darwinia,
 
@@ -323,6 +365,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsGoogleMapsPlace> googleMapsPlaces,
 
+            ImmutableArray<Outputs.ProjectConnectorsGroundcover> groundcovers,
+
             ImmutableArray<Outputs.ProjectConnectorsHcaptcha> hcaptchas,
 
             ImmutableArray<Outputs.ProjectConnectorsHibp> hibps,
@@ -347,6 +391,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsOpentelemetry> opentelemetries,
 
+            ImmutableArray<Outputs.ProjectConnectorsPendo> pendos,
+
             ImmutableArray<Outputs.ProjectConnectorsPingDirectory> pingDirectories,
 
             ImmutableArray<Outputs.ProjectConnectorsPostmark> postmarks,
@@ -355,15 +401,21 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<Outputs.ProjectConnectorsRecaptchaEnterprise> recaptchaEnterprises,
 
+            ImmutableArray<Outputs.ProjectConnectorsRecaptchaV2> recaptchaV2s,
+
             ImmutableArray<Outputs.ProjectConnectorsRecaptcha> recaptchas,
 
             ImmutableArray<Outputs.ProjectConnectorsRekognition> rekognitions,
+
+            ImmutableArray<Outputs.ProjectConnectorsRndReassigned> rndReassigneds,
 
             ImmutableArray<Outputs.ProjectConnectorsSalesforceMarketingCloud> salesforceMarketingClouds,
 
             ImmutableArray<Outputs.ProjectConnectorsSalesforce> salesforces,
 
             ImmutableArray<Outputs.ProjectConnectorsSardine> sardines,
+
+            ImmutableArray<Outputs.ProjectConnectorsScim> scims,
 
             ImmutableArray<Outputs.ProjectConnectorsSegment> segments,
 
@@ -376,6 +428,8 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectConnectorsSmartling> smartlings,
 
             ImmutableArray<Outputs.ProjectConnectorsSmtp> smtps,
+
+            ImmutableArray<Outputs.ProjectConnectorsSnowflake> snowflakes,
 
             ImmutableArray<Outputs.ProjectConnectorsSn> sns,
 
@@ -402,13 +456,16 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectConnectorsZerobounce> zerobounces)
         {
             Abuseipdbs = abuseipdbs;
+            Alloys = alloys;
             Amplitudes = amplitudes;
             Arkoses = arkoses;
             AuditWebhooks = auditWebhooks;
             AwsS3s = awsS3s;
+            AwsSesEmailValidations = awsSesEmailValidations;
             AwsTranslates = awsTranslates;
             Bitsights = bitsights;
             Coralogixes = coralogixes;
+            Cribls = cribls;
             Darwinia = darwinia;
             Datadogs = datadogs;
             DevrevGrows = devrevGrows;
@@ -426,6 +483,7 @@ namespace Descope.Pulumi.Descope.Outputs
             GoogleCloudLoggings = googleCloudLoggings;
             GoogleCloudTranslations = googleCloudTranslations;
             GoogleMapsPlaces = googleMapsPlaces;
+            Groundcovers = groundcovers;
             Hcaptchas = hcaptchas;
             Hibps = hibps;
             Https = https;
@@ -438,21 +496,26 @@ namespace Descope.Pulumi.Descope.Outputs
             Mparticles = mparticles;
             Newrelics = newrelics;
             Opentelemetries = opentelemetries;
+            Pendos = pendos;
             PingDirectories = pingDirectories;
             Postmarks = postmarks;
             Radars = radars;
             RecaptchaEnterprises = recaptchaEnterprises;
+            RecaptchaV2s = recaptchaV2s;
             Recaptchas = recaptchas;
             Rekognitions = rekognitions;
+            RndReassigneds = rndReassigneds;
             SalesforceMarketingClouds = salesforceMarketingClouds;
             Salesforces = salesforces;
             Sardines = sardines;
+            Scims = scims;
             Segments = segments;
             Sendgrids = sendgrids;
             Ses = ses;
             Slacks = slacks;
             Smartlings = smartlings;
             Smtps = smtps;
+            Snowflakes = snowflakes;
             Sns = sns;
             Splunks = splunks;
             Sqls = sqls;

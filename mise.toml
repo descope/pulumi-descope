@@ -1,0 +1,3 @@
+[tools]
+node = "24.14.0"
+"github:pulumi/pulumi-converter-terraform" = "1.3.0"

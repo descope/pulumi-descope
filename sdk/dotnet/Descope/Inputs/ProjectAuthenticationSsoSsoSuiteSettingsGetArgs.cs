@@ -32,6 +32,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? HideGroupsMapping { get; set; }
 
         /// <summary>
+        /// Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+        /// </summary>
+        [Input("hideJitGuide")]
+        public Input<bool>? HideJitGuide { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will hide the OIDC configuration option.
         /// </summary>
         [Input("hideOidc")]
@@ -50,10 +56,22 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? HideScim { get; set; }
 
         /// <summary>
+        /// Whether to display the help/support contact link in the SSO Suite UI.
+        /// </summary>
+        [Input("showHelpContact")]
+        public Input<bool>? ShowHelpContact { get; set; }
+
+        /// <summary>
         /// Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
         /// </summary>
         [Input("styleId")]
         public Input<string>? StyleId { get; set; }
+
+        /// <summary>
+        /// Email address shown to end-users in the SSO Suite UI as a support contact.
+        /// </summary>
+        [Input("supportEmail")]
+        public Input<string>? SupportEmail { get; set; }
 
         public ProjectAuthenticationSsoSsoSuiteSettingsGetArgs()
         {

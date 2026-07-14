@@ -19,6 +19,21 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     public static final ProjectConnectorsRecaptchaEnterpriseArgs Empty = new ProjectConnectorsRecaptchaEnterpriseArgs();
 
     /**
+     * The user-initiated action for this assessment.
+     * 
+     */
+    @Import(name="action")
+    private @Nullable Output<String> action;
+
+    /**
+     * @return The user-initiated action for this assessment.
+     * 
+     */
+    public Optional<Output<String>> action() {
+        return Optional.ofNullable(this.action);
+    }
+
+    /**
      * API key associated with the current project.
      * 
      */
@@ -49,14 +64,14 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     }
 
     /**
-     * Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
      * 
      */
     @Import(name="baseUrl")
     private @Nullable Output<String> baseUrl;
 
     /**
-     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * @return The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
      * 
      */
     public Optional<Output<String>> baseUrl() {
@@ -163,6 +178,7 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
     private ProjectConnectorsRecaptchaEnterpriseArgs() {}
 
     private ProjectConnectorsRecaptchaEnterpriseArgs(ProjectConnectorsRecaptchaEnterpriseArgs $) {
+        this.action = $.action;
         this.apiKey = $.apiKey;
         this.assessmentScore = $.assessmentScore;
         this.baseUrl = $.baseUrl;
@@ -191,6 +207,27 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
 
         public Builder(ProjectConnectorsRecaptchaEnterpriseArgs defaults) {
             $ = new ProjectConnectorsRecaptchaEnterpriseArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param action The user-initiated action for this assessment.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder action(@Nullable Output<String> action) {
+            $.action = action;
+            return this;
+        }
+
+        /**
+         * @param action The user-initiated action for this assessment.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder action(String action) {
+            return action(Output.of(action));
         }
 
         /**
@@ -236,7 +273,7 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
         }
 
         /**
-         * @param baseUrl Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+         * @param baseUrl The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
          * 
          * @return builder
          * 
@@ -247,7 +284,7 @@ public final class ProjectConnectorsRecaptchaEnterpriseArgs extends com.pulumi.r
         }
 
         /**
-         * @param baseUrl Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+         * @param baseUrl The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
          * 
          * @return builder
          * 

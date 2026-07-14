@@ -304,6 +304,21 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
+     * When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+     * 
+     */
+    @Import(name="tenantUserIsolation")
+    private @Nullable Output<Boolean> tenantUserIsolation;
+
+    /**
+     * @return When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+     * 
+     */
+    public Optional<Output<Boolean>> tenantUserIsolation() {
+        return Optional.ofNullable(this.tenantUserIsolation);
+    }
+
+    /**
      * Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      * 
      */
@@ -400,6 +415,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
         this.sessionTokenExpiration = $.sessionTokenExpiration;
         this.sessionTokenResponseMethod = $.sessionTokenResponseMethod;
         this.stepUpTokenExpiration = $.stepUpTokenExpiration;
+        this.tenantUserIsolation = $.tenantUserIsolation;
         this.testUsersLoginidRegexp = $.testUsersLoginidRegexp;
         this.testUsersStaticOtp = $.testUsersStaticOtp;
         this.testUsersVerifierRegexp = $.testUsersVerifierRegexp;
@@ -832,6 +848,27 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
          */
         public Builder stepUpTokenExpiration(String stepUpTokenExpiration) {
             return stepUpTokenExpiration(Output.of(stepUpTokenExpiration));
+        }
+
+        /**
+         * @param tenantUserIsolation When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tenantUserIsolation(@Nullable Output<Boolean> tenantUserIsolation) {
+            $.tenantUserIsolation = tenantUserIsolation;
+            return this;
+        }
+
+        /**
+         * @param tenantUserIsolation When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tenantUserIsolation(Boolean tenantUserIsolation) {
+            return tenantUserIsolation(Output.of(tenantUserIsolation));
         }
 
         /**

@@ -19,6 +19,68 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("authentication")]
         public Input<Inputs.ProjectConnectorsHttpAuthenticationGetArgs>? Authentication { get; set; }
 
+        [Input("awsAccessKeyId")]
+        private Input<string>? _awsAccessKeyId;
+
+        /// <summary>
+        /// The unique AWS access key ID.
+        /// </summary>
+        public Input<string>? AwsAccessKeyId
+        {
+            get => _awsAccessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsAccessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Apply AWS signature version 4 authentication to the request.
+        /// </summary>
+        [Input("awsAuthType")]
+        public Input<string>? AwsAuthType { get; set; }
+
+        /// <summary>
+        /// The external ID to use when assuming the role.
+        /// </summary>
+        [Input("awsExternalId")]
+        public Input<string>? AwsExternalId { get; set; }
+
+        /// <summary>
+        /// The AWS region, e.g. `us-east-1`.
+        /// </summary>
+        [Input("awsRegion")]
+        public Input<string>? AwsRegion { get; set; }
+
+        /// <summary>
+        /// The Amazon Resource Name (ARN) of the role to assume.
+        /// </summary>
+        [Input("awsRoleArn")]
+        public Input<string>? AwsRoleArn { get; set; }
+
+        [Input("awsSecretAccessKey")]
+        private Input<string>? _awsSecretAccessKey;
+
+        /// <summary>
+        /// The secret AWS access key.
+        /// </summary>
+        public Input<string>? AwsSecretAccessKey
+        {
+            get => _awsSecretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _awsSecretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The AWS service to target, e.g. `Lambda`, `execute-api`, `S3`, etc.
+        /// </summary>
+        [Input("awsService")]
+        public Input<string>? AwsService { get; set; }
+
         /// <summary>
         /// The base URL to fetch
         /// </summary>
@@ -63,7 +125,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Id { get; set; }
 
         /// <summary>
-        /// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        /// The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
         /// </summary>
         [Input("includeHeadersInContext")]
         public Input<bool>? IncludeHeadersInContext { get; set; }
@@ -79,6 +141,46 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        /// <summary>
+        /// HTTP message components to include in the signature (e.g., @method, @target-uri, @authority, content-type, content-digest). Leave empty to use defaults: @method, @target-uri, @authority
+        /// </summary>
+        [Input("rfc9421Components")]
+        public Input<string>? Rfc9421Components { get; set; }
+
+        /// <summary>
+        /// Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+        /// </summary>
+        [Input("rfc9421KeyId")]
+        public Input<string>? Rfc9421KeyId { get; set; }
+
+        [Input("rfc9421PrivateKey")]
+        private Input<string>? _rfc9421PrivateKey;
+
+        /// <summary>
+        /// Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+        /// </summary>
+        public Input<string>? Rfc9421PrivateKey
+        {
+            get => _rfc9421PrivateKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _rfc9421PrivateKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+        /// </summary>
+        [Input("rfc9421SignatureTtl")]
+        public Input<double>? Rfc9421SignatureTtl { get; set; }
+
+        /// <summary>
+        /// Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+        /// </summary>
+        [Input("rfc9421SigningEnabled")]
+        public Input<bool>? Rfc9421SigningEnabled { get; set; }
 
         /// <summary>
         /// Whether the connector should send all requests from specific static IPs.

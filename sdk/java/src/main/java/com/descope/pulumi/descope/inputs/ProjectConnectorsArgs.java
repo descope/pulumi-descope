@@ -4,13 +4,16 @@
 package com.descope.pulumi.descope.inputs;
 
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAbuseipdbArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsAlloyArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAmplitudeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsArkoseArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAuditWebhookArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsS3Args;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsSesEmailValidationArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsAwsTranslateArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsBitsightArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsCoralogixArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsCriblArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDarwiniumArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDatadogArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsDevrevGrowArgs;
@@ -28,6 +31,7 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudLoggingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleCloudTranslationArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGoogleMapsPlaceArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsGroundcoverArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHcaptchaArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHibpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsHttpArgs;
@@ -40,15 +44,19 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsMixpanelArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsMparticleArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsNewrelicArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsOpentelemetryArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsPendoArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsPingDirectoryArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsPostmarkArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRadarArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaEnterpriseArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsRecaptchaV2Args;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsRekognitionArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsRndReassignedArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSalesforceArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSalesforceMarketingCloudArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSardineArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsScimArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSegmentArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSendgridArgs;
@@ -56,6 +64,7 @@ import com.descope.pulumi.descope.inputs.ProjectConnectorsSlackArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSmartlingArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSmtpArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSnArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsSnowflakeArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSplunkArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSqlArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsSumologicArgs;
@@ -92,6 +101,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsAbuseipdbArgs>>> abuseipdbs() {
         return Optional.ofNullable(this.abuseipdbs);
+    }
+
+    /**
+     * Streamline identity verification and fraud monitoring with the Alloy connector.
+     * 
+     */
+    @Import(name="alloys")
+    private @Nullable Output<List<ProjectConnectorsAlloyArgs>> alloys;
+
+    /**
+     * @return Streamline identity verification and fraud monitoring with the Alloy connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsAlloyArgs>>> alloys() {
+        return Optional.ofNullable(this.alloys);
     }
 
     /**
@@ -155,6 +179,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+     * 
+     */
+    @Import(name="awsSesEmailValidations")
+    private @Nullable Output<List<ProjectConnectorsAwsSesEmailValidationArgs>> awsSesEmailValidations;
+
+    /**
+     * @return Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsAwsSesEmailValidationArgs>>> awsSesEmailValidations() {
+        return Optional.ofNullable(this.awsSesEmailValidations);
+    }
+
+    /**
      * Localize the language of your login and user journey screens with the Amazon Translate connector.
      * 
      */
@@ -197,6 +236,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsCoralogixArgs>>> coralogixes() {
         return Optional.ofNullable(this.coralogixes);
+    }
+
+    /**
+     * Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+     * 
+     */
+    @Import(name="cribls")
+    private @Nullable Output<List<ProjectConnectorsCriblArgs>> cribls;
+
+    /**
+     * @return Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsCriblArgs>>> cribls() {
+        return Optional.ofNullable(this.cribls);
     }
 
     /**
@@ -455,6 +509,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Send audit events and troubleshooting logs to groundcover.
+     * 
+     */
+    @Import(name="groundcovers")
+    private @Nullable Output<List<ProjectConnectorsGroundcoverArgs>> groundcovers;
+
+    /**
+     * @return Send audit events and troubleshooting logs to groundcover.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsGroundcoverArgs>>> groundcovers() {
+        return Optional.ofNullable(this.groundcovers);
+    }
+
+    /**
      * hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
      * 
      */
@@ -635,6 +704,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Stream authentication audit logs with the Pendo connector.
+     * 
+     */
+    @Import(name="pendos")
+    private @Nullable Output<List<ProjectConnectorsPendoArgs>> pendos;
+
+    /**
+     * @return Stream authentication audit logs with the Pendo connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsPendoArgs>>> pendos() {
+        return Optional.ofNullable(this.pendos);
+    }
+
+    /**
      * Authenticate against PingDirectory.
      * 
      */
@@ -695,6 +779,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+     * 
+     */
+    @Import(name="recaptchaV2s")
+    private @Nullable Output<List<ProjectConnectorsRecaptchaV2Args>> recaptchaV2s;
+
+    /**
+     * @return Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsRecaptchaV2Args>>> recaptchaV2s() {
+        return Optional.ofNullable(this.recaptchaV2s);
+    }
+
+    /**
      * Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      * 
      */
@@ -722,6 +821,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsRekognitionArgs>>> rekognitions() {
         return Optional.ofNullable(this.rekognitions);
+    }
+
+    /**
+     * Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+     * 
+     */
+    @Import(name="rndReassigneds")
+    private @Nullable Output<List<ProjectConnectorsRndReassignedArgs>> rndReassigneds;
+
+    /**
+     * @return Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsRndReassignedArgs>>> rndReassigneds() {
+        return Optional.ofNullable(this.rndReassigneds);
     }
 
     /**
@@ -767,6 +881,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsSardineArgs>>> sardines() {
         return Optional.ofNullable(this.sardines);
+    }
+
+    /**
+     * Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+     * 
+     */
+    @Import(name="scims")
+    private @Nullable Output<List<ProjectConnectorsScimArgs>> scims;
+
+    /**
+     * @return Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsScimArgs>>> scims() {
+        return Optional.ofNullable(this.scims);
     }
 
     /**
@@ -857,6 +986,21 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
      */
     public Optional<Output<List<ProjectConnectorsSmtpArgs>>> smtps() {
         return Optional.ofNullable(this.smtps);
+    }
+
+    /**
+     * Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+     * 
+     */
+    @Import(name="snowflakes")
+    private @Nullable Output<List<ProjectConnectorsSnowflakeArgs>> snowflakes;
+
+    /**
+     * @return Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+     * 
+     */
+    public Optional<Output<List<ProjectConnectorsSnowflakeArgs>>> snowflakes() {
+        return Optional.ofNullable(this.snowflakes);
     }
 
     /**
@@ -1043,13 +1187,16 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
 
     private ProjectConnectorsArgs(ProjectConnectorsArgs $) {
         this.abuseipdbs = $.abuseipdbs;
+        this.alloys = $.alloys;
         this.amplitudes = $.amplitudes;
         this.arkoses = $.arkoses;
         this.auditWebhooks = $.auditWebhooks;
         this.awsS3s = $.awsS3s;
+        this.awsSesEmailValidations = $.awsSesEmailValidations;
         this.awsTranslates = $.awsTranslates;
         this.bitsights = $.bitsights;
         this.coralogixes = $.coralogixes;
+        this.cribls = $.cribls;
         this.darwinia = $.darwinia;
         this.datadogs = $.datadogs;
         this.devrevGrows = $.devrevGrows;
@@ -1067,6 +1214,7 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.googleCloudLoggings = $.googleCloudLoggings;
         this.googleCloudTranslations = $.googleCloudTranslations;
         this.googleMapsPlaces = $.googleMapsPlaces;
+        this.groundcovers = $.groundcovers;
         this.hcaptchas = $.hcaptchas;
         this.hibps = $.hibps;
         this.https = $.https;
@@ -1079,21 +1227,26 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         this.mparticles = $.mparticles;
         this.newrelics = $.newrelics;
         this.opentelemetries = $.opentelemetries;
+        this.pendos = $.pendos;
         this.pingDirectories = $.pingDirectories;
         this.postmarks = $.postmarks;
         this.radars = $.radars;
         this.recaptchaEnterprises = $.recaptchaEnterprises;
+        this.recaptchaV2s = $.recaptchaV2s;
         this.recaptchas = $.recaptchas;
         this.rekognitions = $.rekognitions;
+        this.rndReassigneds = $.rndReassigneds;
         this.salesforceMarketingClouds = $.salesforceMarketingClouds;
         this.salesforces = $.salesforces;
         this.sardines = $.sardines;
+        this.scims = $.scims;
         this.segments = $.segments;
         this.sendgrids = $.sendgrids;
         this.ses = $.ses;
         this.slacks = $.slacks;
         this.smartlings = $.smartlings;
         this.smtps = $.smtps;
+        this.snowflakes = $.snowflakes;
         this.sns = $.sns;
         this.splunks = $.splunks;
         this.sqls = $.sqls;
@@ -1155,6 +1308,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder abuseipdbs(ProjectConnectorsAbuseipdbArgs... abuseipdbs) {
             return abuseipdbs(List.of(abuseipdbs));
+        }
+
+        /**
+         * @param alloys Streamline identity verification and fraud monitoring with the Alloy connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder alloys(@Nullable Output<List<ProjectConnectorsAlloyArgs>> alloys) {
+            $.alloys = alloys;
+            return this;
+        }
+
+        /**
+         * @param alloys Streamline identity verification and fraud monitoring with the Alloy connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder alloys(List<ProjectConnectorsAlloyArgs> alloys) {
+            return alloys(Output.of(alloys));
+        }
+
+        /**
+         * @param alloys Streamline identity verification and fraud monitoring with the Alloy connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder alloys(ProjectConnectorsAlloyArgs... alloys) {
+            return alloys(List.of(alloys));
         }
 
         /**
@@ -1282,6 +1466,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param awsSesEmailValidations Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsSesEmailValidations(@Nullable Output<List<ProjectConnectorsAwsSesEmailValidationArgs>> awsSesEmailValidations) {
+            $.awsSesEmailValidations = awsSesEmailValidations;
+            return this;
+        }
+
+        /**
+         * @param awsSesEmailValidations Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsSesEmailValidations(List<ProjectConnectorsAwsSesEmailValidationArgs> awsSesEmailValidations) {
+            return awsSesEmailValidations(Output.of(awsSesEmailValidations));
+        }
+
+        /**
+         * @param awsSesEmailValidations Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder awsSesEmailValidations(ProjectConnectorsAwsSesEmailValidationArgs... awsSesEmailValidations) {
+            return awsSesEmailValidations(List.of(awsSesEmailValidations));
+        }
+
+        /**
          * @param awsTranslates Localize the language of your login and user journey screens with the Amazon Translate connector.
          * 
          * @return builder
@@ -1372,6 +1587,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder coralogixes(ProjectConnectorsCoralogixArgs... coralogixes) {
             return coralogixes(List.of(coralogixes));
+        }
+
+        /**
+         * @param cribls Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cribls(@Nullable Output<List<ProjectConnectorsCriblArgs>> cribls) {
+            $.cribls = cribls;
+            return this;
+        }
+
+        /**
+         * @param cribls Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cribls(List<ProjectConnectorsCriblArgs> cribls) {
+            return cribls(Output.of(cribls));
+        }
+
+        /**
+         * @param cribls Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl&#39;s HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+         * 
+         * @return builder
+         * 
+         */
+        public Builder cribls(ProjectConnectorsCriblArgs... cribls) {
+            return cribls(List.of(cribls));
         }
 
         /**
@@ -1902,6 +2148,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param groundcovers Send audit events and troubleshooting logs to groundcover.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder groundcovers(@Nullable Output<List<ProjectConnectorsGroundcoverArgs>> groundcovers) {
+            $.groundcovers = groundcovers;
+            return this;
+        }
+
+        /**
+         * @param groundcovers Send audit events and troubleshooting logs to groundcover.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder groundcovers(List<ProjectConnectorsGroundcoverArgs> groundcovers) {
+            return groundcovers(Output.of(groundcovers));
+        }
+
+        /**
+         * @param groundcovers Send audit events and troubleshooting logs to groundcover.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder groundcovers(ProjectConnectorsGroundcoverArgs... groundcovers) {
+            return groundcovers(List.of(groundcovers));
+        }
+
+        /**
          * @param hcaptchas hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
          * 
          * @return builder
@@ -2274,6 +2551,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param pendos Stream authentication audit logs with the Pendo connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pendos(@Nullable Output<List<ProjectConnectorsPendoArgs>> pendos) {
+            $.pendos = pendos;
+            return this;
+        }
+
+        /**
+         * @param pendos Stream authentication audit logs with the Pendo connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pendos(List<ProjectConnectorsPendoArgs> pendos) {
+            return pendos(Output.of(pendos));
+        }
+
+        /**
+         * @param pendos Stream authentication audit logs with the Pendo connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder pendos(ProjectConnectorsPendoArgs... pendos) {
+            return pendos(List.of(pendos));
+        }
+
+        /**
          * @param pingDirectories Authenticate against PingDirectory.
          * 
          * @return builder
@@ -2398,6 +2706,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
+         * @param recaptchaV2s Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder recaptchaV2s(@Nullable Output<List<ProjectConnectorsRecaptchaV2Args>> recaptchaV2s) {
+            $.recaptchaV2s = recaptchaV2s;
+            return this;
+        }
+
+        /**
+         * @param recaptchaV2s Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder recaptchaV2s(List<ProjectConnectorsRecaptchaV2Args> recaptchaV2s) {
+            return recaptchaV2s(Output.of(recaptchaV2s));
+        }
+
+        /**
+         * @param recaptchaV2s Use the reCAPTCHA v2 &#34;I&#39;m not a robot&#34; checkbox widget with your flows.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder recaptchaV2s(ProjectConnectorsRecaptchaV2Args... recaptchaV2s) {
+            return recaptchaV2s(List.of(recaptchaV2s));
+        }
+
+        /**
          * @param recaptchas Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
          * 
          * @return builder
@@ -2457,6 +2796,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder rekognitions(ProjectConnectorsRekognitionArgs... rekognitions) {
             return rekognitions(List.of(rekognitions));
+        }
+
+        /**
+         * @param rndReassigneds Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rndReassigneds(@Nullable Output<List<ProjectConnectorsRndReassignedArgs>> rndReassigneds) {
+            $.rndReassigneds = rndReassigneds;
+            return this;
+        }
+
+        /**
+         * @param rndReassigneds Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rndReassigneds(List<ProjectConnectorsRndReassignedArgs> rndReassigneds) {
+            return rndReassigneds(Output.of(rndReassigneds));
+        }
+
+        /**
+         * @param rndReassigneds Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rndReassigneds(ProjectConnectorsRndReassignedArgs... rndReassigneds) {
+            return rndReassigneds(List.of(rndReassigneds));
         }
 
         /**
@@ -2550,6 +2920,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder sardines(ProjectConnectorsSardineArgs... sardines) {
             return sardines(List.of(sardines));
+        }
+
+        /**
+         * @param scims Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scims(@Nullable Output<List<ProjectConnectorsScimArgs>> scims) {
+            $.scims = scims;
+            return this;
+        }
+
+        /**
+         * @param scims Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scims(List<ProjectConnectorsScimArgs> scims) {
+            return scims(Output.of(scims));
+        }
+
+        /**
+         * @param scims Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scims(ProjectConnectorsScimArgs... scims) {
+            return scims(List.of(scims));
         }
 
         /**
@@ -2736,6 +3137,37 @@ public final class ProjectConnectorsArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder smtps(ProjectConnectorsSmtpArgs... smtps) {
             return smtps(List.of(smtps));
+        }
+
+        /**
+         * @param snowflakes Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder snowflakes(@Nullable Output<List<ProjectConnectorsSnowflakeArgs>> snowflakes) {
+            $.snowflakes = snowflakes;
+            return this;
+        }
+
+        /**
+         * @param snowflakes Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder snowflakes(List<ProjectConnectorsSnowflakeArgs> snowflakes) {
+            return snowflakes(Output.of(snowflakes));
+        }
+
+        /**
+         * @param snowflakes Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder snowflakes(ProjectConnectorsSnowflakeArgs... snowflakes) {
+            return snowflakes(List.of(snowflakes));
         }
 
         /**

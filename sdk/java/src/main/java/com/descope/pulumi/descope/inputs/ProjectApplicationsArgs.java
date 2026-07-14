@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.inputs;
 
 import com.descope.pulumi.descope.inputs.ProjectApplicationsOidcApplicationArgs;
 import com.descope.pulumi.descope.inputs.ProjectApplicationsSamlApplicationArgs;
+import com.descope.pulumi.descope.inputs.ProjectApplicationsWsfedApplicationArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.util.List;
@@ -47,11 +48,27 @@ public final class ProjectApplicationsArgs extends com.pulumi.resources.Resource
         return Optional.ofNullable(this.samlApplications);
     }
 
+    /**
+     * Applications using WS-Federation for authentication.
+     * 
+     */
+    @Import(name="wsfedApplications")
+    private @Nullable Output<List<ProjectApplicationsWsfedApplicationArgs>> wsfedApplications;
+
+    /**
+     * @return Applications using WS-Federation for authentication.
+     * 
+     */
+    public Optional<Output<List<ProjectApplicationsWsfedApplicationArgs>>> wsfedApplications() {
+        return Optional.ofNullable(this.wsfedApplications);
+    }
+
     private ProjectApplicationsArgs() {}
 
     private ProjectApplicationsArgs(ProjectApplicationsArgs $) {
         this.oidcApplications = $.oidcApplications;
         this.samlApplications = $.samlApplications;
+        this.wsfedApplications = $.wsfedApplications;
     }
 
     public static Builder builder() {
@@ -132,6 +149,37 @@ public final class ProjectApplicationsArgs extends com.pulumi.resources.Resource
          */
         public Builder samlApplications(ProjectApplicationsSamlApplicationArgs... samlApplications) {
             return samlApplications(List.of(samlApplications));
+        }
+
+        /**
+         * @param wsfedApplications Applications using WS-Federation for authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder wsfedApplications(@Nullable Output<List<ProjectApplicationsWsfedApplicationArgs>> wsfedApplications) {
+            $.wsfedApplications = wsfedApplications;
+            return this;
+        }
+
+        /**
+         * @param wsfedApplications Applications using WS-Federation for authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder wsfedApplications(List<ProjectApplicationsWsfedApplicationArgs> wsfedApplications) {
+            return wsfedApplications(Output.of(wsfedApplications));
+        }
+
+        /**
+         * @param wsfedApplications Applications using WS-Federation for authentication.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder wsfedApplications(ProjectApplicationsWsfedApplicationArgs... wsfedApplications) {
+            return wsfedApplications(List.of(wsfedApplications));
         }
 
         public ProjectApplicationsArgs build() {

@@ -13,6 +13,12 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectConnectorsRecaptchaEnterpriseGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The user-initiated action for this assessment.
+        /// </summary>
+        [Input("action")]
+        public Input<string>? Action { get; set; }
+
         [Input("apiKey", required: true)]
         private Input<string>? _apiKey;
 
@@ -36,7 +42,7 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<double>? AssessmentScore { get; set; }
 
         /// <summary>
-        /// Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        /// The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
         /// </summary>
         [Input("baseUrl")]
         public Input<string>? BaseUrl { get; set; }

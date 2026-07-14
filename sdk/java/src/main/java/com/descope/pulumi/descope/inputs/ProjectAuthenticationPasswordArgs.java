@@ -19,6 +19,21 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
     public static final ProjectAuthenticationPasswordArgs Empty = new ProjectAuthenticationPasswordArgs();
 
     /**
+     * Whether passwords must contain at least one letter, either uppercase or lowercase.
+     * 
+     */
+    @Import(name="anyLetter")
+    private @Nullable Output<Boolean> anyLetter;
+
+    /**
+     * @return Whether passwords must contain at least one letter, either uppercase or lowercase.
+     * 
+     */
+    public Optional<Output<Boolean>> anyLetter() {
+        return Optional.ofNullable(this.anyLetter);
+    }
+
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -34,6 +49,36 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
     }
 
     /**
+     * Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+     * 
+     */
+    @Import(name="disallowEmailMatch")
+    private @Nullable Output<Boolean> disallowEmailMatch;
+
+    /**
+     * @return Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+     * 
+     */
+    public Optional<Output<Boolean>> disallowEmailMatch() {
+        return Optional.ofNullable(this.disallowEmailMatch);
+    }
+
+    /**
+     * Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+     * 
+     */
+    @Import(name="disallowedCharacters")
+    private @Nullable Output<String> disallowedCharacters;
+
+    /**
+     * @return Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+     * 
+     */
+    public Optional<Output<String>> disallowedCharacters() {
+        return Optional.ofNullable(this.disallowedCharacters);
+    }
+
+    /**
      * Settings related to sending password reset emails as part of the password feature.
      * 
      */
@@ -46,6 +91,21 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
      */
     public Optional<Output<ProjectAuthenticationPasswordEmailServiceArgs>> emailService() {
         return Optional.ofNullable(this.emailService);
+    }
+
+    /**
+     * Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+     * 
+     */
+    @Import(name="enforceStrength")
+    private @Nullable Output<String> enforceStrength;
+
+    /**
+     * @return Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+     * 
+     */
+    public Optional<Output<String>> enforceStrength() {
+        return Optional.ofNullable(this.enforceStrength);
     }
 
     /**
@@ -276,8 +336,12 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
     private ProjectAuthenticationPasswordArgs() {}
 
     private ProjectAuthenticationPasswordArgs(ProjectAuthenticationPasswordArgs $) {
+        this.anyLetter = $.anyLetter;
         this.disabled = $.disabled;
+        this.disallowEmailMatch = $.disallowEmailMatch;
+        this.disallowedCharacters = $.disallowedCharacters;
         this.emailService = $.emailService;
+        this.enforceStrength = $.enforceStrength;
         this.expiration = $.expiration;
         this.expirationWeeks = $.expirationWeeks;
         this.lock = $.lock;
@@ -314,6 +378,27 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
         }
 
         /**
+         * @param anyLetter Whether passwords must contain at least one letter, either uppercase or lowercase.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder anyLetter(@Nullable Output<Boolean> anyLetter) {
+            $.anyLetter = anyLetter;
+            return this;
+        }
+
+        /**
+         * @param anyLetter Whether passwords must contain at least one letter, either uppercase or lowercase.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder anyLetter(Boolean anyLetter) {
+            return anyLetter(Output.of(anyLetter));
+        }
+
+        /**
          * @param disabled Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
          * 
          * @return builder
@@ -335,6 +420,48 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
         }
 
         /**
+         * @param disallowEmailMatch Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disallowEmailMatch(@Nullable Output<Boolean> disallowEmailMatch) {
+            $.disallowEmailMatch = disallowEmailMatch;
+            return this;
+        }
+
+        /**
+         * @param disallowEmailMatch Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disallowEmailMatch(Boolean disallowEmailMatch) {
+            return disallowEmailMatch(Output.of(disallowEmailMatch));
+        }
+
+        /**
+         * @param disallowedCharacters Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disallowedCharacters(@Nullable Output<String> disallowedCharacters) {
+            $.disallowedCharacters = disallowedCharacters;
+            return this;
+        }
+
+        /**
+         * @param disallowedCharacters Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder disallowedCharacters(String disallowedCharacters) {
+            return disallowedCharacters(Output.of(disallowedCharacters));
+        }
+
+        /**
          * @param emailService Settings related to sending password reset emails as part of the password feature.
          * 
          * @return builder
@@ -353,6 +480,27 @@ public final class ProjectAuthenticationPasswordArgs extends com.pulumi.resource
          */
         public Builder emailService(ProjectAuthenticationPasswordEmailServiceArgs emailService) {
             return emailService(Output.of(emailService));
+        }
+
+        /**
+         * @param enforceStrength Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder enforceStrength(@Nullable Output<String> enforceStrength) {
+            $.enforceStrength = enforceStrength;
+            return this;
+        }
+
+        /**
+         * @param enforceStrength Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder enforceStrength(String enforceStrength) {
+            return enforceStrength(Output.of(enforceStrength));
         }
 
         /**

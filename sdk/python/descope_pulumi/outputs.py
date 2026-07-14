@@ -16,9 +16,14 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
+    'AccessKeyTenant',
     'DescoperRbac',
     'DescoperRbacProjectRole',
     'DescoperRbacTagRole',
+    'InboundAppAttributesScope',
+    'InboundAppConnectionsScope',
+    'InboundAppPermissionsScope',
+    'InboundAppSessionSettings',
     'ManagementKeyRebac',
     'ManagementKeyRebacProjectRole',
     'ManagementKeyRebacTagRole',
@@ -26,10 +31,20 @@ __all__ = [
     'ProjectAdminPortalWidget',
     'ProjectApplications',
     'ProjectApplicationsOidcApplication',
+    'ProjectApplicationsOidcApplicationPermission',
+    'ProjectApplicationsOidcApplicationRole',
     'ProjectApplicationsSamlApplication',
     'ProjectApplicationsSamlApplicationAttributeMapping',
     'ProjectApplicationsSamlApplicationDynamicConfiguration',
     'ProjectApplicationsSamlApplicationManualConfiguration',
+    'ProjectApplicationsSamlApplicationPermission',
+    'ProjectApplicationsSamlApplicationRole',
+    'ProjectApplicationsWsfedApplication',
+    'ProjectApplicationsWsfedApplicationAttributeMapping',
+    'ProjectApplicationsWsfedApplicationGroupsMapping',
+    'ProjectApplicationsWsfedApplicationGroupsMappingRole',
+    'ProjectApplicationsWsfedApplicationPermission',
+    'ProjectApplicationsWsfedApplicationRole',
     'ProjectAttributes',
     'ProjectAttributesAccessKey',
     'ProjectAttributesAccessKeyWidgetAuthorization',
@@ -101,6 +116,9 @@ __all__ = [
     'ProjectAuthenticationPasswordEmailService',
     'ProjectAuthenticationPasswordEmailServiceTemplate',
     'ProjectAuthenticationSso',
+    'ProjectAuthenticationSsoEmailService',
+    'ProjectAuthenticationSsoEmailServiceTemplate',
+    'ProjectAuthenticationSsoMandatoryUserAttribute',
     'ProjectAuthenticationSsoSsoSuiteSettings',
     'ProjectAuthenticationTotp',
     'ProjectAuthorization',
@@ -108,6 +126,7 @@ __all__ = [
     'ProjectAuthorizationRole',
     'ProjectConnectors',
     'ProjectConnectorsAbuseipdb',
+    'ProjectConnectorsAlloy',
     'ProjectConnectorsAmplitude',
     'ProjectConnectorsArkose',
     'ProjectConnectorsAuditWebhook',
@@ -117,10 +136,13 @@ __all__ = [
     'ProjectConnectorsAuditWebhookAuthenticationBasic',
     'ProjectConnectorsAwsS3',
     'ProjectConnectorsAwsS3AuditFilter',
+    'ProjectConnectorsAwsSesEmailValidation',
     'ProjectConnectorsAwsTranslate',
     'ProjectConnectorsBitsight',
     'ProjectConnectorsCoralogix',
     'ProjectConnectorsCoralogixAuditFilter',
+    'ProjectConnectorsCribl',
+    'ProjectConnectorsCriblAuditFilter',
     'ProjectConnectorsDarwinium',
     'ProjectConnectorsDatadog',
     'ProjectConnectorsDatadogAuditFilter',
@@ -149,6 +171,8 @@ __all__ = [
     'ProjectConnectorsGoogleCloudLoggingAuditFilter',
     'ProjectConnectorsGoogleCloudTranslation',
     'ProjectConnectorsGoogleMapsPlace',
+    'ProjectConnectorsGroundcover',
+    'ProjectConnectorsGroundcoverAuditFilter',
     'ProjectConnectorsHcaptcha',
     'ProjectConnectorsHibp',
     'ProjectConnectorsHttp',
@@ -170,15 +194,23 @@ __all__ = [
     'ProjectConnectorsOpentelemetryAuthentication',
     'ProjectConnectorsOpentelemetryAuthenticationApiKey',
     'ProjectConnectorsOpentelemetryAuthenticationBasic',
+    'ProjectConnectorsPendo',
+    'ProjectConnectorsPendoAuditFilter',
     'ProjectConnectorsPingDirectory',
     'ProjectConnectorsPostmark',
     'ProjectConnectorsRadar',
     'ProjectConnectorsRecaptcha',
     'ProjectConnectorsRecaptchaEnterprise',
+    'ProjectConnectorsRecaptchaV2',
     'ProjectConnectorsRekognition',
+    'ProjectConnectorsRndReassigned',
     'ProjectConnectorsSalesforce',
     'ProjectConnectorsSalesforceMarketingCloud',
     'ProjectConnectorsSardine',
+    'ProjectConnectorsScim',
+    'ProjectConnectorsScimAuthentication',
+    'ProjectConnectorsScimAuthenticationApiKey',
+    'ProjectConnectorsScimAuthenticationBasic',
     'ProjectConnectorsSe',
     'ProjectConnectorsSeSender',
     'ProjectConnectorsSegment',
@@ -192,6 +224,8 @@ __all__ = [
     'ProjectConnectorsSmtpSender',
     'ProjectConnectorsSmtpServer',
     'ProjectConnectorsSn',
+    'ProjectConnectorsSnowflake',
+    'ProjectConnectorsSnowflakeAuditFilter',
     'ProjectConnectorsSplunk',
     'ProjectConnectorsSplunkAuditFilter',
     'ProjectConnectorsSql',
@@ -220,9 +254,57 @@ __all__ = [
     'ProjectList',
     'ProjectProjectSettings',
     'ProjectProjectSettingsSessionMigration',
+    'ProjectProjectSettingsSessionMigrationUserMapping',
     'ProjectStyles',
     'ProjectWidgets',
 ]
+
+@pulumi.output_type
+class AccessKeyTenant(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tenantId":
+            suggest = "tenant_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AccessKeyTenant. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AccessKeyTenant.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AccessKeyTenant.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 tenant_id: _builtins.str,
+                 roles: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str tenant_id: The ID of the tenant to associate with the access key.
+        :param Sequence[_builtins.str] roles: The roles the access key will be granted within the tenant.
+        """
+        pulumi.set(__self__, "tenant_id", tenant_id)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @_builtins.property
+    @pulumi.getter(name="tenantId")
+    def tenant_id(self) -> _builtins.str:
+        """
+        The ID of the tenant to associate with the access key.
+        """
+        return pulumi.get(self, "tenant_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The roles the access key will be granted within the tenant.
+        """
+        return pulumi.get(self, "roles")
+
 
 @pulumi.output_type
 class DescoperRbac(dict):
@@ -361,6 +443,269 @@ class DescoperRbacTagRole(dict):
         The project tags this role assignment applies to.
         """
         return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class InboundAppAttributesScope(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 name: _builtins.str,
+                 optional: Optional[_builtins.bool] = None,
+                 values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str description: A description for the scope.
+        :param _builtins.str name: A name for the scope.
+        :param _builtins.bool optional: Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        :param Sequence[_builtins.str] values: The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        A description for the scope.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A name for the scope.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def optional(self) -> Optional[_builtins.bool]:
+        """
+        Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        """
+        return pulumi.get(self, "optional")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class InboundAppConnectionsScope(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 name: _builtins.str,
+                 optional: Optional[_builtins.bool] = None,
+                 values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str description: A description for the scope.
+        :param _builtins.str name: A name for the scope.
+        :param _builtins.bool optional: Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        :param Sequence[_builtins.str] values: The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        A description for the scope.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A name for the scope.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def optional(self) -> Optional[_builtins.bool]:
+        """
+        Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        """
+        return pulumi.get(self, "optional")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class InboundAppPermissionsScope(dict):
+    def __init__(__self__, *,
+                 description: _builtins.str,
+                 name: _builtins.str,
+                 optional: Optional[_builtins.bool] = None,
+                 values: Optional[Sequence[_builtins.str]] = None):
+        """
+        :param _builtins.str description: A description for the scope.
+        :param _builtins.str name: A name for the scope.
+        :param _builtins.bool optional: Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        :param Sequence[_builtins.str] values: The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        if optional is not None:
+            pulumi.set(__self__, "optional", optional)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        A description for the scope.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A name for the scope.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def optional(self) -> Optional[_builtins.bool]:
+        """
+        Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+        """
+        return pulumi.get(self, "optional")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        The identifiers of the relevant permission, attribute or connection scopes.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class InboundAppSessionSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "keySessionTokenExpiration":
+            suggest = "key_session_token_expiration"
+        elif key == "keyTemplateId":
+            suggest = "key_template_id"
+        elif key == "refreshTokenExpiration":
+            suggest = "refresh_token_expiration"
+        elif key == "sessionTokenExpiration":
+            suggest = "session_token_expiration"
+        elif key == "userTemplateId":
+            suggest = "user_template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InboundAppSessionSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InboundAppSessionSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InboundAppSessionSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: Optional[_builtins.bool] = None,
+                 key_session_token_expiration: Optional[_builtins.str] = None,
+                 key_template_id: Optional[_builtins.str] = None,
+                 refresh_token_expiration: Optional[_builtins.str] = None,
+                 session_token_expiration: Optional[_builtins.str] = None,
+                 user_template_id: Optional[_builtins.str] = None):
+        """
+        :param _builtins.bool enabled: Whether to override the project's session settings.
+        :param _builtins.str key_session_token_expiration: The expiration duration for access key session tokens. Must be between 3 minutes and one month.
+        :param _builtins.str key_template_id: The ID of the JWT template to use for access key JWTs issued to this inbound app.
+        :param _builtins.str refresh_token_expiration: The expiration duration for refresh tokens issued to this inbound app.
+        :param _builtins.str session_token_expiration: The expiration duration for session tokens issued to this inbound app.
+        :param _builtins.str user_template_id: The ID of the JWT template to use for user JWTs issued to this inbound app.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if key_session_token_expiration is not None:
+            pulumi.set(__self__, "key_session_token_expiration", key_session_token_expiration)
+        if key_template_id is not None:
+            pulumi.set(__self__, "key_template_id", key_template_id)
+        if refresh_token_expiration is not None:
+            pulumi.set(__self__, "refresh_token_expiration", refresh_token_expiration)
+        if session_token_expiration is not None:
+            pulumi.set(__self__, "session_token_expiration", session_token_expiration)
+        if user_template_id is not None:
+            pulumi.set(__self__, "user_template_id", user_template_id)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to override the project's session settings.
+        """
+        return pulumi.get(self, "enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="keySessionTokenExpiration")
+    def key_session_token_expiration(self) -> Optional[_builtins.str]:
+        """
+        The expiration duration for access key session tokens. Must be between 3 minutes and one month.
+        """
+        return pulumi.get(self, "key_session_token_expiration")
+
+    @_builtins.property
+    @pulumi.getter(name="keyTemplateId")
+    def key_template_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the JWT template to use for access key JWTs issued to this inbound app.
+        """
+        return pulumi.get(self, "key_template_id")
+
+    @_builtins.property
+    @pulumi.getter(name="refreshTokenExpiration")
+    def refresh_token_expiration(self) -> Optional[_builtins.str]:
+        """
+        The expiration duration for refresh tokens issued to this inbound app.
+        """
+        return pulumi.get(self, "refresh_token_expiration")
+
+    @_builtins.property
+    @pulumi.getter(name="sessionTokenExpiration")
+    def session_token_expiration(self) -> Optional[_builtins.str]:
+        """
+        The expiration duration for session tokens issued to this inbound app.
+        """
+        return pulumi.get(self, "session_token_expiration")
+
+    @_builtins.property
+    @pulumi.getter(name="userTemplateId")
+    def user_template_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the JWT template to use for user JWTs issued to this inbound app.
+        """
+        return pulumi.get(self, "user_template_id")
 
 
 @pulumi.output_type
@@ -617,6 +962,8 @@ class ProjectApplications(dict):
             suggest = "oidc_applications"
         elif key == "samlApplications":
             suggest = "saml_applications"
+        elif key == "wsfedApplications":
+            suggest = "wsfed_applications"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectApplications. Access the value via the '{suggest}' property getter instead.")
@@ -631,15 +978,19 @@ class ProjectApplications(dict):
 
     def __init__(__self__, *,
                  oidc_applications: Optional[Sequence['outputs.ProjectApplicationsOidcApplication']] = None,
-                 saml_applications: Optional[Sequence['outputs.ProjectApplicationsSamlApplication']] = None):
+                 saml_applications: Optional[Sequence['outputs.ProjectApplicationsSamlApplication']] = None,
+                 wsfed_applications: Optional[Sequence['outputs.ProjectApplicationsWsfedApplication']] = None):
         """
         :param Sequence['ProjectApplicationsOidcApplicationArgs'] oidc_applications: Applications using OpenID Connect (OIDC) for authentication.
         :param Sequence['ProjectApplicationsSamlApplicationArgs'] saml_applications: Applications using SAML for authentication.
+        :param Sequence['ProjectApplicationsWsfedApplicationArgs'] wsfed_applications: Applications using WS-Federation for authentication.
         """
         if oidc_applications is not None:
             pulumi.set(__self__, "oidc_applications", oidc_applications)
         if saml_applications is not None:
             pulumi.set(__self__, "saml_applications", saml_applications)
+        if wsfed_applications is not None:
+            pulumi.set(__self__, "wsfed_applications", wsfed_applications)
 
     @_builtins.property
     @pulumi.getter(name="oidcApplications")
@@ -657,16 +1008,46 @@ class ProjectApplications(dict):
         """
         return pulumi.get(self, "saml_applications")
 
+    @_builtins.property
+    @pulumi.getter(name="wsfedApplications")
+    def wsfed_applications(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplication']]:
+        """
+        Applications using WS-Federation for authentication.
+        """
+        return pulumi.get(self, "wsfed_applications")
+
 
 @pulumi.output_type
 class ProjectApplicationsOidcApplication(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "forceAuthentication":
+        if key == "approvedRedirectUrls":
+            suggest = "approved_redirect_urls"
+        elif key == "authorizationCodeDisabled":
+            suggest = "authorization_code_disabled"
+        elif key == "clientCredentialsDisabled":
+            suggest = "client_credentials_disabled"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "clientType":
+            suggest = "client_type"
+        elif key == "defaultAudience":
+            suggest = "default_audience"
+        elif key == "deviceCodeDisabled":
+            suggest = "device_code_disabled"
+        elif key == "forceAuthentication":
             suggest = "force_authentication"
+        elif key == "forcePkce":
+            suggest = "force_pkce"
+        elif key == "jwtBearerDisabled":
+            suggest = "jwt_bearer_disabled"
         elif key == "loginPageUrl":
             suggest = "login_page_url"
+        elif key == "refreshTokenDisabled":
+            suggest = "refresh_token_disabled"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsOidcApplication. Access the value via the '{suggest}' property getter instead.")
@@ -681,38 +1062,88 @@ class ProjectApplicationsOidcApplication(dict):
 
     def __init__(__self__, *,
                  name: _builtins.str,
+                 approved_redirect_urls: Optional[Sequence[_builtins.str]] = None,
+                 authorization_code_disabled: Optional[_builtins.bool] = None,
                  claims: Optional[Sequence[_builtins.str]] = None,
+                 client_credentials_disabled: Optional[_builtins.bool] = None,
+                 client_id: Optional[_builtins.str] = None,
+                 client_secret: Optional[_builtins.str] = None,
+                 client_type: Optional[_builtins.str] = None,
+                 default_audience: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 device_code_disabled: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
                  force_authentication: Optional[_builtins.bool] = None,
+                 force_pkce: Optional[_builtins.bool] = None,
                  id: Optional[_builtins.str] = None,
+                 jwt_bearer_disabled: Optional[_builtins.bool] = None,
                  login_page_url: Optional[_builtins.str] = None,
-                 logo: Optional[_builtins.str] = None):
+                 logo: Optional[_builtins.str] = None,
+                 permissions: Optional[Sequence['outputs.ProjectApplicationsOidcApplicationPermission']] = None,
+                 refresh_token_disabled: Optional[_builtins.bool] = None,
+                 roles: Optional[Sequence['outputs.ProjectApplicationsOidcApplicationRole']] = None):
         """
         :param _builtins.str name: A name for the OIDC application.
+        :param Sequence[_builtins.str] approved_redirect_urls: A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project's approved/trusted domains.
+        :param _builtins.bool authorization_code_disabled: Disables the `authorization_code` grant type for this application.
         :param Sequence[_builtins.str] claims: A list of supported claims. e.g. `sub`, `email`, `exp`.
+        :param _builtins.bool client_credentials_disabled: Disables the `client_credentials` grant type for this application.
+        :param _builtins.str client_id: A dedicated OIDC `client_id` to import for this application. When omitted, the `client_id` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+        :param _builtins.str client_secret: A dedicated OIDC `client_secret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+        :param _builtins.str client_type: OAuth client confidentiality. One of `""` (default — legacy access-key authentication), `"confidential"` (a dedicated client secret is generated for the app), or `"public"`.
+        :param _builtins.str default_audience: Controls the default `aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `client_type`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
         :param _builtins.str description: A description for the OIDC application.
+        :param _builtins.bool device_code_disabled: Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
         :param _builtins.bool disabled: Whether the application should be enabled or disabled.
         :param _builtins.bool force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        :param _builtins.bool force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         :param _builtins.str id: An optional identifier for the OIDC application.
+        :param _builtins.bool jwt_bearer_disabled: Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
         :param _builtins.str login_page_url: The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param _builtins.str logo: A logo for the OIDC application. Should be a hosted image URL.
+        :param _builtins.bool refresh_token_disabled: Disables the `refresh_token` grant type for this application.
         """
         pulumi.set(__self__, "name", name)
+        if approved_redirect_urls is not None:
+            pulumi.set(__self__, "approved_redirect_urls", approved_redirect_urls)
+        if authorization_code_disabled is not None:
+            pulumi.set(__self__, "authorization_code_disabled", authorization_code_disabled)
         if claims is not None:
             pulumi.set(__self__, "claims", claims)
+        if client_credentials_disabled is not None:
+            pulumi.set(__self__, "client_credentials_disabled", client_credentials_disabled)
+        if client_id is not None:
+            pulumi.set(__self__, "client_id", client_id)
+        if client_secret is not None:
+            pulumi.set(__self__, "client_secret", client_secret)
+        if client_type is not None:
+            pulumi.set(__self__, "client_type", client_type)
+        if default_audience is not None:
+            pulumi.set(__self__, "default_audience", default_audience)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if device_code_disabled is not None:
+            pulumi.set(__self__, "device_code_disabled", device_code_disabled)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if force_authentication is not None:
             pulumi.set(__self__, "force_authentication", force_authentication)
+        if force_pkce is not None:
+            pulumi.set(__self__, "force_pkce", force_pkce)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if jwt_bearer_disabled is not None:
+            pulumi.set(__self__, "jwt_bearer_disabled", jwt_bearer_disabled)
         if login_page_url is not None:
             pulumi.set(__self__, "login_page_url", login_page_url)
         if logo is not None:
             pulumi.set(__self__, "logo", logo)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if refresh_token_disabled is not None:
+            pulumi.set(__self__, "refresh_token_disabled", refresh_token_disabled)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
 
     @_builtins.property
     @pulumi.getter
@@ -723,6 +1154,22 @@ class ProjectApplicationsOidcApplication(dict):
         return pulumi.get(self, "name")
 
     @_builtins.property
+    @pulumi.getter(name="approvedRedirectUrls")
+    def approved_redirect_urls(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project's approved/trusted domains.
+        """
+        return pulumi.get(self, "approved_redirect_urls")
+
+    @_builtins.property
+    @pulumi.getter(name="authorizationCodeDisabled")
+    def authorization_code_disabled(self) -> Optional[_builtins.bool]:
+        """
+        Disables the `authorization_code` grant type for this application.
+        """
+        return pulumi.get(self, "authorization_code_disabled")
+
+    @_builtins.property
     @pulumi.getter
     def claims(self) -> Optional[Sequence[_builtins.str]]:
         """
@@ -731,12 +1178,60 @@ class ProjectApplicationsOidcApplication(dict):
         return pulumi.get(self, "claims")
 
     @_builtins.property
+    @pulumi.getter(name="clientCredentialsDisabled")
+    def client_credentials_disabled(self) -> Optional[_builtins.bool]:
+        """
+        Disables the `client_credentials` grant type for this application.
+        """
+        return pulumi.get(self, "client_credentials_disabled")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> Optional[_builtins.str]:
+        """
+        A dedicated OIDC `client_id` to import for this application. When omitted, the `client_id` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> Optional[_builtins.str]:
+        """
+        A dedicated OIDC `client_secret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="clientType")
+    def client_type(self) -> Optional[_builtins.str]:
+        """
+        OAuth client confidentiality. One of `""` (default — legacy access-key authentication), `"confidential"` (a dedicated client secret is generated for the app), or `"public"`.
+        """
+        return pulumi.get(self, "client_type")
+
+    @_builtins.property
+    @pulumi.getter(name="defaultAudience")
+    def default_audience(self) -> Optional[_builtins.str]:
+        """
+        Controls the default `aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `client_type`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+        """
+        return pulumi.get(self, "default_audience")
+
+    @_builtins.property
     @pulumi.getter
     def description(self) -> Optional[_builtins.str]:
         """
         A description for the OIDC application.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="deviceCodeDisabled")
+    def device_code_disabled(self) -> Optional[_builtins.bool]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+        """
+        return pulumi.get(self, "device_code_disabled")
 
     @_builtins.property
     @pulumi.getter
@@ -755,12 +1250,28 @@ class ProjectApplicationsOidcApplication(dict):
         return pulumi.get(self, "force_authentication")
 
     @_builtins.property
+    @pulumi.getter(name="forcePkce")
+    def force_pkce(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
+        """
+        return pulumi.get(self, "force_pkce")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         """
         An optional identifier for the OIDC application.
         """
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="jwtBearerDisabled")
+    def jwt_bearer_disabled(self) -> Optional[_builtins.bool]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+        """
+        return pulumi.get(self, "jwt_bearer_disabled")
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
@@ -778,6 +1289,113 @@ class ProjectApplicationsOidcApplication(dict):
         """
         return pulumi.get(self, "logo")
 
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.ProjectApplicationsOidcApplicationPermission']]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter(name="refreshTokenDisabled")
+    def refresh_token_disabled(self) -> Optional[_builtins.bool]:
+        """
+        Disables the `refresh_token` grant type for this application.
+        """
+        return pulumi.get(self, "refresh_token_disabled")
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence['outputs.ProjectApplicationsOidcApplicationRole']]:
+        return pulumi.get(self, "roles")
+
+
+@pulumi.output_type
+class ProjectApplicationsOidcApplicationPermission(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectApplicationsOidcApplicationRole(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "roleMappings":
+            suggest = "role_mappings"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsOidcApplicationRole. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplicationsOidcApplicationRole.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplicationsOidcApplicationRole.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 permissions: Optional[Sequence[_builtins.str]] = None,
+                 role_mappings: Optional[Sequence[_builtins.str]] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if role_mappings is not None:
+            pulumi.set(__self__, "role_mappings", role_mappings)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter(name="roleMappings")
+    def role_mappings(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "role_mappings")
+
 
 @pulumi.output_type
 class ProjectApplicationsSamlApplication(dict):
@@ -790,6 +1408,8 @@ class ProjectApplicationsSamlApplication(dict):
             suggest = "attribute_mappings"
         elif key == "defaultRelayState":
             suggest = "default_relay_state"
+        elif key == "defaultSignatureAlgorithm":
+            suggest = "default_signature_algorithm"
         elif key == "dynamicConfiguration":
             suggest = "dynamic_configuration"
         elif key == "forceAuthentication":
@@ -819,6 +1439,7 @@ class ProjectApplicationsSamlApplication(dict):
                  acs_allowed_callback_urls: Optional[Sequence[_builtins.str]] = None,
                  attribute_mappings: Optional[Sequence['outputs.ProjectApplicationsSamlApplicationAttributeMapping']] = None,
                  default_relay_state: Optional[_builtins.str] = None,
+                 default_signature_algorithm: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
                  disabled: Optional[_builtins.bool] = None,
                  dynamic_configuration: Optional['outputs.ProjectApplicationsSamlApplicationDynamicConfiguration'] = None,
@@ -827,6 +1448,8 @@ class ProjectApplicationsSamlApplication(dict):
                  login_page_url: Optional[_builtins.str] = None,
                  logo: Optional[_builtins.str] = None,
                  manual_configuration: Optional['outputs.ProjectApplicationsSamlApplicationManualConfiguration'] = None,
+                 permissions: Optional[Sequence['outputs.ProjectApplicationsSamlApplicationPermission']] = None,
+                 roles: Optional[Sequence['outputs.ProjectApplicationsSamlApplicationRole']] = None,
                  subject_name_id_format: Optional[_builtins.str] = None,
                  subject_name_id_type: Optional[_builtins.str] = None):
         """
@@ -834,6 +1457,7 @@ class ProjectApplicationsSamlApplication(dict):
         :param Sequence[_builtins.str] acs_allowed_callback_urls: A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
         :param Sequence['ProjectApplicationsSamlApplicationAttributeMappingArgs'] attribute_mappings: The `AttributeMapping` object. Read the description below.
         :param _builtins.str default_relay_state: The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
+        :param _builtins.str default_signature_algorithm: The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
         :param _builtins.str description: A description for the SAML application.
         :param _builtins.bool disabled: Whether the application should be enabled or disabled.
         :param 'ProjectApplicationsSamlApplicationDynamicConfigurationArgs' dynamic_configuration: The `DynamicConfiguration` object. Read the description below.
@@ -852,6 +1476,8 @@ class ProjectApplicationsSamlApplication(dict):
             pulumi.set(__self__, "attribute_mappings", attribute_mappings)
         if default_relay_state is not None:
             pulumi.set(__self__, "default_relay_state", default_relay_state)
+        if default_signature_algorithm is not None:
+            pulumi.set(__self__, "default_signature_algorithm", default_signature_algorithm)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if disabled is not None:
@@ -868,6 +1494,10 @@ class ProjectApplicationsSamlApplication(dict):
             pulumi.set(__self__, "logo", logo)
         if manual_configuration is not None:
             pulumi.set(__self__, "manual_configuration", manual_configuration)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
         if subject_name_id_format is not None:
             pulumi.set(__self__, "subject_name_id_format", subject_name_id_format)
         if subject_name_id_type is not None:
@@ -904,6 +1534,14 @@ class ProjectApplicationsSamlApplication(dict):
         The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
         """
         return pulumi.get(self, "default_relay_state")
+
+    @_builtins.property
+    @pulumi.getter(name="defaultSignatureAlgorithm")
+    def default_signature_algorithm(self) -> Optional[_builtins.str]:
+        """
+        The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
+        """
+        return pulumi.get(self, "default_signature_algorithm")
 
     @_builtins.property
     @pulumi.getter
@@ -968,6 +1606,16 @@ class ProjectApplicationsSamlApplication(dict):
         The `ManualConfiguration` object. Read the description below.
         """
         return pulumi.get(self, "manual_configuration")
+
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlApplicationPermission']]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence['outputs.ProjectApplicationsSamlApplicationRole']]:
+        return pulumi.get(self, "roles")
 
     @_builtins.property
     @pulumi.getter(name="subjectNameIdFormat")
@@ -1108,6 +1756,543 @@ class ProjectApplicationsSamlApplicationManualConfiguration(dict):
         Enter the `Certificate` from the SP.
         """
         return pulumi.get(self, "certificate")
+
+
+@pulumi.output_type
+class ProjectApplicationsSamlApplicationPermission(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectApplicationsSamlApplicationRole(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "roleMappings":
+            suggest = "role_mappings"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsSamlApplicationRole. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplicationsSamlApplicationRole.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplicationsSamlApplicationRole.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 permissions: Optional[Sequence[_builtins.str]] = None,
+                 role_mappings: Optional[Sequence[_builtins.str]] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if role_mappings is not None:
+            pulumi.set(__self__, "role_mappings", role_mappings)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter(name="roleMappings")
+    def role_mappings(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "role_mappings")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplication(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "attributeMappings":
+            suggest = "attribute_mappings"
+        elif key == "errorRedirectUrl":
+            suggest = "error_redirect_url"
+        elif key == "forceAuthentication":
+            suggest = "force_authentication"
+        elif key == "groupsMappings":
+            suggest = "groups_mappings"
+        elif key == "loginPageUrl":
+            suggest = "login_page_url"
+        elif key == "logoutRedirectUrl":
+            suggest = "logout_redirect_url"
+        elif key == "replyAllowedCallbackUrls":
+            suggest = "reply_allowed_callback_urls"
+        elif key == "replyUrl":
+            suggest = "reply_url"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsWsfedApplication. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplicationsWsfedApplication.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplicationsWsfedApplication.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 attribute_mappings: Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationAttributeMapping']] = None,
+                 description: Optional[_builtins.str] = None,
+                 disabled: Optional[_builtins.bool] = None,
+                 error_redirect_url: Optional[_builtins.str] = None,
+                 force_authentication: Optional[_builtins.bool] = None,
+                 groups_mappings: Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationGroupsMapping']] = None,
+                 id: Optional[_builtins.str] = None,
+                 login_page_url: Optional[_builtins.str] = None,
+                 logo: Optional[_builtins.str] = None,
+                 logout_redirect_url: Optional[_builtins.str] = None,
+                 permissions: Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationPermission']] = None,
+                 realm: Optional[_builtins.str] = None,
+                 reply_allowed_callback_urls: Optional[Sequence[_builtins.str]] = None,
+                 reply_url: Optional[_builtins.str] = None,
+                 roles: Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationRole']] = None):
+        """
+        :param _builtins.str name: A name for the WS-Fed application.
+        :param Sequence['ProjectApplicationsWsfedApplicationAttributeMappingArgs'] attribute_mappings: A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
+        :param _builtins.str description: A description for the WS-Fed application.
+        :param _builtins.bool disabled: Whether the application should be enabled or disabled.
+        :param _builtins.str error_redirect_url: The URL to redirect to when an error occurs.
+        :param _builtins.bool force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        :param Sequence['ProjectApplicationsWsfedApplicationGroupsMappingArgs'] groups_mappings: A list of group mappings from Descope roles to WS-Fed groups.
+        :param _builtins.str id: An optional identifier for the WS-Fed application.
+        :param _builtins.str login_page_url: The Flow Hosting URL.
+        :param _builtins.str logo: A logo for the WS-Fed application. Should be a hosted image URL.
+        :param _builtins.str logout_redirect_url: The URL to redirect to after logout.
+        :param _builtins.str realm: The WS-Fed realm identifier for the application.
+        :param Sequence[_builtins.str] reply_allowed_callback_urls: Additional allowed `wreply` callback URLs beyond `reply_url`. Each entry may include the `*` wildcard. When the RP supplies a `wreply` parameter, it must match either the default `reply_url` or one of these patterns.
+        :param _builtins.str reply_url: The default reply URL where WS-Fed responses are sent. Used for IdP-initiated flows and when no `wreply` is supplied by the RP.
+        """
+        pulumi.set(__self__, "name", name)
+        if attribute_mappings is not None:
+            pulumi.set(__self__, "attribute_mappings", attribute_mappings)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
+        if error_redirect_url is not None:
+            pulumi.set(__self__, "error_redirect_url", error_redirect_url)
+        if force_authentication is not None:
+            pulumi.set(__self__, "force_authentication", force_authentication)
+        if groups_mappings is not None:
+            pulumi.set(__self__, "groups_mappings", groups_mappings)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if login_page_url is not None:
+            pulumi.set(__self__, "login_page_url", login_page_url)
+        if logo is not None:
+            pulumi.set(__self__, "logo", logo)
+        if logout_redirect_url is not None:
+            pulumi.set(__self__, "logout_redirect_url", logout_redirect_url)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if realm is not None:
+            pulumi.set(__self__, "realm", realm)
+        if reply_allowed_callback_urls is not None:
+            pulumi.set(__self__, "reply_allowed_callback_urls", reply_allowed_callback_urls)
+        if reply_url is not None:
+            pulumi.set(__self__, "reply_url", reply_url)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A name for the WS-Fed application.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="attributeMappings")
+    def attribute_mappings(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationAttributeMapping']]:
+        """
+        A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
+        """
+        return pulumi.get(self, "attribute_mappings")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description for the WS-Fed application.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def disabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether the application should be enabled or disabled.
+        """
+        return pulumi.get(self, "disabled")
+
+    @_builtins.property
+    @pulumi.getter(name="errorRedirectUrl")
+    def error_redirect_url(self) -> Optional[_builtins.str]:
+        """
+        The URL to redirect to when an error occurs.
+        """
+        return pulumi.get(self, "error_redirect_url")
+
+    @_builtins.property
+    @pulumi.getter(name="forceAuthentication")
+    def force_authentication(self) -> Optional[_builtins.bool]:
+        """
+        This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+        """
+        return pulumi.get(self, "force_authentication")
+
+    @_builtins.property
+    @pulumi.getter(name="groupsMappings")
+    def groups_mappings(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationGroupsMapping']]:
+        """
+        A list of group mappings from Descope roles to WS-Fed groups.
+        """
+        return pulumi.get(self, "groups_mappings")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        """
+        An optional identifier for the WS-Fed application.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="loginPageUrl")
+    def login_page_url(self) -> Optional[_builtins.str]:
+        """
+        The Flow Hosting URL.
+        """
+        return pulumi.get(self, "login_page_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def logo(self) -> Optional[_builtins.str]:
+        """
+        A logo for the WS-Fed application. Should be a hosted image URL.
+        """
+        return pulumi.get(self, "logo")
+
+    @_builtins.property
+    @pulumi.getter(name="logoutRedirectUrl")
+    def logout_redirect_url(self) -> Optional[_builtins.str]:
+        """
+        The URL to redirect to after logout.
+        """
+        return pulumi.get(self, "logout_redirect_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationPermission']]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter
+    def realm(self) -> Optional[_builtins.str]:
+        """
+        The WS-Fed realm identifier for the application.
+        """
+        return pulumi.get(self, "realm")
+
+    @_builtins.property
+    @pulumi.getter(name="replyAllowedCallbackUrls")
+    def reply_allowed_callback_urls(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        Additional allowed `wreply` callback URLs beyond `reply_url`. Each entry may include the `*` wildcard. When the RP supplies a `wreply` parameter, it must match either the default `reply_url` or one of these patterns.
+        """
+        return pulumi.get(self, "reply_allowed_callback_urls")
+
+    @_builtins.property
+    @pulumi.getter(name="replyUrl")
+    def reply_url(self) -> Optional[_builtins.str]:
+        """
+        The default reply URL where WS-Fed responses are sent. Used for IdP-initiated flows and when no `wreply` is supplied by the RP.
+        """
+        return pulumi.get(self, "reply_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationRole']]:
+        return pulumi.get(self, "roles")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplicationAttributeMapping(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str name: The name of the attribute.
+        :param _builtins.str value: The value of the attribute.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the attribute.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        The value of the attribute.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplicationGroupsMapping(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "filterType":
+            suggest = "filter_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsWsfedApplicationGroupsMapping. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplicationsWsfedApplicationGroupsMapping.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplicationsWsfedApplicationGroupsMapping.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 filter_type: _builtins.str,
+                 name: _builtins.str,
+                 type: _builtins.str,
+                 value: _builtins.str,
+                 roles: Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationGroupsMappingRole']] = None):
+        """
+        :param _builtins.str filter_type: The filter type for the groups mapping.
+        :param _builtins.str name: The name of the groups mapping.
+        :param _builtins.str type: The type of the groups mapping.
+        :param _builtins.str value: The value of the groups mapping.
+        :param Sequence['ProjectApplicationsWsfedApplicationGroupsMappingRoleArgs'] roles: The `RoleGroupMapping` object. A list of roles mapped to this group.
+        """
+        pulumi.set(__self__, "filter_type", filter_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @_builtins.property
+    @pulumi.getter(name="filterType")
+    def filter_type(self) -> _builtins.str:
+        """
+        The filter type for the groups mapping.
+        """
+        return pulumi.get(self, "filter_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the groups mapping.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        The type of the groups mapping.
+        """
+        return pulumi.get(self, "type")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        The value of the groups mapping.
+        """
+        return pulumi.get(self, "value")
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence['outputs.ProjectApplicationsWsfedApplicationGroupsMappingRole']]:
+        """
+        The `RoleGroupMapping` object. A list of roles mapped to this group.
+        """
+        return pulumi.get(self, "roles")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplicationGroupsMappingRole(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str id: The identifier of the role.
+        :param _builtins.str name: The name of the role.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The identifier of the role.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the role.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplicationPermission(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectApplicationsWsfedApplicationRole(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "roleMappings":
+            suggest = "role_mappings"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectApplicationsWsfedApplicationRole. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectApplicationsWsfedApplicationRole.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectApplicationsWsfedApplicationRole.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 permissions: Optional[Sequence[_builtins.str]] = None,
+                 role_mappings: Optional[Sequence[_builtins.str]] = None):
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if role_mappings is not None:
+            pulumi.set(__self__, "role_mappings", role_mappings)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "permissions")
+
+    @_builtins.property
+    @pulumi.getter(name="roleMappings")
+    def role_mappings(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "role_mappings")
 
 
 @pulumi.output_type
@@ -7696,7 +8881,11 @@ class ProjectAuthenticationPasskeys(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "topLevelDomain":
+        if key == "androidFingerprints":
+            suggest = "android_fingerprints"
+        elif key == "displayName":
+            suggest = "display_name"
+        elif key == "topLevelDomain":
             suggest = "top_level_domain"
 
         if suggest:
@@ -7711,16 +8900,32 @@ class ProjectAuthenticationPasskeys(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 android_fingerprints: Optional[Sequence[_builtins.str]] = None,
                  disabled: Optional[_builtins.bool] = None,
+                 display_name: Optional[_builtins.str] = None,
                  top_level_domain: Optional[_builtins.str] = None):
         """
+        :param Sequence[_builtins.str] android_fingerprints: A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        :param _builtins.str display_name: The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
         :param _builtins.str top_level_domain: Passkeys will be usable in the following domain and all its subdomains.
         """
+        if android_fingerprints is not None:
+            pulumi.set(__self__, "android_fingerprints", android_fingerprints)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if display_name is not None:
+            pulumi.set(__self__, "display_name", display_name)
         if top_level_domain is not None:
             pulumi.set(__self__, "top_level_domain", top_level_domain)
+
+    @_builtins.property
+    @pulumi.getter(name="androidFingerprints")
+    def android_fingerprints(self) -> Optional[Sequence[_builtins.str]]:
+        """
+        A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+        """
+        return pulumi.get(self, "android_fingerprints")
 
     @_builtins.property
     @pulumi.getter
@@ -7729,6 +8934,14 @@ class ProjectAuthenticationPasskeys(dict):
         Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         """
         return pulumi.get(self, "disabled")
+
+    @_builtins.property
+    @pulumi.getter(name="displayName")
+    def display_name(self) -> Optional[_builtins.str]:
+        """
+        The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+        """
+        return pulumi.get(self, "display_name")
 
     @_builtins.property
     @pulumi.getter(name="topLevelDomain")
@@ -7744,8 +8957,16 @@ class ProjectAuthenticationPassword(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "emailService":
+        if key == "anyLetter":
+            suggest = "any_letter"
+        elif key == "disallowEmailMatch":
+            suggest = "disallow_email_match"
+        elif key == "disallowedCharacters":
+            suggest = "disallowed_characters"
+        elif key == "emailService":
             suggest = "email_service"
+        elif key == "enforceStrength":
+            suggest = "enforce_strength"
         elif key == "expirationWeeks":
             suggest = "expiration_weeks"
         elif key == "lockAttempts":
@@ -7777,8 +8998,12 @@ class ProjectAuthenticationPassword(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 any_letter: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
+                 disallow_email_match: Optional[_builtins.bool] = None,
+                 disallowed_characters: Optional[_builtins.str] = None,
                  email_service: Optional['outputs.ProjectAuthenticationPasswordEmailService'] = None,
+                 enforce_strength: Optional[_builtins.str] = None,
                  expiration: Optional[_builtins.bool] = None,
                  expiration_weeks: Optional[_builtins.int] = None,
                  lock: Optional[_builtins.bool] = None,
@@ -7795,8 +9020,12 @@ class ProjectAuthenticationPassword(dict):
                  temporary_lock_duration: Optional[_builtins.str] = None,
                  uppercase: Optional[_builtins.bool] = None):
         """
+        :param _builtins.bool any_letter: Whether passwords must contain at least one letter, either uppercase or lowercase.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        :param _builtins.bool disallow_email_match: Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively. The check is skipped if the user's email is not known at validation time.
+        :param _builtins.str disallowed_characters: Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `"'"` to reject single and double quotes).
         :param 'ProjectAuthenticationPasswordEmailServiceArgs' email_service: Settings related to sending password reset emails as part of the password feature.
+        :param _builtins.str enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
         :param _builtins.bool expiration: Whether users are required to change their password periodically.
         :param _builtins.int expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
         :param _builtins.bool lock: Whether the user account should be locked after a specified number of failed login attempts.
@@ -7813,10 +9042,18 @@ class ProjectAuthenticationPassword(dict):
         :param _builtins.str temporary_lock_duration: The amount of time before the user can sign in again after the account is temporarily locked.
         :param _builtins.bool uppercase: Whether passwords must contain at least one uppercase letter.
         """
+        if any_letter is not None:
+            pulumi.set(__self__, "any_letter", any_letter)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if disallow_email_match is not None:
+            pulumi.set(__self__, "disallow_email_match", disallow_email_match)
+        if disallowed_characters is not None:
+            pulumi.set(__self__, "disallowed_characters", disallowed_characters)
         if email_service is not None:
             pulumi.set(__self__, "email_service", email_service)
+        if enforce_strength is not None:
+            pulumi.set(__self__, "enforce_strength", enforce_strength)
         if expiration is not None:
             pulumi.set(__self__, "expiration", expiration)
         if expiration_weeks is not None:
@@ -7849,6 +9086,14 @@ class ProjectAuthenticationPassword(dict):
             pulumi.set(__self__, "uppercase", uppercase)
 
     @_builtins.property
+    @pulumi.getter(name="anyLetter")
+    def any_letter(self) -> Optional[_builtins.bool]:
+        """
+        Whether passwords must contain at least one letter, either uppercase or lowercase.
+        """
+        return pulumi.get(self, "any_letter")
+
+    @_builtins.property
     @pulumi.getter
     def disabled(self) -> Optional[_builtins.bool]:
         """
@@ -7857,12 +9102,36 @@ class ProjectAuthenticationPassword(dict):
         return pulumi.get(self, "disabled")
 
     @_builtins.property
+    @pulumi.getter(name="disallowEmailMatch")
+    def disallow_email_match(self) -> Optional[_builtins.bool]:
+        """
+        Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively. The check is skipped if the user's email is not known at validation time.
+        """
+        return pulumi.get(self, "disallow_email_match")
+
+    @_builtins.property
+    @pulumi.getter(name="disallowedCharacters")
+    def disallowed_characters(self) -> Optional[_builtins.str]:
+        """
+        Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `"'"` to reject single and double quotes).
+        """
+        return pulumi.get(self, "disallowed_characters")
+
+    @_builtins.property
     @pulumi.getter(name="emailService")
     def email_service(self) -> Optional['outputs.ProjectAuthenticationPasswordEmailService']:
         """
         Settings related to sending password reset emails as part of the password feature.
         """
         return pulumi.get(self, "email_service")
+
+    @_builtins.property
+    @pulumi.getter(name="enforceStrength")
+    def enforce_strength(self) -> Optional[_builtins.str]:
+        """
+        Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+        """
+        return pulumi.get(self, "enforce_strength")
 
     @_builtins.property
     @pulumi.getter
@@ -8130,12 +9399,26 @@ class ProjectAuthenticationSso(dict):
             suggest = "allow_duplicate_domains"
         elif key == "allowOverrideRoles":
             suggest = "allow_override_roles"
+        elif key == "blockIfEmailDomainMismatch":
+            suggest = "block_if_email_domain_mismatch"
+        elif key == "emailService":
+            suggest = "email_service"
         elif key == "groupsPriority":
             suggest = "groups_priority"
+        elif key == "limitMappingToMandatoryAttributes":
+            suggest = "limit_mapping_to_mandatory_attributes"
+        elif key == "mandatoryUserAttributes":
+            suggest = "mandatory_user_attributes"
+        elif key == "markEmailAsUnverified":
+            suggest = "mark_email_as_unverified"
         elif key == "mergeUsers":
             suggest = "merge_users"
         elif key == "redirectUrl":
             suggest = "redirect_url"
+        elif key == "requireGroupsAttributeName":
+            suggest = "require_groups_attribute_name"
+        elif key == "requireSsoDomains":
+            suggest = "require_sso_domains"
         elif key == "ssoSuiteSettings":
             suggest = "sso_suite_settings"
 
@@ -8153,32 +9436,60 @@ class ProjectAuthenticationSso(dict):
     def __init__(__self__, *,
                  allow_duplicate_domains: Optional[_builtins.bool] = None,
                  allow_override_roles: Optional[_builtins.bool] = None,
+                 block_if_email_domain_mismatch: Optional[_builtins.bool] = None,
                  disabled: Optional[_builtins.bool] = None,
+                 email_service: Optional['outputs.ProjectAuthenticationSsoEmailService'] = None,
                  groups_priority: Optional[_builtins.bool] = None,
+                 limit_mapping_to_mandatory_attributes: Optional[_builtins.bool] = None,
+                 mandatory_user_attributes: Optional[Sequence['outputs.ProjectAuthenticationSsoMandatoryUserAttribute']] = None,
+                 mark_email_as_unverified: Optional[_builtins.bool] = None,
                  merge_users: Optional[_builtins.bool] = None,
                  redirect_url: Optional[_builtins.str] = None,
+                 require_groups_attribute_name: Optional[_builtins.bool] = None,
+                 require_sso_domains: Optional[_builtins.bool] = None,
                  sso_suite_settings: Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings'] = None):
         """
         :param _builtins.bool allow_duplicate_domains: Whether to allow duplicate SSO domains across tenants.
         :param _builtins.bool allow_override_roles: Whether to allow overriding user's roles with SSO related roles.
+        :param _builtins.bool block_if_email_domain_mismatch: Whether to block SSO login if the user's email domain doesn't match the configured SSO domains.
         :param _builtins.bool disabled: Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
+        :param 'ProjectAuthenticationSsoEmailServiceArgs' email_service: Settings related to sending SSO invite emails as part of the SSO feature.
         :param _builtins.bool groups_priority: Whether to enable groups priority.
+        :param _builtins.bool limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
+        :param Sequence['ProjectAuthenticationSsoMandatoryUserAttributeArgs'] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
+        :param _builtins.bool mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
         :param _builtins.bool merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param _builtins.str redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
+        :param _builtins.bool require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
+        :param _builtins.bool require_sso_domains: When configuring SSO an SSO domain must be specified.
         :param 'ProjectAuthenticationSsoSsoSuiteSettingsArgs' sso_suite_settings: Configuration block for the SSO Suite.
         """
         if allow_duplicate_domains is not None:
             pulumi.set(__self__, "allow_duplicate_domains", allow_duplicate_domains)
         if allow_override_roles is not None:
             pulumi.set(__self__, "allow_override_roles", allow_override_roles)
+        if block_if_email_domain_mismatch is not None:
+            pulumi.set(__self__, "block_if_email_domain_mismatch", block_if_email_domain_mismatch)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
+        if email_service is not None:
+            pulumi.set(__self__, "email_service", email_service)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
+        if limit_mapping_to_mandatory_attributes is not None:
+            pulumi.set(__self__, "limit_mapping_to_mandatory_attributes", limit_mapping_to_mandatory_attributes)
+        if mandatory_user_attributes is not None:
+            pulumi.set(__self__, "mandatory_user_attributes", mandatory_user_attributes)
+        if mark_email_as_unverified is not None:
+            pulumi.set(__self__, "mark_email_as_unverified", mark_email_as_unverified)
         if merge_users is not None:
             pulumi.set(__self__, "merge_users", merge_users)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
+        if require_groups_attribute_name is not None:
+            pulumi.set(__self__, "require_groups_attribute_name", require_groups_attribute_name)
+        if require_sso_domains is not None:
+            pulumi.set(__self__, "require_sso_domains", require_sso_domains)
         if sso_suite_settings is not None:
             pulumi.set(__self__, "sso_suite_settings", sso_suite_settings)
 
@@ -8199,6 +9510,14 @@ class ProjectAuthenticationSso(dict):
         return pulumi.get(self, "allow_override_roles")
 
     @_builtins.property
+    @pulumi.getter(name="blockIfEmailDomainMismatch")
+    def block_if_email_domain_mismatch(self) -> Optional[_builtins.bool]:
+        """
+        Whether to block SSO login if the user's email domain doesn't match the configured SSO domains.
+        """
+        return pulumi.get(self, "block_if_email_domain_mismatch")
+
+    @_builtins.property
     @pulumi.getter
     def disabled(self) -> Optional[_builtins.bool]:
         """
@@ -8207,12 +9526,44 @@ class ProjectAuthenticationSso(dict):
         return pulumi.get(self, "disabled")
 
     @_builtins.property
+    @pulumi.getter(name="emailService")
+    def email_service(self) -> Optional['outputs.ProjectAuthenticationSsoEmailService']:
+        """
+        Settings related to sending SSO invite emails as part of the SSO feature.
+        """
+        return pulumi.get(self, "email_service")
+
+    @_builtins.property
     @pulumi.getter(name="groupsPriority")
     def groups_priority(self) -> Optional[_builtins.bool]:
         """
         Whether to enable groups priority.
         """
         return pulumi.get(self, "groups_priority")
+
+    @_builtins.property
+    @pulumi.getter(name="limitMappingToMandatoryAttributes")
+    def limit_mapping_to_mandatory_attributes(self) -> Optional[_builtins.bool]:
+        """
+        Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
+        """
+        return pulumi.get(self, "limit_mapping_to_mandatory_attributes")
+
+    @_builtins.property
+    @pulumi.getter(name="mandatoryUserAttributes")
+    def mandatory_user_attributes(self) -> Optional[Sequence['outputs.ProjectAuthenticationSsoMandatoryUserAttribute']]:
+        """
+        Define the required Descope attributes that must be populated when receiving SSO information.
+        """
+        return pulumi.get(self, "mandatory_user_attributes")
+
+    @_builtins.property
+    @pulumi.getter(name="markEmailAsUnverified")
+    def mark_email_as_unverified(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mark the user's email as unverified when logging in via SSO.
+        """
+        return pulumi.get(self, "mark_email_as_unverified")
 
     @_builtins.property
     @pulumi.getter(name="mergeUsers")
@@ -8231,12 +9582,194 @@ class ProjectAuthenticationSso(dict):
         return pulumi.get(self, "redirect_url")
 
     @_builtins.property
+    @pulumi.getter(name="requireGroupsAttributeName")
+    def require_groups_attribute_name(self) -> Optional[_builtins.bool]:
+        """
+        When configuring SSO the groups attribute name must be specified.
+        """
+        return pulumi.get(self, "require_groups_attribute_name")
+
+    @_builtins.property
+    @pulumi.getter(name="requireSsoDomains")
+    def require_sso_domains(self) -> Optional[_builtins.bool]:
+        """
+        When configuring SSO an SSO domain must be specified.
+        """
+        return pulumi.get(self, "require_sso_domains")
+
+    @_builtins.property
     @pulumi.getter(name="ssoSuiteSettings")
     def sso_suite_settings(self) -> Optional['outputs.ProjectAuthenticationSsoSsoSuiteSettings']:
         """
         Configuration block for the SSO Suite.
         """
         return pulumi.get(self, "sso_suite_settings")
+
+
+@pulumi.output_type
+class ProjectAuthenticationSsoEmailService(dict):
+    def __init__(__self__, *,
+                 connector: _builtins.str,
+                 templates: Optional[Sequence['outputs.ProjectAuthenticationSsoEmailServiceTemplate']] = None):
+        """
+        :param _builtins.str connector: The name of the email connector to use for sending emails.
+        :param Sequence['ProjectAuthenticationSsoEmailServiceTemplateArgs'] templates: A list of email templates for different authentication flows.
+        """
+        pulumi.set(__self__, "connector", connector)
+        if templates is not None:
+            pulumi.set(__self__, "templates", templates)
+
+    @_builtins.property
+    @pulumi.getter
+    def connector(self) -> _builtins.str:
+        """
+        The name of the email connector to use for sending emails.
+        """
+        return pulumi.get(self, "connector")
+
+    @_builtins.property
+    @pulumi.getter
+    def templates(self) -> Optional[Sequence['outputs.ProjectAuthenticationSsoEmailServiceTemplate']]:
+        """
+        A list of email templates for different authentication flows.
+        """
+        return pulumi.get(self, "templates")
+
+
+@pulumi.output_type
+class ProjectAuthenticationSsoEmailServiceTemplate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "htmlBody":
+            suggest = "html_body"
+        elif key == "plainTextBody":
+            suggest = "plain_text_body"
+        elif key == "usePlainTextBody":
+            suggest = "use_plain_text_body"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectAuthenticationSsoEmailServiceTemplate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectAuthenticationSsoEmailServiceTemplate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectAuthenticationSsoEmailServiceTemplate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 subject: _builtins.str,
+                 active: Optional[_builtins.bool] = None,
+                 html_body: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 plain_text_body: Optional[_builtins.str] = None,
+                 use_plain_text_body: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str name: Unique name for this email template.
+        :param _builtins.str subject: Subject line of the email message.
+        :param _builtins.bool active: Whether this email template is currently active and in use.
+        :param _builtins.str html_body: HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        :param _builtins.str plain_text_body: Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        :param _builtins.bool use_plain_text_body: Whether to use the plain text body instead of HTML for the email.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "subject", subject)
+        if active is not None:
+            pulumi.set(__self__, "active", active)
+        if html_body is not None:
+            pulumi.set(__self__, "html_body", html_body)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if plain_text_body is not None:
+            pulumi.set(__self__, "plain_text_body", plain_text_body)
+        if use_plain_text_body is not None:
+            pulumi.set(__self__, "use_plain_text_body", use_plain_text_body)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Unique name for this email template.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def subject(self) -> _builtins.str:
+        """
+        Subject line of the email message.
+        """
+        return pulumi.get(self, "subject")
+
+    @_builtins.property
+    @pulumi.getter
+    def active(self) -> Optional[_builtins.bool]:
+        """
+        Whether this email template is currently active and in use.
+        """
+        return pulumi.get(self, "active")
+
+    @_builtins.property
+    @pulumi.getter(name="htmlBody")
+    def html_body(self) -> Optional[_builtins.str]:
+        """
+        HTML content of the email message body, required if `use_plain_text_body` isn't set.
+        """
+        return pulumi.get(self, "html_body")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="plainTextBody")
+    def plain_text_body(self) -> Optional[_builtins.str]:
+        """
+        Plain text version of the email message body, required if `use_plain_text_body` is set to `true`.
+        """
+        return pulumi.get(self, "plain_text_body")
+
+    @_builtins.property
+    @pulumi.getter(name="usePlainTextBody")
+    def use_plain_text_body(self) -> Optional[_builtins.bool]:
+        """
+        Whether to use the plain text body instead of HTML for the email.
+        """
+        return pulumi.get(self, "use_plain_text_body")
+
+
+@pulumi.output_type
+class ProjectAuthenticationSsoMandatoryUserAttribute(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 custom: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str id: The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+        :param _builtins.bool custom: Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+        """
+        pulumi.set(__self__, "id", id)
+        if custom is not None:
+            pulumi.set(__self__, "custom", custom)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def custom(self) -> Optional[_builtins.bool]:
+        """
+        Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+        """
+        return pulumi.get(self, "custom")
 
 
 @pulumi.output_type
@@ -8250,14 +9783,20 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
             suggest = "hide_domains"
         elif key == "hideGroupsMapping":
             suggest = "hide_groups_mapping"
+        elif key == "hideJitGuide":
+            suggest = "hide_jit_guide"
         elif key == "hideOidc":
             suggest = "hide_oidc"
         elif key == "hideSaml":
             suggest = "hide_saml"
         elif key == "hideScim":
             suggest = "hide_scim"
+        elif key == "showHelpContact":
+            suggest = "show_help_contact"
         elif key == "styleId":
             suggest = "style_id"
+        elif key == "supportEmail":
+            suggest = "support_email"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectAuthenticationSsoSsoSuiteSettings. Access the value via the '{suggest}' property getter instead.")
@@ -8274,18 +9813,24 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
                  force_domain_verification: Optional[_builtins.bool] = None,
                  hide_domains: Optional[_builtins.bool] = None,
                  hide_groups_mapping: Optional[_builtins.bool] = None,
+                 hide_jit_guide: Optional[_builtins.bool] = None,
                  hide_oidc: Optional[_builtins.bool] = None,
                  hide_saml: Optional[_builtins.bool] = None,
                  hide_scim: Optional[_builtins.bool] = None,
-                 style_id: Optional[_builtins.str] = None):
+                 show_help_contact: Optional[_builtins.bool] = None,
+                 style_id: Optional[_builtins.str] = None,
+                 support_email: Optional[_builtins.str] = None):
         """
         :param _builtins.bool force_domain_verification: Setting this to `true` will allow only verified domains to be used.
         :param _builtins.bool hide_domains: Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
         :param _builtins.bool hide_groups_mapping: Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
+        :param _builtins.bool hide_jit_guide: Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
         :param _builtins.bool hide_oidc: Setting this to `true` will hide the OIDC configuration option.
         :param _builtins.bool hide_saml: Setting this to `true` will hide the SAML configuration option.
         :param _builtins.bool hide_scim: Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
+        :param _builtins.bool show_help_contact: Whether to display the help/support contact link in the SSO Suite UI.
         :param _builtins.str style_id: Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
+        :param _builtins.str support_email: Email address shown to end-users in the SSO Suite UI as a support contact.
         """
         if force_domain_verification is not None:
             pulumi.set(__self__, "force_domain_verification", force_domain_verification)
@@ -8293,14 +9838,20 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
             pulumi.set(__self__, "hide_domains", hide_domains)
         if hide_groups_mapping is not None:
             pulumi.set(__self__, "hide_groups_mapping", hide_groups_mapping)
+        if hide_jit_guide is not None:
+            pulumi.set(__self__, "hide_jit_guide", hide_jit_guide)
         if hide_oidc is not None:
             pulumi.set(__self__, "hide_oidc", hide_oidc)
         if hide_saml is not None:
             pulumi.set(__self__, "hide_saml", hide_saml)
         if hide_scim is not None:
             pulumi.set(__self__, "hide_scim", hide_scim)
+        if show_help_contact is not None:
+            pulumi.set(__self__, "show_help_contact", show_help_contact)
         if style_id is not None:
             pulumi.set(__self__, "style_id", style_id)
+        if support_email is not None:
+            pulumi.set(__self__, "support_email", support_email)
 
     @_builtins.property
     @pulumi.getter(name="forceDomainVerification")
@@ -8327,6 +9878,14 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         return pulumi.get(self, "hide_groups_mapping")
 
     @_builtins.property
+    @pulumi.getter(name="hideJitGuide")
+    def hide_jit_guide(self) -> Optional[_builtins.bool]:
+        """
+        Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+        """
+        return pulumi.get(self, "hide_jit_guide")
+
+    @_builtins.property
     @pulumi.getter(name="hideOidc")
     def hide_oidc(self) -> Optional[_builtins.bool]:
         """
@@ -8351,12 +9910,28 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         return pulumi.get(self, "hide_scim")
 
     @_builtins.property
+    @pulumi.getter(name="showHelpContact")
+    def show_help_contact(self) -> Optional[_builtins.bool]:
+        """
+        Whether to display the help/support contact link in the SSO Suite UI.
+        """
+        return pulumi.get(self, "show_help_contact")
+
+    @_builtins.property
     @pulumi.getter(name="styleId")
     def style_id(self) -> Optional[_builtins.str]:
         """
         Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
         """
         return pulumi.get(self, "style_id")
+
+    @_builtins.property
+    @pulumi.getter(name="supportEmail")
+    def support_email(self) -> Optional[_builtins.str]:
+        """
+        Email address shown to end-users in the SSO Suite UI as a support contact.
+        """
+        return pulumi.get(self, "support_email")
 
 
 @pulumi.output_type
@@ -8410,16 +9985,28 @@ class ProjectAuthenticationTotp(dict):
 @pulumi.output_type
 class ProjectAuthorization(dict):
     def __init__(__self__, *,
+                 fga: Optional[_builtins.str] = None,
                  permissions: Optional[Sequence['outputs.ProjectAuthorizationPermission']] = None,
                  roles: Optional[Sequence['outputs.ProjectAuthorizationRole']] = None):
         """
+        :param _builtins.str fga: The project's FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
         :param Sequence['ProjectAuthorizationPermissionArgs'] permissions: A list of `Permission` objects.
         :param Sequence['ProjectAuthorizationRoleArgs'] roles: A list of `Role` objects.
         """
+        if fga is not None:
+            pulumi.set(__self__, "fga", fga)
         if permissions is not None:
             pulumi.set(__self__, "permissions", permissions)
         if roles is not None:
             pulumi.set(__self__, "roles", roles)
+
+    @_builtins.property
+    @pulumi.getter
+    def fga(self) -> Optional[_builtins.str]:
+        """
+        The project's FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+        """
+        return pulumi.get(self, "fga")
 
     @_builtins.property
     @pulumi.getter
@@ -8567,6 +10154,8 @@ class ProjectConnectors(dict):
             suggest = "audit_webhooks"
         elif key == "awsS3s":
             suggest = "aws_s3s"
+        elif key == "awsSesEmailValidations":
+            suggest = "aws_ses_email_validations"
         elif key == "awsTranslates":
             suggest = "aws_translates"
         elif key == "devrevGrows":
@@ -8595,6 +10184,10 @@ class ProjectConnectors(dict):
             suggest = "ping_directories"
         elif key == "recaptchaEnterprises":
             suggest = "recaptcha_enterprises"
+        elif key == "recaptchaV2s":
+            suggest = "recaptcha_v2s"
+        elif key == "rndReassigneds":
+            suggest = "rnd_reassigneds"
         elif key == "salesforceMarketingClouds":
             suggest = "salesforce_marketing_clouds"
         elif key == "twilioCores":
@@ -8615,13 +10208,16 @@ class ProjectConnectors(dict):
 
     def __init__(__self__, *,
                  abuseipdbs: Optional[Sequence['outputs.ProjectConnectorsAbuseipdb']] = None,
+                 alloys: Optional[Sequence['outputs.ProjectConnectorsAlloy']] = None,
                  amplitudes: Optional[Sequence['outputs.ProjectConnectorsAmplitude']] = None,
                  arkoses: Optional[Sequence['outputs.ProjectConnectorsArkose']] = None,
                  audit_webhooks: Optional[Sequence['outputs.ProjectConnectorsAuditWebhook']] = None,
                  aws_s3s: Optional[Sequence['outputs.ProjectConnectorsAwsS3']] = None,
+                 aws_ses_email_validations: Optional[Sequence['outputs.ProjectConnectorsAwsSesEmailValidation']] = None,
                  aws_translates: Optional[Sequence['outputs.ProjectConnectorsAwsTranslate']] = None,
                  bitsights: Optional[Sequence['outputs.ProjectConnectorsBitsight']] = None,
                  coralogixes: Optional[Sequence['outputs.ProjectConnectorsCoralogix']] = None,
+                 cribls: Optional[Sequence['outputs.ProjectConnectorsCribl']] = None,
                  darwinia: Optional[Sequence['outputs.ProjectConnectorsDarwinium']] = None,
                  datadogs: Optional[Sequence['outputs.ProjectConnectorsDatadog']] = None,
                  devrev_grows: Optional[Sequence['outputs.ProjectConnectorsDevrevGrow']] = None,
@@ -8639,6 +10235,7 @@ class ProjectConnectors(dict):
                  google_cloud_loggings: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudLogging']] = None,
                  google_cloud_translations: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudTranslation']] = None,
                  google_maps_places: Optional[Sequence['outputs.ProjectConnectorsGoogleMapsPlace']] = None,
+                 groundcovers: Optional[Sequence['outputs.ProjectConnectorsGroundcover']] = None,
                  hcaptchas: Optional[Sequence['outputs.ProjectConnectorsHcaptcha']] = None,
                  hibps: Optional[Sequence['outputs.ProjectConnectorsHibp']] = None,
                  https: Optional[Sequence['outputs.ProjectConnectorsHttp']] = None,
@@ -8651,21 +10248,26 @@ class ProjectConnectors(dict):
                  mparticles: Optional[Sequence['outputs.ProjectConnectorsMparticle']] = None,
                  newrelics: Optional[Sequence['outputs.ProjectConnectorsNewrelic']] = None,
                  opentelemetries: Optional[Sequence['outputs.ProjectConnectorsOpentelemetry']] = None,
+                 pendos: Optional[Sequence['outputs.ProjectConnectorsPendo']] = None,
                  ping_directories: Optional[Sequence['outputs.ProjectConnectorsPingDirectory']] = None,
                  postmarks: Optional[Sequence['outputs.ProjectConnectorsPostmark']] = None,
                  radars: Optional[Sequence['outputs.ProjectConnectorsRadar']] = None,
                  recaptcha_enterprises: Optional[Sequence['outputs.ProjectConnectorsRecaptchaEnterprise']] = None,
+                 recaptcha_v2s: Optional[Sequence['outputs.ProjectConnectorsRecaptchaV2']] = None,
                  recaptchas: Optional[Sequence['outputs.ProjectConnectorsRecaptcha']] = None,
                  rekognitions: Optional[Sequence['outputs.ProjectConnectorsRekognition']] = None,
+                 rnd_reassigneds: Optional[Sequence['outputs.ProjectConnectorsRndReassigned']] = None,
                  salesforce_marketing_clouds: Optional[Sequence['outputs.ProjectConnectorsSalesforceMarketingCloud']] = None,
                  salesforces: Optional[Sequence['outputs.ProjectConnectorsSalesforce']] = None,
                  sardines: Optional[Sequence['outputs.ProjectConnectorsSardine']] = None,
+                 scims: Optional[Sequence['outputs.ProjectConnectorsScim']] = None,
                  segments: Optional[Sequence['outputs.ProjectConnectorsSegment']] = None,
                  sendgrids: Optional[Sequence['outputs.ProjectConnectorsSendgrid']] = None,
                  ses: Optional[Sequence['outputs.ProjectConnectorsSe']] = None,
                  slacks: Optional[Sequence['outputs.ProjectConnectorsSlack']] = None,
                  smartlings: Optional[Sequence['outputs.ProjectConnectorsSmartling']] = None,
                  smtps: Optional[Sequence['outputs.ProjectConnectorsSmtp']] = None,
+                 snowflakes: Optional[Sequence['outputs.ProjectConnectorsSnowflake']] = None,
                  sns: Optional[Sequence['outputs.ProjectConnectorsSn']] = None,
                  splunks: Optional[Sequence['outputs.ProjectConnectorsSplunk']] = None,
                  sqls: Optional[Sequence['outputs.ProjectConnectorsSql']] = None,
@@ -8680,13 +10282,16 @@ class ProjectConnectors(dict):
                  zerobounces: Optional[Sequence['outputs.ProjectConnectorsZerobounce']] = None):
         """
         :param Sequence['ProjectConnectorsAbuseipdbArgs'] abuseipdbs: Utilize IP threat intelligence to block malicious login attempts with the AbuseIPDB connector.
+        :param Sequence['ProjectConnectorsAlloyArgs'] alloys: Streamline identity verification and fraud monitoring with the Alloy connector.
         :param Sequence['ProjectConnectorsAmplitudeArgs'] amplitudes: Track user activity and traits at any point in your user journey with the Amplitude connector.
         :param Sequence['ProjectConnectorsArkoseArgs'] arkoses: Use the Arkose connector to integrate with Arkose's bot and fraud detection.
         :param Sequence['ProjectConnectorsAuditWebhookArgs'] audit_webhooks: Send audit events to a custom webhook.
         :param Sequence['ProjectConnectorsAwsS3Args'] aws_s3s: Stream authentication audit logs with the Amazon S3 connector.
+        :param Sequence['ProjectConnectorsAwsSesEmailValidationArgs'] aws_ses_email_validations: Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
         :param Sequence['ProjectConnectorsAwsTranslateArgs'] aws_translates: Localize the language of your login and user journey screens with the Amazon Translate connector.
         :param Sequence['ProjectConnectorsBitsightArgs'] bitsights: Utilize threat intelligence to block malicious login attempts or check leaks with the Bitsight Threat Intelligence connector.
         :param Sequence['ProjectConnectorsCoralogixArgs'] coralogixes: Send audit events and troubleshooting logs to Coralogix.
+        :param Sequence['ProjectConnectorsCriblArgs'] cribls: Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl's HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
         :param Sequence['ProjectConnectorsDarwiniumArgs'] darwinia: Connect to Darwinium API for fraud detection and device intelligence.
         :param Sequence['ProjectConnectorsDatadogArgs'] datadogs: Stream authentication audit logs with the Datadog connector.
         :param Sequence['ProjectConnectorsDevrevGrowArgs'] devrev_grows: DevRev Grow is a Growth CRM that brings salespeople, product marketers, and PMs onto an AI-native platform to follow the journey of a visitor to a lead, to a contact, and then to a user - to create a champion, not a churned user.
@@ -8704,6 +10309,7 @@ class ProjectConnectors(dict):
         :param Sequence['ProjectConnectorsGoogleCloudLoggingArgs'] google_cloud_loggings: Stream logs and audit events with the Google Cloud Logging connector.
         :param Sequence['ProjectConnectorsGoogleCloudTranslationArgs'] google_cloud_translations: Localize the language of your login and user journey screens with the Google Cloud Translation connector.
         :param Sequence['ProjectConnectorsGoogleMapsPlaceArgs'] google_maps_places: Get address autocompletions from Place Autocomplete Data API.
+        :param Sequence['ProjectConnectorsGroundcoverArgs'] groundcovers: Send audit events and troubleshooting logs to groundcover.
         :param Sequence['ProjectConnectorsHcaptchaArgs'] hcaptchas: hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
         :param Sequence['ProjectConnectorsHibpArgs'] hibps: Check if passwords have been previously exposed in data breaches with the Have I Been Pwned connector.
         :param Sequence['ProjectConnectorsHttpArgs'] https: A general purpose HTTP client
@@ -8716,21 +10322,26 @@ class ProjectConnectors(dict):
         :param Sequence['ProjectConnectorsMparticleArgs'] mparticles: Track and send user event data (e.g. page views, purchases, etc.) across connected tools using the mParticle connector.
         :param Sequence['ProjectConnectorsNewrelicArgs'] newrelics: Stream authentication audit logs with the New Relic connector.
         :param Sequence['ProjectConnectorsOpentelemetryArgs'] opentelemetries: Send audit events and troubleshooting logs to an OpenTelemetry-compatible endpoint using OTLP over HTTP or gRPC.
+        :param Sequence['ProjectConnectorsPendoArgs'] pendos: Stream authentication audit logs with the Pendo connector.
         :param Sequence['ProjectConnectorsPingDirectoryArgs'] ping_directories: Authenticate against PingDirectory.
         :param Sequence['ProjectConnectorsPostmarkArgs'] postmarks: Send emails using Postmark
         :param Sequence['ProjectConnectorsRadarArgs'] radars: Get address autocompletions from Radar Autocomplete API.
         :param Sequence['ProjectConnectorsRecaptchaEnterpriseArgs'] recaptcha_enterprises: Mitigate fraud using advanced risk analysis and add adaptive MFA with the reCAPTCHA Enterprise connector.
+        :param Sequence['ProjectConnectorsRecaptchaV2Args'] recaptcha_v2s: Use the reCAPTCHA v2 "I'm not a robot" checkbox widget with your flows.
         :param Sequence['ProjectConnectorsRecaptchaArgs'] recaptchas: Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
         :param Sequence['ProjectConnectorsRekognitionArgs'] rekognitions: Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
+        :param Sequence['ProjectConnectorsRndReassignedArgs'] rnd_reassigneds: Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
         :param Sequence['ProjectConnectorsSalesforceMarketingCloudArgs'] salesforce_marketing_clouds: Send transactional messages with the Salesforce Marketing Cloud connector.
         :param Sequence['ProjectConnectorsSalesforceArgs'] salesforces: Run SQL queries to retrieve user roles, profiles, account status, and more with the Salesforce connector.
         :param Sequence['ProjectConnectorsSardineArgs'] sardines: Evaluate customer risk using Sardine
+        :param Sequence['ProjectConnectorsScimArgs'] scims: Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
         :param Sequence['ProjectConnectorsSegmentArgs'] segments: Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
         :param Sequence['ProjectConnectorsSendgridArgs'] sendgrids: SendGrid is a cloud-based SMTP provider that allows you to send emails without having to maintain email servers.
         :param Sequence['ProjectConnectorsSeArgs'] ses: Amazon Simple Email Service (SES) for sending emails through AWS infrastructure.
         :param Sequence['ProjectConnectorsSlackArgs'] slacks: Send updates to your team on Slack.
         :param Sequence['ProjectConnectorsSmartlingArgs'] smartlings: Localize the language of your login and user journey screens with the Smartling connector.
         :param Sequence['ProjectConnectorsSmtpArgs'] smtps: Simple Mail Transfer Protocol (SMTP) server for sending emails.
+        :param Sequence['ProjectConnectorsSnowflakeArgs'] snowflakes: Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
         :param Sequence['ProjectConnectorsSnArgs'] sns: Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
         :param Sequence['ProjectConnectorsSplunkArgs'] splunks: Stream logs and audit events with the Splunk HTTP Event Collector (HEC).
         :param Sequence['ProjectConnectorsSqlArgs'] sqls: SQL connector for relational databases including PostgreSQL, MySQL, MariaDB, Microsoft SQL Server (MSSQL), Oracle, CockroachDB, and Amazon Redshift.
@@ -8746,6 +10357,8 @@ class ProjectConnectors(dict):
         """
         if abuseipdbs is not None:
             pulumi.set(__self__, "abuseipdbs", abuseipdbs)
+        if alloys is not None:
+            pulumi.set(__self__, "alloys", alloys)
         if amplitudes is not None:
             pulumi.set(__self__, "amplitudes", amplitudes)
         if arkoses is not None:
@@ -8754,12 +10367,16 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "audit_webhooks", audit_webhooks)
         if aws_s3s is not None:
             pulumi.set(__self__, "aws_s3s", aws_s3s)
+        if aws_ses_email_validations is not None:
+            pulumi.set(__self__, "aws_ses_email_validations", aws_ses_email_validations)
         if aws_translates is not None:
             pulumi.set(__self__, "aws_translates", aws_translates)
         if bitsights is not None:
             pulumi.set(__self__, "bitsights", bitsights)
         if coralogixes is not None:
             pulumi.set(__self__, "coralogixes", coralogixes)
+        if cribls is not None:
+            pulumi.set(__self__, "cribls", cribls)
         if darwinia is not None:
             pulumi.set(__self__, "darwinia", darwinia)
         if datadogs is not None:
@@ -8794,6 +10411,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "google_cloud_translations", google_cloud_translations)
         if google_maps_places is not None:
             pulumi.set(__self__, "google_maps_places", google_maps_places)
+        if groundcovers is not None:
+            pulumi.set(__self__, "groundcovers", groundcovers)
         if hcaptchas is not None:
             pulumi.set(__self__, "hcaptchas", hcaptchas)
         if hibps is not None:
@@ -8818,6 +10437,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "newrelics", newrelics)
         if opentelemetries is not None:
             pulumi.set(__self__, "opentelemetries", opentelemetries)
+        if pendos is not None:
+            pulumi.set(__self__, "pendos", pendos)
         if ping_directories is not None:
             pulumi.set(__self__, "ping_directories", ping_directories)
         if postmarks is not None:
@@ -8826,16 +10447,22 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "radars", radars)
         if recaptcha_enterprises is not None:
             pulumi.set(__self__, "recaptcha_enterprises", recaptcha_enterprises)
+        if recaptcha_v2s is not None:
+            pulumi.set(__self__, "recaptcha_v2s", recaptcha_v2s)
         if recaptchas is not None:
             pulumi.set(__self__, "recaptchas", recaptchas)
         if rekognitions is not None:
             pulumi.set(__self__, "rekognitions", rekognitions)
+        if rnd_reassigneds is not None:
+            pulumi.set(__self__, "rnd_reassigneds", rnd_reassigneds)
         if salesforce_marketing_clouds is not None:
             pulumi.set(__self__, "salesforce_marketing_clouds", salesforce_marketing_clouds)
         if salesforces is not None:
             pulumi.set(__self__, "salesforces", salesforces)
         if sardines is not None:
             pulumi.set(__self__, "sardines", sardines)
+        if scims is not None:
+            pulumi.set(__self__, "scims", scims)
         if segments is not None:
             pulumi.set(__self__, "segments", segments)
         if sendgrids is not None:
@@ -8848,6 +10475,8 @@ class ProjectConnectors(dict):
             pulumi.set(__self__, "smartlings", smartlings)
         if smtps is not None:
             pulumi.set(__self__, "smtps", smtps)
+        if snowflakes is not None:
+            pulumi.set(__self__, "snowflakes", snowflakes)
         if sns is not None:
             pulumi.set(__self__, "sns", sns)
         if splunks is not None:
@@ -8883,6 +10512,14 @@ class ProjectConnectors(dict):
 
     @_builtins.property
     @pulumi.getter
+    def alloys(self) -> Optional[Sequence['outputs.ProjectConnectorsAlloy']]:
+        """
+        Streamline identity verification and fraud monitoring with the Alloy connector.
+        """
+        return pulumi.get(self, "alloys")
+
+    @_builtins.property
+    @pulumi.getter
     def amplitudes(self) -> Optional[Sequence['outputs.ProjectConnectorsAmplitude']]:
         """
         Track user activity and traits at any point in your user journey with the Amplitude connector.
@@ -8914,6 +10551,14 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "aws_s3s")
 
     @_builtins.property
+    @pulumi.getter(name="awsSesEmailValidations")
+    def aws_ses_email_validations(self) -> Optional[Sequence['outputs.ProjectConnectorsAwsSesEmailValidation']]:
+        """
+        Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+        """
+        return pulumi.get(self, "aws_ses_email_validations")
+
+    @_builtins.property
     @pulumi.getter(name="awsTranslates")
     def aws_translates(self) -> Optional[Sequence['outputs.ProjectConnectorsAwsTranslate']]:
         """
@@ -8936,6 +10581,14 @@ class ProjectConnectors(dict):
         Send audit events and troubleshooting logs to Coralogix.
         """
         return pulumi.get(self, "coralogixes")
+
+    @_builtins.property
+    @pulumi.getter
+    def cribls(self) -> Optional[Sequence['outputs.ProjectConnectorsCribl']]:
+        """
+        Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl's HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+        """
+        return pulumi.get(self, "cribls")
 
     @_builtins.property
     @pulumi.getter
@@ -9075,6 +10728,14 @@ class ProjectConnectors(dict):
 
     @_builtins.property
     @pulumi.getter
+    def groundcovers(self) -> Optional[Sequence['outputs.ProjectConnectorsGroundcover']]:
+        """
+        Send audit events and troubleshooting logs to groundcover.
+        """
+        return pulumi.get(self, "groundcovers")
+
+    @_builtins.property
+    @pulumi.getter
     def hcaptchas(self) -> Optional[Sequence['outputs.ProjectConnectorsHcaptcha']]:
         """
         hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
@@ -9170,6 +10831,14 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "opentelemetries")
 
     @_builtins.property
+    @pulumi.getter
+    def pendos(self) -> Optional[Sequence['outputs.ProjectConnectorsPendo']]:
+        """
+        Stream authentication audit logs with the Pendo connector.
+        """
+        return pulumi.get(self, "pendos")
+
+    @_builtins.property
     @pulumi.getter(name="pingDirectories")
     def ping_directories(self) -> Optional[Sequence['outputs.ProjectConnectorsPingDirectory']]:
         """
@@ -9202,6 +10871,14 @@ class ProjectConnectors(dict):
         return pulumi.get(self, "recaptcha_enterprises")
 
     @_builtins.property
+    @pulumi.getter(name="recaptchaV2s")
+    def recaptcha_v2s(self) -> Optional[Sequence['outputs.ProjectConnectorsRecaptchaV2']]:
+        """
+        Use the reCAPTCHA v2 "I'm not a robot" checkbox widget with your flows.
+        """
+        return pulumi.get(self, "recaptcha_v2s")
+
+    @_builtins.property
     @pulumi.getter
     def recaptchas(self) -> Optional[Sequence['outputs.ProjectConnectorsRecaptcha']]:
         """
@@ -9216,6 +10893,14 @@ class ProjectConnectors(dict):
         Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
         """
         return pulumi.get(self, "rekognitions")
+
+    @_builtins.property
+    @pulumi.getter(name="rndReassigneds")
+    def rnd_reassigneds(self) -> Optional[Sequence['outputs.ProjectConnectorsRndReassigned']]:
+        """
+        Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+        """
+        return pulumi.get(self, "rnd_reassigneds")
 
     @_builtins.property
     @pulumi.getter(name="salesforceMarketingClouds")
@@ -9240,6 +10925,14 @@ class ProjectConnectors(dict):
         Evaluate customer risk using Sardine
         """
         return pulumi.get(self, "sardines")
+
+    @_builtins.property
+    @pulumi.getter
+    def scims(self) -> Optional[Sequence['outputs.ProjectConnectorsScim']]:
+        """
+        Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+        """
+        return pulumi.get(self, "scims")
 
     @_builtins.property
     @pulumi.getter
@@ -9288,6 +10981,14 @@ class ProjectConnectors(dict):
         Simple Mail Transfer Protocol (SMTP) server for sending emails.
         """
         return pulumi.get(self, "smtps")
+
+    @_builtins.property
+    @pulumi.getter
+    def snowflakes(self) -> Optional[Sequence['outputs.ProjectConnectorsSnowflake']]:
+        """
+        Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+        """
+        return pulumi.get(self, "snowflakes")
 
     @_builtins.property
     @pulumi.getter
@@ -9453,6 +11154,98 @@ class ProjectConnectorsAbuseipdb(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsAlloy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiSecret":
+            suggest = "api_secret"
+        elif key == "apiToken":
+            suggest = "api_token"
+        elif key == "baseUrl":
+            suggest = "base_url"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsAlloy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsAlloy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsAlloy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_secret: _builtins.str,
+                 api_token: _builtins.str,
+                 base_url: _builtins.str,
+                 name: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str api_secret: The Alloy API secret.
+        :param _builtins.str api_token: The Alloy API token.
+        :param _builtins.str base_url: The base URL for the Alloy API, e.g.: https://sandbox.alloy.co/v1, https://api.alloy.co/v1.
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "api_secret", api_secret)
+        pulumi.set(__self__, "api_token", api_token)
+        pulumi.set(__self__, "base_url", base_url)
+        pulumi.set(__self__, "name", name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter(name="apiSecret")
+    def api_secret(self) -> _builtins.str:
+        """
+        The Alloy API secret.
+        """
+        return pulumi.get(self, "api_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="apiToken")
+    def api_token(self) -> _builtins.str:
+        """
+        The Alloy API token.
+        """
+        return pulumi.get(self, "api_token")
+
+    @_builtins.property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> _builtins.str:
+        """
+        The base URL for the Alloy API, e.g.: https://sandbox.alloy.co/v1, https://api.alloy.co/v1.
+        """
+        return pulumi.get(self, "base_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
 class ProjectConnectorsAmplitude(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -9581,11 +11374,11 @@ class ProjectConnectorsArkose(dict):
                  verify_base_url: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
-        :param _builtins.str private_key: The private key that can be copied from the Keys screen in the Arkose portal.
-        :param _builtins.str public_key: The public key that's shown in the Keys screen in the Arkose portal.
-        :param _builtins.str client_base_url: A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        :param _builtins.str private_key: The private key that can be copied from the Keys screen in the Arkose Labs portal.
+        :param _builtins.str public_key: The public key that's shown in the Keys screen in the Arkose Labs portal.
+        :param _builtins.str client_base_url: A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         :param _builtins.str description: A description of what your connector is used for.
-        :param _builtins.str verify_base_url: A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        :param _builtins.str verify_base_url: A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "private_key", private_key)
@@ -9611,7 +11404,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="privateKey")
     def private_key(self) -> _builtins.str:
         """
-        The private key that can be copied from the Keys screen in the Arkose portal.
+        The private key that can be copied from the Keys screen in the Arkose Labs portal.
         """
         return pulumi.get(self, "private_key")
 
@@ -9619,7 +11412,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="publicKey")
     def public_key(self) -> _builtins.str:
         """
-        The public key that's shown in the Keys screen in the Arkose portal.
+        The public key that's shown in the Keys screen in the Arkose Labs portal.
         """
         return pulumi.get(self, "public_key")
 
@@ -9627,7 +11420,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="clientBaseUrl")
     def client_base_url(self) -> Optional[_builtins.str]:
         """
-        A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+        A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
         """
         return pulumi.get(self, "client_base_url")
 
@@ -9648,7 +11441,7 @@ class ProjectConnectorsArkose(dict):
     @pulumi.getter(name="verifyBaseUrl")
     def verify_base_url(self) -> Optional[_builtins.str]:
         """
-        A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+        A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
         """
         return pulumi.get(self, "verify_base_url")
 
@@ -9958,6 +11751,8 @@ class ProjectConnectorsAwsS3(dict):
             suggest = "auth_type"
         elif key == "externalId":
             suggest = "external_id"
+        elif key == "maskPii":
+            suggest = "mask_pii"
         elif key == "roleArn":
             suggest = "role_arn"
         elif key == "secretAccessKey":
@@ -9987,6 +11782,7 @@ class ProjectConnectorsAwsS3(dict):
                  description: Optional[_builtins.str] = None,
                  external_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
                  role_arn: Optional[_builtins.str] = None,
                  secret_access_key: Optional[_builtins.str] = None,
                  troubleshoot_log_enabled: Optional[_builtins.bool] = None):
@@ -10000,6 +11796,7 @@ class ProjectConnectorsAwsS3(dict):
         :param _builtins.str auth_type: The authentication type to use.
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.str external_id: The external ID to use when assuming the role.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.str role_arn: The Amazon Resource Name (ARN) of the role to assume.
         :param _builtins.str secret_access_key: The secret AWS access key.
         :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
@@ -10021,6 +11818,8 @@ class ProjectConnectorsAwsS3(dict):
             pulumi.set(__self__, "external_id", external_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
         if role_arn is not None:
             pulumi.set(__self__, "role_arn", role_arn)
         if secret_access_key is not None:
@@ -10106,6 +11905,14 @@ class ProjectConnectorsAwsS3(dict):
         return pulumi.get(self, "id")
 
     @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
     @pulumi.getter(name="roleArn")
     def role_arn(self) -> Optional[_builtins.str]:
         """
@@ -10168,6 +11975,154 @@ class ProjectConnectorsAwsS3AuditFilter(dict):
         The list of values to match against for the filter.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class ProjectConnectorsAwsSesEmailValidation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessKeyId":
+            suggest = "access_key_id"
+        elif key == "authType":
+            suggest = "auth_type"
+        elif key == "externalId":
+            suggest = "external_id"
+        elif key == "roleArn":
+            suggest = "role_arn"
+        elif key == "secretAccessKey":
+            suggest = "secret_access_key"
+        elif key == "sessionToken":
+            suggest = "session_token"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsAwsSesEmailValidation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsAwsSesEmailValidation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsAwsSesEmailValidation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 region: _builtins.str,
+                 access_key_id: Optional[_builtins.str] = None,
+                 auth_type: Optional[_builtins.str] = None,
+                 description: Optional[_builtins.str] = None,
+                 external_id: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 role_arn: Optional[_builtins.str] = None,
+                 secret_access_key: Optional[_builtins.str] = None,
+                 session_token: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.str region: The AWS region to which this client will send requests. (e.g. us-east-1.)
+        :param _builtins.str access_key_id: AWS access key ID.
+        :param _builtins.str auth_type: The authentication type to use.
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str external_id: The external ID to use when assuming the role.
+        :param _builtins.str role_arn: The Amazon Resource Name (ARN) of the role to assume.
+        :param _builtins.str secret_access_key: AWS secret access key.
+        :param _builtins.str session_token: (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "region", region)
+        if access_key_id is not None:
+            pulumi.set(__self__, "access_key_id", access_key_id)
+        if auth_type is not None:
+            pulumi.set(__self__, "auth_type", auth_type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if role_arn is not None:
+            pulumi.set(__self__, "role_arn", role_arn)
+        if secret_access_key is not None:
+            pulumi.set(__self__, "secret_access_key", secret_access_key)
+        if session_token is not None:
+            pulumi.set(__self__, "session_token", session_token)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> _builtins.str:
+        """
+        The AWS region to which this client will send requests. (e.g. us-east-1.)
+        """
+        return pulumi.get(self, "region")
+
+    @_builtins.property
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> Optional[_builtins.str]:
+        """
+        AWS access key ID.
+        """
+        return pulumi.get(self, "access_key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> Optional[_builtins.str]:
+        """
+        The authentication type to use.
+        """
+        return pulumi.get(self, "auth_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> Optional[_builtins.str]:
+        """
+        The external ID to use when assuming the role.
+        """
+        return pulumi.get(self, "external_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> Optional[_builtins.str]:
+        """
+        The Amazon Resource Name (ARN) of the role to assume.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @_builtins.property
+    @pulumi.getter(name="secretAccessKey")
+    def secret_access_key(self) -> Optional[_builtins.str]:
+        """
+        AWS secret access key.
+        """
+        return pulumi.get(self, "secret_access_key")
+
+    @_builtins.property
+    @pulumi.getter(name="sessionToken")
+    def session_token(self) -> Optional[_builtins.str]:
+        """
+        (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+        """
+        return pulumi.get(self, "session_token")
 
 
 @pulumi.output_type
@@ -10364,6 +12319,8 @@ class ProjectConnectorsCoralogix(dict):
             suggest = "audit_enabled"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "maskPii":
+            suggest = "mask_pii"
         elif key == "troubleshootLogEnabled":
             suggest = "troubleshoot_log_enabled"
 
@@ -10386,6 +12343,7 @@ class ProjectConnectorsCoralogix(dict):
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsCoralogixAuditFilter']] = None,
                  description: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
                  troubleshoot_log_enabled: Optional[_builtins.bool] = None):
         """
         :param _builtins.str bearer_token: Bearer token issued by Coralogix as Send-Your-Data API key
@@ -10394,6 +12352,7 @@ class ProjectConnectorsCoralogix(dict):
         :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
         :param Sequence['ProjectConnectorsCoralogixAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
         pulumi.set(__self__, "bearer_token", bearer_token)
@@ -10407,6 +12366,8 @@ class ProjectConnectorsCoralogix(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
         if troubleshoot_log_enabled is not None:
             pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
@@ -10464,6 +12425,14 @@ class ProjectConnectorsCoralogix(dict):
         return pulumi.get(self, "id")
 
     @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
     @pulumi.getter(name="troubleshootLogEnabled")
     def troubleshoot_log_enabled(self) -> Optional[_builtins.bool]:
         """
@@ -10474,6 +12443,192 @@ class ProjectConnectorsCoralogix(dict):
 
 @pulumi.output_type
 class ProjectConnectorsCoralogixAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 operator: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str key: The field name to filter on (either 'actions' or 'tenants').
+        :param _builtins.str operator: The filter operation to apply ('includes' or 'excludes').
+        :param Sequence[_builtins.str] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> _builtins.str:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class ProjectConnectorsCribl(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "auditEnabled":
+            suggest = "audit_enabled"
+        elif key == "auditFilters":
+            suggest = "audit_filters"
+        elif key == "authToken":
+            suggest = "auth_token"
+        elif key == "maskPii":
+            suggest = "mask_pii"
+        elif key == "troubleshootLogEnabled":
+            suggest = "troubleshoot_log_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsCribl. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsCribl.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsCribl.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 endpoint: _builtins.str,
+                 name: _builtins.str,
+                 audit_enabled: Optional[_builtins.bool] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsCriblAuditFilter']] = None,
+                 auth_token: Optional[_builtins.str] = None,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
+                 source: Optional[_builtins.str] = None,
+                 troubleshoot_log_enabled: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str endpoint: The base URL of your Cribl Stream HTTP source. For Cribl Cloud, the default http source looks something like https://\\n\\n.main.\\n\\n.cribl.cloud:10080. You can also define a custom source (find this in your Cribl Cloud portal under Data Sources). For self-hosted deployments, use https://\\n\\n:10080 or however you have it configured.
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
+        :param Sequence['ProjectConnectorsCriblAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param _builtins.str auth_token: A shared secret token for authenticating with the Cribl HTTP source. This token is defined on the source and is strongly recommended for security reasons.
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
+        :param _builtins.str source: An optional source identifier for events in Cribl (defaults to 'descope').
+        :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
+        """
+        pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "name", name)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
+        if audit_filters is not None:
+            pulumi.set(__self__, "audit_filters", audit_filters)
+        if auth_token is not None:
+            pulumi.set(__self__, "auth_token", auth_token)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
+
+    @_builtins.property
+    @pulumi.getter
+    def endpoint(self) -> _builtins.str:
+        """
+        The base URL of your Cribl Stream HTTP source. For Cribl Cloud, the default http source looks something like https://\\n\\n.main.\\n\\n.cribl.cloud:10080. You can also define a custom source (find this in your Cribl Cloud portal under Data Sources). For self-hosted deployments, use https://\\n\\n:10080 or however you have it configured.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable streaming of audit events.
+        """
+        return pulumi.get(self, "audit_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="auditFilters")
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsCriblAuditFilter']]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        return pulumi.get(self, "audit_filters")
+
+    @_builtins.property
+    @pulumi.getter(name="authToken")
+    def auth_token(self) -> Optional[_builtins.str]:
+        """
+        A shared secret token for authenticating with the Cribl HTTP source. This token is defined on the source and is strongly recommended for security reasons.
+        """
+        return pulumi.get(self, "auth_token")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
+    @pulumi.getter
+    def source(self) -> Optional[_builtins.str]:
+        """
+        An optional source identifier for events in Cribl (defaults to 'descope').
+        """
+        return pulumi.get(self, "source")
+
+    @_builtins.property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to send troubleshooting events.
+        """
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsCriblAuditFilter(dict):
     def __init__(__self__, *,
                  key: _builtins.str,
                  operator: _builtins.str,
@@ -10734,6 +12889,8 @@ class ProjectConnectorsDatadog(dict):
                  id: Optional[_builtins.str] = None,
                  mask_pii: Optional[_builtins.bool] = None,
                  site: Optional[_builtins.str] = None,
+                 source: Optional[_builtins.str] = None,
+                 tags: Optional[_builtins.str] = None,
                  troubleshoot_log_enabled: Optional[_builtins.bool] = None):
         """
         :param _builtins.str api_key: The unique Datadog organization key.
@@ -10743,6 +12900,8 @@ class ProjectConnectorsDatadog(dict):
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.str site: The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
+        :param _builtins.str source: An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+        :param _builtins.str tags: An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
         :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
         pulumi.set(__self__, "api_key", api_key)
@@ -10759,6 +12918,10 @@ class ProjectConnectorsDatadog(dict):
             pulumi.set(__self__, "mask_pii", mask_pii)
         if site is not None:
             pulumi.set(__self__, "site", site)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if troubleshoot_log_enabled is not None:
             pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
 
@@ -10822,6 +12985,22 @@ class ProjectConnectorsDatadog(dict):
         The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
         """
         return pulumi.get(self, "site")
+
+    @_builtins.property
+    @pulumi.getter
+    def source(self) -> Optional[_builtins.str]:
+        """
+        An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+        """
+        return pulumi.get(self, "source")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> Optional[_builtins.str]:
+        """
+        An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+        """
+        return pulumi.get(self, "tags")
 
     @_builtins.property
     @pulumi.getter(name="troubleshootLogEnabled")
@@ -12832,6 +15011,179 @@ class ProjectConnectorsGoogleMapsPlace(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsGroundcover(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ingestionKey":
+            suggest = "ingestion_key"
+        elif key == "auditEnabled":
+            suggest = "audit_enabled"
+        elif key == "auditFilters":
+            suggest = "audit_filters"
+        elif key == "maskPii":
+            suggest = "mask_pii"
+        elif key == "troubleshootLogEnabled":
+            suggest = "troubleshoot_log_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGroundcover. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsGroundcover.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsGroundcover.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 endpoint: _builtins.str,
+                 ingestion_key: _builtins.str,
+                 name: _builtins.str,
+                 audit_enabled: Optional[_builtins.bool] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsGroundcoverAuditFilter']] = None,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
+                 troubleshoot_log_enabled: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str endpoint: The gRPC OTLP backend endpoint URL. Found in the groundcover console under Settings → Ingestion Keys → Backend Endpoints.
+        :param _builtins.str ingestion_key: Third Party ingestion key for authenticating with groundcover. Create one in the groundcover console under Settings → Ingestion Keys (type: thirdParty).
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
+        :param Sequence['ProjectConnectorsGroundcoverAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
+        :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
+        """
+        pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "ingestion_key", ingestion_key)
+        pulumi.set(__self__, "name", name)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
+        if audit_filters is not None:
+            pulumi.set(__self__, "audit_filters", audit_filters)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
+
+    @_builtins.property
+    @pulumi.getter
+    def endpoint(self) -> _builtins.str:
+        """
+        The gRPC OTLP backend endpoint URL. Found in the groundcover console under Settings → Ingestion Keys → Backend Endpoints.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @_builtins.property
+    @pulumi.getter(name="ingestionKey")
+    def ingestion_key(self) -> _builtins.str:
+        """
+        Third Party ingestion key for authenticating with groundcover. Create one in the groundcover console under Settings → Ingestion Keys (type: thirdParty).
+        """
+        return pulumi.get(self, "ingestion_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable streaming of audit events.
+        """
+        return pulumi.get(self, "audit_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="auditFilters")
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsGroundcoverAuditFilter']]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        return pulumi.get(self, "audit_filters")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to send troubleshooting events.
+        """
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsGroundcoverAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 operator: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str key: The field name to filter on (either 'actions' or 'tenants').
+        :param _builtins.str operator: The filter operation to apply ('includes' or 'excludes').
+        :param Sequence[_builtins.str] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> _builtins.str:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
 class ProjectConnectorsHcaptcha(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -12997,10 +15349,34 @@ class ProjectConnectorsHttp(dict):
         suggest = None
         if key == "baseUrl":
             suggest = "base_url"
+        elif key == "awsAccessKeyId":
+            suggest = "aws_access_key_id"
+        elif key == "awsAuthType":
+            suggest = "aws_auth_type"
+        elif key == "awsExternalId":
+            suggest = "aws_external_id"
+        elif key == "awsRegion":
+            suggest = "aws_region"
+        elif key == "awsRoleArn":
+            suggest = "aws_role_arn"
+        elif key == "awsSecretAccessKey":
+            suggest = "aws_secret_access_key"
+        elif key == "awsService":
+            suggest = "aws_service"
         elif key == "hmacSecret":
             suggest = "hmac_secret"
         elif key == "includeHeadersInContext":
             suggest = "include_headers_in_context"
+        elif key == "rfc9421Components":
+            suggest = "rfc9421_components"
+        elif key == "rfc9421KeyId":
+            suggest = "rfc9421_key_id"
+        elif key == "rfc9421PrivateKey":
+            suggest = "rfc9421_private_key"
+        elif key == "rfc9421SignatureTtl":
+            suggest = "rfc9421_signature_ttl"
+        elif key == "rfc9421SigningEnabled":
+            suggest = "rfc9421_signing_enabled"
         elif key == "useStaticIps":
             suggest = "use_static_ips"
 
@@ -13019,28 +15395,66 @@ class ProjectConnectorsHttp(dict):
                  base_url: _builtins.str,
                  name: _builtins.str,
                  authentication: Optional['outputs.ProjectConnectorsHttpAuthentication'] = None,
+                 aws_access_key_id: Optional[_builtins.str] = None,
+                 aws_auth_type: Optional[_builtins.str] = None,
+                 aws_external_id: Optional[_builtins.str] = None,
+                 aws_region: Optional[_builtins.str] = None,
+                 aws_role_arn: Optional[_builtins.str] = None,
+                 aws_secret_access_key: Optional[_builtins.str] = None,
+                 aws_service: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
                  headers: Optional[Mapping[str, _builtins.str]] = None,
                  hmac_secret: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  include_headers_in_context: Optional[_builtins.bool] = None,
                  insecure: Optional[_builtins.bool] = None,
+                 rfc9421_components: Optional[_builtins.str] = None,
+                 rfc9421_key_id: Optional[_builtins.str] = None,
+                 rfc9421_private_key: Optional[_builtins.str] = None,
+                 rfc9421_signature_ttl: Optional[_builtins.float] = None,
+                 rfc9421_signing_enabled: Optional[_builtins.bool] = None,
                  use_static_ips: Optional[_builtins.bool] = None):
         """
         :param _builtins.str base_url: The base URL to fetch
         :param _builtins.str name: A custom name for your connector.
         :param 'ProjectConnectorsHttpAuthenticationArgs' authentication: Authentication Information
+        :param _builtins.str aws_access_key_id: The unique AWS access key ID.
+        :param _builtins.str aws_auth_type: Apply AWS signature version 4 authentication to the request.
+        :param _builtins.str aws_external_id: The external ID to use when assuming the role.
+        :param _builtins.str aws_region: The AWS region, e.g. `us-east-1`.
+        :param _builtins.str aws_role_arn: The Amazon Resource Name (ARN) of the role to assume.
+        :param _builtins.str aws_secret_access_key: The secret AWS access key.
+        :param _builtins.str aws_service: The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
         :param _builtins.str description: A description of what your connector is used for.
         :param Mapping[str, _builtins.str] headers: The headers to send with the request
         :param _builtins.str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
-        :param _builtins.bool include_headers_in_context: The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        :param _builtins.bool include_headers_in_context: The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
         :param _builtins.bool insecure: Will ignore certificate errors raised by the client
+        :param _builtins.str rfc9421_components: HTTP message components to include in the signature (e.g., @method, @target-uri, @authority, content-type, content-digest). Leave empty to use defaults: @method, @target-uri, @authority
+        :param _builtins.str rfc9421_key_id: Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+        :param _builtins.str rfc9421_private_key: Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+        :param _builtins.float rfc9421_signature_ttl: How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+        :param _builtins.bool rfc9421_signing_enabled: Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
         :param _builtins.bool use_static_ips: Whether the connector should send all requests from specific static IPs.
         """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "name", name)
         if authentication is not None:
             pulumi.set(__self__, "authentication", authentication)
+        if aws_access_key_id is not None:
+            pulumi.set(__self__, "aws_access_key_id", aws_access_key_id)
+        if aws_auth_type is not None:
+            pulumi.set(__self__, "aws_auth_type", aws_auth_type)
+        if aws_external_id is not None:
+            pulumi.set(__self__, "aws_external_id", aws_external_id)
+        if aws_region is not None:
+            pulumi.set(__self__, "aws_region", aws_region)
+        if aws_role_arn is not None:
+            pulumi.set(__self__, "aws_role_arn", aws_role_arn)
+        if aws_secret_access_key is not None:
+            pulumi.set(__self__, "aws_secret_access_key", aws_secret_access_key)
+        if aws_service is not None:
+            pulumi.set(__self__, "aws_service", aws_service)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if headers is not None:
@@ -13053,6 +15467,16 @@ class ProjectConnectorsHttp(dict):
             pulumi.set(__self__, "include_headers_in_context", include_headers_in_context)
         if insecure is not None:
             pulumi.set(__self__, "insecure", insecure)
+        if rfc9421_components is not None:
+            pulumi.set(__self__, "rfc9421_components", rfc9421_components)
+        if rfc9421_key_id is not None:
+            pulumi.set(__self__, "rfc9421_key_id", rfc9421_key_id)
+        if rfc9421_private_key is not None:
+            pulumi.set(__self__, "rfc9421_private_key", rfc9421_private_key)
+        if rfc9421_signature_ttl is not None:
+            pulumi.set(__self__, "rfc9421_signature_ttl", rfc9421_signature_ttl)
+        if rfc9421_signing_enabled is not None:
+            pulumi.set(__self__, "rfc9421_signing_enabled", rfc9421_signing_enabled)
         if use_static_ips is not None:
             pulumi.set(__self__, "use_static_ips", use_static_ips)
 
@@ -13079,6 +15503,62 @@ class ProjectConnectorsHttp(dict):
         Authentication Information
         """
         return pulumi.get(self, "authentication")
+
+    @_builtins.property
+    @pulumi.getter(name="awsAccessKeyId")
+    def aws_access_key_id(self) -> Optional[_builtins.str]:
+        """
+        The unique AWS access key ID.
+        """
+        return pulumi.get(self, "aws_access_key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="awsAuthType")
+    def aws_auth_type(self) -> Optional[_builtins.str]:
+        """
+        Apply AWS signature version 4 authentication to the request.
+        """
+        return pulumi.get(self, "aws_auth_type")
+
+    @_builtins.property
+    @pulumi.getter(name="awsExternalId")
+    def aws_external_id(self) -> Optional[_builtins.str]:
+        """
+        The external ID to use when assuming the role.
+        """
+        return pulumi.get(self, "aws_external_id")
+
+    @_builtins.property
+    @pulumi.getter(name="awsRegion")
+    def aws_region(self) -> Optional[_builtins.str]:
+        """
+        The AWS region, e.g. `us-east-1`.
+        """
+        return pulumi.get(self, "aws_region")
+
+    @_builtins.property
+    @pulumi.getter(name="awsRoleArn")
+    def aws_role_arn(self) -> Optional[_builtins.str]:
+        """
+        The Amazon Resource Name (ARN) of the role to assume.
+        """
+        return pulumi.get(self, "aws_role_arn")
+
+    @_builtins.property
+    @pulumi.getter(name="awsSecretAccessKey")
+    def aws_secret_access_key(self) -> Optional[_builtins.str]:
+        """
+        The secret AWS access key.
+        """
+        return pulumi.get(self, "aws_secret_access_key")
+
+    @_builtins.property
+    @pulumi.getter(name="awsService")
+    def aws_service(self) -> Optional[_builtins.str]:
+        """
+        The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+        """
+        return pulumi.get(self, "aws_service")
 
     @_builtins.property
     @pulumi.getter
@@ -13113,7 +15593,7 @@ class ProjectConnectorsHttp(dict):
     @pulumi.getter(name="includeHeadersInContext")
     def include_headers_in_context(self) -> Optional[_builtins.bool]:
         """
-        The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
         """
         return pulumi.get(self, "include_headers_in_context")
 
@@ -13124,6 +15604,46 @@ class ProjectConnectorsHttp(dict):
         Will ignore certificate errors raised by the client
         """
         return pulumi.get(self, "insecure")
+
+    @_builtins.property
+    @pulumi.getter(name="rfc9421Components")
+    def rfc9421_components(self) -> Optional[_builtins.str]:
+        """
+        HTTP message components to include in the signature (e.g., @method, @target-uri, @authority, content-type, content-digest). Leave empty to use defaults: @method, @target-uri, @authority
+        """
+        return pulumi.get(self, "rfc9421_components")
+
+    @_builtins.property
+    @pulumi.getter(name="rfc9421KeyId")
+    def rfc9421_key_id(self) -> Optional[_builtins.str]:
+        """
+        Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+        """
+        return pulumi.get(self, "rfc9421_key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="rfc9421PrivateKey")
+    def rfc9421_private_key(self) -> Optional[_builtins.str]:
+        """
+        Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+        """
+        return pulumi.get(self, "rfc9421_private_key")
+
+    @_builtins.property
+    @pulumi.getter(name="rfc9421SignatureTtl")
+    def rfc9421_signature_ttl(self) -> Optional[_builtins.float]:
+        """
+        How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+        """
+        return pulumi.get(self, "rfc9421_signature_ttl")
+
+    @_builtins.property
+    @pulumi.getter(name="rfc9421SigningEnabled")
+    def rfc9421_signing_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+        """
+        return pulumi.get(self, "rfc9421_signing_enabled")
 
     @_builtins.property
     @pulumi.getter(name="useStaticIps")
@@ -14658,6 +17178,182 @@ class ProjectConnectorsOpentelemetryAuthenticationBasic(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsPendo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "baseUrl":
+            suggest = "base_url"
+        elif key == "auditEnabled":
+            suggest = "audit_enabled"
+        elif key == "auditFilters":
+            suggest = "audit_filters"
+        elif key == "integrationKey":
+            suggest = "integration_key"
+        elif key == "maskPii":
+            suggest = "mask_pii"
+        elif key == "troubleshootLogEnabled":
+            suggest = "troubleshoot_log_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsPendo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsPendo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsPendo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 base_url: _builtins.str,
+                 name: _builtins.str,
+                 audit_enabled: Optional[_builtins.bool] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsPendoAuditFilter']] = None,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 integration_key: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
+                 troubleshoot_log_enabled: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str base_url: The Pendo regional domain to send logs to. Default is the US region, `https://data.pendo.io`. Customers in other regions must set this accordingly.
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
+        :param Sequence['ProjectConnectorsPendoAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str integration_key: The secret Pendo integration key Descope should use.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
+        :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
+        """
+        pulumi.set(__self__, "base_url", base_url)
+        pulumi.set(__self__, "name", name)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
+        if audit_filters is not None:
+            pulumi.set(__self__, "audit_filters", audit_filters)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if integration_key is not None:
+            pulumi.set(__self__, "integration_key", integration_key)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
+
+    @_builtins.property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> _builtins.str:
+        """
+        The Pendo regional domain to send logs to. Default is the US region, `https://data.pendo.io`. Customers in other regions must set this accordingly.
+        """
+        return pulumi.get(self, "base_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable streaming of audit events.
+        """
+        return pulumi.get(self, "audit_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="auditFilters")
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsPendoAuditFilter']]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        return pulumi.get(self, "audit_filters")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="integrationKey")
+    def integration_key(self) -> Optional[_builtins.str]:
+        """
+        The secret Pendo integration key Descope should use.
+        """
+        return pulumi.get(self, "integration_key")
+
+    @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to send troubleshooting events.
+        """
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+
+@pulumi.output_type
+class ProjectConnectorsPendoAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 operator: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str key: The field name to filter on (either 'actions' or 'tenants').
+        :param _builtins.str operator: The filter operation to apply ('includes' or 'excludes').
+        :param Sequence[_builtins.str] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> _builtins.str:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
 class ProjectConnectorsPingDirectory(dict):
     def __init__(__self__, *,
                  host: _builtins.str,
@@ -15068,6 +17764,7 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
                  name: _builtins.str,
                  project_id: _builtins.str,
                  site_key: _builtins.str,
+                 action: Optional[_builtins.str] = None,
                  assessment_score: Optional[_builtins.float] = None,
                  base_url: Optional[_builtins.str] = None,
                  bot_threshold: Optional[_builtins.float] = None,
@@ -15079,8 +17776,9 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str project_id: The Google Cloud project ID where the reCAPTCHA Enterprise is managed.
         :param _builtins.str site_key: The site key is used to invoke reCAPTCHA Enterprise service on your site or mobile application.
+        :param _builtins.str action: The user-initiated action for this assessment.
         :param _builtins.float assessment_score: When configured, the Recaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
-        :param _builtins.str base_url: Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        :param _builtins.str base_url: The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
         :param _builtins.float bot_threshold: The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.bool override_assessment: Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
@@ -15089,6 +17787,8 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "site_key", site_key)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
         if assessment_score is not None:
             pulumi.set(__self__, "assessment_score", assessment_score)
         if base_url is not None:
@@ -15135,6 +17835,14 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         return pulumi.get(self, "site_key")
 
     @_builtins.property
+    @pulumi.getter
+    def action(self) -> Optional[_builtins.str]:
+        """
+        The user-initiated action for this assessment.
+        """
+        return pulumi.get(self, "action")
+
+    @_builtins.property
     @pulumi.getter(name="assessmentScore")
     def assessment_score(self) -> Optional[_builtins.float]:
         """
@@ -15146,7 +17854,7 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
     @pulumi.getter(name="baseUrl")
     def base_url(self) -> Optional[_builtins.str]:
         """
-        Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+        The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
         """
         return pulumi.get(self, "base_url")
 
@@ -15176,6 +17884,127 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
     def override_assessment(self) -> Optional[_builtins.bool]:
         """
         Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
+        """
+        return pulumi.get(self, "override_assessment")
+
+
+@pulumi.output_type
+class ProjectConnectorsRecaptchaV2(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "secretKey":
+            suggest = "secret_key"
+        elif key == "siteKey":
+            suggest = "site_key"
+        elif key == "assessmentScore":
+            suggest = "assessment_score"
+        elif key == "botThreshold":
+            suggest = "bot_threshold"
+        elif key == "overrideAssessment":
+            suggest = "override_assessment"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsRecaptchaV2. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsRecaptchaV2.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsRecaptchaV2.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 secret_key: _builtins.str,
+                 site_key: _builtins.str,
+                 assessment_score: Optional[_builtins.float] = None,
+                 bot_threshold: Optional[_builtins.float] = None,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 override_assessment: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.str secret_key: The secret key used to verify the user's response with Google siteverify.
+        :param _builtins.str site_key: The reCAPTCHA v2 site key from the Google reCAPTCHA admin console (checkbox / "I'm not a robot" type).
+        :param _builtins.float assessment_score: When override is enabled, return this score instead of calling Google.
+        :param _builtins.float bot_threshold: For v2 verification, success maps to risk score 1 and failure to 0. Bot is detected when risk score is below this threshold (default 0.5).
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool override_assessment: Override the default assessment model. Intended for automated testing only.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "secret_key", secret_key)
+        pulumi.set(__self__, "site_key", site_key)
+        if assessment_score is not None:
+            pulumi.set(__self__, "assessment_score", assessment_score)
+        if bot_threshold is not None:
+            pulumi.set(__self__, "bot_threshold", bot_threshold)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if override_assessment is not None:
+            pulumi.set(__self__, "override_assessment", override_assessment)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="secretKey")
+    def secret_key(self) -> _builtins.str:
+        """
+        The secret key used to verify the user's response with Google siteverify.
+        """
+        return pulumi.get(self, "secret_key")
+
+    @_builtins.property
+    @pulumi.getter(name="siteKey")
+    def site_key(self) -> _builtins.str:
+        """
+        The reCAPTCHA v2 site key from the Google reCAPTCHA admin console (checkbox / "I'm not a robot" type).
+        """
+        return pulumi.get(self, "site_key")
+
+    @_builtins.property
+    @pulumi.getter(name="assessmentScore")
+    def assessment_score(self) -> Optional[_builtins.float]:
+        """
+        When override is enabled, return this score instead of calling Google.
+        """
+        return pulumi.get(self, "assessment_score")
+
+    @_builtins.property
+    @pulumi.getter(name="botThreshold")
+    def bot_threshold(self) -> Optional[_builtins.float]:
+        """
+        For v2 verification, success maps to risk score 1 and failure to 0. Bot is detected when risk score is below this threshold (default 0.5).
+        """
+        return pulumi.get(self, "bot_threshold")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="overrideAssessment")
+    def override_assessment(self) -> Optional[_builtins.bool]:
+        """
+        Override the default assessment model. Intended for automated testing only.
         """
         return pulumi.get(self, "override_assessment")
 
@@ -15257,6 +18086,85 @@ class ProjectConnectorsRekognition(dict):
         The AWS secret access key
         """
         return pulumi.get(self, "secret_access_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectConnectorsRndReassigned(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "companyId":
+            suggest = "company_id"
+        elif key == "refreshToken":
+            suggest = "refresh_token"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsRndReassigned. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsRndReassigned.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsRndReassigned.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 company_id: _builtins.str,
+                 name: _builtins.str,
+                 refresh_token: _builtins.str,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str company_id: Your RND company ID (e.g., C038612852). Retrieve this from your RND account under Account → Company → Company ID.
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.str refresh_token: Your RND refresh token for authentication. Retrieve this from your RND account under Account → API Credentials.
+        :param _builtins.str description: A description of what your connector is used for.
+        """
+        pulumi.set(__self__, "company_id", company_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "refresh_token", refresh_token)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter(name="companyId")
+    def company_id(self) -> _builtins.str:
+        """
+        Your RND company ID (e.g., C038612852). Retrieve this from your RND account under Account → Company → Company ID.
+        """
+        return pulumi.get(self, "company_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="refreshToken")
+    def refresh_token(self) -> _builtins.str:
+        """
+        Your RND refresh token for authentication. Retrieve this from your RND account under Account → API Credentials.
+        """
+        return pulumi.get(self, "refresh_token")
 
     @_builtins.property
     @pulumi.getter
@@ -15581,6 +18489,267 @@ class ProjectConnectorsSardine(dict):
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class ProjectConnectorsScim(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "baseUrl":
+            suggest = "base_url"
+        elif key == "federatedAppId":
+            suggest = "federated_app_id"
+        elif key == "hmacSecret":
+            suggest = "hmac_secret"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsScim. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsScim.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsScim.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 base_url: _builtins.str,
+                 federated_app_id: _builtins.str,
+                 name: _builtins.str,
+                 authentication: Optional['outputs.ProjectConnectorsScimAuthentication'] = None,
+                 description: Optional[_builtins.str] = None,
+                 disabled: Optional[_builtins.bool] = None,
+                 headers: Optional[Mapping[str, _builtins.str]] = None,
+                 hmac_secret: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 insecure: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.str base_url: The base URL of the SCIM v2 endpoint that user provisioning events will be sent to.
+        :param _builtins.str federated_app_id: The ID of the federated SSO application this SCIM connector is associated with.
+        :param _builtins.str name: A custom name for your connector.
+        :param 'ProjectConnectorsScimAuthenticationArgs' authentication: Authentication credentials used when sending requests to the SCIM endpoint.
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool disabled: Whether to disable this SCIM connector. When disabled, provisioning events will not be sent to the configured endpoint.
+        :param Mapping[str, _builtins.str] headers: Custom HTTP headers to send with each provisioning request.
+        :param _builtins.str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature.
+        :param _builtins.bool insecure: Will ignore certificate errors raised by the client.
+        """
+        pulumi.set(__self__, "base_url", base_url)
+        pulumi.set(__self__, "federated_app_id", federated_app_id)
+        pulumi.set(__self__, "name", name)
+        if authentication is not None:
+            pulumi.set(__self__, "authentication", authentication)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if disabled is not None:
+            pulumi.set(__self__, "disabled", disabled)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if hmac_secret is not None:
+            pulumi.set(__self__, "hmac_secret", hmac_secret)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if insecure is not None:
+            pulumi.set(__self__, "insecure", insecure)
+
+    @_builtins.property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> _builtins.str:
+        """
+        The base URL of the SCIM v2 endpoint that user provisioning events will be sent to.
+        """
+        return pulumi.get(self, "base_url")
+
+    @_builtins.property
+    @pulumi.getter(name="federatedAppId")
+    def federated_app_id(self) -> _builtins.str:
+        """
+        The ID of the federated SSO application this SCIM connector is associated with.
+        """
+        return pulumi.get(self, "federated_app_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def authentication(self) -> Optional['outputs.ProjectConnectorsScimAuthentication']:
+        """
+        Authentication credentials used when sending requests to the SCIM endpoint.
+        """
+        return pulumi.get(self, "authentication")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def disabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to disable this SCIM connector. When disabled, provisioning events will not be sent to the configured endpoint.
+        """
+        return pulumi.get(self, "disabled")
+
+    @_builtins.property
+    @pulumi.getter
+    def headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Custom HTTP headers to send with each provisioning request.
+        """
+        return pulumi.get(self, "headers")
+
+    @_builtins.property
+    @pulumi.getter(name="hmacSecret")
+    def hmac_secret(self) -> Optional[_builtins.str]:
+        """
+        HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature.
+        """
+        return pulumi.get(self, "hmac_secret")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def insecure(self) -> Optional[_builtins.bool]:
+        """
+        Will ignore certificate errors raised by the client.
+        """
+        return pulumi.get(self, "insecure")
+
+
+@pulumi.output_type
+class ProjectConnectorsScimAuthentication(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "bearerToken":
+            suggest = "bearer_token"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsScimAuthentication. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsScimAuthentication.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsScimAuthentication.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: Optional['outputs.ProjectConnectorsScimAuthenticationApiKey'] = None,
+                 basic: Optional['outputs.ProjectConnectorsScimAuthenticationBasic'] = None,
+                 bearer_token: Optional[_builtins.str] = None):
+        """
+        :param 'ProjectConnectorsScimAuthenticationApiKeyArgs' api_key: API key authentication configuration.
+        :param 'ProjectConnectorsScimAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
+        :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        """
+        if api_key is not None:
+            pulumi.set(__self__, "api_key", api_key)
+        if basic is not None:
+            pulumi.set(__self__, "basic", basic)
+        if bearer_token is not None:
+            pulumi.set(__self__, "bearer_token", bearer_token)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> Optional['outputs.ProjectConnectorsScimAuthenticationApiKey']:
+        """
+        API key authentication configuration.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def basic(self) -> Optional['outputs.ProjectConnectorsScimAuthenticationBasic']:
+        """
+        Basic authentication credentials (username and password).
+        """
+        return pulumi.get(self, "basic")
+
+    @_builtins.property
+    @pulumi.getter(name="bearerToken")
+    def bearer_token(self) -> Optional[_builtins.str]:
+        """
+        Bearer token for HTTP authentication.
+        """
+        return pulumi.get(self, "bearer_token")
+
+
+@pulumi.output_type
+class ProjectConnectorsScimAuthenticationApiKey(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 token: _builtins.str):
+        """
+        :param _builtins.str key: The API key.
+        :param _builtins.str token: The API secret.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "token", token)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        The API key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def token(self) -> _builtins.str:
+        """
+        The API secret.
+        """
+        return pulumi.get(self, "token")
+
+
+@pulumi.output_type
+class ProjectConnectorsScimAuthenticationBasic(dict):
+    def __init__(__self__, *,
+                 password: _builtins.str,
+                 username: _builtins.str):
+        """
+        :param _builtins.str password: Password for basic HTTP authentication.
+        :param _builtins.str username: Username for basic HTTP authentication.
+        """
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "username", username)
+
+    @_builtins.property
+    @pulumi.getter
+    def password(self) -> _builtins.str:
+        """
+        Password for basic HTTP authentication.
+        """
+        return pulumi.get(self, "password")
+
+    @_builtins.property
+    @pulumi.getter
+    def username(self) -> _builtins.str:
+        """
+        Username for basic HTTP authentication.
+        """
+        return pulumi.get(self, "username")
 
 
 @pulumi.output_type
@@ -16482,6 +19651,243 @@ class ProjectConnectorsSn(dict):
         The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
         """
         return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class ProjectConnectorsSnowflake(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "apiKey":
+            suggest = "api_key"
+        elif key == "auditEnabled":
+            suggest = "audit_enabled"
+        elif key == "auditFilters":
+            suggest = "audit_filters"
+        elif key == "auditTable":
+            suggest = "audit_table"
+        elif key == "maskPii":
+            suggest = "mask_pii"
+        elif key == "minFlushIntervalMinutes":
+            suggest = "min_flush_interval_minutes"
+        elif key == "troubleshootLogEnabled":
+            suggest = "troubleshoot_log_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSnowflake. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSnowflake.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSnowflake.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 api_key: _builtins.str,
+                 name: _builtins.str,
+                 site: _builtins.str,
+                 audit_enabled: Optional[_builtins.bool] = None,
+                 audit_filters: Optional[Sequence['outputs.ProjectConnectorsSnowflakeAuditFilter']] = None,
+                 audit_table: Optional[_builtins.str] = None,
+                 database: Optional[_builtins.str] = None,
+                 description: Optional[_builtins.str] = None,
+                 id: Optional[_builtins.str] = None,
+                 mask_pii: Optional[_builtins.bool] = None,
+                 min_flush_interval_minutes: Optional[_builtins.float] = None,
+                 schema: Optional[_builtins.str] = None,
+                 troubleshoot_log_enabled: Optional[_builtins.bool] = None,
+                 warehouse: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str api_key: A Snowflake Programmatic Access Token (PAT). The token's user must have CREATE DATABASE privileges.
+        :param _builtins.str name: A custom name for your connector.
+        :param _builtins.str site: Your Snowflake account URL, e.g. `https://<org>-<account>.snowflakecomputing.com`.
+        :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
+        :param Sequence['ProjectConnectorsSnowflakeAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param _builtins.str audit_table: The table to write audit events to. Defaults to `DESCOPE_AUDIT_LOGS`.
+        :param _builtins.str database: The Snowflake database to use. Defaults to `DESCOPE_EXPORT_DB`.
+        :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
+        :param _builtins.float min_flush_interval_minutes: The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
+        :param _builtins.str schema: The schema within the database. Defaults to `PUBLIC`.
+        :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
+        :param _builtins.str warehouse: The Snowflake warehouse to use. Defaults to `COMPUTE_WH`.
+        """
+        pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "site", site)
+        if audit_enabled is not None:
+            pulumi.set(__self__, "audit_enabled", audit_enabled)
+        if audit_filters is not None:
+            pulumi.set(__self__, "audit_filters", audit_filters)
+        if audit_table is not None:
+            pulumi.set(__self__, "audit_table", audit_table)
+        if database is not None:
+            pulumi.set(__self__, "database", database)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if mask_pii is not None:
+            pulumi.set(__self__, "mask_pii", mask_pii)
+        if min_flush_interval_minutes is not None:
+            pulumi.set(__self__, "min_flush_interval_minutes", min_flush_interval_minutes)
+        if schema is not None:
+            pulumi.set(__self__, "schema", schema)
+        if troubleshoot_log_enabled is not None:
+            pulumi.set(__self__, "troubleshoot_log_enabled", troubleshoot_log_enabled)
+        if warehouse is not None:
+            pulumi.set(__self__, "warehouse", warehouse)
+
+    @_builtins.property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> _builtins.str:
+        """
+        A Snowflake Programmatic Access Token (PAT). The token's user must have CREATE DATABASE privileges.
+        """
+        return pulumi.get(self, "api_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        A custom name for your connector.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def site(self) -> _builtins.str:
+        """
+        Your Snowflake account URL, e.g. `https://<org>-<account>.snowflakecomputing.com`.
+        """
+        return pulumi.get(self, "site")
+
+    @_builtins.property
+    @pulumi.getter(name="auditEnabled")
+    def audit_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable streaming of audit events.
+        """
+        return pulumi.get(self, "audit_enabled")
+
+    @_builtins.property
+    @pulumi.getter(name="auditFilters")
+    def audit_filters(self) -> Optional[Sequence['outputs.ProjectConnectorsSnowflakeAuditFilter']]:
+        """
+        Specify which events will be sent to the external audit service (including tenant selection).
+        """
+        return pulumi.get(self, "audit_filters")
+
+    @_builtins.property
+    @pulumi.getter(name="auditTable")
+    def audit_table(self) -> Optional[_builtins.str]:
+        """
+        The table to write audit events to. Defaults to `DESCOPE_AUDIT_LOGS`.
+        """
+        return pulumi.get(self, "audit_table")
+
+    @_builtins.property
+    @pulumi.getter
+    def database(self) -> Optional[_builtins.str]:
+        """
+        The Snowflake database to use. Defaults to `DESCOPE_EXPORT_DB`.
+        """
+        return pulumi.get(self, "database")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        A description of what your connector is used for.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="maskPii")
+    def mask_pii(self) -> Optional[_builtins.bool]:
+        """
+        Whether to mask personally identifiable information in the logs.
+        """
+        return pulumi.get(self, "mask_pii")
+
+    @_builtins.property
+    @pulumi.getter(name="minFlushIntervalMinutes")
+    def min_flush_interval_minutes(self) -> Optional[_builtins.float]:
+        """
+        The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
+        """
+        return pulumi.get(self, "min_flush_interval_minutes")
+
+    @_builtins.property
+    @pulumi.getter
+    def schema(self) -> Optional[_builtins.str]:
+        """
+        The schema within the database. Defaults to `PUBLIC`.
+        """
+        return pulumi.get(self, "schema")
+
+    @_builtins.property
+    @pulumi.getter(name="troubleshootLogEnabled")
+    def troubleshoot_log_enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to send troubleshooting events.
+        """
+        return pulumi.get(self, "troubleshoot_log_enabled")
+
+    @_builtins.property
+    @pulumi.getter
+    def warehouse(self) -> Optional[_builtins.str]:
+        """
+        The Snowflake warehouse to use. Defaults to `COMPUTE_WH`.
+        """
+        return pulumi.get(self, "warehouse")
+
+
+@pulumi.output_type
+class ProjectConnectorsSnowflakeAuditFilter(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 operator: _builtins.str,
+                 values: Sequence[_builtins.str]):
+        """
+        :param _builtins.str key: The field name to filter on (either 'actions' or 'tenants').
+        :param _builtins.str operator: The filter operation to apply ('includes' or 'excludes').
+        :param Sequence[_builtins.str] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> _builtins.str:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> Sequence[_builtins.str]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
 
 
 @pulumi.output_type
@@ -17785,7 +21191,9 @@ class ProjectConnectorsUnibeam(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "clientId":
+        if key == "baseUrl":
+            suggest = "base_url"
+        elif key == "clientId":
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
@@ -17808,6 +21216,7 @@ class ProjectConnectorsUnibeam(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 base_url: _builtins.str,
                  client_id: _builtins.str,
                  client_secret: _builtins.str,
                  customer_id: _builtins.str,
@@ -17817,6 +21226,7 @@ class ProjectConnectorsUnibeam(dict):
                  description: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
+        :param _builtins.str base_url: Unibeam API base URL.
         :param _builtins.str client_id: OAuth2 client ID for authentication.
         :param _builtins.str client_secret: OAuth2 client secret for authentication.
         :param _builtins.str customer_id: Your Unibeam customer ID.
@@ -17825,6 +21235,7 @@ class ProjectConnectorsUnibeam(dict):
         :param _builtins.str default_message: Default message to display when no message is provided in the command.
         :param _builtins.str description: A description of what your connector is used for.
         """
+        pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "client_id", client_id)
         pulumi.set(__self__, "client_secret", client_secret)
         pulumi.set(__self__, "customer_id", customer_id)
@@ -17836,6 +21247,14 @@ class ProjectConnectorsUnibeam(dict):
             pulumi.set(__self__, "description", description)
         if id is not None:
             pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter(name="baseUrl")
+    def base_url(self) -> _builtins.str:
+        """
+        Unibeam API base URL.
+        """
+        return pulumi.get(self, "base_url")
 
     @_builtins.property
     @pulumi.getter(name="clientId")
@@ -18320,7 +21739,9 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authSchema":
+        if key == "addJtiClaim":
+            suggest = "add_jti_claim"
+        elif key == "authSchema":
             suggest = "auth_schema"
         elif key == "autoTenantClaim":
             suggest = "auto_tenant_claim"
@@ -18330,6 +21751,10 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             suggest = "empty_claim_policy"
         elif key == "enforceIssuer":
             suggest = "enforce_issuer"
+        elif key == "excludePermissionClaim":
+            suggest = "exclude_permission_claim"
+        elif key == "overrideSubjectClaim":
+            suggest = "override_subject_claim"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesAccessKeyTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -18345,25 +21770,33 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
     def __init__(__self__, *,
                  name: _builtins.str,
                  template: _builtins.str,
+                 add_jti_claim: Optional[_builtins.bool] = None,
                  auth_schema: Optional[_builtins.str] = None,
                  auto_tenant_claim: Optional[_builtins.bool] = None,
                  conformance_issuer: Optional[_builtins.bool] = None,
                  description: Optional[_builtins.str] = None,
                  empty_claim_policy: Optional[_builtins.str] = None,
                  enforce_issuer: Optional[_builtins.bool] = None,
-                 id: Optional[_builtins.str] = None):
+                 exclude_permission_claim: Optional[_builtins.bool] = None,
+                 id: Optional[_builtins.str] = None,
+                 override_subject_claim: Optional[_builtins.bool] = None):
         """
         :param _builtins.str name: Name of the JWT Template.
         :param _builtins.str template: The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        :param _builtins.bool add_jti_claim: When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
         :param _builtins.str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param _builtins.bool auto_tenant_claim: When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
         :param _builtins.bool conformance_issuer: Whether to use OIDC conformance for the JWT issuer field.
         :param _builtins.str description: Description of the JWT Template.
         :param _builtins.str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         :param _builtins.bool enforce_issuer: Whether to enforce that the JWT issuer matches the project configuration.
+        :param _builtins.bool exclude_permission_claim: When enabled, permissions will not be included in the JWT token.
+        :param _builtins.bool override_subject_claim: Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
+        if add_jti_claim is not None:
+            pulumi.set(__self__, "add_jti_claim", add_jti_claim)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if auto_tenant_claim is not None:
@@ -18376,8 +21809,12 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
             pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
         if enforce_issuer is not None:
             pulumi.set(__self__, "enforce_issuer", enforce_issuer)
+        if exclude_permission_claim is not None:
+            pulumi.set(__self__, "exclude_permission_claim", exclude_permission_claim)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if override_subject_claim is not None:
+            pulumi.set(__self__, "override_subject_claim", override_subject_claim)
 
     @_builtins.property
     @pulumi.getter
@@ -18394,6 +21831,14 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
         The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
         """
         return pulumi.get(self, "template")
+
+    @_builtins.property
+    @pulumi.getter(name="addJtiClaim")
+    def add_jti_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        """
+        return pulumi.get(self, "add_jti_claim")
 
     @_builtins.property
     @pulumi.getter(name="authSchema")
@@ -18444,9 +21889,25 @@ class ProjectJwtTemplatesAccessKeyTemplate(dict):
         return pulumi.get(self, "enforce_issuer")
 
     @_builtins.property
+    @pulumi.getter(name="excludePermissionClaim")
+    def exclude_permission_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, permissions will not be included in the JWT token.
+        """
+        return pulumi.get(self, "exclude_permission_claim")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="overrideSubjectClaim")
+    def override_subject_claim(self) -> Optional[_builtins.bool]:
+        """
+        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+        """
+        return pulumi.get(self, "override_subject_claim")
 
 
 @pulumi.output_type
@@ -18454,7 +21915,9 @@ class ProjectJwtTemplatesUserTemplate(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "authSchema":
+        if key == "addJtiClaim":
+            suggest = "add_jti_claim"
+        elif key == "authSchema":
             suggest = "auth_schema"
         elif key == "autoTenantClaim":
             suggest = "auto_tenant_claim"
@@ -18464,6 +21927,10 @@ class ProjectJwtTemplatesUserTemplate(dict):
             suggest = "empty_claim_policy"
         elif key == "enforceIssuer":
             suggest = "enforce_issuer"
+        elif key == "excludePermissionClaim":
+            suggest = "exclude_permission_claim"
+        elif key == "overrideSubjectClaim":
+            suggest = "override_subject_claim"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectJwtTemplatesUserTemplate. Access the value via the '{suggest}' property getter instead.")
@@ -18479,25 +21946,33 @@ class ProjectJwtTemplatesUserTemplate(dict):
     def __init__(__self__, *,
                  name: _builtins.str,
                  template: _builtins.str,
+                 add_jti_claim: Optional[_builtins.bool] = None,
                  auth_schema: Optional[_builtins.str] = None,
                  auto_tenant_claim: Optional[_builtins.bool] = None,
                  conformance_issuer: Optional[_builtins.bool] = None,
                  description: Optional[_builtins.str] = None,
                  empty_claim_policy: Optional[_builtins.str] = None,
                  enforce_issuer: Optional[_builtins.bool] = None,
-                 id: Optional[_builtins.str] = None):
+                 exclude_permission_claim: Optional[_builtins.bool] = None,
+                 id: Optional[_builtins.str] = None,
+                 override_subject_claim: Optional[_builtins.bool] = None):
         """
         :param _builtins.str name: Name of the JWT Template.
         :param _builtins.str template: The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
+        :param _builtins.bool add_jti_claim: When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
         :param _builtins.str auth_schema: The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
         :param _builtins.bool auto_tenant_claim: When a user is associated with a single tenant, the tenant will be set as the user's active tenant, using the `dct` (Descope Current Tenant) claim in their JWT.
         :param _builtins.bool conformance_issuer: Whether to use OIDC conformance for the JWT issuer field.
         :param _builtins.str description: Description of the JWT Template.
         :param _builtins.str empty_claim_policy: Policy for empty claims - `none`, `nil` or `delete`.
         :param _builtins.bool enforce_issuer: Whether to enforce that the JWT issuer matches the project configuration.
+        :param _builtins.bool exclude_permission_claim: When enabled, permissions will not be included in the JWT token.
+        :param _builtins.bool override_subject_claim: Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "template", template)
+        if add_jti_claim is not None:
+            pulumi.set(__self__, "add_jti_claim", add_jti_claim)
         if auth_schema is not None:
             pulumi.set(__self__, "auth_schema", auth_schema)
         if auto_tenant_claim is not None:
@@ -18510,8 +21985,12 @@ class ProjectJwtTemplatesUserTemplate(dict):
             pulumi.set(__self__, "empty_claim_policy", empty_claim_policy)
         if enforce_issuer is not None:
             pulumi.set(__self__, "enforce_issuer", enforce_issuer)
+        if exclude_permission_claim is not None:
+            pulumi.set(__self__, "exclude_permission_claim", exclude_permission_claim)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if override_subject_claim is not None:
+            pulumi.set(__self__, "override_subject_claim", override_subject_claim)
 
     @_builtins.property
     @pulumi.getter
@@ -18528,6 +22007,14 @@ class ProjectJwtTemplatesUserTemplate(dict):
         The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
         """
         return pulumi.get(self, "template")
+
+    @_builtins.property
+    @pulumi.getter(name="addJtiClaim")
+    def add_jti_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+        """
+        return pulumi.get(self, "add_jti_claim")
 
     @_builtins.property
     @pulumi.getter(name="authSchema")
@@ -18578,9 +22065,25 @@ class ProjectJwtTemplatesUserTemplate(dict):
         return pulumi.get(self, "enforce_issuer")
 
     @_builtins.property
+    @pulumi.getter(name="excludePermissionClaim")
+    def exclude_permission_claim(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, permissions will not be included in the JWT token.
+        """
+        return pulumi.get(self, "exclude_permission_claim")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="overrideSubjectClaim")
+    def override_subject_claim(self) -> Optional[_builtins.bool]:
+        """
+        Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+        """
+        return pulumi.get(self, "override_subject_claim")
 
 
 @pulumi.output_type
@@ -18686,6 +22189,8 @@ class ProjectProjectSettings(dict):
             suggest = "session_token_response_method"
         elif key == "stepUpTokenExpiration":
             suggest = "step_up_token_expiration"
+        elif key == "tenantUserIsolation":
+            suggest = "tenant_user_isolation"
         elif key == "testUsersLoginidRegexp":
             suggest = "test_users_loginid_regexp"
         elif key == "testUsersStaticOtp":
@@ -18728,6 +22233,7 @@ class ProjectProjectSettings(dict):
                  session_token_expiration: Optional[_builtins.str] = None,
                  session_token_response_method: Optional[_builtins.str] = None,
                  step_up_token_expiration: Optional[_builtins.str] = None,
+                 tenant_user_isolation: Optional[_builtins.bool] = None,
                  test_users_loginid_regexp: Optional[_builtins.str] = None,
                  test_users_static_otp: Optional[_builtins.str] = None,
                  test_users_verifier_regexp: Optional[_builtins.str] = None,
@@ -18753,6 +22259,7 @@ class ProjectProjectSettings(dict):
         :param _builtins.str session_token_expiration: The expiry time of the session token, used for accessing the application's resources. The value needs to be at least 3 minutes and can't be longer than the refresh token expiration.
         :param _builtins.str session_token_response_method: Configure how sessions tokens are managed by the Descope SDKs. Must be either `response_body` or `cookies`. The default value is `response_body`.
         :param _builtins.str step_up_token_expiration: The expiry time for the step up token, after which it will not be valid and the user will automatically go back to the session token.
+        :param _builtins.bool tenant_user_isolation: When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
         :param _builtins.str test_users_loginid_regexp: Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
         :param _builtins.str test_users_static_otp: A 6 digit static OTP code for use with test users.
         :param _builtins.str test_users_verifier_regexp: The pattern of the verifiers that will be used for testing.
@@ -18797,6 +22304,8 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "session_token_response_method", session_token_response_method)
         if step_up_token_expiration is not None:
             pulumi.set(__self__, "step_up_token_expiration", step_up_token_expiration)
+        if tenant_user_isolation is not None:
+            pulumi.set(__self__, "tenant_user_isolation", tenant_user_isolation)
         if test_users_loginid_regexp is not None:
             pulumi.set(__self__, "test_users_loginid_regexp", test_users_loginid_regexp)
         if test_users_static_otp is not None:
@@ -18961,6 +22470,14 @@ class ProjectProjectSettings(dict):
         return pulumi.get(self, "step_up_token_expiration")
 
     @_builtins.property
+    @pulumi.getter(name="tenantUserIsolation")
+    def tenant_user_isolation(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+        """
+        return pulumi.get(self, "tenant_user_isolation")
+
+    @_builtins.property
     @pulumi.getter(name="testUsersLoginidRegexp")
     def test_users_loginid_regexp(self) -> Optional[_builtins.str]:
         """
@@ -19006,10 +22523,16 @@ class ProjectProjectSettingsSessionMigration(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "clientId":
+        if key == "apiToken":
+            suggest = "api_token"
+        elif key == "clientId":
             suggest = "client_id"
         elif key == "loginidMatchedAttributes":
             suggest = "loginid_matched_attributes"
+        elif key == "userMappings":
+            suggest = "user_mappings"
+        elif key == "userSyncType":
+            suggest = "user_sync_type"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectProjectSettingsSessionMigration. Access the value via the '{suggest}' property getter instead.")
@@ -19023,20 +22546,28 @@ class ProjectProjectSettingsSessionMigration(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 api_token: Optional[_builtins.str] = None,
                  audience: Optional[_builtins.str] = None,
                  client_id: Optional[_builtins.str] = None,
                  domain: Optional[_builtins.str] = None,
                  issuer: Optional[_builtins.str] = None,
                  loginid_matched_attributes: Optional[Sequence[_builtins.str]] = None,
+                 user_mappings: Optional[Sequence['outputs.ProjectProjectSettingsSessionMigrationUserMapping']] = None,
+                 user_sync_type: Optional[_builtins.str] = None,
                  vendor: Optional[_builtins.str] = None):
         """
+        :param _builtins.str api_token: An API token for the vendor, required when `vendor` is set to `okta`.
         :param _builtins.str audience: The audience value if needed by the vendor.
         :param _builtins.str client_id: The unique client ID for the vendor.
         :param _builtins.str domain: The domain value if needed by the vendor.
         :param _builtins.str issuer: An issuer URL if needed by the vendor.
         :param Sequence[_builtins.str] loginid_matched_attributes: A set of attributes from the vendor's user that should be used to match with the Descope user's login ID.
+        :param Sequence['ProjectProjectSettingsSessionMigrationUserMappingArgs'] user_mappings: A list of attribute mappings from the external vendor's user to Descope user attributes.
+        :param _builtins.str user_sync_type: The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
         :param _builtins.str vendor: The name of the vendor the sessions are migrated from, in all lowercase.
         """
+        if api_token is not None:
+            pulumi.set(__self__, "api_token", api_token)
         if audience is not None:
             pulumi.set(__self__, "audience", audience)
         if client_id is not None:
@@ -19047,8 +22578,20 @@ class ProjectProjectSettingsSessionMigration(dict):
             pulumi.set(__self__, "issuer", issuer)
         if loginid_matched_attributes is not None:
             pulumi.set(__self__, "loginid_matched_attributes", loginid_matched_attributes)
+        if user_mappings is not None:
+            pulumi.set(__self__, "user_mappings", user_mappings)
+        if user_sync_type is not None:
+            pulumi.set(__self__, "user_sync_type", user_sync_type)
         if vendor is not None:
             pulumi.set(__self__, "vendor", vendor)
+
+    @_builtins.property
+    @pulumi.getter(name="apiToken")
+    def api_token(self) -> Optional[_builtins.str]:
+        """
+        An API token for the vendor, required when `vendor` is set to `okta`.
+        """
+        return pulumi.get(self, "api_token")
 
     @_builtins.property
     @pulumi.getter
@@ -19091,12 +22634,76 @@ class ProjectProjectSettingsSessionMigration(dict):
         return pulumi.get(self, "loginid_matched_attributes")
 
     @_builtins.property
+    @pulumi.getter(name="userMappings")
+    def user_mappings(self) -> Optional[Sequence['outputs.ProjectProjectSettingsSessionMigrationUserMapping']]:
+        """
+        A list of attribute mappings from the external vendor's user to Descope user attributes.
+        """
+        return pulumi.get(self, "user_mappings")
+
+    @_builtins.property
+    @pulumi.getter(name="userSyncType")
+    def user_sync_type(self) -> Optional[_builtins.str]:
+        """
+        The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+        """
+        return pulumi.get(self, "user_sync_type")
+
+    @_builtins.property
     @pulumi.getter
     def vendor(self) -> Optional[_builtins.str]:
         """
         The name of the vendor the sessions are migrated from, in all lowercase.
         """
         return pulumi.get(self, "vendor")
+
+
+@pulumi.output_type
+class ProjectProjectSettingsSessionMigrationUserMapping(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "descopeKey":
+            suggest = "descope_key"
+        elif key == "externalKey":
+            suggest = "external_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectProjectSettingsSessionMigrationUserMapping. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectProjectSettingsSessionMigrationUserMapping.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectProjectSettingsSessionMigrationUserMapping.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 descope_key: _builtins.str,
+                 external_key: _builtins.str):
+        """
+        :param _builtins.str descope_key: The Descope user attribute to map the external key to.
+        :param _builtins.str external_key: The attribute key in the external vendor's user object.
+        """
+        pulumi.set(__self__, "descope_key", descope_key)
+        pulumi.set(__self__, "external_key", external_key)
+
+    @_builtins.property
+    @pulumi.getter(name="descopeKey")
+    def descope_key(self) -> _builtins.str:
+        """
+        The Descope user attribute to map the external key to.
+        """
+        return pulumi.get(self, "descope_key")
+
+    @_builtins.property
+    @pulumi.getter(name="externalKey")
+    def external_key(self) -> _builtins.str:
+        """
+        The attribute key in the external vendor's user object.
+        """
+        return pulumi.get(self, "external_key")
 
 
 @pulumi.output_type

@@ -134,6 +134,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? StepUpTokenExpiration { get; set; }
 
         /// <summary>
+        /// When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+        /// </summary>
+        [Input("tenantUserIsolation")]
+        public Input<bool>? TenantUserIsolation { get; set; }
+
+        /// <summary>
         /// Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
         /// </summary>
         [Input("testUsersLoginidRegexp")]

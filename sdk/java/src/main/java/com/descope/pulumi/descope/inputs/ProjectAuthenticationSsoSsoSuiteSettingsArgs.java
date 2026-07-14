@@ -62,6 +62,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     }
 
     /**
+     * Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+     * 
+     */
+    @Import(name="hideJitGuide")
+    private @Nullable Output<Boolean> hideJitGuide;
+
+    /**
+     * @return Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+     * 
+     */
+    public Optional<Output<Boolean>> hideJitGuide() {
+        return Optional.ofNullable(this.hideJitGuide);
+    }
+
+    /**
      * Setting this to `true` will hide the OIDC configuration option.
      * 
      */
@@ -107,6 +122,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     }
 
     /**
+     * Whether to display the help/support contact link in the SSO Suite UI.
+     * 
+     */
+    @Import(name="showHelpContact")
+    private @Nullable Output<Boolean> showHelpContact;
+
+    /**
+     * @return Whether to display the help/support contact link in the SSO Suite UI.
+     * 
+     */
+    public Optional<Output<Boolean>> showHelpContact() {
+        return Optional.ofNullable(this.showHelpContact);
+    }
+
+    /**
      * Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
      * 
      */
@@ -121,16 +151,34 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
         return Optional.ofNullable(this.styleId);
     }
 
+    /**
+     * Email address shown to end-users in the SSO Suite UI as a support contact.
+     * 
+     */
+    @Import(name="supportEmail")
+    private @Nullable Output<String> supportEmail;
+
+    /**
+     * @return Email address shown to end-users in the SSO Suite UI as a support contact.
+     * 
+     */
+    public Optional<Output<String>> supportEmail() {
+        return Optional.ofNullable(this.supportEmail);
+    }
+
     private ProjectAuthenticationSsoSsoSuiteSettingsArgs() {}
 
     private ProjectAuthenticationSsoSsoSuiteSettingsArgs(ProjectAuthenticationSsoSsoSuiteSettingsArgs $) {
         this.forceDomainVerification = $.forceDomainVerification;
         this.hideDomains = $.hideDomains;
         this.hideGroupsMapping = $.hideGroupsMapping;
+        this.hideJitGuide = $.hideJitGuide;
         this.hideOidc = $.hideOidc;
         this.hideSaml = $.hideSaml;
         this.hideScim = $.hideScim;
+        this.showHelpContact = $.showHelpContact;
         this.styleId = $.styleId;
+        this.supportEmail = $.supportEmail;
     }
 
     public static Builder builder() {
@@ -215,6 +263,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
         }
 
         /**
+         * @param hideJitGuide Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideJitGuide(@Nullable Output<Boolean> hideJitGuide) {
+            $.hideJitGuide = hideJitGuide;
+            return this;
+        }
+
+        /**
+         * @param hideJitGuide Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideJitGuide(Boolean hideJitGuide) {
+            return hideJitGuide(Output.of(hideJitGuide));
+        }
+
+        /**
          * @param hideOidc Setting this to `true` will hide the OIDC configuration option.
          * 
          * @return builder
@@ -278,6 +347,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
         }
 
         /**
+         * @param showHelpContact Whether to display the help/support contact link in the SSO Suite UI.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder showHelpContact(@Nullable Output<Boolean> showHelpContact) {
+            $.showHelpContact = showHelpContact;
+            return this;
+        }
+
+        /**
+         * @param showHelpContact Whether to display the help/support contact link in the SSO Suite UI.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder showHelpContact(Boolean showHelpContact) {
+            return showHelpContact(Output.of(showHelpContact));
+        }
+
+        /**
          * @param styleId Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
          * 
          * @return builder
@@ -296,6 +386,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
          */
         public Builder styleId(String styleId) {
             return styleId(Output.of(styleId));
+        }
+
+        /**
+         * @param supportEmail Email address shown to end-users in the SSO Suite UI as a support contact.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder supportEmail(@Nullable Output<String> supportEmail) {
+            $.supportEmail = supportEmail;
+            return this;
+        }
+
+        /**
+         * @param supportEmail Email address shown to end-users in the SSO Suite UI as a support contact.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder supportEmail(String supportEmail) {
+            return supportEmail(Output.of(supportEmail));
         }
 
         public ProjectAuthenticationSsoSsoSuiteSettingsArgs build() {

@@ -6,6 +6,272 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+ *
+ * This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
+ *
+ * For a full reference of all supported connectors, see the [connectors reference](https://docs.descope.com/connectors) in the Descope documentation.
+ *
+ * ## Example Usage
+ *
+ * ### Basic Project
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     environment: "production",
+ *     tags: [
+ *         "prod",
+ *         "v2",
+ *     ],
+ * });
+ * ```
+ *
+ * ### Authentication Methods
+ *
+ * Enable and configure the authentication methods your users will use:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     authentication: {
+ *         magicLink: {
+ *             expirationTime: "1 hour",
+ *         },
+ *         password: {
+ *             lock: true,
+ *             lockAttempts: 5,
+ *             minLength: 12,
+ *         },
+ *         otp: {
+ *             expirationTime: "5 minutes",
+ *         },
+ *         passkeys: {
+ *             disabled: false,
+ *         },
+ *     },
+ * });
+ * ```
+ *
+ * ### Roles and Permissions (RBAC)
+ *
+ * Define roles and permissions for your users:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     authorization: {
+ *         permissions: [
+ *             {
+ *                 name: "read:data",
+ *                 description: "Read access to application data",
+ *             },
+ *             {
+ *                 name: "write:data",
+ *                 description: "Write access to application data",
+ *             },
+ *             {
+ *                 name: "admin:panel",
+ *                 description: "Access to the admin panel",
+ *             },
+ *         ],
+ *         roles: [
+ *             {
+ *                 name: "viewer",
+ *                 description: "Can read data",
+ *                 permissions: ["read:data"],
+ *             },
+ *             {
+ *                 name: "editor",
+ *                 description: "Can read and write data",
+ *                 permissions: [
+ *                     "read:data",
+ *                     "write:data",
+ *                 ],
+ *             },
+ *             {
+ *                 name: "admin",
+ *                 description: "Full access",
+ *                 permissions: [
+ *                     "read:data",
+ *                     "write:data",
+ *                     "admin:panel",
+ *                 ],
+ *             },
+ *         ],
+ *     },
+ * });
+ * ```
+ *
+ * ### Connectors
+ *
+ * Integrate with third-party services to enrich flows and send notifications:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     connectors: {
+ *         https: [{
+ *             name: "User Eligibility Check",
+ *             description: "Checks if a new user is allowed to register",
+ *             baseUrl: "https://api.example.com",
+ *             authentication: {
+ *                 bearerToken: webhookSecret,
+ *             },
+ *         }],
+ *         sendgrids: [{
+ *             name: "Transactional Email",
+ *             sender: {
+ *                 email: "noreply@example.com",
+ *                 name: "My App",
+ *             },
+ *             authentication: {
+ *                 apiKey: sendgridApiKey,
+ *             },
+ *         }],
+ *         twilioCores: [{
+ *             name: "SMS OTP",
+ *             accountSid: twilioAccountSid,
+ *             senders: {
+ *                 sms: {
+ *                     phoneNumber: "+15551234567",
+ *                 },
+ *             },
+ *             authentication: {
+ *                 authToken: twilioAuthToken,
+ *             },
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ### Session Settings
+ *
+ * Configure token lifetimes and session behavior:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     projectSettings: {
+ *         refreshTokenExpiration: "3 weeks",
+ *         sessionTokenExpiration: "15 minutes",
+ *         refreshTokenRotation: true,
+ *         enableInactivity: true,
+ *         inactivityTime: "30 minutes",
+ *         customDomain: "auth.example.com",
+ *         approvedDomains: [
+ *             "example.com",
+ *             "app.example.com",
+ *         ],
+ *     },
+ * });
+ * ```
+ *
+ * ### OIDC Applications
+ *
+ * Register an OIDC application for SSO:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     applications: {
+ *         oidcApplications: [{
+ *             name: "My Web App",
+ *             description: "Primary web application",
+ *             loginPageUrl: "https://app.example.com/login",
+ *         }],
+ *     },
+ * });
+ * ```
+ *
+ * ### JWT Templates
+ *
+ * Customize the JWT claims added to session tokens:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     jwtTemplates: {
+ *         userTemplates: [{
+ *             name: "app-claims",
+ *             description: "Adds subscription tier and org context to user JWTs",
+ *             template: JSON.stringify({
+ *                 tier: "@user.customAttributes.subscriptionTier",
+ *                 org_id: "@user.tenants[0].tenantId",
+ *             }),
+ *             excludePermissionClaim: true,
+ *             addJtiClaim: true,
+ *             overrideSubjectClaim: true,
+ *         }],
+ *     },
+ *     projectSettings: {
+ *         userJwtTemplate: "app-claims",
+ *     },
+ * });
+ * ```
+ *
+ * ### SSO Settings
+ *
+ * Configure global settings for Single Sign-On across tenants:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const example = new descope.Project("example", {
+ *     name: "my-app",
+ *     authentication: {
+ *         sso: {
+ *             mergeUsers: true,
+ *             allowOverrideRoles: true,
+ *             groupsPriority: true,
+ *             requireSsoDomains: true,
+ *             requireGroupsAttributeName: true,
+ *             mandatoryUserAttributes: [
+ *                 {
+ *                     id: "email",
+ *                 },
+ *                 {
+ *                     id: "name",
+ *                 },
+ *                 {
+ *                     id: "department",
+ *                     custom: true,
+ *                 },
+ *             ],
+ *             ssoSuiteSettings: {
+ *                 styleId: "my-brand-style",
+ *                 hideScim: false,
+ *                 hideSaml: false,
+ *                 hideOidc: false,
+ *             },
+ *         },
+ *     },
+ * });
+ * ```
+ */
 export class Project extends pulumi.CustomResource {
     /**
      * Get an existing Project resource's state with the given name, ID, and optional extra

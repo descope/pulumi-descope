@@ -37,6 +37,18 @@ namespace Descope.Pulumi.Descope.Inputs
             set => _samlApplications = value;
         }
 
+        [Input("wsfedApplications")]
+        private InputList<Inputs.ProjectApplicationsWsfedApplicationGetArgs>? _wsfedApplications;
+
+        /// <summary>
+        /// Applications using WS-Federation for authentication.
+        /// </summary>
+        public InputList<Inputs.ProjectApplicationsWsfedApplicationGetArgs> WsfedApplications
+        {
+            get => _wsfedApplications ?? (_wsfedApplications = new InputList<Inputs.ProjectApplicationsWsfedApplicationGetArgs>());
+            set => _wsfedApplications = value;
+        }
+
         public ProjectApplicationsGetArgs()
         {
         }
