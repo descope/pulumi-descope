@@ -40,6 +40,12 @@ jobs:
       with:
         ref: ${{ env.PR_COMMIT_SHA }}
         persist-credentials: false
+    - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      id: app-auth
+      with:
+        app-id: ${{ secrets.RELEASE_APP_ID }}
+        private-key: ${{ secrets.RELEASE_APP_PEM }}
+        owner: ${{ github.repository_owner }}
     - name: Checkout p/examples
       if: matrix.testTarget == 'pulumiExamples'
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -53,7 +59,7 @@ jobs:
         MISE_FETCH_REMOTE_VERSIONS_TIMEOUT: 30s
       with:
         version: 2026.3.7
-        github_token: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
+        github_token: ${{ steps.app-auth.outputs.token }}
         # also save this cache since we are using a different mise env.
         cache_save: true
     - name: Prepare local workspace
