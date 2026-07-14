@@ -41,12 +41,6 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
-      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-        id: app-auth
-        with:
-          app-id: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_APP_ID }}
-          private-key: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
       # Without ldid cross-compiling Node binaries on a Linux worker intended to work on darwin-arm64 fails to sign the
       # binaries properly and they do not work as expected. See https://github.com/pulumi/pulumi-awsx/issues/1490
       - uses: MOZGIII/install-ldid-action@d5ab465f3a66a4d60a59882b935eb30e18e8d043 # v1
@@ -58,7 +52,7 @@ jobs:
           MISE_FETCH_REMOTE_VERSIONS_TIMEOUT: 30s
         with:
           version: 2026.3.7
-          github_token: ${{ steps.app-auth.outputs.token }}
+          github_token: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
           # only saving the cache in the prerequisites job
           cache_save: false
       # Based on https://github.com/actions/cache/blob/main/examples.md#go---modules

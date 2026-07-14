@@ -19,3 +19,5 @@ registryDocs: true
 publishRegistry: false
 autoMergeProviderUpgrades: true
 major-version: 1
+github-app:
+    enabled: false
