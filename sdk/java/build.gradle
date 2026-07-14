@@ -96,7 +96,7 @@ publishing {
                 inceptionYear = ""
                 name = ""
                 packaging = "jar"
-                description = "A Pulumi package for creating and managing descope cloud resources."
+                description = $/A Pulumi package for creating and managing descope cloud resources./$
 
                 url = "https://github.com/descope/pulumi-descope"
 

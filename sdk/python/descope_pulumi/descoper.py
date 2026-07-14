@@ -23,10 +23,11 @@ class DescoperArgs:
     def __init__(__self__, *,
                  email: pulumi.Input[_builtins.str],
                  rbac: pulumi.Input['DescoperRbacArgs'],
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 phone: Optional[pulumi.Input[_builtins.str]] = None):
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 phone: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a Descoper resource.
+
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input['DescoperRbacArgs'] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
@@ -65,38 +66,39 @@ class DescoperArgs:
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The display name of the Descope console user.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def phone(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def phone(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The phone number of the Descope console user.
         """
         return pulumi.get(self, "phone")
 
     @phone.setter
-    def phone(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def phone(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "phone", value)
 
 
 @pulumi.input_type
 class _DescoperState:
     def __init__(__self__, *,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 phone: Optional[pulumi.Input[_builtins.str]] = None,
-                 rbac: Optional[pulumi.Input['DescoperRbacArgs']] = None):
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 phone: pulumi.Input[Optional[_builtins.str]] = None,
+                 rbac: pulumi.Input[Optional['DescoperRbacArgs']] = None):
         """
         Input properties used for looking up and filtering Descoper resources.
+
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
         :param pulumi.Input[_builtins.str] phone: The phone number of the Descope console user.
@@ -113,50 +115,50 @@ class _DescoperState:
 
     @_builtins.property
     @pulumi.getter
-    def email(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def email(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The email address of the Descope console user.
         """
         return pulumi.get(self, "email")
 
     @email.setter
-    def email(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def email(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The display name of the Descope console user.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter
-    def phone(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def phone(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The phone number of the Descope console user.
         """
         return pulumi.get(self, "phone")
 
     @phone.setter
-    def phone(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def phone(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "phone", value)
 
     @_builtins.property
     @pulumi.getter
-    def rbac(self) -> Optional[pulumi.Input['DescoperRbacArgs']]:
+    def rbac(self) -> pulumi.Input[Optional['DescoperRbacArgs']]:
         """
         Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
         """
         return pulumi.get(self, "rbac")
 
     @rbac.setter
-    def rbac(self, value: Optional[pulumi.Input['DescoperRbacArgs']]):
+    def rbac(self, value: pulumi.Input[Optional['DescoperRbacArgs']]):
         pulumi.set(self, "rbac", value)
 
 
@@ -166,10 +168,10 @@ class Descoper(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 phone: Optional[pulumi.Input[_builtins.str]] = None,
-                 rbac: Optional[pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 phone: pulumi.Input[Optional[_builtins.str]] = None,
+                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
                  __props__=None):
         """
         Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
@@ -257,6 +259,7 @@ class Descoper(pulumi.CustomResource):
                 ],
             })
         ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -358,6 +361,7 @@ class Descoper(pulumi.CustomResource):
             })
         ```
 
+
         :param str resource_name: The name of the resource.
         :param DescoperArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -373,10 +377,10 @@ class Descoper(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 email: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 phone: Optional[pulumi.Input[_builtins.str]] = None,
-                 rbac: Optional[pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
+                 email: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 phone: pulumi.Input[Optional[_builtins.str]] = None,
+                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -404,10 +408,10 @@ class Descoper(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            email: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            phone: Optional[pulumi.Input[_builtins.str]] = None,
-            rbac: Optional[pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None) -> 'Descoper':
+            email: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            phone: pulumi.Input[Optional[_builtins.str]] = None,
+            rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None) -> 'Descoper':
         """
         Get an existing Descoper resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

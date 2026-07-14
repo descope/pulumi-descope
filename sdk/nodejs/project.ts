@@ -425,67 +425,67 @@ export interface ProjectState {
     /**
      * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
      */
-    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal>;
+    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal | undefined>;
     /**
      * Applications that are registered with the project.
      */
-    applications?: pulumi.Input<inputs.ProjectApplications>;
+    applications?: pulumi.Input<inputs.ProjectApplications | undefined>;
     /**
      * Custom attributes that can be attached to users and tenants.
      */
-    attributes?: pulumi.Input<inputs.ProjectAttributes>;
+    attributes?: pulumi.Input<inputs.ProjectAttributes | undefined>;
     /**
      * Settings for each authentication method.
      */
-    authentication?: pulumi.Input<inputs.ProjectAuthentication>;
+    authentication?: pulumi.Input<inputs.ProjectAuthentication | undefined>;
     /**
      * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
      */
-    authorization?: pulumi.Input<inputs.ProjectAuthorization>;
+    authorization?: pulumi.Input<inputs.ProjectAuthorization | undefined>;
     /**
      * Enrich your flows by interacting with third party services.
      */
-    connectors?: pulumi.Input<inputs.ProjectConnectors>;
+    connectors?: pulumi.Input<inputs.ProjectConnectors | undefined>;
     /**
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * Custom authentication flows to use in this project.
      */
-    flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>} | undefined>;
     /**
      * User invitation settings and behavior.
      */
-    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings>;
+    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings | undefined>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
-    jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates | undefined>;
     /**
      * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
      */
-    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[] | undefined>;
     /**
      * The name of the Descope project.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * General settings for the Descope project.
      */
-    projectSettings?: pulumi.Input<inputs.ProjectProjectSettings>;
+    projectSettings?: pulumi.Input<inputs.ProjectProjectSettings | undefined>;
     /**
      * Custom styles that can be applied to the project's authentication flows.
      */
-    styles?: pulumi.Input<inputs.ProjectStyles>;
+    styles?: pulumi.Input<inputs.ProjectStyles | undefined>;
     /**
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
      */
-    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>}>;
+    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>} | undefined>;
 }
 
 /**
@@ -495,65 +495,65 @@ export interface ProjectArgs {
     /**
      * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
      */
-    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal>;
+    adminPortal?: pulumi.Input<inputs.ProjectAdminPortal | undefined>;
     /**
      * Applications that are registered with the project.
      */
-    applications?: pulumi.Input<inputs.ProjectApplications>;
+    applications?: pulumi.Input<inputs.ProjectApplications | undefined>;
     /**
      * Custom attributes that can be attached to users and tenants.
      */
-    attributes?: pulumi.Input<inputs.ProjectAttributes>;
+    attributes?: pulumi.Input<inputs.ProjectAttributes | undefined>;
     /**
      * Settings for each authentication method.
      */
-    authentication?: pulumi.Input<inputs.ProjectAuthentication>;
+    authentication?: pulumi.Input<inputs.ProjectAuthentication | undefined>;
     /**
      * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
      */
-    authorization?: pulumi.Input<inputs.ProjectAuthorization>;
+    authorization?: pulumi.Input<inputs.ProjectAuthorization | undefined>;
     /**
      * Enrich your flows by interacting with third party services.
      */
-    connectors?: pulumi.Input<inputs.ProjectConnectors>;
+    connectors?: pulumi.Input<inputs.ProjectConnectors | undefined>;
     /**
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * Custom authentication flows to use in this project.
      */
-    flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>}>;
+    flows?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectFlows>} | undefined>;
     /**
      * User invitation settings and behavior.
      */
-    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings>;
+    inviteSettings?: pulumi.Input<inputs.ProjectInviteSettings | undefined>;
     /**
      * Defines templates for JSON Web Tokens (JWT) used for authentication.
      */
-    jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates>;
+    jwtTemplates?: pulumi.Input<inputs.ProjectJwtTemplates | undefined>;
     /**
      * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
      */
-    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[]>;
+    lists?: pulumi.Input<pulumi.Input<inputs.ProjectList>[] | undefined>;
     /**
      * The name of the Descope project.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * General settings for the Descope project.
      */
-    projectSettings?: pulumi.Input<inputs.ProjectProjectSettings>;
+    projectSettings?: pulumi.Input<inputs.ProjectProjectSettings | undefined>;
     /**
      * Custom styles that can be applied to the project's authentication flows.
      */
-    styles?: pulumi.Input<inputs.ProjectStyles>;
+    styles?: pulumi.Input<inputs.ProjectStyles | undefined>;
     /**
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
      */
-    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>}>;
+    widgets?: pulumi.Input<{[key: string]: pulumi.Input<inputs.ProjectWidgets>} | undefined>;
 }

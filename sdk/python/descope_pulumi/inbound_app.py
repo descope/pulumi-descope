@@ -22,24 +22,25 @@ __all__ = ['InboundAppArgs', 'InboundApp']
 class InboundAppArgs:
     def __init__(__self__, *,
                  project_id: pulumi.Input[_builtins.str],
-                 approved_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
-                 audience_whitelists: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 connections_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
-                 default_audience: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 force_add_all_authorization_info: Optional[pulumi.Input[_builtins.bool]] = None,
-                 force_pkce: Optional[pulumi.Input[_builtins.bool]] = None,
-                 login_page_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 logo_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 non_confidential_client: Optional[pulumi.Input[_builtins.bool]] = None,
-                 permissions_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
-                 session_settings: Optional[pulumi.Input['InboundAppSessionSettingsArgs']] = None):
+                 approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
+                 audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
+                 default_audience: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 logo_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 non_confidential_client: pulumi.Input[Optional[_builtins.bool]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
+                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None):
         """
         The set of arguments for constructing a InboundApp resource.
+
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
@@ -106,219 +107,220 @@ class InboundAppArgs:
 
     @_builtins.property
     @pulumi.getter(name="approvedCallbackUrls")
-    def approved_callback_urls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def approved_callback_urls(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         """
         return pulumi.get(self, "approved_callback_urls")
 
     @approved_callback_urls.setter
-    def approved_callback_urls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def approved_callback_urls(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "approved_callback_urls", value)
 
     @_builtins.property
     @pulumi.getter(name="attributesScopes")
-    def attributes_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]:
+    def attributes_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]:
         """
         A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         """
         return pulumi.get(self, "attributes_scopes")
 
     @attributes_scopes.setter
-    def attributes_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]):
+    def attributes_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]):
         pulumi.set(self, "attributes_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="audienceWhitelists")
-    def audience_whitelists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def audience_whitelists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
         """
         return pulumi.get(self, "audience_whitelists")
 
     @audience_whitelists.setter
-    def audience_whitelists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def audience_whitelists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "audience_whitelists", value)
 
     @_builtins.property
     @pulumi.getter(name="clientId")
-    def client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
-    def client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_id", value)
 
     @_builtins.property
     @pulumi.getter(name="clientSecret")
-    def client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
-    def client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_secret", value)
 
     @_builtins.property
     @pulumi.getter(name="connectionsScopes")
-    def connections_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]:
+    def connections_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]:
         """
         A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         """
         return pulumi.get(self, "connections_scopes")
 
     @connections_scopes.setter
-    def connections_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
+    def connections_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
         pulumi.set(self, "connections_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultAudience")
-    def default_audience(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def default_audience(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         """
         return pulumi.get(self, "default_audience")
 
     @default_audience.setter
-    def default_audience(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def default_audience(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "default_audience", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the inbound app.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="forceAddAllAuthorizationInfo")
-    def force_add_all_authorization_info(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def force_add_all_authorization_info(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         """
         return pulumi.get(self, "force_add_all_authorization_info")
 
     @force_add_all_authorization_info.setter
-    def force_add_all_authorization_info(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def force_add_all_authorization_info(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_add_all_authorization_info", value)
 
     @_builtins.property
     @pulumi.getter(name="forcePkce")
-    def force_pkce(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def force_pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         """
         return pulumi.get(self, "force_pkce")
 
     @force_pkce.setter
-    def force_pkce(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def force_pkce(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_pkce", value)
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
-    def login_page_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def login_page_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Flow Hosting URL.
         """
         return pulumi.get(self, "login_page_url")
 
     @login_page_url.setter
-    def login_page_url(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def login_page_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "login_page_url", value)
 
     @_builtins.property
     @pulumi.getter(name="logoUrl")
-    def logo_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def logo_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A URL to the inbound app's logo image.
         """
         return pulumi.get(self, "logo_url")
 
     @logo_url.setter
-    def logo_url(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def logo_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "logo_url", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the inbound app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="nonConfidentialClient")
-    def non_confidential_client(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def non_confidential_client(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
         """
         return pulumi.get(self, "non_confidential_client")
 
     @non_confidential_client.setter
-    def non_confidential_client(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def non_confidential_client(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "non_confidential_client", value)
 
     @_builtins.property
     @pulumi.getter(name="permissionsScopes")
-    def permissions_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]:
+    def permissions_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]:
         """
         A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         """
         return pulumi.get(self, "permissions_scopes")
 
     @permissions_scopes.setter
-    def permissions_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]):
+    def permissions_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]):
         pulumi.set(self, "permissions_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="sessionSettings")
-    def session_settings(self) -> Optional[pulumi.Input['InboundAppSessionSettingsArgs']]:
+    def session_settings(self) -> pulumi.Input[Optional['InboundAppSessionSettingsArgs']]:
         """
         Custom session management settings for this inbound app, overriding the project defaults.
         """
         return pulumi.get(self, "session_settings")
 
     @session_settings.setter
-    def session_settings(self, value: Optional[pulumi.Input['InboundAppSessionSettingsArgs']]):
+    def session_settings(self, value: pulumi.Input[Optional['InboundAppSessionSettingsArgs']]):
         pulumi.set(self, "session_settings", value)
 
 
 @pulumi.input_type
 class _InboundAppState:
     def __init__(__self__, *,
-                 approved_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
-                 audience_whitelists: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 connections_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
-                 default_audience: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 force_add_all_authorization_info: Optional[pulumi.Input[_builtins.bool]] = None,
-                 force_pkce: Optional[pulumi.Input[_builtins.bool]] = None,
-                 login_page_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 logo_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 non_confidential_client: Optional[pulumi.Input[_builtins.bool]] = None,
-                 permissions_scopes: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 session_settings: Optional[pulumi.Input['InboundAppSessionSettingsArgs']] = None):
+                 approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
+                 audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
+                 default_audience: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 logo_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 non_confidential_client: pulumi.Input[Optional[_builtins.bool]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None):
         """
         Input properties used for looking up and filtering InboundApp resources.
+
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
@@ -374,206 +376,206 @@ class _InboundAppState:
 
     @_builtins.property
     @pulumi.getter(name="approvedCallbackUrls")
-    def approved_callback_urls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def approved_callback_urls(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         """
         return pulumi.get(self, "approved_callback_urls")
 
     @approved_callback_urls.setter
-    def approved_callback_urls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def approved_callback_urls(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "approved_callback_urls", value)
 
     @_builtins.property
     @pulumi.getter(name="attributesScopes")
-    def attributes_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]:
+    def attributes_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]:
         """
         A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         """
         return pulumi.get(self, "attributes_scopes")
 
     @attributes_scopes.setter
-    def attributes_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]):
+    def attributes_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]]):
         pulumi.set(self, "attributes_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="audienceWhitelists")
-    def audience_whitelists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def audience_whitelists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
         """
         return pulumi.get(self, "audience_whitelists")
 
     @audience_whitelists.setter
-    def audience_whitelists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def audience_whitelists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "audience_whitelists", value)
 
     @_builtins.property
     @pulumi.getter(name="clientId")
-    def client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         """
         return pulumi.get(self, "client_id")
 
     @client_id.setter
-    def client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_id", value)
 
     @_builtins.property
     @pulumi.getter(name="clientSecret")
-    def client_secret(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         """
         return pulumi.get(self, "client_secret")
 
     @client_secret.setter
-    def client_secret(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_secret", value)
 
     @_builtins.property
     @pulumi.getter(name="connectionsScopes")
-    def connections_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]:
+    def connections_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]:
         """
         A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         """
         return pulumi.get(self, "connections_scopes")
 
     @connections_scopes.setter
-    def connections_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
+    def connections_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
         pulumi.set(self, "connections_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultAudience")
-    def default_audience(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def default_audience(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         """
         return pulumi.get(self, "default_audience")
 
     @default_audience.setter
-    def default_audience(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def default_audience(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "default_audience", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the inbound app.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="forceAddAllAuthorizationInfo")
-    def force_add_all_authorization_info(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def force_add_all_authorization_info(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         """
         return pulumi.get(self, "force_add_all_authorization_info")
 
     @force_add_all_authorization_info.setter
-    def force_add_all_authorization_info(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def force_add_all_authorization_info(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_add_all_authorization_info", value)
 
     @_builtins.property
     @pulumi.getter(name="forcePkce")
-    def force_pkce(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def force_pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         """
         return pulumi.get(self, "force_pkce")
 
     @force_pkce.setter
-    def force_pkce(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def force_pkce(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_pkce", value)
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
-    def login_page_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def login_page_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The Flow Hosting URL.
         """
         return pulumi.get(self, "login_page_url")
 
     @login_page_url.setter
-    def login_page_url(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def login_page_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "login_page_url", value)
 
     @_builtins.property
     @pulumi.getter(name="logoUrl")
-    def logo_url(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def logo_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A URL to the inbound app's logo image.
         """
         return pulumi.get(self, "logo_url")
 
     @logo_url.setter
-    def logo_url(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def logo_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "logo_url", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the inbound app.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="nonConfidentialClient")
-    def non_confidential_client(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def non_confidential_client(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
         """
         return pulumi.get(self, "non_confidential_client")
 
     @non_confidential_client.setter
-    def non_confidential_client(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def non_confidential_client(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "non_confidential_client", value)
 
     @_builtins.property
     @pulumi.getter(name="permissionsScopes")
-    def permissions_scopes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]:
+    def permissions_scopes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]:
         """
         A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         """
         return pulumi.get(self, "permissions_scopes")
 
     @permissions_scopes.setter
-    def permissions_scopes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]):
+    def permissions_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]]):
         pulumi.set(self, "permissions_scopes", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
     @pulumi.getter(name="sessionSettings")
-    def session_settings(self) -> Optional[pulumi.Input['InboundAppSessionSettingsArgs']]:
+    def session_settings(self) -> pulumi.Input[Optional['InboundAppSessionSettingsArgs']]:
         """
         Custom session management settings for this inbound app, overriding the project defaults.
         """
         return pulumi.get(self, "session_settings")
 
     @session_settings.setter
-    def session_settings(self, value: Optional[pulumi.Input['InboundAppSessionSettingsArgs']]):
+    def session_settings(self, value: pulumi.Input[Optional['InboundAppSessionSettingsArgs']]):
         pulumi.set(self, "session_settings", value)
 
 
@@ -583,26 +585,27 @@ class InboundApp(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 approved_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
-                 audience_whitelists: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 connections_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
-                 default_audience: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 force_add_all_authorization_info: Optional[pulumi.Input[_builtins.bool]] = None,
-                 force_pkce: Optional[pulumi.Input[_builtins.bool]] = None,
-                 login_page_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 logo_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 non_confidential_client: Optional[pulumi.Input[_builtins.bool]] = None,
-                 permissions_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 session_settings: Optional[pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
+                 approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+                 audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+                 default_audience: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 logo_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 non_confidential_client: pulumi.Input[Optional[_builtins.bool]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
                  __props__=None):
         """
         Create a InboundApp resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
@@ -631,6 +634,7 @@ class InboundApp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a InboundApp resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param InboundAppArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -646,23 +650,23 @@ class InboundApp(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 approved_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
-                 audience_whitelists: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_secret: Optional[pulumi.Input[_builtins.str]] = None,
-                 connections_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
-                 default_audience: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 force_add_all_authorization_info: Optional[pulumi.Input[_builtins.bool]] = None,
-                 force_pkce: Optional[pulumi.Input[_builtins.bool]] = None,
-                 login_page_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 logo_url: Optional[pulumi.Input[_builtins.str]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 non_confidential_client: Optional[pulumi.Input[_builtins.bool]] = None,
-                 permissions_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 session_settings: Optional[pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
+                 approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+                 audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+                 default_audience: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 logo_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 non_confidential_client: pulumi.Input[Optional[_builtins.bool]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -703,23 +707,23 @@ class InboundApp(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            approved_callback_urls: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            attributes_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
-            audience_whitelists: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            client_id: Optional[pulumi.Input[_builtins.str]] = None,
-            client_secret: Optional[pulumi.Input[_builtins.str]] = None,
-            connections_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
-            default_audience: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            force_add_all_authorization_info: Optional[pulumi.Input[_builtins.bool]] = None,
-            force_pkce: Optional[pulumi.Input[_builtins.bool]] = None,
-            login_page_url: Optional[pulumi.Input[_builtins.str]] = None,
-            logo_url: Optional[pulumi.Input[_builtins.str]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            non_confidential_client: Optional[pulumi.Input[_builtins.bool]] = None,
-            permissions_scopes: Optional[pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
-            project_id: Optional[pulumi.Input[_builtins.str]] = None,
-            session_settings: Optional[pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None) -> 'InboundApp':
+            approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+            audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+            default_audience: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+            force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+            login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
+            logo_url: pulumi.Input[Optional[_builtins.str]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            non_confidential_client: pulumi.Input[Optional[_builtins.bool]] = None,
+            permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+            project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None) -> 'InboundApp':
         """
         Get an existing InboundApp resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

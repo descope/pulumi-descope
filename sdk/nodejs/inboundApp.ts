@@ -170,71 +170,71 @@ export interface InboundAppState {
     /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      */
-    approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
      */
-    attributesScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppAttributesScope>[]>;
+    attributesScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppAttributesScope>[] | undefined>;
     /**
      * A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
      */
-    audienceWhitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    audienceWhitelists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
      */
-    clientSecret?: pulumi.Input<string>;
+    clientSecret?: pulumi.Input<string | undefined>;
     /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
-    connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[]>;
+    connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
     /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
-    defaultAudience?: pulumi.Input<string>;
+    defaultAudience?: pulumi.Input<string | undefined>;
     /**
      * A description for the inbound app.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
      */
-    forceAddAllAuthorizationInfo?: pulumi.Input<boolean>;
+    forceAddAllAuthorizationInfo?: pulumi.Input<boolean | undefined>;
     /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      */
-    forcePkce?: pulumi.Input<boolean>;
+    forcePkce?: pulumi.Input<boolean | undefined>;
     /**
      * The Flow Hosting URL.
      */
-    loginPageUrl?: pulumi.Input<string>;
+    loginPageUrl?: pulumi.Input<string | undefined>;
     /**
      * A URL to the inbound app's logo image.
      */
-    logoUrl?: pulumi.Input<string>;
+    logoUrl?: pulumi.Input<string | undefined>;
     /**
      * A name for the inbound app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
      */
-    nonConfidentialClient?: pulumi.Input<boolean>;
+    nonConfidentialClient?: pulumi.Input<boolean | undefined>;
     /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      */
-    permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[]>;
+    permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[] | undefined>;
     /**
      * The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
-    sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings>;
+    sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings | undefined>;
 }
 
 /**
@@ -244,63 +244,63 @@ export interface InboundAppArgs {
     /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      */
-    approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
      */
-    attributesScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppAttributesScope>[]>;
+    attributesScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppAttributesScope>[] | undefined>;
     /**
      * A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
      */
-    audienceWhitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    audienceWhitelists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
      */
-    clientSecret?: pulumi.Input<string>;
+    clientSecret?: pulumi.Input<string | undefined>;
     /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
-    connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[]>;
+    connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
     /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
-    defaultAudience?: pulumi.Input<string>;
+    defaultAudience?: pulumi.Input<string | undefined>;
     /**
      * A description for the inbound app.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
      */
-    forceAddAllAuthorizationInfo?: pulumi.Input<boolean>;
+    forceAddAllAuthorizationInfo?: pulumi.Input<boolean | undefined>;
     /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      */
-    forcePkce?: pulumi.Input<boolean>;
+    forcePkce?: pulumi.Input<boolean | undefined>;
     /**
      * The Flow Hosting URL.
      */
-    loginPageUrl?: pulumi.Input<string>;
+    loginPageUrl?: pulumi.Input<string | undefined>;
     /**
      * A URL to the inbound app's logo image.
      */
-    logoUrl?: pulumi.Input<string>;
+    logoUrl?: pulumi.Input<string | undefined>;
     /**
      * A name for the inbound app.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
      */
-    nonConfidentialClient?: pulumi.Input<boolean>;
+    nonConfidentialClient?: pulumi.Input<boolean | undefined>;
     /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      */
-    permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[]>;
+    permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[] | undefined>;
     /**
      * The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
      */
@@ -308,5 +308,5 @@ export interface InboundAppArgs {
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
-    sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings>;
+    sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings | undefined>;
 }

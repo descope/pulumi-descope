@@ -1,0 +1,3 @@
+name: descope
+description: A Pulumi resource provider for descope.
+language: dotnet

@@ -155,60 +155,60 @@ export interface AccessKeyState {
     /**
      * The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
      */
-    boundUserId?: pulumi.Input<string>;
+    boundUserId?: pulumi.Input<string | undefined>;
     /**
      * The plaintext value of the access key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to exchange the key for a JWT.
      */
-    cleartext?: pulumi.Input<string>;
-    clientId?: pulumi.Input<string>;
+    cleartext?: pulumi.Input<string | undefined>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the user or management key that created the access key. This value is set by the server and is read-only.
      */
-    createdBy?: pulumi.Input<string>;
+    createdBy?: pulumi.Input<string | undefined>;
     /**
      * The time the access key was created, as a Unix timestamp. This value is set by the server and is read-only.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * A JSON-encoded object of custom attribute values for the access key. The attributes must be defined in the project's access key custom attribute schema.
      */
-    customAttributes?: pulumi.Input<string>;
+    customAttributes?: pulumi.Input<string | undefined>;
     /**
      * A JSON-encoded object of custom claims to add to the JWT created when the access key is exchanged.
      */
-    customClaims?: pulumi.Input<string>;
+    customClaims?: pulumi.Input<string | undefined>;
     /**
      * A description for the access key.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The expiration time of the access key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the access key to be replaced.
      */
-    expireTime?: pulumi.Input<number>;
+    expireTime?: pulumi.Input<number | undefined>;
     /**
      * A name for the access key.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * A list of IP addresses or CIDR ranges that are allowed to use this access key. If not set, the key can be used from any IP address.
      */
-    permittedIps?: pulumi.Input<pulumi.Input<string>[]>;
+    permittedIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
      */
-    roles?: pulumi.Input<pulumi.Input<string>[]>;
+    roles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
      */
-    tenants?: pulumi.Input<pulumi.Input<inputs.AccessKeyTenant>[]>;
+    tenants?: pulumi.Input<pulumi.Input<inputs.AccessKeyTenant>[] | undefined>;
 }
 
 /**
@@ -218,31 +218,31 @@ export interface AccessKeyArgs {
     /**
      * The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
      */
-    boundUserId?: pulumi.Input<string>;
+    boundUserId?: pulumi.Input<string | undefined>;
     /**
      * A JSON-encoded object of custom attribute values for the access key. The attributes must be defined in the project's access key custom attribute schema.
      */
-    customAttributes?: pulumi.Input<string>;
+    customAttributes?: pulumi.Input<string | undefined>;
     /**
      * A JSON-encoded object of custom claims to add to the JWT created when the access key is exchanged.
      */
-    customClaims?: pulumi.Input<string>;
+    customClaims?: pulumi.Input<string | undefined>;
     /**
      * A description for the access key.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The expiration time of the access key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the access key to be replaced.
      */
-    expireTime?: pulumi.Input<number>;
+    expireTime?: pulumi.Input<number | undefined>;
     /**
      * A name for the access key.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * A list of IP addresses or CIDR ranges that are allowed to use this access key. If not set, the key can be used from any IP address.
      */
-    permittedIps?: pulumi.Input<pulumi.Input<string>[]>;
+    permittedIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
      */
@@ -250,13 +250,13 @@ export interface AccessKeyArgs {
     /**
      * A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
      */
-    roles?: pulumi.Input<pulumi.Input<string>[]>;
+    roles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
      */
-    tenants?: pulumi.Input<pulumi.Input<inputs.AccessKeyTenant>[]>;
+    tenants?: pulumi.Input<pulumi.Input<inputs.AccessKeyTenant>[] | undefined>;
 }

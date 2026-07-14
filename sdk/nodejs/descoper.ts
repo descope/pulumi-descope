@@ -184,19 +184,19 @@ export interface DescoperState {
     /**
      * The email address of the Descope console user.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * The display name of the Descope console user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The phone number of the Descope console user.
      */
-    phone?: pulumi.Input<string>;
+    phone?: pulumi.Input<string | undefined>;
     /**
      * Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
      */
-    rbac?: pulumi.Input<inputs.DescoperRbac>;
+    rbac?: pulumi.Input<inputs.DescoperRbac | undefined>;
 }
 
 /**
@@ -210,11 +210,11 @@ export interface DescoperArgs {
     /**
      * The display name of the Descope console user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The phone number of the Descope console user.
      */
-    phone?: pulumi.Input<string>;
+    phone?: pulumi.Input<string | undefined>;
     /**
      * Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
      */

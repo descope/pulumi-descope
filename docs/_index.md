@@ -44,7 +44,7 @@ pulumi preview
 ## Example Usage
 ### Minimal Configuration
 
-{{< chooser language "typescript,python,go,csharp,java,yaml" >}}
+{{< chooser language "typescript,python,go,csharp,java,yaml,hcl" >}}
 {{% choosable language typescript %}}
 ```yaml
 # Pulumi.yaml provider configuration file
@@ -52,10 +52,12 @@ name: configuration-example
 runtime: nodejs
 
 ```
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```yaml
@@ -64,10 +66,12 @@ name: configuration-example
 runtime: python
 
 ```
+
 ```python
 import pulumi
 
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```yaml
@@ -76,6 +80,7 @@ name: configuration-example
 runtime: dotnet
 
 ```
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +91,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```yaml
@@ -94,6 +100,7 @@ name: configuration-example
 runtime: go
 
 ```
+
 ```go
 package main
 
@@ -107,6 +114,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -115,9 +123,11 @@ name: configuration-example
 runtime: yaml
 
 ```
+
 ```yaml
 {}
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```yaml
@@ -126,14 +136,15 @@ name: configuration-example
 runtime: java
 
 ```
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -148,11 +159,18 @@ public class App {
     }
 }
 ```
+
+{{% /choosable %}}
+{{% choosable language hcl %}}
+```hcl
+Example currently unavailable in this language
+```
+
 {{% /choosable %}}
 {{< /chooser >}}
 ### Creating a Project
 
-{{< chooser language "typescript,python,go,csharp,java,yaml" >}}
+{{< chooser language "typescript,python,go,csharp,java,yaml,hcl" >}}
 {{% choosable language typescript %}}
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
@@ -164,6 +182,7 @@ const example = new descope.Project("example", {
     tags: ["prod"],
 });
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```python
@@ -175,6 +194,7 @@ example = descope.Project("example",
     environment="production",
     tags=["prod"])
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```csharp
@@ -198,6 +218,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```go
@@ -224,6 +245,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -236,6 +258,7 @@ resources:
       tags:
         - prod
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```java
@@ -246,8 +269,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.descope.pulumi.descope.Project;
 import com.descope.pulumi.descope.ProjectArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -268,13 +291,32 @@ public class App {
     }
 }
 ```
+
+{{% /choosable %}}
+{{% choosable language hcl %}}
+```hcl
+pulumi {
+  required_providers {
+    descope = {
+      source = "pulumi/descope"
+    }
+  }
+}
+
+resource "descope_project" "example" {
+  name        = "my-app"
+  environment = "production"
+  tags        = ["prod"]
+}
+```
+
 {{% /choosable %}}
 {{< /chooser >}}
 ### Full Provider Configuration
 
 If you need to explicitly configure the provider (e.g. in a module or when not using environment variables):
 
-{{< chooser language "typescript,python,go,csharp,java,yaml" >}}
+{{< chooser language "typescript,python,go,csharp,java,yaml,hcl" >}}
 {{% choosable language typescript %}}
 ```yaml
 # Pulumi.yaml provider configuration file
@@ -285,12 +327,14 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
 const descopeManagementKey = config.require("descopeManagementKey");
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```yaml
@@ -302,12 +346,14 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```python
 import pulumi
 
 config = pulumi.Config()
 descope_management_key = config.require("descopeManagementKey")
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```yaml
@@ -319,6 +365,7 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -331,6 +378,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```yaml
@@ -342,6 +390,7 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```go
 package main
 
@@ -358,6 +407,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -369,11 +419,13 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```yaml
 configuration:
   descopeManagementKey:
     type: string
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```yaml
@@ -385,14 +437,15 @@ config:
         value: 'TODO: var.descope_management_key'
 
 ```
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -405,10 +458,19 @@ public class App {
 
     public static void stack(Context ctx) {
         final var config = ctx.config();
-        final var descopeManagementKey = config.get("descopeManagementKey");
+        final var descopeManagementKey = config.require("descopeManagementKey");
     }
 }
 ```
+
+{{% /choosable %}}
+{{% choosable language hcl %}}
+```hcl
+variable "descopeManagementKey" {
+  type = string
+}
+```
+
 {{% /choosable %}}
 {{< /chooser >}}
 ## Resources
