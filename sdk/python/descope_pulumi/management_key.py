@@ -22,13 +22,14 @@ __all__ = ['ManagementKeyArgs', 'ManagementKey']
 class ManagementKeyArgs:
     def __init__(__self__, *,
                  rebac: pulumi.Input['ManagementKeyRebacArgs'],
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None):
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a ManagementKey resource.
+
         :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
@@ -62,77 +63,78 @@ class ManagementKeyArgs:
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the management key.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="expireTime")
-    def expire_time(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def expire_time(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
-    def expire_time(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def expire_time(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expire_time", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the management key.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="permittedIps")
-    def permitted_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def permitted_ips(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
         """
         return pulumi.get(self, "permitted_ips")
 
     @permitted_ips.setter
-    def permitted_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def permitted_ips(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "permitted_ips", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the management key. Must be either `active` or `inactive`.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
 
 @pulumi.input_type
 class _ManagementKeyState:
     def __init__(__self__, *,
-                 cleartext: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 rebac: Optional[pulumi.Input['ManagementKeyRebacArgs']] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None):
+                 cleartext: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 rebac: pulumi.Input[Optional['ManagementKeyRebacArgs']] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ManagementKey resources.
+
         :param pulumi.Input[_builtins.str] cleartext: The plaintext value of the management key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to authenticate API requests.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
@@ -158,86 +160,86 @@ class _ManagementKeyState:
 
     @_builtins.property
     @pulumi.getter
-    def cleartext(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def cleartext(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The plaintext value of the management key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to authenticate API requests.
         """
         return pulumi.get(self, "cleartext")
 
     @cleartext.setter
-    def cleartext(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def cleartext(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cleartext", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the management key.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="expireTime")
-    def expire_time(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def expire_time(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
-    def expire_time(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def expire_time(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expire_time", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the management key.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="permittedIps")
-    def permitted_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def permitted_ips(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
         """
         return pulumi.get(self, "permitted_ips")
 
     @permitted_ips.setter
-    def permitted_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def permitted_ips(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "permitted_ips", value)
 
     @_builtins.property
     @pulumi.getter
-    def rebac(self) -> Optional[pulumi.Input['ManagementKeyRebacArgs']]:
+    def rebac(self) -> pulumi.Input[Optional['ManagementKeyRebacArgs']]:
         """
         Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
         """
         return pulumi.get(self, "rebac")
 
     @rebac.setter
-    def rebac(self, value: Optional[pulumi.Input['ManagementKeyRebacArgs']]):
+    def rebac(self, value: pulumi.Input[Optional['ManagementKeyRebacArgs']]):
         pulumi.set(self, "rebac", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the management key. Must be either `active` or `inactive`.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
 
@@ -247,12 +249,12 @@ class ManagementKey(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 rebac: Optional[pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
@@ -320,6 +322,7 @@ class ManagementKey(pulumi.CustomResource):
                 }],
             })
         ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -403,6 +406,7 @@ class ManagementKey(pulumi.CustomResource):
             })
         ```
 
+
         :param str resource_name: The name of the resource.
         :param ManagementKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -418,12 +422,12 @@ class ManagementKey(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 rebac: Optional[pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -454,13 +458,13 @@ class ManagementKey(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            cleartext: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            rebac: Optional[pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
-            status: Optional[pulumi.Input[_builtins.str]] = None) -> 'ManagementKey':
+            cleartext: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None) -> 'ManagementKey':
         """
         Get an existing ManagementKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

@@ -22,18 +22,19 @@ __all__ = ['AccessKeyArgs', 'AccessKey']
 class AccessKeyArgs:
     def __init__(__self__, *,
                  project_id: pulumi.Input[_builtins.str],
-                 bound_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_attributes: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_claims: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 roles: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 tenants: Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]] = None):
+                 bound_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_claims: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]] = None):
         """
         The set of arguments for constructing a AccessKey resource.
+
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] bound_user_id: The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
         :param pulumi.Input[_builtins.str] custom_attributes: A JSON-encoded object of custom attribute values for the access key. The attributes must be defined in the project's access key custom attribute schema.
@@ -82,145 +83,146 @@ class AccessKeyArgs:
 
     @_builtins.property
     @pulumi.getter(name="boundUserId")
-    def bound_user_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def bound_user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
         """
         return pulumi.get(self, "bound_user_id")
 
     @bound_user_id.setter
-    def bound_user_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def bound_user_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "bound_user_id", value)
 
     @_builtins.property
     @pulumi.getter(name="customAttributes")
-    def custom_attributes(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def custom_attributes(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A JSON-encoded object of custom attribute values for the access key. The attributes must be defined in the project's access key custom attribute schema.
         """
         return pulumi.get(self, "custom_attributes")
 
     @custom_attributes.setter
-    def custom_attributes(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def custom_attributes(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "custom_attributes", value)
 
     @_builtins.property
     @pulumi.getter(name="customClaims")
-    def custom_claims(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def custom_claims(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A JSON-encoded object of custom claims to add to the JWT created when the access key is exchanged.
         """
         return pulumi.get(self, "custom_claims")
 
     @custom_claims.setter
-    def custom_claims(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def custom_claims(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "custom_claims", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the access key.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="expireTime")
-    def expire_time(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def expire_time(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The expiration time of the access key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the access key to be replaced.
         """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
-    def expire_time(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def expire_time(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expire_time", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the access key.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="permittedIps")
-    def permitted_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def permitted_ips(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of IP addresses or CIDR ranges that are allowed to use this access key. If not set, the key can be used from any IP address.
         """
         return pulumi.get(self, "permitted_ips")
 
     @permitted_ips.setter
-    def permitted_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def permitted_ips(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "permitted_ips", value)
 
     @_builtins.property
     @pulumi.getter
-    def roles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def roles(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
         """
         return pulumi.get(self, "roles")
 
     @roles.setter
-    def roles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def roles(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "roles", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
     @_builtins.property
     @pulumi.getter
-    def tenants(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]:
+    def tenants(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]:
         """
         A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
         """
         return pulumi.get(self, "tenants")
 
     @tenants.setter
-    def tenants(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]):
+    def tenants(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]):
         pulumi.set(self, "tenants", value)
 
 
 @pulumi.input_type
 class _AccessKeyState:
     def __init__(__self__, *,
-                 bound_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 cleartext: Optional[pulumi.Input[_builtins.str]] = None,
-                 client_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 created_by: Optional[pulumi.Input[_builtins.str]] = None,
-                 created_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 custom_attributes: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_claims: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 roles: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 tenants: Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]] = None):
+                 bound_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 cleartext: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 created_by: pulumi.Input[Optional[_builtins.str]] = None,
+                 created_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_claims: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]] = None):
         """
         Input properties used for looking up and filtering AccessKey resources.
+
         :param pulumi.Input[_builtins.str] bound_user_id: The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
         :param pulumi.Input[_builtins.str] cleartext: The plaintext value of the access key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to exchange the key for a JWT.
         :param pulumi.Input[_builtins.str] created_by: The ID of the user or management key that created the access key. This value is set by the server and is read-only.
@@ -269,179 +271,179 @@ class _AccessKeyState:
 
     @_builtins.property
     @pulumi.getter(name="boundUserId")
-    def bound_user_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def bound_user_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
         """
         return pulumi.get(self, "bound_user_id")
 
     @bound_user_id.setter
-    def bound_user_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def bound_user_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "bound_user_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def cleartext(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def cleartext(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The plaintext value of the access key. This is only available after the key is created and cannot be retrieved later. Store this value securely as it is required to exchange the key for a JWT.
         """
         return pulumi.get(self, "cleartext")
 
     @cleartext.setter
-    def cleartext(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def cleartext(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cleartext", value)
 
     @_builtins.property
     @pulumi.getter(name="clientId")
-    def client_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         return pulumi.get(self, "client_id")
 
     @client_id.setter
-    def client_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def client_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_id", value)
 
     @_builtins.property
     @pulumi.getter(name="createdBy")
-    def created_by(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def created_by(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the user or management key that created the access key. This value is set by the server and is read-only.
         """
         return pulumi.get(self, "created_by")
 
     @created_by.setter
-    def created_by(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def created_by(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "created_by", value)
 
     @_builtins.property
     @pulumi.getter(name="createdTime")
-    def created_time(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def created_time(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The time the access key was created, as a Unix timestamp. This value is set by the server and is read-only.
         """
         return pulumi.get(self, "created_time")
 
     @created_time.setter
-    def created_time(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def created_time(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "created_time", value)
 
     @_builtins.property
     @pulumi.getter(name="customAttributes")
-    def custom_attributes(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def custom_attributes(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A JSON-encoded object of custom attribute values for the access key. The attributes must be defined in the project's access key custom attribute schema.
         """
         return pulumi.get(self, "custom_attributes")
 
     @custom_attributes.setter
-    def custom_attributes(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def custom_attributes(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "custom_attributes", value)
 
     @_builtins.property
     @pulumi.getter(name="customClaims")
-    def custom_claims(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def custom_claims(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A JSON-encoded object of custom claims to add to the JWT created when the access key is exchanged.
         """
         return pulumi.get(self, "custom_claims")
 
     @custom_claims.setter
-    def custom_claims(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def custom_claims(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "custom_claims", value)
 
     @_builtins.property
     @pulumi.getter
-    def description(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A description for the access key.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
 
     @_builtins.property
     @pulumi.getter(name="expireTime")
-    def expire_time(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def expire_time(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The expiration time of the access key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the access key to be replaced.
         """
         return pulumi.get(self, "expire_time")
 
     @expire_time.setter
-    def expire_time(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def expire_time(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expire_time", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         A name for the access key.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="permittedIps")
-    def permitted_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def permitted_ips(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of IP addresses or CIDR ranges that are allowed to use this access key. If not set, the key can be used from any IP address.
         """
         return pulumi.get(self, "permitted_ips")
 
     @permitted_ips.setter
-    def permitted_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def permitted_ips(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "permitted_ips", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def roles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def roles(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
         """
         return pulumi.get(self, "roles")
 
     @roles.setter
-    def roles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def roles(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "roles", value)
 
     @_builtins.property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
         """
         return pulumi.get(self, "status")
 
     @status.setter
-    def status(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
     @_builtins.property
     @pulumi.getter
-    def tenants(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]:
+    def tenants(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]:
         """
         A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
         """
         return pulumi.get(self, "tenants")
 
     @tenants.setter
-    def tenants(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]):
+    def tenants(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AccessKeyTenantArgs']]]]):
         pulumi.set(self, "tenants", value)
 
 
@@ -451,20 +453,21 @@ class AccessKey(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 bound_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_attributes: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_claims: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 roles: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 tenants: Optional[pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
+                 bound_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_claims: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
                  __props__=None):
         """
         Create a AccessKey resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] bound_user_id: The ID of a user to bind this access key to. When the key is exchanged for a session JWT, the session acts on behalf of the bound user. Changing this value after creation will require the access key to be replaced.
@@ -487,6 +490,7 @@ class AccessKey(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a AccessKey resource with the given unique name, props, and options.
+
         :param str resource_name: The name of the resource.
         :param AccessKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -502,17 +506,17 @@ class AccessKey(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 bound_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_attributes: Optional[pulumi.Input[_builtins.str]] = None,
-                 custom_claims: Optional[pulumi.Input[_builtins.str]] = None,
-                 description: Optional[pulumi.Input[_builtins.str]] = None,
-                 expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 project_id: Optional[pulumi.Input[_builtins.str]] = None,
-                 roles: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 status: Optional[pulumi.Input[_builtins.str]] = None,
-                 tenants: Optional[pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
+                 bound_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
+                 custom_claims: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -551,21 +555,21 @@ class AccessKey(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            bound_user_id: Optional[pulumi.Input[_builtins.str]] = None,
-            cleartext: Optional[pulumi.Input[_builtins.str]] = None,
-            client_id: Optional[pulumi.Input[_builtins.str]] = None,
-            created_by: Optional[pulumi.Input[_builtins.str]] = None,
-            created_time: Optional[pulumi.Input[_builtins.int]] = None,
-            custom_attributes: Optional[pulumi.Input[_builtins.str]] = None,
-            custom_claims: Optional[pulumi.Input[_builtins.str]] = None,
-            description: Optional[pulumi.Input[_builtins.str]] = None,
-            expire_time: Optional[pulumi.Input[_builtins.int]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            permitted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            project_id: Optional[pulumi.Input[_builtins.str]] = None,
-            roles: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            status: Optional[pulumi.Input[_builtins.str]] = None,
-            tenants: Optional[pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None) -> 'AccessKey':
+            bound_user_id: pulumi.Input[Optional[_builtins.str]] = None,
+            cleartext: pulumi.Input[Optional[_builtins.str]] = None,
+            client_id: pulumi.Input[Optional[_builtins.str]] = None,
+            created_by: pulumi.Input[Optional[_builtins.str]] = None,
+            created_time: pulumi.Input[Optional[_builtins.int]] = None,
+            custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
+            custom_claims: pulumi.Input[Optional[_builtins.str]] = None,
+            description: pulumi.Input[Optional[_builtins.str]] = None,
+            expire_time: pulumi.Input[Optional[_builtins.int]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None) -> 'AccessKey':
         """
         Get an existing AccessKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
