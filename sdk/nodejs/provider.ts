@@ -76,15 +76,15 @@ export interface ProviderArgs {
     /**
      * An optional base URL for the Descope API
      */
-    baseUrl?: pulumi.Input<string>;
+    baseUrl?: pulumi.Input<string | undefined>;
     /**
      * A valid management key for your Descope company
      */
-    managementKey?: pulumi.Input<string>;
+    managementKey?: pulumi.Input<string | undefined>;
     /**
      * @deprecated The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

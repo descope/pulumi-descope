@@ -21,24 +21,25 @@ __all__ = ['ProjectArgs', 'Project']
 @pulumi.input_type
 class ProjectArgs:
     def __init__(__self__, *,
-                 admin_portal: Optional[pulumi.Input['ProjectAdminPortalArgs']] = None,
-                 applications: Optional[pulumi.Input['ProjectApplicationsArgs']] = None,
-                 attributes: Optional[pulumi.Input['ProjectAttributesArgs']] = None,
-                 authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
-                 authorization: Optional[pulumi.Input['ProjectAuthorizationArgs']] = None,
-                 connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
-                 invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
-                 jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
-                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
+                 admin_portal: pulumi.Input[Optional['ProjectAdminPortalArgs']] = None,
+                 applications: pulumi.Input[Optional['ProjectApplicationsArgs']] = None,
+                 attributes: pulumi.Input[Optional['ProjectAttributesArgs']] = None,
+                 authentication: pulumi.Input[Optional['ProjectAuthenticationArgs']] = None,
+                 authorization: pulumi.Input[Optional['ProjectAuthorizationArgs']] = None,
+                 connectors: pulumi.Input[Optional['ProjectConnectorsArgs']] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
+                 invite_settings: pulumi.Input[Optional['ProjectInviteSettingsArgs']] = None,
+                 jwt_templates: pulumi.Input[Optional['ProjectJwtTemplatesArgs']] = None,
+                 lists: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_settings: pulumi.Input[Optional['ProjectProjectSettingsArgs']] = None,
+                 styles: pulumi.Input[Optional['ProjectStylesArgs']] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         The set of arguments for constructing a Project resource.
+
         :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
@@ -91,218 +92,219 @@ class ProjectArgs:
 
     @_builtins.property
     @pulumi.getter(name="adminPortal")
-    def admin_portal(self) -> Optional[pulumi.Input['ProjectAdminPortalArgs']]:
+    def admin_portal(self) -> pulumi.Input[Optional['ProjectAdminPortalArgs']]:
         """
         Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         """
         return pulumi.get(self, "admin_portal")
 
     @admin_portal.setter
-    def admin_portal(self, value: Optional[pulumi.Input['ProjectAdminPortalArgs']]):
+    def admin_portal(self, value: pulumi.Input[Optional['ProjectAdminPortalArgs']]):
         pulumi.set(self, "admin_portal", value)
 
     @_builtins.property
     @pulumi.getter
-    def applications(self) -> Optional[pulumi.Input['ProjectApplicationsArgs']]:
+    def applications(self) -> pulumi.Input[Optional['ProjectApplicationsArgs']]:
         """
         Applications that are registered with the project.
         """
         return pulumi.get(self, "applications")
 
     @applications.setter
-    def applications(self, value: Optional[pulumi.Input['ProjectApplicationsArgs']]):
+    def applications(self, value: pulumi.Input[Optional['ProjectApplicationsArgs']]):
         pulumi.set(self, "applications", value)
 
     @_builtins.property
     @pulumi.getter
-    def attributes(self) -> Optional[pulumi.Input['ProjectAttributesArgs']]:
+    def attributes(self) -> pulumi.Input[Optional['ProjectAttributesArgs']]:
         """
         Custom attributes that can be attached to users and tenants.
         """
         return pulumi.get(self, "attributes")
 
     @attributes.setter
-    def attributes(self, value: Optional[pulumi.Input['ProjectAttributesArgs']]):
+    def attributes(self, value: pulumi.Input[Optional['ProjectAttributesArgs']]):
         pulumi.set(self, "attributes", value)
 
     @_builtins.property
     @pulumi.getter
-    def authentication(self) -> Optional[pulumi.Input['ProjectAuthenticationArgs']]:
+    def authentication(self) -> pulumi.Input[Optional['ProjectAuthenticationArgs']]:
         """
         Settings for each authentication method.
         """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
-    def authentication(self, value: Optional[pulumi.Input['ProjectAuthenticationArgs']]):
+    def authentication(self, value: pulumi.Input[Optional['ProjectAuthenticationArgs']]):
         pulumi.set(self, "authentication", value)
 
     @_builtins.property
     @pulumi.getter
-    def authorization(self) -> Optional[pulumi.Input['ProjectAuthorizationArgs']]:
+    def authorization(self) -> pulumi.Input[Optional['ProjectAuthorizationArgs']]:
         """
         Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         """
         return pulumi.get(self, "authorization")
 
     @authorization.setter
-    def authorization(self, value: Optional[pulumi.Input['ProjectAuthorizationArgs']]):
+    def authorization(self, value: pulumi.Input[Optional['ProjectAuthorizationArgs']]):
         pulumi.set(self, "authorization", value)
 
     @_builtins.property
     @pulumi.getter
-    def connectors(self) -> Optional[pulumi.Input['ProjectConnectorsArgs']]:
+    def connectors(self) -> pulumi.Input[Optional['ProjectConnectorsArgs']]:
         """
         Enrich your flows by interacting with third party services.
         """
         return pulumi.get(self, "connectors")
 
     @connectors.setter
-    def connectors(self, value: Optional[pulumi.Input['ProjectConnectorsArgs']]):
+    def connectors(self, value: pulumi.Input[Optional['ProjectConnectorsArgs']]):
         pulumi.set(self, "connectors", value)
 
     @_builtins.property
     @pulumi.getter
-    def environment(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def environment(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
         """
         return pulumi.get(self, "environment")
 
     @environment.setter
-    def environment(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def environment(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "environment", value)
 
     @_builtins.property
     @pulumi.getter
-    def flows(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
+    def flows(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
         """
         Custom authentication flows to use in this project.
         """
         return pulumi.get(self, "flows")
 
     @flows.setter
-    def flows(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
+    def flows(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
         pulumi.set(self, "flows", value)
 
     @_builtins.property
     @pulumi.getter(name="inviteSettings")
-    def invite_settings(self) -> Optional[pulumi.Input['ProjectInviteSettingsArgs']]:
+    def invite_settings(self) -> pulumi.Input[Optional['ProjectInviteSettingsArgs']]:
         """
         User invitation settings and behavior.
         """
         return pulumi.get(self, "invite_settings")
 
     @invite_settings.setter
-    def invite_settings(self, value: Optional[pulumi.Input['ProjectInviteSettingsArgs']]):
+    def invite_settings(self, value: pulumi.Input[Optional['ProjectInviteSettingsArgs']]):
         pulumi.set(self, "invite_settings", value)
 
     @_builtins.property
     @pulumi.getter(name="jwtTemplates")
-    def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
+    def jwt_templates(self) -> pulumi.Input[Optional['ProjectJwtTemplatesArgs']]:
         """
         Defines templates for JSON Web Tokens (JWT) used for authentication.
         """
         return pulumi.get(self, "jwt_templates")
 
     @jwt_templates.setter
-    def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
+    def jwt_templates(self, value: pulumi.Input[Optional['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
 
     @_builtins.property
     @pulumi.getter
-    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+    def lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]:
         """
         Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         """
         return pulumi.get(self, "lists")
 
     @lists.setter
-    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+    def lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]):
         pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the Descope project.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="projectSettings")
-    def project_settings(self) -> Optional[pulumi.Input['ProjectProjectSettingsArgs']]:
+    def project_settings(self) -> pulumi.Input[Optional['ProjectProjectSettingsArgs']]:
         """
         General settings for the Descope project.
         """
         return pulumi.get(self, "project_settings")
 
     @project_settings.setter
-    def project_settings(self, value: Optional[pulumi.Input['ProjectProjectSettingsArgs']]):
+    def project_settings(self, value: pulumi.Input[Optional['ProjectProjectSettingsArgs']]):
         pulumi.set(self, "project_settings", value)
 
     @_builtins.property
     @pulumi.getter
-    def styles(self) -> Optional[pulumi.Input['ProjectStylesArgs']]:
+    def styles(self) -> pulumi.Input[Optional['ProjectStylesArgs']]:
         """
         Custom styles that can be applied to the project's authentication flows.
         """
         return pulumi.get(self, "styles")
 
     @styles.setter
-    def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
+    def styles(self, value: pulumi.Input[Optional['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter
-    def widgets(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
+    def widgets(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
         """
         Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         return pulumi.get(self, "widgets")
 
     @widgets.setter
-    def widgets(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
+    def widgets(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
         pulumi.set(self, "widgets", value)
 
 
 @pulumi.input_type
 class _ProjectState:
     def __init__(__self__, *,
-                 admin_portal: Optional[pulumi.Input['ProjectAdminPortalArgs']] = None,
-                 applications: Optional[pulumi.Input['ProjectApplicationsArgs']] = None,
-                 attributes: Optional[pulumi.Input['ProjectAttributesArgs']] = None,
-                 authentication: Optional[pulumi.Input['ProjectAuthenticationArgs']] = None,
-                 authorization: Optional[pulumi.Input['ProjectAuthorizationArgs']] = None,
-                 connectors: Optional[pulumi.Input['ProjectConnectorsArgs']] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 flows: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
-                 invite_settings: Optional[pulumi.Input['ProjectInviteSettingsArgs']] = None,
-                 jwt_templates: Optional[pulumi.Input['ProjectJwtTemplatesArgs']] = None,
-                 lists: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_settings: Optional[pulumi.Input['ProjectProjectSettingsArgs']] = None,
-                 styles: Optional[pulumi.Input['ProjectStylesArgs']] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
+                 admin_portal: pulumi.Input[Optional['ProjectAdminPortalArgs']] = None,
+                 applications: pulumi.Input[Optional['ProjectApplicationsArgs']] = None,
+                 attributes: pulumi.Input[Optional['ProjectAttributesArgs']] = None,
+                 authentication: pulumi.Input[Optional['ProjectAuthenticationArgs']] = None,
+                 authorization: pulumi.Input[Optional['ProjectAuthorizationArgs']] = None,
+                 connectors: pulumi.Input[Optional['ProjectConnectorsArgs']] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
+                 invite_settings: pulumi.Input[Optional['ProjectInviteSettingsArgs']] = None,
+                 jwt_templates: pulumi.Input[Optional['ProjectJwtTemplatesArgs']] = None,
+                 lists: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_settings: pulumi.Input[Optional['ProjectProjectSettingsArgs']] = None,
+                 styles: pulumi.Input[Optional['ProjectStylesArgs']] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
+
         :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
         :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
@@ -355,194 +357,194 @@ class _ProjectState:
 
     @_builtins.property
     @pulumi.getter(name="adminPortal")
-    def admin_portal(self) -> Optional[pulumi.Input['ProjectAdminPortalArgs']]:
+    def admin_portal(self) -> pulumi.Input[Optional['ProjectAdminPortalArgs']]:
         """
         Admin portal configuration - A hosted page for end users to access and use Descope Widgets
         """
         return pulumi.get(self, "admin_portal")
 
     @admin_portal.setter
-    def admin_portal(self, value: Optional[pulumi.Input['ProjectAdminPortalArgs']]):
+    def admin_portal(self, value: pulumi.Input[Optional['ProjectAdminPortalArgs']]):
         pulumi.set(self, "admin_portal", value)
 
     @_builtins.property
     @pulumi.getter
-    def applications(self) -> Optional[pulumi.Input['ProjectApplicationsArgs']]:
+    def applications(self) -> pulumi.Input[Optional['ProjectApplicationsArgs']]:
         """
         Applications that are registered with the project.
         """
         return pulumi.get(self, "applications")
 
     @applications.setter
-    def applications(self, value: Optional[pulumi.Input['ProjectApplicationsArgs']]):
+    def applications(self, value: pulumi.Input[Optional['ProjectApplicationsArgs']]):
         pulumi.set(self, "applications", value)
 
     @_builtins.property
     @pulumi.getter
-    def attributes(self) -> Optional[pulumi.Input['ProjectAttributesArgs']]:
+    def attributes(self) -> pulumi.Input[Optional['ProjectAttributesArgs']]:
         """
         Custom attributes that can be attached to users and tenants.
         """
         return pulumi.get(self, "attributes")
 
     @attributes.setter
-    def attributes(self, value: Optional[pulumi.Input['ProjectAttributesArgs']]):
+    def attributes(self, value: pulumi.Input[Optional['ProjectAttributesArgs']]):
         pulumi.set(self, "attributes", value)
 
     @_builtins.property
     @pulumi.getter
-    def authentication(self) -> Optional[pulumi.Input['ProjectAuthenticationArgs']]:
+    def authentication(self) -> pulumi.Input[Optional['ProjectAuthenticationArgs']]:
         """
         Settings for each authentication method.
         """
         return pulumi.get(self, "authentication")
 
     @authentication.setter
-    def authentication(self, value: Optional[pulumi.Input['ProjectAuthenticationArgs']]):
+    def authentication(self, value: pulumi.Input[Optional['ProjectAuthenticationArgs']]):
         pulumi.set(self, "authentication", value)
 
     @_builtins.property
     @pulumi.getter
-    def authorization(self) -> Optional[pulumi.Input['ProjectAuthorizationArgs']]:
+    def authorization(self) -> pulumi.Input[Optional['ProjectAuthorizationArgs']]:
         """
         Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
         """
         return pulumi.get(self, "authorization")
 
     @authorization.setter
-    def authorization(self, value: Optional[pulumi.Input['ProjectAuthorizationArgs']]):
+    def authorization(self, value: pulumi.Input[Optional['ProjectAuthorizationArgs']]):
         pulumi.set(self, "authorization", value)
 
     @_builtins.property
     @pulumi.getter
-    def connectors(self) -> Optional[pulumi.Input['ProjectConnectorsArgs']]:
+    def connectors(self) -> pulumi.Input[Optional['ProjectConnectorsArgs']]:
         """
         Enrich your flows by interacting with third party services.
         """
         return pulumi.get(self, "connectors")
 
     @connectors.setter
-    def connectors(self, value: Optional[pulumi.Input['ProjectConnectorsArgs']]):
+    def connectors(self, value: pulumi.Input[Optional['ProjectConnectorsArgs']]):
         pulumi.set(self, "connectors", value)
 
     @_builtins.property
     @pulumi.getter
-    def environment(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def environment(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
         """
         return pulumi.get(self, "environment")
 
     @environment.setter
-    def environment(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def environment(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "environment", value)
 
     @_builtins.property
     @pulumi.getter
-    def flows(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
+    def flows(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
         """
         Custom authentication flows to use in this project.
         """
         return pulumi.get(self, "flows")
 
     @flows.setter
-    def flows(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
+    def flows(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
         pulumi.set(self, "flows", value)
 
     @_builtins.property
     @pulumi.getter(name="inviteSettings")
-    def invite_settings(self) -> Optional[pulumi.Input['ProjectInviteSettingsArgs']]:
+    def invite_settings(self) -> pulumi.Input[Optional['ProjectInviteSettingsArgs']]:
         """
         User invitation settings and behavior.
         """
         return pulumi.get(self, "invite_settings")
 
     @invite_settings.setter
-    def invite_settings(self, value: Optional[pulumi.Input['ProjectInviteSettingsArgs']]):
+    def invite_settings(self, value: pulumi.Input[Optional['ProjectInviteSettingsArgs']]):
         pulumi.set(self, "invite_settings", value)
 
     @_builtins.property
     @pulumi.getter(name="jwtTemplates")
-    def jwt_templates(self) -> Optional[pulumi.Input['ProjectJwtTemplatesArgs']]:
+    def jwt_templates(self) -> pulumi.Input[Optional['ProjectJwtTemplatesArgs']]:
         """
         Defines templates for JSON Web Tokens (JWT) used for authentication.
         """
         return pulumi.get(self, "jwt_templates")
 
     @jwt_templates.setter
-    def jwt_templates(self, value: Optional[pulumi.Input['ProjectJwtTemplatesArgs']]):
+    def jwt_templates(self, value: pulumi.Input[Optional['ProjectJwtTemplatesArgs']]):
         pulumi.set(self, "jwt_templates", value)
 
     @_builtins.property
     @pulumi.getter
-    def lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]:
+    def lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]:
         """
         Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         """
         return pulumi.get(self, "lists")
 
     @lists.setter
-    def lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]]]):
+    def lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]):
         pulumi.set(self, "lists", value)
 
     @_builtins.property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the Descope project.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
 
     @_builtins.property
     @pulumi.getter(name="projectSettings")
-    def project_settings(self) -> Optional[pulumi.Input['ProjectProjectSettingsArgs']]:
+    def project_settings(self) -> pulumi.Input[Optional['ProjectProjectSettingsArgs']]:
         """
         General settings for the Descope project.
         """
         return pulumi.get(self, "project_settings")
 
     @project_settings.setter
-    def project_settings(self, value: Optional[pulumi.Input['ProjectProjectSettingsArgs']]):
+    def project_settings(self, value: pulumi.Input[Optional['ProjectProjectSettingsArgs']]):
         pulumi.set(self, "project_settings", value)
 
     @_builtins.property
     @pulumi.getter
-    def styles(self) -> Optional[pulumi.Input['ProjectStylesArgs']]:
+    def styles(self) -> pulumi.Input[Optional['ProjectStylesArgs']]:
         """
         Custom styles that can be applied to the project's authentication flows.
         """
         return pulumi.get(self, "styles")
 
     @styles.setter
-    def styles(self, value: Optional[pulumi.Input['ProjectStylesArgs']]):
+    def styles(self, value: pulumi.Input[Optional['ProjectStylesArgs']]):
         pulumi.set(self, "styles", value)
 
     @_builtins.property
     @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         return pulumi.get(self, "tags")
 
     @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
 
     @_builtins.property
     @pulumi.getter
-    def widgets(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
+    def widgets(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
         """
         Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         return pulumi.get(self, "widgets")
 
     @widgets.setter
-    def widgets(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
+    def widgets(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
         pulumi.set(self, "widgets", value)
 
 
@@ -552,22 +554,22 @@ class Project(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-                 applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-                 attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-                 authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-                 authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-                 connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-                 invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-                 jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-                 styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
+                 admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
+                 applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
+                 attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
+                 authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
+                 connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+                 invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
+                 jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
+                 styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         """
         Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
@@ -827,6 +829,7 @@ class Project(pulumi.CustomResource):
                 },
             })
         ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1112,6 +1115,7 @@ class Project(pulumi.CustomResource):
             })
         ```
 
+
         :param str resource_name: The name of the resource.
         :param ProjectArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1127,22 +1131,22 @@ class Project(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-                 applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-                 attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-                 authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-                 authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-                 connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
-                 environment: Optional[pulumi.Input[_builtins.str]] = None,
-                 flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-                 invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-                 jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-                 lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
-                 name: Optional[pulumi.Input[_builtins.str]] = None,
-                 project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-                 styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
+                 admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
+                 applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
+                 attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
+                 authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
+                 connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 environment: pulumi.Input[Optional[_builtins.str]] = None,
+                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+                 invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
+                 jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+                 lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
+                 styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -1178,22 +1182,22 @@ class Project(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            admin_portal: Optional[pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-            applications: Optional[pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-            attributes: Optional[pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-            authentication: Optional[pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-            authorization: Optional[pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-            connectors: Optional[pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
-            environment: Optional[pulumi.Input[_builtins.str]] = None,
-            flows: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-            invite_settings: Optional[pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-            jwt_templates: Optional[pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-            lists: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
-            name: Optional[pulumi.Input[_builtins.str]] = None,
-            project_settings: Optional[pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-            styles: Optional[pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-            tags: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            widgets: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None) -> 'Project':
+            admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
+            applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
+            attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
+            authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
+            authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
+            connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+            environment: pulumi.Input[Optional[_builtins.str]] = None,
+            flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
+            invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
+            jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
+            lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
+            name: pulumi.Input[Optional[_builtins.str]] = None,
+            project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
+            styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None) -> 'Project':
         """
         Get an existing Project resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

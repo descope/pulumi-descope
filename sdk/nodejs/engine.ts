@@ -90,19 +90,19 @@ export interface EngineState {
     /**
      * The creation time of the engine as a Unix timestamp.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * A name for the engine.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Descope project this engine belongs to. Changing this value will require the resource to be deleted and recreated.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * The plaintext secret for the engine. This is only available after the engine is created and cannot be retrieved later. Store this value securely as it is used to authenticate the engine.
      */
-    secret?: pulumi.Input<string>;
+    secret?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -112,7 +112,7 @@ export interface EngineArgs {
     /**
      * A name for the engine.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The ID of the Descope project this engine belongs to. Changing this value will require the resource to be deleted and recreated.
      */
