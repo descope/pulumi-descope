@@ -46,6 +46,12 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
+      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: app-auth
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PEM }}
+          owner: ${{ github.repository_owner }}
       - name: Cache examples generation
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         with:
@@ -58,7 +64,7 @@ jobs:
           MISE_FETCH_REMOTE_VERSIONS_TIMEOUT: 30s
         with:
           version: 2026.3.7
-          github_token: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
+          github_token: ${{ steps.app-auth.outputs.token }}
           # only saving the cache in the prerequisites job
           cache_save: false
       - name: Setup Go Cache
@@ -74,7 +80,7 @@ jobs:
       - name: Prepare local workspace
         run: make prepare_local_workspace
         env:
-          GITHUB_TOKEN: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-auth.outputs.token }}
       - name: Download prerequisites
         uses: ./.github/actions/download-prerequisites
       - name: Update path
