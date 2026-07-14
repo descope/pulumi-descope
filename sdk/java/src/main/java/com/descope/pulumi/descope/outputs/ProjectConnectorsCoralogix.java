@@ -42,6 +42,11 @@ public final class ProjectConnectorsCoralogix {
     private String endpoint;
     private @Nullable String id;
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    private @Nullable Boolean maskPii;
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -92,6 +97,13 @@ public final class ProjectConnectorsCoralogix {
         return Optional.ofNullable(this.id);
     }
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    public Optional<Boolean> maskPii() {
+        return Optional.ofNullable(this.maskPii);
+    }
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -121,6 +133,7 @@ public final class ProjectConnectorsCoralogix {
         private @Nullable String description;
         private String endpoint;
         private @Nullable String id;
+        private @Nullable Boolean maskPii;
         private String name;
         private @Nullable Boolean troubleshootLogEnabled;
         public Builder() {}
@@ -132,6 +145,7 @@ public final class ProjectConnectorsCoralogix {
     	      this.description = defaults.description;
     	      this.endpoint = defaults.endpoint;
     	      this.id = defaults.id;
+    	      this.maskPii = defaults.maskPii;
     	      this.name = defaults.name;
     	      this.troubleshootLogEnabled = defaults.troubleshootLogEnabled;
         }
@@ -180,6 +194,12 @@ public final class ProjectConnectorsCoralogix {
             return this;
         }
         @CustomType.Setter
+        public Builder maskPii(@Nullable Boolean maskPii) {
+
+            this.maskPii = maskPii;
+            return this;
+        }
+        @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsCoralogix", "name");
@@ -201,6 +221,7 @@ public final class ProjectConnectorsCoralogix {
             _resultValue.description = description;
             _resultValue.endpoint = endpoint;
             _resultValue.id = id;
+            _resultValue.maskPii = maskPii;
             _resultValue.name = name;
             _resultValue.troubleshootLogEnabled = troubleshootLogEnabled;
             return _resultValue;

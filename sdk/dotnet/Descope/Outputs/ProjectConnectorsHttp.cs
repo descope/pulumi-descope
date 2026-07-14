@@ -19,6 +19,34 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly Outputs.ProjectConnectorsHttpAuthentication? Authentication;
         /// <summary>
+        /// The unique AWS access key ID.
+        /// </summary>
+        public readonly string? AwsAccessKeyId;
+        /// <summary>
+        /// Apply AWS signature version 4 authentication to the request.
+        /// </summary>
+        public readonly string? AwsAuthType;
+        /// <summary>
+        /// The external ID to use when assuming the role.
+        /// </summary>
+        public readonly string? AwsExternalId;
+        /// <summary>
+        /// The AWS region, e.g. `us-east-1`.
+        /// </summary>
+        public readonly string? AwsRegion;
+        /// <summary>
+        /// The Amazon Resource Name (ARN) of the role to assume.
+        /// </summary>
+        public readonly string? AwsRoleArn;
+        /// <summary>
+        /// The secret AWS access key.
+        /// </summary>
+        public readonly string? AwsSecretAccessKey;
+        /// <summary>
+        /// The AWS service to target, e.g. `Lambda`, `execute-api`, `S3`, etc.
+        /// </summary>
+        public readonly string? AwsService;
+        /// <summary>
         /// The base URL to fetch
         /// </summary>
         public readonly string BaseUrl;
@@ -36,7 +64,7 @@ namespace Descope.Pulumi.Descope.Outputs
         public readonly string? HmacSecret;
         public readonly string? Id;
         /// <summary>
-        /// The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+        /// The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
         /// </summary>
         public readonly bool? IncludeHeadersInContext;
         /// <summary>
@@ -48,6 +76,26 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// HTTP message components to include in the signature (e.g., @method, @target-uri, @authority, content-type, content-digest). Leave empty to use defaults: @method, @target-uri, @authority
+        /// </summary>
+        public readonly string? Rfc9421Components;
+        /// <summary>
+        /// Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+        /// </summary>
+        public readonly string? Rfc9421KeyId;
+        /// <summary>
+        /// Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+        /// </summary>
+        public readonly string? Rfc9421PrivateKey;
+        /// <summary>
+        /// How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+        /// </summary>
+        public readonly double? Rfc9421SignatureTtl;
+        /// <summary>
+        /// Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+        /// </summary>
+        public readonly bool? Rfc9421SigningEnabled;
+        /// <summary>
         /// Whether the connector should send all requests from specific static IPs.
         /// </summary>
         public readonly bool? UseStaticIps;
@@ -55,6 +103,20 @@ namespace Descope.Pulumi.Descope.Outputs
         [OutputConstructor]
         private ProjectConnectorsHttp(
             Outputs.ProjectConnectorsHttpAuthentication? authentication,
+
+            string? awsAccessKeyId,
+
+            string? awsAuthType,
+
+            string? awsExternalId,
+
+            string? awsRegion,
+
+            string? awsRoleArn,
+
+            string? awsSecretAccessKey,
+
+            string? awsService,
 
             string baseUrl,
 
@@ -72,9 +134,26 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string name,
 
+            string? rfc9421Components,
+
+            string? rfc9421KeyId,
+
+            string? rfc9421PrivateKey,
+
+            double? rfc9421SignatureTtl,
+
+            bool? rfc9421SigningEnabled,
+
             bool? useStaticIps)
         {
             Authentication = authentication;
+            AwsAccessKeyId = awsAccessKeyId;
+            AwsAuthType = awsAuthType;
+            AwsExternalId = awsExternalId;
+            AwsRegion = awsRegion;
+            AwsRoleArn = awsRoleArn;
+            AwsSecretAccessKey = awsSecretAccessKey;
+            AwsService = awsService;
             BaseUrl = baseUrl;
             Description = description;
             Headers = headers;
@@ -83,6 +162,11 @@ namespace Descope.Pulumi.Descope.Outputs
             IncludeHeadersInContext = includeHeadersInContext;
             Insecure = insecure;
             Name = name;
+            Rfc9421Components = rfc9421Components;
+            Rfc9421KeyId = rfc9421KeyId;
+            Rfc9421PrivateKey = rfc9421PrivateKey;
+            Rfc9421SignatureTtl = rfc9421SignatureTtl;
+            Rfc9421SigningEnabled = rfc9421SigningEnabled;
             UseStaticIps = useStaticIps;
         }
     }

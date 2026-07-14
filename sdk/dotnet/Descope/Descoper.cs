@@ -10,6 +10,150 @@ using Pulumi;
 
 namespace Descope.Pulumi.Descope
 {
+    /// <summary>
+    /// Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
+    /// 
+    /// Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+    /// - `Admin` – Full access to project settings
+    /// - `Developer` – Can edit flows and configurations
+    /// - `Support` – Can view user data and audit logs
+    /// - `Auditor` – Read-only access to audit logs
+    /// 
+    /// Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ### Company Admin
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var admin = new Descope.Descoper("admin", new()
+    ///     {
+    ///         Email = "admin@example.com",
+    ///         Name = "Alice Admin",
+    ///         Rbac = new Descope.Inputs.DescoperRbacArgs
+    ///         {
+    ///             IsCompanyAdmin = true,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Developer for Specific Projects
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var developer = new Descope.Descoper("developer", new()
+    ///     {
+    ///         Email = "dev@example.com",
+    ///         Name = "Bob Dev",
+    ///         Rbac = new Descope.Inputs.DescoperRbacArgs
+    ///         {
+    ///             ProjectRoles = new[]
+    ///             {
+    ///                 new Descope.Inputs.DescoperRbacProjectRoleArgs
+    ///                 {
+    ///                     Role = "developer",
+    ///                     ProjectIds = new[]
+    ///                     {
+    ///                         "P123abc",
+    ///                         "P456def",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Support Access via Project Tags
+    /// 
+    /// Grant a support engineer access to all projects tagged `Production`:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var support = new Descope.Descoper("support", new()
+    ///     {
+    ///         Email = "support@example.com",
+    ///         Rbac = new Descope.Inputs.DescoperRbacArgs
+    ///         {
+    ///             TagRoles = new[]
+    ///             {
+    ///                 new Descope.Inputs.DescoperRbacTagRoleArgs
+    ///                 {
+    ///                     Role = "support",
+    ///                     Tags = new[]
+    ///                     {
+    ///                         "production",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Multi-Role Access
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var multiRole = new Descope.Descoper("multi_role", new()
+    ///     {
+    ///         Email = "lead@example.com",
+    ///         Rbac = new Descope.Inputs.DescoperRbacArgs
+    ///         {
+    ///             ProjectRoles = new[]
+    ///             {
+    ///                 new Descope.Inputs.DescoperRbacProjectRoleArgs
+    ///                 {
+    ///                     Role = "admin",
+    ///                     ProjectIds = new[]
+    ///                     {
+    ///                         "P123abc",
+    ///                     },
+    ///                 },
+    ///                 new Descope.Inputs.DescoperRbacProjectRoleArgs
+    ///                 {
+    ///                     Role = "developer",
+    ///                     ProjectIds = new[]
+    ///                     {
+    ///                         "P789ghi",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DescopeResourceType("descope:index/descoper:Descoper")]
     public partial class Descoper : global::Pulumi.CustomResource
     {

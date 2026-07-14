@@ -26,16 +26,52 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? AllowOverrideRoles { get; set; }
 
         /// <summary>
+        /// Whether to block SSO login if the user's email domain doesn't match the configured SSO domains.
+        /// </summary>
+        [Input("blockIfEmailDomainMismatch")]
+        public Input<bool>? BlockIfEmailDomainMismatch { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
 
         /// <summary>
+        /// Settings related to sending SSO invite emails as part of the SSO feature.
+        /// </summary>
+        [Input("emailService")]
+        public Input<Inputs.ProjectAuthenticationSsoEmailServiceArgs>? EmailService { get; set; }
+
+        /// <summary>
         /// Whether to enable groups priority.
         /// </summary>
         [Input("groupsPriority")]
         public Input<bool>? GroupsPriority { get; set; }
+
+        /// <summary>
+        /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
+        /// </summary>
+        [Input("limitMappingToMandatoryAttributes")]
+        public Input<bool>? LimitMappingToMandatoryAttributes { get; set; }
+
+        [Input("mandatoryUserAttributes")]
+        private InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs>? _mandatoryUserAttributes;
+
+        /// <summary>
+        /// Define the required Descope attributes that must be populated when receiving SSO information.
+        /// </summary>
+        public InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs> MandatoryUserAttributes
+        {
+            get => _mandatoryUserAttributes ?? (_mandatoryUserAttributes = new InputList<Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs>());
+            set => _mandatoryUserAttributes = value;
+        }
+
+        /// <summary>
+        /// Whether to mark the user's email as unverified when logging in via SSO.
+        /// </summary>
+        [Input("markEmailAsUnverified")]
+        public Input<bool>? MarkEmailAsUnverified { get; set; }
 
         /// <summary>
         /// Whether to merge existing user accounts with new ones created through SSO authentication.
@@ -48,6 +84,18 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
+
+        /// <summary>
+        /// When configuring SSO the groups attribute name must be specified.
+        /// </summary>
+        [Input("requireGroupsAttributeName")]
+        public Input<bool>? RequireGroupsAttributeName { get; set; }
+
+        /// <summary>
+        /// When configuring SSO an SSO domain must be specified.
+        /// </summary>
+        [Input("requireSsoDomains")]
+        public Input<bool>? RequireSsoDomains { get; set; }
 
         /// <summary>
         /// Configuration block for the SSO Suite.

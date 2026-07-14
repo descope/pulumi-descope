@@ -110,6 +110,11 @@ public final class ProjectProjectSettings {
      */
     private @Nullable String stepUpTokenExpiration;
     /**
+     * @return When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+     * 
+     */
+    private @Nullable Boolean tenantUserIsolation;
+    /**
      * @return Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      * 
      */
@@ -270,6 +275,13 @@ public final class ProjectProjectSettings {
         return Optional.ofNullable(this.stepUpTokenExpiration);
     }
     /**
+     * @return When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+     * 
+     */
+    public Optional<Boolean> tenantUserIsolation() {
+        return Optional.ofNullable(this.tenantUserIsolation);
+    }
+    /**
      * @return Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      * 
      */
@@ -333,6 +345,7 @@ public final class ProjectProjectSettings {
         private @Nullable String sessionTokenExpiration;
         private @Nullable String sessionTokenResponseMethod;
         private @Nullable String stepUpTokenExpiration;
+        private @Nullable Boolean tenantUserIsolation;
         private @Nullable String testUsersLoginidRegexp;
         private @Nullable String testUsersStaticOtp;
         private @Nullable String testUsersVerifierRegexp;
@@ -360,6 +373,7 @@ public final class ProjectProjectSettings {
     	      this.sessionTokenExpiration = defaults.sessionTokenExpiration;
     	      this.sessionTokenResponseMethod = defaults.sessionTokenResponseMethod;
     	      this.stepUpTokenExpiration = defaults.stepUpTokenExpiration;
+    	      this.tenantUserIsolation = defaults.tenantUserIsolation;
     	      this.testUsersLoginidRegexp = defaults.testUsersLoginidRegexp;
     	      this.testUsersStaticOtp = defaults.testUsersStaticOtp;
     	      this.testUsersVerifierRegexp = defaults.testUsersVerifierRegexp;
@@ -485,6 +499,12 @@ public final class ProjectProjectSettings {
             return this;
         }
         @CustomType.Setter
+        public Builder tenantUserIsolation(@Nullable Boolean tenantUserIsolation) {
+
+            this.tenantUserIsolation = tenantUserIsolation;
+            return this;
+        }
+        @CustomType.Setter
         public Builder testUsersLoginidRegexp(@Nullable String testUsersLoginidRegexp) {
 
             this.testUsersLoginidRegexp = testUsersLoginidRegexp;
@@ -535,6 +555,7 @@ public final class ProjectProjectSettings {
             _resultValue.sessionTokenExpiration = sessionTokenExpiration;
             _resultValue.sessionTokenResponseMethod = sessionTokenResponseMethod;
             _resultValue.stepUpTokenExpiration = stepUpTokenExpiration;
+            _resultValue.tenantUserIsolation = tenantUserIsolation;
             _resultValue.testUsersLoginidRegexp = testUsersLoginidRegexp;
             _resultValue.testUsersStaticOtp = testUsersStaticOtp;
             _resultValue.testUsersVerifierRegexp = testUsersVerifierRegexp;

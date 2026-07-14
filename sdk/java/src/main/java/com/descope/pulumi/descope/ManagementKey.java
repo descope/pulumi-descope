@@ -16,6 +16,145 @@ import java.lang.String;
 import java.util.List;
 import javax.annotation.Nullable;
 
+/**
+ * Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+ * 
+ * &gt; **Important:** The `cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+ * 
+ * Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+ * - **Company roles** – Access to all projects in the company
+ * - **Project roles** – Scoped to specific project IDs
+ * - **Tag roles** – Scoped to all projects with a given tag
+ * 
+ * See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+ * 
+ * ## Example Usage
+ * 
+ * ### Company-Level Key
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.ManagementKey;
+ * import com.descope.pulumi.descope.ManagementKeyArgs;
+ * import com.pulumi.descope.inputs.ManagementKeyRebacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var companyKey = new ManagementKey("companyKey", ManagementKeyArgs.builder()
+ *             .name("CI/CD Pipeline Key")
+ *             .description("Used by the deployment pipeline to manage users")
+ *             .rebac(ManagementKeyRebacArgs.builder()
+ *                 .companyRoles("<role-name>")
+ *                 .build())
+ *             .build());
+ * 
+ *         ctx.export("managementKeyValue", companyKey.cleartext());
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### Project-Scoped Key with Expiration
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.ManagementKey;
+ * import com.descope.pulumi.descope.ManagementKeyArgs;
+ * import com.pulumi.descope.inputs.ManagementKeyRebacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var projectKey = new ManagementKey("projectKey", ManagementKeyArgs.builder()
+ *             .name("Staging Key")
+ *             .description("Limited access to staging project only")
+ *             .expireTime(1893456000)
+ *             .rebac(ManagementKeyRebacArgs.builder()
+ *                 .projectRoles(ManagementKeyRebacProjectRoleArgs.builder()
+ *                     .projectIds("<project-id>")
+ *                     .roles("<role-name>")
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ### Tag-Scoped Key with IP Restriction
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.ManagementKey;
+ * import com.descope.pulumi.descope.ManagementKeyArgs;
+ * import com.pulumi.descope.inputs.ManagementKeyRebacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var restrictedKey = new ManagementKey("restrictedKey", ManagementKeyArgs.builder()
+ *             .name("Office Network Key")
+ *             .permittedIps(            
+ *                 "203.0.113.0/24",
+ *                 "198.51.100.10")
+ *             .rebac(ManagementKeyRebacArgs.builder()
+ *                 .tagRoles(ManagementKeyRebacTagRoleArgs.builder()
+ *                     .tags("production")
+ *                     .roles("<role-name>")
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ */
 @ResourceType(type="descope:index/managementKey:ManagementKey")
 public class ManagementKey extends com.pulumi.resources.CustomResource {
     /**

@@ -12,6 +12,133 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+//
+// > **Important:** The `cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+//
+// Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+// - **Company roles** – Access to all projects in the company
+// - **Project roles** – Scoped to specific project IDs
+// - **Tag roles** – Scoped to all projects with a given tag
+//
+// See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+//
+// ## Example Usage
+//
+// ### Company-Level Key
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			companyKey, err := descope.NewManagementKey(ctx, "company_key", &descope.ManagementKeyArgs{
+//				Name:        pulumi.String("CI/CD Pipeline Key"),
+//				Description: pulumi.String("Used by the deployment pipeline to manage users"),
+//				Rebac: &descope.ManagementKeyRebacArgs{
+//					CompanyRoles: pulumi.StringArray{
+//						pulumi.String("<role-name>"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("managementKeyValue", companyKey.Cleartext)
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Project-Scoped Key with Expiration
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewManagementKey(ctx, "project_key", &descope.ManagementKeyArgs{
+//				Name:        pulumi.String("Staging Key"),
+//				Description: pulumi.String("Limited access to staging project only"),
+//				ExpireTime:  pulumi.Int(1893456000),
+//				Rebac: &descope.ManagementKeyRebacArgs{
+//					ProjectRoles: descope.ManagementKeyRebacProjectRoleArray{
+//						&descope.ManagementKeyRebacProjectRoleArgs{
+//							ProjectIds: pulumi.StringArray{
+//								pulumi.String("<project-id>"),
+//							},
+//							Roles: pulumi.StringArray{
+//								pulumi.String("<role-name>"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Tag-Scoped Key with IP Restriction
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/descope/pulumi-descope/sdk/go/descope"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := descope.NewManagementKey(ctx, "restricted_key", &descope.ManagementKeyArgs{
+//				Name: pulumi.String("Office Network Key"),
+//				PermittedIps: pulumi.StringArray{
+//					pulumi.String("203.0.113.0/24"),
+//					pulumi.String("198.51.100.10"),
+//				},
+//				Rebac: &descope.ManagementKeyRebacArgs{
+//					TagRoles: descope.ManagementKeyRebacTagRoleArray{
+//						&descope.ManagementKeyRebacTagRoleArgs{
+//							Tags: pulumi.StringArray{
+//								pulumi.String("production"),
+//							},
+//							Roles: pulumi.StringArray{
+//								pulumi.String("<role-name>"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ManagementKey struct {
 	pulumi.CustomResourceState
 

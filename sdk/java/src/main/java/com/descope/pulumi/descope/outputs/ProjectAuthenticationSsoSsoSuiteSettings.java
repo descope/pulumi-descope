@@ -28,6 +28,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
      */
     private @Nullable Boolean hideGroupsMapping;
     /**
+     * @return Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+     * 
+     */
+    private @Nullable Boolean hideJitGuide;
+    /**
      * @return Setting this to `true` will hide the OIDC configuration option.
      * 
      */
@@ -43,10 +48,20 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
      */
     private @Nullable Boolean hideScim;
     /**
+     * @return Whether to display the help/support contact link in the SSO Suite UI.
+     * 
+     */
+    private @Nullable Boolean showHelpContact;
+    /**
      * @return Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
      * 
      */
     private @Nullable String styleId;
+    /**
+     * @return Email address shown to end-users in the SSO Suite UI as a support contact.
+     * 
+     */
+    private @Nullable String supportEmail;
 
     private ProjectAuthenticationSsoSsoSuiteSettings() {}
     /**
@@ -71,6 +86,13 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         return Optional.ofNullable(this.hideGroupsMapping);
     }
     /**
+     * @return Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+     * 
+     */
+    public Optional<Boolean> hideJitGuide() {
+        return Optional.ofNullable(this.hideJitGuide);
+    }
+    /**
      * @return Setting this to `true` will hide the OIDC configuration option.
      * 
      */
@@ -92,11 +114,25 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         return Optional.ofNullable(this.hideScim);
     }
     /**
+     * @return Whether to display the help/support contact link in the SSO Suite UI.
+     * 
+     */
+    public Optional<Boolean> showHelpContact() {
+        return Optional.ofNullable(this.showHelpContact);
+    }
+    /**
      * @return Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
      * 
      */
     public Optional<String> styleId() {
         return Optional.ofNullable(this.styleId);
+    }
+    /**
+     * @return Email address shown to end-users in the SSO Suite UI as a support contact.
+     * 
+     */
+    public Optional<String> supportEmail() {
+        return Optional.ofNullable(this.supportEmail);
     }
 
     public static Builder builder() {
@@ -111,20 +147,26 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         private @Nullable Boolean forceDomainVerification;
         private @Nullable Boolean hideDomains;
         private @Nullable Boolean hideGroupsMapping;
+        private @Nullable Boolean hideJitGuide;
         private @Nullable Boolean hideOidc;
         private @Nullable Boolean hideSaml;
         private @Nullable Boolean hideScim;
+        private @Nullable Boolean showHelpContact;
         private @Nullable String styleId;
+        private @Nullable String supportEmail;
         public Builder() {}
         public Builder(ProjectAuthenticationSsoSsoSuiteSettings defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.forceDomainVerification = defaults.forceDomainVerification;
     	      this.hideDomains = defaults.hideDomains;
     	      this.hideGroupsMapping = defaults.hideGroupsMapping;
+    	      this.hideJitGuide = defaults.hideJitGuide;
     	      this.hideOidc = defaults.hideOidc;
     	      this.hideSaml = defaults.hideSaml;
     	      this.hideScim = defaults.hideScim;
+    	      this.showHelpContact = defaults.showHelpContact;
     	      this.styleId = defaults.styleId;
+    	      this.supportEmail = defaults.supportEmail;
         }
 
         @CustomType.Setter
@@ -146,6 +188,12 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
             return this;
         }
         @CustomType.Setter
+        public Builder hideJitGuide(@Nullable Boolean hideJitGuide) {
+
+            this.hideJitGuide = hideJitGuide;
+            return this;
+        }
+        @CustomType.Setter
         public Builder hideOidc(@Nullable Boolean hideOidc) {
 
             this.hideOidc = hideOidc;
@@ -164,9 +212,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
             return this;
         }
         @CustomType.Setter
+        public Builder showHelpContact(@Nullable Boolean showHelpContact) {
+
+            this.showHelpContact = showHelpContact;
+            return this;
+        }
+        @CustomType.Setter
         public Builder styleId(@Nullable String styleId) {
 
             this.styleId = styleId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder supportEmail(@Nullable String supportEmail) {
+
+            this.supportEmail = supportEmail;
             return this;
         }
         public ProjectAuthenticationSsoSsoSuiteSettings build() {
@@ -174,10 +234,13 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
             _resultValue.forceDomainVerification = forceDomainVerification;
             _resultValue.hideDomains = hideDomains;
             _resultValue.hideGroupsMapping = hideGroupsMapping;
+            _resultValue.hideJitGuide = hideJitGuide;
             _resultValue.hideOidc = hideOidc;
             _resultValue.hideSaml = hideSaml;
             _resultValue.hideScim = hideScim;
+            _resultValue.showHelpContact = showHelpContact;
             _resultValue.styleId = styleId;
+            _resultValue.supportEmail = supportEmail;
             return _resultValue;
         }
     }

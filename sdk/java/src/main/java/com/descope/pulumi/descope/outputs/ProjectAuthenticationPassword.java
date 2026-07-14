@@ -15,15 +15,35 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectAuthenticationPassword {
     /**
+     * @return Whether passwords must contain at least one letter, either uppercase or lowercase.
+     * 
+     */
+    private @Nullable Boolean anyLetter;
+    /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
     private @Nullable Boolean disabled;
     /**
+     * @return Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+     * 
+     */
+    private @Nullable Boolean disallowEmailMatch;
+    /**
+     * @return Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+     * 
+     */
+    private @Nullable String disallowedCharacters;
+    /**
      * @return Settings related to sending password reset emails as part of the password feature.
      * 
      */
     private @Nullable ProjectAuthenticationPasswordEmailService emailService;
+    /**
+     * @return Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+     * 
+     */
+    private @Nullable String enforceStrength;
     /**
      * @return Whether users are required to change their password periodically.
      * 
@@ -102,6 +122,13 @@ public final class ProjectAuthenticationPassword {
 
     private ProjectAuthenticationPassword() {}
     /**
+     * @return Whether passwords must contain at least one letter, either uppercase or lowercase.
+     * 
+     */
+    public Optional<Boolean> anyLetter() {
+        return Optional.ofNullable(this.anyLetter);
+    }
+    /**
      * @return Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      * 
      */
@@ -109,11 +136,32 @@ public final class ProjectAuthenticationPassword {
         return Optional.ofNullable(this.disabled);
     }
     /**
+     * @return Whether to reject passwords that match the user&#39;s email address or its local-part (the segment before `{@literal @}`), case-insensitively. The check is skipped if the user&#39;s email is not known at validation time.
+     * 
+     */
+    public Optional<Boolean> disallowEmailMatch() {
+        return Optional.ofNullable(this.disallowEmailMatch);
+    }
+    /**
+     * @return Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `&#34;&#39;&#34;` to reject single and double quotes).
+     * 
+     */
+    public Optional<String> disallowedCharacters() {
+        return Optional.ofNullable(this.disallowedCharacters);
+    }
+    /**
      * @return Settings related to sending password reset emails as part of the password feature.
      * 
      */
     public Optional<ProjectAuthenticationPasswordEmailService> emailService() {
         return Optional.ofNullable(this.emailService);
+    }
+    /**
+     * @return Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+     * 
+     */
+    public Optional<String> enforceStrength() {
+        return Optional.ofNullable(this.enforceStrength);
     }
     /**
      * @return Whether users are required to change their password periodically.
@@ -230,8 +278,12 @@ public final class ProjectAuthenticationPassword {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable Boolean anyLetter;
         private @Nullable Boolean disabled;
+        private @Nullable Boolean disallowEmailMatch;
+        private @Nullable String disallowedCharacters;
         private @Nullable ProjectAuthenticationPasswordEmailService emailService;
+        private @Nullable String enforceStrength;
         private @Nullable Boolean expiration;
         private @Nullable Integer expirationWeeks;
         private @Nullable Boolean lock;
@@ -250,8 +302,12 @@ public final class ProjectAuthenticationPassword {
         public Builder() {}
         public Builder(ProjectAuthenticationPassword defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.anyLetter = defaults.anyLetter;
     	      this.disabled = defaults.disabled;
+    	      this.disallowEmailMatch = defaults.disallowEmailMatch;
+    	      this.disallowedCharacters = defaults.disallowedCharacters;
     	      this.emailService = defaults.emailService;
+    	      this.enforceStrength = defaults.enforceStrength;
     	      this.expiration = defaults.expiration;
     	      this.expirationWeeks = defaults.expirationWeeks;
     	      this.lock = defaults.lock;
@@ -270,15 +326,39 @@ public final class ProjectAuthenticationPassword {
         }
 
         @CustomType.Setter
+        public Builder anyLetter(@Nullable Boolean anyLetter) {
+
+            this.anyLetter = anyLetter;
+            return this;
+        }
+        @CustomType.Setter
         public Builder disabled(@Nullable Boolean disabled) {
 
             this.disabled = disabled;
             return this;
         }
         @CustomType.Setter
+        public Builder disallowEmailMatch(@Nullable Boolean disallowEmailMatch) {
+
+            this.disallowEmailMatch = disallowEmailMatch;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder disallowedCharacters(@Nullable String disallowedCharacters) {
+
+            this.disallowedCharacters = disallowedCharacters;
+            return this;
+        }
+        @CustomType.Setter
         public Builder emailService(@Nullable ProjectAuthenticationPasswordEmailService emailService) {
 
             this.emailService = emailService;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder enforceStrength(@Nullable String enforceStrength) {
+
+            this.enforceStrength = enforceStrength;
             return this;
         }
         @CustomType.Setter
@@ -373,8 +453,12 @@ public final class ProjectAuthenticationPassword {
         }
         public ProjectAuthenticationPassword build() {
             final var _resultValue = new ProjectAuthenticationPassword();
+            _resultValue.anyLetter = anyLetter;
             _resultValue.disabled = disabled;
+            _resultValue.disallowEmailMatch = disallowEmailMatch;
+            _resultValue.disallowedCharacters = disallowedCharacters;
             _resultValue.emailService = emailService;
+            _resultValue.enforceStrength = enforceStrength;
             _resultValue.expiration = expiration;
             _resultValue.expirationWeeks = expirationWeeks;
             _resultValue.lock = lock;

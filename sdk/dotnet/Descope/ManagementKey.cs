@@ -10,6 +10,127 @@ using Pulumi;
 
 namespace Descope.Pulumi.Descope
 {
+    /// <summary>
+    /// Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+    /// 
+    /// &gt; **Important:** The `Cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+    /// 
+    /// Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+    /// - **Company roles** – Access to all projects in the company
+    /// - **Project roles** – Scoped to specific project IDs
+    /// - **Tag roles** – Scoped to all projects with a given tag
+    /// 
+    /// See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ### Company-Level Key
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var companyKey = new Descope.ManagementKey("company_key", new()
+    ///     {
+    ///         Name = "CI/CD Pipeline Key",
+    ///         Description = "Used by the deployment pipeline to manage users",
+    ///         Rebac = new Descope.Inputs.ManagementKeyRebacArgs
+    ///         {
+    ///             CompanyRoles = new[]
+    ///             {
+    ///                 "&lt;role-name&gt;",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["managementKeyValue"] = companyKey.Cleartext,
+    ///     };
+    /// });
+    /// ```
+    /// 
+    /// ### Project-Scoped Key with Expiration
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var projectKey = new Descope.ManagementKey("project_key", new()
+    ///     {
+    ///         Name = "Staging Key",
+    ///         Description = "Limited access to staging project only",
+    ///         ExpireTime = 1893456000,
+    ///         Rebac = new Descope.Inputs.ManagementKeyRebacArgs
+    ///         {
+    ///             ProjectRoles = new[]
+    ///             {
+    ///                 new Descope.Inputs.ManagementKeyRebacProjectRoleArgs
+    ///                 {
+    ///                     ProjectIds = new[]
+    ///                     {
+    ///                         "&lt;project-id&gt;",
+    ///                     },
+    ///                     Roles = new[]
+    ///                     {
+    ///                         "&lt;role-name&gt;",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Tag-Scoped Key with IP Restriction
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var restrictedKey = new Descope.ManagementKey("restricted_key", new()
+    ///     {
+    ///         Name = "Office Network Key",
+    ///         PermittedIps = new[]
+    ///         {
+    ///             "203.0.113.0/24",
+    ///             "198.51.100.10",
+    ///         },
+    ///         Rebac = new Descope.Inputs.ManagementKeyRebacArgs
+    ///         {
+    ///             TagRoles = new[]
+    ///             {
+    ///                 new Descope.Inputs.ManagementKeyRebacTagRoleArgs
+    ///                 {
+    ///                     Tags = new[]
+    ///                     {
+    ///                         "production",
+    ///                     },
+    ///                     Roles = new[]
+    ///                     {
+    ///                         "&lt;role-name&gt;",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DescopeResourceType("descope:index/managementKey:ManagementKey")]
     public partial class ManagementKey : global::Pulumi.CustomResource
     {

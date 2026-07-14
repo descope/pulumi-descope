@@ -6,12 +6,19 @@ package com.descope.pulumi.descope.outputs;
 import com.descope.pulumi.descope.outputs.ProjectAuthorizationPermission;
 import com.descope.pulumi.descope.outputs.ProjectAuthorizationRole;
 import com.pulumi.core.annotations.CustomType;
+import java.lang.String;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 @CustomType
 public final class ProjectAuthorization {
+    /**
+     * @return The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+     * 
+     */
+    private @Nullable String fga;
     /**
      * @return A list of `Permission` objects.
      * 
@@ -24,6 +31,13 @@ public final class ProjectAuthorization {
     private @Nullable List<ProjectAuthorizationRole> roles;
 
     private ProjectAuthorization() {}
+    /**
+     * @return The project&#39;s FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+     * 
+     */
+    public Optional<String> fga() {
+        return Optional.ofNullable(this.fga);
+    }
     /**
      * @return A list of `Permission` objects.
      * 
@@ -48,15 +62,23 @@ public final class ProjectAuthorization {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String fga;
         private @Nullable List<ProjectAuthorizationPermission> permissions;
         private @Nullable List<ProjectAuthorizationRole> roles;
         public Builder() {}
         public Builder(ProjectAuthorization defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.fga = defaults.fga;
     	      this.permissions = defaults.permissions;
     	      this.roles = defaults.roles;
         }
 
+        @CustomType.Setter
+        public Builder fga(@Nullable String fga) {
+
+            this.fga = fga;
+            return this;
+        }
         @CustomType.Setter
         public Builder permissions(@Nullable List<ProjectAuthorizationPermission> permissions) {
 
@@ -77,6 +99,7 @@ public final class ProjectAuthorization {
         }
         public ProjectAuthorization build() {
             final var _resultValue = new ProjectAuthorization();
+            _resultValue.fga = fga;
             _resultValue.permissions = permissions;
             _resultValue.roles = roles;
             return _resultValue;

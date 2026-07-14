@@ -15,13 +15,29 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectAuthenticationPassword
     {
         /// <summary>
+        /// Whether passwords must contain at least one letter, either uppercase or lowercase.
+        /// </summary>
+        public readonly bool? AnyLetter;
+        /// <summary>
         /// Setting this to `True` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
         /// </summary>
         public readonly bool? Disabled;
         /// <summary>
+        /// Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively. The check is skipped if the user's email is not known at validation time.
+        /// </summary>
+        public readonly bool? DisallowEmailMatch;
+        /// <summary>
+        /// Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `"'"` to reject single and double quotes).
+        /// </summary>
+        public readonly string? DisallowedCharacters;
+        /// <summary>
         /// Settings related to sending password reset emails as part of the password feature.
         /// </summary>
         public readonly Outputs.ProjectAuthenticationPasswordEmailService? EmailService;
+        /// <summary>
+        /// Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+        /// </summary>
+        public readonly string? EnforceStrength;
         /// <summary>
         /// Whether users are required to change their password periodically.
         /// </summary>
@@ -85,9 +101,17 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectAuthenticationPassword(
+            bool? anyLetter,
+
             bool? disabled,
 
+            bool? disallowEmailMatch,
+
+            string? disallowedCharacters,
+
             Outputs.ProjectAuthenticationPasswordEmailService? emailService,
+
+            string? enforceStrength,
 
             bool? expiration,
 
@@ -119,8 +143,12 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? uppercase)
         {
+            AnyLetter = anyLetter;
             Disabled = disabled;
+            DisallowEmailMatch = disallowEmailMatch;
+            DisallowedCharacters = disallowedCharacters;
             EmailService = emailService;
+            EnforceStrength = enforceStrength;
             Expiration = expiration;
             ExpirationWeeks = expirationWeeks;
             Lock = @lock;

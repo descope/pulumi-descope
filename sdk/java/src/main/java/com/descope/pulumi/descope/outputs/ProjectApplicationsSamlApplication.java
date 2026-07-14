@@ -6,6 +6,8 @@ package com.descope.pulumi.descope.outputs;
 import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplicationAttributeMapping;
 import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplicationDynamicConfiguration;
 import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplicationManualConfiguration;
+import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplicationPermission;
+import com.descope.pulumi.descope.outputs.ProjectApplicationsSamlApplicationRole;
 import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
@@ -32,6 +34,11 @@ public final class ProjectApplicationsSamlApplication {
      * 
      */
     private @Nullable String defaultRelayState;
+    /**
+     * @return The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+     * 
+     */
+    private @Nullable String defaultSignatureAlgorithm;
     /**
      * @return A description for the SAML application.
      * 
@@ -77,6 +84,8 @@ public final class ProjectApplicationsSamlApplication {
      * 
      */
     private String name;
+    private @Nullable List<ProjectApplicationsSamlApplicationPermission> permissions;
+    private @Nullable List<ProjectApplicationsSamlApplicationRole> roles;
     /**
      * @return The subject name id format. Choose one of &#34;&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;. Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      * 
@@ -109,6 +118,13 @@ public final class ProjectApplicationsSamlApplication {
      */
     public Optional<String> defaultRelayState() {
         return Optional.ofNullable(this.defaultRelayState);
+    }
+    /**
+     * @return The signature algorithm used to sign SAML responses. Choose one of `&#34;&#34;` (default, SHA-1) or `&#34;sha256&#34;` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP&#39;s SAML request.
+     * 
+     */
+    public Optional<String> defaultSignatureAlgorithm() {
+        return Optional.ofNullable(this.defaultSignatureAlgorithm);
     }
     /**
      * @return A description for the SAML application.
@@ -173,6 +189,12 @@ public final class ProjectApplicationsSamlApplication {
     public String name() {
         return this.name;
     }
+    public List<ProjectApplicationsSamlApplicationPermission> permissions() {
+        return this.permissions == null ? List.of() : this.permissions;
+    }
+    public List<ProjectApplicationsSamlApplicationRole> roles() {
+        return this.roles == null ? List.of() : this.roles;
+    }
     /**
      * @return The subject name id format. Choose one of &#34;&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&#34;, &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&#34;, &#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;. Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      * 
@@ -200,6 +222,7 @@ public final class ProjectApplicationsSamlApplication {
         private @Nullable List<String> acsAllowedCallbackUrls;
         private @Nullable List<ProjectApplicationsSamlApplicationAttributeMapping> attributeMappings;
         private @Nullable String defaultRelayState;
+        private @Nullable String defaultSignatureAlgorithm;
         private @Nullable String description;
         private @Nullable Boolean disabled;
         private @Nullable ProjectApplicationsSamlApplicationDynamicConfiguration dynamicConfiguration;
@@ -209,6 +232,8 @@ public final class ProjectApplicationsSamlApplication {
         private @Nullable String logo;
         private @Nullable ProjectApplicationsSamlApplicationManualConfiguration manualConfiguration;
         private String name;
+        private @Nullable List<ProjectApplicationsSamlApplicationPermission> permissions;
+        private @Nullable List<ProjectApplicationsSamlApplicationRole> roles;
         private @Nullable String subjectNameIdFormat;
         private @Nullable String subjectNameIdType;
         public Builder() {}
@@ -217,6 +242,7 @@ public final class ProjectApplicationsSamlApplication {
     	      this.acsAllowedCallbackUrls = defaults.acsAllowedCallbackUrls;
     	      this.attributeMappings = defaults.attributeMappings;
     	      this.defaultRelayState = defaults.defaultRelayState;
+    	      this.defaultSignatureAlgorithm = defaults.defaultSignatureAlgorithm;
     	      this.description = defaults.description;
     	      this.disabled = defaults.disabled;
     	      this.dynamicConfiguration = defaults.dynamicConfiguration;
@@ -226,6 +252,8 @@ public final class ProjectApplicationsSamlApplication {
     	      this.logo = defaults.logo;
     	      this.manualConfiguration = defaults.manualConfiguration;
     	      this.name = defaults.name;
+    	      this.permissions = defaults.permissions;
+    	      this.roles = defaults.roles;
     	      this.subjectNameIdFormat = defaults.subjectNameIdFormat;
     	      this.subjectNameIdType = defaults.subjectNameIdType;
         }
@@ -252,6 +280,12 @@ public final class ProjectApplicationsSamlApplication {
         public Builder defaultRelayState(@Nullable String defaultRelayState) {
 
             this.defaultRelayState = defaultRelayState;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder defaultSignatureAlgorithm(@Nullable String defaultSignatureAlgorithm) {
+
+            this.defaultSignatureAlgorithm = defaultSignatureAlgorithm;
             return this;
         }
         @CustomType.Setter
@@ -311,6 +345,24 @@ public final class ProjectApplicationsSamlApplication {
             return this;
         }
         @CustomType.Setter
+        public Builder permissions(@Nullable List<ProjectApplicationsSamlApplicationPermission> permissions) {
+
+            this.permissions = permissions;
+            return this;
+        }
+        public Builder permissions(ProjectApplicationsSamlApplicationPermission... permissions) {
+            return permissions(List.of(permissions));
+        }
+        @CustomType.Setter
+        public Builder roles(@Nullable List<ProjectApplicationsSamlApplicationRole> roles) {
+
+            this.roles = roles;
+            return this;
+        }
+        public Builder roles(ProjectApplicationsSamlApplicationRole... roles) {
+            return roles(List.of(roles));
+        }
+        @CustomType.Setter
         public Builder subjectNameIdFormat(@Nullable String subjectNameIdFormat) {
 
             this.subjectNameIdFormat = subjectNameIdFormat;
@@ -327,6 +379,7 @@ public final class ProjectApplicationsSamlApplication {
             _resultValue.acsAllowedCallbackUrls = acsAllowedCallbackUrls;
             _resultValue.attributeMappings = attributeMappings;
             _resultValue.defaultRelayState = defaultRelayState;
+            _resultValue.defaultSignatureAlgorithm = defaultSignatureAlgorithm;
             _resultValue.description = description;
             _resultValue.disabled = disabled;
             _resultValue.dynamicConfiguration = dynamicConfiguration;
@@ -336,6 +389,8 @@ public final class ProjectApplicationsSamlApplication {
             _resultValue.logo = logo;
             _resultValue.manualConfiguration = manualConfiguration;
             _resultValue.name = name;
+            _resultValue.permissions = permissions;
+            _resultValue.roles = roles;
             _resultValue.subjectNameIdFormat = subjectNameIdFormat;
             _resultValue.subjectNameIdType = subjectNameIdType;
             return _resultValue;

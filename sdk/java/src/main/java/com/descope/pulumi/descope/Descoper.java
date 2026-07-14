@@ -14,6 +14,188 @@ import com.pulumi.core.internal.Codegen;
 import java.lang.String;
 import javax.annotation.Nullable;
 
+/**
+ * Manages a Descope console user and their access control settings. Console users (referred to as &#34;Descopers&#34;) are team members who access the [Descope console](https://app.descope.com) to manage projects.
+ * 
+ * Access is controlled via RBAC, where each Descoper can be granted one of four roles:
+ * - `admin` – Full access to project settings
+ * - `developer` – Can edit flows and configurations
+ * - `support` – Can view user data and audit logs
+ * - `auditor` – Read-only access to audit logs
+ * 
+ * Roles can be scoped to the entire company, to specific projects by ID, or to all projects with a given tag.
+ * 
+ * ## Example Usage
+ * 
+ * ### Company Admin
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Descoper;
+ * import com.descope.pulumi.descope.DescoperArgs;
+ * import com.pulumi.descope.inputs.DescoperRbacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var admin = new Descoper("admin", DescoperArgs.builder()
+ *             .email("admin}{@literal @}{@code example.com")
+ *             .name("Alice Admin")
+ *             .rbac(DescoperRbacArgs.builder()
+ *                 .isCompanyAdmin(true)
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ * ### Developer for Specific Projects
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Descoper;
+ * import com.descope.pulumi.descope.DescoperArgs;
+ * import com.pulumi.descope.inputs.DescoperRbacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var developer = new Descoper("developer", DescoperArgs.builder()
+ *             .email("dev}{@literal @}{@code example.com")
+ *             .name("Bob Dev")
+ *             .rbac(DescoperRbacArgs.builder()
+ *                 .projectRoles(DescoperRbacProjectRoleArgs.builder()
+ *                     .role("developer")
+ *                     .projectIds(                    
+ *                         "P123abc",
+ *                         "P456def")
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ * ### Support Access via Project Tags
+ * 
+ * Grant a support engineer access to all projects tagged `production`:
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Descoper;
+ * import com.descope.pulumi.descope.DescoperArgs;
+ * import com.pulumi.descope.inputs.DescoperRbacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var support = new Descoper("support", DescoperArgs.builder()
+ *             .email("support}{@literal @}{@code example.com")
+ *             .rbac(DescoperRbacArgs.builder()
+ *                 .tagRoles(DescoperRbacTagRoleArgs.builder()
+ *                     .role("support")
+ *                     .tags("production")
+ *                     .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ * ### Multi-Role Access
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.Descoper;
+ * import com.descope.pulumi.descope.DescoperArgs;
+ * import com.pulumi.descope.inputs.DescoperRbacArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App }{{@code
+ *     public static void main(String[] args) }{{@code
+ *         Pulumi.run(App::stack);
+ *     }}{@code
+ * 
+ *     public static void stack(Context ctx) }{{@code
+ *         var multiRole = new Descoper("multiRole", DescoperArgs.builder()
+ *             .email("lead}{@literal @}{@code example.com")
+ *             .rbac(DescoperRbacArgs.builder()
+ *                 .projectRoles(                
+ *                     DescoperRbacProjectRoleArgs.builder()
+ *                         .role("admin")
+ *                         .projectIds("P123abc")
+ *                         .build(),
+ *                     DescoperRbacProjectRoleArgs.builder()
+ *                         .role("developer")
+ *                         .projectIds("P789ghi")
+ *                         .build())
+ *                 .build())
+ *             .build());
+ * 
+ *     }}{@code
+ * }}{@code
+ * }
+ * </pre>
+ * 
+ */
 @ResourceType(type="descope:index/descoper:Descoper")
 public class Descoper extends com.pulumi.resources.CustomResource {
     /**

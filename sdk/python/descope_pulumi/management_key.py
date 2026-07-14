@@ -255,7 +255,72 @@ class ManagementKey(pulumi.CustomResource):
                  status: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
         """
-        Create a ManagementKey resource with the given unique name, props, and options.
+        Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+
+        > **Important:** The `cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+
+        Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+        - **Company roles** – Access to all projects in the company
+        - **Project roles** – Scoped to specific project IDs
+        - **Tag roles** – Scoped to all projects with a given tag
+
+        See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+
+        ## Example Usage
+
+        ### Company-Level Key
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        company_key = descope.ManagementKey("company_key",
+            name="CI/CD Pipeline Key",
+            description="Used by the deployment pipeline to manage users",
+            rebac={
+                "company_roles": ["<role-name>"],
+            })
+        pulumi.export("managementKeyValue", company_key.cleartext)
+        ```
+
+        ### Project-Scoped Key with Expiration
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        project_key = descope.ManagementKey("project_key",
+            name="Staging Key",
+            description="Limited access to staging project only",
+            expire_time=1893456000,
+            rebac={
+                "project_roles": [{
+                    "project_ids": ["<project-id>"],
+                    "roles": ["<role-name>"],
+                }],
+            })
+        ```
+
+        ### Tag-Scoped Key with IP Restriction
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        restricted_key = descope.ManagementKey("restricted_key",
+            name="Office Network Key",
+            permitted_ips=[
+                "203.0.113.0/24",
+                "198.51.100.10",
+            ],
+            rebac={
+                "tag_roles": [{
+                    "tags": ["production"],
+                    "roles": ["<role-name>"],
+                }],
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
@@ -272,7 +337,72 @@ class ManagementKey(pulumi.CustomResource):
                  args: ManagementKeyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ManagementKey resource with the given unique name, props, and options.
+        Manages a Descope Management Key—a credential used to authenticate programmatic access to the Descope Management API and SDKs. Management keys are used for backend operations such as creating users, managing sessions, and building automation pipelines.
+
+        > **Important:** The `cleartext` attribute (the raw key value) is only available immediately after creation and **cannot be retrieved later** through the API. Store it securely using a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault) immediately after `pulumi up`.
+
+        Keys can be scoped to restrict which projects they can access, at the company level or per-project or tag:
+        - **Company roles** – Access to all projects in the company
+        - **Project roles** – Scoped to specific project IDs
+        - **Tag roles** – Scoped to all projects with a given tag
+
+        See the [Descope documentation](https://docs.descope.com) for the list of valid role names.
+
+        ## Example Usage
+
+        ### Company-Level Key
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        company_key = descope.ManagementKey("company_key",
+            name="CI/CD Pipeline Key",
+            description="Used by the deployment pipeline to manage users",
+            rebac={
+                "company_roles": ["<role-name>"],
+            })
+        pulumi.export("managementKeyValue", company_key.cleartext)
+        ```
+
+        ### Project-Scoped Key with Expiration
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        project_key = descope.ManagementKey("project_key",
+            name="Staging Key",
+            description="Limited access to staging project only",
+            expire_time=1893456000,
+            rebac={
+                "project_roles": [{
+                    "project_ids": ["<project-id>"],
+                    "roles": ["<role-name>"],
+                }],
+            })
+        ```
+
+        ### Tag-Scoped Key with IP Restriction
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+
+        restricted_key = descope.ManagementKey("restricted_key",
+            name="Office Network Key",
+            permitted_ips=[
+                "203.0.113.0/24",
+                "198.51.100.10",
+            ],
+            rebac={
+                "tag_roles": [{
+                    "tags": ["production"],
+                    "roles": ["<role-name>"],
+                }],
+            })
+        ```
+
         :param str resource_name: The name of the resource.
         :param ManagementKeyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

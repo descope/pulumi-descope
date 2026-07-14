@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectConnectorsUnibeam
     {
         /// <summary>
+        /// Unibeam API base URL.
+        /// </summary>
+        public readonly string BaseUrl;
+        /// <summary>
         /// OAuth2 client ID for authentication.
         /// </summary>
         public readonly string ClientId;
@@ -46,6 +50,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectConnectorsUnibeam(
+            string baseUrl,
+
             string clientId,
 
             string clientSecret,
@@ -62,6 +68,7 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string name)
         {
+            BaseUrl = baseUrl;
             ClientId = clientId;
             ClientSecret = clientSecret;
             CustomerId = customerId;

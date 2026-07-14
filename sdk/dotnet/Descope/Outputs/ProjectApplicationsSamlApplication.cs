@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? DefaultRelayState;
         /// <summary>
+        /// The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
+        /// </summary>
+        public readonly string? DefaultSignatureAlgorithm;
+        /// <summary>
         /// A description for the SAML application.
         /// </summary>
         public readonly string? Description;
@@ -62,6 +66,8 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A name for the SAML application.
         /// </summary>
         public readonly string Name;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplicationPermission> Permissions;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsSamlApplicationRole> Roles;
         /// <summary>
         /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
@@ -78,6 +84,8 @@ namespace Descope.Pulumi.Descope.Outputs
             ImmutableArray<Outputs.ProjectApplicationsSamlApplicationAttributeMapping> attributeMappings,
 
             string? defaultRelayState,
+
+            string? defaultSignatureAlgorithm,
 
             string? description,
 
@@ -97,6 +105,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string name,
 
+            ImmutableArray<Outputs.ProjectApplicationsSamlApplicationPermission> permissions,
+
+            ImmutableArray<Outputs.ProjectApplicationsSamlApplicationRole> roles,
+
             string? subjectNameIdFormat,
 
             string? subjectNameIdType)
@@ -104,6 +116,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AcsAllowedCallbackUrls = acsAllowedCallbackUrls;
             AttributeMappings = attributeMappings;
             DefaultRelayState = defaultRelayState;
+            DefaultSignatureAlgorithm = defaultSignatureAlgorithm;
             Description = description;
             Disabled = disabled;
             DynamicConfiguration = dynamicConfiguration;
@@ -113,6 +126,8 @@ namespace Descope.Pulumi.Descope.Outputs
             Logo = logo;
             ManualConfiguration = manualConfiguration;
             Name = name;
+            Permissions = permissions;
+            Roles = roles;
             SubjectNameIdFormat = subjectNameIdFormat;
             SubjectNameIdType = subjectNameIdType;
         }

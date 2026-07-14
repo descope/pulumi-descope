@@ -13,6 +13,24 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectApplicationsOidcApplicationArgs : global::Pulumi.ResourceArgs
     {
+        [Input("approvedRedirectUrls")]
+        private InputList<string>? _approvedRedirectUrls;
+
+        /// <summary>
+        /// A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project's approved/trusted domains.
+        /// </summary>
+        public InputList<string> ApprovedRedirectUrls
+        {
+            get => _approvedRedirectUrls ?? (_approvedRedirectUrls = new InputList<string>());
+            set => _approvedRedirectUrls = value;
+        }
+
+        /// <summary>
+        /// Disables the `AuthorizationCode` grant type for this application.
+        /// </summary>
+        [Input("authorizationCodeDisabled")]
+        public Input<bool>? AuthorizationCodeDisabled { get; set; }
+
         [Input("claims")]
         private InputList<string>? _claims;
 
@@ -26,10 +44,56 @@ namespace Descope.Pulumi.Descope.Inputs
         }
 
         /// <summary>
+        /// Disables the `ClientCredentials` grant type for this application.
+        /// </summary>
+        [Input("clientCredentialsDisabled")]
+        public Input<bool>? ClientCredentialsDisabled { get; set; }
+
+        /// <summary>
+        /// A dedicated OIDC `ClientId` to import for this application. When omitted, the `ClientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+        /// </summary>
+        [Input("clientId")]
+        public Input<string>? ClientId { get; set; }
+
+        [Input("clientSecret")]
+        private Input<string>? _clientSecret;
+
+        /// <summary>
+        /// A dedicated OIDC `ClientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+        /// </summary>
+        public Input<string>? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// OAuth client confidentiality. One of `""` (default — legacy access-key authentication), `"confidential"` (a dedicated client secret is generated for the app), or `"public"`.
+        /// </summary>
+        [Input("clientType")]
+        public Input<string>? ClientType { get; set; }
+
+        /// <summary>
+        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+        /// </summary>
+        [Input("defaultAudience")]
+        public Input<string>? DefaultAudience { get; set; }
+
+        /// <summary>
         /// A description for the OIDC application.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+        /// </summary>
+        [Input("deviceCodeDisabled")]
+        public Input<bool>? DeviceCodeDisabled { get; set; }
 
         /// <summary>
         /// Whether the application should be enabled or disabled.
@@ -44,10 +108,22 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? ForceAuthentication { get; set; }
 
         /// <summary>
+        /// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `CodeVerifier`. Public clients always use PKCE regardless of this setting.
+        /// </summary>
+        [Input("forcePkce")]
+        public Input<bool>? ForcePkce { get; set; }
+
+        /// <summary>
         /// An optional identifier for the OIDC application.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+        /// </summary>
+        [Input("jwtBearerDisabled")]
+        public Input<bool>? JwtBearerDisabled { get; set; }
 
         /// <summary>
         /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -66,6 +142,28 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        [Input("permissions")]
+        private InputList<Inputs.ProjectApplicationsOidcApplicationPermissionArgs>? _permissions;
+        public InputList<Inputs.ProjectApplicationsOidcApplicationPermissionArgs> Permissions
+        {
+            get => _permissions ?? (_permissions = new InputList<Inputs.ProjectApplicationsOidcApplicationPermissionArgs>());
+            set => _permissions = value;
+        }
+
+        /// <summary>
+        /// Disables the `RefreshToken` grant type for this application.
+        /// </summary>
+        [Input("refreshTokenDisabled")]
+        public Input<bool>? RefreshTokenDisabled { get; set; }
+
+        [Input("roles")]
+        private InputList<Inputs.ProjectApplicationsOidcApplicationRoleArgs>? _roles;
+        public InputList<Inputs.ProjectApplicationsOidcApplicationRoleArgs> Roles
+        {
+            get => _roles ?? (_roles = new InputList<Inputs.ProjectApplicationsOidcApplicationRoleArgs>());
+            set => _roles = value;
+        }
 
         public ProjectApplicationsOidcApplicationArgs()
         {

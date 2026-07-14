@@ -15,13 +15,45 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectApplicationsOidcApplication
     {
         /// <summary>
+        /// A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project's approved/trusted domains.
+        /// </summary>
+        public readonly ImmutableArray<string> ApprovedRedirectUrls;
+        /// <summary>
+        /// Disables the `AuthorizationCode` grant type for this application.
+        /// </summary>
+        public readonly bool? AuthorizationCodeDisabled;
+        /// <summary>
         /// A list of supported claims. e.g. `Sub`, `Email`, `Exp`.
         /// </summary>
         public readonly ImmutableArray<string> Claims;
         /// <summary>
+        /// Disables the `ClientCredentials` grant type for this application.
+        /// </summary>
+        public readonly bool? ClientCredentialsDisabled;
+        /// <summary>
+        /// A dedicated OIDC `ClientId` to import for this application. When omitted, the `ClientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+        /// </summary>
+        public readonly string? ClientId;
+        /// <summary>
+        /// A dedicated OIDC `ClientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+        /// </summary>
+        public readonly string? ClientSecret;
+        /// <summary>
+        /// OAuth client confidentiality. One of `""` (default — legacy access-key authentication), `"confidential"` (a dedicated client secret is generated for the app), or `"public"`.
+        /// </summary>
+        public readonly string? ClientType;
+        /// <summary>
+        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+        /// </summary>
+        public readonly string? DefaultAudience;
+        /// <summary>
         /// A description for the OIDC application.
         /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+        /// </summary>
+        public readonly bool? DeviceCodeDisabled;
         /// <summary>
         /// Whether the application should be enabled or disabled.
         /// </summary>
@@ -31,9 +63,17 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? ForceAuthentication;
         /// <summary>
+        /// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `CodeVerifier`. Public clients always use PKCE regardless of this setting.
+        /// </summary>
+        public readonly bool? ForcePkce;
+        /// <summary>
         /// An optional identifier for the OIDC application.
         /// </summary>
         public readonly string? Id;
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+        /// </summary>
+        public readonly bool? JwtBearerDisabled;
         /// <summary>
         /// The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         /// </summary>
@@ -46,33 +86,78 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A name for the OIDC application.
         /// </summary>
         public readonly string Name;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsOidcApplicationPermission> Permissions;
+        /// <summary>
+        /// Disables the `RefreshToken` grant type for this application.
+        /// </summary>
+        public readonly bool? RefreshTokenDisabled;
+        public readonly ImmutableArray<Outputs.ProjectApplicationsOidcApplicationRole> Roles;
 
         [OutputConstructor]
         private ProjectApplicationsOidcApplication(
+            ImmutableArray<string> approvedRedirectUrls,
+
+            bool? authorizationCodeDisabled,
+
             ImmutableArray<string> claims,
 
+            bool? clientCredentialsDisabled,
+
+            string? clientId,
+
+            string? clientSecret,
+
+            string? clientType,
+
+            string? defaultAudience,
+
             string? description,
+
+            bool? deviceCodeDisabled,
 
             bool? disabled,
 
             bool? forceAuthentication,
 
+            bool? forcePkce,
+
             string? id,
+
+            bool? jwtBearerDisabled,
 
             string? loginPageUrl,
 
             string? logo,
 
-            string name)
+            string name,
+
+            ImmutableArray<Outputs.ProjectApplicationsOidcApplicationPermission> permissions,
+
+            bool? refreshTokenDisabled,
+
+            ImmutableArray<Outputs.ProjectApplicationsOidcApplicationRole> roles)
         {
+            ApprovedRedirectUrls = approvedRedirectUrls;
+            AuthorizationCodeDisabled = authorizationCodeDisabled;
             Claims = claims;
+            ClientCredentialsDisabled = clientCredentialsDisabled;
+            ClientId = clientId;
+            ClientSecret = clientSecret;
+            ClientType = clientType;
+            DefaultAudience = defaultAudience;
             Description = description;
+            DeviceCodeDisabled = deviceCodeDisabled;
             Disabled = disabled;
             ForceAuthentication = forceAuthentication;
+            ForcePkce = forcePkce;
             Id = id;
+            JwtBearerDisabled = jwtBearerDisabled;
             LoginPageUrl = loginPageUrl;
             Logo = logo;
             Name = name;
+            Permissions = permissions;
+            RefreshTokenDisabled = refreshTokenDisabled;
+            Roles = roles;
         }
     }
 }

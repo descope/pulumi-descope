@@ -5,6 +5,17 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface AccessKeyTenant {
+    /**
+     * The roles the access key will be granted within the tenant.
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The ID of the tenant to associate with the access key.
+     */
+    tenantId: pulumi.Input<string>;
+}
+
 export interface DescoperRbac {
     /**
      * Whether this descoper has company-wide admin access. When set to `true`, the descoper cannot have `tagRoles` or `projectRoles`.
@@ -40,6 +51,90 @@ export interface DescoperRbacTagRole {
      * The project tags this role assignment applies to.
      */
     tags: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface InboundAppAttributesScope {
+    /**
+     * A description for the scope.
+     */
+    description: pulumi.Input<string>;
+    /**
+     * A name for the scope.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+     */
+    optional?: pulumi.Input<boolean>;
+    /**
+     * The identifiers of the relevant permission, attribute or connection scopes.
+     */
+    values?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface InboundAppConnectionsScope {
+    /**
+     * A description for the scope.
+     */
+    description: pulumi.Input<string>;
+    /**
+     * A name for the scope.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+     */
+    optional?: pulumi.Input<boolean>;
+    /**
+     * The identifiers of the relevant permission, attribute or connection scopes.
+     */
+    values?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface InboundAppPermissionsScope {
+    /**
+     * A description for the scope.
+     */
+    description: pulumi.Input<string>;
+    /**
+     * A name for the scope.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether this scope is optional. When `false`, the scope is mandatory and must be granted during authorization. When `true`, the user may choose to withhold it.
+     */
+    optional?: pulumi.Input<boolean>;
+    /**
+     * The identifiers of the relevant permission, attribute or connection scopes.
+     */
+    values?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface InboundAppSessionSettings {
+    /**
+     * Whether to override the project's session settings.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * The expiration duration for access key session tokens. Must be between 3 minutes and one month.
+     */
+    keySessionTokenExpiration?: pulumi.Input<string>;
+    /**
+     * The ID of the JWT template to use for access key JWTs issued to this inbound app.
+     */
+    keyTemplateId?: pulumi.Input<string>;
+    /**
+     * The expiration duration for refresh tokens issued to this inbound app.
+     */
+    refreshTokenExpiration?: pulumi.Input<string>;
+    /**
+     * The expiration duration for session tokens issued to this inbound app.
+     */
+    sessionTokenExpiration?: pulumi.Input<string>;
+    /**
+     * The ID of the JWT template to use for user JWTs issued to this inbound app.
+     */
+    userTemplateId?: pulumi.Input<string>;
 }
 
 export interface ManagementKeyRebac {
@@ -114,17 +209,53 @@ export interface ProjectApplications {
      * Applications using SAML for authentication.
      */
     samlApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplication>[]>;
+    /**
+     * Applications using WS-Federation for authentication.
+     */
+    wsfedApplications?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplication>[]>;
 }
 
 export interface ProjectApplicationsOidcApplication {
+    /**
+     * A list of approved redirect URLs for this application (supports `*` wildcards). When set, redirect URIs are validated against this per-app list; when empty, validation falls back to the project's approved/trusted domains.
+     */
+    approvedRedirectUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Disables the `authorizationCode` grant type for this application.
+     */
+    authorizationCodeDisabled?: pulumi.Input<boolean>;
     /**
      * A list of supported claims. e.g. `sub`, `email`, `exp`.
      */
     claims?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Disables the `clientCredentials` grant type for this application.
+     */
+    clientCredentialsDisabled?: pulumi.Input<boolean>;
+    /**
+     * A dedicated OIDC `clientId` to import for this application. When omitted, the `clientId` is computed by the server; when set, it must be unique within the project. Can only be set when the application is created, and attempting to change it on an existing application will fail.
+     */
+    clientId?: pulumi.Input<string>;
+    /**
+     * A dedicated OIDC `clientSecret` to import for this application, applied on creation only. When omitted, a secret is generated server-side. The value is sensitive and is not returned on subsequent reads.
+     */
+    clientSecret?: pulumi.Input<string>;
+    /**
+     * OAuth client confidentiality. One of `""` (default — legacy access-key authentication), `"confidential"` (a dedicated client secret is generated for the app), or `"public"`.
+     */
+    clientType?: pulumi.Input<string>;
+    /**
+     * Controls the default `aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     */
+    defaultAudience?: pulumi.Input<string>;
+    /**
      * A description for the OIDC application.
      */
     description?: pulumi.Input<string>;
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this application.
+     */
+    deviceCodeDisabled?: pulumi.Input<boolean>;
     /**
      * Whether the application should be enabled or disabled.
      */
@@ -134,9 +265,17 @@ export interface ProjectApplicationsOidcApplication {
      */
     forceAuthentication?: pulumi.Input<boolean>;
     /**
+     * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
+     */
+    forcePkce?: pulumi.Input<boolean>;
+    /**
      * An optional identifier for the OIDC application.
      */
     id?: pulumi.Input<string>;
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this application.
+     */
+    jwtBearerDisabled?: pulumi.Input<boolean>;
     /**
      * The Flow Hosting URL. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      */
@@ -149,6 +288,26 @@ export interface ProjectApplicationsOidcApplication {
      * A name for the OIDC application.
      */
     name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidcApplicationPermission>[]>;
+    /**
+     * Disables the `refreshToken` grant type for this application.
+     */
+    refreshTokenDisabled?: pulumi.Input<boolean>;
+    roles?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidcApplicationRole>[]>;
+}
+
+export interface ProjectApplicationsOidcApplicationPermission {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsOidcApplicationRole {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    roleMappings?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectApplicationsSamlApplication {
@@ -164,6 +323,10 @@ export interface ProjectApplicationsSamlApplication {
      * The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
      */
     defaultRelayState?: pulumi.Input<string>;
+    /**
+     * The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
+     */
+    defaultSignatureAlgorithm?: pulumi.Input<string>;
     /**
      * A description for the SAML application.
      */
@@ -200,6 +363,8 @@ export interface ProjectApplicationsSamlApplication {
      * A name for the SAML application.
      */
     name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplicationPermission>[]>;
+    roles?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsSamlApplicationRole>[]>;
     /**
      * The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      */
@@ -241,6 +406,140 @@ export interface ProjectApplicationsSamlApplicationManualConfiguration {
      * Enter the `Entity Id` from the SP.
      */
     entityId: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsSamlApplicationPermission {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsSamlApplicationRole {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    roleMappings?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectApplicationsWsfedApplication {
+    /**
+     * A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
+     */
+    attributeMappings?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplicationAttributeMapping>[]>;
+    /**
+     * A description for the WS-Fed application.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Whether the application should be enabled or disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * The URL to redirect to when an error occurs.
+     */
+    errorRedirectUrl?: pulumi.Input<string>;
+    /**
+     * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
+     */
+    forceAuthentication?: pulumi.Input<boolean>;
+    /**
+     * A list of group mappings from Descope roles to WS-Fed groups.
+     */
+    groupsMappings?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplicationGroupsMapping>[]>;
+    /**
+     * An optional identifier for the WS-Fed application.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The Flow Hosting URL.
+     */
+    loginPageUrl?: pulumi.Input<string>;
+    /**
+     * A logo for the WS-Fed application. Should be a hosted image URL.
+     */
+    logo?: pulumi.Input<string>;
+    /**
+     * The URL to redirect to after logout.
+     */
+    logoutRedirectUrl?: pulumi.Input<string>;
+    /**
+     * A name for the WS-Fed application.
+     */
+    name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplicationPermission>[]>;
+    /**
+     * The WS-Fed realm identifier for the application.
+     */
+    realm?: pulumi.Input<string>;
+    /**
+     * Additional allowed `wreply` callback URLs beyond `replyUrl`. Each entry may include the `*` wildcard. When the RP supplies a `wreply` parameter, it must match either the default `replyUrl` or one of these patterns.
+     */
+    replyAllowedCallbackUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The default reply URL where WS-Fed responses are sent. Used for IdP-initiated flows and when no `wreply` is supplied by the RP.
+     */
+    replyUrl?: pulumi.Input<string>;
+    roles?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplicationRole>[]>;
+}
+
+export interface ProjectApplicationsWsfedApplicationAttributeMapping {
+    /**
+     * The name of the attribute.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the attribute.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsWsfedApplicationGroupsMapping {
+    /**
+     * The filter type for the groups mapping.
+     */
+    filterType: pulumi.Input<string>;
+    /**
+     * The name of the groups mapping.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The `RoleGroupMapping` object. A list of roles mapped to this group.
+     */
+    roles?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsWsfedApplicationGroupsMappingRole>[]>;
+    /**
+     * The type of the groups mapping.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the groups mapping.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsWsfedApplicationGroupsMappingRole {
+    /**
+     * The identifier of the role.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * The name of the role.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsWsfedApplicationPermission {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectApplicationsWsfedApplicationRole {
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    roleMappings?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectAttributes {
@@ -2089,9 +2388,17 @@ export interface ProjectAuthenticationOtpVoiceServiceTemplate {
 
 export interface ProjectAuthenticationPasskeys {
     /**
+     * A list of SHA-256 APK key hash fingerprints (colon-separated hex, e.g. `AB:CD:EF:...`) that are allowed as passkey origins for Android apps. When set, only Android apps with a matching fingerprint will be permitted to use passkey authentication.
+     */
+    androidFingerprints?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled?: pulumi.Input<boolean>;
+    /**
+     * The human-friendly name shown to users when they create or use a passkey. Some password managers display this name, while others display the top level domain instead. When left empty, the project name is used.
+     */
+    displayName?: pulumi.Input<string>;
     /**
      * Passkeys will be usable in the following domain and all its subdomains.
      */
@@ -2100,13 +2407,29 @@ export interface ProjectAuthenticationPasskeys {
 
 export interface ProjectAuthenticationPassword {
     /**
+     * Whether passwords must contain at least one letter, either uppercase or lowercase.
+     */
+    anyLetter?: pulumi.Input<boolean>;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled?: pulumi.Input<boolean>;
     /**
+     * Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively. The check is skipped if the user's email is not known at validation time.
+     */
+    disallowEmailMatch?: pulumi.Input<boolean>;
+    /**
+     * Reject passwords containing any of these characters. Each character in the string is treated as a forbidden literal (e.g., `"'"` to reject single and double quotes).
+     */
+    disallowedCharacters?: pulumi.Input<string>;
+    /**
      * Settings related to sending password reset emails as part of the password feature.
      */
     emailService?: pulumi.Input<inputs.ProjectAuthenticationPasswordEmailService>;
+    /**
+     * Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
+     */
+    enforceStrength?: pulumi.Input<string>;
     /**
      * Whether users are required to change their password periodically.
      */
@@ -2218,13 +2541,33 @@ export interface ProjectAuthenticationSso {
      */
     allowOverrideRoles?: pulumi.Input<boolean>;
     /**
+     * Whether to block SSO login if the user's email domain doesn't match the configured SSO domains.
+     */
+    blockIfEmailDomainMismatch?: pulumi.Input<boolean>;
+    /**
      * Setting this to `true` will disallow using this authentication method directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use this authentication method.
      */
     disabled?: pulumi.Input<boolean>;
     /**
+     * Settings related to sending SSO invite emails as part of the SSO feature.
+     */
+    emailService?: pulumi.Input<inputs.ProjectAuthenticationSsoEmailService>;
+    /**
      * Whether to enable groups priority.
      */
     groupsPriority?: pulumi.Input<boolean>;
+    /**
+     * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
+     */
+    limitMappingToMandatoryAttributes?: pulumi.Input<boolean>;
+    /**
+     * Define the required Descope attributes that must be populated when receiving SSO information.
+     */
+    mandatoryUserAttributes?: pulumi.Input<pulumi.Input<inputs.ProjectAuthenticationSsoMandatoryUserAttribute>[]>;
+    /**
+     * Whether to mark the user's email as unverified when logging in via SSO.
+     */
+    markEmailAsUnverified?: pulumi.Input<boolean>;
     /**
      * Whether to merge existing user accounts with new ones created through SSO authentication.
      */
@@ -2234,9 +2577,67 @@ export interface ProjectAuthenticationSso {
      */
     redirectUrl?: pulumi.Input<string>;
     /**
+     * When configuring SSO the groups attribute name must be specified.
+     */
+    requireGroupsAttributeName?: pulumi.Input<boolean>;
+    /**
+     * When configuring SSO an SSO domain must be specified.
+     */
+    requireSsoDomains?: pulumi.Input<boolean>;
+    /**
      * Configuration block for the SSO Suite.
      */
     ssoSuiteSettings?: pulumi.Input<inputs.ProjectAuthenticationSsoSsoSuiteSettings>;
+}
+
+export interface ProjectAuthenticationSsoEmailService {
+    /**
+     * The name of the email connector to use for sending emails.
+     */
+    connector: pulumi.Input<string>;
+    /**
+     * A list of email templates for different authentication flows.
+     */
+    templates?: pulumi.Input<pulumi.Input<inputs.ProjectAuthenticationSsoEmailServiceTemplate>[]>;
+}
+
+export interface ProjectAuthenticationSsoEmailServiceTemplate {
+    /**
+     * Whether this email template is currently active and in use.
+     */
+    active?: pulumi.Input<boolean>;
+    /**
+     * HTML content of the email message body, required if `usePlainTextBody` isn't set.
+     */
+    htmlBody?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Unique name for this email template.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Plain text version of the email message body, required if `usePlainTextBody` is set to `true`.
+     */
+    plainTextBody?: pulumi.Input<string>;
+    /**
+     * Subject line of the email message.
+     */
+    subject: pulumi.Input<string>;
+    /**
+     * Whether to use the plain text body instead of HTML for the email.
+     */
+    usePlainTextBody?: pulumi.Input<boolean>;
+}
+
+export interface ProjectAuthenticationSsoMandatoryUserAttribute {
+    /**
+     * Whether the attribute is a custom attribute defined in addition to the default Descope user attributes.
+     */
+    custom?: pulumi.Input<boolean>;
+    /**
+     * The identifier for the attribute. This value is called `Machine Name` in the Descope console.
+     */
+    id: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationSsoSsoSuiteSettings {
@@ -2253,6 +2654,10 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      */
     hideGroupsMapping?: pulumi.Input<boolean>;
     /**
+     * Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
+     */
+    hideJitGuide?: pulumi.Input<boolean>;
+    /**
      * Setting this to `true` will hide the OIDC configuration option.
      */
     hideOidc?: pulumi.Input<boolean>;
@@ -2265,9 +2670,17 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      */
     hideScim?: pulumi.Input<boolean>;
     /**
+     * Whether to display the help/support contact link in the SSO Suite UI.
+     */
+    showHelpContact?: pulumi.Input<boolean>;
+    /**
      * Specifies the style ID to apply in the SSO Suite. Ensure a style with this ID exists in the console for it to be used.
      */
     styleId?: pulumi.Input<string>;
+    /**
+     * Email address shown to end-users in the SSO Suite UI as a support contact.
+     */
+    supportEmail?: pulumi.Input<string>;
 }
 
 export interface ProjectAuthenticationTotp {
@@ -2282,6 +2695,10 @@ export interface ProjectAuthenticationTotp {
 }
 
 export interface ProjectAuthorization {
+    /**
+     * The project's FGA schema, configured in the [Descope console](https://app.descope.com/authorization/fga) under the FGA tab. Use the code view to get the schema text and paste it as the value for this attribute.
+     */
+    fga?: pulumi.Input<string>;
     /**
      * A list of `Permission` objects.
      */
@@ -2335,6 +2752,10 @@ export interface ProjectConnectors {
      */
     abuseipdbs?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAbuseipdb>[]>;
     /**
+     * Streamline identity verification and fraud monitoring with the Alloy connector.
+     */
+    alloys?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAlloy>[]>;
+    /**
      * Track user activity and traits at any point in your user journey with the Amplitude connector.
      */
     amplitudes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAmplitude>[]>;
@@ -2351,6 +2772,10 @@ export interface ProjectConnectors {
      */
     awsS3s?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsS3>[]>;
     /**
+     * Validate email addresses using the AWS SES Email Validation API to check syntax, DNS records, mailbox existence, and deliverability.
+     */
+    awsSesEmailValidations?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsSesEmailValidation>[]>;
+    /**
      * Localize the language of your login and user journey screens with the Amazon Translate connector.
      */
     awsTranslates?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsAwsTranslate>[]>;
@@ -2362,6 +2787,10 @@ export interface ProjectConnectors {
      * Send audit events and troubleshooting logs to Coralogix.
      */
     coralogixes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCoralogix>[]>;
+    /**
+     * Stream audit events and troubleshooting logs to Cribl Stream via the HTTP/S Bulk API. Requires an HTTP source configured in your Cribl deployment. See Cribl's HTTP/S source setup guide: https://docs.cribl.io/stream/sources-https/
+     */
+    cribls?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCribl>[]>;
     /**
      * Connect to Darwinium API for fraud detection and device intelligence.
      */
@@ -2431,6 +2860,10 @@ export interface ProjectConnectors {
      */
     googleMapsPlaces?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGoogleMapsPlace>[]>;
     /**
+     * Send audit events and troubleshooting logs to groundcover.
+     */
+    groundcovers?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGroundcover>[]>;
+    /**
      * hCaptcha can help protect your applications from bots, spam, and other forms of automated abuse.
      */
     hcaptchas?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsHcaptcha>[]>;
@@ -2479,6 +2912,10 @@ export interface ProjectConnectors {
      */
     opentelemetries?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsOpentelemetry>[]>;
     /**
+     * Stream authentication audit logs with the Pendo connector.
+     */
+    pendos?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsPendo>[]>;
+    /**
      * Authenticate against PingDirectory.
      */
     pingDirectories?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsPingDirectory>[]>;
@@ -2495,6 +2932,10 @@ export interface ProjectConnectors {
      */
     recaptchaEnterprises?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRecaptchaEnterprise>[]>;
     /**
+     * Use the reCAPTCHA v2 "I'm not a robot" checkbox widget with your flows.
+     */
+    recaptchaV2s?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRecaptchaV2>[]>;
+    /**
      * Prevent bot attacks on your login pages with the reCAPTCHA v3 connector.
      */
     recaptchas?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRecaptcha>[]>;
@@ -2502,6 +2943,10 @@ export interface ProjectConnectors {
      * Add image recognition capabilities for identity verification and fraud prevention with the Amazon Rekognition connector.
      */
     rekognitions?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRekognition>[]>;
+    /**
+     * Query the FCC Reassigned Numbers Database (RND) to validate whether telephone numbers have been permanently disconnected (reassigned) since a specific date. Helps obtain Safe Harbor from TCPA liability by checking the most recent database update.
+     */
+    rndReassigneds?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsRndReassigned>[]>;
     /**
      * Send transactional messages with the Salesforce Marketing Cloud connector.
      */
@@ -2514,6 +2959,10 @@ export interface ProjectConnectors {
      * Evaluate customer risk using Sardine
      */
     sardines?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSardine>[]>;
+    /**
+     * Provision and de-provision users to an external SCIM v2 endpoint as part of your Descope user journey.
+     */
+    scims?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsScim>[]>;
     /**
      * Orchestrate customer identity traits and signals from your Descope user journey with the Segment connector.
      */
@@ -2538,6 +2987,10 @@ export interface ProjectConnectors {
      * Simple Mail Transfer Protocol (SMTP) server for sending emails.
      */
     smtps?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSmtp>[]>;
+    /**
+     * Stream authentication audit logs to your Snowflake data warehouse with the Snowflake connector.
+     */
+    snowflakes?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSnowflake>[]>;
     /**
      * Amazon Simple Notification Service (SNS) for sending SMS messages through AWS.
      */
@@ -2604,6 +3057,30 @@ export interface ProjectConnectorsAbuseipdb {
     name: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsAlloy {
+    /**
+     * The Alloy API secret.
+     */
+    apiSecret: pulumi.Input<string>;
+    /**
+     * The Alloy API token.
+     */
+    apiToken: pulumi.Input<string>;
+    /**
+     * The base URL for the Alloy API, e.g.: https://sandbox.alloy.co/v1, https://api.alloy.co/v1.
+     */
+    baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsAmplitude {
     /**
      * The Amplitude API Key generated for the Descope service.
@@ -2630,7 +3107,7 @@ export interface ProjectConnectorsAmplitude {
 
 export interface ProjectConnectorsArkose {
     /**
-     * A custom base URL to use when loading the Arkose client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
+     * A custom base URL to use when loading the Arkose Labs client script. If not provided, the default value of `https://client-api.arkoselabs.com/v2` will be used.
      */
     clientBaseUrl?: pulumi.Input<string>;
     /**
@@ -2643,15 +3120,15 @@ export interface ProjectConnectorsArkose {
      */
     name: pulumi.Input<string>;
     /**
-     * The private key that can be copied from the Keys screen in the Arkose portal.
+     * The private key that can be copied from the Keys screen in the Arkose Labs portal.
      */
     privateKey: pulumi.Input<string>;
     /**
-     * The public key that's shown in the Keys screen in the Arkose portal.
+     * The public key that's shown in the Keys screen in the Arkose Labs portal.
      */
     publicKey: pulumi.Input<string>;
     /**
-     * A custom base URL to use when verifying the session token using the Arkose Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
+     * A custom base URL to use when verifying the session token using the Arkose Labs Verify API. If not provided, the default value of `https://verify-api.arkoselabs.com/api/v4` will be used.
      */
     verifyBaseUrl?: pulumi.Input<string>;
 }
@@ -2775,6 +3252,10 @@ export interface ProjectConnectorsAwsS3 {
     externalId?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
     /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
@@ -2809,6 +3290,46 @@ export interface ProjectConnectorsAwsS3AuditFilter {
      * The list of values to match against for the filter.
      */
     values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsAwsSesEmailValidation {
+    /**
+     * AWS access key ID.
+     */
+    accessKeyId?: pulumi.Input<string>;
+    /**
+     * The authentication type to use.
+     */
+    authType?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    externalId?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The AWS region to which this client will send requests. (e.g. us-east-1.)
+     */
+    region: pulumi.Input<string>;
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    roleArn?: pulumi.Input<string>;
+    /**
+     * AWS secret access key.
+     */
+    secretAccessKey?: pulumi.Input<string>;
+    /**
+     * (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
+     */
+    sessionToken?: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsAwsTranslate {
@@ -2882,6 +3403,10 @@ export interface ProjectConnectorsCoralogix {
     endpoint: pulumi.Input<string>;
     id?: pulumi.Input<string>;
     /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
@@ -2892,6 +3417,61 @@ export interface ProjectConnectorsCoralogix {
 }
 
 export interface ProjectConnectorsCoralogixAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ProjectConnectorsCribl {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsCriblAuditFilter>[]>;
+    /**
+     * A shared secret token for authenticating with the Cribl HTTP source. This token is defined on the source and is strongly recommended for security reasons.
+     */
+    authToken?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The base URL of your Cribl Stream HTTP source. For Cribl Cloud, the default http source looks something like https://\n\n.main.\n\n.cribl.cloud:10080. You can also define a custom source (find this in your Cribl Cloud portal under Data Sources). For self-hosted deployments, use https://\n\n:10080 or however you have it configured.
+     */
+    endpoint: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * An optional source identifier for events in Cribl (defaults to 'descope').
+     */
+    source?: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsCriblAuditFilter {
     /**
      * The field name to filter on (either 'actions' or 'tenants').
      */
@@ -2988,6 +3568,14 @@ export interface ProjectConnectorsDatadog {
      * The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
      */
     site?: pulumi.Input<string>;
+    /**
+     * An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
+     */
+    source?: pulumi.Input<string>;
+    /**
+     * An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+     */
+    tags?: pulumi.Input<string>;
     /**
      * Whether to send troubleshooting events.
      */
@@ -3551,6 +4139,57 @@ export interface ProjectConnectorsGoogleMapsPlace {
     region?: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsGroundcover {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsGroundcoverAuditFilter>[]>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The gRPC OTLP backend endpoint URL. Found in the groundcover console under Settings → Ingestion Keys → Backend Endpoints.
+     */
+    endpoint: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Third Party ingestion key for authenticating with groundcover. Create one in the groundcover console under Settings → Ingestion Keys (type: thirdParty).
+     */
+    ingestionKey: pulumi.Input<string>;
+    /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsGroundcoverAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface ProjectConnectorsHcaptcha {
     /**
      * When configured, the hCaptcha action will return the score without assessing the request. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot.
@@ -3601,6 +4240,34 @@ export interface ProjectConnectorsHttp {
      */
     authentication?: pulumi.Input<inputs.ProjectConnectorsHttpAuthentication>;
     /**
+     * The unique AWS access key ID.
+     */
+    awsAccessKeyId?: pulumi.Input<string>;
+    /**
+     * Apply AWS signature version 4 authentication to the request.
+     */
+    awsAuthType?: pulumi.Input<string>;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    awsExternalId?: pulumi.Input<string>;
+    /**
+     * The AWS region, e.g. `us-east-1`.
+     */
+    awsRegion?: pulumi.Input<string>;
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    awsRoleArn?: pulumi.Input<string>;
+    /**
+     * The secret AWS access key.
+     */
+    awsSecretAccessKey?: pulumi.Input<string>;
+    /**
+     * The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
+     */
+    awsService?: pulumi.Input<string>;
+    /**
      * The base URL to fetch
      */
     baseUrl: pulumi.Input<string>;
@@ -3618,7 +4285,7 @@ export interface ProjectConnectorsHttp {
     hmacSecret?: pulumi.Input<string>;
     id?: pulumi.Input<string>;
     /**
-     * The connector response context will also include the headers. The context will have a "body" attribute and a "headers" attribute. See more details in the help guide
+     * The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
      */
     includeHeadersInContext?: pulumi.Input<boolean>;
     /**
@@ -3629,6 +4296,26 @@ export interface ProjectConnectorsHttp {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+    /**
+     * HTTP message components to include in the signature (e.g., @method, @target-uri, @authority, content-type, content-digest). Leave empty to use defaults: @method, @target-uri, @authority
+     */
+    rfc9421Components?: pulumi.Input<string>;
+    /**
+     * Identifier for the signing key. This will be included in the signature metadata to help the recipient identify which key was used for verification
+     */
+    rfc9421KeyId?: pulumi.Input<string>;
+    /**
+     * Provide a private key in PEM format or an HMAC secret. Algorithms such as ECDSA P-256/P-384, Ed25519, and RSA are supported. You can paste the key with or without newlines; both formats are accepted.
+     */
+    rfc9421PrivateKey?: pulumi.Input<string>;
+    /**
+     * How long the signature is valid for, in seconds. Default is 300 seconds (5 minutes). The signature includes automatic replay protection via a randomly generated nonce
+     */
+    rfc9421SignatureTtl?: pulumi.Input<number>;
+    /**
+     * Enable RFC 9421 HTTP Message Signatures for cryptographically signing requests. Supports multiple algorithms including ECDSA, Ed25519, RSA, and HMAC
+     */
+    rfc9421SigningEnabled?: pulumi.Input<boolean>;
     /**
      * Whether the connector should send all requests from specific static IPs.
      */
@@ -4070,6 +4757,57 @@ export interface ProjectConnectorsOpentelemetryAuthenticationBasic {
     username: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsPendo {
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsPendoAuditFilter>[]>;
+    /**
+     * The Pendo regional domain to send logs to. Default is the US region, `https://data.pendo.io`. Customers in other regions must set this accordingly.
+     */
+    baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The secret Pendo integration key Descope should use.
+     */
+    integrationKey?: pulumi.Input<string>;
+    /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+}
+
+export interface ProjectConnectorsPendoAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface ProjectConnectorsPingDirectory {
     /**
      * A description of what your connector is used for.
@@ -4176,6 +4914,10 @@ export interface ProjectConnectorsRecaptcha {
 
 export interface ProjectConnectorsRecaptchaEnterprise {
     /**
+     * The user-initiated action for this assessment.
+     */
+    action?: pulumi.Input<string>;
+    /**
      * API key associated with the current project.
      */
     apiKey: pulumi.Input<string>;
@@ -4184,7 +4926,7 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      */
     assessmentScore?: pulumi.Input<number>;
     /**
-     * Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
      */
     baseUrl?: pulumi.Input<string>;
     /**
@@ -4214,6 +4956,38 @@ export interface ProjectConnectorsRecaptchaEnterprise {
     siteKey: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsRecaptchaV2 {
+    /**
+     * When override is enabled, return this score instead of calling Google.
+     */
+    assessmentScore?: pulumi.Input<number>;
+    /**
+     * For v2 verification, success maps to risk score 1 and failure to 0. Bot is detected when risk score is below this threshold (default 0.5).
+     */
+    botThreshold?: pulumi.Input<number>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Override the default assessment model. Intended for automated testing only.
+     */
+    overrideAssessment?: pulumi.Input<boolean>;
+    /**
+     * The secret key used to verify the user's response with Google siteverify.
+     */
+    secretKey: pulumi.Input<string>;
+    /**
+     * The reCAPTCHA v2 site key from the Google reCAPTCHA admin console (checkbox / "I'm not a robot" type).
+     */
+    siteKey: pulumi.Input<string>;
+}
+
 export interface ProjectConnectorsRekognition {
     /**
      * The AWS access key ID
@@ -4236,6 +5010,26 @@ export interface ProjectConnectorsRekognition {
      * The AWS secret access key
      */
     secretAccessKey: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsRndReassigned {
+    /**
+     * Your RND company ID (e.g., C038612852). Retrieve this from your RND account under Account → Company → Company ID.
+     */
+    companyId: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Your RND refresh token for authentication. Retrieve this from your RND account under Account → API Credentials.
+     */
+    refreshToken: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSalesforce {
@@ -4320,6 +5114,83 @@ export interface ProjectConnectorsSardine {
      * A custom name for your connector.
      */
     name: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsScim {
+    /**
+     * Authentication credentials used when sending requests to the SCIM endpoint.
+     */
+    authentication?: pulumi.Input<inputs.ProjectConnectorsScimAuthentication>;
+    /**
+     * The base URL of the SCIM v2 endpoint that user provisioning events will be sent to.
+     */
+    baseUrl: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Whether to disable this SCIM connector. When disabled, provisioning events will not be sent to the configured endpoint.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * The ID of the federated SSO application this SCIM connector is associated with.
+     */
+    federatedAppId: pulumi.Input<string>;
+    /**
+     * Custom HTTP headers to send with each provisioning request.
+     */
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature.
+     */
+    hmacSecret?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Will ignore certificate errors raised by the client.
+     */
+    insecure?: pulumi.Input<boolean>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsScimAuthentication {
+    /**
+     * API key authentication configuration.
+     */
+    apiKey?: pulumi.Input<inputs.ProjectConnectorsScimAuthenticationApiKey>;
+    /**
+     * Basic authentication credentials (username and password).
+     */
+    basic?: pulumi.Input<inputs.ProjectConnectorsScimAuthenticationBasic>;
+    /**
+     * Bearer token for HTTP authentication.
+     */
+    bearerToken?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsScimAuthenticationApiKey {
+    /**
+     * The API key.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The API secret.
+     */
+    token: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsScimAuthenticationBasic {
+    /**
+     * Password for basic HTTP authentication.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Username for basic HTTP authentication.
+     */
+    username: pulumi.Input<string>;
 }
 
 export interface ProjectConnectorsSe {
@@ -4588,6 +5459,77 @@ export interface ProjectConnectorsSn {
      * The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
      */
     templateId?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsSnowflake {
+    /**
+     * A Snowflake Programmatic Access Token (PAT). The token's user must have CREATE DATABASE privileges.
+     */
+    apiKey: pulumi.Input<string>;
+    /**
+     * Whether to enable streaming of audit events.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Specify which events will be sent to the external audit service (including tenant selection).
+     */
+    auditFilters?: pulumi.Input<pulumi.Input<inputs.ProjectConnectorsSnowflakeAuditFilter>[]>;
+    /**
+     * The table to write audit events to. Defaults to `DESCOPE_AUDIT_LOGS`.
+     */
+    auditTable?: pulumi.Input<string>;
+    /**
+     * The Snowflake database to use. Defaults to `DESCOPE_EXPORT_DB`.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * A description of what your connector is used for.
+     */
+    description?: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * Whether to mask personally identifiable information in the logs.
+     */
+    maskPii?: pulumi.Input<boolean>;
+    /**
+     * The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
+     */
+    minFlushIntervalMinutes?: pulumi.Input<number>;
+    /**
+     * A custom name for your connector.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The schema within the database. Defaults to `PUBLIC`.
+     */
+    schema?: pulumi.Input<string>;
+    /**
+     * Your Snowflake account URL, e.g. `https://<org>-<account>.snowflakecomputing.com`.
+     */
+    site: pulumi.Input<string>;
+    /**
+     * Whether to send troubleshooting events.
+     */
+    troubleshootLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The Snowflake warehouse to use. Defaults to `COMPUTE_WH`.
+     */
+    warehouse?: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsSnowflakeAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ProjectConnectorsSplunk {
@@ -4941,6 +5883,10 @@ export interface ProjectConnectorsTwilioVerifyAuthentication {
 
 export interface ProjectConnectorsUnibeam {
     /**
+     * Unibeam API base URL.
+     */
+    baseUrl: pulumi.Input<string>;
+    /**
      * OAuth2 client ID for authentication.
      */
     clientId: pulumi.Input<string>;
@@ -5085,6 +6031,10 @@ export interface ProjectJwtTemplates {
 
 export interface ProjectJwtTemplatesAccessKeyTemplate {
     /**
+     * When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     */
+    addJtiClaim?: pulumi.Input<boolean>;
+    /**
      * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
@@ -5108,11 +6058,19 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
      * Whether to enforce that the JWT issuer matches the project configuration.
      */
     enforceIssuer?: pulumi.Input<boolean>;
+    /**
+     * When enabled, permissions will not be included in the JWT token.
+     */
+    excludePermissionClaim?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
      */
     name: pulumi.Input<string>;
+    /**
+     * Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     */
+    overrideSubjectClaim?: pulumi.Input<boolean>;
     /**
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
@@ -5121,6 +6079,10 @@ export interface ProjectJwtTemplatesAccessKeyTemplate {
 
 export interface ProjectJwtTemplatesUserTemplate {
     /**
+     * When enabled, a unique JWT ID (jti) claim will be added to the token for tracking and preventing replay attacks.
+     */
+    addJtiClaim?: pulumi.Input<boolean>;
+    /**
      * The authorization claims format - `default`, `tenantOnly` or `none`. Read more about schema types [here](https://docs.descope.com/project-settings/jwt-templates).
      */
     authSchema?: pulumi.Input<string>;
@@ -5144,11 +6106,19 @@ export interface ProjectJwtTemplatesUserTemplate {
      * Whether to enforce that the JWT issuer matches the project configuration.
      */
     enforceIssuer?: pulumi.Input<boolean>;
+    /**
+     * When enabled, permissions will not be included in the JWT token.
+     */
+    excludePermissionClaim?: pulumi.Input<boolean>;
     id?: pulumi.Input<string>;
     /**
      * Name of the JWT Template.
      */
     name: pulumi.Input<string>;
+    /**
+     * Switching on will allow you to add a custom subject claim to the JWT. A default new `dsub` claim will be added with the user ID.
+     */
+    overrideSubjectClaim?: pulumi.Input<boolean>;
     /**
      * The JSON template defining the structure and claims of the JWT token. This is expected to be a valid JSON object given as a `string` value.
      */
@@ -5253,6 +6223,10 @@ export interface ProjectProjectSettings {
      */
     stepUpTokenExpiration?: pulumi.Input<string>;
     /**
+     * When enabled, users are completely isolated per tenant. The same login ID in Tenant A and Tenant B will be treated as separate identities with isolated credentials, sessions, and MFA state.
+     */
+    tenantUserIsolation?: pulumi.Input<boolean>;
+    /**
      * Define a regular expression so that whenever a user is created with a matching login ID it will automatically be marked as a test user.
      */
     testUsersLoginidRegexp?: pulumi.Input<string>;
@@ -5276,6 +6250,10 @@ export interface ProjectProjectSettings {
 
 export interface ProjectProjectSettingsSessionMigration {
     /**
+     * An API token for the vendor, required when `vendor` is set to `okta`.
+     */
+    apiToken?: pulumi.Input<string>;
+    /**
      * The audience value if needed by the vendor.
      */
     audience?: pulumi.Input<string>;
@@ -5296,9 +6274,28 @@ export interface ProjectProjectSettingsSessionMigration {
      */
     loginidMatchedAttributes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * A list of attribute mappings from the external vendor's user to Descope user attributes.
+     */
+    userMappings?: pulumi.Input<pulumi.Input<inputs.ProjectProjectSettingsSessionMigrationUserMapping>[]>;
+    /**
+     * The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `jit` (just-in-time provisioning).
+     */
+    userSyncType?: pulumi.Input<string>;
+    /**
      * The name of the vendor the sessions are migrated from, in all lowercase.
      */
     vendor?: pulumi.Input<string>;
+}
+
+export interface ProjectProjectSettingsSessionMigrationUserMapping {
+    /**
+     * The Descope user attribute to map the external key to.
+     */
+    descopeKey: pulumi.Input<string>;
+    /**
+     * The attribute key in the external vendor's user object.
+     */
+    externalKey: pulumi.Input<string>;
 }
 
 export interface ProjectStyles {

@@ -15,6 +15,11 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ProjectConnectorsRecaptchaEnterprise {
     /**
+     * @return The user-initiated action for this assessment.
+     * 
+     */
+    private @Nullable String action;
+    /**
      * @return API key associated with the current project.
      * 
      */
@@ -25,7 +30,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
      */
     private @Nullable Double assessmentScore;
     /**
-     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * @return The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
      * 
      */
     private @Nullable String baseUrl;
@@ -63,6 +68,13 @@ public final class ProjectConnectorsRecaptchaEnterprise {
 
     private ProjectConnectorsRecaptchaEnterprise() {}
     /**
+     * @return The user-initiated action for this assessment.
+     * 
+     */
+    public Optional<String> action() {
+        return Optional.ofNullable(this.action);
+    }
+    /**
      * @return API key associated with the current project.
      * 
      */
@@ -77,7 +89,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         return Optional.ofNullable(this.assessmentScore);
     }
     /**
-     * @return Apply a custom url to the reCAPTCHA Enterprise scripts. This is useful when attempting to use reCAPTCHA globally. Defaults to https://www.google.com
+     * @return The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users&#39; region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
      * 
      */
     public Optional<String> baseUrl() {
@@ -138,6 +150,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String action;
         private String apiKey;
         private @Nullable Double assessmentScore;
         private @Nullable String baseUrl;
@@ -151,6 +164,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         public Builder() {}
         public Builder(ProjectConnectorsRecaptchaEnterprise defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.action = defaults.action;
     	      this.apiKey = defaults.apiKey;
     	      this.assessmentScore = defaults.assessmentScore;
     	      this.baseUrl = defaults.baseUrl;
@@ -163,6 +177,12 @@ public final class ProjectConnectorsRecaptchaEnterprise {
     	      this.siteKey = defaults.siteKey;
         }
 
+        @CustomType.Setter
+        public Builder action(@Nullable String action) {
+
+            this.action = action;
+            return this;
+        }
         @CustomType.Setter
         public Builder apiKey(String apiKey) {
             if (apiKey == null) {
@@ -233,6 +253,7 @@ public final class ProjectConnectorsRecaptchaEnterprise {
         }
         public ProjectConnectorsRecaptchaEnterprise build() {
             final var _resultValue = new ProjectConnectorsRecaptchaEnterprise();
+            _resultValue.action = action;
             _resultValue.apiKey = apiKey;
             _resultValue.assessmentScore = assessmentScore;
             _resultValue.baseUrl = baseUrl;

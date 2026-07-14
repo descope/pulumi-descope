@@ -52,6 +52,11 @@ public final class ProjectConnectorsAwsS3 {
     private @Nullable String externalId;
     private @Nullable String id;
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    private @Nullable Boolean maskPii;
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -131,6 +136,13 @@ public final class ProjectConnectorsAwsS3 {
         return Optional.ofNullable(this.id);
     }
     /**
+     * @return Whether to mask personally identifiable information in the logs.
+     * 
+     */
+    public Optional<Boolean> maskPii() {
+        return Optional.ofNullable(this.maskPii);
+    }
+    /**
      * @return A custom name for your connector.
      * 
      */
@@ -183,6 +195,7 @@ public final class ProjectConnectorsAwsS3 {
         private @Nullable String description;
         private @Nullable String externalId;
         private @Nullable String id;
+        private @Nullable Boolean maskPii;
         private String name;
         private String region;
         private @Nullable String roleArn;
@@ -199,6 +212,7 @@ public final class ProjectConnectorsAwsS3 {
     	      this.description = defaults.description;
     	      this.externalId = defaults.externalId;
     	      this.id = defaults.id;
+    	      this.maskPii = defaults.maskPii;
     	      this.name = defaults.name;
     	      this.region = defaults.region;
     	      this.roleArn = defaults.roleArn;
@@ -260,6 +274,12 @@ public final class ProjectConnectorsAwsS3 {
             return this;
         }
         @CustomType.Setter
+        public Builder maskPii(@Nullable Boolean maskPii) {
+
+            this.maskPii = maskPii;
+            return this;
+        }
+        @CustomType.Setter
         public Builder name(String name) {
             if (name == null) {
               throw new MissingRequiredPropertyException("ProjectConnectorsAwsS3", "name");
@@ -303,6 +323,7 @@ public final class ProjectConnectorsAwsS3 {
             _resultValue.description = description;
             _resultValue.externalId = externalId;
             _resultValue.id = id;
+            _resultValue.maskPii = maskPii;
             _resultValue.name = name;
             _resultValue.region = region;
             _resultValue.roleArn = roleArn;

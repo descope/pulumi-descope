@@ -44,6 +44,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Site;
         /// <summary>
+        /// An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `Production`, `Staging`). If left empty, the default Descope source will be used.
+        /// </summary>
+        public readonly string? Source;
+        /// <summary>
+        /// An optional comma-separated list of tags to append to all log entries sent to Datadog (e.g. `env:production,team:auth`). These are added in addition to any default tags. If left empty, only the default Descope tags will be used.
+        /// </summary>
+        public readonly string? Tags;
+        /// <summary>
         /// Whether to send troubleshooting events.
         /// </summary>
         public readonly bool? TroubleshootLogEnabled;
@@ -66,6 +74,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? site,
 
+            string? source,
+
+            string? tags,
+
             bool? troubleshootLogEnabled)
         {
             ApiKey = apiKey;
@@ -76,6 +88,8 @@ namespace Descope.Pulumi.Descope.Outputs
             MaskPii = maskPii;
             Name = name;
             Site = site;
+            Source = source;
+            Tags = tags;
             TroubleshootLogEnabled = troubleshootLogEnabled;
         }
     }

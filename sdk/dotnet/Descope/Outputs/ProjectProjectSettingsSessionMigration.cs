@@ -15,6 +15,10 @@ namespace Descope.Pulumi.Descope.Outputs
     public sealed class ProjectProjectSettingsSessionMigration
     {
         /// <summary>
+        /// An API token for the vendor, required when `Vendor` is set to `Okta`.
+        /// </summary>
+        public readonly string? ApiToken;
+        /// <summary>
         /// The audience value if needed by the vendor.
         /// </summary>
         public readonly string? Audience;
@@ -35,12 +39,22 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly ImmutableArray<string> LoginidMatchedAttributes;
         /// <summary>
+        /// A list of attribute mappings from the external vendor's user to Descope user attributes.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProjectProjectSettingsSessionMigrationUserMapping> UserMappings;
+        /// <summary>
+        /// The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `Jit` (just-in-time provisioning).
+        /// </summary>
+        public readonly string? UserSyncType;
+        /// <summary>
         /// The name of the vendor the sessions are migrated from, in all lowercase.
         /// </summary>
         public readonly string? Vendor;
 
         [OutputConstructor]
         private ProjectProjectSettingsSessionMigration(
+            string? apiToken,
+
             string? audience,
 
             string? clientId,
@@ -51,13 +65,20 @@ namespace Descope.Pulumi.Descope.Outputs
 
             ImmutableArray<string> loginidMatchedAttributes,
 
+            ImmutableArray<Outputs.ProjectProjectSettingsSessionMigrationUserMapping> userMappings,
+
+            string? userSyncType,
+
             string? vendor)
         {
+            ApiToken = apiToken;
             Audience = audience;
             ClientId = clientId;
             Domain = domain;
             Issuer = issuer;
             LoginidMatchedAttributes = loginidMatchedAttributes;
+            UserMappings = userMappings;
+            UserSyncType = userSyncType;
             Vendor = vendor;
         }
     }

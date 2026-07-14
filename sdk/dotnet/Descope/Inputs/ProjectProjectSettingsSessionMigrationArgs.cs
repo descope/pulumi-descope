@@ -13,6 +13,22 @@ namespace Descope.Pulumi.Descope.Inputs
 
     public sealed class ProjectProjectSettingsSessionMigrationArgs : global::Pulumi.ResourceArgs
     {
+        [Input("apiToken")]
+        private Input<string>? _apiToken;
+
+        /// <summary>
+        /// An API token for the vendor, required when `Vendor` is set to `Okta`.
+        /// </summary>
+        public Input<string>? ApiToken
+        {
+            get => _apiToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apiToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         /// <summary>
         /// The audience value if needed by the vendor.
         /// </summary>
@@ -48,6 +64,24 @@ namespace Descope.Pulumi.Descope.Inputs
             get => _loginidMatchedAttributes ?? (_loginidMatchedAttributes = new InputList<string>());
             set => _loginidMatchedAttributes = value;
         }
+
+        [Input("userMappings")]
+        private InputList<Inputs.ProjectProjectSettingsSessionMigrationUserMappingArgs>? _userMappings;
+
+        /// <summary>
+        /// A list of attribute mappings from the external vendor's user to Descope user attributes.
+        /// </summary>
+        public InputList<Inputs.ProjectProjectSettingsSessionMigrationUserMappingArgs> UserMappings
+        {
+            get => _userMappings ?? (_userMappings = new InputList<Inputs.ProjectProjectSettingsSessionMigrationUserMappingArgs>());
+            set => _userMappings = value;
+        }
+
+        /// <summary>
+        /// The type of user synchronization to perform. Valid values are `matchOnly` (match existing users only) and `Jit` (just-in-time provisioning).
+        /// </summary>
+        [Input("userSyncType")]
+        public Input<string>? UserSyncType { get; set; }
 
         /// <summary>
         /// The name of the vendor the sessions are migrated from, in all lowercase.
