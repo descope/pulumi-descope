@@ -15,23 +15,51 @@ type semanticVersion struct {
 
 func Test_SecurityCriticalDependencies_meet_patched_versions(t *testing.T) {
 	// Given
-	minimums := map[string]semanticVersion{
-		"go.opentelemetry.io/otel": {major: 1, minor: 41},
-		"golang.org/x/net":         {minor: 55},
-	}
-	goMod, err := os.ReadFile("go.mod")
-	if err != nil {
-		t.Fatalf("read go.mod: %v", err)
+	minimumsByFile := map[string]map[string]semanticVersion{
+		"go.mod": {
+			"github.com/go-git/go-billy/v5": {major: 5, minor: 9},
+			"github.com/go-git/go-git/v5":   {major: 5, minor: 19, patch: 1},
+			"go.opentelemetry.io/otel":      {major: 1, minor: 41},
+			"golang.org/x/crypto":           {minor: 52},
+			"golang.org/x/net":              {minor: 55},
+		},
+		"../examples/go.mod": {
+			"github.com/go-git/go-billy/v5": {major: 5, minor: 9},
+			"github.com/go-git/go-git/v5":   {major: 5, minor: 19, patch: 1},
+			"golang.org/x/crypto":           {minor: 52},
+			"golang.org/x/net":              {minor: 55},
+		},
+		"../examples/go/go.mod": {
+			"github.com/go-git/go-billy/v5": {major: 5, minor: 9},
+			"github.com/go-git/go-git/v5":   {major: 5, minor: 19, patch: 1},
+			"golang.org/x/crypto":           {minor: 52},
+			"golang.org/x/net":              {minor: 55},
+		},
+		"../sdk/go.mod": {
+			"github.com/go-git/go-billy/v5": {major: 5, minor: 9},
+			"github.com/go-git/go-git/v5":   {major: 5, minor: 19, patch: 1},
+			"golang.org/x/crypto":           {minor: 52},
+			"golang.org/x/net":              {minor: 55},
+		},
 	}
 
-	for module, minimum := range minimums {
-		t.Run(module, func(t *testing.T) {
-			// When
-			selected := selectedModuleVersion(t, goMod, module)
+	for goModPath, minimums := range minimumsByFile {
+		t.Run(goModPath, func(t *testing.T) {
+			goMod, err := os.ReadFile(goModPath)
+			if err != nil {
+				t.Fatalf("read %s: %v", goModPath, err)
+			}
 
-			// Then
-			if selected.lessThan(minimum) {
-				t.Fatalf("%s version %s is below security minimum %s", module, selected, minimum)
+			for module, minimum := range minimums {
+				t.Run(module, func(t *testing.T) {
+					// When
+					selected := selectedModuleVersion(t, goMod, module)
+
+					// Then
+					if selected.lessThan(minimum) {
+						t.Fatalf("%s version %s is below security minimum %s", module, selected, minimum)
+					}
+				})
 			}
 		})
 	}
