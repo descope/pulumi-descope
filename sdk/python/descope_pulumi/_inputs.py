@@ -13621,6 +13621,9 @@ class ProjectAuthorizationRoleArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     key: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+    """
     permissions: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
     """
     A list of permissions by name to be included in the role.
@@ -13644,6 +13647,7 @@ class ProjectAuthorizationRoleArgs:
         :param pulumi.Input[_builtins.str] name: A name for the role.
         :param pulumi.Input[_builtins.bool] default: Whether this role should automatically be assigned to users that are created without any roles.
         :param pulumi.Input[_builtins.str] description: A description for the role.
+        :param pulumi.Input[_builtins.str] key: A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permissions: A list of permissions by name to be included in the role.
         :param pulumi.Input[_builtins.bool] private: Whether this role should not be displayed to tenant admins.
         """
@@ -13709,6 +13713,9 @@ class ProjectAuthorizationRoleArgs:
     @_builtins.property
     @pulumi.getter
     def key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+        """
         return pulumi.get(self, "key")
 
     @key.setter
@@ -21046,6 +21053,10 @@ class ProjectConnectorsHttpArgsDict(TypedDict):
     """
     A description of what your connector is used for.
     """
+    engine_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+    """
     headers: NotRequired[pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]]
     """
     The headers to send with the request
@@ -21102,6 +21113,7 @@ class ProjectConnectorsHttpArgs:
                  aws_secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_service: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 engine_id: pulumi.Input[Optional[_builtins.str]] = None,
                  headers: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  hmac_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -21125,6 +21137,7 @@ class ProjectConnectorsHttpArgs:
         :param pulumi.Input[_builtins.str] aws_secret_access_key: The secret AWS access key.
         :param pulumi.Input[_builtins.str] aws_service: The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
+        :param pulumi.Input[_builtins.str] engine_id: The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] headers: The headers to send with the request
         :param pulumi.Input[_builtins.str] hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
         :param pulumi.Input[_builtins.bool] include_headers_in_context: The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
@@ -21156,6 +21169,8 @@ class ProjectConnectorsHttpArgs:
             pulumi.set(__self__, "aws_service", aws_service)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if headers is not None:
             pulumi.set(__self__, "headers", headers)
         if hmac_secret is not None:
@@ -21310,6 +21325,18 @@ class ProjectConnectorsHttpArgs:
     @description.setter
     def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        """
+        return pulumi.get(self, "engine_id")
+
+    @engine_id.setter
+    def engine_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "engine_id", value)
 
     @_builtins.property
     @pulumi.getter

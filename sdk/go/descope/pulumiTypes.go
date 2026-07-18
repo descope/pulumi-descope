@@ -21438,7 +21438,8 @@ type ProjectAuthorizationRole struct {
 	// A description for the role.
 	Description *string `pulumi:"description"`
 	Id          *string `pulumi:"id"`
-	Key         *string `pulumi:"key"`
+	// A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+	Key *string `pulumi:"key"`
 	// A name for the role.
 	Name string `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
@@ -21464,7 +21465,8 @@ type ProjectAuthorizationRoleArgs struct {
 	// A description for the role.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	Id          pulumi.StringPtrInput `pulumi:"id"`
-	Key         pulumi.StringPtrInput `pulumi:"key"`
+	// A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+	Key pulumi.StringPtrInput `pulumi:"key"`
 	// A name for the role.
 	Name pulumi.StringInput `pulumi:"name"`
 	// A list of permissions by name to be included in the role.
@@ -21538,6 +21540,7 @@ func (o ProjectAuthorizationRoleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
+// A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
 func (o ProjectAuthorizationRoleOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectAuthorizationRole) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
@@ -30636,6 +30639,8 @@ type ProjectConnectorsHttp struct {
 	BaseUrl string `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+	EngineId *string `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers map[string]string `pulumi:"headers"`
 	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
@@ -30693,6 +30698,8 @@ type ProjectConnectorsHttpArgs struct {
 	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers pulumi.StringMapInput `pulumi:"headers"`
 	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
@@ -30817,6 +30824,11 @@ func (o ProjectConnectorsHttpOutput) BaseUrl() pulumi.StringOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsHttpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+func (o ProjectConnectorsHttpOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 // The headers to send with the request

@@ -25,6 +25,10 @@ public final class ProjectAuthorizationRole {
      */
     private @Nullable String description;
     private @Nullable String id;
+    /**
+     * @return A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+     * 
+     */
     private @Nullable String key;
     /**
      * @return A name for the role.
@@ -60,6 +64,10 @@ public final class ProjectAuthorizationRole {
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
+    /**
+     * @return A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+     * 
+     */
     public Optional<String> key() {
         return Optional.ofNullable(this.key);
     }

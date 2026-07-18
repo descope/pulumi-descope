@@ -23,6 +23,9 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         public readonly string? Id;
+        /// <summary>
+        /// A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `Key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+        /// </summary>
         public readonly string? Key;
         /// <summary>
         /// A name for the role.

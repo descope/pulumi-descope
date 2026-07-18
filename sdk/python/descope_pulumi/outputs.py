@@ -10077,6 +10077,7 @@ class ProjectAuthorizationRole(dict):
         :param _builtins.str name: A name for the role.
         :param _builtins.bool default: Whether this role should automatically be assigned to users that are created without any roles.
         :param _builtins.str description: A description for the role.
+        :param _builtins.str key: A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
         :param Sequence[_builtins.str] permissions: A list of permissions by name to be included in the role.
         :param _builtins.bool private: Whether this role should not be displayed to tenant admins.
         """
@@ -10126,6 +10127,9 @@ class ProjectAuthorizationRole(dict):
     @_builtins.property
     @pulumi.getter
     def key(self) -> Optional[_builtins.str]:
+        """
+        A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+        """
         return pulumi.get(self, "key")
 
     @_builtins.property
@@ -15363,6 +15367,8 @@ class ProjectConnectorsHttp(dict):
             suggest = "aws_secret_access_key"
         elif key == "awsService":
             suggest = "aws_service"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "hmacSecret":
             suggest = "hmac_secret"
         elif key == "includeHeadersInContext":
@@ -15403,6 +15409,7 @@ class ProjectConnectorsHttp(dict):
                  aws_secret_access_key: Optional[_builtins.str] = None,
                  aws_service: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  headers: Optional[Mapping[str, _builtins.str]] = None,
                  hmac_secret: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
@@ -15426,6 +15433,7 @@ class ProjectConnectorsHttp(dict):
         :param _builtins.str aws_secret_access_key: The secret AWS access key.
         :param _builtins.str aws_service: The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
         :param Mapping[str, _builtins.str] headers: The headers to send with the request
         :param _builtins.str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
         :param _builtins.bool include_headers_in_context: The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
@@ -15457,6 +15465,8 @@ class ProjectConnectorsHttp(dict):
             pulumi.set(__self__, "aws_service", aws_service)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if headers is not None:
             pulumi.set(__self__, "headers", headers)
         if hmac_secret is not None:
@@ -15567,6 +15577,14 @@ class ProjectConnectorsHttp(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
