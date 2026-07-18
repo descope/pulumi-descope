@@ -55,6 +55,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        /// </summary>
+        public readonly string? EngineId;
+        /// <summary>
         /// The headers to send with the request
         /// </summary>
         public readonly ImmutableDictionary<string, string>? Headers;
@@ -122,6 +126,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? engineId,
+
             ImmutableDictionary<string, string>? headers,
 
             string? hmacSecret,
@@ -156,6 +162,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AwsService = awsService;
             BaseUrl = baseUrl;
             Description = description;
+            EngineId = engineId;
             Headers = headers;
             HmacSecret = hmacSecret;
             Id = id;

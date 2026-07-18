@@ -28,6 +28,9 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("id")]
         public Input<string>? Id { get; set; }
 
+        /// <summary>
+        /// A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `Key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+        /// </summary>
         [Input("key")]
         public Input<string>? Key { get; set; }
 

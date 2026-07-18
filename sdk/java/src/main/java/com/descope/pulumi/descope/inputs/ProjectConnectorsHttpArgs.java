@@ -171,6 +171,21 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
     }
 
     /**
+     * The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * 
+     */
+    @Import(name="engineId")
+    private @Nullable Output<String> engineId;
+
+    /**
+     * @return The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * 
+     */
+    public Optional<Output<String>> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+
+    /**
      * The headers to send with the request
      * 
      */
@@ -355,6 +370,7 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         this.awsService = $.awsService;
         this.baseUrl = $.baseUrl;
         this.description = $.description;
+        this.engineId = $.engineId;
         this.headers = $.headers;
         this.hmacSecret = $.hmacSecret;
         this.id = $.id;
@@ -595,6 +611,27 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param engineId The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(@Nullable Output<String> engineId) {
+            $.engineId = engineId;
+            return this;
+        }
+
+        /**
+         * @param engineId The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(String engineId) {
+            return engineId(Output.of(engineId));
         }
 
         /**

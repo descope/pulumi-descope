@@ -2731,6 +2731,9 @@ export interface ProjectAuthorizationRole {
      */
     description: string;
     id: string;
+    /**
+     * A persistent value that identifies a role uniquely across plan changes and configuration updates. It is used exclusively by the Terraform provider during planning, to ensure that user roles are maintained consistently even when role names or other details are changed. Once the `key` is set it should never be changed, otherwise the role will be removed and a new one will be created instead.
+     */
     key: string;
     /**
      * A name for the role.
@@ -4275,6 +4278,10 @@ export interface ProjectConnectorsHttp {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     */
+    engineId: string;
     /**
      * The headers to send with the request
      */
