@@ -72,8 +72,8 @@ require (
 	github.com/cncf/xds/go v0.0.0-20260202195803-dba9d589def2 // indirect
 	github.com/deckarep/golang-set/v2 v2.5.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
-	github.com/descope/go-sdk v1.26.0 // indirect
-	github.com/descope/terraform-provider-descope v0.3.13 // indirect
+	github.com/descope/go-sdk v1.27.0 // indirect
+	github.com/descope/terraform-provider-descope v0.3.14 // indirect
 	github.com/djherbis/times v1.6.0 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect

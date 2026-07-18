@@ -1028,5 +1028,15 @@
             }
         }
     },
-    "auto-settings": {}
+    "auto-settings": {},
+    "default-resource-schema-fixups": {
+        "resources": {
+            "descope_access_key": {},
+            "descope_descoper": {},
+            "descope_engine": {},
+            "descope_inbound_app": {},
+            "descope_management_key": {},
+            "descope_project": {}
+        }
+    }
 }
