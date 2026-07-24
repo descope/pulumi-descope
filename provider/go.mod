@@ -5,7 +5,7 @@ go 1.25.11
 replace github.com/descope/terraform-provider-descope/shim => ./shim
 
 require (
-	github.com/descope/terraform-provider-descope/shim v0.3.13
+	github.com/descope/terraform-provider-descope/shim v0.3.14
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.134.0
 	golang.org/x/text v0.40.0
 )
