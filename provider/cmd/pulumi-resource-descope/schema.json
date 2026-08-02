@@ -4499,6 +4499,10 @@
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the domains configuration section in the SSO Suite interface.\n"
                 },
+                "hideFgaMapping": {
+                    "type": "boolean",
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the FGA mapping configuration section in the SSO Suite interface.\n"
+                },
                 "hideGroupsMapping": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the groups mapping configuration section in the SSO Suite interface.\n"
@@ -4510,6 +4514,10 @@
                 "hideOidc": {
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the OIDC configuration option.\n"
+                },
+                "hideRoleMapping": {
+                    "type": "boolean",
+                    "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the role mapping configuration section in the SSO Suite interface.\n"
                 },
                 "hideSaml": {
                     "type": "boolean",
@@ -4538,9 +4546,11 @@
                     "requiredOutputs": [
                         "forceDomainVerification",
                         "hideDomains",
+                        "hideFgaMapping",
                         "hideGroupsMapping",
                         "hideJitGuide",
                         "hideOidc",
+                        "hideRoleMapping",
                         "hideSaml",
                         "hideScim",
                         "showHelpContact",
@@ -5477,6 +5487,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
@@ -5513,6 +5527,7 @@
                         "authentication",
                         "baseUrl",
                         "description",
+                        "engineId",
                         "headers",
                         "hmacSecret",
                         "id",
@@ -5561,6 +5576,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials:ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -5569,7 +5588,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -5610,6 +5630,56 @@
                 "username"
             ]
         },
+        "descope:index/ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials:ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectConnectorsAwsS3:ProjectConnectorsAwsS3": {
             "properties": {
                 "accessKeyId": {
@@ -5639,6 +5709,10 @@
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
+                },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "externalId": {
                     "type": "string",
@@ -5688,6 +5762,7 @@
                         "authType",
                         "bucket",
                         "description",
+                        "engineId",
                         "externalId",
                         "id",
                         "maskPii",
@@ -5739,6 +5814,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "externalId": {
                     "type": "string",
                     "description": "The external ID to use when assuming the role.\n"
@@ -5780,6 +5859,7 @@
                         "accessKeyId",
                         "authType",
                         "description",
+                        "engineId",
                         "externalId",
                         "id",
                         "name",
@@ -5800,6 +5880,10 @@
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
+                },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "id": {
                     "type": "string"
@@ -5835,6 +5919,7 @@
                     "requiredOutputs": [
                         "accessKeyId",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "region",
@@ -6175,6 +6260,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -6215,6 +6304,7 @@
                         "auditEnabled",
                         "auditFilters",
                         "description",
+                        "engineId",
                         "id",
                         "maskPii",
                         "name",
@@ -6564,6 +6654,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials:ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -6572,7 +6666,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -6612,6 +6707,56 @@
                 "password",
                 "username"
             ]
+        },
+        "descope:index/ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials:ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectConnectorsFingerprint:ProjectConnectorsFingerprint": {
             "properties": {
@@ -6708,6 +6853,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -6730,6 +6879,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "serviceAccount"
@@ -6880,6 +7030,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials:ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -6888,7 +7042,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -6928,6 +7083,56 @@
                 "password",
                 "username"
             ]
+        },
+        "descope:index/ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials:ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectConnectorsGenericSmsGateway:ProjectConnectorsGenericSmsGateway": {
             "properties": {
@@ -7011,6 +7216,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials:ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -7019,7 +7228,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -7060,6 +7270,56 @@
                 "username"
             ]
         },
+        "descope:index/ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials:ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
+        },
         "descope:index/ProjectConnectorsGoogleCloudLogging:ProjectConnectorsGoogleCloudLogging": {
             "properties": {
                 "auditEnabled": {
@@ -7076,6 +7336,10 @@
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
+                },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "id": {
                     "type": "string"
@@ -7105,6 +7369,7 @@
                         "auditEnabled",
                         "auditFilters",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "serviceAccountKey",
@@ -7144,6 +7409,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -7171,6 +7440,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "projectId",
@@ -7379,6 +7649,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -7395,6 +7669,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "description",
+                        "engineId",
                         "id",
                         "name"
                     ]
@@ -7447,7 +7722,7 @@
                 },
                 "engineId": {
                     "type": "string",
-                    "description": "The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.\n"
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "headers": {
                     "type": "object",
@@ -7551,6 +7826,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsHttpAuthenticationOauth2ClientCredentials:ProjectConnectorsHttpAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -7559,7 +7838,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -7599,6 +7879,56 @@
                 "password",
                 "username"
             ]
+        },
+        "descope:index/ProjectConnectorsHttpAuthenticationOauth2ClientCredentials:ProjectConnectorsHttpAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectConnectorsHubspot:ProjectConnectorsHubspot": {
             "properties": {
@@ -8239,6 +8569,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials:ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -8247,7 +8581,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -8287,6 +8622,56 @@
                 "password",
                 "username"
             ]
+        },
+        "descope:index/ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials:ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectConnectorsPendo:ProjectConnectorsPendo": {
             "properties": {
@@ -8382,6 +8767,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "host": {
                     "type": "string",
                     "description": "PingDirectory's REST API host.\n"
@@ -8408,6 +8797,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "description",
+                        "engineId",
                         "host",
                         "id",
                         "name",
@@ -8595,6 +8985,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -8631,6 +9025,7 @@
                         "baseUrl",
                         "botThreshold",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "overrideAssessment",
@@ -8710,6 +9105,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -8736,6 +9135,7 @@
                         "accessKeyId",
                         "collectionId",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "secretAccessKey"
@@ -8803,6 +9203,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -8830,6 +9234,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "version"
@@ -8855,6 +9260,10 @@
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
+                },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "id": {
                     "type": "string"
@@ -8886,6 +9295,7 @@
                         "clientId",
                         "clientSecret",
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "scope",
@@ -9024,6 +9434,10 @@
                     "type": "string",
                     "description": "Bearer token for HTTP authentication.\n",
                     "secret": true
+                },
+                "oauth2ClientCredentials": {
+                    "$ref": "#/types/descope:index/ProjectConnectorsScimAuthenticationOauth2ClientCredentials:ProjectConnectorsScimAuthenticationOauth2ClientCredentials",
+                    "description": "OAuth 2.0 client credentials configuration used to fetch an access token before making requests.\n"
                 }
             },
             "type": "object",
@@ -9032,7 +9446,8 @@
                     "requiredOutputs": [
                         "apiKey",
                         "basic",
-                        "bearerToken"
+                        "bearerToken",
+                        "oauth2ClientCredentials"
                     ]
                 }
             }
@@ -9072,6 +9487,56 @@
                 "password",
                 "username"
             ]
+        },
+        "descope:index/ProjectConnectorsScimAuthenticationOauth2ClientCredentials:ProjectConnectorsScimAuthenticationOauth2ClientCredentials": {
+            "properties": {
+                "authStyle": {
+                    "type": "string",
+                    "description": "How the client credentials are sent to the token endpoint. Either \u003cspan pulumi-lang-nodejs=\"`header`\" pulumi-lang-dotnet=\"`Header`\" pulumi-lang-go=\"`header`\" pulumi-lang-python=\"`header`\" pulumi-lang-yaml=\"`header`\" pulumi-lang-java=\"`header`\" pulumi-lang-hcl=\"`header`\"\u003e`header`\u003c/span\u003e to send them in the `Authorization` header, or \u003cspan pulumi-lang-nodejs=\"`body`\" pulumi-lang-dotnet=\"`Body`\" pulumi-lang-go=\"`body`\" pulumi-lang-python=\"`body`\" pulumi-lang-yaml=\"`body`\" pulumi-lang-java=\"`body`\" pulumi-lang-hcl=\"`body`\"\u003e`body`\u003c/span\u003e to send them in the request body.\n"
+                },
+                "authUrl": {
+                    "type": "string",
+                    "description": "The token endpoint URL used to request an access token.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client ID used to authenticate against the token endpoint.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The OAuth 2.0 client secret used to authenticate against the token endpoint.\n",
+                    "secret": true
+                },
+                "scopes": {
+                    "type": "string",
+                    "description": "A space-separated list of OAuth scopes to request when fetching the access token.\n"
+                },
+                "tokenRequestHeaders": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Additional headers to include in the token request sent to the token endpoint.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authUrl",
+                "clientId",
+                "clientSecret"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authStyle",
+                        "authUrl",
+                        "clientId",
+                        "clientSecret",
+                        "scopes",
+                        "tokenRequestHeaders"
+                    ]
+                }
+            }
         },
         "descope:index/ProjectConnectorsSe:ProjectConnectorsSe": {
             "properties": {
@@ -9292,6 +9757,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -9314,6 +9783,7 @@
                 "nodejs": {
                     "requiredOutputs": [
                         "description",
+                        "engineId",
                         "id",
                         "name",
                         "token"
@@ -9505,6 +9975,10 @@
                     "description": "AWS Access key ID.\n",
                     "secret": true
                 },
+                "authType": {
+                    "type": "string",
+                    "description": "The authentication type to use.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
@@ -9516,6 +9990,10 @@
                 "entityId": {
                     "type": "string",
                     "description": "The entity ID or principal entity (PE) ID for sending text messages to recipients in India.\n"
+                },
+                "externalId": {
+                    "type": "string",
+                    "description": "The external ID to use when assuming the role.\n"
                 },
                 "id": {
                     "type": "string"
@@ -9537,6 +10015,10 @@
                     "type": "string",
                     "description": "AWS region to send requests to (e.g. `us-west-2`).\n"
                 },
+                "roleArn": {
+                    "type": "string",
+                    "description": "The Amazon Resource Name (ARN) of the role to assume.\n"
+                },
                 "secret": {
                     "type": "string",
                     "description": "AWS Secret Access Key.\n",
@@ -9553,23 +10035,24 @@
             },
             "type": "object",
             "required": [
-                "accessKeyId",
                 "name",
-                "region",
-                "secret"
+                "region"
             ],
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
                         "accessKeyId",
+                        "authType",
                         "description",
                         "endpoint",
                         "entityId",
+                        "externalId",
                         "id",
                         "name",
                         "organizationNumber",
                         "originationNumber",
                         "region",
+                        "roleArn",
                         "secret",
                         "senderId",
                         "templateId"
@@ -9606,6 +10089,10 @@
                 "description": {
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
+                },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
                 },
                 "id": {
                     "type": "string"
@@ -9654,6 +10141,7 @@
                         "auditTable",
                         "database",
                         "description",
+                        "engineId",
                         "id",
                         "maskPii",
                         "minFlushIntervalMinutes",
@@ -9708,6 +10196,10 @@
                     "type": "string",
                     "description": "A description of what your connector is used for.\n"
                 },
+                "engineId": {
+                    "type": "string",
+                    "description": "The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.\n"
+                },
                 "hecToken": {
                     "type": "string",
                     "description": "An HTTP Event Collector token configured on your Splunk project.\n",
@@ -9745,6 +10237,7 @@
                         "auditEnabled",
                         "auditFilters",
                         "description",
+                        "engineId",
                         "hecToken",
                         "hecUrl",
                         "id",
@@ -10803,6 +11296,10 @@
                     "type": "string",
                     "description": "The expiry time for access key session tokens. Use values such as \"10 minutes\", \"4 hours\", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.\n"
                 },
+                "allowAuthHostingIframeEmbedding": {
+                    "type": "boolean",
+                    "description": "When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.\n"
+                },
                 "appUrl": {
                     "type": "string",
                     "description": "The URL which your application resides on.\n"
@@ -10905,6 +11402,7 @@
                     "requiredOutputs": [
                         "accessKeyJwtTemplate",
                         "accessKeySessionTokenExpiration",
+                        "allowAuthHostingIframeEmbedding",
                         "appUrl",
                         "approvedDomains",
                         "customDomain",
@@ -11482,6 +11980,10 @@
                     "type": "boolean",
                     "description": "When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.\n"
                 },
+                "forceDpop": {
+                    "type": "boolean",
+                    "description": "Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.\n"
+                },
                 "forcePkce": {
                     "type": "boolean",
                     "description": "When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE \u003cspan pulumi-lang-nodejs=\"`codeVerifier`\" pulumi-lang-dotnet=\"`CodeVerifier`\" pulumi-lang-go=\"`codeVerifier`\" pulumi-lang-python=\"`code_verifier`\" pulumi-lang-yaml=\"`codeVerifier`\" pulumi-lang-java=\"`codeVerifier`\" pulumi-lang-hcl=\"`code_verifier`\"\u003e`codeVerifier`\u003c/span\u003e. Public clients always use PKCE regardless of this setting.\n"
@@ -11528,6 +12030,7 @@
                 "defaultAudience",
                 "description",
                 "forceAddAllAuthorizationInfo",
+                "forceDpop",
                 "forcePkce",
                 "loginPageUrl",
                 "logoUrl",
@@ -11586,6 +12089,10 @@
                 "forceAddAllAuthorizationInfo": {
                     "type": "boolean",
                     "description": "When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.\n"
+                },
+                "forceDpop": {
+                    "type": "boolean",
+                    "description": "Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.\n"
                 },
                 "forcePkce": {
                     "type": "boolean",
@@ -11677,6 +12184,10 @@
                     "forceAddAllAuthorizationInfo": {
                         "type": "boolean",
                         "description": "When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.\n"
+                    },
+                    "forceDpop": {
+                        "type": "boolean",
+                        "description": "Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.\n"
                     },
                     "forcePkce": {
                         "type": "boolean",
