@@ -71,6 +71,10 @@ export class InboundApp extends pulumi.CustomResource {
      */
     declare public readonly forceAddAllAuthorizationInfo: pulumi.Output<boolean>;
     /**
+     * Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     */
+    declare public readonly forceDpop: pulumi.Output<boolean>;
+    /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      */
     declare public readonly forcePkce: pulumi.Output<boolean>;
@@ -125,6 +129,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["defaultAudience"] = state?.defaultAudience;
             resourceInputs["description"] = state?.description;
             resourceInputs["forceAddAllAuthorizationInfo"] = state?.forceAddAllAuthorizationInfo;
+            resourceInputs["forceDpop"] = state?.forceDpop;
             resourceInputs["forcePkce"] = state?.forcePkce;
             resourceInputs["loginPageUrl"] = state?.loginPageUrl;
             resourceInputs["logoUrl"] = state?.logoUrl;
@@ -147,6 +152,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["defaultAudience"] = args?.defaultAudience;
             resourceInputs["description"] = args?.description;
             resourceInputs["forceAddAllAuthorizationInfo"] = args?.forceAddAllAuthorizationInfo;
+            resourceInputs["forceDpop"] = args?.forceDpop;
             resourceInputs["forcePkce"] = args?.forcePkce;
             resourceInputs["loginPageUrl"] = args?.loginPageUrl;
             resourceInputs["logoUrl"] = args?.logoUrl;
@@ -203,6 +209,10 @@ export interface InboundAppState {
      * When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
      */
     forceAddAllAuthorizationInfo?: pulumi.Input<boolean | undefined>;
+    /**
+     * Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     */
+    forceDpop?: pulumi.Input<boolean | undefined>;
     /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      */
@@ -277,6 +287,10 @@ export interface InboundAppArgs {
      * When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
      */
     forceAddAllAuthorizationInfo?: pulumi.Input<boolean | undefined>;
+    /**
+     * Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     */
+    forceDpop?: pulumi.Input<boolean | undefined>;
     /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      */

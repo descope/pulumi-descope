@@ -31,6 +31,7 @@ class InboundAppArgs:
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -51,6 +52,7 @@ class InboundAppArgs:
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
+        :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
@@ -78,6 +80,8 @@ class InboundAppArgs:
             pulumi.set(__self__, "description", description)
         if force_add_all_authorization_info is not None:
             pulumi.set(__self__, "force_add_all_authorization_info", force_add_all_authorization_info)
+        if force_dpop is not None:
+            pulumi.set(__self__, "force_dpop", force_dpop)
         if force_pkce is not None:
             pulumi.set(__self__, "force_pkce", force_pkce)
         if login_page_url is not None:
@@ -214,6 +218,18 @@ class InboundAppArgs:
         pulumi.set(self, "force_add_all_authorization_info", value)
 
     @_builtins.property
+    @pulumi.getter(name="forceDpop")
+    def force_dpop(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        """
+        return pulumi.get(self, "force_dpop")
+
+    @force_dpop.setter
+    def force_dpop(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "force_dpop", value)
+
+    @_builtins.property
     @pulumi.getter(name="forcePkce")
     def force_pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -310,6 +326,7 @@ class _InboundAppState:
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -330,6 +347,7 @@ class _InboundAppState:
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
+        :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
@@ -357,6 +375,8 @@ class _InboundAppState:
             pulumi.set(__self__, "description", description)
         if force_add_all_authorization_info is not None:
             pulumi.set(__self__, "force_add_all_authorization_info", force_add_all_authorization_info)
+        if force_dpop is not None:
+            pulumi.set(__self__, "force_dpop", force_dpop)
         if force_pkce is not None:
             pulumi.set(__self__, "force_pkce", force_pkce)
         if login_page_url is not None:
@@ -483,6 +503,18 @@ class _InboundAppState:
         pulumi.set(self, "force_add_all_authorization_info", value)
 
     @_builtins.property
+    @pulumi.getter(name="forceDpop")
+    def force_dpop(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        """
+        return pulumi.get(self, "force_dpop")
+
+    @force_dpop.setter
+    def force_dpop(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "force_dpop", value)
+
+    @_builtins.property
     @pulumi.getter(name="forcePkce")
     def force_pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -594,6 +626,7 @@ class InboundApp(pulumi.CustomResource):
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -617,6 +650,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
+        :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
@@ -659,6 +693,7 @@ class InboundApp(pulumi.CustomResource):
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+                 force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -685,6 +720,7 @@ class InboundApp(pulumi.CustomResource):
             __props__.__dict__["default_audience"] = default_audience
             __props__.__dict__["description"] = description
             __props__.__dict__["force_add_all_authorization_info"] = force_add_all_authorization_info
+            __props__.__dict__["force_dpop"] = force_dpop
             __props__.__dict__["force_pkce"] = force_pkce
             __props__.__dict__["login_page_url"] = login_page_url
             __props__.__dict__["logo_url"] = logo_url
@@ -716,6 +752,7 @@ class InboundApp(pulumi.CustomResource):
             default_audience: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
+            force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
             force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
             login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -740,6 +777,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
+        :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
@@ -762,6 +800,7 @@ class InboundApp(pulumi.CustomResource):
         __props__.__dict__["default_audience"] = default_audience
         __props__.__dict__["description"] = description
         __props__.__dict__["force_add_all_authorization_info"] = force_add_all_authorization_info
+        __props__.__dict__["force_dpop"] = force_dpop
         __props__.__dict__["force_pkce"] = force_pkce
         __props__.__dict__["login_page_url"] = login_page_url
         __props__.__dict__["logo_url"] = logo_url
@@ -843,6 +882,14 @@ class InboundApp(pulumi.CustomResource):
         When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         """
         return pulumi.get(self, "force_add_all_authorization_info")
+
+    @_builtins.property
+    @pulumi.getter(name="forceDpop")
+    def force_dpop(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        """
+        return pulumi.get(self, "force_dpop")
 
     @_builtins.property
     @pulumi.getter(name="forcePkce")

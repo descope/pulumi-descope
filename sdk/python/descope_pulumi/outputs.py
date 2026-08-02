@@ -134,6 +134,7 @@ __all__ = [
     'ProjectConnectorsAuditWebhookAuthentication',
     'ProjectConnectorsAuditWebhookAuthenticationApiKey',
     'ProjectConnectorsAuditWebhookAuthenticationBasic',
+    'ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsAwsS3',
     'ProjectConnectorsAwsS3AuditFilter',
     'ProjectConnectorsAwsSesEmailValidation',
@@ -155,6 +156,7 @@ __all__ = [
     'ProjectConnectorsExternalTokenHttpAuthentication',
     'ProjectConnectorsExternalTokenHttpAuthenticationApiKey',
     'ProjectConnectorsExternalTokenHttpAuthenticationBasic',
+    'ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsFingerprint',
     'ProjectConnectorsFingerprintDescope',
     'ProjectConnectorsFirebaseAdmin',
@@ -163,10 +165,12 @@ __all__ = [
     'ProjectConnectorsGenericEmailGatewayAuthentication',
     'ProjectConnectorsGenericEmailGatewayAuthenticationApiKey',
     'ProjectConnectorsGenericEmailGatewayAuthenticationBasic',
+    'ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsGenericSmsGateway',
     'ProjectConnectorsGenericSmsGatewayAuthentication',
     'ProjectConnectorsGenericSmsGatewayAuthenticationApiKey',
     'ProjectConnectorsGenericSmsGatewayAuthenticationBasic',
+    'ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsGoogleCloudLogging',
     'ProjectConnectorsGoogleCloudLoggingAuditFilter',
     'ProjectConnectorsGoogleCloudTranslation',
@@ -179,6 +183,7 @@ __all__ = [
     'ProjectConnectorsHttpAuthentication',
     'ProjectConnectorsHttpAuthenticationApiKey',
     'ProjectConnectorsHttpAuthenticationBasic',
+    'ProjectConnectorsHttpAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsHubspot',
     'ProjectConnectorsIncode',
     'ProjectConnectorsIntercom',
@@ -194,6 +199,7 @@ __all__ = [
     'ProjectConnectorsOpentelemetryAuthentication',
     'ProjectConnectorsOpentelemetryAuthenticationApiKey',
     'ProjectConnectorsOpentelemetryAuthenticationBasic',
+    'ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsPendo',
     'ProjectConnectorsPendoAuditFilter',
     'ProjectConnectorsPingDirectory',
@@ -211,6 +217,7 @@ __all__ = [
     'ProjectConnectorsScimAuthentication',
     'ProjectConnectorsScimAuthenticationApiKey',
     'ProjectConnectorsScimAuthenticationBasic',
+    'ProjectConnectorsScimAuthenticationOauth2ClientCredentials',
     'ProjectConnectorsSe',
     'ProjectConnectorsSeSender',
     'ProjectConnectorsSegment',
@@ -9781,12 +9788,16 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
             suggest = "force_domain_verification"
         elif key == "hideDomains":
             suggest = "hide_domains"
+        elif key == "hideFgaMapping":
+            suggest = "hide_fga_mapping"
         elif key == "hideGroupsMapping":
             suggest = "hide_groups_mapping"
         elif key == "hideJitGuide":
             suggest = "hide_jit_guide"
         elif key == "hideOidc":
             suggest = "hide_oidc"
+        elif key == "hideRoleMapping":
+            suggest = "hide_role_mapping"
         elif key == "hideSaml":
             suggest = "hide_saml"
         elif key == "hideScim":
@@ -9812,9 +9823,11 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
     def __init__(__self__, *,
                  force_domain_verification: Optional[_builtins.bool] = None,
                  hide_domains: Optional[_builtins.bool] = None,
+                 hide_fga_mapping: Optional[_builtins.bool] = None,
                  hide_groups_mapping: Optional[_builtins.bool] = None,
                  hide_jit_guide: Optional[_builtins.bool] = None,
                  hide_oidc: Optional[_builtins.bool] = None,
+                 hide_role_mapping: Optional[_builtins.bool] = None,
                  hide_saml: Optional[_builtins.bool] = None,
                  hide_scim: Optional[_builtins.bool] = None,
                  show_help_contact: Optional[_builtins.bool] = None,
@@ -9823,9 +9836,11 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         """
         :param _builtins.bool force_domain_verification: Setting this to `true` will allow only verified domains to be used.
         :param _builtins.bool hide_domains: Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
+        :param _builtins.bool hide_fga_mapping: Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
         :param _builtins.bool hide_groups_mapping: Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
         :param _builtins.bool hide_jit_guide: Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
         :param _builtins.bool hide_oidc: Setting this to `true` will hide the OIDC configuration option.
+        :param _builtins.bool hide_role_mapping: Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
         :param _builtins.bool hide_saml: Setting this to `true` will hide the SAML configuration option.
         :param _builtins.bool hide_scim: Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
         :param _builtins.bool show_help_contact: Whether to display the help/support contact link in the SSO Suite UI.
@@ -9836,12 +9851,16 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
             pulumi.set(__self__, "force_domain_verification", force_domain_verification)
         if hide_domains is not None:
             pulumi.set(__self__, "hide_domains", hide_domains)
+        if hide_fga_mapping is not None:
+            pulumi.set(__self__, "hide_fga_mapping", hide_fga_mapping)
         if hide_groups_mapping is not None:
             pulumi.set(__self__, "hide_groups_mapping", hide_groups_mapping)
         if hide_jit_guide is not None:
             pulumi.set(__self__, "hide_jit_guide", hide_jit_guide)
         if hide_oidc is not None:
             pulumi.set(__self__, "hide_oidc", hide_oidc)
+        if hide_role_mapping is not None:
+            pulumi.set(__self__, "hide_role_mapping", hide_role_mapping)
         if hide_saml is not None:
             pulumi.set(__self__, "hide_saml", hide_saml)
         if hide_scim is not None:
@@ -9870,6 +9889,14 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         return pulumi.get(self, "hide_domains")
 
     @_builtins.property
+    @pulumi.getter(name="hideFgaMapping")
+    def hide_fga_mapping(self) -> Optional[_builtins.bool]:
+        """
+        Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_fga_mapping")
+
+    @_builtins.property
     @pulumi.getter(name="hideGroupsMapping")
     def hide_groups_mapping(self) -> Optional[_builtins.bool]:
         """
@@ -9892,6 +9919,14 @@ class ProjectAuthenticationSsoSsoSuiteSettings(dict):
         Setting this to `true` will hide the OIDC configuration option.
         """
         return pulumi.get(self, "hide_oidc")
+
+    @_builtins.property
+    @pulumi.getter(name="hideRoleMapping")
+    def hide_role_mapping(self) -> Optional[_builtins.bool]:
+        """
+        Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_role_mapping")
 
     @_builtins.property
     @pulumi.getter(name="hideSaml")
@@ -11459,6 +11494,8 @@ class ProjectConnectorsAuditWebhook(dict):
             suggest = "base_url"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "hmacSecret":
             suggest = "hmac_secret"
 
@@ -11479,6 +11516,7 @@ class ProjectConnectorsAuditWebhook(dict):
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsAuditWebhookAuditFilter']] = None,
                  authentication: Optional['outputs.ProjectConnectorsAuditWebhookAuthentication'] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  headers: Optional[Mapping[str, _builtins.str]] = None,
                  hmac_secret: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
@@ -11489,6 +11527,7 @@ class ProjectConnectorsAuditWebhook(dict):
         :param Sequence['ProjectConnectorsAuditWebhookAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param 'ProjectConnectorsAuditWebhookAuthenticationArgs' authentication: Authentication Information
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param Mapping[str, _builtins.str] headers: The headers to send with the request
         :param _builtins.str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
         :param _builtins.bool insecure: Will ignore certificate errors raised by the client
@@ -11501,6 +11540,8 @@ class ProjectConnectorsAuditWebhook(dict):
             pulumi.set(__self__, "authentication", authentication)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if headers is not None:
             pulumi.set(__self__, "headers", headers)
         if hmac_secret is not None:
@@ -11549,6 +11590,14 @@ class ProjectConnectorsAuditWebhook(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -11629,6 +11678,8 @@ class ProjectConnectorsAuditWebhookAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsAuditWebhookAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -11644,11 +11695,13 @@ class ProjectConnectorsAuditWebhookAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsAuditWebhookAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsAuditWebhookAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsAuditWebhookAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -11656,6 +11709,8 @@ class ProjectConnectorsAuditWebhookAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -11680,6 +11735,14 @@ class ProjectConnectorsAuditWebhookAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -11741,6 +11804,107 @@ class ProjectConnectorsAuditWebhookAuthenticationBasic(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
+
+
+@pulumi.output_type
 class ProjectConnectorsAwsS3(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -11753,6 +11917,8 @@ class ProjectConnectorsAwsS3(dict):
             suggest = "audit_filters"
         elif key == "authType":
             suggest = "auth_type"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "externalId":
             suggest = "external_id"
         elif key == "maskPii":
@@ -11784,6 +11950,7 @@ class ProjectConnectorsAwsS3(dict):
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsAwsS3AuditFilter']] = None,
                  auth_type: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  external_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  mask_pii: Optional[_builtins.bool] = None,
@@ -11799,6 +11966,7 @@ class ProjectConnectorsAwsS3(dict):
         :param Sequence['ProjectConnectorsAwsS3AuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param _builtins.str auth_type: The authentication type to use.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.str external_id: The external ID to use when assuming the role.
         :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.str role_arn: The Amazon Resource Name (ARN) of the role to assume.
@@ -11818,6 +11986,8 @@ class ProjectConnectorsAwsS3(dict):
             pulumi.set(__self__, "auth_type", auth_type)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if external_id is not None:
             pulumi.set(__self__, "external_id", external_id)
         if id is not None:
@@ -11894,6 +12064,14 @@ class ProjectConnectorsAwsS3(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter(name="externalId")
@@ -11990,6 +12168,8 @@ class ProjectConnectorsAwsSesEmailValidation(dict):
             suggest = "access_key_id"
         elif key == "authType":
             suggest = "auth_type"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "externalId":
             suggest = "external_id"
         elif key == "roleArn":
@@ -12016,6 +12196,7 @@ class ProjectConnectorsAwsSesEmailValidation(dict):
                  access_key_id: Optional[_builtins.str] = None,
                  auth_type: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  external_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  role_arn: Optional[_builtins.str] = None,
@@ -12027,6 +12208,7 @@ class ProjectConnectorsAwsSesEmailValidation(dict):
         :param _builtins.str access_key_id: AWS access key ID.
         :param _builtins.str auth_type: The authentication type to use.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.str external_id: The external ID to use when assuming the role.
         :param _builtins.str role_arn: The Amazon Resource Name (ARN) of the role to assume.
         :param _builtins.str secret_access_key: AWS secret access key.
@@ -12040,6 +12222,8 @@ class ProjectConnectorsAwsSesEmailValidation(dict):
             pulumi.set(__self__, "auth_type", auth_type)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if external_id is not None:
             pulumi.set(__self__, "external_id", external_id)
         if id is not None:
@@ -12092,6 +12276,14 @@ class ProjectConnectorsAwsSesEmailValidation(dict):
         return pulumi.get(self, "description")
 
     @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
+
+    @_builtins.property
     @pulumi.getter(name="externalId")
     def external_id(self) -> Optional[_builtins.str]:
         """
@@ -12138,6 +12330,8 @@ class ProjectConnectorsAwsTranslate(dict):
             suggest = "access_key_id"
         elif key == "secretAccessKey":
             suggest = "secret_access_key"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "sessionToken":
             suggest = "session_token"
 
@@ -12158,6 +12352,7 @@ class ProjectConnectorsAwsTranslate(dict):
                  region: _builtins.str,
                  secret_access_key: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  session_token: Optional[_builtins.str] = None):
         """
@@ -12166,6 +12361,7 @@ class ProjectConnectorsAwsTranslate(dict):
         :param _builtins.str region: The AWS region to which this client will send requests. (e.g. us-east-1.)
         :param _builtins.str secret_access_key: AWS secret access key.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.str session_token: (Optional) A security or session token to use with these credentials. Usually present for temporary credentials.
         """
         pulumi.set(__self__, "access_key_id", access_key_id)
@@ -12174,6 +12370,8 @@ class ProjectConnectorsAwsTranslate(dict):
         pulumi.set(__self__, "secret_access_key", secret_access_key)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if session_token is not None:
@@ -12218,6 +12416,14 @@ class ProjectConnectorsAwsTranslate(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -12868,6 +13074,8 @@ class ProjectConnectorsDatadog(dict):
             suggest = "audit_enabled"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "maskPii":
             suggest = "mask_pii"
         elif key == "troubleshootLogEnabled":
@@ -12890,6 +13098,7 @@ class ProjectConnectorsDatadog(dict):
                  audit_enabled: Optional[_builtins.bool] = None,
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsDatadogAuditFilter']] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  mask_pii: Optional[_builtins.bool] = None,
                  site: Optional[_builtins.str] = None,
@@ -12902,6 +13111,7 @@ class ProjectConnectorsDatadog(dict):
         :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
         :param Sequence['ProjectConnectorsDatadogAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.str site: The Datadog site to send logs to. Default is `datadoghq.com`. European, free tier and other customers should set their site accordingly.
         :param _builtins.str source: An optional custom source to use for log entries sent to Datadog. This can be used to differentiate between environments (e.g. `production`, `staging`). If left empty, the default Descope source will be used.
@@ -12916,6 +13126,8 @@ class ProjectConnectorsDatadog(dict):
             pulumi.set(__self__, "audit_filters", audit_filters)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if mask_pii is not None:
@@ -12968,6 +13180,14 @@ class ProjectConnectorsDatadog(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -13661,6 +13881,8 @@ class ProjectConnectorsExternalTokenHttpAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsExternalTokenHttpAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -13676,11 +13898,13 @@ class ProjectConnectorsExternalTokenHttpAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsExternalTokenHttpAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsExternalTokenHttpAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsExternalTokenHttpAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -13688,6 +13912,8 @@ class ProjectConnectorsExternalTokenHttpAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -13712,6 +13938,14 @@ class ProjectConnectorsExternalTokenHttpAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -13770,6 +14004,107 @@ class ProjectConnectorsExternalTokenHttpAuthenticationBasic(dict):
         Username for basic HTTP authentication.
         """
         return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
 
 
 @pulumi.output_type
@@ -13967,6 +14302,8 @@ class ProjectConnectorsFirebaseAdmin(dict):
         suggest = None
         if key == "serviceAccount":
             suggest = "service_account"
+        elif key == "engineId":
+            suggest = "engine_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsFirebaseAdmin. Access the value via the '{suggest}' property getter instead.")
@@ -13983,16 +14320,20 @@ class ProjectConnectorsFirebaseAdmin(dict):
                  name: _builtins.str,
                  service_account: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str service_account: The Firebase service account JSON.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "service_account", service_account)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -14019,6 +14360,14 @@ class ProjectConnectorsFirebaseAdmin(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -14310,6 +14659,8 @@ class ProjectConnectorsGenericEmailGatewayAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericEmailGatewayAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -14325,11 +14676,13 @@ class ProjectConnectorsGenericEmailGatewayAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsGenericEmailGatewayAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsGenericEmailGatewayAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -14337,6 +14690,8 @@ class ProjectConnectorsGenericEmailGatewayAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -14361,6 +14716,14 @@ class ProjectConnectorsGenericEmailGatewayAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -14419,6 +14782,107 @@ class ProjectConnectorsGenericEmailGatewayAuthenticationBasic(dict):
         Username for basic HTTP authentication.
         """
         return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
 
 
 @pulumi.output_type
@@ -14572,6 +15036,8 @@ class ProjectConnectorsGenericSmsGatewayAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericSmsGatewayAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -14587,11 +15053,13 @@ class ProjectConnectorsGenericSmsGatewayAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -14599,6 +15067,8 @@ class ProjectConnectorsGenericSmsGatewayAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -14623,6 +15093,14 @@ class ProjectConnectorsGenericSmsGatewayAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -14684,6 +15162,107 @@ class ProjectConnectorsGenericSmsGatewayAuthenticationBasic(dict):
 
 
 @pulumi.output_type
+class ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
+
+
+@pulumi.output_type
 class ProjectConnectorsGoogleCloudLogging(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -14694,6 +15273,8 @@ class ProjectConnectorsGoogleCloudLogging(dict):
             suggest = "audit_enabled"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "troubleshootLogEnabled":
             suggest = "troubleshoot_log_enabled"
 
@@ -14714,6 +15295,7 @@ class ProjectConnectorsGoogleCloudLogging(dict):
                  audit_enabled: Optional[_builtins.bool] = None,
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsGoogleCloudLoggingAuditFilter']] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  troubleshoot_log_enabled: Optional[_builtins.bool] = None):
         """
@@ -14722,6 +15304,7 @@ class ProjectConnectorsGoogleCloudLogging(dict):
         :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
         :param Sequence['ProjectConnectorsGoogleCloudLoggingAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
         pulumi.set(__self__, "name", name)
@@ -14732,6 +15315,8 @@ class ProjectConnectorsGoogleCloudLogging(dict):
             pulumi.set(__self__, "audit_filters", audit_filters)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if troubleshoot_log_enabled is not None:
@@ -14776,6 +15361,14 @@ class ProjectConnectorsGoogleCloudLogging(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -14840,6 +15433,8 @@ class ProjectConnectorsGoogleCloudTranslation(dict):
             suggest = "project_id"
         elif key == "serviceAccountJson":
             suggest = "service_account_json"
+        elif key == "engineId":
+            suggest = "engine_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsGoogleCloudTranslation. Access the value via the '{suggest}' property getter instead.")
@@ -14857,18 +15452,22 @@ class ProjectConnectorsGoogleCloudTranslation(dict):
                  project_id: _builtins.str,
                  service_account_json: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str project_id: The Google Cloud project ID where the Google Cloud Translation is managed.
         :param _builtins.str service_account_json: Service Account JSON associated with the current project.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "service_account_json", service_account_json)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -14903,6 +15502,14 @@ class ProjectConnectorsGoogleCloudTranslation(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -15310,17 +15917,38 @@ class ProjectConnectorsHcaptcha(dict):
 
 @pulumi.output_type
 class ProjectConnectorsHibp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "engineId":
+            suggest = "engine_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHibp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsHibp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsHibp.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  name: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "name", name)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -15339,6 +15967,14 @@ class ProjectConnectorsHibp(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -15433,7 +16069,7 @@ class ProjectConnectorsHttp(dict):
         :param _builtins.str aws_secret_access_key: The secret AWS access key.
         :param _builtins.str aws_service: The AWS service to target, e.g. `lambda`, `execute-api`, `s3`, etc.
         :param _builtins.str description: A description of what your connector is used for.
-        :param _builtins.str engine_id: The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param Mapping[str, _builtins.str] headers: The headers to send with the request
         :param _builtins.str hmac_secret: HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the base64 encoded payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
         :param _builtins.bool include_headers_in_context: The connector response context will also include the headers and status code. The context will have a "body" attribute, a "headers" attribute, and a "statusCode" attribute. See more details in the help guide
@@ -15582,7 +16218,7 @@ class ProjectConnectorsHttp(dict):
     @pulumi.getter(name="engineId")
     def engine_id(self) -> Optional[_builtins.str]:
         """
-        The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         return pulumi.get(self, "engine_id")
 
@@ -15681,6 +16317,8 @@ class ProjectConnectorsHttpAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -15696,11 +16334,13 @@ class ProjectConnectorsHttpAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsHttpAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsHttpAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsHttpAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsHttpAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsHttpAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -15708,6 +16348,8 @@ class ProjectConnectorsHttpAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -15732,6 +16374,14 @@ class ProjectConnectorsHttpAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsHttpAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -15790,6 +16440,107 @@ class ProjectConnectorsHttpAuthenticationBasic(dict):
         Username for basic HTTP authentication.
         """
         return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class ProjectConnectorsHttpAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsHttpAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsHttpAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsHttpAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
 
 
 @pulumi.output_type
@@ -17084,6 +17835,8 @@ class ProjectConnectorsOpentelemetryAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsOpentelemetryAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -17099,11 +17852,13 @@ class ProjectConnectorsOpentelemetryAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsOpentelemetryAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsOpentelemetryAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsOpentelemetryAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -17111,6 +17866,8 @@ class ProjectConnectorsOpentelemetryAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -17135,6 +17892,14 @@ class ProjectConnectorsOpentelemetryAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -17193,6 +17958,107 @@ class ProjectConnectorsOpentelemetryAuthenticationBasic(dict):
         Username for basic HTTP authentication.
         """
         return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
 
 
 @pulumi.output_type
@@ -17373,23 +18239,44 @@ class ProjectConnectorsPendoAuditFilter(dict):
 
 @pulumi.output_type
 class ProjectConnectorsPingDirectory(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "engineId":
+            suggest = "engine_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsPingDirectory. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsPingDirectory.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsPingDirectory.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  host: _builtins.str,
                  name: _builtins.str,
                  port: _builtins.float,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str host: PingDirectory's REST API host.
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.float port: PingDirectory's REST API port.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "host", host)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "port", port)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -17424,6 +18311,14 @@ class ProjectConnectorsPingDirectory(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -17763,6 +18658,8 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
             suggest = "base_url"
         elif key == "botThreshold":
             suggest = "bot_threshold"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "overrideAssessment":
             suggest = "override_assessment"
 
@@ -17787,6 +18684,7 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
                  base_url: Optional[_builtins.str] = None,
                  bot_threshold: Optional[_builtins.float] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  override_assessment: Optional[_builtins.bool] = None):
         """
@@ -17799,6 +18697,7 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         :param _builtins.str base_url: The base URL used to load the reCAPTCHA Enterprise scripts. Select recaptcha.net when google.com is unavailable in your users' region. Restricting this to the official Google domains prevents loading scripts from untrusted hosts.
         :param _builtins.float bot_threshold: The bot threshold is used to determine whether the request is a bot or a human. The score ranges between 0 and 1, where 1 is a human interaction and 0 is a bot. If the score is below this threshold, the request is considered a bot.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.bool override_assessment: Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
         """
         pulumi.set(__self__, "api_key", api_key)
@@ -17815,6 +18714,8 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
             pulumi.set(__self__, "bot_threshold", bot_threshold)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if override_assessment is not None:
@@ -17891,6 +18792,14 @@ class ProjectConnectorsRecaptchaEnterprise(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -18038,6 +18947,8 @@ class ProjectConnectorsRekognition(dict):
             suggest = "collection_id"
         elif key == "secretAccessKey":
             suggest = "secret_access_key"
+        elif key == "engineId":
+            suggest = "engine_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsRekognition. Access the value via the '{suggest}' property getter instead.")
@@ -18056,6 +18967,7 @@ class ProjectConnectorsRekognition(dict):
                  name: _builtins.str,
                  secret_access_key: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str access_key_id: The AWS access key ID
@@ -18063,6 +18975,7 @@ class ProjectConnectorsRekognition(dict):
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str secret_access_key: The AWS secret access key
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "collection_id", collection_id)
@@ -18070,6 +18983,8 @@ class ProjectConnectorsRekognition(dict):
         pulumi.set(__self__, "secret_access_key", secret_access_key)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -18112,6 +19027,14 @@ class ProjectConnectorsRekognition(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -18209,6 +19132,8 @@ class ProjectConnectorsSalesforce(dict):
             suggest = "client_id"
         elif key == "clientSecret":
             suggest = "client_secret"
+        elif key == "engineId":
+            suggest = "engine_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSalesforce. Access the value via the '{suggest}' property getter instead.")
@@ -18228,6 +19153,7 @@ class ProjectConnectorsSalesforce(dict):
                  name: _builtins.str,
                  version: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str base_url: The Salesforce API base URL.
@@ -18236,6 +19162,7 @@ class ProjectConnectorsSalesforce(dict):
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str version: REST API Version.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "base_url", base_url)
         pulumi.set(__self__, "client_id", client_id)
@@ -18244,6 +19171,8 @@ class ProjectConnectorsSalesforce(dict):
         pulumi.set(__self__, "version", version)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -18296,6 +19225,14 @@ class ProjectConnectorsSalesforce(dict):
         return pulumi.get(self, "description")
 
     @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
@@ -18312,6 +19249,8 @@ class ProjectConnectorsSalesforceMarketingCloud(dict):
             suggest = "client_secret"
         elif key == "accountId":
             suggest = "account_id"
+        elif key == "engineId":
+            suggest = "engine_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSalesforceMarketingCloud. Access the value via the '{suggest}' property getter instead.")
@@ -18331,6 +19270,7 @@ class ProjectConnectorsSalesforceMarketingCloud(dict):
                  subdomain: _builtins.str,
                  account_id: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  scope: Optional[_builtins.str] = None):
         """
@@ -18340,6 +19280,7 @@ class ProjectConnectorsSalesforceMarketingCloud(dict):
         :param _builtins.str subdomain: The Salesforce Marketing Cloud endpoint subdomain.
         :param _builtins.str account_id: Account identifier, or MID, of the target business unit.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.str scope: Space-separated list of data-access permissions for your connector.
         """
         pulumi.set(__self__, "client_id", client_id)
@@ -18350,6 +19291,8 @@ class ProjectConnectorsSalesforceMarketingCloud(dict):
             pulumi.set(__self__, "account_id", account_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if scope is not None:
@@ -18402,6 +19345,14 @@ class ProjectConnectorsSalesforceMarketingCloud(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -18659,6 +19610,8 @@ class ProjectConnectorsScimAuthentication(dict):
             suggest = "api_key"
         elif key == "bearerToken":
             suggest = "bearer_token"
+        elif key == "oauth2ClientCredentials":
+            suggest = "oauth2_client_credentials"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsScimAuthentication. Access the value via the '{suggest}' property getter instead.")
@@ -18674,11 +19627,13 @@ class ProjectConnectorsScimAuthentication(dict):
     def __init__(__self__, *,
                  api_key: Optional['outputs.ProjectConnectorsScimAuthenticationApiKey'] = None,
                  basic: Optional['outputs.ProjectConnectorsScimAuthenticationBasic'] = None,
-                 bearer_token: Optional[_builtins.str] = None):
+                 bearer_token: Optional[_builtins.str] = None,
+                 oauth2_client_credentials: Optional['outputs.ProjectConnectorsScimAuthenticationOauth2ClientCredentials'] = None):
         """
         :param 'ProjectConnectorsScimAuthenticationApiKeyArgs' api_key: API key authentication configuration.
         :param 'ProjectConnectorsScimAuthenticationBasicArgs' basic: Basic authentication credentials (username and password).
         :param _builtins.str bearer_token: Bearer token for HTTP authentication.
+        :param 'ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs' oauth2_client_credentials: OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -18686,6 +19641,8 @@ class ProjectConnectorsScimAuthentication(dict):
             pulumi.set(__self__, "basic", basic)
         if bearer_token is not None:
             pulumi.set(__self__, "bearer_token", bearer_token)
+        if oauth2_client_credentials is not None:
+            pulumi.set(__self__, "oauth2_client_credentials", oauth2_client_credentials)
 
     @_builtins.property
     @pulumi.getter(name="apiKey")
@@ -18710,6 +19667,14 @@ class ProjectConnectorsScimAuthentication(dict):
         Bearer token for HTTP authentication.
         """
         return pulumi.get(self, "bearer_token")
+
+    @_builtins.property
+    @pulumi.getter(name="oauth2ClientCredentials")
+    def oauth2_client_credentials(self) -> Optional['outputs.ProjectConnectorsScimAuthenticationOauth2ClientCredentials']:
+        """
+        OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        """
+        return pulumi.get(self, "oauth2_client_credentials")
 
 
 @pulumi.output_type
@@ -18768,6 +19733,107 @@ class ProjectConnectorsScimAuthenticationBasic(dict):
         Username for basic HTTP authentication.
         """
         return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class ProjectConnectorsScimAuthenticationOauth2ClientCredentials(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "authUrl":
+            suggest = "auth_url"
+        elif key == "clientId":
+            suggest = "client_id"
+        elif key == "clientSecret":
+            suggest = "client_secret"
+        elif key == "authStyle":
+            suggest = "auth_style"
+        elif key == "tokenRequestHeaders":
+            suggest = "token_request_headers"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsScimAuthenticationOauth2ClientCredentials. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsScimAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsScimAuthenticationOauth2ClientCredentials.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auth_url: _builtins.str,
+                 client_id: _builtins.str,
+                 client_secret: _builtins.str,
+                 auth_style: Optional[_builtins.str] = None,
+                 scopes: Optional[_builtins.str] = None,
+                 token_request_headers: Optional[Mapping[str, _builtins.str]] = None):
+        """
+        :param _builtins.str auth_url: The token endpoint URL used to request an access token.
+        :param _builtins.str client_id: The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        :param _builtins.str client_secret: The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        :param _builtins.str auth_style: How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        :param _builtins.str scopes: A space-separated list of OAuth scopes to request when fetching the access token.
+        :param Mapping[str, _builtins.str] token_request_headers: Additional headers to include in the token request sent to the token endpoint.
+        """
+        pulumi.set(__self__, "auth_url", auth_url)
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "client_secret", client_secret)
+        if auth_style is not None:
+            pulumi.set(__self__, "auth_style", auth_style)
+        if scopes is not None:
+            pulumi.set(__self__, "scopes", scopes)
+        if token_request_headers is not None:
+            pulumi.set(__self__, "token_request_headers", token_request_headers)
+
+    @_builtins.property
+    @pulumi.getter(name="authUrl")
+    def auth_url(self) -> _builtins.str:
+        """
+        The token endpoint URL used to request an access token.
+        """
+        return pulumi.get(self, "auth_url")
+
+    @_builtins.property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client ID used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_id")
+
+    @_builtins.property
+    @pulumi.getter(name="clientSecret")
+    def client_secret(self) -> _builtins.str:
+        """
+        The OAuth 2.0 client secret used to authenticate against the token endpoint.
+        """
+        return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="authStyle")
+    def auth_style(self) -> Optional[_builtins.str]:
+        """
+        How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+        """
+        return pulumi.get(self, "auth_style")
+
+    @_builtins.property
+    @pulumi.getter
+    def scopes(self) -> Optional[_builtins.str]:
+        """
+        A space-separated list of OAuth scopes to request when fetching the access token.
+        """
+        return pulumi.get(self, "scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenRequestHeaders")
+    def token_request_headers(self) -> Optional[Mapping[str, _builtins.str]]:
+        """
+        Additional headers to include in the token request sent to the token endpoint.
+        """
+        return pulumi.get(self, "token_request_headers")
 
 
 @pulumi.output_type
@@ -19160,20 +20226,41 @@ class ProjectConnectorsSendgridSender(dict):
 
 @pulumi.output_type
 class ProjectConnectorsSlack(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "engineId":
+            suggest = "engine_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ProjectConnectorsSlack. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ProjectConnectorsSlack.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ProjectConnectorsSlack.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  name: _builtins.str,
                  token: _builtins.str,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None):
         """
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str token: The OAuth token for Slack's Bot User, used to authenticate API requests.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         """
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "token", token)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
 
@@ -19200,6 +20287,14 @@ class ProjectConnectorsSlack(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -19507,12 +20602,18 @@ class ProjectConnectorsSn(dict):
         suggest = None
         if key == "accessKeyId":
             suggest = "access_key_id"
+        elif key == "authType":
+            suggest = "auth_type"
         elif key == "entityId":
             suggest = "entity_id"
+        elif key == "externalId":
+            suggest = "external_id"
         elif key == "organizationNumber":
             suggest = "organization_number"
         elif key == "originationNumber":
             suggest = "origination_number"
+        elif key == "roleArn":
+            suggest = "role_arn"
         elif key == "senderId":
             suggest = "sender_id"
         elif key == "templateId":
@@ -19530,59 +20631,65 @@ class ProjectConnectorsSn(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 access_key_id: _builtins.str,
                  name: _builtins.str,
                  region: _builtins.str,
-                 secret: _builtins.str,
+                 access_key_id: Optional[_builtins.str] = None,
+                 auth_type: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
                  endpoint: Optional[_builtins.str] = None,
                  entity_id: Optional[_builtins.str] = None,
+                 external_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  organization_number: Optional[_builtins.str] = None,
                  origination_number: Optional[_builtins.str] = None,
+                 role_arn: Optional[_builtins.str] = None,
+                 secret: Optional[_builtins.str] = None,
                  sender_id: Optional[_builtins.str] = None,
                  template_id: Optional[_builtins.str] = None):
         """
-        :param _builtins.str access_key_id: AWS Access key ID.
         :param _builtins.str name: A custom name for your connector.
         :param _builtins.str region: AWS region to send requests to (e.g. `us-west-2`).
-        :param _builtins.str secret: AWS Secret Access Key.
+        :param _builtins.str access_key_id: AWS Access key ID.
+        :param _builtins.str auth_type: The authentication type to use.
         :param _builtins.str description: A description of what your connector is used for.
         :param _builtins.str endpoint: An optional endpoint URL (hostname only or fully qualified URI).
         :param _builtins.str entity_id: The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
+        :param _builtins.str external_id: The external ID to use when assuming the role.
         :param _builtins.str organization_number: Use the `origination_number` attribute instead.
         :param _builtins.str origination_number: An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
+        :param _builtins.str role_arn: The Amazon Resource Name (ARN) of the role to assume.
+        :param _builtins.str secret: AWS Secret Access Key.
         :param _builtins.str sender_id: The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
         :param _builtins.str template_id: The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
         """
-        pulumi.set(__self__, "access_key_id", access_key_id)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "region", region)
-        pulumi.set(__self__, "secret", secret)
+        if access_key_id is not None:
+            pulumi.set(__self__, "access_key_id", access_key_id)
+        if auth_type is not None:
+            pulumi.set(__self__, "auth_type", auth_type)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if entity_id is not None:
             pulumi.set(__self__, "entity_id", entity_id)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if organization_number is not None:
             pulumi.set(__self__, "organization_number", organization_number)
         if origination_number is not None:
             pulumi.set(__self__, "origination_number", origination_number)
+        if role_arn is not None:
+            pulumi.set(__self__, "role_arn", role_arn)
+        if secret is not None:
+            pulumi.set(__self__, "secret", secret)
         if sender_id is not None:
             pulumi.set(__self__, "sender_id", sender_id)
         if template_id is not None:
             pulumi.set(__self__, "template_id", template_id)
-
-    @_builtins.property
-    @pulumi.getter(name="accessKeyId")
-    def access_key_id(self) -> _builtins.str:
-        """
-        AWS Access key ID.
-        """
-        return pulumi.get(self, "access_key_id")
 
     @_builtins.property
     @pulumi.getter
@@ -19601,12 +20708,20 @@ class ProjectConnectorsSn(dict):
         return pulumi.get(self, "region")
 
     @_builtins.property
-    @pulumi.getter
-    def secret(self) -> _builtins.str:
+    @pulumi.getter(name="accessKeyId")
+    def access_key_id(self) -> Optional[_builtins.str]:
         """
-        AWS Secret Access Key.
+        AWS Access key ID.
         """
-        return pulumi.get(self, "secret")
+        return pulumi.get(self, "access_key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="authType")
+    def auth_type(self) -> Optional[_builtins.str]:
+        """
+        The authentication type to use.
+        """
+        return pulumi.get(self, "auth_type")
 
     @_builtins.property
     @pulumi.getter
@@ -19633,6 +20748,14 @@ class ProjectConnectorsSn(dict):
         return pulumi.get(self, "entity_id")
 
     @_builtins.property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> Optional[_builtins.str]:
+        """
+        The external ID to use when assuming the role.
+        """
+        return pulumi.get(self, "external_id")
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> Optional[_builtins.str]:
         return pulumi.get(self, "id")
@@ -19653,6 +20776,22 @@ class ProjectConnectorsSn(dict):
         An optional phone number from which the text messages are going to be sent. Make sure it is registered properly in your server.
         """
         return pulumi.get(self, "origination_number")
+
+    @_builtins.property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> Optional[_builtins.str]:
+        """
+        The Amazon Resource Name (ARN) of the role to assume.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @_builtins.property
+    @pulumi.getter
+    def secret(self) -> Optional[_builtins.str]:
+        """
+        AWS Secret Access Key.
+        """
+        return pulumi.get(self, "secret")
 
     @_builtins.property
     @pulumi.getter(name="senderId")
@@ -19684,6 +20823,8 @@ class ProjectConnectorsSnowflake(dict):
             suggest = "audit_filters"
         elif key == "auditTable":
             suggest = "audit_table"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "maskPii":
             suggest = "mask_pii"
         elif key == "minFlushIntervalMinutes":
@@ -19711,6 +20852,7 @@ class ProjectConnectorsSnowflake(dict):
                  audit_table: Optional[_builtins.str] = None,
                  database: Optional[_builtins.str] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  mask_pii: Optional[_builtins.bool] = None,
                  min_flush_interval_minutes: Optional[_builtins.float] = None,
@@ -19726,6 +20868,7 @@ class ProjectConnectorsSnowflake(dict):
         :param _builtins.str audit_table: The table to write audit events to. Defaults to `DESCOPE_AUDIT_LOGS`.
         :param _builtins.str database: The Snowflake database to use. Defaults to `DESCOPE_EXPORT_DB`.
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.bool mask_pii: Whether to mask personally identifiable information in the logs.
         :param _builtins.float min_flush_interval_minutes: The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
         :param _builtins.str schema: The schema within the database. Defaults to `PUBLIC`.
@@ -19745,6 +20888,8 @@ class ProjectConnectorsSnowflake(dict):
             pulumi.set(__self__, "database", database)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if mask_pii is not None:
@@ -19821,6 +20966,14 @@ class ProjectConnectorsSnowflake(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -19921,6 +21074,8 @@ class ProjectConnectorsSplunk(dict):
             suggest = "audit_enabled"
         elif key == "auditFilters":
             suggest = "audit_filters"
+        elif key == "engineId":
+            suggest = "engine_id"
         elif key == "troubleshootLogEnabled":
             suggest = "troubleshoot_log_enabled"
 
@@ -19942,6 +21097,7 @@ class ProjectConnectorsSplunk(dict):
                  audit_enabled: Optional[_builtins.bool] = None,
                  audit_filters: Optional[Sequence['outputs.ProjectConnectorsSplunkAuditFilter']] = None,
                  description: Optional[_builtins.str] = None,
+                 engine_id: Optional[_builtins.str] = None,
                  id: Optional[_builtins.str] = None,
                  index: Optional[_builtins.str] = None,
                  troubleshoot_log_enabled: Optional[_builtins.bool] = None):
@@ -19952,6 +21108,7 @@ class ProjectConnectorsSplunk(dict):
         :param _builtins.bool audit_enabled: Whether to enable streaming of audit events.
         :param Sequence['ProjectConnectorsSplunkAuditFilterArgs'] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param _builtins.str description: A description of what your connector is used for.
+        :param _builtins.str engine_id: The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         :param _builtins.str index: An optional index to use for all sent events
         :param _builtins.bool troubleshoot_log_enabled: Whether to send troubleshooting events.
         """
@@ -19964,6 +21121,8 @@ class ProjectConnectorsSplunk(dict):
             pulumi.set(__self__, "audit_filters", audit_filters)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if engine_id is not None:
+            pulumi.set(__self__, "engine_id", engine_id)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if index is not None:
@@ -20018,6 +21177,14 @@ class ProjectConnectorsSplunk(dict):
         A description of what your connector is used for.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="engineId")
+    def engine_id(self) -> Optional[_builtins.str]:
+        """
+        The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        """
+        return pulumi.get(self, "engine_id")
 
     @_builtins.property
     @pulumi.getter
@@ -22173,6 +23340,8 @@ class ProjectProjectSettings(dict):
             suggest = "access_key_jwt_template"
         elif key == "accessKeySessionTokenExpiration":
             suggest = "access_key_session_token_expiration"
+        elif key == "allowAuthHostingIframeEmbedding":
+            suggest = "allow_auth_hosting_iframe_embedding"
         elif key == "appUrl":
             suggest = "app_url"
         elif key == "approvedDomains":
@@ -22234,6 +23403,7 @@ class ProjectProjectSettings(dict):
     def __init__(__self__, *,
                  access_key_jwt_template: Optional[_builtins.str] = None,
                  access_key_session_token_expiration: Optional[_builtins.str] = None,
+                 allow_auth_hosting_iframe_embedding: Optional[_builtins.bool] = None,
                  app_url: Optional[_builtins.str] = None,
                  approved_domains: Optional[Sequence[_builtins.str]] = None,
                  custom_domain: Optional[_builtins.str] = None,
@@ -22260,6 +23430,7 @@ class ProjectProjectSettings(dict):
         """
         :param _builtins.str access_key_jwt_template: Name of the access key JWT Template.
         :param _builtins.str access_key_session_token_expiration: The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
+        :param _builtins.bool allow_auth_hosting_iframe_embedding: When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
         :param _builtins.str app_url: The URL which your application resides on.
         :param Sequence[_builtins.str] approved_domains: The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
         :param _builtins.str custom_domain: A custom CNAME that's configured to point to `cname.descope.com`. Read more about custom domains and cookie policy [here](https://docs.descope.com/how-to-deploy-to-production/custom-domain).
@@ -22288,6 +23459,8 @@ class ProjectProjectSettings(dict):
             pulumi.set(__self__, "access_key_jwt_template", access_key_jwt_template)
         if access_key_session_token_expiration is not None:
             pulumi.set(__self__, "access_key_session_token_expiration", access_key_session_token_expiration)
+        if allow_auth_hosting_iframe_embedding is not None:
+            pulumi.set(__self__, "allow_auth_hosting_iframe_embedding", allow_auth_hosting_iframe_embedding)
         if app_url is not None:
             pulumi.set(__self__, "app_url", app_url)
         if approved_domains is not None:
@@ -22350,6 +23523,14 @@ class ProjectProjectSettings(dict):
         The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
         """
         return pulumi.get(self, "access_key_session_token_expiration")
+
+    @_builtins.property
+    @pulumi.getter(name="allowAuthHostingIframeEmbedding")
+    def allow_auth_hosting_iframe_embedding(self) -> Optional[_builtins.bool]:
+        """
+        When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+        """
+        return pulumi.get(self, "allow_auth_hosting_iframe_embedding")
 
     @_builtins.property
     @pulumi.getter(name="appUrl")

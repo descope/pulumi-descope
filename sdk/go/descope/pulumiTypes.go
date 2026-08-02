@@ -20686,12 +20686,16 @@ type ProjectAuthenticationSsoSsoSuiteSettings struct {
 	ForceDomainVerification *bool `pulumi:"forceDomainVerification"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains *bool `pulumi:"hideDomains"`
+	// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+	HideFgaMapping *bool `pulumi:"hideFgaMapping"`
 	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
 	HideGroupsMapping *bool `pulumi:"hideGroupsMapping"`
 	// Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
 	HideJitGuide *bool `pulumi:"hideJitGuide"`
 	// Setting this to `true` will hide the OIDC configuration option.
 	HideOidc *bool `pulumi:"hideOidc"`
+	// Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+	HideRoleMapping *bool `pulumi:"hideRoleMapping"`
 	// Setting this to `true` will hide the SAML configuration option.
 	HideSaml *bool `pulumi:"hideSaml"`
 	// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
@@ -20720,12 +20724,16 @@ type ProjectAuthenticationSsoSsoSuiteSettingsArgs struct {
 	ForceDomainVerification pulumi.BoolPtrInput `pulumi:"forceDomainVerification"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains pulumi.BoolPtrInput `pulumi:"hideDomains"`
+	// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+	HideFgaMapping pulumi.BoolPtrInput `pulumi:"hideFgaMapping"`
 	// Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
 	HideGroupsMapping pulumi.BoolPtrInput `pulumi:"hideGroupsMapping"`
 	// Whether to hide the JIT provisioning guide section in the SSO Suite hosted UI.
 	HideJitGuide pulumi.BoolPtrInput `pulumi:"hideJitGuide"`
 	// Setting this to `true` will hide the OIDC configuration option.
 	HideOidc pulumi.BoolPtrInput `pulumi:"hideOidc"`
+	// Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+	HideRoleMapping pulumi.BoolPtrInput `pulumi:"hideRoleMapping"`
 	// Setting this to `true` will hide the SAML configuration option.
 	HideSaml pulumi.BoolPtrInput `pulumi:"hideSaml"`
 	// Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
@@ -20825,6 +20833,11 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideDomains() pulumi.Boo
 	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideDomains }).(pulumi.BoolPtrOutput)
 }
 
+// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideFgaMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideFgaMapping }).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
 func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideGroupsMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideGroupsMapping }).(pulumi.BoolPtrOutput)
@@ -20838,6 +20851,11 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideJitGuide() pulumi.Bo
 // Setting this to `true` will hide the OIDC configuration option.
 func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideOidc() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideOidc }).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsOutput) HideRoleMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectAuthenticationSsoSsoSuiteSettings) *bool { return v.HideRoleMapping }).(pulumi.BoolPtrOutput)
 }
 
 // Setting this to `true` will hide the SAML configuration option.
@@ -20909,6 +20927,16 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideDomains() pulumi.
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideFgaMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideFgaMapping
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
 func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideGroupsMapping() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
@@ -20936,6 +20964,16 @@ func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideOidc() pulumi.Boo
 			return nil
 		}
 		return v.HideOidc
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+func (o ProjectAuthenticationSsoSsoSuiteSettingsPtrOutput) HideRoleMapping() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectAuthenticationSsoSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideRoleMapping
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -23643,6 +23681,8 @@ type ProjectConnectorsAuditWebhook struct {
 	BaseUrl string `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers map[string]string `pulumi:"headers"`
 	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
@@ -23674,6 +23714,8 @@ type ProjectConnectorsAuditWebhookArgs struct {
 	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers pulumi.StringMapInput `pulumi:"headers"`
 	// HMAC is a method for message signing with a symmetrical key. This secret will be used to sign the payload, and the resulting signature will be sent in the `x-descope-webhook-s256` header. The receiving service should use this secret to verify the integrity and authenticity of the payload by checking the provided signature
@@ -23758,6 +23800,11 @@ func (o ProjectConnectorsAuditWebhookOutput) BaseUrl() pulumi.StringOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsAuditWebhookOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsAuditWebhookOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhook) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 // The headers to send with the request
@@ -23926,6 +23973,8 @@ type ProjectConnectorsAuditWebhookAuthentication struct {
 	Basic *ProjectConnectorsAuditWebhookAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsAuditWebhookAuthenticationInput is an input type that accepts ProjectConnectorsAuditWebhookAuthenticationArgs and ProjectConnectorsAuditWebhookAuthenticationOutput values.
@@ -23946,6 +23995,8 @@ type ProjectConnectorsAuditWebhookAuthenticationArgs struct {
 	Basic ProjectConnectorsAuditWebhookAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsAuditWebhookAuthenticationArgs) ElementType() reflect.Type {
@@ -24044,6 +24095,13 @@ func (o ProjectConnectorsAuditWebhookAuthenticationOutput) BearerToken() pulumi.
 	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsAuditWebhookAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthentication) *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsAuditWebhookAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsAuditWebhookAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -24096,6 +24154,16 @@ func (o ProjectConnectorsAuditWebhookAuthenticationPtrOutput) BearerToken() pulu
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsAuditWebhookAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthentication) *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsAuditWebhookAuthenticationApiKey struct {
@@ -24410,6 +24478,242 @@ func (o ProjectConnectorsAuditWebhookAuthenticationBasicPtrOutput) Username() pu
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string { return v.AuthStyle }).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) string { return v.AuthUrl }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) string {
+		return v.ClientSecret
+	}).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string { return v.Scopes }).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
 type ProjectConnectorsAwsS3 struct {
 	// The unique AWS access key ID.
 	AccessKeyId *string `pulumi:"accessKeyId"`
@@ -24423,6 +24727,8 @@ type ProjectConnectorsAwsS3 struct {
 	Bucket string `pulumi:"bucket"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
 	// The external ID to use when assuming the role.
 	ExternalId *string `pulumi:"externalId"`
 	Id         *string `pulumi:"id"`
@@ -24464,6 +24770,8 @@ type ProjectConnectorsAwsS3Args struct {
 	Bucket pulumi.StringInput `pulumi:"bucket"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// The external ID to use when assuming the role.
 	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
 	Id         pulumi.StringPtrInput `pulumi:"id"`
@@ -24560,6 +24868,11 @@ func (o ProjectConnectorsAwsS3Output) Bucket() pulumi.StringOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsAwsS3Output) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsAwsS3Output) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsS3) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 // The external ID to use when assuming the role.
@@ -24743,6 +25056,8 @@ type ProjectConnectorsAwsSesEmailValidation struct {
 	AuthType *string `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
 	// The external ID to use when assuming the role.
 	ExternalId *string `pulumi:"externalId"`
 	Id         *string `pulumi:"id"`
@@ -24776,6 +25091,8 @@ type ProjectConnectorsAwsSesEmailValidationArgs struct {
 	AuthType pulumi.StringPtrInput `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// The external ID to use when assuming the role.
 	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
 	Id         pulumi.StringPtrInput `pulumi:"id"`
@@ -24857,6 +25174,11 @@ func (o ProjectConnectorsAwsSesEmailValidationOutput) Description() pulumi.Strin
 	return o.ApplyT(func(v ProjectConnectorsAwsSesEmailValidation) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsAwsSesEmailValidationOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsSesEmailValidation) *string { return v.EngineId }).(pulumi.StringPtrOutput)
+}
+
 // The external ID to use when assuming the role.
 func (o ProjectConnectorsAwsSesEmailValidationOutput) ExternalId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsSesEmailValidation) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
@@ -24916,7 +25238,9 @@ type ProjectConnectorsAwsTranslate struct {
 	AccessKeyId string `pulumi:"accessKeyId"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The AWS region to which this client will send requests. (e.g. us-east-1.)
@@ -24943,7 +25267,9 @@ type ProjectConnectorsAwsTranslateArgs struct {
 	AccessKeyId pulumi.StringInput `pulumi:"accessKeyId"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The AWS region to which this client will send requests. (e.g. us-east-1.)
@@ -25013,6 +25339,11 @@ func (o ProjectConnectorsAwsTranslateOutput) AccessKeyId() pulumi.StringOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsAwsTranslateOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsAwsTranslateOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsAwsTranslate) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsAwsTranslateOutput) Id() pulumi.StringPtrOutput {
@@ -25971,7 +26302,9 @@ type ProjectConnectorsDatadog struct {
 	AuditFilters []ProjectConnectorsDatadogAuditFilter `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// Whether to mask personally identifiable information in the logs.
 	MaskPii *bool `pulumi:"maskPii"`
 	// A custom name for your connector.
@@ -26006,7 +26339,9 @@ type ProjectConnectorsDatadogArgs struct {
 	AuditFilters ProjectConnectorsDatadogAuditFilterArrayInput `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// Whether to mask personally identifiable information in the logs.
 	MaskPii pulumi.BoolPtrInput `pulumi:"maskPii"`
 	// A custom name for your connector.
@@ -26090,6 +26425,11 @@ func (o ProjectConnectorsDatadogOutput) AuditFilters() ProjectConnectorsDatadogA
 // A description of what your connector is used for.
 func (o ProjectConnectorsDatadogOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsDatadogOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsDatadog) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsDatadogOutput) Id() pulumi.StringPtrOutput {
@@ -27140,6 +27480,8 @@ type ProjectConnectorsExternalTokenHttpAuthentication struct {
 	Basic *ProjectConnectorsExternalTokenHttpAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsExternalTokenHttpAuthenticationInput is an input type that accepts ProjectConnectorsExternalTokenHttpAuthenticationArgs and ProjectConnectorsExternalTokenHttpAuthenticationOutput values.
@@ -27160,6 +27502,8 @@ type ProjectConnectorsExternalTokenHttpAuthenticationArgs struct {
 	Basic ProjectConnectorsExternalTokenHttpAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsExternalTokenHttpAuthenticationArgs) ElementType() reflect.Type {
@@ -27258,6 +27602,13 @@ func (o ProjectConnectorsExternalTokenHttpAuthenticationOutput) BearerToken() pu
 	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthentication) *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsExternalTokenHttpAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsExternalTokenHttpAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -27310,6 +27661,16 @@ func (o ProjectConnectorsExternalTokenHttpAuthenticationPtrOutput) BearerToken()
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthentication) *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsExternalTokenHttpAuthenticationApiKey struct {
@@ -27624,6 +27985,250 @@ func (o ProjectConnectorsExternalTokenHttpAuthenticationBasicPtrOutput) Username
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) string {
+		return v.AuthUrl
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) string {
+		return v.ClientId
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) string {
+		return v.ClientSecret
+	}).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
 type ProjectConnectorsFingerprint struct {
 	// The Cloudflare integration Endpoint URL.
 	CloudflareEndpointUrl *string `pulumi:"cloudflareEndpointUrl"`
@@ -27905,7 +28510,9 @@ func (o ProjectConnectorsFingerprintDescopeArrayOutput) Index(i pulumi.IntInput)
 type ProjectConnectorsFirebaseAdmin struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The Firebase service account JSON.
@@ -27926,7 +28533,9 @@ type ProjectConnectorsFirebaseAdminInput interface {
 type ProjectConnectorsFirebaseAdminArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The Firebase service account JSON.
@@ -27987,6 +28596,11 @@ func (o ProjectConnectorsFirebaseAdminOutput) ToProjectConnectorsFirebaseAdminOu
 // A description of what your connector is used for.
 func (o ProjectConnectorsFirebaseAdminOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsFirebaseAdmin) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsFirebaseAdminOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsFirebaseAdmin) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsFirebaseAdminOutput) Id() pulumi.StringPtrOutput {
@@ -28373,6 +28987,8 @@ type ProjectConnectorsGenericEmailGatewayAuthentication struct {
 	Basic *ProjectConnectorsGenericEmailGatewayAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsGenericEmailGatewayAuthenticationInput is an input type that accepts ProjectConnectorsGenericEmailGatewayAuthenticationArgs and ProjectConnectorsGenericEmailGatewayAuthenticationOutput values.
@@ -28393,6 +29009,8 @@ type ProjectConnectorsGenericEmailGatewayAuthenticationArgs struct {
 	Basic ProjectConnectorsGenericEmailGatewayAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsGenericEmailGatewayAuthenticationArgs) ElementType() reflect.Type {
@@ -28491,6 +29109,13 @@ func (o ProjectConnectorsGenericEmailGatewayAuthenticationOutput) BearerToken() 
 	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthentication) *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsGenericEmailGatewayAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsGenericEmailGatewayAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -28543,6 +29168,16 @@ func (o ProjectConnectorsGenericEmailGatewayAuthenticationPtrOutput) BearerToken
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthentication) *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsGenericEmailGatewayAuthenticationApiKey struct {
@@ -28857,6 +29492,250 @@ func (o ProjectConnectorsGenericEmailGatewayAuthenticationBasicPtrOutput) Userna
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.AuthUrl
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.ClientId
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.ClientSecret
+	}).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
 type ProjectConnectorsGenericSmsGateway struct {
 	// Authentication Information
 	Authentication *ProjectConnectorsGenericSmsGatewayAuthentication `pulumi:"authentication"`
@@ -29041,6 +29920,8 @@ type ProjectConnectorsGenericSmsGatewayAuthentication struct {
 	Basic *ProjectConnectorsGenericSmsGatewayAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsGenericSmsGatewayAuthenticationInput is an input type that accepts ProjectConnectorsGenericSmsGatewayAuthenticationArgs and ProjectConnectorsGenericSmsGatewayAuthenticationOutput values.
@@ -29061,6 +29942,8 @@ type ProjectConnectorsGenericSmsGatewayAuthenticationArgs struct {
 	Basic ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsGenericSmsGatewayAuthenticationArgs) ElementType() reflect.Type {
@@ -29159,6 +30042,13 @@ func (o ProjectConnectorsGenericSmsGatewayAuthenticationOutput) BearerToken() pu
 	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthentication) *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsGenericSmsGatewayAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsGenericSmsGatewayAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -29211,6 +30101,16 @@ func (o ProjectConnectorsGenericSmsGatewayAuthenticationPtrOutput) BearerToken()
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthentication) *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsGenericSmsGatewayAuthenticationApiKey struct {
@@ -29525,6 +30425,250 @@ func (o ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrOutput) Username
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.AuthUrl
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.ClientId
+	}).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) string {
+		return v.ClientSecret
+	}).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
 type ProjectConnectorsGoogleCloudLogging struct {
 	// Whether to enable streaming of audit events.
 	AuditEnabled *bool `pulumi:"auditEnabled"`
@@ -29532,7 +30676,9 @@ type ProjectConnectorsGoogleCloudLogging struct {
 	AuditFilters []ProjectConnectorsGoogleCloudLoggingAuditFilter `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
@@ -29559,7 +30705,9 @@ type ProjectConnectorsGoogleCloudLoggingArgs struct {
 	AuditFilters ProjectConnectorsGoogleCloudLoggingAuditFilterArrayInput `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// A Service Account Key JSON file created from a service account on your Google Cloud project. This file is used to authenticate and authorize the connector to access Google Cloud Logging. The service account this key belongs to must have the appropriate permissions to write logs.
@@ -29634,6 +30782,11 @@ func (o ProjectConnectorsGoogleCloudLoggingOutput) AuditFilters() ProjectConnect
 // A description of what your connector is used for.
 func (o ProjectConnectorsGoogleCloudLoggingOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsGoogleCloudLoggingOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudLogging) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsGoogleCloudLoggingOutput) Id() pulumi.StringPtrOutput {
@@ -29793,7 +30946,9 @@ func (o ProjectConnectorsGoogleCloudLoggingAuditFilterArrayOutput) Index(i pulum
 type ProjectConnectorsGoogleCloudTranslation struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The Google Cloud project ID where the Google Cloud Translation is managed.
@@ -29816,7 +30971,9 @@ type ProjectConnectorsGoogleCloudTranslationInput interface {
 type ProjectConnectorsGoogleCloudTranslationArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The Google Cloud project ID where the Google Cloud Translation is managed.
@@ -29879,6 +31036,11 @@ func (o ProjectConnectorsGoogleCloudTranslationOutput) ToProjectConnectorsGoogle
 // A description of what your connector is used for.
 func (o ProjectConnectorsGoogleCloudTranslationOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsGoogleCloudTranslationOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsGoogleCloudTranslation) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsGoogleCloudTranslationOutput) Id() pulumi.StringPtrOutput {
@@ -30509,7 +31671,9 @@ func (o ProjectConnectorsHcaptchaArrayOutput) Index(i pulumi.IntInput) ProjectCo
 type ProjectConnectorsHibp struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 }
@@ -30528,7 +31692,9 @@ type ProjectConnectorsHibpInput interface {
 type ProjectConnectorsHibpArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 }
@@ -30589,6 +31755,11 @@ func (o ProjectConnectorsHibpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHibp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsHibpOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHibp) *string { return v.EngineId }).(pulumi.StringPtrOutput)
+}
+
 func (o ProjectConnectorsHibpOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHibp) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -30639,7 +31810,7 @@ type ProjectConnectorsHttp struct {
 	BaseUrl string `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
 	EngineId *string `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers map[string]string `pulumi:"headers"`
@@ -30698,7 +31869,7 @@ type ProjectConnectorsHttpArgs struct {
 	BaseUrl pulumi.StringInput `pulumi:"baseUrl"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
 	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// The headers to send with the request
 	Headers pulumi.StringMapInput `pulumi:"headers"`
@@ -30826,7 +31997,7 @@ func (o ProjectConnectorsHttpOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
 func (o ProjectConnectorsHttpOutput) EngineId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsHttp) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
@@ -30917,6 +32088,8 @@ type ProjectConnectorsHttpAuthentication struct {
 	Basic *ProjectConnectorsHttpAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsHttpAuthenticationInput is an input type that accepts ProjectConnectorsHttpAuthenticationArgs and ProjectConnectorsHttpAuthenticationOutput values.
@@ -30937,6 +32110,8 @@ type ProjectConnectorsHttpAuthenticationArgs struct {
 	Basic ProjectConnectorsHttpAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsHttpAuthenticationArgs) ElementType() reflect.Type {
@@ -31033,6 +32208,13 @@ func (o ProjectConnectorsHttpAuthenticationOutput) BearerToken() pulumi.StringPt
 	return o.ApplyT(func(v ProjectConnectorsHttpAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsHttpAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthentication) *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsHttpAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsHttpAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -31085,6 +32267,16 @@ func (o ProjectConnectorsHttpAuthenticationPtrOutput) BearerToken() pulumi.Strin
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsHttpAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthentication) *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsHttpAuthenticationApiKey struct {
@@ -31397,6 +32589,240 @@ func (o ProjectConnectorsHttpAuthenticationBasicPtrOutput) Username() pulumi.Str
 		}
 		return &v.Username
 	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string { return v.AuthStyle }).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) string { return v.AuthUrl }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) string { return v.ClientSecret }).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string { return v.Scopes }).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsHttpAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsHttpAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsHttpAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
 }
 
 type ProjectConnectorsHubspot struct {
@@ -33231,6 +34657,8 @@ type ProjectConnectorsOpentelemetryAuthentication struct {
 	Basic *ProjectConnectorsOpentelemetryAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsOpentelemetryAuthenticationInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationArgs and ProjectConnectorsOpentelemetryAuthenticationOutput values.
@@ -33251,6 +34679,8 @@ type ProjectConnectorsOpentelemetryAuthenticationArgs struct {
 	Basic ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsOpentelemetryAuthenticationArgs) ElementType() reflect.Type {
@@ -33349,6 +34779,13 @@ func (o ProjectConnectorsOpentelemetryAuthenticationOutput) BearerToken() pulumi
 	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsOpentelemetryAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsOpentelemetryAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsOpentelemetryAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -33401,6 +34838,16 @@ func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) BearerToken() pul
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsOpentelemetryAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthentication) *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsOpentelemetryAuthenticationApiKey struct {
@@ -33715,6 +35162,244 @@ func (o ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput) Username() p
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) string { return v.AuthUrl }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) string {
+		return v.ClientSecret
+	}).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string { return v.Scopes }).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
 type ProjectConnectorsPendo struct {
 	// Whether to enable streaming of audit events.
 	AuditEnabled *bool `pulumi:"auditEnabled"`
@@ -33999,6 +35684,8 @@ func (o ProjectConnectorsPendoAuditFilterArrayOutput) Index(i pulumi.IntInput) P
 type ProjectConnectorsPingDirectory struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
 	// PingDirectory's REST API host.
 	Host string  `pulumi:"host"`
 	Id   *string `pulumi:"id"`
@@ -34022,6 +35709,8 @@ type ProjectConnectorsPingDirectoryInput interface {
 type ProjectConnectorsPingDirectoryArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// PingDirectory's REST API host.
 	Host pulumi.StringInput    `pulumi:"host"`
 	Id   pulumi.StringPtrInput `pulumi:"id"`
@@ -34085,6 +35774,11 @@ func (o ProjectConnectorsPingDirectoryOutput) ToProjectConnectorsPingDirectoryOu
 // A description of what your connector is used for.
 func (o ProjectConnectorsPingDirectoryOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsPingDirectory) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsPingDirectoryOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsPingDirectory) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 // PingDirectory's REST API host.
@@ -34583,7 +36277,9 @@ type ProjectConnectorsRecaptchaEnterprise struct {
 	BotThreshold *float64 `pulumi:"botThreshold"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
@@ -34618,7 +36314,9 @@ type ProjectConnectorsRecaptchaEnterpriseArgs struct {
 	BotThreshold pulumi.Float64PtrInput `pulumi:"botThreshold"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Override the default assessment model. Note: Overriding assessment is intended for automated testing and should not be utilized in production environments.
@@ -34708,6 +36406,11 @@ func (o ProjectConnectorsRecaptchaEnterpriseOutput) BotThreshold() pulumi.Float6
 // A description of what your connector is used for.
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsRecaptchaEnterpriseOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsRecaptchaEnterprise) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsRecaptchaEnterpriseOutput) Id() pulumi.StringPtrOutput {
@@ -34918,7 +36621,9 @@ type ProjectConnectorsRekognition struct {
 	CollectionId string `pulumi:"collectionId"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The AWS secret access key
@@ -34943,7 +36648,9 @@ type ProjectConnectorsRekognitionArgs struct {
 	CollectionId pulumi.StringInput `pulumi:"collectionId"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The AWS secret access key
@@ -35014,6 +36721,11 @@ func (o ProjectConnectorsRekognitionOutput) CollectionId() pulumi.StringOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsRekognitionOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsRekognition) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsRekognitionOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsRekognition) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsRekognitionOutput) Id() pulumi.StringPtrOutput {
@@ -35189,7 +36901,9 @@ type ProjectConnectorsSalesforce struct {
 	ClientSecret string `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// REST API Version.
@@ -35216,7 +36930,9 @@ type ProjectConnectorsSalesforceArgs struct {
 	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// REST API Version.
@@ -35294,6 +37010,11 @@ func (o ProjectConnectorsSalesforceOutput) Description() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsSalesforceOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSalesforce) *string { return v.EngineId }).(pulumi.StringPtrOutput)
+}
+
 func (o ProjectConnectorsSalesforceOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforce) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -35337,7 +37058,9 @@ type ProjectConnectorsSalesforceMarketingCloud struct {
 	ClientSecret string `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// Space-separated list of data-access permissions for your connector.
@@ -35366,7 +37089,9 @@ type ProjectConnectorsSalesforceMarketingCloudArgs struct {
 	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Space-separated list of data-access permissions for your connector.
@@ -35444,6 +37169,11 @@ func (o ProjectConnectorsSalesforceMarketingCloudOutput) ClientSecret() pulumi.S
 // A description of what your connector is used for.
 func (o ProjectConnectorsSalesforceMarketingCloudOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSalesforceMarketingCloud) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsSalesforceMarketingCloudOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSalesforceMarketingCloud) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsSalesforceMarketingCloudOutput) Id() pulumi.StringPtrOutput {
@@ -35806,6 +37536,8 @@ type ProjectConnectorsScimAuthentication struct {
 	Basic *ProjectConnectorsScimAuthenticationBasic `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken *string `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials *ProjectConnectorsScimAuthenticationOauth2ClientCredentials `pulumi:"oauth2ClientCredentials"`
 }
 
 // ProjectConnectorsScimAuthenticationInput is an input type that accepts ProjectConnectorsScimAuthenticationArgs and ProjectConnectorsScimAuthenticationOutput values.
@@ -35826,6 +37558,8 @@ type ProjectConnectorsScimAuthenticationArgs struct {
 	Basic ProjectConnectorsScimAuthenticationBasicPtrInput `pulumi:"basic"`
 	// Bearer token for HTTP authentication.
 	BearerToken pulumi.StringPtrInput `pulumi:"bearerToken"`
+	// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+	Oauth2ClientCredentials ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput `pulumi:"oauth2ClientCredentials"`
 }
 
 func (ProjectConnectorsScimAuthenticationArgs) ElementType() reflect.Type {
@@ -35922,6 +37656,13 @@ func (o ProjectConnectorsScimAuthenticationOutput) BearerToken() pulumi.StringPt
 	return o.ApplyT(func(v ProjectConnectorsScimAuthentication) *string { return v.BearerToken }).(pulumi.StringPtrOutput)
 }
 
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsScimAuthenticationOutput) Oauth2ClientCredentials() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthentication) *ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
 type ProjectConnectorsScimAuthenticationPtrOutput struct{ *pulumi.OutputState }
 
 func (ProjectConnectorsScimAuthenticationPtrOutput) ElementType() reflect.Type {
@@ -35974,6 +37715,16 @@ func (o ProjectConnectorsScimAuthenticationPtrOutput) BearerToken() pulumi.Strin
 		}
 		return v.BearerToken
 	}).(pulumi.StringPtrOutput)
+}
+
+// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+func (o ProjectConnectorsScimAuthenticationPtrOutput) Oauth2ClientCredentials() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthentication) *ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+		if v == nil {
+			return nil
+		}
+		return v.Oauth2ClientCredentials
+	}).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput)
 }
 
 type ProjectConnectorsScimAuthenticationApiKey struct {
@@ -36286,6 +38037,240 @@ func (o ProjectConnectorsScimAuthenticationBasicPtrOutput) Username() pulumi.Str
 		}
 		return &v.Username
 	}).(pulumi.StringPtrOutput)
+}
+
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentials struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle *string `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl string `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId string `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret string `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes *string `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders map[string]string `pulumi:"tokenRequestHeaders"`
+}
+
+// ProjectConnectorsScimAuthenticationOauth2ClientCredentialsInput is an input type that accepts ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs and ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput values.
+// You can construct a concrete instance of `ProjectConnectorsScimAuthenticationOauth2ClientCredentialsInput` via:
+//
+//	ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs{...}
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentialsInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput
+	ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutputWithContext(context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput
+}
+
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs struct {
+	// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+	AuthStyle pulumi.StringPtrInput `pulumi:"authStyle"`
+	// The token endpoint URL used to request an access token.
+	AuthUrl pulumi.StringInput `pulumi:"authUrl"`
+	// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+	ClientSecret pulumi.StringInput `pulumi:"clientSecret"`
+	// A space-separated list of OAuth scopes to request when fetching the access token.
+	Scopes pulumi.StringPtrInput `pulumi:"scopes"`
+	// Additional headers to include in the token request sent to the token endpoint.
+	TokenRequestHeaders pulumi.StringMapInput `pulumi:"tokenRequestHeaders"`
+}
+
+func (ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsScimAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput {
+	return i.ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput)
+}
+
+func (i ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput).ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx)
+}
+
+// ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput is an input type that accepts ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs, ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtr and ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput values.
+// You can construct a concrete instance of `ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput` via:
+//
+//	        ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput interface {
+	pulumi.Input
+
+	ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput
+	ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput
+}
+
+type projectConnectorsScimAuthenticationOauth2ClientCredentialsPtrType ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs
+
+func ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtr(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput {
+	return (*projectConnectorsScimAuthenticationOauth2ClientCredentialsPtrType)(v)
+}
+
+func (*projectConnectorsScimAuthenticationOauth2ClientCredentialsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsScimAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (i *projectConnectorsScimAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return i.ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (i *projectConnectorsScimAuthenticationOauth2ClientCredentialsPtrType) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProjectConnectorsScimAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput {
+	return o
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(context.Background())
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+		return &v
+	}).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string { return v.AuthStyle }).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) AuthUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) string { return v.AuthUrl }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) ClientSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) string { return v.ClientSecret }).(pulumi.StringOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string { return v.Scopes }).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ProjectConnectorsScimAuthenticationOauth2ClientCredentials) map[string]string {
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
+}
+
+type ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput struct{ *pulumi.OutputState }
+
+func (ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProjectConnectorsScimAuthenticationOauth2ClientCredentials)(nil)).Elem()
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) ToProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutputWithContext(ctx context.Context) ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput {
+	return o
+}
+
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) Elem() ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+		if v != nil {
+			return *v
+		}
+		var ret ProjectConnectorsScimAuthenticationOauth2ClientCredentials
+		return ret
+	}).(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput)
+}
+
+// How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) AuthStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AuthStyle
+	}).(pulumi.StringPtrOutput)
+}
+
+// The token endpoint URL used to request an access token.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) AuthUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AuthUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client ID used to authenticate against the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The OAuth 2.0 client secret used to authenticate against the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) ClientSecret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientSecret
+	}).(pulumi.StringPtrOutput)
+}
+
+// A space-separated list of OAuth scopes to request when fetching the access token.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) Scopes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scopes
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional headers to include in the token request sent to the token endpoint.
+func (o ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput) TokenRequestHeaders() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *ProjectConnectorsScimAuthenticationOauth2ClientCredentials) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.TokenRequestHeaders
+	}).(pulumi.StringMapOutput)
 }
 
 type ProjectConnectorsSe struct {
@@ -36909,7 +38894,9 @@ func (o ProjectConnectorsSendgridSenderOutput) Name() pulumi.StringPtrOutput {
 type ProjectConnectorsSlack struct {
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// The OAuth token for Slack's Bot User, used to authenticate API requests.
@@ -36930,7 +38917,9 @@ type ProjectConnectorsSlackInput interface {
 type ProjectConnectorsSlackArgs struct {
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The OAuth token for Slack's Bot User, used to authenticate API requests.
@@ -36991,6 +38980,11 @@ func (o ProjectConnectorsSlackOutput) ToProjectConnectorsSlackOutputWithContext(
 // A description of what your connector is used for.
 func (o ProjectConnectorsSlackOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSlack) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsSlackOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSlack) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsSlackOutput) Id() pulumi.StringPtrOutput {
@@ -37508,14 +39502,18 @@ func (o ProjectConnectorsSmtpServerOutput) Port() pulumi.IntPtrOutput {
 
 type ProjectConnectorsSn struct {
 	// AWS Access key ID.
-	AccessKeyId string `pulumi:"accessKeyId"`
+	AccessKeyId *string `pulumi:"accessKeyId"`
+	// The authentication type to use.
+	AuthType *string `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	// An optional endpoint URL (hostname only or fully qualified URI).
 	Endpoint *string `pulumi:"endpoint"`
 	// The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
 	EntityId *string `pulumi:"entityId"`
-	Id       *string `pulumi:"id"`
+	// The external ID to use when assuming the role.
+	ExternalId *string `pulumi:"externalId"`
+	Id         *string `pulumi:"id"`
 	// A custom name for your connector.
 	Name string `pulumi:"name"`
 	// Use the `originationNumber` attribute instead.
@@ -37526,8 +39524,10 @@ type ProjectConnectorsSn struct {
 	OriginationNumber *string `pulumi:"originationNumber"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region string `pulumi:"region"`
+	// The Amazon Resource Name (ARN) of the role to assume.
+	RoleArn *string `pulumi:"roleArn"`
 	// AWS Secret Access Key.
-	Secret string `pulumi:"secret"`
+	Secret *string `pulumi:"secret"`
 	// The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
 	SenderId *string `pulumi:"senderId"`
 	// The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
@@ -37547,14 +39547,18 @@ type ProjectConnectorsSnInput interface {
 
 type ProjectConnectorsSnArgs struct {
 	// AWS Access key ID.
-	AccessKeyId pulumi.StringInput `pulumi:"accessKeyId"`
+	AccessKeyId pulumi.StringPtrInput `pulumi:"accessKeyId"`
+	// The authentication type to use.
+	AuthType pulumi.StringPtrInput `pulumi:"authType"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// An optional endpoint URL (hostname only or fully qualified URI).
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
 	EntityId pulumi.StringPtrInput `pulumi:"entityId"`
-	Id       pulumi.StringPtrInput `pulumi:"id"`
+	// The external ID to use when assuming the role.
+	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
+	Id         pulumi.StringPtrInput `pulumi:"id"`
 	// A custom name for your connector.
 	Name pulumi.StringInput `pulumi:"name"`
 	// Use the `originationNumber` attribute instead.
@@ -37565,8 +39569,10 @@ type ProjectConnectorsSnArgs struct {
 	OriginationNumber pulumi.StringPtrInput `pulumi:"originationNumber"`
 	// AWS region to send requests to (e.g. `us-west-2`).
 	Region pulumi.StringInput `pulumi:"region"`
+	// The Amazon Resource Name (ARN) of the role to assume.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
 	// AWS Secret Access Key.
-	Secret pulumi.StringInput `pulumi:"secret"`
+	Secret pulumi.StringPtrInput `pulumi:"secret"`
 	// The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
 	SenderId pulumi.StringPtrInput `pulumi:"senderId"`
 	// The template for sending text messages to recipients in India. The template ID must be associated with the sender ID.
@@ -37625,8 +39631,13 @@ func (o ProjectConnectorsSnOutput) ToProjectConnectorsSnOutputWithContext(ctx co
 }
 
 // AWS Access key ID.
-func (o ProjectConnectorsSnOutput) AccessKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsSn) string { return v.AccessKeyId }).(pulumi.StringOutput)
+func (o ProjectConnectorsSnOutput) AccessKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.AccessKeyId }).(pulumi.StringPtrOutput)
+}
+
+// The authentication type to use.
+func (o ProjectConnectorsSnOutput) AuthType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.AuthType }).(pulumi.StringPtrOutput)
 }
 
 // A description of what your connector is used for.
@@ -37642,6 +39653,11 @@ func (o ProjectConnectorsSnOutput) Endpoint() pulumi.StringPtrOutput {
 // The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
 func (o ProjectConnectorsSnOutput) EntityId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.EntityId }).(pulumi.StringPtrOutput)
+}
+
+// The external ID to use when assuming the role.
+func (o ProjectConnectorsSnOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsSnOutput) Id() pulumi.StringPtrOutput {
@@ -37670,9 +39686,14 @@ func (o ProjectConnectorsSnOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v ProjectConnectorsSn) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// The Amazon Resource Name (ARN) of the role to assume.
+func (o ProjectConnectorsSnOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
 // AWS Secret Access Key.
-func (o ProjectConnectorsSnOutput) Secret() pulumi.StringOutput {
-	return o.ApplyT(func(v ProjectConnectorsSn) string { return v.Secret }).(pulumi.StringOutput)
+func (o ProjectConnectorsSnOutput) Secret() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSn) *string { return v.Secret }).(pulumi.StringPtrOutput)
 }
 
 // The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
@@ -37718,7 +39739,9 @@ type ProjectConnectorsSnowflake struct {
 	Database *string `pulumi:"database"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
-	Id          *string `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
+	Id       *string `pulumi:"id"`
 	// Whether to mask personally identifiable information in the logs.
 	MaskPii *bool `pulumi:"maskPii"`
 	// The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
@@ -37759,7 +39782,9 @@ type ProjectConnectorsSnowflakeArgs struct {
 	Database pulumi.StringPtrInput `pulumi:"database"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Id          pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
 	// Whether to mask personally identifiable information in the logs.
 	MaskPii pulumi.BoolPtrInput `pulumi:"maskPii"`
 	// The minimum time between writes to Snowflake, in minutes. When set, events are accumulated and written in a single batch at most once per interval, which lets the warehouse auto-suspend between writes and reduces cost. Set to 0 (or leave empty) to write events according to the default Descope cycle.
@@ -37855,6 +39880,11 @@ func (o ProjectConnectorsSnowflakeOutput) Database() pulumi.StringPtrOutput {
 // A description of what your connector is used for.
 func (o ProjectConnectorsSnowflakeOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSnowflake) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsSnowflakeOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSnowflake) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 func (o ProjectConnectorsSnowflakeOutput) Id() pulumi.StringPtrOutput {
@@ -38038,6 +40068,8 @@ type ProjectConnectorsSplunk struct {
 	AuditFilters []ProjectConnectorsSplunkAuditFilter `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId *string `pulumi:"engineId"`
 	// An HTTP Event Collector token configured on your Splunk project.
 	HecToken string `pulumi:"hecToken"`
 	// The URL to be used accessing your Splunk system, including the appropriate port
@@ -38069,6 +40101,8 @@ type ProjectConnectorsSplunkArgs struct {
 	AuditFilters ProjectConnectorsSplunkAuditFilterArrayInput `pulumi:"auditFilters"`
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+	EngineId pulumi.StringPtrInput `pulumi:"engineId"`
 	// An HTTP Event Collector token configured on your Splunk project.
 	HecToken pulumi.StringInput `pulumi:"hecToken"`
 	// The URL to be used accessing your Splunk system, including the appropriate port
@@ -38146,6 +40180,11 @@ func (o ProjectConnectorsSplunkOutput) AuditFilters() ProjectConnectorsSplunkAud
 // A description of what your connector is used for.
 func (o ProjectConnectorsSplunkOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectConnectorsSplunk) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+func (o ProjectConnectorsSplunkOutput) EngineId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProjectConnectorsSplunk) *string { return v.EngineId }).(pulumi.StringPtrOutput)
 }
 
 // An HTTP Event Collector token configured on your Splunk project.
@@ -41658,6 +43697,8 @@ type ProjectProjectSettings struct {
 	AccessKeyJwtTemplate *string `pulumi:"accessKeyJwtTemplate"`
 	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
 	AccessKeySessionTokenExpiration *string `pulumi:"accessKeySessionTokenExpiration"`
+	// When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+	AllowAuthHostingIframeEmbedding *bool `pulumi:"allowAuthHostingIframeEmbedding"`
 	// The URL which your application resides on.
 	AppUrl *string `pulumi:"appUrl"`
 	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
@@ -41722,6 +43763,8 @@ type ProjectProjectSettingsArgs struct {
 	AccessKeyJwtTemplate pulumi.StringPtrInput `pulumi:"accessKeyJwtTemplate"`
 	// The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
 	AccessKeySessionTokenExpiration pulumi.StringPtrInput `pulumi:"accessKeySessionTokenExpiration"`
+	// When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+	AllowAuthHostingIframeEmbedding pulumi.BoolPtrInput `pulumi:"allowAuthHostingIframeEmbedding"`
 	// The URL which your application resides on.
 	AppUrl pulumi.StringPtrInput `pulumi:"appUrl"`
 	// The list of approved domains that are allowed for redirect and verification URLs for different authentication methods.
@@ -41855,6 +43898,11 @@ func (o ProjectProjectSettingsOutput) AccessKeyJwtTemplate() pulumi.StringPtrOut
 // The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
 func (o ProjectProjectSettingsOutput) AccessKeySessionTokenExpiration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProjectProjectSettings) *string { return v.AccessKeySessionTokenExpiration }).(pulumi.StringPtrOutput)
+}
+
+// When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+func (o ProjectProjectSettingsOutput) AllowAuthHostingIframeEmbedding() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProjectProjectSettings) *bool { return v.AllowAuthHostingIframeEmbedding }).(pulumi.BoolPtrOutput)
 }
 
 // The URL which your application resides on.
@@ -42014,6 +44062,16 @@ func (o ProjectProjectSettingsPtrOutput) AccessKeySessionTokenExpiration() pulum
 		}
 		return v.AccessKeySessionTokenExpiration
 	}).(pulumi.StringPtrOutput)
+}
+
+// When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+func (o ProjectProjectSettingsPtrOutput) AllowAuthHostingIframeEmbedding() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProjectProjectSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AllowAuthHostingIframeEmbedding
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The URL which your application resides on.
@@ -43114,6 +45172,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsS3Input)(nil)).Elem(), ProjectConnectorsAwsS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsS3ArrayInput)(nil)).Elem(), ProjectConnectorsAwsS3Array{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsAwsS3AuditFilterInput)(nil)).Elem(), ProjectConnectorsAwsS3AuditFilterArgs{})
@@ -43156,6 +45216,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsExternalTokenHttpAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsExternalTokenHttpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsExternalTokenHttpAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintInput)(nil)).Elem(), ProjectConnectorsFingerprintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintArrayInput)(nil)).Elem(), ProjectConnectorsFingerprintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsFingerprintDescopeInput)(nil)).Elem(), ProjectConnectorsFingerprintDescopeArgs{})
@@ -43172,6 +45234,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsGenericEmailGatewayAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayArrayInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationArgs{})
@@ -43180,6 +45244,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingArrayInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsGoogleCloudLoggingAuditFilterInput)(nil)).Elem(), ProjectConnectorsGoogleCloudLoggingAuditFilterArgs{})
@@ -43204,6 +45270,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotInput)(nil)).Elem(), ProjectConnectorsHubspotArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsHubspotArrayInput)(nil)).Elem(), ProjectConnectorsHubspotArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsIncodeInput)(nil)).Elem(), ProjectConnectorsIncodeArgs{})
@@ -43234,6 +45302,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPendoInput)(nil)).Elem(), ProjectConnectorsPendoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPendoArrayInput)(nil)).Elem(), ProjectConnectorsPendoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsPendoAuditFilterInput)(nil)).Elem(), ProjectConnectorsPendoAuditFilterArgs{})
@@ -43268,6 +45338,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsScimAuthenticationApiKeyPtrInput)(nil)).Elem(), ProjectConnectorsScimAuthenticationApiKeyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsScimAuthenticationBasicInput)(nil)).Elem(), ProjectConnectorsScimAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsScimAuthenticationBasicPtrInput)(nil)).Elem(), ProjectConnectorsScimAuthenticationBasicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsScimAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), ProjectConnectorsScimAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSeInput)(nil)).Elem(), ProjectConnectorsSeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSeArrayInput)(nil)).Elem(), ProjectConnectorsSeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectConnectorsSeSenderInput)(nil)).Elem(), ProjectConnectorsSeSenderArgs{})
@@ -43586,6 +45658,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsS3Output{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsS3ArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsAwsS3AuditFilterOutput{})
@@ -43628,6 +45702,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsExternalTokenHttpAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsExternalTokenHttpAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsExternalTokenHttpAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsFingerprintOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsFingerprintArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsFingerprintDescopeOutput{})
@@ -43644,6 +45720,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsGenericEmailGatewayAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericEmailGatewayAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericEmailGatewayAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationOutput{})
@@ -43652,6 +45730,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsGoogleCloudLoggingAuditFilterOutput{})
@@ -43676,6 +45756,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsHttpAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsHubspotArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsIncodeOutput{})
@@ -43706,6 +45788,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsPendoOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsPendoArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsPendoAuditFilterOutput{})
@@ -43740,6 +45824,8 @@ func init() {
 	pulumi.RegisterOutputType(ProjectConnectorsScimAuthenticationApiKeyPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsScimAuthenticationBasicOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsScimAuthenticationBasicPtrOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsOutput{})
+	pulumi.RegisterOutputType(ProjectConnectorsScimAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSeOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSeArrayOutput{})
 	pulumi.RegisterOutputType(ProjectConnectorsSeSenderOutput{})

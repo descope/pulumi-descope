@@ -41,6 +41,12 @@ namespace Descope.Pulumi.Descope.Inputs
             }
         }
 
+        /// <summary>
+        /// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        /// </summary>
+        [Input("oauth2ClientCredentials")]
+        public Input<Inputs.ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentialsGetArgs>? Oauth2ClientCredentials { get; set; }
+
         public ProjectConnectorsAuditWebhookAuthenticationGetArgs()
         {
         }

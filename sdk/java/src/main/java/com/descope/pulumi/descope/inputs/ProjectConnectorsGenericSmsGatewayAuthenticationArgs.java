@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.inputs;
 
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayAuthenticationApiKeyArgs;
 import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayAuthenticationBasicArgs;
+import com.descope.pulumi.descope.inputs.ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.String;
@@ -62,12 +63,28 @@ public final class ProjectConnectorsGenericSmsGatewayAuthenticationArgs extends 
         return Optional.ofNullable(this.bearerToken);
     }
 
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     * 
+     */
+    @Import(name="oauth2ClientCredentials")
+    private @Nullable Output<ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs> oauth2ClientCredentials;
+
+    /**
+     * @return OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     * 
+     */
+    public Optional<Output<ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs>> oauth2ClientCredentials() {
+        return Optional.ofNullable(this.oauth2ClientCredentials);
+    }
+
     private ProjectConnectorsGenericSmsGatewayAuthenticationArgs() {}
 
     private ProjectConnectorsGenericSmsGatewayAuthenticationArgs(ProjectConnectorsGenericSmsGatewayAuthenticationArgs $) {
         this.apiKey = $.apiKey;
         this.basic = $.basic;
         this.bearerToken = $.bearerToken;
+        this.oauth2ClientCredentials = $.oauth2ClientCredentials;
     }
 
     public static Builder builder() {
@@ -149,6 +166,27 @@ public final class ProjectConnectorsGenericSmsGatewayAuthenticationArgs extends 
          */
         public Builder bearerToken(String bearerToken) {
             return bearerToken(Output.of(bearerToken));
+        }
+
+        /**
+         * @param oauth2ClientCredentials OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder oauth2ClientCredentials(@Nullable Output<ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs> oauth2ClientCredentials) {
+            $.oauth2ClientCredentials = oauth2ClientCredentials;
+            return this;
+        }
+
+        /**
+         * @param oauth2ClientCredentials OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder oauth2ClientCredentials(ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentialsArgs oauth2ClientCredentials) {
+            return oauth2ClientCredentials(Output.of(oauth2ClientCredentials));
         }
 
         public ProjectConnectorsGenericSmsGatewayAuthenticationArgs build() {

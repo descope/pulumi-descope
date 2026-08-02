@@ -30,6 +30,11 @@ public final class ProjectConnectorsGoogleCloudLogging {
      * 
      */
     private @Nullable String description;
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -69,6 +74,13 @@ public final class ProjectConnectorsGoogleCloudLogging {
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
     }
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
@@ -106,6 +118,7 @@ public final class ProjectConnectorsGoogleCloudLogging {
         private @Nullable Boolean auditEnabled;
         private @Nullable List<ProjectConnectorsGoogleCloudLoggingAuditFilter> auditFilters;
         private @Nullable String description;
+        private @Nullable String engineId;
         private @Nullable String id;
         private String name;
         private String serviceAccountKey;
@@ -116,6 +129,7 @@ public final class ProjectConnectorsGoogleCloudLogging {
     	      this.auditEnabled = defaults.auditEnabled;
     	      this.auditFilters = defaults.auditFilters;
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.serviceAccountKey = defaults.serviceAccountKey;
@@ -141,6 +155,12 @@ public final class ProjectConnectorsGoogleCloudLogging {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -176,6 +196,7 @@ public final class ProjectConnectorsGoogleCloudLogging {
             _resultValue.auditEnabled = auditEnabled;
             _resultValue.auditFilters = auditFilters;
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.serviceAccountKey = serviceAccountKey;

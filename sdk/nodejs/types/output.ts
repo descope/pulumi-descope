@@ -2650,6 +2650,10 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      */
     hideDomains: boolean;
     /**
+     * Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     */
+    hideFgaMapping: boolean;
+    /**
      * Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
      */
     hideGroupsMapping: boolean;
@@ -2661,6 +2665,10 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      * Setting this to `true` will hide the OIDC configuration option.
      */
     hideOidc: boolean;
+    /**
+     * Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     */
+    hideRoleMapping: boolean;
     /**
      * Setting this to `true` will hide the SAML configuration option.
      */
@@ -3154,6 +3162,10 @@ export interface ProjectConnectorsAuditWebhook {
      */
     description: string;
     /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
+    /**
      * The headers to send with the request
      */
     headers: {[key: string]: string};
@@ -3200,6 +3212,10 @@ export interface ProjectConnectorsAuditWebhookAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsAuditWebhookAuthenticationApiKey {
@@ -3222,6 +3238,33 @@ export interface ProjectConnectorsAuditWebhookAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsAwsS3 {
@@ -3249,6 +3292,10 @@ export interface ProjectConnectorsAwsS3 {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     /**
      * The external ID to use when assuming the role.
      */
@@ -3309,6 +3356,10 @@ export interface ProjectConnectorsAwsSesEmailValidation {
      */
     description: string;
     /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
+    /**
      * The external ID to use when assuming the role.
      */
     externalId: string;
@@ -3344,6 +3395,10 @@ export interface ProjectConnectorsAwsTranslate {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -3558,6 +3613,10 @@ export interface ProjectConnectorsDatadog {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * Whether to mask personally identifiable information in the logs.
@@ -3773,6 +3832,10 @@ export interface ProjectConnectorsExternalTokenHttpAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsExternalTokenHttpAuthenticationApiKey {
@@ -3795,6 +3858,33 @@ export interface ProjectConnectorsExternalTokenHttpAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsFingerprint {
@@ -3850,6 +3940,10 @@ export interface ProjectConnectorsFirebaseAdmin {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -3950,6 +4044,10 @@ export interface ProjectConnectorsGenericEmailGatewayAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsGenericEmailGatewayAuthenticationApiKey {
@@ -3972,6 +4070,33 @@ export interface ProjectConnectorsGenericEmailGatewayAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsGenericSmsGateway {
@@ -4027,6 +4152,10 @@ export interface ProjectConnectorsGenericSmsGatewayAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsGenericSmsGatewayAuthenticationApiKey {
@@ -4051,6 +4180,33 @@ export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
     username: string;
 }
 
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
+}
+
 export interface ProjectConnectorsGoogleCloudLogging {
     /**
      * Whether to enable streaming of audit events.
@@ -4064,6 +4220,10 @@ export interface ProjectConnectorsGoogleCloudLogging {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -4099,6 +4259,10 @@ export interface ProjectConnectorsGoogleCloudTranslation {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -4230,6 +4394,10 @@ export interface ProjectConnectorsHibp {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -4279,7 +4447,7 @@ export interface ProjectConnectorsHttp {
      */
     description: string;
     /**
-     * The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
      */
     engineId: string;
     /**
@@ -4342,6 +4510,10 @@ export interface ProjectConnectorsHttpAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsHttpAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsHttpAuthenticationApiKey {
@@ -4364,6 +4536,33 @@ export interface ProjectConnectorsHttpAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsHubspot {
@@ -4740,6 +4939,10 @@ export interface ProjectConnectorsOpentelemetryAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsOpentelemetryAuthenticationApiKey {
@@ -4762,6 +4965,33 @@ export interface ProjectConnectorsOpentelemetryAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsPendo {
@@ -4820,6 +5050,10 @@ export interface ProjectConnectorsPingDirectory {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     /**
      * PingDirectory's REST API host.
      */
@@ -4944,6 +5178,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5008,6 +5246,10 @@ export interface ProjectConnectorsRekognition {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5056,6 +5298,10 @@ export interface ProjectConnectorsSalesforce {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5084,6 +5330,10 @@ export interface ProjectConnectorsSalesforceMarketingCloud {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5176,6 +5426,10 @@ export interface ProjectConnectorsScimAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken: string;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials: outputs.ProjectConnectorsScimAuthenticationOauth2ClientCredentials;
 }
 
 export interface ProjectConnectorsScimAuthenticationApiKey {
@@ -5198,6 +5452,33 @@ export interface ProjectConnectorsScimAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: string;
+}
+
+export interface ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle: string;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: string;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: string;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: string;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes: string;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders: {[key: string]: string};
 }
 
 export interface ProjectConnectorsSe {
@@ -5318,6 +5599,10 @@ export interface ProjectConnectorsSlack {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5424,6 +5709,10 @@ export interface ProjectConnectorsSn {
      */
     accessKeyId: string;
     /**
+     * The authentication type to use.
+     */
+    authType: string;
+    /**
      * A description of what your connector is used for.
      */
     description: string;
@@ -5435,6 +5724,10 @@ export interface ProjectConnectorsSn {
      * The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
      */
     entityId: string;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    externalId: string;
     id: string;
     /**
      * A custom name for your connector.
@@ -5454,6 +5747,10 @@ export interface ProjectConnectorsSn {
      * AWS region to send requests to (e.g. `us-west-2`).
      */
     region: string;
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    roleArn: string;
     /**
      * AWS Secret Access Key.
      */
@@ -5493,6 +5790,10 @@ export interface ProjectConnectorsSnowflake {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     id: string;
     /**
      * Whether to mask personally identifiable information in the logs.
@@ -5552,6 +5853,10 @@ export interface ProjectConnectorsSplunk {
      * A description of what your connector is used for.
      */
     description: string;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId: string;
     /**
      * An HTTP Event Collector token configured on your Splunk project.
      */
@@ -6161,6 +6466,10 @@ export interface ProjectProjectSettings {
      * The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
      */
     accessKeySessionTokenExpiration: string;
+    /**
+     * When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     */
+    allowAuthHostingIframeEmbedding: boolean;
     /**
      * The URL which your application resides on.
      */

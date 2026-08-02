@@ -76,6 +76,21 @@ public final class ProjectConnectorsSalesforceMarketingCloudArgs extends com.pul
         return Optional.ofNullable(this.description);
     }
 
+    /**
+     * The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    @Import(name="engineId")
+    private @Nullable Output<String> engineId;
+
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<Output<String>> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+
     @Import(name="id")
     private @Nullable Output<String> id;
 
@@ -135,6 +150,7 @@ public final class ProjectConnectorsSalesforceMarketingCloudArgs extends com.pul
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.description = $.description;
+        this.engineId = $.engineId;
         this.id = $.id;
         this.name = $.name;
         this.scope = $.scope;
@@ -241,6 +257,27 @@ public final class ProjectConnectorsSalesforceMarketingCloudArgs extends com.pul
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(@Nullable Output<String> engineId) {
+            $.engineId = engineId;
+            return this;
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(String engineId) {
+            return engineId(Output.of(engineId));
         }
 
         public Builder id(@Nullable Output<String> id) {

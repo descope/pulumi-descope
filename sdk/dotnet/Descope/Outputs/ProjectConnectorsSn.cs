@@ -17,7 +17,11 @@ namespace Descope.Pulumi.Descope.Outputs
         /// <summary>
         /// AWS Access key ID.
         /// </summary>
-        public readonly string AccessKeyId;
+        public readonly string? AccessKeyId;
+        /// <summary>
+        /// The authentication type to use.
+        /// </summary>
+        public readonly string? AuthType;
         /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
@@ -30,6 +34,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
         /// </summary>
         public readonly string? EntityId;
+        /// <summary>
+        /// The external ID to use when assuming the role.
+        /// </summary>
+        public readonly string? ExternalId;
         public readonly string? Id;
         /// <summary>
         /// A custom name for your connector.
@@ -48,9 +56,13 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string Region;
         /// <summary>
+        /// The Amazon Resource Name (ARN) of the role to assume.
+        /// </summary>
+        public readonly string? RoleArn;
+        /// <summary>
         /// AWS Secret Access Key.
         /// </summary>
-        public readonly string Secret;
+        public readonly string? Secret;
         /// <summary>
         /// The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
         /// </summary>
@@ -62,13 +74,17 @@ namespace Descope.Pulumi.Descope.Outputs
 
         [OutputConstructor]
         private ProjectConnectorsSn(
-            string accessKeyId,
+            string? accessKeyId,
+
+            string? authType,
 
             string? description,
 
             string? endpoint,
 
             string? entityId,
+
+            string? externalId,
 
             string? id,
 
@@ -80,21 +96,26 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string region,
 
-            string secret,
+            string? roleArn,
+
+            string? secret,
 
             string? senderId,
 
             string? templateId)
         {
             AccessKeyId = accessKeyId;
+            AuthType = authType;
             Description = description;
             Endpoint = endpoint;
             EntityId = entityId;
+            ExternalId = externalId;
             Id = id;
             Name = name;
             OrganizationNumber = organizationNumber;
             OriginationNumber = originationNumber;
             Region = region;
+            RoleArn = roleArn;
             Secret = secret;
             SenderId = senderId;
             TemplateId = templateId;

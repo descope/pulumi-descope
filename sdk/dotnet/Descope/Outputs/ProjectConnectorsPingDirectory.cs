@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
+        /// <summary>
         /// PingDirectory's REST API host.
         /// </summary>
         public readonly string Host;
@@ -36,6 +40,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectConnectorsPingDirectory(
             string? description,
 
+            string? engineId,
+
             string host,
 
             string? id,
@@ -45,6 +51,7 @@ namespace Descope.Pulumi.Descope.Outputs
             double port)
         {
             Description = description;
+            EngineId = engineId;
             Host = host;
             Id = id;
             Name = name;

@@ -23,6 +23,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
      */
     private @Nullable Boolean hideDomains;
     /**
+     * @return Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    private @Nullable Boolean hideFgaMapping;
+    /**
      * @return Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
      * 
      */
@@ -37,6 +42,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
      * 
      */
     private @Nullable Boolean hideOidc;
+    /**
+     * @return Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    private @Nullable Boolean hideRoleMapping;
     /**
      * @return Setting this to `true` will hide the SAML configuration option.
      * 
@@ -79,6 +89,13 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         return Optional.ofNullable(this.hideDomains);
     }
     /**
+     * @return Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    public Optional<Boolean> hideFgaMapping() {
+        return Optional.ofNullable(this.hideFgaMapping);
+    }
+    /**
      * @return Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
      * 
      */
@@ -98,6 +115,13 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
      */
     public Optional<Boolean> hideOidc() {
         return Optional.ofNullable(this.hideOidc);
+    }
+    /**
+     * @return Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    public Optional<Boolean> hideRoleMapping() {
+        return Optional.ofNullable(this.hideRoleMapping);
     }
     /**
      * @return Setting this to `true` will hide the SAML configuration option.
@@ -146,9 +170,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
     public static final class Builder {
         private @Nullable Boolean forceDomainVerification;
         private @Nullable Boolean hideDomains;
+        private @Nullable Boolean hideFgaMapping;
         private @Nullable Boolean hideGroupsMapping;
         private @Nullable Boolean hideJitGuide;
         private @Nullable Boolean hideOidc;
+        private @Nullable Boolean hideRoleMapping;
         private @Nullable Boolean hideSaml;
         private @Nullable Boolean hideScim;
         private @Nullable Boolean showHelpContact;
@@ -159,9 +185,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
     	      Objects.requireNonNull(defaults);
     	      this.forceDomainVerification = defaults.forceDomainVerification;
     	      this.hideDomains = defaults.hideDomains;
+    	      this.hideFgaMapping = defaults.hideFgaMapping;
     	      this.hideGroupsMapping = defaults.hideGroupsMapping;
     	      this.hideJitGuide = defaults.hideJitGuide;
     	      this.hideOidc = defaults.hideOidc;
+    	      this.hideRoleMapping = defaults.hideRoleMapping;
     	      this.hideSaml = defaults.hideSaml;
     	      this.hideScim = defaults.hideScim;
     	      this.showHelpContact = defaults.showHelpContact;
@@ -182,6 +210,12 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
             return this;
         }
         @CustomType.Setter
+        public Builder hideFgaMapping(@Nullable Boolean hideFgaMapping) {
+
+            this.hideFgaMapping = hideFgaMapping;
+            return this;
+        }
+        @CustomType.Setter
         public Builder hideGroupsMapping(@Nullable Boolean hideGroupsMapping) {
 
             this.hideGroupsMapping = hideGroupsMapping;
@@ -197,6 +231,12 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
         public Builder hideOidc(@Nullable Boolean hideOidc) {
 
             this.hideOidc = hideOidc;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder hideRoleMapping(@Nullable Boolean hideRoleMapping) {
+
+            this.hideRoleMapping = hideRoleMapping;
             return this;
         }
         @CustomType.Setter
@@ -233,9 +273,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettings {
             final var _resultValue = new ProjectAuthenticationSsoSsoSuiteSettings();
             _resultValue.forceDomainVerification = forceDomainVerification;
             _resultValue.hideDomains = hideDomains;
+            _resultValue.hideFgaMapping = hideFgaMapping;
             _resultValue.hideGroupsMapping = hideGroupsMapping;
             _resultValue.hideJitGuide = hideJitGuide;
             _resultValue.hideOidc = hideOidc;
+            _resultValue.hideRoleMapping = hideRoleMapping;
             _resultValue.hideSaml = hideSaml;
             _resultValue.hideScim = hideScim;
             _resultValue.showHelpContact = showHelpContact;

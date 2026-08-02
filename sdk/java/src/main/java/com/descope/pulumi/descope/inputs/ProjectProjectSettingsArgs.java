@@ -49,6 +49,21 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     }
 
     /**
+     * When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     * 
+     */
+    @Import(name="allowAuthHostingIframeEmbedding")
+    private @Nullable Output<Boolean> allowAuthHostingIframeEmbedding;
+
+    /**
+     * @return When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     * 
+     */
+    public Optional<Output<Boolean>> allowAuthHostingIframeEmbedding() {
+        return Optional.ofNullable(this.allowAuthHostingIframeEmbedding);
+    }
+
+    /**
      * The URL which your application resides on.
      * 
      */
@@ -398,6 +413,7 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
     private ProjectProjectSettingsArgs(ProjectProjectSettingsArgs $) {
         this.accessKeyJwtTemplate = $.accessKeyJwtTemplate;
         this.accessKeySessionTokenExpiration = $.accessKeySessionTokenExpiration;
+        this.allowAuthHostingIframeEmbedding = $.allowAuthHostingIframeEmbedding;
         this.appUrl = $.appUrl;
         this.approvedDomains = $.approvedDomains;
         this.customDomain = $.customDomain;
@@ -481,6 +497,27 @@ public final class ProjectProjectSettingsArgs extends com.pulumi.resources.Resou
          */
         public Builder accessKeySessionTokenExpiration(String accessKeySessionTokenExpiration) {
             return accessKeySessionTokenExpiration(Output.of(accessKeySessionTokenExpiration));
+        }
+
+        /**
+         * @param allowAuthHostingIframeEmbedding When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowAuthHostingIframeEmbedding(@Nullable Output<Boolean> allowAuthHostingIframeEmbedding) {
+            $.allowAuthHostingIframeEmbedding = allowAuthHostingIframeEmbedding;
+            return this;
+        }
+
+        /**
+         * @param allowAuthHostingIframeEmbedding When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowAuthHostingIframeEmbedding(Boolean allowAuthHostingIframeEmbedding) {
+            return allowAuthHostingIframeEmbedding(Output.of(allowAuthHostingIframeEmbedding));
         }
 
         /**

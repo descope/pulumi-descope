@@ -65,6 +65,21 @@ public final class ProjectConnectorsSplunkArgs extends com.pulumi.resources.Reso
     }
 
     /**
+     * The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    @Import(name="engineId")
+    private @Nullable Output<String> engineId;
+
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<Output<String>> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+
+    /**
      * An HTTP Event Collector token configured on your Splunk project.
      * 
      */
@@ -152,6 +167,7 @@ public final class ProjectConnectorsSplunkArgs extends com.pulumi.resources.Reso
         this.auditEnabled = $.auditEnabled;
         this.auditFilters = $.auditFilters;
         this.description = $.description;
+        this.engineId = $.engineId;
         this.hecToken = $.hecToken;
         this.hecUrl = $.hecUrl;
         this.id = $.id;
@@ -249,6 +265,27 @@ public final class ProjectConnectorsSplunkArgs extends com.pulumi.resources.Reso
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(@Nullable Output<String> engineId) {
+            $.engineId = engineId;
+            return this;
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(String engineId) {
+            return engineId(Output.of(engineId));
         }
 
         /**

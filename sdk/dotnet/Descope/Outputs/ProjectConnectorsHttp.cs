@@ -55,7 +55,7 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
         /// </summary>
         public readonly string? EngineId;
         /// <summary>

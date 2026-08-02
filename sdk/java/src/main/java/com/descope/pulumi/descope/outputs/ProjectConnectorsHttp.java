@@ -67,7 +67,7 @@ public final class ProjectConnectorsHttp {
      */
     private @Nullable String description;
     /**
-     * @return The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
      * 
      */
     private @Nullable String engineId;
@@ -200,7 +200,7 @@ public final class ProjectConnectorsHttp {
         return Optional.ofNullable(this.description);
     }
     /**
-     * @return The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
      * 
      */
     public Optional<String> engineId() {
