@@ -33,6 +33,8 @@ type InboundApp struct {
 	Description pulumi.StringOutput `pulumi:"description"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolOutput `pulumi:"forceAddAllAuthorizationInfo"`
+	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+	ForceDpop pulumi.BoolOutput `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolOutput `pulumi:"forcePkce"`
 	// The Flow Hosting URL.
@@ -109,6 +111,8 @@ type inboundAppState struct {
 	Description *string `pulumi:"description"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo *bool `pulumi:"forceAddAllAuthorizationInfo"`
+	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+	ForceDpop *bool `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce *bool `pulumi:"forcePkce"`
 	// The Flow Hosting URL.
@@ -146,6 +150,8 @@ type InboundAppState struct {
 	Description pulumi.StringPtrInput
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolPtrInput
+	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+	ForceDpop pulumi.BoolPtrInput
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolPtrInput
 	// The Flow Hosting URL.
@@ -187,6 +193,8 @@ type inboundAppArgs struct {
 	Description *string `pulumi:"description"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo *bool `pulumi:"forceAddAllAuthorizationInfo"`
+	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+	ForceDpop *bool `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce *bool `pulumi:"forcePkce"`
 	// The Flow Hosting URL.
@@ -225,6 +233,8 @@ type InboundAppArgs struct {
 	Description pulumi.StringPtrInput
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolPtrInput
+	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+	ForceDpop pulumi.BoolPtrInput
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolPtrInput
 	// The Flow Hosting URL.
@@ -373,6 +383,11 @@ func (o InboundAppOutput) Description() pulumi.StringOutput {
 // When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 func (o InboundAppOutput) ForceAddAllAuthorizationInfo() pulumi.BoolOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.ForceAddAllAuthorizationInfo }).(pulumi.BoolOutput)
+}
+
+// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+func (o InboundAppOutput) ForceDpop() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.ForceDpop }).(pulumi.BoolOutput)
 }
 
 // When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.

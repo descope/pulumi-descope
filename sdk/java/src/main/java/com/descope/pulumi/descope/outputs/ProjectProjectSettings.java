@@ -25,6 +25,11 @@ public final class ProjectProjectSettings {
      */
     private @Nullable String accessKeySessionTokenExpiration;
     /**
+     * @return When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     * 
+     */
+    private @Nullable Boolean allowAuthHostingIframeEmbedding;
+    /**
      * @return The URL which your application resides on.
      * 
      */
@@ -154,6 +159,13 @@ public final class ProjectProjectSettings {
      */
     public Optional<String> accessKeySessionTokenExpiration() {
         return Optional.ofNullable(this.accessKeySessionTokenExpiration);
+    }
+    /**
+     * @return When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     * 
+     */
+    public Optional<Boolean> allowAuthHostingIframeEmbedding() {
+        return Optional.ofNullable(this.allowAuthHostingIframeEmbedding);
     }
     /**
      * @return The URL which your application resides on.
@@ -328,6 +340,7 @@ public final class ProjectProjectSettings {
     public static final class Builder {
         private @Nullable String accessKeyJwtTemplate;
         private @Nullable String accessKeySessionTokenExpiration;
+        private @Nullable Boolean allowAuthHostingIframeEmbedding;
         private @Nullable String appUrl;
         private @Nullable List<String> approvedDomains;
         private @Nullable String customDomain;
@@ -356,6 +369,7 @@ public final class ProjectProjectSettings {
     	      Objects.requireNonNull(defaults);
     	      this.accessKeyJwtTemplate = defaults.accessKeyJwtTemplate;
     	      this.accessKeySessionTokenExpiration = defaults.accessKeySessionTokenExpiration;
+    	      this.allowAuthHostingIframeEmbedding = defaults.allowAuthHostingIframeEmbedding;
     	      this.appUrl = defaults.appUrl;
     	      this.approvedDomains = defaults.approvedDomains;
     	      this.customDomain = defaults.customDomain;
@@ -391,6 +405,12 @@ public final class ProjectProjectSettings {
         public Builder accessKeySessionTokenExpiration(@Nullable String accessKeySessionTokenExpiration) {
 
             this.accessKeySessionTokenExpiration = accessKeySessionTokenExpiration;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder allowAuthHostingIframeEmbedding(@Nullable Boolean allowAuthHostingIframeEmbedding) {
+
+            this.allowAuthHostingIframeEmbedding = allowAuthHostingIframeEmbedding;
             return this;
         }
         @CustomType.Setter
@@ -538,6 +558,7 @@ public final class ProjectProjectSettings {
             final var _resultValue = new ProjectProjectSettings();
             _resultValue.accessKeyJwtTemplate = accessKeyJwtTemplate;
             _resultValue.accessKeySessionTokenExpiration = accessKeySessionTokenExpiration;
+            _resultValue.allowAuthHostingIframeEmbedding = allowAuthHostingIframeEmbedding;
             _resultValue.appUrl = appUrl;
             _resultValue.approvedDomains = approvedDomains;
             _resultValue.customDomain = customDomain;

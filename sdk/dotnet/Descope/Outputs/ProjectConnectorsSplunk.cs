@@ -27,6 +27,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
+        /// <summary>
         /// An HTTP Event Collector token configured on your Splunk project.
         /// </summary>
         public readonly string HecToken;
@@ -56,6 +60,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? engineId,
+
             string hecToken,
 
             string hecUrl,
@@ -71,6 +77,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AuditEnabled = auditEnabled;
             AuditFilters = auditFilters;
             Description = description;
+            EngineId = engineId;
             HecToken = hecToken;
             HecUrl = hecUrl;
             Id = id;

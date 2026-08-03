@@ -23,6 +23,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? HideDomains;
         /// <summary>
+        /// Setting this to `True` will hide the FGA mapping configuration section in the SSO Suite interface.
+        /// </summary>
+        public readonly bool? HideFgaMapping;
+        /// <summary>
         /// Setting this to `True` will hide the groups mapping configuration section in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideGroupsMapping;
@@ -34,6 +38,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Setting this to `True` will hide the OIDC configuration option.
         /// </summary>
         public readonly bool? HideOidc;
+        /// <summary>
+        /// Setting this to `True` will hide the role mapping configuration section in the SSO Suite interface.
+        /// </summary>
+        public readonly bool? HideRoleMapping;
         /// <summary>
         /// Setting this to `True` will hide the SAML configuration option.
         /// </summary>
@@ -61,11 +69,15 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? hideDomains,
 
+            bool? hideFgaMapping,
+
             bool? hideGroupsMapping,
 
             bool? hideJitGuide,
 
             bool? hideOidc,
+
+            bool? hideRoleMapping,
 
             bool? hideSaml,
 
@@ -79,9 +91,11 @@ namespace Descope.Pulumi.Descope.Outputs
         {
             ForceDomainVerification = forceDomainVerification;
             HideDomains = hideDomains;
+            HideFgaMapping = hideFgaMapping;
             HideGroupsMapping = hideGroupsMapping;
             HideJitGuide = hideJitGuide;
             HideOidc = hideOidc;
+            HideRoleMapping = hideRoleMapping;
             HideSaml = hideSaml;
             HideScim = hideScim;
             ShowHelpContact = showHelpContact;

@@ -110,6 +110,21 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
     }
 
     /**
+     * The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    @Import(name="engineId")
+    private @Nullable Output<String> engineId;
+
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<Output<String>> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+
+    /**
      * The external ID to use when assuming the role.
      * 
      */
@@ -230,6 +245,7 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
         this.authType = $.authType;
         this.bucket = $.bucket;
         this.description = $.description;
+        this.engineId = $.engineId;
         this.externalId = $.externalId;
         this.id = $.id;
         this.maskPii = $.maskPii;
@@ -392,6 +408,27 @@ public final class ProjectConnectorsAwsS3Args extends com.pulumi.resources.Resou
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(@Nullable Output<String> engineId) {
+            $.engineId = engineId;
+            return this;
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(String engineId) {
+            return engineId(Output.of(engineId));
         }
 
         /**

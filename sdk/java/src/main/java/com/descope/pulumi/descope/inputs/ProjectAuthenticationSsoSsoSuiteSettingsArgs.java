@@ -47,6 +47,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     }
 
     /**
+     * Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    @Import(name="hideFgaMapping")
+    private @Nullable Output<Boolean> hideFgaMapping;
+
+    /**
+     * @return Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    public Optional<Output<Boolean>> hideFgaMapping() {
+        return Optional.ofNullable(this.hideFgaMapping);
+    }
+
+    /**
      * Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
      * 
      */
@@ -89,6 +104,21 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
      */
     public Optional<Output<Boolean>> hideOidc() {
         return Optional.ofNullable(this.hideOidc);
+    }
+
+    /**
+     * Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    @Import(name="hideRoleMapping")
+    private @Nullable Output<Boolean> hideRoleMapping;
+
+    /**
+     * @return Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     * 
+     */
+    public Optional<Output<Boolean>> hideRoleMapping() {
+        return Optional.ofNullable(this.hideRoleMapping);
     }
 
     /**
@@ -171,9 +201,11 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
     private ProjectAuthenticationSsoSsoSuiteSettingsArgs(ProjectAuthenticationSsoSsoSuiteSettingsArgs $) {
         this.forceDomainVerification = $.forceDomainVerification;
         this.hideDomains = $.hideDomains;
+        this.hideFgaMapping = $.hideFgaMapping;
         this.hideGroupsMapping = $.hideGroupsMapping;
         this.hideJitGuide = $.hideJitGuide;
         this.hideOidc = $.hideOidc;
+        this.hideRoleMapping = $.hideRoleMapping;
         this.hideSaml = $.hideSaml;
         this.hideScim = $.hideScim;
         this.showHelpContact = $.showHelpContact;
@@ -242,6 +274,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
         }
 
         /**
+         * @param hideFgaMapping Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideFgaMapping(@Nullable Output<Boolean> hideFgaMapping) {
+            $.hideFgaMapping = hideFgaMapping;
+            return this;
+        }
+
+        /**
+         * @param hideFgaMapping Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideFgaMapping(Boolean hideFgaMapping) {
+            return hideFgaMapping(Output.of(hideFgaMapping));
+        }
+
+        /**
          * @param hideGroupsMapping Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
          * 
          * @return builder
@@ -302,6 +355,27 @@ public final class ProjectAuthenticationSsoSsoSuiteSettingsArgs extends com.pulu
          */
         public Builder hideOidc(Boolean hideOidc) {
             return hideOidc(Output.of(hideOidc));
+        }
+
+        /**
+         * @param hideRoleMapping Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideRoleMapping(@Nullable Output<Boolean> hideRoleMapping) {
+            $.hideRoleMapping = hideRoleMapping;
+            return this;
+        }
+
+        /**
+         * @param hideRoleMapping Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideRoleMapping(Boolean hideRoleMapping) {
+            return hideRoleMapping(Output.of(hideRoleMapping));
         }
 
         /**

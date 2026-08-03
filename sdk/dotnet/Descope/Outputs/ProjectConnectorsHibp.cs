@@ -18,6 +18,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
         public readonly string? Id;
         /// <summary>
         /// A custom name for your connector.
@@ -28,11 +32,14 @@ namespace Descope.Pulumi.Descope.Outputs
         private ProjectConnectorsHibp(
             string? description,
 
+            string? engineId,
+
             string? id,
 
             string name)
         {
             Description = description;
+            EngineId = engineId;
             Id = id;
             Name = name;
         }

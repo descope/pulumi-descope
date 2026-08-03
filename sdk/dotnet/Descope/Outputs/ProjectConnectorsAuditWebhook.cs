@@ -31,6 +31,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
+        /// <summary>
         /// The headers to send with the request
         /// </summary>
         public readonly ImmutableDictionary<string, string>? Headers;
@@ -58,6 +62,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? engineId,
+
             ImmutableDictionary<string, string>? headers,
 
             string? hmacSecret,
@@ -72,6 +78,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Authentication = authentication;
             BaseUrl = baseUrl;
             Description = description;
+            EngineId = engineId;
             Headers = headers;
             HmacSecret = hmacSecret;
             Id = id;

@@ -16,7 +16,12 @@ public final class ProjectConnectorsSn {
      * @return AWS Access key ID.
      * 
      */
-    private String accessKeyId;
+    private @Nullable String accessKeyId;
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    private @Nullable String authType;
     /**
      * @return A description of what your connector is used for.
      * 
@@ -32,6 +37,11 @@ public final class ProjectConnectorsSn {
      * 
      */
     private @Nullable String entityId;
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    private @Nullable String externalId;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -58,10 +68,15 @@ public final class ProjectConnectorsSn {
      */
     private String region;
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    private @Nullable String roleArn;
+    /**
      * @return AWS Secret Access Key.
      * 
      */
-    private String secret;
+    private @Nullable String secret;
     /**
      * @return The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
      * 
@@ -78,8 +93,15 @@ public final class ProjectConnectorsSn {
      * @return AWS Access key ID.
      * 
      */
-    public String accessKeyId() {
-        return this.accessKeyId;
+    public Optional<String> accessKeyId() {
+        return Optional.ofNullable(this.accessKeyId);
+    }
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Optional<String> authType() {
+        return Optional.ofNullable(this.authType);
     }
     /**
      * @return A description of what your connector is used for.
@@ -101,6 +123,13 @@ public final class ProjectConnectorsSn {
      */
     public Optional<String> entityId() {
         return Optional.ofNullable(this.entityId);
+    }
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<String> externalId() {
+        return Optional.ofNullable(this.externalId);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
@@ -138,11 +167,18 @@ public final class ProjectConnectorsSn {
         return this.region;
     }
     /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<String> roleArn() {
+        return Optional.ofNullable(this.roleArn);
+    }
+    /**
      * @return AWS Secret Access Key.
      * 
      */
-    public String secret() {
-        return this.secret;
+    public Optional<String> secret() {
+        return Optional.ofNullable(this.secret);
     }
     /**
      * @return The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
@@ -168,41 +204,51 @@ public final class ProjectConnectorsSn {
     }
     @CustomType.Builder
     public static final class Builder {
-        private String accessKeyId;
+        private @Nullable String accessKeyId;
+        private @Nullable String authType;
         private @Nullable String description;
         private @Nullable String endpoint;
         private @Nullable String entityId;
+        private @Nullable String externalId;
         private @Nullable String id;
         private String name;
         private @Nullable String organizationNumber;
         private @Nullable String originationNumber;
         private String region;
-        private String secret;
+        private @Nullable String roleArn;
+        private @Nullable String secret;
         private @Nullable String senderId;
         private @Nullable String templateId;
         public Builder() {}
         public Builder(ProjectConnectorsSn defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.accessKeyId = defaults.accessKeyId;
+    	      this.authType = defaults.authType;
     	      this.description = defaults.description;
     	      this.endpoint = defaults.endpoint;
     	      this.entityId = defaults.entityId;
+    	      this.externalId = defaults.externalId;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.organizationNumber = defaults.organizationNumber;
     	      this.originationNumber = defaults.originationNumber;
     	      this.region = defaults.region;
+    	      this.roleArn = defaults.roleArn;
     	      this.secret = defaults.secret;
     	      this.senderId = defaults.senderId;
     	      this.templateId = defaults.templateId;
         }
 
         @CustomType.Setter
-        public Builder accessKeyId(String accessKeyId) {
-            if (accessKeyId == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsSn", "accessKeyId");
-            }
+        public Builder accessKeyId(@Nullable String accessKeyId) {
+
             this.accessKeyId = accessKeyId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder authType(@Nullable String authType) {
+
+            this.authType = authType;
             return this;
         }
         @CustomType.Setter
@@ -221,6 +267,12 @@ public final class ProjectConnectorsSn {
         public Builder entityId(@Nullable String entityId) {
 
             this.entityId = entityId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder externalId(@Nullable String externalId) {
+
+            this.externalId = externalId;
             return this;
         }
         @CustomType.Setter
@@ -258,10 +310,14 @@ public final class ProjectConnectorsSn {
             return this;
         }
         @CustomType.Setter
-        public Builder secret(String secret) {
-            if (secret == null) {
-              throw new MissingRequiredPropertyException("ProjectConnectorsSn", "secret");
-            }
+        public Builder roleArn(@Nullable String roleArn) {
+
+            this.roleArn = roleArn;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder secret(@Nullable String secret) {
+
             this.secret = secret;
             return this;
         }
@@ -280,14 +336,17 @@ public final class ProjectConnectorsSn {
         public ProjectConnectorsSn build() {
             final var _resultValue = new ProjectConnectorsSn();
             _resultValue.accessKeyId = accessKeyId;
+            _resultValue.authType = authType;
             _resultValue.description = description;
             _resultValue.endpoint = endpoint;
             _resultValue.entityId = entityId;
+            _resultValue.externalId = externalId;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.organizationNumber = organizationNumber;
             _resultValue.originationNumber = originationNumber;
             _resultValue.region = region;
+            _resultValue.roleArn = roleArn;
             _resultValue.secret = secret;
             _resultValue.senderId = senderId;
             _resultValue.templateId = templateId;

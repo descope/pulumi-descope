@@ -26,6 +26,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// Bearer token for HTTP authentication.
         /// </summary>
         public readonly string? BearerToken;
+        /// <summary>
+        /// OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+        /// </summary>
+        public readonly Outputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials? Oauth2ClientCredentials;
 
         [OutputConstructor]
         private ProjectConnectorsGenericEmailGatewayAuthentication(
@@ -33,11 +37,14 @@ namespace Descope.Pulumi.Descope.Outputs
 
             Outputs.ProjectConnectorsGenericEmailGatewayAuthenticationBasic? basic,
 
-            string? bearerToken)
+            string? bearerToken,
+
+            Outputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials? oauth2ClientCredentials)
         {
             ApiKey = apiKey;
             Basic = basic;
             BearerToken = bearerToken;
+            Oauth2ClientCredentials = oauth2ClientCredentials;
         }
     }
 }

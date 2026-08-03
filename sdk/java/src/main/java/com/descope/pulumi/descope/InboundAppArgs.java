@@ -158,6 +158,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     * 
+     */
+    @Import(name="forceDpop")
+    private @Nullable Output<Boolean> forceDpop;
+
+    /**
+     * @return Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     * 
+     */
+    public Optional<Output<Boolean>> forceDpop() {
+        return Optional.ofNullable(this.forceDpop);
+    }
+
+    /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      * 
      */
@@ -289,6 +304,7 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.defaultAudience = $.defaultAudience;
         this.description = $.description;
         this.forceAddAllAuthorizationInfo = $.forceAddAllAuthorizationInfo;
+        this.forceDpop = $.forceDpop;
         this.forcePkce = $.forcePkce;
         this.loginPageUrl = $.loginPageUrl;
         this.logoUrl = $.logoUrl;
@@ -544,6 +560,27 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder forceAddAllAuthorizationInfo(Boolean forceAddAllAuthorizationInfo) {
             return forceAddAllAuthorizationInfo(Output.of(forceAddAllAuthorizationInfo));
+        }
+
+        /**
+         * @param forceDpop Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forceDpop(@Nullable Output<Boolean> forceDpop) {
+            $.forceDpop = forceDpop;
+            return this;
+        }
+
+        /**
+         * @param forceDpop Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder forceDpop(Boolean forceDpop) {
+            return forceDpop(Output.of(forceDpop));
         }
 
         /**

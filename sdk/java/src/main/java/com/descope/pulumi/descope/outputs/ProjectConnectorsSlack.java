@@ -17,6 +17,11 @@ public final class ProjectConnectorsSlack {
      * 
      */
     private @Nullable String description;
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
     private @Nullable String id;
     /**
      * @return A custom name for your connector.
@@ -36,6 +41,13 @@ public final class ProjectConnectorsSlack {
      */
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
+    }
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
     }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
@@ -65,6 +77,7 @@ public final class ProjectConnectorsSlack {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable String description;
+        private @Nullable String engineId;
         private @Nullable String id;
         private String name;
         private String token;
@@ -72,6 +85,7 @@ public final class ProjectConnectorsSlack {
         public Builder(ProjectConnectorsSlack defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.token = defaults.token;
@@ -81,6 +95,12 @@ public final class ProjectConnectorsSlack {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -108,6 +128,7 @@ public final class ProjectConnectorsSlack {
         public ProjectConnectorsSlack build() {
             final var _resultValue = new ProjectConnectorsSlack();
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.id = id;
             _resultValue.name = name;
             _resultValue.token = token;

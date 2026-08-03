@@ -225,6 +225,10 @@ export interface ProjectApplicationsOidcApplication {
      */
     authorizationCodeDisabled?: pulumi.Input<boolean | undefined>;
     /**
+     * The URL that Descope notifies with a logout token when the user's session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+     */
+    backchannelLogoutUrl?: pulumi.Input<string | undefined>;
+    /**
      * A list of supported claims. e.g. `sub`, `email`, `exp`.
      */
     claims?: pulumi.Input<pulumi.Input<string>[] | undefined>;
@@ -245,7 +249,11 @@ export interface ProjectApplicationsOidcApplication {
      */
     clientType?: pulumi.Input<string | undefined>;
     /**
-     * Controls the default `aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+     */
+    customIdpInitiatedLoginPageUrl?: pulumi.Input<string | undefined>;
+    /**
+     * Controls the default `aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), `"appId"` (the application ID only), `"empty"` (no `aud` claim at all), or `""` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
      */
     defaultAudience?: pulumi.Input<string | undefined>;
     /**
@@ -294,6 +302,10 @@ export interface ProjectApplicationsOidcApplication {
      */
     refreshTokenDisabled?: pulumi.Input<boolean | undefined>;
     roles?: pulumi.Input<pulumi.Input<inputs.ProjectApplicationsOidcApplicationRole>[] | undefined>;
+    /**
+     * Controls the audience values appended to the issued token's `aud` claim for trusted sibling applications. One of `"projectId"`, `"clientId"`, `"appId"`, `"empty"` (add none), or `""` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+     */
+    trustedAppsAudience?: pulumi.Input<string | undefined>;
 }
 
 export interface ProjectApplicationsOidcApplicationPermission {
@@ -2650,6 +2662,10 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      */
     hideDomains?: pulumi.Input<boolean | undefined>;
     /**
+     * Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
+     */
+    hideFgaMapping?: pulumi.Input<boolean | undefined>;
+    /**
      * Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
      */
     hideGroupsMapping?: pulumi.Input<boolean | undefined>;
@@ -2661,6 +2677,10 @@ export interface ProjectAuthenticationSsoSsoSuiteSettings {
      * Setting this to `true` will hide the OIDC configuration option.
      */
     hideOidc?: pulumi.Input<boolean | undefined>;
+    /**
+     * Setting this to `true` will hide the role mapping configuration section in the SSO Suite interface.
+     */
+    hideRoleMapping?: pulumi.Input<boolean | undefined>;
     /**
      * Setting this to `true` will hide the SAML configuration option.
      */
@@ -3154,6 +3174,10 @@ export interface ProjectConnectorsAuditWebhook {
      */
     description?: pulumi.Input<string | undefined>;
     /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
+    /**
      * The headers to send with the request
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
@@ -3200,6 +3224,10 @@ export interface ProjectConnectorsAuditWebhookAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsAuditWebhookAuthenticationApiKey {
@@ -3222,6 +3250,33 @@ export interface ProjectConnectorsAuditWebhookAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsAuditWebhookAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsAwsS3 {
@@ -3249,6 +3304,10 @@ export interface ProjectConnectorsAwsS3 {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     /**
      * The external ID to use when assuming the role.
      */
@@ -3309,6 +3368,10 @@ export interface ProjectConnectorsAwsSesEmailValidation {
      */
     description?: pulumi.Input<string | undefined>;
     /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
+    /**
      * The external ID to use when assuming the role.
      */
     externalId?: pulumi.Input<string | undefined>;
@@ -3344,6 +3407,10 @@ export interface ProjectConnectorsAwsTranslate {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -3558,6 +3625,10 @@ export interface ProjectConnectorsDatadog {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * Whether to mask personally identifiable information in the logs.
@@ -3773,6 +3844,10 @@ export interface ProjectConnectorsExternalTokenHttpAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsExternalTokenHttpAuthenticationApiKey {
@@ -3795,6 +3870,33 @@ export interface ProjectConnectorsExternalTokenHttpAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsExternalTokenHttpAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsFingerprint {
@@ -3850,6 +3952,10 @@ export interface ProjectConnectorsFirebaseAdmin {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -3950,6 +4056,10 @@ export interface ProjectConnectorsGenericEmailGatewayAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsGenericEmailGatewayAuthenticationApiKey {
@@ -3972,6 +4082,33 @@ export interface ProjectConnectorsGenericEmailGatewayAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsGenericEmailGatewayAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsGenericSmsGateway {
@@ -4027,6 +4164,10 @@ export interface ProjectConnectorsGenericSmsGatewayAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsGenericSmsGatewayAuthenticationApiKey {
@@ -4051,6 +4192,33 @@ export interface ProjectConnectorsGenericSmsGatewayAuthenticationBasic {
     username: pulumi.Input<string>;
 }
 
+export interface ProjectConnectorsGenericSmsGatewayAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+}
+
 export interface ProjectConnectorsGoogleCloudLogging {
     /**
      * Whether to enable streaming of audit events.
@@ -4064,6 +4232,10 @@ export interface ProjectConnectorsGoogleCloudLogging {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -4099,6 +4271,10 @@ export interface ProjectConnectorsGoogleCloudTranslation {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -4230,6 +4406,10 @@ export interface ProjectConnectorsHibp {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -4279,7 +4459,7 @@ export interface ProjectConnectorsHttp {
      */
     description?: pulumi.Input<string | undefined>;
     /**
-     * The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
      */
     engineId?: pulumi.Input<string | undefined>;
     /**
@@ -4342,6 +4522,10 @@ export interface ProjectConnectorsHttpAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsHttpAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsHttpAuthenticationApiKey {
@@ -4364,6 +4548,33 @@ export interface ProjectConnectorsHttpAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsHttpAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsHubspot {
@@ -4740,6 +4951,10 @@ export interface ProjectConnectorsOpentelemetryAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsOpentelemetryAuthenticationApiKey {
@@ -4762,6 +4977,33 @@ export interface ProjectConnectorsOpentelemetryAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsOpentelemetryAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsPendo {
@@ -4820,6 +5062,10 @@ export interface ProjectConnectorsPingDirectory {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     /**
      * PingDirectory's REST API host.
      */
@@ -4944,6 +5190,10 @@ export interface ProjectConnectorsRecaptchaEnterprise {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5008,6 +5258,10 @@ export interface ProjectConnectorsRekognition {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5056,6 +5310,10 @@ export interface ProjectConnectorsSalesforce {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5084,6 +5342,10 @@ export interface ProjectConnectorsSalesforceMarketingCloud {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5176,6 +5438,10 @@ export interface ProjectConnectorsScimAuthentication {
      * Bearer token for HTTP authentication.
      */
     bearerToken?: pulumi.Input<string | undefined>;
+    /**
+     * OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     */
+    oauth2ClientCredentials?: pulumi.Input<inputs.ProjectConnectorsScimAuthenticationOauth2ClientCredentials | undefined>;
 }
 
 export interface ProjectConnectorsScimAuthenticationApiKey {
@@ -5198,6 +5464,33 @@ export interface ProjectConnectorsScimAuthenticationBasic {
      * Username for basic HTTP authentication.
      */
     username: pulumi.Input<string>;
+}
+
+export interface ProjectConnectorsScimAuthenticationOauth2ClientCredentials {
+    /**
+     * How the client credentials are sent to the token endpoint. Either `header` to send them in the `Authorization` header, or `body` to send them in the request body.
+     */
+    authStyle?: pulumi.Input<string | undefined>;
+    /**
+     * The token endpoint URL used to request an access token.
+     */
+    authUrl: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client ID used to authenticate against the token endpoint.
+     */
+    clientId: pulumi.Input<string>;
+    /**
+     * The OAuth 2.0 client secret used to authenticate against the token endpoint.
+     */
+    clientSecret: pulumi.Input<string>;
+    /**
+     * A space-separated list of OAuth scopes to request when fetching the access token.
+     */
+    scopes?: pulumi.Input<string | undefined>;
+    /**
+     * Additional headers to include in the token request sent to the token endpoint.
+     */
+    tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 export interface ProjectConnectorsSe {
@@ -5318,6 +5611,10 @@ export interface ProjectConnectorsSlack {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5422,7 +5719,11 @@ export interface ProjectConnectorsSn {
     /**
      * AWS Access key ID.
      */
-    accessKeyId: pulumi.Input<string>;
+    accessKeyId?: pulumi.Input<string | undefined>;
+    /**
+     * The authentication type to use.
+     */
+    authType?: pulumi.Input<string | undefined>;
     /**
      * A description of what your connector is used for.
      */
@@ -5435,6 +5736,10 @@ export interface ProjectConnectorsSn {
      * The entity ID or principal entity (PE) ID for sending text messages to recipients in India.
      */
     entityId?: pulumi.Input<string | undefined>;
+    /**
+     * The external ID to use when assuming the role.
+     */
+    externalId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * A custom name for your connector.
@@ -5455,9 +5760,13 @@ export interface ProjectConnectorsSn {
      */
     region: pulumi.Input<string>;
     /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     */
+    roleArn?: pulumi.Input<string | undefined>;
+    /**
      * AWS Secret Access Key.
      */
-    secret: pulumi.Input<string>;
+    secret?: pulumi.Input<string | undefined>;
     /**
      * The name of the sender from which the text message is going to be sent (see SNS documentation regarding acceptable IDs and supported regions/countries).
      */
@@ -5493,6 +5802,10 @@ export interface ProjectConnectorsSnowflake {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     id?: pulumi.Input<string | undefined>;
     /**
      * Whether to mask personally identifiable information in the logs.
@@ -5552,6 +5865,10 @@ export interface ProjectConnectorsSplunk {
      * A description of what your connector is used for.
      */
     description?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+     */
+    engineId?: pulumi.Input<string | undefined>;
     /**
      * An HTTP Event Collector token configured on your Splunk project.
      */
@@ -6161,6 +6478,10 @@ export interface ProjectProjectSettings {
      * The expiry time for access key session tokens. Use values such as "10 minutes", "4 hours", etc. The value needs to be at least 3 minutes and can't be longer than 4 weeks.
      */
     accessKeySessionTokenExpiration?: pulumi.Input<string | undefined>;
+    /**
+     * When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+     */
+    allowAuthHostingIframeEmbedding?: pulumi.Input<boolean | undefined>;
     /**
      * The URL which your application resides on.
      */

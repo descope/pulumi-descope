@@ -38,6 +38,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// A description of what your connector is used for.
         /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
         public readonly string? Id;
         /// <summary>
         /// Whether to mask personally identifiable information in the logs.
@@ -82,6 +86,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? engineId,
+
             string? id,
 
             bool? maskPii,
@@ -104,6 +110,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AuditTable = auditTable;
             Database = database;
             Description = description;
+            EngineId = engineId;
             Id = id;
             MaskPii = maskPii;
             MinFlushIntervalMinutes = minFlushIntervalMinutes;

@@ -26,6 +26,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? HideDomains { get; set; }
 
         /// <summary>
+        /// Setting this to `True` will hide the FGA mapping configuration section in the SSO Suite interface.
+        /// </summary>
+        [Input("hideFgaMapping")]
+        public Input<bool>? HideFgaMapping { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will hide the groups mapping configuration section in the SSO Suite interface.
         /// </summary>
         [Input("hideGroupsMapping")]
@@ -42,6 +48,12 @@ namespace Descope.Pulumi.Descope.Inputs
         /// </summary>
         [Input("hideOidc")]
         public Input<bool>? HideOidc { get; set; }
+
+        /// <summary>
+        /// Setting this to `True` will hide the role mapping configuration section in the SSO Suite interface.
+        /// </summary>
+        [Input("hideRoleMapping")]
+        public Input<bool>? HideRoleMapping { get; set; }
 
         /// <summary>
         /// Setting this to `True` will hide the SAML configuration option.
