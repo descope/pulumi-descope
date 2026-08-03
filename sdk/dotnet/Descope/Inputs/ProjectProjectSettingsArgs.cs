@@ -26,6 +26,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? AccessKeySessionTokenExpiration { get; set; }
 
         /// <summary>
+        /// When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
+        /// </summary>
+        [Input("allowAuthHostingIframeEmbedding")]
+        public Input<bool>? AllowAuthHostingIframeEmbedding { get; set; }
+
+        /// <summary>
         /// The URL which your application resides on.
         /// </summary>
         [Input("appUrl")]

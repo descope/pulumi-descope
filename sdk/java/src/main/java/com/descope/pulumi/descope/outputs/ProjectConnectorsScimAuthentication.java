@@ -5,6 +5,7 @@ package com.descope.pulumi.descope.outputs;
 
 import com.descope.pulumi.descope.outputs.ProjectConnectorsScimAuthenticationApiKey;
 import com.descope.pulumi.descope.outputs.ProjectConnectorsScimAuthenticationBasic;
+import com.descope.pulumi.descope.outputs.ProjectConnectorsScimAuthenticationOauth2ClientCredentials;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.String;
 import java.util.Objects;
@@ -28,6 +29,11 @@ public final class ProjectConnectorsScimAuthentication {
      * 
      */
     private @Nullable String bearerToken;
+    /**
+     * @return OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     * 
+     */
+    private @Nullable ProjectConnectorsScimAuthenticationOauth2ClientCredentials oauth2ClientCredentials;
 
     private ProjectConnectorsScimAuthentication() {}
     /**
@@ -51,6 +57,13 @@ public final class ProjectConnectorsScimAuthentication {
     public Optional<String> bearerToken() {
         return Optional.ofNullable(this.bearerToken);
     }
+    /**
+     * @return OAuth 2.0 client credentials configuration used to fetch an access token before making requests.
+     * 
+     */
+    public Optional<ProjectConnectorsScimAuthenticationOauth2ClientCredentials> oauth2ClientCredentials() {
+        return Optional.ofNullable(this.oauth2ClientCredentials);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -64,12 +77,14 @@ public final class ProjectConnectorsScimAuthentication {
         private @Nullable ProjectConnectorsScimAuthenticationApiKey apiKey;
         private @Nullable ProjectConnectorsScimAuthenticationBasic basic;
         private @Nullable String bearerToken;
+        private @Nullable ProjectConnectorsScimAuthenticationOauth2ClientCredentials oauth2ClientCredentials;
         public Builder() {}
         public Builder(ProjectConnectorsScimAuthentication defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.apiKey = defaults.apiKey;
     	      this.basic = defaults.basic;
     	      this.bearerToken = defaults.bearerToken;
+    	      this.oauth2ClientCredentials = defaults.oauth2ClientCredentials;
         }
 
         @CustomType.Setter
@@ -90,11 +105,18 @@ public final class ProjectConnectorsScimAuthentication {
             this.bearerToken = bearerToken;
             return this;
         }
+        @CustomType.Setter
+        public Builder oauth2ClientCredentials(@Nullable ProjectConnectorsScimAuthenticationOauth2ClientCredentials oauth2ClientCredentials) {
+
+            this.oauth2ClientCredentials = oauth2ClientCredentials;
+            return this;
+        }
         public ProjectConnectorsScimAuthentication build() {
             final var _resultValue = new ProjectConnectorsScimAuthentication();
             _resultValue.apiKey = apiKey;
             _resultValue.basic = basic;
             _resultValue.bearerToken = bearerToken;
+            _resultValue.oauth2ClientCredentials = oauth2ClientCredentials;
             return _resultValue;
         }
     }

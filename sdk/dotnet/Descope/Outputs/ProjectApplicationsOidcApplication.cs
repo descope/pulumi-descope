@@ -23,6 +23,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? AuthorizationCodeDisabled;
         /// <summary>
+        /// The URL that Descope notifies with a logout token when the user's session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+        /// </summary>
+        public readonly string? BackchannelLogoutUrl;
+        /// <summary>
         /// A list of supported claims. e.g. `Sub`, `Email`, `Exp`.
         /// </summary>
         public readonly ImmutableArray<string> Claims;
@@ -43,7 +47,11 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? ClientType;
         /// <summary>
-        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+        /// A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+        /// </summary>
+        public readonly string? CustomIdpInitiatedLoginPageUrl;
+        /// <summary>
+        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), `"appId"` (the application ID only), `"empty"` (no `Aud` claim at all), or `""` (default — both the project ID and the client ID). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
         /// </summary>
         public readonly string? DefaultAudience;
         /// <summary>
@@ -92,12 +100,18 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? RefreshTokenDisabled;
         public readonly ImmutableArray<Outputs.ProjectApplicationsOidcApplicationRole> Roles;
+        /// <summary>
+        /// Controls the audience values appended to the issued token's `Aud` claim for trusted sibling applications. One of `"projectId"`, `"clientId"`, `"appId"`, `"empty"` (add none), or `""` (default — both the project ID and the client ID). Independent of `DefaultAudience`.
+        /// </summary>
+        public readonly string? TrustedAppsAudience;
 
         [OutputConstructor]
         private ProjectApplicationsOidcApplication(
             ImmutableArray<string> approvedRedirectUrls,
 
             bool? authorizationCodeDisabled,
+
+            string? backchannelLogoutUrl,
 
             ImmutableArray<string> claims,
 
@@ -108,6 +122,8 @@ namespace Descope.Pulumi.Descope.Outputs
             string? clientSecret,
 
             string? clientType,
+
+            string? customIdpInitiatedLoginPageUrl,
 
             string? defaultAudience,
 
@@ -135,15 +151,19 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? refreshTokenDisabled,
 
-            ImmutableArray<Outputs.ProjectApplicationsOidcApplicationRole> roles)
+            ImmutableArray<Outputs.ProjectApplicationsOidcApplicationRole> roles,
+
+            string? trustedAppsAudience)
         {
             ApprovedRedirectUrls = approvedRedirectUrls;
             AuthorizationCodeDisabled = authorizationCodeDisabled;
+            BackchannelLogoutUrl = backchannelLogoutUrl;
             Claims = claims;
             ClientCredentialsDisabled = clientCredentialsDisabled;
             ClientId = clientId;
             ClientSecret = clientSecret;
             ClientType = clientType;
+            CustomIdpInitiatedLoginPageUrl = customIdpInitiatedLoginPageUrl;
             DefaultAudience = defaultAudience;
             Description = description;
             DeviceCodeDisabled = deviceCodeDisabled;
@@ -158,6 +178,7 @@ namespace Descope.Pulumi.Descope.Outputs
             Permissions = permissions;
             RefreshTokenDisabled = refreshTokenDisabled;
             Roles = roles;
+            TrustedAppsAudience = trustedAppsAudience;
         }
     }
 }

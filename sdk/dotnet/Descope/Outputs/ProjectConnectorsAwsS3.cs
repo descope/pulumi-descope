@@ -39,6 +39,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        public readonly string? EngineId;
+        /// <summary>
         /// The external ID to use when assuming the role.
         /// </summary>
         public readonly string? ExternalId;
@@ -82,6 +86,8 @@ namespace Descope.Pulumi.Descope.Outputs
 
             string? description,
 
+            string? engineId,
+
             string? externalId,
 
             string? id,
@@ -104,6 +110,7 @@ namespace Descope.Pulumi.Descope.Outputs
             AuthType = authType;
             Bucket = bucket;
             Description = description;
+            EngineId = engineId;
             ExternalId = externalId;
             Id = id;
             MaskPii = maskPii;

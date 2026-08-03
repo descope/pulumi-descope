@@ -68,6 +68,12 @@ namespace Descope.Pulumi.Descope
         public Output<bool> ForceAddAllAuthorizationInfo { get; private set; } = null!;
 
         /// <summary>
+        /// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        /// </summary>
+        [Output("forceDpop")]
+        public Output<bool> ForceDpop { get; private set; } = null!;
+
+        /// <summary>
         /// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `CodeVerifier`. Public clients always use PKCE regardless of this setting.
         /// </summary>
         [Output("forcePkce")]
@@ -255,6 +261,12 @@ namespace Descope.Pulumi.Descope
         public Input<bool>? ForceAddAllAuthorizationInfo { get; set; }
 
         /// <summary>
+        /// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        /// </summary>
+        [Input("forceDpop")]
+        public Input<bool>? ForceDpop { get; set; }
+
+        /// <summary>
         /// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `CodeVerifier`. Public clients always use PKCE regardless of this setting.
         /// </summary>
         [Input("forcePkce")]
@@ -403,6 +415,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("forceAddAllAuthorizationInfo")]
         public Input<bool>? ForceAddAllAuthorizationInfo { get; set; }
+
+        /// <summary>
+        /// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+        /// </summary>
+        [Input("forceDpop")]
+        public Input<bool>? ForceDpop { get; set; }
 
         /// <summary>
         /// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `CodeVerifier`. Public clients always use PKCE regardless of this setting.

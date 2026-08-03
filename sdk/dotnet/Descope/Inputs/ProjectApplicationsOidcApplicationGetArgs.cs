@@ -31,6 +31,12 @@ namespace Descope.Pulumi.Descope.Inputs
         [Input("authorizationCodeDisabled")]
         public Input<bool>? AuthorizationCodeDisabled { get; set; }
 
+        /// <summary>
+        /// The URL that Descope notifies with a logout token when the user's session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+        /// </summary>
+        [Input("backchannelLogoutUrl")]
+        public Input<string>? BackchannelLogoutUrl { get; set; }
+
         [Input("claims")]
         private InputList<string>? _claims;
 
@@ -78,7 +84,13 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? ClientType { get; set; }
 
         /// <summary>
-        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), or `""` (default — both). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+        /// A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+        /// </summary>
+        [Input("customIdpInitiatedLoginPageUrl")]
+        public Input<string>? CustomIdpInitiatedLoginPageUrl { get; set; }
+
+        /// <summary>
+        /// Controls the default `Aud` claim of tokens issued for this application. One of `"projectId"` (the project ID only), `"clientId"` (the dedicated client ID only), `"appId"` (the application ID only), `"empty"` (no `Aud` claim at all), or `""` (default — both the project ID and the client ID). Only applies to modern apps that set a `ClientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
         /// </summary>
         [Input("defaultAudience")]
         public Input<string>? DefaultAudience { get; set; }
@@ -164,6 +176,12 @@ namespace Descope.Pulumi.Descope.Inputs
             get => _roles ?? (_roles = new InputList<Inputs.ProjectApplicationsOidcApplicationRoleGetArgs>());
             set => _roles = value;
         }
+
+        /// <summary>
+        /// Controls the audience values appended to the issued token's `Aud` claim for trusted sibling applications. One of `"projectId"`, `"clientId"`, `"appId"`, `"empty"` (add none), or `""` (default — both the project ID and the client ID). Independent of `DefaultAudience`.
+        /// </summary>
+        [Input("trustedAppsAudience")]
+        public Input<string>? TrustedAppsAudience { get; set; }
 
         public ProjectApplicationsOidcApplicationGetArgs()
         {

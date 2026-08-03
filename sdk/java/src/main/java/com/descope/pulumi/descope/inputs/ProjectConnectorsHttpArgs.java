@@ -171,14 +171,14 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
     }
 
     /**
-     * The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
      * 
      */
     @Import(name="engineId")
     private @Nullable Output<String> engineId;
 
     /**
-     * @return The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
      * 
      */
     public Optional<Output<String>> engineId() {
@@ -614,7 +614,7 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param engineId The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
          * 
          * @return builder
          * 
@@ -625,7 +625,7 @@ public final class ProjectConnectorsHttpArgs extends com.pulumi.resources.Resour
         }
 
         /**
-         * @param engineId The identifier of the Descope engine that should run this connector. Leave empty to run the connector locally.
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
          * 
          * @return builder
          * 

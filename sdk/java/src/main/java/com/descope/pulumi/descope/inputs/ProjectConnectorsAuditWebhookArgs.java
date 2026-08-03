@@ -82,6 +82,21 @@ public final class ProjectConnectorsAuditWebhookArgs extends com.pulumi.resource
     }
 
     /**
+     * The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    @Import(name="engineId")
+    private @Nullable Output<String> engineId;
+
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<Output<String>> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+
+    /**
      * The headers to send with the request
      * 
      */
@@ -155,6 +170,7 @@ public final class ProjectConnectorsAuditWebhookArgs extends com.pulumi.resource
         this.authentication = $.authentication;
         this.baseUrl = $.baseUrl;
         this.description = $.description;
+        this.engineId = $.engineId;
         this.headers = $.headers;
         this.hmacSecret = $.hmacSecret;
         this.id = $.id;
@@ -272,6 +288,27 @@ public final class ProjectConnectorsAuditWebhookArgs extends com.pulumi.resource
          */
         public Builder description(String description) {
             return description(Output.of(description));
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(@Nullable Output<String> engineId) {
+            $.engineId = engineId;
+            return this;
+        }
+
+        /**
+         * @param engineId The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder engineId(String engineId) {
+            return engineId(Output.of(engineId));
         }
 
         /**

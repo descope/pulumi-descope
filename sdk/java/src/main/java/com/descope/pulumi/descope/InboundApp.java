@@ -148,6 +148,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
         return this.forceAddAllAuthorizationInfo;
     }
     /**
+     * Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     * 
+     */
+    @Export(name="forceDpop", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> forceDpop;
+
+    /**
+     * @return Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
+     * 
+     */
+    public Output<Boolean> forceDpop() {
+        return this.forceDpop;
+    }
+    /**
      * When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
      * 
      */

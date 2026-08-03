@@ -38,6 +38,11 @@ public final class ProjectConnectorsAuditWebhook {
      */
     private @Nullable String description;
     /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
+    /**
      * @return The headers to send with the request
      * 
      */
@@ -89,6 +94,13 @@ public final class ProjectConnectorsAuditWebhook {
         return Optional.ofNullable(this.description);
     }
     /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+    /**
      * @return The headers to send with the request
      * 
      */
@@ -133,6 +145,7 @@ public final class ProjectConnectorsAuditWebhook {
         private @Nullable ProjectConnectorsAuditWebhookAuthentication authentication;
         private String baseUrl;
         private @Nullable String description;
+        private @Nullable String engineId;
         private @Nullable Map<String,String> headers;
         private @Nullable String hmacSecret;
         private @Nullable String id;
@@ -145,6 +158,7 @@ public final class ProjectConnectorsAuditWebhook {
     	      this.authentication = defaults.authentication;
     	      this.baseUrl = defaults.baseUrl;
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.headers = defaults.headers;
     	      this.hmacSecret = defaults.hmacSecret;
     	      this.id = defaults.id;
@@ -179,6 +193,12 @@ public final class ProjectConnectorsAuditWebhook {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -219,6 +239,7 @@ public final class ProjectConnectorsAuditWebhook {
             _resultValue.authentication = authentication;
             _resultValue.baseUrl = baseUrl;
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.headers = headers;
             _resultValue.hmacSecret = hmacSecret;
             _resultValue.id = id;

@@ -20,15 +20,30 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
      * AWS Access key ID.
      * 
      */
-    @Import(name="accessKeyId", required=true)
-    private Output<String> accessKeyId;
+    @Import(name="accessKeyId")
+    private @Nullable Output<String> accessKeyId;
 
     /**
      * @return AWS Access key ID.
      * 
      */
-    public Output<String> accessKeyId() {
-        return this.accessKeyId;
+    public Optional<Output<String>> accessKeyId() {
+        return Optional.ofNullable(this.accessKeyId);
+    }
+
+    /**
+     * The authentication type to use.
+     * 
+     */
+    @Import(name="authType")
+    private @Nullable Output<String> authType;
+
+    /**
+     * @return The authentication type to use.
+     * 
+     */
+    public Optional<Output<String>> authType() {
+        return Optional.ofNullable(this.authType);
     }
 
     /**
@@ -74,6 +89,21 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
      */
     public Optional<Output<String>> entityId() {
         return Optional.ofNullable(this.entityId);
+    }
+
+    /**
+     * The external ID to use when assuming the role.
+     * 
+     */
+    @Import(name="externalId")
+    private @Nullable Output<String> externalId;
+
+    /**
+     * @return The external ID to use when assuming the role.
+     * 
+     */
+    public Optional<Output<String>> externalId() {
+        return Optional.ofNullable(this.externalId);
     }
 
     @Import(name="id")
@@ -152,18 +182,33 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
     }
 
     /**
+     * The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    @Import(name="roleArn")
+    private @Nullable Output<String> roleArn;
+
+    /**
+     * @return The Amazon Resource Name (ARN) of the role to assume.
+     * 
+     */
+    public Optional<Output<String>> roleArn() {
+        return Optional.ofNullable(this.roleArn);
+    }
+
+    /**
      * AWS Secret Access Key.
      * 
      */
-    @Import(name="secret", required=true)
-    private Output<String> secret;
+    @Import(name="secret")
+    private @Nullable Output<String> secret;
 
     /**
      * @return AWS Secret Access Key.
      * 
      */
-    public Output<String> secret() {
-        return this.secret;
+    public Optional<Output<String>> secret() {
+        return Optional.ofNullable(this.secret);
     }
 
     /**
@@ -200,14 +245,17 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
 
     private ProjectConnectorsSnArgs(ProjectConnectorsSnArgs $) {
         this.accessKeyId = $.accessKeyId;
+        this.authType = $.authType;
         this.description = $.description;
         this.endpoint = $.endpoint;
         this.entityId = $.entityId;
+        this.externalId = $.externalId;
         this.id = $.id;
         this.name = $.name;
         this.organizationNumber = $.organizationNumber;
         this.originationNumber = $.originationNumber;
         this.region = $.region;
+        this.roleArn = $.roleArn;
         this.secret = $.secret;
         this.senderId = $.senderId;
         this.templateId = $.templateId;
@@ -237,7 +285,7 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
          * @return builder
          * 
          */
-        public Builder accessKeyId(Output<String> accessKeyId) {
+        public Builder accessKeyId(@Nullable Output<String> accessKeyId) {
             $.accessKeyId = accessKeyId;
             return this;
         }
@@ -250,6 +298,27 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
          */
         public Builder accessKeyId(String accessKeyId) {
             return accessKeyId(Output.of(accessKeyId));
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(@Nullable Output<String> authType) {
+            $.authType = authType;
+            return this;
+        }
+
+        /**
+         * @param authType The authentication type to use.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authType(String authType) {
+            return authType(Output.of(authType));
         }
 
         /**
@@ -313,6 +382,27 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
          */
         public Builder entityId(String entityId) {
             return entityId(Output.of(entityId));
+        }
+
+        /**
+         * @param externalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalId(@Nullable Output<String> externalId) {
+            $.externalId = externalId;
+            return this;
+        }
+
+        /**
+         * @param externalId The external ID to use when assuming the role.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalId(String externalId) {
+            return externalId(Output.of(externalId));
         }
 
         public Builder id(@Nullable Output<String> id) {
@@ -417,12 +507,33 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
         }
 
         /**
+         * @param roleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder roleArn(@Nullable Output<String> roleArn) {
+            $.roleArn = roleArn;
+            return this;
+        }
+
+        /**
+         * @param roleArn The Amazon Resource Name (ARN) of the role to assume.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder roleArn(String roleArn) {
+            return roleArn(Output.of(roleArn));
+        }
+
+        /**
          * @param secret AWS Secret Access Key.
          * 
          * @return builder
          * 
          */
-        public Builder secret(Output<String> secret) {
+        public Builder secret(@Nullable Output<String> secret) {
             $.secret = secret;
             return this;
         }
@@ -480,17 +591,11 @@ public final class ProjectConnectorsSnArgs extends com.pulumi.resources.Resource
         }
 
         public ProjectConnectorsSnArgs build() {
-            if ($.accessKeyId == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsSnArgs", "accessKeyId");
-            }
             if ($.name == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsSnArgs", "name");
             }
             if ($.region == null) {
                 throw new MissingRequiredPropertyException("ProjectConnectorsSnArgs", "region");
-            }
-            if ($.secret == null) {
-                throw new MissingRequiredPropertyException("ProjectConnectorsSnArgs", "secret");
             }
             return $;
         }

@@ -46,6 +46,11 @@ public final class ProjectConnectorsAwsS3 {
      */
     private @Nullable String description;
     /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
+    /**
      * @return The external ID to use when assuming the role.
      * 
      */
@@ -126,6 +131,13 @@ public final class ProjectConnectorsAwsS3 {
         return Optional.ofNullable(this.description);
     }
     /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
+    /**
      * @return The external ID to use when assuming the role.
      * 
      */
@@ -193,6 +205,7 @@ public final class ProjectConnectorsAwsS3 {
         private @Nullable String authType;
         private String bucket;
         private @Nullable String description;
+        private @Nullable String engineId;
         private @Nullable String externalId;
         private @Nullable String id;
         private @Nullable Boolean maskPii;
@@ -210,6 +223,7 @@ public final class ProjectConnectorsAwsS3 {
     	      this.authType = defaults.authType;
     	      this.bucket = defaults.bucket;
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.externalId = defaults.externalId;
     	      this.id = defaults.id;
     	      this.maskPii = defaults.maskPii;
@@ -259,6 +273,12 @@ public final class ProjectConnectorsAwsS3 {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -321,6 +341,7 @@ public final class ProjectConnectorsAwsS3 {
             _resultValue.authType = authType;
             _resultValue.bucket = bucket;
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.externalId = externalId;
             _resultValue.id = id;
             _resultValue.maskPii = maskPii;

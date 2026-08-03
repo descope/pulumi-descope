@@ -51,6 +51,21 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
     }
 
     /**
+     * The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+     * 
+     */
+    @Import(name="backchannelLogoutUrl")
+    private @Nullable Output<String> backchannelLogoutUrl;
+
+    /**
+     * @return The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+     * 
+     */
+    public Optional<Output<String>> backchannelLogoutUrl() {
+        return Optional.ofNullable(this.backchannelLogoutUrl);
+    }
+
+    /**
      * A list of supported claims. e.g. `sub`, `email`, `exp`.
      * 
      */
@@ -126,14 +141,29 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
     }
 
     /**
-     * Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+     * 
+     */
+    @Import(name="customIdpInitiatedLoginPageUrl")
+    private @Nullable Output<String> customIdpInitiatedLoginPageUrl;
+
+    /**
+     * @return A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+     * 
+     */
+    public Optional<Output<String>> customIdpInitiatedLoginPageUrl() {
+        return Optional.ofNullable(this.customIdpInitiatedLoginPageUrl);
+    }
+
+    /**
+     * Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
      * 
      */
     @Import(name="defaultAudience")
     private @Nullable Output<String> defaultAudience;
 
     /**
-     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
      * 
      */
     public Optional<Output<String>> defaultAudience() {
@@ -319,16 +349,33 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         return Optional.ofNullable(this.roles);
     }
 
+    /**
+     * Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+     * 
+     */
+    @Import(name="trustedAppsAudience")
+    private @Nullable Output<String> trustedAppsAudience;
+
+    /**
+     * @return Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+     * 
+     */
+    public Optional<Output<String>> trustedAppsAudience() {
+        return Optional.ofNullable(this.trustedAppsAudience);
+    }
+
     private ProjectApplicationsOidcApplicationArgs() {}
 
     private ProjectApplicationsOidcApplicationArgs(ProjectApplicationsOidcApplicationArgs $) {
         this.approvedRedirectUrls = $.approvedRedirectUrls;
         this.authorizationCodeDisabled = $.authorizationCodeDisabled;
+        this.backchannelLogoutUrl = $.backchannelLogoutUrl;
         this.claims = $.claims;
         this.clientCredentialsDisabled = $.clientCredentialsDisabled;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.clientType = $.clientType;
+        this.customIdpInitiatedLoginPageUrl = $.customIdpInitiatedLoginPageUrl;
         this.defaultAudience = $.defaultAudience;
         this.description = $.description;
         this.deviceCodeDisabled = $.deviceCodeDisabled;
@@ -343,6 +390,7 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         this.permissions = $.permissions;
         this.refreshTokenDisabled = $.refreshTokenDisabled;
         this.roles = $.roles;
+        this.trustedAppsAudience = $.trustedAppsAudience;
     }
 
     public static Builder builder() {
@@ -413,6 +461,27 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
          */
         public Builder authorizationCodeDisabled(Boolean authorizationCodeDisabled) {
             return authorizationCodeDisabled(Output.of(authorizationCodeDisabled));
+        }
+
+        /**
+         * @param backchannelLogoutUrl The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder backchannelLogoutUrl(@Nullable Output<String> backchannelLogoutUrl) {
+            $.backchannelLogoutUrl = backchannelLogoutUrl;
+            return this;
+        }
+
+        /**
+         * @param backchannelLogoutUrl The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder backchannelLogoutUrl(String backchannelLogoutUrl) {
+            return backchannelLogoutUrl(Output.of(backchannelLogoutUrl));
         }
 
         /**
@@ -531,7 +600,28 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         }
 
         /**
-         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+         * @param customIdpInitiatedLoginPageUrl A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customIdpInitiatedLoginPageUrl(@Nullable Output<String> customIdpInitiatedLoginPageUrl) {
+            $.customIdpInitiatedLoginPageUrl = customIdpInitiatedLoginPageUrl;
+            return this;
+        }
+
+        /**
+         * @param customIdpInitiatedLoginPageUrl A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customIdpInitiatedLoginPageUrl(String customIdpInitiatedLoginPageUrl) {
+            return customIdpInitiatedLoginPageUrl(Output.of(customIdpInitiatedLoginPageUrl));
+        }
+
+        /**
+         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
          * 
          * @return builder
          * 
@@ -542,7 +632,7 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
         }
 
         /**
-         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+         * @param defaultAudience Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
          * 
          * @return builder
          * 
@@ -806,6 +896,27 @@ public final class ProjectApplicationsOidcApplicationArgs extends com.pulumi.res
 
         public Builder roles(ProjectApplicationsOidcApplicationRoleArgs... roles) {
             return roles(List.of(roles));
+        }
+
+        /**
+         * @param trustedAppsAudience Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder trustedAppsAudience(@Nullable Output<String> trustedAppsAudience) {
+            $.trustedAppsAudience = trustedAppsAudience;
+            return this;
+        }
+
+        /**
+         * @param trustedAppsAudience Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder trustedAppsAudience(String trustedAppsAudience) {
+            return trustedAppsAudience(Output.of(trustedAppsAudience));
         }
 
         public ProjectApplicationsOidcApplicationArgs build() {

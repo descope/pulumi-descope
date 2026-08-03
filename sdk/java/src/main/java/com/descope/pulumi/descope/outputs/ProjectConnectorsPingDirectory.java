@@ -19,6 +19,11 @@ public final class ProjectConnectorsPingDirectory {
      */
     private @Nullable String description;
     /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
+    /**
      * @return PingDirectory&#39;s REST API host.
      * 
      */
@@ -42,6 +47,13 @@ public final class ProjectConnectorsPingDirectory {
      */
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
+    }
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
     }
     /**
      * @return PingDirectory&#39;s REST API host.
@@ -78,6 +90,7 @@ public final class ProjectConnectorsPingDirectory {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable String description;
+        private @Nullable String engineId;
         private String host;
         private @Nullable String id;
         private String name;
@@ -86,6 +99,7 @@ public final class ProjectConnectorsPingDirectory {
         public Builder(ProjectConnectorsPingDirectory defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.host = defaults.host;
     	      this.id = defaults.id;
     	      this.name = defaults.name;
@@ -96,6 +110,12 @@ public final class ProjectConnectorsPingDirectory {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -131,6 +151,7 @@ public final class ProjectConnectorsPingDirectory {
         public ProjectConnectorsPingDirectory build() {
             final var _resultValue = new ProjectConnectorsPingDirectory();
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.host = host;
             _resultValue.id = id;
             _resultValue.name = name;

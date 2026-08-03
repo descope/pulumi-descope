@@ -27,6 +27,11 @@ public final class ProjectApplicationsOidcApplication {
      */
     private @Nullable Boolean authorizationCodeDisabled;
     /**
+     * @return The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+     * 
+     */
+    private @Nullable String backchannelLogoutUrl;
+    /**
      * @return A list of supported claims. e.g. `sub`, `email`, `exp`.
      * 
      */
@@ -52,7 +57,12 @@ public final class ProjectApplicationsOidcApplication {
      */
     private @Nullable String clientType;
     /**
-     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * @return A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+     * 
+     */
+    private @Nullable String customIdpInitiatedLoginPageUrl;
+    /**
+     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
      * 
      */
     private @Nullable String defaultAudience;
@@ -113,6 +123,11 @@ public final class ProjectApplicationsOidcApplication {
      */
     private @Nullable Boolean refreshTokenDisabled;
     private @Nullable List<ProjectApplicationsOidcApplicationRole> roles;
+    /**
+     * @return Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+     * 
+     */
+    private @Nullable String trustedAppsAudience;
 
     private ProjectApplicationsOidcApplication() {}
     /**
@@ -128,6 +143,13 @@ public final class ProjectApplicationsOidcApplication {
      */
     public Optional<Boolean> authorizationCodeDisabled() {
         return Optional.ofNullable(this.authorizationCodeDisabled);
+    }
+    /**
+     * @return The URL that Descope notifies with a logout token when the user&#39;s session ends, as per the [OIDC Back-Channel Logout](https://openid.net/specs/openid-connect-backchannel-1_0.html) specification. Leave empty to disable back-channel logout notifications for this application.
+     * 
+     */
+    public Optional<String> backchannelLogoutUrl() {
+        return Optional.ofNullable(this.backchannelLogoutUrl);
     }
     /**
      * @return A list of supported claims. e.g. `sub`, `email`, `exp`.
@@ -165,7 +187,14 @@ public final class ProjectApplicationsOidcApplication {
         return Optional.ofNullable(this.clientType);
     }
     /**
-     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), or `&#34;&#34;` (default — both). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
+     * @return A custom login page URL to redirect users to on IdP-initiated login flows, instead of the default login page.
+     * 
+     */
+    public Optional<String> customIdpInitiatedLoginPageUrl() {
+        return Optional.ofNullable(this.customIdpInitiatedLoginPageUrl);
+    }
+    /**
+     * @return Controls the default `aud` claim of tokens issued for this application. One of `&#34;projectId&#34;` (the project ID only), `&#34;clientId&#34;` (the dedicated client ID only), `&#34;appId&#34;` (the application ID only), `&#34;empty&#34;` (no `aud` claim at all), or `&#34;&#34;` (default — both the project ID and the client ID). Only applies to modern apps that set a `clientType`; legacy apps always use the project ID, so the empty default leaves their behavior unchanged.
      * 
      */
     public Optional<String> defaultAudience() {
@@ -254,6 +283,13 @@ public final class ProjectApplicationsOidcApplication {
     public List<ProjectApplicationsOidcApplicationRole> roles() {
         return this.roles == null ? List.of() : this.roles;
     }
+    /**
+     * @return Controls the audience values appended to the issued token&#39;s `aud` claim for trusted sibling applications. One of `&#34;projectId&#34;`, `&#34;clientId&#34;`, `&#34;appId&#34;`, `&#34;empty&#34;` (add none), or `&#34;&#34;` (default — both the project ID and the client ID). Independent of `defaultAudience`.
+     * 
+     */
+    public Optional<String> trustedAppsAudience() {
+        return Optional.ofNullable(this.trustedAppsAudience);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -266,11 +302,13 @@ public final class ProjectApplicationsOidcApplication {
     public static final class Builder {
         private @Nullable List<String> approvedRedirectUrls;
         private @Nullable Boolean authorizationCodeDisabled;
+        private @Nullable String backchannelLogoutUrl;
         private @Nullable List<String> claims;
         private @Nullable Boolean clientCredentialsDisabled;
         private @Nullable String clientId;
         private @Nullable String clientSecret;
         private @Nullable String clientType;
+        private @Nullable String customIdpInitiatedLoginPageUrl;
         private @Nullable String defaultAudience;
         private @Nullable String description;
         private @Nullable Boolean deviceCodeDisabled;
@@ -285,16 +323,19 @@ public final class ProjectApplicationsOidcApplication {
         private @Nullable List<ProjectApplicationsOidcApplicationPermission> permissions;
         private @Nullable Boolean refreshTokenDisabled;
         private @Nullable List<ProjectApplicationsOidcApplicationRole> roles;
+        private @Nullable String trustedAppsAudience;
         public Builder() {}
         public Builder(ProjectApplicationsOidcApplication defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.approvedRedirectUrls = defaults.approvedRedirectUrls;
     	      this.authorizationCodeDisabled = defaults.authorizationCodeDisabled;
+    	      this.backchannelLogoutUrl = defaults.backchannelLogoutUrl;
     	      this.claims = defaults.claims;
     	      this.clientCredentialsDisabled = defaults.clientCredentialsDisabled;
     	      this.clientId = defaults.clientId;
     	      this.clientSecret = defaults.clientSecret;
     	      this.clientType = defaults.clientType;
+    	      this.customIdpInitiatedLoginPageUrl = defaults.customIdpInitiatedLoginPageUrl;
     	      this.defaultAudience = defaults.defaultAudience;
     	      this.description = defaults.description;
     	      this.deviceCodeDisabled = defaults.deviceCodeDisabled;
@@ -309,6 +350,7 @@ public final class ProjectApplicationsOidcApplication {
     	      this.permissions = defaults.permissions;
     	      this.refreshTokenDisabled = defaults.refreshTokenDisabled;
     	      this.roles = defaults.roles;
+    	      this.trustedAppsAudience = defaults.trustedAppsAudience;
         }
 
         @CustomType.Setter
@@ -324,6 +366,12 @@ public final class ProjectApplicationsOidcApplication {
         public Builder authorizationCodeDisabled(@Nullable Boolean authorizationCodeDisabled) {
 
             this.authorizationCodeDisabled = authorizationCodeDisabled;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder backchannelLogoutUrl(@Nullable String backchannelLogoutUrl) {
+
+            this.backchannelLogoutUrl = backchannelLogoutUrl;
             return this;
         }
         @CustomType.Setter
@@ -357,6 +405,12 @@ public final class ProjectApplicationsOidcApplication {
         public Builder clientType(@Nullable String clientType) {
 
             this.clientType = clientType;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder customIdpInitiatedLoginPageUrl(@Nullable String customIdpInitiatedLoginPageUrl) {
+
+            this.customIdpInitiatedLoginPageUrl = customIdpInitiatedLoginPageUrl;
             return this;
         }
         @CustomType.Setter
@@ -451,15 +505,23 @@ public final class ProjectApplicationsOidcApplication {
         public Builder roles(ProjectApplicationsOidcApplicationRole... roles) {
             return roles(List.of(roles));
         }
+        @CustomType.Setter
+        public Builder trustedAppsAudience(@Nullable String trustedAppsAudience) {
+
+            this.trustedAppsAudience = trustedAppsAudience;
+            return this;
+        }
         public ProjectApplicationsOidcApplication build() {
             final var _resultValue = new ProjectApplicationsOidcApplication();
             _resultValue.approvedRedirectUrls = approvedRedirectUrls;
             _resultValue.authorizationCodeDisabled = authorizationCodeDisabled;
+            _resultValue.backchannelLogoutUrl = backchannelLogoutUrl;
             _resultValue.claims = claims;
             _resultValue.clientCredentialsDisabled = clientCredentialsDisabled;
             _resultValue.clientId = clientId;
             _resultValue.clientSecret = clientSecret;
             _resultValue.clientType = clientType;
+            _resultValue.customIdpInitiatedLoginPageUrl = customIdpInitiatedLoginPageUrl;
             _resultValue.defaultAudience = defaultAudience;
             _resultValue.description = description;
             _resultValue.deviceCodeDisabled = deviceCodeDisabled;
@@ -474,6 +536,7 @@ public final class ProjectApplicationsOidcApplication {
             _resultValue.permissions = permissions;
             _resultValue.refreshTokenDisabled = refreshTokenDisabled;
             _resultValue.roles = roles;
+            _resultValue.trustedAppsAudience = trustedAppsAudience;
             return _resultValue;
         }
     }

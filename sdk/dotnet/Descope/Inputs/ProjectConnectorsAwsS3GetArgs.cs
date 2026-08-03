@@ -66,6 +66,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// The ID of the Descope Engine that runs this connector's actions inside your private network. Leave empty to run the connector in the Descope backend.
+        /// </summary>
+        [Input("engineId")]
+        public Input<string>? EngineId { get; set; }
+
+        /// <summary>
         /// The external ID to use when assuming the role.
         /// </summary>
         [Input("externalId")]

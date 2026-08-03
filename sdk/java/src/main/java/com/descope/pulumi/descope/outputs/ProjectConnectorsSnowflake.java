@@ -46,6 +46,11 @@ public final class ProjectConnectorsSnowflake {
      * 
      */
     private @Nullable String description;
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    private @Nullable String engineId;
     private @Nullable String id;
     /**
      * @return Whether to mask personally identifiable information in the logs.
@@ -126,6 +131,13 @@ public final class ProjectConnectorsSnowflake {
     public Optional<String> description() {
         return Optional.ofNullable(this.description);
     }
+    /**
+     * @return The ID of the Descope Engine that runs this connector&#39;s actions inside your private network. Leave empty to run the connector in the Descope backend.
+     * 
+     */
+    public Optional<String> engineId() {
+        return Optional.ofNullable(this.engineId);
+    }
     public Optional<String> id() {
         return Optional.ofNullable(this.id);
     }
@@ -194,6 +206,7 @@ public final class ProjectConnectorsSnowflake {
         private @Nullable String auditTable;
         private @Nullable String database;
         private @Nullable String description;
+        private @Nullable String engineId;
         private @Nullable String id;
         private @Nullable Boolean maskPii;
         private @Nullable Double minFlushIntervalMinutes;
@@ -211,6 +224,7 @@ public final class ProjectConnectorsSnowflake {
     	      this.auditTable = defaults.auditTable;
     	      this.database = defaults.database;
     	      this.description = defaults.description;
+    	      this.engineId = defaults.engineId;
     	      this.id = defaults.id;
     	      this.maskPii = defaults.maskPii;
     	      this.minFlushIntervalMinutes = defaults.minFlushIntervalMinutes;
@@ -260,6 +274,12 @@ public final class ProjectConnectorsSnowflake {
         public Builder description(@Nullable String description) {
 
             this.description = description;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder engineId(@Nullable String engineId) {
+
+            this.engineId = engineId;
             return this;
         }
         @CustomType.Setter
@@ -322,6 +342,7 @@ public final class ProjectConnectorsSnowflake {
             _resultValue.auditTable = auditTable;
             _resultValue.database = database;
             _resultValue.description = description;
+            _resultValue.engineId = engineId;
             _resultValue.id = id;
             _resultValue.maskPii = maskPii;
             _resultValue.minFlushIntervalMinutes = minFlushIntervalMinutes;
