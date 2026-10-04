@@ -14,6 +14,12 @@ namespace Descope.Pulumi.Descope
     public partial class InboundApp : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+        /// </summary>
+        [Output("allowedTenants")]
+        public Output<ImmutableArray<string>> AllowedTenants { get; private set; } = null!;
+
+        /// <summary>
         /// A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         /// </summary>
         [Output("approvedCallbackUrls")]
@@ -44,6 +50,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> ClientSecret { get; private set; } = null!;
 
         /// <summary>
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// </summary>
+        [Output("clientType")]
+        public Output<string> ClientType { get; private set; } = null!;
+
+        /// <summary>
         /// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         /// </summary>
         [Output("connectionsScopes")]
@@ -54,6 +66,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("defaultAudience")]
         public Output<string> DefaultAudience { get; private set; } = null!;
+
+        /// <summary>
+        /// Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `False` and apply the change first.
+        /// </summary>
+        [Output("deletionProtection")]
+        public Output<bool?> DeletionProtection { get; private set; } = null!;
 
         /// <summary>
         /// A description for the inbound app.
@@ -98,12 +116,6 @@ namespace Descope.Pulumi.Descope
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-        /// </summary>
-        [Output("nonConfidentialClient")]
-        public Output<bool> NonConfidentialClient { get; private set; } = null!;
-
-        /// <summary>
         /// A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         /// </summary>
         [Output("permissionsScopes")]
@@ -114,6 +126,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("projectId")]
         public Output<string> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `AttributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+        /// </summary>
+        [Output("scopeClaimMappings")]
+        public Output<ImmutableArray<Outputs.InboundAppScopeClaimMapping>> ScopeClaimMappings { get; private set; } = null!;
 
         /// <summary>
         /// Custom session management settings for this inbound app, overriding the project defaults.
@@ -172,6 +190,18 @@ namespace Descope.Pulumi.Descope
 
     public sealed class InboundAppArgs : global::Pulumi.ResourceArgs
     {
+        [Input("allowedTenants")]
+        private InputList<string>? _allowedTenants;
+
+        /// <summary>
+        /// Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+        /// </summary>
+        public InputList<string> AllowedTenants
+        {
+            get => _allowedTenants ?? (_allowedTenants = new InputList<string>());
+            set => _allowedTenants = value;
+        }
+
         [Input("approvedCallbackUrls")]
         private InputList<string>? _approvedCallbackUrls;
 
@@ -230,6 +260,12 @@ namespace Descope.Pulumi.Descope
             }
         }
 
+        /// <summary>
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// </summary>
+        [Input("clientType")]
+        public Input<string>? ClientType { get; set; }
+
         [Input("connectionsScopes")]
         private InputList<Inputs.InboundAppConnectionsScopeArgs>? _connectionsScopes;
 
@@ -247,6 +283,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("defaultAudience")]
         public Input<string>? DefaultAudience { get; set; }
+
+        /// <summary>
+        /// Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `False` and apply the change first.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
 
         /// <summary>
         /// A description for the inbound app.
@@ -290,12 +332,6 @@ namespace Descope.Pulumi.Descope
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-        /// </summary>
-        [Input("nonConfidentialClient")]
-        public Input<bool>? NonConfidentialClient { get; set; }
-
         [Input("permissionsScopes")]
         private InputList<Inputs.InboundAppPermissionsScopeArgs>? _permissionsScopes;
 
@@ -314,6 +350,18 @@ namespace Descope.Pulumi.Descope
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
 
+        [Input("scopeClaimMappings")]
+        private InputList<Inputs.InboundAppScopeClaimMappingArgs>? _scopeClaimMappings;
+
+        /// <summary>
+        /// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `AttributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+        /// </summary>
+        public InputList<Inputs.InboundAppScopeClaimMappingArgs> ScopeClaimMappings
+        {
+            get => _scopeClaimMappings ?? (_scopeClaimMappings = new InputList<Inputs.InboundAppScopeClaimMappingArgs>());
+            set => _scopeClaimMappings = value;
+        }
+
         /// <summary>
         /// Custom session management settings for this inbound app, overriding the project defaults.
         /// </summary>
@@ -328,6 +376,18 @@ namespace Descope.Pulumi.Descope
 
     public sealed class InboundAppState : global::Pulumi.ResourceArgs
     {
+        [Input("allowedTenants")]
+        private InputList<string>? _allowedTenants;
+
+        /// <summary>
+        /// Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+        /// </summary>
+        public InputList<string> AllowedTenants
+        {
+            get => _allowedTenants ?? (_allowedTenants = new InputList<string>());
+            set => _allowedTenants = value;
+        }
+
         [Input("approvedCallbackUrls")]
         private InputList<string>? _approvedCallbackUrls;
 
@@ -386,6 +446,12 @@ namespace Descope.Pulumi.Descope
             }
         }
 
+        /// <summary>
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// </summary>
+        [Input("clientType")]
+        public Input<string>? ClientType { get; set; }
+
         [Input("connectionsScopes")]
         private InputList<Inputs.InboundAppConnectionsScopeGetArgs>? _connectionsScopes;
 
@@ -403,6 +469,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("defaultAudience")]
         public Input<string>? DefaultAudience { get; set; }
+
+        /// <summary>
+        /// Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `False` and apply the change first.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
 
         /// <summary>
         /// A description for the inbound app.
@@ -446,12 +518,6 @@ namespace Descope.Pulumi.Descope
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-        /// </summary>
-        [Input("nonConfidentialClient")]
-        public Input<bool>? NonConfidentialClient { get; set; }
-
         [Input("permissionsScopes")]
         private InputList<Inputs.InboundAppPermissionsScopeGetArgs>? _permissionsScopes;
 
@@ -469,6 +535,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("projectId")]
         public Input<string>? ProjectId { get; set; }
+
+        [Input("scopeClaimMappings")]
+        private InputList<Inputs.InboundAppScopeClaimMappingGetArgs>? _scopeClaimMappings;
+
+        /// <summary>
+        /// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `AttributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+        /// </summary>
+        public InputList<Inputs.InboundAppScopeClaimMappingGetArgs> ScopeClaimMappings
+        {
+            get => _scopeClaimMappings ?? (_scopeClaimMappings = new InputList<Inputs.InboundAppScopeClaimMappingGetArgs>());
+            set => _scopeClaimMappings = value;
+        }
 
         /// <summary>
         /// Custom session management settings for this inbound app, overriding the project defaults.

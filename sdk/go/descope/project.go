@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+// Manages a Descope project. A project is the core entity in Descope—its authentication settings, user flows, roles, connectors, applications, and other configuration are managed with the standalone `descope_*` resources that reference the project by ID.
 //
 // This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
 //
@@ -52,7 +52,9 @@ import (
 //
 // ### Authentication Methods
 //
-// Enable and configure the authentication methods your users will use:
+// Authentication method settings are managed with their own standalone resources, such as
+// `MagiclinkSettings`, `OtpSettings`,
+// `PasswordSettings`, and `SsoSettings`:
 //
 // ```go
 // package main
@@ -66,24 +68,24 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				Authentication: &descope.ProjectAuthenticationArgs{
-//					MagicLink: &descope.ProjectAuthenticationMagicLinkArgs{
-//						ExpirationTime: pulumi.String("1 hour"),
-//					},
-//					Password: &descope.ProjectAuthenticationPasswordArgs{
-//						Lock:         pulumi.Bool(true),
-//						LockAttempts: pulumi.Int(5),
-//						MinLength:    pulumi.Int(12),
-//					},
-//					Otp: &descope.ProjectAuthenticationOtpArgs{
-//						ExpirationTime: pulumi.String("5 minutes"),
-//					},
-//					Passkeys: &descope.ProjectAuthenticationPasskeysArgs{
-//						Disabled: pulumi.Bool(false),
-//					},
-//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewMagiclinkSettings(ctx, "example", &descope.MagiclinkSettingsArgs{
+//				ProjectId:      example.ID(),
+//				ExpirationTime: pulumi.String("1 hour"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewPasswordSettings(ctx, "example", &descope.PasswordSettingsArgs{
+//				ProjectId:    example.ID(),
+//				Lock:         pulumi.Bool(true),
+//				LockAttempts: pulumi.Int(5),
+//				MinLength:    pulumi.Int(12),
 //			})
 //			if err != nil {
 //				return err
@@ -96,7 +98,7 @@ import (
 //
 // ### Roles and Permissions (RBAC)
 //
-// Define roles and permissions for your users:
+// Roles and permissions are managed as standalone resources that reference the project by ID:
 //
 // ```go
 // package main
@@ -110,49 +112,67 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				Authorization: &descope.ProjectAuthorizationArgs{
-//					Permissions: descope.ProjectAuthorizationPermissionArray{
-//						&descope.ProjectAuthorizationPermissionArgs{
-//							Name:        pulumi.String("read:data"),
-//							Description: pulumi.String("Read access to application data"),
-//						},
-//						&descope.ProjectAuthorizationPermissionArgs{
-//							Name:        pulumi.String("write:data"),
-//							Description: pulumi.String("Write access to application data"),
-//						},
-//						&descope.ProjectAuthorizationPermissionArgs{
-//							Name:        pulumi.String("admin:panel"),
-//							Description: pulumi.String("Access to the admin panel"),
-//						},
-//					},
-//					Roles: descope.ProjectAuthorizationRoleArray{
-//						&descope.ProjectAuthorizationRoleArgs{
-//							Name:        pulumi.String("viewer"),
-//							Description: pulumi.String("Can read data"),
-//							Permissions: pulumi.StringArray{
-//								pulumi.String("read:data"),
-//							},
-//						},
-//						&descope.ProjectAuthorizationRoleArgs{
-//							Name:        pulumi.String("editor"),
-//							Description: pulumi.String("Can read and write data"),
-//							Permissions: pulumi.StringArray{
-//								pulumi.String("read:data"),
-//								pulumi.String("write:data"),
-//							},
-//						},
-//						&descope.ProjectAuthorizationRoleArgs{
-//							Name:        pulumi.String("admin"),
-//							Description: pulumi.String("Full access"),
-//							Permissions: pulumi.StringArray{
-//								pulumi.String("read:data"),
-//								pulumi.String("write:data"),
-//								pulumi.String("admin:panel"),
-//							},
-//						},
-//					},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			readData, err := descope.NewPermission(ctx, "read_data", &descope.PermissionArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("read:data"),
+//				Description: pulumi.String("Read access to application data"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			writeData, err := descope.NewPermission(ctx, "write_data", &descope.PermissionArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("write:data"),
+//				Description: pulumi.String("Write access to application data"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			adminPanel, err := descope.NewPermission(ctx, "admin_panel", &descope.PermissionArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("admin:panel"),
+//				Description: pulumi.String("Access to the admin panel"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewRole(ctx, "viewer", &descope.RoleArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("viewer"),
+//				Description: pulumi.String("Can read data"),
+//				Permissions: pulumi.StringArray{
+//					readData.Name,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewRole(ctx, "editor", &descope.RoleArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("editor"),
+//				Description: pulumi.String("Can read and write data"),
+//				Permissions: pulumi.StringArray{
+//					readData.Name,
+//					writeData.Name,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewRole(ctx, "admin", &descope.RoleArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("admin"),
+//				Description: pulumi.String("Full access"),
+//				Permissions: pulumi.StringArray{
+//					readData.Name,
+//					writeData.Name,
+//					adminPanel.Name,
 //				},
 //			})
 //			if err != nil {
@@ -166,7 +186,7 @@ import (
 //
 // ### Connectors
 //
-// Integrate with third-party services to enrich flows and send notifications:
+// Integrate with third-party services using standalone per-type connector resources:
 //
 // ```go
 // package main
@@ -180,46 +200,43 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				Connectors: &descope.ProjectConnectorsArgs{
-//					Https: descope.ProjectConnectorsHttpArray{
-//						&descope.ProjectConnectorsHttpArgs{
-//							Name:        pulumi.String("User Eligibility Check"),
-//							Description: pulumi.String("Checks if a new user is allowed to register"),
-//							BaseUrl:     pulumi.String("https://api.example.com"),
-//							Authentication: &descope.ProjectConnectorsHttpAuthenticationArgs{
-//								BearerToken: pulumi.Any(webhookSecret),
-//							},
-//						},
-//					},
-//					Sendgrids: descope.ProjectConnectorsSendgridArray{
-//						&descope.ProjectConnectorsSendgridArgs{
-//							Name: pulumi.String("Transactional Email"),
-//							Sender: &descope.ProjectConnectorsSendgridSenderArgs{
-//								Email: pulumi.String("noreply@example.com"),
-//								Name:  pulumi.String("My App"),
-//							},
-//							Authentication: &descope.ProjectConnectorsSendgridAuthenticationArgs{
-//								ApiKey: pulumi.Any(sendgridApiKey),
-//							},
-//						},
-//					},
-//					TwilioCores: descope.ProjectConnectorsTwilioCoreArray{
-//						&descope.ProjectConnectorsTwilioCoreArgs{
-//							Name:       pulumi.String("SMS OTP"),
-//							AccountSid: pulumi.Any(twilioAccountSid),
-//							Senders: &descope.ProjectConnectorsTwilioCoreSendersArgs{
-//								Sms: &descope.ProjectConnectorsTwilioCoreSendersSmsArgs{
-//									PhoneNumber: pulumi.String("+15551234567"),
-//								},
-//							},
-//							Authentication: &descope.ProjectConnectorsTwilioCoreAuthenticationArgs{
-//								AuthToken: pulumi.Any(twilioAuthToken),
-//							},
-//						},
-//					},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Generic HTTP webhook with bearer token auth
+//			_, err = descope.NewHttpConnector(ctx, "eligibility", &descope.HttpConnectorArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("User Eligibility Check"),
+//				Description: pulumi.String("Checks if a new user is allowed to register"),
+//				BaseUrl:     pulumi.String("https://api.example.com"),
+//				Authentication: &descope.HttpConnectorAuthenticationArgs{
+//					BearerToken: pulumi.Any(webhookSecret),
 //				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// SendGrid for email delivery
+//			_, err = descope.NewSendgridConnector(ctx, "email", &descope.SendgridConnectorArgs{
+//				ProjectId:   example.ID(),
+//				Name:        pulumi.String("Transactional Email"),
+//				SenderEmail: pulumi.String("noreply@example.com"),
+//				SenderName:  pulumi.String("My App"),
+//				ApiKey:      pulumi.Any(sendgridApiKey),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Twilio for SMS OTP
+//			_, err = descope.NewTwilioCoreConnector(ctx, "sms", &descope.TwilioCoreConnectorArgs{
+//				ProjectId:  example.ID(),
+//				Name:       pulumi.String("SMS OTP"),
+//				AccountSid: pulumi.Any(twilioAccountSid),
+//				FromPhone:  pulumi.String("+15551234567"),
+//				AuthToken:  pulumi.Any(twilioAuthToken),
 //			})
 //			if err != nil {
 //				return err
@@ -230,9 +247,12 @@ import (
 //
 // ```
 //
-// ### Session Settings
+// ### Project and Session Settings
 //
-// Configure token lifetimes and session behavior:
+// General project settings, session behavior, and user invitations are managed with the
+// standalone `ProjectSettings`,
+// `SessionSettings`, and
+// `InviteSettings` resources:
 //
 // ```go
 // package main
@@ -246,20 +266,38 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				ProjectSettings: &descope.ProjectProjectSettingsArgs{
-//					RefreshTokenExpiration: pulumi.String("3 weeks"),
-//					SessionTokenExpiration: pulumi.String("15 minutes"),
-//					RefreshTokenRotation:   pulumi.Bool(true),
-//					EnableInactivity:       pulumi.Bool(true),
-//					InactivityTime:         pulumi.String("30 minutes"),
-//					CustomDomain:           pulumi.String("auth.example.com"),
-//					ApprovedDomains: pulumi.StringArray{
-//						pulumi.String("example.com"),
-//						pulumi.String("app.example.com"),
-//					},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewProjectSettings(ctx, "example", &descope.ProjectSettingsArgs{
+//				ProjectId: example.ID(),
+//				AppUrl:    pulumi.String("https://app.example.com"),
+//				ApprovedDomains: pulumi.StringArray{
+//					pulumi.String("example.com"),
+//					pulumi.String("app.example.com"),
 //				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewSessionSettings(ctx, "example", &descope.SessionSettingsArgs{
+//				ProjectId:              example.ID(),
+//				RefreshTokenExpiration: pulumi.String("3 weeks"),
+//				SessionTokenExpiration: pulumi.String("15 minutes"),
+//				RefreshTokenRotation:   pulumi.Bool(true),
+//				EnableInactivity:       pulumi.Bool(true),
+//				InactivityTime:         pulumi.String("30 minutes"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewInviteSettings(ctx, "example", &descope.InviteSettingsArgs{
+//				ProjectId:         example.ID(),
+//				RequireInvitation: pulumi.Bool(true),
+//				InviteUrl:         pulumi.String("https://app.example.com/invite"),
 //			})
 //			if err != nil {
 //				return err
@@ -270,9 +308,11 @@ import (
 //
 // ```
 //
-// ### OIDC Applications
+// ### Federated Applications
 //
-// Register an OIDC application for SSO:
+// Federated (SSO IdP) applications and their app-scoped roles and permissions are managed
+// with the standalone `OidcApp`, `SamlApp`, `WsfedApp`,
+// `AppRole`, and `AppPermission` resources that reference the project by ID:
 //
 // ```go
 // package main
@@ -286,16 +326,35 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				Applications: &descope.ProjectApplicationsArgs{
-//					OidcApplications: descope.ProjectApplicationsOidcApplicationArray{
-//						&descope.ProjectApplicationsOidcApplicationArgs{
-//							Name:         pulumi.String("My Web App"),
-//							Description:  pulumi.String("Primary web application"),
-//							LoginPageUrl: pulumi.String("https://app.example.com/login"),
-//						},
-//					},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			web, err := descope.NewOidcApp(ctx, "web", &descope.OidcAppArgs{
+//				ProjectId:    example.ID(),
+//				Name:         pulumi.String("My Web App"),
+//				Description:  pulumi.String("Primary web application"),
+//				LoginPageUrl: pulumi.String("https://app.example.com/login"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			readReports, err := descope.NewAppPermission(ctx, "read_reports", &descope.AppPermissionArgs{
+//				ProjectId: example.ID(),
+//				AppId:     web.OidcAppId,
+//				Name:      pulumi.String("read:reports"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewAppRole(ctx, "analyst", &descope.AppRoleArgs{
+//				ProjectId: example.ID(),
+//				AppId:     web.OidcAppId,
+//				Name:      pulumi.String("analyst"),
+//				PermissionIds: pulumi.StringArray{
+//					readReports.ID(),
 //				},
 //			})
 //			if err != nil {
@@ -309,7 +368,8 @@ import (
 //
 // ### JWT Templates
 //
-// Customize the JWT claims added to session tokens:
+// JWT templates are managed with the standalone `JwtTemplate` resource that
+// references the project by ID:
 //
 // ```go
 // package main
@@ -325,6 +385,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//				Name: pulumi.String("my-app"),
+//			})
+//			if err != nil {
+//				return err
+//			}
 //			tmpJSON0, err := json.Marshal(map[string]interface{}{
 //				"tier":   "@user.customAttributes.subscriptionTier",
 //				"org_id": "@user.tenants[0].tenantId",
@@ -333,23 +399,15 @@ import (
 //				return err
 //			}
 //			json0 := string(tmpJSON0)
-//			_, err = descope.NewProject(ctx, "example", &descope.ProjectArgs{
-//				Name: pulumi.String("my-app"),
-//				JwtTemplates: &descope.ProjectJwtTemplatesArgs{
-//					UserTemplates: descope.ProjectJwtTemplatesUserTemplateArray{
-//						&descope.ProjectJwtTemplatesUserTemplateArgs{
-//							Name:                   pulumi.String("app-claims"),
-//							Description:            pulumi.String("Adds subscription tier and org context to user JWTs"),
-//							Template:               pulumi.String(json0),
-//							ExcludePermissionClaim: pulumi.Bool(true),
-//							AddJtiClaim:            pulumi.Bool(true),
-//							OverrideSubjectClaim:   pulumi.Bool(true),
-//						},
-//					},
-//				},
-//				ProjectSettings: &descope.ProjectProjectSettingsArgs{
-//					UserJwtTemplate: pulumi.String("app-claims"),
-//				},
+//			_, err = descope.NewJwtTemplate(ctx, "app_claims", &descope.JwtTemplateArgs{
+//				ProjectId:              example.ID(),
+//				Name:                   pulumi.String("app-claims"),
+//				Description:            pulumi.String("Adds subscription tier and org context to user JWTs"),
+//				Type:                   pulumi.String("user"),
+//				Template:               pulumi.String(json0),
+//				ExcludePermissionClaim: pulumi.Bool(true),
+//				AddJtiClaim:            pulumi.Bool(true),
+//				OverrideSubjectClaim:   pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -362,7 +420,8 @@ import (
 //
 // ### SSO Settings
 //
-// Configure global settings for Single Sign-On across tenants:
+// Global settings for Single Sign-On across tenants are managed with the standalone
+// `SsoSettings` resource:
 //
 // ```go
 // package main
@@ -376,34 +435,33 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
+//			example, err := descope.NewProject(ctx, "example", &descope.ProjectArgs{
 //				Name: pulumi.String("my-app"),
-//				Authentication: &descope.ProjectAuthenticationArgs{
-//					Sso: &descope.ProjectAuthenticationSsoArgs{
-//						MergeUsers:                 pulumi.Bool(true),
-//						AllowOverrideRoles:         pulumi.Bool(true),
-//						GroupsPriority:             pulumi.Bool(true),
-//						RequireSsoDomains:          pulumi.Bool(true),
-//						RequireGroupsAttributeName: pulumi.Bool(true),
-//						MandatoryUserAttributes: descope.ProjectAuthenticationSsoMandatoryUserAttributeArray{
-//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
-//								Id: pulumi.String("email"),
-//							},
-//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
-//								Id: pulumi.String("name"),
-//							},
-//							&descope.ProjectAuthenticationSsoMandatoryUserAttributeArgs{
-//								Id:     pulumi.String("department"),
-//								Custom: pulumi.Bool(true),
-//							},
-//						},
-//						SsoSuiteSettings: &descope.ProjectAuthenticationSsoSsoSuiteSettingsArgs{
-//							StyleId:  pulumi.String("my-brand-style"),
-//							HideScim: pulumi.Bool(false),
-//							HideSaml: pulumi.Bool(false),
-//							HideOidc: pulumi.Bool(false),
-//						},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = descope.NewSsoSettings(ctx, "example", &descope.SsoSettingsArgs{
+//				ProjectId:          example.ID(),
+//				MergeUsers:         pulumi.Bool(true),
+//				AllowOverrideRoles: pulumi.Bool(true),
+//				MandatoryUserAttributes: descope.SsoSettingsMandatoryUserAttributeArray{
+//					&descope.SsoSettingsMandatoryUserAttributeArgs{
+//						Id: pulumi.String("email"),
 //					},
+//					&descope.SsoSettingsMandatoryUserAttributeArgs{
+//						Id: pulumi.String("name"),
+//					},
+//					&descope.SsoSettingsMandatoryUserAttributeArgs{
+//						Id:     pulumi.String("department"),
+//						Custom: pulumi.Bool(true),
+//					},
+//				},
+//				SsoSuiteSettings: &descope.SsoSettingsSsoSuiteSettingsArgs{
+//					StyleId:  pulumi.String("my-brand-style"),
+//					HideScim: pulumi.Bool(false),
+//					HideSaml: pulumi.Bool(false),
+//					HideOidc: pulumi.Bool(false),
 //				},
 //			})
 //			if err != nil {
@@ -417,38 +475,14 @@ import (
 type Project struct {
 	pulumi.CustomResourceState
 
-	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-	AdminPortal ProjectAdminPortalOutput `pulumi:"adminPortal"`
-	// Applications that are registered with the project.
-	Applications ProjectApplicationsOutput `pulumi:"applications"`
-	// Custom attributes that can be attached to users and tenants.
-	Attributes ProjectAttributesOutput `pulumi:"attributes"`
-	// Settings for each authentication method.
-	Authentication ProjectAuthenticationOutput `pulumi:"authentication"`
-	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-	Authorization ProjectAuthorizationOutput `pulumi:"authorization"`
-	// Enrich your flows by interacting with third party services.
-	Connectors ProjectConnectorsOutput `pulumi:"connectors"`
+	// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+	DeletionProtection pulumi.BoolPtrOutput `pulumi:"deletionProtection"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringOutput `pulumi:"environment"`
-	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapOutput `pulumi:"flows"`
-	// User invitation settings and behavior.
-	InviteSettings ProjectInviteSettingsOutput `pulumi:"inviteSettings"`
-	// Defines templates for JSON Web Tokens (JWT) used for authentication.
-	JwtTemplates ProjectJwtTemplatesOutput `pulumi:"jwtTemplates"`
-	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-	Lists ProjectListArrayOutput `pulumi:"lists"`
 	// The name of the Descope project.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// General settings for the Descope project.
-	ProjectSettings ProjectProjectSettingsOutput `pulumi:"projectSettings"`
-	// Custom styles that can be applied to the project's authentication flows.
-	Styles ProjectStylesOutput `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
-	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-	Widgets ProjectWidgetsMapOutput `pulumi:"widgets"`
 }
 
 // NewProject registers a new resource with the given unique name, arguments, and options.
@@ -481,73 +515,25 @@ func GetProject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Project resources.
 type projectState struct {
-	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-	AdminPortal *ProjectAdminPortal `pulumi:"adminPortal"`
-	// Applications that are registered with the project.
-	Applications *ProjectApplications `pulumi:"applications"`
-	// Custom attributes that can be attached to users and tenants.
-	Attributes *ProjectAttributes `pulumi:"attributes"`
-	// Settings for each authentication method.
-	Authentication *ProjectAuthentication `pulumi:"authentication"`
-	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-	Authorization *ProjectAuthorization `pulumi:"authorization"`
-	// Enrich your flows by interacting with third party services.
-	Connectors *ProjectConnectors `pulumi:"connectors"`
+	// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment *string `pulumi:"environment"`
-	// Custom authentication flows to use in this project.
-	Flows map[string]ProjectFlows `pulumi:"flows"`
-	// User invitation settings and behavior.
-	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
-	// Defines templates for JSON Web Tokens (JWT) used for authentication.
-	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
-	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-	Lists []ProjectList `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
-	// General settings for the Descope project.
-	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
-	// Custom styles that can be applied to the project's authentication flows.
-	Styles *ProjectStyles `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags []string `pulumi:"tags"`
-	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-	Widgets map[string]ProjectWidgets `pulumi:"widgets"`
 }
 
 type ProjectState struct {
-	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-	AdminPortal ProjectAdminPortalPtrInput
-	// Applications that are registered with the project.
-	Applications ProjectApplicationsPtrInput
-	// Custom attributes that can be attached to users and tenants.
-	Attributes ProjectAttributesPtrInput
-	// Settings for each authentication method.
-	Authentication ProjectAuthenticationPtrInput
-	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-	Authorization ProjectAuthorizationPtrInput
-	// Enrich your flows by interacting with third party services.
-	Connectors ProjectConnectorsPtrInput
+	// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+	DeletionProtection pulumi.BoolPtrInput
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
-	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapInput
-	// User invitation settings and behavior.
-	InviteSettings ProjectInviteSettingsPtrInput
-	// Defines templates for JSON Web Tokens (JWT) used for authentication.
-	JwtTemplates ProjectJwtTemplatesPtrInput
-	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-	Lists ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
-	// General settings for the Descope project.
-	ProjectSettings ProjectProjectSettingsPtrInput
-	// Custom styles that can be applied to the project's authentication flows.
-	Styles ProjectStylesPtrInput
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayInput
-	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-	Widgets ProjectWidgetsMapInput
 }
 
 func (ProjectState) ElementType() reflect.Type {
@@ -555,74 +541,26 @@ func (ProjectState) ElementType() reflect.Type {
 }
 
 type projectArgs struct {
-	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-	AdminPortal *ProjectAdminPortal `pulumi:"adminPortal"`
-	// Applications that are registered with the project.
-	Applications *ProjectApplications `pulumi:"applications"`
-	// Custom attributes that can be attached to users and tenants.
-	Attributes *ProjectAttributes `pulumi:"attributes"`
-	// Settings for each authentication method.
-	Authentication *ProjectAuthentication `pulumi:"authentication"`
-	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-	Authorization *ProjectAuthorization `pulumi:"authorization"`
-	// Enrich your flows by interacting with third party services.
-	Connectors *ProjectConnectors `pulumi:"connectors"`
+	// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment *string `pulumi:"environment"`
-	// Custom authentication flows to use in this project.
-	Flows map[string]ProjectFlows `pulumi:"flows"`
-	// User invitation settings and behavior.
-	InviteSettings *ProjectInviteSettings `pulumi:"inviteSettings"`
-	// Defines templates for JSON Web Tokens (JWT) used for authentication.
-	JwtTemplates *ProjectJwtTemplates `pulumi:"jwtTemplates"`
-	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-	Lists []ProjectList `pulumi:"lists"`
 	// The name of the Descope project.
 	Name *string `pulumi:"name"`
-	// General settings for the Descope project.
-	ProjectSettings *ProjectProjectSettings `pulumi:"projectSettings"`
-	// Custom styles that can be applied to the project's authentication flows.
-	Styles *ProjectStyles `pulumi:"styles"`
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags []string `pulumi:"tags"`
-	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-	Widgets map[string]ProjectWidgets `pulumi:"widgets"`
 }
 
 // The set of arguments for constructing a Project resource.
 type ProjectArgs struct {
-	// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-	AdminPortal ProjectAdminPortalPtrInput
-	// Applications that are registered with the project.
-	Applications ProjectApplicationsPtrInput
-	// Custom attributes that can be attached to users and tenants.
-	Attributes ProjectAttributesPtrInput
-	// Settings for each authentication method.
-	Authentication ProjectAuthenticationPtrInput
-	// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-	Authorization ProjectAuthorizationPtrInput
-	// Enrich your flows by interacting with third party services.
-	Connectors ProjectConnectorsPtrInput
+	// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+	DeletionProtection pulumi.BoolPtrInput
 	// This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
 	Environment pulumi.StringPtrInput
-	// Custom authentication flows to use in this project.
-	Flows ProjectFlowsMapInput
-	// User invitation settings and behavior.
-	InviteSettings ProjectInviteSettingsPtrInput
-	// Defines templates for JSON Web Tokens (JWT) used for authentication.
-	JwtTemplates ProjectJwtTemplatesPtrInput
-	// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-	Lists ProjectListArrayInput
 	// The name of the Descope project.
 	Name pulumi.StringPtrInput
-	// General settings for the Descope project.
-	ProjectSettings ProjectProjectSettingsPtrInput
-	// Custom styles that can be applied to the project's authentication flows.
-	Styles ProjectStylesPtrInput
 	// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 	Tags pulumi.StringArrayInput
-	// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-	Widgets ProjectWidgetsMapInput
 }
 
 func (ProjectArgs) ElementType() reflect.Type {
@@ -712,34 +650,9 @@ func (o ProjectOutput) ToProjectOutputWithContext(ctx context.Context) ProjectOu
 	return o
 }
 
-// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-func (o ProjectOutput) AdminPortal() ProjectAdminPortalOutput {
-	return o.ApplyT(func(v *Project) ProjectAdminPortalOutput { return v.AdminPortal }).(ProjectAdminPortalOutput)
-}
-
-// Applications that are registered with the project.
-func (o ProjectOutput) Applications() ProjectApplicationsOutput {
-	return o.ApplyT(func(v *Project) ProjectApplicationsOutput { return v.Applications }).(ProjectApplicationsOutput)
-}
-
-// Custom attributes that can be attached to users and tenants.
-func (o ProjectOutput) Attributes() ProjectAttributesOutput {
-	return o.ApplyT(func(v *Project) ProjectAttributesOutput { return v.Attributes }).(ProjectAttributesOutput)
-}
-
-// Settings for each authentication method.
-func (o ProjectOutput) Authentication() ProjectAuthenticationOutput {
-	return o.ApplyT(func(v *Project) ProjectAuthenticationOutput { return v.Authentication }).(ProjectAuthenticationOutput)
-}
-
-// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-func (o ProjectOutput) Authorization() ProjectAuthorizationOutput {
-	return o.ApplyT(func(v *Project) ProjectAuthorizationOutput { return v.Authorization }).(ProjectAuthorizationOutput)
-}
-
-// Enrich your flows by interacting with third party services.
-func (o ProjectOutput) Connectors() ProjectConnectorsOutput {
-	return o.ApplyT(func(v *Project) ProjectConnectorsOutput { return v.Connectors }).(ProjectConnectorsOutput)
+// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
+func (o ProjectOutput) DeletionProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Project) pulumi.BoolPtrOutput { return v.DeletionProtection }).(pulumi.BoolPtrOutput)
 }
 
 // This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
@@ -747,49 +660,14 @@ func (o ProjectOutput) Environment() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
 }
 
-// Custom authentication flows to use in this project.
-func (o ProjectOutput) Flows() ProjectFlowsMapOutput {
-	return o.ApplyT(func(v *Project) ProjectFlowsMapOutput { return v.Flows }).(ProjectFlowsMapOutput)
-}
-
-// User invitation settings and behavior.
-func (o ProjectOutput) InviteSettings() ProjectInviteSettingsOutput {
-	return o.ApplyT(func(v *Project) ProjectInviteSettingsOutput { return v.InviteSettings }).(ProjectInviteSettingsOutput)
-}
-
-// Defines templates for JSON Web Tokens (JWT) used for authentication.
-func (o ProjectOutput) JwtTemplates() ProjectJwtTemplatesOutput {
-	return o.ApplyT(func(v *Project) ProjectJwtTemplatesOutput { return v.JwtTemplates }).(ProjectJwtTemplatesOutput)
-}
-
-// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-func (o ProjectOutput) Lists() ProjectListArrayOutput {
-	return o.ApplyT(func(v *Project) ProjectListArrayOutput { return v.Lists }).(ProjectListArrayOutput)
-}
-
 // The name of the Descope project.
 func (o ProjectOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// General settings for the Descope project.
-func (o ProjectOutput) ProjectSettings() ProjectProjectSettingsOutput {
-	return o.ApplyT(func(v *Project) ProjectProjectSettingsOutput { return v.ProjectSettings }).(ProjectProjectSettingsOutput)
-}
-
-// Custom styles that can be applied to the project's authentication flows.
-func (o ProjectOutput) Styles() ProjectStylesOutput {
-	return o.ApplyT(func(v *Project) ProjectStylesOutput { return v.Styles }).(ProjectStylesOutput)
-}
-
 // Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
 func (o ProjectOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
-}
-
-// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-func (o ProjectOutput) Widgets() ProjectWidgetsMapOutput {
-	return o.ApplyT(func(v *Project) ProjectWidgetsMapOutput { return v.Widgets }).(ProjectWidgetsMapOutput)
 }
 
 type ProjectArrayOutput struct{ *pulumi.OutputState }

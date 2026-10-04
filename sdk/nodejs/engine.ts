@@ -4,6 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
+ */
 export class Engine extends pulumi.CustomResource {
     /**
      * Get an existing Engine resource's state with the given name, ID, and optional extra

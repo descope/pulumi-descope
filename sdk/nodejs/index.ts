@@ -5,38 +5,583 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { AbuseipdbConnectorArgs, AbuseipdbConnectorState } from "./abuseipdbConnector";
+export type AbuseipdbConnector = import("./abuseipdbConnector").AbuseipdbConnector;
+export const AbuseipdbConnector: typeof import("./abuseipdbConnector").AbuseipdbConnector = null as any;
+utilities.lazyLoad(exports, ["AbuseipdbConnector"], () => require("./abuseipdbConnector"));
+
 export { AccessKeyArgs, AccessKeyState } from "./accessKey";
 export type AccessKey = import("./accessKey").AccessKey;
 export const AccessKey: typeof import("./accessKey").AccessKey = null as any;
 utilities.lazyLoad(exports, ["AccessKey"], () => require("./accessKey"));
+
+export { AccessKeyAttributeArgs, AccessKeyAttributeState } from "./accessKeyAttribute";
+export type AccessKeyAttribute = import("./accessKeyAttribute").AccessKeyAttribute;
+export const AccessKeyAttribute: typeof import("./accessKeyAttribute").AccessKeyAttribute = null as any;
+utilities.lazyLoad(exports, ["AccessKeyAttribute"], () => require("./accessKeyAttribute"));
+
+export { AdminPortalArgs, AdminPortalState } from "./adminPortal";
+export type AdminPortal = import("./adminPortal").AdminPortal;
+export const AdminPortal: typeof import("./adminPortal").AdminPortal = null as any;
+utilities.lazyLoad(exports, ["AdminPortal"], () => require("./adminPortal"));
+
+export { AlloyConnectorArgs, AlloyConnectorState } from "./alloyConnector";
+export type AlloyConnector = import("./alloyConnector").AlloyConnector;
+export const AlloyConnector: typeof import("./alloyConnector").AlloyConnector = null as any;
+utilities.lazyLoad(exports, ["AlloyConnector"], () => require("./alloyConnector"));
+
+export { AmplitudeConnectorArgs, AmplitudeConnectorState } from "./amplitudeConnector";
+export type AmplitudeConnector = import("./amplitudeConnector").AmplitudeConnector;
+export const AmplitudeConnector: typeof import("./amplitudeConnector").AmplitudeConnector = null as any;
+utilities.lazyLoad(exports, ["AmplitudeConnector"], () => require("./amplitudeConnector"));
+
+export { AppPermissionArgs, AppPermissionState } from "./appPermission";
+export type AppPermission = import("./appPermission").AppPermission;
+export const AppPermission: typeof import("./appPermission").AppPermission = null as any;
+utilities.lazyLoad(exports, ["AppPermission"], () => require("./appPermission"));
+
+export { AppRoleArgs, AppRoleState } from "./appRole";
+export type AppRole = import("./appRole").AppRole;
+export const AppRole: typeof import("./appRole").AppRole = null as any;
+utilities.lazyLoad(exports, ["AppRole"], () => require("./appRole"));
+
+export { ArkoseConnectorArgs, ArkoseConnectorState } from "./arkoseConnector";
+export type ArkoseConnector = import("./arkoseConnector").ArkoseConnector;
+export const ArkoseConnector: typeof import("./arkoseConnector").ArkoseConnector = null as any;
+utilities.lazyLoad(exports, ["ArkoseConnector"], () => require("./arkoseConnector"));
+
+export { AuditWebhookConnectorArgs, AuditWebhookConnectorState } from "./auditWebhookConnector";
+export type AuditWebhookConnector = import("./auditWebhookConnector").AuditWebhookConnector;
+export const AuditWebhookConnector: typeof import("./auditWebhookConnector").AuditWebhookConnector = null as any;
+utilities.lazyLoad(exports, ["AuditWebhookConnector"], () => require("./auditWebhookConnector"));
+
+export { AwsEventbridgeConnectorArgs, AwsEventbridgeConnectorState } from "./awsEventbridgeConnector";
+export type AwsEventbridgeConnector = import("./awsEventbridgeConnector").AwsEventbridgeConnector;
+export const AwsEventbridgeConnector: typeof import("./awsEventbridgeConnector").AwsEventbridgeConnector = null as any;
+utilities.lazyLoad(exports, ["AwsEventbridgeConnector"], () => require("./awsEventbridgeConnector"));
+
+export { AwsS3ConnectorArgs, AwsS3ConnectorState } from "./awsS3Connector";
+export type AwsS3Connector = import("./awsS3Connector").AwsS3Connector;
+export const AwsS3Connector: typeof import("./awsS3Connector").AwsS3Connector = null as any;
+utilities.lazyLoad(exports, ["AwsS3Connector"], () => require("./awsS3Connector"));
+
+export { AwsSesEmailValidationConnectorArgs, AwsSesEmailValidationConnectorState } from "./awsSesEmailValidationConnector";
+export type AwsSesEmailValidationConnector = import("./awsSesEmailValidationConnector").AwsSesEmailValidationConnector;
+export const AwsSesEmailValidationConnector: typeof import("./awsSesEmailValidationConnector").AwsSesEmailValidationConnector = null as any;
+utilities.lazyLoad(exports, ["AwsSesEmailValidationConnector"], () => require("./awsSesEmailValidationConnector"));
+
+export { AwsTranslateConnectorArgs, AwsTranslateConnectorState } from "./awsTranslateConnector";
+export type AwsTranslateConnector = import("./awsTranslateConnector").AwsTranslateConnector;
+export const AwsTranslateConnector: typeof import("./awsTranslateConnector").AwsTranslateConnector = null as any;
+utilities.lazyLoad(exports, ["AwsTranslateConnector"], () => require("./awsTranslateConnector"));
+
+export { BitsightConnectorArgs, BitsightConnectorState } from "./bitsightConnector";
+export type BitsightConnector = import("./bitsightConnector").BitsightConnector;
+export const BitsightConnector: typeof import("./bitsightConnector").BitsightConnector = null as any;
+utilities.lazyLoad(exports, ["BitsightConnector"], () => require("./bitsightConnector"));
+
+export { CoralogixConnectorArgs, CoralogixConnectorState } from "./coralogixConnector";
+export type CoralogixConnector = import("./coralogixConnector").CoralogixConnector;
+export const CoralogixConnector: typeof import("./coralogixConnector").CoralogixConnector = null as any;
+utilities.lazyLoad(exports, ["CoralogixConnector"], () => require("./coralogixConnector"));
+
+export { CriblConnectorArgs, CriblConnectorState } from "./criblConnector";
+export type CriblConnector = import("./criblConnector").CriblConnector;
+export const CriblConnector: typeof import("./criblConnector").CriblConnector = null as any;
+utilities.lazyLoad(exports, ["CriblConnector"], () => require("./criblConnector"));
+
+export { DarwiniumConnectorArgs, DarwiniumConnectorState } from "./darwiniumConnector";
+export type DarwiniumConnector = import("./darwiniumConnector").DarwiniumConnector;
+export const DarwiniumConnector: typeof import("./darwiniumConnector").DarwiniumConnector = null as any;
+utilities.lazyLoad(exports, ["DarwiniumConnector"], () => require("./darwiniumConnector"));
+
+export { DatadogConnectorArgs, DatadogConnectorState } from "./datadogConnector";
+export type DatadogConnector = import("./datadogConnector").DatadogConnector;
+export const DatadogConnector: typeof import("./datadogConnector").DatadogConnector = null as any;
+utilities.lazyLoad(exports, ["DatadogConnector"], () => require("./datadogConnector"));
 
 export { DescoperArgs, DescoperState } from "./descoper";
 export type Descoper = import("./descoper").Descoper;
 export const Descoper: typeof import("./descoper").Descoper = null as any;
 utilities.lazyLoad(exports, ["Descoper"], () => require("./descoper"));
 
+export { DevrevGrowConnectorArgs, DevrevGrowConnectorState } from "./devrevGrowConnector";
+export type DevrevGrowConnector = import("./devrevGrowConnector").DevrevGrowConnector;
+export const DevrevGrowConnector: typeof import("./devrevGrowConnector").DevrevGrowConnector = null as any;
+utilities.lazyLoad(exports, ["DevrevGrowConnector"], () => require("./devrevGrowConnector"));
+
+export { DoceboConnectorArgs, DoceboConnectorState } from "./doceboConnector";
+export type DoceboConnector = import("./doceboConnector").DoceboConnector;
+export const DoceboConnector: typeof import("./doceboConnector").DoceboConnector = null as any;
+utilities.lazyLoad(exports, ["DoceboConnector"], () => require("./doceboConnector"));
+
+export { EightByEightViberConnectorArgs, EightByEightViberConnectorState } from "./eightByEightViberConnector";
+export type EightByEightViberConnector = import("./eightByEightViberConnector").EightByEightViberConnector;
+export const EightByEightViberConnector: typeof import("./eightByEightViberConnector").EightByEightViberConnector = null as any;
+utilities.lazyLoad(exports, ["EightByEightViberConnector"], () => require("./eightByEightViberConnector"));
+
+export { EightByEightWhatsappConnectorArgs, EightByEightWhatsappConnectorState } from "./eightByEightWhatsappConnector";
+export type EightByEightWhatsappConnector = import("./eightByEightWhatsappConnector").EightByEightWhatsappConnector;
+export const EightByEightWhatsappConnector: typeof import("./eightByEightWhatsappConnector").EightByEightWhatsappConnector = null as any;
+utilities.lazyLoad(exports, ["EightByEightWhatsappConnector"], () => require("./eightByEightWhatsappConnector"));
+
+export { ElephantConnectorArgs, ElephantConnectorState } from "./elephantConnector";
+export type ElephantConnector = import("./elephantConnector").ElephantConnector;
+export const ElephantConnector: typeof import("./elephantConnector").ElephantConnector = null as any;
+utilities.lazyLoad(exports, ["ElephantConnector"], () => require("./elephantConnector"));
+
+export { EmailTemplateArgs, EmailTemplateState } from "./emailTemplate";
+export type EmailTemplate = import("./emailTemplate").EmailTemplate;
+export const EmailTemplate: typeof import("./emailTemplate").EmailTemplate = null as any;
+utilities.lazyLoad(exports, ["EmailTemplate"], () => require("./emailTemplate"));
+
+export { EmbeddedlinkSettingsArgs, EmbeddedlinkSettingsState } from "./embeddedlinkSettings";
+export type EmbeddedlinkSettings = import("./embeddedlinkSettings").EmbeddedlinkSettings;
+export const EmbeddedlinkSettings: typeof import("./embeddedlinkSettings").EmbeddedlinkSettings = null as any;
+utilities.lazyLoad(exports, ["EmbeddedlinkSettings"], () => require("./embeddedlinkSettings"));
+
+export { EnchantedlinkSettingsArgs, EnchantedlinkSettingsState } from "./enchantedlinkSettings";
+export type EnchantedlinkSettings = import("./enchantedlinkSettings").EnchantedlinkSettings;
+export const EnchantedlinkSettings: typeof import("./enchantedlinkSettings").EnchantedlinkSettings = null as any;
+utilities.lazyLoad(exports, ["EnchantedlinkSettings"], () => require("./enchantedlinkSettings"));
+
 export { EngineArgs, EngineState } from "./engine";
 export type Engine = import("./engine").Engine;
 export const Engine: typeof import("./engine").Engine = null as any;
 utilities.lazyLoad(exports, ["Engine"], () => require("./engine"));
+
+export { ExternalTokenHttpConnectorArgs, ExternalTokenHttpConnectorState } from "./externalTokenHttpConnector";
+export type ExternalTokenHttpConnector = import("./externalTokenHttpConnector").ExternalTokenHttpConnector;
+export const ExternalTokenHttpConnector: typeof import("./externalTokenHttpConnector").ExternalTokenHttpConnector = null as any;
+utilities.lazyLoad(exports, ["ExternalTokenHttpConnector"], () => require("./externalTokenHttpConnector"));
+
+export { FgaSchemaArgs, FgaSchemaState } from "./fgaSchema";
+export type FgaSchema = import("./fgaSchema").FgaSchema;
+export const FgaSchema: typeof import("./fgaSchema").FgaSchema = null as any;
+utilities.lazyLoad(exports, ["FgaSchema"], () => require("./fgaSchema"));
+
+export { FingerprintConnectorArgs, FingerprintConnectorState } from "./fingerprintConnector";
+export type FingerprintConnector = import("./fingerprintConnector").FingerprintConnector;
+export const FingerprintConnector: typeof import("./fingerprintConnector").FingerprintConnector = null as any;
+utilities.lazyLoad(exports, ["FingerprintConnector"], () => require("./fingerprintConnector"));
+
+export { FingerprintDescopeConnectorArgs, FingerprintDescopeConnectorState } from "./fingerprintDescopeConnector";
+export type FingerprintDescopeConnector = import("./fingerprintDescopeConnector").FingerprintDescopeConnector;
+export const FingerprintDescopeConnector: typeof import("./fingerprintDescopeConnector").FingerprintDescopeConnector = null as any;
+utilities.lazyLoad(exports, ["FingerprintDescopeConnector"], () => require("./fingerprintDescopeConnector"));
+
+export { FirebaseAdminConnectorArgs, FirebaseAdminConnectorState } from "./firebaseAdminConnector";
+export type FirebaseAdminConnector = import("./firebaseAdminConnector").FirebaseAdminConnector;
+export const FirebaseAdminConnector: typeof import("./firebaseAdminConnector").FirebaseAdminConnector = null as any;
+utilities.lazyLoad(exports, ["FirebaseAdminConnector"], () => require("./firebaseAdminConnector"));
+
+export { FlowArgs, FlowState } from "./flow";
+export type Flow = import("./flow").Flow;
+export const Flow: typeof import("./flow").Flow = null as any;
+utilities.lazyLoad(exports, ["Flow"], () => require("./flow"));
+
+export { ForterConnectorArgs, ForterConnectorState } from "./forterConnector";
+export type ForterConnector = import("./forterConnector").ForterConnector;
+export const ForterConnector: typeof import("./forterConnector").ForterConnector = null as any;
+utilities.lazyLoad(exports, ["ForterConnector"], () => require("./forterConnector"));
+
+export { GenericEmailGatewayConnectorArgs, GenericEmailGatewayConnectorState } from "./genericEmailGatewayConnector";
+export type GenericEmailGatewayConnector = import("./genericEmailGatewayConnector").GenericEmailGatewayConnector;
+export const GenericEmailGatewayConnector: typeof import("./genericEmailGatewayConnector").GenericEmailGatewayConnector = null as any;
+utilities.lazyLoad(exports, ["GenericEmailGatewayConnector"], () => require("./genericEmailGatewayConnector"));
+
+export { GenericSmsGatewayConnectorArgs, GenericSmsGatewayConnectorState } from "./genericSmsGatewayConnector";
+export type GenericSmsGatewayConnector = import("./genericSmsGatewayConnector").GenericSmsGatewayConnector;
+export const GenericSmsGatewayConnector: typeof import("./genericSmsGatewayConnector").GenericSmsGatewayConnector = null as any;
+utilities.lazyLoad(exports, ["GenericSmsGatewayConnector"], () => require("./genericSmsGatewayConnector"));
+
+export { GoogleCloudLoggingConnectorArgs, GoogleCloudLoggingConnectorState } from "./googleCloudLoggingConnector";
+export type GoogleCloudLoggingConnector = import("./googleCloudLoggingConnector").GoogleCloudLoggingConnector;
+export const GoogleCloudLoggingConnector: typeof import("./googleCloudLoggingConnector").GoogleCloudLoggingConnector = null as any;
+utilities.lazyLoad(exports, ["GoogleCloudLoggingConnector"], () => require("./googleCloudLoggingConnector"));
+
+export { GoogleCloudTranslationConnectorArgs, GoogleCloudTranslationConnectorState } from "./googleCloudTranslationConnector";
+export type GoogleCloudTranslationConnector = import("./googleCloudTranslationConnector").GoogleCloudTranslationConnector;
+export const GoogleCloudTranslationConnector: typeof import("./googleCloudTranslationConnector").GoogleCloudTranslationConnector = null as any;
+utilities.lazyLoad(exports, ["GoogleCloudTranslationConnector"], () => require("./googleCloudTranslationConnector"));
+
+export { GoogleMapsPlacesConnectorArgs, GoogleMapsPlacesConnectorState } from "./googleMapsPlacesConnector";
+export type GoogleMapsPlacesConnector = import("./googleMapsPlacesConnector").GoogleMapsPlacesConnector;
+export const GoogleMapsPlacesConnector: typeof import("./googleMapsPlacesConnector").GoogleMapsPlacesConnector = null as any;
+utilities.lazyLoad(exports, ["GoogleMapsPlacesConnector"], () => require("./googleMapsPlacesConnector"));
+
+export { GroundcoverConnectorArgs, GroundcoverConnectorState } from "./groundcoverConnector";
+export type GroundcoverConnector = import("./groundcoverConnector").GroundcoverConnector;
+export const GroundcoverConnector: typeof import("./groundcoverConnector").GroundcoverConnector = null as any;
+utilities.lazyLoad(exports, ["GroundcoverConnector"], () => require("./groundcoverConnector"));
+
+export { HcaptchaConnectorArgs, HcaptchaConnectorState } from "./hcaptchaConnector";
+export type HcaptchaConnector = import("./hcaptchaConnector").HcaptchaConnector;
+export const HcaptchaConnector: typeof import("./hcaptchaConnector").HcaptchaConnector = null as any;
+utilities.lazyLoad(exports, ["HcaptchaConnector"], () => require("./hcaptchaConnector"));
+
+export { HibpConnectorArgs, HibpConnectorState } from "./hibpConnector";
+export type HibpConnector = import("./hibpConnector").HibpConnector;
+export const HibpConnector: typeof import("./hibpConnector").HibpConnector = null as any;
+utilities.lazyLoad(exports, ["HibpConnector"], () => require("./hibpConnector"));
+
+export { HttpConnectorArgs, HttpConnectorState } from "./httpConnector";
+export type HttpConnector = import("./httpConnector").HttpConnector;
+export const HttpConnector: typeof import("./httpConnector").HttpConnector = null as any;
+utilities.lazyLoad(exports, ["HttpConnector"], () => require("./httpConnector"));
+
+export { HubspotConnectorArgs, HubspotConnectorState } from "./hubspotConnector";
+export type HubspotConnector = import("./hubspotConnector").HubspotConnector;
+export const HubspotConnector: typeof import("./hubspotConnector").HubspotConnector = null as any;
+utilities.lazyLoad(exports, ["HubspotConnector"], () => require("./hubspotConnector"));
 
 export { InboundAppArgs, InboundAppState } from "./inboundApp";
 export type InboundApp = import("./inboundApp").InboundApp;
 export const InboundApp: typeof import("./inboundApp").InboundApp = null as any;
 utilities.lazyLoad(exports, ["InboundApp"], () => require("./inboundApp"));
 
+export { IncodeConnectorArgs, IncodeConnectorState } from "./incodeConnector";
+export type IncodeConnector = import("./incodeConnector").IncodeConnector;
+export const IncodeConnector: typeof import("./incodeConnector").IncodeConnector = null as any;
+utilities.lazyLoad(exports, ["IncodeConnector"], () => require("./incodeConnector"));
+
+export { IntercomConnectorArgs, IntercomConnectorState } from "./intercomConnector";
+export type IntercomConnector = import("./intercomConnector").IntercomConnector;
+export const IntercomConnector: typeof import("./intercomConnector").IntercomConnector = null as any;
+utilities.lazyLoad(exports, ["IntercomConnector"], () => require("./intercomConnector"));
+
+export { InviteSettingsArgs, InviteSettingsState } from "./inviteSettings";
+export type InviteSettings = import("./inviteSettings").InviteSettings;
+export const InviteSettings: typeof import("./inviteSettings").InviteSettings = null as any;
+utilities.lazyLoad(exports, ["InviteSettings"], () => require("./inviteSettings"));
+
+export { JwtTemplateArgs, JwtTemplateState } from "./jwtTemplate";
+export type JwtTemplate = import("./jwtTemplate").JwtTemplate;
+export const JwtTemplate: typeof import("./jwtTemplate").JwtTemplate = null as any;
+utilities.lazyLoad(exports, ["JwtTemplate"], () => require("./jwtTemplate"));
+
+export { LdapConnectorArgs, LdapConnectorState } from "./ldapConnector";
+export type LdapConnector = import("./ldapConnector").LdapConnector;
+export const LdapConnector: typeof import("./ldapConnector").LdapConnector = null as any;
+utilities.lazyLoad(exports, ["LdapConnector"], () => require("./ldapConnector"));
+
+export { ListArgs, ListState } from "./list";
+export type List = import("./list").List;
+export const List: typeof import("./list").List = null as any;
+utilities.lazyLoad(exports, ["List"], () => require("./list"));
+
+export { LokaliseConnectorArgs, LokaliseConnectorState } from "./lokaliseConnector";
+export type LokaliseConnector = import("./lokaliseConnector").LokaliseConnector;
+export const LokaliseConnector: typeof import("./lokaliseConnector").LokaliseConnector = null as any;
+utilities.lazyLoad(exports, ["LokaliseConnector"], () => require("./lokaliseConnector"));
+
+export { MagiclinkSettingsArgs, MagiclinkSettingsState } from "./magiclinkSettings";
+export type MagiclinkSettings = import("./magiclinkSettings").MagiclinkSettings;
+export const MagiclinkSettings: typeof import("./magiclinkSettings").MagiclinkSettings = null as any;
+utilities.lazyLoad(exports, ["MagiclinkSettings"], () => require("./magiclinkSettings"));
+
 export { ManagementKeyArgs, ManagementKeyState } from "./managementKey";
 export type ManagementKey = import("./managementKey").ManagementKey;
 export const ManagementKey: typeof import("./managementKey").ManagementKey = null as any;
 utilities.lazyLoad(exports, ["ManagementKey"], () => require("./managementKey"));
+
+export { MixpanelConnectorArgs, MixpanelConnectorState } from "./mixpanelConnector";
+export type MixpanelConnector = import("./mixpanelConnector").MixpanelConnector;
+export const MixpanelConnector: typeof import("./mixpanelConnector").MixpanelConnector = null as any;
+utilities.lazyLoad(exports, ["MixpanelConnector"], () => require("./mixpanelConnector"));
+
+export { MparticleConnectorArgs, MparticleConnectorState } from "./mparticleConnector";
+export type MparticleConnector = import("./mparticleConnector").MparticleConnector;
+export const MparticleConnector: typeof import("./mparticleConnector").MparticleConnector = null as any;
+utilities.lazyLoad(exports, ["MparticleConnector"], () => require("./mparticleConnector"));
+
+export { NewrelicConnectorArgs, NewrelicConnectorState } from "./newrelicConnector";
+export type NewrelicConnector = import("./newrelicConnector").NewrelicConnector;
+export const NewrelicConnector: typeof import("./newrelicConnector").NewrelicConnector = null as any;
+utilities.lazyLoad(exports, ["NewrelicConnector"], () => require("./newrelicConnector"));
+
+export { OauthProviderArgs, OauthProviderState } from "./oauthProvider";
+export type OauthProvider = import("./oauthProvider").OauthProvider;
+export const OauthProvider: typeof import("./oauthProvider").OauthProvider = null as any;
+utilities.lazyLoad(exports, ["OauthProvider"], () => require("./oauthProvider"));
+
+export { OauthSettingsArgs, OauthSettingsState } from "./oauthSettings";
+export type OauthSettings = import("./oauthSettings").OauthSettings;
+export const OauthSettings: typeof import("./oauthSettings").OauthSettings = null as any;
+utilities.lazyLoad(exports, ["OauthSettings"], () => require("./oauthSettings"));
+
+export { OidcAppArgs, OidcAppState } from "./oidcApp";
+export type OidcApp = import("./oidcApp").OidcApp;
+export const OidcApp: typeof import("./oidcApp").OidcApp = null as any;
+utilities.lazyLoad(exports, ["OidcApp"], () => require("./oidcApp"));
+
+export { OpentelemetryConnectorArgs, OpentelemetryConnectorState } from "./opentelemetryConnector";
+export type OpentelemetryConnector = import("./opentelemetryConnector").OpentelemetryConnector;
+export const OpentelemetryConnector: typeof import("./opentelemetryConnector").OpentelemetryConnector = null as any;
+utilities.lazyLoad(exports, ["OpentelemetryConnector"], () => require("./opentelemetryConnector"));
+
+export { OtpSettingsArgs, OtpSettingsState } from "./otpSettings";
+export type OtpSettings = import("./otpSettings").OtpSettings;
+export const OtpSettings: typeof import("./otpSettings").OtpSettings = null as any;
+utilities.lazyLoad(exports, ["OtpSettings"], () => require("./otpSettings"));
+
+export { OutboundAppArgs, OutboundAppState } from "./outboundApp";
+export type OutboundApp = import("./outboundApp").OutboundApp;
+export const OutboundApp: typeof import("./outboundApp").OutboundApp = null as any;
+utilities.lazyLoad(exports, ["OutboundApp"], () => require("./outboundApp"));
+
+export { PasskeySettingsArgs, PasskeySettingsState } from "./passkeySettings";
+export type PasskeySettings = import("./passkeySettings").PasskeySettings;
+export const PasskeySettings: typeof import("./passkeySettings").PasskeySettings = null as any;
+utilities.lazyLoad(exports, ["PasskeySettings"], () => require("./passkeySettings"));
+
+export { PasswordSettingsArgs, PasswordSettingsState } from "./passwordSettings";
+export type PasswordSettings = import("./passwordSettings").PasswordSettings;
+export const PasswordSettings: typeof import("./passwordSettings").PasswordSettings = null as any;
+utilities.lazyLoad(exports, ["PasswordSettings"], () => require("./passwordSettings"));
+
+export { PendoConnectorArgs, PendoConnectorState } from "./pendoConnector";
+export type PendoConnector = import("./pendoConnector").PendoConnector;
+export const PendoConnector: typeof import("./pendoConnector").PendoConnector = null as any;
+utilities.lazyLoad(exports, ["PendoConnector"], () => require("./pendoConnector"));
+
+export { PermissionArgs, PermissionState } from "./permission";
+export type Permission = import("./permission").Permission;
+export const Permission: typeof import("./permission").Permission = null as any;
+utilities.lazyLoad(exports, ["Permission"], () => require("./permission"));
+
+export { PingDirectoryConnectorArgs, PingDirectoryConnectorState } from "./pingDirectoryConnector";
+export type PingDirectoryConnector = import("./pingDirectoryConnector").PingDirectoryConnector;
+export const PingDirectoryConnector: typeof import("./pingDirectoryConnector").PingDirectoryConnector = null as any;
+utilities.lazyLoad(exports, ["PingDirectoryConnector"], () => require("./pingDirectoryConnector"));
+
+export { PostmarkConnectorArgs, PostmarkConnectorState } from "./postmarkConnector";
+export type PostmarkConnector = import("./postmarkConnector").PostmarkConnector;
+export const PostmarkConnector: typeof import("./postmarkConnector").PostmarkConnector = null as any;
+utilities.lazyLoad(exports, ["PostmarkConnector"], () => require("./postmarkConnector"));
 
 export { ProjectArgs, ProjectState } from "./project";
 export type Project = import("./project").Project;
 export const Project: typeof import("./project").Project = null as any;
 utilities.lazyLoad(exports, ["Project"], () => require("./project"));
 
+export { ProjectSettingsArgs, ProjectSettingsState } from "./projectSettings";
+export type ProjectSettings = import("./projectSettings").ProjectSettings;
+export const ProjectSettings: typeof import("./projectSettings").ProjectSettings = null as any;
+utilities.lazyLoad(exports, ["ProjectSettings"], () => require("./projectSettings"));
+
 export * from "./provider";
 import { Provider } from "./provider";
+
+export { RadarConnectorArgs, RadarConnectorState } from "./radarConnector";
+export type RadarConnector = import("./radarConnector").RadarConnector;
+export const RadarConnector: typeof import("./radarConnector").RadarConnector = null as any;
+utilities.lazyLoad(exports, ["RadarConnector"], () => require("./radarConnector"));
+
+export { RecaptchaConnectorArgs, RecaptchaConnectorState } from "./recaptchaConnector";
+export type RecaptchaConnector = import("./recaptchaConnector").RecaptchaConnector;
+export const RecaptchaConnector: typeof import("./recaptchaConnector").RecaptchaConnector = null as any;
+utilities.lazyLoad(exports, ["RecaptchaConnector"], () => require("./recaptchaConnector"));
+
+export { RecaptchaEnterpriseConnectorArgs, RecaptchaEnterpriseConnectorState } from "./recaptchaEnterpriseConnector";
+export type RecaptchaEnterpriseConnector = import("./recaptchaEnterpriseConnector").RecaptchaEnterpriseConnector;
+export const RecaptchaEnterpriseConnector: typeof import("./recaptchaEnterpriseConnector").RecaptchaEnterpriseConnector = null as any;
+utilities.lazyLoad(exports, ["RecaptchaEnterpriseConnector"], () => require("./recaptchaEnterpriseConnector"));
+
+export { RecaptchaV2ConnectorArgs, RecaptchaV2ConnectorState } from "./recaptchaV2Connector";
+export type RecaptchaV2Connector = import("./recaptchaV2Connector").RecaptchaV2Connector;
+export const RecaptchaV2Connector: typeof import("./recaptchaV2Connector").RecaptchaV2Connector = null as any;
+utilities.lazyLoad(exports, ["RecaptchaV2Connector"], () => require("./recaptchaV2Connector"));
+
+export { RekognitionConnectorArgs, RekognitionConnectorState } from "./rekognitionConnector";
+export type RekognitionConnector = import("./rekognitionConnector").RekognitionConnector;
+export const RekognitionConnector: typeof import("./rekognitionConnector").RekognitionConnector = null as any;
+utilities.lazyLoad(exports, ["RekognitionConnector"], () => require("./rekognitionConnector"));
+
+export { RndReassignedConnectorArgs, RndReassignedConnectorState } from "./rndReassignedConnector";
+export type RndReassignedConnector = import("./rndReassignedConnector").RndReassignedConnector;
+export const RndReassignedConnector: typeof import("./rndReassignedConnector").RndReassignedConnector = null as any;
+utilities.lazyLoad(exports, ["RndReassignedConnector"], () => require("./rndReassignedConnector"));
+
+export { RoleArgs, RoleState } from "./role";
+export type Role = import("./role").Role;
+export const Role: typeof import("./role").Role = null as any;
+utilities.lazyLoad(exports, ["Role"], () => require("./role"));
+
+export { SalesforceConnectorArgs, SalesforceConnectorState } from "./salesforceConnector";
+export type SalesforceConnector = import("./salesforceConnector").SalesforceConnector;
+export const SalesforceConnector: typeof import("./salesforceConnector").SalesforceConnector = null as any;
+utilities.lazyLoad(exports, ["SalesforceConnector"], () => require("./salesforceConnector"));
+
+export { SalesforceMarketingCloudConnectorArgs, SalesforceMarketingCloudConnectorState } from "./salesforceMarketingCloudConnector";
+export type SalesforceMarketingCloudConnector = import("./salesforceMarketingCloudConnector").SalesforceMarketingCloudConnector;
+export const SalesforceMarketingCloudConnector: typeof import("./salesforceMarketingCloudConnector").SalesforceMarketingCloudConnector = null as any;
+utilities.lazyLoad(exports, ["SalesforceMarketingCloudConnector"], () => require("./salesforceMarketingCloudConnector"));
+
+export { SamlAppArgs, SamlAppState } from "./samlApp";
+export type SamlApp = import("./samlApp").SamlApp;
+export const SamlApp: typeof import("./samlApp").SamlApp = null as any;
+utilities.lazyLoad(exports, ["SamlApp"], () => require("./samlApp"));
+
+export { SardineConnectorArgs, SardineConnectorState } from "./sardineConnector";
+export type SardineConnector = import("./sardineConnector").SardineConnector;
+export const SardineConnector: typeof import("./sardineConnector").SardineConnector = null as any;
+utilities.lazyLoad(exports, ["SardineConnector"], () => require("./sardineConnector"));
+
+export { ScimConnectorArgs, ScimConnectorState } from "./scimConnector";
+export type ScimConnector = import("./scimConnector").ScimConnector;
+export const ScimConnector: typeof import("./scimConnector").ScimConnector = null as any;
+utilities.lazyLoad(exports, ["ScimConnector"], () => require("./scimConnector"));
+
+export { SegmentConnectorArgs, SegmentConnectorState } from "./segmentConnector";
+export type SegmentConnector = import("./segmentConnector").SegmentConnector;
+export const SegmentConnector: typeof import("./segmentConnector").SegmentConnector = null as any;
+utilities.lazyLoad(exports, ["SegmentConnector"], () => require("./segmentConnector"));
+
+export { SendgridConnectorArgs, SendgridConnectorState } from "./sendgridConnector";
+export type SendgridConnector = import("./sendgridConnector").SendgridConnector;
+export const SendgridConnector: typeof import("./sendgridConnector").SendgridConnector = null as any;
+utilities.lazyLoad(exports, ["SendgridConnector"], () => require("./sendgridConnector"));
+
+export { SesConnectorArgs, SesConnectorState } from "./sesConnector";
+export type SesConnector = import("./sesConnector").SesConnector;
+export const SesConnector: typeof import("./sesConnector").SesConnector = null as any;
+utilities.lazyLoad(exports, ["SesConnector"], () => require("./sesConnector"));
+
+export { SessionMigrationArgs, SessionMigrationState } from "./sessionMigration";
+export type SessionMigration = import("./sessionMigration").SessionMigration;
+export const SessionMigration: typeof import("./sessionMigration").SessionMigration = null as any;
+utilities.lazyLoad(exports, ["SessionMigration"], () => require("./sessionMigration"));
+
+export { SessionSettingsArgs, SessionSettingsState } from "./sessionSettings";
+export type SessionSettings = import("./sessionSettings").SessionSettings;
+export const SessionSettings: typeof import("./sessionSettings").SessionSettings = null as any;
+utilities.lazyLoad(exports, ["SessionSettings"], () => require("./sessionSettings"));
+
+export { SlackConnectorArgs, SlackConnectorState } from "./slackConnector";
+export type SlackConnector = import("./slackConnector").SlackConnector;
+export const SlackConnector: typeof import("./slackConnector").SlackConnector = null as any;
+utilities.lazyLoad(exports, ["SlackConnector"], () => require("./slackConnector"));
+
+export { SmartlingConnectorArgs, SmartlingConnectorState } from "./smartlingConnector";
+export type SmartlingConnector = import("./smartlingConnector").SmartlingConnector;
+export const SmartlingConnector: typeof import("./smartlingConnector").SmartlingConnector = null as any;
+utilities.lazyLoad(exports, ["SmartlingConnector"], () => require("./smartlingConnector"));
+
+export { SmtpConnectorArgs, SmtpConnectorState } from "./smtpConnector";
+export type SmtpConnector = import("./smtpConnector").SmtpConnector;
+export const SmtpConnector: typeof import("./smtpConnector").SmtpConnector = null as any;
+utilities.lazyLoad(exports, ["SmtpConnector"], () => require("./smtpConnector"));
+
+export { SnowflakeConnectorArgs, SnowflakeConnectorState } from "./snowflakeConnector";
+export type SnowflakeConnector = import("./snowflakeConnector").SnowflakeConnector;
+export const SnowflakeConnector: typeof import("./snowflakeConnector").SnowflakeConnector = null as any;
+utilities.lazyLoad(exports, ["SnowflakeConnector"], () => require("./snowflakeConnector"));
+
+export { SnsConnectorArgs, SnsConnectorState } from "./snsConnector";
+export type SnsConnector = import("./snsConnector").SnsConnector;
+export const SnsConnector: typeof import("./snsConnector").SnsConnector = null as any;
+utilities.lazyLoad(exports, ["SnsConnector"], () => require("./snsConnector"));
+
+export { SplunkConnectorArgs, SplunkConnectorState } from "./splunkConnector";
+export type SplunkConnector = import("./splunkConnector").SplunkConnector;
+export const SplunkConnector: typeof import("./splunkConnector").SplunkConnector = null as any;
+utilities.lazyLoad(exports, ["SplunkConnector"], () => require("./splunkConnector"));
+
+export { SqlConnectorArgs, SqlConnectorState } from "./sqlConnector";
+export type SqlConnector = import("./sqlConnector").SqlConnector;
+export const SqlConnector: typeof import("./sqlConnector").SqlConnector = null as any;
+utilities.lazyLoad(exports, ["SqlConnector"], () => require("./sqlConnector"));
+
+export { SsoSettingsArgs, SsoSettingsState } from "./ssoSettings";
+export type SsoSettings = import("./ssoSettings").SsoSettings;
+export const SsoSettings: typeof import("./ssoSettings").SsoSettings = null as any;
+utilities.lazyLoad(exports, ["SsoSettings"], () => require("./ssoSettings"));
+
+export { StylesArgs, StylesState } from "./styles";
+export type Styles = import("./styles").Styles;
+export const Styles: typeof import("./styles").Styles = null as any;
+utilities.lazyLoad(exports, ["Styles"], () => require("./styles"));
+
+export { SumologicConnectorArgs, SumologicConnectorState } from "./sumologicConnector";
+export type SumologicConnector = import("./sumologicConnector").SumologicConnector;
+export const SumologicConnector: typeof import("./sumologicConnector").SumologicConnector = null as any;
+utilities.lazyLoad(exports, ["SumologicConnector"], () => require("./sumologicConnector"));
+
+export { SupabaseConnectorArgs, SupabaseConnectorState } from "./supabaseConnector";
+export type SupabaseConnector = import("./supabaseConnector").SupabaseConnector;
+export const SupabaseConnector: typeof import("./supabaseConnector").SupabaseConnector = null as any;
+utilities.lazyLoad(exports, ["SupabaseConnector"], () => require("./supabaseConnector"));
+
+export { TelesignConnectorArgs, TelesignConnectorState } from "./telesignConnector";
+export type TelesignConnector = import("./telesignConnector").TelesignConnector;
+export const TelesignConnector: typeof import("./telesignConnector").TelesignConnector = null as any;
+utilities.lazyLoad(exports, ["TelesignConnector"], () => require("./telesignConnector"));
+
+export { TenantAttributeArgs, TenantAttributeState } from "./tenantAttribute";
+export type TenantAttribute = import("./tenantAttribute").TenantAttribute;
+export const TenantAttribute: typeof import("./tenantAttribute").TenantAttribute = null as any;
+utilities.lazyLoad(exports, ["TenantAttribute"], () => require("./tenantAttribute"));
+
+export { TextTemplateArgs, TextTemplateState } from "./textTemplate";
+export type TextTemplate = import("./textTemplate").TextTemplate;
+export const TextTemplate: typeof import("./textTemplate").TextTemplate = null as any;
+utilities.lazyLoad(exports, ["TextTemplate"], () => require("./textTemplate"));
+
+export { TotpSettingsArgs, TotpSettingsState } from "./totpSettings";
+export type TotpSettings = import("./totpSettings").TotpSettings;
+export const TotpSettings: typeof import("./totpSettings").TotpSettings = null as any;
+utilities.lazyLoad(exports, ["TotpSettings"], () => require("./totpSettings"));
+
+export { TraceableConnectorArgs, TraceableConnectorState } from "./traceableConnector";
+export type TraceableConnector = import("./traceableConnector").TraceableConnector;
+export const TraceableConnector: typeof import("./traceableConnector").TraceableConnector = null as any;
+utilities.lazyLoad(exports, ["TraceableConnector"], () => require("./traceableConnector"));
+
+export { TurnstileConnectorArgs, TurnstileConnectorState } from "./turnstileConnector";
+export type TurnstileConnector = import("./turnstileConnector").TurnstileConnector;
+export const TurnstileConnector: typeof import("./turnstileConnector").TurnstileConnector = null as any;
+utilities.lazyLoad(exports, ["TurnstileConnector"], () => require("./turnstileConnector"));
+
+export { TwilioCoreConnectorArgs, TwilioCoreConnectorState } from "./twilioCoreConnector";
+export type TwilioCoreConnector = import("./twilioCoreConnector").TwilioCoreConnector;
+export const TwilioCoreConnector: typeof import("./twilioCoreConnector").TwilioCoreConnector = null as any;
+utilities.lazyLoad(exports, ["TwilioCoreConnector"], () => require("./twilioCoreConnector"));
+
+export { TwilioVerifyConnectorArgs, TwilioVerifyConnectorState } from "./twilioVerifyConnector";
+export type TwilioVerifyConnector = import("./twilioVerifyConnector").TwilioVerifyConnector;
+export const TwilioVerifyConnector: typeof import("./twilioVerifyConnector").TwilioVerifyConnector = null as any;
+utilities.lazyLoad(exports, ["TwilioVerifyConnector"], () => require("./twilioVerifyConnector"));
+
+export { UnibeamConnectorArgs, UnibeamConnectorState } from "./unibeamConnector";
+export type UnibeamConnector = import("./unibeamConnector").UnibeamConnector;
+export const UnibeamConnector: typeof import("./unibeamConnector").UnibeamConnector = null as any;
+utilities.lazyLoad(exports, ["UnibeamConnector"], () => require("./unibeamConnector"));
+
+export { UserAttributeArgs, UserAttributeState } from "./userAttribute";
+export type UserAttribute = import("./userAttribute").UserAttribute;
+export const UserAttribute: typeof import("./userAttribute").UserAttribute = null as any;
+utilities.lazyLoad(exports, ["UserAttribute"], () => require("./userAttribute"));
+
+export { VoiceTemplateArgs, VoiceTemplateState } from "./voiceTemplate";
+export type VoiceTemplate = import("./voiceTemplate").VoiceTemplate;
+export const VoiceTemplate: typeof import("./voiceTemplate").VoiceTemplate = null as any;
+utilities.lazyLoad(exports, ["VoiceTemplate"], () => require("./voiceTemplate"));
+
+export { WidgetArgs, WidgetState } from "./widget";
+export type Widget = import("./widget").Widget;
+export const Widget: typeof import("./widget").Widget = null as any;
+utilities.lazyLoad(exports, ["Widget"], () => require("./widget"));
+
+export { WsfedAppArgs, WsfedAppState } from "./wsfedApp";
+export type WsfedApp = import("./wsfedApp").WsfedApp;
+export const WsfedApp: typeof import("./wsfedApp").WsfedApp = null as any;
+utilities.lazyLoad(exports, ["WsfedApp"], () => require("./wsfedApp"));
+
+export { ZerobounceConnectorArgs, ZerobounceConnectorState } from "./zerobounceConnector";
+export type ZerobounceConnector = import("./zerobounceConnector").ZerobounceConnector;
+export const ZerobounceConnector: typeof import("./zerobounceConnector").ZerobounceConnector = null as any;
+utilities.lazyLoad(exports, ["ZerobounceConnector"], () => require("./zerobounceConnector"));
 
 
 // Export sub-modules:
@@ -52,29 +597,356 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "descope:index/abuseipdbConnector:AbuseipdbConnector":
+                return new AbuseipdbConnector(name, <any>undefined, { urn })
             case "descope:index/accessKey:AccessKey":
                 return new AccessKey(name, <any>undefined, { urn })
+            case "descope:index/accessKeyAttribute:AccessKeyAttribute":
+                return new AccessKeyAttribute(name, <any>undefined, { urn })
+            case "descope:index/adminPortal:AdminPortal":
+                return new AdminPortal(name, <any>undefined, { urn })
+            case "descope:index/alloyConnector:AlloyConnector":
+                return new AlloyConnector(name, <any>undefined, { urn })
+            case "descope:index/amplitudeConnector:AmplitudeConnector":
+                return new AmplitudeConnector(name, <any>undefined, { urn })
+            case "descope:index/appPermission:AppPermission":
+                return new AppPermission(name, <any>undefined, { urn })
+            case "descope:index/appRole:AppRole":
+                return new AppRole(name, <any>undefined, { urn })
+            case "descope:index/arkoseConnector:ArkoseConnector":
+                return new ArkoseConnector(name, <any>undefined, { urn })
+            case "descope:index/auditWebhookConnector:AuditWebhookConnector":
+                return new AuditWebhookConnector(name, <any>undefined, { urn })
+            case "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector":
+                return new AwsEventbridgeConnector(name, <any>undefined, { urn })
+            case "descope:index/awsS3Connector:AwsS3Connector":
+                return new AwsS3Connector(name, <any>undefined, { urn })
+            case "descope:index/awsSesEmailValidationConnector:AwsSesEmailValidationConnector":
+                return new AwsSesEmailValidationConnector(name, <any>undefined, { urn })
+            case "descope:index/awsTranslateConnector:AwsTranslateConnector":
+                return new AwsTranslateConnector(name, <any>undefined, { urn })
+            case "descope:index/bitsightConnector:BitsightConnector":
+                return new BitsightConnector(name, <any>undefined, { urn })
+            case "descope:index/coralogixConnector:CoralogixConnector":
+                return new CoralogixConnector(name, <any>undefined, { urn })
+            case "descope:index/criblConnector:CriblConnector":
+                return new CriblConnector(name, <any>undefined, { urn })
+            case "descope:index/darwiniumConnector:DarwiniumConnector":
+                return new DarwiniumConnector(name, <any>undefined, { urn })
+            case "descope:index/datadogConnector:DatadogConnector":
+                return new DatadogConnector(name, <any>undefined, { urn })
             case "descope:index/descoper:Descoper":
                 return new Descoper(name, <any>undefined, { urn })
+            case "descope:index/devrevGrowConnector:DevrevGrowConnector":
+                return new DevrevGrowConnector(name, <any>undefined, { urn })
+            case "descope:index/doceboConnector:DoceboConnector":
+                return new DoceboConnector(name, <any>undefined, { urn })
+            case "descope:index/eightByEightViberConnector:EightByEightViberConnector":
+                return new EightByEightViberConnector(name, <any>undefined, { urn })
+            case "descope:index/eightByEightWhatsappConnector:EightByEightWhatsappConnector":
+                return new EightByEightWhatsappConnector(name, <any>undefined, { urn })
+            case "descope:index/elephantConnector:ElephantConnector":
+                return new ElephantConnector(name, <any>undefined, { urn })
+            case "descope:index/emailTemplate:EmailTemplate":
+                return new EmailTemplate(name, <any>undefined, { urn })
+            case "descope:index/embeddedlinkSettings:EmbeddedlinkSettings":
+                return new EmbeddedlinkSettings(name, <any>undefined, { urn })
+            case "descope:index/enchantedlinkSettings:EnchantedlinkSettings":
+                return new EnchantedlinkSettings(name, <any>undefined, { urn })
             case "descope:index/engine:Engine":
                 return new Engine(name, <any>undefined, { urn })
+            case "descope:index/externalTokenHttpConnector:ExternalTokenHttpConnector":
+                return new ExternalTokenHttpConnector(name, <any>undefined, { urn })
+            case "descope:index/fgaSchema:FgaSchema":
+                return new FgaSchema(name, <any>undefined, { urn })
+            case "descope:index/fingerprintConnector:FingerprintConnector":
+                return new FingerprintConnector(name, <any>undefined, { urn })
+            case "descope:index/fingerprintDescopeConnector:FingerprintDescopeConnector":
+                return new FingerprintDescopeConnector(name, <any>undefined, { urn })
+            case "descope:index/firebaseAdminConnector:FirebaseAdminConnector":
+                return new FirebaseAdminConnector(name, <any>undefined, { urn })
+            case "descope:index/flow:Flow":
+                return new Flow(name, <any>undefined, { urn })
+            case "descope:index/forterConnector:ForterConnector":
+                return new ForterConnector(name, <any>undefined, { urn })
+            case "descope:index/genericEmailGatewayConnector:GenericEmailGatewayConnector":
+                return new GenericEmailGatewayConnector(name, <any>undefined, { urn })
+            case "descope:index/genericSmsGatewayConnector:GenericSmsGatewayConnector":
+                return new GenericSmsGatewayConnector(name, <any>undefined, { urn })
+            case "descope:index/googleCloudLoggingConnector:GoogleCloudLoggingConnector":
+                return new GoogleCloudLoggingConnector(name, <any>undefined, { urn })
+            case "descope:index/googleCloudTranslationConnector:GoogleCloudTranslationConnector":
+                return new GoogleCloudTranslationConnector(name, <any>undefined, { urn })
+            case "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector":
+                return new GoogleMapsPlacesConnector(name, <any>undefined, { urn })
+            case "descope:index/groundcoverConnector:GroundcoverConnector":
+                return new GroundcoverConnector(name, <any>undefined, { urn })
+            case "descope:index/hcaptchaConnector:HcaptchaConnector":
+                return new HcaptchaConnector(name, <any>undefined, { urn })
+            case "descope:index/hibpConnector:HibpConnector":
+                return new HibpConnector(name, <any>undefined, { urn })
+            case "descope:index/httpConnector:HttpConnector":
+                return new HttpConnector(name, <any>undefined, { urn })
+            case "descope:index/hubspotConnector:HubspotConnector":
+                return new HubspotConnector(name, <any>undefined, { urn })
             case "descope:index/inboundApp:InboundApp":
                 return new InboundApp(name, <any>undefined, { urn })
+            case "descope:index/incodeConnector:IncodeConnector":
+                return new IncodeConnector(name, <any>undefined, { urn })
+            case "descope:index/intercomConnector:IntercomConnector":
+                return new IntercomConnector(name, <any>undefined, { urn })
+            case "descope:index/inviteSettings:InviteSettings":
+                return new InviteSettings(name, <any>undefined, { urn })
+            case "descope:index/jwtTemplate:JwtTemplate":
+                return new JwtTemplate(name, <any>undefined, { urn })
+            case "descope:index/ldapConnector:LdapConnector":
+                return new LdapConnector(name, <any>undefined, { urn })
+            case "descope:index/list:List":
+                return new List(name, <any>undefined, { urn })
+            case "descope:index/lokaliseConnector:LokaliseConnector":
+                return new LokaliseConnector(name, <any>undefined, { urn })
+            case "descope:index/magiclinkSettings:MagiclinkSettings":
+                return new MagiclinkSettings(name, <any>undefined, { urn })
             case "descope:index/managementKey:ManagementKey":
                 return new ManagementKey(name, <any>undefined, { urn })
+            case "descope:index/mixpanelConnector:MixpanelConnector":
+                return new MixpanelConnector(name, <any>undefined, { urn })
+            case "descope:index/mparticleConnector:MparticleConnector":
+                return new MparticleConnector(name, <any>undefined, { urn })
+            case "descope:index/newrelicConnector:NewrelicConnector":
+                return new NewrelicConnector(name, <any>undefined, { urn })
+            case "descope:index/oauthProvider:OauthProvider":
+                return new OauthProvider(name, <any>undefined, { urn })
+            case "descope:index/oauthSettings:OauthSettings":
+                return new OauthSettings(name, <any>undefined, { urn })
+            case "descope:index/oidcApp:OidcApp":
+                return new OidcApp(name, <any>undefined, { urn })
+            case "descope:index/opentelemetryConnector:OpentelemetryConnector":
+                return new OpentelemetryConnector(name, <any>undefined, { urn })
+            case "descope:index/otpSettings:OtpSettings":
+                return new OtpSettings(name, <any>undefined, { urn })
+            case "descope:index/outboundApp:OutboundApp":
+                return new OutboundApp(name, <any>undefined, { urn })
+            case "descope:index/passkeySettings:PasskeySettings":
+                return new PasskeySettings(name, <any>undefined, { urn })
+            case "descope:index/passwordSettings:PasswordSettings":
+                return new PasswordSettings(name, <any>undefined, { urn })
+            case "descope:index/pendoConnector:PendoConnector":
+                return new PendoConnector(name, <any>undefined, { urn })
+            case "descope:index/permission:Permission":
+                return new Permission(name, <any>undefined, { urn })
+            case "descope:index/pingDirectoryConnector:PingDirectoryConnector":
+                return new PingDirectoryConnector(name, <any>undefined, { urn })
+            case "descope:index/postmarkConnector:PostmarkConnector":
+                return new PostmarkConnector(name, <any>undefined, { urn })
             case "descope:index/project:Project":
                 return new Project(name, <any>undefined, { urn })
+            case "descope:index/projectSettings:ProjectSettings":
+                return new ProjectSettings(name, <any>undefined, { urn })
+            case "descope:index/radarConnector:RadarConnector":
+                return new RadarConnector(name, <any>undefined, { urn })
+            case "descope:index/recaptchaConnector:RecaptchaConnector":
+                return new RecaptchaConnector(name, <any>undefined, { urn })
+            case "descope:index/recaptchaEnterpriseConnector:RecaptchaEnterpriseConnector":
+                return new RecaptchaEnterpriseConnector(name, <any>undefined, { urn })
+            case "descope:index/recaptchaV2Connector:RecaptchaV2Connector":
+                return new RecaptchaV2Connector(name, <any>undefined, { urn })
+            case "descope:index/rekognitionConnector:RekognitionConnector":
+                return new RekognitionConnector(name, <any>undefined, { urn })
+            case "descope:index/rndReassignedConnector:RndReassignedConnector":
+                return new RndReassignedConnector(name, <any>undefined, { urn })
+            case "descope:index/role:Role":
+                return new Role(name, <any>undefined, { urn })
+            case "descope:index/salesforceConnector:SalesforceConnector":
+                return new SalesforceConnector(name, <any>undefined, { urn })
+            case "descope:index/salesforceMarketingCloudConnector:SalesforceMarketingCloudConnector":
+                return new SalesforceMarketingCloudConnector(name, <any>undefined, { urn })
+            case "descope:index/samlApp:SamlApp":
+                return new SamlApp(name, <any>undefined, { urn })
+            case "descope:index/sardineConnector:SardineConnector":
+                return new SardineConnector(name, <any>undefined, { urn })
+            case "descope:index/scimConnector:ScimConnector":
+                return new ScimConnector(name, <any>undefined, { urn })
+            case "descope:index/segmentConnector:SegmentConnector":
+                return new SegmentConnector(name, <any>undefined, { urn })
+            case "descope:index/sendgridConnector:SendgridConnector":
+                return new SendgridConnector(name, <any>undefined, { urn })
+            case "descope:index/sesConnector:SesConnector":
+                return new SesConnector(name, <any>undefined, { urn })
+            case "descope:index/sessionMigration:SessionMigration":
+                return new SessionMigration(name, <any>undefined, { urn })
+            case "descope:index/sessionSettings:SessionSettings":
+                return new SessionSettings(name, <any>undefined, { urn })
+            case "descope:index/slackConnector:SlackConnector":
+                return new SlackConnector(name, <any>undefined, { urn })
+            case "descope:index/smartlingConnector:SmartlingConnector":
+                return new SmartlingConnector(name, <any>undefined, { urn })
+            case "descope:index/smtpConnector:SmtpConnector":
+                return new SmtpConnector(name, <any>undefined, { urn })
+            case "descope:index/snowflakeConnector:SnowflakeConnector":
+                return new SnowflakeConnector(name, <any>undefined, { urn })
+            case "descope:index/snsConnector:SnsConnector":
+                return new SnsConnector(name, <any>undefined, { urn })
+            case "descope:index/splunkConnector:SplunkConnector":
+                return new SplunkConnector(name, <any>undefined, { urn })
+            case "descope:index/sqlConnector:SqlConnector":
+                return new SqlConnector(name, <any>undefined, { urn })
+            case "descope:index/ssoSettings:SsoSettings":
+                return new SsoSettings(name, <any>undefined, { urn })
+            case "descope:index/styles:Styles":
+                return new Styles(name, <any>undefined, { urn })
+            case "descope:index/sumologicConnector:SumologicConnector":
+                return new SumologicConnector(name, <any>undefined, { urn })
+            case "descope:index/supabaseConnector:SupabaseConnector":
+                return new SupabaseConnector(name, <any>undefined, { urn })
+            case "descope:index/telesignConnector:TelesignConnector":
+                return new TelesignConnector(name, <any>undefined, { urn })
+            case "descope:index/tenantAttribute:TenantAttribute":
+                return new TenantAttribute(name, <any>undefined, { urn })
+            case "descope:index/textTemplate:TextTemplate":
+                return new TextTemplate(name, <any>undefined, { urn })
+            case "descope:index/totpSettings:TotpSettings":
+                return new TotpSettings(name, <any>undefined, { urn })
+            case "descope:index/traceableConnector:TraceableConnector":
+                return new TraceableConnector(name, <any>undefined, { urn })
+            case "descope:index/turnstileConnector:TurnstileConnector":
+                return new TurnstileConnector(name, <any>undefined, { urn })
+            case "descope:index/twilioCoreConnector:TwilioCoreConnector":
+                return new TwilioCoreConnector(name, <any>undefined, { urn })
+            case "descope:index/twilioVerifyConnector:TwilioVerifyConnector":
+                return new TwilioVerifyConnector(name, <any>undefined, { urn })
+            case "descope:index/unibeamConnector:UnibeamConnector":
+                return new UnibeamConnector(name, <any>undefined, { urn })
+            case "descope:index/userAttribute:UserAttribute":
+                return new UserAttribute(name, <any>undefined, { urn })
+            case "descope:index/voiceTemplate:VoiceTemplate":
+                return new VoiceTemplate(name, <any>undefined, { urn })
+            case "descope:index/widget:Widget":
+                return new Widget(name, <any>undefined, { urn })
+            case "descope:index/wsfedApp:WsfedApp":
+                return new WsfedApp(name, <any>undefined, { urn })
+            case "descope:index/zerobounceConnector:ZerobounceConnector":
+                return new ZerobounceConnector(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("descope", "index/abuseipdbConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/accessKey", _module)
+pulumi.runtime.registerResourceModule("descope", "index/accessKeyAttribute", _module)
+pulumi.runtime.registerResourceModule("descope", "index/adminPortal", _module)
+pulumi.runtime.registerResourceModule("descope", "index/alloyConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/amplitudeConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/appPermission", _module)
+pulumi.runtime.registerResourceModule("descope", "index/appRole", _module)
+pulumi.runtime.registerResourceModule("descope", "index/arkoseConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/auditWebhookConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/awsEventbridgeConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/awsS3Connector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/awsSesEmailValidationConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/awsTranslateConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/bitsightConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/coralogixConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/criblConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/darwiniumConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/datadogConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/descoper", _module)
+pulumi.runtime.registerResourceModule("descope", "index/devrevGrowConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/doceboConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/eightByEightViberConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/eightByEightWhatsappConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/elephantConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/emailTemplate", _module)
+pulumi.runtime.registerResourceModule("descope", "index/embeddedlinkSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/enchantedlinkSettings", _module)
 pulumi.runtime.registerResourceModule("descope", "index/engine", _module)
+pulumi.runtime.registerResourceModule("descope", "index/externalTokenHttpConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/fgaSchema", _module)
+pulumi.runtime.registerResourceModule("descope", "index/fingerprintConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/fingerprintDescopeConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/firebaseAdminConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/flow", _module)
+pulumi.runtime.registerResourceModule("descope", "index/forterConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/genericEmailGatewayConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/genericSmsGatewayConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/googleCloudLoggingConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/googleCloudTranslationConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/googleMapsPlacesConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/groundcoverConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/hcaptchaConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/hibpConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/httpConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/hubspotConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/inboundApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/incodeConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/intercomConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/inviteSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/jwtTemplate", _module)
+pulumi.runtime.registerResourceModule("descope", "index/ldapConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/list", _module)
+pulumi.runtime.registerResourceModule("descope", "index/lokaliseConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/magiclinkSettings", _module)
 pulumi.runtime.registerResourceModule("descope", "index/managementKey", _module)
+pulumi.runtime.registerResourceModule("descope", "index/mixpanelConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/mparticleConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/newrelicConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/oauthProvider", _module)
+pulumi.runtime.registerResourceModule("descope", "index/oauthSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/oidcApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/opentelemetryConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/otpSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/outboundApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/passkeySettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/passwordSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/pendoConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/permission", _module)
+pulumi.runtime.registerResourceModule("descope", "index/pingDirectoryConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/postmarkConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/project", _module)
+pulumi.runtime.registerResourceModule("descope", "index/projectSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/radarConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/recaptchaConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/recaptchaEnterpriseConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/recaptchaV2Connector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/rekognitionConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/rndReassignedConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/role", _module)
+pulumi.runtime.registerResourceModule("descope", "index/salesforceConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/salesforceMarketingCloudConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/samlApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sardineConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/scimConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/segmentConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sendgridConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sesConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sessionMigration", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sessionSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/slackConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/smartlingConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/smtpConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/snowflakeConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/snsConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/splunkConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sqlConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/ssoSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/styles", _module)
+pulumi.runtime.registerResourceModule("descope", "index/sumologicConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/supabaseConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/telesignConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/tenantAttribute", _module)
+pulumi.runtime.registerResourceModule("descope", "index/textTemplate", _module)
+pulumi.runtime.registerResourceModule("descope", "index/totpSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/traceableConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/turnstileConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/twilioCoreConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/twilioVerifyConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/unibeamConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/userAttribute", _module)
+pulumi.runtime.registerResourceModule("descope", "index/voiceTemplate", _module)
+pulumi.runtime.registerResourceModule("descope", "index/widget", _module)
+pulumi.runtime.registerResourceModule("descope", "index/wsfedApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/zerobounceConnector", _module)
 pulumi.runtime.registerResourcePackage("descope", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

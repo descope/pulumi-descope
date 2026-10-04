@@ -139,7 +139,8 @@ class Engine(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Create a Engine resource with the given unique name, props, and options.
+        Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -153,7 +154,8 @@ class Engine(pulumi.CustomResource):
                  args: EngineArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Engine resource with the given unique name, props, and options.
+        Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
+
 
         :param str resource_name: The name of the resource.
         :param EngineArgs args: The arguments to use to populate this resource's properties.

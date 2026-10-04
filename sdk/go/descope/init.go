@@ -21,18 +21,236 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "descope:index/abuseipdbConnector:AbuseipdbConnector":
+		r = &AbuseipdbConnector{}
 	case "descope:index/accessKey:AccessKey":
 		r = &AccessKey{}
+	case "descope:index/accessKeyAttribute:AccessKeyAttribute":
+		r = &AccessKeyAttribute{}
+	case "descope:index/adminPortal:AdminPortal":
+		r = &AdminPortal{}
+	case "descope:index/alloyConnector:AlloyConnector":
+		r = &AlloyConnector{}
+	case "descope:index/amplitudeConnector:AmplitudeConnector":
+		r = &AmplitudeConnector{}
+	case "descope:index/appPermission:AppPermission":
+		r = &AppPermission{}
+	case "descope:index/appRole:AppRole":
+		r = &AppRole{}
+	case "descope:index/arkoseConnector:ArkoseConnector":
+		r = &ArkoseConnector{}
+	case "descope:index/auditWebhookConnector:AuditWebhookConnector":
+		r = &AuditWebhookConnector{}
+	case "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector":
+		r = &AwsEventbridgeConnector{}
+	case "descope:index/awsS3Connector:AwsS3Connector":
+		r = &AwsS3Connector{}
+	case "descope:index/awsSesEmailValidationConnector:AwsSesEmailValidationConnector":
+		r = &AwsSesEmailValidationConnector{}
+	case "descope:index/awsTranslateConnector:AwsTranslateConnector":
+		r = &AwsTranslateConnector{}
+	case "descope:index/bitsightConnector:BitsightConnector":
+		r = &BitsightConnector{}
+	case "descope:index/coralogixConnector:CoralogixConnector":
+		r = &CoralogixConnector{}
+	case "descope:index/criblConnector:CriblConnector":
+		r = &CriblConnector{}
+	case "descope:index/darwiniumConnector:DarwiniumConnector":
+		r = &DarwiniumConnector{}
+	case "descope:index/datadogConnector:DatadogConnector":
+		r = &DatadogConnector{}
 	case "descope:index/descoper:Descoper":
 		r = &Descoper{}
+	case "descope:index/devrevGrowConnector:DevrevGrowConnector":
+		r = &DevrevGrowConnector{}
+	case "descope:index/doceboConnector:DoceboConnector":
+		r = &DoceboConnector{}
+	case "descope:index/eightByEightViberConnector:EightByEightViberConnector":
+		r = &EightByEightViberConnector{}
+	case "descope:index/eightByEightWhatsappConnector:EightByEightWhatsappConnector":
+		r = &EightByEightWhatsappConnector{}
+	case "descope:index/elephantConnector:ElephantConnector":
+		r = &ElephantConnector{}
+	case "descope:index/emailTemplate:EmailTemplate":
+		r = &EmailTemplate{}
+	case "descope:index/embeddedlinkSettings:EmbeddedlinkSettings":
+		r = &EmbeddedlinkSettings{}
+	case "descope:index/enchantedlinkSettings:EnchantedlinkSettings":
+		r = &EnchantedlinkSettings{}
 	case "descope:index/engine:Engine":
 		r = &Engine{}
+	case "descope:index/externalTokenHttpConnector:ExternalTokenHttpConnector":
+		r = &ExternalTokenHttpConnector{}
+	case "descope:index/fgaSchema:FgaSchema":
+		r = &FgaSchema{}
+	case "descope:index/fingerprintConnector:FingerprintConnector":
+		r = &FingerprintConnector{}
+	case "descope:index/fingerprintDescopeConnector:FingerprintDescopeConnector":
+		r = &FingerprintDescopeConnector{}
+	case "descope:index/firebaseAdminConnector:FirebaseAdminConnector":
+		r = &FirebaseAdminConnector{}
+	case "descope:index/flow:Flow":
+		r = &Flow{}
+	case "descope:index/forterConnector:ForterConnector":
+		r = &ForterConnector{}
+	case "descope:index/genericEmailGatewayConnector:GenericEmailGatewayConnector":
+		r = &GenericEmailGatewayConnector{}
+	case "descope:index/genericSmsGatewayConnector:GenericSmsGatewayConnector":
+		r = &GenericSmsGatewayConnector{}
+	case "descope:index/googleCloudLoggingConnector:GoogleCloudLoggingConnector":
+		r = &GoogleCloudLoggingConnector{}
+	case "descope:index/googleCloudTranslationConnector:GoogleCloudTranslationConnector":
+		r = &GoogleCloudTranslationConnector{}
+	case "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector":
+		r = &GoogleMapsPlacesConnector{}
+	case "descope:index/groundcoverConnector:GroundcoverConnector":
+		r = &GroundcoverConnector{}
+	case "descope:index/hcaptchaConnector:HcaptchaConnector":
+		r = &HcaptchaConnector{}
+	case "descope:index/hibpConnector:HibpConnector":
+		r = &HibpConnector{}
+	case "descope:index/httpConnector:HttpConnector":
+		r = &HttpConnector{}
+	case "descope:index/hubspotConnector:HubspotConnector":
+		r = &HubspotConnector{}
 	case "descope:index/inboundApp:InboundApp":
 		r = &InboundApp{}
+	case "descope:index/incodeConnector:IncodeConnector":
+		r = &IncodeConnector{}
+	case "descope:index/intercomConnector:IntercomConnector":
+		r = &IntercomConnector{}
+	case "descope:index/inviteSettings:InviteSettings":
+		r = &InviteSettings{}
+	case "descope:index/jwtTemplate:JwtTemplate":
+		r = &JwtTemplate{}
+	case "descope:index/ldapConnector:LdapConnector":
+		r = &LdapConnector{}
+	case "descope:index/list:List":
+		r = &List{}
+	case "descope:index/lokaliseConnector:LokaliseConnector":
+		r = &LokaliseConnector{}
+	case "descope:index/magiclinkSettings:MagiclinkSettings":
+		r = &MagiclinkSettings{}
 	case "descope:index/managementKey:ManagementKey":
 		r = &ManagementKey{}
+	case "descope:index/mixpanelConnector:MixpanelConnector":
+		r = &MixpanelConnector{}
+	case "descope:index/mparticleConnector:MparticleConnector":
+		r = &MparticleConnector{}
+	case "descope:index/newrelicConnector:NewrelicConnector":
+		r = &NewrelicConnector{}
+	case "descope:index/oauthProvider:OauthProvider":
+		r = &OauthProvider{}
+	case "descope:index/oauthSettings:OauthSettings":
+		r = &OauthSettings{}
+	case "descope:index/oidcApp:OidcApp":
+		r = &OidcApp{}
+	case "descope:index/opentelemetryConnector:OpentelemetryConnector":
+		r = &OpentelemetryConnector{}
+	case "descope:index/otpSettings:OtpSettings":
+		r = &OtpSettings{}
+	case "descope:index/outboundApp:OutboundApp":
+		r = &OutboundApp{}
+	case "descope:index/passkeySettings:PasskeySettings":
+		r = &PasskeySettings{}
+	case "descope:index/passwordSettings:PasswordSettings":
+		r = &PasswordSettings{}
+	case "descope:index/pendoConnector:PendoConnector":
+		r = &PendoConnector{}
+	case "descope:index/permission:Permission":
+		r = &Permission{}
+	case "descope:index/pingDirectoryConnector:PingDirectoryConnector":
+		r = &PingDirectoryConnector{}
+	case "descope:index/postmarkConnector:PostmarkConnector":
+		r = &PostmarkConnector{}
 	case "descope:index/project:Project":
 		r = &Project{}
+	case "descope:index/projectSettings:ProjectSettings":
+		r = &ProjectSettings{}
+	case "descope:index/radarConnector:RadarConnector":
+		r = &RadarConnector{}
+	case "descope:index/recaptchaConnector:RecaptchaConnector":
+		r = &RecaptchaConnector{}
+	case "descope:index/recaptchaEnterpriseConnector:RecaptchaEnterpriseConnector":
+		r = &RecaptchaEnterpriseConnector{}
+	case "descope:index/recaptchaV2Connector:RecaptchaV2Connector":
+		r = &RecaptchaV2Connector{}
+	case "descope:index/rekognitionConnector:RekognitionConnector":
+		r = &RekognitionConnector{}
+	case "descope:index/rndReassignedConnector:RndReassignedConnector":
+		r = &RndReassignedConnector{}
+	case "descope:index/role:Role":
+		r = &Role{}
+	case "descope:index/salesforceConnector:SalesforceConnector":
+		r = &SalesforceConnector{}
+	case "descope:index/salesforceMarketingCloudConnector:SalesforceMarketingCloudConnector":
+		r = &SalesforceMarketingCloudConnector{}
+	case "descope:index/samlApp:SamlApp":
+		r = &SamlApp{}
+	case "descope:index/sardineConnector:SardineConnector":
+		r = &SardineConnector{}
+	case "descope:index/scimConnector:ScimConnector":
+		r = &ScimConnector{}
+	case "descope:index/segmentConnector:SegmentConnector":
+		r = &SegmentConnector{}
+	case "descope:index/sendgridConnector:SendgridConnector":
+		r = &SendgridConnector{}
+	case "descope:index/sesConnector:SesConnector":
+		r = &SesConnector{}
+	case "descope:index/sessionMigration:SessionMigration":
+		r = &SessionMigration{}
+	case "descope:index/sessionSettings:SessionSettings":
+		r = &SessionSettings{}
+	case "descope:index/slackConnector:SlackConnector":
+		r = &SlackConnector{}
+	case "descope:index/smartlingConnector:SmartlingConnector":
+		r = &SmartlingConnector{}
+	case "descope:index/smtpConnector:SmtpConnector":
+		r = &SmtpConnector{}
+	case "descope:index/snowflakeConnector:SnowflakeConnector":
+		r = &SnowflakeConnector{}
+	case "descope:index/snsConnector:SnsConnector":
+		r = &SnsConnector{}
+	case "descope:index/splunkConnector:SplunkConnector":
+		r = &SplunkConnector{}
+	case "descope:index/sqlConnector:SqlConnector":
+		r = &SqlConnector{}
+	case "descope:index/ssoSettings:SsoSettings":
+		r = &SsoSettings{}
+	case "descope:index/styles:Styles":
+		r = &Styles{}
+	case "descope:index/sumologicConnector:SumologicConnector":
+		r = &SumologicConnector{}
+	case "descope:index/supabaseConnector:SupabaseConnector":
+		r = &SupabaseConnector{}
+	case "descope:index/telesignConnector:TelesignConnector":
+		r = &TelesignConnector{}
+	case "descope:index/tenantAttribute:TenantAttribute":
+		r = &TenantAttribute{}
+	case "descope:index/textTemplate:TextTemplate":
+		r = &TextTemplate{}
+	case "descope:index/totpSettings:TotpSettings":
+		r = &TotpSettings{}
+	case "descope:index/traceableConnector:TraceableConnector":
+		r = &TraceableConnector{}
+	case "descope:index/turnstileConnector:TurnstileConnector":
+		r = &TurnstileConnector{}
+	case "descope:index/twilioCoreConnector:TwilioCoreConnector":
+		r = &TwilioCoreConnector{}
+	case "descope:index/twilioVerifyConnector:TwilioVerifyConnector":
+		r = &TwilioVerifyConnector{}
+	case "descope:index/unibeamConnector:UnibeamConnector":
+		r = &UnibeamConnector{}
+	case "descope:index/userAttribute:UserAttribute":
+		r = &UserAttribute{}
+	case "descope:index/voiceTemplate:VoiceTemplate":
+		r = &VoiceTemplate{}
+	case "descope:index/widget:Widget":
+		r = &Widget{}
+	case "descope:index/wsfedApp:WsfedApp":
+		r = &WsfedApp{}
+	case "descope:index/zerobounceConnector:ZerobounceConnector":
+		r = &ZerobounceConnector{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -66,7 +284,97 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/abuseipdbConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/accessKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/accessKeyAttribute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/adminPortal",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/alloyConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/amplitudeConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/appPermission",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/appRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/arkoseConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/auditWebhookConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/awsEventbridgeConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/awsS3Connector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/awsSesEmailValidationConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/awsTranslateConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/bitsightConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/coralogixConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/criblConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/darwiniumConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/datadogConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -76,7 +384,132 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/devrevGrowConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/doceboConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/eightByEightViberConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/eightByEightWhatsappConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/elephantConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/emailTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/embeddedlinkSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/enchantedlinkSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/engine",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/externalTokenHttpConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/fgaSchema",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/fingerprintConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/fingerprintDescopeConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/firebaseAdminConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/flow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/forterConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/genericEmailGatewayConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/genericSmsGatewayConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/googleCloudLoggingConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/googleCloudTranslationConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/googleMapsPlacesConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/groundcoverConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/hcaptchaConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/hibpConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/httpConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/hubspotConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -86,12 +519,342 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/incodeConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/intercomConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/inviteSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/jwtTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/ldapConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/list",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/lokaliseConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/magiclinkSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/managementKey",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/mixpanelConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/mparticleConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/newrelicConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/oauthProvider",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/oauthSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/oidcApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/opentelemetryConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/otpSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/outboundApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/passkeySettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/passwordSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/pendoConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/permission",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/pingDirectoryConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/postmarkConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/project",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/projectSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/radarConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/recaptchaConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/recaptchaEnterpriseConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/recaptchaV2Connector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/rekognitionConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/rndReassignedConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/role",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/salesforceConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/salesforceMarketingCloudConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/samlApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sardineConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/scimConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/segmentConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sendgridConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sesConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sessionMigration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sessionSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/slackConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/smartlingConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/smtpConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/snowflakeConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/snsConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/splunkConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sqlConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/ssoSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/styles",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/sumologicConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/supabaseConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/telesignConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/tenantAttribute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/textTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/totpSettings",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/traceableConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/turnstileConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/twilioCoreConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/twilioVerifyConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/unibeamConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/userAttribute",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/voiceTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/widget",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/wsfedApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/zerobounceConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

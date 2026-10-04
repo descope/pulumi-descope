@@ -12,6 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
 type Engine struct {
 	pulumi.CustomResourceState
 

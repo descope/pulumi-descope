@@ -6,30 +6,18 @@ package com.descope.pulumi.descope;
 import com.descope.pulumi.descope.ProjectArgs;
 import com.descope.pulumi.descope.Utilities;
 import com.descope.pulumi.descope.inputs.ProjectState;
-import com.descope.pulumi.descope.outputs.ProjectAdminPortal;
-import com.descope.pulumi.descope.outputs.ProjectApplications;
-import com.descope.pulumi.descope.outputs.ProjectAttributes;
-import com.descope.pulumi.descope.outputs.ProjectAuthentication;
-import com.descope.pulumi.descope.outputs.ProjectAuthorization;
-import com.descope.pulumi.descope.outputs.ProjectConnectors;
-import com.descope.pulumi.descope.outputs.ProjectFlows;
-import com.descope.pulumi.descope.outputs.ProjectInviteSettings;
-import com.descope.pulumi.descope.outputs.ProjectJwtTemplates;
-import com.descope.pulumi.descope.outputs.ProjectList;
-import com.descope.pulumi.descope.outputs.ProjectProjectSettings;
-import com.descope.pulumi.descope.outputs.ProjectStyles;
-import com.descope.pulumi.descope.outputs.ProjectWidgets;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Export;
 import com.pulumi.core.annotations.ResourceType;
 import com.pulumi.core.internal.Codegen;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+ * Manages a Descope project. A project is the core entity in Descope—its authentication settings, user flows, roles, connectors, applications, and other configuration are managed with the standalone `descope_*` resources that reference the project by ID.
  * 
  * This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
  * 
@@ -76,7 +64,9 @@ import javax.annotation.Nullable;
  * 
  * ### Authentication Methods
  * 
- * Enable and configure the authentication methods your users will use:
+ * Authentication method settings are managed with their own standalone resources, such as
+ * `descope.MagiclinkSettings`, `descope.OtpSettings`,
+ * `descope.PasswordSettings`, and `descope.SsoSettings`:
  * 
  * <pre>
  * {@code
@@ -87,11 +77,10 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationMagicLinkArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationPasswordArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationOtpArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationPasskeysArgs;
+ * import com.descope.pulumi.descope.MagiclinkSettings;
+ * import com.descope.pulumi.descope.MagiclinkSettingsArgs;
+ * import com.descope.pulumi.descope.PasswordSettings;
+ * import com.descope.pulumi.descope.PasswordSettingsArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -107,22 +96,18 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .authentication(ProjectAuthenticationArgs.builder()
- *                 .magicLink(ProjectAuthenticationMagicLinkArgs.builder()
- *                     .expirationTime("1 hour")
- *                     .build())
- *                 .password(ProjectAuthenticationPasswordArgs.builder()
- *                     .lock(true)
- *                     .lockAttempts(5)
- *                     .minLength(12)
- *                     .build())
- *                 .otp(ProjectAuthenticationOtpArgs.builder()
- *                     .expirationTime("5 minutes")
- *                     .build())
- *                 .passkeys(ProjectAuthenticationPasskeysArgs.builder()
- *                     .disabled(false)
- *                     .build())
- *                 .build())
+ *             .build());
+ * 
+ *         var exampleMagiclinkSettings = new MagiclinkSettings("exampleMagiclinkSettings", MagiclinkSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .expirationTime("1 hour")
+ *             .build());
+ * 
+ *         var examplePasswordSettings = new PasswordSettings("examplePasswordSettings", PasswordSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .lock(true)
+ *             .lockAttempts(5)
+ *             .minLength(12)
  *             .build());
  * 
  *     }
@@ -132,7 +117,7 @@ import javax.annotation.Nullable;
  * 
  * ### Roles and Permissions (RBAC)
  * 
- * Define roles and permissions for your users:
+ * Roles and permissions are managed as standalone resources that reference the project by ID:
  * 
  * <pre>
  * {@code
@@ -143,9 +128,10 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectAuthorizationArgs;
- * import com.pulumi.descope.inputs.ProjectAuthorizationPermissionArgs;
- * import com.pulumi.descope.inputs.ProjectAuthorizationRoleArgs;
+ * import com.descope.pulumi.descope.Permission;
+ * import com.descope.pulumi.descope.PermissionArgs;
+ * import com.descope.pulumi.descope.Role;
+ * import com.descope.pulumi.descope.RoleArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -161,42 +147,50 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .authorization(ProjectAuthorizationArgs.builder()
- *                 .permissions(                
- *                     ProjectAuthorizationPermissionArgs.builder()
- *                         .name("read:data")
- *                         .description("Read access to application data")
- *                         .build(),
- *                     ProjectAuthorizationPermissionArgs.builder()
- *                         .name("write:data")
- *                         .description("Write access to application data")
- *                         .build(),
- *                     ProjectAuthorizationPermissionArgs.builder()
- *                         .name("admin:panel")
- *                         .description("Access to the admin panel")
- *                         .build())
- *                 .roles(                
- *                     ProjectAuthorizationRoleArgs.builder()
- *                         .name("viewer")
- *                         .description("Can read data")
- *                         .permissions("read:data")
- *                         .build(),
- *                     ProjectAuthorizationRoleArgs.builder()
- *                         .name("editor")
- *                         .description("Can read and write data")
- *                         .permissions(                        
- *                             "read:data",
- *                             "write:data")
- *                         .build(),
- *                     ProjectAuthorizationRoleArgs.builder()
- *                         .name("admin")
- *                         .description("Full access")
- *                         .permissions(                        
- *                             "read:data",
- *                             "write:data",
- *                             "admin:panel")
- *                         .build())
- *                 .build())
+ *             .build());
+ * 
+ *         var readData = new Permission("readData", PermissionArgs.builder()
+ *             .projectId(example.id())
+ *             .name("read:data")
+ *             .description("Read access to application data")
+ *             .build());
+ * 
+ *         var writeData = new Permission("writeData", PermissionArgs.builder()
+ *             .projectId(example.id())
+ *             .name("write:data")
+ *             .description("Write access to application data")
+ *             .build());
+ * 
+ *         var adminPanel = new Permission("adminPanel", PermissionArgs.builder()
+ *             .projectId(example.id())
+ *             .name("admin:panel")
+ *             .description("Access to the admin panel")
+ *             .build());
+ * 
+ *         var viewer = new Role("viewer", RoleArgs.builder()
+ *             .projectId(example.id())
+ *             .name("viewer")
+ *             .description("Can read data")
+ *             .permissions(readData.name())
+ *             .build());
+ * 
+ *         var editor = new Role("editor", RoleArgs.builder()
+ *             .projectId(example.id())
+ *             .name("editor")
+ *             .description("Can read and write data")
+ *             .permissions(            
+ *                 readData.name(),
+ *                 writeData.name())
+ *             .build());
+ * 
+ *         var admin = new Role("admin", RoleArgs.builder()
+ *             .projectId(example.id())
+ *             .name("admin")
+ *             .description("Full access")
+ *             .permissions(            
+ *                 readData.name(),
+ *                 writeData.name(),
+ *                 adminPanel.name())
  *             .build());
  * 
  *     }
@@ -206,7 +200,7 @@ import javax.annotation.Nullable;
  * 
  * ### Connectors
  * 
- * Integrate with third-party services to enrich flows and send notifications:
+ * Integrate with third-party services using standalone per-type connector resources:
  * 
  * <pre>
  * {@code
@@ -217,16 +211,13 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsHttpArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsHttpAuthenticationArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsSendgridArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsSendgridSenderArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsSendgridAuthenticationArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsTwilioCoreArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsTwilioCoreSendersArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsTwilioCoreSendersSmsArgs;
- * import com.pulumi.descope.inputs.ProjectConnectorsTwilioCoreAuthenticationArgs;
+ * import com.descope.pulumi.descope.HttpConnector;
+ * import com.descope.pulumi.descope.HttpConnectorArgs;
+ * import com.pulumi.descope.inputs.HttpConnectorAuthenticationArgs;
+ * import com.descope.pulumi.descope.SendgridConnector;
+ * import com.descope.pulumi.descope.SendgridConnectorArgs;
+ * import com.descope.pulumi.descope.TwilioCoreConnector;
+ * import com.descope.pulumi.descope.TwilioCoreConnectorArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -242,38 +233,35 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) }{{@code
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .connectors(ProjectConnectorsArgs.builder()
- *                 .https(ProjectConnectorsHttpArgs.builder()
- *                     .name("User Eligibility Check")
- *                     .description("Checks if a new user is allowed to register")
- *                     .baseUrl("https://api.example.com")
- *                     .authentication(ProjectConnectorsHttpAuthenticationArgs.builder()
- *                         .bearerToken(webhookSecret)
- *                         .build())
- *                     .build())
- *                 .sendgrids(ProjectConnectorsSendgridArgs.builder()
- *                     .name("Transactional Email")
- *                     .sender(ProjectConnectorsSendgridSenderArgs.builder()
- *                         .email("noreply}{@literal @}{@code example.com")
- *                         .name("My App")
- *                         .build())
- *                     .authentication(ProjectConnectorsSendgridAuthenticationArgs.builder()
- *                         .apiKey(sendgridApiKey)
- *                         .build())
- *                     .build())
- *                 .twilioCores(ProjectConnectorsTwilioCoreArgs.builder()
- *                     .name("SMS OTP")
- *                     .accountSid(twilioAccountSid)
- *                     .senders(ProjectConnectorsTwilioCoreSendersArgs.builder()
- *                         .sms(ProjectConnectorsTwilioCoreSendersSmsArgs.builder()
- *                             .phoneNumber("+15551234567")
- *                             .build())
- *                         .build())
- *                     .authentication(ProjectConnectorsTwilioCoreAuthenticationArgs.builder()
- *                         .authToken(twilioAuthToken)
- *                         .build())
- *                     .build())
+ *             .build());
+ * 
+ *         // Generic HTTP webhook with bearer token auth
+ *         var eligibility = new HttpConnector("eligibility", HttpConnectorArgs.builder()
+ *             .projectId(example.id())
+ *             .name("User Eligibility Check")
+ *             .description("Checks if a new user is allowed to register")
+ *             .baseUrl("https://api.example.com")
+ *             .authentication(HttpConnectorAuthenticationArgs.builder()
+ *                 .bearerToken(webhookSecret)
  *                 .build())
+ *             .build());
+ * 
+ *         // SendGrid for email delivery
+ *         var email = new SendgridConnector("email", SendgridConnectorArgs.builder()
+ *             .projectId(example.id())
+ *             .name("Transactional Email")
+ *             .senderEmail("noreply}{@literal @}{@code example.com")
+ *             .senderName("My App")
+ *             .apiKey(sendgridApiKey)
+ *             .build());
+ * 
+ *         // Twilio for SMS OTP
+ *         var sms = new TwilioCoreConnector("sms", TwilioCoreConnectorArgs.builder()
+ *             .projectId(example.id())
+ *             .name("SMS OTP")
+ *             .accountSid(twilioAccountSid)
+ *             .fromPhone("+15551234567")
+ *             .authToken(twilioAuthToken)
  *             .build());
  * 
  *     }}{@code
@@ -281,9 +269,12 @@ import javax.annotation.Nullable;
  * }
  * </pre>
  * 
- * ### Session Settings
+ * ### Project and Session Settings
  * 
- * Configure token lifetimes and session behavior:
+ * General project settings, session behavior, and user invitations are managed with the
+ * standalone `descope.ProjectSettings`,
+ * `descope.SessionSettings`, and
+ * `descope.InviteSettings` resources:
  * 
  * <pre>
  * {@code
@@ -294,7 +285,12 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectProjectSettingsArgs;
+ * import com.descope.pulumi.descope.ProjectSettings;
+ * import com.descope.pulumi.descope.ProjectSettingsArgs;
+ * import com.descope.pulumi.descope.SessionSettings;
+ * import com.descope.pulumi.descope.SessionSettingsArgs;
+ * import com.descope.pulumi.descope.InviteSettings;
+ * import com.descope.pulumi.descope.InviteSettingsArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -310,17 +306,29 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .projectSettings(ProjectProjectSettingsArgs.builder()
- *                 .refreshTokenExpiration("3 weeks")
- *                 .sessionTokenExpiration("15 minutes")
- *                 .refreshTokenRotation(true)
- *                 .enableInactivity(true)
- *                 .inactivityTime("30 minutes")
- *                 .customDomain("auth.example.com")
- *                 .approvedDomains(                
- *                     "example.com",
- *                     "app.example.com")
- *                 .build())
+ *             .build());
+ * 
+ *         var exampleProjectSettings = new ProjectSettings("exampleProjectSettings", ProjectSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .appUrl("https://app.example.com")
+ *             .approvedDomains(            
+ *                 "example.com",
+ *                 "app.example.com")
+ *             .build());
+ * 
+ *         var exampleSessionSettings = new SessionSettings("exampleSessionSettings", SessionSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .refreshTokenExpiration("3 weeks")
+ *             .sessionTokenExpiration("15 minutes")
+ *             .refreshTokenRotation(true)
+ *             .enableInactivity(true)
+ *             .inactivityTime("30 minutes")
+ *             .build());
+ * 
+ *         var exampleInviteSettings = new InviteSettings("exampleInviteSettings", InviteSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .requireInvitation(true)
+ *             .inviteUrl("https://app.example.com/invite")
  *             .build());
  * 
  *     }
@@ -328,9 +336,11 @@ import javax.annotation.Nullable;
  * }
  * </pre>
  * 
- * ### OIDC Applications
+ * ### Federated Applications
  * 
- * Register an OIDC application for SSO:
+ * Federated (SSO IdP) applications and their app-scoped roles and permissions are managed
+ * with the standalone `descope.OidcApp`, `descope.SamlApp`, `descope.WsfedApp`,
+ * `descope.AppRole`, and `descope.AppPermission` resources that reference the project by ID:
  * 
  * <pre>
  * {@code
@@ -341,8 +351,12 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectApplicationsArgs;
- * import com.pulumi.descope.inputs.ProjectApplicationsOidcApplicationArgs;
+ * import com.descope.pulumi.descope.OidcApp;
+ * import com.descope.pulumi.descope.OidcAppArgs;
+ * import com.descope.pulumi.descope.AppPermission;
+ * import com.descope.pulumi.descope.AppPermissionArgs;
+ * import com.descope.pulumi.descope.AppRole;
+ * import com.descope.pulumi.descope.AppRoleArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -358,13 +372,26 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .applications(ProjectApplicationsArgs.builder()
- *                 .oidcApplications(ProjectApplicationsOidcApplicationArgs.builder()
- *                     .name("My Web App")
- *                     .description("Primary web application")
- *                     .loginPageUrl("https://app.example.com/login")
- *                     .build())
- *                 .build())
+ *             .build());
+ * 
+ *         var web = new OidcApp("web", OidcAppArgs.builder()
+ *             .projectId(example.id())
+ *             .name("My Web App")
+ *             .description("Primary web application")
+ *             .loginPageUrl("https://app.example.com/login")
+ *             .build());
+ * 
+ *         var readReports = new AppPermission("readReports", AppPermissionArgs.builder()
+ *             .projectId(example.id())
+ *             .appId(web.oidcAppId())
+ *             .name("read:reports")
+ *             .build());
+ * 
+ *         var analyst = new AppRole("analyst", AppRoleArgs.builder()
+ *             .projectId(example.id())
+ *             .appId(web.oidcAppId())
+ *             .name("analyst")
+ *             .permissionIds(readReports.id())
  *             .build());
  * 
  *     }
@@ -374,7 +401,8 @@ import javax.annotation.Nullable;
  * 
  * ### JWT Templates
  * 
- * Customize the JWT claims added to session tokens:
+ * JWT templates are managed with the standalone `descope.JwtTemplate` resource that
+ * references the project by ID:
  * 
  * <pre>
  * {@code
@@ -385,9 +413,8 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectJwtTemplatesArgs;
- * import com.pulumi.descope.inputs.ProjectJwtTemplatesUserTemplateArgs;
- * import com.pulumi.descope.inputs.ProjectProjectSettingsArgs;
+ * import com.descope.pulumi.descope.JwtTemplate;
+ * import com.descope.pulumi.descope.JwtTemplateArgs;
  * import static com.pulumi.codegen.internal.Serialization.*;
  * import java.util.ArrayList;
  * import java.util.Arrays;
@@ -404,23 +431,21 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) }{{@code
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .jwtTemplates(ProjectJwtTemplatesArgs.builder()
- *                 .userTemplates(ProjectJwtTemplatesUserTemplateArgs.builder()
- *                     .name("app-claims")
- *                     .description("Adds subscription tier and org context to user JWTs")
- *                     .template(serializeJson(
- *                         jsonObject(
- *                             jsonProperty("tier", "}{@literal @}{@code user.customAttributes.subscriptionTier"),
- *                             jsonProperty("org_id", "}{@literal @}{@code user.tenants[0].tenantId")
- *                         )))
- *                     .excludePermissionClaim(true)
- *                     .addJtiClaim(true)
- *                     .overrideSubjectClaim(true)
- *                     .build())
- *                 .build())
- *             .projectSettings(ProjectProjectSettingsArgs.builder()
- *                 .userJwtTemplate("app-claims")
- *                 .build())
+ *             .build());
+ * 
+ *         var appClaims = new JwtTemplate("appClaims", JwtTemplateArgs.builder()
+ *             .projectId(example.id())
+ *             .name("app-claims")
+ *             .description("Adds subscription tier and org context to user JWTs")
+ *             .type("user")
+ *             .template(serializeJson(
+ *                 jsonObject(
+ *                     jsonProperty("tier", "}{@literal @}{@code user.customAttributes.subscriptionTier"),
+ *                     jsonProperty("org_id", "}{@literal @}{@code user.tenants[0].tenantId")
+ *                 )))
+ *             .excludePermissionClaim(true)
+ *             .addJtiClaim(true)
+ *             .overrideSubjectClaim(true)
  *             .build());
  * 
  *     }}{@code
@@ -430,7 +455,8 @@ import javax.annotation.Nullable;
  * 
  * ### SSO Settings
  * 
- * Configure global settings for Single Sign-On across tenants:
+ * Global settings for Single Sign-On across tenants are managed with the standalone
+ * `descope.SsoSettings` resource:
  * 
  * <pre>
  * {@code
@@ -441,10 +467,10 @@ import javax.annotation.Nullable;
  * import com.pulumi.core.Output;
  * import com.descope.pulumi.descope.Project;
  * import com.descope.pulumi.descope.ProjectArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationSsoArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs;
- * import com.pulumi.descope.inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs;
+ * import com.descope.pulumi.descope.SsoSettings;
+ * import com.descope.pulumi.descope.SsoSettingsArgs;
+ * import com.pulumi.descope.inputs.SsoSettingsMandatoryUserAttributeArgs;
+ * import com.pulumi.descope.inputs.SsoSettingsSsoSuiteSettingsArgs;
  * import java.util.ArrayList;
  * import java.util.Arrays;
  * import java.util.Map;
@@ -460,31 +486,28 @@ import javax.annotation.Nullable;
  *     public static void stack(Context ctx) {
  *         var example = new Project("example", ProjectArgs.builder()
  *             .name("my-app")
- *             .authentication(ProjectAuthenticationArgs.builder()
- *                 .sso(ProjectAuthenticationSsoArgs.builder()
- *                     .mergeUsers(true)
- *                     .allowOverrideRoles(true)
- *                     .groupsPriority(true)
- *                     .requireSsoDomains(true)
- *                     .requireGroupsAttributeName(true)
- *                     .mandatoryUserAttributes(                    
- *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
- *                             .id("email")
- *                             .build(),
- *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
- *                             .id("name")
- *                             .build(),
- *                         ProjectAuthenticationSsoMandatoryUserAttributeArgs.builder()
- *                             .id("department")
- *                             .custom(true)
- *                             .build())
- *                     .ssoSuiteSettings(ProjectAuthenticationSsoSsoSuiteSettingsArgs.builder()
- *                         .styleId("my-brand-style")
- *                         .hideScim(false)
- *                         .hideSaml(false)
- *                         .hideOidc(false)
- *                         .build())
+ *             .build());
+ * 
+ *         var exampleSsoSettings = new SsoSettings("exampleSsoSettings", SsoSettingsArgs.builder()
+ *             .projectId(example.id())
+ *             .mergeUsers(true)
+ *             .allowOverrideRoles(true)
+ *             .mandatoryUserAttributes(            
+ *                 SsoSettingsMandatoryUserAttributeArgs.builder()
+ *                     .id("email")
+ *                     .build(),
+ *                 SsoSettingsMandatoryUserAttributeArgs.builder()
+ *                     .id("name")
+ *                     .build(),
+ *                 SsoSettingsMandatoryUserAttributeArgs.builder()
+ *                     .id("department")
+ *                     .custom(true)
  *                     .build())
+ *             .ssoSuiteSettings(SsoSettingsSsoSuiteSettingsArgs.builder()
+ *                 .styleId("my-brand-style")
+ *                 .hideScim(false)
+ *                 .hideSaml(false)
+ *                 .hideOidc(false)
  *                 .build())
  *             .build());
  * 
@@ -497,88 +520,18 @@ import javax.annotation.Nullable;
 @ResourceType(type="descope:index/project:Project")
 public class Project extends com.pulumi.resources.CustomResource {
     /**
-     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
      * 
      */
-    @Export(name="adminPortal", refs={ProjectAdminPortal.class}, tree="[0]")
-    private Output<ProjectAdminPortal> adminPortal;
+    @Export(name="deletionProtection", refs={Boolean.class}, tree="[0]")
+    private Output</* @Nullable */ Boolean> deletionProtection;
 
     /**
-     * @return Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * @return Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
      * 
      */
-    public Output<ProjectAdminPortal> adminPortal() {
-        return this.adminPortal;
-    }
-    /**
-     * Applications that are registered with the project.
-     * 
-     */
-    @Export(name="applications", refs={ProjectApplications.class}, tree="[0]")
-    private Output<ProjectApplications> applications;
-
-    /**
-     * @return Applications that are registered with the project.
-     * 
-     */
-    public Output<ProjectApplications> applications() {
-        return this.applications;
-    }
-    /**
-     * Custom attributes that can be attached to users and tenants.
-     * 
-     */
-    @Export(name="attributes", refs={ProjectAttributes.class}, tree="[0]")
-    private Output<ProjectAttributes> attributes;
-
-    /**
-     * @return Custom attributes that can be attached to users and tenants.
-     * 
-     */
-    public Output<ProjectAttributes> attributes() {
-        return this.attributes;
-    }
-    /**
-     * Settings for each authentication method.
-     * 
-     */
-    @Export(name="authentication", refs={ProjectAuthentication.class}, tree="[0]")
-    private Output<ProjectAuthentication> authentication;
-
-    /**
-     * @return Settings for each authentication method.
-     * 
-     */
-    public Output<ProjectAuthentication> authentication() {
-        return this.authentication;
-    }
-    /**
-     * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-     * 
-     */
-    @Export(name="authorization", refs={ProjectAuthorization.class}, tree="[0]")
-    private Output<ProjectAuthorization> authorization;
-
-    /**
-     * @return Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-     * 
-     */
-    public Output<ProjectAuthorization> authorization() {
-        return this.authorization;
-    }
-    /**
-     * Enrich your flows by interacting with third party services.
-     * 
-     */
-    @Export(name="connectors", refs={ProjectConnectors.class}, tree="[0]")
-    private Output<ProjectConnectors> connectors;
-
-    /**
-     * @return Enrich your flows by interacting with third party services.
-     * 
-     */
-    public Output<ProjectConnectors> connectors() {
-        return this.connectors;
+    public Output<Optional<Boolean>> deletionProtection() {
+        return Codegen.optional(this.deletionProtection);
     }
     /**
      * This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
@@ -595,62 +548,6 @@ public class Project extends com.pulumi.resources.CustomResource {
         return this.environment;
     }
     /**
-     * Custom authentication flows to use in this project.
-     * 
-     */
-    @Export(name="flows", refs={Map.class,String.class,ProjectFlows.class}, tree="[0,1,2]")
-    private Output<Map<String,ProjectFlows>> flows;
-
-    /**
-     * @return Custom authentication flows to use in this project.
-     * 
-     */
-    public Output<Map<String,ProjectFlows>> flows() {
-        return this.flows;
-    }
-    /**
-     * User invitation settings and behavior.
-     * 
-     */
-    @Export(name="inviteSettings", refs={ProjectInviteSettings.class}, tree="[0]")
-    private Output<ProjectInviteSettings> inviteSettings;
-
-    /**
-     * @return User invitation settings and behavior.
-     * 
-     */
-    public Output<ProjectInviteSettings> inviteSettings() {
-        return this.inviteSettings;
-    }
-    /**
-     * Defines templates for JSON Web Tokens (JWT) used for authentication.
-     * 
-     */
-    @Export(name="jwtTemplates", refs={ProjectJwtTemplates.class}, tree="[0]")
-    private Output<ProjectJwtTemplates> jwtTemplates;
-
-    /**
-     * @return Defines templates for JSON Web Tokens (JWT) used for authentication.
-     * 
-     */
-    public Output<ProjectJwtTemplates> jwtTemplates() {
-        return this.jwtTemplates;
-    }
-    /**
-     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-     * 
-     */
-    @Export(name="lists", refs={List.class,ProjectList.class}, tree="[0,1]")
-    private Output<List<ProjectList>> lists;
-
-    /**
-     * @return Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-     * 
-     */
-    public Output<List<ProjectList>> lists() {
-        return this.lists;
-    }
-    /**
      * The name of the Descope project.
      * 
      */
@@ -665,34 +562,6 @@ public class Project extends com.pulumi.resources.CustomResource {
         return this.name;
     }
     /**
-     * General settings for the Descope project.
-     * 
-     */
-    @Export(name="projectSettings", refs={ProjectProjectSettings.class}, tree="[0]")
-    private Output<ProjectProjectSettings> projectSettings;
-
-    /**
-     * @return General settings for the Descope project.
-     * 
-     */
-    public Output<ProjectProjectSettings> projectSettings() {
-        return this.projectSettings;
-    }
-    /**
-     * Custom styles that can be applied to the project&#39;s authentication flows.
-     * 
-     */
-    @Export(name="styles", refs={ProjectStyles.class}, tree="[0]")
-    private Output<ProjectStyles> styles;
-
-    /**
-     * @return Custom styles that can be applied to the project&#39;s authentication flows.
-     * 
-     */
-    public Output<ProjectStyles> styles() {
-        return this.styles;
-    }
-    /**
      * Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
      * 
      */
@@ -705,20 +574,6 @@ public class Project extends com.pulumi.resources.CustomResource {
      */
     public Output<List<String>> tags() {
         return this.tags;
-    }
-    /**
-     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-     * 
-     */
-    @Export(name="widgets", refs={Map.class,String.class,ProjectWidgets.class}, tree="[0,1,2]")
-    private Output<Map<String,ProjectWidgets>> widgets;
-
-    /**
-     * @return Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-     * 
-     */
-    public Output<Map<String,ProjectWidgets>> widgets() {
-        return this.widgets;
     }
 
     /**

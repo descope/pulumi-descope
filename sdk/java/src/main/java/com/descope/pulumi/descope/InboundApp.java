@@ -9,6 +9,7 @@ import com.descope.pulumi.descope.inputs.InboundAppState;
 import com.descope.pulumi.descope.outputs.InboundAppAttributesScope;
 import com.descope.pulumi.descope.outputs.InboundAppConnectionsScope;
 import com.descope.pulumi.descope.outputs.InboundAppPermissionsScope;
+import com.descope.pulumi.descope.outputs.InboundAppScopeClaimMapping;
 import com.descope.pulumi.descope.outputs.InboundAppSessionSettings;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Export;
@@ -17,10 +18,25 @@ import com.pulumi.core.internal.Codegen;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 @ResourceType(type="descope:index/inboundApp:InboundApp")
 public class InboundApp extends com.pulumi.resources.CustomResource {
+    /**
+     * Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     * 
+     */
+    @Export(name="allowedTenants", refs={List.class,String.class}, tree="[0,1]")
+    private Output<List<String>> allowedTenants;
+
+    /**
+     * @return Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     * 
+     */
+    public Output<List<String>> allowedTenants() {
+        return this.allowedTenants;
+    }
     /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      * 
@@ -92,6 +108,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
         return this.clientSecret;
     }
     /**
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * 
+     */
+    @Export(name="clientType", refs={String.class}, tree="[0]")
+    private Output<String> clientType;
+
+    /**
+     * @return The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * 
+     */
+    public Output<String> clientType() {
+        return this.clientType;
+    }
+    /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      * 
      */
@@ -118,6 +148,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
      */
     public Output<String> defaultAudience() {
         return this.defaultAudience;
+    }
+    /**
+     * Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     * 
+     */
+    @Export(name="deletionProtection", refs={Boolean.class}, tree="[0]")
+    private Output</* @Nullable */ Boolean> deletionProtection;
+
+    /**
+     * @return Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     * 
+     */
+    public Output<Optional<Boolean>> deletionProtection() {
+        return Codegen.optional(this.deletionProtection);
     }
     /**
      * A description for the inbound app.
@@ -218,20 +262,6 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
         return this.name;
     }
     /**
-     * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     * 
-     */
-    @Export(name="nonConfidentialClient", refs={Boolean.class}, tree="[0]")
-    private Output<Boolean> nonConfidentialClient;
-
-    /**
-     * @return Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     * 
-     */
-    public Output<Boolean> nonConfidentialClient() {
-        return this.nonConfidentialClient;
-    }
-    /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      * 
      */
@@ -258,6 +288,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
      */
     public Output<String> projectId() {
         return this.projectId;
+    }
+    /**
+     * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     * 
+     */
+    @Export(name="scopeClaimMappings", refs={List.class,InboundAppScopeClaimMapping.class}, tree="[0,1]")
+    private Output<List<InboundAppScopeClaimMapping>> scopeClaimMappings;
+
+    /**
+     * @return Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     * 
+     */
+    public Output<List<InboundAppScopeClaimMapping>> scopeClaimMappings() {
+        return this.scopeClaimMappings;
     }
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.

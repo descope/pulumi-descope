@@ -15,6 +15,10 @@ import java.lang.String;
 import java.util.List;
 import javax.annotation.Nullable;
 
+/**
+ * Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
+ * 
+ */
 @ResourceType(type="descope:index/engine:Engine")
 public class Engine extends com.pulumi.resources.CustomResource {
     /**

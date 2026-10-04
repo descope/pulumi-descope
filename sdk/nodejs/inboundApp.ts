@@ -35,6 +35,10 @@ export class InboundApp extends pulumi.CustomResource {
     }
 
     /**
+     * Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     */
+    declare public readonly allowedTenants: pulumi.Output<string[]>;
+    /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      */
     declare public readonly approvedCallbackUrls: pulumi.Output<string[]>;
@@ -55,6 +59,10 @@ export class InboundApp extends pulumi.CustomResource {
      */
     declare public readonly clientSecret: pulumi.Output<string>;
     /**
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     */
+    declare public readonly clientType: pulumi.Output<string>;
+    /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
     declare public readonly connectionsScopes: pulumi.Output<outputs.InboundAppConnectionsScope[]>;
@@ -62,6 +70,10 @@ export class InboundApp extends pulumi.CustomResource {
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
     declare public readonly defaultAudience: pulumi.Output<string>;
+    /**
+     * Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     */
+    declare public readonly deletionProtection: pulumi.Output<boolean | undefined>;
     /**
      * A description for the inbound app.
      */
@@ -91,10 +103,6 @@ export class InboundApp extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     */
-    declare public readonly nonConfidentialClient: pulumi.Output<boolean>;
-    /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      */
     declare public readonly permissionsScopes: pulumi.Output<outputs.InboundAppPermissionsScope[]>;
@@ -102,6 +110,10 @@ export class InboundApp extends pulumi.CustomResource {
      * The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
      */
     declare public readonly projectId: pulumi.Output<string>;
+    /**
+     * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     */
+    declare public readonly scopeClaimMappings: pulumi.Output<outputs.InboundAppScopeClaimMapping[]>;
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
@@ -120,13 +132,16 @@ export class InboundApp extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InboundAppState | undefined;
+            resourceInputs["allowedTenants"] = state?.allowedTenants;
             resourceInputs["approvedCallbackUrls"] = state?.approvedCallbackUrls;
             resourceInputs["attributesScopes"] = state?.attributesScopes;
             resourceInputs["audienceWhitelists"] = state?.audienceWhitelists;
             resourceInputs["clientId"] = state?.clientId;
             resourceInputs["clientSecret"] = state?.clientSecret;
+            resourceInputs["clientType"] = state?.clientType;
             resourceInputs["connectionsScopes"] = state?.connectionsScopes;
             resourceInputs["defaultAudience"] = state?.defaultAudience;
+            resourceInputs["deletionProtection"] = state?.deletionProtection;
             resourceInputs["description"] = state?.description;
             resourceInputs["forceAddAllAuthorizationInfo"] = state?.forceAddAllAuthorizationInfo;
             resourceInputs["forceDpop"] = state?.forceDpop;
@@ -134,22 +149,25 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["loginPageUrl"] = state?.loginPageUrl;
             resourceInputs["logoUrl"] = state?.logoUrl;
             resourceInputs["name"] = state?.name;
-            resourceInputs["nonConfidentialClient"] = state?.nonConfidentialClient;
             resourceInputs["permissionsScopes"] = state?.permissionsScopes;
             resourceInputs["projectId"] = state?.projectId;
+            resourceInputs["scopeClaimMappings"] = state?.scopeClaimMappings;
             resourceInputs["sessionSettings"] = state?.sessionSettings;
         } else {
             const args = argsOrState as InboundAppArgs | undefined;
             if (args?.projectId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
+            resourceInputs["allowedTenants"] = args?.allowedTenants;
             resourceInputs["approvedCallbackUrls"] = args?.approvedCallbackUrls;
             resourceInputs["attributesScopes"] = args?.attributesScopes;
             resourceInputs["audienceWhitelists"] = args?.audienceWhitelists;
             resourceInputs["clientId"] = args?.clientId;
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
+            resourceInputs["clientType"] = args?.clientType;
             resourceInputs["connectionsScopes"] = args?.connectionsScopes;
             resourceInputs["defaultAudience"] = args?.defaultAudience;
+            resourceInputs["deletionProtection"] = args?.deletionProtection;
             resourceInputs["description"] = args?.description;
             resourceInputs["forceAddAllAuthorizationInfo"] = args?.forceAddAllAuthorizationInfo;
             resourceInputs["forceDpop"] = args?.forceDpop;
@@ -157,9 +175,9 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["loginPageUrl"] = args?.loginPageUrl;
             resourceInputs["logoUrl"] = args?.logoUrl;
             resourceInputs["name"] = args?.name;
-            resourceInputs["nonConfidentialClient"] = args?.nonConfidentialClient;
             resourceInputs["permissionsScopes"] = args?.permissionsScopes;
             resourceInputs["projectId"] = args?.projectId;
+            resourceInputs["scopeClaimMappings"] = args?.scopeClaimMappings;
             resourceInputs["sessionSettings"] = args?.sessionSettings;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -174,6 +192,10 @@ export class InboundApp extends pulumi.CustomResource {
  */
 export interface InboundAppState {
     /**
+     * Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     */
+    allowedTenants?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      */
     approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
@@ -194,6 +216,10 @@ export interface InboundAppState {
      */
     clientSecret?: pulumi.Input<string | undefined>;
     /**
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     */
+    clientType?: pulumi.Input<string | undefined>;
+    /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
     connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
@@ -201,6 +227,10 @@ export interface InboundAppState {
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
     defaultAudience?: pulumi.Input<string | undefined>;
+    /**
+     * Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * A description for the inbound app.
      */
@@ -230,10 +260,6 @@ export interface InboundAppState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     */
-    nonConfidentialClient?: pulumi.Input<boolean | undefined>;
-    /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      */
     permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[] | undefined>;
@@ -241,6 +267,10 @@ export interface InboundAppState {
      * The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
      */
     projectId?: pulumi.Input<string | undefined>;
+    /**
+     * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     */
+    scopeClaimMappings?: pulumi.Input<pulumi.Input<inputs.InboundAppScopeClaimMapping>[] | undefined>;
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
@@ -252,6 +282,10 @@ export interface InboundAppState {
  */
 export interface InboundAppArgs {
     /**
+     * Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     */
+    allowedTenants?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
      */
     approvedCallbackUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
@@ -272,6 +306,10 @@ export interface InboundAppArgs {
      */
     clientSecret?: pulumi.Input<string | undefined>;
     /**
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     */
+    clientType?: pulumi.Input<string | undefined>;
+    /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
     connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
@@ -279,6 +317,10 @@ export interface InboundAppArgs {
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
     defaultAudience?: pulumi.Input<string | undefined>;
+    /**
+     * Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * A description for the inbound app.
      */
@@ -308,10 +350,6 @@ export interface InboundAppArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     */
-    nonConfidentialClient?: pulumi.Input<boolean | undefined>;
-    /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      */
     permissionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppPermissionsScope>[] | undefined>;
@@ -319,6 +357,10 @@ export interface InboundAppArgs {
      * The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
      */
     projectId: pulumi.Input<string>;
+    /**
+     * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     */
+    scopeClaimMappings?: pulumi.Input<pulumi.Input<inputs.InboundAppScopeClaimMapping>[] | undefined>;
     /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
