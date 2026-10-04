@@ -1,47 +1,18 @@
 import * as descope from "@descope/pulumi-descope";
 
 export const project = new descope.Project("pulumi-ts-test", {
-  jwtTemplates: {
-    userTemplates: [
-      {
-        name: "userjwt",
-        description: "JWT token",
-        template: "{}", // must be json
-      },
-    ],
-    accessKeyTemplates: [
-      {
-        name: "accesskeyjwt",
-        description: "JWT token",
-        template: "{}", // must be json
-      },
-    ],
-  },
-  attributes: {
-    tenants: [{ name: "my_attribute", type: "string" }],
-    users: [{ name: "my_attribute", type: "string" }],
-  },
-  authentication: {
-    otp: {
-      disabled: false,
-    },
-  },
-  authorization: {
-    permissions: [
-      {
-        name: "perm1",
-        description: "Permission 1",
-      },
-    ],
-    roles: [
-      {
-        name: "role1",
-        permissions: ["perm1"],
-      },
-    ],
-  },
-  connectors: {
-    https: [{ name: "my_https", baseUrl: "https://example.com" }],
-  },
   environment: "production",
+  deletionProtection: false,
+});
+
+const permission = new descope.Permission("pulumi-ts-perm1", {
+  projectId: project.id,
+  name: "perm1",
+  description: "Permission 1",
+});
+
+export const role = new descope.Role("pulumi-ts-role1", {
+  projectId: project.id,
+  name: "role1",
+  permissions: [permission.name],
 });

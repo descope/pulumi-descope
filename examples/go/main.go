@@ -10,7 +10,10 @@ func main() {
 		project, err := descope.NewProject(
 			ctx,
 			"pulumi-go-test",
-			&descope.ProjectArgs{Environment: pulumi.String("production")},
+			&descope.ProjectArgs{
+				Environment:        pulumi.String("production"),
+				DeletionProtection: pulumi.Bool(false),
+			},
 		)
 		if err != nil {
 			return err
