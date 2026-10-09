@@ -44,8 +44,8 @@ jobs:
       - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: app-auth
         with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PEM }}
+          app-id: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       # Without ldid cross-compiling Node binaries on a Linux worker intended to work on darwin-arm64 fails to sign the
       # binaries properly and they do not work as expected. See https://github.com/pulumi/pulumi-awsx/issues/1490
