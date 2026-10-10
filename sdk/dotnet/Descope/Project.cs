@@ -11,7 +11,7 @@ using Pulumi;
 namespace Descope.Pulumi.Descope
 {
     /// <summary>
-    /// Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+    /// Manages a Descope project. A project is the core entity in Descope—its authentication settings, user flows, roles, connectors, applications, and other configuration are managed with the standalone `descope_*` resources that reference the project by ID.
     /// 
     /// This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
     /// 
@@ -45,7 +45,9 @@ namespace Descope.Pulumi.Descope
     /// 
     /// ### Authentication Methods
     /// 
-    /// Enable and configure the authentication methods your users will use:
+    /// Authentication method settings are managed with their own standalone resources, such as
+    /// `descope.MagiclinkSettings`, `descope.OtpSettings`,
+    /// `descope.PasswordSettings`, and `descope.SsoSettings`:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -58,27 +60,20 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         Authentication = new Descope.Inputs.ProjectAuthenticationArgs
-    ///         {
-    ///             MagicLink = new Descope.Inputs.ProjectAuthenticationMagicLinkArgs
-    ///             {
-    ///                 ExpirationTime = "1 hour",
-    ///             },
-    ///             Password = new Descope.Inputs.ProjectAuthenticationPasswordArgs
-    ///             {
-    ///                 Lock = true,
-    ///                 LockAttempts = 5,
-    ///                 MinLength = 12,
-    ///             },
-    ///             Otp = new Descope.Inputs.ProjectAuthenticationOtpArgs
-    ///             {
-    ///                 ExpirationTime = "5 minutes",
-    ///             },
-    ///             Passkeys = new Descope.Inputs.ProjectAuthenticationPasskeysArgs
-    ///             {
-    ///                 Disabled = false,
-    ///             },
-    ///         },
+    ///     });
+    /// 
+    ///     var exampleMagiclinkSettings = new Descope.MagiclinkSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         ExpirationTime = "1 hour",
+    ///     });
+    /// 
+    ///     var examplePasswordSettings = new Descope.PasswordSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Lock = true,
+    ///         LockAttempts = 5,
+    ///         MinLength = 12,
     ///     });
     /// 
     /// });
@@ -86,7 +81,7 @@ namespace Descope.Pulumi.Descope
     /// 
     /// ### Roles and Permissions (RBAC)
     /// 
-    /// Define roles and permissions for your users:
+    /// Roles and permissions are managed as standalone resources that reference the project by ID:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -99,59 +94,62 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         Authorization = new Descope.Inputs.ProjectAuthorizationArgs
+    ///     });
+    /// 
+    ///     var readData = new Descope.Permission("read_data", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "read:data",
+    ///         Description = "Read access to application data",
+    ///     });
+    /// 
+    ///     var writeData = new Descope.Permission("write_data", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "write:data",
+    ///         Description = "Write access to application data",
+    ///     });
+    /// 
+    ///     var adminPanel = new Descope.Permission("admin_panel", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "admin:panel",
+    ///         Description = "Access to the admin panel",
+    ///     });
+    /// 
+    ///     var viewer = new Descope.Role("viewer", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "viewer",
+    ///         Description = "Can read data",
+    ///         Permissions = new[]
     ///         {
-    ///             Permissions = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
-    ///                 {
-    ///                     Name = "read:data",
-    ///                     Description = "Read access to application data",
-    ///                 },
-    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
-    ///                 {
-    ///                     Name = "write:data",
-    ///                     Description = "Write access to application data",
-    ///                 },
-    ///                 new Descope.Inputs.ProjectAuthorizationPermissionArgs
-    ///                 {
-    ///                     Name = "admin:panel",
-    ///                     Description = "Access to the admin panel",
-    ///                 },
-    ///             },
-    ///             Roles = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
-    ///                 {
-    ///                     Name = "viewer",
-    ///                     Description = "Can read data",
-    ///                     Permissions = new[]
-    ///                     {
-    ///                         "read:data",
-    ///                     },
-    ///                 },
-    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
-    ///                 {
-    ///                     Name = "editor",
-    ///                     Description = "Can read and write data",
-    ///                     Permissions = new[]
-    ///                     {
-    ///                         "read:data",
-    ///                         "write:data",
-    ///                     },
-    ///                 },
-    ///                 new Descope.Inputs.ProjectAuthorizationRoleArgs
-    ///                 {
-    ///                     Name = "admin",
-    ///                     Description = "Full access",
-    ///                     Permissions = new[]
-    ///                     {
-    ///                         "read:data",
-    ///                         "write:data",
-    ///                         "admin:panel",
-    ///                     },
-    ///                 },
-    ///             },
+    ///             readData.Name,
+    ///         },
+    ///     });
+    /// 
+    ///     var editor = new Descope.Role("editor", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "editor",
+    ///         Description = "Can read and write data",
+    ///         Permissions = new[]
+    ///         {
+    ///             readData.Name,
+    ///             writeData.Name,
+    ///         },
+    ///     });
+    /// 
+    ///     var admin = new Descope.Role("admin", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "admin",
+    ///         Description = "Full access",
+    ///         Permissions = new[]
+    ///         {
+    ///             readData.Name,
+    ///             writeData.Name,
+    ///             adminPanel.Name,
     ///         },
     ///     });
     /// 
@@ -160,7 +158,7 @@ namespace Descope.Pulumi.Descope
     /// 
     /// ### Connectors
     /// 
-    /// Integrate with third-party services to enrich flows and send notifications:
+    /// Integrate with third-party services using standalone per-type connector resources:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -173,65 +171,50 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         Connectors = new Descope.Inputs.ProjectConnectorsArgs
+    ///     });
+    /// 
+    ///     // Generic HTTP webhook with bearer token auth
+    ///     var eligibility = new Descope.HttpConnector("eligibility", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "User Eligibility Check",
+    ///         Description = "Checks if a new user is allowed to register",
+    ///         BaseUrl = "https://api.example.com",
+    ///         Authentication = new Descope.Inputs.HttpConnectorAuthenticationArgs
     ///         {
-    ///             Https = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectConnectorsHttpArgs
-    ///                 {
-    ///                     Name = "User Eligibility Check",
-    ///                     Description = "Checks if a new user is allowed to register",
-    ///                     BaseUrl = "https://api.example.com",
-    ///                     Authentication = new Descope.Inputs.ProjectConnectorsHttpAuthenticationArgs
-    ///                     {
-    ///                         BearerToken = webhookSecret,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             Sendgrids = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectConnectorsSendgridArgs
-    ///                 {
-    ///                     Name = "Transactional Email",
-    ///                     Sender = new Descope.Inputs.ProjectConnectorsSendgridSenderArgs
-    ///                     {
-    ///                         Email = "noreply@example.com",
-    ///                         Name = "My App",
-    ///                     },
-    ///                     Authentication = new Descope.Inputs.ProjectConnectorsSendgridAuthenticationArgs
-    ///                     {
-    ///                         ApiKey = sendgridApiKey,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             TwilioCores = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectConnectorsTwilioCoreArgs
-    ///                 {
-    ///                     Name = "SMS OTP",
-    ///                     AccountSid = twilioAccountSid,
-    ///                     Senders = new Descope.Inputs.ProjectConnectorsTwilioCoreSendersArgs
-    ///                     {
-    ///                         Sms = new Descope.Inputs.ProjectConnectorsTwilioCoreSendersSmsArgs
-    ///                         {
-    ///                             PhoneNumber = "+15551234567",
-    ///                         },
-    ///                     },
-    ///                     Authentication = new Descope.Inputs.ProjectConnectorsTwilioCoreAuthenticationArgs
-    ///                     {
-    ///                         AuthToken = twilioAuthToken,
-    ///                     },
-    ///                 },
-    ///             },
+    ///             BearerToken = webhookSecret,
     ///         },
+    ///     });
+    /// 
+    ///     // SendGrid for email delivery
+    ///     var email = new Descope.SendgridConnector("email", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "Transactional Email",
+    ///         SenderEmail = "noreply@example.com",
+    ///         SenderName = "My App",
+    ///         ApiKey = sendgridApiKey,
+    ///     });
+    /// 
+    ///     // Twilio for SMS OTP
+    ///     var sms = new Descope.TwilioCoreConnector("sms", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "SMS OTP",
+    ///         AccountSid = twilioAccountSid,
+    ///         FromPhone = "+15551234567",
+    ///         AuthToken = twilioAuthToken,
     ///     });
     /// 
     /// });
     /// ```
     /// 
-    /// ### Session Settings
+    /// ### Project and Session Settings
     /// 
-    /// Configure token lifetimes and session behavior:
+    /// General project settings, session behavior, and user invitations are managed with the
+    /// standalone `descope.ProjectSettings`,
+    /// `descope.SessionSettings`, and
+    /// `descope.InviteSettings` resources:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -244,28 +227,44 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         ProjectSettings = new Descope.Inputs.ProjectProjectSettingsArgs
+    ///     });
+    /// 
+    ///     var exampleProjectSettings = new Descope.ProjectSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         AppUrl = "https://app.example.com",
+    ///         ApprovedDomains = new[]
     ///         {
-    ///             RefreshTokenExpiration = "3 weeks",
-    ///             SessionTokenExpiration = "15 minutes",
-    ///             RefreshTokenRotation = true,
-    ///             EnableInactivity = true,
-    ///             InactivityTime = "30 minutes",
-    ///             CustomDomain = "auth.example.com",
-    ///             ApprovedDomains = new[]
-    ///             {
-    ///                 "example.com",
-    ///                 "app.example.com",
-    ///             },
+    ///             "example.com",
+    ///             "app.example.com",
     ///         },
+    ///     });
+    /// 
+    ///     var exampleSessionSettings = new Descope.SessionSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         RefreshTokenExpiration = "3 weeks",
+    ///         SessionTokenExpiration = "15 minutes",
+    ///         RefreshTokenRotation = true,
+    ///         EnableInactivity = true,
+    ///         InactivityTime = "30 minutes",
+    ///     });
+    /// 
+    ///     var exampleInviteSettings = new Descope.InviteSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         RequireInvitation = true,
+    ///         InviteUrl = "https://app.example.com/invite",
     ///     });
     /// 
     /// });
     /// ```
     /// 
-    /// ### OIDC Applications
+    /// ### Federated Applications
     /// 
-    /// Register an OIDC application for SSO:
+    /// Federated (SSO IdP) applications and their app-scoped roles and permissions are managed
+    /// with the standalone `descope.OidcApp`, `descope.SamlApp`, `descope.WsfedApp`,
+    /// `descope.AppRole`, and `descope.AppPermission` resources that reference the project by ID:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -278,17 +277,31 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         Applications = new Descope.Inputs.ProjectApplicationsArgs
+    ///     });
+    /// 
+    ///     var web = new Descope.OidcApp("web", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "My Web App",
+    ///         Description = "Primary web application",
+    ///         LoginPageUrl = "https://app.example.com/login",
+    ///     });
+    /// 
+    ///     var readReports = new Descope.AppPermission("read_reports", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         AppId = web.OidcAppId,
+    ///         Name = "read:reports",
+    ///     });
+    /// 
+    ///     var analyst = new Descope.AppRole("analyst", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         AppId = web.OidcAppId,
+    ///         Name = "analyst",
+    ///         PermissionIds = new[]
     ///         {
-    ///             OidcApplications = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectApplicationsOidcApplicationArgs
-    ///                 {
-    ///                     Name = "My Web App",
-    ///                     Description = "Primary web application",
-    ///                     LoginPageUrl = "https://app.example.com/login",
-    ///                 },
-    ///             },
+    ///             readReports.Id,
     ///         },
     ///     });
     /// 
@@ -297,7 +310,8 @@ namespace Descope.Pulumi.Descope
     /// 
     /// ### JWT Templates
     /// 
-    /// Customize the JWT claims added to session tokens:
+    /// JWT templates are managed with the standalone `descope.JwtTemplate` resource that
+    /// references the project by ID:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -311,29 +325,22 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         JwtTemplates = new Descope.Inputs.ProjectJwtTemplatesArgs
+    ///     });
+    /// 
+    ///     var appClaims = new Descope.JwtTemplate("app_claims", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "app-claims",
+    ///         Description = "Adds subscription tier and org context to user JWTs",
+    ///         Type = "user",
+    ///         Template = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             UserTemplates = new[]
-    ///             {
-    ///                 new Descope.Inputs.ProjectJwtTemplatesUserTemplateArgs
-    ///                 {
-    ///                     Name = "app-claims",
-    ///                     Description = "Adds subscription tier and org context to user JWTs",
-    ///                     Template = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///                     {
-    ///                         ["tier"] = "@user.customAttributes.subscriptionTier",
-    ///                         ["org_id"] = "@user.tenants[0].tenantId",
-    ///                     }),
-    ///                     ExcludePermissionClaim = true,
-    ///                     AddJtiClaim = true,
-    ///                     OverrideSubjectClaim = true,
-    ///                 },
-    ///             },
-    ///         },
-    ///         ProjectSettings = new Descope.Inputs.ProjectProjectSettingsArgs
-    ///         {
-    ///             UserJwtTemplate = "app-claims",
-    ///         },
+    ///             ["tier"] = "@user.customAttributes.subscriptionTier",
+    ///             ["org_id"] = "@user.tenants[0].tenantId",
+    ///         }),
+    ///         ExcludePermissionClaim = true,
+    ///         AddJtiClaim = true,
+    ///         OverrideSubjectClaim = true,
     ///     });
     /// 
     /// });
@@ -341,7 +348,8 @@ namespace Descope.Pulumi.Descope
     /// 
     /// ### SSO Settings
     /// 
-    /// Configure global settings for Single Sign-On across tenants:
+    /// Global settings for Single Sign-On across tenants are managed with the standalone
+    /// `descope.SsoSettings` resource:
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -354,39 +362,35 @@ namespace Descope.Pulumi.Descope
     ///     var example = new Descope.Project("example", new()
     ///     {
     ///         Name = "my-app",
-    ///         Authentication = new Descope.Inputs.ProjectAuthenticationArgs
+    ///     });
+    /// 
+    ///     var exampleSsoSettings = new Descope.SsoSettings("example", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         MergeUsers = true,
+    ///         AllowOverrideRoles = true,
+    ///         MandatoryUserAttributes = new[]
     ///         {
-    ///             Sso = new Descope.Inputs.ProjectAuthenticationSsoArgs
+    ///             new Descope.Inputs.SsoSettingsMandatoryUserAttributeArgs
     ///             {
-    ///                 MergeUsers = true,
-    ///                 AllowOverrideRoles = true,
-    ///                 GroupsPriority = true,
-    ///                 RequireSsoDomains = true,
-    ///                 RequireGroupsAttributeName = true,
-    ///                 MandatoryUserAttributes = new[]
-    ///                 {
-    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
-    ///                     {
-    ///                         Id = "email",
-    ///                     },
-    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
-    ///                     {
-    ///                         Id = "name",
-    ///                     },
-    ///                     new Descope.Inputs.ProjectAuthenticationSsoMandatoryUserAttributeArgs
-    ///                     {
-    ///                         Id = "department",
-    ///                         Custom = true,
-    ///                     },
-    ///                 },
-    ///                 SsoSuiteSettings = new Descope.Inputs.ProjectAuthenticationSsoSsoSuiteSettingsArgs
-    ///                 {
-    ///                     StyleId = "my-brand-style",
-    ///                     HideScim = false,
-    ///                     HideSaml = false,
-    ///                     HideOidc = false,
-    ///                 },
+    ///                 Id = "email",
     ///             },
+    ///             new Descope.Inputs.SsoSettingsMandatoryUserAttributeArgs
+    ///             {
+    ///                 Id = "name",
+    ///             },
+    ///             new Descope.Inputs.SsoSettingsMandatoryUserAttributeArgs
+    ///             {
+    ///                 Id = "department",
+    ///                 Custom = true,
+    ///             },
+    ///         },
+    ///         SsoSuiteSettings = new Descope.Inputs.SsoSettingsSsoSuiteSettingsArgs
+    ///         {
+    ///             StyleId = "my-brand-style",
+    ///             HideScim = false,
+    ///             HideSaml = false,
+    ///             HideOidc = false,
     ///         },
     ///     });
     /// 
@@ -397,40 +401,10 @@ namespace Descope.Pulumi.Descope
     public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `Environment` attribute is set to. To destroy a protected project, set this attribute to `False` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         /// </summary>
-        [Output("adminPortal")]
-        public Output<Outputs.ProjectAdminPortal> AdminPortal { get; private set; } = null!;
-
-        /// <summary>
-        /// Applications that are registered with the project.
-        /// </summary>
-        [Output("applications")]
-        public Output<Outputs.ProjectApplications> Applications { get; private set; } = null!;
-
-        /// <summary>
-        /// Custom attributes that can be attached to users and tenants.
-        /// </summary>
-        [Output("attributes")]
-        public Output<Outputs.ProjectAttributes> Attributes { get; private set; } = null!;
-
-        /// <summary>
-        /// Settings for each authentication method.
-        /// </summary>
-        [Output("authentication")]
-        public Output<Outputs.ProjectAuthentication> Authentication { get; private set; } = null!;
-
-        /// <summary>
-        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        /// </summary>
-        [Output("authorization")]
-        public Output<Outputs.ProjectAuthorization> Authorization { get; private set; } = null!;
-
-        /// <summary>
-        /// Enrich your flows by interacting with third party services.
-        /// </summary>
-        [Output("connectors")]
-        public Output<Outputs.ProjectConnectors> Connectors { get; private set; } = null!;
+        [Output("deletionProtection")]
+        public Output<bool?> DeletionProtection { get; private set; } = null!;
 
         /// <summary>
         /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
@@ -439,58 +413,16 @@ namespace Descope.Pulumi.Descope
         public Output<string> Environment { get; private set; } = null!;
 
         /// <summary>
-        /// Custom authentication flows to use in this project.
-        /// </summary>
-        [Output("flows")]
-        public Output<ImmutableDictionary<string, Outputs.ProjectFlows>> Flows { get; private set; } = null!;
-
-        /// <summary>
-        /// User invitation settings and behavior.
-        /// </summary>
-        [Output("inviteSettings")]
-        public Output<Outputs.ProjectInviteSettings> InviteSettings { get; private set; } = null!;
-
-        /// <summary>
-        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
-        /// </summary>
-        [Output("jwtTemplates")]
-        public Output<Outputs.ProjectJwtTemplates> JwtTemplates { get; private set; } = null!;
-
-        /// <summary>
-        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        /// </summary>
-        [Output("lists")]
-        public Output<ImmutableArray<Outputs.ProjectList>> Lists { get; private set; } = null!;
-
-        /// <summary>
         /// The name of the Descope project.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// General settings for the Descope project.
-        /// </summary>
-        [Output("projectSettings")]
-        public Output<Outputs.ProjectProjectSettings> ProjectSettings { get; private set; } = null!;
-
-        /// <summary>
-        /// Custom styles that can be applied to the project's authentication flows.
-        /// </summary>
-        [Output("styles")]
-        public Output<Outputs.ProjectStyles> Styles { get; private set; } = null!;
-
-        /// <summary>
         /// Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
-
-        /// <summary>
-        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        /// </summary>
-        [Output("widgets")]
-        public Output<ImmutableDictionary<string, Outputs.ProjectWidgets>> Widgets { get; private set; } = null!;
 
 
         /// <summary>
@@ -540,40 +472,10 @@ namespace Descope.Pulumi.Descope
     public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `Environment` attribute is set to. To destroy a protected project, set this attribute to `False` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         /// </summary>
-        [Input("adminPortal")]
-        public Input<Inputs.ProjectAdminPortalArgs>? AdminPortal { get; set; }
-
-        /// <summary>
-        /// Applications that are registered with the project.
-        /// </summary>
-        [Input("applications")]
-        public Input<Inputs.ProjectApplicationsArgs>? Applications { get; set; }
-
-        /// <summary>
-        /// Custom attributes that can be attached to users and tenants.
-        /// </summary>
-        [Input("attributes")]
-        public Input<Inputs.ProjectAttributesArgs>? Attributes { get; set; }
-
-        /// <summary>
-        /// Settings for each authentication method.
-        /// </summary>
-        [Input("authentication")]
-        public Input<Inputs.ProjectAuthenticationArgs>? Authentication { get; set; }
-
-        /// <summary>
-        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        /// </summary>
-        [Input("authorization")]
-        public Input<Inputs.ProjectAuthorizationArgs>? Authorization { get; set; }
-
-        /// <summary>
-        /// Enrich your flows by interacting with third party services.
-        /// </summary>
-        [Input("connectors")]
-        public Input<Inputs.ProjectConnectorsArgs>? Connectors { get; set; }
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
 
         /// <summary>
         /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
@@ -581,59 +483,11 @@ namespace Descope.Pulumi.Descope
         [Input("environment")]
         public Input<string>? Environment { get; set; }
 
-        [Input("flows")]
-        private InputMap<Inputs.ProjectFlowsArgs>? _flows;
-
-        /// <summary>
-        /// Custom authentication flows to use in this project.
-        /// </summary>
-        public InputMap<Inputs.ProjectFlowsArgs> Flows
-        {
-            get => _flows ?? (_flows = new InputMap<Inputs.ProjectFlowsArgs>());
-            set => _flows = value;
-        }
-
-        /// <summary>
-        /// User invitation settings and behavior.
-        /// </summary>
-        [Input("inviteSettings")]
-        public Input<Inputs.ProjectInviteSettingsArgs>? InviteSettings { get; set; }
-
-        /// <summary>
-        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
-        /// </summary>
-        [Input("jwtTemplates")]
-        public Input<Inputs.ProjectJwtTemplatesArgs>? JwtTemplates { get; set; }
-
-        [Input("lists")]
-        private InputList<Inputs.ProjectListArgs>? _lists;
-
-        /// <summary>
-        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        /// </summary>
-        public InputList<Inputs.ProjectListArgs> Lists
-        {
-            get => _lists ?? (_lists = new InputList<Inputs.ProjectListArgs>());
-            set => _lists = value;
-        }
-
         /// <summary>
         /// The name of the Descope project.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// General settings for the Descope project.
-        /// </summary>
-        [Input("projectSettings")]
-        public Input<Inputs.ProjectProjectSettingsArgs>? ProjectSettings { get; set; }
-
-        /// <summary>
-        /// Custom styles that can be applied to the project's authentication flows.
-        /// </summary>
-        [Input("styles")]
-        public Input<Inputs.ProjectStylesArgs>? Styles { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -645,18 +499,6 @@ namespace Descope.Pulumi.Descope
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
-        }
-
-        [Input("widgets")]
-        private InputMap<Inputs.ProjectWidgetsArgs>? _widgets;
-
-        /// <summary>
-        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        /// </summary>
-        public InputMap<Inputs.ProjectWidgetsArgs> Widgets
-        {
-            get => _widgets ?? (_widgets = new InputMap<Inputs.ProjectWidgetsArgs>());
-            set => _widgets = value;
         }
 
         public ProjectArgs()
@@ -668,40 +510,10 @@ namespace Descope.Pulumi.Descope
     public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        /// Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `Environment` attribute is set to. To destroy a protected project, set this attribute to `False` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         /// </summary>
-        [Input("adminPortal")]
-        public Input<Inputs.ProjectAdminPortalGetArgs>? AdminPortal { get; set; }
-
-        /// <summary>
-        /// Applications that are registered with the project.
-        /// </summary>
-        [Input("applications")]
-        public Input<Inputs.ProjectApplicationsGetArgs>? Applications { get; set; }
-
-        /// <summary>
-        /// Custom attributes that can be attached to users and tenants.
-        /// </summary>
-        [Input("attributes")]
-        public Input<Inputs.ProjectAttributesGetArgs>? Attributes { get; set; }
-
-        /// <summary>
-        /// Settings for each authentication method.
-        /// </summary>
-        [Input("authentication")]
-        public Input<Inputs.ProjectAuthenticationGetArgs>? Authentication { get; set; }
-
-        /// <summary>
-        /// Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        /// </summary>
-        [Input("authorization")]
-        public Input<Inputs.ProjectAuthorizationGetArgs>? Authorization { get; set; }
-
-        /// <summary>
-        /// Enrich your flows by interacting with third party services.
-        /// </summary>
-        [Input("connectors")]
-        public Input<Inputs.ProjectConnectorsGetArgs>? Connectors { get; set; }
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
 
         /// <summary>
         /// This can be set to `Production` to mark production projects, otherwise this should be left unset for development or staging projects.
@@ -709,59 +521,11 @@ namespace Descope.Pulumi.Descope
         [Input("environment")]
         public Input<string>? Environment { get; set; }
 
-        [Input("flows")]
-        private InputMap<Inputs.ProjectFlowsGetArgs>? _flows;
-
-        /// <summary>
-        /// Custom authentication flows to use in this project.
-        /// </summary>
-        public InputMap<Inputs.ProjectFlowsGetArgs> Flows
-        {
-            get => _flows ?? (_flows = new InputMap<Inputs.ProjectFlowsGetArgs>());
-            set => _flows = value;
-        }
-
-        /// <summary>
-        /// User invitation settings and behavior.
-        /// </summary>
-        [Input("inviteSettings")]
-        public Input<Inputs.ProjectInviteSettingsGetArgs>? InviteSettings { get; set; }
-
-        /// <summary>
-        /// Defines templates for JSON Web Tokens (JWT) used for authentication.
-        /// </summary>
-        [Input("jwtTemplates")]
-        public Input<Inputs.ProjectJwtTemplatesGetArgs>? JwtTemplates { get; set; }
-
-        [Input("lists")]
-        private InputList<Inputs.ProjectListGetArgs>? _lists;
-
-        /// <summary>
-        /// Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        /// </summary>
-        public InputList<Inputs.ProjectListGetArgs> Lists
-        {
-            get => _lists ?? (_lists = new InputList<Inputs.ProjectListGetArgs>());
-            set => _lists = value;
-        }
-
         /// <summary>
         /// The name of the Descope project.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// General settings for the Descope project.
-        /// </summary>
-        [Input("projectSettings")]
-        public Input<Inputs.ProjectProjectSettingsGetArgs>? ProjectSettings { get; set; }
-
-        /// <summary>
-        /// Custom styles that can be applied to the project's authentication flows.
-        /// </summary>
-        [Input("styles")]
-        public Input<Inputs.ProjectStylesGetArgs>? Styles { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -773,18 +537,6 @@ namespace Descope.Pulumi.Descope
         {
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
-        }
-
-        [Input("widgets")]
-        private InputMap<Inputs.ProjectWidgetsGetArgs>? _widgets;
-
-        /// <summary>
-        /// Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        /// </summary>
-        public InputMap<Inputs.ProjectWidgetsGetArgs> Widgets
-        {
-            get => _widgets ?? (_widgets = new InputMap<Inputs.ProjectWidgetsGetArgs>());
-            set => _widgets = value;
         }
 
         public ProjectState()

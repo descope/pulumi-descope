@@ -3,24 +3,11 @@
 
 package com.descope.pulumi.descope;
 
-import com.descope.pulumi.descope.inputs.ProjectAdminPortalArgs;
-import com.descope.pulumi.descope.inputs.ProjectApplicationsArgs;
-import com.descope.pulumi.descope.inputs.ProjectAttributesArgs;
-import com.descope.pulumi.descope.inputs.ProjectAuthenticationArgs;
-import com.descope.pulumi.descope.inputs.ProjectAuthorizationArgs;
-import com.descope.pulumi.descope.inputs.ProjectConnectorsArgs;
-import com.descope.pulumi.descope.inputs.ProjectFlowsArgs;
-import com.descope.pulumi.descope.inputs.ProjectInviteSettingsArgs;
-import com.descope.pulumi.descope.inputs.ProjectJwtTemplatesArgs;
-import com.descope.pulumi.descope.inputs.ProjectListArgs;
-import com.descope.pulumi.descope.inputs.ProjectProjectSettingsArgs;
-import com.descope.pulumi.descope.inputs.ProjectStylesArgs;
-import com.descope.pulumi.descope.inputs.ProjectWidgetsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -31,93 +18,18 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
     public static final ProjectArgs Empty = new ProjectArgs();
 
     /**
-     * Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
      * 
      */
-    @Import(name="adminPortal")
-    private @Nullable Output<ProjectAdminPortalArgs> adminPortal;
+    @Import(name="deletionProtection")
+    private @Nullable Output<Boolean> deletionProtection;
 
     /**
-     * @return Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+     * @return Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
      * 
      */
-    public Optional<Output<ProjectAdminPortalArgs>> adminPortal() {
-        return Optional.ofNullable(this.adminPortal);
-    }
-
-    /**
-     * Applications that are registered with the project.
-     * 
-     */
-    @Import(name="applications")
-    private @Nullable Output<ProjectApplicationsArgs> applications;
-
-    /**
-     * @return Applications that are registered with the project.
-     * 
-     */
-    public Optional<Output<ProjectApplicationsArgs>> applications() {
-        return Optional.ofNullable(this.applications);
-    }
-
-    /**
-     * Custom attributes that can be attached to users and tenants.
-     * 
-     */
-    @Import(name="attributes")
-    private @Nullable Output<ProjectAttributesArgs> attributes;
-
-    /**
-     * @return Custom attributes that can be attached to users and tenants.
-     * 
-     */
-    public Optional<Output<ProjectAttributesArgs>> attributes() {
-        return Optional.ofNullable(this.attributes);
-    }
-
-    /**
-     * Settings for each authentication method.
-     * 
-     */
-    @Import(name="authentication")
-    private @Nullable Output<ProjectAuthenticationArgs> authentication;
-
-    /**
-     * @return Settings for each authentication method.
-     * 
-     */
-    public Optional<Output<ProjectAuthenticationArgs>> authentication() {
-        return Optional.ofNullable(this.authentication);
-    }
-
-    /**
-     * Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-     * 
-     */
-    @Import(name="authorization")
-    private @Nullable Output<ProjectAuthorizationArgs> authorization;
-
-    /**
-     * @return Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-     * 
-     */
-    public Optional<Output<ProjectAuthorizationArgs>> authorization() {
-        return Optional.ofNullable(this.authorization);
-    }
-
-    /**
-     * Enrich your flows by interacting with third party services.
-     * 
-     */
-    @Import(name="connectors")
-    private @Nullable Output<ProjectConnectorsArgs> connectors;
-
-    /**
-     * @return Enrich your flows by interacting with third party services.
-     * 
-     */
-    public Optional<Output<ProjectConnectorsArgs>> connectors() {
-        return Optional.ofNullable(this.connectors);
+    public Optional<Output<Boolean>> deletionProtection() {
+        return Optional.ofNullable(this.deletionProtection);
     }
 
     /**
@@ -136,66 +48,6 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Custom authentication flows to use in this project.
-     * 
-     */
-    @Import(name="flows")
-    private @Nullable Output<Map<String,ProjectFlowsArgs>> flows;
-
-    /**
-     * @return Custom authentication flows to use in this project.
-     * 
-     */
-    public Optional<Output<Map<String,ProjectFlowsArgs>>> flows() {
-        return Optional.ofNullable(this.flows);
-    }
-
-    /**
-     * User invitation settings and behavior.
-     * 
-     */
-    @Import(name="inviteSettings")
-    private @Nullable Output<ProjectInviteSettingsArgs> inviteSettings;
-
-    /**
-     * @return User invitation settings and behavior.
-     * 
-     */
-    public Optional<Output<ProjectInviteSettingsArgs>> inviteSettings() {
-        return Optional.ofNullable(this.inviteSettings);
-    }
-
-    /**
-     * Defines templates for JSON Web Tokens (JWT) used for authentication.
-     * 
-     */
-    @Import(name="jwtTemplates")
-    private @Nullable Output<ProjectJwtTemplatesArgs> jwtTemplates;
-
-    /**
-     * @return Defines templates for JSON Web Tokens (JWT) used for authentication.
-     * 
-     */
-    public Optional<Output<ProjectJwtTemplatesArgs>> jwtTemplates() {
-        return Optional.ofNullable(this.jwtTemplates);
-    }
-
-    /**
-     * Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-     * 
-     */
-    @Import(name="lists")
-    private @Nullable Output<List<ProjectListArgs>> lists;
-
-    /**
-     * @return Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-     * 
-     */
-    public Optional<Output<List<ProjectListArgs>>> lists() {
-        return Optional.ofNullable(this.lists);
-    }
-
-    /**
      * The name of the Descope project.
      * 
      */
@@ -208,36 +60,6 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
-    }
-
-    /**
-     * General settings for the Descope project.
-     * 
-     */
-    @Import(name="projectSettings")
-    private @Nullable Output<ProjectProjectSettingsArgs> projectSettings;
-
-    /**
-     * @return General settings for the Descope project.
-     * 
-     */
-    public Optional<Output<ProjectProjectSettingsArgs>> projectSettings() {
-        return Optional.ofNullable(this.projectSettings);
-    }
-
-    /**
-     * Custom styles that can be applied to the project&#39;s authentication flows.
-     * 
-     */
-    @Import(name="styles")
-    private @Nullable Output<ProjectStylesArgs> styles;
-
-    /**
-     * @return Custom styles that can be applied to the project&#39;s authentication flows.
-     * 
-     */
-    public Optional<Output<ProjectStylesArgs>> styles() {
-        return Optional.ofNullable(this.styles);
     }
 
     /**
@@ -255,40 +77,13 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.tags);
     }
 
-    /**
-     * Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-     * 
-     */
-    @Import(name="widgets")
-    private @Nullable Output<Map<String,ProjectWidgetsArgs>> widgets;
-
-    /**
-     * @return Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-     * 
-     */
-    public Optional<Output<Map<String,ProjectWidgetsArgs>>> widgets() {
-        return Optional.ofNullable(this.widgets);
-    }
-
     private ProjectArgs() {}
 
     private ProjectArgs(ProjectArgs $) {
-        this.adminPortal = $.adminPortal;
-        this.applications = $.applications;
-        this.attributes = $.attributes;
-        this.authentication = $.authentication;
-        this.authorization = $.authorization;
-        this.connectors = $.connectors;
+        this.deletionProtection = $.deletionProtection;
         this.environment = $.environment;
-        this.flows = $.flows;
-        this.inviteSettings = $.inviteSettings;
-        this.jwtTemplates = $.jwtTemplates;
-        this.lists = $.lists;
         this.name = $.name;
-        this.projectSettings = $.projectSettings;
-        this.styles = $.styles;
         this.tags = $.tags;
-        this.widgets = $.widgets;
     }
 
     public static Builder builder() {
@@ -310,129 +105,24 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param adminPortal Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+         * @param deletionProtection Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
          * 
          * @return builder
          * 
          */
-        public Builder adminPortal(@Nullable Output<ProjectAdminPortalArgs> adminPortal) {
-            $.adminPortal = adminPortal;
+        public Builder deletionProtection(@Nullable Output<Boolean> deletionProtection) {
+            $.deletionProtection = deletionProtection;
             return this;
         }
 
         /**
-         * @param adminPortal Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+         * @param deletionProtection Protects the project from being accidentally destroyed. When this attribute isn&#39;t set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
          * 
          * @return builder
          * 
          */
-        public Builder adminPortal(ProjectAdminPortalArgs adminPortal) {
-            return adminPortal(Output.of(adminPortal));
-        }
-
-        /**
-         * @param applications Applications that are registered with the project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder applications(@Nullable Output<ProjectApplicationsArgs> applications) {
-            $.applications = applications;
-            return this;
-        }
-
-        /**
-         * @param applications Applications that are registered with the project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder applications(ProjectApplicationsArgs applications) {
-            return applications(Output.of(applications));
-        }
-
-        /**
-         * @param attributes Custom attributes that can be attached to users and tenants.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder attributes(@Nullable Output<ProjectAttributesArgs> attributes) {
-            $.attributes = attributes;
-            return this;
-        }
-
-        /**
-         * @param attributes Custom attributes that can be attached to users and tenants.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder attributes(ProjectAttributesArgs attributes) {
-            return attributes(Output.of(attributes));
-        }
-
-        /**
-         * @param authentication Settings for each authentication method.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder authentication(@Nullable Output<ProjectAuthenticationArgs> authentication) {
-            $.authentication = authentication;
-            return this;
-        }
-
-        /**
-         * @param authentication Settings for each authentication method.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder authentication(ProjectAuthenticationArgs authentication) {
-            return authentication(Output.of(authentication));
-        }
-
-        /**
-         * @param authorization Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder authorization(@Nullable Output<ProjectAuthorizationArgs> authorization) {
-            $.authorization = authorization;
-            return this;
-        }
-
-        /**
-         * @param authorization Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder authorization(ProjectAuthorizationArgs authorization) {
-            return authorization(Output.of(authorization));
-        }
-
-        /**
-         * @param connectors Enrich your flows by interacting with third party services.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder connectors(@Nullable Output<ProjectConnectorsArgs> connectors) {
-            $.connectors = connectors;
-            return this;
-        }
-
-        /**
-         * @param connectors Enrich your flows by interacting with third party services.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder connectors(ProjectConnectorsArgs connectors) {
-            return connectors(Output.of(connectors));
+        public Builder deletionProtection(Boolean deletionProtection) {
+            return deletionProtection(Output.of(deletionProtection));
         }
 
         /**
@@ -457,100 +147,6 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param flows Custom authentication flows to use in this project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder flows(@Nullable Output<Map<String,ProjectFlowsArgs>> flows) {
-            $.flows = flows;
-            return this;
-        }
-
-        /**
-         * @param flows Custom authentication flows to use in this project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder flows(Map<String,ProjectFlowsArgs> flows) {
-            return flows(Output.of(flows));
-        }
-
-        /**
-         * @param inviteSettings User invitation settings and behavior.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder inviteSettings(@Nullable Output<ProjectInviteSettingsArgs> inviteSettings) {
-            $.inviteSettings = inviteSettings;
-            return this;
-        }
-
-        /**
-         * @param inviteSettings User invitation settings and behavior.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder inviteSettings(ProjectInviteSettingsArgs inviteSettings) {
-            return inviteSettings(Output.of(inviteSettings));
-        }
-
-        /**
-         * @param jwtTemplates Defines templates for JSON Web Tokens (JWT) used for authentication.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder jwtTemplates(@Nullable Output<ProjectJwtTemplatesArgs> jwtTemplates) {
-            $.jwtTemplates = jwtTemplates;
-            return this;
-        }
-
-        /**
-         * @param jwtTemplates Defines templates for JSON Web Tokens (JWT) used for authentication.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder jwtTemplates(ProjectJwtTemplatesArgs jwtTemplates) {
-            return jwtTemplates(Output.of(jwtTemplates));
-        }
-
-        /**
-         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder lists(@Nullable Output<List<ProjectListArgs>> lists) {
-            $.lists = lists;
-            return this;
-        }
-
-        /**
-         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder lists(List<ProjectListArgs> lists) {
-            return lists(Output.of(lists));
-        }
-
-        /**
-         * @param lists Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder lists(ProjectListArgs... lists) {
-            return lists(List.of(lists));
-        }
-
-        /**
          * @param name The name of the Descope project.
          * 
          * @return builder
@@ -569,48 +165,6 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder name(String name) {
             return name(Output.of(name));
-        }
-
-        /**
-         * @param projectSettings General settings for the Descope project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder projectSettings(@Nullable Output<ProjectProjectSettingsArgs> projectSettings) {
-            $.projectSettings = projectSettings;
-            return this;
-        }
-
-        /**
-         * @param projectSettings General settings for the Descope project.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder projectSettings(ProjectProjectSettingsArgs projectSettings) {
-            return projectSettings(Output.of(projectSettings));
-        }
-
-        /**
-         * @param styles Custom styles that can be applied to the project&#39;s authentication flows.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder styles(@Nullable Output<ProjectStylesArgs> styles) {
-            $.styles = styles;
-            return this;
-        }
-
-        /**
-         * @param styles Custom styles that can be applied to the project&#39;s authentication flows.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder styles(ProjectStylesArgs styles) {
-            return styles(Output.of(styles));
         }
 
         /**
@@ -642,27 +196,6 @@ public final class ProjectArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder tags(String... tags) {
             return tags(List.of(tags));
-        }
-
-        /**
-         * @param widgets Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder widgets(@Nullable Output<Map<String,ProjectWidgetsArgs>> widgets) {
-            $.widgets = widgets;
-            return this;
-        }
-
-        /**
-         * @param widgets Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder widgets(Map<String,ProjectWidgetsArgs> widgets) {
-            return widgets(Output.of(widgets));
         }
 
         public ProjectArgs build() {

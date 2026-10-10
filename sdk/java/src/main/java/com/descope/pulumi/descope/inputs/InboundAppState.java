@@ -6,6 +6,7 @@ package com.descope.pulumi.descope.inputs;
 import com.descope.pulumi.descope.inputs.InboundAppAttributesScopeArgs;
 import com.descope.pulumi.descope.inputs.InboundAppConnectionsScopeArgs;
 import com.descope.pulumi.descope.inputs.InboundAppPermissionsScopeArgs;
+import com.descope.pulumi.descope.inputs.InboundAppScopeClaimMappingArgs;
 import com.descope.pulumi.descope.inputs.InboundAppSessionSettingsArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
@@ -20,6 +21,21 @@ import javax.annotation.Nullable;
 public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
 
     public static final InboundAppState Empty = new InboundAppState();
+
+    /**
+     * Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     * 
+     */
+    @Import(name="allowedTenants")
+    private @Nullable Output<List<String>> allowedTenants;
+
+    /**
+     * @return Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+     * 
+     */
+    public Optional<Output<List<String>>> allowedTenants() {
+        return Optional.ofNullable(this.allowedTenants);
+    }
 
     /**
      * A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
@@ -97,6 +113,21 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * 
+     */
+    @Import(name="clientType")
+    private @Nullable Output<String> clientType;
+
+    /**
+     * @return The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * 
+     */
+    public Optional<Output<String>> clientType() {
+        return Optional.ofNullable(this.clientType);
+    }
+
+    /**
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      * 
      */
@@ -124,6 +155,21 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<String>> defaultAudience() {
         return Optional.ofNullable(this.defaultAudience);
+    }
+
+    /**
+     * Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     * 
+     */
+    @Import(name="deletionProtection")
+    private @Nullable Output<Boolean> deletionProtection;
+
+    /**
+     * @return Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+     * 
+     */
+    public Optional<Output<Boolean>> deletionProtection() {
+        return Optional.ofNullable(this.deletionProtection);
     }
 
     /**
@@ -232,21 +278,6 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     * 
-     */
-    @Import(name="nonConfidentialClient")
-    private @Nullable Output<Boolean> nonConfidentialClient;
-
-    /**
-     * @return Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-     * 
-     */
-    public Optional<Output<Boolean>> nonConfidentialClient() {
-        return Optional.ofNullable(this.nonConfidentialClient);
-    }
-
-    /**
      * A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
      * 
      */
@@ -277,6 +308,21 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     * 
+     */
+    @Import(name="scopeClaimMappings")
+    private @Nullable Output<List<InboundAppScopeClaimMappingArgs>> scopeClaimMappings;
+
+    /**
+     * @return Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+     * 
+     */
+    public Optional<Output<List<InboundAppScopeClaimMappingArgs>>> scopeClaimMappings() {
+        return Optional.ofNullable(this.scopeClaimMappings);
+    }
+
+    /**
      * Custom session management settings for this inbound app, overriding the project defaults.
      * 
      */
@@ -294,13 +340,16 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
     private InboundAppState() {}
 
     private InboundAppState(InboundAppState $) {
+        this.allowedTenants = $.allowedTenants;
         this.approvedCallbackUrls = $.approvedCallbackUrls;
         this.attributesScopes = $.attributesScopes;
         this.audienceWhitelists = $.audienceWhitelists;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
+        this.clientType = $.clientType;
         this.connectionsScopes = $.connectionsScopes;
         this.defaultAudience = $.defaultAudience;
+        this.deletionProtection = $.deletionProtection;
         this.description = $.description;
         this.forceAddAllAuthorizationInfo = $.forceAddAllAuthorizationInfo;
         this.forceDpop = $.forceDpop;
@@ -308,9 +357,9 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
         this.loginPageUrl = $.loginPageUrl;
         this.logoUrl = $.logoUrl;
         this.name = $.name;
-        this.nonConfidentialClient = $.nonConfidentialClient;
         this.permissionsScopes = $.permissionsScopes;
         this.projectId = $.projectId;
+        this.scopeClaimMappings = $.scopeClaimMappings;
         this.sessionSettings = $.sessionSettings;
     }
 
@@ -330,6 +379,37 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
 
         public Builder(InboundAppState defaults) {
             $ = new InboundAppState(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param allowedTenants Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowedTenants(@Nullable Output<List<String>> allowedTenants) {
+            $.allowedTenants = allowedTenants;
+            return this;
+        }
+
+        /**
+         * @param allowedTenants Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowedTenants(List<String> allowedTenants) {
+            return allowedTenants(Output.of(allowedTenants));
+        }
+
+        /**
+         * @param allowedTenants Restricts the app to these tenant IDs. Leave empty to allow all tenants.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder allowedTenants(String... allowedTenants) {
+            return allowedTenants(List.of(allowedTenants));
         }
 
         /**
@@ -468,6 +548,27 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientType(@Nullable Output<String> clientType) {
+            $.clientType = clientType;
+            return this;
+        }
+
+        /**
+         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientType(String clientType) {
+            return clientType(Output.of(clientType));
+        }
+
+        /**
          * @param connectionsScopes A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
          * 
          * @return builder
@@ -517,6 +618,27 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder defaultAudience(String defaultAudience) {
             return defaultAudience(Output.of(defaultAudience));
+        }
+
+        /**
+         * @param deletionProtection Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deletionProtection(@Nullable Output<Boolean> deletionProtection) {
+            $.deletionProtection = deletionProtection;
+            return this;
+        }
+
+        /**
+         * @param deletionProtection Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deletionProtection(Boolean deletionProtection) {
+            return deletionProtection(Output.of(deletionProtection));
         }
 
         /**
@@ -667,27 +789,6 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param nonConfidentialClient Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder nonConfidentialClient(@Nullable Output<Boolean> nonConfidentialClient) {
-            $.nonConfidentialClient = nonConfidentialClient;
-            return this;
-        }
-
-        /**
-         * @param nonConfidentialClient Whether this is a public (non-confidential) client that does not use a client secret. Changing this value after creation will require the resource to be replaced.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder nonConfidentialClient(Boolean nonConfidentialClient) {
-            return nonConfidentialClient(Output.of(nonConfidentialClient));
-        }
-
-        /**
          * @param permissionsScopes A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
          * 
          * @return builder
@@ -737,6 +838,37 @@ public final class InboundAppState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder projectId(String projectId) {
             return projectId(Output.of(projectId));
+        }
+
+        /**
+         * @param scopeClaimMappings Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scopeClaimMappings(@Nullable Output<List<InboundAppScopeClaimMappingArgs>> scopeClaimMappings) {
+            $.scopeClaimMappings = scopeClaimMappings;
+            return this;
+        }
+
+        /**
+         * @param scopeClaimMappings Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scopeClaimMappings(List<InboundAppScopeClaimMappingArgs> scopeClaimMappings) {
+            return scopeClaimMappings(Output.of(scopeClaimMappings));
+        }
+
+        /**
+         * @param scopeClaimMappings Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder scopeClaimMappings(InboundAppScopeClaimMappingArgs... scopeClaimMappings) {
+            return scopeClaimMappings(List.of(scopeClaimMappings));
         }
 
         /**

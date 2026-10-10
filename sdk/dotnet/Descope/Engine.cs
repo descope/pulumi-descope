@@ -10,6 +10,9 @@ using Pulumi;
 
 namespace Descope.Pulumi.Descope
 {
+    /// <summary>
+    /// Manages a Descope Engine, a self-hosted agent that runs connector actions inside your own network.
+    /// </summary>
     [DescopeResourceType("descope:index/engine:Engine")]
     public partial class Engine : global::Pulumi.CustomResource
     {

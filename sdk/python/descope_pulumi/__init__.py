@@ -6,13 +6,122 @@ import builtins as _builtins
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .abuseipdb_connector import *
 from .access_key import *
+from .access_key_attribute import *
+from .admin_portal import *
+from .alloy_connector import *
+from .amplitude_connector import *
+from .app_permission import *
+from .app_role import *
+from .arkose_connector import *
+from .audit_webhook_connector import *
+from .aws_eventbridge_connector import *
+from .aws_s3_connector import *
+from .aws_ses_email_validation_connector import *
+from .aws_translate_connector import *
+from .bitsight_connector import *
+from .coralogix_connector import *
+from .cribl_connector import *
+from .darwinium_connector import *
+from .datadog_connector import *
 from .descoper import *
+from .devrev_grow_connector import *
+from .docebo_connector import *
+from .eight_by_eight_viber_connector import *
+from .eight_by_eight_whatsapp_connector import *
+from .elephant_connector import *
+from .email_template import *
+from .embeddedlink_settings import *
+from .enchantedlink_settings import *
 from .engine import *
+from .external_token_http_connector import *
+from .fga_schema import *
+from .fingerprint_connector import *
+from .fingerprint_descope_connector import *
+from .firebase_admin_connector import *
+from .flow import *
+from .forter_connector import *
+from .generic_email_gateway_connector import *
+from .generic_sms_gateway_connector import *
+from .google_cloud_logging_connector import *
+from .google_cloud_translation_connector import *
+from .google_maps_places_connector import *
+from .groundcover_connector import *
+from .hcaptcha_connector import *
+from .hibp_connector import *
+from .http_connector import *
+from .hubspot_connector import *
 from .inbound_app import *
+from .incode_connector import *
+from .intercom_connector import *
+from .invite_settings import *
+from .jwt_template import *
+from .ldap_connector import *
+from .list import *
+from .lokalise_connector import *
+from .magiclink_settings import *
 from .management_key import *
+from .mixpanel_connector import *
+from .mparticle_connector import *
+from .newrelic_connector import *
+from .oauth_provider import *
+from .oauth_settings import *
+from .oidc_app import *
+from .opentelemetry_connector import *
+from .otp_settings import *
+from .outbound_app import *
+from .passkey_settings import *
+from .password_settings import *
+from .pendo_connector import *
+from .permission import *
+from .ping_directory_connector import *
+from .postmark_connector import *
 from .project import *
+from .project_settings import *
 from .provider import *
+from .radar_connector import *
+from .recaptcha_connector import *
+from .recaptcha_enterprise_connector import *
+from .recaptcha_v2_connector import *
+from .rekognition_connector import *
+from .rnd_reassigned_connector import *
+from .role import *
+from .salesforce_connector import *
+from .salesforce_marketing_cloud_connector import *
+from .saml_app import *
+from .sardine_connector import *
+from .scim_connector import *
+from .segment_connector import *
+from .sendgrid_connector import *
+from .ses_connector import *
+from .session_migration import *
+from .session_settings import *
+from .slack_connector import *
+from .smartling_connector import *
+from .smtp_connector import *
+from .snowflake_connector import *
+from .sns_connector import *
+from .splunk_connector import *
+from .sql_connector import *
+from .sso_settings import *
+from .styles import *
+from .sumologic_connector import *
+from .supabase_connector import *
+from .telesign_connector import *
+from .tenant_attribute import *
+from .text_template import *
+from .totp_settings import *
+from .traceable_connector import *
+from .turnstile_connector import *
+from .twilio_core_connector import *
+from .twilio_verify_connector import *
+from .unibeam_connector import *
+from .user_attribute import *
+from .voice_template import *
+from .widget import *
+from .wsfed_app import *
+from .zerobounce_connector import *
 from ._inputs import *
 from . import outputs
 
@@ -28,10 +137,154 @@ _utilities.register(
 [
  {
   "pkg": "descope",
+  "mod": "index/abuseipdbConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/abuseipdbConnector:AbuseipdbConnector": "AbuseipdbConnector"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/accessKey",
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/accessKey:AccessKey": "AccessKey"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/accessKeyAttribute",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/accessKeyAttribute:AccessKeyAttribute": "AccessKeyAttribute"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/adminPortal",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/adminPortal:AdminPortal": "AdminPortal"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/alloyConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/alloyConnector:AlloyConnector": "AlloyConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/amplitudeConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/amplitudeConnector:AmplitudeConnector": "AmplitudeConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/appPermission",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/appPermission:AppPermission": "AppPermission"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/appRole",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/appRole:AppRole": "AppRole"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/arkoseConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/arkoseConnector:ArkoseConnector": "ArkoseConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/auditWebhookConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/auditWebhookConnector:AuditWebhookConnector": "AuditWebhookConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/awsEventbridgeConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector": "AwsEventbridgeConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/awsS3Connector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/awsS3Connector:AwsS3Connector": "AwsS3Connector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/awsSesEmailValidationConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/awsSesEmailValidationConnector:AwsSesEmailValidationConnector": "AwsSesEmailValidationConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/awsTranslateConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/awsTranslateConnector:AwsTranslateConnector": "AwsTranslateConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/bitsightConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/bitsightConnector:BitsightConnector": "BitsightConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/coralogixConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/coralogixConnector:CoralogixConnector": "CoralogixConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/criblConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/criblConnector:CriblConnector": "CriblConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/darwiniumConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/darwiniumConnector:DarwiniumConnector": "DarwiniumConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/datadogConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/datadogConnector:DatadogConnector": "DatadogConnector"
   }
  },
  {
@@ -44,10 +297,210 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/devrevGrowConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/devrevGrowConnector:DevrevGrowConnector": "DevrevGrowConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/doceboConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/doceboConnector:DoceboConnector": "DoceboConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/eightByEightViberConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/eightByEightViberConnector:EightByEightViberConnector": "EightByEightViberConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/eightByEightWhatsappConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/eightByEightWhatsappConnector:EightByEightWhatsappConnector": "EightByEightWhatsappConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/elephantConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/elephantConnector:ElephantConnector": "ElephantConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/emailTemplate",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/emailTemplate:EmailTemplate": "EmailTemplate"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/embeddedlinkSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/embeddedlinkSettings:EmbeddedlinkSettings": "EmbeddedlinkSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/enchantedlinkSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/enchantedlinkSettings:EnchantedlinkSettings": "EnchantedlinkSettings"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/engine",
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/engine:Engine": "Engine"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/externalTokenHttpConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/externalTokenHttpConnector:ExternalTokenHttpConnector": "ExternalTokenHttpConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/fgaSchema",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/fgaSchema:FgaSchema": "FgaSchema"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/fingerprintConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/fingerprintConnector:FingerprintConnector": "FingerprintConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/fingerprintDescopeConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/fingerprintDescopeConnector:FingerprintDescopeConnector": "FingerprintDescopeConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/firebaseAdminConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/firebaseAdminConnector:FirebaseAdminConnector": "FirebaseAdminConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/flow",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/flow:Flow": "Flow"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/forterConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/forterConnector:ForterConnector": "ForterConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/genericEmailGatewayConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/genericEmailGatewayConnector:GenericEmailGatewayConnector": "GenericEmailGatewayConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/genericSmsGatewayConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/genericSmsGatewayConnector:GenericSmsGatewayConnector": "GenericSmsGatewayConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/googleCloudLoggingConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/googleCloudLoggingConnector:GoogleCloudLoggingConnector": "GoogleCloudLoggingConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/googleCloudTranslationConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/googleCloudTranslationConnector:GoogleCloudTranslationConnector": "GoogleCloudTranslationConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/googleMapsPlacesConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector": "GoogleMapsPlacesConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/groundcoverConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/groundcoverConnector:GroundcoverConnector": "GroundcoverConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/hcaptchaConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/hcaptchaConnector:HcaptchaConnector": "HcaptchaConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/hibpConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/hibpConnector:HibpConnector": "HibpConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/httpConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/httpConnector:HttpConnector": "HttpConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/hubspotConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/hubspotConnector:HubspotConnector": "HubspotConnector"
   }
  },
  {
@@ -60,6 +513,70 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/incodeConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/incodeConnector:IncodeConnector": "IncodeConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/intercomConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/intercomConnector:IntercomConnector": "IntercomConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/inviteSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/inviteSettings:InviteSettings": "InviteSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/jwtTemplate",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/jwtTemplate:JwtTemplate": "JwtTemplate"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/ldapConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/ldapConnector:LdapConnector": "LdapConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/list",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/list:List": "List"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/lokaliseConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/lokaliseConnector:LokaliseConnector": "LokaliseConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/magiclinkSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/magiclinkSettings:MagiclinkSettings": "MagiclinkSettings"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/managementKey",
   "fqn": "descope_pulumi",
   "classes": {
@@ -68,10 +585,474 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/mixpanelConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/mixpanelConnector:MixpanelConnector": "MixpanelConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/mparticleConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/mparticleConnector:MparticleConnector": "MparticleConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/newrelicConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/newrelicConnector:NewrelicConnector": "NewrelicConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/oauthProvider",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/oauthProvider:OauthProvider": "OauthProvider"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/oauthSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/oauthSettings:OauthSettings": "OauthSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/oidcApp",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/oidcApp:OidcApp": "OidcApp"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/opentelemetryConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/opentelemetryConnector:OpentelemetryConnector": "OpentelemetryConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/otpSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/otpSettings:OtpSettings": "OtpSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/outboundApp",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/outboundApp:OutboundApp": "OutboundApp"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/passkeySettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/passkeySettings:PasskeySettings": "PasskeySettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/passwordSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/passwordSettings:PasswordSettings": "PasswordSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/pendoConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/pendoConnector:PendoConnector": "PendoConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/permission",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/permission:Permission": "Permission"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/pingDirectoryConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/pingDirectoryConnector:PingDirectoryConnector": "PingDirectoryConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/postmarkConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/postmarkConnector:PostmarkConnector": "PostmarkConnector"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/project",
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/project:Project": "Project"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/projectSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/projectSettings:ProjectSettings": "ProjectSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/radarConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/radarConnector:RadarConnector": "RadarConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/recaptchaConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/recaptchaConnector:RecaptchaConnector": "RecaptchaConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/recaptchaEnterpriseConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/recaptchaEnterpriseConnector:RecaptchaEnterpriseConnector": "RecaptchaEnterpriseConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/recaptchaV2Connector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/recaptchaV2Connector:RecaptchaV2Connector": "RecaptchaV2Connector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/rekognitionConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/rekognitionConnector:RekognitionConnector": "RekognitionConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/rndReassignedConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/rndReassignedConnector:RndReassignedConnector": "RndReassignedConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/role",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/role:Role": "Role"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/salesforceConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/salesforceConnector:SalesforceConnector": "SalesforceConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/salesforceMarketingCloudConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/salesforceMarketingCloudConnector:SalesforceMarketingCloudConnector": "SalesforceMarketingCloudConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/samlApp",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/samlApp:SamlApp": "SamlApp"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sardineConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sardineConnector:SardineConnector": "SardineConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/scimConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/scimConnector:ScimConnector": "ScimConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/segmentConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/segmentConnector:SegmentConnector": "SegmentConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sendgridConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sendgridConnector:SendgridConnector": "SendgridConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sesConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sesConnector:SesConnector": "SesConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sessionMigration",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sessionMigration:SessionMigration": "SessionMigration"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sessionSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sessionSettings:SessionSettings": "SessionSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/slackConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/slackConnector:SlackConnector": "SlackConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/smartlingConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/smartlingConnector:SmartlingConnector": "SmartlingConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/smtpConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/smtpConnector:SmtpConnector": "SmtpConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/snowflakeConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/snowflakeConnector:SnowflakeConnector": "SnowflakeConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/snsConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/snsConnector:SnsConnector": "SnsConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/splunkConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/splunkConnector:SplunkConnector": "SplunkConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sqlConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sqlConnector:SqlConnector": "SqlConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/ssoSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/ssoSettings:SsoSettings": "SsoSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/styles",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/styles:Styles": "Styles"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/sumologicConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/sumologicConnector:SumologicConnector": "SumologicConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/supabaseConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/supabaseConnector:SupabaseConnector": "SupabaseConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/telesignConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/telesignConnector:TelesignConnector": "TelesignConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/tenantAttribute",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/tenantAttribute:TenantAttribute": "TenantAttribute"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/textTemplate",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/textTemplate:TextTemplate": "TextTemplate"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/totpSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/totpSettings:TotpSettings": "TotpSettings"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/traceableConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/traceableConnector:TraceableConnector": "TraceableConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/turnstileConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/turnstileConnector:TurnstileConnector": "TurnstileConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/twilioCoreConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/twilioCoreConnector:TwilioCoreConnector": "TwilioCoreConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/twilioVerifyConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/twilioVerifyConnector:TwilioVerifyConnector": "TwilioVerifyConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/unibeamConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/unibeamConnector:UnibeamConnector": "UnibeamConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/userAttribute",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/userAttribute:UserAttribute": "UserAttribute"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/voiceTemplate",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/voiceTemplate:VoiceTemplate": "VoiceTemplate"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/widget",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/widget:Widget": "Widget"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/wsfedApp",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/wsfedApp:WsfedApp": "WsfedApp"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/zerobounceConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/zerobounceConnector:ZerobounceConnector": "ZerobounceConnector"
   }
  }
 ]

@@ -13,154 +13,44 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
-from . import outputs
-from ._inputs import *
 
 __all__ = ['ProjectArgs', 'Project']
 
 @pulumi.input_type
 class ProjectArgs:
     def __init__(__self__, *,
-                 admin_portal: pulumi.Input[Optional['ProjectAdminPortalArgs']] = None,
-                 applications: pulumi.Input[Optional['ProjectApplicationsArgs']] = None,
-                 attributes: pulumi.Input[Optional['ProjectAttributesArgs']] = None,
-                 authentication: pulumi.Input[Optional['ProjectAuthenticationArgs']] = None,
-                 authorization: pulumi.Input[Optional['ProjectAuthorizationArgs']] = None,
-                 connectors: pulumi.Input[Optional['ProjectConnectorsArgs']] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
-                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
-                 invite_settings: pulumi.Input[Optional['ProjectInviteSettingsArgs']] = None,
-                 jwt_templates: pulumi.Input[Optional['ProjectJwtTemplatesArgs']] = None,
-                 lists: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_settings: pulumi.Input[Optional['ProjectProjectSettingsArgs']] = None,
-                 styles: pulumi.Input[Optional['ProjectStylesArgs']] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Project resource.
 
-        :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-        :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
-        :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
-        :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
-        :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         :param pulumi.Input[_builtins.str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
-        :param pulumi.Input['ProjectInviteSettingsArgs'] invite_settings: User invitation settings and behavior.
-        :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
-        :param pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
-        :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
-        :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
-        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
-        if admin_portal is not None:
-            pulumi.set(__self__, "admin_portal", admin_portal)
-        if applications is not None:
-            pulumi.set(__self__, "applications", applications)
-        if attributes is not None:
-            pulumi.set(__self__, "attributes", attributes)
-        if authentication is not None:
-            pulumi.set(__self__, "authentication", authentication)
-        if authorization is not None:
-            pulumi.set(__self__, "authorization", authorization)
-        if connectors is not None:
-            pulumi.set(__self__, "connectors", connectors)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if environment is not None:
             pulumi.set(__self__, "environment", environment)
-        if flows is not None:
-            pulumi.set(__self__, "flows", flows)
-        if invite_settings is not None:
-            pulumi.set(__self__, "invite_settings", invite_settings)
-        if jwt_templates is not None:
-            pulumi.set(__self__, "jwt_templates", jwt_templates)
-        if lists is not None:
-            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if project_settings is not None:
-            pulumi.set(__self__, "project_settings", project_settings)
-        if styles is not None:
-            pulumi.set(__self__, "styles", styles)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
-        if widgets is not None:
-            pulumi.set(__self__, "widgets", widgets)
 
     @_builtins.property
-    @pulumi.getter(name="adminPortal")
-    def admin_portal(self) -> pulumi.Input[Optional['ProjectAdminPortalArgs']]:
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         """
-        return pulumi.get(self, "admin_portal")
+        return pulumi.get(self, "deletion_protection")
 
-    @admin_portal.setter
-    def admin_portal(self, value: pulumi.Input[Optional['ProjectAdminPortalArgs']]):
-        pulumi.set(self, "admin_portal", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def applications(self) -> pulumi.Input[Optional['ProjectApplicationsArgs']]:
-        """
-        Applications that are registered with the project.
-        """
-        return pulumi.get(self, "applications")
-
-    @applications.setter
-    def applications(self, value: pulumi.Input[Optional['ProjectApplicationsArgs']]):
-        pulumi.set(self, "applications", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def attributes(self) -> pulumi.Input[Optional['ProjectAttributesArgs']]:
-        """
-        Custom attributes that can be attached to users and tenants.
-        """
-        return pulumi.get(self, "attributes")
-
-    @attributes.setter
-    def attributes(self, value: pulumi.Input[Optional['ProjectAttributesArgs']]):
-        pulumi.set(self, "attributes", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def authentication(self) -> pulumi.Input[Optional['ProjectAuthenticationArgs']]:
-        """
-        Settings for each authentication method.
-        """
-        return pulumi.get(self, "authentication")
-
-    @authentication.setter
-    def authentication(self, value: pulumi.Input[Optional['ProjectAuthenticationArgs']]):
-        pulumi.set(self, "authentication", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def authorization(self) -> pulumi.Input[Optional['ProjectAuthorizationArgs']]:
-        """
-        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        """
-        return pulumi.get(self, "authorization")
-
-    @authorization.setter
-    def authorization(self, value: pulumi.Input[Optional['ProjectAuthorizationArgs']]):
-        pulumi.set(self, "authorization", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def connectors(self) -> pulumi.Input[Optional['ProjectConnectorsArgs']]:
-        """
-        Enrich your flows by interacting with third party services.
-        """
-        return pulumi.get(self, "connectors")
-
-    @connectors.setter
-    def connectors(self, value: pulumi.Input[Optional['ProjectConnectorsArgs']]):
-        pulumi.set(self, "connectors", value)
+    @deletion_protection.setter
+    def deletion_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "deletion_protection", value)
 
     @_builtins.property
     @pulumi.getter
@@ -176,54 +66,6 @@ class ProjectArgs:
 
     @_builtins.property
     @pulumi.getter
-    def flows(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
-        """
-        Custom authentication flows to use in this project.
-        """
-        return pulumi.get(self, "flows")
-
-    @flows.setter
-    def flows(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
-        pulumi.set(self, "flows", value)
-
-    @_builtins.property
-    @pulumi.getter(name="inviteSettings")
-    def invite_settings(self) -> pulumi.Input[Optional['ProjectInviteSettingsArgs']]:
-        """
-        User invitation settings and behavior.
-        """
-        return pulumi.get(self, "invite_settings")
-
-    @invite_settings.setter
-    def invite_settings(self, value: pulumi.Input[Optional['ProjectInviteSettingsArgs']]):
-        pulumi.set(self, "invite_settings", value)
-
-    @_builtins.property
-    @pulumi.getter(name="jwtTemplates")
-    def jwt_templates(self) -> pulumi.Input[Optional['ProjectJwtTemplatesArgs']]:
-        """
-        Defines templates for JSON Web Tokens (JWT) used for authentication.
-        """
-        return pulumi.get(self, "jwt_templates")
-
-    @jwt_templates.setter
-    def jwt_templates(self, value: pulumi.Input[Optional['ProjectJwtTemplatesArgs']]):
-        pulumi.set(self, "jwt_templates", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]:
-        """
-        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        """
-        return pulumi.get(self, "lists")
-
-    @lists.setter
-    def lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]):
-        pulumi.set(self, "lists", value)
-
-    @_builtins.property
-    @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the Descope project.
@@ -233,30 +75,6 @@ class ProjectArgs:
     @name.setter
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
-
-    @_builtins.property
-    @pulumi.getter(name="projectSettings")
-    def project_settings(self) -> pulumi.Input[Optional['ProjectProjectSettingsArgs']]:
-        """
-        General settings for the Descope project.
-        """
-        return pulumi.get(self, "project_settings")
-
-    @project_settings.setter
-    def project_settings(self, value: pulumi.Input[Optional['ProjectProjectSettingsArgs']]):
-        pulumi.set(self, "project_settings", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def styles(self) -> pulumi.Input[Optional['ProjectStylesArgs']]:
-        """
-        Custom styles that can be applied to the project's authentication flows.
-        """
-        return pulumi.get(self, "styles")
-
-    @styles.setter
-    def styles(self, value: pulumi.Input[Optional['ProjectStylesArgs']]):
-        pulumi.set(self, "styles", value)
 
     @_builtins.property
     @pulumi.getter
@@ -269,163 +87,43 @@ class ProjectArgs:
     @tags.setter
     def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def widgets(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
-        """
-        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        """
-        return pulumi.get(self, "widgets")
-
-    @widgets.setter
-    def widgets(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
-        pulumi.set(self, "widgets", value)
 
 
 @pulumi.input_type
 class _ProjectState:
     def __init__(__self__, *,
-                 admin_portal: pulumi.Input[Optional['ProjectAdminPortalArgs']] = None,
-                 applications: pulumi.Input[Optional['ProjectApplicationsArgs']] = None,
-                 attributes: pulumi.Input[Optional['ProjectAttributesArgs']] = None,
-                 authentication: pulumi.Input[Optional['ProjectAuthenticationArgs']] = None,
-                 authorization: pulumi.Input[Optional['ProjectAuthorizationArgs']] = None,
-                 connectors: pulumi.Input[Optional['ProjectConnectorsArgs']] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
-                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]] = None,
-                 invite_settings: pulumi.Input[Optional['ProjectInviteSettingsArgs']] = None,
-                 jwt_templates: pulumi.Input[Optional['ProjectJwtTemplatesArgs']] = None,
-                 lists: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_settings: pulumi.Input[Optional['ProjectProjectSettingsArgs']] = None,
-                 styles: pulumi.Input[Optional['ProjectStylesArgs']] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]] = None):
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering Project resources.
 
-        :param pulumi.Input['ProjectAdminPortalArgs'] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-        :param pulumi.Input['ProjectApplicationsArgs'] applications: Applications that are registered with the project.
-        :param pulumi.Input['ProjectAttributesArgs'] attributes: Custom attributes that can be attached to users and tenants.
-        :param pulumi.Input['ProjectAuthenticationArgs'] authentication: Settings for each authentication method.
-        :param pulumi.Input['ProjectAuthorizationArgs'] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        :param pulumi.Input['ProjectConnectorsArgs'] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         :param pulumi.Input[_builtins.str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectFlowsArgs']]] flows: Custom authentication flows to use in this project.
-        :param pulumi.Input['ProjectInviteSettingsArgs'] invite_settings: User invitation settings and behavior.
-        :param pulumi.Input['ProjectJwtTemplatesArgs'] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
-        :param pulumi.Input[Sequence[pulumi.Input['ProjectListArgs']]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
-        :param pulumi.Input['ProjectProjectSettingsArgs'] project_settings: General settings for the Descope project.
-        :param pulumi.Input['ProjectStylesArgs'] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
-        :param pulumi.Input[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
-        if admin_portal is not None:
-            pulumi.set(__self__, "admin_portal", admin_portal)
-        if applications is not None:
-            pulumi.set(__self__, "applications", applications)
-        if attributes is not None:
-            pulumi.set(__self__, "attributes", attributes)
-        if authentication is not None:
-            pulumi.set(__self__, "authentication", authentication)
-        if authorization is not None:
-            pulumi.set(__self__, "authorization", authorization)
-        if connectors is not None:
-            pulumi.set(__self__, "connectors", connectors)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if environment is not None:
             pulumi.set(__self__, "environment", environment)
-        if flows is not None:
-            pulumi.set(__self__, "flows", flows)
-        if invite_settings is not None:
-            pulumi.set(__self__, "invite_settings", invite_settings)
-        if jwt_templates is not None:
-            pulumi.set(__self__, "jwt_templates", jwt_templates)
-        if lists is not None:
-            pulumi.set(__self__, "lists", lists)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if project_settings is not None:
-            pulumi.set(__self__, "project_settings", project_settings)
-        if styles is not None:
-            pulumi.set(__self__, "styles", styles)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
-        if widgets is not None:
-            pulumi.set(__self__, "widgets", widgets)
 
     @_builtins.property
-    @pulumi.getter(name="adminPortal")
-    def admin_portal(self) -> pulumi.Input[Optional['ProjectAdminPortalArgs']]:
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         """
-        return pulumi.get(self, "admin_portal")
+        return pulumi.get(self, "deletion_protection")
 
-    @admin_portal.setter
-    def admin_portal(self, value: pulumi.Input[Optional['ProjectAdminPortalArgs']]):
-        pulumi.set(self, "admin_portal", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def applications(self) -> pulumi.Input[Optional['ProjectApplicationsArgs']]:
-        """
-        Applications that are registered with the project.
-        """
-        return pulumi.get(self, "applications")
-
-    @applications.setter
-    def applications(self, value: pulumi.Input[Optional['ProjectApplicationsArgs']]):
-        pulumi.set(self, "applications", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def attributes(self) -> pulumi.Input[Optional['ProjectAttributesArgs']]:
-        """
-        Custom attributes that can be attached to users and tenants.
-        """
-        return pulumi.get(self, "attributes")
-
-    @attributes.setter
-    def attributes(self, value: pulumi.Input[Optional['ProjectAttributesArgs']]):
-        pulumi.set(self, "attributes", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def authentication(self) -> pulumi.Input[Optional['ProjectAuthenticationArgs']]:
-        """
-        Settings for each authentication method.
-        """
-        return pulumi.get(self, "authentication")
-
-    @authentication.setter
-    def authentication(self, value: pulumi.Input[Optional['ProjectAuthenticationArgs']]):
-        pulumi.set(self, "authentication", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def authorization(self) -> pulumi.Input[Optional['ProjectAuthorizationArgs']]:
-        """
-        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        """
-        return pulumi.get(self, "authorization")
-
-    @authorization.setter
-    def authorization(self, value: pulumi.Input[Optional['ProjectAuthorizationArgs']]):
-        pulumi.set(self, "authorization", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def connectors(self) -> pulumi.Input[Optional['ProjectConnectorsArgs']]:
-        """
-        Enrich your flows by interacting with third party services.
-        """
-        return pulumi.get(self, "connectors")
-
-    @connectors.setter
-    def connectors(self, value: pulumi.Input[Optional['ProjectConnectorsArgs']]):
-        pulumi.set(self, "connectors", value)
+    @deletion_protection.setter
+    def deletion_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "deletion_protection", value)
 
     @_builtins.property
     @pulumi.getter
@@ -441,54 +139,6 @@ class _ProjectState:
 
     @_builtins.property
     @pulumi.getter
-    def flows(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]:
-        """
-        Custom authentication flows to use in this project.
-        """
-        return pulumi.get(self, "flows")
-
-    @flows.setter
-    def flows(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectFlowsArgs']]]]):
-        pulumi.set(self, "flows", value)
-
-    @_builtins.property
-    @pulumi.getter(name="inviteSettings")
-    def invite_settings(self) -> pulumi.Input[Optional['ProjectInviteSettingsArgs']]:
-        """
-        User invitation settings and behavior.
-        """
-        return pulumi.get(self, "invite_settings")
-
-    @invite_settings.setter
-    def invite_settings(self, value: pulumi.Input[Optional['ProjectInviteSettingsArgs']]):
-        pulumi.set(self, "invite_settings", value)
-
-    @_builtins.property
-    @pulumi.getter(name="jwtTemplates")
-    def jwt_templates(self) -> pulumi.Input[Optional['ProjectJwtTemplatesArgs']]:
-        """
-        Defines templates for JSON Web Tokens (JWT) used for authentication.
-        """
-        return pulumi.get(self, "jwt_templates")
-
-    @jwt_templates.setter
-    def jwt_templates(self, value: pulumi.Input[Optional['ProjectJwtTemplatesArgs']]):
-        pulumi.set(self, "jwt_templates", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]:
-        """
-        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        """
-        return pulumi.get(self, "lists")
-
-    @lists.setter
-    def lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ProjectListArgs']]]]):
-        pulumi.set(self, "lists", value)
-
-    @_builtins.property
-    @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The name of the Descope project.
@@ -498,30 +148,6 @@ class _ProjectState:
     @name.setter
     def name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "name", value)
-
-    @_builtins.property
-    @pulumi.getter(name="projectSettings")
-    def project_settings(self) -> pulumi.Input[Optional['ProjectProjectSettingsArgs']]:
-        """
-        General settings for the Descope project.
-        """
-        return pulumi.get(self, "project_settings")
-
-    @project_settings.setter
-    def project_settings(self, value: pulumi.Input[Optional['ProjectProjectSettingsArgs']]):
-        pulumi.set(self, "project_settings", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def styles(self) -> pulumi.Input[Optional['ProjectStylesArgs']]:
-        """
-        Custom styles that can be applied to the project's authentication flows.
-        """
-        return pulumi.get(self, "styles")
-
-    @styles.setter
-    def styles(self, value: pulumi.Input[Optional['ProjectStylesArgs']]):
-        pulumi.set(self, "styles", value)
 
     @_builtins.property
     @pulumi.getter
@@ -534,18 +160,6 @@ class _ProjectState:
     @tags.setter
     def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "tags", value)
-
-    @_builtins.property
-    @pulumi.getter
-    def widgets(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]:
-        """
-        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        """
-        return pulumi.get(self, "widgets")
-
-    @widgets.setter
-    def widgets(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input['ProjectWidgetsArgs']]]]):
-        pulumi.set(self, "widgets", value)
 
 
 @pulumi.type_token("descope:index/project:Project")
@@ -554,25 +168,13 @@ class Project(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-                 applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-                 attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-                 authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-                 authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-                 connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
-                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-                 invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-                 jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-                 lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-                 styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
                  tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         """
-        Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+        Manages a Descope project. A project is the core entity in Descope—its authentication settings, user flows, roles, connectors, applications, and other configuration are managed with the standalone `descope_*` resources that reference the project by ID.
 
         This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
 
@@ -597,258 +199,229 @@ class Project(pulumi.CustomResource):
 
         ### Authentication Methods
 
-        Enable and configure the authentication methods your users will use:
+        Authentication method settings are managed with their own standalone resources, such as
+        `MagiclinkSettings`, `OtpSettings`,
+        `PasswordSettings`, and `SsoSettings`:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authentication={
-                "magic_link": {
-                    "expiration_time": "1 hour",
-                },
-                "password": {
-                    "lock": True,
-                    "lock_attempts": 5,
-                    "min_length": 12,
-                },
-                "otp": {
-                    "expiration_time": "5 minutes",
-                },
-                "passkeys": {
-                    "disabled": False,
-                },
-            })
+        example = descope.Project("example", name="my-app")
+        example_magiclink_settings = descope.MagiclinkSettings("example",
+            project_id=example.id,
+            expiration_time="1 hour")
+        example_password_settings = descope.PasswordSettings("example",
+            project_id=example.id,
+            lock=True,
+            lock_attempts=5,
+            min_length=12)
         ```
 
         ### Roles and Permissions (RBAC)
 
-        Define roles and permissions for your users:
+        Roles and permissions are managed as standalone resources that reference the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authorization={
-                "permissions": [
-                    {
-                        "name": "read:data",
-                        "description": "Read access to application data",
-                    },
-                    {
-                        "name": "write:data",
-                        "description": "Write access to application data",
-                    },
-                    {
-                        "name": "admin:panel",
-                        "description": "Access to the admin panel",
-                    },
-                ],
-                "roles": [
-                    {
-                        "name": "viewer",
-                        "description": "Can read data",
-                        "permissions": ["read:data"],
-                    },
-                    {
-                        "name": "editor",
-                        "description": "Can read and write data",
-                        "permissions": [
-                            "read:data",
-                            "write:data",
-                        ],
-                    },
-                    {
-                        "name": "admin",
-                        "description": "Full access",
-                        "permissions": [
-                            "read:data",
-                            "write:data",
-                            "admin:panel",
-                        ],
-                    },
-                ],
-            })
+        example = descope.Project("example", name="my-app")
+        read_data = descope.Permission("read_data",
+            project_id=example.id,
+            name="read:data",
+            description="Read access to application data")
+        write_data = descope.Permission("write_data",
+            project_id=example.id,
+            name="write:data",
+            description="Write access to application data")
+        admin_panel = descope.Permission("admin_panel",
+            project_id=example.id,
+            name="admin:panel",
+            description="Access to the admin panel")
+        viewer = descope.Role("viewer",
+            project_id=example.id,
+            name="viewer",
+            description="Can read data",
+            permissions=[read_data.name])
+        editor = descope.Role("editor",
+            project_id=example.id,
+            name="editor",
+            description="Can read and write data",
+            permissions=[
+                read_data.name,
+                write_data.name,
+            ])
+        admin = descope.Role("admin",
+            project_id=example.id,
+            name="admin",
+            description="Full access",
+            permissions=[
+                read_data.name,
+                write_data.name,
+                admin_panel.name,
+            ])
         ```
 
         ### Connectors
 
-        Integrate with third-party services to enrich flows and send notifications:
+        Integrate with third-party services using standalone per-type connector resources:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            connectors={
-                "https": [{
-                    "name": "User Eligibility Check",
-                    "description": "Checks if a new user is allowed to register",
-                    "base_url": "https://api.example.com",
-                    "authentication": {
-                        "bearer_token": webhook_secret,
-                    },
-                }],
-                "sendgrids": [{
-                    "name": "Transactional Email",
-                    "sender": {
-                        "email": "noreply@example.com",
-                        "name": "My App",
-                    },
-                    "authentication": {
-                        "api_key": sendgrid_api_key,
-                    },
-                }],
-                "twilio_cores": [{
-                    "name": "SMS OTP",
-                    "account_sid": twilio_account_sid,
-                    "senders": {
-                        "sms": {
-                            "phone_number": "+15551234567",
-                        },
-                    },
-                    "authentication": {
-                        "auth_token": twilio_auth_token,
-                    },
-                }],
+        example = descope.Project("example", name="my-app")
+        # Generic HTTP webhook with bearer token auth
+        eligibility = descope.HttpConnector("eligibility",
+            project_id=example.id,
+            name="User Eligibility Check",
+            description="Checks if a new user is allowed to register",
+            base_url="https://api.example.com",
+            authentication={
+                "bearer_token": webhook_secret,
             })
+        # SendGrid for email delivery
+        email = descope.SendgridConnector("email",
+            project_id=example.id,
+            name="Transactional Email",
+            sender_email="noreply@example.com",
+            sender_name="My App",
+            api_key=sendgrid_api_key)
+        # Twilio for SMS OTP
+        sms = descope.TwilioCoreConnector("sms",
+            project_id=example.id,
+            name="SMS OTP",
+            account_sid=twilio_account_sid,
+            from_phone="+15551234567",
+            auth_token=twilio_auth_token)
         ```
 
-        ### Session Settings
+        ### Project and Session Settings
 
-        Configure token lifetimes and session behavior:
+        General project settings, session behavior, and user invitations are managed with the
+        standalone `ProjectSettings`,
+        `SessionSettings`, and
+        `InviteSettings` resources:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            project_settings={
-                "refresh_token_expiration": "3 weeks",
-                "session_token_expiration": "15 minutes",
-                "refresh_token_rotation": True,
-                "enable_inactivity": True,
-                "inactivity_time": "30 minutes",
-                "custom_domain": "auth.example.com",
-                "approved_domains": [
-                    "example.com",
-                    "app.example.com",
-                ],
-            })
+        example = descope.Project("example", name="my-app")
+        example_project_settings = descope.ProjectSettings("example",
+            project_id=example.id,
+            app_url="https://app.example.com",
+            approved_domains=[
+                "example.com",
+                "app.example.com",
+            ])
+        example_session_settings = descope.SessionSettings("example",
+            project_id=example.id,
+            refresh_token_expiration="3 weeks",
+            session_token_expiration="15 minutes",
+            refresh_token_rotation=True,
+            enable_inactivity=True,
+            inactivity_time="30 minutes")
+        example_invite_settings = descope.InviteSettings("example",
+            project_id=example.id,
+            require_invitation=True,
+            invite_url="https://app.example.com/invite")
         ```
 
-        ### OIDC Applications
+        ### Federated Applications
 
-        Register an OIDC application for SSO:
+        Federated (SSO IdP) applications and their app-scoped roles and permissions are managed
+        with the standalone `OidcApp`, `SamlApp`, `WsfedApp`,
+        `AppRole`, and `AppPermission` resources that reference the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            applications={
-                "oidc_applications": [{
-                    "name": "My Web App",
-                    "description": "Primary web application",
-                    "login_page_url": "https://app.example.com/login",
-                }],
-            })
+        example = descope.Project("example", name="my-app")
+        web = descope.OidcApp("web",
+            project_id=example.id,
+            name="My Web App",
+            description="Primary web application",
+            login_page_url="https://app.example.com/login")
+        read_reports = descope.AppPermission("read_reports",
+            project_id=example.id,
+            app_id=web.oidc_app_id,
+            name="read:reports")
+        analyst = descope.AppRole("analyst",
+            project_id=example.id,
+            app_id=web.oidc_app_id,
+            name="analyst",
+            permission_ids=[read_reports.id])
         ```
 
         ### JWT Templates
 
-        Customize the JWT claims added to session tokens:
+        JWT templates are managed with the standalone `JwtTemplate` resource that
+        references the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
         import json
 
-        example = descope.Project("example",
-            name="my-app",
-            jwt_templates={
-                "user_templates": [{
-                    "name": "app-claims",
-                    "description": "Adds subscription tier and org context to user JWTs",
-                    "template": json.dumps({
-                        "tier": "@user.customAttributes.subscriptionTier",
-                        "org_id": "@user.tenants[0].tenantId",
-                    }),
-                    "exclude_permission_claim": True,
-                    "add_jti_claim": True,
-                    "override_subject_claim": True,
-                }],
-            },
-            project_settings={
-                "user_jwt_template": "app-claims",
-            })
+        example = descope.Project("example", name="my-app")
+        app_claims = descope.JwtTemplate("app_claims",
+            project_id=example.id,
+            name="app-claims",
+            description="Adds subscription tier and org context to user JWTs",
+            type="user",
+            template=json.dumps({
+                "tier": "@user.customAttributes.subscriptionTier",
+                "org_id": "@user.tenants[0].tenantId",
+            }),
+            exclude_permission_claim=True,
+            add_jti_claim=True,
+            override_subject_claim=True)
         ```
 
         ### SSO Settings
 
-        Configure global settings for Single Sign-On across tenants:
+        Global settings for Single Sign-On across tenants are managed with the standalone
+        `SsoSettings` resource:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authentication={
-                "sso": {
-                    "merge_users": True,
-                    "allow_override_roles": True,
-                    "groups_priority": True,
-                    "require_sso_domains": True,
-                    "require_groups_attribute_name": True,
-                    "mandatory_user_attributes": [
-                        {
-                            "id": "email",
-                        },
-                        {
-                            "id": "name",
-                        },
-                        {
-                            "id": "department",
-                            "custom": True,
-                        },
-                    ],
-                    "sso_suite_settings": {
-                        "style_id": "my-brand-style",
-                        "hide_scim": False,
-                        "hide_saml": False,
-                        "hide_oidc": False,
-                    },
+        example = descope.Project("example", name="my-app")
+        example_sso_settings = descope.SsoSettings("example",
+            project_id=example.id,
+            merge_users=True,
+            allow_override_roles=True,
+            mandatory_user_attributes=[
+                {
+                    "id": "email",
                 },
+                {
+                    "id": "name",
+                },
+                {
+                    "id": "department",
+                    "custom": True,
+                },
+            ],
+            sso_suite_settings={
+                "style_id": "my-brand-style",
+                "hide_scim": False,
+                "hide_saml": False,
+                "hide_oidc": False,
             })
         ```
 
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-        :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
-        :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
-        :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
-        :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         :param pulumi.Input[_builtins.str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
-        :param pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']] invite_settings: User invitation settings and behavior.
-        :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
-        :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
-        :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         ...
     @overload
@@ -857,7 +430,7 @@ class Project(pulumi.CustomResource):
                  args: Optional[ProjectArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Manages the configuration of a Descope project. A project is the core entity in Descope—it contains all authentication settings, user flows, roles, connectors, and other configuration for your application.
+        Manages a Descope project. A project is the core entity in Descope—its authentication settings, user flows, roles, connectors, applications, and other configuration are managed with the standalone `descope_*` resources that reference the project by ID.
 
         This resource manages _project configuration_, not users or tenants. For user management, use the [Descope Management API](https://docs.descope.com/api/openapi) or [SDKs](https://docs.descope.com).
 
@@ -882,236 +455,219 @@ class Project(pulumi.CustomResource):
 
         ### Authentication Methods
 
-        Enable and configure the authentication methods your users will use:
+        Authentication method settings are managed with their own standalone resources, such as
+        `MagiclinkSettings`, `OtpSettings`,
+        `PasswordSettings`, and `SsoSettings`:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authentication={
-                "magic_link": {
-                    "expiration_time": "1 hour",
-                },
-                "password": {
-                    "lock": True,
-                    "lock_attempts": 5,
-                    "min_length": 12,
-                },
-                "otp": {
-                    "expiration_time": "5 minutes",
-                },
-                "passkeys": {
-                    "disabled": False,
-                },
-            })
+        example = descope.Project("example", name="my-app")
+        example_magiclink_settings = descope.MagiclinkSettings("example",
+            project_id=example.id,
+            expiration_time="1 hour")
+        example_password_settings = descope.PasswordSettings("example",
+            project_id=example.id,
+            lock=True,
+            lock_attempts=5,
+            min_length=12)
         ```
 
         ### Roles and Permissions (RBAC)
 
-        Define roles and permissions for your users:
+        Roles and permissions are managed as standalone resources that reference the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authorization={
-                "permissions": [
-                    {
-                        "name": "read:data",
-                        "description": "Read access to application data",
-                    },
-                    {
-                        "name": "write:data",
-                        "description": "Write access to application data",
-                    },
-                    {
-                        "name": "admin:panel",
-                        "description": "Access to the admin panel",
-                    },
-                ],
-                "roles": [
-                    {
-                        "name": "viewer",
-                        "description": "Can read data",
-                        "permissions": ["read:data"],
-                    },
-                    {
-                        "name": "editor",
-                        "description": "Can read and write data",
-                        "permissions": [
-                            "read:data",
-                            "write:data",
-                        ],
-                    },
-                    {
-                        "name": "admin",
-                        "description": "Full access",
-                        "permissions": [
-                            "read:data",
-                            "write:data",
-                            "admin:panel",
-                        ],
-                    },
-                ],
-            })
+        example = descope.Project("example", name="my-app")
+        read_data = descope.Permission("read_data",
+            project_id=example.id,
+            name="read:data",
+            description="Read access to application data")
+        write_data = descope.Permission("write_data",
+            project_id=example.id,
+            name="write:data",
+            description="Write access to application data")
+        admin_panel = descope.Permission("admin_panel",
+            project_id=example.id,
+            name="admin:panel",
+            description="Access to the admin panel")
+        viewer = descope.Role("viewer",
+            project_id=example.id,
+            name="viewer",
+            description="Can read data",
+            permissions=[read_data.name])
+        editor = descope.Role("editor",
+            project_id=example.id,
+            name="editor",
+            description="Can read and write data",
+            permissions=[
+                read_data.name,
+                write_data.name,
+            ])
+        admin = descope.Role("admin",
+            project_id=example.id,
+            name="admin",
+            description="Full access",
+            permissions=[
+                read_data.name,
+                write_data.name,
+                admin_panel.name,
+            ])
         ```
 
         ### Connectors
 
-        Integrate with third-party services to enrich flows and send notifications:
+        Integrate with third-party services using standalone per-type connector resources:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            connectors={
-                "https": [{
-                    "name": "User Eligibility Check",
-                    "description": "Checks if a new user is allowed to register",
-                    "base_url": "https://api.example.com",
-                    "authentication": {
-                        "bearer_token": webhook_secret,
-                    },
-                }],
-                "sendgrids": [{
-                    "name": "Transactional Email",
-                    "sender": {
-                        "email": "noreply@example.com",
-                        "name": "My App",
-                    },
-                    "authentication": {
-                        "api_key": sendgrid_api_key,
-                    },
-                }],
-                "twilio_cores": [{
-                    "name": "SMS OTP",
-                    "account_sid": twilio_account_sid,
-                    "senders": {
-                        "sms": {
-                            "phone_number": "+15551234567",
-                        },
-                    },
-                    "authentication": {
-                        "auth_token": twilio_auth_token,
-                    },
-                }],
+        example = descope.Project("example", name="my-app")
+        # Generic HTTP webhook with bearer token auth
+        eligibility = descope.HttpConnector("eligibility",
+            project_id=example.id,
+            name="User Eligibility Check",
+            description="Checks if a new user is allowed to register",
+            base_url="https://api.example.com",
+            authentication={
+                "bearer_token": webhook_secret,
             })
+        # SendGrid for email delivery
+        email = descope.SendgridConnector("email",
+            project_id=example.id,
+            name="Transactional Email",
+            sender_email="noreply@example.com",
+            sender_name="My App",
+            api_key=sendgrid_api_key)
+        # Twilio for SMS OTP
+        sms = descope.TwilioCoreConnector("sms",
+            project_id=example.id,
+            name="SMS OTP",
+            account_sid=twilio_account_sid,
+            from_phone="+15551234567",
+            auth_token=twilio_auth_token)
         ```
 
-        ### Session Settings
+        ### Project and Session Settings
 
-        Configure token lifetimes and session behavior:
+        General project settings, session behavior, and user invitations are managed with the
+        standalone `ProjectSettings`,
+        `SessionSettings`, and
+        `InviteSettings` resources:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            project_settings={
-                "refresh_token_expiration": "3 weeks",
-                "session_token_expiration": "15 minutes",
-                "refresh_token_rotation": True,
-                "enable_inactivity": True,
-                "inactivity_time": "30 minutes",
-                "custom_domain": "auth.example.com",
-                "approved_domains": [
-                    "example.com",
-                    "app.example.com",
-                ],
-            })
+        example = descope.Project("example", name="my-app")
+        example_project_settings = descope.ProjectSettings("example",
+            project_id=example.id,
+            app_url="https://app.example.com",
+            approved_domains=[
+                "example.com",
+                "app.example.com",
+            ])
+        example_session_settings = descope.SessionSettings("example",
+            project_id=example.id,
+            refresh_token_expiration="3 weeks",
+            session_token_expiration="15 minutes",
+            refresh_token_rotation=True,
+            enable_inactivity=True,
+            inactivity_time="30 minutes")
+        example_invite_settings = descope.InviteSettings("example",
+            project_id=example.id,
+            require_invitation=True,
+            invite_url="https://app.example.com/invite")
         ```
 
-        ### OIDC Applications
+        ### Federated Applications
 
-        Register an OIDC application for SSO:
+        Federated (SSO IdP) applications and their app-scoped roles and permissions are managed
+        with the standalone `OidcApp`, `SamlApp`, `WsfedApp`,
+        `AppRole`, and `AppPermission` resources that reference the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            applications={
-                "oidc_applications": [{
-                    "name": "My Web App",
-                    "description": "Primary web application",
-                    "login_page_url": "https://app.example.com/login",
-                }],
-            })
+        example = descope.Project("example", name="my-app")
+        web = descope.OidcApp("web",
+            project_id=example.id,
+            name="My Web App",
+            description="Primary web application",
+            login_page_url="https://app.example.com/login")
+        read_reports = descope.AppPermission("read_reports",
+            project_id=example.id,
+            app_id=web.oidc_app_id,
+            name="read:reports")
+        analyst = descope.AppRole("analyst",
+            project_id=example.id,
+            app_id=web.oidc_app_id,
+            name="analyst",
+            permission_ids=[read_reports.id])
         ```
 
         ### JWT Templates
 
-        Customize the JWT claims added to session tokens:
+        JWT templates are managed with the standalone `JwtTemplate` resource that
+        references the project by ID:
 
         ```python
         import pulumi
         import descope_pulumi as descope
         import json
 
-        example = descope.Project("example",
-            name="my-app",
-            jwt_templates={
-                "user_templates": [{
-                    "name": "app-claims",
-                    "description": "Adds subscription tier and org context to user JWTs",
-                    "template": json.dumps({
-                        "tier": "@user.customAttributes.subscriptionTier",
-                        "org_id": "@user.tenants[0].tenantId",
-                    }),
-                    "exclude_permission_claim": True,
-                    "add_jti_claim": True,
-                    "override_subject_claim": True,
-                }],
-            },
-            project_settings={
-                "user_jwt_template": "app-claims",
-            })
+        example = descope.Project("example", name="my-app")
+        app_claims = descope.JwtTemplate("app_claims",
+            project_id=example.id,
+            name="app-claims",
+            description="Adds subscription tier and org context to user JWTs",
+            type="user",
+            template=json.dumps({
+                "tier": "@user.customAttributes.subscriptionTier",
+                "org_id": "@user.tenants[0].tenantId",
+            }),
+            exclude_permission_claim=True,
+            add_jti_claim=True,
+            override_subject_claim=True)
         ```
 
         ### SSO Settings
 
-        Configure global settings for Single Sign-On across tenants:
+        Global settings for Single Sign-On across tenants are managed with the standalone
+        `SsoSettings` resource:
 
         ```python
         import pulumi
         import descope_pulumi as descope
 
-        example = descope.Project("example",
-            name="my-app",
-            authentication={
-                "sso": {
-                    "merge_users": True,
-                    "allow_override_roles": True,
-                    "groups_priority": True,
-                    "require_sso_domains": True,
-                    "require_groups_attribute_name": True,
-                    "mandatory_user_attributes": [
-                        {
-                            "id": "email",
-                        },
-                        {
-                            "id": "name",
-                        },
-                        {
-                            "id": "department",
-                            "custom": True,
-                        },
-                    ],
-                    "sso_suite_settings": {
-                        "style_id": "my-brand-style",
-                        "hide_scim": False,
-                        "hide_saml": False,
-                        "hide_oidc": False,
-                    },
+        example = descope.Project("example", name="my-app")
+        example_sso_settings = descope.SsoSettings("example",
+            project_id=example.id,
+            merge_users=True,
+            allow_override_roles=True,
+            mandatory_user_attributes=[
+                {
+                    "id": "email",
                 },
+                {
+                    "id": "name",
+                },
+                {
+                    "id": "department",
+                    "custom": True,
+                },
+            ],
+            sso_suite_settings={
+                "style_id": "my-brand-style",
+                "hide_scim": False,
+                "hide_saml": False,
+                "hide_oidc": False,
             })
         ```
 
@@ -1131,22 +687,10 @@ class Project(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-                 applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-                 attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-                 authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-                 authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-                 connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  environment: pulumi.Input[Optional[_builtins.str]] = None,
-                 flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-                 invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-                 jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-                 lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-                 styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
                  tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -1156,22 +700,10 @@ class Project(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProjectArgs.__new__(ProjectArgs)
 
-            __props__.__dict__["admin_portal"] = admin_portal
-            __props__.__dict__["applications"] = applications
-            __props__.__dict__["attributes"] = attributes
-            __props__.__dict__["authentication"] = authentication
-            __props__.__dict__["authorization"] = authorization
-            __props__.__dict__["connectors"] = connectors
+            __props__.__dict__["deletion_protection"] = deletion_protection
             __props__.__dict__["environment"] = environment
-            __props__.__dict__["flows"] = flows
-            __props__.__dict__["invite_settings"] = invite_settings
-            __props__.__dict__["jwt_templates"] = jwt_templates
-            __props__.__dict__["lists"] = lists
             __props__.__dict__["name"] = name
-            __props__.__dict__["project_settings"] = project_settings
-            __props__.__dict__["styles"] = styles
             __props__.__dict__["tags"] = tags
-            __props__.__dict__["widgets"] = widgets
         super(Project, __self__).__init__(
             'descope:index/project:Project',
             resource_name,
@@ -1182,22 +714,10 @@ class Project(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            admin_portal: pulumi.Input[Optional[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']]] = None,
-            applications: pulumi.Input[Optional[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']]] = None,
-            attributes: pulumi.Input[Optional[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']]] = None,
-            authentication: pulumi.Input[Optional[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']]] = None,
-            authorization: pulumi.Input[Optional[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']]] = None,
-            connectors: pulumi.Input[Optional[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']]] = None,
+            deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             environment: pulumi.Input[Optional[_builtins.str]] = None,
-            flows: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]]] = None,
-            invite_settings: pulumi.Input[Optional[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']]] = None,
-            jwt_templates: pulumi.Input[Optional[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']]] = None,
-            lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            project_settings: pulumi.Input[Optional[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']]] = None,
-            styles: pulumi.Input[Optional[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']]] = None,
-            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            widgets: pulumi.Input[Optional[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]]] = None) -> 'Project':
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Project':
         """
         Get an existing Project resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -1205,92 +725,28 @@ class Project(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ProjectAdminPortalArgs', 'ProjectAdminPortalArgsDict']] admin_portal: Admin portal configuration - A hosted page for end users to access and use Descope Widgets
-        :param pulumi.Input[Union['ProjectApplicationsArgs', 'ProjectApplicationsArgsDict']] applications: Applications that are registered with the project.
-        :param pulumi.Input[Union['ProjectAttributesArgs', 'ProjectAttributesArgsDict']] attributes: Custom attributes that can be attached to users and tenants.
-        :param pulumi.Input[Union['ProjectAuthenticationArgs', 'ProjectAuthenticationArgsDict']] authentication: Settings for each authentication method.
-        :param pulumi.Input[Union['ProjectAuthorizationArgs', 'ProjectAuthorizationArgsDict']] authorization: Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        :param pulumi.Input[Union['ProjectConnectorsArgs', 'ProjectConnectorsArgsDict']] connectors: Enrich your flows by interacting with third party services.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         :param pulumi.Input[_builtins.str] environment: This can be set to `production` to mark production projects, otherwise this should be left unset for development or staging projects.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectFlowsArgs', 'ProjectFlowsArgsDict']]]] flows: Custom authentication flows to use in this project.
-        :param pulumi.Input[Union['ProjectInviteSettingsArgs', 'ProjectInviteSettingsArgsDict']] invite_settings: User invitation settings and behavior.
-        :param pulumi.Input[Union['ProjectJwtTemplatesArgs', 'ProjectJwtTemplatesArgsDict']] jwt_templates: Defines templates for JSON Web Tokens (JWT) used for authentication.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ProjectListArgs', 'ProjectListArgsDict']]]] lists: Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
         :param pulumi.Input[_builtins.str] name: The name of the Descope project.
-        :param pulumi.Input[Union['ProjectProjectSettingsArgs', 'ProjectProjectSettingsArgsDict']] project_settings: General settings for the Descope project.
-        :param pulumi.Input[Union['ProjectStylesArgs', 'ProjectStylesArgsDict']] styles: Custom styles that can be applied to the project's authentication flows.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
-        :param pulumi.Input[Mapping[str, pulumi.Input[Union['ProjectWidgetsArgs', 'ProjectWidgetsArgsDict']]]] widgets: Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ProjectState.__new__(_ProjectState)
 
-        __props__.__dict__["admin_portal"] = admin_portal
-        __props__.__dict__["applications"] = applications
-        __props__.__dict__["attributes"] = attributes
-        __props__.__dict__["authentication"] = authentication
-        __props__.__dict__["authorization"] = authorization
-        __props__.__dict__["connectors"] = connectors
+        __props__.__dict__["deletion_protection"] = deletion_protection
         __props__.__dict__["environment"] = environment
-        __props__.__dict__["flows"] = flows
-        __props__.__dict__["invite_settings"] = invite_settings
-        __props__.__dict__["jwt_templates"] = jwt_templates
-        __props__.__dict__["lists"] = lists
         __props__.__dict__["name"] = name
-        __props__.__dict__["project_settings"] = project_settings
-        __props__.__dict__["styles"] = styles
         __props__.__dict__["tags"] = tags
-        __props__.__dict__["widgets"] = widgets
         return Project(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
-    @pulumi.getter(name="adminPortal")
-    def admin_portal(self) -> pulumi.Output['outputs.ProjectAdminPortal']:
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Output[Optional[_builtins.bool]]:
         """
-        Admin portal configuration - A hosted page for end users to access and use Descope Widgets
+        Protects the project from being accidentally destroyed. When this attribute isn't set, deletion protection is enabled automatically for every project, whatever its `environment` attribute is set to. To destroy a protected project, set this attribute to `false` and apply the change first. Note that this only guards operations performed through this provider, so removing the resource from the Terraform state is not prevented.
         """
-        return pulumi.get(self, "admin_portal")
-
-    @_builtins.property
-    @pulumi.getter
-    def applications(self) -> pulumi.Output['outputs.ProjectApplications']:
-        """
-        Applications that are registered with the project.
-        """
-        return pulumi.get(self, "applications")
-
-    @_builtins.property
-    @pulumi.getter
-    def attributes(self) -> pulumi.Output['outputs.ProjectAttributes']:
-        """
-        Custom attributes that can be attached to users and tenants.
-        """
-        return pulumi.get(self, "attributes")
-
-    @_builtins.property
-    @pulumi.getter
-    def authentication(self) -> pulumi.Output['outputs.ProjectAuthentication']:
-        """
-        Settings for each authentication method.
-        """
-        return pulumi.get(self, "authentication")
-
-    @_builtins.property
-    @pulumi.getter
-    def authorization(self) -> pulumi.Output['outputs.ProjectAuthorization']:
-        """
-        Define Role-Based Access Control (RBAC) for your users by creating roles and permissions.
-        """
-        return pulumi.get(self, "authorization")
-
-    @_builtins.property
-    @pulumi.getter
-    def connectors(self) -> pulumi.Output['outputs.ProjectConnectors']:
-        """
-        Enrich your flows by interacting with third party services.
-        """
-        return pulumi.get(self, "connectors")
+        return pulumi.get(self, "deletion_protection")
 
     @_builtins.property
     @pulumi.getter
@@ -1302,59 +758,11 @@ class Project(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter
-    def flows(self) -> pulumi.Output[Mapping[str, 'outputs.ProjectFlows']]:
-        """
-        Custom authentication flows to use in this project.
-        """
-        return pulumi.get(self, "flows")
-
-    @_builtins.property
-    @pulumi.getter(name="inviteSettings")
-    def invite_settings(self) -> pulumi.Output['outputs.ProjectInviteSettings']:
-        """
-        User invitation settings and behavior.
-        """
-        return pulumi.get(self, "invite_settings")
-
-    @_builtins.property
-    @pulumi.getter(name="jwtTemplates")
-    def jwt_templates(self) -> pulumi.Output['outputs.ProjectJwtTemplates']:
-        """
-        Defines templates for JSON Web Tokens (JWT) used for authentication.
-        """
-        return pulumi.get(self, "jwt_templates")
-
-    @_builtins.property
-    @pulumi.getter
-    def lists(self) -> pulumi.Output[Sequence['outputs.ProjectList']]:
-        """
-        Lists that can be used for various purposes in the project, such as IP allowlists, text lists, or custom JSON data.
-        """
-        return pulumi.get(self, "lists")
-
-    @_builtins.property
-    @pulumi.getter
     def name(self) -> pulumi.Output[_builtins.str]:
         """
         The name of the Descope project.
         """
         return pulumi.get(self, "name")
-
-    @_builtins.property
-    @pulumi.getter(name="projectSettings")
-    def project_settings(self) -> pulumi.Output['outputs.ProjectProjectSettings']:
-        """
-        General settings for the Descope project.
-        """
-        return pulumi.get(self, "project_settings")
-
-    @_builtins.property
-    @pulumi.getter
-    def styles(self) -> pulumi.Output['outputs.ProjectStyles']:
-        """
-        Custom styles that can be applied to the project's authentication flows.
-        """
-        return pulumi.get(self, "styles")
 
     @_builtins.property
     @pulumi.getter
@@ -1363,12 +771,4 @@ class Project(pulumi.CustomResource):
         Descriptive tags for your Descope project. Each tag must be no more than 50 characters long.
         """
         return pulumi.get(self, "tags")
-
-    @_builtins.property
-    @pulumi.getter
-    def widgets(self) -> pulumi.Output[Mapping[str, 'outputs.ProjectWidgets']]:
-        """
-        Embeddable components designed to facilitate the delegation of operations to tenant admins and end users.
-        """
-        return pulumi.get(self, "widgets")
 

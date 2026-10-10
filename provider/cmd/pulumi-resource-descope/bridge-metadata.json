@@ -1,6 +1,10 @@
 {
     "auto-aliasing": {
         "resources": {
+            "descope_abuseipdb_connector": {
+                "current": "descope:index/abuseipdbConnector:AbuseipdbConnector",
+                "majorVersion": 1
+            },
             "descope_access_key": {
                 "current": "descope:index/accessKey:AccessKey",
                 "majorVersion": 1,
@@ -16,6 +20,174 @@
                         "elem": {
                             "fields": {
                                 "roles": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_access_key_attribute": {
+                "current": "descope:index/accessKeyAttribute:AccessKeyAttribute",
+                "majorVersion": 1,
+                "fields": {
+                    "select_options": {
+                        "maxItemsOne": false
+                    },
+                    "widget_authorization": {
+                        "fields": {
+                            "edit_permissions": {
+                                "maxItemsOne": false
+                            },
+                            "view_permissions": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_admin_portal": {
+                "current": "descope:index/adminPortal:AdminPortal",
+                "majorVersion": 1,
+                "fields": {
+                    "widgets": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_alloy_connector": {
+                "current": "descope:index/alloyConnector:AlloyConnector",
+                "majorVersion": 1
+            },
+            "descope_amplitude_connector": {
+                "current": "descope:index/amplitudeConnector:AmplitudeConnector",
+                "majorVersion": 1
+            },
+            "descope_app_permission": {
+                "current": "descope:index/appPermission:AppPermission",
+                "majorVersion": 1
+            },
+            "descope_app_role": {
+                "current": "descope:index/appRole:AppRole",
+                "majorVersion": 1,
+                "fields": {
+                    "permission_ids": {
+                        "maxItemsOne": false
+                    },
+                    "role_mappings": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_arkose_connector": {
+                "current": "descope:index/arkoseConnector:ArkoseConnector",
+                "majorVersion": 1
+            },
+            "descope_audit_webhook_connector": {
+                "current": "descope:index/auditWebhookConnector:AuditWebhookConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_aws_eventbridge_connector": {
+                "current": "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_aws_s3_connector": {
+                "current": "descope:index/awsS3Connector:AwsS3Connector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_aws_ses_email_validation_connector": {
+                "current": "descope:index/awsSesEmailValidationConnector:AwsSesEmailValidationConnector",
+                "majorVersion": 1
+            },
+            "descope_aws_translate_connector": {
+                "current": "descope:index/awsTranslateConnector:AwsTranslateConnector",
+                "majorVersion": 1
+            },
+            "descope_bitsight_connector": {
+                "current": "descope:index/bitsightConnector:BitsightConnector",
+                "majorVersion": 1
+            },
+            "descope_coralogix_connector": {
+                "current": "descope:index/coralogixConnector:CoralogixConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_cribl_connector": {
+                "current": "descope:index/criblConnector:CriblConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_darwinium_connector": {
+                "current": "descope:index/darwiniumConnector:DarwiniumConnector",
+                "majorVersion": 1
+            },
+            "descope_datadog_connector": {
+                "current": "descope:index/datadogConnector:DatadogConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
                                     "maxItemsOne": false
                                 }
                             }
@@ -53,14 +225,141 @@
                     }
                 }
             },
+            "descope_devrev_grow_connector": {
+                "current": "descope:index/devrevGrowConnector:DevrevGrowConnector",
+                "majorVersion": 1
+            },
+            "descope_docebo_connector": {
+                "current": "descope:index/doceboConnector:DoceboConnector",
+                "majorVersion": 1
+            },
+            "descope_eight_by_eight_viber_connector": {
+                "current": "descope:index/eightByEightViberConnector:EightByEightViberConnector",
+                "majorVersion": 1
+            },
+            "descope_eight_by_eight_whatsapp_connector": {
+                "current": "descope:index/eightByEightWhatsappConnector:EightByEightWhatsappConnector",
+                "majorVersion": 1
+            },
+            "descope_elephant_connector": {
+                "current": "descope:index/elephantConnector:ElephantConnector",
+                "majorVersion": 1
+            },
+            "descope_email_template": {
+                "current": "descope:index/emailTemplate:EmailTemplate",
+                "majorVersion": 1
+            },
+            "descope_embeddedlink_settings": {
+                "current": "descope:index/embeddedlinkSettings:EmbeddedlinkSettings",
+                "majorVersion": 1
+            },
+            "descope_enchantedlink_settings": {
+                "current": "descope:index/enchantedlinkSettings:EnchantedlinkSettings",
+                "majorVersion": 1
+            },
             "descope_engine": {
                 "current": "descope:index/engine:Engine",
+                "majorVersion": 1
+            },
+            "descope_external_token_http_connector": {
+                "current": "descope:index/externalTokenHttpConnector:ExternalTokenHttpConnector",
+                "majorVersion": 1
+            },
+            "descope_fga_schema": {
+                "current": "descope:index/fgaSchema:FgaSchema",
+                "majorVersion": 1
+            },
+            "descope_fingerprint_connector": {
+                "current": "descope:index/fingerprintConnector:FingerprintConnector",
+                "majorVersion": 1
+            },
+            "descope_fingerprint_descope_connector": {
+                "current": "descope:index/fingerprintDescopeConnector:FingerprintDescopeConnector",
+                "majorVersion": 1
+            },
+            "descope_firebase_admin_connector": {
+                "current": "descope:index/firebaseAdminConnector:FirebaseAdminConnector",
+                "majorVersion": 1
+            },
+            "descope_flow": {
+                "current": "descope:index/flow:Flow",
+                "majorVersion": 1
+            },
+            "descope_forter_connector": {
+                "current": "descope:index/forterConnector:ForterConnector",
+                "majorVersion": 1
+            },
+            "descope_generic_email_gateway_connector": {
+                "current": "descope:index/genericEmailGatewayConnector:GenericEmailGatewayConnector",
+                "majorVersion": 1
+            },
+            "descope_generic_sms_gateway_connector": {
+                "current": "descope:index/genericSmsGatewayConnector:GenericSmsGatewayConnector",
+                "majorVersion": 1
+            },
+            "descope_google_cloud_logging_connector": {
+                "current": "descope:index/googleCloudLoggingConnector:GoogleCloudLoggingConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_google_cloud_translation_connector": {
+                "current": "descope:index/googleCloudTranslationConnector:GoogleCloudTranslationConnector",
+                "majorVersion": 1
+            },
+            "descope_google_maps_places_connector": {
+                "current": "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector",
+                "majorVersion": 1
+            },
+            "descope_groundcover_connector": {
+                "current": "descope:index/groundcoverConnector:GroundcoverConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_hcaptcha_connector": {
+                "current": "descope:index/hcaptchaConnector:HcaptchaConnector",
+                "majorVersion": 1
+            },
+            "descope_hibp_connector": {
+                "current": "descope:index/hibpConnector:HibpConnector",
+                "majorVersion": 1
+            },
+            "descope_http_connector": {
+                "current": "descope:index/httpConnector:HttpConnector",
+                "majorVersion": 1
+            },
+            "descope_hubspot_connector": {
+                "current": "descope:index/hubspotConnector:HubspotConnector",
                 "majorVersion": 1
             },
             "descope_inbound_app": {
                 "current": "descope:index/inboundApp:InboundApp",
                 "majorVersion": 1,
                 "fields": {
+                    "allowed_tenants": {
+                        "maxItemsOne": false
+                    },
                     "approved_callback_urls": {
                         "maxItemsOne": false
                     },
@@ -96,8 +395,51 @@
                                 }
                             }
                         }
+                    },
+                    "scope_claim_mapping": {
+                        "maxItemsOne": false
                     }
                 }
+            },
+            "descope_incode_connector": {
+                "current": "descope:index/incodeConnector:IncodeConnector",
+                "majorVersion": 1
+            },
+            "descope_intercom_connector": {
+                "current": "descope:index/intercomConnector:IntercomConnector",
+                "majorVersion": 1
+            },
+            "descope_invite_settings": {
+                "current": "descope:index/inviteSettings:InviteSettings",
+                "majorVersion": 1
+            },
+            "descope_jwt_template": {
+                "current": "descope:index/jwtTemplate:JwtTemplate",
+                "majorVersion": 1
+            },
+            "descope_ldap_connector": {
+                "current": "descope:index/ldapConnector:LdapConnector",
+                "majorVersion": 1
+            },
+            "descope_list": {
+                "current": "descope:index/list:List",
+                "majorVersion": 1,
+                "fields": {
+                    "ips": {
+                        "maxItemsOne": false
+                    },
+                    "texts": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_lokalise_connector": {
+                "current": "descope:index/lokaliseConnector:LokaliseConnector",
+                "majorVersion": 1
+            },
+            "descope_magiclink_settings": {
+                "current": "descope:index/magiclinkSettings:MagiclinkSettings",
+                "majorVersion": 1
             },
             "descope_management_key": {
                 "current": "descope:index/managementKey:ManagementKey",
@@ -141,902 +483,629 @@
                     }
                 }
             },
+            "descope_mixpanel_connector": {
+                "current": "descope:index/mixpanelConnector:MixpanelConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_mparticle_connector": {
+                "current": "descope:index/mparticleConnector:MparticleConnector",
+                "majorVersion": 1
+            },
+            "descope_newrelic_connector": {
+                "current": "descope:index/newrelicConnector:NewrelicConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_oauth_provider": {
+                "current": "descope:index/oauthProvider:OauthProvider",
+                "majorVersion": 1,
+                "fields": {
+                    "allowed_grant_types": {
+                        "maxItemsOne": false
+                    },
+                    "prompts": {
+                        "maxItemsOne": false
+                    },
+                    "scopes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_oauth_settings": {
+                "current": "descope:index/oauthSettings:OauthSettings",
+                "majorVersion": 1
+            },
+            "descope_oidc_app": {
+                "current": "descope:index/oidcApp:OidcApp",
+                "majorVersion": 1,
+                "fields": {
+                    "approved_redirect_urls": {
+                        "maxItemsOne": false
+                    },
+                    "claims": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_opentelemetry_connector": {
+                "current": "descope:index/opentelemetryConnector:OpentelemetryConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_otp_settings": {
+                "current": "descope:index/otpSettings:OtpSettings",
+                "majorVersion": 1
+            },
+            "descope_outbound_app": {
+                "current": "descope:index/outboundApp:OutboundApp",
+                "majorVersion": 1,
+                "fields": {
+                    "default_scopes": {
+                        "maxItemsOne": false
+                    },
+                    "prompt": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_passkey_settings": {
+                "current": "descope:index/passkeySettings:PasskeySettings",
+                "majorVersion": 1,
+                "fields": {
+                    "android_fingerprints": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_password_settings": {
+                "current": "descope:index/passwordSettings:PasswordSettings",
+                "majorVersion": 1
+            },
+            "descope_pendo_connector": {
+                "current": "descope:index/pendoConnector:PendoConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_permission": {
+                "current": "descope:index/permission:Permission",
+                "majorVersion": 1
+            },
+            "descope_ping_directory_connector": {
+                "current": "descope:index/pingDirectoryConnector:PingDirectoryConnector",
+                "majorVersion": 1
+            },
+            "descope_postmark_connector": {
+                "current": "descope:index/postmarkConnector:PostmarkConnector",
+                "majorVersion": 1
+            },
             "descope_project": {
                 "current": "descope:index/project:Project",
                 "majorVersion": 1,
                 "fields": {
-                    "admin_portal": {
-                        "fields": {
-                            "widgets": {
-                                "maxItemsOne": false
-                            }
-                        }
-                    },
-                    "applications": {
-                        "fields": {
-                            "oidc_applications": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "approved_redirect_urls": {
-                                            "maxItemsOne": false
-                                        },
-                                        "claims": {
-                                            "maxItemsOne": false
-                                        },
-                                        "permissions": {
-                                            "maxItemsOne": false
-                                        },
-                                        "roles": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "permissions": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "role_mappings": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "saml_applications": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "acs_allowed_callback_urls": {
-                                            "maxItemsOne": false
-                                        },
-                                        "attribute_mapping": {
-                                            "maxItemsOne": false
-                                        },
-                                        "permissions": {
-                                            "maxItemsOne": false
-                                        },
-                                        "roles": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "permissions": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "role_mappings": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "wsfed_applications": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "attribute_mapping": {
-                                            "maxItemsOne": false
-                                        },
-                                        "groups_mapping": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "roles": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "permissions": {
-                                            "maxItemsOne": false
-                                        },
-                                        "reply_allowed_callback_urls": {
-                                            "maxItemsOne": false
-                                        },
-                                        "roles": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "permissions": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "role_mappings": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "attributes": {
-                        "fields": {
-                            "access_key": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "select_options": {
-                                            "maxItemsOne": false
-                                        },
-                                        "widget_authorization": {
-                                            "fields": {
-                                                "edit_permissions": {
-                                                    "maxItemsOne": false
-                                                },
-                                                "view_permissions": {
-                                                    "maxItemsOne": false
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "tenant": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "authorization": {
-                                            "fields": {
-                                                "view_permissions": {
-                                                    "maxItemsOne": false
-                                                }
-                                            }
-                                        },
-                                        "select_options": {
-                                            "maxItemsOne": false
-                                        }
-                                    }
-                                }
-                            },
-                            "user": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "select_options": {
-                                            "maxItemsOne": false
-                                        },
-                                        "widget_authorization": {
-                                            "fields": {
-                                                "edit_permissions": {
-                                                    "maxItemsOne": false
-                                                },
-                                                "view_permissions": {
-                                                    "maxItemsOne": false
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "authentication": {
-                        "fields": {
-                            "enchanted_link": {
-                                "fields": {
-                                    "email_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "magic_link": {
-                                "fields": {
-                                    "email_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    },
-                                    "text_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "oauth": {
-                                "fields": {
-                                    "custom": {
-                                        "elem": {
-                                            "fields": {
-                                                "allowed_grant_types": {
-                                                    "maxItemsOne": false
-                                                },
-                                                "prompts": {
-                                                    "maxItemsOne": false
-                                                },
-                                                "scopes": {
-                                                    "maxItemsOne": false
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "system": {
-                                        "fields": {
-                                            "apple": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "discord": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "facebook": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "github": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "gitlab": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "google": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "linkedin": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "microsoft": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            },
-                                            "slack": {
-                                                "fields": {
-                                                    "allowed_grant_types": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "prompts": {
-                                                        "maxItemsOne": false
-                                                    },
-                                                    "scopes": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "otp": {
-                                "fields": {
-                                    "email_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    },
-                                    "text_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    },
-                                    "voice_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "passkeys": {
-                                "fields": {
-                                    "android_fingerprints": {
-                                        "maxItemsOne": false
-                                    }
-                                }
-                            },
-                            "password": {
-                                "fields": {
-                                    "email_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "sso": {
-                                "fields": {
-                                    "email_service": {
-                                        "fields": {
-                                            "templates": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    },
-                                    "mandatory_user_attributes": {
-                                        "maxItemsOne": false
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "authorization": {
-                        "fields": {
-                            "permissions": {
-                                "maxItemsOne": false
-                            },
-                            "roles": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "permissions": {
-                                            "maxItemsOne": false
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "connectors": {
-                        "fields": {
-                            "abuseipdb": {
-                                "maxItemsOne": false
-                            },
-                            "alloy": {
-                                "maxItemsOne": false
-                            },
-                            "amplitude": {
-                                "maxItemsOne": false
-                            },
-                            "arkose": {
-                                "maxItemsOne": false
-                            },
-                            "audit_webhook": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "aws_s3": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "aws_ses_email_validation": {
-                                "maxItemsOne": false
-                            },
-                            "aws_translate": {
-                                "maxItemsOne": false
-                            },
-                            "bitsight": {
-                                "maxItemsOne": false
-                            },
-                            "coralogix": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "cribl": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "darwinium": {
-                                "maxItemsOne": false
-                            },
-                            "datadog": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "devrev_grow": {
-                                "maxItemsOne": false
-                            },
-                            "docebo": {
-                                "maxItemsOne": false
-                            },
-                            "eight_by_eight_viber": {
-                                "maxItemsOne": false
-                            },
-                            "eight_by_eight_whatsapp": {
-                                "maxItemsOne": false
-                            },
-                            "elephant": {
-                                "maxItemsOne": false
-                            },
-                            "external_token_http": {
-                                "maxItemsOne": false
-                            },
-                            "fingerprint": {
-                                "maxItemsOne": false
-                            },
-                            "fingerprint_descope": {
-                                "maxItemsOne": false
-                            },
-                            "firebase_admin": {
-                                "maxItemsOne": false
-                            },
-                            "forter": {
-                                "maxItemsOne": false
-                            },
-                            "generic_email_gateway": {
-                                "maxItemsOne": false
-                            },
-                            "generic_sms_gateway": {
-                                "maxItemsOne": false
-                            },
-                            "google_cloud_logging": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "google_cloud_translation": {
-                                "maxItemsOne": false
-                            },
-                            "google_maps_places": {
-                                "maxItemsOne": false
-                            },
-                            "groundcover": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "hcaptcha": {
-                                "maxItemsOne": false
-                            },
-                            "hibp": {
-                                "maxItemsOne": false
-                            },
-                            "http": {
-                                "maxItemsOne": false
-                            },
-                            "hubspot": {
-                                "maxItemsOne": false
-                            },
-                            "incode": {
-                                "maxItemsOne": false
-                            },
-                            "intercom": {
-                                "maxItemsOne": false
-                            },
-                            "ldap": {
-                                "maxItemsOne": false
-                            },
-                            "lokalise": {
-                                "maxItemsOne": false
-                            },
-                            "mixpanel": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "mparticle": {
-                                "maxItemsOne": false
-                            },
-                            "newrelic": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "opentelemetry": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "pendo": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "ping_directory": {
-                                "maxItemsOne": false
-                            },
-                            "postmark": {
-                                "maxItemsOne": false
-                            },
-                            "radar": {
-                                "maxItemsOne": false
-                            },
-                            "recaptcha": {
-                                "maxItemsOne": false
-                            },
-                            "recaptcha_enterprise": {
-                                "maxItemsOne": false
-                            },
-                            "recaptcha_v2": {
-                                "maxItemsOne": false
-                            },
-                            "rekognition": {
-                                "maxItemsOne": false
-                            },
-                            "rnd_reassigned": {
-                                "maxItemsOne": false
-                            },
-                            "salesforce": {
-                                "maxItemsOne": false
-                            },
-                            "salesforce_marketing_cloud": {
-                                "maxItemsOne": false
-                            },
-                            "sardine": {
-                                "maxItemsOne": false
-                            },
-                            "scim": {
-                                "maxItemsOne": false
-                            },
-                            "segment": {
-                                "maxItemsOne": false
-                            },
-                            "sendgrid": {
-                                "maxItemsOne": false
-                            },
-                            "ses": {
-                                "maxItemsOne": false
-                            },
-                            "slack": {
-                                "maxItemsOne": false
-                            },
-                            "smartling": {
-                                "maxItemsOne": false
-                            },
-                            "smtp": {
-                                "maxItemsOne": false
-                            },
-                            "snowflake": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "sns": {
-                                "maxItemsOne": false
-                            },
-                            "splunk": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "sql": {
-                                "maxItemsOne": false
-                            },
-                            "sumologic": {
-                                "maxItemsOne": false,
-                                "elem": {
-                                    "fields": {
-                                        "audit_filters": {
-                                            "maxItemsOne": false,
-                                            "elem": {
-                                                "fields": {
-                                                    "values": {
-                                                        "maxItemsOne": false
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "supabase": {
-                                "maxItemsOne": false
-                            },
-                            "telesign": {
-                                "maxItemsOne": false
-                            },
-                            "traceable": {
-                                "maxItemsOne": false
-                            },
-                            "turnstile": {
-                                "maxItemsOne": false
-                            },
-                            "twilio_core": {
-                                "maxItemsOne": false
-                            },
-                            "twilio_verify": {
-                                "maxItemsOne": false
-                            },
-                            "unibeam": {
-                                "maxItemsOne": false
-                            },
-                            "zerobounce": {
-                                "maxItemsOne": false
-                            }
-                        }
-                    },
-                    "invite_settings": {
-                        "fields": {
-                            "email_service": {
-                                "fields": {
-                                    "templates": {
-                                        "maxItemsOne": false
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "jwt_templates": {
-                        "fields": {
-                            "access_key_templates": {
-                                "maxItemsOne": false
-                            },
-                            "user_templates": {
-                                "maxItemsOne": false
-                            }
-                        }
-                    },
-                    "lists": {
-                        "maxItemsOne": false
-                    },
-                    "project_settings": {
-                        "fields": {
-                            "approved_domains": {
-                                "maxItemsOne": false
-                            },
-                            "session_migration": {
-                                "fields": {
-                                    "loginid_matched_attributes": {
-                                        "maxItemsOne": false
-                                    },
-                                    "user_mapping": {
-                                        "maxItemsOne": false
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "tags": {
                         "maxItemsOne": false
                     }
                 }
+            },
+            "descope_project_settings": {
+                "current": "descope:index/projectSettings:ProjectSettings",
+                "majorVersion": 1,
+                "fields": {
+                    "approved_domains": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_radar_connector": {
+                "current": "descope:index/radarConnector:RadarConnector",
+                "majorVersion": 1
+            },
+            "descope_recaptcha_connector": {
+                "current": "descope:index/recaptchaConnector:RecaptchaConnector",
+                "majorVersion": 1
+            },
+            "descope_recaptcha_enterprise_connector": {
+                "current": "descope:index/recaptchaEnterpriseConnector:RecaptchaEnterpriseConnector",
+                "majorVersion": 1
+            },
+            "descope_recaptcha_v2_connector": {
+                "current": "descope:index/recaptchaV2Connector:RecaptchaV2Connector",
+                "majorVersion": 1
+            },
+            "descope_rekognition_connector": {
+                "current": "descope:index/rekognitionConnector:RekognitionConnector",
+                "majorVersion": 1
+            },
+            "descope_rnd_reassigned_connector": {
+                "current": "descope:index/rndReassignedConnector:RndReassignedConnector",
+                "majorVersion": 1
+            },
+            "descope_role": {
+                "current": "descope:index/role:Role",
+                "majorVersion": 1,
+                "fields": {
+                    "permissions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_salesforce_connector": {
+                "current": "descope:index/salesforceConnector:SalesforceConnector",
+                "majorVersion": 1
+            },
+            "descope_salesforce_marketing_cloud_connector": {
+                "current": "descope:index/salesforceMarketingCloudConnector:SalesforceMarketingCloudConnector",
+                "majorVersion": 1
+            },
+            "descope_saml_app": {
+                "current": "descope:index/samlApp:SamlApp",
+                "majorVersion": 1,
+                "fields": {
+                    "acs_allowed_callback_urls": {
+                        "maxItemsOne": false
+                    },
+                    "attribute_mapping": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_sardine_connector": {
+                "current": "descope:index/sardineConnector:SardineConnector",
+                "majorVersion": 1
+            },
+            "descope_scim_connector": {
+                "current": "descope:index/scimConnector:ScimConnector",
+                "majorVersion": 1
+            },
+            "descope_segment_connector": {
+                "current": "descope:index/segmentConnector:SegmentConnector",
+                "majorVersion": 1
+            },
+            "descope_sendgrid_connector": {
+                "current": "descope:index/sendgridConnector:SendgridConnector",
+                "majorVersion": 1
+            },
+            "descope_ses_connector": {
+                "current": "descope:index/sesConnector:SesConnector",
+                "majorVersion": 1
+            },
+            "descope_session_migration": {
+                "current": "descope:index/sessionMigration:SessionMigration",
+                "majorVersion": 1,
+                "fields": {
+                    "loginid_matched_attributes": {
+                        "maxItemsOne": false
+                    },
+                    "user_mapping": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_session_settings": {
+                "current": "descope:index/sessionSettings:SessionSettings",
+                "majorVersion": 1
+            },
+            "descope_slack_connector": {
+                "current": "descope:index/slackConnector:SlackConnector",
+                "majorVersion": 1
+            },
+            "descope_smartling_connector": {
+                "current": "descope:index/smartlingConnector:SmartlingConnector",
+                "majorVersion": 1
+            },
+            "descope_smtp_connector": {
+                "current": "descope:index/smtpConnector:SmtpConnector",
+                "majorVersion": 1
+            },
+            "descope_snowflake_connector": {
+                "current": "descope:index/snowflakeConnector:SnowflakeConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_sns_connector": {
+                "current": "descope:index/snsConnector:SnsConnector",
+                "majorVersion": 1
+            },
+            "descope_splunk_connector": {
+                "current": "descope:index/splunkConnector:SplunkConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_sql_connector": {
+                "current": "descope:index/sqlConnector:SqlConnector",
+                "majorVersion": 1
+            },
+            "descope_sso_settings": {
+                "current": "descope:index/ssoSettings:SsoSettings",
+                "majorVersion": 1,
+                "fields": {
+                    "mandatory_user_attributes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_styles": {
+                "current": "descope:index/styles:Styles",
+                "majorVersion": 1
+            },
+            "descope_sumologic_connector": {
+                "current": "descope:index/sumologicConnector:SumologicConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_supabase_connector": {
+                "current": "descope:index/supabaseConnector:SupabaseConnector",
+                "majorVersion": 1
+            },
+            "descope_telesign_connector": {
+                "current": "descope:index/telesignConnector:TelesignConnector",
+                "majorVersion": 1
+            },
+            "descope_tenant_attribute": {
+                "current": "descope:index/tenantAttribute:TenantAttribute",
+                "majorVersion": 1,
+                "fields": {
+                    "authorization": {
+                        "fields": {
+                            "view_permissions": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "select_options": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_text_template": {
+                "current": "descope:index/textTemplate:TextTemplate",
+                "majorVersion": 1
+            },
+            "descope_totp_settings": {
+                "current": "descope:index/totpSettings:TotpSettings",
+                "majorVersion": 1
+            },
+            "descope_traceable_connector": {
+                "current": "descope:index/traceableConnector:TraceableConnector",
+                "majorVersion": 1
+            },
+            "descope_turnstile_connector": {
+                "current": "descope:index/turnstileConnector:TurnstileConnector",
+                "majorVersion": 1
+            },
+            "descope_twilio_core_connector": {
+                "current": "descope:index/twilioCoreConnector:TwilioCoreConnector",
+                "majorVersion": 1
+            },
+            "descope_twilio_verify_connector": {
+                "current": "descope:index/twilioVerifyConnector:TwilioVerifyConnector",
+                "majorVersion": 1
+            },
+            "descope_unibeam_connector": {
+                "current": "descope:index/unibeamConnector:UnibeamConnector",
+                "majorVersion": 1
+            },
+            "descope_user_attribute": {
+                "current": "descope:index/userAttribute:UserAttribute",
+                "majorVersion": 1,
+                "fields": {
+                    "select_options": {
+                        "maxItemsOne": false
+                    },
+                    "widget_authorization": {
+                        "fields": {
+                            "edit_permissions": {
+                                "maxItemsOne": false
+                            },
+                            "view_permissions": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_voice_template": {
+                "current": "descope:index/voiceTemplate:VoiceTemplate",
+                "majorVersion": 1
+            },
+            "descope_widget": {
+                "current": "descope:index/widget:Widget",
+                "majorVersion": 1
+            },
+            "descope_wsfed_app": {
+                "current": "descope:index/wsfedApp:WsfedApp",
+                "majorVersion": 1,
+                "fields": {
+                    "attribute_mapping": {
+                        "maxItemsOne": false
+                    },
+                    "groups_mapping": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "roles": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "reply_allowed_callback_urls": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_zerobounce_connector": {
+                "current": "descope:index/zerobounceConnector:ZerobounceConnector",
+                "majorVersion": 1
             }
         }
     },
     "auto-settings": {},
     "default-resource-schema-fixups": {
         "resources": {
+            "descope_abuseipdb_connector": {},
             "descope_access_key": {},
+            "descope_access_key_attribute": {
+                "fields": {
+                    "id": {
+                        "name": "accessKeyAttributeId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "accessKeyAttributeId"
+                }
+            },
+            "descope_admin_portal": {},
+            "descope_alloy_connector": {},
+            "descope_amplitude_connector": {},
+            "descope_app_permission": {},
+            "descope_app_role": {},
+            "descope_arkose_connector": {},
+            "descope_audit_webhook_connector": {},
+            "descope_aws_eventbridge_connector": {},
+            "descope_aws_s3_connector": {},
+            "descope_aws_ses_email_validation_connector": {},
+            "descope_aws_translate_connector": {},
+            "descope_bitsight_connector": {},
+            "descope_coralogix_connector": {},
+            "descope_cribl_connector": {},
+            "descope_darwinium_connector": {},
+            "descope_datadog_connector": {},
             "descope_descoper": {},
+            "descope_devrev_grow_connector": {},
+            "descope_docebo_connector": {},
+            "descope_eight_by_eight_viber_connector": {},
+            "descope_eight_by_eight_whatsapp_connector": {},
+            "descope_elephant_connector": {},
+            "descope_email_template": {},
+            "descope_embeddedlink_settings": {},
+            "descope_enchantedlink_settings": {},
             "descope_engine": {},
+            "descope_external_token_http_connector": {},
+            "descope_fga_schema": {},
+            "descope_fingerprint_connector": {},
+            "descope_fingerprint_descope_connector": {},
+            "descope_firebase_admin_connector": {},
+            "descope_flow": {},
+            "descope_forter_connector": {},
+            "descope_generic_email_gateway_connector": {},
+            "descope_generic_sms_gateway_connector": {},
+            "descope_google_cloud_logging_connector": {},
+            "descope_google_cloud_translation_connector": {},
+            "descope_google_maps_places_connector": {},
+            "descope_groundcover_connector": {},
+            "descope_hcaptcha_connector": {},
+            "descope_hibp_connector": {},
+            "descope_http_connector": {},
+            "descope_hubspot_connector": {},
             "descope_inbound_app": {},
+            "descope_incode_connector": {},
+            "descope_intercom_connector": {},
+            "descope_invite_settings": {},
+            "descope_jwt_template": {},
+            "descope_ldap_connector": {},
+            "descope_list": {},
+            "descope_lokalise_connector": {},
+            "descope_magiclink_settings": {},
             "descope_management_key": {},
-            "descope_project": {}
+            "descope_mixpanel_connector": {},
+            "descope_mparticle_connector": {},
+            "descope_newrelic_connector": {},
+            "descope_oauth_provider": {
+                "fields": {
+                    "id": {
+                        "name": "oauthProviderId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "oauthProviderId"
+                }
+            },
+            "descope_oauth_settings": {},
+            "descope_oidc_app": {
+                "fields": {
+                    "id": {
+                        "name": "oidcAppId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "oidcAppId"
+                }
+            },
+            "descope_opentelemetry_connector": {},
+            "descope_otp_settings": {},
+            "descope_outbound_app": {},
+            "descope_passkey_settings": {},
+            "descope_password_settings": {},
+            "descope_pendo_connector": {},
+            "descope_permission": {},
+            "descope_ping_directory_connector": {},
+            "descope_postmark_connector": {},
+            "descope_project": {},
+            "descope_project_settings": {},
+            "descope_radar_connector": {},
+            "descope_recaptcha_connector": {},
+            "descope_recaptcha_enterprise_connector": {},
+            "descope_recaptcha_v2_connector": {},
+            "descope_rekognition_connector": {},
+            "descope_rnd_reassigned_connector": {},
+            "descope_role": {},
+            "descope_salesforce_connector": {},
+            "descope_salesforce_marketing_cloud_connector": {},
+            "descope_saml_app": {
+                "fields": {
+                    "id": {
+                        "name": "samlAppId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "samlAppId"
+                }
+            },
+            "descope_sardine_connector": {},
+            "descope_scim_connector": {},
+            "descope_segment_connector": {},
+            "descope_sendgrid_connector": {},
+            "descope_ses_connector": {},
+            "descope_session_migration": {},
+            "descope_session_settings": {},
+            "descope_slack_connector": {},
+            "descope_smartling_connector": {},
+            "descope_smtp_connector": {},
+            "descope_snowflake_connector": {},
+            "descope_sns_connector": {},
+            "descope_splunk_connector": {},
+            "descope_sql_connector": {},
+            "descope_sso_settings": {},
+            "descope_styles": {},
+            "descope_sumologic_connector": {},
+            "descope_supabase_connector": {},
+            "descope_telesign_connector": {},
+            "descope_tenant_attribute": {
+                "fields": {
+                    "id": {
+                        "name": "tenantAttributeId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "tenantAttributeId"
+                }
+            },
+            "descope_text_template": {},
+            "descope_totp_settings": {},
+            "descope_traceable_connector": {},
+            "descope_turnstile_connector": {},
+            "descope_twilio_core_connector": {},
+            "descope_twilio_verify_connector": {},
+            "descope_unibeam_connector": {},
+            "descope_user_attribute": {
+                "fields": {
+                    "id": {
+                        "name": "userAttributeId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "userAttributeId"
+                }
+            },
+            "descope_voice_template": {},
+            "descope_widget": {},
+            "descope_wsfed_app": {
+                "fields": {
+                    "id": {
+                        "name": "wsfedAppId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "wsfedAppId"
+                }
+            },
+            "descope_zerobounce_connector": {}
         }
     }
 }
