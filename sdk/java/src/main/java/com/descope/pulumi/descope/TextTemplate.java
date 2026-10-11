@@ -34,14 +34,14 @@ public class TextTemplate extends com.pulumi.resources.CustomResource {
         return this.body;
     }
     /**
-     * The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      * 
      */
     @Export(name="method", refs={String.class}, tree="[0]")
     private Output<String> method;
 
     /**
-     * @return The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * @return The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      * 
      */
     public Output<String> method() {

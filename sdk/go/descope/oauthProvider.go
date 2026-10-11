@@ -26,6 +26,8 @@ type OauthProvider struct {
 	CallbackDomain pulumi.StringOutput `pulumi:"callbackDomain"`
 	// Maps OAuth provider claims to Descope user attributes.
 	ClaimMapping pulumi.StringMapOutput `pulumi:"claimMapping"`
+	// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+	ClientAuthMethod pulumi.StringOutput `pulumi:"clientAuthMethod"`
 	// The client ID for the OAuth provider, used to identify the application to the provider.
 	ClientId pulumi.StringOutput `pulumi:"clientId"`
 	// The client secret for the OAuth provider, used to authenticate the application with the provider.
@@ -127,6 +129,8 @@ type oauthProviderState struct {
 	CallbackDomain *string `pulumi:"callbackDomain"`
 	// Maps OAuth provider claims to Descope user attributes.
 	ClaimMapping map[string]string `pulumi:"claimMapping"`
+	// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+	ClientAuthMethod *string `pulumi:"clientAuthMethod"`
 	// The client ID for the OAuth provider, used to identify the application to the provider.
 	ClientId *string `pulumi:"clientId"`
 	// The client secret for the OAuth provider, used to authenticate the application with the provider.
@@ -182,6 +186,8 @@ type OauthProviderState struct {
 	CallbackDomain pulumi.StringPtrInput
 	// Maps OAuth provider claims to Descope user attributes.
 	ClaimMapping pulumi.StringMapInput
+	// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+	ClientAuthMethod pulumi.StringPtrInput
 	// The client ID for the OAuth provider, used to identify the application to the provider.
 	ClientId pulumi.StringPtrInput
 	// The client secret for the OAuth provider, used to authenticate the application with the provider.
@@ -241,6 +247,8 @@ type oauthProviderArgs struct {
 	CallbackDomain *string `pulumi:"callbackDomain"`
 	// Maps OAuth provider claims to Descope user attributes.
 	ClaimMapping map[string]string `pulumi:"claimMapping"`
+	// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+	ClientAuthMethod *string `pulumi:"clientAuthMethod"`
 	// The client ID for the OAuth provider, used to identify the application to the provider.
 	ClientId *string `pulumi:"clientId"`
 	// The client secret for the OAuth provider, used to authenticate the application with the provider.
@@ -297,6 +305,8 @@ type OauthProviderArgs struct {
 	CallbackDomain pulumi.StringPtrInput
 	// Maps OAuth provider claims to Descope user attributes.
 	ClaimMapping pulumi.StringMapInput
+	// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+	ClientAuthMethod pulumi.StringPtrInput
 	// The client ID for the OAuth provider, used to identify the application to the provider.
 	ClientId pulumi.StringPtrInput
 	// The client secret for the OAuth provider, used to authenticate the application with the provider.
@@ -451,6 +461,11 @@ func (o OauthProviderOutput) CallbackDomain() pulumi.StringOutput {
 // Maps OAuth provider claims to Descope user attributes.
 func (o OauthProviderOutput) ClaimMapping() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *OauthProvider) pulumi.StringMapOutput { return v.ClaimMapping }).(pulumi.StringMapOutput)
+}
+
+// The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+func (o OauthProviderOutput) ClientAuthMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v *OauthProvider) pulumi.StringOutput { return v.ClientAuthMethod }).(pulumi.StringOutput)
 }
 
 // The client ID for the OAuth provider, used to identify the application to the provider.

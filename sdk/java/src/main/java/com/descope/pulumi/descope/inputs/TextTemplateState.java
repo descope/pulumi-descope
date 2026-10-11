@@ -31,14 +31,14 @@ public final class TextTemplateState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      * 
      */
     @Import(name="method")
     private @Nullable Output<String> method;
 
     /**
-     * @return The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * @return The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      * 
      */
     public Optional<Output<String>> method() {
@@ -124,7 +124,7 @@ public final class TextTemplateState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param method The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+         * @param method The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
          * 
          * @return builder
          * 
@@ -135,7 +135,7 @@ public final class TextTemplateState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param method The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+         * @param method The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
          * 
          * @return builder
          * 

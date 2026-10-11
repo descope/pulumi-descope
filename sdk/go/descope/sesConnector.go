@@ -40,6 +40,8 @@ type SesConnector struct {
 	SenderEmail pulumi.StringOutput `pulumi:"senderEmail"`
 	// The name shown as the sender of the emails.
 	SenderName pulumi.StringOutput `pulumi:"senderName"`
+	// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 }
 
 // NewSesConnector registers a new resource with the given unique name, arguments, and options.
@@ -116,6 +118,8 @@ type sesConnectorState struct {
 	SenderEmail *string `pulumi:"senderEmail"`
 	// The name shown as the sender of the emails.
 	SenderName *string `pulumi:"senderName"`
+	// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 type SesConnectorState struct {
@@ -143,6 +147,8 @@ type SesConnectorState struct {
 	SenderEmail pulumi.StringPtrInput
 	// The name shown as the sender of the emails.
 	SenderName pulumi.StringPtrInput
+	// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+	Tags pulumi.StringMapInput
 }
 
 func (SesConnectorState) ElementType() reflect.Type {
@@ -174,6 +180,8 @@ type sesConnectorArgs struct {
 	SenderEmail string `pulumi:"senderEmail"`
 	// The name shown as the sender of the emails.
 	SenderName *string `pulumi:"senderName"`
+	// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a SesConnector resource.
@@ -202,6 +210,8 @@ type SesConnectorArgs struct {
 	SenderEmail pulumi.StringInput
 	// The name shown as the sender of the emails.
 	SenderName pulumi.StringPtrInput
+	// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+	Tags pulumi.StringMapInput
 }
 
 func (SesConnectorArgs) ElementType() reflect.Type {
@@ -349,6 +359,11 @@ func (o SesConnectorOutput) SenderEmail() pulumi.StringOutput {
 // The name shown as the sender of the emails.
 func (o SesConnectorOutput) SenderName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SesConnector) pulumi.StringOutput { return v.SenderName }).(pulumi.StringOutput)
+}
+
+// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+func (o SesConnectorOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SesConnector) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 type SesConnectorArrayOutput struct{ *pulumi.OutputState }

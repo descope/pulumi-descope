@@ -47,6 +47,12 @@ namespace Descope.Pulumi.Descope
         public Output<ImmutableDictionary<string, string>> ClaimMapping { get; private set; } = null!;
 
         /// <summary>
+        /// The token endpoint client authentication method: `ClientSecretBasic` (credentials in the HTTP Basic auth header) or `ClientSecretPost` (credentials in the request body). Empty defaults to `ClientSecretPost`.
+        /// </summary>
+        [Output("clientAuthMethod")]
+        public Output<string> ClientAuthMethod { get; private set; } = null!;
+
+        /// <summary>
         /// The client ID for the OAuth provider, used to identify the application to the provider.
         /// </summary>
         [Output("clientId")]
@@ -267,6 +273,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// The token endpoint client authentication method: `ClientSecretBasic` (credentials in the HTTP Basic auth header) or `ClientSecretPost` (credentials in the request body). Empty defaults to `ClientSecretPost`.
+        /// </summary>
+        [Input("clientAuthMethod")]
+        public Input<string>? ClientAuthMethod { get; set; }
+
+        /// <summary>
         /// The client ID for the OAuth provider, used to identify the application to the provider.
         /// </summary>
         [Input("clientId")]
@@ -473,6 +485,12 @@ namespace Descope.Pulumi.Descope
             get => _claimMapping ?? (_claimMapping = new InputMap<string>());
             set => _claimMapping = value;
         }
+
+        /// <summary>
+        /// The token endpoint client authentication method: `ClientSecretBasic` (credentials in the HTTP Basic auth header) or `ClientSecretPost` (credentials in the request body). Empty defaults to `ClientSecretPost`.
+        /// </summary>
+        [Input("clientAuthMethod")]
+        public Input<string>? ClientAuthMethod { get; set; }
 
         /// <summary>
         /// The client ID for the OAuth provider, used to identify the application to the provider.

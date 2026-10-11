@@ -59,6 +59,14 @@ export class EnchantedlinkSettings extends pulumi.CustomResource {
      * The URL to redirect users to after they log in using the enchanted link.
      */
     declare public readonly redirectUrl: pulumi.Output<string>;
+    /**
+     * The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     */
+    declare public readonly textConnectorId: pulumi.Output<string>;
+    /**
+     * The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     */
+    declare public readonly textTemplateId: pulumi.Output<string>;
 
     /**
      * Create a EnchantedlinkSettings resource with the given unique name, arguments, and options.
@@ -79,6 +87,8 @@ export class EnchantedlinkSettings extends pulumi.CustomResource {
             resourceInputs["expirationTime"] = state?.expirationTime;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["redirectUrl"] = state?.redirectUrl;
+            resourceInputs["textConnectorId"] = state?.textConnectorId;
+            resourceInputs["textTemplateId"] = state?.textTemplateId;
         } else {
             const args = argsOrState as EnchantedlinkSettingsArgs | undefined;
             if (args?.projectId === undefined && !opts.urn) {
@@ -90,6 +100,8 @@ export class EnchantedlinkSettings extends pulumi.CustomResource {
             resourceInputs["expirationTime"] = args?.expirationTime;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["redirectUrl"] = args?.redirectUrl;
+            resourceInputs["textConnectorId"] = args?.textConnectorId;
+            resourceInputs["textTemplateId"] = args?.textTemplateId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(EnchantedlinkSettings.__pulumiType, name, resourceInputs, opts);
@@ -124,6 +136,14 @@ export interface EnchantedlinkSettingsState {
      * The URL to redirect users to after they log in using the enchanted link.
      */
     redirectUrl?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     */
+    textConnectorId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     */
+    textTemplateId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -154,4 +174,12 @@ export interface EnchantedlinkSettingsArgs {
      * The URL to redirect users to after they log in using the enchanted link.
      */
     redirectUrl?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     */
+    textConnectorId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     */
+    textTemplateId?: pulumi.Input<string | undefined>;
 }

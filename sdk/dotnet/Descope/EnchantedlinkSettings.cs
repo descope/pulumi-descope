@@ -52,6 +52,18 @@ namespace Descope.Pulumi.Descope
         [Output("redirectUrl")]
         public Output<string> RedirectUrl { get; private set; } = null!;
 
+        /// <summary>
+        /// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+        /// </summary>
+        [Output("textConnectorId")]
+        public Output<string> TextConnectorId { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `Method` set to `Enchantedlink`. An empty value (the default) selects the built-in System template.
+        /// </summary>
+        [Output("textTemplateId")]
+        public Output<string> TextTemplateId { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a EnchantedlinkSettings resource with the given unique name, arguments, and options.
@@ -135,6 +147,18 @@ namespace Descope.Pulumi.Descope
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
 
+        /// <summary>
+        /// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+        /// </summary>
+        [Input("textConnectorId")]
+        public Input<string>? TextConnectorId { get; set; }
+
+        /// <summary>
+        /// The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `Method` set to `Enchantedlink`. An empty value (the default) selects the built-in System template.
+        /// </summary>
+        [Input("textTemplateId")]
+        public Input<string>? TextTemplateId { get; set; }
+
         public EnchantedlinkSettingsArgs()
         {
         }
@@ -178,6 +202,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("redirectUrl")]
         public Input<string>? RedirectUrl { get; set; }
+
+        /// <summary>
+        /// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+        /// </summary>
+        [Input("textConnectorId")]
+        public Input<string>? TextConnectorId { get; set; }
+
+        /// <summary>
+        /// The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `Method` set to `Enchantedlink`. An empty value (the default) selects the built-in System template.
+        /// </summary>
+        [Input("textTemplateId")]
+        public Input<string>? TextTemplateId { get; set; }
 
         public EnchantedlinkSettingsState()
         {
