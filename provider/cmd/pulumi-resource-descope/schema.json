@@ -5797,6 +5797,14 @@
                 "redirectUrl": {
                     "type": "string",
                     "description": "The URL to redirect users to after they log in using the enchanted link.\n"
+                },
+                "textConnectorId": {
+                    "type": "string",
+                    "description": "The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.\n"
+                },
+                "textTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the text template to send to users, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.TextTemplate`\" pulumi-lang-dotnet=\"`descope.TextTemplate`\" pulumi-lang-go=\"`TextTemplate`\" pulumi-lang-python=\"`TextTemplate`\" pulumi-lang-yaml=\"`descope.TextTemplate`\" pulumi-lang-java=\"`descope.TextTemplate`\" pulumi-lang-hcl=\"`descope_text_template`\"\u003e`descope.TextTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
                 }
             },
             "required": [
@@ -5805,7 +5813,9 @@
                 "emailTemplateId",
                 "expirationTime",
                 "projectId",
-                "redirectUrl"
+                "redirectUrl",
+                "textConnectorId",
+                "textTemplateId"
             ],
             "inputProperties": {
                 "disabled": {
@@ -5831,6 +5841,14 @@
                 "redirectUrl": {
                     "type": "string",
                     "description": "The URL to redirect users to after they log in using the enchanted link.\n"
+                },
+                "textConnectorId": {
+                    "type": "string",
+                    "description": "The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.\n"
+                },
+                "textTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the text template to send to users, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.TextTemplate`\" pulumi-lang-dotnet=\"`descope.TextTemplate`\" pulumi-lang-go=\"`TextTemplate`\" pulumi-lang-python=\"`TextTemplate`\" pulumi-lang-yaml=\"`descope.TextTemplate`\" pulumi-lang-java=\"`descope.TextTemplate`\" pulumi-lang-hcl=\"`descope_text_template`\"\u003e`descope.TextTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
                 }
             },
             "requiredInputs": [
@@ -5862,6 +5880,14 @@
                     "redirectUrl": {
                         "type": "string",
                         "description": "The URL to redirect users to after they log in using the enchanted link.\n"
+                    },
+                    "textConnectorId": {
+                        "type": "string",
+                        "description": "The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.\n"
+                    },
+                    "textTemplateId": {
+                        "type": "string",
+                        "description": "The ID of the text template to send to users, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.TextTemplate`\" pulumi-lang-dotnet=\"`descope.TextTemplate`\" pulumi-lang-go=\"`TextTemplate`\" pulumi-lang-python=\"`TextTemplate`\" pulumi-lang-yaml=\"`descope.TextTemplate`\" pulumi-lang-java=\"`descope.TextTemplate`\" pulumi-lang-hcl=\"`descope_text_template`\"\u003e`descope.TextTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
                     }
                 },
                 "type": "object"
@@ -10537,6 +10563,10 @@
                     },
                     "description": "Maps OAuth provider claims to Descope user attributes.\n"
                 },
+                "clientAuthMethod": {
+                    "type": "string",
+                    "description": "The token endpoint client authentication method: \u003cspan pulumi-lang-nodejs=\"`clientSecretBasic`\" pulumi-lang-dotnet=\"`ClientSecretBasic`\" pulumi-lang-go=\"`clientSecretBasic`\" pulumi-lang-python=\"`client_secret_basic`\" pulumi-lang-yaml=\"`clientSecretBasic`\" pulumi-lang-java=\"`clientSecretBasic`\" pulumi-lang-hcl=\"`client_secret_basic`\"\u003e`clientSecretBasic`\u003c/span\u003e (credentials in the HTTP Basic auth header) or \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e (credentials in the request body). Empty defaults to \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e.\n"
+                },
                 "clientId": {
                     "type": "string",
                     "description": "The client ID for the OAuth provider, used to identify the application to the provider.\n"
@@ -10636,6 +10666,7 @@
                 "authorizationEndpoint",
                 "callbackDomain",
                 "claimMapping",
+                "clientAuthMethod",
                 "clientId",
                 "clientSecret",
                 "description",
@@ -10684,6 +10715,10 @@
                         "type": "string"
                     },
                     "description": "Maps OAuth provider claims to Descope user attributes.\n"
+                },
+                "clientAuthMethod": {
+                    "type": "string",
+                    "description": "The token endpoint client authentication method: \u003cspan pulumi-lang-nodejs=\"`clientSecretBasic`\" pulumi-lang-dotnet=\"`ClientSecretBasic`\" pulumi-lang-go=\"`clientSecretBasic`\" pulumi-lang-python=\"`client_secret_basic`\" pulumi-lang-yaml=\"`clientSecretBasic`\" pulumi-lang-java=\"`clientSecretBasic`\" pulumi-lang-hcl=\"`client_secret_basic`\"\u003e`clientSecretBasic`\u003c/span\u003e (credentials in the HTTP Basic auth header) or \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e (credentials in the request body). Empty defaults to \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e.\n"
                 },
                 "clientId": {
                     "type": "string",
@@ -10810,6 +10845,10 @@
                             "type": "string"
                         },
                         "description": "Maps OAuth provider claims to Descope user attributes.\n"
+                    },
+                    "clientAuthMethod": {
+                        "type": "string",
+                        "description": "The token endpoint client authentication method: \u003cspan pulumi-lang-nodejs=\"`clientSecretBasic`\" pulumi-lang-dotnet=\"`ClientSecretBasic`\" pulumi-lang-go=\"`clientSecretBasic`\" pulumi-lang-python=\"`client_secret_basic`\" pulumi-lang-yaml=\"`clientSecretBasic`\" pulumi-lang-java=\"`clientSecretBasic`\" pulumi-lang-hcl=\"`client_secret_basic`\"\u003e`clientSecretBasic`\u003c/span\u003e (credentials in the HTTP Basic auth header) or \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e (credentials in the request body). Empty defaults to \u003cspan pulumi-lang-nodejs=\"`clientSecretPost`\" pulumi-lang-dotnet=\"`ClientSecretPost`\" pulumi-lang-go=\"`clientSecretPost`\" pulumi-lang-python=\"`client_secret_post`\" pulumi-lang-yaml=\"`clientSecretPost`\" pulumi-lang-java=\"`clientSecretPost`\" pulumi-lang-hcl=\"`client_secret_post`\"\u003e`clientSecretPost`\u003c/span\u003e.\n"
                     },
                     "clientId": {
                         "type": "string",
@@ -15054,6 +15093,13 @@
                 "senderName": {
                     "type": "string",
                     "description": "The name shown as the sender of the emails.\n"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.\n"
                 }
             },
             "required": [
@@ -15068,7 +15114,8 @@
                 "roleArn",
                 "secretAccessKey",
                 "senderEmail",
-                "senderName"
+                "senderName",
+                "tags"
             ],
             "inputProperties": {
                 "accessKeyId": {
@@ -15120,6 +15167,13 @@
                 "senderName": {
                     "type": "string",
                     "description": "The name shown as the sender of the emails.\n"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.\n"
                 }
             },
             "requiredInputs": [
@@ -15179,6 +15233,13 @@
                     "senderName": {
                         "type": "string",
                         "description": "The name shown as the sender of the emails.\n"
+                    },
+                    "tags": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.\n"
                     }
                 },
                 "type": "object"
@@ -17662,7 +17723,7 @@
                 },
                 "method": {
                     "type": "string",
-                    "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
+                    "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
                 },
                 "name": {
                     "type": "string",
@@ -17686,7 +17747,7 @@
                 },
                 "method": {
                     "type": "string",
-                    "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
+                    "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
                 },
                 "name": {
                     "type": "string",
@@ -17711,7 +17772,7 @@
                     },
                     "method": {
                         "type": "string",
-                        "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
+                        "description": "The authentication method the text template is used with, e.g. \u003cspan pulumi-lang-nodejs=\"`magiclink`\" pulumi-lang-dotnet=\"`Magiclink`\" pulumi-lang-go=\"`magiclink`\" pulumi-lang-python=\"`magiclink`\" pulumi-lang-yaml=\"`magiclink`\" pulumi-lang-java=\"`magiclink`\" pulumi-lang-hcl=\"`magiclink`\"\u003e`magiclink`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`otp`\" pulumi-lang-dotnet=\"`Otp`\" pulumi-lang-go=\"`otp`\" pulumi-lang-python=\"`otp`\" pulumi-lang-yaml=\"`otp`\" pulumi-lang-java=\"`otp`\" pulumi-lang-hcl=\"`otp`\"\u003e`otp`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`enchantedlink`\" pulumi-lang-dotnet=\"`Enchantedlink`\" pulumi-lang-go=\"`enchantedlink`\" pulumi-lang-python=\"`enchantedlink`\" pulumi-lang-yaml=\"`enchantedlink`\" pulumi-lang-java=\"`enchantedlink`\" pulumi-lang-hcl=\"`enchantedlink`\"\u003e`enchantedlink`\u003c/span\u003e. Changing this value will require the resource to be deleted and recreated.\n"
                     },
                     "name": {
                         "type": "string",
