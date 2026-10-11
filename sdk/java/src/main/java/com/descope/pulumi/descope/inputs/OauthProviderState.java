@@ -96,6 +96,21 @@ public final class OauthProviderState extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
+     * The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     * 
+     */
+    @Import(name="clientAuthMethod")
+    private @Nullable Output<String> clientAuthMethod;
+
+    /**
+     * @return The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     * 
+     */
+    public Optional<Output<String>> clientAuthMethod() {
+        return Optional.ofNullable(this.clientAuthMethod);
+    }
+
+    /**
      * The client ID for the OAuth provider, used to identify the application to the provider.
      * 
      */
@@ -418,6 +433,7 @@ public final class OauthProviderState extends com.pulumi.resources.ResourceArgs 
         this.authorizationEndpoint = $.authorizationEndpoint;
         this.callbackDomain = $.callbackDomain;
         this.claimMapping = $.claimMapping;
+        this.clientAuthMethod = $.clientAuthMethod;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.description = $.description;
@@ -572,6 +588,27 @@ public final class OauthProviderState extends com.pulumi.resources.ResourceArgs 
          */
         public Builder claimMapping(Map<String,String> claimMapping) {
             return claimMapping(Output.of(claimMapping));
+        }
+
+        /**
+         * @param clientAuthMethod The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAuthMethod(@Nullable Output<String> clientAuthMethod) {
+            $.clientAuthMethod = clientAuthMethod;
+            return this;
+        }
+
+        /**
+         * @param clientAuthMethod The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAuthMethod(String clientAuthMethod) {
+            return clientAuthMethod(Output.of(clientAuthMethod));
         }
 
         /**

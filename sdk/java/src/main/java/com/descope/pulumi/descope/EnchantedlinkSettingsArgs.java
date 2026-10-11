@@ -107,6 +107,36 @@ public final class EnchantedlinkSettingsArgs extends com.pulumi.resources.Resour
         return Optional.ofNullable(this.redirectUrl);
     }
 
+    /**
+     * The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     * 
+     */
+    @Import(name="textConnectorId")
+    private @Nullable Output<String> textConnectorId;
+
+    /**
+     * @return The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     * 
+     */
+    public Optional<Output<String>> textConnectorId() {
+        return Optional.ofNullable(this.textConnectorId);
+    }
+
+    /**
+     * The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     * 
+     */
+    @Import(name="textTemplateId")
+    private @Nullable Output<String> textTemplateId;
+
+    /**
+     * @return The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     * 
+     */
+    public Optional<Output<String>> textTemplateId() {
+        return Optional.ofNullable(this.textTemplateId);
+    }
+
     private EnchantedlinkSettingsArgs() {}
 
     private EnchantedlinkSettingsArgs(EnchantedlinkSettingsArgs $) {
@@ -116,6 +146,8 @@ public final class EnchantedlinkSettingsArgs extends com.pulumi.resources.Resour
         this.expirationTime = $.expirationTime;
         this.projectId = $.projectId;
         this.redirectUrl = $.redirectUrl;
+        this.textConnectorId = $.textConnectorId;
+        this.textTemplateId = $.textTemplateId;
     }
 
     public static Builder builder() {
@@ -260,6 +292,48 @@ public final class EnchantedlinkSettingsArgs extends com.pulumi.resources.Resour
          */
         public Builder redirectUrl(String redirectUrl) {
             return redirectUrl(Output.of(redirectUrl));
+        }
+
+        /**
+         * @param textConnectorId The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder textConnectorId(@Nullable Output<String> textConnectorId) {
+            $.textConnectorId = textConnectorId;
+            return this;
+        }
+
+        /**
+         * @param textConnectorId The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder textConnectorId(String textConnectorId) {
+            return textConnectorId(Output.of(textConnectorId));
+        }
+
+        /**
+         * @param textTemplateId The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder textTemplateId(@Nullable Output<String> textTemplateId) {
+            $.textTemplateId = textTemplateId;
+            return this;
+        }
+
+        /**
+         * @param textTemplateId The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder textTemplateId(String textTemplateId) {
+            return textTemplateId(Output.of(textTemplateId));
         }
 
         public EnchantedlinkSettingsArgs build() {

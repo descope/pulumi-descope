@@ -95,6 +95,20 @@ public class OauthProvider extends com.pulumi.resources.CustomResource {
         return this.claimMapping;
     }
     /**
+     * The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     * 
+     */
+    @Export(name="clientAuthMethod", refs={String.class}, tree="[0]")
+    private Output<String> clientAuthMethod;
+
+    /**
+     * @return The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     * 
+     */
+    public Output<String> clientAuthMethod() {
+        return this.clientAuthMethod;
+    }
+    /**
      * The client ID for the OAuth provider, used to identify the application to the provider.
      * 
      */

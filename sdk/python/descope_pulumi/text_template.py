@@ -27,7 +27,7 @@ class TextTemplateArgs:
         The set of arguments for constructing a TextTemplate resource.
 
         :param pulumi.Input[_builtins.str] body: The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
-        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that the text template belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] name: A name for the text template that's unique among the templates of the same authentication method.
         """
@@ -53,7 +53,7 @@ class TextTemplateArgs:
     @pulumi.getter
     def method(self) -> pulumi.Input[_builtins.str]:
         """
-        The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "method")
 
@@ -97,7 +97,7 @@ class _TextTemplateState:
         Input properties used for looking up and filtering TextTemplate resources.
 
         :param pulumi.Input[_builtins.str] body: The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
-        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] name: A name for the text template that's unique among the templates of the same authentication method.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that the text template belongs to. Changing this value will require the resource to be deleted and recreated.
         """
@@ -126,7 +126,7 @@ class _TextTemplateState:
     @pulumi.getter
     def method(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "method")
 
@@ -177,7 +177,7 @@ class TextTemplate(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] body: The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
-        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] name: A name for the text template that's unique among the templates of the same authentication method.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that the text template belongs to. Changing this value will require the resource to be deleted and recreated.
         """
@@ -251,7 +251,7 @@ class TextTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] body: The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
-        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] method: The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] name: A name for the text template that's unique among the templates of the same authentication method.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that the text template belongs to. Changing this value will require the resource to be deleted and recreated.
         """
@@ -277,7 +277,7 @@ class TextTemplate(pulumi.CustomResource):
     @pulumi.getter
     def method(self) -> pulumi.Output[_builtins.str]:
         """
-        The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+        The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "method")
 

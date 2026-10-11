@@ -28,6 +28,7 @@ class OauthProviderArgs:
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -57,6 +58,7 @@ class OauthProviderArgs:
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
+        :param pulumi.Input[_builtins.str] client_auth_method: The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
@@ -89,6 +91,8 @@ class OauthProviderArgs:
             pulumi.set(__self__, "callback_domain", callback_domain)
         if claim_mapping is not None:
             pulumi.set(__self__, "claim_mapping", claim_mapping)
+        if client_auth_method is not None:
+            pulumi.set(__self__, "client_auth_method", client_auth_method)
         if client_id is not None:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
@@ -211,6 +215,18 @@ class OauthProviderArgs:
     @claim_mapping.setter
     def claim_mapping(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "claim_mapping", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
+        """
+        return pulumi.get(self, "client_auth_method")
+
+    @client_auth_method.setter
+    def client_auth_method(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "client_auth_method", value)
 
     @_builtins.property
     @pulumi.getter(name="clientId")
@@ -449,6 +465,7 @@ class _OauthProviderState:
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -478,6 +495,7 @@ class _OauthProviderState:
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
+        :param pulumi.Input[_builtins.str] client_auth_method: The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
@@ -510,6 +528,8 @@ class _OauthProviderState:
             pulumi.set(__self__, "callback_domain", callback_domain)
         if claim_mapping is not None:
             pulumi.set(__self__, "claim_mapping", claim_mapping)
+        if client_auth_method is not None:
+            pulumi.set(__self__, "client_auth_method", client_auth_method)
         if client_id is not None:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
@@ -612,6 +632,18 @@ class _OauthProviderState:
     @claim_mapping.setter
     def claim_mapping(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "claim_mapping", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
+        """
+        return pulumi.get(self, "client_auth_method")
+
+    @client_auth_method.setter
+    def client_auth_method(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "client_auth_method", value)
 
     @_builtins.property
     @pulumi.getter(name="clientId")
@@ -877,6 +909,7 @@ class OauthProvider(pulumi.CustomResource):
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -910,6 +943,7 @@ class OauthProvider(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
+        :param pulumi.Input[_builtins.str] client_auth_method: The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
@@ -962,6 +996,7 @@ class OauthProvider(pulumi.CustomResource):
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -997,6 +1032,7 @@ class OauthProvider(pulumi.CustomResource):
             __props__.__dict__["authorization_endpoint"] = authorization_endpoint
             __props__.__dict__["callback_domain"] = callback_domain
             __props__.__dict__["claim_mapping"] = claim_mapping
+            __props__.__dict__["client_auth_method"] = client_auth_method
             __props__.__dict__["client_id"] = client_id
             __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             __props__.__dict__["description"] = description
@@ -1039,6 +1075,7 @@ class OauthProvider(pulumi.CustomResource):
             authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
             callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
             claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+            client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
             client_id: pulumi.Input[Optional[_builtins.str]] = None,
             client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1072,6 +1109,7 @@ class OauthProvider(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
+        :param pulumi.Input[_builtins.str] client_auth_method: The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
         :param pulumi.Input[_builtins.str] client_id: The client ID for the OAuth provider, used to identify the application to the provider.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for the OAuth provider, used to authenticate the application with the provider.
         :param pulumi.Input[_builtins.str] description: A brief description of the OAuth provider.
@@ -1103,6 +1141,7 @@ class OauthProvider(pulumi.CustomResource):
         __props__.__dict__["authorization_endpoint"] = authorization_endpoint
         __props__.__dict__["callback_domain"] = callback_domain
         __props__.__dict__["claim_mapping"] = claim_mapping
+        __props__.__dict__["client_auth_method"] = client_auth_method
         __props__.__dict__["client_id"] = client_id
         __props__.__dict__["client_secret"] = client_secret
         __props__.__dict__["description"] = description
@@ -1165,6 +1204,14 @@ class OauthProvider(pulumi.CustomResource):
         Maps OAuth provider claims to Descope user attributes.
         """
         return pulumi.get(self, "claim_mapping")
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Output[_builtins.str]:
+        """
+        The token endpoint client authentication method: `client_secret_basic` (credentials in the HTTP Basic auth header) or `client_secret_post` (credentials in the request body). Empty defaults to `client_secret_post`.
+        """
+        return pulumi.get(self, "client_auth_method")
 
     @_builtins.property
     @pulumi.getter(name="clientId")

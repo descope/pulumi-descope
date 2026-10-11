@@ -28,6 +28,10 @@ type EnchantedlinkSettings struct {
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl pulumi.StringOutput `pulumi:"redirectUrl"`
+	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+	TextConnectorId pulumi.StringOutput `pulumi:"textConnectorId"`
+	// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+	TextTemplateId pulumi.StringOutput `pulumi:"textTemplateId"`
 }
 
 // NewEnchantedlinkSettings registers a new resource with the given unique name, arguments, and options.
@@ -75,6 +79,10 @@ type enchantedlinkSettingsState struct {
 	ProjectId *string `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl *string `pulumi:"redirectUrl"`
+	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+	TextConnectorId *string `pulumi:"textConnectorId"`
+	// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+	TextTemplateId *string `pulumi:"textTemplateId"`
 }
 
 type EnchantedlinkSettingsState struct {
@@ -90,6 +98,10 @@ type EnchantedlinkSettingsState struct {
 	ProjectId pulumi.StringPtrInput
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl pulumi.StringPtrInput
+	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+	TextConnectorId pulumi.StringPtrInput
+	// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+	TextTemplateId pulumi.StringPtrInput
 }
 
 func (EnchantedlinkSettingsState) ElementType() reflect.Type {
@@ -109,6 +121,10 @@ type enchantedlinkSettingsArgs struct {
 	ProjectId string `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl *string `pulumi:"redirectUrl"`
+	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+	TextConnectorId *string `pulumi:"textConnectorId"`
+	// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+	TextTemplateId *string `pulumi:"textTemplateId"`
 }
 
 // The set of arguments for constructing a EnchantedlinkSettings resource.
@@ -125,6 +141,10 @@ type EnchantedlinkSettingsArgs struct {
 	ProjectId pulumi.StringInput
 	// The URL to redirect users to after they log in using the enchanted link.
 	RedirectUrl pulumi.StringPtrInput
+	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+	TextConnectorId pulumi.StringPtrInput
+	// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+	TextTemplateId pulumi.StringPtrInput
 }
 
 func (EnchantedlinkSettingsArgs) ElementType() reflect.Type {
@@ -242,6 +262,16 @@ func (o EnchantedlinkSettingsOutput) ProjectId() pulumi.StringOutput {
 // The URL to redirect users to after they log in using the enchanted link.
 func (o EnchantedlinkSettingsOutput) RedirectUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *EnchantedlinkSettings) pulumi.StringOutput { return v.RedirectUrl }).(pulumi.StringOutput)
+}
+
+// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+func (o EnchantedlinkSettingsOutput) TextConnectorId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EnchantedlinkSettings) pulumi.StringOutput { return v.TextConnectorId }).(pulumi.StringOutput)
+}
+
+// The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+func (o EnchantedlinkSettingsOutput) TextTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EnchantedlinkSettings) pulumi.StringOutput { return v.TextTemplateId }).(pulumi.StringOutput)
 }
 
 type EnchantedlinkSettingsArrayOutput struct{ *pulumi.OutputState }
