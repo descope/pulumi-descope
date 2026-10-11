@@ -83,6 +83,10 @@ export class SesConnector extends pulumi.CustomResource {
      * The name shown as the sender of the emails.
      */
     declare public readonly senderName: pulumi.Output<string>;
+    /**
+     * Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string}>;
 
     /**
      * Create a SesConnector resource with the given unique name, arguments, and options.
@@ -109,6 +113,7 @@ export class SesConnector extends pulumi.CustomResource {
             resourceInputs["secretAccessKey"] = state?.secretAccessKey;
             resourceInputs["senderEmail"] = state?.senderEmail;
             resourceInputs["senderName"] = state?.senderName;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as SesConnectorArgs | undefined;
             if (args?.projectId === undefined && !opts.urn) {
@@ -132,6 +137,7 @@ export class SesConnector extends pulumi.CustomResource {
             resourceInputs["secretAccessKey"] = args?.secretAccessKey ? pulumi.secret(args.secretAccessKey) : undefined;
             resourceInputs["senderEmail"] = args?.senderEmail;
             resourceInputs["senderName"] = args?.senderName;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["accessKeyId", "secretAccessKey"] };
@@ -192,6 +198,10 @@ export interface SesConnectorState {
      * The name shown as the sender of the emails.
      */
     senderName?: pulumi.Input<string | undefined>;
+    /**
+     * Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -246,4 +256,8 @@ export interface SesConnectorArgs {
      * The name shown as the sender of the emails.
      */
     senderName?: pulumi.Input<string | undefined>;
+    /**
+     * Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -18,7 +18,7 @@ type TextTemplate struct {
 
 	// The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
 	Body pulumi.StringOutput `pulumi:"body"`
-	// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+	// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 	Method pulumi.StringOutput `pulumi:"method"`
 	// A name for the text template that's unique among the templates of the same authentication method.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -67,7 +67,7 @@ func GetTextTemplate(ctx *pulumi.Context,
 type textTemplateState struct {
 	// The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
 	Body *string `pulumi:"body"`
-	// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+	// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 	Method *string `pulumi:"method"`
 	// A name for the text template that's unique among the templates of the same authentication method.
 	Name *string `pulumi:"name"`
@@ -78,7 +78,7 @@ type textTemplateState struct {
 type TextTemplateState struct {
 	// The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
 	Body pulumi.StringPtrInput
-	// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+	// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 	Method pulumi.StringPtrInput
 	// A name for the text template that's unique among the templates of the same authentication method.
 	Name pulumi.StringPtrInput
@@ -93,7 +93,7 @@ func (TextTemplateState) ElementType() reflect.Type {
 type textTemplateArgs struct {
 	// The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
 	Body string `pulumi:"body"`
-	// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+	// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 	Method string `pulumi:"method"`
 	// A name for the text template that's unique among the templates of the same authentication method.
 	Name *string `pulumi:"name"`
@@ -105,7 +105,7 @@ type textTemplateArgs struct {
 type TextTemplateArgs struct {
 	// The body of text messages sent with this template. Template macros such as `{{.code}}` can be used to insert dynamic values.
 	Body pulumi.StringInput
-	// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+	// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 	Method pulumi.StringInput
 	// A name for the text template that's unique among the templates of the same authentication method.
 	Name pulumi.StringPtrInput
@@ -205,7 +205,7 @@ func (o TextTemplateOutput) Body() pulumi.StringOutput {
 	return o.ApplyT(func(v *TextTemplate) pulumi.StringOutput { return v.Body }).(pulumi.StringOutput)
 }
 
-// The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+// The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
 func (o TextTemplateOutput) Method() pulumi.StringOutput {
 	return o.ApplyT(func(v *TextTemplate) pulumi.StringOutput { return v.Method }).(pulumi.StringOutput)
 }

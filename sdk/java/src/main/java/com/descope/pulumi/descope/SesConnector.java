@@ -12,6 +12,7 @@ import com.pulumi.core.annotations.ResourceType;
 import com.pulumi.core.internal.Codegen;
 import java.lang.String;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Nullable;
 
 /**
@@ -187,6 +188,20 @@ public class SesConnector extends com.pulumi.resources.CustomResource {
      */
     public Output<String> senderName() {
         return this.senderName;
+    }
+    /**
+     * Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     * 
+     */
+    @Export(name="tags", refs={Map.class,String.class}, tree="[0,1,1]")
+    private Output<Map<String,String>> tags;
+
+    /**
+     * @return Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     * 
+     */
+    public Output<Map<String,String>> tags() {
+        return this.tags;
     }
 
     /**

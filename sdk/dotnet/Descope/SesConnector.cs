@@ -88,6 +88,12 @@ namespace Descope.Pulumi.Descope
         [Output("senderName")]
         public Output<string> SenderName { get; private set; } = null!;
 
+        /// <summary>
+        /// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>> Tags { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a SesConnector resource with the given unique name, arguments, and options.
@@ -232,6 +238,18 @@ namespace Descope.Pulumi.Descope
         [Input("senderName")]
         public Input<string>? SenderName { get; set; }
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         public SesConnectorArgs()
         {
         }
@@ -331,6 +349,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("senderName")]
         public Input<string>? SenderName { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         public SesConnectorState()
         {

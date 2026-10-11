@@ -30,7 +30,8 @@ class SesConnectorArgs:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  role_arn: pulumi.Input[Optional[_builtins.str]] = None,
                  secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
-                 sender_name: pulumi.Input[Optional[_builtins.str]] = None):
+                 sender_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a SesConnector resource.
 
@@ -46,6 +47,7 @@ class SesConnectorArgs:
         :param pulumi.Input[_builtins.str] role_arn: The ARN of the IAM role to assume. Required when the authentication type is 'assumeRole'.
         :param pulumi.Input[_builtins.str] secret_access_key: The AWS secret access key. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] sender_name: The name shown as the sender of the emails.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
         """
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "region", region)
@@ -68,6 +70,8 @@ class SesConnectorArgs:
             pulumi.set(__self__, "secret_access_key", secret_access_key)
         if sender_name is not None:
             pulumi.set(__self__, "sender_name", sender_name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -213,6 +217,18 @@ class SesConnectorArgs:
     def sender_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "sender_name", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _SesConnectorState:
@@ -228,7 +244,8 @@ class _SesConnectorState:
                  role_arn: pulumi.Input[Optional[_builtins.str]] = None,
                  secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
                  sender_email: pulumi.Input[Optional[_builtins.str]] = None,
-                 sender_name: pulumi.Input[Optional[_builtins.str]] = None):
+                 sender_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering SesConnector resources.
 
@@ -244,6 +261,7 @@ class _SesConnectorState:
         :param pulumi.Input[_builtins.str] secret_access_key: The AWS secret access key. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] sender_email: The email address that emails are sent from. Make sure it is a verified identity in SES.
         :param pulumi.Input[_builtins.str] sender_name: The name shown as the sender of the emails.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
         """
         if access_key_id is not None:
             pulumi.set(__self__, "access_key_id", access_key_id)
@@ -269,6 +287,8 @@ class _SesConnectorState:
             pulumi.set(__self__, "sender_email", sender_email)
         if sender_name is not None:
             pulumi.set(__self__, "sender_name", sender_name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @_builtins.property
     @pulumi.getter(name="accessKeyId")
@@ -414,6 +434,18 @@ class _SesConnectorState:
     def sender_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "sender_name", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
+        """
+        Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.type_token("descope:index/sesConnector:SesConnector")
 class SesConnector(pulumi.CustomResource):
@@ -433,6 +465,7 @@ class SesConnector(pulumi.CustomResource):
                  secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
                  sender_email: pulumi.Input[Optional[_builtins.str]] = None,
                  sender_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
         Manages a AWS SES connector and its configuration in a Descope project. Send emails through Amazon Simple Email Service (SES).
@@ -452,6 +485,7 @@ class SesConnector(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] secret_access_key: The AWS secret access key. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] sender_email: The email address that emails are sent from. Make sure it is a verified identity in SES.
         :param pulumi.Input[_builtins.str] sender_name: The name shown as the sender of the emails.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
         """
         ...
     @overload
@@ -490,6 +524,7 @@ class SesConnector(pulumi.CustomResource):
                  secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
                  sender_email: pulumi.Input[Optional[_builtins.str]] = None,
                  sender_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -517,6 +552,7 @@ class SesConnector(pulumi.CustomResource):
                 raise TypeError("Missing required property 'sender_email'")
             __props__.__dict__["sender_email"] = sender_email
             __props__.__dict__["sender_name"] = sender_name
+            __props__.__dict__["tags"] = tags
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["accessKeyId", "secretAccessKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SesConnector, __self__).__init__(
@@ -540,7 +576,8 @@ class SesConnector(pulumi.CustomResource):
             role_arn: pulumi.Input[Optional[_builtins.str]] = None,
             secret_access_key: pulumi.Input[Optional[_builtins.str]] = None,
             sender_email: pulumi.Input[Optional[_builtins.str]] = None,
-            sender_name: pulumi.Input[Optional[_builtins.str]] = None) -> 'SesConnector':
+            sender_name: pulumi.Input[Optional[_builtins.str]] = None,
+            tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None) -> 'SesConnector':
         """
         Get an existing SesConnector resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -560,6 +597,7 @@ class SesConnector(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] secret_access_key: The AWS secret access key. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] sender_email: The email address that emails are sent from. Make sure it is a verified identity in SES.
         :param pulumi.Input[_builtins.str] sender_name: The name shown as the sender of the emails.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -577,6 +615,7 @@ class SesConnector(pulumi.CustomResource):
         __props__.__dict__["secret_access_key"] = secret_access_key
         __props__.__dict__["sender_email"] = sender_email
         __props__.__dict__["sender_name"] = sender_name
+        __props__.__dict__["tags"] = tags
         return SesConnector(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -674,4 +713,12 @@ class SesConnector(pulumi.CustomResource):
         The name shown as the sender of the emails.
         """
         return pulumi.get(self, "sender_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Mapping[str, _builtins.str]]:
+        """
+        Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+        """
+        return pulumi.get(self, "tags")
 

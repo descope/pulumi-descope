@@ -58,6 +58,10 @@ export class OauthProvider extends pulumi.CustomResource {
      */
     declare public readonly claimMapping: pulumi.Output<{[key: string]: string}>;
     /**
+     * The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     */
+    declare public readonly clientAuthMethod: pulumi.Output<string>;
+    /**
      * The client ID for the OAuth provider, used to identify the application to the provider.
      */
     declare public readonly clientId: pulumi.Output<string>;
@@ -160,6 +164,7 @@ export class OauthProvider extends pulumi.CustomResource {
             resourceInputs["authorizationEndpoint"] = state?.authorizationEndpoint;
             resourceInputs["callbackDomain"] = state?.callbackDomain;
             resourceInputs["claimMapping"] = state?.claimMapping;
+            resourceInputs["clientAuthMethod"] = state?.clientAuthMethod;
             resourceInputs["clientId"] = state?.clientId;
             resourceInputs["clientSecret"] = state?.clientSecret;
             resourceInputs["description"] = state?.description;
@@ -194,6 +199,7 @@ export class OauthProvider extends pulumi.CustomResource {
             resourceInputs["authorizationEndpoint"] = args?.authorizationEndpoint;
             resourceInputs["callbackDomain"] = args?.callbackDomain;
             resourceInputs["claimMapping"] = args?.claimMapping;
+            resourceInputs["clientAuthMethod"] = args?.clientAuthMethod;
             resourceInputs["clientId"] = args?.clientId;
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["description"] = args?.description;
@@ -247,6 +253,10 @@ export interface OauthProviderState {
      * Maps OAuth provider claims to Descope user attributes.
      */
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     */
+    clientAuthMethod?: pulumi.Input<string | undefined>;
     /**
      * The client ID for the OAuth provider, used to identify the application to the provider.
      */
@@ -357,6 +367,10 @@ export interface OauthProviderArgs {
      * Maps OAuth provider claims to Descope user attributes.
      */
     claimMapping?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * The token endpoint client authentication method: `clientSecretBasic` (credentials in the HTTP Basic auth header) or `clientSecretPost` (credentials in the request body). Empty defaults to `clientSecretPost`.
+     */
+    clientAuthMethod?: pulumi.Input<string | undefined>;
     /**
      * The client ID for the OAuth provider, used to identify the application to the provider.
      */

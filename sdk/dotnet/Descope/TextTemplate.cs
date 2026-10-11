@@ -23,7 +23,7 @@ namespace Descope.Pulumi.Descope
         public Output<string> Body { get; private set; } = null!;
 
         /// <summary>
-        /// The authentication method the text template is used with, e.g. `Magiclink` or `Otp`. Changing this value will require the resource to be deleted and recreated.
+        /// The authentication method the text template is used with, e.g. `Magiclink`, `Otp` or `Enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Output("method")]
         public Output<string> Method { get; private set; } = null!;
@@ -94,7 +94,7 @@ namespace Descope.Pulumi.Descope
         public Input<string> Body { get; set; } = null!;
 
         /// <summary>
-        /// The authentication method the text template is used with, e.g. `Magiclink` or `Otp`. Changing this value will require the resource to be deleted and recreated.
+        /// The authentication method the text template is used with, e.g. `Magiclink`, `Otp` or `Enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("method", required: true)]
         public Input<string> Method { get; set; } = null!;
@@ -126,7 +126,7 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Body { get; set; }
 
         /// <summary>
-        /// The authentication method the text template is used with, e.g. `Magiclink` or `Otp`. Changing this value will require the resource to be deleted and recreated.
+        /// The authentication method the text template is used with, e.g. `Magiclink`, `Otp` or `Enchantedlink`. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("method")]
         public Input<string>? Method { get; set; }

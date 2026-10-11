@@ -7,6 +7,7 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -196,6 +197,21 @@ public final class SesConnectorArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.senderName);
     }
 
+    /**
+     * Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     * 
+     */
+    @Import(name="tags")
+    private @Nullable Output<Map<String,String>> tags;
+
+    /**
+     * @return Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+     * 
+     */
+    public Optional<Output<Map<String,String>>> tags() {
+        return Optional.ofNullable(this.tags);
+    }
+
     private SesConnectorArgs() {}
 
     private SesConnectorArgs(SesConnectorArgs $) {
@@ -211,6 +227,7 @@ public final class SesConnectorArgs extends com.pulumi.resources.ResourceArgs {
         this.secretAccessKey = $.secretAccessKey;
         this.senderEmail = $.senderEmail;
         this.senderName = $.senderName;
+        this.tags = $.tags;
     }
 
     public static Builder builder() {
@@ -481,6 +498,27 @@ public final class SesConnectorArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder senderName(String senderName) {
             return senderName(Output.of(senderName));
+        }
+
+        /**
+         * @param tags Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(@Nullable Output<Map<String,String>> tags) {
+            $.tags = tags;
+            return this;
+        }
+
+        /**
+         * @param tags Custom AWS SES message tags added to every email sent through this connector, as key/value pairs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(Map<String,String> tags) {
+            return tags(Output.of(tags));
         }
 
         public SesConnectorArgs build() {

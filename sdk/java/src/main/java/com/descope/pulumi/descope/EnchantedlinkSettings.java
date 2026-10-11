@@ -104,6 +104,34 @@ public class EnchantedlinkSettings extends com.pulumi.resources.CustomResource {
     public Output<String> redirectUrl() {
         return this.redirectUrl;
     }
+    /**
+     * The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     * 
+     */
+    @Export(name="textConnectorId", refs={String.class}, tree="[0]")
+    private Output<String> textConnectorId;
+
+    /**
+     * @return The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
+     * 
+     */
+    public Output<String> textConnectorId() {
+        return this.textConnectorId;
+    }
+    /**
+     * The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     * 
+     */
+    @Export(name="textTemplateId", refs={String.class}, tree="[0]")
+    private Output<String> textTemplateId;
+
+    /**
+     * @return The ID of the text template to send to users, taken from a `descope.TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
+     * 
+     */
+    public Output<String> textTemplateId() {
+        return this.textTemplateId;
+    }
 
     /**
      *

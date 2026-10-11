@@ -40,7 +40,7 @@ export class TextTemplate extends pulumi.CustomResource {
      */
     declare public readonly body: pulumi.Output<string>;
     /**
-     * The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      */
     declare public readonly method: pulumi.Output<string>;
     /**
@@ -99,7 +99,7 @@ export interface TextTemplateState {
      */
     body?: pulumi.Input<string | undefined>;
     /**
-     * The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      */
     method?: pulumi.Input<string | undefined>;
     /**
@@ -121,7 +121,7 @@ export interface TextTemplateArgs {
      */
     body: pulumi.Input<string>;
     /**
-     * The authentication method the text template is used with, e.g. `magiclink` or `otp`. Changing this value will require the resource to be deleted and recreated.
+     * The authentication method the text template is used with, e.g. `magiclink`, `otp` or `enchantedlink`. Changing this value will require the resource to be deleted and recreated.
      */
     method: pulumi.Input<string>;
     /**
