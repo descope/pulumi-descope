@@ -43,8 +43,8 @@ jobs:
     - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
       id: app-auth
       with:
-        app-id: ${{ secrets.RELEASE_APP_ID }}
-        private-key: ${{ secrets.RELEASE_APP_PEM }}
+        app-id: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_APP_ID }}
+        private-key: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY }}
         owner: ${{ github.repository_owner }}
     - name: Checkout p/examples
       if: matrix.testTarget == 'pulumiExamples'
