@@ -34,8 +34,8 @@ jobs:
       - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: app-auth
         with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PEM }}
+          app-id: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.PULUMI_PROVIDER_AUTOMATION_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - name: Install mise
         uses: jdx/mise-action@c1a019b8d2586943b4dbebc456323b516910e310
