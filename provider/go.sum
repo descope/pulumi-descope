@@ -460,6 +460,10 @@ github.com/opentofu/registry-address/v2 v2.0.0-20250611143131-d0a99bd8acdd h1:YA
 github.com/opentofu/registry-address/v2 v2.0.0-20250611143131-d0a99bd8acdd/go.mod h1:7M92SvuJm1WBriIpa4j0XmruU9pxkgPXmRdc6FfAvAk=
 github.com/opentofu/svchost v0.0.0-20250610175836-86c9e5e3d8c8 h1:J3pmsVB+nGdfNp5HWdEAC96asYgc7S6J724ICrYDCTk=
 github.com/opentofu/svchost v0.0.0-20250610175836-86c9e5e3d8c8/go.mod h1:0kKTcD9hUrbAz41GWp8USa/+OuI8QKirU3qdCWNa3jI=
+github.com/opentracing-contrib/go-grpc v0.1.4 h1:m9VukGYQ+tfcgtwdsifjjFtAoWRqmcbnGhgRQcZ+ZQA=
+github.com/opentracing-contrib/go-grpc v0.1.4/go.mod h1:xP8rkWX/qdQJVTkf01D6Fc002zN0WUMKsvuKg7Tf93E=
+github.com/opentracing-contrib/go-grpc/test v0.0.0-20260727233914-064b4d2bcbbf h1:xfFA+XblffDh3LsTrbSG1MHpmrXsY/9GQI4sbCnY+kI=
+github.com/opentracing-contrib/go-grpc/test v0.0.0-20260727233914-064b4d2bcbbf/go.mod h1:AYO7D5MbvWwD7/UggkDbqyW0pDt7KZyQkHCn4IC2i/w=
 github.com/opentracing/basictracer-go v1.1.0 h1:Oa1fTSBvAl8pa3U+IJYqrKm0NALwH9OsgwOqDv4xJW0=
 github.com/opentracing/basictracer-go v1.1.0/go.mod h1:V2HZueSJEp879yv285Aap1BS69fQMD+MNP1mRs6mBQc=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
@@ -613,8 +617,8 @@ go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.67.0 h1:Oyrsyzu
 go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.67.0/go.mod h1:C2NGBr+kAB4bk3xtMXfZ94gqFDtg/GkI7e9zqGh5Beg=
 go.opentelemetry.io/otel v1.45.0 h1:pdrWmLHofpubmArBv1LgFSv1Z0Ie/ppdZzu+kUN5EeU=
 go.opentelemetry.io/otel v1.45.0/go.mod h1:XZxIqPapzEYnhNSScF5DIqXhm/rYi0FzCe2XddAwZfQ=
-go.opentelemetry.io/otel/bridge/opentracing v1.33.0 h1:eH88qvKdY7ns7Xu6WlJBQNOzZ3MVvBR6tEl2euaYS9w=
-go.opentelemetry.io/otel/bridge/opentracing v1.33.0/go.mod h1:FNai/nhRSn/kHyv+V1zaf/30BU8hO/DXo0MvV0PaUS8=
+go.opentelemetry.io/otel/bridge/opentracing v1.45.0 h1:hFf959SYHZpFc8ZWlqiYlnH3Ke5w4fcWZh7He+CmqXk=
+go.opentelemetry.io/otel/bridge/opentracing v1.45.0/go.mod h1:etOoQoentzhTX0XTaRJmwlsiQx8TXD7mHo76YxNeBYg=
 go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.20.0 h1:rydZ9sxbcFdm/oWrVyfLTjHIygMgv0bEeMd+3B/BvoM=
 go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.20.0/go.mod h1:earQ25dooT0Hhspq59DZ8YCC50jWfOlFEeWoxy/P444=
 go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.45.0 h1:QRefszxJmfPdjXUUm3j6iDzY03mTPXMjqErFqQ67vUg=
