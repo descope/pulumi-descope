@@ -394,7 +394,7 @@ class NewrelicConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict', 'outputs.NewrelicConnectorAuditFilter']]]]] = None,
                  data_center: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -412,7 +412,7 @@ class NewrelicConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: Ingest License Key of the account you want to report data to.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict', 'outputs.NewrelicConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] data_center: The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
@@ -449,7 +449,7 @@ class NewrelicConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict', 'outputs.NewrelicConnectorAuditFilter']]]]] = None,
                  data_center: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -496,7 +496,7 @@ class NewrelicConnector(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             api_key: pulumi.Input[Optional[_builtins.str]] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict', 'outputs.NewrelicConnectorAuditFilter']]]]] = None,
             data_center: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -514,7 +514,7 @@ class NewrelicConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: Ingest License Key of the account you want to report data to.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NewrelicConnectorAuditFilterArgs', 'NewrelicConnectorAuditFilterArgsDict', 'outputs.NewrelicConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] data_center: The New Relic data center the account belongs to. Possible values are: `US`, `EU`, `FedRAMP`. Default is `US`.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.

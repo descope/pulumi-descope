@@ -457,8 +457,8 @@ class OpentelemetryConnector(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict']]]]] = None,
-                 authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict']]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict', 'outputs.OpentelemetryConnectorAuditFilter']]]]] = None,
+                 authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict', 'outputs.OpentelemetryConnectorAuthentication']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
@@ -477,8 +477,8 @@ class OpentelemetryConnector(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
-        :param pulumi.Input[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict', 'outputs.OpentelemetryConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict', 'outputs.OpentelemetryConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.str] endpoint: The OTLP endpoint URL.
@@ -516,8 +516,8 @@ class OpentelemetryConnector(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict']]]]] = None,
-                 authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict']]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict', 'outputs.OpentelemetryConnectorAuditFilter']]]]] = None,
+                 authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict', 'outputs.OpentelemetryConnectorAuthentication']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
@@ -567,8 +567,8 @@ class OpentelemetryConnector(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict']]]]] = None,
-            authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict']]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict', 'outputs.OpentelemetryConnectorAuditFilter']]]]] = None,
+            authentication: pulumi.Input[Optional[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict', 'outputs.OpentelemetryConnectorAuthentication']]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             endpoint: pulumi.Input[Optional[_builtins.str]] = None,
@@ -587,8 +587,8 @@ class OpentelemetryConnector(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
-        :param pulumi.Input[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Sequence[pulumi.Input[Union['OpentelemetryConnectorAuditFilterArgs', 'OpentelemetryConnectorAuditFilterArgsDict', 'outputs.OpentelemetryConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Union['OpentelemetryConnectorAuthenticationArgs', 'OpentelemetryConnectorAuthenticationArgsDict', 'outputs.OpentelemetryConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.str] endpoint: The OTLP endpoint URL.

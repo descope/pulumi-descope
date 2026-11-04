@@ -936,7 +936,7 @@ class HttpConnector(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict', 'outputs.HttpConnectorAuthentication']]] = None,
                  aws_access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -971,7 +971,7 @@ class HttpConnector(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict', 'outputs.HttpConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] aws_access_key_id: The unique AWS access key ID.
         :param pulumi.Input[_builtins.str] aws_auth_type: Apply AWS signature version 4 authentication to the request.
         :param pulumi.Input[_builtins.str] aws_external_id: The external ID to use when assuming the role.
@@ -1025,7 +1025,7 @@ class HttpConnector(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict', 'outputs.HttpConnectorAuthentication']]] = None,
                  aws_access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  aws_external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1106,7 +1106,7 @@ class HttpConnector(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict']]] = None,
+            authentication: pulumi.Input[Optional[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict', 'outputs.HttpConnectorAuthentication']]] = None,
             aws_access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             aws_auth_type: pulumi.Input[Optional[_builtins.str]] = None,
             aws_external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1141,7 +1141,7 @@ class HttpConnector(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Union['HttpConnectorAuthenticationArgs', 'HttpConnectorAuthenticationArgsDict', 'outputs.HttpConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] aws_access_key_id: The unique AWS access key ID.
         :param pulumi.Input[_builtins.str] aws_auth_type: Apply AWS signature version 4 authentication to the request.
         :param pulumi.Input[_builtins.str] aws_external_id: The external ID to use when assuming the role.

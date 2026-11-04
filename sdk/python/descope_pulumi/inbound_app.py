@@ -715,12 +715,12 @@ class InboundApp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_tenants: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -730,10 +730,10 @@ class InboundApp(pulumi.CustomResource):
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict']]]]] = None,
-                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
+                 scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
+                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
                  __props__=None):
         """
         Create a InboundApp resource with the given unique name, props, and options.
@@ -742,12 +742,12 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_tenants: Restricts the app to these tenant IDs. Leave empty to allow all tenants.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -757,10 +757,10 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
-        :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+        :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
         """
         ...
     @overload
@@ -788,12 +788,12 @@ class InboundApp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_tenants: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+                 attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+                 connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -803,10 +803,10 @@ class InboundApp(pulumi.CustomResource):
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+                 permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict']]]]] = None,
-                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None,
+                 scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
+                 session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -853,12 +853,12 @@ class InboundApp(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             allowed_tenants: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]]] = None,
+            attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
             audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             client_id: pulumi.Input[Optional[_builtins.str]] = None,
             client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             client_type: pulumi.Input[Optional[_builtins.str]] = None,
-            connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]]] = None,
+            connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
             default_audience: pulumi.Input[Optional[_builtins.str]] = None,
             deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -868,10 +868,10 @@ class InboundApp(pulumi.CustomResource):
             login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo_url: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]]] = None,
+            permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
-            scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict']]]]] = None,
-            session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']]] = None) -> 'InboundApp':
+            scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
+            session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None) -> 'InboundApp':
         """
         Get an existing InboundApp resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -881,12 +881,12 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_tenants: Restricts the app to these tenant IDs. Leave empty to allow all tenants.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -896,10 +896,10 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
-        :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
+        :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

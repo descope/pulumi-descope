@@ -905,7 +905,7 @@ class OauthProvider(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_grant_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict']]] = None,
+                 apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict', 'outputs.OauthProviderAppleKeyGenerator']]] = None,
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -920,7 +920,7 @@ class OauthProvider(pulumi.CustomResource):
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  manage_provider_tokens: pulumi.Input[Optional[_builtins.bool]] = None,
                  merge_user_accounts: pulumi.Input[Optional[_builtins.bool]] = None,
-                 native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict']]] = None,
+                 native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict', 'outputs.OauthProviderNativeAppleKeyGenerator']]] = None,
                  native_client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  native_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  oauth_provider_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -939,7 +939,7 @@ class OauthProvider(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        :param pulumi.Input[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict']] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
+        :param pulumi.Input[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict', 'outputs.OauthProviderAppleKeyGenerator']] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -954,7 +954,7 @@ class OauthProvider(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
-        :param pulumi.Input[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict']] native_apple_key_generator: The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+        :param pulumi.Input[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict', 'outputs.OauthProviderNativeAppleKeyGenerator']] native_apple_key_generator: The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
         :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[_builtins.str] oauth_provider_id: The OAuth provider to configure. Use one of the built-in system providers (`apple`, `discord`, `facebook`, `github`, `gitlab`, `google`, `linkedin`, `microsoft`, `slack`) or any other value to define a custom OAuth/OIDC provider. Changing this value will require the resource to be deleted and recreated.
@@ -992,7 +992,7 @@ class OauthProvider(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_grant_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict']]] = None,
+                 apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict', 'outputs.OauthProviderAppleKeyGenerator']]] = None,
                  authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -1007,7 +1007,7 @@ class OauthProvider(pulumi.CustomResource):
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  manage_provider_tokens: pulumi.Input[Optional[_builtins.bool]] = None,
                  merge_user_accounts: pulumi.Input[Optional[_builtins.bool]] = None,
-                 native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict']]] = None,
+                 native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict', 'outputs.OauthProviderNativeAppleKeyGenerator']]] = None,
                  native_client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  native_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  oauth_provider_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1071,7 +1071,7 @@ class OauthProvider(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             allowed_grant_types: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict']]] = None,
+            apple_key_generator: pulumi.Input[Optional[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict', 'outputs.OauthProviderAppleKeyGenerator']]] = None,
             authorization_endpoint: pulumi.Input[Optional[_builtins.str]] = None,
             callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
             claim_mapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -1086,7 +1086,7 @@ class OauthProvider(pulumi.CustomResource):
             logo: pulumi.Input[Optional[_builtins.str]] = None,
             manage_provider_tokens: pulumi.Input[Optional[_builtins.bool]] = None,
             merge_user_accounts: pulumi.Input[Optional[_builtins.bool]] = None,
-            native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict']]] = None,
+            native_apple_key_generator: pulumi.Input[Optional[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict', 'outputs.OauthProviderNativeAppleKeyGenerator']]] = None,
             native_client_id: pulumi.Input[Optional[_builtins.str]] = None,
             native_client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             oauth_provider_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1105,7 +1105,7 @@ class OauthProvider(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_grant_types: The type of grants (`authorization_code` or `implicit`) to allow when requesting access tokens from the OAuth provider.
-        :param pulumi.Input[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict']] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
+        :param pulumi.Input[Union['OauthProviderAppleKeyGeneratorArgs', 'OauthProviderAppleKeyGeneratorArgsDict', 'outputs.OauthProviderAppleKeyGenerator']] apple_key_generator: The apple key generator object describing how to create a dynamic apple client secret for applications.
         :param pulumi.Input[_builtins.str] authorization_endpoint: The URL that users are redirected to for authorization with the OAuth provider.
         :param pulumi.Input[_builtins.str] callback_domain: Use a custom domain in your OAuth verification screen.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] claim_mapping: Maps OAuth provider claims to Descope user attributes.
@@ -1120,7 +1120,7 @@ class OauthProvider(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] logo: The URL of the logo associated with the OAuth provider.
         :param pulumi.Input[_builtins.bool] manage_provider_tokens: Whether to enable provider token management for this OAuth provider.
         :param pulumi.Input[_builtins.bool] merge_user_accounts: Whether to merge existing user accounts with new ones created through OAuth authentication.
-        :param pulumi.Input[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict']] native_apple_key_generator: The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
+        :param pulumi.Input[Union['OauthProviderNativeAppleKeyGeneratorArgs', 'OauthProviderNativeAppleKeyGeneratorArgsDict', 'outputs.OauthProviderNativeAppleKeyGenerator']] native_apple_key_generator: The apple key generator object describing how to create a dynamic native apple client secret for mobile apps.
         :param pulumi.Input[_builtins.str] native_client_id: The client ID for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[_builtins.str] native_client_secret: The client secret for the OAuth provider, used for Sign in with Apple in mobile apps.
         :param pulumi.Input[_builtins.str] oauth_provider_id: The OAuth provider to configure. Use one of the built-in system providers (`apple`, `discord`, `facebook`, `github`, `gitlab`, `google`, `linkedin`, `microsoft`, `slack`) or any other value to define a custom OAuth/OIDC provider. Changing this value will require the resource to be deleted and recreated.

@@ -392,8 +392,8 @@ class AuditWebhookConnector(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict']]]]] = None,
-                 authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict']]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict', 'outputs.AuditWebhookConnectorAuditFilter']]]]] = None,
+                 authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict', 'outputs.AuditWebhookConnectorAuthentication']]] = None,
                  base_url: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -410,8 +410,8 @@ class AuditWebhookConnector(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
-        :param pulumi.Input[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict', 'outputs.AuditWebhookConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict', 'outputs.AuditWebhookConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] base_url: The base URL to fetch
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
@@ -447,8 +447,8 @@ class AuditWebhookConnector(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict']]]]] = None,
-                 authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict']]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict', 'outputs.AuditWebhookConnectorAuditFilter']]]]] = None,
+                 authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict', 'outputs.AuditWebhookConnectorAuthentication']]] = None,
                  base_url: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -494,8 +494,8 @@ class AuditWebhookConnector(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict']]]]] = None,
-            authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict']]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict', 'outputs.AuditWebhookConnectorAuditFilter']]]]] = None,
+            authentication: pulumi.Input[Optional[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict', 'outputs.AuditWebhookConnectorAuthentication']]] = None,
             base_url: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -512,8 +512,8 @@ class AuditWebhookConnector(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
-        :param pulumi.Input[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AuditWebhookConnectorAuditFilterArgs', 'AuditWebhookConnectorAuditFilterArgsDict', 'outputs.AuditWebhookConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Union['AuditWebhookConnectorAuthenticationArgs', 'AuditWebhookConnectorAuthenticationArgsDict', 'outputs.AuditWebhookConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] base_url: The base URL to fetch
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.

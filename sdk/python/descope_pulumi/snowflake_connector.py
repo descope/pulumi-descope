@@ -712,7 +712,7 @@ class SnowflakeConnector(pulumi.CustomResource):
                  account_identifier: pulumi.Input[Optional[_builtins.str]] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict', 'outputs.SnowflakeConnectorAuditFilter']]]]] = None,
                  audit_table: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  database: pulumi.Input[Optional[_builtins.str]] = None,
@@ -740,7 +740,7 @@ class SnowflakeConnector(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] account_identifier: Overrides the account identifier derived from the Account URL. Only needed for PrivateLink or legacy region locators.
         :param pulumi.Input[_builtins.str] api_key: A Snowflake Programmatic Access Token (PAT). The token's user must have CREATE DATABASE privileges, unless Self Provision is enabled - in which case it only needs write access to the table you created.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict', 'outputs.SnowflakeConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] audit_table: The table to write audit events to, exactly as stored (unquoted names are uppercased: audit*logs->AUDIT*LOGS). Run SHOW TABLES to check. Defaults to `DESCOPE_AUDIT_LOGS`.
         :param pulumi.Input[_builtins.str] auth_type: How Descope authenticates to the Snowflake SQL API. See the connector documentation for the setup steps of each method.
         :param pulumi.Input[_builtins.str] database: The Snowflake database, exactly as stored (unquoted names are uppercased: descope*db->DESCOPE*DB). Run SHOW DATABASES to check. Defaults to `DESCOPE_EXPORT_DB`.
@@ -787,7 +787,7 @@ class SnowflakeConnector(pulumi.CustomResource):
                  account_identifier: pulumi.Input[Optional[_builtins.str]] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict', 'outputs.SnowflakeConnectorAuditFilter']]]]] = None,
                  audit_table: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  database: pulumi.Input[Optional[_builtins.str]] = None,
@@ -860,7 +860,7 @@ class SnowflakeConnector(pulumi.CustomResource):
             account_identifier: pulumi.Input[Optional[_builtins.str]] = None,
             api_key: pulumi.Input[Optional[_builtins.str]] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict', 'outputs.SnowflakeConnectorAuditFilter']]]]] = None,
             audit_table: pulumi.Input[Optional[_builtins.str]] = None,
             auth_type: pulumi.Input[Optional[_builtins.str]] = None,
             database: pulumi.Input[Optional[_builtins.str]] = None,
@@ -888,7 +888,7 @@ class SnowflakeConnector(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] account_identifier: Overrides the account identifier derived from the Account URL. Only needed for PrivateLink or legacy region locators.
         :param pulumi.Input[_builtins.str] api_key: A Snowflake Programmatic Access Token (PAT). The token's user must have CREATE DATABASE privileges, unless Self Provision is enabled - in which case it only needs write access to the table you created.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SnowflakeConnectorAuditFilterArgs', 'SnowflakeConnectorAuditFilterArgsDict', 'outputs.SnowflakeConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] audit_table: The table to write audit events to, exactly as stored (unquoted names are uppercased: audit*logs->AUDIT*LOGS). Run SHOW TABLES to check. Defaults to `DESCOPE_AUDIT_LOGS`.
         :param pulumi.Input[_builtins.str] auth_type: How Descope authenticates to the Snowflake SQL API. See the connector documentation for the setup steps of each method.
         :param pulumi.Input[_builtins.str] database: The Snowflake database, exactly as stored (unquoted names are uppercased: descope*db->DESCOPE*DB). Run SHOW DATABASES to check. Defaults to `DESCOPE_EXPORT_DB`.

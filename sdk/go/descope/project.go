@@ -75,14 +75,14 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewMagiclinkSettings(ctx, "example", &descope.MagiclinkSettingsArgs{
-//				ProjectId:      example.ID(),
+//				ProjectId:      example.ID().ToIDOutput().ToStringOutput(),
 //				ExpirationTime: pulumi.String("1 hour"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = descope.NewPasswordSettings(ctx, "example", &descope.PasswordSettingsArgs{
-//				ProjectId:    example.ID(),
+//				ProjectId:    example.ID().ToIDOutput().ToStringOutput(),
 //				Lock:         pulumi.Bool(true),
 //				LockAttempts: pulumi.Int(5),
 //				MinLength:    pulumi.Int(12),
@@ -119,7 +119,7 @@ import (
 //				return err
 //			}
 //			readData, err := descope.NewPermission(ctx, "read_data", &descope.PermissionArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("read:data"),
 //				Description: pulumi.String("Read access to application data"),
 //			})
@@ -127,7 +127,7 @@ import (
 //				return err
 //			}
 //			writeData, err := descope.NewPermission(ctx, "write_data", &descope.PermissionArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("write:data"),
 //				Description: pulumi.String("Write access to application data"),
 //			})
@@ -135,7 +135,7 @@ import (
 //				return err
 //			}
 //			adminPanel, err := descope.NewPermission(ctx, "admin_panel", &descope.PermissionArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("admin:panel"),
 //				Description: pulumi.String("Access to the admin panel"),
 //			})
@@ -143,7 +143,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewRole(ctx, "viewer", &descope.RoleArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("viewer"),
 //				Description: pulumi.String("Can read data"),
 //				Permissions: pulumi.StringArray{
@@ -154,7 +154,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewRole(ctx, "editor", &descope.RoleArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("editor"),
 //				Description: pulumi.String("Can read and write data"),
 //				Permissions: pulumi.StringArray{
@@ -166,7 +166,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewRole(ctx, "admin", &descope.RoleArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("admin"),
 //				Description: pulumi.String("Full access"),
 //				Permissions: pulumi.StringArray{
@@ -208,7 +208,7 @@ import (
 //			}
 //			// Generic HTTP webhook with bearer token auth
 //			_, err = descope.NewHttpConnector(ctx, "eligibility", &descope.HttpConnectorArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("User Eligibility Check"),
 //				Description: pulumi.String("Checks if a new user is allowed to register"),
 //				BaseUrl:     pulumi.String("https://api.example.com"),
@@ -221,7 +221,7 @@ import (
 //			}
 //			// SendGrid for email delivery
 //			_, err = descope.NewSendgridConnector(ctx, "email", &descope.SendgridConnectorArgs{
-//				ProjectId:   example.ID(),
+//				ProjectId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("Transactional Email"),
 //				SenderEmail: pulumi.String("noreply@example.com"),
 //				SenderName:  pulumi.String("My App"),
@@ -232,7 +232,7 @@ import (
 //			}
 //			// Twilio for SMS OTP
 //			_, err = descope.NewTwilioCoreConnector(ctx, "sms", &descope.TwilioCoreConnectorArgs{
-//				ProjectId:  example.ID(),
+//				ProjectId:  example.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("SMS OTP"),
 //				AccountSid: pulumi.Any(twilioAccountSid),
 //				FromPhone:  pulumi.String("+15551234567"),
@@ -273,7 +273,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewProjectSettings(ctx, "example", &descope.ProjectSettingsArgs{
-//				ProjectId: example.ID(),
+//				ProjectId: example.ID().ToIDOutput().ToStringOutput(),
 //				AppUrl:    pulumi.String("https://app.example.com"),
 //				ApprovedDomains: pulumi.StringArray{
 //					pulumi.String("example.com"),
@@ -284,7 +284,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewSessionSettings(ctx, "example", &descope.SessionSettingsArgs{
-//				ProjectId:              example.ID(),
+//				ProjectId:              example.ID().ToIDOutput().ToStringOutput(),
 //				RefreshTokenExpiration: pulumi.String("3 weeks"),
 //				SessionTokenExpiration: pulumi.String("15 minutes"),
 //				RefreshTokenRotation:   pulumi.Bool(true),
@@ -295,7 +295,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewInviteSettings(ctx, "example", &descope.InviteSettingsArgs{
-//				ProjectId:         example.ID(),
+//				ProjectId:         example.ID().ToIDOutput().ToStringOutput(),
 //				RequireInvitation: pulumi.Bool(true),
 //				InviteUrl:         pulumi.String("https://app.example.com/invite"),
 //			})
@@ -333,7 +333,7 @@ import (
 //				return err
 //			}
 //			web, err := descope.NewOidcApp(ctx, "web", &descope.OidcAppArgs{
-//				ProjectId:    example.ID(),
+//				ProjectId:    example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("My Web App"),
 //				Description:  pulumi.String("Primary web application"),
 //				LoginPageUrl: pulumi.String("https://app.example.com/login"),
@@ -342,7 +342,7 @@ import (
 //				return err
 //			}
 //			readReports, err := descope.NewAppPermission(ctx, "read_reports", &descope.AppPermissionArgs{
-//				ProjectId: example.ID(),
+//				ProjectId: example.ID().ToIDOutput().ToStringOutput(),
 //				AppId:     web.OidcAppId,
 //				Name:      pulumi.String("read:reports"),
 //			})
@@ -350,11 +350,11 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewAppRole(ctx, "analyst", &descope.AppRoleArgs{
-//				ProjectId: example.ID(),
+//				ProjectId: example.ID().ToIDOutput().ToStringOutput(),
 //				AppId:     web.OidcAppId,
 //				Name:      pulumi.String("analyst"),
 //				PermissionIds: pulumi.StringArray{
-//					readReports.ID(),
+//					readReports.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -391,7 +391,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]string{
 //				"tier":   "@user.customAttributes.subscriptionTier",
 //				"org_id": "@user.tenants[0].tenantId",
 //			})
@@ -400,7 +400,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = descope.NewJwtTemplate(ctx, "app_claims", &descope.JwtTemplateArgs{
-//				ProjectId:              example.ID(),
+//				ProjectId:              example.ID().ToIDOutput().ToStringOutput(),
 //				Name:                   pulumi.String("app-claims"),
 //				Description:            pulumi.String("Adds subscription tier and org context to user JWTs"),
 //				Type:                   pulumi.String("user"),
@@ -442,7 +442,7 @@ import (
 //				return err
 //			}
 //			_, err = descope.NewSsoSettings(ctx, "example", &descope.SsoSettingsArgs{
-//				ProjectId:          example.ID(),
+//				ProjectId:          example.ID().ToIDOutput().ToStringOutput(),
 //				MergeUsers:         pulumi.Bool(true),
 //				AllowOverrideRoles: pulumi.Bool(true),
 //				MandatoryUserAttributes: descope.SsoSettingsMandatoryUserAttributeArray{

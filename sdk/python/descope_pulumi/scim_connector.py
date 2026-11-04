@@ -391,7 +391,7 @@ class ScimConnector(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict', 'outputs.ScimConnectorAuthentication']]] = None,
                  base_url: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -409,7 +409,7 @@ class ScimConnector(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict']] authentication: The authentication used when calling the SCIM server.
+        :param pulumi.Input[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict', 'outputs.ScimConnectorAuthentication']] authentication: The authentication used when calling the SCIM server.
         :param pulumi.Input[_builtins.str] base_url: The base URL of the SCIM server that users and groups are provisioned to.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
@@ -446,7 +446,7 @@ class ScimConnector(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict', 'outputs.ScimConnectorAuthentication']]] = None,
                  base_url: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -495,7 +495,7 @@ class ScimConnector(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict']]] = None,
+            authentication: pulumi.Input[Optional[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict', 'outputs.ScimConnectorAuthentication']]] = None,
             base_url: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -513,7 +513,7 @@ class ScimConnector(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict']] authentication: The authentication used when calling the SCIM server.
+        :param pulumi.Input[Union['ScimConnectorAuthenticationArgs', 'ScimConnectorAuthenticationArgsDict', 'outputs.ScimConnectorAuthentication']] authentication: The authentication used when calling the SCIM server.
         :param pulumi.Input[_builtins.str] base_url: The base URL of the SCIM server that users and groups are provisioned to.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.

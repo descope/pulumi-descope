@@ -594,14 +594,14 @@ class SsoSettings(pulumi.CustomResource):
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
-                 mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict']]]]] = None,
+                 mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
                  merge_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  require_groups_attribute_name: pulumi.Input[Optional[_builtins.bool]] = None,
                  require_sso_domains: pulumi.Input[Optional[_builtins.bool]] = None,
-                 sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict']]] = None,
+                 sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict', 'outputs.SsoSettingsSsoSuiteSettings']]] = None,
                  __props__=None):
         """
         Manages the project-level SSO authentication settings. This is a singleton resource, and its id is always the project ID.
@@ -618,14 +618,14 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
         :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
         :param pulumi.Input[_builtins.bool] require_sso_domains: When configuring SSO an SSO domain must be specified.
-        :param pulumi.Input[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict']] sso_suite_settings: Configuration block for the SSO Suite.
+        :param pulumi.Input[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict', 'outputs.SsoSettingsSsoSuiteSettings']] sso_suite_settings: Configuration block for the SSO Suite.
         """
         ...
     @overload
@@ -661,14 +661,14 @@ class SsoSettings(pulumi.CustomResource):
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
-                 mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict']]]]] = None,
+                 mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
                  merge_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  require_groups_attribute_name: pulumi.Input[Optional[_builtins.bool]] = None,
                  require_sso_domains: pulumi.Input[Optional[_builtins.bool]] = None,
-                 sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict']]] = None,
+                 sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict', 'outputs.SsoSettingsSsoSuiteSettings']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -716,14 +716,14 @@ class SsoSettings(pulumi.CustomResource):
             email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
             limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
-            mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict']]]]] = None,
+            mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
             mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
             merge_users: pulumi.Input[Optional[_builtins.bool]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
             require_groups_attribute_name: pulumi.Input[Optional[_builtins.bool]] = None,
             require_sso_domains: pulumi.Input[Optional[_builtins.bool]] = None,
-            sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict']]] = None) -> 'SsoSettings':
+            sso_suite_settings: pulumi.Input[Optional[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict', 'outputs.SsoSettingsSsoSuiteSettings']]] = None) -> 'SsoSettings':
         """
         Get an existing SsoSettings resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -740,14 +740,14 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
         :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
         :param pulumi.Input[_builtins.bool] require_sso_domains: When configuring SSO an SSO domain must be specified.
-        :param pulumi.Input[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict']] sso_suite_settings: Configuration block for the SSO Suite.
+        :param pulumi.Input[Union['SsoSettingsSsoSuiteSettingsArgs', 'SsoSettingsSsoSuiteSettingsArgsDict', 'outputs.SsoSettingsSsoSuiteSettings']] sso_suite_settings: Configuration block for the SSO Suite.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

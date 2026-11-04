@@ -553,13 +553,13 @@ class WsfedApp(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict']]]]] = None,
+                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict', 'outputs.WsfedAppAttributeMapping']]]]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  error_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
-                 groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict']]]]] = None,
+                 groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict', 'outputs.WsfedAppGroupsMapping']]]]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  logout_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -576,13 +576,13 @@ class WsfedApp(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict', 'outputs.WsfedAppAttributeMapping']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the application from being accidentally destroyed or replaced. Destroying or replacing a federated application breaks the service provider's configured integration, so these applications are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the WS-Federation application.
         :param pulumi.Input[_builtins.bool] disabled: Whether the application should be enabled or disabled.
         :param pulumi.Input[_builtins.str] error_redirect_url: The URL to redirect to when an error occurs.
         :param pulumi.Input[_builtins.bool] force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict']]]] groups_mappings: A list of group mappings from Descope roles to WS-Fed groups.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict', 'outputs.WsfedAppGroupsMapping']]]] groups_mappings: A list of group mappings from Descope roles to WS-Fed groups.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param pulumi.Input[_builtins.str] logo: A logo for the WS-Federation application. Should be a hosted image URL.
         :param pulumi.Input[_builtins.str] logout_redirect_url: The URL to redirect to after logout.
@@ -618,13 +618,13 @@ class WsfedApp(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict']]]]] = None,
+                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict', 'outputs.WsfedAppAttributeMapping']]]]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  error_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
-                 groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict']]]]] = None,
+                 groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict', 'outputs.WsfedAppGroupsMapping']]]]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  logout_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -671,13 +671,13 @@ class WsfedApp(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict']]]]] = None,
+            attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict', 'outputs.WsfedAppAttributeMapping']]]]] = None,
             deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             error_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
             force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
-            groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict']]]]] = None,
+            groups_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict', 'outputs.WsfedAppGroupsMapping']]]]] = None,
             login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo: pulumi.Input[Optional[_builtins.str]] = None,
             logout_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -694,13 +694,13 @@ class WsfedApp(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppAttributeMappingArgs', 'WsfedAppAttributeMappingArgsDict', 'outputs.WsfedAppAttributeMapping']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to WS-Fed assertion attributes.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the application from being accidentally destroyed or replaced. Destroying or replacing a federated application breaks the service provider's configured integration, so these applications are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the WS-Federation application.
         :param pulumi.Input[_builtins.bool] disabled: Whether the application should be enabled or disabled.
         :param pulumi.Input[_builtins.str] error_redirect_url: The URL to redirect to when an error occurs.
         :param pulumi.Input[_builtins.bool] force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict']]]] groups_mappings: A list of group mappings from Descope roles to WS-Fed groups.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['WsfedAppGroupsMappingArgs', 'WsfedAppGroupsMappingArgsDict', 'outputs.WsfedAppGroupsMapping']]]] groups_mappings: A list of group mappings from Descope roles to WS-Fed groups.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param pulumi.Input[_builtins.str] logo: A logo for the WS-Federation application. Should be a hosted image URL.
         :param pulumi.Input[_builtins.str] logout_redirect_url: The URL to redirect to after logout.

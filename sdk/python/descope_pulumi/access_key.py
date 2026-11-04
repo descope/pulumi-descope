@@ -463,7 +463,7 @@ class AccessKey(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
-                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict', 'outputs.AccessKeyTenant']]]]] = None,
                  __props__=None):
         """
         Create a AccessKey resource with the given unique name, props, and options.
@@ -480,7 +480,7 @@ class AccessKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] roles: A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
         :param pulumi.Input[_builtins.str] status: The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]] tenants: A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict', 'outputs.AccessKeyTenant']]]] tenants: A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
         """
         ...
     @overload
@@ -516,7 +516,7 @@ class AccessKey(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
-                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None,
+                 tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict', 'outputs.AccessKeyTenant']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -569,7 +569,7 @@ class AccessKey(pulumi.CustomResource):
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             roles: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None,
-            tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]]] = None) -> 'AccessKey':
+            tenants: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict', 'outputs.AccessKeyTenant']]]]] = None) -> 'AccessKey':
         """
         Get an existing AccessKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -590,7 +590,7 @@ class AccessKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this access key belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] roles: A list of project-level roles to grant to the access key. Cannot be used together with `tenants`.
         :param pulumi.Input[_builtins.str] status: The status of the access key. Must be either `active` or `inactive`. A new access key cannot be created with an `inactive` status.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict']]]] tenants: A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AccessKeyTenantArgs', 'AccessKeyTenantArgsDict', 'outputs.AccessKeyTenant']]]] tenants: A list of tenants to associate with the access key, each with its own set of roles. Cannot be used together with `roles`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
