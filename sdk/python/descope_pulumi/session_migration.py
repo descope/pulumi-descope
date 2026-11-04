@@ -368,7 +368,7 @@ class SessionMigration(pulumi.CustomResource):
                  issuer: pulumi.Input[Optional[_builtins.str]] = None,
                  loginid_matched_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict']]]]] = None,
+                 user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict', 'outputs.SessionMigrationUserMapping']]]]] = None,
                  user_sync_type: pulumi.Input[Optional[_builtins.str]] = None,
                  vendor: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -385,7 +385,7 @@ class SessionMigration(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] issuer: The issuer from the vendor's authentication configuration. Only used with the `okta` vendor.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] loginid_matched_attributes: Which attributes from the vendor's user should be used to match the Descope user's login ID (e.g. `email`).
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict']]]] user_mappings: A list of attribute mappings from the external vendor's user to Descope user attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict', 'outputs.SessionMigrationUserMapping']]]] user_mappings: A list of attribute mappings from the external vendor's user to Descope user attributes.
         :param pulumi.Input[_builtins.str] user_sync_type: The type of user synchronization to perform, either `matchOnly` to only match existing users or `jit` for just-in-time provisioning.
         :param pulumi.Input[_builtins.str] vendor: The vendor to migrate user sessions from, either `auth0` or `okta`. Session migration is disabled when this isn't set.
         """
@@ -421,7 +421,7 @@ class SessionMigration(pulumi.CustomResource):
                  issuer: pulumi.Input[Optional[_builtins.str]] = None,
                  loginid_matched_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict']]]]] = None,
+                 user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict', 'outputs.SessionMigrationUserMapping']]]]] = None,
                  user_sync_type: pulumi.Input[Optional[_builtins.str]] = None,
                  vendor: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -464,7 +464,7 @@ class SessionMigration(pulumi.CustomResource):
             issuer: pulumi.Input[Optional[_builtins.str]] = None,
             loginid_matched_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
-            user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict']]]]] = None,
+            user_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict', 'outputs.SessionMigrationUserMapping']]]]] = None,
             user_sync_type: pulumi.Input[Optional[_builtins.str]] = None,
             vendor: pulumi.Input[Optional[_builtins.str]] = None) -> 'SessionMigration':
         """
@@ -481,7 +481,7 @@ class SessionMigration(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] issuer: The issuer from the vendor's authentication configuration. Only used with the `okta` vendor.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] loginid_matched_attributes: Which attributes from the vendor's user should be used to match the Descope user's login ID (e.g. `email`).
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict']]]] user_mappings: A list of attribute mappings from the external vendor's user to Descope user attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SessionMigrationUserMappingArgs', 'SessionMigrationUserMappingArgsDict', 'outputs.SessionMigrationUserMapping']]]] user_mappings: A list of attribute mappings from the external vendor's user to Descope user attributes.
         :param pulumi.Input[_builtins.str] user_sync_type: The type of user synchronization to perform, either `matchOnly` to only match existing users or `jit` for just-in-time provisioning.
         :param pulumi.Input[_builtins.str] vendor: The vendor to migrate user sessions from, either `auth0` or `okta`. Session migration is disabled when this isn't set.
         """

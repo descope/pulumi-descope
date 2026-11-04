@@ -583,7 +583,7 @@ class AwsEventbridgeConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict', 'outputs.AwsEventbridgeConnectorAuditFilter']]]]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  detail_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -607,7 +607,7 @@ class AwsEventbridgeConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] access_key_id: The unique AWS access key ID.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict', 'outputs.AwsEventbridgeConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] auth_type: The authentication type to use.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] detail_type: The detail type for the EventBridge event. This is a free-form string used to identify the event type, e.g. `descope.audit.event`.
@@ -650,7 +650,7 @@ class AwsEventbridgeConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict', 'outputs.AwsEventbridgeConnectorAuditFilter']]]]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  detail_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -715,7 +715,7 @@ class AwsEventbridgeConnector(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict', 'outputs.AwsEventbridgeConnectorAuditFilter']]]]] = None,
             auth_type: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             detail_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -739,7 +739,7 @@ class AwsEventbridgeConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] access_key_id: The unique AWS access key ID.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AwsEventbridgeConnectorAuditFilterArgs', 'AwsEventbridgeConnectorAuditFilterArgsDict', 'outputs.AwsEventbridgeConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] auth_type: The authentication type to use.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] detail_type: The detail type for the EventBridge event. This is a free-form string used to identify the event type, e.g. `descope.audit.event`.

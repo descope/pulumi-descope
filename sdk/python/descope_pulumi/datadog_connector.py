@@ -426,7 +426,7 @@ class DatadogConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict', 'outputs.DatadogConnectorAuditFilter']]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  mask_pii: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -445,7 +445,7 @@ class DatadogConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: The unique Datadog organization key.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict', 'outputs.DatadogConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.bool] mask_pii: Whether to mask personally identifiable information in the logs.
@@ -483,7 +483,7 @@ class DatadogConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict', 'outputs.DatadogConnectorAuditFilter']]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  mask_pii: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -532,7 +532,7 @@ class DatadogConnector(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             api_key: pulumi.Input[Optional[_builtins.str]] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict', 'outputs.DatadogConnectorAuditFilter']]]]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             mask_pii: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -551,7 +551,7 @@ class DatadogConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_key: The unique Datadog organization key.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DatadogConnectorAuditFilterArgs', 'DatadogConnectorAuditFilterArgsDict', 'outputs.DatadogConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.bool] mask_pii: Whether to mask personally identifiable information in the logs.

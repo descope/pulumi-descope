@@ -231,7 +231,7 @@ class TenantAttribute(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict']]] = None,
+                 authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict', 'outputs.TenantAttributeAuthorization']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -244,7 +244,7 @@ class TenantAttribute(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict']] authorization: Determines the permissions users are required to have to access this attribute. Tenant attributes are view-only and do not support edit permissions.
+        :param pulumi.Input[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict', 'outputs.TenantAttributeAuthorization']] authorization: Determines the permissions users are required to have to access this attribute. Tenant attributes are view-only and do not support edit permissions.
         :param pulumi.Input[_builtins.str] name: The display name of the attribute. This value is called `Display Name` in the Descope console.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this tenant attribute belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".
@@ -276,7 +276,7 @@ class TenantAttribute(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict']]] = None,
+                 authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict', 'outputs.TenantAttributeAuthorization']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -313,7 +313,7 @@ class TenantAttribute(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict']]] = None,
+            authorization: pulumi.Input[Optional[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict', 'outputs.TenantAttributeAuthorization']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -326,7 +326,7 @@ class TenantAttribute(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict']] authorization: Determines the permissions users are required to have to access this attribute. Tenant attributes are view-only and do not support edit permissions.
+        :param pulumi.Input[Union['TenantAttributeAuthorizationArgs', 'TenantAttributeAuthorizationArgsDict', 'outputs.TenantAttributeAuthorization']] authorization: Determines the permissions users are required to have to access this attribute. Tenant attributes are view-only and do not support edit permissions.
         :param pulumi.Input[_builtins.str] name: The display name of the attribute. This value is called `Display Name` in the Descope console.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this tenant attribute belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".

@@ -586,17 +586,17 @@ class SamlApp(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  acs_allowed_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict']]]]] = None,
+                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict', 'outputs.SamlAppAttributeMapping']]]]] = None,
                  default_relay_state: pulumi.Input[Optional[_builtins.str]] = None,
                  default_signature_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict']]] = None,
+                 dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict', 'outputs.SamlAppDynamicConfiguration']]] = None,
                  force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
-                 manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict']]] = None,
+                 manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict', 'outputs.SamlAppManualConfiguration']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  saml_app_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -610,17 +610,17 @@ class SamlApp(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] acs_allowed_callback_urls: A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to SAML assertion attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict', 'outputs.SamlAppAttributeMapping']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to SAML assertion attributes.
         :param pulumi.Input[_builtins.str] default_relay_state: The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
         :param pulumi.Input[_builtins.str] default_signature_algorithm: The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the application from being accidentally destroyed or replaced. Destroying or replacing a federated application breaks the service provider's configured integration, so these applications are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the SAML application.
         :param pulumi.Input[_builtins.bool] disabled: Whether the application should be enabled or disabled.
-        :param pulumi.Input[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict']] dynamic_configuration: Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
+        :param pulumi.Input[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict', 'outputs.SamlAppDynamicConfiguration']] dynamic_configuration: Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
         :param pulumi.Input[_builtins.bool] force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param pulumi.Input[_builtins.str] logo: A logo for the SAML application. Should be a hosted image URL.
-        :param pulumi.Input[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict']] manual_configuration: Connection details are provided manually. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
+        :param pulumi.Input[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict', 'outputs.SamlAppManualConfiguration']] manual_configuration: Connection details are provided manually. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
         :param pulumi.Input[_builtins.str] name: A name for the SAML application.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] saml_app_id: An optional identifier for the application. When omitted, an identifier is generated by the server. Can only be set when the application is created, and changing it will require the resource to be deleted and recreated.
@@ -653,17 +653,17 @@ class SamlApp(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  acs_allowed_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict']]]]] = None,
+                 attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict', 'outputs.SamlAppAttributeMapping']]]]] = None,
                  default_relay_state: pulumi.Input[Optional[_builtins.str]] = None,
                  default_signature_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict']]] = None,
+                 dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict', 'outputs.SamlAppDynamicConfiguration']]] = None,
                  force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
-                 manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict']]] = None,
+                 manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict', 'outputs.SamlAppManualConfiguration']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  saml_app_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -708,17 +708,17 @@ class SamlApp(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             acs_allowed_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict']]]]] = None,
+            attribute_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict', 'outputs.SamlAppAttributeMapping']]]]] = None,
             default_relay_state: pulumi.Input[Optional[_builtins.str]] = None,
             default_signature_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
             deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict']]] = None,
+            dynamic_configuration: pulumi.Input[Optional[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict', 'outputs.SamlAppDynamicConfiguration']]] = None,
             force_authentication: pulumi.Input[Optional[_builtins.bool]] = None,
             login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo: pulumi.Input[Optional[_builtins.str]] = None,
-            manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict']]] = None,
+            manual_configuration: pulumi.Input[Optional[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict', 'outputs.SamlAppManualConfiguration']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             saml_app_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -732,17 +732,17 @@ class SamlApp(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] acs_allowed_callback_urls: A list of allowed ACS callback URLS. This configuration is used when the default ACS URL value is unreachable. Supports wildcards.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to SAML assertion attributes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SamlAppAttributeMappingArgs', 'SamlAppAttributeMappingArgsDict', 'outputs.SamlAppAttributeMapping']]]] attribute_mappings: A list of attribute mappings from Descope user attributes to SAML assertion attributes.
         :param pulumi.Input[_builtins.str] default_relay_state: The default relay state. When using IdP-initiated authentication, this value may be used as a URL to a resource in the Service Provider.
         :param pulumi.Input[_builtins.str] default_signature_algorithm: The signature algorithm used to sign SAML responses. Choose one of `""` (default, SHA-1) or `"sha256"` (SHA-256). Only applies to IdP-initiated flows — SP-initiated flows use the algorithm specified in the SP's SAML request.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the application from being accidentally destroyed or replaced. Destroying or replacing a federated application breaks the service provider's configured integration, so these applications are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the SAML application.
         :param pulumi.Input[_builtins.bool] disabled: Whether the application should be enabled or disabled.
-        :param pulumi.Input[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict']] dynamic_configuration: Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
+        :param pulumi.Input[Union['SamlAppDynamicConfigurationArgs', 'SamlAppDynamicConfigurationArgsDict', 'outputs.SamlAppDynamicConfiguration']] dynamic_configuration: Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
         :param pulumi.Input[_builtins.bool] force_authentication: This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
         :param pulumi.Input[_builtins.str] logo: A logo for the SAML application. Should be a hosted image URL.
-        :param pulumi.Input[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict']] manual_configuration: Connection details are provided manually. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
+        :param pulumi.Input[Union['SamlAppManualConfigurationArgs', 'SamlAppManualConfigurationArgsDict', 'outputs.SamlAppManualConfiguration']] manual_configuration: Connection details are provided manually. Exactly one of `dynamic_configuration` and `manual_configuration` must be set.
         :param pulumi.Input[_builtins.str] name: A name for the SAML application.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] saml_app_id: An optional identifier for the application. When omitted, an identifier is generated by the server. Can only be set when the application is created, and changing it will require the resource to be deleted and recreated.

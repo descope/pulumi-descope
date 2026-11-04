@@ -172,7 +172,7 @@ class AdminPortal(pulumi.CustomResource):
                  enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  style_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict']]]]] = None,
+                 widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict', 'outputs.AdminPortalWidget']]]]] = None,
                  __props__=None):
         """
         Manages the project's admin portal configuration. This is a singleton resource, and its id is always the project ID.
@@ -183,7 +183,7 @@ class AdminPortal(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] enabled: Whether the Admin Portal is enabled. At least one widget must be listed in the `widgets` attribute when this is set to `true`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this configuration belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] style_id: The name of the style the Admin Portal uses. Styles are defined in the project theme, which can be managed with the `Styles` resource. When left empty, the default style is used.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict']]]] widgets: The widgets to show in the Admin Portal, in display order. The `widget_id` values usually reference widgets managed with the `Widget` resource, e.g., `widget_id = descope_widget.mywidget.widget_id`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict', 'outputs.AdminPortalWidget']]]] widgets: The widgets to show in the Admin Portal, in display order. The `widget_id` values usually reference widgets managed with the `Widget` resource, e.g., `widget_id = descope_widget.mywidget.widget_id`.
         """
         ...
     @overload
@@ -213,7 +213,7 @@ class AdminPortal(pulumi.CustomResource):
                  enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  style_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict']]]]] = None,
+                 widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict', 'outputs.AdminPortalWidget']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -242,7 +242,7 @@ class AdminPortal(pulumi.CustomResource):
             enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             style_id: pulumi.Input[Optional[_builtins.str]] = None,
-            widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict']]]]] = None) -> 'AdminPortal':
+            widgets: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict', 'outputs.AdminPortalWidget']]]]] = None) -> 'AdminPortal':
         """
         Get an existing AdminPortal resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -253,7 +253,7 @@ class AdminPortal(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] enabled: Whether the Admin Portal is enabled. At least one widget must be listed in the `widgets` attribute when this is set to `true`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this configuration belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] style_id: The name of the style the Admin Portal uses. Styles are defined in the project theme, which can be managed with the `Styles` resource. When left empty, the default style is used.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict']]]] widgets: The widgets to show in the Admin Portal, in display order. The `widget_id` values usually reference widgets managed with the `Widget` resource, e.g., `widget_id = descope_widget.mywidget.widget_id`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AdminPortalWidgetArgs', 'AdminPortalWidgetArgsDict', 'outputs.AdminPortalWidget']]]] widgets: The widgets to show in the Admin Portal, in display order. The `widget_id` values usually reference widgets managed with the `Widget` resource, e.g., `widget_id = descope_widget.mywidget.widget_id`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

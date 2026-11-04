@@ -424,7 +424,7 @@ class GenericSmsGatewayConnector(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict', 'outputs.GenericSmsGatewayConnectorAuthentication']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  headers: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -443,7 +443,7 @@ class GenericSmsGatewayConnector(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict', 'outputs.GenericSmsGatewayConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] headers: The headers to send with the request
@@ -481,7 +481,7 @@ class GenericSmsGatewayConnector(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict']]] = None,
+                 authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict', 'outputs.GenericSmsGatewayConnectorAuthentication']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  headers: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -530,7 +530,7 @@ class GenericSmsGatewayConnector(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict']]] = None,
+            authentication: pulumi.Input[Optional[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict', 'outputs.GenericSmsGatewayConnectorAuthentication']]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             headers: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -549,7 +549,7 @@ class GenericSmsGatewayConnector(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict']] authentication: Authentication Information
+        :param pulumi.Input[Union['GenericSmsGatewayConnectorAuthenticationArgs', 'GenericSmsGatewayConnectorAuthenticationArgsDict', 'outputs.GenericSmsGatewayConnectorAuthentication']] authentication: Authentication Information
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] headers: The headers to send with the request

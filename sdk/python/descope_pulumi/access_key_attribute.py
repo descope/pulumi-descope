@@ -236,7 +236,7 @@ class AccessKeyAttribute(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
-                 widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict']]] = None,
+                 widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict', 'outputs.AccessKeyAttributeWidgetAuthorization']]] = None,
                  __props__=None):
         """
         Manages a single access key custom attribute definition in a Descope project.
@@ -249,7 +249,7 @@ class AccessKeyAttribute(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this access key attribute belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date", "monthday". Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
+        :param pulumi.Input[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict', 'outputs.AccessKeyAttributeWidgetAuthorization']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
         """
         ...
     @overload
@@ -281,7 +281,7 @@ class AccessKeyAttribute(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
-                 widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict']]] = None,
+                 widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict', 'outputs.AccessKeyAttributeWidgetAuthorization']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -318,7 +318,7 @@ class AccessKeyAttribute(pulumi.CustomResource):
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None,
-            widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict']]] = None) -> 'AccessKeyAttribute':
+            widget_authorization: pulumi.Input[Optional[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict', 'outputs.AccessKeyAttributeWidgetAuthorization']]] = None) -> 'AccessKeyAttribute':
         """
         Get an existing AccessKeyAttribute resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -331,7 +331,7 @@ class AccessKeyAttribute(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that this access key attribute belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date", "monthday". Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
+        :param pulumi.Input[Union['AccessKeyAttributeWidgetAuthorizationArgs', 'AccessKeyAttributeWidgetAuthorizationArgsDict', 'outputs.AccessKeyAttributeWidgetAuthorization']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

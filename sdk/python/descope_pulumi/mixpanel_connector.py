@@ -522,7 +522,7 @@ class MixpanelConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict', 'outputs.MixpanelConnectorAuditFilter']]]]] = None,
                  config_project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -544,7 +544,7 @@ class MixpanelConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_secret: The Mixpanel API secret key used for authenticating API requests.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict', 'outputs.MixpanelConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] config_project_id: The unique identifier for your Mixpanel project.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
@@ -585,7 +585,7 @@ class MixpanelConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict', 'outputs.MixpanelConnectorAuditFilter']]]]] = None,
                  config_project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -640,7 +640,7 @@ class MixpanelConnector(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             api_secret: pulumi.Input[Optional[_builtins.str]] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict', 'outputs.MixpanelConnectorAuditFilter']]]]] = None,
             config_project_id: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -662,7 +662,7 @@ class MixpanelConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_secret: The Mixpanel API secret key used for authenticating API requests.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['MixpanelConnectorAuditFilterArgs', 'MixpanelConnectorAuditFilterArgsDict', 'outputs.MixpanelConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] config_project_id: The unique identifier for your Mixpanel project.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.

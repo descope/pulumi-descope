@@ -236,7 +236,7 @@ class UserAttribute(pulumi.CustomResource):
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_attribute_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict']]] = None,
+                 widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict', 'outputs.UserAttributeWidgetAuthorization']]] = None,
                  __props__=None):
         """
         Manages a single user custom attribute definition in a Descope project.
@@ -249,7 +249,7 @@ class UserAttribute(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date", "monthday". Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] user_attribute_id: The immutable machine name that identifies the attribute. This value is called `Machine Name` in the Descope console. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
+        :param pulumi.Input[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict', 'outputs.UserAttributeWidgetAuthorization']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
         """
         ...
     @overload
@@ -281,7 +281,7 @@ class UserAttribute(pulumi.CustomResource):
                  select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  user_attribute_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict']]] = None,
+                 widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict', 'outputs.UserAttributeWidgetAuthorization']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -318,7 +318,7 @@ class UserAttribute(pulumi.CustomResource):
             select_options: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None,
             user_attribute_id: pulumi.Input[Optional[_builtins.str]] = None,
-            widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict']]] = None) -> 'UserAttribute':
+            widget_authorization: pulumi.Input[Optional[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict', 'outputs.UserAttributeWidgetAuthorization']]] = None) -> 'UserAttribute':
         """
         Get an existing UserAttribute resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -331,7 +331,7 @@ class UserAttribute(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] select_options: The list of options to choose from when the attribute type is "singleselect" or "multiselect".
         :param pulumi.Input[_builtins.str] type: The type of the attribute. Choose one of "string", "number", "boolean", "singleselect", "multiselect", "date", "monthday". Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] user_attribute_id: The immutable machine name that identifies the attribute. This value is called `Machine Name` in the Descope console. Changing this value will require the resource to be deleted and recreated.
-        :param pulumi.Input[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
+        :param pulumi.Input[Union['UserAttributeWidgetAuthorizationArgs', 'UserAttributeWidgetAuthorizationArgsDict', 'outputs.UserAttributeWidgetAuthorization']] widget_authorization: Determines the permissions users are required to have to access this attribute in the user management widget.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

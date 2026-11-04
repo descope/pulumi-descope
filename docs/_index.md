@@ -296,7 +296,7 @@ public class App {
 {{% /choosable %}}
 {{% choosable language hcl %}}
 ```hcl
-pulumi {
+terraform {
   required_providers {
     descope = {
       source = "pulumi/descope"
@@ -305,6 +305,9 @@ pulumi {
 }
 
 resource "descope_project" "example" {
+  lifecycle {
+    create_before_destroy = true
+  }
   name        = "my-app"
   environment = "production"
   tags        = ["prod"]

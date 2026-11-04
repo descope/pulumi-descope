@@ -171,7 +171,7 @@ class Descoper(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  phone: pulumi.Input[Optional[_builtins.str]] = None,
-                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
+                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict', 'outputs.DescoperRbac']]] = None,
                  __props__=None):
         """
         Manages a Descope console user and their access control settings. Console users (referred to as "Descopers") are team members who access the [Descope console](https://app.descope.com) to manage projects.
@@ -266,7 +266,7 @@ class Descoper(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
         :param pulumi.Input[_builtins.str] phone: The phone number of the Descope console user.
-        :param pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
+        :param pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict', 'outputs.DescoperRbac']] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
         """
         ...
     @overload
@@ -380,7 +380,7 @@ class Descoper(pulumi.CustomResource):
                  email: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  phone: pulumi.Input[Optional[_builtins.str]] = None,
-                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None,
+                 rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict', 'outputs.DescoperRbac']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -411,7 +411,7 @@ class Descoper(pulumi.CustomResource):
             email: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             phone: pulumi.Input[Optional[_builtins.str]] = None,
-            rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']]] = None) -> 'Descoper':
+            rbac: pulumi.Input[Optional[Union['DescoperRbacArgs', 'DescoperRbacArgsDict', 'outputs.DescoperRbac']]] = None) -> 'Descoper':
         """
         Get an existing Descoper resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -422,7 +422,7 @@ class Descoper(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email: The email address of the Descope console user.
         :param pulumi.Input[_builtins.str] name: The display name of the Descope console user.
         :param pulumi.Input[_builtins.str] phone: The phone number of the Descope console user.
-        :param pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict']] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
+        :param pulumi.Input[Union['DescoperRbacArgs', 'DescoperRbacArgsDict', 'outputs.DescoperRbac']] rbac: Access control settings for the Descope console user. This defines the permissions granted to the user, either as a company admin or for specific projects or project tags.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

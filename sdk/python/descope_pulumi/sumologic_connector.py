@@ -297,7 +297,7 @@ class SumologicConnector(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict', 'outputs.SumologicConnectorAuditFilter']]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  http_source_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -312,7 +312,7 @@ class SumologicConnector(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict', 'outputs.SumologicConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.str] http_source_url: The URL associated with an HTTP Hosted collector
@@ -346,7 +346,7 @@ class SumologicConnector(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict']]]]] = None,
+                 audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict', 'outputs.SumologicConnectorAuditFilter']]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  http_source_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -387,7 +387,7 @@ class SumologicConnector(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             audit_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict']]]]] = None,
+            audit_filters: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict', 'outputs.SumologicConnectorAuditFilter']]]]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             http_source_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -402,7 +402,7 @@ class SumologicConnector(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.bool] audit_enabled: Whether to enable streaming of audit events.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SumologicConnectorAuditFilterArgs', 'SumologicConnectorAuditFilterArgsDict', 'outputs.SumologicConnectorAuditFilter']]]] audit_filters: Specify which events will be sent to the external audit service (including tenant selection).
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.bool] disabled: Whether the connector is disabled. This can be used to temporarily stop a connector from executing without fully deleting it.
         :param pulumi.Input[_builtins.str] http_source_url: The URL associated with an HTTP Hosted collector

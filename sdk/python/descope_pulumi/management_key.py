@@ -253,7 +253,7 @@ class ManagementKey(pulumi.CustomResource):
                  expire_time: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -330,7 +330,7 @@ class ManagementKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permitted_ips: A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
-        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] status: The status of the management key. Must be either `active` or `inactive`.
         """
         ...
@@ -426,7 +426,7 @@ class ManagementKey(pulumi.CustomResource):
                  expire_time: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+                 rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -463,7 +463,7 @@ class ManagementKey(pulumi.CustomResource):
             expire_time: pulumi.Input[Optional[_builtins.int]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             permitted_ips: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']]] = None,
+            rebac: pulumi.Input[Optional[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None) -> 'ManagementKey':
         """
         Get an existing ManagementKey resource's state with the given name, id, and optional extra
@@ -477,7 +477,7 @@ class ManagementKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permitted_ips: A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
-        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] status: The status of the management key. Must be either `active` or `inactive`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
