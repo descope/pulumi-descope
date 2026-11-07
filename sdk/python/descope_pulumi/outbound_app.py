@@ -27,6 +27,7 @@ class OutboundAppArgs:
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 dcr_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -37,7 +38,8 @@ class OutboundAppArgs:
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url: pulumi.Input[Optional[_builtins.str]] = None,
-                 token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
+                 token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 use_dcr: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a OutboundApp resource.
 
@@ -49,6 +51,7 @@ class OutboundAppArgs:
         :param pulumi.Input[_builtins.str] callback_domain: The domain that the provider redirects back to after consent. Leave this empty to use the project's configured domain.
         :param pulumi.Input[_builtins.str] client_id: The OAuth client ID issued by the third party provider.
         :param pulumi.Input[_builtins.str] client_secret: The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
+        :param pulumi.Input[_builtins.str] dcr_url: The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
         :param pulumi.Input[_builtins.str] default_redirect_url: The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] default_scopes: The scopes requested from the provider when no scopes are given for a specific connection.
         :param pulumi.Input[_builtins.str] description: A description for the outbound application.
@@ -60,6 +63,7 @@ class OutboundAppArgs:
         :param pulumi.Input[_builtins.str] revocation_url: The provider's token revocation endpoint.
         :param pulumi.Input[_builtins.str] token_url: The provider's token endpoint, used to exchange an authorization code and to refresh tokens.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] token_url_params: Additional query parameters to append to the token request, for providers that require them.
+        :param pulumi.Input[_builtins.bool] use_dcr: Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
         """
         pulumi.set(__self__, "project_id", project_id)
         if access_type is not None:
@@ -76,6 +80,8 @@ class OutboundAppArgs:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
             pulumi.set(__self__, "client_secret", client_secret)
+        if dcr_url is not None:
+            pulumi.set(__self__, "dcr_url", dcr_url)
         if default_redirect_url is not None:
             pulumi.set(__self__, "default_redirect_url", default_redirect_url)
         if default_scopes is not None:
@@ -98,6 +104,8 @@ class OutboundAppArgs:
             pulumi.set(__self__, "token_url", token_url)
         if token_url_params is not None:
             pulumi.set(__self__, "token_url_params", token_url_params)
+        if use_dcr is not None:
+            pulumi.set(__self__, "use_dcr", use_dcr)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -194,6 +202,18 @@ class OutboundAppArgs:
     @client_secret.setter
     def client_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_secret", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dcrUrl")
+    def dcr_url(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
+        """
+        return pulumi.get(self, "dcr_url")
+
+    @dcr_url.setter
+    def dcr_url(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "dcr_url", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultRedirectUrl")
@@ -327,6 +347,18 @@ class OutboundAppArgs:
     def token_url_params(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "token_url_params", value)
 
+    @_builtins.property
+    @pulumi.getter(name="useDcr")
+    def use_dcr(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        """
+        return pulumi.get(self, "use_dcr")
+
+    @use_dcr.setter
+    def use_dcr(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "use_dcr", value)
+
 
 @pulumi.input_type
 class _OutboundAppState:
@@ -338,6 +370,7 @@ class _OutboundAppState:
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 dcr_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -349,7 +382,8 @@ class _OutboundAppState:
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url: pulumi.Input[Optional[_builtins.str]] = None,
-                 token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
+                 token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 use_dcr: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering OutboundApp resources.
 
@@ -360,6 +394,7 @@ class _OutboundAppState:
         :param pulumi.Input[_builtins.str] callback_domain: The domain that the provider redirects back to after consent. Leave this empty to use the project's configured domain.
         :param pulumi.Input[_builtins.str] client_id: The OAuth client ID issued by the third party provider.
         :param pulumi.Input[_builtins.str] client_secret: The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
+        :param pulumi.Input[_builtins.str] dcr_url: The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
         :param pulumi.Input[_builtins.str] default_redirect_url: The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] default_scopes: The scopes requested from the provider when no scopes are given for a specific connection.
         :param pulumi.Input[_builtins.str] description: A description for the outbound application.
@@ -372,6 +407,7 @@ class _OutboundAppState:
         :param pulumi.Input[_builtins.str] revocation_url: The provider's token revocation endpoint.
         :param pulumi.Input[_builtins.str] token_url: The provider's token endpoint, used to exchange an authorization code and to refresh tokens.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] token_url_params: Additional query parameters to append to the token request, for providers that require them.
+        :param pulumi.Input[_builtins.bool] use_dcr: Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
         """
         if access_type is not None:
             pulumi.set(__self__, "access_type", access_type)
@@ -387,6 +423,8 @@ class _OutboundAppState:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
             pulumi.set(__self__, "client_secret", client_secret)
+        if dcr_url is not None:
+            pulumi.set(__self__, "dcr_url", dcr_url)
         if default_redirect_url is not None:
             pulumi.set(__self__, "default_redirect_url", default_redirect_url)
         if default_scopes is not None:
@@ -411,6 +449,8 @@ class _OutboundAppState:
             pulumi.set(__self__, "token_url", token_url)
         if token_url_params is not None:
             pulumi.set(__self__, "token_url_params", token_url_params)
+        if use_dcr is not None:
+            pulumi.set(__self__, "use_dcr", use_dcr)
 
     @_builtins.property
     @pulumi.getter(name="accessType")
@@ -495,6 +535,18 @@ class _OutboundAppState:
     @client_secret.setter
     def client_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "client_secret", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dcrUrl")
+    def dcr_url(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
+        """
+        return pulumi.get(self, "dcr_url")
+
+    @dcr_url.setter
+    def dcr_url(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "dcr_url", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultRedirectUrl")
@@ -640,6 +692,18 @@ class _OutboundAppState:
     def token_url_params(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "token_url_params", value)
 
+    @_builtins.property
+    @pulumi.getter(name="useDcr")
+    def use_dcr(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        """
+        return pulumi.get(self, "use_dcr")
+
+    @use_dcr.setter
+    def use_dcr(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "use_dcr", value)
+
 
 @pulumi.type_token("descope:index/outboundApp:OutboundApp")
 class OutboundApp(pulumi.CustomResource):
@@ -654,6 +718,7 @@ class OutboundApp(pulumi.CustomResource):
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 dcr_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -666,6 +731,7 @@ class OutboundApp(pulumi.CustomResource):
                  revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 use_dcr: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
         Manages a custom outbound application in a Descope project. Outbound applications let Descope hold and refresh a third party OAuth token on behalf of a user or a tenant, so an application can call that provider's API without implementing the OAuth flow itself.
@@ -680,6 +746,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] callback_domain: The domain that the provider redirects back to after consent. Leave this empty to use the project's configured domain.
         :param pulumi.Input[_builtins.str] client_id: The OAuth client ID issued by the third party provider.
         :param pulumi.Input[_builtins.str] client_secret: The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
+        :param pulumi.Input[_builtins.str] dcr_url: The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
         :param pulumi.Input[_builtins.str] default_redirect_url: The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] default_scopes: The scopes requested from the provider when no scopes are given for a specific connection.
         :param pulumi.Input[_builtins.str] description: A description for the outbound application.
@@ -692,6 +759,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] revocation_url: The provider's token revocation endpoint.
         :param pulumi.Input[_builtins.str] token_url: The provider's token endpoint, used to exchange an authorization code and to refresh tokens.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] token_url_params: Additional query parameters to append to the token request, for providers that require them.
+        :param pulumi.Input[_builtins.bool] use_dcr: Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
         """
         ...
     @overload
@@ -725,6 +793,7 @@ class OutboundApp(pulumi.CustomResource):
                  callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+                 dcr_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  default_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -737,6 +806,7 @@ class OutboundApp(pulumi.CustomResource):
                  revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url: pulumi.Input[Optional[_builtins.str]] = None,
                  token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+                 use_dcr: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -753,6 +823,7 @@ class OutboundApp(pulumi.CustomResource):
             __props__.__dict__["callback_domain"] = callback_domain
             __props__.__dict__["client_id"] = client_id
             __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
+            __props__.__dict__["dcr_url"] = dcr_url
             __props__.__dict__["default_redirect_url"] = default_redirect_url
             __props__.__dict__["default_scopes"] = default_scopes
             __props__.__dict__["description"] = description
@@ -767,6 +838,7 @@ class OutboundApp(pulumi.CustomResource):
             __props__.__dict__["revocation_url"] = revocation_url
             __props__.__dict__["token_url"] = token_url
             __props__.__dict__["token_url_params"] = token_url_params
+            __props__.__dict__["use_dcr"] = use_dcr
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(OutboundApp, __self__).__init__(
@@ -786,6 +858,7 @@ class OutboundApp(pulumi.CustomResource):
             callback_domain: pulumi.Input[Optional[_builtins.str]] = None,
             client_id: pulumi.Input[Optional[_builtins.str]] = None,
             client_secret: pulumi.Input[Optional[_builtins.str]] = None,
+            dcr_url: pulumi.Input[Optional[_builtins.str]] = None,
             default_redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
             default_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -797,7 +870,8 @@ class OutboundApp(pulumi.CustomResource):
             prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
             token_url: pulumi.Input[Optional[_builtins.str]] = None,
-            token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None) -> 'OutboundApp':
+            token_url_params: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
+            use_dcr: pulumi.Input[Optional[_builtins.bool]] = None) -> 'OutboundApp':
         """
         Get an existing OutboundApp resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -812,6 +886,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] callback_domain: The domain that the provider redirects back to after consent. Leave this empty to use the project's configured domain.
         :param pulumi.Input[_builtins.str] client_id: The OAuth client ID issued by the third party provider.
         :param pulumi.Input[_builtins.str] client_secret: The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
+        :param pulumi.Input[_builtins.str] dcr_url: The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
         :param pulumi.Input[_builtins.str] default_redirect_url: The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] default_scopes: The scopes requested from the provider when no scopes are given for a specific connection.
         :param pulumi.Input[_builtins.str] description: A description for the outbound application.
@@ -824,6 +899,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] revocation_url: The provider's token revocation endpoint.
         :param pulumi.Input[_builtins.str] token_url: The provider's token endpoint, used to exchange an authorization code and to refresh tokens.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] token_url_params: Additional query parameters to append to the token request, for providers that require them.
+        :param pulumi.Input[_builtins.bool] use_dcr: Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -836,6 +912,7 @@ class OutboundApp(pulumi.CustomResource):
         __props__.__dict__["callback_domain"] = callback_domain
         __props__.__dict__["client_id"] = client_id
         __props__.__dict__["client_secret"] = client_secret
+        __props__.__dict__["dcr_url"] = dcr_url
         __props__.__dict__["default_redirect_url"] = default_redirect_url
         __props__.__dict__["default_scopes"] = default_scopes
         __props__.__dict__["description"] = description
@@ -848,6 +925,7 @@ class OutboundApp(pulumi.CustomResource):
         __props__.__dict__["revocation_url"] = revocation_url
         __props__.__dict__["token_url"] = token_url
         __props__.__dict__["token_url_params"] = token_url_params
+        __props__.__dict__["use_dcr"] = use_dcr
         return OutboundApp(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -905,6 +983,14 @@ class OutboundApp(pulumi.CustomResource):
         The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
         """
         return pulumi.get(self, "client_secret")
+
+    @_builtins.property
+    @pulumi.getter(name="dcrUrl")
+    def dcr_url(self) -> pulumi.Output[_builtins.str]:
+        """
+        The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `use_dcr` is enabled. This cannot be changed on an existing outbound application.
+        """
+        return pulumi.get(self, "dcr_url")
 
     @_builtins.property
     @pulumi.getter(name="defaultRedirectUrl")
@@ -1001,4 +1087,12 @@ class OutboundApp(pulumi.CustomResource):
         Additional query parameters to append to the token request, for providers that require them.
         """
         return pulumi.get(self, "token_url_params")
+
+    @_builtins.property
+    @pulumi.getter(name="useDcr")
+    def use_dcr(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `client_id`, `client_secret`, `authorization_url`, `token_url`, `revocation_url`, `default_scopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        """
+        return pulumi.get(self, "use_dcr")
 

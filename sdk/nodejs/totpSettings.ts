@@ -36,6 +36,10 @@ export class TotpSettings extends pulumi.CustomResource {
     }
 
     /**
+     * The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+     */
+    declare public readonly accountLabel: pulumi.Output<string>;
+    /**
      * Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
      */
     declare public readonly disabled: pulumi.Output<boolean>;
@@ -61,6 +65,7 @@ export class TotpSettings extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TotpSettingsState | undefined;
+            resourceInputs["accountLabel"] = state?.accountLabel;
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["serviceLabel"] = state?.serviceLabel;
@@ -69,6 +74,7 @@ export class TotpSettings extends pulumi.CustomResource {
             if (args?.projectId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'projectId'");
             }
+            resourceInputs["accountLabel"] = args?.accountLabel;
             resourceInputs["disabled"] = args?.disabled;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["serviceLabel"] = args?.serviceLabel;
@@ -82,6 +88,10 @@ export class TotpSettings extends pulumi.CustomResource {
  * Input properties used for looking up and filtering TotpSettings resources.
  */
 export interface TotpSettingsState {
+    /**
+     * The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+     */
+    accountLabel?: pulumi.Input<string | undefined>;
     /**
      * Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
      */
@@ -100,6 +110,10 @@ export interface TotpSettingsState {
  * The set of arguments for constructing a TotpSettings resource.
  */
 export interface TotpSettingsArgs {
+    /**
+     * The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+     */
+    accountLabel?: pulumi.Input<string | undefined>;
     /**
      * Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
      */

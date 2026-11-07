@@ -31,10 +31,14 @@ __all__ = [
     'AuditWebhookConnectorAuthenticationBasicArgsDict',
     'AuditWebhookConnectorAuthenticationOauth2ClientCredentialsArgs',
     'AuditWebhookConnectorAuthenticationOauth2ClientCredentialsArgsDict',
+    'AuthAccessRuleConditionArgs',
+    'AuthAccessRuleConditionArgsDict',
     'AwsEventbridgeConnectorAuditFilterArgs',
     'AwsEventbridgeConnectorAuditFilterArgsDict',
     'AwsS3ConnectorAuditFilterArgs',
     'AwsS3ConnectorAuditFilterArgsDict',
+    'AzureMonitorConnectorAuditFilterArgs',
+    'AzureMonitorConnectorAuditFilterArgsDict',
     'CoralogixConnectorAuditFilterArgs',
     'CoralogixConnectorAuditFilterArgsDict',
     'CriblConnectorAuditFilterArgs',
@@ -85,6 +89,8 @@ __all__ = [
     'HttpConnectorAuthenticationOauth2ClientCredentialsArgsDict',
     'InboundAppAttributesScopeArgs',
     'InboundAppAttributesScopeArgsDict',
+    'InboundAppClientAssertionArgs',
+    'InboundAppClientAssertionArgsDict',
     'InboundAppConnectionsScopeArgs',
     'InboundAppConnectionsScopeArgsDict',
     'InboundAppPermissionsScopeArgs',
@@ -93,12 +99,16 @@ __all__ = [
     'InboundAppScopeClaimMappingArgsDict',
     'InboundAppSessionSettingsArgs',
     'InboundAppSessionSettingsArgsDict',
+    'InboundAppWorkloadClientAssertionArgs',
+    'InboundAppWorkloadClientAssertionArgsDict',
     'ManagementKeyRebacArgs',
     'ManagementKeyRebacArgsDict',
     'ManagementKeyRebacProjectRoleArgs',
     'ManagementKeyRebacProjectRoleArgsDict',
     'ManagementKeyRebacTagRoleArgs',
     'ManagementKeyRebacTagRoleArgsDict',
+    'MicrosoftSentinelConnectorAuditFilterArgs',
+    'MicrosoftSentinelConnectorAuditFilterArgsDict',
     'MixpanelConnectorAuditFilterArgs',
     'MixpanelConnectorAuditFilterArgsDict',
     'NewrelicConnectorAuditFilterArgs',
@@ -117,6 +127,8 @@ __all__ = [
     'OpentelemetryConnectorAuthenticationBasicArgsDict',
     'OpentelemetryConnectorAuthenticationOauth2ClientCredentialsArgs',
     'OpentelemetryConnectorAuthenticationOauth2ClientCredentialsArgsDict',
+    'PasswordSettingsRolePolicyArgs',
+    'PasswordSettingsRolePolicyArgsDict',
     'PendoConnectorAuditFilterArgs',
     'PendoConnectorAuditFilterArgsDict',
     'SamlAppAttributeMappingArgs',
@@ -149,6 +161,12 @@ __all__ = [
     'TenantAttributeAuthorizationArgsDict',
     'UserAttributeWidgetAuthorizationArgs',
     'UserAttributeWidgetAuthorizationArgsDict',
+    'WellknownSettingsClaimsSupportedArgs',
+    'WellknownSettingsClaimsSupportedArgsDict',
+    'WellknownSettingsRemovedValueArgs',
+    'WellknownSettingsRemovedValueArgsDict',
+    'WellknownSettingsScopesSupportedArgs',
+    'WellknownSettingsScopesSupportedArgsDict',
     'WsfedAppAttributeMappingArgs',
     'WsfedAppAttributeMappingArgsDict',
     'WsfedAppGroupsMappingArgs',
@@ -676,6 +694,72 @@ class AuditWebhookConnectorAuthenticationOauth2ClientCredentialsArgs:
         pulumi.set(self, "token_request_headers", value)
 
 
+class AuthAccessRuleConditionArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+    """
+
+@pulumi.input_type
+class AuthAccessRuleConditionArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 operator: pulumi.Input[_builtins.str],
+                 values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        """
+        :param pulumi.Input[_builtins.str] key: The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+        :param pulumi.Input[_builtins.str] operator: How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] values: The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> pulumi.Input[_builtins.str]:
+        """
+        How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "operator", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "values", value)
+
+
 class AwsEventbridgeConnectorAuditFilterArgsDict(TypedDict):
     key: pulumi.Input[_builtins.str]
     """
@@ -758,6 +842,72 @@ class AwsS3ConnectorAuditFilterArgsDict(TypedDict):
 
 @pulumi.input_type
 class AwsS3ConnectorAuditFilterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 operator: pulumi.Input[_builtins.str],
+                 values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        """
+        :param pulumi.Input[_builtins.str] key: The field name to filter on (either 'actions' or 'tenants').
+        :param pulumi.Input[_builtins.str] operator: The filter operation to apply ('includes' or 'excludes').
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> pulumi.Input[_builtins.str]:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "operator", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "values", value)
+
+
+class AzureMonitorConnectorAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
+
+@pulumi.input_type
+class AzureMonitorConnectorAuditFilterArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[_builtins.str],
                  operator: pulumi.Input[_builtins.str],
@@ -2624,6 +2774,94 @@ class InboundAppAttributesScopeArgs:
         pulumi.set(self, "values", value)
 
 
+class InboundAppClientAssertionArgsDict(TypedDict):
+    key_source: pulumi.Input[_builtins.str]
+    """
+    Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+    """
+    jwks_uri: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The HTTPS URL of the JWKS document. Required when `key_source` is `jwks`.
+    """
+    public_key: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A PEM encoded public key or certificate. Required when `key_source` is `publicKey`.
+    """
+    sign_algorithm: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+    """
+
+@pulumi.input_type
+class InboundAppClientAssertionArgs:
+    def __init__(__self__, *,
+                 key_source: pulumi.Input[_builtins.str],
+                 jwks_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 public_key: pulumi.Input[Optional[_builtins.str]] = None,
+                 sign_algorithm: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] key_source: Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+        :param pulumi.Input[_builtins.str] jwks_uri: The HTTPS URL of the JWKS document. Required when `key_source` is `jwks`.
+        :param pulumi.Input[_builtins.str] public_key: A PEM encoded public key or certificate. Required when `key_source` is `publicKey`.
+        :param pulumi.Input[_builtins.str] sign_algorithm: Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+        """
+        pulumi.set(__self__, "key_source", key_source)
+        if jwks_uri is not None:
+            pulumi.set(__self__, "jwks_uri", jwks_uri)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+        if sign_algorithm is not None:
+            pulumi.set(__self__, "sign_algorithm", sign_algorithm)
+
+    @_builtins.property
+    @pulumi.getter(name="keySource")
+    def key_source(self) -> pulumi.Input[_builtins.str]:
+        """
+        Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+        """
+        return pulumi.get(self, "key_source")
+
+    @key_source.setter
+    def key_source(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key_source", value)
+
+    @_builtins.property
+    @pulumi.getter(name="jwksUri")
+    def jwks_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The HTTPS URL of the JWKS document. Required when `key_source` is `jwks`.
+        """
+        return pulumi.get(self, "jwks_uri")
+
+    @jwks_uri.setter
+    def jwks_uri(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "jwks_uri", value)
+
+    @_builtins.property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        A PEM encoded public key or certificate. Required when `key_source` is `publicKey`.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "public_key", value)
+
+    @_builtins.property
+    @pulumi.getter(name="signAlgorithm")
+    def sign_algorithm(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+        """
+        return pulumi.get(self, "sign_algorithm")
+
+    @sign_algorithm.setter
+    def sign_algorithm(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sign_algorithm", value)
+
+
 class InboundAppConnectionsScopeArgsDict(TypedDict):
     description: pulumi.Input[_builtins.str]
     """
@@ -3035,6 +3273,133 @@ class InboundAppSessionSettingsArgs:
         pulumi.set(self, "user_template_id", value)
 
 
+class InboundAppWorkloadClientAssertionArgsDict(TypedDict):
+    allowed_subjects: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+    """
+    federation_type: pulumi.Input[_builtins.str]
+    """
+    The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+    """
+    issuer: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The HTTPS issuer URL. Required when `federation_type` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwks_uri`.
+    """
+    jwks_uri: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+    """
+    sign_algorithm: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+    """
+    trust_domain: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The SPIFFE trust domain, such as `prod.example.com`. Required when `federation_type` is `spiffe`.
+    """
+
+@pulumi.input_type
+class InboundAppWorkloadClientAssertionArgs:
+    def __init__(__self__, *,
+                 allowed_subjects: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
+                 federation_type: pulumi.Input[_builtins.str],
+                 issuer: pulumi.Input[Optional[_builtins.str]] = None,
+                 jwks_uri: pulumi.Input[Optional[_builtins.str]] = None,
+                 sign_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+                 trust_domain: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_subjects: The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+        :param pulumi.Input[_builtins.str] federation_type: The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+        :param pulumi.Input[_builtins.str] issuer: The HTTPS issuer URL. Required when `federation_type` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwks_uri`.
+        :param pulumi.Input[_builtins.str] jwks_uri: For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+        :param pulumi.Input[_builtins.str] sign_algorithm: Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+        :param pulumi.Input[_builtins.str] trust_domain: The SPIFFE trust domain, such as `prod.example.com`. Required when `federation_type` is `spiffe`.
+        """
+        pulumi.set(__self__, "allowed_subjects", allowed_subjects)
+        pulumi.set(__self__, "federation_type", federation_type)
+        if issuer is not None:
+            pulumi.set(__self__, "issuer", issuer)
+        if jwks_uri is not None:
+            pulumi.set(__self__, "jwks_uri", jwks_uri)
+        if sign_algorithm is not None:
+            pulumi.set(__self__, "sign_algorithm", sign_algorithm)
+        if trust_domain is not None:
+            pulumi.set(__self__, "trust_domain", trust_domain)
+
+    @_builtins.property
+    @pulumi.getter(name="allowedSubjects")
+    def allowed_subjects(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+        """
+        return pulumi.get(self, "allowed_subjects")
+
+    @allowed_subjects.setter
+    def allowed_subjects(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "allowed_subjects", value)
+
+    @_builtins.property
+    @pulumi.getter(name="federationType")
+    def federation_type(self) -> pulumi.Input[_builtins.str]:
+        """
+        The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+        """
+        return pulumi.get(self, "federation_type")
+
+    @federation_type.setter
+    def federation_type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "federation_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def issuer(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The HTTPS issuer URL. Required when `federation_type` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwks_uri`.
+        """
+        return pulumi.get(self, "issuer")
+
+    @issuer.setter
+    def issuer(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "issuer", value)
+
+    @_builtins.property
+    @pulumi.getter(name="jwksUri")
+    def jwks_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+        """
+        return pulumi.get(self, "jwks_uri")
+
+    @jwks_uri.setter
+    def jwks_uri(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "jwks_uri", value)
+
+    @_builtins.property
+    @pulumi.getter(name="signAlgorithm")
+    def sign_algorithm(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+        """
+        return pulumi.get(self, "sign_algorithm")
+
+    @sign_algorithm.setter
+    def sign_algorithm(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sign_algorithm", value)
+
+    @_builtins.property
+    @pulumi.getter(name="trustDomain")
+    def trust_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The SPIFFE trust domain, such as `prod.example.com`. Required when `federation_type` is `spiffe`.
+        """
+        return pulumi.get(self, "trust_domain")
+
+    @trust_domain.setter
+    def trust_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "trust_domain", value)
+
+
 class ManagementKeyRebacArgsDict(TypedDict):
     company_roles: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
     """
@@ -3196,6 +3561,72 @@ class ManagementKeyRebacTagRoleArgs:
     @tags.setter
     def tags(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
         pulumi.set(self, "tags", value)
+
+
+class MicrosoftSentinelConnectorAuditFilterArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    The field name to filter on (either 'actions' or 'tenants').
+    """
+    operator: pulumi.Input[_builtins.str]
+    """
+    The filter operation to apply ('includes' or 'excludes').
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The list of values to match against for the filter.
+    """
+
+@pulumi.input_type
+class MicrosoftSentinelConnectorAuditFilterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 operator: pulumi.Input[_builtins.str],
+                 values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        """
+        :param pulumi.Input[_builtins.str] key: The field name to filter on (either 'actions' or 'tenants').
+        :param pulumi.Input[_builtins.str] operator: The filter operation to apply ('includes' or 'excludes').
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] values: The list of values to match against for the filter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        The field name to filter on (either 'actions' or 'tenants').
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def operator(self) -> pulumi.Input[_builtins.str]:
+        """
+        The filter operation to apply ('includes' or 'excludes').
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "operator", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The list of values to match against for the filter.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "values", value)
 
 
 class MixpanelConnectorAuditFilterArgsDict(TypedDict):
@@ -3835,6 +4266,214 @@ class OpentelemetryConnectorAuthenticationOauth2ClientCredentialsArgs:
     @token_request_headers.setter
     def token_request_headers(self, value: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "token_request_headers", value)
+
+
+class PasswordSettingsRolePolicyArgsDict(TypedDict):
+    roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+    """
+    any_letter: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether passwords must contain at least one letter, either uppercase or lowercase.
+    """
+    disallow_email_match: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+    """
+    disallowed_characters: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+    """
+    enforce_strength: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+    """
+    lowercase: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether passwords must contain at least one lowercase letter.
+    """
+    min_length: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+    """
+    non_alphanumeric: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+    """
+    number: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether passwords must contain at least one number.
+    """
+    uppercase: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether passwords must contain at least one uppercase letter.
+    """
+
+@pulumi.input_type
+class PasswordSettingsRolePolicyArgs:
+    def __init__(__self__, *,
+                 roles: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
+                 any_letter: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disallow_email_match: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disallowed_characters: pulumi.Input[Optional[_builtins.str]] = None,
+                 enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
+                 lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
+                 min_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 non_alphanumeric: pulumi.Input[Optional[_builtins.bool]] = None,
+                 number: pulumi.Input[Optional[_builtins.bool]] = None,
+                 uppercase: pulumi.Input[Optional[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] roles: The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+        :param pulumi.Input[_builtins.bool] any_letter: Whether passwords must contain at least one letter, either uppercase or lowercase.
+        :param pulumi.Input[_builtins.bool] disallow_email_match: Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+        :param pulumi.Input[_builtins.str] disallowed_characters: Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+        :param pulumi.Input[_builtins.str] enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+        :param pulumi.Input[_builtins.bool] lowercase: Whether passwords must contain at least one lowercase letter.
+        :param pulumi.Input[_builtins.int] min_length: The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+        :param pulumi.Input[_builtins.bool] non_alphanumeric: Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        :param pulumi.Input[_builtins.bool] number: Whether passwords must contain at least one number.
+        :param pulumi.Input[_builtins.bool] uppercase: Whether passwords must contain at least one uppercase letter.
+        """
+        pulumi.set(__self__, "roles", roles)
+        if any_letter is not None:
+            pulumi.set(__self__, "any_letter", any_letter)
+        if disallow_email_match is not None:
+            pulumi.set(__self__, "disallow_email_match", disallow_email_match)
+        if disallowed_characters is not None:
+            pulumi.set(__self__, "disallowed_characters", disallowed_characters)
+        if enforce_strength is not None:
+            pulumi.set(__self__, "enforce_strength", enforce_strength)
+        if lowercase is not None:
+            pulumi.set(__self__, "lowercase", lowercase)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if non_alphanumeric is not None:
+            pulumi.set(__self__, "non_alphanumeric", non_alphanumeric)
+        if number is not None:
+            pulumi.set(__self__, "number", number)
+        if uppercase is not None:
+            pulumi.set(__self__, "uppercase", uppercase)
+
+    @_builtins.property
+    @pulumi.getter
+    def roles(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+        """
+        return pulumi.get(self, "roles")
+
+    @roles.setter
+    def roles(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "roles", value)
+
+    @_builtins.property
+    @pulumi.getter(name="anyLetter")
+    def any_letter(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether passwords must contain at least one letter, either uppercase or lowercase.
+        """
+        return pulumi.get(self, "any_letter")
+
+    @any_letter.setter
+    def any_letter(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "any_letter", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disallowEmailMatch")
+    def disallow_email_match(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+        """
+        return pulumi.get(self, "disallow_email_match")
+
+    @disallow_email_match.setter
+    def disallow_email_match(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "disallow_email_match", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disallowedCharacters")
+    def disallowed_characters(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+        """
+        return pulumi.get(self, "disallowed_characters")
+
+    @disallowed_characters.setter
+    def disallowed_characters(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "disallowed_characters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enforceStrength")
+    def enforce_strength(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+        """
+        return pulumi.get(self, "enforce_strength")
+
+    @enforce_strength.setter
+    def enforce_strength(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "enforce_strength", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def lowercase(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether passwords must contain at least one lowercase letter.
+        """
+        return pulumi.get(self, "lowercase")
+
+    @lowercase.setter
+    def lowercase(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "lowercase", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "min_length", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nonAlphanumeric")
+    def non_alphanumeric(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+        """
+        return pulumi.get(self, "non_alphanumeric")
+
+    @non_alphanumeric.setter
+    def non_alphanumeric(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "non_alphanumeric", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def number(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether passwords must contain at least one number.
+        """
+        return pulumi.get(self, "number")
+
+    @number.setter
+    def number(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "number", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def uppercase(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether passwords must contain at least one uppercase letter.
+        """
+        return pulumi.get(self, "uppercase")
+
+    @uppercase.setter
+    def uppercase(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "uppercase", value)
 
 
 class PendoConnectorAuditFilterArgsDict(TypedDict):
@@ -4586,6 +5225,10 @@ class SsoSettingsSsoSuiteSettingsArgsDict(TypedDict):
     """
     Setting this to `true` will allow only verified domains to be used.
     """
+    hide_audit: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+    """
     hide_domains: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
     Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
@@ -4647,6 +5290,7 @@ class SsoSettingsSsoSuiteSettingsArgsDict(TypedDict):
 class SsoSettingsSsoSuiteSettingsArgs:
     def __init__(__self__, *,
                  force_domain_verification: pulumi.Input[Optional[_builtins.bool]] = None,
+                 hide_audit: pulumi.Input[Optional[_builtins.bool]] = None,
                  hide_domains: pulumi.Input[Optional[_builtins.bool]] = None,
                  hide_fga_mapping: pulumi.Input[Optional[_builtins.bool]] = None,
                  hide_groups_mapping: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -4663,6 +5307,7 @@ class SsoSettingsSsoSuiteSettingsArgs:
                  support_email: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.bool] force_domain_verification: Setting this to `true` will allow only verified domains to be used.
+        :param pulumi.Input[_builtins.bool] hide_audit: Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
         :param pulumi.Input[_builtins.bool] hide_domains: Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
         :param pulumi.Input[_builtins.bool] hide_fga_mapping: Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
         :param pulumi.Input[_builtins.bool] hide_groups_mapping: Setting this to `true` will hide the groups mapping configuration section in the SSO Suite interface.
@@ -4680,6 +5325,8 @@ class SsoSettingsSsoSuiteSettingsArgs:
         """
         if force_domain_verification is not None:
             pulumi.set(__self__, "force_domain_verification", force_domain_verification)
+        if hide_audit is not None:
+            pulumi.set(__self__, "hide_audit", hide_audit)
         if hide_domains is not None:
             pulumi.set(__self__, "hide_domains", hide_domains)
         if hide_fga_mapping is not None:
@@ -4720,6 +5367,18 @@ class SsoSettingsSsoSuiteSettingsArgs:
     @force_domain_verification.setter
     def force_domain_verification(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_domain_verification", value)
+
+    @_builtins.property
+    @pulumi.getter(name="hideAudit")
+    def hide_audit(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+        """
+        return pulumi.get(self, "hide_audit")
+
+    @hide_audit.setter
+    def hide_audit(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "hide_audit", value)
 
     @_builtins.property
     @pulumi.getter(name="hideDomains")
@@ -5032,6 +5691,151 @@ class UserAttributeWidgetAuthorizationArgs:
     @view_permissions.setter
     def view_permissions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "view_permissions", value)
+
+
+class WellknownSettingsClaimsSupportedArgsDict(TypedDict):
+    excludeds: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Values to remove from the list.
+    """
+    extras: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Values to add to the list.
+    """
+
+@pulumi.input_type
+class WellknownSettingsClaimsSupportedArgs:
+    def __init__(__self__, *,
+                 excludeds: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 extras: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] excludeds: Values to remove from the list.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] extras: Values to add to the list.
+        """
+        if excludeds is not None:
+            pulumi.set(__self__, "excludeds", excludeds)
+        if extras is not None:
+            pulumi.set(__self__, "extras", extras)
+
+    @_builtins.property
+    @pulumi.getter
+    def excludeds(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Values to remove from the list.
+        """
+        return pulumi.get(self, "excludeds")
+
+    @excludeds.setter
+    def excludeds(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "excludeds", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def extras(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Values to add to the list.
+        """
+        return pulumi.get(self, "extras")
+
+    @extras.setter
+    def extras(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "extras", value)
+
+
+class WellknownSettingsRemovedValueArgsDict(TypedDict):
+    field: pulumi.Input[_builtins.str]
+    """
+    The name of a list field in the discovery documents, such as `grant_types_supported`, `token_endpoint_auth_methods_supported` or `code_challenge_methods_supported`.
+    """
+    values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]
+    """
+    The values to remove from the list.
+    """
+
+@pulumi.input_type
+class WellknownSettingsRemovedValueArgs:
+    def __init__(__self__, *,
+                 field: pulumi.Input[_builtins.str],
+                 values: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        """
+        :param pulumi.Input[_builtins.str] field: The name of a list field in the discovery documents, such as `grant_types_supported`, `token_endpoint_auth_methods_supported` or `code_challenge_methods_supported`.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] values: The values to remove from the list.
+        """
+        pulumi.set(__self__, "field", field)
+        pulumi.set(__self__, "values", values)
+
+    @_builtins.property
+    @pulumi.getter
+    def field(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of a list field in the discovery documents, such as `grant_types_supported`, `token_endpoint_auth_methods_supported` or `code_challenge_methods_supported`.
+        """
+        return pulumi.get(self, "field")
+
+    @field.setter
+    def field(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "field", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]:
+        """
+        The values to remove from the list.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
+        pulumi.set(self, "values", value)
+
+
+class WellknownSettingsScopesSupportedArgsDict(TypedDict):
+    excludeds: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Values to remove from the list.
+    """
+    extras: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Values to add to the list.
+    """
+
+@pulumi.input_type
+class WellknownSettingsScopesSupportedArgs:
+    def __init__(__self__, *,
+                 excludeds: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 extras: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] excludeds: Values to remove from the list.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] extras: Values to add to the list.
+        """
+        if excludeds is not None:
+            pulumi.set(__self__, "excludeds", excludeds)
+        if extras is not None:
+            pulumi.set(__self__, "extras", extras)
+
+    @_builtins.property
+    @pulumi.getter
+    def excludeds(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Values to remove from the list.
+        """
+        return pulumi.get(self, "excludeds")
+
+    @excludeds.setter
+    def excludeds(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "excludeds", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def extras(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Values to add to the list.
+        """
+        return pulumi.get(self, "extras")
+
+    @extras.setter
+    def extras(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "extras", value)
 
 
 class WsfedAppAttributeMappingArgsDict(TypedDict):

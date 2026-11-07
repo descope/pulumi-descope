@@ -24,6 +24,7 @@ class SesConnectorArgs:
                  sender_email: pulumi.Input[_builtins.str],
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 configuration_set_name: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -40,6 +41,7 @@ class SesConnectorArgs:
         :param pulumi.Input[_builtins.str] sender_email: The email address that emails are sent from. Make sure it is a verified identity in SES.
         :param pulumi.Input[_builtins.str] access_key_id: The AWS access key ID. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] auth_type: How to authenticate with AWS: using static credentials or by assuming an IAM role.
+        :param pulumi.Input[_builtins.str] configuration_set_name: The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] endpoint: A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
         :param pulumi.Input[_builtins.str] external_id: The external ID used when assuming the IAM role. Required when the authentication type is 'assumeRole'.
@@ -56,6 +58,8 @@ class SesConnectorArgs:
             pulumi.set(__self__, "access_key_id", access_key_id)
         if auth_type is not None:
             pulumi.set(__self__, "auth_type", auth_type)
+        if configuration_set_name is not None:
+            pulumi.set(__self__, "configuration_set_name", configuration_set_name)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if endpoint is not None:
@@ -132,6 +136,18 @@ class SesConnectorArgs:
     @auth_type.setter
     def auth_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "auth_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="configurationSetName")
+    def configuration_set_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        """
+        return pulumi.get(self, "configuration_set_name")
+
+    @configuration_set_name.setter
+    def configuration_set_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "configuration_set_name", value)
 
     @_builtins.property
     @pulumi.getter
@@ -235,6 +251,7 @@ class _SesConnectorState:
     def __init__(__self__, *,
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 configuration_set_name: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -251,6 +268,7 @@ class _SesConnectorState:
 
         :param pulumi.Input[_builtins.str] access_key_id: The AWS access key ID. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] auth_type: How to authenticate with AWS: using static credentials or by assuming an IAM role.
+        :param pulumi.Input[_builtins.str] configuration_set_name: The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] endpoint: A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
         :param pulumi.Input[_builtins.str] external_id: The external ID used when assuming the IAM role. Required when the authentication type is 'assumeRole'.
@@ -267,6 +285,8 @@ class _SesConnectorState:
             pulumi.set(__self__, "access_key_id", access_key_id)
         if auth_type is not None:
             pulumi.set(__self__, "auth_type", auth_type)
+        if configuration_set_name is not None:
+            pulumi.set(__self__, "configuration_set_name", configuration_set_name)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if endpoint is not None:
@@ -313,6 +333,18 @@ class _SesConnectorState:
     @auth_type.setter
     def auth_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "auth_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="configurationSetName")
+    def configuration_set_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        """
+        return pulumi.get(self, "configuration_set_name")
+
+    @configuration_set_name.setter
+    def configuration_set_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "configuration_set_name", value)
 
     @_builtins.property
     @pulumi.getter
@@ -455,6 +487,7 @@ class SesConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 configuration_set_name: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -475,6 +508,7 @@ class SesConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] access_key_id: The AWS access key ID. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] auth_type: How to authenticate with AWS: using static credentials or by assuming an IAM role.
+        :param pulumi.Input[_builtins.str] configuration_set_name: The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] endpoint: A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
         :param pulumi.Input[_builtins.str] external_id: The external ID used when assuming the IAM role. Required when the authentication type is 'assumeRole'.
@@ -514,6 +548,7 @@ class SesConnector(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  auth_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 configuration_set_name: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  endpoint: pulumi.Input[Optional[_builtins.str]] = None,
                  external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -536,6 +571,7 @@ class SesConnector(pulumi.CustomResource):
 
             __props__.__dict__["access_key_id"] = None if access_key_id is None else pulumi.Output.secret(access_key_id)
             __props__.__dict__["auth_type"] = auth_type
+            __props__.__dict__["configuration_set_name"] = configuration_set_name
             __props__.__dict__["description"] = description
             __props__.__dict__["endpoint"] = endpoint
             __props__.__dict__["external_id"] = external_id
@@ -567,6 +603,7 @@ class SesConnector(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             access_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             auth_type: pulumi.Input[Optional[_builtins.str]] = None,
+            configuration_set_name: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             endpoint: pulumi.Input[Optional[_builtins.str]] = None,
             external_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -587,6 +624,7 @@ class SesConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] access_key_id: The AWS access key ID. Required when the authentication type is 'credentials'.
         :param pulumi.Input[_builtins.str] auth_type: How to authenticate with AWS: using static credentials or by assuming an IAM role.
+        :param pulumi.Input[_builtins.str] configuration_set_name: The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
         :param pulumi.Input[_builtins.str] description: A description of what your connector is used for.
         :param pulumi.Input[_builtins.str] endpoint: A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
         :param pulumi.Input[_builtins.str] external_id: The external ID used when assuming the IAM role. Required when the authentication type is 'assumeRole'.
@@ -605,6 +643,7 @@ class SesConnector(pulumi.CustomResource):
 
         __props__.__dict__["access_key_id"] = access_key_id
         __props__.__dict__["auth_type"] = auth_type
+        __props__.__dict__["configuration_set_name"] = configuration_set_name
         __props__.__dict__["description"] = description
         __props__.__dict__["endpoint"] = endpoint
         __props__.__dict__["external_id"] = external_id
@@ -633,6 +672,14 @@ class SesConnector(pulumi.CustomResource):
         How to authenticate with AWS: using static credentials or by assuming an IAM role.
         """
         return pulumi.get(self, "auth_type")
+
+    @_builtins.property
+    @pulumi.getter(name="configurationSetName")
+    def configuration_set_name(self) -> pulumi.Output[_builtins.str]:
+        """
+        The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        """
+        return pulumi.get(self, "configuration_set_name")
 
     @_builtins.property
     @pulumi.getter

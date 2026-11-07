@@ -131,6 +131,12 @@ namespace Descope.Pulumi.Descope
         public Output<int> ReuseAmount { get; private set; } = null!;
 
         /// <summary>
+        /// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        /// </summary>
+        [Output("rolePolicies")]
+        public Output<ImmutableArray<Outputs.PasswordSettingsRolePolicy>> RolePolicies { get; private set; } = null!;
+
+        /// <summary>
         /// Whether the user account should be temporarily locked after a specified number of failed login attempts.
         /// </summary>
         [Output("temporaryLock")]
@@ -315,6 +321,18 @@ namespace Descope.Pulumi.Descope
         [Input("reuseAmount")]
         public Input<int>? ReuseAmount { get; set; }
 
+        [Input("rolePolicies")]
+        private InputList<Inputs.PasswordSettingsRolePolicyArgs>? _rolePolicies;
+
+        /// <summary>
+        /// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        /// </summary>
+        public InputList<Inputs.PasswordSettingsRolePolicyArgs> RolePolicies
+        {
+            get => _rolePolicies ?? (_rolePolicies = new InputList<Inputs.PasswordSettingsRolePolicyArgs>());
+            set => _rolePolicies = value;
+        }
+
         /// <summary>
         /// Whether the user account should be temporarily locked after a specified number of failed login attempts.
         /// </summary>
@@ -460,6 +478,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("reuseAmount")]
         public Input<int>? ReuseAmount { get; set; }
+
+        [Input("rolePolicies")]
+        private InputList<Inputs.PasswordSettingsRolePolicyGetArgs>? _rolePolicies;
+
+        /// <summary>
+        /// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        /// </summary>
+        public InputList<Inputs.PasswordSettingsRolePolicyGetArgs> RolePolicies
+        {
+            get => _rolePolicies ?? (_rolePolicies = new InputList<Inputs.PasswordSettingsRolePolicyGetArgs>());
+            set => _rolePolicies = value;
+        }
 
         /// <summary>
         /// Whether the user account should be temporarily locked after a specified number of failed login attempts.

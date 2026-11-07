@@ -41,6 +41,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ArkoseConnector{}
 	case "descope:index/auditWebhookConnector:AuditWebhookConnector":
 		r = &AuditWebhookConnector{}
+	case "descope:index/authAccessPolicy:AuthAccessPolicy":
+		r = &AuthAccessPolicy{}
+	case "descope:index/authAccessRule:AuthAccessRule":
+		r = &AuthAccessRule{}
+	case "descope:index/awsEndUserMessagingConnector:AwsEndUserMessagingConnector":
+		r = &AwsEndUserMessagingConnector{}
 	case "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector":
 		r = &AwsEventbridgeConnector{}
 	case "descope:index/awsS3Connector:AwsS3Connector":
@@ -49,6 +55,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AwsSesEmailValidationConnector{}
 	case "descope:index/awsTranslateConnector:AwsTranslateConnector":
 		r = &AwsTranslateConnector{}
+	case "descope:index/azureMonitorConnector:AzureMonitorConnector":
+		r = &AzureMonitorConnector{}
 	case "descope:index/bitsightConnector:BitsightConnector":
 		r = &BitsightConnector{}
 	case "descope:index/coralogixConnector:CoralogixConnector":
@@ -103,6 +111,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GoogleCloudTranslationConnector{}
 	case "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector":
 		r = &GoogleMapsPlacesConnector{}
+	case "descope:index/governance:Governance":
+		r = &Governance{}
 	case "descope:index/groundcoverConnector:GroundcoverConnector":
 		r = &GroundcoverConnector{}
 	case "descope:index/hcaptchaConnector:HcaptchaConnector":
@@ -131,8 +141,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &LokaliseConnector{}
 	case "descope:index/magiclinkSettings:MagiclinkSettings":
 		r = &MagiclinkSettings{}
+	case "descope:index/mailjetConnector:MailjetConnector":
+		r = &MailjetConnector{}
 	case "descope:index/managementKey:ManagementKey":
 		r = &ManagementKey{}
+	case "descope:index/microsoftSentinelConnector:MicrosoftSentinelConnector":
+		r = &MicrosoftSentinelConnector{}
 	case "descope:index/mixpanelConnector:MixpanelConnector":
 		r = &MixpanelConnector{}
 	case "descope:index/mparticleConnector:MparticleConnector":
@@ -213,6 +227,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SnsConnector{}
 	case "descope:index/splunkConnector:SplunkConnector":
 		r = &SplunkConnector{}
+	case "descope:index/splunkOnCallConnector:SplunkOnCallConnector":
+		r = &SplunkOnCallConnector{}
 	case "descope:index/sqlConnector:SqlConnector":
 		r = &SqlConnector{}
 	case "descope:index/ssoSettings:SsoSettings":
@@ -245,6 +261,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &UserAttribute{}
 	case "descope:index/voiceTemplate:VoiceTemplate":
 		r = &VoiceTemplate{}
+	case "descope:index/vonageConnector:VonageConnector":
+		r = &VonageConnector{}
+	case "descope:index/wellknownSettings:WellknownSettings":
+		r = &WellknownSettings{}
 	case "descope:index/widget:Widget":
 		r = &Widget{}
 	case "descope:index/wsfedApp:WsfedApp":
@@ -334,6 +354,21 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/authAccessPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/authAccessRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/awsEndUserMessagingConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/awsEventbridgeConnector",
 		&module{version},
 	)
@@ -350,6 +385,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"descope",
 		"index/awsTranslateConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/azureMonitorConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -489,6 +529,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/governance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/groundcoverConnector",
 		&module{version},
 	)
@@ -559,7 +604,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/mailjetConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/managementKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/microsoftSentinelConnector",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -764,6 +819,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"descope",
+		"index/splunkOnCallConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
 		"index/sqlConnector",
 		&module{version},
 	)
@@ -840,6 +900,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"descope",
 		"index/voiceTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/vonageConnector",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/wellknownSettings",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

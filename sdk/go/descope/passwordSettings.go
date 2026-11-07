@@ -54,6 +54,8 @@ type PasswordSettings struct {
 	Reuse pulumi.BoolOutput `pulumi:"reuse"`
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount pulumi.IntOutput `pulumi:"reuseAmount"`
+	// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+	RolePolicies PasswordSettingsRolePolicyArrayOutput `pulumi:"rolePolicies"`
 	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
 	TemporaryLock pulumi.BoolOutput `pulumi:"temporaryLock"`
 	// The number of failed login attempts allowed before an account is temporarily locked.
@@ -135,6 +137,8 @@ type passwordSettingsState struct {
 	Reuse *bool `pulumi:"reuse"`
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount *int `pulumi:"reuseAmount"`
+	// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+	RolePolicies []PasswordSettingsRolePolicy `pulumi:"rolePolicies"`
 	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
 	TemporaryLock *bool `pulumi:"temporaryLock"`
 	// The number of failed login attempts allowed before an account is temporarily locked.
@@ -184,6 +188,8 @@ type PasswordSettingsState struct {
 	Reuse pulumi.BoolPtrInput
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount pulumi.IntPtrInput
+	// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+	RolePolicies PasswordSettingsRolePolicyArrayInput
 	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
 	TemporaryLock pulumi.BoolPtrInput
 	// The number of failed login attempts allowed before an account is temporarily locked.
@@ -237,6 +243,8 @@ type passwordSettingsArgs struct {
 	Reuse *bool `pulumi:"reuse"`
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount *int `pulumi:"reuseAmount"`
+	// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+	RolePolicies []PasswordSettingsRolePolicy `pulumi:"rolePolicies"`
 	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
 	TemporaryLock *bool `pulumi:"temporaryLock"`
 	// The number of failed login attempts allowed before an account is temporarily locked.
@@ -287,6 +295,8 @@ type PasswordSettingsArgs struct {
 	Reuse pulumi.BoolPtrInput
 	// The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 	ReuseAmount pulumi.IntPtrInput
+	// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+	RolePolicies PasswordSettingsRolePolicyArrayInput
 	// Whether the user account should be temporarily locked after a specified number of failed login attempts.
 	TemporaryLock pulumi.BoolPtrInput
 	// The number of failed login attempts allowed before an account is temporarily locked.
@@ -477,6 +487,11 @@ func (o PasswordSettingsOutput) Reuse() pulumi.BoolOutput {
 // The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
 func (o PasswordSettingsOutput) ReuseAmount() pulumi.IntOutput {
 	return o.ApplyT(func(v *PasswordSettings) pulumi.IntOutput { return v.ReuseAmount }).(pulumi.IntOutput)
+}
+
+// Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+func (o PasswordSettingsOutput) RolePolicies() PasswordSettingsRolePolicyArrayOutput {
+	return o.ApplyT(func(v *PasswordSettings) PasswordSettingsRolePolicyArrayOutput { return v.RolePolicies }).(PasswordSettingsRolePolicyArrayOutput)
 }
 
 // Whether the user account should be temporarily locked after a specified number of failed login attempts.

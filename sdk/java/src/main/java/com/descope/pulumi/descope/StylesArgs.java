@@ -15,14 +15,14 @@ public final class StylesArgs extends com.pulumi.resources.ResourceArgs {
     public static final StylesArgs Empty = new StylesArgs();
 
     /**
-     * The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax.
+     * The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data&#39;s `componentsVersion` differs from the project&#39;s, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
      * 
      */
     @Import(name="data", required=true)
     private Output<String> data;
 
     /**
-     * @return The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax.
+     * @return The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data&#39;s `componentsVersion` differs from the project&#39;s, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
      * 
      */
     public Output<String> data() {
@@ -70,7 +70,7 @@ public final class StylesArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param data The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax.
+         * @param data The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data&#39;s `componentsVersion` differs from the project&#39;s, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
          * 
          * @return builder
          * 
@@ -81,7 +81,7 @@ public final class StylesArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param data The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax.
+         * @param data The JSON data of the styles in their exported theme representation, defining the visual styling of the project&#39;s flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file(&#34;...&#34;)` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data&#39;s `componentsVersion` differs from the project&#39;s, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
          * 
          * @return builder
          * 

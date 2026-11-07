@@ -21,6 +21,20 @@ import javax.annotation.Nullable;
 @ResourceType(type="descope:index/totpSettings:TotpSettings")
 public class TotpSettings extends com.pulumi.resources.CustomResource {
     /**
+     * The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+     * 
+     */
+    @Export(name="accountLabel", refs={String.class}, tree="[0]")
+    private Output<String> accountLabel;
+
+    /**
+     * @return The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+     * 
+     */
+    public Output<String> accountLabel() {
+        return this.accountLabel;
+    }
+    /**
      * Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
      * 
      */

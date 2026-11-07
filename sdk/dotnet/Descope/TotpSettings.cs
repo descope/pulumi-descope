@@ -17,6 +17,12 @@ namespace Descope.Pulumi.Descope
     public partial class TotpSettings : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        /// </summary>
+        [Output("accountLabel")]
+        public Output<string> AccountLabel { get; private set; } = null!;
+
+        /// <summary>
         /// Setting this to `True` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         /// </summary>
         [Output("disabled")]
@@ -82,6 +88,12 @@ namespace Descope.Pulumi.Descope
     public sealed class TotpSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        /// </summary>
+        [Input("accountLabel")]
+        public Input<string>? AccountLabel { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         /// </summary>
         [Input("disabled")]
@@ -107,6 +119,12 @@ namespace Descope.Pulumi.Descope
 
     public sealed class TotpSettingsState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        /// </summary>
+        [Input("accountLabel")]
+        public Input<string>? AccountLabel { get; set; }
+
         /// <summary>
         /// Setting this to `True` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         /// </summary>

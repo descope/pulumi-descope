@@ -18,6 +18,21 @@ public final class TotpSettingsArgs extends com.pulumi.resources.ResourceArgs {
     public static final TotpSettingsArgs Empty = new TotpSettingsArgs();
 
     /**
+     * The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+     * 
+     */
+    @Import(name="accountLabel")
+    private @Nullable Output<String> accountLabel;
+
+    /**
+     * @return The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+     * 
+     */
+    public Optional<Output<String>> accountLabel() {
+        return Optional.ofNullable(this.accountLabel);
+    }
+
+    /**
      * Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
      * 
      */
@@ -65,6 +80,7 @@ public final class TotpSettingsArgs extends com.pulumi.resources.ResourceArgs {
     private TotpSettingsArgs() {}
 
     private TotpSettingsArgs(TotpSettingsArgs $) {
+        this.accountLabel = $.accountLabel;
         this.disabled = $.disabled;
         this.projectId = $.projectId;
         this.serviceLabel = $.serviceLabel;
@@ -86,6 +102,27 @@ public final class TotpSettingsArgs extends com.pulumi.resources.ResourceArgs {
 
         public Builder(TotpSettingsArgs defaults) {
             $ = new TotpSettingsArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param accountLabel The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder accountLabel(@Nullable Output<String> accountLabel) {
+            $.accountLabel = accountLabel;
+            return this;
+        }
+
+        /**
+         * @param accountLabel The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.&lt;name&gt;}}`. When empty, or when it renders empty for a user, the user&#39;s login ID is used.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder accountLabel(String accountLabel) {
+            return accountLabel(Output.of(accountLabel));
         }
 
         /**

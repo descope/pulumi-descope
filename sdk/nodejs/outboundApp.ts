@@ -64,6 +64,10 @@ export class OutboundApp extends pulumi.CustomResource {
      */
     declare public readonly clientSecret: pulumi.Output<string>;
     /**
+     * The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+     */
+    declare public readonly dcrUrl: pulumi.Output<string>;
+    /**
      * The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
      */
     declare public readonly defaultRedirectUrl: pulumi.Output<string>;
@@ -111,6 +115,10 @@ export class OutboundApp extends pulumi.CustomResource {
      * Additional query parameters to append to the token request, for providers that require them.
      */
     declare public readonly tokenUrlParams: pulumi.Output<{[key: string]: string}>;
+    /**
+     * Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+     */
+    declare public readonly useDcr: pulumi.Output<boolean>;
 
     /**
      * Create a OutboundApp resource with the given unique name, arguments, and options.
@@ -132,6 +140,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["callbackDomain"] = state?.callbackDomain;
             resourceInputs["clientId"] = state?.clientId;
             resourceInputs["clientSecret"] = state?.clientSecret;
+            resourceInputs["dcrUrl"] = state?.dcrUrl;
             resourceInputs["defaultRedirectUrl"] = state?.defaultRedirectUrl;
             resourceInputs["defaultScopes"] = state?.defaultScopes;
             resourceInputs["description"] = state?.description;
@@ -144,6 +153,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["revocationUrl"] = state?.revocationUrl;
             resourceInputs["tokenUrl"] = state?.tokenUrl;
             resourceInputs["tokenUrlParams"] = state?.tokenUrlParams;
+            resourceInputs["useDcr"] = state?.useDcr;
         } else {
             const args = argsOrState as OutboundAppArgs | undefined;
             if (args?.projectId === undefined && !opts.urn) {
@@ -156,6 +166,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["callbackDomain"] = args?.callbackDomain;
             resourceInputs["clientId"] = args?.clientId;
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
+            resourceInputs["dcrUrl"] = args?.dcrUrl;
             resourceInputs["defaultRedirectUrl"] = args?.defaultRedirectUrl;
             resourceInputs["defaultScopes"] = args?.defaultScopes;
             resourceInputs["description"] = args?.description;
@@ -168,6 +179,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["revocationUrl"] = args?.revocationUrl;
             resourceInputs["tokenUrl"] = args?.tokenUrl;
             resourceInputs["tokenUrlParams"] = args?.tokenUrlParams;
+            resourceInputs["useDcr"] = args?.useDcr;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
@@ -208,6 +220,10 @@ export interface OutboundAppState {
      * The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
      */
     clientSecret?: pulumi.Input<string | undefined>;
+    /**
+     * The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+     */
+    dcrUrl?: pulumi.Input<string | undefined>;
     /**
      * The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
      */
@@ -256,6 +272,10 @@ export interface OutboundAppState {
      * Additional query parameters to append to the token request, for providers that require them.
      */
     tokenUrlParams?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+     */
+    useDcr?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -290,6 +310,10 @@ export interface OutboundAppArgs {
      * The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
      */
     clientSecret?: pulumi.Input<string | undefined>;
+    /**
+     * The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+     */
+    dcrUrl?: pulumi.Input<string | undefined>;
     /**
      * The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
      */
@@ -338,4 +362,8 @@ export interface OutboundAppArgs {
      * Additional query parameters to append to the token request, for providers that require them.
      */
     tokenUrlParams?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+     */
+    useDcr?: pulumi.Input<boolean | undefined>;
 }

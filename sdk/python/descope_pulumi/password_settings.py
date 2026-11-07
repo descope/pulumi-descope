@@ -13,6 +13,8 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['PasswordSettingsArgs', 'PasswordSettings']
 
@@ -38,6 +40,7 @@ class PasswordSettingsArgs:
                  number: pulumi.Input[Optional[_builtins.bool]] = None,
                  reuse: pulumi.Input[Optional[_builtins.bool]] = None,
                  reuse_amount: pulumi.Input[Optional[_builtins.int]] = None,
+                 role_policies: pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]] = None,
                  temporary_lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  temporary_lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  temporary_lock_duration: pulumi.Input[Optional[_builtins.str]] = None,
@@ -64,6 +67,7 @@ class PasswordSettingsArgs:
         :param pulumi.Input[_builtins.bool] number: Whether passwords must contain at least one number.
         :param pulumi.Input[_builtins.bool] reuse: Whether to forbid password reuse when users change their password.
         :param pulumi.Input[_builtins.int] reuse_amount: The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+        :param pulumi.Input[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]] role_policies: Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
         :param pulumi.Input[_builtins.bool] temporary_lock: Whether the user account should be temporarily locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] temporary_lock_attempts: The number of failed login attempts allowed before an account is temporarily locked.
         :param pulumi.Input[_builtins.str] temporary_lock_duration: The amount of time before the user can sign in again after the account is temporarily locked.
@@ -106,6 +110,8 @@ class PasswordSettingsArgs:
             pulumi.set(__self__, "reuse", reuse)
         if reuse_amount is not None:
             pulumi.set(__self__, "reuse_amount", reuse_amount)
+        if role_policies is not None:
+            pulumi.set(__self__, "role_policies", role_policies)
         if temporary_lock is not None:
             pulumi.set(__self__, "temporary_lock", temporary_lock)
         if temporary_lock_attempts is not None:
@@ -344,6 +350,18 @@ class PasswordSettingsArgs:
         pulumi.set(self, "reuse_amount", value)
 
     @_builtins.property
+    @pulumi.getter(name="rolePolicies")
+    def role_policies(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]]:
+        """
+        Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        """
+        return pulumi.get(self, "role_policies")
+
+    @role_policies.setter
+    def role_policies(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]]):
+        pulumi.set(self, "role_policies", value)
+
+    @_builtins.property
     @pulumi.getter(name="temporaryLock")
     def temporary_lock(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -414,6 +432,7 @@ class _PasswordSettingsState:
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reuse: pulumi.Input[Optional[_builtins.bool]] = None,
                  reuse_amount: pulumi.Input[Optional[_builtins.int]] = None,
+                 role_policies: pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]] = None,
                  temporary_lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  temporary_lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  temporary_lock_duration: pulumi.Input[Optional[_builtins.str]] = None,
@@ -440,6 +459,7 @@ class _PasswordSettingsState:
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] reuse: Whether to forbid password reuse when users change their password.
         :param pulumi.Input[_builtins.int] reuse_amount: The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+        :param pulumi.Input[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]] role_policies: Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
         :param pulumi.Input[_builtins.bool] temporary_lock: Whether the user account should be temporarily locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] temporary_lock_attempts: The number of failed login attempts allowed before an account is temporarily locked.
         :param pulumi.Input[_builtins.str] temporary_lock_duration: The amount of time before the user can sign in again after the account is temporarily locked.
@@ -483,6 +503,8 @@ class _PasswordSettingsState:
             pulumi.set(__self__, "reuse", reuse)
         if reuse_amount is not None:
             pulumi.set(__self__, "reuse_amount", reuse_amount)
+        if role_policies is not None:
+            pulumi.set(__self__, "role_policies", role_policies)
         if temporary_lock is not None:
             pulumi.set(__self__, "temporary_lock", temporary_lock)
         if temporary_lock_attempts is not None:
@@ -721,6 +743,18 @@ class _PasswordSettingsState:
         pulumi.set(self, "reuse_amount", value)
 
     @_builtins.property
+    @pulumi.getter(name="rolePolicies")
+    def role_policies(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]]:
+        """
+        Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        """
+        return pulumi.get(self, "role_policies")
+
+    @role_policies.setter
+    def role_policies(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['PasswordSettingsRolePolicyArgs']]]]):
+        pulumi.set(self, "role_policies", value)
+
+    @_builtins.property
     @pulumi.getter(name="temporaryLock")
     def temporary_lock(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -794,6 +828,7 @@ class PasswordSettings(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reuse: pulumi.Input[Optional[_builtins.bool]] = None,
                  reuse_amount: pulumi.Input[Optional[_builtins.int]] = None,
+                 role_policies: pulumi.Input[Optional[Sequence[pulumi.Input[Union['PasswordSettingsRolePolicyArgs', 'PasswordSettingsRolePolicyArgsDict', 'outputs.PasswordSettingsRolePolicy']]]]] = None,
                  temporary_lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  temporary_lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  temporary_lock_duration: pulumi.Input[Optional[_builtins.str]] = None,
@@ -824,6 +859,7 @@ class PasswordSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] reuse: Whether to forbid password reuse when users change their password.
         :param pulumi.Input[_builtins.int] reuse_amount: The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['PasswordSettingsRolePolicyArgs', 'PasswordSettingsRolePolicyArgsDict', 'outputs.PasswordSettingsRolePolicy']]]] role_policies: Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
         :param pulumi.Input[_builtins.bool] temporary_lock: Whether the user account should be temporarily locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] temporary_lock_attempts: The number of failed login attempts allowed before an account is temporarily locked.
         :param pulumi.Input[_builtins.str] temporary_lock_duration: The amount of time before the user can sign in again after the account is temporarily locked.
@@ -873,6 +909,7 @@ class PasswordSettings(pulumi.CustomResource):
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  reuse: pulumi.Input[Optional[_builtins.bool]] = None,
                  reuse_amount: pulumi.Input[Optional[_builtins.int]] = None,
+                 role_policies: pulumi.Input[Optional[Sequence[pulumi.Input[Union['PasswordSettingsRolePolicyArgs', 'PasswordSettingsRolePolicyArgsDict', 'outputs.PasswordSettingsRolePolicy']]]]] = None,
                  temporary_lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  temporary_lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  temporary_lock_duration: pulumi.Input[Optional[_builtins.str]] = None,
@@ -907,6 +944,7 @@ class PasswordSettings(pulumi.CustomResource):
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["reuse"] = reuse
             __props__.__dict__["reuse_amount"] = reuse_amount
+            __props__.__dict__["role_policies"] = role_policies
             __props__.__dict__["temporary_lock"] = temporary_lock
             __props__.__dict__["temporary_lock_attempts"] = temporary_lock_attempts
             __props__.__dict__["temporary_lock_duration"] = temporary_lock_duration
@@ -940,6 +978,7 @@ class PasswordSettings(pulumi.CustomResource):
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             reuse: pulumi.Input[Optional[_builtins.bool]] = None,
             reuse_amount: pulumi.Input[Optional[_builtins.int]] = None,
+            role_policies: pulumi.Input[Optional[Sequence[pulumi.Input[Union['PasswordSettingsRolePolicyArgs', 'PasswordSettingsRolePolicyArgsDict', 'outputs.PasswordSettingsRolePolicy']]]]] = None,
             temporary_lock: pulumi.Input[Optional[_builtins.bool]] = None,
             temporary_lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
             temporary_lock_duration: pulumi.Input[Optional[_builtins.str]] = None,
@@ -970,6 +1009,7 @@ class PasswordSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] reuse: Whether to forbid password reuse when users change their password.
         :param pulumi.Input[_builtins.int] reuse_amount: The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['PasswordSettingsRolePolicyArgs', 'PasswordSettingsRolePolicyArgsDict', 'outputs.PasswordSettingsRolePolicy']]]] role_policies: Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
         :param pulumi.Input[_builtins.bool] temporary_lock: Whether the user account should be temporarily locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] temporary_lock_attempts: The number of failed login attempts allowed before an account is temporarily locked.
         :param pulumi.Input[_builtins.str] temporary_lock_duration: The amount of time before the user can sign in again after the account is temporarily locked.
@@ -998,6 +1038,7 @@ class PasswordSettings(pulumi.CustomResource):
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["reuse"] = reuse
         __props__.__dict__["reuse_amount"] = reuse_amount
+        __props__.__dict__["role_policies"] = role_policies
         __props__.__dict__["temporary_lock"] = temporary_lock
         __props__.__dict__["temporary_lock_attempts"] = temporary_lock_attempts
         __props__.__dict__["temporary_lock_duration"] = temporary_lock_duration
@@ -1155,6 +1196,14 @@ class PasswordSettings(pulumi.CustomResource):
         The number of previous passwords whose hashes are kept to prevent users from reusing old passwords.
         """
         return pulumi.get(self, "reuse_amount")
+
+    @_builtins.property
+    @pulumi.getter(name="rolePolicies")
+    def role_policies(self) -> pulumi.Output[Sequence['outputs.PasswordSettingsRolePolicy']]:
+        """
+        Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+        """
+        return pulumi.get(self, "role_policies")
 
     @_builtins.property
     @pulumi.getter(name="temporaryLock")
