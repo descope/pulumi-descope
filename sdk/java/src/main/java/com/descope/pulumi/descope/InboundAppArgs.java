@@ -4,10 +4,12 @@
 package com.descope.pulumi.descope;
 
 import com.descope.pulumi.descope.inputs.InboundAppAttributesScopeArgs;
+import com.descope.pulumi.descope.inputs.InboundAppClientAssertionArgs;
 import com.descope.pulumi.descope.inputs.InboundAppConnectionsScopeArgs;
 import com.descope.pulumi.descope.inputs.InboundAppPermissionsScopeArgs;
 import com.descope.pulumi.descope.inputs.InboundAppScopeClaimMappingArgs;
 import com.descope.pulumi.descope.inputs.InboundAppSessionSettingsArgs;
+import com.descope.pulumi.descope.inputs.InboundAppWorkloadClientAssertionArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
@@ -84,6 +86,66 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    @Import(name="authorizationCodeDisabled")
+    private @Nullable Output<Boolean> authorizationCodeDisabled;
+
+    /**
+     * @return Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    public Optional<Output<Boolean>> authorizationCodeDisabled() {
+        return Optional.ofNullable(this.authorizationCodeDisabled);
+    }
+
+    /**
+     * The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+     * 
+     */
+    @Import(name="clientAssertions")
+    private @Nullable Output<List<InboundAppClientAssertionArgs>> clientAssertions;
+
+    /**
+     * @return The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+     * 
+     */
+    public Optional<Output<List<InboundAppClientAssertionArgs>>> clientAssertions() {
+        return Optional.ofNullable(this.clientAssertions);
+    }
+
+    /**
+     * How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+     * 
+     */
+    @Import(name="clientAuthMethod")
+    private @Nullable Output<String> clientAuthMethod;
+
+    /**
+     * @return How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+     * 
+     */
+    public Optional<Output<String>> clientAuthMethod() {
+        return Optional.ofNullable(this.clientAuthMethod);
+    }
+
+    /**
+     * Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+     * 
+     */
+    @Import(name="clientCredentialsDisabled")
+    private @Nullable Output<Boolean> clientCredentialsDisabled;
+
+    /**
+     * @return Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+     * 
+     */
+    public Optional<Output<Boolean>> clientCredentialsDisabled() {
+        return Optional.ofNullable(this.clientCredentialsDisabled);
+    }
+
+    /**
      * A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
      * 
      */
@@ -114,14 +176,14 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode. If this attribute is omitted when the app is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
      * 
      */
     @Import(name="clientType")
     private @Nullable Output<String> clientType;
 
     /**
-     * @return The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+     * @return The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode. If this attribute is omitted when the app is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
      * 
      */
     public Optional<Output<String>> clientType() {
@@ -189,6 +251,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    @Import(name="deviceCodeDisabled")
+    private @Nullable Output<Boolean> deviceCodeDisabled;
+
+    /**
+     * @return Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    public Optional<Output<Boolean>> deviceCodeDisabled() {
+        return Optional.ofNullable(this.deviceCodeDisabled);
+    }
+
+    /**
      * When enabled, all of the user&#39;s tenants, roles, and permissions will always be included in issued tokens.
      * 
      */
@@ -231,6 +308,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<Boolean>> forcePkce() {
         return Optional.ofNullable(this.forcePkce);
+    }
+
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+     * 
+     */
+    @Import(name="jwtBearerDisabled")
+    private @Nullable Output<Boolean> jwtBearerDisabled;
+
+    /**
+     * @return Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+     * 
+     */
+    public Optional<Output<Boolean>> jwtBearerDisabled() {
+        return Optional.ofNullable(this.jwtBearerDisabled);
     }
 
     /**
@@ -309,6 +401,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    @Import(name="refreshTokenDisabled")
+    private @Nullable Output<Boolean> refreshTokenDisabled;
+
+    /**
+     * @return Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    public Optional<Output<Boolean>> refreshTokenDisabled() {
+        return Optional.ofNullable(this.refreshTokenDisabled);
+    }
+
+    /**
      * Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
      * 
      */
@@ -338,6 +445,36 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.sessionSettings);
     }
 
+    /**
+     * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    @Import(name="tokenExchangeDisabled")
+    private @Nullable Output<Boolean> tokenExchangeDisabled;
+
+    /**
+     * @return Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+     * 
+     */
+    public Optional<Output<Boolean>> tokenExchangeDisabled() {
+        return Optional.ofNullable(this.tokenExchangeDisabled);
+    }
+
+    /**
+     * The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+     * 
+     */
+    @Import(name="workloadClientAssertions")
+    private @Nullable Output<List<InboundAppWorkloadClientAssertionArgs>> workloadClientAssertions;
+
+    /**
+     * @return The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+     * 
+     */
+    public Optional<Output<List<InboundAppWorkloadClientAssertionArgs>>> workloadClientAssertions() {
+        return Optional.ofNullable(this.workloadClientAssertions);
+    }
+
     private InboundAppArgs() {}
 
     private InboundAppArgs(InboundAppArgs $) {
@@ -345,6 +482,10 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.approvedCallbackUrls = $.approvedCallbackUrls;
         this.attributesScopes = $.attributesScopes;
         this.audienceWhitelists = $.audienceWhitelists;
+        this.authorizationCodeDisabled = $.authorizationCodeDisabled;
+        this.clientAssertions = $.clientAssertions;
+        this.clientAuthMethod = $.clientAuthMethod;
+        this.clientCredentialsDisabled = $.clientCredentialsDisabled;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
         this.clientType = $.clientType;
@@ -352,16 +493,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.defaultAudience = $.defaultAudience;
         this.deletionProtection = $.deletionProtection;
         this.description = $.description;
+        this.deviceCodeDisabled = $.deviceCodeDisabled;
         this.forceAddAllAuthorizationInfo = $.forceAddAllAuthorizationInfo;
         this.forceDpop = $.forceDpop;
         this.forcePkce = $.forcePkce;
+        this.jwtBearerDisabled = $.jwtBearerDisabled;
         this.loginPageUrl = $.loginPageUrl;
         this.logoUrl = $.logoUrl;
         this.name = $.name;
         this.permissionsScopes = $.permissionsScopes;
         this.projectId = $.projectId;
+        this.refreshTokenDisabled = $.refreshTokenDisabled;
         this.scopeClaimMappings = $.scopeClaimMappings;
         this.sessionSettings = $.sessionSettings;
+        this.tokenExchangeDisabled = $.tokenExchangeDisabled;
+        this.workloadClientAssertions = $.workloadClientAssertions;
     }
 
     public static Builder builder() {
@@ -507,6 +653,100 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param authorizationCodeDisabled Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authorizationCodeDisabled(@Nullable Output<Boolean> authorizationCodeDisabled) {
+            $.authorizationCodeDisabled = authorizationCodeDisabled;
+            return this;
+        }
+
+        /**
+         * @param authorizationCodeDisabled Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder authorizationCodeDisabled(Boolean authorizationCodeDisabled) {
+            return authorizationCodeDisabled(Output.of(authorizationCodeDisabled));
+        }
+
+        /**
+         * @param clientAssertions The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAssertions(@Nullable Output<List<InboundAppClientAssertionArgs>> clientAssertions) {
+            $.clientAssertions = clientAssertions;
+            return this;
+        }
+
+        /**
+         * @param clientAssertions The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAssertions(List<InboundAppClientAssertionArgs> clientAssertions) {
+            return clientAssertions(Output.of(clientAssertions));
+        }
+
+        /**
+         * @param clientAssertions The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAssertions(InboundAppClientAssertionArgs... clientAssertions) {
+            return clientAssertions(List.of(clientAssertions));
+        }
+
+        /**
+         * @param clientAuthMethod How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAuthMethod(@Nullable Output<String> clientAuthMethod) {
+            $.clientAuthMethod = clientAuthMethod;
+            return this;
+        }
+
+        /**
+         * @param clientAuthMethod How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientAuthMethod(String clientAuthMethod) {
+            return clientAuthMethod(Output.of(clientAuthMethod));
+        }
+
+        /**
+         * @param clientCredentialsDisabled Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientCredentialsDisabled(@Nullable Output<Boolean> clientCredentialsDisabled) {
+            $.clientCredentialsDisabled = clientCredentialsDisabled;
+            return this;
+        }
+
+        /**
+         * @param clientCredentialsDisabled Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clientCredentialsDisabled(Boolean clientCredentialsDisabled) {
+            return clientCredentialsDisabled(Output.of(clientCredentialsDisabled));
+        }
+
+        /**
          * @param clientId A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
          * 
          * @return builder
@@ -549,7 +789,7 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode. If this attribute is omitted when the app is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
          * 
          * @return builder
          * 
@@ -560,7 +800,7 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+         * @param clientType The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode. If this attribute is omitted when the app is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
          * 
          * @return builder
          * 
@@ -664,6 +904,27 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param deviceCodeDisabled Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deviceCodeDisabled(@Nullable Output<Boolean> deviceCodeDisabled) {
+            $.deviceCodeDisabled = deviceCodeDisabled;
+            return this;
+        }
+
+        /**
+         * @param deviceCodeDisabled Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder deviceCodeDisabled(Boolean deviceCodeDisabled) {
+            return deviceCodeDisabled(Output.of(deviceCodeDisabled));
+        }
+
+        /**
          * @param forceAddAllAuthorizationInfo When enabled, all of the user&#39;s tenants, roles, and permissions will always be included in issued tokens.
          * 
          * @return builder
@@ -724,6 +985,27 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder forcePkce(Boolean forcePkce) {
             return forcePkce(Output.of(forcePkce));
+        }
+
+        /**
+         * @param jwtBearerDisabled Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder jwtBearerDisabled(@Nullable Output<Boolean> jwtBearerDisabled) {
+            $.jwtBearerDisabled = jwtBearerDisabled;
+            return this;
+        }
+
+        /**
+         * @param jwtBearerDisabled Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder jwtBearerDisabled(Boolean jwtBearerDisabled) {
+            return jwtBearerDisabled(Output.of(jwtBearerDisabled));
         }
 
         /**
@@ -842,6 +1124,27 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param refreshTokenDisabled Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder refreshTokenDisabled(@Nullable Output<Boolean> refreshTokenDisabled) {
+            $.refreshTokenDisabled = refreshTokenDisabled;
+            return this;
+        }
+
+        /**
+         * @param refreshTokenDisabled Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder refreshTokenDisabled(Boolean refreshTokenDisabled) {
+            return refreshTokenDisabled(Output.of(refreshTokenDisabled));
+        }
+
+        /**
          * @param scopeClaimMappings Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
          * 
          * @return builder
@@ -891,6 +1194,58 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder sessionSettings(InboundAppSessionSettingsArgs sessionSettings) {
             return sessionSettings(Output.of(sessionSettings));
+        }
+
+        /**
+         * @param tokenExchangeDisabled Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tokenExchangeDisabled(@Nullable Output<Boolean> tokenExchangeDisabled) {
+            $.tokenExchangeDisabled = tokenExchangeDisabled;
+            return this;
+        }
+
+        /**
+         * @param tokenExchangeDisabled Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tokenExchangeDisabled(Boolean tokenExchangeDisabled) {
+            return tokenExchangeDisabled(Output.of(tokenExchangeDisabled));
+        }
+
+        /**
+         * @param workloadClientAssertions The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder workloadClientAssertions(@Nullable Output<List<InboundAppWorkloadClientAssertionArgs>> workloadClientAssertions) {
+            $.workloadClientAssertions = workloadClientAssertions;
+            return this;
+        }
+
+        /**
+         * @param workloadClientAssertions The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder workloadClientAssertions(List<InboundAppWorkloadClientAssertionArgs> workloadClientAssertions) {
+            return workloadClientAssertions(Output.of(workloadClientAssertions));
+        }
+
+        /**
+         * @param workloadClientAssertions The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder workloadClientAssertions(InboundAppWorkloadClientAssertionArgs... workloadClientAssertions) {
+            return workloadClientAssertions(List.of(workloadClientAssertions));
         }
 
         public InboundAppArgs build() {

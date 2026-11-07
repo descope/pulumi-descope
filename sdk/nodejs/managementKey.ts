@@ -125,7 +125,7 @@ export class ManagementKey extends pulumi.CustomResource {
      */
     declare public readonly permittedIps: pulumi.Output<string[]>;
     /**
-     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      */
     declare public readonly rebac: pulumi.Output<outputs.ManagementKeyRebac>;
     /**
@@ -198,7 +198,7 @@ export interface ManagementKeyState {
      */
     permittedIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      */
     rebac?: pulumi.Input<inputs.ManagementKeyRebac | undefined>;
     /**
@@ -228,7 +228,7 @@ export interface ManagementKeyArgs {
      */
     permittedIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      */
     rebac: pulumi.Input<inputs.ManagementKeyRebac>;
     /**

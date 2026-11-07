@@ -47,6 +47,21 @@ public final class SesConnectorState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     * 
+     */
+    @Import(name="configurationSetName")
+    private @Nullable Output<String> configurationSetName;
+
+    /**
+     * @return The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     * 
+     */
+    public Optional<Output<String>> configurationSetName() {
+        return Optional.ofNullable(this.configurationSetName);
+    }
+
+    /**
      * A description of what your connector is used for.
      * 
      */
@@ -216,6 +231,7 @@ public final class SesConnectorState extends com.pulumi.resources.ResourceArgs {
     private SesConnectorState(SesConnectorState $) {
         this.accessKeyId = $.accessKeyId;
         this.authType = $.authType;
+        this.configurationSetName = $.configurationSetName;
         this.description = $.description;
         this.endpoint = $.endpoint;
         this.externalId = $.externalId;
@@ -287,6 +303,27 @@ public final class SesConnectorState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder authType(String authType) {
             return authType(Output.of(authType));
+        }
+
+        /**
+         * @param configurationSetName The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder configurationSetName(@Nullable Output<String> configurationSetName) {
+            $.configurationSetName = configurationSetName;
+            return this;
+        }
+
+        /**
+         * @param configurationSetName The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder configurationSetName(String configurationSetName) {
+            return configurationSetName(Output.of(configurationSetName));
         }
 
         /**

@@ -23,8 +23,10 @@ class ProjectSettingsArgs:
                  allow_auth_hosting_iframe_embedding: pulumi.Input[Optional[_builtins.bool]] = None,
                  app_url: pulumi.Input[Optional[_builtins.str]] = None,
                  approved_domains: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apps_custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  default_no_sso_apps: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disable_auth_hosting: pulumi.Input[Optional[_builtins.bool]] = None,
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
@@ -36,8 +38,10 @@ class ProjectSettingsArgs:
         :param pulumi.Input[_builtins.bool] allow_auth_hosting_iframe_embedding: When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
         :param pulumi.Input[_builtins.str] app_url: The URL where your application resides.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_domains: List of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        :param pulumi.Input[_builtins.str] apps_custom_domain: The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
         :param pulumi.Input[_builtins.str] custom_domain: A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `app_url` domain.
         :param pulumi.Input[_builtins.bool] default_no_sso_apps: Whether new users should not be given access to any federated applications by default.
+        :param pulumi.Input[_builtins.bool] disable_auth_hosting: When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
         :param pulumi.Input[_builtins.bool] tenant_user_isolation: Isolate users per tenant so the same login ID is treated as a separate identity in each tenant, with independent credentials and MFA state.
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
         :param pulumi.Input[_builtins.str] test_users_static_otp: A static OTP code that can be used by test users instead of a real verification code. Must be set together with `test_users_verifier_regexp`.
@@ -50,10 +54,14 @@ class ProjectSettingsArgs:
             pulumi.set(__self__, "app_url", app_url)
         if approved_domains is not None:
             pulumi.set(__self__, "approved_domains", approved_domains)
+        if apps_custom_domain is not None:
+            pulumi.set(__self__, "apps_custom_domain", apps_custom_domain)
         if custom_domain is not None:
             pulumi.set(__self__, "custom_domain", custom_domain)
         if default_no_sso_apps is not None:
             pulumi.set(__self__, "default_no_sso_apps", default_no_sso_apps)
+        if disable_auth_hosting is not None:
+            pulumi.set(__self__, "disable_auth_hosting", disable_auth_hosting)
         if tenant_user_isolation is not None:
             pulumi.set(__self__, "tenant_user_isolation", tenant_user_isolation)
         if test_users_loginid_regexp is not None:
@@ -112,6 +120,18 @@ class ProjectSettingsArgs:
         pulumi.set(self, "approved_domains", value)
 
     @_builtins.property
+    @pulumi.getter(name="appsCustomDomain")
+    def apps_custom_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        """
+        return pulumi.get(self, "apps_custom_domain")
+
+    @apps_custom_domain.setter
+    def apps_custom_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "apps_custom_domain", value)
+
+    @_builtins.property
     @pulumi.getter(name="customDomain")
     def custom_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -134,6 +154,18 @@ class ProjectSettingsArgs:
     @default_no_sso_apps.setter
     def default_no_sso_apps(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "default_no_sso_apps", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableAuthHosting")
+    def disable_auth_hosting(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        """
+        return pulumi.get(self, "disable_auth_hosting")
+
+    @disable_auth_hosting.setter
+    def disable_auth_hosting(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "disable_auth_hosting", value)
 
     @_builtins.property
     @pulumi.getter(name="tenantUserIsolation")
@@ -190,8 +222,10 @@ class _ProjectSettingsState:
                  allow_auth_hosting_iframe_embedding: pulumi.Input[Optional[_builtins.bool]] = None,
                  app_url: pulumi.Input[Optional[_builtins.str]] = None,
                  approved_domains: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apps_custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  default_no_sso_apps: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disable_auth_hosting: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
@@ -203,8 +237,10 @@ class _ProjectSettingsState:
         :param pulumi.Input[_builtins.bool] allow_auth_hosting_iframe_embedding: When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
         :param pulumi.Input[_builtins.str] app_url: The URL where your application resides.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_domains: List of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        :param pulumi.Input[_builtins.str] apps_custom_domain: The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
         :param pulumi.Input[_builtins.str] custom_domain: A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `app_url` domain.
         :param pulumi.Input[_builtins.bool] default_no_sso_apps: Whether new users should not be given access to any federated applications by default.
+        :param pulumi.Input[_builtins.bool] disable_auth_hosting: When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] tenant_user_isolation: Isolate users per tenant so the same login ID is treated as a separate identity in each tenant, with independent credentials and MFA state.
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
@@ -217,10 +253,14 @@ class _ProjectSettingsState:
             pulumi.set(__self__, "app_url", app_url)
         if approved_domains is not None:
             pulumi.set(__self__, "approved_domains", approved_domains)
+        if apps_custom_domain is not None:
+            pulumi.set(__self__, "apps_custom_domain", apps_custom_domain)
         if custom_domain is not None:
             pulumi.set(__self__, "custom_domain", custom_domain)
         if default_no_sso_apps is not None:
             pulumi.set(__self__, "default_no_sso_apps", default_no_sso_apps)
+        if disable_auth_hosting is not None:
+            pulumi.set(__self__, "disable_auth_hosting", disable_auth_hosting)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if tenant_user_isolation is not None:
@@ -269,6 +309,18 @@ class _ProjectSettingsState:
         pulumi.set(self, "approved_domains", value)
 
     @_builtins.property
+    @pulumi.getter(name="appsCustomDomain")
+    def apps_custom_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        """
+        return pulumi.get(self, "apps_custom_domain")
+
+    @apps_custom_domain.setter
+    def apps_custom_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "apps_custom_domain", value)
+
+    @_builtins.property
     @pulumi.getter(name="customDomain")
     def custom_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -291,6 +343,18 @@ class _ProjectSettingsState:
     @default_no_sso_apps.setter
     def default_no_sso_apps(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "default_no_sso_apps", value)
+
+    @_builtins.property
+    @pulumi.getter(name="disableAuthHosting")
+    def disable_auth_hosting(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        """
+        return pulumi.get(self, "disable_auth_hosting")
+
+    @disable_auth_hosting.setter
+    def disable_auth_hosting(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "disable_auth_hosting", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -362,8 +426,10 @@ class ProjectSettings(pulumi.CustomResource):
                  allow_auth_hosting_iframe_embedding: pulumi.Input[Optional[_builtins.bool]] = None,
                  app_url: pulumi.Input[Optional[_builtins.str]] = None,
                  approved_domains: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apps_custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  default_no_sso_apps: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disable_auth_hosting: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
@@ -379,8 +445,10 @@ class ProjectSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] allow_auth_hosting_iframe_embedding: When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
         :param pulumi.Input[_builtins.str] app_url: The URL where your application resides.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_domains: List of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        :param pulumi.Input[_builtins.str] apps_custom_domain: The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
         :param pulumi.Input[_builtins.str] custom_domain: A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `app_url` domain.
         :param pulumi.Input[_builtins.bool] default_no_sso_apps: Whether new users should not be given access to any federated applications by default.
+        :param pulumi.Input[_builtins.bool] disable_auth_hosting: When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] tenant_user_isolation: Isolate users per tenant so the same login ID is treated as a separate identity in each tenant, with independent credentials and MFA state.
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
@@ -415,8 +483,10 @@ class ProjectSettings(pulumi.CustomResource):
                  allow_auth_hosting_iframe_embedding: pulumi.Input[Optional[_builtins.bool]] = None,
                  app_url: pulumi.Input[Optional[_builtins.str]] = None,
                  approved_domains: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 apps_custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  default_no_sso_apps: pulumi.Input[Optional[_builtins.bool]] = None,
+                 disable_auth_hosting: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
@@ -434,8 +504,10 @@ class ProjectSettings(pulumi.CustomResource):
             __props__.__dict__["allow_auth_hosting_iframe_embedding"] = allow_auth_hosting_iframe_embedding
             __props__.__dict__["app_url"] = app_url
             __props__.__dict__["approved_domains"] = approved_domains
+            __props__.__dict__["apps_custom_domain"] = apps_custom_domain
             __props__.__dict__["custom_domain"] = custom_domain
             __props__.__dict__["default_no_sso_apps"] = default_no_sso_apps
+            __props__.__dict__["disable_auth_hosting"] = disable_auth_hosting
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
@@ -456,8 +528,10 @@ class ProjectSettings(pulumi.CustomResource):
             allow_auth_hosting_iframe_embedding: pulumi.Input[Optional[_builtins.bool]] = None,
             app_url: pulumi.Input[Optional[_builtins.str]] = None,
             approved_domains: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            apps_custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
             custom_domain: pulumi.Input[Optional[_builtins.str]] = None,
             default_no_sso_apps: pulumi.Input[Optional[_builtins.bool]] = None,
+            disable_auth_hosting: pulumi.Input[Optional[_builtins.bool]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
             test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
@@ -473,8 +547,10 @@ class ProjectSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] allow_auth_hosting_iframe_embedding: When enabled, Descope-hosted flows can be displayed within an iframe on your website. This modifies the security headers that typically prevent the page from being embedded.
         :param pulumi.Input[_builtins.str] app_url: The URL where your application resides.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_domains: List of approved domains that are allowed for redirect and verification URLs for different authentication methods.
+        :param pulumi.Input[_builtins.str] apps_custom_domain: The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
         :param pulumi.Input[_builtins.str] custom_domain: A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `app_url` domain.
         :param pulumi.Input[_builtins.bool] default_no_sso_apps: Whether new users should not be given access to any federated applications by default.
+        :param pulumi.Input[_builtins.bool] disable_auth_hosting: When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] tenant_user_isolation: Isolate users per tenant so the same login ID is treated as a separate identity in each tenant, with independent credentials and MFA state.
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
@@ -488,8 +564,10 @@ class ProjectSettings(pulumi.CustomResource):
         __props__.__dict__["allow_auth_hosting_iframe_embedding"] = allow_auth_hosting_iframe_embedding
         __props__.__dict__["app_url"] = app_url
         __props__.__dict__["approved_domains"] = approved_domains
+        __props__.__dict__["apps_custom_domain"] = apps_custom_domain
         __props__.__dict__["custom_domain"] = custom_domain
         __props__.__dict__["default_no_sso_apps"] = default_no_sso_apps
+        __props__.__dict__["disable_auth_hosting"] = disable_auth_hosting
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["tenant_user_isolation"] = tenant_user_isolation
         __props__.__dict__["test_users_loginid_regexp"] = test_users_loginid_regexp
@@ -522,6 +600,14 @@ class ProjectSettings(pulumi.CustomResource):
         return pulumi.get(self, "approved_domains")
 
     @_builtins.property
+    @pulumi.getter(name="appsCustomDomain")
+    def apps_custom_domain(self) -> pulumi.Output[_builtins.str]:
+        """
+        The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `custom_domain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `custom_domain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        """
+        return pulumi.get(self, "apps_custom_domain")
+
+    @_builtins.property
     @pulumi.getter(name="customDomain")
     def custom_domain(self) -> pulumi.Output[_builtins.str]:
         """
@@ -536,6 +622,14 @@ class ProjectSettings(pulumi.CustomResource):
         Whether new users should not be given access to any federated applications by default.
         """
         return pulumi.get(self, "default_no_sso_apps")
+
+    @_builtins.property
+    @pulumi.getter(name="disableAuthHosting")
+    def disable_auth_hosting(self) -> pulumi.Output[_builtins.bool]:
+        """
+        When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        """
+        return pulumi.get(self, "disable_auth_hosting")
 
     @_builtins.property
     @pulumi.getter(name="projectId")

@@ -30,6 +30,8 @@ type OutboundApp struct {
 	ClientId pulumi.StringOutput `pulumi:"clientId"`
 	// The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
 	ClientSecret pulumi.StringOutput `pulumi:"clientSecret"`
+	// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+	DcrUrl pulumi.StringOutput `pulumi:"dcrUrl"`
 	// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 	DefaultRedirectUrl pulumi.StringOutput `pulumi:"defaultRedirectUrl"`
 	// The scopes requested from the provider when no scopes are given for a specific connection.
@@ -54,6 +56,8 @@ type OutboundApp struct {
 	TokenUrl pulumi.StringOutput `pulumi:"tokenUrl"`
 	// Additional query parameters to append to the token request, for providers that require them.
 	TokenUrlParams pulumi.StringMapOutput `pulumi:"tokenUrlParams"`
+	// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+	UseDcr pulumi.BoolOutput `pulumi:"useDcr"`
 }
 
 // NewOutboundApp registers a new resource with the given unique name, arguments, and options.
@@ -110,6 +114,8 @@ type outboundAppState struct {
 	ClientId *string `pulumi:"clientId"`
 	// The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
 	ClientSecret *string `pulumi:"clientSecret"`
+	// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+	DcrUrl *string `pulumi:"dcrUrl"`
 	// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 	DefaultRedirectUrl *string `pulumi:"defaultRedirectUrl"`
 	// The scopes requested from the provider when no scopes are given for a specific connection.
@@ -134,6 +140,8 @@ type outboundAppState struct {
 	TokenUrl *string `pulumi:"tokenUrl"`
 	// Additional query parameters to append to the token request, for providers that require them.
 	TokenUrlParams map[string]string `pulumi:"tokenUrlParams"`
+	// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+	UseDcr *bool `pulumi:"useDcr"`
 }
 
 type OutboundAppState struct {
@@ -151,6 +159,8 @@ type OutboundAppState struct {
 	ClientId pulumi.StringPtrInput
 	// The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
 	ClientSecret pulumi.StringPtrInput
+	// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+	DcrUrl pulumi.StringPtrInput
 	// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 	DefaultRedirectUrl pulumi.StringPtrInput
 	// The scopes requested from the provider when no scopes are given for a specific connection.
@@ -175,6 +185,8 @@ type OutboundAppState struct {
 	TokenUrl pulumi.StringPtrInput
 	// Additional query parameters to append to the token request, for providers that require them.
 	TokenUrlParams pulumi.StringMapInput
+	// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+	UseDcr pulumi.BoolPtrInput
 }
 
 func (OutboundAppState) ElementType() reflect.Type {
@@ -196,6 +208,8 @@ type outboundAppArgs struct {
 	ClientId *string `pulumi:"clientId"`
 	// The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
 	ClientSecret *string `pulumi:"clientSecret"`
+	// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+	DcrUrl *string `pulumi:"dcrUrl"`
 	// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 	DefaultRedirectUrl *string `pulumi:"defaultRedirectUrl"`
 	// The scopes requested from the provider when no scopes are given for a specific connection.
@@ -220,6 +234,8 @@ type outboundAppArgs struct {
 	TokenUrl *string `pulumi:"tokenUrl"`
 	// Additional query parameters to append to the token request, for providers that require them.
 	TokenUrlParams map[string]string `pulumi:"tokenUrlParams"`
+	// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+	UseDcr *bool `pulumi:"useDcr"`
 }
 
 // The set of arguments for constructing a OutboundApp resource.
@@ -238,6 +254,8 @@ type OutboundAppArgs struct {
 	ClientId pulumi.StringPtrInput
 	// The OAuth client secret issued by the third party provider. The Descope API never returns this value, so it cannot be read back and is not verified against the server. Omitting the field leaves any previously stored secret in place, while setting it to a new value replaces it. An empty string is not accepted.
 	ClientSecret pulumi.StringPtrInput
+	// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+	DcrUrl pulumi.StringPtrInput
 	// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 	DefaultRedirectUrl pulumi.StringPtrInput
 	// The scopes requested from the provider when no scopes are given for a specific connection.
@@ -262,6 +280,8 @@ type OutboundAppArgs struct {
 	TokenUrl pulumi.StringPtrInput
 	// Additional query parameters to append to the token request, for providers that require them.
 	TokenUrlParams pulumi.StringMapInput
+	// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+	UseDcr pulumi.BoolPtrInput
 }
 
 func (OutboundAppArgs) ElementType() reflect.Type {
@@ -386,6 +406,11 @@ func (o OutboundAppOutput) ClientSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *OutboundApp) pulumi.StringOutput { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
+// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+func (o OutboundAppOutput) DcrUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *OutboundApp) pulumi.StringOutput { return v.DcrUrl }).(pulumi.StringOutput)
+}
+
 // The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
 func (o OutboundAppOutput) DefaultRedirectUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *OutboundApp) pulumi.StringOutput { return v.DefaultRedirectUrl }).(pulumi.StringOutput)
@@ -444,6 +469,11 @@ func (o OutboundAppOutput) TokenUrl() pulumi.StringOutput {
 // Additional query parameters to append to the token request, for providers that require them.
 func (o OutboundAppOutput) TokenUrlParams() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *OutboundApp) pulumi.StringMapOutput { return v.TokenUrlParams }).(pulumi.StringMapOutput)
+}
+
+// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+func (o OutboundAppOutput) UseDcr() pulumi.BoolOutput {
+	return o.ApplyT(func(v *OutboundApp) pulumi.BoolOutput { return v.UseDcr }).(pulumi.BoolOutput)
 }
 
 type OutboundAppArrayOutput struct{ *pulumi.OutputState }

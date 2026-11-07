@@ -30,7 +30,7 @@ class ManagementKeyArgs:
         """
         The set of arguments for constructing a ManagementKey resource.
 
-        :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         :param pulumi.Input[_builtins.str] description: A description for the management key.
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
@@ -53,7 +53,7 @@ class ManagementKeyArgs:
     @pulumi.getter
     def rebac(self) -> pulumi.Input['ManagementKeyRebacArgs']:
         """
-        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         """
         return pulumi.get(self, "rebac")
 
@@ -140,7 +140,7 @@ class _ManagementKeyState:
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permitted_ips: A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
-        :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input['ManagementKeyRebacArgs'] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         :param pulumi.Input[_builtins.str] status: The status of the management key. Must be either `active` or `inactive`.
         """
         if cleartext is not None:
@@ -222,7 +222,7 @@ class _ManagementKeyState:
     @pulumi.getter
     def rebac(self) -> pulumi.Input[Optional['ManagementKeyRebacArgs']]:
         """
-        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         """
         return pulumi.get(self, "rebac")
 
@@ -330,7 +330,7 @@ class ManagementKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permitted_ips: A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
-        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         :param pulumi.Input[_builtins.str] status: The status of the management key. Must be either `active` or `inactive`.
         """
         ...
@@ -477,7 +477,7 @@ class ManagementKey(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] expire_time: The expiration time of the management key as a Unix timestamp. If not set, the key will not expire. Changing this value after creation will require the management key to be replaced.
         :param pulumi.Input[_builtins.str] name: A name for the management key.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] permitted_ips: A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
-        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        :param pulumi.Input[Union['ManagementKeyRebacArgs', 'ManagementKeyRebacArgsDict', 'outputs.ManagementKeyRebac']] rebac: Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         :param pulumi.Input[_builtins.str] status: The status of the management key. Must be either `active` or `inactive`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -537,7 +537,7 @@ class ManagementKey(pulumi.CustomResource):
     @pulumi.getter
     def rebac(self) -> pulumi.Output['outputs.ManagementKeyRebac']:
         """
-        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         """
         return pulumi.get(self, "rebac")
 

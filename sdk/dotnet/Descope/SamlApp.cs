@@ -65,10 +65,22 @@ namespace Descope.Pulumi.Descope
         public Output<Outputs.SamlAppDynamicConfiguration> DynamicConfiguration { get; private set; } = null!;
 
         /// <summary>
+        /// The URL to redirect to when an error occurs.
+        /// </summary>
+        [Output("errorRedirectUrl")]
+        public Output<string> ErrorRedirectUrl { get; private set; } = null!;
+
+        /// <summary>
         /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         /// </summary>
         [Output("forceAuthentication")]
         public Output<bool> ForceAuthentication { get; private set; } = null!;
+
+        /// <summary>
+        /// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+        /// </summary>
+        [Output("idpLogoutUrl")]
+        public Output<string> IdpLogoutUrl { get; private set; } = null!;
 
         /// <summary>
         /// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -81,6 +93,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("logo")]
         public Output<string> Logo { get; private set; } = null!;
+
+        /// <summary>
+        /// The URL to redirect to after logout. When the service provider sends the user to the `IdpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+        /// </summary>
+        [Output("logoutRedirectUrl")]
+        public Output<string> LogoutRedirectUrl { get; private set; } = null!;
 
         /// <summary>
         /// Connection details are provided manually. Exactly one of `DynamicConfiguration` and `ManualConfiguration` must be set.
@@ -226,6 +244,12 @@ namespace Descope.Pulumi.Descope
         public Input<Inputs.SamlAppDynamicConfigurationArgs>? DynamicConfiguration { get; set; }
 
         /// <summary>
+        /// The URL to redirect to when an error occurs.
+        /// </summary>
+        [Input("errorRedirectUrl")]
+        public Input<string>? ErrorRedirectUrl { get; set; }
+
+        /// <summary>
         /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         /// </summary>
         [Input("forceAuthentication")]
@@ -242,6 +266,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
+
+        /// <summary>
+        /// The URL to redirect to after logout. When the service provider sends the user to the `IdpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+        /// </summary>
+        [Input("logoutRedirectUrl")]
+        public Input<string>? LogoutRedirectUrl { get; set; }
 
         /// <summary>
         /// Connection details are provided manually. Exactly one of `DynamicConfiguration` and `ManualConfiguration` must be set.
@@ -348,10 +378,22 @@ namespace Descope.Pulumi.Descope
         public Input<Inputs.SamlAppDynamicConfigurationGetArgs>? DynamicConfiguration { get; set; }
 
         /// <summary>
+        /// The URL to redirect to when an error occurs.
+        /// </summary>
+        [Input("errorRedirectUrl")]
+        public Input<string>? ErrorRedirectUrl { get; set; }
+
+        /// <summary>
         /// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
         /// </summary>
         [Input("forceAuthentication")]
         public Input<bool>? ForceAuthentication { get; set; }
+
+        /// <summary>
+        /// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+        /// </summary>
+        [Input("idpLogoutUrl")]
+        public Input<string>? IdpLogoutUrl { get; set; }
 
         /// <summary>
         /// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -364,6 +406,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("logo")]
         public Input<string>? Logo { get; set; }
+
+        /// <summary>
+        /// The URL to redirect to after logout. When the service provider sends the user to the `IdpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+        /// </summary>
+        [Input("logoutRedirectUrl")]
+        public Input<string>? LogoutRedirectUrl { get; set; }
 
         /// <summary>
         /// Connection details are provided manually. Exactly one of `DynamicConfiguration` and `ManualConfiguration` must be set.

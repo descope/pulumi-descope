@@ -38,6 +38,30 @@ namespace Descope.Pulumi.Descope
         public Output<ImmutableArray<string>> AudienceWhitelists { get; private set; } = null!;
 
         /// <summary>
+        /// Disables the `AuthorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Output("authorizationCodeDisabled")]
+        public Output<bool> AuthorizationCodeDisabled { get; private set; } = null!;
+
+        /// <summary>
+        /// The keys that verify a `PrivateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `ClientAuthMethod` is `privateKeyJwt`.
+        /// </summary>
+        [Output("clientAssertions")]
+        public Output<ImmutableArray<Outputs.InboundAppClientAssertion>> ClientAssertions { get; private set; } = null!;
+
+        /// <summary>
+        /// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `ClientSecret`, `privateKeyJwt` accepts a `PrivateKeyJwt` client assertion verified against `ClientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `WorkloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        /// </summary>
+        [Output("clientAuthMethod")]
+        public Output<string> ClientAuthMethod { get; private set; } = null!;
+
+        /// <summary>
+        /// Disables the `ClientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Output("clientCredentialsDisabled")]
+        public Output<bool> ClientCredentialsDisabled { get; private set; } = null!;
+
+        /// <summary>
         /// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         /// </summary>
         [Output("clientId")]
@@ -50,7 +74,7 @@ namespace Descope.Pulumi.Descope
         public Output<string> ClientSecret { get; private set; } = null!;
 
         /// <summary>
-        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `Confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `NonConfidentialClient = true` in v0.3, needs one after moving to `Confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         /// </summary>
         [Output("clientType")]
         public Output<string> ClientType { get; private set; } = null!;
@@ -80,6 +104,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Output("deviceCodeDisabled")]
+        public Output<bool> DeviceCodeDisabled { get; private set; } = null!;
+
+        /// <summary>
         /// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         /// </summary>
         [Output("forceAddAllAuthorizationInfo")]
@@ -96,6 +126,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("forcePkce")]
         public Output<bool> ForcePkce { get; private set; } = null!;
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Output("jwtBearerDisabled")]
+        public Output<bool> JwtBearerDisabled { get; private set; } = null!;
 
         /// <summary>
         /// The Flow Hosting URL.
@@ -128,6 +164,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> ProjectId { get; private set; } = null!;
 
         /// <summary>
+        /// Disables the `RefreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Output("refreshTokenDisabled")]
+        public Output<bool> RefreshTokenDisabled { get; private set; } = null!;
+
+        /// <summary>
         /// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `AttributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         /// </summary>
         [Output("scopeClaimMappings")]
@@ -138,6 +180,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("sessionSettings")]
         public Output<Outputs.InboundAppSessionSettings> SessionSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Output("tokenExchangeDisabled")]
+        public Output<bool> TokenExchangeDisabled { get; private set; } = null!;
+
+        /// <summary>
+        /// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `ClientAuthMethod` is `workloadIdentity`.
+        /// </summary>
+        [Output("workloadClientAssertions")]
+        public Output<ImmutableArray<Outputs.InboundAppWorkloadClientAssertion>> WorkloadClientAssertions { get; private set; } = null!;
 
 
         /// <summary>
@@ -239,6 +293,36 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// Disables the `AuthorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("authorizationCodeDisabled")]
+        public Input<bool>? AuthorizationCodeDisabled { get; set; }
+
+        [Input("clientAssertions")]
+        private InputList<Inputs.InboundAppClientAssertionArgs>? _clientAssertions;
+
+        /// <summary>
+        /// The keys that verify a `PrivateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `ClientAuthMethod` is `privateKeyJwt`.
+        /// </summary>
+        public InputList<Inputs.InboundAppClientAssertionArgs> ClientAssertions
+        {
+            get => _clientAssertions ?? (_clientAssertions = new InputList<Inputs.InboundAppClientAssertionArgs>());
+            set => _clientAssertions = value;
+        }
+
+        /// <summary>
+        /// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `ClientSecret`, `privateKeyJwt` accepts a `PrivateKeyJwt` client assertion verified against `ClientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `WorkloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        /// </summary>
+        [Input("clientAuthMethod")]
+        public Input<string>? ClientAuthMethod { get; set; }
+
+        /// <summary>
+        /// Disables the `ClientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Input("clientCredentialsDisabled")]
+        public Input<bool>? ClientCredentialsDisabled { get; set; }
+
+        /// <summary>
         /// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         /// </summary>
         [Input("clientId")]
@@ -261,7 +345,7 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
-        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `Confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `NonConfidentialClient = true` in v0.3, needs one after moving to `Confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         /// </summary>
         [Input("clientType")]
         public Input<string>? ClientType { get; set; }
@@ -297,6 +381,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("deviceCodeDisabled")]
+        public Input<bool>? DeviceCodeDisabled { get; set; }
+
+        /// <summary>
         /// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         /// </summary>
         [Input("forceAddAllAuthorizationInfo")]
@@ -313,6 +403,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("forcePkce")]
         public Input<bool>? ForcePkce { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Input("jwtBearerDisabled")]
+        public Input<bool>? JwtBearerDisabled { get; set; }
 
         /// <summary>
         /// The Flow Hosting URL.
@@ -350,6 +446,12 @@ namespace Descope.Pulumi.Descope
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
 
+        /// <summary>
+        /// Disables the `RefreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("refreshTokenDisabled")]
+        public Input<bool>? RefreshTokenDisabled { get; set; }
+
         [Input("scopeClaimMappings")]
         private InputList<Inputs.InboundAppScopeClaimMappingArgs>? _scopeClaimMappings;
 
@@ -367,6 +469,24 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sessionSettings")]
         public Input<Inputs.InboundAppSessionSettingsArgs>? SessionSettings { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("tokenExchangeDisabled")]
+        public Input<bool>? TokenExchangeDisabled { get; set; }
+
+        [Input("workloadClientAssertions")]
+        private InputList<Inputs.InboundAppWorkloadClientAssertionArgs>? _workloadClientAssertions;
+
+        /// <summary>
+        /// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `ClientAuthMethod` is `workloadIdentity`.
+        /// </summary>
+        public InputList<Inputs.InboundAppWorkloadClientAssertionArgs> WorkloadClientAssertions
+        {
+            get => _workloadClientAssertions ?? (_workloadClientAssertions = new InputList<Inputs.InboundAppWorkloadClientAssertionArgs>());
+            set => _workloadClientAssertions = value;
+        }
 
         public InboundAppArgs()
         {
@@ -425,6 +545,36 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// Disables the `AuthorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("authorizationCodeDisabled")]
+        public Input<bool>? AuthorizationCodeDisabled { get; set; }
+
+        [Input("clientAssertions")]
+        private InputList<Inputs.InboundAppClientAssertionGetArgs>? _clientAssertions;
+
+        /// <summary>
+        /// The keys that verify a `PrivateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `ClientAuthMethod` is `privateKeyJwt`.
+        /// </summary>
+        public InputList<Inputs.InboundAppClientAssertionGetArgs> ClientAssertions
+        {
+            get => _clientAssertions ?? (_clientAssertions = new InputList<Inputs.InboundAppClientAssertionGetArgs>());
+            set => _clientAssertions = value;
+        }
+
+        /// <summary>
+        /// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `ClientSecret`, `privateKeyJwt` accepts a `PrivateKeyJwt` client assertion verified against `ClientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `WorkloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        /// </summary>
+        [Input("clientAuthMethod")]
+        public Input<string>? ClientAuthMethod { get; set; }
+
+        /// <summary>
+        /// Disables the `ClientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Input("clientCredentialsDisabled")]
+        public Input<bool>? ClientCredentialsDisabled { get; set; }
+
+        /// <summary>
         /// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         /// </summary>
         [Input("clientId")]
@@ -447,7 +597,7 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
-        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        /// The OAuth client type: `Confidential` for a client that authenticates with a secret, or `Public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `Confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `NonConfidentialClient = true` in v0.3, needs one after moving to `Confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         /// </summary>
         [Input("clientType")]
         public Input<string>? ClientType { get; set; }
@@ -483,6 +633,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("deviceCodeDisabled")]
+        public Input<bool>? DeviceCodeDisabled { get; set; }
+
+        /// <summary>
         /// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         /// </summary>
         [Input("forceAddAllAuthorizationInfo")]
@@ -499,6 +655,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("forcePkce")]
         public Input<bool>? ForcePkce { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `ClientType` is `Public`. Public clients cannot use this grant type, so it cannot be set to `False` for one.
+        /// </summary>
+        [Input("jwtBearerDisabled")]
+        public Input<bool>? JwtBearerDisabled { get; set; }
 
         /// <summary>
         /// The Flow Hosting URL.
@@ -536,6 +698,12 @@ namespace Descope.Pulumi.Descope
         [Input("projectId")]
         public Input<string>? ProjectId { get; set; }
 
+        /// <summary>
+        /// Disables the `RefreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("refreshTokenDisabled")]
+        public Input<bool>? RefreshTokenDisabled { get; set; }
+
         [Input("scopeClaimMappings")]
         private InputList<Inputs.InboundAppScopeClaimMappingGetArgs>? _scopeClaimMappings;
 
@@ -553,6 +721,24 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sessionSettings")]
         public Input<Inputs.InboundAppSessionSettingsGetArgs>? SessionSettings { get; set; }
+
+        /// <summary>
+        /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        /// </summary>
+        [Input("tokenExchangeDisabled")]
+        public Input<bool>? TokenExchangeDisabled { get; set; }
+
+        [Input("workloadClientAssertions")]
+        private InputList<Inputs.InboundAppWorkloadClientAssertionGetArgs>? _workloadClientAssertions;
+
+        /// <summary>
+        /// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `ClientAuthMethod` is `workloadIdentity`.
+        /// </summary>
+        public InputList<Inputs.InboundAppWorkloadClientAssertionGetArgs> WorkloadClientAssertions
+        {
+            get => _workloadClientAssertions ?? (_workloadClientAssertions = new InputList<Inputs.InboundAppWorkloadClientAssertionGetArgs>());
+            set => _workloadClientAssertions = value;
+        }
 
         public InboundAppState()
         {

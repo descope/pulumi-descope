@@ -35,6 +35,12 @@ namespace Descope.Pulumi.Descope
         public Output<ImmutableArray<string>> ApprovedDomains { get; private set; } = null!;
 
         /// <summary>
+        /// The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `CustomDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `CustomDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        /// </summary>
+        [Output("appsCustomDomain")]
+        public Output<string> AppsCustomDomain { get; private set; } = null!;
+
+        /// <summary>
         /// A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `AppUrl` domain.
         /// </summary>
         [Output("customDomain")]
@@ -45,6 +51,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("defaultNoSsoApps")]
         public Output<bool> DefaultNoSsoApps { get; private set; } = null!;
+
+        /// <summary>
+        /// When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        /// </summary>
+        [Output("disableAuthHosting")]
+        public Output<bool> DisableAuthHosting { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -148,6 +160,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `CustomDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `CustomDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        /// </summary>
+        [Input("appsCustomDomain")]
+        public Input<string>? AppsCustomDomain { get; set; }
+
+        /// <summary>
         /// A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `AppUrl` domain.
         /// </summary>
         [Input("customDomain")]
@@ -158,6 +176,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("defaultNoSsoApps")]
         public Input<bool>? DefaultNoSsoApps { get; set; }
+
+        /// <summary>
+        /// When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        /// </summary>
+        [Input("disableAuthHosting")]
+        public Input<bool>? DisableAuthHosting { get; set; }
 
         /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -222,6 +246,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `CustomDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `CustomDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+        /// </summary>
+        [Input("appsCustomDomain")]
+        public Input<string>? AppsCustomDomain { get; set; }
+
+        /// <summary>
         /// A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `AppUrl` domain.
         /// </summary>
         [Input("customDomain")]
@@ -232,6 +262,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("defaultNoSsoApps")]
         public Input<bool>? DefaultNoSsoApps { get; set; }
+
+        /// <summary>
+        /// When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+        /// </summary>
+        [Input("disableAuthHosting")]
+        public Input<bool>? DisableAuthHosting { get; set; }
 
         /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.

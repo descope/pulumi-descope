@@ -55,6 +55,21 @@ export type AuditWebhookConnector = import("./auditWebhookConnector").AuditWebho
 export const AuditWebhookConnector: typeof import("./auditWebhookConnector").AuditWebhookConnector = null as any;
 utilities.lazyLoad(exports, ["AuditWebhookConnector"], () => require("./auditWebhookConnector"));
 
+export { AuthAccessPolicyArgs, AuthAccessPolicyState } from "./authAccessPolicy";
+export type AuthAccessPolicy = import("./authAccessPolicy").AuthAccessPolicy;
+export const AuthAccessPolicy: typeof import("./authAccessPolicy").AuthAccessPolicy = null as any;
+utilities.lazyLoad(exports, ["AuthAccessPolicy"], () => require("./authAccessPolicy"));
+
+export { AuthAccessRuleArgs, AuthAccessRuleState } from "./authAccessRule";
+export type AuthAccessRule = import("./authAccessRule").AuthAccessRule;
+export const AuthAccessRule: typeof import("./authAccessRule").AuthAccessRule = null as any;
+utilities.lazyLoad(exports, ["AuthAccessRule"], () => require("./authAccessRule"));
+
+export { AwsEndUserMessagingConnectorArgs, AwsEndUserMessagingConnectorState } from "./awsEndUserMessagingConnector";
+export type AwsEndUserMessagingConnector = import("./awsEndUserMessagingConnector").AwsEndUserMessagingConnector;
+export const AwsEndUserMessagingConnector: typeof import("./awsEndUserMessagingConnector").AwsEndUserMessagingConnector = null as any;
+utilities.lazyLoad(exports, ["AwsEndUserMessagingConnector"], () => require("./awsEndUserMessagingConnector"));
+
 export { AwsEventbridgeConnectorArgs, AwsEventbridgeConnectorState } from "./awsEventbridgeConnector";
 export type AwsEventbridgeConnector = import("./awsEventbridgeConnector").AwsEventbridgeConnector;
 export const AwsEventbridgeConnector: typeof import("./awsEventbridgeConnector").AwsEventbridgeConnector = null as any;
@@ -74,6 +89,11 @@ export { AwsTranslateConnectorArgs, AwsTranslateConnectorState } from "./awsTran
 export type AwsTranslateConnector = import("./awsTranslateConnector").AwsTranslateConnector;
 export const AwsTranslateConnector: typeof import("./awsTranslateConnector").AwsTranslateConnector = null as any;
 utilities.lazyLoad(exports, ["AwsTranslateConnector"], () => require("./awsTranslateConnector"));
+
+export { AzureMonitorConnectorArgs, AzureMonitorConnectorState } from "./azureMonitorConnector";
+export type AzureMonitorConnector = import("./azureMonitorConnector").AzureMonitorConnector;
+export const AzureMonitorConnector: typeof import("./azureMonitorConnector").AzureMonitorConnector = null as any;
+utilities.lazyLoad(exports, ["AzureMonitorConnector"], () => require("./azureMonitorConnector"));
 
 export { BitsightConnectorArgs, BitsightConnectorState } from "./bitsightConnector";
 export type BitsightConnector = import("./bitsightConnector").BitsightConnector;
@@ -210,6 +230,11 @@ export type GoogleMapsPlacesConnector = import("./googleMapsPlacesConnector").Go
 export const GoogleMapsPlacesConnector: typeof import("./googleMapsPlacesConnector").GoogleMapsPlacesConnector = null as any;
 utilities.lazyLoad(exports, ["GoogleMapsPlacesConnector"], () => require("./googleMapsPlacesConnector"));
 
+export { GovernanceArgs, GovernanceState } from "./governance";
+export type Governance = import("./governance").Governance;
+export const Governance: typeof import("./governance").Governance = null as any;
+utilities.lazyLoad(exports, ["Governance"], () => require("./governance"));
+
 export { GroundcoverConnectorArgs, GroundcoverConnectorState } from "./groundcoverConnector";
 export type GroundcoverConnector = import("./groundcoverConnector").GroundcoverConnector;
 export const GroundcoverConnector: typeof import("./groundcoverConnector").GroundcoverConnector = null as any;
@@ -280,10 +305,20 @@ export type MagiclinkSettings = import("./magiclinkSettings").MagiclinkSettings;
 export const MagiclinkSettings: typeof import("./magiclinkSettings").MagiclinkSettings = null as any;
 utilities.lazyLoad(exports, ["MagiclinkSettings"], () => require("./magiclinkSettings"));
 
+export { MailjetConnectorArgs, MailjetConnectorState } from "./mailjetConnector";
+export type MailjetConnector = import("./mailjetConnector").MailjetConnector;
+export const MailjetConnector: typeof import("./mailjetConnector").MailjetConnector = null as any;
+utilities.lazyLoad(exports, ["MailjetConnector"], () => require("./mailjetConnector"));
+
 export { ManagementKeyArgs, ManagementKeyState } from "./managementKey";
 export type ManagementKey = import("./managementKey").ManagementKey;
 export const ManagementKey: typeof import("./managementKey").ManagementKey = null as any;
 utilities.lazyLoad(exports, ["ManagementKey"], () => require("./managementKey"));
+
+export { MicrosoftSentinelConnectorArgs, MicrosoftSentinelConnectorState } from "./microsoftSentinelConnector";
+export type MicrosoftSentinelConnector = import("./microsoftSentinelConnector").MicrosoftSentinelConnector;
+export const MicrosoftSentinelConnector: typeof import("./microsoftSentinelConnector").MicrosoftSentinelConnector = null as any;
+utilities.lazyLoad(exports, ["MicrosoftSentinelConnector"], () => require("./microsoftSentinelConnector"));
 
 export { MixpanelConnectorArgs, MixpanelConnectorState } from "./mixpanelConnector";
 export type MixpanelConnector = import("./mixpanelConnector").MixpanelConnector;
@@ -488,6 +523,11 @@ export type SplunkConnector = import("./splunkConnector").SplunkConnector;
 export const SplunkConnector: typeof import("./splunkConnector").SplunkConnector = null as any;
 utilities.lazyLoad(exports, ["SplunkConnector"], () => require("./splunkConnector"));
 
+export { SplunkOnCallConnectorArgs, SplunkOnCallConnectorState } from "./splunkOnCallConnector";
+export type SplunkOnCallConnector = import("./splunkOnCallConnector").SplunkOnCallConnector;
+export const SplunkOnCallConnector: typeof import("./splunkOnCallConnector").SplunkOnCallConnector = null as any;
+utilities.lazyLoad(exports, ["SplunkOnCallConnector"], () => require("./splunkOnCallConnector"));
+
 export { SqlConnectorArgs, SqlConnectorState } from "./sqlConnector";
 export type SqlConnector = import("./sqlConnector").SqlConnector;
 export const SqlConnector: typeof import("./sqlConnector").SqlConnector = null as any;
@@ -568,6 +608,16 @@ export type VoiceTemplate = import("./voiceTemplate").VoiceTemplate;
 export const VoiceTemplate: typeof import("./voiceTemplate").VoiceTemplate = null as any;
 utilities.lazyLoad(exports, ["VoiceTemplate"], () => require("./voiceTemplate"));
 
+export { VonageConnectorArgs, VonageConnectorState } from "./vonageConnector";
+export type VonageConnector = import("./vonageConnector").VonageConnector;
+export const VonageConnector: typeof import("./vonageConnector").VonageConnector = null as any;
+utilities.lazyLoad(exports, ["VonageConnector"], () => require("./vonageConnector"));
+
+export { WellknownSettingsArgs, WellknownSettingsState } from "./wellknownSettings";
+export type WellknownSettings = import("./wellknownSettings").WellknownSettings;
+export const WellknownSettings: typeof import("./wellknownSettings").WellknownSettings = null as any;
+utilities.lazyLoad(exports, ["WellknownSettings"], () => require("./wellknownSettings"));
+
 export { WidgetArgs, WidgetState } from "./widget";
 export type Widget = import("./widget").Widget;
 export const Widget: typeof import("./widget").Widget = null as any;
@@ -617,6 +667,12 @@ const _module = {
                 return new ArkoseConnector(name, <any>undefined, { urn })
             case "descope:index/auditWebhookConnector:AuditWebhookConnector":
                 return new AuditWebhookConnector(name, <any>undefined, { urn })
+            case "descope:index/authAccessPolicy:AuthAccessPolicy":
+                return new AuthAccessPolicy(name, <any>undefined, { urn })
+            case "descope:index/authAccessRule:AuthAccessRule":
+                return new AuthAccessRule(name, <any>undefined, { urn })
+            case "descope:index/awsEndUserMessagingConnector:AwsEndUserMessagingConnector":
+                return new AwsEndUserMessagingConnector(name, <any>undefined, { urn })
             case "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector":
                 return new AwsEventbridgeConnector(name, <any>undefined, { urn })
             case "descope:index/awsS3Connector:AwsS3Connector":
@@ -625,6 +681,8 @@ const _module = {
                 return new AwsSesEmailValidationConnector(name, <any>undefined, { urn })
             case "descope:index/awsTranslateConnector:AwsTranslateConnector":
                 return new AwsTranslateConnector(name, <any>undefined, { urn })
+            case "descope:index/azureMonitorConnector:AzureMonitorConnector":
+                return new AzureMonitorConnector(name, <any>undefined, { urn })
             case "descope:index/bitsightConnector:BitsightConnector":
                 return new BitsightConnector(name, <any>undefined, { urn })
             case "descope:index/coralogixConnector:CoralogixConnector":
@@ -679,6 +737,8 @@ const _module = {
                 return new GoogleCloudTranslationConnector(name, <any>undefined, { urn })
             case "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector":
                 return new GoogleMapsPlacesConnector(name, <any>undefined, { urn })
+            case "descope:index/governance:Governance":
+                return new Governance(name, <any>undefined, { urn })
             case "descope:index/groundcoverConnector:GroundcoverConnector":
                 return new GroundcoverConnector(name, <any>undefined, { urn })
             case "descope:index/hcaptchaConnector:HcaptchaConnector":
@@ -707,8 +767,12 @@ const _module = {
                 return new LokaliseConnector(name, <any>undefined, { urn })
             case "descope:index/magiclinkSettings:MagiclinkSettings":
                 return new MagiclinkSettings(name, <any>undefined, { urn })
+            case "descope:index/mailjetConnector:MailjetConnector":
+                return new MailjetConnector(name, <any>undefined, { urn })
             case "descope:index/managementKey:ManagementKey":
                 return new ManagementKey(name, <any>undefined, { urn })
+            case "descope:index/microsoftSentinelConnector:MicrosoftSentinelConnector":
+                return new MicrosoftSentinelConnector(name, <any>undefined, { urn })
             case "descope:index/mixpanelConnector:MixpanelConnector":
                 return new MixpanelConnector(name, <any>undefined, { urn })
             case "descope:index/mparticleConnector:MparticleConnector":
@@ -789,6 +853,8 @@ const _module = {
                 return new SnsConnector(name, <any>undefined, { urn })
             case "descope:index/splunkConnector:SplunkConnector":
                 return new SplunkConnector(name, <any>undefined, { urn })
+            case "descope:index/splunkOnCallConnector:SplunkOnCallConnector":
+                return new SplunkOnCallConnector(name, <any>undefined, { urn })
             case "descope:index/sqlConnector:SqlConnector":
                 return new SqlConnector(name, <any>undefined, { urn })
             case "descope:index/ssoSettings:SsoSettings":
@@ -821,6 +887,10 @@ const _module = {
                 return new UserAttribute(name, <any>undefined, { urn })
             case "descope:index/voiceTemplate:VoiceTemplate":
                 return new VoiceTemplate(name, <any>undefined, { urn })
+            case "descope:index/vonageConnector:VonageConnector":
+                return new VonageConnector(name, <any>undefined, { urn })
+            case "descope:index/wellknownSettings:WellknownSettings":
+                return new WellknownSettings(name, <any>undefined, { urn })
             case "descope:index/widget:Widget":
                 return new Widget(name, <any>undefined, { urn })
             case "descope:index/wsfedApp:WsfedApp":
@@ -842,10 +912,14 @@ pulumi.runtime.registerResourceModule("descope", "index/appPermission", _module)
 pulumi.runtime.registerResourceModule("descope", "index/appRole", _module)
 pulumi.runtime.registerResourceModule("descope", "index/arkoseConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/auditWebhookConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/authAccessPolicy", _module)
+pulumi.runtime.registerResourceModule("descope", "index/authAccessRule", _module)
+pulumi.runtime.registerResourceModule("descope", "index/awsEndUserMessagingConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/awsEventbridgeConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/awsS3Connector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/awsSesEmailValidationConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/awsTranslateConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/azureMonitorConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/bitsightConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/coralogixConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/criblConnector", _module)
@@ -873,6 +947,7 @@ pulumi.runtime.registerResourceModule("descope", "index/genericSmsGatewayConnect
 pulumi.runtime.registerResourceModule("descope", "index/googleCloudLoggingConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/googleCloudTranslationConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/googleMapsPlacesConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/governance", _module)
 pulumi.runtime.registerResourceModule("descope", "index/groundcoverConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/hcaptchaConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/hibpConnector", _module)
@@ -887,7 +962,9 @@ pulumi.runtime.registerResourceModule("descope", "index/ldapConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/list", _module)
 pulumi.runtime.registerResourceModule("descope", "index/lokaliseConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/magiclinkSettings", _module)
+pulumi.runtime.registerResourceModule("descope", "index/mailjetConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/managementKey", _module)
+pulumi.runtime.registerResourceModule("descope", "index/microsoftSentinelConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/mixpanelConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/mparticleConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/newrelicConnector", _module)
@@ -928,6 +1005,7 @@ pulumi.runtime.registerResourceModule("descope", "index/smtpConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/snowflakeConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/snsConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/splunkConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/splunkOnCallConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/sqlConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/ssoSettings", _module)
 pulumi.runtime.registerResourceModule("descope", "index/styles", _module)
@@ -944,6 +1022,8 @@ pulumi.runtime.registerResourceModule("descope", "index/twilioVerifyConnector", 
 pulumi.runtime.registerResourceModule("descope", "index/unibeamConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/userAttribute", _module)
 pulumi.runtime.registerResourceModule("descope", "index/voiceTemplate", _module)
+pulumi.runtime.registerResourceModule("descope", "index/vonageConnector", _module)
+pulumi.runtime.registerResourceModule("descope", "index/wellknownSettings", _module)
 pulumi.runtime.registerResourceModule("descope", "index/widget", _module)
 pulumi.runtime.registerResourceModule("descope", "index/wsfedApp", _module)
 pulumi.runtime.registerResourceModule("descope", "index/zerobounceConnector", _module)

@@ -20,16 +20,20 @@ __all__ = ['TotpSettingsArgs', 'TotpSettings']
 class TotpSettingsArgs:
     def __init__(__self__, *,
                  project_id: pulumi.Input[_builtins.str],
+                 account_label: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  service_label: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a TotpSettings resource.
 
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] account_label: The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         :param pulumi.Input[_builtins.str] service_label: The template for the service issuer label (issuer) shown in the authenticator app.
         """
         pulumi.set(__self__, "project_id", project_id)
+        if account_label is not None:
+            pulumi.set(__self__, "account_label", account_label)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if service_label is not None:
@@ -46,6 +50,18 @@ class TotpSettingsArgs:
     @project_id.setter
     def project_id(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "project_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="accountLabel")
+    def account_label(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        """
+        return pulumi.get(self, "account_label")
+
+    @account_label.setter
+    def account_label(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "account_label", value)
 
     @_builtins.property
     @pulumi.getter
@@ -75,22 +91,38 @@ class TotpSettingsArgs:
 @pulumi.input_type
 class _TotpSettingsState:
     def __init__(__self__, *,
+                 account_label: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  service_label: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering TotpSettings resources.
 
+        :param pulumi.Input[_builtins.str] account_label: The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] service_label: The template for the service issuer label (issuer) shown in the authenticator app.
         """
+        if account_label is not None:
+            pulumi.set(__self__, "account_label", account_label)
         if disabled is not None:
             pulumi.set(__self__, "disabled", disabled)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if service_label is not None:
             pulumi.set(__self__, "service_label", service_label)
+
+    @_builtins.property
+    @pulumi.getter(name="accountLabel")
+    def account_label(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        """
+        return pulumi.get(self, "account_label")
+
+    @account_label.setter
+    def account_label(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "account_label", value)
 
     @_builtins.property
     @pulumi.getter
@@ -135,6 +167,7 @@ class TotpSettings(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 account_label: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  service_label: pulumi.Input[Optional[_builtins.str]] = None,
@@ -145,6 +178,7 @@ class TotpSettings(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] account_label: The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] service_label: The template for the service issuer label (issuer) shown in the authenticator app.
@@ -174,6 +208,7 @@ class TotpSettings(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 account_label: pulumi.Input[Optional[_builtins.str]] = None,
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  service_label: pulumi.Input[Optional[_builtins.str]] = None,
@@ -186,6 +221,7 @@ class TotpSettings(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = TotpSettingsArgs.__new__(TotpSettingsArgs)
 
+            __props__.__dict__["account_label"] = account_label
             __props__.__dict__["disabled"] = disabled
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -201,6 +237,7 @@ class TotpSettings(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            account_label: pulumi.Input[Optional[_builtins.str]] = None,
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             service_label: pulumi.Input[Optional[_builtins.str]] = None) -> 'TotpSettings':
@@ -211,6 +248,7 @@ class TotpSettings(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] account_label: The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] service_label: The template for the service issuer label (issuer) shown in the authenticator app.
@@ -219,10 +257,19 @@ class TotpSettings(pulumi.CustomResource):
 
         __props__ = _TotpSettingsState.__new__(_TotpSettingsState)
 
+        __props__.__dict__["account_label"] = account_label
         __props__.__dict__["disabled"] = disabled
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["service_label"] = service_label
         return TotpSettings(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="accountLabel")
+    def account_label(self) -> pulumi.Output[_builtins.str]:
+        """
+        The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+        """
+        return pulumi.get(self, "account_label")
 
     @_builtins.property
     @pulumi.getter

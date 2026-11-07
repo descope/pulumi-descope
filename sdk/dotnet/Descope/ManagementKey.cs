@@ -165,7 +165,7 @@ namespace Descope.Pulumi.Descope
         public Output<ImmutableArray<string>> PermittedIps { get; private set; } = null!;
 
         /// <summary>
-        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         /// </summary>
         [Output("rebac")]
         public Output<Outputs.ManagementKeyRebac> Rebac { get; private set; } = null!;
@@ -258,7 +258,7 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
-        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         /// </summary>
         [Input("rebac", required: true)]
         public Input<Inputs.ManagementKeyRebacArgs> Rebac { get; set; } = null!;
@@ -324,7 +324,7 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
-        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+        /// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
         /// </summary>
         [Input("rebac")]
         public Input<Inputs.ManagementKeyRebacGetArgs>? Rebac { get; set; }

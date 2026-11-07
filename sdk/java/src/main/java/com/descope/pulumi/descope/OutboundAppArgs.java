@@ -125,6 +125,21 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * The URL of the provider&#39;s protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+     * 
+     */
+    @Import(name="dcrUrl")
+    private @Nullable Output<String> dcrUrl;
+
+    /**
+     * @return The URL of the provider&#39;s protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+     * 
+     */
+    public Optional<Output<String>> dcrUrl() {
+        return Optional.ofNullable(this.dcrUrl);
+    }
+
+    /**
      * The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
      * 
      */
@@ -304,6 +319,21 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.tokenUrlParams);
     }
 
+    /**
+     * Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+     * 
+     */
+    @Import(name="useDcr")
+    private @Nullable Output<Boolean> useDcr;
+
+    /**
+     * @return Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+     * 
+     */
+    public Optional<Output<Boolean>> useDcr() {
+        return Optional.ofNullable(this.useDcr);
+    }
+
     private OutboundAppArgs() {}
 
     private OutboundAppArgs(OutboundAppArgs $) {
@@ -314,6 +344,7 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.callbackDomain = $.callbackDomain;
         this.clientId = $.clientId;
         this.clientSecret = $.clientSecret;
+        this.dcrUrl = $.dcrUrl;
         this.defaultRedirectUrl = $.defaultRedirectUrl;
         this.defaultScopes = $.defaultScopes;
         this.description = $.description;
@@ -326,6 +357,7 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.revocationUrl = $.revocationUrl;
         this.tokenUrl = $.tokenUrl;
         this.tokenUrlParams = $.tokenUrlParams;
+        this.useDcr = $.useDcr;
     }
 
     public static Builder builder() {
@@ -491,6 +523,27 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder clientSecret(String clientSecret) {
             return clientSecret(Output.of(clientSecret));
+        }
+
+        /**
+         * @param dcrUrl The URL of the provider&#39;s protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder dcrUrl(@Nullable Output<String> dcrUrl) {
+            $.dcrUrl = dcrUrl;
+            return this;
+        }
+
+        /**
+         * @param dcrUrl The URL of the provider&#39;s protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `useDcr` is enabled. This cannot be changed on an existing outbound application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder dcrUrl(String dcrUrl) {
+            return dcrUrl(Output.of(dcrUrl));
         }
 
         /**
@@ -763,6 +816,27 @@ public final class OutboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder tokenUrlParams(Map<String,String> tokenUrlParams) {
             return tokenUrlParams(Output.of(tokenUrlParams));
+        }
+
+        /**
+         * @param useDcr Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder useDcr(@Nullable Output<Boolean> useDcr) {
+            $.useDcr = useDcr;
+            return this;
+        }
+
+        /**
+         * @param useDcr Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `clientId`, `clientSecret`, `authorizationUrl`, `tokenUrl`, `revocationUrl`, `defaultScopes` and `pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder useDcr(Boolean useDcr) {
+            return useDcr(Output.of(useDcr));
         }
 
         public OutboundAppArgs build() {
