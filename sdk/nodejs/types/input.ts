@@ -121,6 +121,21 @@ export interface AuditWebhookConnectorAuthenticationOauth2ClientCredentials {
     tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
+export interface AuthAccessRuleCondition {
+    /**
+     * The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface AwsEventbridgeConnectorAuditFilter {
     /**
      * The field name to filter on (either 'actions' or 'tenants').
@@ -137,6 +152,21 @@ export interface AwsEventbridgeConnectorAuditFilter {
 }
 
 export interface AwsS3ConnectorAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface AzureMonitorConnectorAuditFilter {
     /**
      * The field name to filter on (either 'actions' or 'tenants').
      */
@@ -554,6 +584,25 @@ export interface InboundAppAttributesScope {
     values?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
+export interface InboundAppClientAssertion {
+    /**
+     * The HTTPS URL of the JWKS document. Required when `keySource` is `jwks`.
+     */
+    jwksUri?: pulumi.Input<string | undefined>;
+    /**
+     * Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+     */
+    keySource: pulumi.Input<string>;
+    /**
+     * A PEM encoded public key or certificate. Required when `keySource` is `publicKey`.
+     */
+    publicKey?: pulumi.Input<string | undefined>;
+    /**
+     * Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+     */
+    signAlgorithm?: pulumi.Input<string | undefined>;
+}
+
 export interface InboundAppConnectionsScope {
     /**
      * A description for the scope.
@@ -642,6 +691,33 @@ export interface InboundAppSessionSettings {
     userTemplateId?: pulumi.Input<string | undefined>;
 }
 
+export interface InboundAppWorkloadClientAssertion {
+    /**
+     * The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+     */
+    allowedSubjects: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+     */
+    federationType: pulumi.Input<string>;
+    /**
+     * The HTTPS issuer URL. Required when `federationType` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwksUri`.
+     */
+    issuer?: pulumi.Input<string | undefined>;
+    /**
+     * For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+     */
+    jwksUri?: pulumi.Input<string | undefined>;
+    /**
+     * Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+     */
+    signAlgorithm?: pulumi.Input<string | undefined>;
+    /**
+     * The SPIFFE trust domain, such as `prod.example.com`. Required when `federationType` is `spiffe`.
+     */
+    trustDomain?: pulumi.Input<string | undefined>;
+}
+
 export interface ManagementKeyRebac {
     /**
      * A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
@@ -677,6 +753,21 @@ export interface ManagementKeyRebacTagRole {
      * The project tags this role grant applies to.
      */
     tags: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MicrosoftSentinelConnectorAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: pulumi.Input<string>;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface MixpanelConnectorAuditFilter {
@@ -820,6 +911,49 @@ export interface OpentelemetryConnectorAuthenticationOauth2ClientCredentials {
      * Additional headers to include in the token request sent to the token endpoint.
      */
     tokenRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+}
+
+export interface PasswordSettingsRolePolicy {
+    /**
+     * Whether passwords must contain at least one letter, either uppercase or lowercase.
+     */
+    anyLetter?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+     */
+    disallowEmailMatch?: pulumi.Input<boolean | undefined>;
+    /**
+     * Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+     */
+    disallowedCharacters?: pulumi.Input<string | undefined>;
+    /**
+     * Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+     */
+    enforceStrength?: pulumi.Input<string | undefined>;
+    /**
+     * Whether passwords must contain at least one lowercase letter.
+     */
+    lowercase?: pulumi.Input<boolean | undefined>;
+    /**
+     * The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+     */
+    minLength?: pulumi.Input<number | undefined>;
+    /**
+     * Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+     */
+    nonAlphanumeric?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether passwords must contain at least one number.
+     */
+    number?: pulumi.Input<boolean | undefined>;
+    /**
+     * The names of the roles the policy applies to. Reference the `name` attribute of `descope.Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+     */
+    roles: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether passwords must contain at least one uppercase letter.
+     */
+    uppercase?: pulumi.Input<boolean | undefined>;
 }
 
 export interface PendoConnectorAuditFilter {
@@ -996,6 +1130,10 @@ export interface SsoSettingsSsoSuiteSettings {
      */
     forceDomainVerification?: pulumi.Input<boolean | undefined>;
     /**
+     * Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     */
+    hideAudit?: pulumi.Input<boolean | undefined>;
+    /**
      * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      */
     hideDomains?: pulumi.Input<boolean | undefined>;
@@ -1084,6 +1222,39 @@ export interface UserAttributeWidgetAuthorization {
      * The names of the permissions users are required to have to view this attribute in the user management widget. An empty set means no restriction.
      */
     viewPermissions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+}
+
+export interface WellknownSettingsClaimsSupported {
+    /**
+     * Values to remove from the list.
+     */
+    excludeds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Values to add to the list.
+     */
+    extras?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+}
+
+export interface WellknownSettingsRemovedValue {
+    /**
+     * The name of a list field in the discovery documents, such as `grantTypesSupported`, `tokenEndpointAuthMethodsSupported` or `codeChallengeMethodsSupported`.
+     */
+    field: pulumi.Input<string>;
+    /**
+     * The values to remove from the list.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface WellknownSettingsScopesSupported {
+    /**
+     * Values to remove from the list.
+     */
+    excludeds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Values to add to the list.
+     */
+    extras?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 export interface WsfedAppAttributeMapping {

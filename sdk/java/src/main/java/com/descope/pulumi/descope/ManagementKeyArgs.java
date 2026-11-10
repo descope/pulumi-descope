@@ -80,14 +80,14 @@ public final class ManagementKeyArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      * 
      */
     @Import(name="rebac", required=true)
     private Output<ManagementKeyRebacArgs> rebac;
 
     /**
-     * @return Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * @return Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      * 
      */
     public Output<ManagementKeyRebacArgs> rebac() {
@@ -233,7 +233,7 @@ public final class ManagementKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param rebac Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+         * @param rebac Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
          * 
          * @return builder
          * 
@@ -244,7 +244,7 @@ public final class ManagementKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param rebac Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+         * @param rebac Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
          * 
          * @return builder
          * 

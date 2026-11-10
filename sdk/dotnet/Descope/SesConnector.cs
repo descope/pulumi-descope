@@ -29,6 +29,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> AuthType { get; private set; } = null!;
 
         /// <summary>
+        /// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        /// </summary>
+        [Output("configurationSetName")]
+        public Output<string> ConfigurationSetName { get; private set; } = null!;
+
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         [Output("description")]
@@ -169,6 +175,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? AuthType { get; set; }
 
         /// <summary>
+        /// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        /// </summary>
+        [Input("configurationSetName")]
+        public Input<string>? ConfigurationSetName { get; set; }
+
+        /// <summary>
         /// A description of what your connector is used for.
         /// </summary>
         [Input("description")]
@@ -279,6 +291,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("authType")]
         public Input<string>? AuthType { get; set; }
+
+        /// <summary>
+        /// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+        /// </summary>
+        [Input("configurationSetName")]
+        public Input<string>? ConfigurationSetName { get; set; }
 
         /// <summary>
         /// A description of what your connector is used for.

@@ -20,6 +20,12 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? ForceDomainVerification { get; set; }
 
         /// <summary>
+        /// Setting this to `True` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+        /// </summary>
+        [Input("hideAudit")]
+        public Input<bool>? HideAudit { get; set; }
+
+        /// <summary>
         /// Setting this to `True` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         [Input("hideDomains")]

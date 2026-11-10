@@ -3,11 +3,13 @@
 
 package com.descope.pulumi.descope.inputs;
 
+import com.descope.pulumi.descope.inputs.PasswordSettingsRolePolicyArgs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -303,6 +305,21 @@ public final class PasswordSettingsState extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+     * 
+     */
+    @Import(name="rolePolicies")
+    private @Nullable Output<List<PasswordSettingsRolePolicyArgs>> rolePolicies;
+
+    /**
+     * @return Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+     * 
+     */
+    public Optional<Output<List<PasswordSettingsRolePolicyArgs>>> rolePolicies() {
+        return Optional.ofNullable(this.rolePolicies);
+    }
+
+    /**
      * Whether the user account should be temporarily locked after a specified number of failed login attempts.
      * 
      */
@@ -384,6 +401,7 @@ public final class PasswordSettingsState extends com.pulumi.resources.ResourceAr
         this.projectId = $.projectId;
         this.reuse = $.reuse;
         this.reuseAmount = $.reuseAmount;
+        this.rolePolicies = $.rolePolicies;
         this.temporaryLock = $.temporaryLock;
         this.temporaryLockAttempts = $.temporaryLockAttempts;
         this.temporaryLockDuration = $.temporaryLockDuration;
@@ -805,6 +823,37 @@ public final class PasswordSettingsState extends com.pulumi.resources.ResourceAr
          */
         public Builder reuseAmount(Integer reuseAmount) {
             return reuseAmount(Output.of(reuseAmount));
+        }
+
+        /**
+         * @param rolePolicies Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rolePolicies(@Nullable Output<List<PasswordSettingsRolePolicyArgs>> rolePolicies) {
+            $.rolePolicies = rolePolicies;
+            return this;
+        }
+
+        /**
+         * @param rolePolicies Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rolePolicies(List<PasswordSettingsRolePolicyArgs> rolePolicies) {
+            return rolePolicies(Output.of(rolePolicies));
+        }
+
+        /**
+         * @param rolePolicies Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder rolePolicies(PasswordSettingsRolePolicyArgs... rolePolicies) {
+            return rolePolicies(List.of(rolePolicies));
         }
 
         /**

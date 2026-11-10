@@ -152,7 +152,7 @@ type ManagementKey struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
 	PermittedIps pulumi.StringArrayOutput `pulumi:"permittedIps"`
-	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 	Rebac ManagementKeyRebacOutput `pulumi:"rebac"`
 	// The status of the management key. Must be either `active` or `inactive`.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -205,7 +205,7 @@ type managementKeyState struct {
 	Name *string `pulumi:"name"`
 	// A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
 	PermittedIps []string `pulumi:"permittedIps"`
-	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 	Rebac *ManagementKeyRebac `pulumi:"rebac"`
 	// The status of the management key. Must be either `active` or `inactive`.
 	Status *string `pulumi:"status"`
@@ -222,7 +222,7 @@ type ManagementKeyState struct {
 	Name pulumi.StringPtrInput
 	// A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
 	PermittedIps pulumi.StringArrayInput
-	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 	Rebac ManagementKeyRebacPtrInput
 	// The status of the management key. Must be either `active` or `inactive`.
 	Status pulumi.StringPtrInput
@@ -241,7 +241,7 @@ type managementKeyArgs struct {
 	Name *string `pulumi:"name"`
 	// A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
 	PermittedIps []string `pulumi:"permittedIps"`
-	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 	Rebac ManagementKeyRebac `pulumi:"rebac"`
 	// The status of the management key. Must be either `active` or `inactive`.
 	Status *string `pulumi:"status"`
@@ -257,7 +257,7 @@ type ManagementKeyArgs struct {
 	Name pulumi.StringPtrInput
 	// A list of IP addresses or CIDR ranges that are allowed to use this management key. If not set, the key can be used from any IP address.
 	PermittedIps pulumi.StringArrayInput
-	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+	// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 	Rebac ManagementKeyRebacInput
 	// The status of the management key. Must be either `active` or `inactive`.
 	Status pulumi.StringPtrInput
@@ -375,7 +375,7 @@ func (o ManagementKeyOutput) PermittedIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ManagementKey) pulumi.StringArrayOutput { return v.PermittedIps }).(pulumi.StringArrayOutput)
 }
 
-// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+// Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
 func (o ManagementKeyOutput) Rebac() ManagementKeyRebacOutput {
 	return o.ApplyT(func(v *ManagementKey) ManagementKeyRebacOutput { return v.Rebac }).(ManagementKeyRebacOutput)
 }

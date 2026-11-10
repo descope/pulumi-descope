@@ -16,7 +16,7 @@ import (
 type Styles struct {
 	pulumi.CustomResourceState
 
-	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 	Data pulumi.StringOutput `pulumi:"data"`
 	// The ID of the project that the styles belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
@@ -58,14 +58,14 @@ func GetStyles(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Styles resources.
 type stylesState struct {
-	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 	Data *string `pulumi:"data"`
 	// The ID of the project that the styles belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
 }
 
 type StylesState struct {
-	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 	Data pulumi.StringPtrInput
 	// The ID of the project that the styles belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
@@ -76,7 +76,7 @@ func (StylesState) ElementType() reflect.Type {
 }
 
 type stylesArgs struct {
-	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 	Data string `pulumi:"data"`
 	// The ID of the project that the styles belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
@@ -84,7 +84,7 @@ type stylesArgs struct {
 
 // The set of arguments for constructing a Styles resource.
 type StylesArgs struct {
-	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+	// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 	Data pulumi.StringInput
 	// The ID of the project that the styles belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
@@ -177,7 +177,7 @@ func (o StylesOutput) ToStylesOutputWithContext(ctx context.Context) StylesOutpu
 	return o
 }
 
-// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, and set in the `.tf` file using the `data = file("...")` syntax.
+// The JSON data of the styles in their exported theme representation, defining the visual styling of the project's flow pages. This will usually be exported as a `.json` file from the Descope console, which exports one style per file, and set in the `.tf` file using the `data = file("...")` syntax. Applying this resource creates and overwrites the styles the data carries, and leaves every other style in the project untouched, so styles created in the console are safe from a pulumi up. For the same reason removing a style from the data does not remove it from the project - delete it in the console or through the management API instead. An apply is rejected if the data's `componentsVersion` differs from the project's, in which case export the styles again or leave `componentsVersion` out, and if it changes the type of a style that already exists in the project.
 func (o StylesOutput) Data() pulumi.StringOutput {
 	return o.ApplyT(func(v *Styles) pulumi.StringOutput { return v.Data }).(pulumi.StringOutput)
 }

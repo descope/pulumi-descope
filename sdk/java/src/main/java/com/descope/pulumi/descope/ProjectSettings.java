@@ -64,6 +64,20 @@ public class ProjectSettings extends com.pulumi.resources.CustomResource {
         return this.approvedDomains;
     }
     /**
+     * The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `customDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project&#39;s custom domains, `customDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+     * 
+     */
+    @Export(name="appsCustomDomain", refs={String.class}, tree="[0]")
+    private Output<String> appsCustomDomain;
+
+    /**
+     * @return The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `customDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project&#39;s custom domains, `customDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+     * 
+     */
+    public Output<String> appsCustomDomain() {
+        return this.appsCustomDomain;
+    }
+    /**
      * A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `appUrl` domain.
      * 
      */
@@ -90,6 +104,20 @@ public class ProjectSettings extends com.pulumi.resources.CustomResource {
      */
     public Output<Boolean> defaultNoSsoApps() {
         return this.defaultNoSsoApps;
+    }
+    /**
+     * When enabled, Descope stops serving this project&#39;s flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+     * 
+     */
+    @Export(name="disableAuthHosting", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> disableAuthHosting;
+
+    /**
+     * @return When enabled, Descope stops serving this project&#39;s flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+     * 
+     */
+    public Output<Boolean> disableAuthHosting() {
+        return this.disableAuthHosting;
     }
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.

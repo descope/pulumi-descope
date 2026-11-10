@@ -23,11 +23,19 @@ type InboundApp struct {
 	AttributesScopes InboundAppAttributesScopeArrayOutput `pulumi:"attributesScopes"`
 	// A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
 	AudienceWhitelists pulumi.StringArrayOutput `pulumi:"audienceWhitelists"`
+	// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	AuthorizationCodeDisabled pulumi.BoolOutput `pulumi:"authorizationCodeDisabled"`
+	// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+	ClientAssertions InboundAppClientAssertionArrayOutput `pulumi:"clientAssertions"`
+	// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+	ClientAuthMethod pulumi.StringOutput `pulumi:"clientAuthMethod"`
+	// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	ClientCredentialsDisabled pulumi.BoolOutput `pulumi:"clientCredentialsDisabled"`
 	// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 	ClientId pulumi.StringOutput `pulumi:"clientId"`
 	// The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
 	ClientSecret pulumi.StringOutput `pulumi:"clientSecret"`
-	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 	ClientType pulumi.StringOutput `pulumi:"clientType"`
 	// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
 	ConnectionsScopes InboundAppConnectionsScopeArrayOutput `pulumi:"connectionsScopes"`
@@ -37,12 +45,16 @@ type InboundApp struct {
 	DeletionProtection pulumi.BoolPtrOutput `pulumi:"deletionProtection"`
 	// A description for the inbound app.
 	Description pulumi.StringOutput `pulumi:"description"`
+	// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	DeviceCodeDisabled pulumi.BoolOutput `pulumi:"deviceCodeDisabled"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolOutput `pulumi:"forceAddAllAuthorizationInfo"`
 	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
 	ForceDpop pulumi.BoolOutput `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolOutput `pulumi:"forcePkce"`
+	// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	JwtBearerDisabled pulumi.BoolOutput `pulumi:"jwtBearerDisabled"`
 	// The Flow Hosting URL.
 	LoginPageUrl pulumi.StringOutput `pulumi:"loginPageUrl"`
 	// A URL to the inbound app's logo image.
@@ -53,10 +65,16 @@ type InboundApp struct {
 	PermissionsScopes InboundAppPermissionsScopeArrayOutput `pulumi:"permissionsScopes"`
 	// The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
+	// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	RefreshTokenDisabled pulumi.BoolOutput `pulumi:"refreshTokenDisabled"`
 	// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 	ScopeClaimMappings InboundAppScopeClaimMappingArrayOutput `pulumi:"scopeClaimMappings"`
 	// Custom session management settings for this inbound app, overriding the project defaults.
 	SessionSettings InboundAppSessionSettingsOutput `pulumi:"sessionSettings"`
+	// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	TokenExchangeDisabled pulumi.BoolOutput `pulumi:"tokenExchangeDisabled"`
+	// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+	WorkloadClientAssertions InboundAppWorkloadClientAssertionArrayOutput `pulumi:"workloadClientAssertions"`
 }
 
 // NewInboundApp registers a new resource with the given unique name, arguments, and options.
@@ -107,11 +125,19 @@ type inboundAppState struct {
 	AttributesScopes []InboundAppAttributesScope `pulumi:"attributesScopes"`
 	// A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
 	AudienceWhitelists []string `pulumi:"audienceWhitelists"`
+	// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	AuthorizationCodeDisabled *bool `pulumi:"authorizationCodeDisabled"`
+	// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+	ClientAssertions []InboundAppClientAssertion `pulumi:"clientAssertions"`
+	// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+	ClientAuthMethod *string `pulumi:"clientAuthMethod"`
+	// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	ClientCredentialsDisabled *bool `pulumi:"clientCredentialsDisabled"`
 	// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 	ClientId *string `pulumi:"clientId"`
 	// The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
 	ClientSecret *string `pulumi:"clientSecret"`
-	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 	ClientType *string `pulumi:"clientType"`
 	// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
 	ConnectionsScopes []InboundAppConnectionsScope `pulumi:"connectionsScopes"`
@@ -121,12 +147,16 @@ type inboundAppState struct {
 	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// A description for the inbound app.
 	Description *string `pulumi:"description"`
+	// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	DeviceCodeDisabled *bool `pulumi:"deviceCodeDisabled"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo *bool `pulumi:"forceAddAllAuthorizationInfo"`
 	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
 	ForceDpop *bool `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce *bool `pulumi:"forcePkce"`
+	// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	JwtBearerDisabled *bool `pulumi:"jwtBearerDisabled"`
 	// The Flow Hosting URL.
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
 	// A URL to the inbound app's logo image.
@@ -137,10 +167,16 @@ type inboundAppState struct {
 	PermissionsScopes []InboundAppPermissionsScope `pulumi:"permissionsScopes"`
 	// The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
+	// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	RefreshTokenDisabled *bool `pulumi:"refreshTokenDisabled"`
 	// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 	ScopeClaimMappings []InboundAppScopeClaimMapping `pulumi:"scopeClaimMappings"`
 	// Custom session management settings for this inbound app, overriding the project defaults.
 	SessionSettings *InboundAppSessionSettings `pulumi:"sessionSettings"`
+	// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	TokenExchangeDisabled *bool `pulumi:"tokenExchangeDisabled"`
+	// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+	WorkloadClientAssertions []InboundAppWorkloadClientAssertion `pulumi:"workloadClientAssertions"`
 }
 
 type InboundAppState struct {
@@ -152,11 +188,19 @@ type InboundAppState struct {
 	AttributesScopes InboundAppAttributesScopeArrayInput
 	// A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
 	AudienceWhitelists pulumi.StringArrayInput
+	// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	AuthorizationCodeDisabled pulumi.BoolPtrInput
+	// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+	ClientAssertions InboundAppClientAssertionArrayInput
+	// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+	ClientAuthMethod pulumi.StringPtrInput
+	// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	ClientCredentialsDisabled pulumi.BoolPtrInput
 	// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 	ClientId pulumi.StringPtrInput
 	// The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
 	ClientSecret pulumi.StringPtrInput
-	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 	ClientType pulumi.StringPtrInput
 	// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
 	ConnectionsScopes InboundAppConnectionsScopeArrayInput
@@ -166,12 +210,16 @@ type InboundAppState struct {
 	DeletionProtection pulumi.BoolPtrInput
 	// A description for the inbound app.
 	Description pulumi.StringPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	DeviceCodeDisabled pulumi.BoolPtrInput
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolPtrInput
 	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
 	ForceDpop pulumi.BoolPtrInput
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	JwtBearerDisabled pulumi.BoolPtrInput
 	// The Flow Hosting URL.
 	LoginPageUrl pulumi.StringPtrInput
 	// A URL to the inbound app's logo image.
@@ -182,10 +230,16 @@ type InboundAppState struct {
 	PermissionsScopes InboundAppPermissionsScopeArrayInput
 	// The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
+	// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	RefreshTokenDisabled pulumi.BoolPtrInput
 	// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 	ScopeClaimMappings InboundAppScopeClaimMappingArrayInput
 	// Custom session management settings for this inbound app, overriding the project defaults.
 	SessionSettings InboundAppSessionSettingsPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	TokenExchangeDisabled pulumi.BoolPtrInput
+	// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+	WorkloadClientAssertions InboundAppWorkloadClientAssertionArrayInput
 }
 
 func (InboundAppState) ElementType() reflect.Type {
@@ -201,11 +255,19 @@ type inboundAppArgs struct {
 	AttributesScopes []InboundAppAttributesScope `pulumi:"attributesScopes"`
 	// A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
 	AudienceWhitelists []string `pulumi:"audienceWhitelists"`
+	// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	AuthorizationCodeDisabled *bool `pulumi:"authorizationCodeDisabled"`
+	// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+	ClientAssertions []InboundAppClientAssertion `pulumi:"clientAssertions"`
+	// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+	ClientAuthMethod *string `pulumi:"clientAuthMethod"`
+	// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	ClientCredentialsDisabled *bool `pulumi:"clientCredentialsDisabled"`
 	// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 	ClientId *string `pulumi:"clientId"`
 	// The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
 	ClientSecret *string `pulumi:"clientSecret"`
-	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 	ClientType *string `pulumi:"clientType"`
 	// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
 	ConnectionsScopes []InboundAppConnectionsScope `pulumi:"connectionsScopes"`
@@ -215,12 +277,16 @@ type inboundAppArgs struct {
 	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// A description for the inbound app.
 	Description *string `pulumi:"description"`
+	// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	DeviceCodeDisabled *bool `pulumi:"deviceCodeDisabled"`
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo *bool `pulumi:"forceAddAllAuthorizationInfo"`
 	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
 	ForceDpop *bool `pulumi:"forceDpop"`
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce *bool `pulumi:"forcePkce"`
+	// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	JwtBearerDisabled *bool `pulumi:"jwtBearerDisabled"`
 	// The Flow Hosting URL.
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
 	// A URL to the inbound app's logo image.
@@ -231,10 +297,16 @@ type inboundAppArgs struct {
 	PermissionsScopes []InboundAppPermissionsScope `pulumi:"permissionsScopes"`
 	// The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
+	// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	RefreshTokenDisabled *bool `pulumi:"refreshTokenDisabled"`
 	// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 	ScopeClaimMappings []InboundAppScopeClaimMapping `pulumi:"scopeClaimMappings"`
 	// Custom session management settings for this inbound app, overriding the project defaults.
 	SessionSettings *InboundAppSessionSettings `pulumi:"sessionSettings"`
+	// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	TokenExchangeDisabled *bool `pulumi:"tokenExchangeDisabled"`
+	// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+	WorkloadClientAssertions []InboundAppWorkloadClientAssertion `pulumi:"workloadClientAssertions"`
 }
 
 // The set of arguments for constructing a InboundApp resource.
@@ -247,11 +319,19 @@ type InboundAppArgs struct {
 	AttributesScopes InboundAppAttributesScopeArrayInput
 	// A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
 	AudienceWhitelists pulumi.StringArrayInput
+	// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	AuthorizationCodeDisabled pulumi.BoolPtrInput
+	// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+	ClientAssertions InboundAppClientAssertionArrayInput
+	// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+	ClientAuthMethod pulumi.StringPtrInput
+	// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	ClientCredentialsDisabled pulumi.BoolPtrInput
 	// A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 	ClientId pulumi.StringPtrInput
 	// The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
 	ClientSecret pulumi.StringPtrInput
-	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+	// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 	ClientType pulumi.StringPtrInput
 	// A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
 	ConnectionsScopes InboundAppConnectionsScopeArrayInput
@@ -261,12 +341,16 @@ type InboundAppArgs struct {
 	DeletionProtection pulumi.BoolPtrInput
 	// A description for the inbound app.
 	Description pulumi.StringPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	DeviceCodeDisabled pulumi.BoolPtrInput
 	// When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 	ForceAddAllAuthorizationInfo pulumi.BoolPtrInput
 	// Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
 	ForceDpop pulumi.BoolPtrInput
 	// When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 	ForcePkce pulumi.BoolPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+	JwtBearerDisabled pulumi.BoolPtrInput
 	// The Flow Hosting URL.
 	LoginPageUrl pulumi.StringPtrInput
 	// A URL to the inbound app's logo image.
@@ -277,10 +361,16 @@ type InboundAppArgs struct {
 	PermissionsScopes InboundAppPermissionsScopeArrayInput
 	// The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
+	// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	RefreshTokenDisabled pulumi.BoolPtrInput
 	// Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 	ScopeClaimMappings InboundAppScopeClaimMappingArrayInput
 	// Custom session management settings for this inbound app, overriding the project defaults.
 	SessionSettings InboundAppSessionSettingsPtrInput
+	// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+	TokenExchangeDisabled pulumi.BoolPtrInput
+	// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+	WorkloadClientAssertions InboundAppWorkloadClientAssertionArrayInput
 }
 
 func (InboundAppArgs) ElementType() reflect.Type {
@@ -390,6 +480,26 @@ func (o InboundAppOutput) AudienceWhitelists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringArrayOutput { return v.AudienceWhitelists }).(pulumi.StringArrayOutput)
 }
 
+// Disables the `authorizationCode` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+func (o InboundAppOutput) AuthorizationCodeDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.AuthorizationCodeDisabled }).(pulumi.BoolOutput)
+}
+
+// The keys that verify a `privateKeyJwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `clientAuthMethod` is `privateKeyJwt`.
+func (o InboundAppOutput) ClientAssertions() InboundAppClientAssertionArrayOutput {
+	return o.ApplyT(func(v *InboundApp) InboundAppClientAssertionArrayOutput { return v.ClientAssertions }).(InboundAppClientAssertionArrayOutput)
+}
+
+// How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `clientSecret`, `privateKeyJwt` accepts a `privateKeyJwt` client assertion verified against `clientAssertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workloadClientAssertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+func (o InboundAppOutput) ClientAuthMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.ClientAuthMethod }).(pulumi.StringOutput)
+}
+
+// Disables the `clientCredentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+func (o InboundAppOutput) ClientCredentialsDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.ClientCredentialsDisabled }).(pulumi.BoolOutput)
+}
+
 // A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
 func (o InboundAppOutput) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
@@ -400,7 +510,7 @@ func (o InboundAppOutput) ClientSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
-// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+// The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `nonConfidentialClient = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
 func (o InboundAppOutput) ClientType() pulumi.StringOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.ClientType }).(pulumi.StringOutput)
 }
@@ -425,6 +535,11 @@ func (o InboundAppOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
+// Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+func (o InboundAppOutput) DeviceCodeDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.DeviceCodeDisabled }).(pulumi.BoolOutput)
+}
+
 // When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
 func (o InboundAppOutput) ForceAddAllAuthorizationInfo() pulumi.BoolOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.ForceAddAllAuthorizationInfo }).(pulumi.BoolOutput)
@@ -438,6 +553,11 @@ func (o InboundAppOutput) ForceDpop() pulumi.BoolOutput {
 // When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `codeVerifier`. Public clients always use PKCE regardless of this setting.
 func (o InboundAppOutput) ForcePkce() pulumi.BoolOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.ForcePkce }).(pulumi.BoolOutput)
+}
+
+// Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `clientType` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+func (o InboundAppOutput) JwtBearerDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.JwtBearerDisabled }).(pulumi.BoolOutput)
 }
 
 // The Flow Hosting URL.
@@ -465,6 +585,11 @@ func (o InboundAppOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InboundApp) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Disables the `refreshToken` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+func (o InboundAppOutput) RefreshTokenDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.RefreshTokenDisabled }).(pulumi.BoolOutput)
+}
+
 // Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributesScopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
 func (o InboundAppOutput) ScopeClaimMappings() InboundAppScopeClaimMappingArrayOutput {
 	return o.ApplyT(func(v *InboundApp) InboundAppScopeClaimMappingArrayOutput { return v.ScopeClaimMappings }).(InboundAppScopeClaimMappingArrayOutput)
@@ -473,6 +598,16 @@ func (o InboundAppOutput) ScopeClaimMappings() InboundAppScopeClaimMappingArrayO
 // Custom session management settings for this inbound app, overriding the project defaults.
 func (o InboundAppOutput) SessionSettings() InboundAppSessionSettingsOutput {
 	return o.ApplyT(func(v *InboundApp) InboundAppSessionSettingsOutput { return v.SessionSettings }).(InboundAppSessionSettingsOutput)
+}
+
+// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+func (o InboundAppOutput) TokenExchangeDisabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InboundApp) pulumi.BoolOutput { return v.TokenExchangeDisabled }).(pulumi.BoolOutput)
+}
+
+// The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `clientAuthMethod` is `workloadIdentity`.
+func (o InboundAppOutput) WorkloadClientAssertions() InboundAppWorkloadClientAssertionArrayOutput {
+	return o.ApplyT(func(v *InboundApp) InboundAppWorkloadClientAssertionArrayOutput { return v.WorkloadClientAssertions }).(InboundAppWorkloadClientAssertionArrayOutput)
 }
 
 type InboundAppArrayOutput struct{ *pulumi.OutputState }

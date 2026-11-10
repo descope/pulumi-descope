@@ -59,6 +59,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> ClientSecret { get; private set; } = null!;
 
         /// <summary>
+        /// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `UseDcr` is enabled. This cannot be changed on an existing outbound application.
+        /// </summary>
+        [Output("dcrUrl")]
+        public Output<string> DcrUrl { get; private set; } = null!;
+
+        /// <summary>
         /// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         /// </summary>
         [Output("defaultRedirectUrl")]
@@ -129,6 +135,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("tokenUrlParams")]
         public Output<ImmutableDictionary<string, string>> TokenUrlParams { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `ClientId`, `ClientSecret`, `AuthorizationUrl`, `TokenUrl`, `RevocationUrl`, `DefaultScopes` and `Pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        /// </summary>
+        [Output("useDcr")]
+        public Output<bool> UseDcr { get; private set; } = null!;
 
 
         /// <summary>
@@ -240,6 +252,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `UseDcr` is enabled. This cannot be changed on an existing outbound application.
+        /// </summary>
+        [Input("dcrUrl")]
+        public Input<string>? DcrUrl { get; set; }
+
+        /// <summary>
         /// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
         /// </summary>
         [Input("defaultRedirectUrl")]
@@ -329,6 +347,12 @@ namespace Descope.Pulumi.Descope
             set => _tokenUrlParams = value;
         }
 
+        /// <summary>
+        /// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `ClientId`, `ClientSecret`, `AuthorizationUrl`, `TokenUrl`, `RevocationUrl`, `DefaultScopes` and `Pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        /// </summary>
+        [Input("useDcr")]
+        public Input<bool>? UseDcr { get; set; }
+
         public OutboundAppArgs()
         {
         }
@@ -394,6 +418,12 @@ namespace Descope.Pulumi.Descope
                 _clientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        /// <summary>
+        /// The URL of the provider's protected resource, such as an MCP server, or of its authorization server, used to discover the registration endpoint when `UseDcr` is enabled. This cannot be changed on an existing outbound application.
+        /// </summary>
+        [Input("dcrUrl")]
+        public Input<string>? DcrUrl { get; set; }
 
         /// <summary>
         /// The URL that users are returned to once they have finished granting or denying consent at the provider. This can be overridden per connection.
@@ -484,6 +514,12 @@ namespace Descope.Pulumi.Descope
             get => _tokenUrlParams ?? (_tokenUrlParams = new InputMap<string>());
             set => _tokenUrlParams = value;
         }
+
+        /// <summary>
+        /// Whether Descope registers itself as a client with the provider using OAuth Dynamic Client Registration when the outbound application is created. The registration fills in the `ClientId`, `ClientSecret`, `AuthorizationUrl`, `TokenUrl`, `RevocationUrl`, `DefaultScopes` and `Pkce` fields, so they cannot be set when creating the application. Registration only happens on creation, so this cannot be enabled on an existing outbound application.
+        /// </summary>
+        [Input("useDcr")]
+        public Input<bool>? UseDcr { get; set; }
 
         public OutboundAppState()
         {

@@ -142,6 +142,21 @@ public final class SamlAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * The URL to redirect to when an error occurs.
+     * 
+     */
+    @Import(name="errorRedirectUrl")
+    private @Nullable Output<String> errorRedirectUrl;
+
+    /**
+     * @return The URL to redirect to when an error occurs.
+     * 
+     */
+    public Optional<Output<String>> errorRedirectUrl() {
+        return Optional.ofNullable(this.errorRedirectUrl);
+    }
+
+    /**
      * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP&#39;s request.
      * 
      */
@@ -184,6 +199,21 @@ public final class SamlAppArgs extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<String>> logo() {
         return Optional.ofNullable(this.logo);
+    }
+
+    /**
+     * The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     * 
+     */
+    @Import(name="logoutRedirectUrl")
+    private @Nullable Output<String> logoutRedirectUrl;
+
+    /**
+     * @return The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     * 
+     */
+    public Optional<Output<String>> logoutRedirectUrl() {
+        return Optional.ofNullable(this.logoutRedirectUrl);
     }
 
     /**
@@ -287,9 +317,11 @@ public final class SamlAppArgs extends com.pulumi.resources.ResourceArgs {
         this.description = $.description;
         this.disabled = $.disabled;
         this.dynamicConfiguration = $.dynamicConfiguration;
+        this.errorRedirectUrl = $.errorRedirectUrl;
         this.forceAuthentication = $.forceAuthentication;
         this.loginPageUrl = $.loginPageUrl;
         this.logo = $.logo;
+        this.logoutRedirectUrl = $.logoutRedirectUrl;
         this.manualConfiguration = $.manualConfiguration;
         this.name = $.name;
         this.projectId = $.projectId;
@@ -505,6 +537,27 @@ public final class SamlAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param errorRedirectUrl The URL to redirect to when an error occurs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder errorRedirectUrl(@Nullable Output<String> errorRedirectUrl) {
+            $.errorRedirectUrl = errorRedirectUrl;
+            return this;
+        }
+
+        /**
+         * @param errorRedirectUrl The URL to redirect to when an error occurs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder errorRedirectUrl(String errorRedirectUrl) {
+            return errorRedirectUrl(Output.of(errorRedirectUrl));
+        }
+
+        /**
          * @param forceAuthentication This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP&#39;s request.
          * 
          * @return builder
@@ -565,6 +618,27 @@ public final class SamlAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder logo(String logo) {
             return logo(Output.of(logo));
+        }
+
+        /**
+         * @param logoutRedirectUrl The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder logoutRedirectUrl(@Nullable Output<String> logoutRedirectUrl) {
+            $.logoutRedirectUrl = logoutRedirectUrl;
+            return this;
+        }
+
+        /**
+         * @param logoutRedirectUrl The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder logoutRedirectUrl(String logoutRedirectUrl) {
+            return logoutRedirectUrl(Output.of(logoutRedirectUrl));
         }
 
         /**

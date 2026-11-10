@@ -32,6 +32,21 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
     }
 
     /**
+     * Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     * 
+     */
+    @Import(name="hideAudit")
+    private @Nullable Output<Boolean> hideAudit;
+
+    /**
+     * @return Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     * 
+     */
+    public Optional<Output<Boolean>> hideAudit() {
+        return Optional.ofNullable(this.hideAudit);
+    }
+
+    /**
      * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      * 
      */
@@ -245,6 +260,7 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
 
     private SsoSettingsSsoSuiteSettingsArgs(SsoSettingsSsoSuiteSettingsArgs $) {
         this.forceDomainVerification = $.forceDomainVerification;
+        this.hideAudit = $.hideAudit;
         this.hideDomains = $.hideDomains;
         this.hideFgaMapping = $.hideFgaMapping;
         this.hideGroupsMapping = $.hideGroupsMapping;
@@ -298,6 +314,27 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
          */
         public Builder forceDomainVerification(Boolean forceDomainVerification) {
             return forceDomainVerification(Output.of(forceDomainVerification));
+        }
+
+        /**
+         * @param hideAudit Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideAudit(@Nullable Output<Boolean> hideAudit) {
+            $.hideAudit = hideAudit;
+            return this;
+        }
+
+        /**
+         * @param hideAudit Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder hideAudit(Boolean hideAudit) {
+            return hideAudit(Output.of(hideAudit));
         }
 
         /**

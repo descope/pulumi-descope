@@ -18,6 +18,11 @@ public final class SsoSettingsSsoSuiteSettings {
      */
     private @Nullable Boolean forceDomainVerification;
     /**
+     * @return Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     * 
+     */
+    private @Nullable Boolean hideAudit;
+    /**
      * @return Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      * 
      */
@@ -95,6 +100,13 @@ public final class SsoSettingsSsoSuiteSettings {
      */
     public Optional<Boolean> forceDomainVerification() {
         return Optional.ofNullable(this.forceDomainVerification);
+    }
+    /**
+     * @return Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     * 
+     */
+    public Optional<Boolean> hideAudit() {
+        return Optional.ofNullable(this.hideAudit);
     }
     /**
      * @return Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
@@ -205,6 +217,7 @@ public final class SsoSettingsSsoSuiteSettings {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable Boolean forceDomainVerification;
+        private @Nullable Boolean hideAudit;
         private @Nullable Boolean hideDomains;
         private @Nullable Boolean hideFgaMapping;
         private @Nullable Boolean hideGroupsMapping;
@@ -223,6 +236,7 @@ public final class SsoSettingsSsoSuiteSettings {
         public Builder(SsoSettingsSsoSuiteSettings defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.forceDomainVerification = defaults.forceDomainVerification;
+    	      this.hideAudit = defaults.hideAudit;
     	      this.hideDomains = defaults.hideDomains;
     	      this.hideFgaMapping = defaults.hideFgaMapping;
     	      this.hideGroupsMapping = defaults.hideGroupsMapping;
@@ -243,6 +257,12 @@ public final class SsoSettingsSsoSuiteSettings {
         public Builder forceDomainVerification(@Nullable Boolean forceDomainVerification) {
 
             this.forceDomainVerification = forceDomainVerification;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder hideAudit(@Nullable Boolean hideAudit) {
+
+            this.hideAudit = hideAudit;
             return this;
         }
         @CustomType.Setter
@@ -332,6 +352,7 @@ public final class SsoSettingsSsoSuiteSettings {
         public SsoSettingsSsoSuiteSettings build() {
             final var _resultValue = new SsoSettingsSsoSuiteSettings();
             _resultValue.forceDomainVerification = forceDomainVerification;
+            _resultValue.hideAudit = hideAudit;
             _resultValue.hideDomains = hideDomains;
             _resultValue.hideFgaMapping = hideFgaMapping;
             _resultValue.hideGroupsMapping = hideGroupsMapping;

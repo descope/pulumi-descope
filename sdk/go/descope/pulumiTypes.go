@@ -1240,6 +1240,121 @@ func (o AuditWebhookConnectorAuthenticationOauth2ClientCredentialsPtrOutput) Tok
 	}).(pulumi.StringMapOutput)
 }
 
+type AuthAccessRuleCondition struct {
+	// The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+	Key string `pulumi:"key"`
+	// How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+	Operator string `pulumi:"operator"`
+	// The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+	Values []string `pulumi:"values"`
+}
+
+// AuthAccessRuleConditionInput is an input type that accepts AuthAccessRuleConditionArgs and AuthAccessRuleConditionOutput values.
+// You can construct a concrete instance of `AuthAccessRuleConditionInput` via:
+//
+//	AuthAccessRuleConditionArgs{...}
+type AuthAccessRuleConditionInput interface {
+	pulumi.Input
+
+	ToAuthAccessRuleConditionOutput() AuthAccessRuleConditionOutput
+	ToAuthAccessRuleConditionOutputWithContext(context.Context) AuthAccessRuleConditionOutput
+}
+
+type AuthAccessRuleConditionArgs struct {
+	// The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+	Key pulumi.StringInput `pulumi:"key"`
+	// How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (AuthAccessRuleConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuthAccessRuleCondition)(nil)).Elem()
+}
+
+func (i AuthAccessRuleConditionArgs) ToAuthAccessRuleConditionOutput() AuthAccessRuleConditionOutput {
+	return i.ToAuthAccessRuleConditionOutputWithContext(context.Background())
+}
+
+func (i AuthAccessRuleConditionArgs) ToAuthAccessRuleConditionOutputWithContext(ctx context.Context) AuthAccessRuleConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuthAccessRuleConditionOutput)
+}
+
+// AuthAccessRuleConditionArrayInput is an input type that accepts AuthAccessRuleConditionArray and AuthAccessRuleConditionArrayOutput values.
+// You can construct a concrete instance of `AuthAccessRuleConditionArrayInput` via:
+//
+//	AuthAccessRuleConditionArray{ AuthAccessRuleConditionArgs{...} }
+type AuthAccessRuleConditionArrayInput interface {
+	pulumi.Input
+
+	ToAuthAccessRuleConditionArrayOutput() AuthAccessRuleConditionArrayOutput
+	ToAuthAccessRuleConditionArrayOutputWithContext(context.Context) AuthAccessRuleConditionArrayOutput
+}
+
+type AuthAccessRuleConditionArray []AuthAccessRuleConditionInput
+
+func (AuthAccessRuleConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuthAccessRuleCondition)(nil)).Elem()
+}
+
+func (i AuthAccessRuleConditionArray) ToAuthAccessRuleConditionArrayOutput() AuthAccessRuleConditionArrayOutput {
+	return i.ToAuthAccessRuleConditionArrayOutputWithContext(context.Background())
+}
+
+func (i AuthAccessRuleConditionArray) ToAuthAccessRuleConditionArrayOutputWithContext(ctx context.Context) AuthAccessRuleConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuthAccessRuleConditionArrayOutput)
+}
+
+type AuthAccessRuleConditionOutput struct{ *pulumi.OutputState }
+
+func (AuthAccessRuleConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuthAccessRuleCondition)(nil)).Elem()
+}
+
+func (o AuthAccessRuleConditionOutput) ToAuthAccessRuleConditionOutput() AuthAccessRuleConditionOutput {
+	return o
+}
+
+func (o AuthAccessRuleConditionOutput) ToAuthAccessRuleConditionOutputWithContext(ctx context.Context) AuthAccessRuleConditionOutput {
+	return o
+}
+
+// The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+func (o AuthAccessRuleConditionOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v AuthAccessRuleCondition) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+func (o AuthAccessRuleConditionOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v AuthAccessRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+func (o AuthAccessRuleConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuthAccessRuleCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type AuthAccessRuleConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (AuthAccessRuleConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuthAccessRuleCondition)(nil)).Elem()
+}
+
+func (o AuthAccessRuleConditionArrayOutput) ToAuthAccessRuleConditionArrayOutput() AuthAccessRuleConditionArrayOutput {
+	return o
+}
+
+func (o AuthAccessRuleConditionArrayOutput) ToAuthAccessRuleConditionArrayOutputWithContext(ctx context.Context) AuthAccessRuleConditionArrayOutput {
+	return o
+}
+
+func (o AuthAccessRuleConditionArrayOutput) Index(i pulumi.IntInput) AuthAccessRuleConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AuthAccessRuleCondition {
+		return vs[0].([]AuthAccessRuleCondition)[vs[1].(int)]
+	}).(AuthAccessRuleConditionOutput)
+}
+
 type AwsEventbridgeConnectorAuditFilter struct {
 	// The field name to filter on (either 'actions' or 'tenants').
 	Key string `pulumi:"key"`
@@ -1468,6 +1583,121 @@ func (o AwsS3ConnectorAuditFilterArrayOutput) Index(i pulumi.IntInput) AwsS3Conn
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AwsS3ConnectorAuditFilter {
 		return vs[0].([]AwsS3ConnectorAuditFilter)[vs[1].(int)]
 	}).(AwsS3ConnectorAuditFilterOutput)
+}
+
+type AzureMonitorConnectorAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// AzureMonitorConnectorAuditFilterInput is an input type that accepts AzureMonitorConnectorAuditFilterArgs and AzureMonitorConnectorAuditFilterOutput values.
+// You can construct a concrete instance of `AzureMonitorConnectorAuditFilterInput` via:
+//
+//	AzureMonitorConnectorAuditFilterArgs{...}
+type AzureMonitorConnectorAuditFilterInput interface {
+	pulumi.Input
+
+	ToAzureMonitorConnectorAuditFilterOutput() AzureMonitorConnectorAuditFilterOutput
+	ToAzureMonitorConnectorAuditFilterOutputWithContext(context.Context) AzureMonitorConnectorAuditFilterOutput
+}
+
+type AzureMonitorConnectorAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (AzureMonitorConnectorAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AzureMonitorConnectorAuditFilter)(nil)).Elem()
+}
+
+func (i AzureMonitorConnectorAuditFilterArgs) ToAzureMonitorConnectorAuditFilterOutput() AzureMonitorConnectorAuditFilterOutput {
+	return i.ToAzureMonitorConnectorAuditFilterOutputWithContext(context.Background())
+}
+
+func (i AzureMonitorConnectorAuditFilterArgs) ToAzureMonitorConnectorAuditFilterOutputWithContext(ctx context.Context) AzureMonitorConnectorAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AzureMonitorConnectorAuditFilterOutput)
+}
+
+// AzureMonitorConnectorAuditFilterArrayInput is an input type that accepts AzureMonitorConnectorAuditFilterArray and AzureMonitorConnectorAuditFilterArrayOutput values.
+// You can construct a concrete instance of `AzureMonitorConnectorAuditFilterArrayInput` via:
+//
+//	AzureMonitorConnectorAuditFilterArray{ AzureMonitorConnectorAuditFilterArgs{...} }
+type AzureMonitorConnectorAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToAzureMonitorConnectorAuditFilterArrayOutput() AzureMonitorConnectorAuditFilterArrayOutput
+	ToAzureMonitorConnectorAuditFilterArrayOutputWithContext(context.Context) AzureMonitorConnectorAuditFilterArrayOutput
+}
+
+type AzureMonitorConnectorAuditFilterArray []AzureMonitorConnectorAuditFilterInput
+
+func (AzureMonitorConnectorAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AzureMonitorConnectorAuditFilter)(nil)).Elem()
+}
+
+func (i AzureMonitorConnectorAuditFilterArray) ToAzureMonitorConnectorAuditFilterArrayOutput() AzureMonitorConnectorAuditFilterArrayOutput {
+	return i.ToAzureMonitorConnectorAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i AzureMonitorConnectorAuditFilterArray) ToAzureMonitorConnectorAuditFilterArrayOutputWithContext(ctx context.Context) AzureMonitorConnectorAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AzureMonitorConnectorAuditFilterArrayOutput)
+}
+
+type AzureMonitorConnectorAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (AzureMonitorConnectorAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AzureMonitorConnectorAuditFilter)(nil)).Elem()
+}
+
+func (o AzureMonitorConnectorAuditFilterOutput) ToAzureMonitorConnectorAuditFilterOutput() AzureMonitorConnectorAuditFilterOutput {
+	return o
+}
+
+func (o AzureMonitorConnectorAuditFilterOutput) ToAzureMonitorConnectorAuditFilterOutputWithContext(ctx context.Context) AzureMonitorConnectorAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o AzureMonitorConnectorAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v AzureMonitorConnectorAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o AzureMonitorConnectorAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v AzureMonitorConnectorAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o AzureMonitorConnectorAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AzureMonitorConnectorAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type AzureMonitorConnectorAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (AzureMonitorConnectorAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AzureMonitorConnectorAuditFilter)(nil)).Elem()
+}
+
+func (o AzureMonitorConnectorAuditFilterArrayOutput) ToAzureMonitorConnectorAuditFilterArrayOutput() AzureMonitorConnectorAuditFilterArrayOutput {
+	return o
+}
+
+func (o AzureMonitorConnectorAuditFilterArrayOutput) ToAzureMonitorConnectorAuditFilterArrayOutputWithContext(ctx context.Context) AzureMonitorConnectorAuditFilterArrayOutput {
+	return o
+}
+
+func (o AzureMonitorConnectorAuditFilterArrayOutput) Index(i pulumi.IntInput) AzureMonitorConnectorAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AzureMonitorConnectorAuditFilter {
+		return vs[0].([]AzureMonitorConnectorAuditFilter)[vs[1].(int)]
+	}).(AzureMonitorConnectorAuditFilterOutput)
 }
 
 type CoralogixConnectorAuditFilter struct {
@@ -5538,6 +5768,130 @@ func (o InboundAppAttributesScopeArrayOutput) Index(i pulumi.IntInput) InboundAp
 	}).(InboundAppAttributesScopeOutput)
 }
 
+type InboundAppClientAssertion struct {
+	// The HTTPS URL of the JWKS document. Required when `keySource` is `jwks`.
+	JwksUri *string `pulumi:"jwksUri"`
+	// Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+	KeySource string `pulumi:"keySource"`
+	// A PEM encoded public key or certificate. Required when `keySource` is `publicKey`.
+	PublicKey *string `pulumi:"publicKey"`
+	// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+	SignAlgorithm *string `pulumi:"signAlgorithm"`
+}
+
+// InboundAppClientAssertionInput is an input type that accepts InboundAppClientAssertionArgs and InboundAppClientAssertionOutput values.
+// You can construct a concrete instance of `InboundAppClientAssertionInput` via:
+//
+//	InboundAppClientAssertionArgs{...}
+type InboundAppClientAssertionInput interface {
+	pulumi.Input
+
+	ToInboundAppClientAssertionOutput() InboundAppClientAssertionOutput
+	ToInboundAppClientAssertionOutputWithContext(context.Context) InboundAppClientAssertionOutput
+}
+
+type InboundAppClientAssertionArgs struct {
+	// The HTTPS URL of the JWKS document. Required when `keySource` is `jwks`.
+	JwksUri pulumi.StringPtrInput `pulumi:"jwksUri"`
+	// Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+	KeySource pulumi.StringInput `pulumi:"keySource"`
+	// A PEM encoded public key or certificate. Required when `keySource` is `publicKey`.
+	PublicKey pulumi.StringPtrInput `pulumi:"publicKey"`
+	// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+	SignAlgorithm pulumi.StringPtrInput `pulumi:"signAlgorithm"`
+}
+
+func (InboundAppClientAssertionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InboundAppClientAssertion)(nil)).Elem()
+}
+
+func (i InboundAppClientAssertionArgs) ToInboundAppClientAssertionOutput() InboundAppClientAssertionOutput {
+	return i.ToInboundAppClientAssertionOutputWithContext(context.Background())
+}
+
+func (i InboundAppClientAssertionArgs) ToInboundAppClientAssertionOutputWithContext(ctx context.Context) InboundAppClientAssertionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InboundAppClientAssertionOutput)
+}
+
+// InboundAppClientAssertionArrayInput is an input type that accepts InboundAppClientAssertionArray and InboundAppClientAssertionArrayOutput values.
+// You can construct a concrete instance of `InboundAppClientAssertionArrayInput` via:
+//
+//	InboundAppClientAssertionArray{ InboundAppClientAssertionArgs{...} }
+type InboundAppClientAssertionArrayInput interface {
+	pulumi.Input
+
+	ToInboundAppClientAssertionArrayOutput() InboundAppClientAssertionArrayOutput
+	ToInboundAppClientAssertionArrayOutputWithContext(context.Context) InboundAppClientAssertionArrayOutput
+}
+
+type InboundAppClientAssertionArray []InboundAppClientAssertionInput
+
+func (InboundAppClientAssertionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InboundAppClientAssertion)(nil)).Elem()
+}
+
+func (i InboundAppClientAssertionArray) ToInboundAppClientAssertionArrayOutput() InboundAppClientAssertionArrayOutput {
+	return i.ToInboundAppClientAssertionArrayOutputWithContext(context.Background())
+}
+
+func (i InboundAppClientAssertionArray) ToInboundAppClientAssertionArrayOutputWithContext(ctx context.Context) InboundAppClientAssertionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InboundAppClientAssertionArrayOutput)
+}
+
+type InboundAppClientAssertionOutput struct{ *pulumi.OutputState }
+
+func (InboundAppClientAssertionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InboundAppClientAssertion)(nil)).Elem()
+}
+
+func (o InboundAppClientAssertionOutput) ToInboundAppClientAssertionOutput() InboundAppClientAssertionOutput {
+	return o
+}
+
+func (o InboundAppClientAssertionOutput) ToInboundAppClientAssertionOutputWithContext(ctx context.Context) InboundAppClientAssertionOutput {
+	return o
+}
+
+// The HTTPS URL of the JWKS document. Required when `keySource` is `jwks`.
+func (o InboundAppClientAssertionOutput) JwksUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppClientAssertion) *string { return v.JwksUri }).(pulumi.StringPtrOutput)
+}
+
+// Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+func (o InboundAppClientAssertionOutput) KeySource() pulumi.StringOutput {
+	return o.ApplyT(func(v InboundAppClientAssertion) string { return v.KeySource }).(pulumi.StringOutput)
+}
+
+// A PEM encoded public key or certificate. Required when `keySource` is `publicKey`.
+func (o InboundAppClientAssertionOutput) PublicKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppClientAssertion) *string { return v.PublicKey }).(pulumi.StringPtrOutput)
+}
+
+// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+func (o InboundAppClientAssertionOutput) SignAlgorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppClientAssertion) *string { return v.SignAlgorithm }).(pulumi.StringPtrOutput)
+}
+
+type InboundAppClientAssertionArrayOutput struct{ *pulumi.OutputState }
+
+func (InboundAppClientAssertionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InboundAppClientAssertion)(nil)).Elem()
+}
+
+func (o InboundAppClientAssertionArrayOutput) ToInboundAppClientAssertionArrayOutput() InboundAppClientAssertionArrayOutput {
+	return o
+}
+
+func (o InboundAppClientAssertionArrayOutput) ToInboundAppClientAssertionArrayOutputWithContext(ctx context.Context) InboundAppClientAssertionArrayOutput {
+	return o
+}
+
+func (o InboundAppClientAssertionArrayOutput) Index(i pulumi.IntInput) InboundAppClientAssertionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InboundAppClientAssertion {
+		return vs[0].([]InboundAppClientAssertion)[vs[1].(int)]
+	}).(InboundAppClientAssertionOutput)
+}
+
 type InboundAppConnectionsScope struct {
 	// A description for the scope.
 	Description string `pulumi:"description"`
@@ -6151,6 +6505,148 @@ func (o InboundAppSessionSettingsPtrOutput) UserTemplateId() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
+type InboundAppWorkloadClientAssertion struct {
+	// The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+	AllowedSubjects []string `pulumi:"allowedSubjects"`
+	// The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+	FederationType string `pulumi:"federationType"`
+	// The HTTPS issuer URL. Required when `federationType` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwksUri`.
+	Issuer *string `pulumi:"issuer"`
+	// For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+	JwksUri *string `pulumi:"jwksUri"`
+	// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+	SignAlgorithm *string `pulumi:"signAlgorithm"`
+	// The SPIFFE trust domain, such as `prod.example.com`. Required when `federationType` is `spiffe`.
+	TrustDomain *string `pulumi:"trustDomain"`
+}
+
+// InboundAppWorkloadClientAssertionInput is an input type that accepts InboundAppWorkloadClientAssertionArgs and InboundAppWorkloadClientAssertionOutput values.
+// You can construct a concrete instance of `InboundAppWorkloadClientAssertionInput` via:
+//
+//	InboundAppWorkloadClientAssertionArgs{...}
+type InboundAppWorkloadClientAssertionInput interface {
+	pulumi.Input
+
+	ToInboundAppWorkloadClientAssertionOutput() InboundAppWorkloadClientAssertionOutput
+	ToInboundAppWorkloadClientAssertionOutputWithContext(context.Context) InboundAppWorkloadClientAssertionOutput
+}
+
+type InboundAppWorkloadClientAssertionArgs struct {
+	// The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+	AllowedSubjects pulumi.StringArrayInput `pulumi:"allowedSubjects"`
+	// The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+	FederationType pulumi.StringInput `pulumi:"federationType"`
+	// The HTTPS issuer URL. Required when `federationType` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwksUri`.
+	Issuer pulumi.StringPtrInput `pulumi:"issuer"`
+	// For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+	JwksUri pulumi.StringPtrInput `pulumi:"jwksUri"`
+	// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+	SignAlgorithm pulumi.StringPtrInput `pulumi:"signAlgorithm"`
+	// The SPIFFE trust domain, such as `prod.example.com`. Required when `federationType` is `spiffe`.
+	TrustDomain pulumi.StringPtrInput `pulumi:"trustDomain"`
+}
+
+func (InboundAppWorkloadClientAssertionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InboundAppWorkloadClientAssertion)(nil)).Elem()
+}
+
+func (i InboundAppWorkloadClientAssertionArgs) ToInboundAppWorkloadClientAssertionOutput() InboundAppWorkloadClientAssertionOutput {
+	return i.ToInboundAppWorkloadClientAssertionOutputWithContext(context.Background())
+}
+
+func (i InboundAppWorkloadClientAssertionArgs) ToInboundAppWorkloadClientAssertionOutputWithContext(ctx context.Context) InboundAppWorkloadClientAssertionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InboundAppWorkloadClientAssertionOutput)
+}
+
+// InboundAppWorkloadClientAssertionArrayInput is an input type that accepts InboundAppWorkloadClientAssertionArray and InboundAppWorkloadClientAssertionArrayOutput values.
+// You can construct a concrete instance of `InboundAppWorkloadClientAssertionArrayInput` via:
+//
+//	InboundAppWorkloadClientAssertionArray{ InboundAppWorkloadClientAssertionArgs{...} }
+type InboundAppWorkloadClientAssertionArrayInput interface {
+	pulumi.Input
+
+	ToInboundAppWorkloadClientAssertionArrayOutput() InboundAppWorkloadClientAssertionArrayOutput
+	ToInboundAppWorkloadClientAssertionArrayOutputWithContext(context.Context) InboundAppWorkloadClientAssertionArrayOutput
+}
+
+type InboundAppWorkloadClientAssertionArray []InboundAppWorkloadClientAssertionInput
+
+func (InboundAppWorkloadClientAssertionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InboundAppWorkloadClientAssertion)(nil)).Elem()
+}
+
+func (i InboundAppWorkloadClientAssertionArray) ToInboundAppWorkloadClientAssertionArrayOutput() InboundAppWorkloadClientAssertionArrayOutput {
+	return i.ToInboundAppWorkloadClientAssertionArrayOutputWithContext(context.Background())
+}
+
+func (i InboundAppWorkloadClientAssertionArray) ToInboundAppWorkloadClientAssertionArrayOutputWithContext(ctx context.Context) InboundAppWorkloadClientAssertionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InboundAppWorkloadClientAssertionArrayOutput)
+}
+
+type InboundAppWorkloadClientAssertionOutput struct{ *pulumi.OutputState }
+
+func (InboundAppWorkloadClientAssertionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InboundAppWorkloadClientAssertion)(nil)).Elem()
+}
+
+func (o InboundAppWorkloadClientAssertionOutput) ToInboundAppWorkloadClientAssertionOutput() InboundAppWorkloadClientAssertionOutput {
+	return o
+}
+
+func (o InboundAppWorkloadClientAssertionOutput) ToInboundAppWorkloadClientAssertionOutputWithContext(ctx context.Context) InboundAppWorkloadClientAssertionOutput {
+	return o
+}
+
+// The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+func (o InboundAppWorkloadClientAssertionOutput) AllowedSubjects() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) []string { return v.AllowedSubjects }).(pulumi.StringArrayOutput)
+}
+
+// The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+func (o InboundAppWorkloadClientAssertionOutput) FederationType() pulumi.StringOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) string { return v.FederationType }).(pulumi.StringOutput)
+}
+
+// The HTTPS issuer URL. Required when `federationType` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwksUri`.
+func (o InboundAppWorkloadClientAssertionOutput) Issuer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) *string { return v.Issuer }).(pulumi.StringPtrOutput)
+}
+
+// For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+func (o InboundAppWorkloadClientAssertionOutput) JwksUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) *string { return v.JwksUri }).(pulumi.StringPtrOutput)
+}
+
+// Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+func (o InboundAppWorkloadClientAssertionOutput) SignAlgorithm() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) *string { return v.SignAlgorithm }).(pulumi.StringPtrOutput)
+}
+
+// The SPIFFE trust domain, such as `prod.example.com`. Required when `federationType` is `spiffe`.
+func (o InboundAppWorkloadClientAssertionOutput) TrustDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InboundAppWorkloadClientAssertion) *string { return v.TrustDomain }).(pulumi.StringPtrOutput)
+}
+
+type InboundAppWorkloadClientAssertionArrayOutput struct{ *pulumi.OutputState }
+
+func (InboundAppWorkloadClientAssertionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InboundAppWorkloadClientAssertion)(nil)).Elem()
+}
+
+func (o InboundAppWorkloadClientAssertionArrayOutput) ToInboundAppWorkloadClientAssertionArrayOutput() InboundAppWorkloadClientAssertionArrayOutput {
+	return o
+}
+
+func (o InboundAppWorkloadClientAssertionArrayOutput) ToInboundAppWorkloadClientAssertionArrayOutputWithContext(ctx context.Context) InboundAppWorkloadClientAssertionArrayOutput {
+	return o
+}
+
+func (o InboundAppWorkloadClientAssertionArrayOutput) Index(i pulumi.IntInput) InboundAppWorkloadClientAssertionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InboundAppWorkloadClientAssertion {
+		return vs[0].([]InboundAppWorkloadClientAssertion)[vs[1].(int)]
+	}).(InboundAppWorkloadClientAssertionOutput)
+}
+
 type ManagementKeyRebac struct {
 	// A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
 	CompanyRoles []string `pulumi:"companyRoles"`
@@ -6536,6 +7032,121 @@ func (o ManagementKeyRebacTagRoleArrayOutput) Index(i pulumi.IntInput) Managemen
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ManagementKeyRebacTagRole {
 		return vs[0].([]ManagementKeyRebacTagRole)[vs[1].(int)]
 	}).(ManagementKeyRebacTagRoleOutput)
+}
+
+type MicrosoftSentinelConnectorAuditFilter struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key string `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator string `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values []string `pulumi:"values"`
+}
+
+// MicrosoftSentinelConnectorAuditFilterInput is an input type that accepts MicrosoftSentinelConnectorAuditFilterArgs and MicrosoftSentinelConnectorAuditFilterOutput values.
+// You can construct a concrete instance of `MicrosoftSentinelConnectorAuditFilterInput` via:
+//
+//	MicrosoftSentinelConnectorAuditFilterArgs{...}
+type MicrosoftSentinelConnectorAuditFilterInput interface {
+	pulumi.Input
+
+	ToMicrosoftSentinelConnectorAuditFilterOutput() MicrosoftSentinelConnectorAuditFilterOutput
+	ToMicrosoftSentinelConnectorAuditFilterOutputWithContext(context.Context) MicrosoftSentinelConnectorAuditFilterOutput
+}
+
+type MicrosoftSentinelConnectorAuditFilterArgs struct {
+	// The field name to filter on (either 'actions' or 'tenants').
+	Key pulumi.StringInput `pulumi:"key"`
+	// The filter operation to apply ('includes' or 'excludes').
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The list of values to match against for the filter.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (MicrosoftSentinelConnectorAuditFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MicrosoftSentinelConnectorAuditFilter)(nil)).Elem()
+}
+
+func (i MicrosoftSentinelConnectorAuditFilterArgs) ToMicrosoftSentinelConnectorAuditFilterOutput() MicrosoftSentinelConnectorAuditFilterOutput {
+	return i.ToMicrosoftSentinelConnectorAuditFilterOutputWithContext(context.Background())
+}
+
+func (i MicrosoftSentinelConnectorAuditFilterArgs) ToMicrosoftSentinelConnectorAuditFilterOutputWithContext(ctx context.Context) MicrosoftSentinelConnectorAuditFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MicrosoftSentinelConnectorAuditFilterOutput)
+}
+
+// MicrosoftSentinelConnectorAuditFilterArrayInput is an input type that accepts MicrosoftSentinelConnectorAuditFilterArray and MicrosoftSentinelConnectorAuditFilterArrayOutput values.
+// You can construct a concrete instance of `MicrosoftSentinelConnectorAuditFilterArrayInput` via:
+//
+//	MicrosoftSentinelConnectorAuditFilterArray{ MicrosoftSentinelConnectorAuditFilterArgs{...} }
+type MicrosoftSentinelConnectorAuditFilterArrayInput interface {
+	pulumi.Input
+
+	ToMicrosoftSentinelConnectorAuditFilterArrayOutput() MicrosoftSentinelConnectorAuditFilterArrayOutput
+	ToMicrosoftSentinelConnectorAuditFilterArrayOutputWithContext(context.Context) MicrosoftSentinelConnectorAuditFilterArrayOutput
+}
+
+type MicrosoftSentinelConnectorAuditFilterArray []MicrosoftSentinelConnectorAuditFilterInput
+
+func (MicrosoftSentinelConnectorAuditFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MicrosoftSentinelConnectorAuditFilter)(nil)).Elem()
+}
+
+func (i MicrosoftSentinelConnectorAuditFilterArray) ToMicrosoftSentinelConnectorAuditFilterArrayOutput() MicrosoftSentinelConnectorAuditFilterArrayOutput {
+	return i.ToMicrosoftSentinelConnectorAuditFilterArrayOutputWithContext(context.Background())
+}
+
+func (i MicrosoftSentinelConnectorAuditFilterArray) ToMicrosoftSentinelConnectorAuditFilterArrayOutputWithContext(ctx context.Context) MicrosoftSentinelConnectorAuditFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MicrosoftSentinelConnectorAuditFilterArrayOutput)
+}
+
+type MicrosoftSentinelConnectorAuditFilterOutput struct{ *pulumi.OutputState }
+
+func (MicrosoftSentinelConnectorAuditFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MicrosoftSentinelConnectorAuditFilter)(nil)).Elem()
+}
+
+func (o MicrosoftSentinelConnectorAuditFilterOutput) ToMicrosoftSentinelConnectorAuditFilterOutput() MicrosoftSentinelConnectorAuditFilterOutput {
+	return o
+}
+
+func (o MicrosoftSentinelConnectorAuditFilterOutput) ToMicrosoftSentinelConnectorAuditFilterOutputWithContext(ctx context.Context) MicrosoftSentinelConnectorAuditFilterOutput {
+	return o
+}
+
+// The field name to filter on (either 'actions' or 'tenants').
+func (o MicrosoftSentinelConnectorAuditFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v MicrosoftSentinelConnectorAuditFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The filter operation to apply ('includes' or 'excludes').
+func (o MicrosoftSentinelConnectorAuditFilterOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v MicrosoftSentinelConnectorAuditFilter) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The list of values to match against for the filter.
+func (o MicrosoftSentinelConnectorAuditFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v MicrosoftSentinelConnectorAuditFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type MicrosoftSentinelConnectorAuditFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (MicrosoftSentinelConnectorAuditFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MicrosoftSentinelConnectorAuditFilter)(nil)).Elem()
+}
+
+func (o MicrosoftSentinelConnectorAuditFilterArrayOutput) ToMicrosoftSentinelConnectorAuditFilterArrayOutput() MicrosoftSentinelConnectorAuditFilterArrayOutput {
+	return o
+}
+
+func (o MicrosoftSentinelConnectorAuditFilterArrayOutput) ToMicrosoftSentinelConnectorAuditFilterArrayOutputWithContext(ctx context.Context) MicrosoftSentinelConnectorAuditFilterArrayOutput {
+	return o
+}
+
+func (o MicrosoftSentinelConnectorAuditFilterArrayOutput) Index(i pulumi.IntInput) MicrosoftSentinelConnectorAuditFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MicrosoftSentinelConnectorAuditFilter {
+		return vs[0].([]MicrosoftSentinelConnectorAuditFilter)[vs[1].(int)]
+	}).(MicrosoftSentinelConnectorAuditFilterOutput)
 }
 
 type MixpanelConnectorAuditFilter struct {
@@ -7977,6 +8588,184 @@ func (o OpentelemetryConnectorAuthenticationOauth2ClientCredentialsPtrOutput) To
 		}
 		return v.TokenRequestHeaders
 	}).(pulumi.StringMapOutput)
+}
+
+type PasswordSettingsRolePolicy struct {
+	// Whether passwords must contain at least one letter, either uppercase or lowercase.
+	AnyLetter *bool `pulumi:"anyLetter"`
+	// Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+	DisallowEmailMatch *bool `pulumi:"disallowEmailMatch"`
+	// Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+	DisallowedCharacters *string `pulumi:"disallowedCharacters"`
+	// Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+	EnforceStrength *string `pulumi:"enforceStrength"`
+	// Whether passwords must contain at least one lowercase letter.
+	Lowercase *bool `pulumi:"lowercase"`
+	// The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+	MinLength *int `pulumi:"minLength"`
+	// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+	NonAlphanumeric *bool `pulumi:"nonAlphanumeric"`
+	// Whether passwords must contain at least one number.
+	Number *bool `pulumi:"number"`
+	// The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+	Roles []string `pulumi:"roles"`
+	// Whether passwords must contain at least one uppercase letter.
+	Uppercase *bool `pulumi:"uppercase"`
+}
+
+// PasswordSettingsRolePolicyInput is an input type that accepts PasswordSettingsRolePolicyArgs and PasswordSettingsRolePolicyOutput values.
+// You can construct a concrete instance of `PasswordSettingsRolePolicyInput` via:
+//
+//	PasswordSettingsRolePolicyArgs{...}
+type PasswordSettingsRolePolicyInput interface {
+	pulumi.Input
+
+	ToPasswordSettingsRolePolicyOutput() PasswordSettingsRolePolicyOutput
+	ToPasswordSettingsRolePolicyOutputWithContext(context.Context) PasswordSettingsRolePolicyOutput
+}
+
+type PasswordSettingsRolePolicyArgs struct {
+	// Whether passwords must contain at least one letter, either uppercase or lowercase.
+	AnyLetter pulumi.BoolPtrInput `pulumi:"anyLetter"`
+	// Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+	DisallowEmailMatch pulumi.BoolPtrInput `pulumi:"disallowEmailMatch"`
+	// Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+	DisallowedCharacters pulumi.StringPtrInput `pulumi:"disallowedCharacters"`
+	// Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+	EnforceStrength pulumi.StringPtrInput `pulumi:"enforceStrength"`
+	// Whether passwords must contain at least one lowercase letter.
+	Lowercase pulumi.BoolPtrInput `pulumi:"lowercase"`
+	// The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+	MinLength pulumi.IntPtrInput `pulumi:"minLength"`
+	// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+	NonAlphanumeric pulumi.BoolPtrInput `pulumi:"nonAlphanumeric"`
+	// Whether passwords must contain at least one number.
+	Number pulumi.BoolPtrInput `pulumi:"number"`
+	// The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Whether passwords must contain at least one uppercase letter.
+	Uppercase pulumi.BoolPtrInput `pulumi:"uppercase"`
+}
+
+func (PasswordSettingsRolePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PasswordSettingsRolePolicy)(nil)).Elem()
+}
+
+func (i PasswordSettingsRolePolicyArgs) ToPasswordSettingsRolePolicyOutput() PasswordSettingsRolePolicyOutput {
+	return i.ToPasswordSettingsRolePolicyOutputWithContext(context.Background())
+}
+
+func (i PasswordSettingsRolePolicyArgs) ToPasswordSettingsRolePolicyOutputWithContext(ctx context.Context) PasswordSettingsRolePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PasswordSettingsRolePolicyOutput)
+}
+
+// PasswordSettingsRolePolicyArrayInput is an input type that accepts PasswordSettingsRolePolicyArray and PasswordSettingsRolePolicyArrayOutput values.
+// You can construct a concrete instance of `PasswordSettingsRolePolicyArrayInput` via:
+//
+//	PasswordSettingsRolePolicyArray{ PasswordSettingsRolePolicyArgs{...} }
+type PasswordSettingsRolePolicyArrayInput interface {
+	pulumi.Input
+
+	ToPasswordSettingsRolePolicyArrayOutput() PasswordSettingsRolePolicyArrayOutput
+	ToPasswordSettingsRolePolicyArrayOutputWithContext(context.Context) PasswordSettingsRolePolicyArrayOutput
+}
+
+type PasswordSettingsRolePolicyArray []PasswordSettingsRolePolicyInput
+
+func (PasswordSettingsRolePolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PasswordSettingsRolePolicy)(nil)).Elem()
+}
+
+func (i PasswordSettingsRolePolicyArray) ToPasswordSettingsRolePolicyArrayOutput() PasswordSettingsRolePolicyArrayOutput {
+	return i.ToPasswordSettingsRolePolicyArrayOutputWithContext(context.Background())
+}
+
+func (i PasswordSettingsRolePolicyArray) ToPasswordSettingsRolePolicyArrayOutputWithContext(ctx context.Context) PasswordSettingsRolePolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PasswordSettingsRolePolicyArrayOutput)
+}
+
+type PasswordSettingsRolePolicyOutput struct{ *pulumi.OutputState }
+
+func (PasswordSettingsRolePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PasswordSettingsRolePolicy)(nil)).Elem()
+}
+
+func (o PasswordSettingsRolePolicyOutput) ToPasswordSettingsRolePolicyOutput() PasswordSettingsRolePolicyOutput {
+	return o
+}
+
+func (o PasswordSettingsRolePolicyOutput) ToPasswordSettingsRolePolicyOutputWithContext(ctx context.Context) PasswordSettingsRolePolicyOutput {
+	return o
+}
+
+// Whether passwords must contain at least one letter, either uppercase or lowercase.
+func (o PasswordSettingsRolePolicyOutput) AnyLetter() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.AnyLetter }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+func (o PasswordSettingsRolePolicyOutput) DisallowEmailMatch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.DisallowEmailMatch }).(pulumi.BoolPtrOutput)
+}
+
+// Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+func (o PasswordSettingsRolePolicyOutput) DisallowedCharacters() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *string { return v.DisallowedCharacters }).(pulumi.StringPtrOutput)
+}
+
+// Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+func (o PasswordSettingsRolePolicyOutput) EnforceStrength() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *string { return v.EnforceStrength }).(pulumi.StringPtrOutput)
+}
+
+// Whether passwords must contain at least one lowercase letter.
+func (o PasswordSettingsRolePolicyOutput) Lowercase() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.Lowercase }).(pulumi.BoolPtrOutput)
+}
+
+// The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+func (o PasswordSettingsRolePolicyOutput) MinLength() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *int { return v.MinLength }).(pulumi.IntPtrOutput)
+}
+
+// Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+func (o PasswordSettingsRolePolicyOutput) NonAlphanumeric() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.NonAlphanumeric }).(pulumi.BoolPtrOutput)
+}
+
+// Whether passwords must contain at least one number.
+func (o PasswordSettingsRolePolicyOutput) Number() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.Number }).(pulumi.BoolPtrOutput)
+}
+
+// The names of the roles the policy applies to. Reference the `name` attribute of `Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+func (o PasswordSettingsRolePolicyOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) []string { return v.Roles }).(pulumi.StringArrayOutput)
+}
+
+// Whether passwords must contain at least one uppercase letter.
+func (o PasswordSettingsRolePolicyOutput) Uppercase() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v PasswordSettingsRolePolicy) *bool { return v.Uppercase }).(pulumi.BoolPtrOutput)
+}
+
+type PasswordSettingsRolePolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (PasswordSettingsRolePolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PasswordSettingsRolePolicy)(nil)).Elem()
+}
+
+func (o PasswordSettingsRolePolicyArrayOutput) ToPasswordSettingsRolePolicyArrayOutput() PasswordSettingsRolePolicyArrayOutput {
+	return o
+}
+
+func (o PasswordSettingsRolePolicyArrayOutput) ToPasswordSettingsRolePolicyArrayOutputWithContext(ctx context.Context) PasswordSettingsRolePolicyArrayOutput {
+	return o
+}
+
+func (o PasswordSettingsRolePolicyArrayOutput) Index(i pulumi.IntInput) PasswordSettingsRolePolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PasswordSettingsRolePolicy {
+		return vs[0].([]PasswordSettingsRolePolicy)[vs[1].(int)]
+	}).(PasswordSettingsRolePolicyOutput)
 }
 
 type PendoConnectorAuditFilter struct {
@@ -9699,6 +10488,8 @@ func (o SsoSettingsMandatoryUserAttributeArrayOutput) Index(i pulumi.IntInput) S
 type SsoSettingsSsoSuiteSettings struct {
 	// Setting this to `true` will allow only verified domains to be used.
 	ForceDomainVerification *bool `pulumi:"forceDomainVerification"`
+	// Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+	HideAudit *bool `pulumi:"hideAudit"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains *bool `pulumi:"hideDomains"`
 	// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
@@ -9743,6 +10534,8 @@ type SsoSettingsSsoSuiteSettingsInput interface {
 type SsoSettingsSsoSuiteSettingsArgs struct {
 	// Setting this to `true` will allow only verified domains to be used.
 	ForceDomainVerification pulumi.BoolPtrInput `pulumi:"forceDomainVerification"`
+	// Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+	HideAudit pulumi.BoolPtrInput `pulumi:"hideAudit"`
 	// Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 	HideDomains pulumi.BoolPtrInput `pulumi:"hideDomains"`
 	// Setting this to `true` will hide the FGA mapping configuration section in the SSO Suite interface.
@@ -9855,6 +10648,11 @@ func (o SsoSettingsSsoSuiteSettingsOutput) ForceDomainVerification() pulumi.Bool
 	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *bool { return v.ForceDomainVerification }).(pulumi.BoolPtrOutput)
 }
 
+// Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+func (o SsoSettingsSsoSuiteSettingsOutput) HideAudit() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *bool { return v.HideAudit }).(pulumi.BoolPtrOutput)
+}
+
 // Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
 func (o SsoSettingsSsoSuiteSettingsOutput) HideDomains() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *bool { return v.HideDomains }).(pulumi.BoolPtrOutput)
@@ -9956,6 +10754,16 @@ func (o SsoSettingsSsoSuiteSettingsPtrOutput) ForceDomainVerification() pulumi.B
 			return nil
 		}
 		return v.ForceDomainVerification
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+func (o SsoSettingsSsoSuiteSettingsPtrOutput) HideAudit() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SsoSettingsSsoSuiteSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.HideAudit
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -10507,6 +11315,424 @@ func (o UserAttributeWidgetAuthorizationPtrOutput) ViewPermissions() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+type WellknownSettingsClaimsSupported struct {
+	// Values to remove from the list.
+	Excludeds []string `pulumi:"excludeds"`
+	// Values to add to the list.
+	Extras []string `pulumi:"extras"`
+}
+
+// WellknownSettingsClaimsSupportedInput is an input type that accepts WellknownSettingsClaimsSupportedArgs and WellknownSettingsClaimsSupportedOutput values.
+// You can construct a concrete instance of `WellknownSettingsClaimsSupportedInput` via:
+//
+//	WellknownSettingsClaimsSupportedArgs{...}
+type WellknownSettingsClaimsSupportedInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsClaimsSupportedOutput() WellknownSettingsClaimsSupportedOutput
+	ToWellknownSettingsClaimsSupportedOutputWithContext(context.Context) WellknownSettingsClaimsSupportedOutput
+}
+
+type WellknownSettingsClaimsSupportedArgs struct {
+	// Values to remove from the list.
+	Excludeds pulumi.StringArrayInput `pulumi:"excludeds"`
+	// Values to add to the list.
+	Extras pulumi.StringArrayInput `pulumi:"extras"`
+}
+
+func (WellknownSettingsClaimsSupportedArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsClaimsSupported)(nil)).Elem()
+}
+
+func (i WellknownSettingsClaimsSupportedArgs) ToWellknownSettingsClaimsSupportedOutput() WellknownSettingsClaimsSupportedOutput {
+	return i.ToWellknownSettingsClaimsSupportedOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsClaimsSupportedArgs) ToWellknownSettingsClaimsSupportedOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsClaimsSupportedOutput)
+}
+
+func (i WellknownSettingsClaimsSupportedArgs) ToWellknownSettingsClaimsSupportedPtrOutput() WellknownSettingsClaimsSupportedPtrOutput {
+	return i.ToWellknownSettingsClaimsSupportedPtrOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsClaimsSupportedArgs) ToWellknownSettingsClaimsSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsClaimsSupportedOutput).ToWellknownSettingsClaimsSupportedPtrOutputWithContext(ctx)
+}
+
+// WellknownSettingsClaimsSupportedPtrInput is an input type that accepts WellknownSettingsClaimsSupportedArgs, WellknownSettingsClaimsSupportedPtr and WellknownSettingsClaimsSupportedPtrOutput values.
+// You can construct a concrete instance of `WellknownSettingsClaimsSupportedPtrInput` via:
+//
+//	        WellknownSettingsClaimsSupportedArgs{...}
+//
+//	or:
+//
+//	        nil
+type WellknownSettingsClaimsSupportedPtrInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsClaimsSupportedPtrOutput() WellknownSettingsClaimsSupportedPtrOutput
+	ToWellknownSettingsClaimsSupportedPtrOutputWithContext(context.Context) WellknownSettingsClaimsSupportedPtrOutput
+}
+
+type wellknownSettingsClaimsSupportedPtrType WellknownSettingsClaimsSupportedArgs
+
+func WellknownSettingsClaimsSupportedPtr(v *WellknownSettingsClaimsSupportedArgs) WellknownSettingsClaimsSupportedPtrInput {
+	return (*wellknownSettingsClaimsSupportedPtrType)(v)
+}
+
+func (*wellknownSettingsClaimsSupportedPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WellknownSettingsClaimsSupported)(nil)).Elem()
+}
+
+func (i *wellknownSettingsClaimsSupportedPtrType) ToWellknownSettingsClaimsSupportedPtrOutput() WellknownSettingsClaimsSupportedPtrOutput {
+	return i.ToWellknownSettingsClaimsSupportedPtrOutputWithContext(context.Background())
+}
+
+func (i *wellknownSettingsClaimsSupportedPtrType) ToWellknownSettingsClaimsSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsClaimsSupportedPtrOutput)
+}
+
+type WellknownSettingsClaimsSupportedOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsClaimsSupportedOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsClaimsSupported)(nil)).Elem()
+}
+
+func (o WellknownSettingsClaimsSupportedOutput) ToWellknownSettingsClaimsSupportedOutput() WellknownSettingsClaimsSupportedOutput {
+	return o
+}
+
+func (o WellknownSettingsClaimsSupportedOutput) ToWellknownSettingsClaimsSupportedOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedOutput {
+	return o
+}
+
+func (o WellknownSettingsClaimsSupportedOutput) ToWellknownSettingsClaimsSupportedPtrOutput() WellknownSettingsClaimsSupportedPtrOutput {
+	return o.ToWellknownSettingsClaimsSupportedPtrOutputWithContext(context.Background())
+}
+
+func (o WellknownSettingsClaimsSupportedOutput) ToWellknownSettingsClaimsSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WellknownSettingsClaimsSupported) *WellknownSettingsClaimsSupported {
+		return &v
+	}).(WellknownSettingsClaimsSupportedPtrOutput)
+}
+
+// Values to remove from the list.
+func (o WellknownSettingsClaimsSupportedOutput) Excludeds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WellknownSettingsClaimsSupported) []string { return v.Excludeds }).(pulumi.StringArrayOutput)
+}
+
+// Values to add to the list.
+func (o WellknownSettingsClaimsSupportedOutput) Extras() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WellknownSettingsClaimsSupported) []string { return v.Extras }).(pulumi.StringArrayOutput)
+}
+
+type WellknownSettingsClaimsSupportedPtrOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsClaimsSupportedPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WellknownSettingsClaimsSupported)(nil)).Elem()
+}
+
+func (o WellknownSettingsClaimsSupportedPtrOutput) ToWellknownSettingsClaimsSupportedPtrOutput() WellknownSettingsClaimsSupportedPtrOutput {
+	return o
+}
+
+func (o WellknownSettingsClaimsSupportedPtrOutput) ToWellknownSettingsClaimsSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsClaimsSupportedPtrOutput {
+	return o
+}
+
+func (o WellknownSettingsClaimsSupportedPtrOutput) Elem() WellknownSettingsClaimsSupportedOutput {
+	return o.ApplyT(func(v *WellknownSettingsClaimsSupported) WellknownSettingsClaimsSupported {
+		if v != nil {
+			return *v
+		}
+		var ret WellknownSettingsClaimsSupported
+		return ret
+	}).(WellknownSettingsClaimsSupportedOutput)
+}
+
+// Values to remove from the list.
+func (o WellknownSettingsClaimsSupportedPtrOutput) Excludeds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *WellknownSettingsClaimsSupported) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Excludeds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Values to add to the list.
+func (o WellknownSettingsClaimsSupportedPtrOutput) Extras() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *WellknownSettingsClaimsSupported) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Extras
+	}).(pulumi.StringArrayOutput)
+}
+
+type WellknownSettingsRemovedValue struct {
+	// The name of a list field in the discovery documents, such as `grantTypesSupported`, `tokenEndpointAuthMethodsSupported` or `codeChallengeMethodsSupported`.
+	Field string `pulumi:"field"`
+	// The values to remove from the list.
+	Values []string `pulumi:"values"`
+}
+
+// WellknownSettingsRemovedValueInput is an input type that accepts WellknownSettingsRemovedValueArgs and WellknownSettingsRemovedValueOutput values.
+// You can construct a concrete instance of `WellknownSettingsRemovedValueInput` via:
+//
+//	WellknownSettingsRemovedValueArgs{...}
+type WellknownSettingsRemovedValueInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsRemovedValueOutput() WellknownSettingsRemovedValueOutput
+	ToWellknownSettingsRemovedValueOutputWithContext(context.Context) WellknownSettingsRemovedValueOutput
+}
+
+type WellknownSettingsRemovedValueArgs struct {
+	// The name of a list field in the discovery documents, such as `grantTypesSupported`, `tokenEndpointAuthMethodsSupported` or `codeChallengeMethodsSupported`.
+	Field pulumi.StringInput `pulumi:"field"`
+	// The values to remove from the list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (WellknownSettingsRemovedValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsRemovedValue)(nil)).Elem()
+}
+
+func (i WellknownSettingsRemovedValueArgs) ToWellknownSettingsRemovedValueOutput() WellknownSettingsRemovedValueOutput {
+	return i.ToWellknownSettingsRemovedValueOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsRemovedValueArgs) ToWellknownSettingsRemovedValueOutputWithContext(ctx context.Context) WellknownSettingsRemovedValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsRemovedValueOutput)
+}
+
+// WellknownSettingsRemovedValueArrayInput is an input type that accepts WellknownSettingsRemovedValueArray and WellknownSettingsRemovedValueArrayOutput values.
+// You can construct a concrete instance of `WellknownSettingsRemovedValueArrayInput` via:
+//
+//	WellknownSettingsRemovedValueArray{ WellknownSettingsRemovedValueArgs{...} }
+type WellknownSettingsRemovedValueArrayInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsRemovedValueArrayOutput() WellknownSettingsRemovedValueArrayOutput
+	ToWellknownSettingsRemovedValueArrayOutputWithContext(context.Context) WellknownSettingsRemovedValueArrayOutput
+}
+
+type WellknownSettingsRemovedValueArray []WellknownSettingsRemovedValueInput
+
+func (WellknownSettingsRemovedValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WellknownSettingsRemovedValue)(nil)).Elem()
+}
+
+func (i WellknownSettingsRemovedValueArray) ToWellknownSettingsRemovedValueArrayOutput() WellknownSettingsRemovedValueArrayOutput {
+	return i.ToWellknownSettingsRemovedValueArrayOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsRemovedValueArray) ToWellknownSettingsRemovedValueArrayOutputWithContext(ctx context.Context) WellknownSettingsRemovedValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsRemovedValueArrayOutput)
+}
+
+type WellknownSettingsRemovedValueOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsRemovedValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsRemovedValue)(nil)).Elem()
+}
+
+func (o WellknownSettingsRemovedValueOutput) ToWellknownSettingsRemovedValueOutput() WellknownSettingsRemovedValueOutput {
+	return o
+}
+
+func (o WellknownSettingsRemovedValueOutput) ToWellknownSettingsRemovedValueOutputWithContext(ctx context.Context) WellknownSettingsRemovedValueOutput {
+	return o
+}
+
+// The name of a list field in the discovery documents, such as `grantTypesSupported`, `tokenEndpointAuthMethodsSupported` or `codeChallengeMethodsSupported`.
+func (o WellknownSettingsRemovedValueOutput) Field() pulumi.StringOutput {
+	return o.ApplyT(func(v WellknownSettingsRemovedValue) string { return v.Field }).(pulumi.StringOutput)
+}
+
+// The values to remove from the list.
+func (o WellknownSettingsRemovedValueOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WellknownSettingsRemovedValue) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type WellknownSettingsRemovedValueArrayOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsRemovedValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WellknownSettingsRemovedValue)(nil)).Elem()
+}
+
+func (o WellknownSettingsRemovedValueArrayOutput) ToWellknownSettingsRemovedValueArrayOutput() WellknownSettingsRemovedValueArrayOutput {
+	return o
+}
+
+func (o WellknownSettingsRemovedValueArrayOutput) ToWellknownSettingsRemovedValueArrayOutputWithContext(ctx context.Context) WellknownSettingsRemovedValueArrayOutput {
+	return o
+}
+
+func (o WellknownSettingsRemovedValueArrayOutput) Index(i pulumi.IntInput) WellknownSettingsRemovedValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WellknownSettingsRemovedValue {
+		return vs[0].([]WellknownSettingsRemovedValue)[vs[1].(int)]
+	}).(WellknownSettingsRemovedValueOutput)
+}
+
+type WellknownSettingsScopesSupported struct {
+	// Values to remove from the list.
+	Excludeds []string `pulumi:"excludeds"`
+	// Values to add to the list.
+	Extras []string `pulumi:"extras"`
+}
+
+// WellknownSettingsScopesSupportedInput is an input type that accepts WellknownSettingsScopesSupportedArgs and WellknownSettingsScopesSupportedOutput values.
+// You can construct a concrete instance of `WellknownSettingsScopesSupportedInput` via:
+//
+//	WellknownSettingsScopesSupportedArgs{...}
+type WellknownSettingsScopesSupportedInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsScopesSupportedOutput() WellknownSettingsScopesSupportedOutput
+	ToWellknownSettingsScopesSupportedOutputWithContext(context.Context) WellknownSettingsScopesSupportedOutput
+}
+
+type WellknownSettingsScopesSupportedArgs struct {
+	// Values to remove from the list.
+	Excludeds pulumi.StringArrayInput `pulumi:"excludeds"`
+	// Values to add to the list.
+	Extras pulumi.StringArrayInput `pulumi:"extras"`
+}
+
+func (WellknownSettingsScopesSupportedArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsScopesSupported)(nil)).Elem()
+}
+
+func (i WellknownSettingsScopesSupportedArgs) ToWellknownSettingsScopesSupportedOutput() WellknownSettingsScopesSupportedOutput {
+	return i.ToWellknownSettingsScopesSupportedOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsScopesSupportedArgs) ToWellknownSettingsScopesSupportedOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsScopesSupportedOutput)
+}
+
+func (i WellknownSettingsScopesSupportedArgs) ToWellknownSettingsScopesSupportedPtrOutput() WellknownSettingsScopesSupportedPtrOutput {
+	return i.ToWellknownSettingsScopesSupportedPtrOutputWithContext(context.Background())
+}
+
+func (i WellknownSettingsScopesSupportedArgs) ToWellknownSettingsScopesSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsScopesSupportedOutput).ToWellknownSettingsScopesSupportedPtrOutputWithContext(ctx)
+}
+
+// WellknownSettingsScopesSupportedPtrInput is an input type that accepts WellknownSettingsScopesSupportedArgs, WellknownSettingsScopesSupportedPtr and WellknownSettingsScopesSupportedPtrOutput values.
+// You can construct a concrete instance of `WellknownSettingsScopesSupportedPtrInput` via:
+//
+//	        WellknownSettingsScopesSupportedArgs{...}
+//
+//	or:
+//
+//	        nil
+type WellknownSettingsScopesSupportedPtrInput interface {
+	pulumi.Input
+
+	ToWellknownSettingsScopesSupportedPtrOutput() WellknownSettingsScopesSupportedPtrOutput
+	ToWellknownSettingsScopesSupportedPtrOutputWithContext(context.Context) WellknownSettingsScopesSupportedPtrOutput
+}
+
+type wellknownSettingsScopesSupportedPtrType WellknownSettingsScopesSupportedArgs
+
+func WellknownSettingsScopesSupportedPtr(v *WellknownSettingsScopesSupportedArgs) WellknownSettingsScopesSupportedPtrInput {
+	return (*wellknownSettingsScopesSupportedPtrType)(v)
+}
+
+func (*wellknownSettingsScopesSupportedPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WellknownSettingsScopesSupported)(nil)).Elem()
+}
+
+func (i *wellknownSettingsScopesSupportedPtrType) ToWellknownSettingsScopesSupportedPtrOutput() WellknownSettingsScopesSupportedPtrOutput {
+	return i.ToWellknownSettingsScopesSupportedPtrOutputWithContext(context.Background())
+}
+
+func (i *wellknownSettingsScopesSupportedPtrType) ToWellknownSettingsScopesSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WellknownSettingsScopesSupportedPtrOutput)
+}
+
+type WellknownSettingsScopesSupportedOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsScopesSupportedOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WellknownSettingsScopesSupported)(nil)).Elem()
+}
+
+func (o WellknownSettingsScopesSupportedOutput) ToWellknownSettingsScopesSupportedOutput() WellknownSettingsScopesSupportedOutput {
+	return o
+}
+
+func (o WellknownSettingsScopesSupportedOutput) ToWellknownSettingsScopesSupportedOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedOutput {
+	return o
+}
+
+func (o WellknownSettingsScopesSupportedOutput) ToWellknownSettingsScopesSupportedPtrOutput() WellknownSettingsScopesSupportedPtrOutput {
+	return o.ToWellknownSettingsScopesSupportedPtrOutputWithContext(context.Background())
+}
+
+func (o WellknownSettingsScopesSupportedOutput) ToWellknownSettingsScopesSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WellknownSettingsScopesSupported) *WellknownSettingsScopesSupported {
+		return &v
+	}).(WellknownSettingsScopesSupportedPtrOutput)
+}
+
+// Values to remove from the list.
+func (o WellknownSettingsScopesSupportedOutput) Excludeds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WellknownSettingsScopesSupported) []string { return v.Excludeds }).(pulumi.StringArrayOutput)
+}
+
+// Values to add to the list.
+func (o WellknownSettingsScopesSupportedOutput) Extras() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WellknownSettingsScopesSupported) []string { return v.Extras }).(pulumi.StringArrayOutput)
+}
+
+type WellknownSettingsScopesSupportedPtrOutput struct{ *pulumi.OutputState }
+
+func (WellknownSettingsScopesSupportedPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WellknownSettingsScopesSupported)(nil)).Elem()
+}
+
+func (o WellknownSettingsScopesSupportedPtrOutput) ToWellknownSettingsScopesSupportedPtrOutput() WellknownSettingsScopesSupportedPtrOutput {
+	return o
+}
+
+func (o WellknownSettingsScopesSupportedPtrOutput) ToWellknownSettingsScopesSupportedPtrOutputWithContext(ctx context.Context) WellknownSettingsScopesSupportedPtrOutput {
+	return o
+}
+
+func (o WellknownSettingsScopesSupportedPtrOutput) Elem() WellknownSettingsScopesSupportedOutput {
+	return o.ApplyT(func(v *WellknownSettingsScopesSupported) WellknownSettingsScopesSupported {
+		if v != nil {
+			return *v
+		}
+		var ret WellknownSettingsScopesSupported
+		return ret
+	}).(WellknownSettingsScopesSupportedOutput)
+}
+
+// Values to remove from the list.
+func (o WellknownSettingsScopesSupportedPtrOutput) Excludeds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *WellknownSettingsScopesSupported) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Excludeds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Values to add to the list.
+func (o WellknownSettingsScopesSupportedPtrOutput) Extras() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *WellknownSettingsScopesSupported) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Extras
+	}).(pulumi.StringArrayOutput)
+}
+
 type WsfedAppAttributeMapping struct {
 	// The name of the attribute.
 	Name string `pulumi:"name"`
@@ -10869,10 +12095,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditWebhookConnectorAuthenticationBasicPtrInput)(nil)).Elem(), AuditWebhookConnectorAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditWebhookConnectorAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), AuditWebhookConnectorAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditWebhookConnectorAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), AuditWebhookConnectorAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuthAccessRuleConditionInput)(nil)).Elem(), AuthAccessRuleConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuthAccessRuleConditionArrayInput)(nil)).Elem(), AuthAccessRuleConditionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AwsEventbridgeConnectorAuditFilterInput)(nil)).Elem(), AwsEventbridgeConnectorAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AwsEventbridgeConnectorAuditFilterArrayInput)(nil)).Elem(), AwsEventbridgeConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AwsS3ConnectorAuditFilterInput)(nil)).Elem(), AwsS3ConnectorAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AwsS3ConnectorAuditFilterArrayInput)(nil)).Elem(), AwsS3ConnectorAuditFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AzureMonitorConnectorAuditFilterInput)(nil)).Elem(), AzureMonitorConnectorAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AzureMonitorConnectorAuditFilterArrayInput)(nil)).Elem(), AzureMonitorConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CoralogixConnectorAuditFilterInput)(nil)).Elem(), CoralogixConnectorAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CoralogixConnectorAuditFilterArrayInput)(nil)).Elem(), CoralogixConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CriblConnectorAuditFilterInput)(nil)).Elem(), CriblConnectorAuditFilterArgs{})
@@ -10923,6 +12153,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*HttpConnectorAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), HttpConnectorAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppAttributesScopeInput)(nil)).Elem(), InboundAppAttributesScopeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppAttributesScopeArrayInput)(nil)).Elem(), InboundAppAttributesScopeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppClientAssertionInput)(nil)).Elem(), InboundAppClientAssertionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppClientAssertionArrayInput)(nil)).Elem(), InboundAppClientAssertionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppConnectionsScopeInput)(nil)).Elem(), InboundAppConnectionsScopeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppConnectionsScopeArrayInput)(nil)).Elem(), InboundAppConnectionsScopeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppPermissionsScopeInput)(nil)).Elem(), InboundAppPermissionsScopeArgs{})
@@ -10931,12 +12163,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppScopeClaimMappingArrayInput)(nil)).Elem(), InboundAppScopeClaimMappingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppSessionSettingsInput)(nil)).Elem(), InboundAppSessionSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppSessionSettingsPtrInput)(nil)).Elem(), InboundAppSessionSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppWorkloadClientAssertionInput)(nil)).Elem(), InboundAppWorkloadClientAssertionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InboundAppWorkloadClientAssertionArrayInput)(nil)).Elem(), InboundAppWorkloadClientAssertionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacInput)(nil)).Elem(), ManagementKeyRebacArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacPtrInput)(nil)).Elem(), ManagementKeyRebacArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacProjectRoleInput)(nil)).Elem(), ManagementKeyRebacProjectRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacProjectRoleArrayInput)(nil)).Elem(), ManagementKeyRebacProjectRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacTagRoleInput)(nil)).Elem(), ManagementKeyRebacTagRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ManagementKeyRebacTagRoleArrayInput)(nil)).Elem(), ManagementKeyRebacTagRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MicrosoftSentinelConnectorAuditFilterInput)(nil)).Elem(), MicrosoftSentinelConnectorAuditFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MicrosoftSentinelConnectorAuditFilterArrayInput)(nil)).Elem(), MicrosoftSentinelConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MixpanelConnectorAuditFilterInput)(nil)).Elem(), MixpanelConnectorAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MixpanelConnectorAuditFilterArrayInput)(nil)).Elem(), MixpanelConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NewrelicConnectorAuditFilterInput)(nil)).Elem(), NewrelicConnectorAuditFilterArgs{})
@@ -10955,6 +12191,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*OpentelemetryConnectorAuthenticationBasicPtrInput)(nil)).Elem(), OpentelemetryConnectorAuthenticationBasicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OpentelemetryConnectorAuthenticationOauth2ClientCredentialsInput)(nil)).Elem(), OpentelemetryConnectorAuthenticationOauth2ClientCredentialsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OpentelemetryConnectorAuthenticationOauth2ClientCredentialsPtrInput)(nil)).Elem(), OpentelemetryConnectorAuthenticationOauth2ClientCredentialsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PasswordSettingsRolePolicyInput)(nil)).Elem(), PasswordSettingsRolePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PasswordSettingsRolePolicyArrayInput)(nil)).Elem(), PasswordSettingsRolePolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PendoConnectorAuditFilterInput)(nil)).Elem(), PendoConnectorAuditFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PendoConnectorAuditFilterArrayInput)(nil)).Elem(), PendoConnectorAuditFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SamlAppAttributeMappingInput)(nil)).Elem(), SamlAppAttributeMappingArgs{})
@@ -10987,6 +12225,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TenantAttributeAuthorizationPtrInput)(nil)).Elem(), TenantAttributeAuthorizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserAttributeWidgetAuthorizationInput)(nil)).Elem(), UserAttributeWidgetAuthorizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserAttributeWidgetAuthorizationPtrInput)(nil)).Elem(), UserAttributeWidgetAuthorizationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsClaimsSupportedInput)(nil)).Elem(), WellknownSettingsClaimsSupportedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsClaimsSupportedPtrInput)(nil)).Elem(), WellknownSettingsClaimsSupportedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsRemovedValueInput)(nil)).Elem(), WellknownSettingsRemovedValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsRemovedValueArrayInput)(nil)).Elem(), WellknownSettingsRemovedValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsScopesSupportedInput)(nil)).Elem(), WellknownSettingsScopesSupportedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WellknownSettingsScopesSupportedPtrInput)(nil)).Elem(), WellknownSettingsScopesSupportedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WsfedAppAttributeMappingInput)(nil)).Elem(), WsfedAppAttributeMappingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WsfedAppAttributeMappingArrayInput)(nil)).Elem(), WsfedAppAttributeMappingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WsfedAppGroupsMappingInput)(nil)).Elem(), WsfedAppGroupsMappingArgs{})
@@ -11009,10 +12253,14 @@ func init() {
 	pulumi.RegisterOutputType(AuditWebhookConnectorAuthenticationBasicPtrOutput{})
 	pulumi.RegisterOutputType(AuditWebhookConnectorAuthenticationOauth2ClientCredentialsOutput{})
 	pulumi.RegisterOutputType(AuditWebhookConnectorAuthenticationOauth2ClientCredentialsPtrOutput{})
+	pulumi.RegisterOutputType(AuthAccessRuleConditionOutput{})
+	pulumi.RegisterOutputType(AuthAccessRuleConditionArrayOutput{})
 	pulumi.RegisterOutputType(AwsEventbridgeConnectorAuditFilterOutput{})
 	pulumi.RegisterOutputType(AwsEventbridgeConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(AwsS3ConnectorAuditFilterOutput{})
 	pulumi.RegisterOutputType(AwsS3ConnectorAuditFilterArrayOutput{})
+	pulumi.RegisterOutputType(AzureMonitorConnectorAuditFilterOutput{})
+	pulumi.RegisterOutputType(AzureMonitorConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(CoralogixConnectorAuditFilterOutput{})
 	pulumi.RegisterOutputType(CoralogixConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(CriblConnectorAuditFilterOutput{})
@@ -11063,6 +12311,8 @@ func init() {
 	pulumi.RegisterOutputType(HttpConnectorAuthenticationOauth2ClientCredentialsPtrOutput{})
 	pulumi.RegisterOutputType(InboundAppAttributesScopeOutput{})
 	pulumi.RegisterOutputType(InboundAppAttributesScopeArrayOutput{})
+	pulumi.RegisterOutputType(InboundAppClientAssertionOutput{})
+	pulumi.RegisterOutputType(InboundAppClientAssertionArrayOutput{})
 	pulumi.RegisterOutputType(InboundAppConnectionsScopeOutput{})
 	pulumi.RegisterOutputType(InboundAppConnectionsScopeArrayOutput{})
 	pulumi.RegisterOutputType(InboundAppPermissionsScopeOutput{})
@@ -11071,12 +12321,16 @@ func init() {
 	pulumi.RegisterOutputType(InboundAppScopeClaimMappingArrayOutput{})
 	pulumi.RegisterOutputType(InboundAppSessionSettingsOutput{})
 	pulumi.RegisterOutputType(InboundAppSessionSettingsPtrOutput{})
+	pulumi.RegisterOutputType(InboundAppWorkloadClientAssertionOutput{})
+	pulumi.RegisterOutputType(InboundAppWorkloadClientAssertionArrayOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacPtrOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacProjectRoleOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacProjectRoleArrayOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacTagRoleOutput{})
 	pulumi.RegisterOutputType(ManagementKeyRebacTagRoleArrayOutput{})
+	pulumi.RegisterOutputType(MicrosoftSentinelConnectorAuditFilterOutput{})
+	pulumi.RegisterOutputType(MicrosoftSentinelConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(MixpanelConnectorAuditFilterOutput{})
 	pulumi.RegisterOutputType(MixpanelConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(NewrelicConnectorAuditFilterOutput{})
@@ -11095,6 +12349,8 @@ func init() {
 	pulumi.RegisterOutputType(OpentelemetryConnectorAuthenticationBasicPtrOutput{})
 	pulumi.RegisterOutputType(OpentelemetryConnectorAuthenticationOauth2ClientCredentialsOutput{})
 	pulumi.RegisterOutputType(OpentelemetryConnectorAuthenticationOauth2ClientCredentialsPtrOutput{})
+	pulumi.RegisterOutputType(PasswordSettingsRolePolicyOutput{})
+	pulumi.RegisterOutputType(PasswordSettingsRolePolicyArrayOutput{})
 	pulumi.RegisterOutputType(PendoConnectorAuditFilterOutput{})
 	pulumi.RegisterOutputType(PendoConnectorAuditFilterArrayOutput{})
 	pulumi.RegisterOutputType(SamlAppAttributeMappingOutput{})
@@ -11127,6 +12383,12 @@ func init() {
 	pulumi.RegisterOutputType(TenantAttributeAuthorizationPtrOutput{})
 	pulumi.RegisterOutputType(UserAttributeWidgetAuthorizationOutput{})
 	pulumi.RegisterOutputType(UserAttributeWidgetAuthorizationPtrOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsClaimsSupportedOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsClaimsSupportedPtrOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsRemovedValueOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsRemovedValueArrayOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsScopesSupportedOutput{})
+	pulumi.RegisterOutputType(WellknownSettingsScopesSupportedPtrOutput{})
 	pulumi.RegisterOutputType(WsfedAppAttributeMappingOutput{})
 	pulumi.RegisterOutputType(WsfedAppAttributeMappingArrayOutput{})
 	pulumi.RegisterOutputType(WsfedAppGroupsMappingOutput{})

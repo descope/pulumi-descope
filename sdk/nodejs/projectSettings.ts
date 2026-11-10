@@ -48,6 +48,10 @@ export class ProjectSettings extends pulumi.CustomResource {
      */
     declare public readonly approvedDomains: pulumi.Output<string[]>;
     /**
+     * The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `customDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `customDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+     */
+    declare public readonly appsCustomDomain: pulumi.Output<string>;
+    /**
      * A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `appUrl` domain.
      */
     declare public readonly customDomain: pulumi.Output<string>;
@@ -55,6 +59,10 @@ export class ProjectSettings extends pulumi.CustomResource {
      * Whether new users should not be given access to any federated applications by default.
      */
     declare public readonly defaultNoSsoApps: pulumi.Output<boolean>;
+    /**
+     * When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+     */
+    declare public readonly disableAuthHosting: pulumi.Output<boolean>;
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
@@ -92,8 +100,10 @@ export class ProjectSettings extends pulumi.CustomResource {
             resourceInputs["allowAuthHostingIframeEmbedding"] = state?.allowAuthHostingIframeEmbedding;
             resourceInputs["appUrl"] = state?.appUrl;
             resourceInputs["approvedDomains"] = state?.approvedDomains;
+            resourceInputs["appsCustomDomain"] = state?.appsCustomDomain;
             resourceInputs["customDomain"] = state?.customDomain;
             resourceInputs["defaultNoSsoApps"] = state?.defaultNoSsoApps;
+            resourceInputs["disableAuthHosting"] = state?.disableAuthHosting;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["tenantUserIsolation"] = state?.tenantUserIsolation;
             resourceInputs["testUsersLoginidRegexp"] = state?.testUsersLoginidRegexp;
@@ -107,8 +117,10 @@ export class ProjectSettings extends pulumi.CustomResource {
             resourceInputs["allowAuthHostingIframeEmbedding"] = args?.allowAuthHostingIframeEmbedding;
             resourceInputs["appUrl"] = args?.appUrl;
             resourceInputs["approvedDomains"] = args?.approvedDomains;
+            resourceInputs["appsCustomDomain"] = args?.appsCustomDomain;
             resourceInputs["customDomain"] = args?.customDomain;
             resourceInputs["defaultNoSsoApps"] = args?.defaultNoSsoApps;
+            resourceInputs["disableAuthHosting"] = args?.disableAuthHosting;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["tenantUserIsolation"] = args?.tenantUserIsolation;
             resourceInputs["testUsersLoginidRegexp"] = args?.testUsersLoginidRegexp;
@@ -137,6 +149,10 @@ export interface ProjectSettingsState {
      */
     approvedDomains?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
+     * The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `customDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `customDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+     */
+    appsCustomDomain?: pulumi.Input<string | undefined>;
+    /**
      * A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `appUrl` domain.
      */
     customDomain?: pulumi.Input<string | undefined>;
@@ -144,6 +160,10 @@ export interface ProjectSettingsState {
      * Whether new users should not be given access to any federated applications by default.
      */
     defaultNoSsoApps?: pulumi.Input<boolean | undefined>;
+    /**
+     * When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+     */
+    disableAuthHosting?: pulumi.Input<boolean | undefined>;
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
@@ -183,6 +203,10 @@ export interface ProjectSettingsArgs {
      */
     approvedDomains?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
+     * The custom domain that federated and inbound application URLs are built on, such as the SAML entity ID, SSO and metadata URLs and the OIDC issuer and discovery URL. Set it to `customDomain` or to another custom domain that was added to the project. When empty, or when the domain is no longer one of the project's custom domains, `customDomain` is used. Changing it changes the SAML entity ID and SSO URL of every federated application, so service providers must be updated.
+     */
+    appsCustomDomain?: pulumi.Input<string | undefined>;
+    /**
      * A custom CNAME domain for the project, used instead of the default Descope base URL for authentication traffic. Must be a subdomain of the `appUrl` domain.
      */
     customDomain?: pulumi.Input<string | undefined>;
@@ -190,6 +214,10 @@ export interface ProjectSettingsArgs {
      * Whether new users should not be given access to any federated applications by default.
      */
     defaultNoSsoApps?: pulumi.Input<boolean | undefined>;
+    /**
+     * When enabled, Descope stops serving this project's flows from its hosted login pages, both at the Descope domain and at the `/login` path of a custom domain. Anything that relies on the default hosted login page URL, such as a federated application or an embedded link that lands on it, stops working. Flows running in your own application are unaffected.
+     */
+    disableAuthHosting?: pulumi.Input<boolean | undefined>;
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
