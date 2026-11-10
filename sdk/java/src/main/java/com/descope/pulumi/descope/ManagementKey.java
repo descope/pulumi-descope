@@ -230,14 +230,14 @@ public class ManagementKey extends com.pulumi.resources.CustomResource {
         return this.permittedIps;
     }
     /**
-     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      * 
      */
     @Export(name="rebac", refs={ManagementKeyRebac.class}, tree="[0]")
     private Output<ManagementKeyRebac> rebac;
 
     /**
-     * @return Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation will require the management key to be replaced.
+     * @return Access control settings for the management key. This defines the permissions granted to the management key, either at the company level or for specific projects or for project tags. Changing this value after creation updates the management key in place without rotating its secret. Changing the roles requires the management key that the provider is configured with to be allowed to manage management keys.
      * 
      */
     public Output<ManagementKeyRebac> rebac() {

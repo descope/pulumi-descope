@@ -50,6 +50,20 @@ public class SesConnector extends com.pulumi.resources.CustomResource {
         return this.authType;
     }
     /**
+     * The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     * 
+     */
+    @Export(name="configurationSetName", refs={String.class}, tree="[0]")
+    private Output<String> configurationSetName;
+
+    /**
+     * @return The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     * 
+     */
+    public Output<String> configurationSetName() {
+        return this.configurationSetName;
+    }
+    /**
      * A description of what your connector is used for.
      * 
      */

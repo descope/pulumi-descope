@@ -44,6 +44,10 @@ export class SesConnector extends pulumi.CustomResource {
      */
     declare public readonly authType: pulumi.Output<string>;
     /**
+     * The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     */
+    declare public readonly configurationSetName: pulumi.Output<string>;
+    /**
      * A description of what your connector is used for.
      */
     declare public readonly description: pulumi.Output<string>;
@@ -103,6 +107,7 @@ export class SesConnector extends pulumi.CustomResource {
             const state = argsOrState as SesConnectorState | undefined;
             resourceInputs["accessKeyId"] = state?.accessKeyId;
             resourceInputs["authType"] = state?.authType;
+            resourceInputs["configurationSetName"] = state?.configurationSetName;
             resourceInputs["description"] = state?.description;
             resourceInputs["endpoint"] = state?.endpoint;
             resourceInputs["externalId"] = state?.externalId;
@@ -127,6 +132,7 @@ export class SesConnector extends pulumi.CustomResource {
             }
             resourceInputs["accessKeyId"] = args?.accessKeyId ? pulumi.secret(args.accessKeyId) : undefined;
             resourceInputs["authType"] = args?.authType;
+            resourceInputs["configurationSetName"] = args?.configurationSetName;
             resourceInputs["description"] = args?.description;
             resourceInputs["endpoint"] = args?.endpoint;
             resourceInputs["externalId"] = args?.externalId;
@@ -158,6 +164,10 @@ export interface SesConnectorState {
      * How to authenticate with AWS: using static credentials or by assuming an IAM role.
      */
     authType?: pulumi.Input<string | undefined>;
+    /**
+     * The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     */
+    configurationSetName?: pulumi.Input<string | undefined>;
     /**
      * A description of what your connector is used for.
      */
@@ -216,6 +226,10 @@ export interface SesConnectorArgs {
      * How to authenticate with AWS: using static credentials or by assuming an IAM role.
      */
     authType?: pulumi.Input<string | undefined>;
+    /**
+     * The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+     */
+    configurationSetName?: pulumi.Input<string | undefined>;
     /**
      * A description of what your connector is used for.
      */

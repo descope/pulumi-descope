@@ -26,6 +26,10 @@ class InboundAppArgs:
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 authorization_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_credentials_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -33,15 +37,20 @@ class InboundAppArgs:
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 device_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 jwt_bearer_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
+                 refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]] = None,
-                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None):
+                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None,
+                 token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]] = None):
         """
         The set of arguments for constructing a InboundApp resource.
 
@@ -50,22 +59,31 @@ class InboundAppArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
+        :param pulumi.Input[_builtins.bool] authorization_code_disabled: Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]] client_assertions: The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        :param pulumi.Input[_builtins.str] client_auth_method: How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        :param pulumi.Input[_builtins.bool] client_credentials_disabled: Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
-        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
+        :param pulumi.Input[_builtins.bool] device_code_disabled: Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
+        :param pulumi.Input[_builtins.bool] jwt_bearer_disabled: Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
+        :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input['InboundAppSessionSettingsArgs'] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
         pulumi.set(__self__, "project_id", project_id)
         if allowed_tenants is not None:
@@ -76,6 +94,14 @@ class InboundAppArgs:
             pulumi.set(__self__, "attributes_scopes", attributes_scopes)
         if audience_whitelists is not None:
             pulumi.set(__self__, "audience_whitelists", audience_whitelists)
+        if authorization_code_disabled is not None:
+            pulumi.set(__self__, "authorization_code_disabled", authorization_code_disabled)
+        if client_assertions is not None:
+            pulumi.set(__self__, "client_assertions", client_assertions)
+        if client_auth_method is not None:
+            pulumi.set(__self__, "client_auth_method", client_auth_method)
+        if client_credentials_disabled is not None:
+            pulumi.set(__self__, "client_credentials_disabled", client_credentials_disabled)
         if client_id is not None:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
@@ -90,12 +116,16 @@ class InboundAppArgs:
             pulumi.set(__self__, "deletion_protection", deletion_protection)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if device_code_disabled is not None:
+            pulumi.set(__self__, "device_code_disabled", device_code_disabled)
         if force_add_all_authorization_info is not None:
             pulumi.set(__self__, "force_add_all_authorization_info", force_add_all_authorization_info)
         if force_dpop is not None:
             pulumi.set(__self__, "force_dpop", force_dpop)
         if force_pkce is not None:
             pulumi.set(__self__, "force_pkce", force_pkce)
+        if jwt_bearer_disabled is not None:
+            pulumi.set(__self__, "jwt_bearer_disabled", jwt_bearer_disabled)
         if login_page_url is not None:
             pulumi.set(__self__, "login_page_url", login_page_url)
         if logo_url is not None:
@@ -104,10 +134,16 @@ class InboundAppArgs:
             pulumi.set(__self__, "name", name)
         if permissions_scopes is not None:
             pulumi.set(__self__, "permissions_scopes", permissions_scopes)
+        if refresh_token_disabled is not None:
+            pulumi.set(__self__, "refresh_token_disabled", refresh_token_disabled)
         if scope_claim_mappings is not None:
             pulumi.set(__self__, "scope_claim_mappings", scope_claim_mappings)
         if session_settings is not None:
             pulumi.set(__self__, "session_settings", session_settings)
+        if token_exchange_disabled is not None:
+            pulumi.set(__self__, "token_exchange_disabled", token_exchange_disabled)
+        if workload_client_assertions is not None:
+            pulumi.set(__self__, "workload_client_assertions", workload_client_assertions)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -170,6 +206,54 @@ class InboundAppArgs:
         pulumi.set(self, "audience_whitelists", value)
 
     @_builtins.property
+    @pulumi.getter(name="authorizationCodeDisabled")
+    def authorization_code_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "authorization_code_disabled")
+
+    @authorization_code_disabled.setter
+    def authorization_code_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "authorization_code_disabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAssertions")
+    def client_assertions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]]:
+        """
+        The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        """
+        return pulumi.get(self, "client_assertions")
+
+    @client_assertions.setter
+    def client_assertions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]]):
+        pulumi.set(self, "client_assertions", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        """
+        return pulumi.get(self, "client_auth_method")
+
+    @client_auth_method.setter
+    def client_auth_method(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "client_auth_method", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientCredentialsDisabled")
+    def client_credentials_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "client_credentials_disabled")
+
+    @client_credentials_disabled.setter
+    def client_credentials_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "client_credentials_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -197,7 +281,7 @@ class InboundAppArgs:
     @pulumi.getter(name="clientType")
     def client_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         """
         return pulumi.get(self, "client_type")
 
@@ -254,6 +338,18 @@ class InboundAppArgs:
         pulumi.set(self, "description", value)
 
     @_builtins.property
+    @pulumi.getter(name="deviceCodeDisabled")
+    def device_code_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "device_code_disabled")
+
+    @device_code_disabled.setter
+    def device_code_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "device_code_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="forceAddAllAuthorizationInfo")
     def force_add_all_authorization_info(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -288,6 +384,18 @@ class InboundAppArgs:
     @force_pkce.setter
     def force_pkce(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_pkce", value)
+
+    @_builtins.property
+    @pulumi.getter(name="jwtBearerDisabled")
+    def jwt_bearer_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "jwt_bearer_disabled")
+
+    @jwt_bearer_disabled.setter
+    def jwt_bearer_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "jwt_bearer_disabled", value)
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
@@ -338,6 +446,18 @@ class InboundAppArgs:
         pulumi.set(self, "permissions_scopes", value)
 
     @_builtins.property
+    @pulumi.getter(name="refreshTokenDisabled")
+    def refresh_token_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "refresh_token_disabled")
+
+    @refresh_token_disabled.setter
+    def refresh_token_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "refresh_token_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="scopeClaimMappings")
     def scope_claim_mappings(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]]:
         """
@@ -361,6 +481,30 @@ class InboundAppArgs:
     def session_settings(self, value: pulumi.Input[Optional['InboundAppSessionSettingsArgs']]):
         pulumi.set(self, "session_settings", value)
 
+    @_builtins.property
+    @pulumi.getter(name="tokenExchangeDisabled")
+    def token_exchange_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "token_exchange_disabled")
+
+    @token_exchange_disabled.setter
+    def token_exchange_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "token_exchange_disabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="workloadClientAssertions")
+    def workload_client_assertions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]]:
+        """
+        The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
+        """
+        return pulumi.get(self, "workload_client_assertions")
+
+    @workload_client_assertions.setter
+    def workload_client_assertions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]]):
+        pulumi.set(self, "workload_client_assertions", value)
+
 
 @pulumi.input_type
 class _InboundAppState:
@@ -369,6 +513,10 @@ class _InboundAppState:
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 authorization_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_credentials_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -376,16 +524,21 @@ class _InboundAppState:
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 device_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 jwt_bearer_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]] = None,
-                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None):
+                 session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None,
+                 token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]] = None):
         """
         Input properties used for looking up and filtering InboundApp resources.
 
@@ -393,23 +546,32 @@ class _InboundAppState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppAttributesScopeArgs']]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
+        :param pulumi.Input[_builtins.bool] authorization_code_disabled: Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]] client_assertions: The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        :param pulumi.Input[_builtins.str] client_auth_method: How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        :param pulumi.Input[_builtins.bool] client_credentials_disabled: Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
-        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
+        :param pulumi.Input[_builtins.bool] device_code_disabled: Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
+        :param pulumi.Input[_builtins.bool] jwt_bearer_disabled: Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppPermissionsScopeArgs']]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input['InboundAppSessionSettingsArgs'] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
         if allowed_tenants is not None:
             pulumi.set(__self__, "allowed_tenants", allowed_tenants)
@@ -419,6 +581,14 @@ class _InboundAppState:
             pulumi.set(__self__, "attributes_scopes", attributes_scopes)
         if audience_whitelists is not None:
             pulumi.set(__self__, "audience_whitelists", audience_whitelists)
+        if authorization_code_disabled is not None:
+            pulumi.set(__self__, "authorization_code_disabled", authorization_code_disabled)
+        if client_assertions is not None:
+            pulumi.set(__self__, "client_assertions", client_assertions)
+        if client_auth_method is not None:
+            pulumi.set(__self__, "client_auth_method", client_auth_method)
+        if client_credentials_disabled is not None:
+            pulumi.set(__self__, "client_credentials_disabled", client_credentials_disabled)
         if client_id is not None:
             pulumi.set(__self__, "client_id", client_id)
         if client_secret is not None:
@@ -433,12 +603,16 @@ class _InboundAppState:
             pulumi.set(__self__, "deletion_protection", deletion_protection)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if device_code_disabled is not None:
+            pulumi.set(__self__, "device_code_disabled", device_code_disabled)
         if force_add_all_authorization_info is not None:
             pulumi.set(__self__, "force_add_all_authorization_info", force_add_all_authorization_info)
         if force_dpop is not None:
             pulumi.set(__self__, "force_dpop", force_dpop)
         if force_pkce is not None:
             pulumi.set(__self__, "force_pkce", force_pkce)
+        if jwt_bearer_disabled is not None:
+            pulumi.set(__self__, "jwt_bearer_disabled", jwt_bearer_disabled)
         if login_page_url is not None:
             pulumi.set(__self__, "login_page_url", login_page_url)
         if logo_url is not None:
@@ -449,10 +623,16 @@ class _InboundAppState:
             pulumi.set(__self__, "permissions_scopes", permissions_scopes)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if refresh_token_disabled is not None:
+            pulumi.set(__self__, "refresh_token_disabled", refresh_token_disabled)
         if scope_claim_mappings is not None:
             pulumi.set(__self__, "scope_claim_mappings", scope_claim_mappings)
         if session_settings is not None:
             pulumi.set(__self__, "session_settings", session_settings)
+        if token_exchange_disabled is not None:
+            pulumi.set(__self__, "token_exchange_disabled", token_exchange_disabled)
+        if workload_client_assertions is not None:
+            pulumi.set(__self__, "workload_client_assertions", workload_client_assertions)
 
     @_builtins.property
     @pulumi.getter(name="allowedTenants")
@@ -503,6 +683,54 @@ class _InboundAppState:
         pulumi.set(self, "audience_whitelists", value)
 
     @_builtins.property
+    @pulumi.getter(name="authorizationCodeDisabled")
+    def authorization_code_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "authorization_code_disabled")
+
+    @authorization_code_disabled.setter
+    def authorization_code_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "authorization_code_disabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAssertions")
+    def client_assertions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]]:
+        """
+        The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        """
+        return pulumi.get(self, "client_assertions")
+
+    @client_assertions.setter
+    def client_assertions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppClientAssertionArgs']]]]):
+        pulumi.set(self, "client_assertions", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        """
+        return pulumi.get(self, "client_auth_method")
+
+    @client_auth_method.setter
+    def client_auth_method(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "client_auth_method", value)
+
+    @_builtins.property
+    @pulumi.getter(name="clientCredentialsDisabled")
+    def client_credentials_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "client_credentials_disabled")
+
+    @client_credentials_disabled.setter
+    def client_credentials_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "client_credentials_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -530,7 +758,7 @@ class _InboundAppState:
     @pulumi.getter(name="clientType")
     def client_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         """
         return pulumi.get(self, "client_type")
 
@@ -587,6 +815,18 @@ class _InboundAppState:
         pulumi.set(self, "description", value)
 
     @_builtins.property
+    @pulumi.getter(name="deviceCodeDisabled")
+    def device_code_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "device_code_disabled")
+
+    @device_code_disabled.setter
+    def device_code_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "device_code_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="forceAddAllAuthorizationInfo")
     def force_add_all_authorization_info(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -621,6 +861,18 @@ class _InboundAppState:
     @force_pkce.setter
     def force_pkce(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "force_pkce", value)
+
+    @_builtins.property
+    @pulumi.getter(name="jwtBearerDisabled")
+    def jwt_bearer_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "jwt_bearer_disabled")
+
+    @jwt_bearer_disabled.setter
+    def jwt_bearer_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "jwt_bearer_disabled", value)
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
@@ -683,6 +935,18 @@ class _InboundAppState:
         pulumi.set(self, "project_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="refreshTokenDisabled")
+    def refresh_token_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "refresh_token_disabled")
+
+    @refresh_token_disabled.setter
+    def refresh_token_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "refresh_token_disabled", value)
+
+    @_builtins.property
     @pulumi.getter(name="scopeClaimMappings")
     def scope_claim_mappings(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]]:
         """
@@ -706,6 +970,30 @@ class _InboundAppState:
     def session_settings(self, value: pulumi.Input[Optional['InboundAppSessionSettingsArgs']]):
         pulumi.set(self, "session_settings", value)
 
+    @_builtins.property
+    @pulumi.getter(name="tokenExchangeDisabled")
+    def token_exchange_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "token_exchange_disabled")
+
+    @token_exchange_disabled.setter
+    def token_exchange_disabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "token_exchange_disabled", value)
+
+    @_builtins.property
+    @pulumi.getter(name="workloadClientAssertions")
+    def workload_client_assertions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]]:
+        """
+        The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
+        """
+        return pulumi.get(self, "workload_client_assertions")
+
+    @workload_client_assertions.setter
+    def workload_client_assertions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]]):
+        pulumi.set(self, "workload_client_assertions", value)
+
 
 @pulumi.type_token("descope:index/inboundApp:InboundApp")
 class InboundApp(pulumi.CustomResource):
@@ -717,6 +1005,10 @@ class InboundApp(pulumi.CustomResource):
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 authorization_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppClientAssertionArgs', 'InboundAppClientAssertionArgsDict', 'outputs.InboundAppClientAssertion']]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_credentials_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -724,16 +1016,21 @@ class InboundApp(pulumi.CustomResource):
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 device_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 jwt_bearer_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
                  session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+                 token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None,
                  __props__=None):
         """
         Create a InboundApp resource with the given unique name, props, and options.
@@ -744,23 +1041,32 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
+        :param pulumi.Input[_builtins.bool] authorization_code_disabled: Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppClientAssertionArgs', 'InboundAppClientAssertionArgsDict', 'outputs.InboundAppClientAssertion']]]] client_assertions: The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        :param pulumi.Input[_builtins.str] client_auth_method: How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        :param pulumi.Input[_builtins.bool] client_credentials_disabled: Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
-        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
+        :param pulumi.Input[_builtins.bool] device_code_disabled: Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
+        :param pulumi.Input[_builtins.bool] jwt_bearer_disabled: Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
         ...
     @overload
@@ -790,6 +1096,10 @@ class InboundApp(pulumi.CustomResource):
                  approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
                  audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 authorization_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppClientAssertionArgs', 'InboundAppClientAssertionArgsDict', 'outputs.InboundAppClientAssertion']]]]] = None,
+                 client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
+                 client_credentials_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  client_id: pulumi.Input[Optional[_builtins.str]] = None,
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -797,16 +1107,21 @@ class InboundApp(pulumi.CustomResource):
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 device_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+                 jwt_bearer_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo_url: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
                  session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+                 token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+                 workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -820,6 +1135,10 @@ class InboundApp(pulumi.CustomResource):
             __props__.__dict__["approved_callback_urls"] = approved_callback_urls
             __props__.__dict__["attributes_scopes"] = attributes_scopes
             __props__.__dict__["audience_whitelists"] = audience_whitelists
+            __props__.__dict__["authorization_code_disabled"] = authorization_code_disabled
+            __props__.__dict__["client_assertions"] = client_assertions
+            __props__.__dict__["client_auth_method"] = client_auth_method
+            __props__.__dict__["client_credentials_disabled"] = client_credentials_disabled
             __props__.__dict__["client_id"] = client_id
             __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             __props__.__dict__["client_type"] = client_type
@@ -827,9 +1146,11 @@ class InboundApp(pulumi.CustomResource):
             __props__.__dict__["default_audience"] = default_audience
             __props__.__dict__["deletion_protection"] = deletion_protection
             __props__.__dict__["description"] = description
+            __props__.__dict__["device_code_disabled"] = device_code_disabled
             __props__.__dict__["force_add_all_authorization_info"] = force_add_all_authorization_info
             __props__.__dict__["force_dpop"] = force_dpop
             __props__.__dict__["force_pkce"] = force_pkce
+            __props__.__dict__["jwt_bearer_disabled"] = jwt_bearer_disabled
             __props__.__dict__["login_page_url"] = login_page_url
             __props__.__dict__["logo_url"] = logo_url
             __props__.__dict__["name"] = name
@@ -837,8 +1158,11 @@ class InboundApp(pulumi.CustomResource):
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
+            __props__.__dict__["refresh_token_disabled"] = refresh_token_disabled
             __props__.__dict__["scope_claim_mappings"] = scope_claim_mappings
             __props__.__dict__["session_settings"] = session_settings
+            __props__.__dict__["token_exchange_disabled"] = token_exchange_disabled
+            __props__.__dict__["workload_client_assertions"] = workload_client_assertions
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(InboundApp, __self__).__init__(
@@ -855,6 +1179,10 @@ class InboundApp(pulumi.CustomResource):
             approved_callback_urls: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             attributes_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]]] = None,
             audience_whitelists: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            authorization_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppClientAssertionArgs', 'InboundAppClientAssertionArgsDict', 'outputs.InboundAppClientAssertion']]]]] = None,
+            client_auth_method: pulumi.Input[Optional[_builtins.str]] = None,
+            client_credentials_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             client_id: pulumi.Input[Optional[_builtins.str]] = None,
             client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             client_type: pulumi.Input[Optional[_builtins.str]] = None,
@@ -862,16 +1190,21 @@ class InboundApp(pulumi.CustomResource):
             default_audience: pulumi.Input[Optional[_builtins.str]] = None,
             deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
+            device_code_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             force_add_all_authorization_info: pulumi.Input[Optional[_builtins.bool]] = None,
             force_dpop: pulumi.Input[Optional[_builtins.bool]] = None,
             force_pkce: pulumi.Input[Optional[_builtins.bool]] = None,
+            jwt_bearer_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             login_page_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo_url: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             permissions_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
-            session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None) -> 'InboundApp':
+            session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+            token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
+            workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None) -> 'InboundApp':
         """
         Get an existing InboundApp resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -883,23 +1216,32 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] approved_callback_urls: A set of approved redirect URIs that the inbound app is allowed to redirect to after authorization.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppAttributesScopeArgs', 'InboundAppAttributesScopeArgsDict', 'outputs.InboundAppAttributesScope']]]] attributes_scopes: A list of user information scopes that the inbound app can request. Attribute scopes provide the app with access to user profile data such as email, phone, or custom attributes.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] audience_whitelists: A set of allowed custom `aud` claim values that the inbound app can request via the `resource` parameter, per RFC 8707.
+        :param pulumi.Input[_builtins.bool] authorization_code_disabled: Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppClientAssertionArgs', 'InboundAppClientAssertionArgsDict', 'outputs.InboundAppClientAssertion']]]] client_assertions: The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        :param pulumi.Input[_builtins.str] client_auth_method: How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        :param pulumi.Input[_builtins.bool] client_credentials_disabled: Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] client_id: A custom client ID for the inbound app. If not set, an ID will be generated automatically. Changing this value after creation will require the resource to be replaced.
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
-        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
+        :param pulumi.Input[_builtins.bool] device_code_disabled: Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[_builtins.bool] force_add_all_authorization_info: When enabled, all of the user's tenants, roles, and permissions will always be included in issued tokens.
         :param pulumi.Input[_builtins.bool] force_dpop: Require clients to use DPoP (Demonstrating Proof of Possession), binding access tokens to a key held by the client so a stolen token cannot be used by anyone else.
         :param pulumi.Input[_builtins.bool] force_pkce: When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
+        :param pulumi.Input[_builtins.bool] jwt_bearer_disabled: Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
         :param pulumi.Input[_builtins.str] login_page_url: The Flow Hosting URL.
         :param pulumi.Input[_builtins.str] logo_url: A URL to the inbound app's logo image.
         :param pulumi.Input[_builtins.str] name: A name for the inbound app.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppPermissionsScopeArgs', 'InboundAppPermissionsScopeArgsDict', 'outputs.InboundAppPermissionsScope']]]] permissions_scopes: A list of permission scopes that the inbound app can request. Permission scopes provide the app with the ability to act on behalf of a user based on their roles and permissions.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this inbound app belongs to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -909,6 +1251,10 @@ class InboundApp(pulumi.CustomResource):
         __props__.__dict__["approved_callback_urls"] = approved_callback_urls
         __props__.__dict__["attributes_scopes"] = attributes_scopes
         __props__.__dict__["audience_whitelists"] = audience_whitelists
+        __props__.__dict__["authorization_code_disabled"] = authorization_code_disabled
+        __props__.__dict__["client_assertions"] = client_assertions
+        __props__.__dict__["client_auth_method"] = client_auth_method
+        __props__.__dict__["client_credentials_disabled"] = client_credentials_disabled
         __props__.__dict__["client_id"] = client_id
         __props__.__dict__["client_secret"] = client_secret
         __props__.__dict__["client_type"] = client_type
@@ -916,16 +1262,21 @@ class InboundApp(pulumi.CustomResource):
         __props__.__dict__["default_audience"] = default_audience
         __props__.__dict__["deletion_protection"] = deletion_protection
         __props__.__dict__["description"] = description
+        __props__.__dict__["device_code_disabled"] = device_code_disabled
         __props__.__dict__["force_add_all_authorization_info"] = force_add_all_authorization_info
         __props__.__dict__["force_dpop"] = force_dpop
         __props__.__dict__["force_pkce"] = force_pkce
+        __props__.__dict__["jwt_bearer_disabled"] = jwt_bearer_disabled
         __props__.__dict__["login_page_url"] = login_page_url
         __props__.__dict__["logo_url"] = logo_url
         __props__.__dict__["name"] = name
         __props__.__dict__["permissions_scopes"] = permissions_scopes
         __props__.__dict__["project_id"] = project_id
+        __props__.__dict__["refresh_token_disabled"] = refresh_token_disabled
         __props__.__dict__["scope_claim_mappings"] = scope_claim_mappings
         __props__.__dict__["session_settings"] = session_settings
+        __props__.__dict__["token_exchange_disabled"] = token_exchange_disabled
+        __props__.__dict__["workload_client_assertions"] = workload_client_assertions
         return InboundApp(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -961,6 +1312,38 @@ class InboundApp(pulumi.CustomResource):
         return pulumi.get(self, "audience_whitelists")
 
     @_builtins.property
+    @pulumi.getter(name="authorizationCodeDisabled")
+    def authorization_code_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `authorization_code` grant type for this inbound app, including its authorization requests. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "authorization_code_disabled")
+
+    @_builtins.property
+    @pulumi.getter(name="clientAssertions")
+    def client_assertions(self) -> pulumi.Output[Sequence['outputs.InboundAppClientAssertion']]:
+        """
+        The keys that verify a `private_key_jwt` client assertion, either a JWKS URL or a PEM public key per entry. Required to have at least one entry when `client_auth_method` is `privateKeyJwt`.
+        """
+        return pulumi.get(self, "client_assertions")
+
+    @_builtins.property
+    @pulumi.getter(name="clientAuthMethod")
+    def client_auth_method(self) -> pulumi.Output[_builtins.str]:
+        """
+        How the app authenticates at the token endpoint. `clientSecret` (the default, also when empty) uses `client_secret`, `privateKeyJwt` accepts a `private_key_jwt` client assertion verified against `client_assertions`, and `workloadIdentity` accepts a SPIFFE JWT-SVID or an OIDC workload token verified against `workload_client_assertions`. An app that authenticates with mTLS certificates is managed in the Descope console.
+        """
+        return pulumi.get(self, "client_auth_method")
+
+    @_builtins.property
+    @pulumi.getter(name="clientCredentialsDisabled")
+    def client_credentials_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `client_credentials` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "client_credentials_disabled")
+
+    @_builtins.property
     @pulumi.getter(name="clientId")
     def client_id(self) -> pulumi.Output[_builtins.str]:
         """
@@ -980,7 +1363,7 @@ class InboundApp(pulumi.CustomResource):
     @pulumi.getter(name="clientType")
     def client_type(self) -> pulumi.Output[_builtins.str]:
         """
-        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Leave empty to let the backend decide. Changing this value after creation will require the resource to be replaced.
+        The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         """
         return pulumi.get(self, "client_type")
 
@@ -1017,6 +1400,14 @@ class InboundApp(pulumi.CustomResource):
         return pulumi.get(self, "description")
 
     @_builtins.property
+    @pulumi.getter(name="deviceCodeDisabled")
+    def device_code_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:device_code` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "device_code_disabled")
+
+    @_builtins.property
     @pulumi.getter(name="forceAddAllAuthorizationInfo")
     def force_add_all_authorization_info(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -1039,6 +1430,14 @@ class InboundApp(pulumi.CustomResource):
         When enabled, the authorization code flow requires PKCE in addition to the normal client authentication. A confidential client must then present both its client secret and a valid PKCE `code_verifier`. Public clients always use PKCE regardless of this setting.
         """
         return pulumi.get(self, "force_pkce")
+
+    @_builtins.property
+    @pulumi.getter(name="jwtBearerDisabled")
+    def jwt_bearer_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled unless `client_type` is `public`. Public clients cannot use this grant type, so it cannot be set to `false` for one.
+        """
+        return pulumi.get(self, "jwt_bearer_disabled")
 
     @_builtins.property
     @pulumi.getter(name="loginPageUrl")
@@ -1081,6 +1480,14 @@ class InboundApp(pulumi.CustomResource):
         return pulumi.get(self, "project_id")
 
     @_builtins.property
+    @pulumi.getter(name="refreshTokenDisabled")
+    def refresh_token_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "refresh_token_disabled")
+
+    @_builtins.property
     @pulumi.getter(name="scopeClaimMappings")
     def scope_claim_mappings(self) -> pulumi.Output[Sequence['outputs.InboundAppScopeClaimMapping']]:
         """
@@ -1095,4 +1502,20 @@ class InboundApp(pulumi.CustomResource):
         Custom session management settings for this inbound app, overriding the project defaults.
         """
         return pulumi.get(self, "session_settings")
+
+    @_builtins.property
+    @pulumi.getter(name="tokenExchangeDisabled")
+    def token_exchange_disabled(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
+        """
+        return pulumi.get(self, "token_exchange_disabled")
+
+    @_builtins.property
+    @pulumi.getter(name="workloadClientAssertions")
+    def workload_client_assertions(self) -> pulumi.Output[Sequence['outputs.InboundAppWorkloadClientAssertion']]:
+        """
+        The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
+        """
+        return pulumi.get(self, "workload_client_assertions")
 

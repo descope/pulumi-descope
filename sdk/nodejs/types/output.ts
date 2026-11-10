@@ -121,6 +121,21 @@ export interface AuditWebhookConnectorAuthenticationOauth2ClientCredentials {
     tokenRequestHeaders: {[key: string]: string};
 }
 
+export interface AuthAccessRuleCondition {
+    /**
+     * The attribute the condition checks. One of `request.ip`, `request.country`, `user.email`, `user.emailDomain`, `user.loginId` or `user.phone`.
+     */
+    key: string;
+    /**
+     * How the attribute is compared with the values. One of `equal`, `notEqual`, `in`, `notIn`, `inCidr` or `notInCidr`. The CIDR operators are only supported with the `request.ip` key.
+     */
+    operator: string;
+    /**
+     * The values to compare with. The `equal`, `notEqual`, `inCidr` and `notInCidr` operators take exactly one value. With `equal` and `notEqual` the value may instead be a reference of the form `{{jwtClaims.<name>}}`, which compares the attribute with that custom claim of the token the user presented. An absent claim never matches. Values must be in canonical form: lowercase emails and domains, uppercase country codes, phone numbers in E.164 form and IP addresses in their shortest form.
+     */
+    values: string[];
+}
+
 export interface AwsEventbridgeConnectorAuditFilter {
     /**
      * The field name to filter on (either 'actions' or 'tenants').
@@ -137,6 +152,21 @@ export interface AwsEventbridgeConnectorAuditFilter {
 }
 
 export interface AwsS3ConnectorAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
+}
+
+export interface AzureMonitorConnectorAuditFilter {
     /**
      * The field name to filter on (either 'actions' or 'tenants').
      */
@@ -554,6 +584,25 @@ export interface InboundAppAttributesScope {
     values: string[];
 }
 
+export interface InboundAppClientAssertion {
+    /**
+     * The HTTPS URL of the JWKS document. Required when `keySource` is `jwks`.
+     */
+    jwksUri: string;
+    /**
+     * Where the key that signed the assertion comes from: `jwks` for a JWKS URL, or `publicKey` for a PEM public key.
+     */
+    keySource: string;
+    /**
+     * A PEM encoded public key or certificate. Required when `keySource` is `publicKey`.
+     */
+    publicKey: string;
+    /**
+     * Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+     */
+    signAlgorithm: string;
+}
+
 export interface InboundAppConnectionsScope {
     /**
      * A description for the scope.
@@ -642,6 +691,33 @@ export interface InboundAppSessionSettings {
     userTemplateId: string;
 }
 
+export interface InboundAppWorkloadClientAssertion {
+    /**
+     * The workloads this app accepts, matched against the assertion's subject. For a `spiffe` entry each value is an exact SPIFFE ID or one ending with `/*` to accept the workloads under that path. For an `oidc` entry each value is an anchored regular expression.
+     */
+    allowedSubjects: string[];
+    /**
+     * The kind of issuer this entry trusts: `spiffe` for a SPIFFE trust domain, or `oidc` for an OIDC issuer.
+     */
+    federationType: string;
+    /**
+     * The HTTPS issuer URL. Required when `federationType` is `oidc`. For a `spiffe` entry it is the trust domain's OIDC Discovery Provider and replaces the bundle endpoint in `jwksUri`.
+     */
+    issuer: string;
+    /**
+     * For a `spiffe` entry, the HTTPS URL of the trust domain's bundle endpoint, required unless `issuer` is set. For an `oidc` entry, an optional JWKS URL that overrides the one found by discovery.
+     */
+    jwksUri: string;
+    /**
+     * Pins the JWS algorithm of the assertion, such as `RS256` or `ES256`. Leave empty to accept every supported asymmetric algorithm.
+     */
+    signAlgorithm: string;
+    /**
+     * The SPIFFE trust domain, such as `prod.example.com`. Required when `federationType` is `spiffe`.
+     */
+    trustDomain: string;
+}
+
 export interface ManagementKeyRebac {
     /**
      * A list of company-level role names that are granted to the management key. This attribute is mutually exclusive with `tagRoles` and `projectRoles`.
@@ -677,6 +753,21 @@ export interface ManagementKeyRebacTagRole {
      * The project tags this role grant applies to.
      */
     tags: string[];
+}
+
+export interface MicrosoftSentinelConnectorAuditFilter {
+    /**
+     * The field name to filter on (either 'actions' or 'tenants').
+     */
+    key: string;
+    /**
+     * The filter operation to apply ('includes' or 'excludes').
+     */
+    operator: string;
+    /**
+     * The list of values to match against for the filter.
+     */
+    values: string[];
 }
 
 export interface MixpanelConnectorAuditFilter {
@@ -820,6 +911,49 @@ export interface OpentelemetryConnectorAuthenticationOauth2ClientCredentials {
      * Additional headers to include in the token request sent to the token endpoint.
      */
     tokenRequestHeaders: {[key: string]: string};
+}
+
+export interface PasswordSettingsRolePolicy {
+    /**
+     * Whether passwords must contain at least one letter, either uppercase or lowercase.
+     */
+    anyLetter: boolean;
+    /**
+     * Whether to reject passwords that match the user's email address or its local-part (the segment before `@`), case-insensitively.
+     */
+    disallowEmailMatch: boolean;
+    /**
+     * Reject passwords containing any of these characters, in addition to the characters that the password settings disallow. Each character in the string is treated as a forbidden literal.
+     */
+    disallowedCharacters: string;
+    /**
+     * Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength. The default value of `none` adds no requirement.
+     */
+    enforceStrength: string;
+    /**
+     * Whether passwords must contain at least one lowercase letter.
+     */
+    lowercase: boolean;
+    /**
+     * The minimum length of the password, up to `64`. The default value of `0` adds no requirement.
+     */
+    minLength: number;
+    /**
+     * Whether passwords must contain at least one non-alphanumeric character (e.g. `!`, `@`, `#`).
+     */
+    nonAlphanumeric: boolean;
+    /**
+     * Whether passwords must contain at least one number.
+     */
+    number: boolean;
+    /**
+     * The names of the roles the policy applies to. Reference the `name` attribute of `descope.Role` resources (e.g., `descope_role.admin.name`) so that Terraform orders the operations correctly. Each role must exist when the policy is applied.
+     */
+    roles: string[];
+    /**
+     * Whether passwords must contain at least one uppercase letter.
+     */
+    uppercase: boolean;
 }
 
 export interface PendoConnectorAuditFilter {
@@ -996,6 +1130,10 @@ export interface SsoSettingsSsoSuiteSettings {
      */
     forceDomainVerification: boolean;
     /**
+     * Setting this to `true` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+     */
+    hideAudit: boolean;
+    /**
      * Setting this to `true` will hide the domains configuration section in the SSO Suite interface.
      */
     hideDomains: boolean;
@@ -1084,6 +1222,39 @@ export interface UserAttributeWidgetAuthorization {
      * The names of the permissions users are required to have to view this attribute in the user management widget. An empty set means no restriction.
      */
     viewPermissions: string[];
+}
+
+export interface WellknownSettingsClaimsSupported {
+    /**
+     * Values to remove from the list.
+     */
+    excludeds: string[];
+    /**
+     * Values to add to the list.
+     */
+    extras: string[];
+}
+
+export interface WellknownSettingsRemovedValue {
+    /**
+     * The name of a list field in the discovery documents, such as `grantTypesSupported`, `tokenEndpointAuthMethodsSupported` or `codeChallengeMethodsSupported`.
+     */
+    field: string;
+    /**
+     * The values to remove from the list.
+     */
+    values: string[];
+}
+
+export interface WellknownSettingsScopesSupported {
+    /**
+     * Values to remove from the list.
+     */
+    excludeds: string[];
+    /**
+     * Values to add to the list.
+     */
+    extras: string[];
 }
 
 export interface WsfedAppAttributeMapping {

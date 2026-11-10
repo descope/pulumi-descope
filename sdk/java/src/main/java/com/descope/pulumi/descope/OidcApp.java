@@ -121,14 +121,14 @@ public class OidcApp extends com.pulumi.resources.CustomResource {
         return this.clientSecret;
     }
     /**
-     * OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;` (PKCE only, no client secret). Changing this value on an existing application changes how its clients must authenticate, so coordinate the change with the application&#39;s developers.
+     * OAuth client confidentiality. One of `&#34;confidential&#34;` (a dedicated client secret is generated for the app) or `&#34;public&#34;` (PKCE only, no client secret), and setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode with access-key authentication. If this attribute is omitted when the application is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving an existing application to the legacy mode can be rejected by the Descope API. Changing this value on an existing application changes how its clients must authenticate, so coordinate the change with the application&#39;s developers.
      * 
      */
     @Export(name="clientType", refs={String.class}, tree="[0]")
     private Output<String> clientType;
 
     /**
-     * @return OAuth client confidentiality. One of `&#34;&#34;` (default — legacy access-key authentication), `&#34;confidential&#34;` (a dedicated client secret is generated for the app), or `&#34;public&#34;` (PKCE only, no client secret). Changing this value on an existing application changes how its clients must authenticate, so coordinate the change with the application&#39;s developers.
+     * @return OAuth client confidentiality. One of `&#34;confidential&#34;` (a dedicated client secret is generated for the app) or `&#34;public&#34;` (PKCE only, no client secret), and setting it explicitly is recommended. The empty value `&#34;&#34;` is the legacy mode with access-key authentication. If this attribute is omitted when the application is created, the account&#39;s default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving an existing application to the legacy mode can be rejected by the Descope API. Changing this value on an existing application changes how its clients must authenticate, so coordinate the change with the application&#39;s developers.
      * 
      */
     public Output<String> clientType() {

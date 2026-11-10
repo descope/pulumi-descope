@@ -16,10 +16,14 @@ from .app_permission import *
 from .app_role import *
 from .arkose_connector import *
 from .audit_webhook_connector import *
+from .auth_access_policy import *
+from .auth_access_rule import *
+from .aws_end_user_messaging_connector import *
 from .aws_eventbridge_connector import *
 from .aws_s3_connector import *
 from .aws_ses_email_validation_connector import *
 from .aws_translate_connector import *
+from .azure_monitor_connector import *
 from .bitsight_connector import *
 from .coralogix_connector import *
 from .cribl_connector import *
@@ -47,6 +51,7 @@ from .generic_sms_gateway_connector import *
 from .google_cloud_logging_connector import *
 from .google_cloud_translation_connector import *
 from .google_maps_places_connector import *
+from .governance import *
 from .groundcover_connector import *
 from .hcaptcha_connector import *
 from .hibp_connector import *
@@ -61,7 +66,9 @@ from .ldap_connector import *
 from .list import *
 from .lokalise_connector import *
 from .magiclink_settings import *
+from .mailjet_connector import *
 from .management_key import *
+from .microsoft_sentinel_connector import *
 from .mixpanel_connector import *
 from .mparticle_connector import *
 from .newrelic_connector import *
@@ -103,6 +110,7 @@ from .smtp_connector import *
 from .snowflake_connector import *
 from .sns_connector import *
 from .splunk_connector import *
+from .splunk_on_call_connector import *
 from .sql_connector import *
 from .sso_settings import *
 from .styles import *
@@ -119,6 +127,8 @@ from .twilio_verify_connector import *
 from .unibeam_connector import *
 from .user_attribute import *
 from .voice_template import *
+from .vonage_connector import *
+from .wellknown_settings import *
 from .widget import *
 from .wsfed_app import *
 from .zerobounce_connector import *
@@ -217,6 +227,30 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/authAccessPolicy",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/authAccessPolicy:AuthAccessPolicy": "AuthAccessPolicy"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/authAccessRule",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/authAccessRule:AuthAccessRule": "AuthAccessRule"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/awsEndUserMessagingConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/awsEndUserMessagingConnector:AwsEndUserMessagingConnector": "AwsEndUserMessagingConnector"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/awsEventbridgeConnector",
   "fqn": "descope_pulumi",
   "classes": {
@@ -245,6 +279,14 @@ _utilities.register(
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/awsTranslateConnector:AwsTranslateConnector": "AwsTranslateConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/azureMonitorConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/azureMonitorConnector:AzureMonitorConnector": "AzureMonitorConnector"
   }
  },
  {
@@ -465,6 +507,14 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/governance",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/governance:Governance": "Governance"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/groundcoverConnector",
   "fqn": "descope_pulumi",
   "classes": {
@@ -577,10 +627,26 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/mailjetConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/mailjetConnector:MailjetConnector": "MailjetConnector"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/managementKey",
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/managementKey:ManagementKey": "ManagementKey"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/microsoftSentinelConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/microsoftSentinelConnector:MicrosoftSentinelConnector": "MicrosoftSentinelConnector"
   }
  },
  {
@@ -905,6 +971,14 @@ _utilities.register(
  },
  {
   "pkg": "descope",
+  "mod": "index/splunkOnCallConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/splunkOnCallConnector:SplunkOnCallConnector": "SplunkOnCallConnector"
+  }
+ },
+ {
+  "pkg": "descope",
   "mod": "index/sqlConnector",
   "fqn": "descope_pulumi",
   "classes": {
@@ -1029,6 +1103,22 @@ _utilities.register(
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/voiceTemplate:VoiceTemplate": "VoiceTemplate"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/vonageConnector",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/vonageConnector:VonageConnector": "VonageConnector"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/wellknownSettings",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/wellknownSettings:WellknownSettings": "WellknownSettings"
   }
  },
  {

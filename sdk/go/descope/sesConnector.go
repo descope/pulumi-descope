@@ -20,6 +20,8 @@ type SesConnector struct {
 	AccessKeyId pulumi.StringOutput `pulumi:"accessKeyId"`
 	// How to authenticate with AWS: using static credentials or by assuming an IAM role.
 	AuthType pulumi.StringOutput `pulumi:"authType"`
+	// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+	ConfigurationSetName pulumi.StringOutput `pulumi:"configurationSetName"`
 	// A description of what your connector is used for.
 	Description pulumi.StringOutput `pulumi:"description"`
 	// A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
@@ -98,6 +100,8 @@ type sesConnectorState struct {
 	AccessKeyId *string `pulumi:"accessKeyId"`
 	// How to authenticate with AWS: using static credentials or by assuming an IAM role.
 	AuthType *string `pulumi:"authType"`
+	// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+	ConfigurationSetName *string `pulumi:"configurationSetName"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	// A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
@@ -127,6 +131,8 @@ type SesConnectorState struct {
 	AccessKeyId pulumi.StringPtrInput
 	// How to authenticate with AWS: using static credentials or by assuming an IAM role.
 	AuthType pulumi.StringPtrInput
+	// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+	ConfigurationSetName pulumi.StringPtrInput
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput
 	// A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
@@ -160,6 +166,8 @@ type sesConnectorArgs struct {
 	AccessKeyId *string `pulumi:"accessKeyId"`
 	// How to authenticate with AWS: using static credentials or by assuming an IAM role.
 	AuthType *string `pulumi:"authType"`
+	// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+	ConfigurationSetName *string `pulumi:"configurationSetName"`
 	// A description of what your connector is used for.
 	Description *string `pulumi:"description"`
 	// A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
@@ -190,6 +198,8 @@ type SesConnectorArgs struct {
 	AccessKeyId pulumi.StringPtrInput
 	// How to authenticate with AWS: using static credentials or by assuming an IAM role.
 	AuthType pulumi.StringPtrInput
+	// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+	ConfigurationSetName pulumi.StringPtrInput
 	// A description of what your connector is used for.
 	Description pulumi.StringPtrInput
 	// A custom endpoint for the SES API. Leave empty to use the default AWS endpoint.
@@ -309,6 +319,11 @@ func (o SesConnectorOutput) AccessKeyId() pulumi.StringOutput {
 // How to authenticate with AWS: using static credentials or by assuming an IAM role.
 func (o SesConnectorOutput) AuthType() pulumi.StringOutput {
 	return o.ApplyT(func(v *SesConnector) pulumi.StringOutput { return v.AuthType }).(pulumi.StringOutput)
+}
+
+// The SES configuration set to send every email with, so SES events such as bounces, complaints and deliveries carry it. It must exist in the same AWS account and region.
+func (o SesConnectorOutput) ConfigurationSetName() pulumi.StringOutput {
+	return o.ApplyT(func(v *SesConnector) pulumi.StringOutput { return v.ConfigurationSetName }).(pulumi.StringOutput)
 }
 
 // A description of what your connector is used for.

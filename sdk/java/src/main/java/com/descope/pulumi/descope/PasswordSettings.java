@@ -6,6 +6,7 @@ package com.descope.pulumi.descope;
 import com.descope.pulumi.descope.PasswordSettingsArgs;
 import com.descope.pulumi.descope.Utilities;
 import com.descope.pulumi.descope.inputs.PasswordSettingsState;
+import com.descope.pulumi.descope.outputs.PasswordSettingsRolePolicy;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Export;
 import com.pulumi.core.annotations.ResourceType;
@@ -13,6 +14,7 @@ import com.pulumi.core.internal.Codegen;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
 import javax.annotation.Nullable;
 
 /**
@@ -286,6 +288,20 @@ public class PasswordSettings extends com.pulumi.resources.CustomResource {
      */
     public Output<Integer> reuseAmount() {
         return this.reuseAmount;
+    }
+    /**
+     * Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+     * 
+     */
+    @Export(name="rolePolicies", refs={List.class,PasswordSettingsRolePolicy.class}, tree="[0,1]")
+    private Output<List<PasswordSettingsRolePolicy>> rolePolicies;
+
+    /**
+     * @return Stricter password requirements for users who hold specific roles. When a user holds any of the roles of a policy, at the project level or in any of their tenants, each rule of the policy is combined with the matching rule of the password settings that apply to the user, and the strictest value wins. A policy can therefore only make the requirements stricter, and when a user matches more than one policy all of them apply. The policies are enforced when a signed-in user sets or changes their own password, and not at sign-up or to passwords set for a user by an administrator. Existing passwords are not checked again when roles or policies change.
+     * 
+     */
+    public Output<List<PasswordSettingsRolePolicy>> rolePolicies() {
+        return this.rolePolicies;
     }
     /**
      * Whether the user account should be temporarily locked after a specified number of failed login attempts.

@@ -70,9 +70,17 @@ export class SamlApp extends pulumi.CustomResource {
      */
     declare public readonly dynamicConfiguration: pulumi.Output<outputs.SamlAppDynamicConfiguration>;
     /**
+     * The URL to redirect to when an error occurs.
+     */
+    declare public readonly errorRedirectUrl: pulumi.Output<string>;
+    /**
      * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
      */
     declare public readonly forceAuthentication: pulumi.Output<boolean>;
+    /**
+     * The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+     */
+    declare public /*out*/ readonly idpLogoutUrl: pulumi.Output<string>;
     /**
      * The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      */
@@ -81,6 +89,10 @@ export class SamlApp extends pulumi.CustomResource {
      * A logo for the SAML application. Should be a hosted image URL.
      */
     declare public readonly logo: pulumi.Output<string>;
+    /**
+     * The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     */
+    declare public readonly logoutRedirectUrl: pulumi.Output<string>;
     /**
      * Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
      */
@@ -127,9 +139,12 @@ export class SamlApp extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["dynamicConfiguration"] = state?.dynamicConfiguration;
+            resourceInputs["errorRedirectUrl"] = state?.errorRedirectUrl;
             resourceInputs["forceAuthentication"] = state?.forceAuthentication;
+            resourceInputs["idpLogoutUrl"] = state?.idpLogoutUrl;
             resourceInputs["loginPageUrl"] = state?.loginPageUrl;
             resourceInputs["logo"] = state?.logo;
+            resourceInputs["logoutRedirectUrl"] = state?.logoutRedirectUrl;
             resourceInputs["manualConfiguration"] = state?.manualConfiguration;
             resourceInputs["name"] = state?.name;
             resourceInputs["projectId"] = state?.projectId;
@@ -149,15 +164,18 @@ export class SamlApp extends pulumi.CustomResource {
             resourceInputs["description"] = args?.description;
             resourceInputs["disabled"] = args?.disabled;
             resourceInputs["dynamicConfiguration"] = args?.dynamicConfiguration;
+            resourceInputs["errorRedirectUrl"] = args?.errorRedirectUrl;
             resourceInputs["forceAuthentication"] = args?.forceAuthentication;
             resourceInputs["loginPageUrl"] = args?.loginPageUrl;
             resourceInputs["logo"] = args?.logo;
+            resourceInputs["logoutRedirectUrl"] = args?.logoutRedirectUrl;
             resourceInputs["manualConfiguration"] = args?.manualConfiguration;
             resourceInputs["name"] = args?.name;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["samlAppId"] = args?.samlAppId;
             resourceInputs["subjectNameIdFormat"] = args?.subjectNameIdFormat;
             resourceInputs["subjectNameIdType"] = args?.subjectNameIdType;
+            resourceInputs["idpLogoutUrl"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SamlApp.__pulumiType, name, resourceInputs, opts);
@@ -201,9 +219,17 @@ export interface SamlAppState {
      */
     dynamicConfiguration?: pulumi.Input<inputs.SamlAppDynamicConfiguration | undefined>;
     /**
+     * The URL to redirect to when an error occurs.
+     */
+    errorRedirectUrl?: pulumi.Input<string | undefined>;
+    /**
      * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
      */
     forceAuthentication?: pulumi.Input<boolean | undefined>;
+    /**
+     * The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+     */
+    idpLogoutUrl?: pulumi.Input<string | undefined>;
     /**
      * The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
      */
@@ -212,6 +238,10 @@ export interface SamlAppState {
      * A logo for the SAML application. Should be a hosted image URL.
      */
     logo?: pulumi.Input<string | undefined>;
+    /**
+     * The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     */
+    logoutRedirectUrl?: pulumi.Input<string | undefined>;
     /**
      * Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
      */
@@ -275,6 +305,10 @@ export interface SamlAppArgs {
      */
     dynamicConfiguration?: pulumi.Input<inputs.SamlAppDynamicConfiguration | undefined>;
     /**
+     * The URL to redirect to when an error occurs.
+     */
+    errorRedirectUrl?: pulumi.Input<string | undefined>;
+    /**
      * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
      */
     forceAuthentication?: pulumi.Input<boolean | undefined>;
@@ -286,6 +320,10 @@ export interface SamlAppArgs {
      * A logo for the SAML application. Should be a hosted image URL.
      */
     logo?: pulumi.Input<string | undefined>;
+    /**
+     * The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     */
+    logoutRedirectUrl?: pulumi.Input<string | undefined>;
     /**
      * Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
      */

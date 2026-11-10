@@ -16,6 +16,8 @@ import (
 type TotpSettings struct {
 	pulumi.CustomResourceState
 
+	// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+	AccountLabel pulumi.StringOutput `pulumi:"accountLabel"`
 	// Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -57,6 +59,8 @@ func GetTotpSettings(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TotpSettings resources.
 type totpSettingsState struct {
+	// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+	AccountLabel *string `pulumi:"accountLabel"`
 	// Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
 	Disabled *bool `pulumi:"disabled"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -66,6 +70,8 @@ type totpSettingsState struct {
 }
 
 type TotpSettingsState struct {
+	// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+	AccountLabel pulumi.StringPtrInput
 	// Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
 	Disabled pulumi.BoolPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -79,6 +85,8 @@ func (TotpSettingsState) ElementType() reflect.Type {
 }
 
 type totpSettingsArgs struct {
+	// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+	AccountLabel *string `pulumi:"accountLabel"`
 	// Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
 	Disabled *bool `pulumi:"disabled"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -89,6 +97,8 @@ type totpSettingsArgs struct {
 
 // The set of arguments for constructing a TotpSettings resource.
 type TotpSettingsArgs struct {
+	// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+	AccountLabel pulumi.StringPtrInput
 	// Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.
 	Disabled pulumi.BoolPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
@@ -182,6 +192,11 @@ func (o TotpSettingsOutput) ToTotpSettingsOutput() TotpSettingsOutput {
 
 func (o TotpSettingsOutput) ToTotpSettingsOutputWithContext(ctx context.Context) TotpSettingsOutput {
 	return o
+}
+
+// The template for the account name shown in the authenticator app, for example `{{user.email}}` or `{{user.customAttributes.employeeId}}`. Supports `{{user.email}}`, `{{user.phone}}`, `{{user.name}}`, `{{user.loginId}}` and `{{user.customAttributes.<name>}}`. When empty, or when it renders empty for a user, the user's login ID is used.
+func (o TotpSettingsOutput) AccountLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v *TotpSettings) pulumi.StringOutput { return v.AccountLabel }).(pulumi.StringOutput)
 }
 
 // Setting this to `true` will disallow using TOTP authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use TOTP.

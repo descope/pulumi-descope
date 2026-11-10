@@ -32,12 +32,18 @@ type SamlApp struct {
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
 	// Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	DynamicConfiguration SamlAppDynamicConfigurationOutput `pulumi:"dynamicConfiguration"`
+	// The URL to redirect to when an error occurs.
+	ErrorRedirectUrl pulumi.StringOutput `pulumi:"errorRedirectUrl"`
 	// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 	ForceAuthentication pulumi.BoolOutput `pulumi:"forceAuthentication"`
+	// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+	IdpLogoutUrl pulumi.StringOutput `pulumi:"idpLogoutUrl"`
 	// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl pulumi.StringOutput `pulumi:"loginPageUrl"`
 	// A logo for the SAML application. Should be a hosted image URL.
 	Logo pulumi.StringOutput `pulumi:"logo"`
+	// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+	LogoutRedirectUrl pulumi.StringOutput `pulumi:"logoutRedirectUrl"`
 	// Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	ManualConfiguration SamlAppManualConfigurationOutput `pulumi:"manualConfiguration"`
 	// A name for the SAML application.
@@ -101,12 +107,18 @@ type samlAppState struct {
 	Disabled *bool `pulumi:"disabled"`
 	// Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	DynamicConfiguration *SamlAppDynamicConfiguration `pulumi:"dynamicConfiguration"`
+	// The URL to redirect to when an error occurs.
+	ErrorRedirectUrl *string `pulumi:"errorRedirectUrl"`
 	// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 	ForceAuthentication *bool `pulumi:"forceAuthentication"`
+	// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+	IdpLogoutUrl *string `pulumi:"idpLogoutUrl"`
 	// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
 	// A logo for the SAML application. Should be a hosted image URL.
 	Logo *string `pulumi:"logo"`
+	// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+	LogoutRedirectUrl *string `pulumi:"logoutRedirectUrl"`
 	// Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	ManualConfiguration *SamlAppManualConfiguration `pulumi:"manualConfiguration"`
 	// A name for the SAML application.
@@ -138,12 +150,18 @@ type SamlAppState struct {
 	Disabled pulumi.BoolPtrInput
 	// Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	DynamicConfiguration SamlAppDynamicConfigurationPtrInput
+	// The URL to redirect to when an error occurs.
+	ErrorRedirectUrl pulumi.StringPtrInput
 	// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 	ForceAuthentication pulumi.BoolPtrInput
+	// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+	IdpLogoutUrl pulumi.StringPtrInput
 	// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl pulumi.StringPtrInput
 	// A logo for the SAML application. Should be a hosted image URL.
 	Logo pulumi.StringPtrInput
+	// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+	LogoutRedirectUrl pulumi.StringPtrInput
 	// Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	ManualConfiguration SamlAppManualConfigurationPtrInput
 	// A name for the SAML application.
@@ -179,12 +197,16 @@ type samlAppArgs struct {
 	Disabled *bool `pulumi:"disabled"`
 	// Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	DynamicConfiguration *SamlAppDynamicConfiguration `pulumi:"dynamicConfiguration"`
+	// The URL to redirect to when an error occurs.
+	ErrorRedirectUrl *string `pulumi:"errorRedirectUrl"`
 	// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 	ForceAuthentication *bool `pulumi:"forceAuthentication"`
 	// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl *string `pulumi:"loginPageUrl"`
 	// A logo for the SAML application. Should be a hosted image URL.
 	Logo *string `pulumi:"logo"`
+	// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+	LogoutRedirectUrl *string `pulumi:"logoutRedirectUrl"`
 	// Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	ManualConfiguration *SamlAppManualConfiguration `pulumi:"manualConfiguration"`
 	// A name for the SAML application.
@@ -217,12 +239,16 @@ type SamlAppArgs struct {
 	Disabled pulumi.BoolPtrInput
 	// Connection details are retrieved dynamically from the SP's metadata URL. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	DynamicConfiguration SamlAppDynamicConfigurationPtrInput
+	// The URL to redirect to when an error occurs.
+	ErrorRedirectUrl pulumi.StringPtrInput
 	// This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 	ForceAuthentication pulumi.BoolPtrInput
 	// The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
 	LoginPageUrl pulumi.StringPtrInput
 	// A logo for the SAML application. Should be a hosted image URL.
 	Logo pulumi.StringPtrInput
+	// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+	LogoutRedirectUrl pulumi.StringPtrInput
 	// Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.
 	ManualConfiguration SamlAppManualConfigurationPtrInput
 	// A name for the SAML application.
@@ -364,9 +390,19 @@ func (o SamlAppOutput) DynamicConfiguration() SamlAppDynamicConfigurationOutput 
 	return o.ApplyT(func(v *SamlApp) SamlAppDynamicConfigurationOutput { return v.DynamicConfiguration }).(SamlAppDynamicConfigurationOutput)
 }
 
+// The URL to redirect to when an error occurs.
+func (o SamlAppOutput) ErrorRedirectUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *SamlApp) pulumi.StringOutput { return v.ErrorRedirectUrl }).(pulumi.StringOutput)
+}
+
 // This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP's request.
 func (o SamlAppOutput) ForceAuthentication() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SamlApp) pulumi.BoolOutput { return v.ForceAuthentication }).(pulumi.BoolOutput)
+}
+
+// The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+func (o SamlAppOutput) IdpLogoutUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *SamlApp) pulumi.StringOutput { return v.IdpLogoutUrl }).(pulumi.StringOutput)
 }
 
 // The Flow Hosting URL. When left empty the project's default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -377,6 +413,11 @@ func (o SamlAppOutput) LoginPageUrl() pulumi.StringOutput {
 // A logo for the SAML application. Should be a hosted image URL.
 func (o SamlAppOutput) Logo() pulumi.StringOutput {
 	return o.ApplyT(func(v *SamlApp) pulumi.StringOutput { return v.Logo }).(pulumi.StringOutput)
+}
+
+// The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+func (o SamlAppOutput) LogoutRedirectUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *SamlApp) pulumi.StringOutput { return v.LogoutRedirectUrl }).(pulumi.StringOutput)
 }
 
 // Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.

@@ -138,6 +138,20 @@ public class SamlApp extends com.pulumi.resources.CustomResource {
         return this.dynamicConfiguration;
     }
     /**
+     * The URL to redirect to when an error occurs.
+     * 
+     */
+    @Export(name="errorRedirectUrl", refs={String.class}, tree="[0]")
+    private Output<String> errorRedirectUrl;
+
+    /**
+     * @return The URL to redirect to when an error occurs.
+     * 
+     */
+    public Output<String> errorRedirectUrl() {
+        return this.errorRedirectUrl;
+    }
+    /**
      * This configuration overrides the default behavior of the SSO application and forces the user to authenticate via the Descope flow, regardless of the SP&#39;s request.
      * 
      */
@@ -150,6 +164,20 @@ public class SamlApp extends com.pulumi.resources.CustomResource {
      */
     public Output<Boolean> forceAuthentication() {
         return this.forceAuthentication;
+    }
+    /**
+     * The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+     * 
+     */
+    @Export(name="idpLogoutUrl", refs={String.class}, tree="[0]")
+    private Output<String> idpLogoutUrl;
+
+    /**
+     * @return The logout URL of the application, to set as the sign-out URL in the service provider. This value is set by the server and is read-only.
+     * 
+     */
+    public Output<String> idpLogoutUrl() {
+        return this.idpLogoutUrl;
     }
     /**
      * The Flow Hosting URL. When left empty the project&#39;s default login page URL is used, and the computed value is reflected in this attribute. Read more about using this parameter with custom domain [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -178,6 +206,20 @@ public class SamlApp extends com.pulumi.resources.CustomResource {
      */
     public Output<String> logo() {
         return this.logo;
+    }
+    /**
+     * The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     * 
+     */
+    @Export(name="logoutRedirectUrl", refs={String.class}, tree="[0]")
+    private Output<String> logoutRedirectUrl;
+
+    /**
+     * @return The URL to redirect to after logout. When the service provider sends the user to the `idpLogoutUrl`, Descope logs the user out and then redirects them to this URL.
+     * 
+     */
+    public Output<String> logoutRedirectUrl() {
+        return this.logoutRedirectUrl;
     }
     /**
      * Connection details are provided manually. Exactly one of `dynamicConfiguration` and `manualConfiguration` must be set.

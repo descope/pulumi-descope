@@ -19,6 +19,10 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? ForceDomainVerification;
         /// <summary>
+        /// Setting this to `True` will hide the audit log of SSO and SCIM events in the SSO Suite interface.
+        /// </summary>
+        public readonly bool? HideAudit;
+        /// <summary>
         /// Setting this to `True` will hide the domains configuration section in the SSO Suite interface.
         /// </summary>
         public readonly bool? HideDomains;
@@ -79,6 +83,8 @@ namespace Descope.Pulumi.Descope.Outputs
         private SsoSettingsSsoSuiteSettings(
             bool? forceDomainVerification,
 
+            bool? hideAudit,
+
             bool? hideDomains,
 
             bool? hideFgaMapping,
@@ -108,6 +114,7 @@ namespace Descope.Pulumi.Descope.Outputs
             string? supportEmail)
         {
             ForceDomainVerification = forceDomainVerification;
+            HideAudit = hideAudit;
             HideDomains = hideDomains;
             HideFgaMapping = hideFgaMapping;
             HideGroupsMapping = hideGroupsMapping;
