@@ -99,6 +99,35 @@
                     }
                 }
             },
+            "descope_auth_access_policy": {
+                "current": "descope:index/authAccessPolicy:AuthAccessPolicy",
+                "majorVersion": 1,
+                "fields": {
+                    "rule_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "descope_auth_access_rule": {
+                "current": "descope:index/authAccessRule:AuthAccessRule",
+                "majorVersion": 1,
+                "fields": {
+                    "conditions": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_aws_end_user_messaging_connector": {
+                "current": "descope:index/awsEndUserMessagingConnector:AwsEndUserMessagingConnector",
+                "majorVersion": 1
+            },
             "descope_aws_eventbridge_connector": {
                 "current": "descope:index/awsEventbridgeConnector:AwsEventbridgeConnector",
                 "majorVersion": 1,
@@ -138,6 +167,22 @@
             "descope_aws_translate_connector": {
                 "current": "descope:index/awsTranslateConnector:AwsTranslateConnector",
                 "majorVersion": 1
+            },
+            "descope_azure_monitor_connector": {
+                "current": "descope:index/azureMonitorConnector:AzureMonitorConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "descope_bitsight_connector": {
                 "current": "descope:index/bitsightConnector:BitsightConnector",
@@ -321,6 +366,10 @@
                 "current": "descope:index/googleMapsPlacesConnector:GoogleMapsPlacesConnector",
                 "majorVersion": 1
             },
+            "descope_governance": {
+                "current": "descope:index/governance:Governance",
+                "majorVersion": 1
+            },
             "descope_groundcover_connector": {
                 "current": "descope:index/groundcoverConnector:GroundcoverConnector",
                 "majorVersion": 1,
@@ -376,6 +425,9 @@
                     "audience_whitelist": {
                         "maxItemsOne": false
                     },
+                    "client_assertions": {
+                        "maxItemsOne": false
+                    },
                     "connections_scopes": {
                         "maxItemsOne": false,
                         "elem": {
@@ -398,6 +450,16 @@
                     },
                     "scope_claim_mapping": {
                         "maxItemsOne": false
+                    },
+                    "workload_client_assertions": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "allowed_subjects": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -441,6 +503,10 @@
                 "current": "descope:index/magiclinkSettings:MagiclinkSettings",
                 "majorVersion": 1
             },
+            "descope_mailjet_connector": {
+                "current": "descope:index/mailjetConnector:MailjetConnector",
+                "majorVersion": 1
+            },
             "descope_management_key": {
                 "current": "descope:index/managementKey:ManagementKey",
                 "majorVersion": 1,
@@ -477,6 +543,22 @@
                                             "maxItemsOne": false
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "descope_microsoft_sentinel_connector": {
+                "current": "descope:index/microsoftSentinelConnector:MicrosoftSentinelConnector",
+                "majorVersion": 1,
+                "fields": {
+                    "audit_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
                                 }
                             }
                         }
@@ -593,7 +675,19 @@
             },
             "descope_password_settings": {
                 "current": "descope:index/passwordSettings:PasswordSettings",
-                "majorVersion": 1
+                "majorVersion": 1,
+                "fields": {
+                    "role_policies": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "roles": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "descope_pendo_connector": {
                 "current": "descope:index/pendoConnector:PendoConnector",
@@ -778,6 +872,10 @@
                     }
                 }
             },
+            "descope_splunk_on_call_connector": {
+                "current": "descope:index/splunkOnCallConnector:SplunkOnCallConnector",
+                "majorVersion": 1
+            },
             "descope_sql_connector": {
                 "current": "descope:index/sqlConnector:SqlConnector",
                 "majorVersion": 1
@@ -886,6 +984,49 @@
                 "current": "descope:index/voiceTemplate:VoiceTemplate",
                 "majorVersion": 1
             },
+            "descope_vonage_connector": {
+                "current": "descope:index/vonageConnector:VonageConnector",
+                "majorVersion": 1
+            },
+            "descope_wellknown_settings": {
+                "current": "descope:index/wellknownSettings:WellknownSettings",
+                "majorVersion": 1,
+                "fields": {
+                    "claims_supported": {
+                        "fields": {
+                            "excluded": {
+                                "maxItemsOne": false
+                            },
+                            "extra": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "hidden_fields": {
+                        "maxItemsOne": false
+                    },
+                    "removed_values": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "scopes_supported": {
+                        "fields": {
+                            "excluded": {
+                                "maxItemsOne": false
+                            },
+                            "extra": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
             "descope_widget": {
                 "current": "descope:index/widget:Widget",
                 "majorVersion": 1
@@ -941,10 +1082,14 @@
             "descope_app_role": {},
             "descope_arkose_connector": {},
             "descope_audit_webhook_connector": {},
+            "descope_auth_access_policy": {},
+            "descope_auth_access_rule": {},
+            "descope_aws_end_user_messaging_connector": {},
             "descope_aws_eventbridge_connector": {},
             "descope_aws_s3_connector": {},
             "descope_aws_ses_email_validation_connector": {},
             "descope_aws_translate_connector": {},
+            "descope_azure_monitor_connector": {},
             "descope_bitsight_connector": {},
             "descope_coralogix_connector": {},
             "descope_cribl_connector": {},
@@ -972,6 +1117,7 @@
             "descope_google_cloud_logging_connector": {},
             "descope_google_cloud_translation_connector": {},
             "descope_google_maps_places_connector": {},
+            "descope_governance": {},
             "descope_groundcover_connector": {},
             "descope_hcaptcha_connector": {},
             "descope_hibp_connector": {},
@@ -986,7 +1132,9 @@
             "descope_list": {},
             "descope_lokalise_connector": {},
             "descope_magiclink_settings": {},
+            "descope_mailjet_connector": {},
             "descope_management_key": {},
+            "descope_microsoft_sentinel_connector": {},
             "descope_mixpanel_connector": {},
             "descope_mparticle_connector": {},
             "descope_newrelic_connector": {},
@@ -1057,6 +1205,7 @@
             "descope_snowflake_connector": {},
             "descope_sns_connector": {},
             "descope_splunk_connector": {},
+            "descope_splunk_on_call_connector": {},
             "descope_sql_connector": {},
             "descope_sso_settings": {},
             "descope_styles": {},
@@ -1093,6 +1242,8 @@
                 }
             },
             "descope_voice_template": {},
+            "descope_vonage_connector": {},
+            "descope_wellknown_settings": {},
             "descope_widget": {},
             "descope_wsfed_app": {
                 "fields": {
