@@ -173,8 +173,8 @@ github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1 h1:5RVFMOWjMyRy8cARdy79nAmgYw3h
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1/go.mod h1:ZXNYxsqcloTdSy/rNShjYzMhyjf0LaoftYK0p+A3h40=
 github.com/descope/go-sdk v1.38.0 h1:Fnw0iDeU0PgDnPmYvNzDAIPa0r85gbR2UNHUvnvBRMo=
 github.com/descope/go-sdk v1.38.0/go.mod h1:Y/0H3cz3rQ4H76z55vQwLq97bsu4KunddboLzsioIHk=
-github.com/descope/terraform-provider-descope v1.1.1 h1:A8CxED8O3cHZ7UoTEcCn2GZQX79lBUK4BuA3GKE6PNw=
-github.com/descope/terraform-provider-descope v1.1.1/go.mod h1:zE7exrBG11/44ePIXIe34KmoswRF4XfGWOwsubgqhig=
+github.com/descope/terraform-provider-descope v1.2.0 h1:0VB+iekw49sAqKvHprPnOCo3/BcQ4XX/cRMZfWF3eMw=
+github.com/descope/terraform-provider-descope v1.2.0/go.mod h1:zE7exrBG11/44ePIXIe34KmoswRF4XfGWOwsubgqhig=
 github.com/djherbis/times v1.6.0 h1:w2ctJ92J8fBvWPxugmXIv7Nz7Q3iDMKNx9v5ocVH20c=
 github.com/djherbis/times v1.6.0/go.mod h1:gOHeRAz2h+VJNZ5Gmc/o7iD9k4wW7NMVqieYCY99oc0=
 github.com/ebitengine/purego v0.10.2 h1:W809HbnvzAxgdm+aOvlSekrM16wGCdT/e76+9tS7gzE=

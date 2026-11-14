@@ -73,7 +73,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.9.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1 // indirect
 	github.com/descope/go-sdk v1.38.0 // indirect
-	github.com/descope/terraform-provider-descope v1.1.1 // indirect
+	github.com/descope/terraform-provider-descope v1.2.0 // indirect
 	github.com/djherbis/times v1.6.0 // indirect
 	github.com/ebitengine/purego v0.10.2 // indirect
 	github.com/edsrzf/mmap-go v1.1.0 // indirect

@@ -6703,6 +6703,10 @@
                     "type": "string",
                     "description": "How long the enchanted link remains valid before it expires.\n"
                 },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -6725,6 +6729,7 @@
                 "emailConnectorId",
                 "emailTemplateId",
                 "expirationTime",
+                "externalEmailTemplateId",
                 "projectId",
                 "redirectUrl",
                 "textConnectorId",
@@ -6746,6 +6751,10 @@
                 "expirationTime": {
                     "type": "string",
                     "description": "How long the enchanted link remains valid before it expires.\n"
+                },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -6785,6 +6794,10 @@
                     "expirationTime": {
                         "type": "string",
                         "description": "How long the enchanted link remains valid before it expires.\n"
+                    },
+                    "externalEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                     },
                     "projectId": {
                         "type": "string",
@@ -10887,6 +10900,10 @@
                     "type": "string",
                     "description": "How long the magic link remains valid before it expires.\n"
                 },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -10909,6 +10926,7 @@
                 "emailConnectorId",
                 "emailTemplateId",
                 "expirationTime",
+                "externalEmailTemplateId",
                 "projectId",
                 "redirectUrl",
                 "textConnectorId",
@@ -10930,6 +10948,10 @@
                 "expirationTime": {
                     "type": "string",
                     "description": "How long the magic link remains valid before it expires.\n"
+                },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -10969,6 +10991,10 @@
                     "expirationTime": {
                         "type": "string",
                         "description": "How long the magic link remains valid before it expires.\n"
+                    },
+                    "externalEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                     },
                     "projectId": {
                         "type": "string",
@@ -12543,9 +12569,17 @@
                     "type": "string",
                     "description": "A logo for the OIDC application. Should be a hosted image URL.\n"
                 },
+                "logoutPropagation": {
+                    "type": "string",
+                    "description": "How far a logout at the application's end-session endpoint reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's sessions and notify the calling application alone, or `\"allApps\"` to also log the user out of their other applications.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "A name for the OIDC application.\n"
+                },
+                "notifyOnForceLogout": {
+                    "type": "boolean",
+                    "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a back-channel logout token. Requires \u003cspan pulumi-lang-nodejs=\"`backchannelLogoutUrl`\" pulumi-lang-dotnet=\"`BackchannelLogoutUrl`\" pulumi-lang-go=\"`backchannelLogoutUrl`\" pulumi-lang-python=\"`backchannel_logout_url`\" pulumi-lang-yaml=\"`backchannelLogoutUrl`\" pulumi-lang-java=\"`backchannelLogoutUrl`\" pulumi-lang-hcl=\"`backchannel_logout_url`\"\u003e`backchannelLogoutUrl`\u003c/span\u003e. When disabled, the default, a force logout doesn't notify the application.\n"
                 },
                 "oidcAppId": {
                     "type": "string",
@@ -12584,7 +12618,9 @@
                 "jwtBearerDisabled",
                 "loginPageUrl",
                 "logo",
+                "logoutPropagation",
                 "name",
+                "notifyOnForceLogout",
                 "projectId",
                 "refreshTokenDisabled",
                 "trustedAppsAudience"
@@ -12673,9 +12709,17 @@
                     "type": "string",
                     "description": "A logo for the OIDC application. Should be a hosted image URL.\n"
                 },
+                "logoutPropagation": {
+                    "type": "string",
+                    "description": "How far a logout at the application's end-session endpoint reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's sessions and notify the calling application alone, or `\"allApps\"` to also log the user out of their other applications.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "A name for the OIDC application.\n"
+                },
+                "notifyOnForceLogout": {
+                    "type": "boolean",
+                    "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a back-channel logout token. Requires \u003cspan pulumi-lang-nodejs=\"`backchannelLogoutUrl`\" pulumi-lang-dotnet=\"`BackchannelLogoutUrl`\" pulumi-lang-go=\"`backchannelLogoutUrl`\" pulumi-lang-python=\"`backchannel_logout_url`\" pulumi-lang-yaml=\"`backchannelLogoutUrl`\" pulumi-lang-java=\"`backchannelLogoutUrl`\" pulumi-lang-hcl=\"`backchannel_logout_url`\"\u003e`backchannelLogoutUrl`\u003c/span\u003e. When disabled, the default, a force logout doesn't notify the application.\n"
                 },
                 "oidcAppId": {
                     "type": "string",
@@ -12783,9 +12827,17 @@
                         "type": "string",
                         "description": "A logo for the OIDC application. Should be a hosted image URL.\n"
                     },
+                    "logoutPropagation": {
+                        "type": "string",
+                        "description": "How far a logout at the application's end-session endpoint reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's sessions and notify the calling application alone, or `\"allApps\"` to also log the user out of their other applications.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "A name for the OIDC application.\n"
+                    },
+                    "notifyOnForceLogout": {
+                        "type": "boolean",
+                        "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a back-channel logout token. Requires \u003cspan pulumi-lang-nodejs=\"`backchannelLogoutUrl`\" pulumi-lang-dotnet=\"`BackchannelLogoutUrl`\" pulumi-lang-go=\"`backchannelLogoutUrl`\" pulumi-lang-python=\"`backchannel_logout_url`\" pulumi-lang-yaml=\"`backchannelLogoutUrl`\" pulumi-lang-java=\"`backchannelLogoutUrl`\" pulumi-lang-hcl=\"`backchannel_logout_url`\"\u003e`backchannelLogoutUrl`\u003c/span\u003e. When disabled, the default, a force logout doesn't notify the application.\n"
                     },
                     "oidcAppId": {
                         "type": "string",
@@ -13048,6 +13100,10 @@
                     "type": "string",
                     "description": "The amount of time that an OTP code will be valid for.\n"
                 },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -13075,6 +13131,7 @@
                 "emailConnectorId",
                 "emailTemplateId",
                 "expirationTime",
+                "externalEmailTemplateId",
                 "projectId",
                 "textConnectorId",
                 "textTemplateId",
@@ -13101,6 +13158,10 @@
                 "expirationTime": {
                     "type": "string",
                     "description": "The amount of time that an OTP code will be valid for.\n"
+                },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -13148,6 +13209,10 @@
                     "expirationTime": {
                         "type": "string",
                         "description": "The amount of time that an OTP code will be valid for.\n"
+                    },
+                    "externalEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                     },
                     "projectId": {
                         "type": "string",
@@ -13634,6 +13699,10 @@
                     "type": "integer",
                     "description": "The number of weeks after which a user's password expires and they need to replace it.\n"
                 },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
+                },
                 "lock": {
                     "type": "boolean",
                     "description": "Whether the user account should be locked after a specified number of failed login attempts.\n"
@@ -13708,6 +13777,7 @@
                 "enforceStrength",
                 "expiration",
                 "expirationWeeks",
+                "externalEmailTemplateId",
                 "lock",
                 "lockAttempts",
                 "lowercase",
@@ -13760,6 +13830,10 @@
                 "expirationWeeks": {
                     "type": "integer",
                     "description": "The number of weeks after which a user's password expires and they need to replace it.\n"
+                },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                 },
                 "lock": {
                     "type": "boolean",
@@ -13866,6 +13940,10 @@
                     "expirationWeeks": {
                         "type": "integer",
                         "description": "The number of weeks after which a user's password expires and they need to replace it.\n"
+                    },
+                    "externalEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                     },
                     "lock": {
                         "type": "boolean",
@@ -14493,6 +14571,11 @@
                 "testUsersVerifierRegexp": {
                     "type": "string",
                     "description": "A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.\n"
+                },
+                "trustedProxySecret": {
+                    "type": "string",
+                    "description": "The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.\n",
+                    "secret": true
                 }
             },
             "required": [
@@ -14507,7 +14590,8 @@
                 "tenantUserIsolation",
                 "testUsersLoginidRegexp",
                 "testUsersStaticOtp",
-                "testUsersVerifierRegexp"
+                "testUsersVerifierRegexp",
+                "trustedProxySecret"
             ],
             "inputProperties": {
                 "allowAuthHostingIframeEmbedding": {
@@ -14560,6 +14644,11 @@
                 "testUsersVerifierRegexp": {
                     "type": "string",
                     "description": "A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.\n"
+                },
+                "trustedProxySecret": {
+                    "type": "string",
+                    "description": "The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.\n",
+                    "secret": true
                 }
             },
             "requiredInputs": [
@@ -14618,6 +14707,11 @@
                     "testUsersVerifierRegexp": {
                         "type": "string",
                         "description": "A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.\n"
+                    },
+                    "trustedProxySecret": {
+                        "type": "string",
+                        "description": "The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.\n",
+                        "secret": true
                     }
                 },
                 "type": "object"
@@ -15870,6 +15964,10 @@
                     "type": "string",
                     "description": "A name for the SAML application.\n"
                 },
+                "notifyOnForceLogout": {
+                    "type": "boolean",
+                    "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `\"soap\"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -15877,6 +15975,26 @@
                 "samlAppId": {
                     "type": "string",
                     "description": "An optional identifier for the application. When omitted, an identifier is generated by the server. Can only be set when the application is created, and changing it will require the resource to be deleted and recreated.\n"
+                },
+                "singleLogoutEnabled": {
+                    "type": "boolean",
+                    "description": "Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the \u003cspan pulumi-lang-nodejs=\"`idpLogoutUrl`\" pulumi-lang-dotnet=\"`IdpLogoutUrl`\" pulumi-lang-go=\"`idpLogoutUrl`\" pulumi-lang-python=\"`idp_logout_url`\" pulumi-lang-yaml=\"`idpLogoutUrl`\" pulumi-lang-java=\"`idpLogoutUrl`\" pulumi-lang-hcl=\"`idp_logout_url`\"\u003e`idpLogoutUrl`\u003c/span\u003e, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when \u003cspan pulumi-lang-nodejs=\"`notifyOnForceLogout`\" pulumi-lang-dotnet=\"`NotifyOnForceLogout`\" pulumi-lang-go=\"`notifyOnForceLogout`\" pulumi-lang-python=\"`notify_on_force_logout`\" pulumi-lang-yaml=\"`notifyOnForceLogout`\" pulumi-lang-java=\"`notifyOnForceLogout`\" pulumi-lang-hcl=\"`notify_on_force_logout`\"\u003e`notifyOnForceLogout`\u003c/span\u003e is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `\"soap\"` binding.\n"
+                },
+                "singleLogoutPropagation": {
+                    "type": "string",
+                    "description": "What a logout started by the service provider reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's session without notifying any other application, or `\"allApps\"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).\n"
+                },
+                "singleLogoutScope": {
+                    "type": "string",
+                    "description": "Which Descope sessions a logout started by the service provider ends. Choose one of `\"\"` (default, same as `\"session\"`), `\"session\"` to end the sessions the logout request's session indexes name, or `\"allSessions\"` to end every session of the user. With `\"session\"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.\n"
+                },
+                "spSingleLogoutBinding": {
+                    "type": "string",
+                    "description": "The SAML binding used for \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e. Choose one of `\"\"` (default), `\"redirect\"`, `\"post\"` or `\"soap\"`. With the default and an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, Descope uses HTTP-Redirect. Without an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `\"soap\"` binding sends the logout request directly from Descope to the service provider and requires an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e URL.\n"
+                },
+                "spSingleLogoutUrl": {
+                    "type": "string",
+                    "description": "The service provider's Single Logout Service URL that logout requests are sent to. Required when \u003cspan pulumi-lang-nodejs=\"`singleLogoutEnabled`\" pulumi-lang-dotnet=\"`SingleLogoutEnabled`\" pulumi-lang-go=\"`singleLogoutEnabled`\" pulumi-lang-python=\"`single_logout_enabled`\" pulumi-lang-yaml=\"`singleLogoutEnabled`\" pulumi-lang-java=\"`singleLogoutEnabled`\" pulumi-lang-hcl=\"`single_logout_enabled`\"\u003e`singleLogoutEnabled`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`manualConfiguration`\" pulumi-lang-dotnet=\"`ManualConfiguration`\" pulumi-lang-go=\"`manualConfiguration`\" pulumi-lang-python=\"`manual_configuration`\" pulumi-lang-yaml=\"`manualConfiguration`\" pulumi-lang-java=\"`manualConfiguration`\" pulumi-lang-hcl=\"`manual_configuration`\"\u003e`manualConfiguration`\u003c/span\u003e is used. With \u003cspan pulumi-lang-nodejs=\"`dynamicConfiguration`\" pulumi-lang-dotnet=\"`DynamicConfiguration`\" pulumi-lang-go=\"`dynamicConfiguration`\" pulumi-lang-python=\"`dynamic_configuration`\" pulumi-lang-yaml=\"`dynamicConfiguration`\" pulumi-lang-java=\"`dynamicConfiguration`\" pulumi-lang-hcl=\"`dynamic_configuration`\"\u003e`dynamicConfiguration`\u003c/span\u003e it can be left empty to take the URL from the service provider's metadata.\n"
                 },
                 "subjectNameIdFormat": {
                     "type": "string",
@@ -15904,7 +16022,13 @@
                 "logoutRedirectUrl",
                 "manualConfiguration",
                 "name",
+                "notifyOnForceLogout",
                 "projectId",
+                "singleLogoutEnabled",
+                "singleLogoutPropagation",
+                "singleLogoutScope",
+                "spSingleLogoutBinding",
+                "spSingleLogoutUrl",
                 "subjectNameIdFormat",
                 "subjectNameIdType"
             ],
@@ -15975,6 +16099,10 @@
                     "type": "string",
                     "description": "A name for the SAML application.\n"
                 },
+                "notifyOnForceLogout": {
+                    "type": "boolean",
+                    "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `\"soap\"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -15982,6 +16110,26 @@
                 "samlAppId": {
                     "type": "string",
                     "description": "An optional identifier for the application. When omitted, an identifier is generated by the server. Can only be set when the application is created, and changing it will require the resource to be deleted and recreated.\n"
+                },
+                "singleLogoutEnabled": {
+                    "type": "boolean",
+                    "description": "Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the \u003cspan pulumi-lang-nodejs=\"`idpLogoutUrl`\" pulumi-lang-dotnet=\"`IdpLogoutUrl`\" pulumi-lang-go=\"`idpLogoutUrl`\" pulumi-lang-python=\"`idp_logout_url`\" pulumi-lang-yaml=\"`idpLogoutUrl`\" pulumi-lang-java=\"`idpLogoutUrl`\" pulumi-lang-hcl=\"`idp_logout_url`\"\u003e`idpLogoutUrl`\u003c/span\u003e, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when \u003cspan pulumi-lang-nodejs=\"`notifyOnForceLogout`\" pulumi-lang-dotnet=\"`NotifyOnForceLogout`\" pulumi-lang-go=\"`notifyOnForceLogout`\" pulumi-lang-python=\"`notify_on_force_logout`\" pulumi-lang-yaml=\"`notifyOnForceLogout`\" pulumi-lang-java=\"`notifyOnForceLogout`\" pulumi-lang-hcl=\"`notify_on_force_logout`\"\u003e`notifyOnForceLogout`\u003c/span\u003e is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `\"soap\"` binding.\n"
+                },
+                "singleLogoutPropagation": {
+                    "type": "string",
+                    "description": "What a logout started by the service provider reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's session without notifying any other application, or `\"allApps\"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).\n"
+                },
+                "singleLogoutScope": {
+                    "type": "string",
+                    "description": "Which Descope sessions a logout started by the service provider ends. Choose one of `\"\"` (default, same as `\"session\"`), `\"session\"` to end the sessions the logout request's session indexes name, or `\"allSessions\"` to end every session of the user. With `\"session\"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.\n"
+                },
+                "spSingleLogoutBinding": {
+                    "type": "string",
+                    "description": "The SAML binding used for \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e. Choose one of `\"\"` (default), `\"redirect\"`, `\"post\"` or `\"soap\"`. With the default and an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, Descope uses HTTP-Redirect. Without an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `\"soap\"` binding sends the logout request directly from Descope to the service provider and requires an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e URL.\n"
+                },
+                "spSingleLogoutUrl": {
+                    "type": "string",
+                    "description": "The service provider's Single Logout Service URL that logout requests are sent to. Required when \u003cspan pulumi-lang-nodejs=\"`singleLogoutEnabled`\" pulumi-lang-dotnet=\"`SingleLogoutEnabled`\" pulumi-lang-go=\"`singleLogoutEnabled`\" pulumi-lang-python=\"`single_logout_enabled`\" pulumi-lang-yaml=\"`singleLogoutEnabled`\" pulumi-lang-java=\"`singleLogoutEnabled`\" pulumi-lang-hcl=\"`single_logout_enabled`\"\u003e`singleLogoutEnabled`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`manualConfiguration`\" pulumi-lang-dotnet=\"`ManualConfiguration`\" pulumi-lang-go=\"`manualConfiguration`\" pulumi-lang-python=\"`manual_configuration`\" pulumi-lang-yaml=\"`manualConfiguration`\" pulumi-lang-java=\"`manualConfiguration`\" pulumi-lang-hcl=\"`manual_configuration`\"\u003e`manualConfiguration`\u003c/span\u003e is used. With \u003cspan pulumi-lang-nodejs=\"`dynamicConfiguration`\" pulumi-lang-dotnet=\"`DynamicConfiguration`\" pulumi-lang-go=\"`dynamicConfiguration`\" pulumi-lang-python=\"`dynamic_configuration`\" pulumi-lang-yaml=\"`dynamicConfiguration`\" pulumi-lang-java=\"`dynamicConfiguration`\" pulumi-lang-hcl=\"`dynamic_configuration`\"\u003e`dynamicConfiguration`\u003c/span\u003e it can be left empty to take the URL from the service provider's metadata.\n"
                 },
                 "subjectNameIdFormat": {
                     "type": "string",
@@ -16068,6 +16216,10 @@
                         "type": "string",
                         "description": "A name for the SAML application.\n"
                     },
+                    "notifyOnForceLogout": {
+                        "type": "boolean",
+                        "description": "Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `\"soap\"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.\n"
+                    },
                     "projectId": {
                         "type": "string",
                         "description": "The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.\n"
@@ -16075,6 +16227,26 @@
                     "samlAppId": {
                         "type": "string",
                         "description": "An optional identifier for the application. When omitted, an identifier is generated by the server. Can only be set when the application is created, and changing it will require the resource to be deleted and recreated.\n"
+                    },
+                    "singleLogoutEnabled": {
+                        "type": "boolean",
+                        "description": "Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the \u003cspan pulumi-lang-nodejs=\"`idpLogoutUrl`\" pulumi-lang-dotnet=\"`IdpLogoutUrl`\" pulumi-lang-go=\"`idpLogoutUrl`\" pulumi-lang-python=\"`idp_logout_url`\" pulumi-lang-yaml=\"`idpLogoutUrl`\" pulumi-lang-java=\"`idpLogoutUrl`\" pulumi-lang-hcl=\"`idp_logout_url`\"\u003e`idpLogoutUrl`\u003c/span\u003e, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when \u003cspan pulumi-lang-nodejs=\"`notifyOnForceLogout`\" pulumi-lang-dotnet=\"`NotifyOnForceLogout`\" pulumi-lang-go=\"`notifyOnForceLogout`\" pulumi-lang-python=\"`notify_on_force_logout`\" pulumi-lang-yaml=\"`notifyOnForceLogout`\" pulumi-lang-java=\"`notifyOnForceLogout`\" pulumi-lang-hcl=\"`notify_on_force_logout`\"\u003e`notifyOnForceLogout`\u003c/span\u003e is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `\"soap\"` binding.\n"
+                    },
+                    "singleLogoutPropagation": {
+                        "type": "string",
+                        "description": "What a logout started by the service provider reaches. Choose one of `\"\"` (default, same as `\"none\"`), `\"none\"` to only end the user's session without notifying any other application, or `\"allApps\"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).\n"
+                    },
+                    "singleLogoutScope": {
+                        "type": "string",
+                        "description": "Which Descope sessions a logout started by the service provider ends. Choose one of `\"\"` (default, same as `\"session\"`), `\"session\"` to end the sessions the logout request's session indexes name, or `\"allSessions\"` to end every session of the user. With `\"session\"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.\n"
+                    },
+                    "spSingleLogoutBinding": {
+                        "type": "string",
+                        "description": "The SAML binding used for \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e. Choose one of `\"\"` (default), `\"redirect\"`, `\"post\"` or `\"soap\"`. With the default and an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, Descope uses HTTP-Redirect. Without an \u003cspan pulumi-lang-nodejs=\"`spSingleLogoutUrl`\" pulumi-lang-dotnet=\"`SpSingleLogoutUrl`\" pulumi-lang-go=\"`spSingleLogoutUrl`\" pulumi-lang-python=\"`sp_single_logout_url`\" pulumi-lang-yaml=\"`spSingleLogoutUrl`\" pulumi-lang-java=\"`spSingleLogoutUrl`\" pulumi-lang-hcl=\"`sp_single_logout_url`\"\u003e`spSingleLogoutUrl`\u003c/span\u003e, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `\"soap\"` binding sends the logout request directly from Descope to the service provider and requires an \u003cspan pulumi-lang-nodejs=\"`https`\" pulumi-lang-dotnet=\"`Https`\" pulumi-lang-go=\"`https`\" pulumi-lang-python=\"`https`\" pulumi-lang-yaml=\"`https`\" pulumi-lang-java=\"`https`\" pulumi-lang-hcl=\"`https`\"\u003e`https`\u003c/span\u003e URL.\n"
+                    },
+                    "spSingleLogoutUrl": {
+                        "type": "string",
+                        "description": "The service provider's Single Logout Service URL that logout requests are sent to. Required when \u003cspan pulumi-lang-nodejs=\"`singleLogoutEnabled`\" pulumi-lang-dotnet=\"`SingleLogoutEnabled`\" pulumi-lang-go=\"`singleLogoutEnabled`\" pulumi-lang-python=\"`single_logout_enabled`\" pulumi-lang-yaml=\"`singleLogoutEnabled`\" pulumi-lang-java=\"`singleLogoutEnabled`\" pulumi-lang-hcl=\"`single_logout_enabled`\"\u003e`singleLogoutEnabled`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`manualConfiguration`\" pulumi-lang-dotnet=\"`ManualConfiguration`\" pulumi-lang-go=\"`manualConfiguration`\" pulumi-lang-python=\"`manual_configuration`\" pulumi-lang-yaml=\"`manualConfiguration`\" pulumi-lang-java=\"`manualConfiguration`\" pulumi-lang-hcl=\"`manual_configuration`\"\u003e`manualConfiguration`\u003c/span\u003e is used. With \u003cspan pulumi-lang-nodejs=\"`dynamicConfiguration`\" pulumi-lang-dotnet=\"`DynamicConfiguration`\" pulumi-lang-go=\"`dynamicConfiguration`\" pulumi-lang-python=\"`dynamic_configuration`\" pulumi-lang-yaml=\"`dynamicConfiguration`\" pulumi-lang-java=\"`dynamicConfiguration`\" pulumi-lang-hcl=\"`dynamic_configuration`\"\u003e`dynamicConfiguration`\u003c/span\u003e it can be left empty to take the URL from the service provider's metadata.\n"
                     },
                     "subjectNameIdFormat": {
                         "type": "string",
@@ -18621,6 +18793,10 @@
                     "type": "string",
                     "description": "The ID of the email template for SSO configuration invitation emails, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`sso`\" pulumi-lang-dotnet=\"`Sso`\" pulumi-lang-go=\"`sso`\" pulumi-lang-python=\"`sso`\" pulumi-lang-yaml=\"`sso`\" pulumi-lang-java=\"`sso`\" pulumi-lang-hcl=\"`sso`\"\u003e`sso`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
                 },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
+                },
                 "groupsPriority": {
                     "type": "boolean",
                     "description": "Whether to enable groups priority.\n"
@@ -18673,6 +18849,7 @@
                 "disabled",
                 "emailConnectorId",
                 "emailTemplateId",
+                "externalEmailTemplateId",
                 "groupsPriority",
                 "limitMappingToMandatoryAttributes",
                 "mandatoryUserAttributes",
@@ -18712,6 +18889,10 @@
                 "emailTemplateId": {
                     "type": "string",
                     "description": "The ID of the email template for SSO configuration invitation emails, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`sso`\" pulumi-lang-dotnet=\"`Sso`\" pulumi-lang-go=\"`sso`\" pulumi-lang-python=\"`sso`\" pulumi-lang-yaml=\"`sso`\" pulumi-lang-java=\"`sso`\" pulumi-lang-hcl=\"`sso`\"\u003e`sso`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
+                },
+                "externalEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                 },
                 "groupsPriority": {
                     "type": "boolean",
@@ -18790,6 +18971,10 @@
                     "emailTemplateId": {
                         "type": "string",
                         "description": "The ID of the email template for SSO configuration invitation emails, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`sso`\" pulumi-lang-dotnet=\"`Sso`\" pulumi-lang-go=\"`sso`\" pulumi-lang-python=\"`sso`\" pulumi-lang-yaml=\"`sso`\" pulumi-lang-java=\"`sso`\" pulumi-lang-hcl=\"`sso`\"\u003e`sso`\u003c/span\u003e. An empty value (the default) selects the built-in System template.\n"
+                    },
+                    "externalEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by \u003cspan pulumi-lang-nodejs=\"`emailTemplateId`\" pulumi-lang-dotnet=\"`EmailTemplateId`\" pulumi-lang-go=\"`emailTemplateId`\" pulumi-lang-python=\"`email_template_id`\" pulumi-lang-yaml=\"`emailTemplateId`\" pulumi-lang-java=\"`emailTemplateId`\" pulumi-lang-hcl=\"`email_template_id`\"\u003e`emailTemplateId`\u003c/span\u003e.\n"
                     },
                     "groupsPriority": {
                         "type": "boolean",
