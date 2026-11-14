@@ -24,6 +24,7 @@ class EnchantedlinkSettingsArgs:
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_template_id: pulumi.Input[Optional[_builtins.str]] = None):
@@ -35,6 +36,7 @@ class EnchantedlinkSettingsArgs:
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: How long the enchanted link remains valid before it expires.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] redirect_url: The URL to redirect users to after they log in using the enchanted link.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] text_template_id: The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
@@ -48,6 +50,8 @@ class EnchantedlinkSettingsArgs:
             pulumi.set(__self__, "email_template_id", email_template_id)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if redirect_url is not None:
             pulumi.set(__self__, "redirect_url", redirect_url)
         if text_connector_id is not None:
@@ -116,6 +120,18 @@ class EnchantedlinkSettingsArgs:
         pulumi.set(self, "expiration_time", value)
 
     @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
+
+    @_builtins.property
     @pulumi.getter(name="redirectUrl")
     def redirect_url(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -159,6 +175,7 @@ class _EnchantedlinkSettingsState:
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -170,6 +187,7 @@ class _EnchantedlinkSettingsState:
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: How long the enchanted link remains valid before it expires.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL to redirect users to after they log in using the enchanted link.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -183,6 +201,8 @@ class _EnchantedlinkSettingsState:
             pulumi.set(__self__, "email_template_id", email_template_id)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if redirect_url is not None:
@@ -239,6 +259,18 @@ class _EnchantedlinkSettingsState:
     @expiration_time.setter
     def expiration_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "expiration_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -299,6 +331,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -314,6 +347,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: How long the enchanted link remains valid before it expires.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL to redirect users to after they log in using the enchanted link.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -348,6 +382,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -365,6 +400,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
             __props__.__dict__["email_connector_id"] = email_connector_id
             __props__.__dict__["email_template_id"] = email_template_id
             __props__.__dict__["expiration_time"] = expiration_time
+            __props__.__dict__["external_email_template_id"] = external_email_template_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
@@ -385,6 +421,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
             email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
             email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+            external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             redirect_url: pulumi.Input[Optional[_builtins.str]] = None,
             text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -400,6 +437,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `enchantedlink`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: How long the enchanted link remains valid before it expires.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL to redirect users to after they log in using the enchanted link.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -413,6 +451,7 @@ class EnchantedlinkSettings(pulumi.CustomResource):
         __props__.__dict__["email_connector_id"] = email_connector_id
         __props__.__dict__["email_template_id"] = email_template_id
         __props__.__dict__["expiration_time"] = expiration_time
+        __props__.__dict__["external_email_template_id"] = external_email_template_id
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["redirect_url"] = redirect_url
         __props__.__dict__["text_connector_id"] = text_connector_id
@@ -450,6 +489,14 @@ class EnchantedlinkSettings(pulumi.CustomResource):
         How long the enchanted link remains valid before it expires.
         """
         return pulumi.get(self, "expiration_time")
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
 
     @_builtins.property
     @pulumi.getter(name="projectId")

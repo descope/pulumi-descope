@@ -156,6 +156,21 @@ public final class PasswordSettingsArgs extends com.pulumi.resources.ResourceArg
     }
 
     /**
+     * The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    @Import(name="externalEmailTemplateId")
+    private @Nullable Output<String> externalEmailTemplateId;
+
+    /**
+     * @return The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    public Optional<Output<String>> externalEmailTemplateId() {
+        return Optional.ofNullable(this.externalEmailTemplateId);
+    }
+
+    /**
      * Whether the user account should be locked after a specified number of failed login attempts.
      * 
      */
@@ -392,6 +407,7 @@ public final class PasswordSettingsArgs extends com.pulumi.resources.ResourceArg
         this.enforceStrength = $.enforceStrength;
         this.expiration = $.expiration;
         this.expirationWeeks = $.expirationWeeks;
+        this.externalEmailTemplateId = $.externalEmailTemplateId;
         this.lock = $.lock;
         this.lockAttempts = $.lockAttempts;
         this.lowercase = $.lowercase;
@@ -614,6 +630,27 @@ public final class PasswordSettingsArgs extends com.pulumi.resources.ResourceArg
          */
         public Builder expirationWeeks(Integer expirationWeeks) {
             return expirationWeeks(Output.of(expirationWeeks));
+        }
+
+        /**
+         * @param externalEmailTemplateId The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalEmailTemplateId(@Nullable Output<String> externalEmailTemplateId) {
+            $.externalEmailTemplateId = externalEmailTemplateId;
+            return this;
+        }
+
+        /**
+         * @param externalEmailTemplateId The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder externalEmailTemplateId(String externalEmailTemplateId) {
+            return externalEmailTemplateId(Output.of(externalEmailTemplateId));
         }
 
         /**

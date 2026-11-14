@@ -71,6 +71,12 @@ namespace Descope.Pulumi.Descope
         public Output<int> ExpirationWeeks { get; private set; } = null!;
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Output("externalEmailTemplateId")]
+        public Output<string> ExternalEmailTemplateId { get; private set; } = null!;
+
+        /// <summary>
         /// Whether the user account should be locked after a specified number of failed login attempts.
         /// </summary>
         [Output("lock")]
@@ -262,6 +268,12 @@ namespace Descope.Pulumi.Descope
         public Input<int>? ExpirationWeeks { get; set; }
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
+
+        /// <summary>
         /// Whether the user account should be locked after a specified number of failed login attempts.
         /// </summary>
         [Input("lock")]
@@ -418,6 +430,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("expirationWeeks")]
         public Input<int>? ExpirationWeeks { get; set; }
+
+        /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
 
         /// <summary>
         /// Whether the user account should be locked after a specified number of failed login attempts.

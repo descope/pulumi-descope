@@ -66,6 +66,10 @@ export class SsoSettings extends pulumi.CustomResource {
      */
     declare public readonly emailTemplateId: pulumi.Output<string>;
     /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    declare public readonly externalEmailTemplateId: pulumi.Output<string>;
+    /**
      * Whether to enable groups priority.
      */
     declare public readonly groupsPriority: pulumi.Output<boolean>;
@@ -126,6 +130,7 @@ export class SsoSettings extends pulumi.CustomResource {
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["emailConnectorId"] = state?.emailConnectorId;
             resourceInputs["emailTemplateId"] = state?.emailTemplateId;
+            resourceInputs["externalEmailTemplateId"] = state?.externalEmailTemplateId;
             resourceInputs["groupsPriority"] = state?.groupsPriority;
             resourceInputs["limitMappingToMandatoryAttributes"] = state?.limitMappingToMandatoryAttributes;
             resourceInputs["mandatoryUserAttributes"] = state?.mandatoryUserAttributes;
@@ -148,6 +153,7 @@ export class SsoSettings extends pulumi.CustomResource {
             resourceInputs["disabled"] = args?.disabled;
             resourceInputs["emailConnectorId"] = args?.emailConnectorId;
             resourceInputs["emailTemplateId"] = args?.emailTemplateId;
+            resourceInputs["externalEmailTemplateId"] = args?.externalEmailTemplateId;
             resourceInputs["groupsPriority"] = args?.groupsPriority;
             resourceInputs["limitMappingToMandatoryAttributes"] = args?.limitMappingToMandatoryAttributes;
             resourceInputs["mandatoryUserAttributes"] = args?.mandatoryUserAttributes;
@@ -196,6 +202,10 @@ export interface SsoSettingsState {
      * The ID of the email template for SSO configuration invitation emails, taken from a `descope.EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
      */
     emailTemplateId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable groups priority.
      */
@@ -270,6 +280,10 @@ export interface SsoSettingsArgs {
      * The ID of the email template for SSO configuration invitation emails, taken from a `descope.EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
      */
     emailTemplateId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable groups priority.
      */

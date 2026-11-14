@@ -29,6 +29,7 @@ class SsoSettingsArgs:
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]]] = None,
@@ -49,6 +50,7 @@ class SsoSettingsArgs:
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using SSO authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use SSO.
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
@@ -74,6 +76,8 @@ class SsoSettingsArgs:
             pulumi.set(__self__, "email_connector_id", email_connector_id)
         if email_template_id is not None:
             pulumi.set(__self__, "email_template_id", email_template_id)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
         if limit_mapping_to_mandatory_attributes is not None:
@@ -188,6 +192,18 @@ class SsoSettingsArgs:
     @email_template_id.setter
     def email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email_template_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="groupsPriority")
@@ -308,6 +324,7 @@ class _SsoSettingsState:
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]]] = None,
@@ -328,6 +345,7 @@ class _SsoSettingsState:
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using SSO authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use SSO.
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
@@ -353,6 +371,8 @@ class _SsoSettingsState:
             pulumi.set(__self__, "email_connector_id", email_connector_id)
         if email_template_id is not None:
             pulumi.set(__self__, "email_template_id", email_template_id)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
         if limit_mapping_to_mandatory_attributes is not None:
@@ -457,6 +477,18 @@ class _SsoSettingsState:
     @email_template_id.setter
     def email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "email_template_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="groupsPriority")
@@ -592,6 +624,7 @@ class SsoSettings(pulumi.CustomResource):
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
@@ -616,6 +649,7 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using SSO authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use SSO.
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
@@ -659,6 +693,7 @@ class SsoSettings(pulumi.CustomResource):
                  disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
@@ -685,6 +720,7 @@ class SsoSettings(pulumi.CustomResource):
             __props__.__dict__["disabled"] = disabled
             __props__.__dict__["email_connector_id"] = email_connector_id
             __props__.__dict__["email_template_id"] = email_template_id
+            __props__.__dict__["external_email_template_id"] = external_email_template_id
             __props__.__dict__["groups_priority"] = groups_priority
             __props__.__dict__["limit_mapping_to_mandatory_attributes"] = limit_mapping_to_mandatory_attributes
             __props__.__dict__["mandatory_user_attributes"] = mandatory_user_attributes
@@ -714,6 +750,7 @@ class SsoSettings(pulumi.CustomResource):
             disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
             email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+            external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
             limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
             mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
@@ -738,6 +775,7 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] disabled: Setting this to `true` will disallow using SSO authentication directly via API and SDK calls. Note that this does not affect authentication flows that are configured to use SSO.
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
@@ -760,6 +798,7 @@ class SsoSettings(pulumi.CustomResource):
         __props__.__dict__["disabled"] = disabled
         __props__.__dict__["email_connector_id"] = email_connector_id
         __props__.__dict__["email_template_id"] = email_template_id
+        __props__.__dict__["external_email_template_id"] = external_email_template_id
         __props__.__dict__["groups_priority"] = groups_priority
         __props__.__dict__["limit_mapping_to_mandatory_attributes"] = limit_mapping_to_mandatory_attributes
         __props__.__dict__["mandatory_user_attributes"] = mandatory_user_attributes
@@ -827,6 +866,14 @@ class SsoSettings(pulumi.CustomResource):
         The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         """
         return pulumi.get(self, "email_template_id")
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
 
     @_builtins.property
     @pulumi.getter(name="groupsPriority")
