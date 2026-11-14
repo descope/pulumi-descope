@@ -150,6 +150,20 @@ public class PasswordSettings extends com.pulumi.resources.CustomResource {
         return this.expirationWeeks;
     }
     /**
+     * The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    @Export(name="externalEmailTemplateId", refs={String.class}, tree="[0]")
+    private Output<String> externalEmailTemplateId;
+
+    /**
+     * @return The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    public Output<String> externalEmailTemplateId() {
+        return this.externalEmailTemplateId;
+    }
+    /**
      * Whether the user account should be locked after a specified number of failed login attempts.
      * 
      */

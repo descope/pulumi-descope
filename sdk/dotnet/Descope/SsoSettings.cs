@@ -59,6 +59,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> EmailTemplateId { get; private set; } = null!;
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Output("externalEmailTemplateId")]
+        public Output<string> ExternalEmailTemplateId { get; private set; } = null!;
+
+        /// <summary>
         /// Whether to enable groups priority.
         /// </summary>
         [Output("groupsPriority")]
@@ -208,6 +214,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? EmailTemplateId { get; set; }
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
+
+        /// <summary>
         /// Whether to enable groups priority.
         /// </summary>
         [Input("groupsPriority")]
@@ -322,6 +334,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("emailTemplateId")]
         public Input<string>? EmailTemplateId { get; set; }
+
+        /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
 
         /// <summary>
         /// Whether to enable groups priority.

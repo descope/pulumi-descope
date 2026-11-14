@@ -56,6 +56,10 @@ export class OtpSettings extends pulumi.CustomResource {
      */
     declare public readonly expirationTime: pulumi.Output<string>;
     /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    declare public readonly externalEmailTemplateId: pulumi.Output<string>;
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
     declare public readonly projectId: pulumi.Output<string>;
@@ -94,6 +98,7 @@ export class OtpSettings extends pulumi.CustomResource {
             resourceInputs["emailConnectorId"] = state?.emailConnectorId;
             resourceInputs["emailTemplateId"] = state?.emailTemplateId;
             resourceInputs["expirationTime"] = state?.expirationTime;
+            resourceInputs["externalEmailTemplateId"] = state?.externalEmailTemplateId;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["textConnectorId"] = state?.textConnectorId;
             resourceInputs["textTemplateId"] = state?.textTemplateId;
@@ -109,6 +114,7 @@ export class OtpSettings extends pulumi.CustomResource {
             resourceInputs["emailConnectorId"] = args?.emailConnectorId;
             resourceInputs["emailTemplateId"] = args?.emailTemplateId;
             resourceInputs["expirationTime"] = args?.expirationTime;
+            resourceInputs["externalEmailTemplateId"] = args?.externalEmailTemplateId;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["textConnectorId"] = args?.textConnectorId;
             resourceInputs["textTemplateId"] = args?.textTemplateId;
@@ -144,6 +150,10 @@ export interface OtpSettingsState {
      * The amount of time that an OTP code will be valid for.
      */
     expirationTime?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
@@ -190,6 +200,10 @@ export interface OtpSettingsArgs {
      * The amount of time that an OTP code will be valid for.
      */
     expirationTime?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */

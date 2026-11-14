@@ -83,6 +83,10 @@ export class ProjectSettings extends pulumi.CustomResource {
      * A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
      */
     declare public readonly testUsersVerifierRegexp: pulumi.Output<string>;
+    /**
+     * The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+     */
+    declare public readonly trustedProxySecret: pulumi.Output<string>;
 
     /**
      * Create a ProjectSettings resource with the given unique name, arguments, and options.
@@ -109,6 +113,7 @@ export class ProjectSettings extends pulumi.CustomResource {
             resourceInputs["testUsersLoginidRegexp"] = state?.testUsersLoginidRegexp;
             resourceInputs["testUsersStaticOtp"] = state?.testUsersStaticOtp;
             resourceInputs["testUsersVerifierRegexp"] = state?.testUsersVerifierRegexp;
+            resourceInputs["trustedProxySecret"] = state?.trustedProxySecret;
         } else {
             const args = argsOrState as ProjectSettingsArgs | undefined;
             if (args?.projectId === undefined && !opts.urn) {
@@ -126,8 +131,11 @@ export class ProjectSettings extends pulumi.CustomResource {
             resourceInputs["testUsersLoginidRegexp"] = args?.testUsersLoginidRegexp;
             resourceInputs["testUsersStaticOtp"] = args?.testUsersStaticOtp;
             resourceInputs["testUsersVerifierRegexp"] = args?.testUsersVerifierRegexp;
+            resourceInputs["trustedProxySecret"] = args?.trustedProxySecret ? pulumi.secret(args.trustedProxySecret) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["trustedProxySecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ProjectSettings.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -184,6 +192,10 @@ export interface ProjectSettingsState {
      * A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
      */
     testUsersVerifierRegexp?: pulumi.Input<string | undefined>;
+    /**
+     * The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+     */
+    trustedProxySecret?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -238,4 +250,8 @@ export interface ProjectSettingsArgs {
      * A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
      */
     testUsersVerifierRegexp?: pulumi.Input<string | undefined>;
+    /**
+     * The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+     */
+    trustedProxySecret?: pulumi.Input<string | undefined>;
 }

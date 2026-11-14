@@ -304,6 +304,21 @@ public final class OidcAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * How far a logout at the application&#39;s end-session endpoint reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s sessions and notify the calling application alone, or `&#34;allApps&#34;` to also log the user out of their other applications.
+     * 
+     */
+    @Import(name="logoutPropagation")
+    private @Nullable Output<String> logoutPropagation;
+
+    /**
+     * @return How far a logout at the application&#39;s end-session endpoint reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s sessions and notify the calling application alone, or `&#34;allApps&#34;` to also log the user out of their other applications.
+     * 
+     */
+    public Optional<Output<String>> logoutPropagation() {
+        return Optional.ofNullable(this.logoutPropagation);
+    }
+
+    /**
      * A name for the OIDC application.
      * 
      */
@@ -316,6 +331,21 @@ public final class OidcAppArgs extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
+    }
+
+    /**
+     * Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a back-channel logout token. Requires `backchannelLogoutUrl`. When disabled, the default, a force logout doesn&#39;t notify the application.
+     * 
+     */
+    @Import(name="notifyOnForceLogout")
+    private @Nullable Output<Boolean> notifyOnForceLogout;
+
+    /**
+     * @return Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a back-channel logout token. Requires `backchannelLogoutUrl`. When disabled, the default, a force logout doesn&#39;t notify the application.
+     * 
+     */
+    public Optional<Output<Boolean>> notifyOnForceLogout() {
+        return Optional.ofNullable(this.notifyOnForceLogout);
     }
 
     /**
@@ -400,7 +430,9 @@ public final class OidcAppArgs extends com.pulumi.resources.ResourceArgs {
         this.jwtBearerDisabled = $.jwtBearerDisabled;
         this.loginPageUrl = $.loginPageUrl;
         this.logo = $.logo;
+        this.logoutPropagation = $.logoutPropagation;
         this.name = $.name;
+        this.notifyOnForceLogout = $.notifyOnForceLogout;
         this.oidcAppId = $.oidcAppId;
         this.projectId = $.projectId;
         this.refreshTokenDisabled = $.refreshTokenDisabled;
@@ -845,6 +877,27 @@ public final class OidcAppArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param logoutPropagation How far a logout at the application&#39;s end-session endpoint reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s sessions and notify the calling application alone, or `&#34;allApps&#34;` to also log the user out of their other applications.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder logoutPropagation(@Nullable Output<String> logoutPropagation) {
+            $.logoutPropagation = logoutPropagation;
+            return this;
+        }
+
+        /**
+         * @param logoutPropagation How far a logout at the application&#39;s end-session endpoint reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s sessions and notify the calling application alone, or `&#34;allApps&#34;` to also log the user out of their other applications.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder logoutPropagation(String logoutPropagation) {
+            return logoutPropagation(Output.of(logoutPropagation));
+        }
+
+        /**
          * @param name A name for the OIDC application.
          * 
          * @return builder
@@ -863,6 +916,27 @@ public final class OidcAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param notifyOnForceLogout Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a back-channel logout token. Requires `backchannelLogoutUrl`. When disabled, the default, a force logout doesn&#39;t notify the application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder notifyOnForceLogout(@Nullable Output<Boolean> notifyOnForceLogout) {
+            $.notifyOnForceLogout = notifyOnForceLogout;
+            return this;
+        }
+
+        /**
+         * @param notifyOnForceLogout Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a back-channel logout token. Requires `backchannelLogoutUrl`. When disabled, the default, a force logout doesn&#39;t notify the application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder notifyOnForceLogout(Boolean notifyOnForceLogout) {
+            return notifyOnForceLogout(Output.of(notifyOnForceLogout));
         }
 
         /**

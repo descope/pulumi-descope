@@ -5,7 +5,7 @@ go 1.26.0
 toolchain go1.26.5
 
 require (
-	github.com/descope/terraform-provider-descope v1.1.1
+	github.com/descope/terraform-provider-descope v1.2.0
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 )
 
