@@ -198,6 +198,21 @@ public final class ProjectSettingsArgs extends com.pulumi.resources.ResourceArgs
         return Optional.ofNullable(this.testUsersVerifierRegexp);
     }
 
+    /**
+     * The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+     * 
+     */
+    @Import(name="trustedProxySecret")
+    private @Nullable Output<String> trustedProxySecret;
+
+    /**
+     * @return The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+     * 
+     */
+    public Optional<Output<String>> trustedProxySecret() {
+        return Optional.ofNullable(this.trustedProxySecret);
+    }
+
     private ProjectSettingsArgs() {}
 
     private ProjectSettingsArgs(ProjectSettingsArgs $) {
@@ -213,6 +228,7 @@ public final class ProjectSettingsArgs extends com.pulumi.resources.ResourceArgs
         this.testUsersLoginidRegexp = $.testUsersLoginidRegexp;
         this.testUsersStaticOtp = $.testUsersStaticOtp;
         this.testUsersVerifierRegexp = $.testUsersVerifierRegexp;
+        this.trustedProxySecret = $.trustedProxySecret;
     }
 
     public static Builder builder() {
@@ -493,6 +509,27 @@ public final class ProjectSettingsArgs extends com.pulumi.resources.ResourceArgs
          */
         public Builder testUsersVerifierRegexp(String testUsersVerifierRegexp) {
             return testUsersVerifierRegexp(Output.of(testUsersVerifierRegexp));
+        }
+
+        /**
+         * @param trustedProxySecret The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder trustedProxySecret(@Nullable Output<String> trustedProxySecret) {
+            $.trustedProxySecret = trustedProxySecret;
+            return this;
+        }
+
+        /**
+         * @param trustedProxySecret The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder trustedProxySecret(String trustedProxySecret) {
+            return trustedProxySecret(Output.of(trustedProxySecret));
         }
 
         public ProjectSettingsArgs build() {

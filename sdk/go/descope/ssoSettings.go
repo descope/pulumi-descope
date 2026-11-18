@@ -30,6 +30,8 @@ type SsoSettings struct {
 	EmailConnectorId pulumi.StringOutput `pulumi:"emailConnectorId"`
 	// The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 	EmailTemplateId pulumi.StringOutput `pulumi:"emailTemplateId"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringOutput `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolOutput `pulumi:"groupsPriority"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
@@ -99,6 +101,8 @@ type ssoSettingsState struct {
 	EmailConnectorId *string `pulumi:"emailConnectorId"`
 	// The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority *bool `pulumi:"groupsPriority"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
@@ -136,6 +140,8 @@ type SsoSettingsState struct {
 	EmailConnectorId pulumi.StringPtrInput
 	// The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 	EmailTemplateId pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolPtrInput
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
@@ -177,6 +183,8 @@ type ssoSettingsArgs struct {
 	EmailConnectorId *string `pulumi:"emailConnectorId"`
 	// The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority *bool `pulumi:"groupsPriority"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
@@ -215,6 +223,8 @@ type SsoSettingsArgs struct {
 	EmailConnectorId pulumi.StringPtrInput
 	// The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 	EmailTemplateId pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolPtrInput
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
@@ -357,6 +367,11 @@ func (o SsoSettingsOutput) EmailConnectorId() pulumi.StringOutput {
 // The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
 func (o SsoSettingsOutput) EmailTemplateId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SsoSettings) pulumi.StringOutput { return v.EmailTemplateId }).(pulumi.StringOutput)
+}
+
+// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+func (o SsoSettingsOutput) ExternalEmailTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SsoSettings) pulumi.StringOutput { return v.ExternalEmailTemplateId }).(pulumi.StringOutput)
 }
 
 // Whether to enable groups priority.

@@ -24,6 +24,8 @@ type EnchantedlinkSettings struct {
 	EmailTemplateId pulumi.StringOutput `pulumi:"emailTemplateId"`
 	// How long the enchanted link remains valid before it expires.
 	ExpirationTime pulumi.StringOutput `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringOutput `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
@@ -75,6 +77,8 @@ type enchantedlinkSettingsState struct {
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
 	// How long the enchanted link remains valid before it expires.
 	ExpirationTime *string `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
@@ -94,6 +98,8 @@ type EnchantedlinkSettingsState struct {
 	EmailTemplateId pulumi.StringPtrInput
 	// How long the enchanted link remains valid before it expires.
 	ExpirationTime pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
 	// The URL to redirect users to after they log in using the enchanted link.
@@ -117,6 +123,8 @@ type enchantedlinkSettingsArgs struct {
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
 	// How long the enchanted link remains valid before it expires.
 	ExpirationTime *string `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
 	// The URL to redirect users to after they log in using the enchanted link.
@@ -137,6 +145,8 @@ type EnchantedlinkSettingsArgs struct {
 	EmailTemplateId pulumi.StringPtrInput
 	// How long the enchanted link remains valid before it expires.
 	ExpirationTime pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
 	// The URL to redirect users to after they log in using the enchanted link.
@@ -252,6 +262,11 @@ func (o EnchantedlinkSettingsOutput) EmailTemplateId() pulumi.StringOutput {
 // How long the enchanted link remains valid before it expires.
 func (o EnchantedlinkSettingsOutput) ExpirationTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *EnchantedlinkSettings) pulumi.StringOutput { return v.ExpirationTime }).(pulumi.StringOutput)
+}
+
+// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+func (o EnchantedlinkSettingsOutput) ExternalEmailTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EnchantedlinkSettings) pulumi.StringOutput { return v.ExternalEmailTemplateId }).(pulumi.StringOutput)
 }
 
 // The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.

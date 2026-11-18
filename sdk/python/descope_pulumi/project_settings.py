@@ -30,7 +30,8 @@ class ProjectSettingsArgs:
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
-                 test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None):
+                 test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None,
+                 trusted_proxy_secret: pulumi.Input[Optional[_builtins.str]] = None):
         """
         The set of arguments for constructing a ProjectSettings resource.
 
@@ -46,6 +47,7 @@ class ProjectSettingsArgs:
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
         :param pulumi.Input[_builtins.str] test_users_static_otp: A static OTP code that can be used by test users instead of a real verification code. Must be set together with `test_users_verifier_regexp`.
         :param pulumi.Input[_builtins.str] test_users_verifier_regexp: A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
+        :param pulumi.Input[_builtins.str] trusted_proxy_secret: The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
         """
         pulumi.set(__self__, "project_id", project_id)
         if allow_auth_hosting_iframe_embedding is not None:
@@ -70,6 +72,8 @@ class ProjectSettingsArgs:
             pulumi.set(__self__, "test_users_static_otp", test_users_static_otp)
         if test_users_verifier_regexp is not None:
             pulumi.set(__self__, "test_users_verifier_regexp", test_users_verifier_regexp)
+        if trusted_proxy_secret is not None:
+            pulumi.set(__self__, "trusted_proxy_secret", trusted_proxy_secret)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -215,6 +219,18 @@ class ProjectSettingsArgs:
     def test_users_verifier_regexp(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "test_users_verifier_regexp", value)
 
+    @_builtins.property
+    @pulumi.getter(name="trustedProxySecret")
+    def trusted_proxy_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        """
+        return pulumi.get(self, "trusted_proxy_secret")
+
+    @trusted_proxy_secret.setter
+    def trusted_proxy_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "trusted_proxy_secret", value)
+
 
 @pulumi.input_type
 class _ProjectSettingsState:
@@ -230,7 +246,8 @@ class _ProjectSettingsState:
                  tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
-                 test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None):
+                 test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None,
+                 trusted_proxy_secret: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ProjectSettings resources.
 
@@ -246,6 +263,7 @@ class _ProjectSettingsState:
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
         :param pulumi.Input[_builtins.str] test_users_static_otp: A static OTP code that can be used by test users instead of a real verification code. Must be set together with `test_users_verifier_regexp`.
         :param pulumi.Input[_builtins.str] test_users_verifier_regexp: A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
+        :param pulumi.Input[_builtins.str] trusted_proxy_secret: The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
         """
         if allow_auth_hosting_iframe_embedding is not None:
             pulumi.set(__self__, "allow_auth_hosting_iframe_embedding", allow_auth_hosting_iframe_embedding)
@@ -271,6 +289,8 @@ class _ProjectSettingsState:
             pulumi.set(__self__, "test_users_static_otp", test_users_static_otp)
         if test_users_verifier_regexp is not None:
             pulumi.set(__self__, "test_users_verifier_regexp", test_users_verifier_regexp)
+        if trusted_proxy_secret is not None:
+            pulumi.set(__self__, "trusted_proxy_secret", trusted_proxy_secret)
 
     @_builtins.property
     @pulumi.getter(name="allowAuthHostingIframeEmbedding")
@@ -416,6 +436,18 @@ class _ProjectSettingsState:
     def test_users_verifier_regexp(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "test_users_verifier_regexp", value)
 
+    @_builtins.property
+    @pulumi.getter(name="trustedProxySecret")
+    def trusted_proxy_secret(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        """
+        return pulumi.get(self, "trusted_proxy_secret")
+
+    @trusted_proxy_secret.setter
+    def trusted_proxy_secret(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "trusted_proxy_secret", value)
+
 
 @pulumi.type_token("descope:index/projectSettings:ProjectSettings")
 class ProjectSettings(pulumi.CustomResource):
@@ -435,6 +467,7 @@ class ProjectSettings(pulumi.CustomResource):
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None,
+                 trusted_proxy_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
         Manages the project-level domain, security, and test user settings. This is a singleton resource, and its id is always the project ID.
@@ -454,6 +487,7 @@ class ProjectSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
         :param pulumi.Input[_builtins.str] test_users_static_otp: A static OTP code that can be used by test users instead of a real verification code. Must be set together with `test_users_verifier_regexp`.
         :param pulumi.Input[_builtins.str] test_users_verifier_regexp: A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
+        :param pulumi.Input[_builtins.str] trusted_proxy_secret: The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
         """
         ...
     @overload
@@ -492,6 +526,7 @@ class ProjectSettings(pulumi.CustomResource):
                  test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
                  test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None,
+                 trusted_proxy_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -515,6 +550,9 @@ class ProjectSettings(pulumi.CustomResource):
             __props__.__dict__["test_users_loginid_regexp"] = test_users_loginid_regexp
             __props__.__dict__["test_users_static_otp"] = test_users_static_otp
             __props__.__dict__["test_users_verifier_regexp"] = test_users_verifier_regexp
+            __props__.__dict__["trusted_proxy_secret"] = None if trusted_proxy_secret is None else pulumi.Output.secret(trusted_proxy_secret)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["trustedProxySecret"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(ProjectSettings, __self__).__init__(
             'descope:index/projectSettings:ProjectSettings',
             resource_name,
@@ -536,7 +574,8 @@ class ProjectSettings(pulumi.CustomResource):
             tenant_user_isolation: pulumi.Input[Optional[_builtins.bool]] = None,
             test_users_loginid_regexp: pulumi.Input[Optional[_builtins.str]] = None,
             test_users_static_otp: pulumi.Input[Optional[_builtins.str]] = None,
-            test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectSettings':
+            test_users_verifier_regexp: pulumi.Input[Optional[_builtins.str]] = None,
+            trusted_proxy_secret: pulumi.Input[Optional[_builtins.str]] = None) -> 'ProjectSettings':
         """
         Get an existing ProjectSettings resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -556,6 +595,7 @@ class ProjectSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] test_users_loginid_regexp: A regular expression pattern that, when a user is created with a matching login ID, will automatically mark the user as a test user.
         :param pulumi.Input[_builtins.str] test_users_static_otp: A static OTP code that can be used by test users instead of a real verification code. Must be set together with `test_users_verifier_regexp`.
         :param pulumi.Input[_builtins.str] test_users_verifier_regexp: A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
+        :param pulumi.Input[_builtins.str] trusted_proxy_secret: The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -573,6 +613,7 @@ class ProjectSettings(pulumi.CustomResource):
         __props__.__dict__["test_users_loginid_regexp"] = test_users_loginid_regexp
         __props__.__dict__["test_users_static_otp"] = test_users_static_otp
         __props__.__dict__["test_users_verifier_regexp"] = test_users_verifier_regexp
+        __props__.__dict__["trusted_proxy_secret"] = trusted_proxy_secret
         return ProjectSettings(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -670,4 +711,12 @@ class ProjectSettings(pulumi.CustomResource):
         A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
         """
         return pulumi.get(self, "test_users_verifier_regexp")
+
+    @_builtins.property
+    @pulumi.getter(name="trustedProxySecret")
+    def trusted_proxy_secret(self) -> pulumi.Output[_builtins.str]:
+        """
+        The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        """
+        return pulumi.get(self, "trusted_proxy_secret")
 

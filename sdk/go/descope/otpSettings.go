@@ -26,6 +26,8 @@ type OtpSettings struct {
 	EmailTemplateId pulumi.StringOutput `pulumi:"emailTemplateId"`
 	// The amount of time that an OTP code will be valid for.
 	ExpirationTime pulumi.StringOutput `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringOutput `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -81,6 +83,8 @@ type otpSettingsState struct {
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
 	// The amount of time that an OTP code will be valid for.
 	ExpirationTime *string `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
 	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -104,6 +108,8 @@ type OtpSettingsState struct {
 	EmailTemplateId pulumi.StringPtrInput
 	// The amount of time that an OTP code will be valid for.
 	ExpirationTime pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
 	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -131,6 +137,8 @@ type otpSettingsArgs struct {
 	EmailTemplateId *string `pulumi:"emailTemplateId"`
 	// The amount of time that an OTP code will be valid for.
 	ExpirationTime *string `pulumi:"expirationTime"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
 	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -155,6 +163,8 @@ type OtpSettingsArgs struct {
 	EmailTemplateId pulumi.StringPtrInput
 	// The amount of time that an OTP code will be valid for.
 	ExpirationTime pulumi.StringPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
 	// The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
@@ -277,6 +287,11 @@ func (o OtpSettingsOutput) EmailTemplateId() pulumi.StringOutput {
 // The amount of time that an OTP code will be valid for.
 func (o OtpSettingsOutput) ExpirationTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *OtpSettings) pulumi.StringOutput { return v.ExpirationTime }).(pulumi.StringOutput)
+}
+
+// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+func (o OtpSettingsOutput) ExternalEmailTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *OtpSettings) pulumi.StringOutput { return v.ExternalEmailTemplateId }).(pulumi.StringOutput)
 }
 
 // The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
