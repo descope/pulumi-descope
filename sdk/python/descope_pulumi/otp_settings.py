@@ -25,6 +25,7 @@ class OtpSettingsArgs:
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  voice_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -38,6 +39,7 @@ class OtpSettingsArgs:
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: The amount of time that an OTP code will be valid for.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] text_template_id: The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] voice_connector_id: The ID of a voice call connector to use for making voice calls. An empty value (the default) selects the built-in Descope delivery service.
@@ -54,6 +56,8 @@ class OtpSettingsArgs:
             pulumi.set(__self__, "email_template_id", email_template_id)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if text_connector_id is not None:
             pulumi.set(__self__, "text_connector_id", text_connector_id)
         if text_template_id is not None:
@@ -136,6 +140,18 @@ class OtpSettingsArgs:
         pulumi.set(self, "expiration_time", value)
 
     @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
+
+    @_builtins.property
     @pulumi.getter(name="textConnectorId")
     def text_connector_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -192,6 +208,7 @@ class _OtpSettingsState:
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -205,6 +222,7 @@ class _OtpSettingsState:
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: The amount of time that an OTP code will be valid for.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] text_template_id: The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
@@ -221,6 +239,8 @@ class _OtpSettingsState:
             pulumi.set(__self__, "email_template_id", email_template_id)
         if expiration_time is not None:
             pulumi.set(__self__, "expiration_time", expiration_time)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
         if text_connector_id is not None:
@@ -291,6 +311,18 @@ class _OtpSettingsState:
     @expiration_time.setter
     def expiration_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "expiration_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="projectId")
@@ -364,6 +396,7 @@ class OtpSettings(pulumi.CustomResource):
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -381,6 +414,7 @@ class OtpSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: The amount of time that an OTP code will be valid for.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] text_template_id: The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
@@ -417,6 +451,7 @@ class OtpSettings(pulumi.CustomResource):
                  email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
                  text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -436,6 +471,7 @@ class OtpSettings(pulumi.CustomResource):
             __props__.__dict__["email_connector_id"] = email_connector_id
             __props__.__dict__["email_template_id"] = email_template_id
             __props__.__dict__["expiration_time"] = expiration_time
+            __props__.__dict__["external_email_template_id"] = external_email_template_id
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
@@ -458,6 +494,7 @@ class OtpSettings(pulumi.CustomResource):
             email_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
             email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             expiration_time: pulumi.Input[Optional[_builtins.str]] = None,
+            external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             text_connector_id: pulumi.Input[Optional[_builtins.str]] = None,
             text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -475,6 +512,7 @@ class OtpSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_connector_id: The ID of an email connector to use for sending emails. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template to send to users, taken from a `EmailTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] expiration_time: The amount of time that an OTP code will be valid for.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] text_connector_id: The ID of an SMS connector to use for sending text messages. An empty value (the default) selects the built-in Descope delivery service.
         :param pulumi.Input[_builtins.str] text_template_id: The ID of the text template to send to users, taken from a `TextTemplate` resource with its `method` set to `otp`. An empty value (the default) selects the built-in System template.
@@ -490,6 +528,7 @@ class OtpSettings(pulumi.CustomResource):
         __props__.__dict__["email_connector_id"] = email_connector_id
         __props__.__dict__["email_template_id"] = email_template_id
         __props__.__dict__["expiration_time"] = expiration_time
+        __props__.__dict__["external_email_template_id"] = external_email_template_id
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["text_connector_id"] = text_connector_id
         __props__.__dict__["text_template_id"] = text_template_id
@@ -536,6 +575,14 @@ class OtpSettings(pulumi.CustomResource):
         The amount of time that an OTP code will be valid for.
         """
         return pulumi.get(self, "expiration_time")
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
 
     @_builtins.property
     @pulumi.getter(name="projectId")

@@ -91,6 +91,20 @@ public class OtpSettings extends com.pulumi.resources.CustomResource {
         return this.expirationTime;
     }
     /**
+     * The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    @Export(name="externalEmailTemplateId", refs={String.class}, tree="[0]")
+    private Output<String> externalEmailTemplateId;
+
+    /**
+     * @return The ID of an email template hosted by the email connector&#39;s provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     * 
+     */
+    public Output<String> externalEmailTemplateId() {
+        return this.externalEmailTemplateId;
+    }
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      * 
      */

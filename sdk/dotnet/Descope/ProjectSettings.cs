@@ -88,6 +88,12 @@ namespace Descope.Pulumi.Descope
         [Output("testUsersVerifierRegexp")]
         public Output<string> TestUsersVerifierRegexp { get; private set; } = null!;
 
+        /// <summary>
+        /// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        /// </summary>
+        [Output("trustedProxySecret")]
+        public Output<string> TrustedProxySecret { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a ProjectSettings resource with the given unique name, arguments, and options.
@@ -112,6 +118,10 @@ namespace Descope.Pulumi.Descope
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/descope",
+                AdditionalSecretOutputs =
+                {
+                    "trustedProxySecret",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -213,6 +223,22 @@ namespace Descope.Pulumi.Descope
         [Input("testUsersVerifierRegexp")]
         public Input<string>? TestUsersVerifierRegexp { get; set; }
 
+        [Input("trustedProxySecret")]
+        private Input<string>? _trustedProxySecret;
+
+        /// <summary>
+        /// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        /// </summary>
+        public Input<string>? TrustedProxySecret
+        {
+            get => _trustedProxySecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _trustedProxySecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         public ProjectSettingsArgs()
         {
         }
@@ -298,6 +324,22 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("testUsersVerifierRegexp")]
         public Input<string>? TestUsersVerifierRegexp { get; set; }
+
+        [Input("trustedProxySecret")]
+        private Input<string>? _trustedProxySecret;
+
+        /// <summary>
+        /// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+        /// </summary>
+        public Input<string>? TrustedProxySecret
+        {
+            get => _trustedProxySecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _trustedProxySecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ProjectSettingsState()
         {

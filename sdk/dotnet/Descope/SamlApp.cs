@@ -113,6 +113,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `"soap"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.
+        /// </summary>
+        [Output("notifyOnForceLogout")]
+        public Output<bool> NotifyOnForceLogout { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Output("projectId")]
@@ -123,6 +129,36 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("samlAppId")]
         public Output<string> SamlAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `IdpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when `NotifyOnForceLogout` is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `"soap"` binding.
+        /// </summary>
+        [Output("singleLogoutEnabled")]
+        public Output<bool> SingleLogoutEnabled { get; private set; } = null!;
+
+        /// <summary>
+        /// What a logout started by the service provider reaches. Choose one of `""` (default, same as `"none"`), `"none"` to only end the user's session without notifying any other application, or `"allApps"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+        /// </summary>
+        [Output("singleLogoutPropagation")]
+        public Output<string> SingleLogoutPropagation { get; private set; } = null!;
+
+        /// <summary>
+        /// Which Descope sessions a logout started by the service provider ends. Choose one of `""` (default, same as `"session"`), `"session"` to end the sessions the logout request's session indexes name, or `"allSessions"` to end every session of the user. With `"session"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+        /// </summary>
+        [Output("singleLogoutScope")]
+        public Output<string> SingleLogoutScope { get; private set; } = null!;
+
+        /// <summary>
+        /// The SAML binding used for `SpSingleLogoutUrl`. Choose one of `""` (default), `"redirect"`, `"post"` or `"soap"`. With the default and an `SpSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `SpSingleLogoutUrl`, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an `Https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `"soap"` binding sends the logout request directly from Descope to the service provider and requires an `Https` URL.
+        /// </summary>
+        [Output("spSingleLogoutBinding")]
+        public Output<string> SpSingleLogoutBinding { get; private set; } = null!;
+
+        /// <summary>
+        /// The service provider's Single Logout Service URL that logout requests are sent to. Required when `SingleLogoutEnabled` is `True` and `ManualConfiguration` is used. With `DynamicConfiguration` it can be left empty to take the URL from the service provider's metadata.
+        /// </summary>
+        [Output("spSingleLogoutUrl")]
+        public Output<string> SpSingleLogoutUrl { get; private set; } = null!;
 
         /// <summary>
         /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -286,6 +322,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `"soap"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.
+        /// </summary>
+        [Input("notifyOnForceLogout")]
+        public Input<bool>? NotifyOnForceLogout { get; set; }
+
+        /// <summary>
         /// The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("projectId", required: true)]
@@ -296,6 +338,36 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("samlAppId")]
         public Input<string>? SamlAppId { get; set; }
+
+        /// <summary>
+        /// Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `IdpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when `NotifyOnForceLogout` is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `"soap"` binding.
+        /// </summary>
+        [Input("singleLogoutEnabled")]
+        public Input<bool>? SingleLogoutEnabled { get; set; }
+
+        /// <summary>
+        /// What a logout started by the service provider reaches. Choose one of `""` (default, same as `"none"`), `"none"` to only end the user's session without notifying any other application, or `"allApps"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+        /// </summary>
+        [Input("singleLogoutPropagation")]
+        public Input<string>? SingleLogoutPropagation { get; set; }
+
+        /// <summary>
+        /// Which Descope sessions a logout started by the service provider ends. Choose one of `""` (default, same as `"session"`), `"session"` to end the sessions the logout request's session indexes name, or `"allSessions"` to end every session of the user. With `"session"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+        /// </summary>
+        [Input("singleLogoutScope")]
+        public Input<string>? SingleLogoutScope { get; set; }
+
+        /// <summary>
+        /// The SAML binding used for `SpSingleLogoutUrl`. Choose one of `""` (default), `"redirect"`, `"post"` or `"soap"`. With the default and an `SpSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `SpSingleLogoutUrl`, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an `Https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `"soap"` binding sends the logout request directly from Descope to the service provider and requires an `Https` URL.
+        /// </summary>
+        [Input("spSingleLogoutBinding")]
+        public Input<string>? SpSingleLogoutBinding { get; set; }
+
+        /// <summary>
+        /// The service provider's Single Logout Service URL that logout requests are sent to. Required when `SingleLogoutEnabled` is `True` and `ManualConfiguration` is used. With `DynamicConfiguration` it can be left empty to take the URL from the service provider's metadata.
+        /// </summary>
+        [Input("spSingleLogoutUrl")]
+        public Input<string>? SpSingleLogoutUrl { get; set; }
 
         /// <summary>
         /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).
@@ -426,6 +498,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Whether a Force Logout of the user, from the Console or the Management API's Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `"soap"` binding, since a force logout has no browser. When disabled, the default, a force logout doesn't notify the application.
+        /// </summary>
+        [Input("notifyOnForceLogout")]
+        public Input<bool>? NotifyOnForceLogout { get; set; }
+
+        /// <summary>
         /// The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("projectId")]
@@ -436,6 +514,36 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("samlAppId")]
         public Input<string>? SamlAppId { get; set; }
+
+        /// <summary>
+        /// Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `IdpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user's applications (the user's own logout of all devices, a force logout when `NotifyOnForceLogout` is enabled, or another application's logout that propagates). The request names the user by the application's NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn't used. A logout without a browser (the user's own logout of all devices, a force logout) reaches only applications with the `"soap"` binding.
+        /// </summary>
+        [Input("singleLogoutEnabled")]
+        public Input<bool>? SingleLogoutEnabled { get; set; }
+
+        /// <summary>
+        /// What a logout started by the service provider reaches. Choose one of `""` (default, same as `"none"`), `"none"` to only end the user's session without notifying any other application, or `"allApps"` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+        /// </summary>
+        [Input("singleLogoutPropagation")]
+        public Input<string>? SingleLogoutPropagation { get; set; }
+
+        /// <summary>
+        /// Which Descope sessions a logout started by the service provider ends. Choose one of `""` (default, same as `"session"`), `"session"` to end the sessions the logout request's session indexes name, or `"allSessions"` to end every session of the user. With `"session"`, a logout request with no session index, or with one Descope didn't issue, ends the browser's Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren't all Descope's ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+        /// </summary>
+        [Input("singleLogoutScope")]
+        public Input<string>? SingleLogoutScope { get; set; }
+
+        /// <summary>
+        /// The SAML binding used for `SpSingleLogoutUrl`. Choose one of `""` (default), `"redirect"`, `"post"` or `"soap"`. With the default and an `SpSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `SpSingleLogoutUrl`, the endpoint comes from the service provider's metadata: the default uses SOAP when the metadata offers an `Https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `"soap"` binding sends the logout request directly from Descope to the service provider and requires an `Https` URL.
+        /// </summary>
+        [Input("spSingleLogoutBinding")]
+        public Input<string>? SpSingleLogoutBinding { get; set; }
+
+        /// <summary>
+        /// The service provider's Single Logout Service URL that logout requests are sent to. Required when `SingleLogoutEnabled` is `True` and `ManualConfiguration` is used. With `DynamicConfiguration` it can be left empty to take the URL from the service provider's metadata.
+        /// </summary>
+        [Input("spSingleLogoutUrl")]
+        public Input<string>? SpSingleLogoutUrl { get; set; }
 
         /// <summary>
         /// The subject name id format. Choose one of "", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:transient". Read more about this configuration [here](https://docs.descope.com/sso-integrations/applications/saml-apps).

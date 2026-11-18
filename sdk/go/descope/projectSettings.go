@@ -40,6 +40,8 @@ type ProjectSettings struct {
 	TestUsersStaticOtp pulumi.StringOutput `pulumi:"testUsersStaticOtp"`
 	// A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 	TestUsersVerifierRegexp pulumi.StringOutput `pulumi:"testUsersVerifierRegexp"`
+	// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+	TrustedProxySecret pulumi.StringOutput `pulumi:"trustedProxySecret"`
 }
 
 // NewProjectSettings registers a new resource with the given unique name, arguments, and options.
@@ -52,6 +54,13 @@ func NewProjectSettings(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
+	if args.TrustedProxySecret != nil {
+		args.TrustedProxySecret = pulumi.ToSecret(args.TrustedProxySecret).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"trustedProxySecret",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectSettings
 	err := ctx.RegisterResource("descope:index/projectSettings:ProjectSettings", name, args, &resource, opts...)
@@ -99,6 +108,8 @@ type projectSettingsState struct {
 	TestUsersStaticOtp *string `pulumi:"testUsersStaticOtp"`
 	// A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 	TestUsersVerifierRegexp *string `pulumi:"testUsersVerifierRegexp"`
+	// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+	TrustedProxySecret *string `pulumi:"trustedProxySecret"`
 }
 
 type ProjectSettingsState struct {
@@ -126,6 +137,8 @@ type ProjectSettingsState struct {
 	TestUsersStaticOtp pulumi.StringPtrInput
 	// A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 	TestUsersVerifierRegexp pulumi.StringPtrInput
+	// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+	TrustedProxySecret pulumi.StringPtrInput
 }
 
 func (ProjectSettingsState) ElementType() reflect.Type {
@@ -157,6 +170,8 @@ type projectSettingsArgs struct {
 	TestUsersStaticOtp *string `pulumi:"testUsersStaticOtp"`
 	// A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 	TestUsersVerifierRegexp *string `pulumi:"testUsersVerifierRegexp"`
+	// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+	TrustedProxySecret *string `pulumi:"trustedProxySecret"`
 }
 
 // The set of arguments for constructing a ProjectSettings resource.
@@ -185,6 +200,8 @@ type ProjectSettingsArgs struct {
 	TestUsersStaticOtp pulumi.StringPtrInput
 	// A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 	TestUsersVerifierRegexp pulumi.StringPtrInput
+	// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+	TrustedProxySecret pulumi.StringPtrInput
 }
 
 func (ProjectSettingsArgs) ElementType() reflect.Type {
@@ -332,6 +349,11 @@ func (o ProjectSettingsOutput) TestUsersStaticOtp() pulumi.StringOutput {
 // A regular expression pattern that determines which test user verifiers (email addresses or phone numbers) the static OTP code applies to.
 func (o ProjectSettingsOutput) TestUsersVerifierRegexp() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProjectSettings) pulumi.StringOutput { return v.TestUsersVerifierRegexp }).(pulumi.StringOutput)
+}
+
+// The secret a trusted reverse proxy sends in the `x-descope-proxy-secret` header, so that the forwarded hostname and client IP headers it adds are honored. Used to serve tenant vanity domains through a gateway. Must be at least 64 visible ASCII characters with no spaces, for example the output of `openssl rand -base64 48`. Requires vanity domains to be enabled on the company license. This value is write-only and never read back from the server. Removing it from the configuration keeps the stored secret, set it to an empty string to clear it.
+func (o ProjectSettingsOutput) TrustedProxySecret() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProjectSettings) pulumi.StringOutput { return v.TrustedProxySecret }).(pulumi.StringOutput)
 }
 
 type ProjectSettingsArrayOutput struct{ *pulumi.OutputState }

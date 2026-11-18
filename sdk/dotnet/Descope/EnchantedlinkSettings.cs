@@ -41,6 +41,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> ExpirationTime { get; private set; } = null!;
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Output("externalEmailTemplateId")]
+        public Output<string> ExternalEmailTemplateId { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Output("projectId")]
@@ -136,6 +142,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? ExpirationTime { get; set; }
 
         /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
+
+        /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("projectId", required: true)]
@@ -190,6 +202,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("expirationTime")]
         public Input<string>? ExpirationTime { get; set; }
+
+        /// <summary>
+        /// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `EmailTemplateId`.
+        /// </summary>
+        [Input("externalEmailTemplateId")]
+        public Input<string>? ExternalEmailTemplateId { get; set; }
 
         /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.

@@ -74,6 +74,10 @@ export class PasswordSettings extends pulumi.CustomResource {
      */
     declare public readonly expirationWeeks: pulumi.Output<number>;
     /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    declare public readonly externalEmailTemplateId: pulumi.Output<string>;
+    /**
      * Whether the user account should be locked after a specified number of failed login attempts.
      */
     declare public readonly lock: pulumi.Output<boolean>;
@@ -156,6 +160,7 @@ export class PasswordSettings extends pulumi.CustomResource {
             resourceInputs["enforceStrength"] = state?.enforceStrength;
             resourceInputs["expiration"] = state?.expiration;
             resourceInputs["expirationWeeks"] = state?.expirationWeeks;
+            resourceInputs["externalEmailTemplateId"] = state?.externalEmailTemplateId;
             resourceInputs["lock"] = state?.lock;
             resourceInputs["lockAttempts"] = state?.lockAttempts;
             resourceInputs["lowercase"] = state?.lowercase;
@@ -185,6 +190,7 @@ export class PasswordSettings extends pulumi.CustomResource {
             resourceInputs["enforceStrength"] = args?.enforceStrength;
             resourceInputs["expiration"] = args?.expiration;
             resourceInputs["expirationWeeks"] = args?.expirationWeeks;
+            resourceInputs["externalEmailTemplateId"] = args?.externalEmailTemplateId;
             resourceInputs["lock"] = args?.lock;
             resourceInputs["lockAttempts"] = args?.lockAttempts;
             resourceInputs["lowercase"] = args?.lowercase;
@@ -246,6 +252,10 @@ export interface PasswordSettingsState {
      * The number of weeks after which a user's password expires and they need to replace it.
      */
     expirationWeeks?: pulumi.Input<number | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether the user account should be locked after a specified number of failed login attempts.
      */
@@ -348,6 +358,10 @@ export interface PasswordSettingsArgs {
      * The number of weeks after which a user's password expires and they need to replace it.
      */
     expirationWeeks?: pulumi.Input<number | undefined>;
+    /**
+     * The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+     */
+    externalEmailTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether the user account should be locked after a specified number of failed login attempts.
      */

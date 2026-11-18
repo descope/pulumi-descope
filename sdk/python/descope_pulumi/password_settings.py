@@ -31,6 +31,7 @@ class PasswordSettingsArgs:
                  enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration: pulumi.Input[Optional[_builtins.bool]] = None,
                  expiration_weeks: pulumi.Input[Optional[_builtins.int]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -58,6 +59,7 @@ class PasswordSettingsArgs:
         :param pulumi.Input[_builtins.str] enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
         :param pulumi.Input[_builtins.bool] expiration: Whether users are required to change their password periodically.
         :param pulumi.Input[_builtins.int] expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] lock: Whether the user account should be locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] lock_attempts: The number of failed login attempts allowed before an account is locked.
         :param pulumi.Input[_builtins.bool] lowercase: Whether passwords must contain at least one lowercase letter.
@@ -92,6 +94,8 @@ class PasswordSettingsArgs:
             pulumi.set(__self__, "expiration", expiration)
         if expiration_weeks is not None:
             pulumi.set(__self__, "expiration_weeks", expiration_weeks)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if lock is not None:
             pulumi.set(__self__, "lock", lock)
         if lock_attempts is not None:
@@ -240,6 +244,18 @@ class PasswordSettingsArgs:
     @expiration_weeks.setter
     def expiration_weeks(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expiration_weeks", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -422,6 +438,7 @@ class _PasswordSettingsState:
                  enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration: pulumi.Input[Optional[_builtins.bool]] = None,
                  expiration_weeks: pulumi.Input[Optional[_builtins.int]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -449,6 +466,7 @@ class _PasswordSettingsState:
         :param pulumi.Input[_builtins.str] enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
         :param pulumi.Input[_builtins.bool] expiration: Whether users are required to change their password periodically.
         :param pulumi.Input[_builtins.int] expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] lock: Whether the user account should be locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] lock_attempts: The number of failed login attempts allowed before an account is locked.
         :param pulumi.Input[_builtins.bool] lowercase: Whether passwords must contain at least one lowercase letter.
@@ -483,6 +501,8 @@ class _PasswordSettingsState:
             pulumi.set(__self__, "expiration", expiration)
         if expiration_weeks is not None:
             pulumi.set(__self__, "expiration_weeks", expiration_weeks)
+        if external_email_template_id is not None:
+            pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if lock is not None:
             pulumi.set(__self__, "lock", lock)
         if lock_attempts is not None:
@@ -621,6 +641,18 @@ class _PasswordSettingsState:
     @expiration_weeks.setter
     def expiration_weeks(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "expiration_weeks", value)
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
+
+    @external_email_template_id.setter
+    def external_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "external_email_template_id", value)
 
     @_builtins.property
     @pulumi.getter
@@ -818,6 +850,7 @@ class PasswordSettings(pulumi.CustomResource):
                  enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration: pulumi.Input[Optional[_builtins.bool]] = None,
                  expiration_weeks: pulumi.Input[Optional[_builtins.int]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -849,6 +882,7 @@ class PasswordSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
         :param pulumi.Input[_builtins.bool] expiration: Whether users are required to change their password periodically.
         :param pulumi.Input[_builtins.int] expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] lock: Whether the user account should be locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] lock_attempts: The number of failed login attempts allowed before an account is locked.
         :param pulumi.Input[_builtins.bool] lowercase: Whether passwords must contain at least one lowercase letter.
@@ -899,6 +933,7 @@ class PasswordSettings(pulumi.CustomResource):
                  enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
                  expiration: pulumi.Input[Optional[_builtins.bool]] = None,
                  expiration_weeks: pulumi.Input[Optional[_builtins.int]] = None,
+                 external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  lock: pulumi.Input[Optional[_builtins.bool]] = None,
                  lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
                  lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -932,6 +967,7 @@ class PasswordSettings(pulumi.CustomResource):
             __props__.__dict__["enforce_strength"] = enforce_strength
             __props__.__dict__["expiration"] = expiration
             __props__.__dict__["expiration_weeks"] = expiration_weeks
+            __props__.__dict__["external_email_template_id"] = external_email_template_id
             __props__.__dict__["lock"] = lock
             __props__.__dict__["lock_attempts"] = lock_attempts
             __props__.__dict__["lowercase"] = lowercase
@@ -968,6 +1004,7 @@ class PasswordSettings(pulumi.CustomResource):
             enforce_strength: pulumi.Input[Optional[_builtins.str]] = None,
             expiration: pulumi.Input[Optional[_builtins.bool]] = None,
             expiration_weeks: pulumi.Input[Optional[_builtins.int]] = None,
+            external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             lock: pulumi.Input[Optional[_builtins.bool]] = None,
             lock_attempts: pulumi.Input[Optional[_builtins.int]] = None,
             lowercase: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -999,6 +1036,7 @@ class PasswordSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] enforce_strength: Use zxcvbn to calculate the strength of a given password and enforce a minimum level of strength.
         :param pulumi.Input[_builtins.bool] expiration: Whether users are required to change their password periodically.
         :param pulumi.Input[_builtins.int] expiration_weeks: The number of weeks after which a user's password expires and they need to replace it.
+        :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] lock: Whether the user account should be locked after a specified number of failed login attempts.
         :param pulumi.Input[_builtins.int] lock_attempts: The number of failed login attempts allowed before an account is locked.
         :param pulumi.Input[_builtins.bool] lowercase: Whether passwords must contain at least one lowercase letter.
@@ -1028,6 +1066,7 @@ class PasswordSettings(pulumi.CustomResource):
         __props__.__dict__["enforce_strength"] = enforce_strength
         __props__.__dict__["expiration"] = expiration
         __props__.__dict__["expiration_weeks"] = expiration_weeks
+        __props__.__dict__["external_email_template_id"] = external_email_template_id
         __props__.__dict__["lock"] = lock
         __props__.__dict__["lock_attempts"] = lock_attempts
         __props__.__dict__["lowercase"] = lowercase
@@ -1116,6 +1155,14 @@ class PasswordSettings(pulumi.CustomResource):
         The number of weeks after which a user's password expires and they need to replace it.
         """
         return pulumi.get(self, "expiration_weeks")
+
+    @_builtins.property
+    @pulumi.getter(name="externalEmailTemplateId")
+    def external_email_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
+        """
+        return pulumi.get(self, "external_email_template_id")
 
     @_builtins.property
     @pulumi.getter

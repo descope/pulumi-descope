@@ -34,6 +34,8 @@ type PasswordSettings struct {
 	Expiration pulumi.BoolOutput `pulumi:"expiration"`
 	// The number of weeks after which a user's password expires and they need to replace it.
 	ExpirationWeeks pulumi.IntOutput `pulumi:"expirationWeeks"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringOutput `pulumi:"externalEmailTemplateId"`
 	// Whether the user account should be locked after a specified number of failed login attempts.
 	Lock pulumi.BoolOutput `pulumi:"lock"`
 	// The number of failed login attempts allowed before an account is locked.
@@ -117,6 +119,8 @@ type passwordSettingsState struct {
 	Expiration *bool `pulumi:"expiration"`
 	// The number of weeks after which a user's password expires and they need to replace it.
 	ExpirationWeeks *int `pulumi:"expirationWeeks"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether the user account should be locked after a specified number of failed login attempts.
 	Lock *bool `pulumi:"lock"`
 	// The number of failed login attempts allowed before an account is locked.
@@ -168,6 +172,8 @@ type PasswordSettingsState struct {
 	Expiration pulumi.BoolPtrInput
 	// The number of weeks after which a user's password expires and they need to replace it.
 	ExpirationWeeks pulumi.IntPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether the user account should be locked after a specified number of failed login attempts.
 	Lock pulumi.BoolPtrInput
 	// The number of failed login attempts allowed before an account is locked.
@@ -223,6 +229,8 @@ type passwordSettingsArgs struct {
 	Expiration *bool `pulumi:"expiration"`
 	// The number of weeks after which a user's password expires and they need to replace it.
 	ExpirationWeeks *int `pulumi:"expirationWeeks"`
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether the user account should be locked after a specified number of failed login attempts.
 	Lock *bool `pulumi:"lock"`
 	// The number of failed login attempts allowed before an account is locked.
@@ -275,6 +283,8 @@ type PasswordSettingsArgs struct {
 	Expiration pulumi.BoolPtrInput
 	// The number of weeks after which a user's password expires and they need to replace it.
 	ExpirationWeeks pulumi.IntPtrInput
+	// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether the user account should be locked after a specified number of failed login attempts.
 	Lock pulumi.BoolPtrInput
 	// The number of failed login attempts allowed before an account is locked.
@@ -437,6 +447,11 @@ func (o PasswordSettingsOutput) Expiration() pulumi.BoolOutput {
 // The number of weeks after which a user's password expires and they need to replace it.
 func (o PasswordSettingsOutput) ExpirationWeeks() pulumi.IntOutput {
 	return o.ApplyT(func(v *PasswordSettings) pulumi.IntOutput { return v.ExpirationWeeks }).(pulumi.IntOutput)
+}
+
+// The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `emailTemplateId`.
+func (o PasswordSettingsOutput) ExternalEmailTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *PasswordSettings) pulumi.StringOutput { return v.ExternalEmailTemplateId }).(pulumi.StringOutput)
 }
 
 // Whether the user account should be locked after a specified number of failed login attempts.

@@ -261,6 +261,21 @@ public final class SamlAppState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `&#34;soap&#34;` binding, since a force logout has no browser. When disabled, the default, a force logout doesn&#39;t notify the application.
+     * 
+     */
+    @Import(name="notifyOnForceLogout")
+    private @Nullable Output<Boolean> notifyOnForceLogout;
+
+    /**
+     * @return Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `&#34;soap&#34;` binding, since a force logout has no browser. When disabled, the default, a force logout doesn&#39;t notify the application.
+     * 
+     */
+    public Optional<Output<Boolean>> notifyOnForceLogout() {
+        return Optional.ofNullable(this.notifyOnForceLogout);
+    }
+
+    /**
      * The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
      * 
      */
@@ -288,6 +303,81 @@ public final class SamlAppState extends com.pulumi.resources.ResourceArgs {
      */
     public Optional<Output<String>> samlAppId() {
         return Optional.ofNullable(this.samlAppId);
+    }
+
+    /**
+     * Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `idpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user&#39;s applications (the user&#39;s own logout of all devices, a force logout when `notifyOnForceLogout` is enabled, or another application&#39;s logout that propagates). The request names the user by the application&#39;s NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn&#39;t used. A logout without a browser (the user&#39;s own logout of all devices, a force logout) reaches only applications with the `&#34;soap&#34;` binding.
+     * 
+     */
+    @Import(name="singleLogoutEnabled")
+    private @Nullable Output<Boolean> singleLogoutEnabled;
+
+    /**
+     * @return Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `idpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user&#39;s applications (the user&#39;s own logout of all devices, a force logout when `notifyOnForceLogout` is enabled, or another application&#39;s logout that propagates). The request names the user by the application&#39;s NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn&#39;t used. A logout without a browser (the user&#39;s own logout of all devices, a force logout) reaches only applications with the `&#34;soap&#34;` binding.
+     * 
+     */
+    public Optional<Output<Boolean>> singleLogoutEnabled() {
+        return Optional.ofNullable(this.singleLogoutEnabled);
+    }
+
+    /**
+     * What a logout started by the service provider reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s session without notifying any other application, or `&#34;allApps&#34;` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+     * 
+     */
+    @Import(name="singleLogoutPropagation")
+    private @Nullable Output<String> singleLogoutPropagation;
+
+    /**
+     * @return What a logout started by the service provider reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s session without notifying any other application, or `&#34;allApps&#34;` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+     * 
+     */
+    public Optional<Output<String>> singleLogoutPropagation() {
+        return Optional.ofNullable(this.singleLogoutPropagation);
+    }
+
+    /**
+     * Which Descope sessions a logout started by the service provider ends. Choose one of `&#34;&#34;` (default, same as `&#34;session&#34;`), `&#34;session&#34;` to end the sessions the logout request&#39;s session indexes name, or `&#34;allSessions&#34;` to end every session of the user. With `&#34;session&#34;`, a logout request with no session index, or with one Descope didn&#39;t issue, ends the browser&#39;s Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren&#39;t all Descope&#39;s ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+     * 
+     */
+    @Import(name="singleLogoutScope")
+    private @Nullable Output<String> singleLogoutScope;
+
+    /**
+     * @return Which Descope sessions a logout started by the service provider ends. Choose one of `&#34;&#34;` (default, same as `&#34;session&#34;`), `&#34;session&#34;` to end the sessions the logout request&#39;s session indexes name, or `&#34;allSessions&#34;` to end every session of the user. With `&#34;session&#34;`, a logout request with no session index, or with one Descope didn&#39;t issue, ends the browser&#39;s Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren&#39;t all Descope&#39;s ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+     * 
+     */
+    public Optional<Output<String>> singleLogoutScope() {
+        return Optional.ofNullable(this.singleLogoutScope);
+    }
+
+    /**
+     * The SAML binding used for `spSingleLogoutUrl`. Choose one of `&#34;&#34;` (default), `&#34;redirect&#34;`, `&#34;post&#34;` or `&#34;soap&#34;`. With the default and an `spSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `spSingleLogoutUrl`, the endpoint comes from the service provider&#39;s metadata: the default uses SOAP when the metadata offers an `https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `&#34;soap&#34;` binding sends the logout request directly from Descope to the service provider and requires an `https` URL.
+     * 
+     */
+    @Import(name="spSingleLogoutBinding")
+    private @Nullable Output<String> spSingleLogoutBinding;
+
+    /**
+     * @return The SAML binding used for `spSingleLogoutUrl`. Choose one of `&#34;&#34;` (default), `&#34;redirect&#34;`, `&#34;post&#34;` or `&#34;soap&#34;`. With the default and an `spSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `spSingleLogoutUrl`, the endpoint comes from the service provider&#39;s metadata: the default uses SOAP when the metadata offers an `https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `&#34;soap&#34;` binding sends the logout request directly from Descope to the service provider and requires an `https` URL.
+     * 
+     */
+    public Optional<Output<String>> spSingleLogoutBinding() {
+        return Optional.ofNullable(this.spSingleLogoutBinding);
+    }
+
+    /**
+     * The service provider&#39;s Single Logout Service URL that logout requests are sent to. Required when `singleLogoutEnabled` is `true` and `manualConfiguration` is used. With `dynamicConfiguration` it can be left empty to take the URL from the service provider&#39;s metadata.
+     * 
+     */
+    @Import(name="spSingleLogoutUrl")
+    private @Nullable Output<String> spSingleLogoutUrl;
+
+    /**
+     * @return The service provider&#39;s Single Logout Service URL that logout requests are sent to. Required when `singleLogoutEnabled` is `true` and `manualConfiguration` is used. With `dynamicConfiguration` it can be left empty to take the URL from the service provider&#39;s metadata.
+     * 
+     */
+    public Optional<Output<String>> spSingleLogoutUrl() {
+        return Optional.ofNullable(this.spSingleLogoutUrl);
     }
 
     /**
@@ -339,8 +429,14 @@ public final class SamlAppState extends com.pulumi.resources.ResourceArgs {
         this.logoutRedirectUrl = $.logoutRedirectUrl;
         this.manualConfiguration = $.manualConfiguration;
         this.name = $.name;
+        this.notifyOnForceLogout = $.notifyOnForceLogout;
         this.projectId = $.projectId;
         this.samlAppId = $.samlAppId;
+        this.singleLogoutEnabled = $.singleLogoutEnabled;
+        this.singleLogoutPropagation = $.singleLogoutPropagation;
+        this.singleLogoutScope = $.singleLogoutScope;
+        this.spSingleLogoutBinding = $.spSingleLogoutBinding;
+        this.spSingleLogoutUrl = $.spSingleLogoutUrl;
         this.subjectNameIdFormat = $.subjectNameIdFormat;
         this.subjectNameIdType = $.subjectNameIdType;
     }
@@ -720,6 +816,27 @@ public final class SamlAppState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param notifyOnForceLogout Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `&#34;soap&#34;` binding, since a force logout has no browser. When disabled, the default, a force logout doesn&#39;t notify the application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder notifyOnForceLogout(@Nullable Output<Boolean> notifyOnForceLogout) {
+            $.notifyOnForceLogout = notifyOnForceLogout;
+            return this;
+        }
+
+        /**
+         * @param notifyOnForceLogout Whether a Force Logout of the user, from the Console or the Management API&#39;s Logout User from All Devices, sends this application a `LogoutRequest`. Requires single logout with the `&#34;soap&#34;` binding, since a force logout has no browser. When disabled, the default, a force logout doesn&#39;t notify the application.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder notifyOnForceLogout(Boolean notifyOnForceLogout) {
+            return notifyOnForceLogout(Output.of(notifyOnForceLogout));
+        }
+
+        /**
          * @param projectId The ID of the project that this application belongs to. Changing this value will require the resource to be deleted and recreated.
          * 
          * @return builder
@@ -759,6 +876,111 @@ public final class SamlAppState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder samlAppId(String samlAppId) {
             return samlAppId(Output.of(samlAppId));
+        }
+
+        /**
+         * @param singleLogoutEnabled Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `idpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user&#39;s applications (the user&#39;s own logout of all devices, a force logout when `notifyOnForceLogout` is enabled, or another application&#39;s logout that propagates). The request names the user by the application&#39;s NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn&#39;t used. A logout without a browser (the user&#39;s own logout of all devices, a force logout) reaches only applications with the `&#34;soap&#34;` binding.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutEnabled(@Nullable Output<Boolean> singleLogoutEnabled) {
+            $.singleLogoutEnabled = singleLogoutEnabled;
+            return this;
+        }
+
+        /**
+         * @param singleLogoutEnabled Whether SAML Single Logout (SLO) is enabled for the application. When enabled, the service provider can log the user out by sending a signed `LogoutRequest` to the `idpLogoutUrl`, and Descope sends a `LogoutRequest` to the service provider when a logout reaches the user&#39;s applications (the user&#39;s own logout of all devices, a force logout when `notifyOnForceLogout` is enabled, or another application&#39;s logout that propagates). The request names the user by the application&#39;s NameID, and it is sent to every application with single logout enabled that the user can sign in to, including ones the user hasn&#39;t used. A logout without a browser (the user&#39;s own logout of all devices, a force logout) reaches only applications with the `&#34;soap&#34;` binding.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutEnabled(Boolean singleLogoutEnabled) {
+            return singleLogoutEnabled(Output.of(singleLogoutEnabled));
+        }
+
+        /**
+         * @param singleLogoutPropagation What a logout started by the service provider reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s session without notifying any other application, or `&#34;allApps&#34;` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutPropagation(@Nullable Output<String> singleLogoutPropagation) {
+            $.singleLogoutPropagation = singleLogoutPropagation;
+            return this;
+        }
+
+        /**
+         * @param singleLogoutPropagation What a logout started by the service provider reaches. Choose one of `&#34;&#34;` (default, same as `&#34;none&#34;`), `&#34;none&#34;` to only end the user&#39;s session without notifying any other application, or `&#34;allApps&#34;` to also log the user out of their other applications (OIDC applications only when every session of the user ended).
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutPropagation(String singleLogoutPropagation) {
+            return singleLogoutPropagation(Output.of(singleLogoutPropagation));
+        }
+
+        /**
+         * @param singleLogoutScope Which Descope sessions a logout started by the service provider ends. Choose one of `&#34;&#34;` (default, same as `&#34;session&#34;`), `&#34;session&#34;` to end the sessions the logout request&#39;s session indexes name, or `&#34;allSessions&#34;` to end every session of the user. With `&#34;session&#34;`, a logout request with no session index, or with one Descope didn&#39;t issue, ends the browser&#39;s Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren&#39;t all Descope&#39;s ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutScope(@Nullable Output<String> singleLogoutScope) {
+            $.singleLogoutScope = singleLogoutScope;
+            return this;
+        }
+
+        /**
+         * @param singleLogoutScope Which Descope sessions a logout started by the service provider ends. Choose one of `&#34;&#34;` (default, same as `&#34;session&#34;`), `&#34;session&#34;` to end the sessions the logout request&#39;s session indexes name, or `&#34;allSessions&#34;` to end every session of the user. With `&#34;session&#34;`, a logout request with no session index, or with one Descope didn&#39;t issue, ends the browser&#39;s Descope session when the browser has one for the user, else every session of the user its NameID names, and one with several session indexes that aren&#39;t all Descope&#39;s ends every session of the user. A visit to the logout URL without a logout request always ends every session of the user.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder singleLogoutScope(String singleLogoutScope) {
+            return singleLogoutScope(Output.of(singleLogoutScope));
+        }
+
+        /**
+         * @param spSingleLogoutBinding The SAML binding used for `spSingleLogoutUrl`. Choose one of `&#34;&#34;` (default), `&#34;redirect&#34;`, `&#34;post&#34;` or `&#34;soap&#34;`. With the default and an `spSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `spSingleLogoutUrl`, the endpoint comes from the service provider&#39;s metadata: the default uses SOAP when the metadata offers an `https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `&#34;soap&#34;` binding sends the logout request directly from Descope to the service provider and requires an `https` URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder spSingleLogoutBinding(@Nullable Output<String> spSingleLogoutBinding) {
+            $.spSingleLogoutBinding = spSingleLogoutBinding;
+            return this;
+        }
+
+        /**
+         * @param spSingleLogoutBinding The SAML binding used for `spSingleLogoutUrl`. Choose one of `&#34;&#34;` (default), `&#34;redirect&#34;`, `&#34;post&#34;` or `&#34;soap&#34;`. With the default and an `spSingleLogoutUrl`, Descope uses HTTP-Redirect. Without an `spSingleLogoutUrl`, the endpoint comes from the service provider&#39;s metadata: the default uses SOAP when the metadata offers an `https` SOAP endpoint, else HTTP-Redirect, else HTTP-POST, and any other value uses the metadata endpoint with that binding. The `&#34;soap&#34;` binding sends the logout request directly from Descope to the service provider and requires an `https` URL.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder spSingleLogoutBinding(String spSingleLogoutBinding) {
+            return spSingleLogoutBinding(Output.of(spSingleLogoutBinding));
+        }
+
+        /**
+         * @param spSingleLogoutUrl The service provider&#39;s Single Logout Service URL that logout requests are sent to. Required when `singleLogoutEnabled` is `true` and `manualConfiguration` is used. With `dynamicConfiguration` it can be left empty to take the URL from the service provider&#39;s metadata.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder spSingleLogoutUrl(@Nullable Output<String> spSingleLogoutUrl) {
+            $.spSingleLogoutUrl = spSingleLogoutUrl;
+            return this;
+        }
+
+        /**
+         * @param spSingleLogoutUrl The service provider&#39;s Single Logout Service URL that logout requests are sent to. Required when `singleLogoutEnabled` is `true` and `manualConfiguration` is used. With `dynamicConfiguration` it can be left empty to take the URL from the service provider&#39;s metadata.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder spSingleLogoutUrl(String spSingleLogoutUrl) {
+            return spSingleLogoutUrl(Output.of(spSingleLogoutUrl));
         }
 
         /**
