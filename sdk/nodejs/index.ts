@@ -265,6 +265,11 @@ export type InboundApp = import("./inboundApp").InboundApp;
 export const InboundApp: typeof import("./inboundApp").InboundApp = null as any;
 utilities.lazyLoad(exports, ["InboundApp"], () => require("./inboundApp"));
 
+export { InboundAppAttributeArgs, InboundAppAttributeState } from "./inboundAppAttribute";
+export type InboundAppAttribute = import("./inboundAppAttribute").InboundAppAttribute;
+export const InboundAppAttribute: typeof import("./inboundAppAttribute").InboundAppAttribute = null as any;
+utilities.lazyLoad(exports, ["InboundAppAttribute"], () => require("./inboundAppAttribute"));
+
 export { IncodeConnectorArgs, IncodeConnectorState } from "./incodeConnector";
 export type IncodeConnector = import("./incodeConnector").IncodeConnector;
 export const IncodeConnector: typeof import("./incodeConnector").IncodeConnector = null as any;
@@ -751,6 +756,8 @@ const _module = {
                 return new HubspotConnector(name, <any>undefined, { urn })
             case "descope:index/inboundApp:InboundApp":
                 return new InboundApp(name, <any>undefined, { urn })
+            case "descope:index/inboundAppAttribute:InboundAppAttribute":
+                return new InboundAppAttribute(name, <any>undefined, { urn })
             case "descope:index/incodeConnector:IncodeConnector":
                 return new IncodeConnector(name, <any>undefined, { urn })
             case "descope:index/intercomConnector:IntercomConnector":
@@ -954,6 +961,7 @@ pulumi.runtime.registerResourceModule("descope", "index/hibpConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/httpConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/hubspotConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/inboundApp", _module)
+pulumi.runtime.registerResourceModule("descope", "index/inboundAppAttribute", _module)
 pulumi.runtime.registerResourceModule("descope", "index/incodeConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/intercomConnector", _module)
 pulumi.runtime.registerResourceModule("descope", "index/inviteSettings", _module)

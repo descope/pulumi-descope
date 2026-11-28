@@ -155,6 +155,21 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+     * 
+     */
+    @Import(name="ignoreInvalidIdpPhones")
+    private @Nullable Output<Boolean> ignoreInvalidIdpPhones;
+
+    /**
+     * @return When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+     * 
+     */
+    public Optional<Output<Boolean>> ignoreInvalidIdpPhones() {
+        return Optional.ofNullable(this.ignoreInvalidIdpPhones);
+    }
+
+    /**
      * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
      * 
      */
@@ -200,14 +215,14 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     * Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      * 
      */
     @Import(name="mergeUsers")
     private @Nullable Output<Boolean> mergeUsers;
 
     /**
-     * @return Whether to merge existing user accounts with new ones created through SSO authentication.
+     * @return Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      * 
      */
     public Optional<Output<Boolean>> mergeUsers() {
@@ -301,6 +316,7 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
         this.emailTemplateId = $.emailTemplateId;
         this.externalEmailTemplateId = $.externalEmailTemplateId;
         this.groupsPriority = $.groupsPriority;
+        this.ignoreInvalidIdpPhones = $.ignoreInvalidIdpPhones;
         this.limitMappingToMandatoryAttributes = $.limitMappingToMandatoryAttributes;
         this.mandatoryUserAttributes = $.mandatoryUserAttributes;
         this.markEmailAsUnverified = $.markEmailAsUnverified;
@@ -520,6 +536,27 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
+         * @param ignoreInvalidIdpPhones When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ignoreInvalidIdpPhones(@Nullable Output<Boolean> ignoreInvalidIdpPhones) {
+            $.ignoreInvalidIdpPhones = ignoreInvalidIdpPhones;
+            return this;
+        }
+
+        /**
+         * @param ignoreInvalidIdpPhones When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder ignoreInvalidIdpPhones(Boolean ignoreInvalidIdpPhones) {
+            return ignoreInvalidIdpPhones(Output.of(ignoreInvalidIdpPhones));
+        }
+
+        /**
          * @param limitMappingToMandatoryAttributes Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
          * 
          * @return builder
@@ -593,7 +630,7 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param mergeUsers Whether to merge existing user accounts with new ones created through SSO authentication.
+         * @param mergeUsers Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
          * 
          * @return builder
          * 
@@ -604,7 +641,7 @@ public final class SsoSettingsState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param mergeUsers Whether to merge existing user accounts with new ones created through SSO authentication.
+         * @param mergeUsers Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
          * 
          * @return builder
          * 

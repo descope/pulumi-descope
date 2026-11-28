@@ -206,6 +206,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     * 
+     */
+    @Import(name="customAttributes")
+    private @Nullable Output<String> customAttributes;
+
+    /**
+     * @return A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     * 
+     */
+    public Optional<Output<String>> customAttributes() {
+        return Optional.ofNullable(this.customAttributes);
+    }
+
+    /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app&#39;s client ID, or leave empty to include both.
      * 
      */
@@ -446,6 +461,21 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     * 
+     */
+    @Import(name="tags")
+    private @Nullable Output<List<String>> tags;
+
+    /**
+     * @return Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     * 
+     */
+    public Optional<Output<List<String>>> tags() {
+        return Optional.ofNullable(this.tags);
+    }
+
+    /**
      * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
      * 
      */
@@ -490,6 +520,7 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.clientSecret = $.clientSecret;
         this.clientType = $.clientType;
         this.connectionsScopes = $.connectionsScopes;
+        this.customAttributes = $.customAttributes;
         this.defaultAudience = $.defaultAudience;
         this.deletionProtection = $.deletionProtection;
         this.description = $.description;
@@ -506,6 +537,7 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
         this.refreshTokenDisabled = $.refreshTokenDisabled;
         this.scopeClaimMappings = $.scopeClaimMappings;
         this.sessionSettings = $.sessionSettings;
+        this.tags = $.tags;
         this.tokenExchangeDisabled = $.tokenExchangeDisabled;
         this.workloadClientAssertions = $.workloadClientAssertions;
     }
@@ -838,6 +870,27 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder connectionsScopes(InboundAppConnectionsScopeArgs... connectionsScopes) {
             return connectionsScopes(List.of(connectionsScopes));
+        }
+
+        /**
+         * @param customAttributes A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customAttributes(@Nullable Output<String> customAttributes) {
+            $.customAttributes = customAttributes;
+            return this;
+        }
+
+        /**
+         * @param customAttributes A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder customAttributes(String customAttributes) {
+            return customAttributes(Output.of(customAttributes));
         }
 
         /**
@@ -1194,6 +1247,37 @@ public final class InboundAppArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder sessionSettings(InboundAppSessionSettingsArgs sessionSettings) {
             return sessionSettings(Output.of(sessionSettings));
+        }
+
+        /**
+         * @param tags Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(@Nullable Output<List<String>> tags) {
+            $.tags = tags;
+            return this;
+        }
+
+        /**
+         * @param tags Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(List<String> tags) {
+            return tags(Output.of(tags));
+        }
+
+        /**
+         * @param tags Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder tags(String... tags) {
+            return tags(List.of(tags));
         }
 
         /**

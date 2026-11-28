@@ -219,6 +219,20 @@ public class OutboundApp extends com.pulumi.resources.CustomResource {
         return this.name;
     }
     /**
+     * The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     * 
+     */
+    @Export(name="outboundAppId", refs={String.class}, tree="[0]")
+    private Output<String> outboundAppId;
+
+    /**
+     * @return The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     * 
+     */
+    public Output<String> outboundAppId() {
+        return this.outboundAppId;
+    }
+    /**
      * Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
      * 
      */

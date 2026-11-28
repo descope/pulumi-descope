@@ -229,6 +229,21 @@ public final class OutboundAppState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
+     * The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     * 
+     */
+    @Import(name="outboundAppId")
+    private @Nullable Output<String> outboundAppId;
+
+    /**
+     * @return The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     * 
+     */
+    public Optional<Output<String>> outboundAppId() {
+        return Optional.ofNullable(this.outboundAppId);
+    }
+
+    /**
      * Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
      * 
      */
@@ -350,6 +365,7 @@ public final class OutboundAppState extends com.pulumi.resources.ResourceArgs {
         this.discoveryUrl = $.discoveryUrl;
         this.logo = $.logo;
         this.name = $.name;
+        this.outboundAppId = $.outboundAppId;
         this.pkce = $.pkce;
         this.projectId = $.projectId;
         this.prompts = $.prompts;
@@ -679,6 +695,27 @@ public final class OutboundAppState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param outboundAppId The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder outboundAppId(@Nullable Output<String> outboundAppId) {
+            $.outboundAppId = outboundAppId;
+            return this;
+        }
+
+        /**
+         * @param outboundAppId The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder outboundAppId(String outboundAppId) {
+            return outboundAppId(Output.of(outboundAppId));
         }
 
         /**

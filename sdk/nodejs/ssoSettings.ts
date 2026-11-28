@@ -74,6 +74,10 @@ export class SsoSettings extends pulumi.CustomResource {
      */
     declare public readonly groupsPriority: pulumi.Output<boolean>;
     /**
+     * When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+     */
+    declare public readonly ignoreInvalidIdpPhones: pulumi.Output<boolean>;
+    /**
      * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
      */
     declare public readonly limitMappingToMandatoryAttributes: pulumi.Output<boolean>;
@@ -86,7 +90,7 @@ export class SsoSettings extends pulumi.CustomResource {
      */
     declare public readonly markEmailAsUnverified: pulumi.Output<boolean>;
     /**
-     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     * Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      */
     declare public readonly mergeUsers: pulumi.Output<boolean>;
     /**
@@ -132,6 +136,7 @@ export class SsoSettings extends pulumi.CustomResource {
             resourceInputs["emailTemplateId"] = state?.emailTemplateId;
             resourceInputs["externalEmailTemplateId"] = state?.externalEmailTemplateId;
             resourceInputs["groupsPriority"] = state?.groupsPriority;
+            resourceInputs["ignoreInvalidIdpPhones"] = state?.ignoreInvalidIdpPhones;
             resourceInputs["limitMappingToMandatoryAttributes"] = state?.limitMappingToMandatoryAttributes;
             resourceInputs["mandatoryUserAttributes"] = state?.mandatoryUserAttributes;
             resourceInputs["markEmailAsUnverified"] = state?.markEmailAsUnverified;
@@ -155,6 +160,7 @@ export class SsoSettings extends pulumi.CustomResource {
             resourceInputs["emailTemplateId"] = args?.emailTemplateId;
             resourceInputs["externalEmailTemplateId"] = args?.externalEmailTemplateId;
             resourceInputs["groupsPriority"] = args?.groupsPriority;
+            resourceInputs["ignoreInvalidIdpPhones"] = args?.ignoreInvalidIdpPhones;
             resourceInputs["limitMappingToMandatoryAttributes"] = args?.limitMappingToMandatoryAttributes;
             resourceInputs["mandatoryUserAttributes"] = args?.mandatoryUserAttributes;
             resourceInputs["markEmailAsUnverified"] = args?.markEmailAsUnverified;
@@ -211,6 +217,10 @@ export interface SsoSettingsState {
      */
     groupsPriority?: pulumi.Input<boolean | undefined>;
     /**
+     * When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+     */
+    ignoreInvalidIdpPhones?: pulumi.Input<boolean | undefined>;
+    /**
      * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
      */
     limitMappingToMandatoryAttributes?: pulumi.Input<boolean | undefined>;
@@ -223,7 +233,7 @@ export interface SsoSettingsState {
      */
     markEmailAsUnverified?: pulumi.Input<boolean | undefined>;
     /**
-     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     * Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      */
     mergeUsers?: pulumi.Input<boolean | undefined>;
     /**
@@ -289,6 +299,10 @@ export interface SsoSettingsArgs {
      */
     groupsPriority?: pulumi.Input<boolean | undefined>;
     /**
+     * When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+     */
+    ignoreInvalidIdpPhones?: pulumi.Input<boolean | undefined>;
+    /**
      * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
      */
     limitMappingToMandatoryAttributes?: pulumi.Input<boolean | undefined>;
@@ -301,7 +315,7 @@ export interface SsoSettingsArgs {
      */
     markEmailAsUnverified?: pulumi.Input<boolean | undefined>;
     /**
-     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     * Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      */
     mergeUsers?: pulumi.Input<boolean | undefined>;
     /**

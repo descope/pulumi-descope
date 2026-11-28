@@ -10508,6 +10508,10 @@ type SsoSettingsSsoSuiteSettings struct {
 	HideScim *bool `pulumi:"hideScim"`
 	// Setting this to `true` will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.
 	HideSso *bool `pulumi:"hideSso"`
+	// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+	LoginFlowId *string `pulumi:"loginFlowId"`
+	// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+	LoginFlowStyleId *string `pulumi:"loginFlowStyleId"`
 	// The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
 	OidcLoginIdAttribute *string `pulumi:"oidcLoginIdAttribute"`
 	// Whether to display the help/support contact link in the SSO Suite UI.
@@ -10554,6 +10558,10 @@ type SsoSettingsSsoSuiteSettingsArgs struct {
 	HideScim pulumi.BoolPtrInput `pulumi:"hideScim"`
 	// Setting this to `true` will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.
 	HideSso pulumi.BoolPtrInput `pulumi:"hideSso"`
+	// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+	LoginFlowId pulumi.StringPtrInput `pulumi:"loginFlowId"`
+	// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+	LoginFlowStyleId pulumi.StringPtrInput `pulumi:"loginFlowStyleId"`
 	// The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
 	OidcLoginIdAttribute pulumi.StringPtrInput `pulumi:"oidcLoginIdAttribute"`
 	// Whether to display the help/support contact link in the SSO Suite UI.
@@ -10696,6 +10704,16 @@ func (o SsoSettingsSsoSuiteSettingsOutput) HideScim() pulumi.BoolPtrOutput {
 // Setting this to `true` will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.
 func (o SsoSettingsSsoSuiteSettingsOutput) HideSso() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *bool { return v.HideSso }).(pulumi.BoolPtrOutput)
+}
+
+// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+func (o SsoSettingsSsoSuiteSettingsOutput) LoginFlowId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *string { return v.LoginFlowId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+func (o SsoSettingsSsoSuiteSettingsOutput) LoginFlowStyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SsoSettingsSsoSuiteSettings) *string { return v.LoginFlowStyleId }).(pulumi.StringPtrOutput)
 }
 
 // The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
@@ -10855,6 +10873,26 @@ func (o SsoSettingsSsoSuiteSettingsPtrOutput) HideSso() pulumi.BoolPtrOutput {
 		}
 		return v.HideSso
 	}).(pulumi.BoolPtrOutput)
+}
+
+// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+func (o SsoSettingsSsoSuiteSettingsPtrOutput) LoginFlowId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SsoSettingsSsoSuiteSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LoginFlowId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+func (o SsoSettingsSsoSuiteSettingsPtrOutput) LoginFlowStyleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SsoSettingsSsoSuiteSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LoginFlowStyleId
+	}).(pulumi.StringPtrOutput)
 }
 
 // The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.

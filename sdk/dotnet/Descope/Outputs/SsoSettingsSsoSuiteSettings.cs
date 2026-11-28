@@ -59,6 +59,14 @@ namespace Descope.Pulumi.Descope.Outputs
         /// </summary>
         public readonly bool? HideSso;
         /// <summary>
+        /// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+        /// </summary>
+        public readonly string? LoginFlowId;
+        /// <summary>
+        /// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+        /// </summary>
+        public readonly string? LoginFlowStyleId;
+        /// <summary>
         /// The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `Sub` claim. SAML configurations are unaffected.
         /// </summary>
         public readonly string? OidcLoginIdAttribute;
@@ -103,6 +111,10 @@ namespace Descope.Pulumi.Descope.Outputs
 
             bool? hideSso,
 
+            string? loginFlowId,
+
+            string? loginFlowStyleId,
+
             string? oidcLoginIdAttribute,
 
             bool? showHelpContact,
@@ -124,6 +136,8 @@ namespace Descope.Pulumi.Descope.Outputs
             HideSaml = hideSaml;
             HideScim = hideScim;
             HideSso = hideSso;
+            LoginFlowId = loginFlowId;
+            LoginFlowStyleId = loginFlowStyleId;
             OidcLoginIdAttribute = oidcLoginIdAttribute;
             ShowHelpContact = showHelpContact;
             ShowXaa = showXaa;

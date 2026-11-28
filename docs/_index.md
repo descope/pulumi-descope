@@ -25,18 +25,21 @@ Descope is an authentication and user management platform. The Pulumi provider m
 - Pulumi 1.0 or later, or 1.5 or later to adopt an existing project
   with `import` blocks
 - A Descope **Pro or Enterprise** plan
-- A **Management Key** from [Company Settings](https://app.descope.com/settings/company) in the Descope console
+- A **Management Key** from [Company Settings](https://app.descope.com/settings/company) in the Descope console, or a
+  workload identity token for a federated management key
 ## Authentication
 
 The provider authenticates with the Descope API using a management key. You can create management keys in the [Company Settings](https://app.descope.com/settings/company) section of the Descope console.
 
+A CI/CD workload can instead authenticate with the short-lived OIDC token its platform issues to it, so no management key is stored. See the Workload Identity guide.
+
 > **Security Note:** Never hardcode your management key in Pulumi configuration files, as this risks exposing it in version control. Use environment variables or a secrets manager instead.
 ### Environment Variables
 
-|         Variable         |                        Description                        |
-|--------------------------|-----------------------------------------------------------|
-| `DESCOPE_MANAGEMENT_KEY` | A valid management key for your Descope company           |
-| `DESCOPE_BASE_URL`       | Override the Descope API base URL (optional, for testing) |
+|         Variable         |                                  Description                                  |
+|--------------------------|-------------------------------------------------------------------------------|
+| `DESCOPE_MANAGEMENT_KEY` | A valid management key for your Descope company, or a workload identity token |
+| `DESCOPE_BASE_URL`       | Override the Descope API base URL (optional, for testing)                     |
 
 ```shell
 export DESCOPE_MANAGEMENT_KEY="K2..."
@@ -488,7 +491,7 @@ the project is managed by its own resource, which references the project with a 
 | Authentication methods        | `descope.PasswordSettings`, `descope.OtpSettings`, `descope.MagiclinkSettings`, `descope.EnchantedlinkSettings`, `descope.EmbeddedlinkSettings`, `descope.PasskeySettings`, `descope.TotpSettings`, `descope.SsoSettings`, `descope.OauthSettings`, `descope.OauthProvider` |
 | Messaging                     | `descope.EmailTemplate`, `descope.TextTemplate`, `descope.VoiceTemplate`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Authorization                 | `descope.Role`, `descope.Permission`, `descope.FgaSchema`                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Attributes                    | `descope.UserAttribute`, `descope.TenantAttribute`, `descope.AccessKeyAttribute`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Attributes                    | `descope.UserAttribute`, `descope.TenantAttribute`, `descope.AccessKeyAttribute`, `descope.InboundAppAttribute`                                                                                                                                                                                                                                                                                                                                             |
 | Applications                  | `descope.OidcApp`, `descope.SamlApp`, `descope.WsfedApp`, `descope.InboundApp`, `descope.OutboundApp`, `descope.AppRole`, `descope.AppPermission`                                                                                                                                                                                                                                                                 |
 | Flows and styles              | `descope.Flow`, `descope.Widget`, `descope.Styles`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | Access keys, tokens and lists | `descope.AccessKey`, `descope.JwtTemplate`, `descope.List`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -498,8 +501,9 @@ the project is managed by its own resource, which references the project with a 
 
 - Quickstart - Set up the provider and manage your first project
 - Upgrading from v0.3.x - Adopt a project managed by v0.3.x into the standalone resources
+- Workload Identity - Authenticate a CI/CD workload with its own OIDC token instead of a management key
 ## Configuration Reference
 
 - `baseUrl` (String) An optional base URL for the Descope API
-- `managementKey` (String, Sensitive) A valid management key for your Descope company
+- `managementKey` (String, Sensitive) A valid management key for your Descope company, or a workload identity token for a federated management key
 - `projectId` (String, Deprecated)

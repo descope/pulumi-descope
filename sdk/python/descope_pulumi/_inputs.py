@@ -5265,6 +5265,14 @@ class SsoSettingsSsoSuiteSettingsArgsDict(TypedDict):
     """
     Setting this to `true` will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.
     """
+    login_flow_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+    """
+    login_flow_style_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+    """
     oidc_login_id_attribute: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
@@ -5300,6 +5308,8 @@ class SsoSettingsSsoSuiteSettingsArgs:
                  hide_saml: pulumi.Input[Optional[_builtins.bool]] = None,
                  hide_scim: pulumi.Input[Optional[_builtins.bool]] = None,
                  hide_sso: pulumi.Input[Optional[_builtins.bool]] = None,
+                 login_flow_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 login_flow_style_id: pulumi.Input[Optional[_builtins.str]] = None,
                  oidc_login_id_attribute: pulumi.Input[Optional[_builtins.str]] = None,
                  show_help_contact: pulumi.Input[Optional[_builtins.bool]] = None,
                  show_xaa: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -5317,6 +5327,8 @@ class SsoSettingsSsoSuiteSettingsArgs:
         :param pulumi.Input[_builtins.bool] hide_saml: Setting this to `true` will hide the SAML configuration option.
         :param pulumi.Input[_builtins.bool] hide_scim: Setting this to `true` will hide the SCIM configuration in the SSO Suite interface.
         :param pulumi.Input[_builtins.bool] hide_sso: Setting this to `true` will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.
+        :param pulumi.Input[_builtins.str] login_flow_id: The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+        :param pulumi.Input[_builtins.str] login_flow_style_id: The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
         :param pulumi.Input[_builtins.str] oidc_login_id_attribute: The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
         :param pulumi.Input[_builtins.bool] show_help_contact: Whether to display the help/support contact link in the SSO Suite UI.
         :param pulumi.Input[_builtins.bool] show_xaa: Whether to show the Cross-App Access (XAA) section in the SSO Suite hosted UI. Cross-App Access is opt-in: it stays hidden unless this is set.
@@ -5345,6 +5357,10 @@ class SsoSettingsSsoSuiteSettingsArgs:
             pulumi.set(__self__, "hide_scim", hide_scim)
         if hide_sso is not None:
             pulumi.set(__self__, "hide_sso", hide_sso)
+        if login_flow_id is not None:
+            pulumi.set(__self__, "login_flow_id", login_flow_id)
+        if login_flow_style_id is not None:
+            pulumi.set(__self__, "login_flow_style_id", login_flow_style_id)
         if oidc_login_id_attribute is not None:
             pulumi.set(__self__, "oidc_login_id_attribute", oidc_login_id_attribute)
         if show_help_contact is not None:
@@ -5487,6 +5503,30 @@ class SsoSettingsSsoSuiteSettingsArgs:
     @hide_sso.setter
     def hide_sso(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "hide_sso", value)
+
+    @_builtins.property
+    @pulumi.getter(name="loginFlowId")
+    def login_flow_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+        """
+        return pulumi.get(self, "login_flow_id")
+
+    @login_flow_id.setter
+    def login_flow_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "login_flow_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="loginFlowStyleId")
+    def login_flow_style_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+        """
+        return pulumi.get(self, "login_flow_style_id")
+
+    @login_flow_style_id.setter
+    def login_flow_style_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "login_flow_style_id", value)
 
     @_builtins.property
     @pulumi.getter(name="oidcLoginIdAttribute")

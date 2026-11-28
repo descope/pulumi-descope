@@ -11,6 +11,7 @@ import com.pulumi.core.annotations.Export;
 import com.pulumi.core.annotations.ResourceType;
 import com.pulumi.core.internal.Codegen;
 import java.lang.Boolean;
+import java.lang.Integer;
 import java.lang.String;
 import javax.annotation.Nullable;
 
@@ -105,6 +106,20 @@ public class InviteSettings extends com.pulumi.resources.CustomResource {
         return this.inviteUrl;
     }
     /**
+     * The maximum number of reminders to send for each invitation, between 1 and 5.
+     * 
+     */
+    @Export(name="maxReminders", refs={Integer.class}, tree="[0]")
+    private Output<Integer> maxReminders;
+
+    /**
+     * @return The maximum number of reminders to send for each invitation, between 1 and 5.
+     * 
+     */
+    public Output<Integer> maxReminders() {
+        return this.maxReminders;
+    }
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      * 
      */
@@ -117,6 +132,48 @@ public class InviteSettings extends com.pulumi.resources.CustomResource {
      */
     public Output<String> projectId() {
         return this.projectId;
+    }
+    /**
+     * The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     * 
+     */
+    @Export(name="reminderEmailTemplateId", refs={String.class}, tree="[0]")
+    private Output<String> reminderEmailTemplateId;
+
+    /**
+     * @return The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     * 
+     */
+    public Output<String> reminderEmailTemplateId() {
+        return this.reminderEmailTemplateId;
+    }
+    /**
+     * How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as &#34;2 days&#34;, &#34;1 week&#34;, etc. The minimum value is &#34;1 day&#34;.
+     * 
+     */
+    @Export(name="reminderInterval", refs={String.class}, tree="[0]")
+    private Output<String> reminderInterval;
+
+    /**
+     * @return How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as &#34;2 days&#34;, &#34;1 week&#34;, etc. The minimum value is &#34;1 day&#34;.
+     * 
+     */
+    public Output<String> reminderInterval() {
+        return this.reminderInterval;
+    }
+    /**
+     * The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     * 
+     */
+    @Export(name="reminderTextTemplateId", refs={String.class}, tree="[0]")
+    private Output<String> reminderTextTemplateId;
+
+    /**
+     * @return The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     * 
+     */
+    public Output<String> reminderTextTemplateId() {
+        return this.reminderTextTemplateId;
     }
     /**
      * Whether users must be invited before they can sign up to the project.
@@ -145,6 +202,20 @@ public class InviteSettings extends com.pulumi.resources.CustomResource {
      */
     public Output<Boolean> sendEmail() {
         return this.sendEmail;
+    }
+    /**
+     * Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+     * 
+     */
+    @Export(name="sendReminders", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> sendReminders;
+
+    /**
+     * @return Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+     * 
+     */
+    public Output<Boolean> sendReminders() {
+        return this.sendReminders;
     }
     /**
      * Whether to send invitation SMS messages to users.

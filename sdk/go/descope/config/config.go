@@ -16,7 +16,7 @@ func GetBaseUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "descope:baseUrl")
 }
 
-// A valid management key for your Descope company
+// A valid management key for your Descope company, or a workload identity token for a federated management key
 func GetManagementKey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "descope:managementKey")
 }

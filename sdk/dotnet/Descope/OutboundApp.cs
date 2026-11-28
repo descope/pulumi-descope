@@ -101,6 +101,12 @@ namespace Descope.Pulumi.Descope
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        /// </summary>
+        [Output("outboundAppId")]
+        public Output<string> OutboundAppId { get; private set; } = null!;
+
+        /// <summary>
         /// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         /// </summary>
         [Output("pkce")]
@@ -300,6 +306,12 @@ namespace Descope.Pulumi.Descope
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        /// </summary>
+        [Input("outboundAppId")]
+        public Input<string>? OutboundAppId { get; set; }
+
+        /// <summary>
         /// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         /// </summary>
         [Input("pkce")]
@@ -466,6 +478,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        /// </summary>
+        [Input("outboundAppId")]
+        public Input<string>? OutboundAppId { get; set; }
 
         /// <summary>
         /// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.

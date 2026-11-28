@@ -6,6 +6,42 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Manages an inbound app, an OAuth client that requests tokens from a Descope project.
+ *
+ * ## Example Usage
+ *
+ * ### Machine-to-machine app with a custom attribute
+ *
+ * The app below only uses the `clientCredentials` grant type, so every other grant type is disabled. Its
+ * `managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared
+ * by every app, with a claim such as `"{{app.customAttributes.managingOrganization}}"`.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as descope from "@descope/pulumi-descope";
+ *
+ * const managingOrganization = new descope.InboundAppAttribute("managing_organization", {
+ *     projectId: example.id,
+ *     inboundAppAttributeId: "managingOrganization",
+ *     name: "Managing Organization",
+ *     type: "string",
+ * });
+ * const partnerBackend = new descope.InboundApp("partner_backend", {
+ *     projectId: example.id,
+ *     name: "Partner Backend",
+ *     clientType: "confidential",
+ *     authorizationCodeDisabled: true,
+ *     refreshTokenDisabled: true,
+ *     deviceCodeDisabled: true,
+ *     jwtBearerDisabled: true,
+ *     tokenExchangeDisabled: true,
+ *     customAttributes: pulumi.jsonStringify(managingOrganization.inboundAppAttributeId.apply(inboundAppAttributeId => {
+ *         [inboundAppAttributeId]: "6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13",
+ *     })),
+ * });
+ * ```
+ */
 export class InboundApp extends pulumi.CustomResource {
     /**
      * Get an existing InboundApp resource's state with the given name, ID, and optional extra
@@ -83,6 +119,10 @@ export class InboundApp extends pulumi.CustomResource {
      */
     declare public readonly connectionsScopes: pulumi.Output<outputs.InboundAppConnectionsScope[]>;
     /**
+     * A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     */
+    declare public readonly customAttributes: pulumi.Output<string>;
+    /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
     declare public readonly defaultAudience: pulumi.Output<string>;
@@ -147,6 +187,10 @@ export class InboundApp extends pulumi.CustomResource {
      */
     declare public readonly sessionSettings: pulumi.Output<outputs.InboundAppSessionSettings>;
     /**
+     * Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     */
+    declare public readonly tags: pulumi.Output<string[]>;
+    /**
      * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
      */
     declare public readonly tokenExchangeDisabled: pulumi.Output<boolean>;
@@ -180,6 +224,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["clientSecret"] = state?.clientSecret;
             resourceInputs["clientType"] = state?.clientType;
             resourceInputs["connectionsScopes"] = state?.connectionsScopes;
+            resourceInputs["customAttributes"] = state?.customAttributes;
             resourceInputs["defaultAudience"] = state?.defaultAudience;
             resourceInputs["deletionProtection"] = state?.deletionProtection;
             resourceInputs["description"] = state?.description;
@@ -196,6 +241,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["refreshTokenDisabled"] = state?.refreshTokenDisabled;
             resourceInputs["scopeClaimMappings"] = state?.scopeClaimMappings;
             resourceInputs["sessionSettings"] = state?.sessionSettings;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["tokenExchangeDisabled"] = state?.tokenExchangeDisabled;
             resourceInputs["workloadClientAssertions"] = state?.workloadClientAssertions;
         } else {
@@ -215,6 +261,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["clientType"] = args?.clientType;
             resourceInputs["connectionsScopes"] = args?.connectionsScopes;
+            resourceInputs["customAttributes"] = args?.customAttributes;
             resourceInputs["defaultAudience"] = args?.defaultAudience;
             resourceInputs["deletionProtection"] = args?.deletionProtection;
             resourceInputs["description"] = args?.description;
@@ -231,6 +278,7 @@ export class InboundApp extends pulumi.CustomResource {
             resourceInputs["refreshTokenDisabled"] = args?.refreshTokenDisabled;
             resourceInputs["scopeClaimMappings"] = args?.scopeClaimMappings;
             resourceInputs["sessionSettings"] = args?.sessionSettings;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["tokenExchangeDisabled"] = args?.tokenExchangeDisabled;
             resourceInputs["workloadClientAssertions"] = args?.workloadClientAssertions;
         }
@@ -293,6 +341,10 @@ export interface InboundAppState {
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
     connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
+    /**
+     * A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     */
+    customAttributes?: pulumi.Input<string | undefined>;
     /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
@@ -358,6 +410,10 @@ export interface InboundAppState {
      */
     sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings | undefined>;
     /**
+     * Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
      * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
      */
     tokenExchangeDisabled?: pulumi.Input<boolean | undefined>;
@@ -419,6 +475,10 @@ export interface InboundAppArgs {
      * A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
      */
     connectionsScopes?: pulumi.Input<pulumi.Input<inputs.InboundAppConnectionsScope>[] | undefined>;
+    /**
+     * A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     */
+    customAttributes?: pulumi.Input<string | undefined>;
     /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
      */
@@ -483,6 +543,10 @@ export interface InboundAppArgs {
      * Custom session management settings for this inbound app, overriding the project defaults.
      */
     sessionSettings?: pulumi.Input<inputs.InboundAppSessionSettings | undefined>;
+    /**
+     * Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
      */

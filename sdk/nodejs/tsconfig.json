@@ -73,6 +73,7 @@
         "httpConnector.ts",
         "hubspotConnector.ts",
         "inboundApp.ts",
+        "inboundAppAttribute.ts",
         "incodeConnector.ts",
         "index.ts",
         "intercomConnector.ts",

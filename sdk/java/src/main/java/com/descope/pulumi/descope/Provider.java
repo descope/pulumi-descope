@@ -38,14 +38,14 @@ public class Provider extends com.pulumi.resources.ProviderResource {
         return Codegen.optional(this.baseUrl);
     }
     /**
-     * A valid management key for your Descope company
+     * A valid management key for your Descope company, or a workload identity token for a federated management key
      * 
      */
     @Export(name="managementKey", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> managementKey;
 
     /**
-     * @return A valid management key for your Descope company
+     * @return A valid management key for your Descope company, or a workload identity token for a federated management key
      * 
      */
     public Output<Optional<String>> managementKey() {

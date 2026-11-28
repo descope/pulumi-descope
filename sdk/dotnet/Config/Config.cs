@@ -44,7 +44,7 @@ namespace Descope.Pulumi.Descope
 
         private static readonly __Value<string?> _managementKey = new __Value<string?>(() => __config.Get("managementKey"));
         /// <summary>
-        /// A valid management key for your Descope company
+        /// A valid management key for your Descope company, or a workload identity token for a federated management key
         /// </summary>
         public static string? ManagementKey
         {

@@ -26,7 +26,7 @@ namespace Descope.Pulumi.Descope
         public Output<string?> BaseUrl { get; private set; } = null!;
 
         /// <summary>
-        /// A valid management key for your Descope company
+        /// A valid management key for your Descope company, or a workload identity token for a federated management key
         /// </summary>
         [Output("managementKey")]
         public Output<string?> ManagementKey { get; private set; } = null!;
@@ -83,7 +83,7 @@ namespace Descope.Pulumi.Descope
         private Input<string>? _managementKey;
 
         /// <summary>
-        /// A valid management key for your Descope company
+        /// A valid management key for your Descope company, or a workload identity token for a federated management key
         /// </summary>
         public Input<string>? ManagementKey
         {

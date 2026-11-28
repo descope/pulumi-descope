@@ -26,8 +26,13 @@ class InviteSettingsArgs:
                  expire_invited_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  invite_expiration: pulumi.Input[Optional[_builtins.str]] = None,
                  invite_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 max_reminders: pulumi.Input[Optional[_builtins.int]] = None,
+                 reminder_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_interval: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  require_invitation: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 send_reminders: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_text: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         The set of arguments for constructing a InviteSettings resource.
@@ -39,8 +44,13 @@ class InviteSettingsArgs:
         :param pulumi.Input[_builtins.bool] expire_invited_users: Expire the user account if the invitation is not accepted within the expiration time.
         :param pulumi.Input[_builtins.str] invite_expiration: The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
+        :param pulumi.Input[_builtins.int] max_reminders: The maximum number of reminders to send for each invitation, between 1 and 5.
+        :param pulumi.Input[_builtins.str] reminder_email_template_id: The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        :param pulumi.Input[_builtins.str] reminder_interval: How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        :param pulumi.Input[_builtins.str] reminder_text_template_id: The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
+        :param pulumi.Input[_builtins.bool] send_reminders: Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
         :param pulumi.Input[_builtins.bool] send_text: Whether to send invitation SMS messages to users.
         """
         pulumi.set(__self__, "project_id", project_id)
@@ -56,10 +66,20 @@ class InviteSettingsArgs:
             pulumi.set(__self__, "invite_expiration", invite_expiration)
         if invite_url is not None:
             pulumi.set(__self__, "invite_url", invite_url)
+        if max_reminders is not None:
+            pulumi.set(__self__, "max_reminders", max_reminders)
+        if reminder_email_template_id is not None:
+            pulumi.set(__self__, "reminder_email_template_id", reminder_email_template_id)
+        if reminder_interval is not None:
+            pulumi.set(__self__, "reminder_interval", reminder_interval)
+        if reminder_text_template_id is not None:
+            pulumi.set(__self__, "reminder_text_template_id", reminder_text_template_id)
         if require_invitation is not None:
             pulumi.set(__self__, "require_invitation", require_invitation)
         if send_email is not None:
             pulumi.set(__self__, "send_email", send_email)
+        if send_reminders is not None:
+            pulumi.set(__self__, "send_reminders", send_reminders)
         if send_text is not None:
             pulumi.set(__self__, "send_text", send_text)
 
@@ -148,6 +168,54 @@ class InviteSettingsArgs:
         pulumi.set(self, "invite_url", value)
 
     @_builtins.property
+    @pulumi.getter(name="maxReminders")
+    def max_reminders(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The maximum number of reminders to send for each invitation, between 1 and 5.
+        """
+        return pulumi.get(self, "max_reminders")
+
+    @max_reminders.setter
+    def max_reminders(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "max_reminders", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderEmailTemplateId")
+    def reminder_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_email_template_id")
+
+    @reminder_email_template_id.setter
+    def reminder_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_email_template_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderInterval")
+    def reminder_interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        """
+        return pulumi.get(self, "reminder_interval")
+
+    @reminder_interval.setter
+    def reminder_interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_interval", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderTextTemplateId")
+    def reminder_text_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_text_template_id")
+
+    @reminder_text_template_id.setter
+    def reminder_text_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_text_template_id", value)
+
+    @_builtins.property
     @pulumi.getter(name="requireInvitation")
     def require_invitation(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -172,6 +240,18 @@ class InviteSettingsArgs:
         pulumi.set(self, "send_email", value)
 
     @_builtins.property
+    @pulumi.getter(name="sendReminders")
+    def send_reminders(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        """
+        return pulumi.get(self, "send_reminders")
+
+    @send_reminders.setter
+    def send_reminders(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "send_reminders", value)
+
+    @_builtins.property
     @pulumi.getter(name="sendText")
     def send_text(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -193,9 +273,14 @@ class _InviteSettingsState:
                  expire_invited_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  invite_expiration: pulumi.Input[Optional[_builtins.str]] = None,
                  invite_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 max_reminders: pulumi.Input[Optional[_builtins.int]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_interval: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  require_invitation: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 send_reminders: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_text: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         Input properties used for looking up and filtering InviteSettings resources.
@@ -206,9 +291,14 @@ class _InviteSettingsState:
         :param pulumi.Input[_builtins.bool] expire_invited_users: Expire the user account if the invitation is not accepted within the expiration time.
         :param pulumi.Input[_builtins.str] invite_expiration: The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
+        :param pulumi.Input[_builtins.int] max_reminders: The maximum number of reminders to send for each invitation, between 1 and 5.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] reminder_email_template_id: The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        :param pulumi.Input[_builtins.str] reminder_interval: How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        :param pulumi.Input[_builtins.str] reminder_text_template_id: The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
+        :param pulumi.Input[_builtins.bool] send_reminders: Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
         :param pulumi.Input[_builtins.bool] send_text: Whether to send invitation SMS messages to users.
         """
         if add_magiclink_token is not None:
@@ -223,12 +313,22 @@ class _InviteSettingsState:
             pulumi.set(__self__, "invite_expiration", invite_expiration)
         if invite_url is not None:
             pulumi.set(__self__, "invite_url", invite_url)
+        if max_reminders is not None:
+            pulumi.set(__self__, "max_reminders", max_reminders)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if reminder_email_template_id is not None:
+            pulumi.set(__self__, "reminder_email_template_id", reminder_email_template_id)
+        if reminder_interval is not None:
+            pulumi.set(__self__, "reminder_interval", reminder_interval)
+        if reminder_text_template_id is not None:
+            pulumi.set(__self__, "reminder_text_template_id", reminder_text_template_id)
         if require_invitation is not None:
             pulumi.set(__self__, "require_invitation", require_invitation)
         if send_email is not None:
             pulumi.set(__self__, "send_email", send_email)
+        if send_reminders is not None:
+            pulumi.set(__self__, "send_reminders", send_reminders)
         if send_text is not None:
             pulumi.set(__self__, "send_text", send_text)
 
@@ -305,6 +405,18 @@ class _InviteSettingsState:
         pulumi.set(self, "invite_url", value)
 
     @_builtins.property
+    @pulumi.getter(name="maxReminders")
+    def max_reminders(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The maximum number of reminders to send for each invitation, between 1 and 5.
+        """
+        return pulumi.get(self, "max_reminders")
+
+    @max_reminders.setter
+    def max_reminders(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "max_reminders", value)
+
+    @_builtins.property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -315,6 +427,42 @@ class _InviteSettingsState:
     @project_id.setter
     def project_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "project_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderEmailTemplateId")
+    def reminder_email_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_email_template_id")
+
+    @reminder_email_template_id.setter
+    def reminder_email_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_email_template_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderInterval")
+    def reminder_interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        """
+        return pulumi.get(self, "reminder_interval")
+
+    @reminder_interval.setter
+    def reminder_interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_interval", value)
+
+    @_builtins.property
+    @pulumi.getter(name="reminderTextTemplateId")
+    def reminder_text_template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_text_template_id")
+
+    @reminder_text_template_id.setter
+    def reminder_text_template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "reminder_text_template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="requireInvitation")
@@ -341,6 +489,18 @@ class _InviteSettingsState:
         pulumi.set(self, "send_email", value)
 
     @_builtins.property
+    @pulumi.getter(name="sendReminders")
+    def send_reminders(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        """
+        return pulumi.get(self, "send_reminders")
+
+    @send_reminders.setter
+    def send_reminders(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "send_reminders", value)
+
+    @_builtins.property
     @pulumi.getter(name="sendText")
     def send_text(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -365,9 +525,14 @@ class InviteSettings(pulumi.CustomResource):
                  expire_invited_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  invite_expiration: pulumi.Input[Optional[_builtins.str]] = None,
                  invite_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 max_reminders: pulumi.Input[Optional[_builtins.int]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_interval: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  require_invitation: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 send_reminders: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_text: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         """
@@ -382,9 +547,14 @@ class InviteSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] expire_invited_users: Expire the user account if the invitation is not accepted within the expiration time.
         :param pulumi.Input[_builtins.str] invite_expiration: The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
+        :param pulumi.Input[_builtins.int] max_reminders: The maximum number of reminders to send for each invitation, between 1 and 5.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] reminder_email_template_id: The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        :param pulumi.Input[_builtins.str] reminder_interval: How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        :param pulumi.Input[_builtins.str] reminder_text_template_id: The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
+        :param pulumi.Input[_builtins.bool] send_reminders: Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
         :param pulumi.Input[_builtins.bool] send_text: Whether to send invitation SMS messages to users.
         """
         ...
@@ -418,9 +588,14 @@ class InviteSettings(pulumi.CustomResource):
                  expire_invited_users: pulumi.Input[Optional[_builtins.bool]] = None,
                  invite_expiration: pulumi.Input[Optional[_builtins.str]] = None,
                  invite_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 max_reminders: pulumi.Input[Optional[_builtins.int]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_interval: pulumi.Input[Optional[_builtins.str]] = None,
+                 reminder_text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  require_invitation: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_email: pulumi.Input[Optional[_builtins.bool]] = None,
+                 send_reminders: pulumi.Input[Optional[_builtins.bool]] = None,
                  send_text: pulumi.Input[Optional[_builtins.bool]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -437,11 +612,16 @@ class InviteSettings(pulumi.CustomResource):
             __props__.__dict__["expire_invited_users"] = expire_invited_users
             __props__.__dict__["invite_expiration"] = invite_expiration
             __props__.__dict__["invite_url"] = invite_url
+            __props__.__dict__["max_reminders"] = max_reminders
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
+            __props__.__dict__["reminder_email_template_id"] = reminder_email_template_id
+            __props__.__dict__["reminder_interval"] = reminder_interval
+            __props__.__dict__["reminder_text_template_id"] = reminder_text_template_id
             __props__.__dict__["require_invitation"] = require_invitation
             __props__.__dict__["send_email"] = send_email
+            __props__.__dict__["send_reminders"] = send_reminders
             __props__.__dict__["send_text"] = send_text
         super(InviteSettings, __self__).__init__(
             'descope:index/inviteSettings:InviteSettings',
@@ -459,9 +639,14 @@ class InviteSettings(pulumi.CustomResource):
             expire_invited_users: pulumi.Input[Optional[_builtins.bool]] = None,
             invite_expiration: pulumi.Input[Optional[_builtins.str]] = None,
             invite_url: pulumi.Input[Optional[_builtins.str]] = None,
+            max_reminders: pulumi.Input[Optional[_builtins.int]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
+            reminder_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
+            reminder_interval: pulumi.Input[Optional[_builtins.str]] = None,
+            reminder_text_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             require_invitation: pulumi.Input[Optional[_builtins.bool]] = None,
             send_email: pulumi.Input[Optional[_builtins.bool]] = None,
+            send_reminders: pulumi.Input[Optional[_builtins.bool]] = None,
             send_text: pulumi.Input[Optional[_builtins.bool]] = None) -> 'InviteSettings':
         """
         Get an existing InviteSettings resource's state with the given name, id, and optional extra
@@ -476,9 +661,14 @@ class InviteSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] expire_invited_users: Expire the user account if the invitation is not accepted within the expiration time.
         :param pulumi.Input[_builtins.str] invite_expiration: The expiry time for the invitation, meant to be used together with `expire_invited_users` and/or `add_magiclink_token`. Use values such as "2 weeks", "4 days", etc. The minimum value is "1 hour".
         :param pulumi.Input[_builtins.str] invite_url: Custom URL to include in the message sent to invited users.
+        :param pulumi.Input[_builtins.int] max_reminders: The maximum number of reminders to send for each invitation, between 1 and 5.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
+        :param pulumi.Input[_builtins.str] reminder_email_template_id: The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        :param pulumi.Input[_builtins.str] reminder_interval: How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        :param pulumi.Input[_builtins.str] reminder_text_template_id: The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
         :param pulumi.Input[_builtins.bool] require_invitation: Whether users must be invited before they can sign up to the project.
         :param pulumi.Input[_builtins.bool] send_email: Whether to send invitation emails to users.
+        :param pulumi.Input[_builtins.bool] send_reminders: Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
         :param pulumi.Input[_builtins.bool] send_text: Whether to send invitation SMS messages to users.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -491,9 +681,14 @@ class InviteSettings(pulumi.CustomResource):
         __props__.__dict__["expire_invited_users"] = expire_invited_users
         __props__.__dict__["invite_expiration"] = invite_expiration
         __props__.__dict__["invite_url"] = invite_url
+        __props__.__dict__["max_reminders"] = max_reminders
         __props__.__dict__["project_id"] = project_id
+        __props__.__dict__["reminder_email_template_id"] = reminder_email_template_id
+        __props__.__dict__["reminder_interval"] = reminder_interval
+        __props__.__dict__["reminder_text_template_id"] = reminder_text_template_id
         __props__.__dict__["require_invitation"] = require_invitation
         __props__.__dict__["send_email"] = send_email
+        __props__.__dict__["send_reminders"] = send_reminders
         __props__.__dict__["send_text"] = send_text
         return InviteSettings(resource_name, opts=opts, __props__=__props__)
 
@@ -546,12 +741,44 @@ class InviteSettings(pulumi.CustomResource):
         return pulumi.get(self, "invite_url")
 
     @_builtins.property
+    @pulumi.getter(name="maxReminders")
+    def max_reminders(self) -> pulumi.Output[_builtins.int]:
+        """
+        The maximum number of reminders to send for each invitation, between 1 and 5.
+        """
+        return pulumi.get(self, "max_reminders")
+
+    @_builtins.property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Output[_builtins.str]:
         """
         The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         """
         return pulumi.get(self, "project_id")
+
+    @_builtins.property
+    @pulumi.getter(name="reminderEmailTemplateId")
+    def reminder_email_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_email_template_id")
+
+    @_builtins.property
+    @pulumi.getter(name="reminderInterval")
+    def reminder_interval(self) -> pulumi.Output[_builtins.str]:
+        """
+        How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        """
+        return pulumi.get(self, "reminder_interval")
+
+    @_builtins.property
+    @pulumi.getter(name="reminderTextTemplateId")
+    def reminder_text_template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        """
+        return pulumi.get(self, "reminder_text_template_id")
 
     @_builtins.property
     @pulumi.getter(name="requireInvitation")
@@ -568,6 +795,14 @@ class InviteSettings(pulumi.CustomResource):
         Whether to send invitation emails to users.
         """
         return pulumi.get(self, "send_email")
+
+    @_builtins.property
+    @pulumi.getter(name="sendReminders")
+    def send_reminders(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether to automatically resend the invitation to users who have not accepted it yet, every `reminder_interval` and up to `max_reminders` times. Reminders are only sent through a custom connector, so turning this on requires `email_connector_id` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        """
+        return pulumi.get(self, "send_reminders")
 
     @_builtins.property
     @pulumi.getter(name="sendText")
