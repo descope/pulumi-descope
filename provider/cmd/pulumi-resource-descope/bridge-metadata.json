@@ -451,6 +451,9 @@
                     "scope_claim_mapping": {
                         "maxItemsOne": false
                     },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
                     "workload_client_assertions": {
                         "maxItemsOne": false,
                         "elem": {
@@ -460,6 +463,15 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "descope_inbound_app_attribute": {
+                "current": "descope:index/inboundAppAttribute:InboundAppAttribute",
+                "majorVersion": 1,
+                "fields": {
+                    "select_options": {
+                        "maxItemsOne": false
                     }
                 }
             },
@@ -1124,6 +1136,17 @@
             "descope_http_connector": {},
             "descope_hubspot_connector": {},
             "descope_inbound_app": {},
+            "descope_inbound_app_attribute": {
+                "fields": {
+                    "id": {
+                        "name": "inboundAppAttributeId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "inboundAppAttributeId"
+                }
+            },
             "descope_incode_connector": {},
             "descope_intercom_connector": {},
             "descope_invite_settings": {},
@@ -1163,7 +1186,17 @@
             },
             "descope_opentelemetry_connector": {},
             "descope_otp_settings": {},
-            "descope_outbound_app": {},
+            "descope_outbound_app": {
+                "fields": {
+                    "id": {
+                        "name": "outboundAppId"
+                    }
+                },
+                "computeID": {
+                    "kind": "delegate",
+                    "field": "outboundAppId"
+                }
+            },
             "descope_passkey_settings": {},
             "descope_password_settings": {},
             "descope_pendo_connector": {},

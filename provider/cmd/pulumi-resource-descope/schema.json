@@ -63,7 +63,7 @@
             },
             "managementKey": {
                 "type": "string",
-                "description": "A valid management key for your Descope company",
+                "description": "A valid management key for your Descope company, or a workload identity token for a federated management key",
                 "secret": true
             },
             "projectId": {
@@ -2086,6 +2086,14 @@
                     "type": "boolean",
                     "description": "Setting this to \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e will hide the SSO configuration in the SSO Suite interface, for tenants that only need to set up SCIM provisioning.\n"
                 },
+                "loginFlowId": {
+                    "type": "string",
+                    "description": "The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.\n"
+                },
+                "loginFlowStyleId": {
+                    "type": "string",
+                    "description": "The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.\n"
+                },
                 "oidcLoginIdAttribute": {
                     "type": "string",
                     "description": "The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the \u003cspan pulumi-lang-nodejs=\"`sub`\" pulumi-lang-dotnet=\"`Sub`\" pulumi-lang-go=\"`sub`\" pulumi-lang-python=\"`sub`\" pulumi-lang-yaml=\"`sub`\" pulumi-lang-java=\"`sub`\" pulumi-lang-hcl=\"`sub`\"\u003e`sub`\u003c/span\u003e claim. SAML configurations are unaffected.\n"
@@ -2122,6 +2130,8 @@
                         "hideSaml",
                         "hideScim",
                         "hideSso",
+                        "loginFlowId",
+                        "loginFlowStyleId",
                         "oidcLoginIdAttribute",
                         "showHelpContact",
                         "showXaa",
@@ -2365,7 +2375,7 @@
             },
             "managementKey": {
                 "type": "string",
-                "description": "A valid management key for your Descope company",
+                "description": "A valid management key for your Descope company, or a workload identity token for a federated management key",
                 "secret": true
             },
             "projectId": {
@@ -2380,7 +2390,7 @@
             },
             "managementKey": {
                 "type": "string",
-                "description": "A valid management key for your Descope company",
+                "description": "A valid management key for your Descope company, or a workload identity token for a federated management key",
                 "secret": true
             },
             "projectId": {
@@ -9412,6 +9422,7 @@
             }
         },
         "descope:index/inboundApp:InboundApp": {
+            "description": "Manages an inbound app, an OAuth client that requests tokens from a Descope project.\n\n## Example Usage\n\n### Machine-to-machine app with a custom attribute\n\nThe app below only uses the \u003cspan pulumi-lang-nodejs=\"`clientCredentials`\" pulumi-lang-dotnet=\"`ClientCredentials`\" pulumi-lang-go=\"`clientCredentials`\" pulumi-lang-python=\"`client_credentials`\" pulumi-lang-yaml=\"`clientCredentials`\" pulumi-lang-java=\"`clientCredentials`\" pulumi-lang-hcl=\"`client_credentials`\"\u003e`clientCredentials`\u003c/span\u003e grant type, so every other grant type is disabled. Its\n`managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared\nby every app, with a claim such as `\"{{app.customAttributes.managingOrganization}}\"`.\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as descope from \"@descope/pulumi-descope\";\n\nconst managingOrganization = new descope.InboundAppAttribute(\"managing_organization\", {\n    projectId: example.id,\n    inboundAppAttributeId: \"managingOrganization\",\n    name: \"Managing Organization\",\n    type: \"string\",\n});\nconst partnerBackend = new descope.InboundApp(\"partner_backend\", {\n    projectId: example.id,\n    name: \"Partner Backend\",\n    clientType: \"confidential\",\n    authorizationCodeDisabled: true,\n    refreshTokenDisabled: true,\n    deviceCodeDisabled: true,\n    jwtBearerDisabled: true,\n    tokenExchangeDisabled: true,\n    customAttributes: pulumi.jsonStringify(managingOrganization.inboundAppAttributeId.apply(inboundAppAttributeId =\u003e {\n        [inboundAppAttributeId]: \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\",\n    })),\n});\n```\n```python\nimport pulumi\nimport descope_pulumi as descope\nimport json\n\nmanaging_organization = descope.InboundAppAttribute(\"managing_organization\",\n    project_id=example[\"id\"],\n    inbound_app_attribute_id=\"managingOrganization\",\n    name=\"Managing Organization\",\n    type=\"string\")\npartner_backend = descope.InboundApp(\"partner_backend\",\n    project_id=example[\"id\"],\n    name=\"Partner Backend\",\n    client_type=\"confidential\",\n    authorization_code_disabled=True,\n    refresh_token_disabled=True,\n    device_code_disabled=True,\n    jwt_bearer_disabled=True,\n    token_exchange_disabled=True,\n    custom_attributes=pulumi.Output.json_dumps(managing_organization.inbound_app_attribute_id.apply(lambda inbound_app_attribute_id: {\n        inbound_app_attribute_id: \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\",\n    })))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text.Json;\nusing Pulumi;\nusing Descope = Descope.Pulumi.Descope;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var managingOrganization = new Descope.InboundAppAttribute(\"managing_organization\", new()\n    {\n        ProjectId = example.Id,\n        InboundAppAttributeId = \"managingOrganization\",\n        Name = \"Managing Organization\",\n        Type = \"string\",\n    });\n\n    var partnerBackend = new Descope.InboundApp(\"partner_backend\", new()\n    {\n        ProjectId = example.Id,\n        Name = \"Partner Backend\",\n        ClientType = \"confidential\",\n        AuthorizationCodeDisabled = true,\n        RefreshTokenDisabled = true,\n        DeviceCodeDisabled = true,\n        JwtBearerDisabled = true,\n        TokenExchangeDisabled = true,\n        CustomAttributes = Output.JsonSerialize(Output.Create(managingOrganization.InboundAppAttributeId.Apply(inboundAppAttributeId =\u003e \n        {\n            { inboundAppAttributeId, \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\" },\n        }))),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"encoding/json\"\n\n\t\"github.com/descope/pulumi-descope/sdk/go/descope\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tmanagingOrganization, err := descope.NewInboundAppAttribute(ctx, \"managing_organization\", \u0026descope.InboundAppAttributeArgs{\n\t\t\tProjectId:             pulumi.Any(example.Id),\n\t\t\tInboundAppAttributeId: pulumi.String(\"managingOrganization\"),\n\t\t\tName:                  pulumi.String(\"Managing Organization\"),\n\t\t\tType:                  pulumi.String(\"string\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = descope.NewInboundApp(ctx, \"partner_backend\", \u0026descope.InboundAppArgs{\n\t\t\tProjectId:                 pulumi.Any(example.Id),\n\t\t\tName:                      pulumi.String(\"Partner Backend\"),\n\t\t\tClientType:                pulumi.String(\"confidential\"),\n\t\t\tAuthorizationCodeDisabled: pulumi.Bool(true),\n\t\t\tRefreshTokenDisabled:      pulumi.Bool(true),\n\t\t\tDeviceCodeDisabled:        pulumi.Bool(true),\n\t\t\tJwtBearerDisabled:         pulumi.Bool(true),\n\t\t\tTokenExchangeDisabled:     pulumi.Bool(true),\n\t\t\tCustomAttributes: managingOrganization.InboundAppAttributeId.ApplyT(func(inboundAppAttributeId string) (pulumi.String, error) {\n\t\t\t\tvar _zero pulumi.String\n\t\t\t\ttmpJSON0, err := json.Marshal(map[string]string{\n\t\t\t\t\tinboundAppAttributeId: \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\",\n\t\t\t\t})\n\t\t\t\tif err != nil {\n\t\t\t\t\treturn _zero, err\n\t\t\t\t}\n\t\t\t\tjson0 := string(tmpJSON0)\n\t\t\t\treturn pulumi.String(json0), nil\n\t\t\t}).(pulumi.StringOutput),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    descope = {\n      source = \"pulumi/descope\"\n    }\n  }\n}\n\nresource \"descope_inbound_app_attribute\" \"managing_organization\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  project_id               = example.id\n  inbound_app_attribute_id = \"managingOrganization\"\n  name                     = \"Managing Organization\"\n  type                     = \"string\"\n}\nresource \"descope_inbound_app\" \"partner_backend\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  project_id                  = example.id\n  name                        = \"Partner Backend\"\n  client_type                 = \"confidential\"\n  authorization_code_disabled = true\n  refresh_token_disabled      = true\n  device_code_disabled        = true\n  jwt_bearer_disabled         = true\n  token_exchange_disabled     = true\n  # Referencing the attribute in the key creates it before its value is set on the app\n  custom_attributes = jsonencode({\n    descope_inbound_app_attribute.managing_organization.inbound_app_attribute_id = \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\"\n  })\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.descope.pulumi.descope.InboundAppAttribute;\nimport com.descope.pulumi.descope.InboundAppAttributeArgs;\nimport com.descope.pulumi.descope.InboundApp;\nimport com.descope.pulumi.descope.InboundAppArgs;\nimport static com.pulumi.codegen.internal.Serialization.*;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var managingOrganization = new InboundAppAttribute(\"managingOrganization\", InboundAppAttributeArgs.builder()\n            .projectId(example.get(\"id\"))\n            .inboundAppAttributeId(\"managingOrganization\")\n            .name(\"Managing Organization\")\n            .type(\"string\")\n            .build());\n\n        var partnerBackend = new InboundApp(\"partnerBackend\", InboundAppArgs.builder()\n            .projectId(example.get(\"id\"))\n            .name(\"Partner Backend\")\n            .clientType(\"confidential\")\n            .authorizationCodeDisabled(true)\n            .refreshTokenDisabled(true)\n            .deviceCodeDisabled(true)\n            .jwtBearerDisabled(true)\n            .tokenExchangeDisabled(true)\n            .customAttributes(managingOrganization.inboundAppAttributeId().applyValue(_inboundAppAttributeId -\u003e serializeJson(\n                jsonObject(\n                    jsonProperty(_inboundAppAttributeId, \"6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\")\n                ))))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  managingOrganization:\n    type: descope:InboundAppAttribute\n    name: managing_organization\n    properties:\n      projectId: ${example.id}\n      inboundAppAttributeId: managingOrganization\n      name: Managing Organization\n      type: string\n  partnerBackend:\n    type: descope:InboundApp\n    name: partner_backend\n    properties:\n      projectId: ${example.id}\n      name: Partner Backend\n      clientType: confidential\n      authorizationCodeDisabled: true\n      refreshTokenDisabled: true\n      deviceCodeDisabled: true\n      jwtBearerDisabled: true\n      tokenExchangeDisabled: true # Referencing the attribute in the key creates it before its value is set on the app\n      customAttributes:\n        fn::toJSON:\n          ${managingOrganization.inboundAppAttributeId}: 6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "allowedTenants": {
                     "type": "array",
@@ -9479,6 +9490,10 @@
                         "$ref": "#/types/descope:index/InboundAppConnectionsScope:InboundAppConnectionsScope"
                     },
                     "description": "A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.\n"
+                },
+                "customAttributes": {
+                    "type": "string",
+                    "description": "A JSON-encoded object of custom attribute values for the inbound app, keyed by the \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e of a \u003cspan pulumi-lang-nodejs=\"`descope.InboundAppAttribute`\" pulumi-lang-dotnet=\"`descope.InboundAppAttribute`\" pulumi-lang-go=\"`InboundAppAttribute`\" pulumi-lang-python=\"`InboundAppAttribute`\" pulumi-lang-yaml=\"`descope.InboundAppAttribute`\" pulumi-lang-java=\"`descope.InboundAppAttribute`\" pulumi-lang-hcl=\"`descope_inbound_app_attribute`\"\u003e`descope.InboundAppAttribute`\u003c/span\u003e. JWT templates read these values as `{{app.customAttributes.\u003cid\u003e}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = \"...\" })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for \u003cspan pulumi-lang-nodejs=\"`string`\" pulumi-lang-dotnet=\"`String`\" pulumi-lang-go=\"`string`\" pulumi-lang-python=\"`string`\" pulumi-lang-yaml=\"`string`\" pulumi-lang-java=\"`string`\" pulumi-lang-hcl=\"`string`\"\u003e`string`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`singleselect`\" pulumi-lang-dotnet=\"`Singleselect`\" pulumi-lang-go=\"`singleselect`\" pulumi-lang-python=\"`singleselect`\" pulumi-lang-yaml=\"`singleselect`\" pulumi-lang-java=\"`singleselect`\" pulumi-lang-hcl=\"`singleselect`\"\u003e`singleselect`\u003c/span\u003e, an unquoted number for \u003cspan pulumi-lang-nodejs=\"`number`\" pulumi-lang-dotnet=\"`Number`\" pulumi-lang-go=\"`number`\" pulumi-lang-python=\"`number`\" pulumi-lang-yaml=\"`number`\" pulumi-lang-java=\"`number`\" pulumi-lang-hcl=\"`number`\"\u003e`number`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e for \u003cspan pulumi-lang-nodejs=\"`boolean`\" pulumi-lang-dotnet=\"`Boolean`\" pulumi-lang-go=\"`boolean`\" pulumi-lang-python=\"`boolean`\" pulumi-lang-yaml=\"`boolean`\" pulumi-lang-java=\"`boolean`\" pulumi-lang-hcl=\"`boolean`\"\u003e`boolean`\u003c/span\u003e, a list of strings for \u003cspan pulumi-lang-nodejs=\"`multiselect`\" pulumi-lang-dotnet=\"`Multiselect`\" pulumi-lang-go=\"`multiselect`\" pulumi-lang-python=\"`multiselect`\" pulumi-lang-yaml=\"`multiselect`\" pulumi-lang-java=\"`multiselect`\" pulumi-lang-hcl=\"`multiselect`\"\u003e`multiselect`\u003c/span\u003e, a number of milliseconds since the epoch for \u003cspan pulumi-lang-nodejs=\"`date`\" pulumi-lang-dotnet=\"`Date`\" pulumi-lang-go=\"`date`\" pulumi-lang-python=\"`date`\" pulumi-lang-yaml=\"`date`\" pulumi-lang-java=\"`date`\" pulumi-lang-hcl=\"`date`\"\u003e`date`\u003c/span\u003e, and an `MM-DD` string for \u003cspan pulumi-lang-nodejs=\"`monthday`\" pulumi-lang-dotnet=\"`Monthday`\" pulumi-lang-go=\"`monthday`\" pulumi-lang-python=\"`monthday`\" pulumi-lang-yaml=\"`monthday`\" pulumi-lang-java=\"`monthday`\" pulumi-lang-hcl=\"`monthday`\"\u003e`monthday`\u003c/span\u003e. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.\n"
                 },
                 "defaultAudience": {
                     "type": "string",
@@ -9550,6 +9565,13 @@
                     "$ref": "#/types/descope:index/InboundAppSessionSettings:InboundAppSessionSettings",
                     "description": "Custom session management settings for this inbound app, overriding the project defaults.\n"
                 },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.\n"
+                },
                 "tokenExchangeDisabled": {
                     "type": "boolean",
                     "description": "Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.\n"
@@ -9575,6 +9597,7 @@
                 "clientSecret",
                 "clientType",
                 "connectionsScopes",
+                "customAttributes",
                 "defaultAudience",
                 "description",
                 "deviceCodeDisabled",
@@ -9590,6 +9613,7 @@
                 "refreshTokenDisabled",
                 "scopeClaimMappings",
                 "sessionSettings",
+                "tags",
                 "tokenExchangeDisabled",
                 "workloadClientAssertions"
             ],
@@ -9661,6 +9685,10 @@
                     },
                     "description": "A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.\n"
                 },
+                "customAttributes": {
+                    "type": "string",
+                    "description": "A JSON-encoded object of custom attribute values for the inbound app, keyed by the \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e of a \u003cspan pulumi-lang-nodejs=\"`descope.InboundAppAttribute`\" pulumi-lang-dotnet=\"`descope.InboundAppAttribute`\" pulumi-lang-go=\"`InboundAppAttribute`\" pulumi-lang-python=\"`InboundAppAttribute`\" pulumi-lang-yaml=\"`descope.InboundAppAttribute`\" pulumi-lang-java=\"`descope.InboundAppAttribute`\" pulumi-lang-hcl=\"`descope_inbound_app_attribute`\"\u003e`descope.InboundAppAttribute`\u003c/span\u003e. JWT templates read these values as `{{app.customAttributes.\u003cid\u003e}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = \"...\" })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for \u003cspan pulumi-lang-nodejs=\"`string`\" pulumi-lang-dotnet=\"`String`\" pulumi-lang-go=\"`string`\" pulumi-lang-python=\"`string`\" pulumi-lang-yaml=\"`string`\" pulumi-lang-java=\"`string`\" pulumi-lang-hcl=\"`string`\"\u003e`string`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`singleselect`\" pulumi-lang-dotnet=\"`Singleselect`\" pulumi-lang-go=\"`singleselect`\" pulumi-lang-python=\"`singleselect`\" pulumi-lang-yaml=\"`singleselect`\" pulumi-lang-java=\"`singleselect`\" pulumi-lang-hcl=\"`singleselect`\"\u003e`singleselect`\u003c/span\u003e, an unquoted number for \u003cspan pulumi-lang-nodejs=\"`number`\" pulumi-lang-dotnet=\"`Number`\" pulumi-lang-go=\"`number`\" pulumi-lang-python=\"`number`\" pulumi-lang-yaml=\"`number`\" pulumi-lang-java=\"`number`\" pulumi-lang-hcl=\"`number`\"\u003e`number`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e for \u003cspan pulumi-lang-nodejs=\"`boolean`\" pulumi-lang-dotnet=\"`Boolean`\" pulumi-lang-go=\"`boolean`\" pulumi-lang-python=\"`boolean`\" pulumi-lang-yaml=\"`boolean`\" pulumi-lang-java=\"`boolean`\" pulumi-lang-hcl=\"`boolean`\"\u003e`boolean`\u003c/span\u003e, a list of strings for \u003cspan pulumi-lang-nodejs=\"`multiselect`\" pulumi-lang-dotnet=\"`Multiselect`\" pulumi-lang-go=\"`multiselect`\" pulumi-lang-python=\"`multiselect`\" pulumi-lang-yaml=\"`multiselect`\" pulumi-lang-java=\"`multiselect`\" pulumi-lang-hcl=\"`multiselect`\"\u003e`multiselect`\u003c/span\u003e, a number of milliseconds since the epoch for \u003cspan pulumi-lang-nodejs=\"`date`\" pulumi-lang-dotnet=\"`Date`\" pulumi-lang-go=\"`date`\" pulumi-lang-python=\"`date`\" pulumi-lang-yaml=\"`date`\" pulumi-lang-java=\"`date`\" pulumi-lang-hcl=\"`date`\"\u003e`date`\u003c/span\u003e, and an `MM-DD` string for \u003cspan pulumi-lang-nodejs=\"`monthday`\" pulumi-lang-dotnet=\"`Monthday`\" pulumi-lang-go=\"`monthday`\" pulumi-lang-python=\"`monthday`\" pulumi-lang-yaml=\"`monthday`\" pulumi-lang-java=\"`monthday`\" pulumi-lang-hcl=\"`monthday`\"\u003e`monthday`\u003c/span\u003e. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.\n"
+                },
                 "defaultAudience": {
                     "type": "string",
                     "description": "The default \u003cspan pulumi-lang-nodejs=\"`aud`\" pulumi-lang-dotnet=\"`Aud`\" pulumi-lang-go=\"`aud`\" pulumi-lang-python=\"`aud`\" pulumi-lang-yaml=\"`aud`\" pulumi-lang-java=\"`aud`\" pulumi-lang-hcl=\"`aud`\"\u003e`aud`\u003c/span\u003e claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.\n"
@@ -9730,6 +9758,13 @@
                 "sessionSettings": {
                     "$ref": "#/types/descope:index/InboundAppSessionSettings:InboundAppSessionSettings",
                     "description": "Custom session management settings for this inbound app, overriding the project defaults.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.\n"
                 },
                 "tokenExchangeDisabled": {
                     "type": "boolean",
@@ -9816,6 +9851,10 @@
                         },
                         "description": "A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.\n"
                     },
+                    "customAttributes": {
+                        "type": "string",
+                        "description": "A JSON-encoded object of custom attribute values for the inbound app, keyed by the \u003cspan pulumi-lang-nodejs=\"`id`\" pulumi-lang-dotnet=\"`Id`\" pulumi-lang-go=\"`id`\" pulumi-lang-python=\"`id`\" pulumi-lang-yaml=\"`id`\" pulumi-lang-java=\"`id`\" pulumi-lang-hcl=\"`id`\"\u003e`id`\u003c/span\u003e of a \u003cspan pulumi-lang-nodejs=\"`descope.InboundAppAttribute`\" pulumi-lang-dotnet=\"`descope.InboundAppAttribute`\" pulumi-lang-go=\"`InboundAppAttribute`\" pulumi-lang-python=\"`InboundAppAttribute`\" pulumi-lang-yaml=\"`descope.InboundAppAttribute`\" pulumi-lang-java=\"`descope.InboundAppAttribute`\" pulumi-lang-hcl=\"`descope_inbound_app_attribute`\"\u003e`descope.InboundAppAttribute`\u003c/span\u003e. JWT templates read these values as `{{app.customAttributes.\u003cid\u003e}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = \"...\" })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for \u003cspan pulumi-lang-nodejs=\"`string`\" pulumi-lang-dotnet=\"`String`\" pulumi-lang-go=\"`string`\" pulumi-lang-python=\"`string`\" pulumi-lang-yaml=\"`string`\" pulumi-lang-java=\"`string`\" pulumi-lang-hcl=\"`string`\"\u003e`string`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`singleselect`\" pulumi-lang-dotnet=\"`Singleselect`\" pulumi-lang-go=\"`singleselect`\" pulumi-lang-python=\"`singleselect`\" pulumi-lang-yaml=\"`singleselect`\" pulumi-lang-java=\"`singleselect`\" pulumi-lang-hcl=\"`singleselect`\"\u003e`singleselect`\u003c/span\u003e, an unquoted number for \u003cspan pulumi-lang-nodejs=\"`number`\" pulumi-lang-dotnet=\"`Number`\" pulumi-lang-go=\"`number`\" pulumi-lang-python=\"`number`\" pulumi-lang-yaml=\"`number`\" pulumi-lang-java=\"`number`\" pulumi-lang-hcl=\"`number`\"\u003e`number`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e for \u003cspan pulumi-lang-nodejs=\"`boolean`\" pulumi-lang-dotnet=\"`Boolean`\" pulumi-lang-go=\"`boolean`\" pulumi-lang-python=\"`boolean`\" pulumi-lang-yaml=\"`boolean`\" pulumi-lang-java=\"`boolean`\" pulumi-lang-hcl=\"`boolean`\"\u003e`boolean`\u003c/span\u003e, a list of strings for \u003cspan pulumi-lang-nodejs=\"`multiselect`\" pulumi-lang-dotnet=\"`Multiselect`\" pulumi-lang-go=\"`multiselect`\" pulumi-lang-python=\"`multiselect`\" pulumi-lang-yaml=\"`multiselect`\" pulumi-lang-java=\"`multiselect`\" pulumi-lang-hcl=\"`multiselect`\"\u003e`multiselect`\u003c/span\u003e, a number of milliseconds since the epoch for \u003cspan pulumi-lang-nodejs=\"`date`\" pulumi-lang-dotnet=\"`Date`\" pulumi-lang-go=\"`date`\" pulumi-lang-python=\"`date`\" pulumi-lang-yaml=\"`date`\" pulumi-lang-java=\"`date`\" pulumi-lang-hcl=\"`date`\"\u003e`date`\u003c/span\u003e, and an `MM-DD` string for \u003cspan pulumi-lang-nodejs=\"`monthday`\" pulumi-lang-dotnet=\"`Monthday`\" pulumi-lang-go=\"`monthday`\" pulumi-lang-python=\"`monthday`\" pulumi-lang-yaml=\"`monthday`\" pulumi-lang-java=\"`monthday`\" pulumi-lang-hcl=\"`monthday`\"\u003e`monthday`\u003c/span\u003e. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.\n"
+                    },
                     "defaultAudience": {
                         "type": "string",
                         "description": "The default \u003cspan pulumi-lang-nodejs=\"`aud`\" pulumi-lang-dotnet=\"`Aud`\" pulumi-lang-go=\"`aud`\" pulumi-lang-python=\"`aud`\" pulumi-lang-yaml=\"`aud`\" pulumi-lang-java=\"`aud`\" pulumi-lang-hcl=\"`aud`\"\u003e`aud`\u003c/span\u003e claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.\n"
@@ -9886,6 +9925,13 @@
                         "$ref": "#/types/descope:index/InboundAppSessionSettings:InboundAppSessionSettings",
                         "description": "Custom session management settings for this inbound app, overriding the project defaults.\n"
                     },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.\n"
+                    },
                     "tokenExchangeDisabled": {
                         "type": "boolean",
                         "description": "Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.\n"
@@ -9896,6 +9942,100 @@
                             "$ref": "#/types/descope:index/InboundAppWorkloadClientAssertion:InboundAppWorkloadClientAssertion"
                         },
                         "description": "The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when \u003cspan pulumi-lang-nodejs=\"`clientAuthMethod`\" pulumi-lang-dotnet=\"`ClientAuthMethod`\" pulumi-lang-go=\"`clientAuthMethod`\" pulumi-lang-python=\"`client_auth_method`\" pulumi-lang-yaml=\"`clientAuthMethod`\" pulumi-lang-java=\"`clientAuthMethod`\" pulumi-lang-hcl=\"`client_auth_method`\"\u003e`clientAuthMethod`\u003c/span\u003e is `workloadIdentity`.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "descope:index/inboundAppAttribute:InboundAppAttribute": {
+            "description": "Manages a single inbound app custom attribute definition in a Descope project.\n",
+            "properties": {
+                "inboundAppAttributeId": {
+                    "type": "string",
+                    "description": "The immutable machine name that identifies the attribute. This value is called `Machine Name` in the Descope console, and JWT templates read an inbound app's value for it as `{{app.customAttributes.\u003cid\u003e}}`. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The display name of the attribute. This value is called `Display Name` in the Descope console.\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project that this inbound app attribute belongs to. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "selectOptions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of options to choose from when the attribute type is \"singleselect\" or \"multiselect\".\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the attribute. Choose one of \"string\", \"number\", \"boolean\", \"singleselect\", \"multiselect\", \"date\", \"monthday\". Changing this value will require the resource to be deleted and recreated.\n"
+                }
+            },
+            "required": [
+                "inboundAppAttributeId",
+                "name",
+                "projectId",
+                "selectOptions",
+                "type"
+            ],
+            "inputProperties": {
+                "inboundAppAttributeId": {
+                    "type": "string",
+                    "description": "The immutable machine name that identifies the attribute. This value is called `Machine Name` in the Descope console, and JWT templates read an inbound app's value for it as `{{app.customAttributes.\u003cid\u003e}}`. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The display name of the attribute. This value is called `Display Name` in the Descope console.\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project that this inbound app attribute belongs to. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "selectOptions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of options to choose from when the attribute type is \"singleselect\" or \"multiselect\".\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the attribute. Choose one of \"string\", \"number\", \"boolean\", \"singleselect\", \"multiselect\", \"date\", \"monthday\". Changing this value will require the resource to be deleted and recreated.\n"
+                }
+            },
+            "requiredInputs": [
+                "inboundAppAttributeId",
+                "projectId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering InboundAppAttribute resources.\n",
+                "properties": {
+                    "inboundAppAttributeId": {
+                        "type": "string",
+                        "description": "The immutable machine name that identifies the attribute. This value is called `Machine Name` in the Descope console, and JWT templates read an inbound app's value for it as `{{app.customAttributes.\u003cid\u003e}}`. Changing this value will require the resource to be deleted and recreated.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The display name of the attribute. This value is called `Display Name` in the Descope console.\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "The ID of the project that this inbound app attribute belongs to. Changing this value will require the resource to be deleted and recreated.\n"
+                    },
+                    "selectOptions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of options to choose from when the attribute type is \"singleselect\" or \"multiselect\".\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of the attribute. Choose one of \"string\", \"number\", \"boolean\", \"singleselect\", \"multiselect\", \"date\", \"monthday\". Changing this value will require the resource to be deleted and recreated.\n"
                     }
                 },
                 "type": "object"
@@ -10143,9 +10283,25 @@
                     "type": "string",
                     "description": "Custom URL to include in the message sent to invited users.\n"
                 },
+                "maxReminders": {
+                    "type": "integer",
+                    "description": "The maximum number of reminders to send for each invitation, between 1 and 5.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "reminderEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the email template to send reminders with, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`invite`\" pulumi-lang-dotnet=\"`Invite`\" pulumi-lang-go=\"`invite`\" pulumi-lang-python=\"`invite`\" pulumi-lang-yaml=\"`invite`\" pulumi-lang-java=\"`invite`\" pulumi-lang-hcl=\"`invite`\"\u003e`invite`\u003c/span\u003e. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
+                },
+                "reminderInterval": {
+                    "type": "string",
+                    "description": "How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as \"2 days\", \"1 week\", etc. The minimum value is \"1 day\".\n"
+                },
+                "reminderTextTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
                 },
                 "requireInvitation": {
                     "type": "boolean",
@@ -10154,6 +10310,10 @@
                 "sendEmail": {
                     "type": "boolean",
                     "description": "Whether to send invitation emails to users.\n"
+                },
+                "sendReminders": {
+                    "type": "boolean",
+                    "description": "Whether to automatically resend the invitation to users who have not accepted it yet, every \u003cspan pulumi-lang-nodejs=\"`reminderInterval`\" pulumi-lang-dotnet=\"`ReminderInterval`\" pulumi-lang-go=\"`reminderInterval`\" pulumi-lang-python=\"`reminder_interval`\" pulumi-lang-yaml=\"`reminderInterval`\" pulumi-lang-java=\"`reminderInterval`\" pulumi-lang-hcl=\"`reminder_interval`\"\u003e`reminderInterval`\u003c/span\u003e and up to \u003cspan pulumi-lang-nodejs=\"`maxReminders`\" pulumi-lang-dotnet=\"`MaxReminders`\" pulumi-lang-go=\"`maxReminders`\" pulumi-lang-python=\"`max_reminders`\" pulumi-lang-yaml=\"`maxReminders`\" pulumi-lang-java=\"`maxReminders`\" pulumi-lang-hcl=\"`max_reminders`\"\u003e`maxReminders`\u003c/span\u003e times. Reminders are only sent through a custom connector, so turning this on requires \u003cspan pulumi-lang-nodejs=\"`emailConnectorId`\" pulumi-lang-dotnet=\"`EmailConnectorId`\" pulumi-lang-go=\"`emailConnectorId`\" pulumi-lang-python=\"`email_connector_id`\" pulumi-lang-yaml=\"`emailConnectorId`\" pulumi-lang-java=\"`emailConnectorId`\" pulumi-lang-hcl=\"`email_connector_id`\"\u003e`emailConnectorId`\u003c/span\u003e to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.\n"
                 },
                 "sendText": {
                     "type": "boolean",
@@ -10167,9 +10327,14 @@
                 "expireInvitedUsers",
                 "inviteExpiration",
                 "inviteUrl",
+                "maxReminders",
                 "projectId",
+                "reminderEmailTemplateId",
+                "reminderInterval",
+                "reminderTextTemplateId",
                 "requireInvitation",
                 "sendEmail",
+                "sendReminders",
                 "sendText"
             ],
             "inputProperties": {
@@ -10197,9 +10362,25 @@
                     "type": "string",
                     "description": "Custom URL to include in the message sent to invited users.\n"
                 },
+                "maxReminders": {
+                    "type": "integer",
+                    "description": "The maximum number of reminders to send for each invitation, between 1 and 5.\n"
+                },
                 "projectId": {
                     "type": "string",
                     "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
+                },
+                "reminderEmailTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the email template to send reminders with, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`invite`\" pulumi-lang-dotnet=\"`Invite`\" pulumi-lang-go=\"`invite`\" pulumi-lang-python=\"`invite`\" pulumi-lang-yaml=\"`invite`\" pulumi-lang-java=\"`invite`\" pulumi-lang-hcl=\"`invite`\"\u003e`invite`\u003c/span\u003e. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
+                },
+                "reminderInterval": {
+                    "type": "string",
+                    "description": "How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as \"2 days\", \"1 week\", etc. The minimum value is \"1 day\".\n"
+                },
+                "reminderTextTemplateId": {
+                    "type": "string",
+                    "description": "The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
                 },
                 "requireInvitation": {
                     "type": "boolean",
@@ -10208,6 +10389,10 @@
                 "sendEmail": {
                     "type": "boolean",
                     "description": "Whether to send invitation emails to users.\n"
+                },
+                "sendReminders": {
+                    "type": "boolean",
+                    "description": "Whether to automatically resend the invitation to users who have not accepted it yet, every \u003cspan pulumi-lang-nodejs=\"`reminderInterval`\" pulumi-lang-dotnet=\"`ReminderInterval`\" pulumi-lang-go=\"`reminderInterval`\" pulumi-lang-python=\"`reminder_interval`\" pulumi-lang-yaml=\"`reminderInterval`\" pulumi-lang-java=\"`reminderInterval`\" pulumi-lang-hcl=\"`reminder_interval`\"\u003e`reminderInterval`\u003c/span\u003e and up to \u003cspan pulumi-lang-nodejs=\"`maxReminders`\" pulumi-lang-dotnet=\"`MaxReminders`\" pulumi-lang-go=\"`maxReminders`\" pulumi-lang-python=\"`max_reminders`\" pulumi-lang-yaml=\"`maxReminders`\" pulumi-lang-java=\"`maxReminders`\" pulumi-lang-hcl=\"`max_reminders`\"\u003e`maxReminders`\u003c/span\u003e times. Reminders are only sent through a custom connector, so turning this on requires \u003cspan pulumi-lang-nodejs=\"`emailConnectorId`\" pulumi-lang-dotnet=\"`EmailConnectorId`\" pulumi-lang-go=\"`emailConnectorId`\" pulumi-lang-python=\"`email_connector_id`\" pulumi-lang-yaml=\"`emailConnectorId`\" pulumi-lang-java=\"`emailConnectorId`\" pulumi-lang-hcl=\"`email_connector_id`\"\u003e`emailConnectorId`\u003c/span\u003e to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.\n"
                 },
                 "sendText": {
                     "type": "boolean",
@@ -10244,9 +10429,25 @@
                         "type": "string",
                         "description": "Custom URL to include in the message sent to invited users.\n"
                     },
+                    "maxReminders": {
+                        "type": "integer",
+                        "description": "The maximum number of reminders to send for each invitation, between 1 and 5.\n"
+                    },
                     "projectId": {
                         "type": "string",
                         "description": "The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.\n"
+                    },
+                    "reminderEmailTemplateId": {
+                        "type": "string",
+                        "description": "The ID of the email template to send reminders with, taken from a \u003cspan pulumi-lang-nodejs=\"`descope.EmailTemplate`\" pulumi-lang-dotnet=\"`descope.EmailTemplate`\" pulumi-lang-go=\"`EmailTemplate`\" pulumi-lang-python=\"`EmailTemplate`\" pulumi-lang-yaml=\"`descope.EmailTemplate`\" pulumi-lang-java=\"`descope.EmailTemplate`\" pulumi-lang-hcl=\"`descope_email_template`\"\u003e`descope.EmailTemplate`\u003c/span\u003e resource with its \u003cspan pulumi-lang-nodejs=\"`method`\" pulumi-lang-dotnet=\"`Method`\" pulumi-lang-go=\"`method`\" pulumi-lang-python=\"`method`\" pulumi-lang-yaml=\"`method`\" pulumi-lang-java=\"`method`\" pulumi-lang-hcl=\"`method`\"\u003e`method`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`invite`\" pulumi-lang-dotnet=\"`Invite`\" pulumi-lang-go=\"`invite`\" pulumi-lang-python=\"`invite`\" pulumi-lang-yaml=\"`invite`\" pulumi-lang-java=\"`invite`\" pulumi-lang-hcl=\"`invite`\"\u003e`invite`\u003c/span\u003e. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
+                    },
+                    "reminderInterval": {
+                        "type": "string",
+                        "description": "How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as \"2 days\", \"1 week\", etc. The minimum value is \"1 day\".\n"
+                    },
+                    "reminderTextTemplateId": {
+                        "type": "string",
+                        "description": "The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.\n"
                     },
                     "requireInvitation": {
                         "type": "boolean",
@@ -10255,6 +10456,10 @@
                     "sendEmail": {
                         "type": "boolean",
                         "description": "Whether to send invitation emails to users.\n"
+                    },
+                    "sendReminders": {
+                        "type": "boolean",
+                        "description": "Whether to automatically resend the invitation to users who have not accepted it yet, every \u003cspan pulumi-lang-nodejs=\"`reminderInterval`\" pulumi-lang-dotnet=\"`ReminderInterval`\" pulumi-lang-go=\"`reminderInterval`\" pulumi-lang-python=\"`reminder_interval`\" pulumi-lang-yaml=\"`reminderInterval`\" pulumi-lang-java=\"`reminderInterval`\" pulumi-lang-hcl=\"`reminder_interval`\"\u003e`reminderInterval`\u003c/span\u003e and up to \u003cspan pulumi-lang-nodejs=\"`maxReminders`\" pulumi-lang-dotnet=\"`MaxReminders`\" pulumi-lang-go=\"`maxReminders`\" pulumi-lang-python=\"`max_reminders`\" pulumi-lang-yaml=\"`maxReminders`\" pulumi-lang-java=\"`maxReminders`\" pulumi-lang-hcl=\"`max_reminders`\"\u003e`maxReminders`\u003c/span\u003e times. Reminders are only sent through a custom connector, so turning this on requires \u003cspan pulumi-lang-nodejs=\"`emailConnectorId`\" pulumi-lang-dotnet=\"`EmailConnectorId`\" pulumi-lang-go=\"`emailConnectorId`\" pulumi-lang-python=\"`email_connector_id`\" pulumi-lang-yaml=\"`emailConnectorId`\" pulumi-lang-java=\"`emailConnectorId`\" pulumi-lang-hcl=\"`email_connector_id`\"\u003e`emailConnectorId`\u003c/span\u003e to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.\n"
                     },
                     "sendText": {
                         "type": "boolean",
@@ -13304,6 +13509,10 @@
                     "type": "string",
                     "description": "A name for the outbound application.\n"
                 },
+                "outboundAppId": {
+                    "type": "string",
+                    "description": "The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.\n"
+                },
                 "pkce": {
                     "type": "boolean",
                     "description": "Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.\n"
@@ -13352,6 +13561,7 @@
                 "defaultScopes",
                 "description",
                 "discoveryUrl",
+                "outboundAppId",
                 "logo",
                 "name",
                 "pkce",
@@ -13425,6 +13635,10 @@
                 "name": {
                     "type": "string",
                     "description": "A name for the outbound application.\n"
+                },
+                "outboundAppId": {
+                    "type": "string",
+                    "description": "The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.\n"
                 },
                 "pkce": {
                     "type": "boolean",
@@ -13529,6 +13743,10 @@
                     "name": {
                         "type": "string",
                         "description": "A name for the outbound application.\n"
+                    },
+                    "outboundAppId": {
+                        "type": "string",
+                        "description": "The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.\n"
                     },
                     "pkce": {
                         "type": "boolean",
@@ -18801,6 +19019,10 @@
                     "type": "boolean",
                     "description": "Whether to enable groups priority.\n"
                 },
+                "ignoreInvalidIdpPhones": {
+                    "type": "boolean",
+                    "description": "When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.\n"
+                },
                 "limitMappingToMandatoryAttributes": {
                     "type": "boolean",
                     "description": "Mapping to attributes not specified in \u003cspan pulumi-lang-nodejs=\"`mandatoryUserAttributes`\" pulumi-lang-dotnet=\"`MandatoryUserAttributes`\" pulumi-lang-go=\"`mandatoryUserAttributes`\" pulumi-lang-python=\"`mandatory_user_attributes`\" pulumi-lang-yaml=\"`mandatoryUserAttributes`\" pulumi-lang-java=\"`mandatoryUserAttributes`\" pulumi-lang-hcl=\"`mandatory_user_attributes`\"\u003e`mandatoryUserAttributes`\u003c/span\u003e is not allowed.\n"
@@ -18818,7 +19040,7 @@
                 },
                 "mergeUsers": {
                     "type": "boolean",
-                    "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
+                    "description": "Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -18851,6 +19073,7 @@
                 "emailTemplateId",
                 "externalEmailTemplateId",
                 "groupsPriority",
+                "ignoreInvalidIdpPhones",
                 "limitMappingToMandatoryAttributes",
                 "mandatoryUserAttributes",
                 "markEmailAsUnverified",
@@ -18898,6 +19121,10 @@
                     "type": "boolean",
                     "description": "Whether to enable groups priority.\n"
                 },
+                "ignoreInvalidIdpPhones": {
+                    "type": "boolean",
+                    "description": "When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.\n"
+                },
                 "limitMappingToMandatoryAttributes": {
                     "type": "boolean",
                     "description": "Mapping to attributes not specified in \u003cspan pulumi-lang-nodejs=\"`mandatoryUserAttributes`\" pulumi-lang-dotnet=\"`MandatoryUserAttributes`\" pulumi-lang-go=\"`mandatoryUserAttributes`\" pulumi-lang-python=\"`mandatory_user_attributes`\" pulumi-lang-yaml=\"`mandatoryUserAttributes`\" pulumi-lang-java=\"`mandatoryUserAttributes`\" pulumi-lang-hcl=\"`mandatory_user_attributes`\"\u003e`mandatoryUserAttributes`\u003c/span\u003e is not allowed.\n"
@@ -18915,7 +19142,7 @@
                 },
                 "mergeUsers": {
                     "type": "boolean",
-                    "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
+                    "description": "Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -18980,6 +19207,10 @@
                         "type": "boolean",
                         "description": "Whether to enable groups priority.\n"
                     },
+                    "ignoreInvalidIdpPhones": {
+                        "type": "boolean",
+                        "description": "When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.\n"
+                    },
                     "limitMappingToMandatoryAttributes": {
                         "type": "boolean",
                         "description": "Mapping to attributes not specified in \u003cspan pulumi-lang-nodejs=\"`mandatoryUserAttributes`\" pulumi-lang-dotnet=\"`MandatoryUserAttributes`\" pulumi-lang-go=\"`mandatoryUserAttributes`\" pulumi-lang-python=\"`mandatory_user_attributes`\" pulumi-lang-yaml=\"`mandatoryUserAttributes`\" pulumi-lang-java=\"`mandatoryUserAttributes`\" pulumi-lang-hcl=\"`mandatory_user_attributes`\"\u003e`mandatoryUserAttributes`\u003c/span\u003e is not allowed.\n"
@@ -18997,7 +19228,7 @@
                     },
                     "mergeUsers": {
                         "type": "boolean",
-                        "description": "Whether to merge existing user accounts with new ones created through SSO authentication.\n"
+                        "description": "Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.\n"
                     },
                     "projectId": {
                         "type": "string",
