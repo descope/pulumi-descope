@@ -53,10 +53,34 @@ namespace Descope.Pulumi.Descope
         public Output<string> InviteUrl { get; private set; } = null!;
 
         /// <summary>
+        /// The maximum number of reminders to send for each invitation, between 1 and 5.
+        /// </summary>
+        [Output("maxReminders")]
+        public Output<int> MaxReminders { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Output("projectId")]
         public Output<string> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `Method` set to `Invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Output("reminderEmailTemplateId")]
+        public Output<string> ReminderEmailTemplateId { get; private set; } = null!;
+
+        /// <summary>
+        /// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        /// </summary>
+        [Output("reminderInterval")]
+        public Output<string> ReminderInterval { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Output("reminderTextTemplateId")]
+        public Output<string> ReminderTextTemplateId { get; private set; } = null!;
 
         /// <summary>
         /// Whether users must be invited before they can sign up to the project.
@@ -69,6 +93,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("sendEmail")]
         public Output<bool> SendEmail { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to automatically resend the invitation to users who have not accepted it yet, every `ReminderInterval` and up to `MaxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `EmailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        /// </summary>
+        [Output("sendReminders")]
+        public Output<bool> SendReminders { get; private set; } = null!;
 
         /// <summary>
         /// Whether to send invitation SMS messages to users.
@@ -160,10 +190,34 @@ namespace Descope.Pulumi.Descope
         public Input<string>? InviteUrl { get; set; }
 
         /// <summary>
+        /// The maximum number of reminders to send for each invitation, between 1 and 5.
+        /// </summary>
+        [Input("maxReminders")]
+        public Input<int>? MaxReminders { get; set; }
+
+        /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("projectId", required: true)]
         public Input<string> ProjectId { get; set; } = null!;
+
+        /// <summary>
+        /// The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `Method` set to `Invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Input("reminderEmailTemplateId")]
+        public Input<string>? ReminderEmailTemplateId { get; set; }
+
+        /// <summary>
+        /// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        /// </summary>
+        [Input("reminderInterval")]
+        public Input<string>? ReminderInterval { get; set; }
+
+        /// <summary>
+        /// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Input("reminderTextTemplateId")]
+        public Input<string>? ReminderTextTemplateId { get; set; }
 
         /// <summary>
         /// Whether users must be invited before they can sign up to the project.
@@ -176,6 +230,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sendEmail")]
         public Input<bool>? SendEmail { get; set; }
+
+        /// <summary>
+        /// Whether to automatically resend the invitation to users who have not accepted it yet, every `ReminderInterval` and up to `MaxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `EmailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        /// </summary>
+        [Input("sendReminders")]
+        public Input<bool>? SendReminders { get; set; }
 
         /// <summary>
         /// Whether to send invitation SMS messages to users.
@@ -228,10 +288,34 @@ namespace Descope.Pulumi.Descope
         public Input<string>? InviteUrl { get; set; }
 
         /// <summary>
+        /// The maximum number of reminders to send for each invitation, between 1 and 5.
+        /// </summary>
+        [Input("maxReminders")]
+        public Input<int>? MaxReminders { get; set; }
+
+        /// <summary>
         /// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         /// </summary>
         [Input("projectId")]
         public Input<string>? ProjectId { get; set; }
+
+        /// <summary>
+        /// The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `Method` set to `Invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Input("reminderEmailTemplateId")]
+        public Input<string>? ReminderEmailTemplateId { get; set; }
+
+        /// <summary>
+        /// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+        /// </summary>
+        [Input("reminderInterval")]
+        public Input<string>? ReminderInterval { get; set; }
+
+        /// <summary>
+        /// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+        /// </summary>
+        [Input("reminderTextTemplateId")]
+        public Input<string>? ReminderTextTemplateId { get; set; }
 
         /// <summary>
         /// Whether users must be invited before they can sign up to the project.
@@ -244,6 +328,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sendEmail")]
         public Input<bool>? SendEmail { get; set; }
+
+        /// <summary>
+        /// Whether to automatically resend the invitation to users who have not accepted it yet, every `ReminderInterval` and up to `MaxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `EmailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+        /// </summary>
+        [Input("sendReminders")]
+        public Input<bool>? SendReminders { get; set; }
 
         /// <summary>
         /// Whether to send invitation SMS messages to users.

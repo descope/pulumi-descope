@@ -34,6 +34,7 @@ class InboundAppArgs:
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
                  connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -49,6 +50,7 @@ class InboundAppArgs:
                  refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]] = None,
                  session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]] = None):
         """
@@ -67,6 +69,7 @@ class InboundAppArgs:
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[_builtins.str] custom_attributes: A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -82,6 +85,7 @@ class InboundAppArgs:
         :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input['InboundAppSessionSettingsArgs'] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
         :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
@@ -110,6 +114,8 @@ class InboundAppArgs:
             pulumi.set(__self__, "client_type", client_type)
         if connections_scopes is not None:
             pulumi.set(__self__, "connections_scopes", connections_scopes)
+        if custom_attributes is not None:
+            pulumi.set(__self__, "custom_attributes", custom_attributes)
         if default_audience is not None:
             pulumi.set(__self__, "default_audience", default_audience)
         if deletion_protection is not None:
@@ -140,6 +146,8 @@ class InboundAppArgs:
             pulumi.set(__self__, "scope_claim_mappings", scope_claim_mappings)
         if session_settings is not None:
             pulumi.set(__self__, "session_settings", session_settings)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if token_exchange_disabled is not None:
             pulumi.set(__self__, "token_exchange_disabled", token_exchange_disabled)
         if workload_client_assertions is not None:
@@ -300,6 +308,18 @@ class InboundAppArgs:
     @connections_scopes.setter
     def connections_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
         pulumi.set(self, "connections_scopes", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customAttributes")
+    def custom_attributes(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        """
+        return pulumi.get(self, "custom_attributes")
+
+    @custom_attributes.setter
+    def custom_attributes(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "custom_attributes", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultAudience")
@@ -482,6 +502,18 @@ class InboundAppArgs:
         pulumi.set(self, "session_settings", value)
 
     @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
     @pulumi.getter(name="tokenExchangeDisabled")
     def token_exchange_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -521,6 +553,7 @@ class _InboundAppState:
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
                  connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -537,6 +570,7 @@ class _InboundAppState:
                  refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]]] = None,
                  session_settings: pulumi.Input[Optional['InboundAppSessionSettingsArgs']] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]]] = None):
         """
@@ -554,6 +588,7 @@ class _InboundAppState:
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[_builtins.str] custom_attributes: A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -570,6 +605,7 @@ class _InboundAppState:
         :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppScopeClaimMappingArgs']]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input['InboundAppSessionSettingsArgs'] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
         :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input['InboundAppWorkloadClientAssertionArgs']]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
@@ -597,6 +633,8 @@ class _InboundAppState:
             pulumi.set(__self__, "client_type", client_type)
         if connections_scopes is not None:
             pulumi.set(__self__, "connections_scopes", connections_scopes)
+        if custom_attributes is not None:
+            pulumi.set(__self__, "custom_attributes", custom_attributes)
         if default_audience is not None:
             pulumi.set(__self__, "default_audience", default_audience)
         if deletion_protection is not None:
@@ -629,6 +667,8 @@ class _InboundAppState:
             pulumi.set(__self__, "scope_claim_mappings", scope_claim_mappings)
         if session_settings is not None:
             pulumi.set(__self__, "session_settings", session_settings)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if token_exchange_disabled is not None:
             pulumi.set(__self__, "token_exchange_disabled", token_exchange_disabled)
         if workload_client_assertions is not None:
@@ -777,6 +817,18 @@ class _InboundAppState:
     @connections_scopes.setter
     def connections_scopes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['InboundAppConnectionsScopeArgs']]]]):
         pulumi.set(self, "connections_scopes", value)
+
+    @_builtins.property
+    @pulumi.getter(name="customAttributes")
+    def custom_attributes(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        """
+        return pulumi.get(self, "custom_attributes")
+
+    @custom_attributes.setter
+    def custom_attributes(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "custom_attributes", value)
 
     @_builtins.property
     @pulumi.getter(name="defaultAudience")
@@ -971,6 +1023,18 @@ class _InboundAppState:
         pulumi.set(self, "session_settings", value)
 
     @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @_builtins.property
     @pulumi.getter(name="tokenExchangeDisabled")
     def token_exchange_disabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -1013,6 +1077,7 @@ class InboundApp(pulumi.CustomResource):
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
                  connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1029,11 +1094,45 @@ class InboundApp(pulumi.CustomResource):
                  refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
                  session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None,
                  __props__=None):
         """
-        Create a InboundApp resource with the given unique name, props, and options.
+        Manages an inbound app, an OAuth client that requests tokens from a Descope project.
+
+        ## Example Usage
+
+        ### Machine-to-machine app with a custom attribute
+
+        The app below only uses the `client_credentials` grant type, so every other grant type is disabled. Its
+        `managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared
+        by every app, with a claim such as `"{{app.customAttributes.managingOrganization}}"`.
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+        import json
+
+        managing_organization = descope.InboundAppAttribute("managing_organization",
+            project_id=example["id"],
+            inbound_app_attribute_id="managingOrganization",
+            name="Managing Organization",
+            type="string")
+        partner_backend = descope.InboundApp("partner_backend",
+            project_id=example["id"],
+            name="Partner Backend",
+            client_type="confidential",
+            authorization_code_disabled=True,
+            refresh_token_disabled=True,
+            device_code_disabled=True,
+            jwt_bearer_disabled=True,
+            token_exchange_disabled=True,
+            custom_attributes=pulumi.Output.json_dumps(managing_organization.inbound_app_attribute_id.apply(lambda inbound_app_attribute_id: {
+                inbound_app_attribute_id: "6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13",
+            })))
+        ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -1049,6 +1148,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[_builtins.str] custom_attributes: A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -1065,6 +1165,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
         :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
@@ -1075,7 +1176,40 @@ class InboundApp(pulumi.CustomResource):
                  args: InboundAppArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a InboundApp resource with the given unique name, props, and options.
+        Manages an inbound app, an OAuth client that requests tokens from a Descope project.
+
+        ## Example Usage
+
+        ### Machine-to-machine app with a custom attribute
+
+        The app below only uses the `client_credentials` grant type, so every other grant type is disabled. Its
+        `managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared
+        by every app, with a claim such as `"{{app.customAttributes.managingOrganization}}"`.
+
+        ```python
+        import pulumi
+        import descope_pulumi as descope
+        import json
+
+        managing_organization = descope.InboundAppAttribute("managing_organization",
+            project_id=example["id"],
+            inbound_app_attribute_id="managingOrganization",
+            name="Managing Organization",
+            type="string")
+        partner_backend = descope.InboundApp("partner_backend",
+            project_id=example["id"],
+            name="Partner Backend",
+            client_type="confidential",
+            authorization_code_disabled=True,
+            refresh_token_disabled=True,
+            device_code_disabled=True,
+            jwt_bearer_disabled=True,
+            token_exchange_disabled=True,
+            custom_attributes=pulumi.Output.json_dumps(managing_organization.inbound_app_attribute_id.apply(lambda inbound_app_attribute_id: {
+                inbound_app_attribute_id: "6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13",
+            })))
+        ```
+
 
         :param str resource_name: The name of the resource.
         :param InboundAppArgs args: The arguments to use to populate this resource's properties.
@@ -1104,6 +1238,7 @@ class InboundApp(pulumi.CustomResource):
                  client_secret: pulumi.Input[Optional[_builtins.str]] = None,
                  client_type: pulumi.Input[Optional[_builtins.str]] = None,
                  connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
+                 custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
                  default_audience: pulumi.Input[Optional[_builtins.str]] = None,
                  deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1120,6 +1255,7 @@ class InboundApp(pulumi.CustomResource):
                  refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
                  session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None,
                  __props__=None):
@@ -1143,6 +1279,7 @@ class InboundApp(pulumi.CustomResource):
             __props__.__dict__["client_secret"] = None if client_secret is None else pulumi.Output.secret(client_secret)
             __props__.__dict__["client_type"] = client_type
             __props__.__dict__["connections_scopes"] = connections_scopes
+            __props__.__dict__["custom_attributes"] = custom_attributes
             __props__.__dict__["default_audience"] = default_audience
             __props__.__dict__["deletion_protection"] = deletion_protection
             __props__.__dict__["description"] = description
@@ -1161,6 +1298,7 @@ class InboundApp(pulumi.CustomResource):
             __props__.__dict__["refresh_token_disabled"] = refresh_token_disabled
             __props__.__dict__["scope_claim_mappings"] = scope_claim_mappings
             __props__.__dict__["session_settings"] = session_settings
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["token_exchange_disabled"] = token_exchange_disabled
             __props__.__dict__["workload_client_assertions"] = workload_client_assertions
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["clientSecret"])
@@ -1187,6 +1325,7 @@ class InboundApp(pulumi.CustomResource):
             client_secret: pulumi.Input[Optional[_builtins.str]] = None,
             client_type: pulumi.Input[Optional[_builtins.str]] = None,
             connections_scopes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]]] = None,
+            custom_attributes: pulumi.Input[Optional[_builtins.str]] = None,
             default_audience: pulumi.Input[Optional[_builtins.str]] = None,
             deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1203,6 +1342,7 @@ class InboundApp(pulumi.CustomResource):
             refresh_token_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             scope_claim_mappings: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]]] = None,
             session_settings: pulumi.Input[Optional[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             token_exchange_disabled: pulumi.Input[Optional[_builtins.bool]] = None,
             workload_client_assertions: pulumi.Input[Optional[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]]] = None) -> 'InboundApp':
         """
@@ -1224,6 +1364,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] client_secret: The client secret for authenticating this inbound app. This value is generated automatically and cannot be retrieved after the resource is created. Store this value securely.
         :param pulumi.Input[_builtins.str] client_type: The OAuth client type: `confidential` for a client that authenticates with a secret, or `public` for one that authenticates with PKCE and has no secret. Setting it explicitly is recommended. The empty value `""` is the legacy mode. If this attribute is omitted when the app is created, the account's default client type is used and the stored value shows which one it is, and removing the attribute from the configuration later keeps the current type. Moving from the legacy mode to `confidential` updates the app in place and keeps its client ID, and any other change, including a move to the legacy mode, replaces the resource, which issues a new client ID and secret. An app that was never issued a client secret, such as one created with `non_confidential_client = true` in v0.3, needs one after moving to `confidential`: rotate its client secret, for example in the Descope console, or force a replacement with `pulumi up -replace` to get a new client ID and secret.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppConnectionsScopeArgs', 'InboundAppConnectionsScopeArgsDict', 'outputs.InboundAppConnectionsScope']]]] connections_scopes: A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
+        :param pulumi.Input[_builtins.str] custom_attributes: A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
         :param pulumi.Input[_builtins.str] default_audience: The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         :param pulumi.Input[_builtins.bool] deletion_protection: Protects the inbound app from being accidentally destroyed or replaced. Destroying or replacing an inbound app issues a new client ID and client secret, breaking any integrations that rely on the existing ones, so inbound apps are protected by default. To allow the resource to be destroyed or replaced, for example in ephemeral test environments, set this attribute to `false` and apply the change first.
         :param pulumi.Input[_builtins.str] description: A description for the inbound app.
@@ -1240,6 +1381,7 @@ class InboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] refresh_token_disabled: Disables the `refresh_token` grant type for this inbound app, so its tokens cannot be refreshed. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppScopeClaimMappingArgs', 'InboundAppScopeClaimMappingArgsDict', 'outputs.InboundAppScopeClaimMapping']]]] scope_claim_mappings: Maps the claims that each scope contributes to the tokens issued for this app. This is the structured form of `attributes_scopes` and takes precedence over it: when a requested scope appears in both, the mapping here wins.
         :param pulumi.Input[Union['InboundAppSessionSettingsArgs', 'InboundAppSessionSettingsArgsDict', 'outputs.InboundAppSessionSettings']] session_settings: Custom session management settings for this inbound app, overriding the project defaults.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
         :param pulumi.Input[_builtins.bool] token_exchange_disabled: Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
         :param pulumi.Input[Sequence[pulumi.Input[Union['InboundAppWorkloadClientAssertionArgs', 'InboundAppWorkloadClientAssertionArgsDict', 'outputs.InboundAppWorkloadClientAssertion']]]] workload_client_assertions: The workload identity issuers this app trusts, each a SPIFFE trust domain or an OIDC issuer together with the workload subjects it accepts. Required to have at least one entry when `client_auth_method` is `workloadIdentity`.
         """
@@ -1259,6 +1401,7 @@ class InboundApp(pulumi.CustomResource):
         __props__.__dict__["client_secret"] = client_secret
         __props__.__dict__["client_type"] = client_type
         __props__.__dict__["connections_scopes"] = connections_scopes
+        __props__.__dict__["custom_attributes"] = custom_attributes
         __props__.__dict__["default_audience"] = default_audience
         __props__.__dict__["deletion_protection"] = deletion_protection
         __props__.__dict__["description"] = description
@@ -1275,6 +1418,7 @@ class InboundApp(pulumi.CustomResource):
         __props__.__dict__["refresh_token_disabled"] = refresh_token_disabled
         __props__.__dict__["scope_claim_mappings"] = scope_claim_mappings
         __props__.__dict__["session_settings"] = session_settings
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["token_exchange_disabled"] = token_exchange_disabled
         __props__.__dict__["workload_client_assertions"] = workload_client_assertions
         return InboundApp(resource_name, opts=opts, __props__=__props__)
@@ -1374,6 +1518,14 @@ class InboundApp(pulumi.CustomResource):
         A list of connection scopes that the inbound app can request. Connection scopes provide the app with the ability to access external tokens based on the mapped scopes.
         """
         return pulumi.get(self, "connections_scopes")
+
+    @_builtins.property
+    @pulumi.getter(name="customAttributes")
+    def custom_attributes(self) -> pulumi.Output[_builtins.str]:
+        """
+        A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.<id>}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        """
+        return pulumi.get(self, "custom_attributes")
 
     @_builtins.property
     @pulumi.getter(name="defaultAudience")
@@ -1502,6 +1654,14 @@ class InboundApp(pulumi.CustomResource):
         Custom session management settings for this inbound app, overriding the project defaults.
         """
         return pulumi.get(self, "session_settings")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Sequence[_builtins.str]]:
+        """
+        Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        """
+        return pulumi.get(self, "tags")
 
     @_builtins.property
     @pulumi.getter(name="tokenExchangeDisabled")

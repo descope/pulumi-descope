@@ -182,6 +182,36 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
     }
 
     /**
+     * The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+     * 
+     */
+    @Import(name="loginFlowId")
+    private @Nullable Output<String> loginFlowId;
+
+    /**
+     * @return The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+     * 
+     */
+    public Optional<Output<String>> loginFlowId() {
+        return Optional.ofNullable(this.loginFlowId);
+    }
+
+    /**
+     * The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+     * 
+     */
+    @Import(name="loginFlowStyleId")
+    private @Nullable Output<String> loginFlowStyleId;
+
+    /**
+     * @return The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+     * 
+     */
+    public Optional<Output<String>> loginFlowStyleId() {
+        return Optional.ofNullable(this.loginFlowStyleId);
+    }
+
+    /**
      * The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
      * 
      */
@@ -270,6 +300,8 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
         this.hideSaml = $.hideSaml;
         this.hideScim = $.hideScim;
         this.hideSso = $.hideSso;
+        this.loginFlowId = $.loginFlowId;
+        this.loginFlowStyleId = $.loginFlowStyleId;
         this.oidcLoginIdAttribute = $.oidcLoginIdAttribute;
         this.showHelpContact = $.showHelpContact;
         this.showXaa = $.showXaa;
@@ -524,6 +556,48 @@ public final class SsoSettingsSsoSuiteSettingsArgs extends com.pulumi.resources.
          */
         public Builder hideSso(Boolean hideSso) {
             return hideSso(Output.of(hideSso));
+        }
+
+        /**
+         * @param loginFlowId The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder loginFlowId(@Nullable Output<String> loginFlowId) {
+            $.loginFlowId = loginFlowId;
+            return this;
+        }
+
+        /**
+         * @param loginFlowId The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder loginFlowId(String loginFlowId) {
+            return loginFlowId(Output.of(loginFlowId));
+        }
+
+        /**
+         * @param loginFlowStyleId The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder loginFlowStyleId(@Nullable Output<String> loginFlowStyleId) {
+            $.loginFlowStyleId = loginFlowStyleId;
+            return this;
+        }
+
+        /**
+         * @param loginFlowStyleId The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder loginFlowStyleId(String loginFlowStyleId) {
+            return loginFlowStyleId(Output.of(loginFlowStyleId));
         }
 
         /**

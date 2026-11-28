@@ -58,6 +58,7 @@ from .hibp_connector import *
 from .http_connector import *
 from .hubspot_connector import *
 from .inbound_app import *
+from .inbound_app_attribute import *
 from .incode_connector import *
 from .intercom_connector import *
 from .invite_settings import *
@@ -559,6 +560,14 @@ _utilities.register(
   "fqn": "descope_pulumi",
   "classes": {
    "descope:index/inboundApp:InboundApp": "InboundApp"
+  }
+ },
+ {
+  "pkg": "descope",
+  "mod": "index/inboundAppAttribute",
+  "fqn": "descope_pulumi",
+  "classes": {
+   "descope:index/inboundAppAttribute:InboundAppAttribute": "InboundAppAttribute"
   }
  },
  {

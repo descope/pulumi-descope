@@ -68,6 +68,16 @@ public final class SsoSettingsSsoSuiteSettings {
      */
     private @Nullable Boolean hideSso;
     /**
+     * @return The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+     * 
+     */
+    private @Nullable String loginFlowId;
+    /**
+     * @return The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+     * 
+     */
+    private @Nullable String loginFlowStyleId;
+    /**
      * @return The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
      * 
      */
@@ -172,6 +182,20 @@ public final class SsoSettingsSsoSuiteSettings {
         return Optional.ofNullable(this.hideSso);
     }
     /**
+     * @return The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+     * 
+     */
+    public Optional<String> loginFlowId() {
+        return Optional.ofNullable(this.loginFlowId);
+    }
+    /**
+     * @return The ID of the style to apply to the login flow. Leave empty to use the project&#39;s default flow style.
+     * 
+     */
+    public Optional<String> loginFlowStyleId() {
+        return Optional.ofNullable(this.loginFlowStyleId);
+    }
+    /**
      * @return The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `sub` claim. SAML configurations are unaffected.
      * 
      */
@@ -227,6 +251,8 @@ public final class SsoSettingsSsoSuiteSettings {
         private @Nullable Boolean hideSaml;
         private @Nullable Boolean hideScim;
         private @Nullable Boolean hideSso;
+        private @Nullable String loginFlowId;
+        private @Nullable String loginFlowStyleId;
         private @Nullable String oidcLoginIdAttribute;
         private @Nullable Boolean showHelpContact;
         private @Nullable Boolean showXaa;
@@ -246,6 +272,8 @@ public final class SsoSettingsSsoSuiteSettings {
     	      this.hideSaml = defaults.hideSaml;
     	      this.hideScim = defaults.hideScim;
     	      this.hideSso = defaults.hideSso;
+    	      this.loginFlowId = defaults.loginFlowId;
+    	      this.loginFlowStyleId = defaults.loginFlowStyleId;
     	      this.oidcLoginIdAttribute = defaults.oidcLoginIdAttribute;
     	      this.showHelpContact = defaults.showHelpContact;
     	      this.showXaa = defaults.showXaa;
@@ -320,6 +348,18 @@ public final class SsoSettingsSsoSuiteSettings {
             return this;
         }
         @CustomType.Setter
+        public Builder loginFlowId(@Nullable String loginFlowId) {
+
+            this.loginFlowId = loginFlowId;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder loginFlowStyleId(@Nullable String loginFlowStyleId) {
+
+            this.loginFlowStyleId = loginFlowStyleId;
+            return this;
+        }
+        @CustomType.Setter
         public Builder oidcLoginIdAttribute(@Nullable String oidcLoginIdAttribute) {
 
             this.oidcLoginIdAttribute = oidcLoginIdAttribute;
@@ -362,6 +402,8 @@ public final class SsoSettingsSsoSuiteSettings {
             _resultValue.hideSaml = hideSaml;
             _resultValue.hideScim = hideScim;
             _resultValue.hideSso = hideSso;
+            _resultValue.loginFlowId = loginFlowId;
+            _resultValue.loginFlowStyleId = loginFlowStyleId;
             _resultValue.oidcLoginIdAttribute = oidcLoginIdAttribute;
             _resultValue.showHelpContact = showHelpContact;
             _resultValue.showXaa = showXaa;

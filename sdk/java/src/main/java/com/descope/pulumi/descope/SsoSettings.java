@@ -150,6 +150,20 @@ public class SsoSettings extends com.pulumi.resources.CustomResource {
         return this.groupsPriority;
     }
     /**
+     * When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+     * 
+     */
+    @Export(name="ignoreInvalidIdpPhones", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> ignoreInvalidIdpPhones;
+
+    /**
+     * @return When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project&#39;s Troubleshooting logs.
+     * 
+     */
+    public Output<Boolean> ignoreInvalidIdpPhones() {
+        return this.ignoreInvalidIdpPhones;
+    }
+    /**
      * Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
      * 
      */
@@ -192,14 +206,14 @@ public class SsoSettings extends com.pulumi.resources.CustomResource {
         return this.markEmailAsUnverified;
     }
     /**
-     * Whether to merge existing user accounts with new ones created through SSO authentication.
+     * Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      * 
      */
     @Export(name="mergeUsers", refs={Boolean.class}, tree="[0]")
     private Output<Boolean> mergeUsers;
 
     /**
-     * @return Whether to merge existing user accounts with new ones created through SSO authentication.
+     * @return Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
      * 
      */
     public Output<Boolean> mergeUsers() {

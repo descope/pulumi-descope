@@ -31,14 +31,14 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * A valid management key for your Descope company
+     * A valid management key for your Descope company, or a workload identity token for a federated management key
      * 
      */
     @Import(name="managementKey")
     private @Nullable Output<String> managementKey;
 
     /**
-     * @return A valid management key for your Descope company
+     * @return A valid management key for your Descope company, or a workload identity token for a federated management key
      * 
      */
     public Optional<Output<String>> managementKey() {
@@ -112,7 +112,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param managementKey A valid management key for your Descope company
+         * @param managementKey A valid management key for your Descope company, or a workload identity token for a federated management key
          * 
          * @return builder
          * 
@@ -123,7 +123,7 @@ public final class ProviderArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param managementKey A valid management key for your Descope company
+         * @param managementKey A valid management key for your Descope company, or a workload identity token for a federated management key
          * 
          * @return builder
          * 

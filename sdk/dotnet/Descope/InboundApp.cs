@@ -10,6 +10,53 @@ using Pulumi;
 
 namespace Descope.Pulumi.Descope
 {
+    /// <summary>
+    /// Manages an inbound app, an OAuth client that requests tokens from a Descope project.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ### Machine-to-machine app with a custom attribute
+    /// 
+    /// The app below only uses the `ClientCredentials` grant type, so every other grant type is disabled. Its
+    /// `managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared
+    /// by every app, with a claim such as `"{{app.customAttributes.managingOrganization}}"`.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Descope = Descope.Pulumi.Descope;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var managingOrganization = new Descope.InboundAppAttribute("managing_organization", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         InboundAppAttributeId = "managingOrganization",
+    ///         Name = "Managing Organization",
+    ///         Type = "string",
+    ///     });
+    /// 
+    ///     var partnerBackend = new Descope.InboundApp("partner_backend", new()
+    ///     {
+    ///         ProjectId = example.Id,
+    ///         Name = "Partner Backend",
+    ///         ClientType = "confidential",
+    ///         AuthorizationCodeDisabled = true,
+    ///         RefreshTokenDisabled = true,
+    ///         DeviceCodeDisabled = true,
+    ///         JwtBearerDisabled = true,
+    ///         TokenExchangeDisabled = true,
+    ///         CustomAttributes = Output.JsonSerialize(Output.Create(managingOrganization.InboundAppAttributeId.Apply(inboundAppAttributeId =&gt; 
+    ///         {
+    ///             { inboundAppAttributeId, "6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13" },
+    ///         }))),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DescopeResourceType("descope:index/inboundApp:InboundApp")]
     public partial class InboundApp : global::Pulumi.CustomResource
     {
@@ -84,6 +131,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("connectionsScopes")]
         public Output<ImmutableArray<Outputs.InboundAppConnectionsScope>> ConnectionsScopes { get; private set; } = null!;
+
+        /// <summary>
+        /// A JSON-encoded object of custom attribute values for the inbound app, keyed by the `Id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `String` and `Singleselect`, an unquoted number for `Number`, `True` or `False` for `Boolean`, a list of strings for `Multiselect`, a number of milliseconds since the epoch for `Date`, and an `MM-DD` string for `Monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        /// </summary>
+        [Output("customAttributes")]
+        public Output<string> CustomAttributes { get; private set; } = null!;
 
         /// <summary>
         /// The default `Aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
@@ -180,6 +233,12 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Output("sessionSettings")]
         public Output<Outputs.InboundAppSessionSettings> SessionSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
@@ -363,6 +422,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// A JSON-encoded object of custom attribute values for the inbound app, keyed by the `Id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `String` and `Singleselect`, an unquoted number for `Number`, `True` or `False` for `Boolean`, a list of strings for `Multiselect`, a number of milliseconds since the epoch for `Date`, and an `MM-DD` string for `Monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        /// </summary>
+        [Input("customAttributes")]
+        public Input<string>? CustomAttributes { get; set; }
+
+        /// <summary>
         /// The default `Aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         /// </summary>
         [Input("defaultAudience")]
@@ -469,6 +534,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sessionSettings")]
         public Input<Inputs.InboundAppSessionSettingsArgs>? SessionSettings { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.
@@ -615,6 +692,12 @@ namespace Descope.Pulumi.Descope
         }
 
         /// <summary>
+        /// A JSON-encoded object of custom attribute values for the inbound app, keyed by the `Id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = "..." })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute's type, as it is not converted: a string for `String` and `Singleselect`, an unquoted number for `Number`, `True` or `False` for `Boolean`, a list of strings for `Multiselect`, a number of milliseconds since the epoch for `Date`, and an `MM-DD` string for `Monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+        /// </summary>
+        [Input("customAttributes")]
+        public Input<string>? CustomAttributes { get; set; }
+
+        /// <summary>
         /// The default `Aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app's client ID, or leave empty to include both.
         /// </summary>
         [Input("defaultAudience")]
@@ -721,6 +804,18 @@ namespace Descope.Pulumi.Descope
         /// </summary>
         [Input("sessionSettings")]
         public Input<Inputs.InboundAppSessionSettingsGetArgs>? SessionSettings { get; set; }
+
+        [Input("tags")]
+        private InputList<string>? _tags;
+
+        /// <summary>
+        /// Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+        /// </summary>
+        public InputList<string> Tags
+        {
+            get => _tags ?? (_tags = new InputList<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.

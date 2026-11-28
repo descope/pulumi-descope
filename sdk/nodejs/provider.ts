@@ -30,7 +30,7 @@ export class Provider extends pulumi.ProviderResource {
      */
     declare public readonly baseUrl: pulumi.Output<string | undefined>;
     /**
-     * A valid management key for your Descope company
+     * A valid management key for your Descope company, or a workload identity token for a federated management key
      */
     declare public readonly managementKey: pulumi.Output<string | undefined>;
     /**
@@ -78,7 +78,7 @@ export interface ProviderArgs {
      */
     baseUrl?: pulumi.Input<string | undefined>;
     /**
-     * A valid management key for your Descope company
+     * A valid management key for your Descope company, or a workload identity token for a federated management key
      */
     managementKey?: pulumi.Input<string | undefined>;
     /**

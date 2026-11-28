@@ -26,7 +26,7 @@ class ProviderArgs:
         The set of arguments for constructing a Provider resource.
 
         :param pulumi.Input[_builtins.str] base_url: An optional base URL for the Descope API
-        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company
+        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company, or a workload identity token for a federated management key
         """
         if base_url is not None:
             pulumi.set(__self__, "base_url", base_url)
@@ -54,7 +54,7 @@ class ProviderArgs:
     @pulumi.getter(name="managementKey")
     def management_key(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        A valid management key for your Descope company
+        A valid management key for your Descope company, or a workload identity token for a federated management key
         """
         return pulumi.get(self, "management_key")
 
@@ -93,7 +93,7 @@ class Provider(pulumi.ProviderResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] base_url: An optional base URL for the Descope API
-        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company
+        :param pulumi.Input[_builtins.str] management_key: A valid management key for your Descope company, or a workload identity token for a federated management key
         """
         ...
     @overload
@@ -158,7 +158,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="managementKey")
     def management_key(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        A valid management key for your Descope company
+        A valid management key for your Descope company, or a workload identity token for a federated management key
         """
         return pulumi.get(self, "management_key")
 

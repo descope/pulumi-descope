@@ -18,7 +18,7 @@ public final class Config {
         return Codegen.stringProp("baseUrl").config(config).get();
     }
 /**
- * A valid management key for your Descope company
+ * A valid management key for your Descope company, or a workload identity token for a federated management key
  * 
  */
     public Optional<String> managementKey() {

@@ -71,6 +71,12 @@ namespace Descope.Pulumi.Descope
         public Output<bool> GroupsPriority { get; private set; } = null!;
 
         /// <summary>
+        /// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        /// </summary>
+        [Output("ignoreInvalidIdpPhones")]
+        public Output<bool> IgnoreInvalidIdpPhones { get; private set; } = null!;
+
+        /// <summary>
         /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
         /// </summary>
         [Output("limitMappingToMandatoryAttributes")]
@@ -89,7 +95,7 @@ namespace Descope.Pulumi.Descope
         public Output<bool> MarkEmailAsUnverified { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to merge existing user accounts with new ones created through SSO authentication.
+        /// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         /// </summary>
         [Output("mergeUsers")]
         public Output<bool> MergeUsers { get; private set; } = null!;
@@ -226,6 +232,12 @@ namespace Descope.Pulumi.Descope
         public Input<bool>? GroupsPriority { get; set; }
 
         /// <summary>
+        /// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        /// </summary>
+        [Input("ignoreInvalidIdpPhones")]
+        public Input<bool>? IgnoreInvalidIdpPhones { get; set; }
+
+        /// <summary>
         /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
         /// </summary>
         [Input("limitMappingToMandatoryAttributes")]
@@ -250,7 +262,7 @@ namespace Descope.Pulumi.Descope
         public Input<bool>? MarkEmailAsUnverified { get; set; }
 
         /// <summary>
-        /// Whether to merge existing user accounts with new ones created through SSO authentication.
+        /// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         /// </summary>
         [Input("mergeUsers")]
         public Input<bool>? MergeUsers { get; set; }
@@ -348,6 +360,12 @@ namespace Descope.Pulumi.Descope
         public Input<bool>? GroupsPriority { get; set; }
 
         /// <summary>
+        /// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        /// </summary>
+        [Input("ignoreInvalidIdpPhones")]
+        public Input<bool>? IgnoreInvalidIdpPhones { get; set; }
+
+        /// <summary>
         /// Mapping to attributes not specified in `MandatoryUserAttributes` is not allowed.
         /// </summary>
         [Input("limitMappingToMandatoryAttributes")]
@@ -372,7 +390,7 @@ namespace Descope.Pulumi.Descope
         public Input<bool>? MarkEmailAsUnverified { get; set; }
 
         /// <summary>
-        /// Whether to merge existing user accounts with new ones created through SSO authentication.
+        /// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         /// </summary>
         [Input("mergeUsers")]
         public Input<bool>? MergeUsers { get; set; }

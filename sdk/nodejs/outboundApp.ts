@@ -92,6 +92,10 @@ export class OutboundApp extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     */
+    declare public readonly outboundAppId: pulumi.Output<string>;
+    /**
      * Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
      */
     declare public readonly pkce: pulumi.Output<boolean>;
@@ -147,6 +151,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["discoveryUrl"] = state?.discoveryUrl;
             resourceInputs["logo"] = state?.logo;
             resourceInputs["name"] = state?.name;
+            resourceInputs["outboundAppId"] = state?.outboundAppId;
             resourceInputs["pkce"] = state?.pkce;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["prompts"] = state?.prompts;
@@ -173,6 +178,7 @@ export class OutboundApp extends pulumi.CustomResource {
             resourceInputs["discoveryUrl"] = args?.discoveryUrl;
             resourceInputs["logo"] = args?.logo;
             resourceInputs["name"] = args?.name;
+            resourceInputs["outboundAppId"] = args?.outboundAppId;
             resourceInputs["pkce"] = args?.pkce;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["prompts"] = args?.prompts;
@@ -248,6 +254,10 @@ export interface OutboundAppState {
      * A name for the outbound application.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     */
+    outboundAppId?: pulumi.Input<string | undefined>;
     /**
      * Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
      */
@@ -338,6 +348,10 @@ export interface OutboundAppArgs {
      * A name for the outbound application.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+     */
+    outboundAppId?: pulumi.Input<string | undefined>;
     /**
      * Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
      */

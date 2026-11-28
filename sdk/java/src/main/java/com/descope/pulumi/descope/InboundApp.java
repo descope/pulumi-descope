@@ -23,6 +23,70 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
+/**
+ * Manages an inbound app, an OAuth client that requests tokens from a Descope project.
+ * 
+ * ## Example Usage
+ * 
+ * ### Machine-to-machine app with a custom attribute
+ * 
+ * The app below only uses the `clientCredentials` grant type, so every other grant type is disabled. Its
+ * `managingOrganization` custom attribute value can be added to its tokens by a JWT template that is shared
+ * by every app, with a claim such as `&#34;{{app.customAttributes.managingOrganization}}&#34;`.
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.descope.pulumi.descope.InboundAppAttribute;
+ * import com.descope.pulumi.descope.InboundAppAttributeArgs;
+ * import com.descope.pulumi.descope.InboundApp;
+ * import com.descope.pulumi.descope.InboundAppArgs;
+ * import static com.pulumi.codegen.internal.Serialization.*;
+ * import java.util.ArrayList;
+ * import java.util.Arrays;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var managingOrganization = new InboundAppAttribute("managingOrganization", InboundAppAttributeArgs.builder()
+ *             .projectId(example.get("id"))
+ *             .inboundAppAttributeId("managingOrganization")
+ *             .name("Managing Organization")
+ *             .type("string")
+ *             .build());
+ * 
+ *         var partnerBackend = new InboundApp("partnerBackend", InboundAppArgs.builder()
+ *             .projectId(example.get("id"))
+ *             .name("Partner Backend")
+ *             .clientType("confidential")
+ *             .authorizationCodeDisabled(true)
+ *             .refreshTokenDisabled(true)
+ *             .deviceCodeDisabled(true)
+ *             .jwtBearerDisabled(true)
+ *             .tokenExchangeDisabled(true)
+ *             .customAttributes(managingOrganization.inboundAppAttributeId().applyValue(_inboundAppAttributeId -> serializeJson(
+ *                 jsonObject(
+ *                     jsonProperty(_inboundAppAttributeId, "6f1c2a9e-4b3d-4e8a-9c1f-2d7b5a0e8f13")
+ *                 ))))
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ */
 @ResourceType(type="descope:index/inboundApp:InboundApp")
 public class InboundApp extends com.pulumi.resources.CustomResource {
     /**
@@ -192,6 +256,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
      */
     public Output<List<InboundAppConnectionsScope>> connectionsScopes() {
         return this.connectionsScopes;
+    }
+    /**
+     * A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     * 
+     */
+    @Export(name="customAttributes", refs={String.class}, tree="[0]")
+    private Output<String> customAttributes;
+
+    /**
+     * @return A JSON-encoded object of custom attribute values for the inbound app, keyed by the `id` of a `descope.InboundAppAttribute`. JWT templates read these values as `{{app.customAttributes.&lt;id&gt;}}`. Reference the attribute resource in the key, as in `jsonencode({ (descope_inbound_app_attribute.org.id) = &#34;...&#34; })`, so the attribute is created first, since a value for an attribute that is not defined is rejected. Each value must have the attribute&#39;s type, as it is not converted: a string for `string` and `singleselect`, an unquoted number for `number`, `true` or `false` for `boolean`, a list of strings for `multiselect`, a number of milliseconds since the epoch for `date`, and an `MM-DD` string for `monthday`. Values set outside Terraform are removed on the next apply unless they are also in this attribute, so the first plan after adding it, or after upgrading the provider, shows those values as removed.
+     * 
+     */
+    public Output<String> customAttributes() {
+        return this.customAttributes;
     }
     /**
      * The default `aud` claim to include in tokens issued for this app. Use `projectId` to set the project ID as the audience, `clientId` to set the app&#39;s client ID, or leave empty to include both.
@@ -416,6 +494,20 @@ public class InboundApp extends com.pulumi.resources.CustomResource {
      */
     public Output<InboundAppSessionSettings> sessionSettings() {
         return this.sessionSettings;
+    }
+    /**
+     * Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     * 
+     */
+    @Export(name="tags", refs={List.class,String.class}, tree="[0,1]")
+    private Output<List<String>> tags;
+
+    /**
+     * @return Labels for this inbound app, matched by policy rules through `client.tags` conditions. Up to 100 tags, each up to 100 bytes. Setting this replaces any tags set elsewhere, such as in the console.
+     * 
+     */
+    public Output<List<String>> tags() {
+        return this.tags;
     }
     /**
      * Disables the `urn:ietf:params:oauth:grant-type:token-exchange` grant type for this inbound app. When omitted, the current setting is kept, and a new app has the grant type enabled.

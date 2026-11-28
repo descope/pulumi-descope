@@ -34,13 +34,15 @@ type SsoSettings struct {
 	ExternalEmailTemplateId pulumi.StringOutput `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolOutput `pulumi:"groupsPriority"`
+	// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+	IgnoreInvalidIdpPhones pulumi.BoolOutput `pulumi:"ignoreInvalidIdpPhones"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 	LimitMappingToMandatoryAttributes pulumi.BoolOutput `pulumi:"limitMappingToMandatoryAttributes"`
 	// Define the required Descope attributes that must be populated when receiving SSO information.
 	MandatoryUserAttributes SsoSettingsMandatoryUserAttributeArrayOutput `pulumi:"mandatoryUserAttributes"`
 	// Whether to mark the user's email as unverified when logging in via SSO.
 	MarkEmailAsUnverified pulumi.BoolOutput `pulumi:"markEmailAsUnverified"`
-	// Whether to merge existing user accounts with new ones created through SSO authentication.
+	// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 	MergeUsers pulumi.BoolOutput `pulumi:"mergeUsers"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
@@ -105,13 +107,15 @@ type ssoSettingsState struct {
 	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority *bool `pulumi:"groupsPriority"`
+	// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+	IgnoreInvalidIdpPhones *bool `pulumi:"ignoreInvalidIdpPhones"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 	LimitMappingToMandatoryAttributes *bool `pulumi:"limitMappingToMandatoryAttributes"`
 	// Define the required Descope attributes that must be populated when receiving SSO information.
 	MandatoryUserAttributes []SsoSettingsMandatoryUserAttribute `pulumi:"mandatoryUserAttributes"`
 	// Whether to mark the user's email as unverified when logging in via SSO.
 	MarkEmailAsUnverified *bool `pulumi:"markEmailAsUnverified"`
-	// Whether to merge existing user accounts with new ones created through SSO authentication.
+	// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
@@ -144,13 +148,15 @@ type SsoSettingsState struct {
 	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolPtrInput
+	// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+	IgnoreInvalidIdpPhones pulumi.BoolPtrInput
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 	LimitMappingToMandatoryAttributes pulumi.BoolPtrInput
 	// Define the required Descope attributes that must be populated when receiving SSO information.
 	MandatoryUserAttributes SsoSettingsMandatoryUserAttributeArrayInput
 	// Whether to mark the user's email as unverified when logging in via SSO.
 	MarkEmailAsUnverified pulumi.BoolPtrInput
-	// Whether to merge existing user accounts with new ones created through SSO authentication.
+	// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 	MergeUsers pulumi.BoolPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
@@ -187,13 +193,15 @@ type ssoSettingsArgs struct {
 	ExternalEmailTemplateId *string `pulumi:"externalEmailTemplateId"`
 	// Whether to enable groups priority.
 	GroupsPriority *bool `pulumi:"groupsPriority"`
+	// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+	IgnoreInvalidIdpPhones *bool `pulumi:"ignoreInvalidIdpPhones"`
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 	LimitMappingToMandatoryAttributes *bool `pulumi:"limitMappingToMandatoryAttributes"`
 	// Define the required Descope attributes that must be populated when receiving SSO information.
 	MandatoryUserAttributes []SsoSettingsMandatoryUserAttribute `pulumi:"mandatoryUserAttributes"`
 	// Whether to mark the user's email as unverified when logging in via SSO.
 	MarkEmailAsUnverified *bool `pulumi:"markEmailAsUnverified"`
-	// Whether to merge existing user accounts with new ones created through SSO authentication.
+	// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 	MergeUsers *bool `pulumi:"mergeUsers"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
@@ -227,13 +235,15 @@ type SsoSettingsArgs struct {
 	ExternalEmailTemplateId pulumi.StringPtrInput
 	// Whether to enable groups priority.
 	GroupsPriority pulumi.BoolPtrInput
+	// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+	IgnoreInvalidIdpPhones pulumi.BoolPtrInput
 	// Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 	LimitMappingToMandatoryAttributes pulumi.BoolPtrInput
 	// Define the required Descope attributes that must be populated when receiving SSO information.
 	MandatoryUserAttributes SsoSettingsMandatoryUserAttributeArrayInput
 	// Whether to mark the user's email as unverified when logging in via SSO.
 	MarkEmailAsUnverified pulumi.BoolPtrInput
-	// Whether to merge existing user accounts with new ones created through SSO authentication.
+	// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 	MergeUsers pulumi.BoolPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
@@ -379,6 +389,11 @@ func (o SsoSettingsOutput) GroupsPriority() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SsoSettings) pulumi.BoolOutput { return v.GroupsPriority }).(pulumi.BoolOutput)
 }
 
+// When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+func (o SsoSettingsOutput) IgnoreInvalidIdpPhones() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SsoSettings) pulumi.BoolOutput { return v.IgnoreInvalidIdpPhones }).(pulumi.BoolOutput)
+}
+
 // Mapping to attributes not specified in `mandatoryUserAttributes` is not allowed.
 func (o SsoSettingsOutput) LimitMappingToMandatoryAttributes() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SsoSettings) pulumi.BoolOutput { return v.LimitMappingToMandatoryAttributes }).(pulumi.BoolOutput)
@@ -394,7 +409,7 @@ func (o SsoSettingsOutput) MarkEmailAsUnverified() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SsoSettings) pulumi.BoolOutput { return v.MarkEmailAsUnverified }).(pulumi.BoolOutput)
 }
 
-// Whether to merge existing user accounts with new ones created through SSO authentication.
+// Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
 func (o SsoSettingsOutput) MergeUsers() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SsoSettings) pulumi.BoolOutput { return v.MergeUsers }).(pulumi.BoolOutput)
 }

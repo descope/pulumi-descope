@@ -30,7 +30,7 @@ class _ExportableConfig(types.ModuleType):
     @_builtins.property
     def management_key(self) -> Optional[str]:
         """
-        A valid management key for your Descope company
+        A valid management key for your Descope company, or a workload identity token for a federated management key
         """
         return __config__.get('managementKey')
 

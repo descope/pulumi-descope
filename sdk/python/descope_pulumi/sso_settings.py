@@ -31,6 +31,7 @@ class SsoSettingsArgs:
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ignore_invalid_idp_phones: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -52,10 +53,11 @@ class SsoSettingsArgs:
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
+        :param pulumi.Input[_builtins.bool] ignore_invalid_idp_phones: When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
-        :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        :param pulumi.Input[_builtins.bool] merge_users: Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
         :param pulumi.Input[_builtins.bool] require_sso_domains: When configuring SSO an SSO domain must be specified.
@@ -80,6 +82,8 @@ class SsoSettingsArgs:
             pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
+        if ignore_invalid_idp_phones is not None:
+            pulumi.set(__self__, "ignore_invalid_idp_phones", ignore_invalid_idp_phones)
         if limit_mapping_to_mandatory_attributes is not None:
             pulumi.set(__self__, "limit_mapping_to_mandatory_attributes", limit_mapping_to_mandatory_attributes)
         if mandatory_user_attributes is not None:
@@ -218,6 +222,18 @@ class SsoSettingsArgs:
         pulumi.set(self, "groups_priority", value)
 
     @_builtins.property
+    @pulumi.getter(name="ignoreInvalidIdpPhones")
+    def ignore_invalid_idp_phones(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        """
+        return pulumi.get(self, "ignore_invalid_idp_phones")
+
+    @ignore_invalid_idp_phones.setter
+    def ignore_invalid_idp_phones(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "ignore_invalid_idp_phones", value)
+
+    @_builtins.property
     @pulumi.getter(name="limitMappingToMandatoryAttributes")
     def limit_mapping_to_mandatory_attributes(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -257,7 +273,7 @@ class SsoSettingsArgs:
     @pulumi.getter(name="mergeUsers")
     def merge_users(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Whether to merge existing user accounts with new ones created through SSO authentication.
+        Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         """
         return pulumi.get(self, "merge_users")
 
@@ -326,6 +342,7 @@ class _SsoSettingsState:
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ignore_invalid_idp_phones: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -347,10 +364,11 @@ class _SsoSettingsState:
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
+        :param pulumi.Input[_builtins.bool] ignore_invalid_idp_phones: When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input['SsoSettingsMandatoryUserAttributeArgs']]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
-        :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        :param pulumi.Input[_builtins.bool] merge_users: Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
@@ -375,6 +393,8 @@ class _SsoSettingsState:
             pulumi.set(__self__, "external_email_template_id", external_email_template_id)
         if groups_priority is not None:
             pulumi.set(__self__, "groups_priority", groups_priority)
+        if ignore_invalid_idp_phones is not None:
+            pulumi.set(__self__, "ignore_invalid_idp_phones", ignore_invalid_idp_phones)
         if limit_mapping_to_mandatory_attributes is not None:
             pulumi.set(__self__, "limit_mapping_to_mandatory_attributes", limit_mapping_to_mandatory_attributes)
         if mandatory_user_attributes is not None:
@@ -503,6 +523,18 @@ class _SsoSettingsState:
         pulumi.set(self, "groups_priority", value)
 
     @_builtins.property
+    @pulumi.getter(name="ignoreInvalidIdpPhones")
+    def ignore_invalid_idp_phones(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        """
+        return pulumi.get(self, "ignore_invalid_idp_phones")
+
+    @ignore_invalid_idp_phones.setter
+    def ignore_invalid_idp_phones(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "ignore_invalid_idp_phones", value)
+
+    @_builtins.property
     @pulumi.getter(name="limitMappingToMandatoryAttributes")
     def limit_mapping_to_mandatory_attributes(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -542,7 +574,7 @@ class _SsoSettingsState:
     @pulumi.getter(name="mergeUsers")
     def merge_users(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        Whether to merge existing user accounts with new ones created through SSO authentication.
+        Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         """
         return pulumi.get(self, "merge_users")
 
@@ -626,6 +658,7 @@ class SsoSettings(pulumi.CustomResource):
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ignore_invalid_idp_phones: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -651,10 +684,11 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
+        :param pulumi.Input[_builtins.bool] ignore_invalid_idp_phones: When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
-        :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        :param pulumi.Input[_builtins.bool] merge_users: Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
@@ -695,6 +729,7 @@ class SsoSettings(pulumi.CustomResource):
                  email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
+                 ignore_invalid_idp_phones: pulumi.Input[Optional[_builtins.bool]] = None,
                  limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
                  mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
                  mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -722,6 +757,7 @@ class SsoSettings(pulumi.CustomResource):
             __props__.__dict__["email_template_id"] = email_template_id
             __props__.__dict__["external_email_template_id"] = external_email_template_id
             __props__.__dict__["groups_priority"] = groups_priority
+            __props__.__dict__["ignore_invalid_idp_phones"] = ignore_invalid_idp_phones
             __props__.__dict__["limit_mapping_to_mandatory_attributes"] = limit_mapping_to_mandatory_attributes
             __props__.__dict__["mandatory_user_attributes"] = mandatory_user_attributes
             __props__.__dict__["mark_email_as_unverified"] = mark_email_as_unverified
@@ -752,6 +788,7 @@ class SsoSettings(pulumi.CustomResource):
             email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             external_email_template_id: pulumi.Input[Optional[_builtins.str]] = None,
             groups_priority: pulumi.Input[Optional[_builtins.bool]] = None,
+            ignore_invalid_idp_phones: pulumi.Input[Optional[_builtins.bool]] = None,
             limit_mapping_to_mandatory_attributes: pulumi.Input[Optional[_builtins.bool]] = None,
             mandatory_user_attributes: pulumi.Input[Optional[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]]] = None,
             mark_email_as_unverified: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -777,10 +814,11 @@ class SsoSettings(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] email_template_id: The ID of the email template for SSO configuration invitation emails, taken from a `EmailTemplate` resource with its `method` set to `sso`. An empty value (the default) selects the built-in System template.
         :param pulumi.Input[_builtins.str] external_email_template_id: The ID of an email template hosted by the email connector's provider, to send instead of a Descope template. An empty value (the default) sends the Descope template selected by `email_template_id`.
         :param pulumi.Input[_builtins.bool] groups_priority: Whether to enable groups priority.
+        :param pulumi.Input[_builtins.bool] ignore_invalid_idp_phones: When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
         :param pulumi.Input[_builtins.bool] limit_mapping_to_mandatory_attributes: Mapping to attributes not specified in `mandatory_user_attributes` is not allowed.
         :param pulumi.Input[Sequence[pulumi.Input[Union['SsoSettingsMandatoryUserAttributeArgs', 'SsoSettingsMandatoryUserAttributeArgsDict', 'outputs.SsoSettingsMandatoryUserAttribute']]]] mandatory_user_attributes: Define the required Descope attributes that must be populated when receiving SSO information.
         :param pulumi.Input[_builtins.bool] mark_email_as_unverified: Whether to mark the user's email as unverified when logging in via SSO.
-        :param pulumi.Input[_builtins.bool] merge_users: Whether to merge existing user accounts with new ones created through SSO authentication.
+        :param pulumi.Input[_builtins.bool] merge_users: Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         :param pulumi.Input[_builtins.str] project_id: The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.str] redirect_url: The URL the end user is redirected to after a successful authentication. If one is specified in tenant level settings or SDK/API call, they will override this value.
         :param pulumi.Input[_builtins.bool] require_groups_attribute_name: When configuring SSO the groups attribute name must be specified.
@@ -800,6 +838,7 @@ class SsoSettings(pulumi.CustomResource):
         __props__.__dict__["email_template_id"] = email_template_id
         __props__.__dict__["external_email_template_id"] = external_email_template_id
         __props__.__dict__["groups_priority"] = groups_priority
+        __props__.__dict__["ignore_invalid_idp_phones"] = ignore_invalid_idp_phones
         __props__.__dict__["limit_mapping_to_mandatory_attributes"] = limit_mapping_to_mandatory_attributes
         __props__.__dict__["mandatory_user_attributes"] = mandatory_user_attributes
         __props__.__dict__["mark_email_as_unverified"] = mark_email_as_unverified
@@ -884,6 +923,14 @@ class SsoSettings(pulumi.CustomResource):
         return pulumi.get(self, "groups_priority")
 
     @_builtins.property
+    @pulumi.getter(name="ignoreInvalidIdpPhones")
+    def ignore_invalid_idp_phones(self) -> pulumi.Output[_builtins.bool]:
+        """
+        When enabled, a phone number that an identity provider sends through SCIM provisioning or the SAML or OIDC phone mapping is ignored if it is not a valid phone number, instead of being saved on the user. A new user is created without a phone and an existing user keeps their current phone. Each ignored number is recorded in the project's Troubleshooting logs.
+        """
+        return pulumi.get(self, "ignore_invalid_idp_phones")
+
+    @_builtins.property
     @pulumi.getter(name="limitMappingToMandatoryAttributes")
     def limit_mapping_to_mandatory_attributes(self) -> pulumi.Output[_builtins.bool]:
         """
@@ -911,7 +958,7 @@ class SsoSettings(pulumi.CustomResource):
     @pulumi.getter(name="mergeUsers")
     def merge_users(self) -> pulumi.Output[_builtins.bool]:
         """
-        Whether to merge existing user accounts with new ones created through SSO authentication.
+        Whether to convert an existing user to an SSO-only user after a successful SSO login. When enabled, an existing member of this tenant that matches the SSO identity has their login ID replaced with the SSO login ID, instead of a separate user being created.
         """
         return pulumi.get(self, "merge_users")
 

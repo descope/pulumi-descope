@@ -80,6 +80,18 @@ namespace Descope.Pulumi.Descope.Inputs
         public Input<bool>? HideSso { get; set; }
 
         /// <summary>
+        /// The ID of a flow the SSO Suite shows so users can sign in when they open it without an existing session. Leave empty to show the authentication required page instead.
+        /// </summary>
+        [Input("loginFlowId")]
+        public Input<string>? LoginFlowId { get; set; }
+
+        /// <summary>
+        /// The ID of the style to apply to the login flow. Leave empty to use the project's default flow style.
+        /// </summary>
+        [Input("loginFlowStyleId")]
+        public Input<string>? LoginFlowStyleId { get; set; }
+
+        /// <summary>
         /// The identity provider claim the SSO Suite suggests as the Login ID when a tenant configures OIDC. Leave empty to keep the default, which suggests the `Sub` claim. SAML configurations are unaffected.
         /// </summary>
         [Input("oidcLoginIdAttribute")]

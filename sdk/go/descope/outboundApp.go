@@ -44,6 +44,8 @@ type OutboundApp struct {
 	Logo pulumi.StringOutput `pulumi:"logo"`
 	// A name for the outbound application.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+	OutboundAppId pulumi.StringOutput `pulumi:"outboundAppId"`
 	// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
 	Pkce pulumi.BoolOutput `pulumi:"pkce"`
 	// The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
@@ -128,6 +130,8 @@ type outboundAppState struct {
 	Logo *string `pulumi:"logo"`
 	// A name for the outbound application.
 	Name *string `pulumi:"name"`
+	// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+	OutboundAppId *string `pulumi:"outboundAppId"`
 	// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
 	Pkce *bool `pulumi:"pkce"`
 	// The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
@@ -173,6 +177,8 @@ type OutboundAppState struct {
 	Logo pulumi.StringPtrInput
 	// A name for the outbound application.
 	Name pulumi.StringPtrInput
+	// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+	OutboundAppId pulumi.StringPtrInput
 	// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
 	Pkce pulumi.BoolPtrInput
 	// The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
@@ -222,6 +228,8 @@ type outboundAppArgs struct {
 	Logo *string `pulumi:"logo"`
 	// A name for the outbound application.
 	Name *string `pulumi:"name"`
+	// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+	OutboundAppId *string `pulumi:"outboundAppId"`
 	// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
 	Pkce *bool `pulumi:"pkce"`
 	// The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
@@ -268,6 +276,8 @@ type OutboundAppArgs struct {
 	Logo pulumi.StringPtrInput
 	// A name for the outbound application.
 	Name pulumi.StringPtrInput
+	// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+	OutboundAppId pulumi.StringPtrInput
 	// Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
 	Pkce pulumi.BoolPtrInput
 	// The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
@@ -439,6 +449,11 @@ func (o OutboundAppOutput) Logo() pulumi.StringOutput {
 // A name for the outbound application.
 func (o OutboundAppOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *OutboundApp) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+func (o OutboundAppOutput) OutboundAppId() pulumi.StringOutput {
+	return o.ApplyT(func(v *OutboundApp) pulumi.StringOutput { return v.OutboundAppId }).(pulumi.StringOutput)
 }
 
 // Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.

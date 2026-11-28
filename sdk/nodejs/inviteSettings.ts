@@ -60,9 +60,25 @@ export class InviteSettings extends pulumi.CustomResource {
      */
     declare public readonly inviteUrl: pulumi.Output<string>;
     /**
+     * The maximum number of reminders to send for each invitation, between 1 and 5.
+     */
+    declare public readonly maxReminders: pulumi.Output<number>;
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
     declare public readonly projectId: pulumi.Output<string>;
+    /**
+     * The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    declare public readonly reminderEmailTemplateId: pulumi.Output<string>;
+    /**
+     * How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+     */
+    declare public readonly reminderInterval: pulumi.Output<string>;
+    /**
+     * The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    declare public readonly reminderTextTemplateId: pulumi.Output<string>;
     /**
      * Whether users must be invited before they can sign up to the project.
      */
@@ -71,6 +87,10 @@ export class InviteSettings extends pulumi.CustomResource {
      * Whether to send invitation emails to users.
      */
     declare public readonly sendEmail: pulumi.Output<boolean>;
+    /**
+     * Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+     */
+    declare public readonly sendReminders: pulumi.Output<boolean>;
     /**
      * Whether to send invitation SMS messages to users.
      */
@@ -95,9 +115,14 @@ export class InviteSettings extends pulumi.CustomResource {
             resourceInputs["expireInvitedUsers"] = state?.expireInvitedUsers;
             resourceInputs["inviteExpiration"] = state?.inviteExpiration;
             resourceInputs["inviteUrl"] = state?.inviteUrl;
+            resourceInputs["maxReminders"] = state?.maxReminders;
             resourceInputs["projectId"] = state?.projectId;
+            resourceInputs["reminderEmailTemplateId"] = state?.reminderEmailTemplateId;
+            resourceInputs["reminderInterval"] = state?.reminderInterval;
+            resourceInputs["reminderTextTemplateId"] = state?.reminderTextTemplateId;
             resourceInputs["requireInvitation"] = state?.requireInvitation;
             resourceInputs["sendEmail"] = state?.sendEmail;
+            resourceInputs["sendReminders"] = state?.sendReminders;
             resourceInputs["sendText"] = state?.sendText;
         } else {
             const args = argsOrState as InviteSettingsArgs | undefined;
@@ -110,9 +135,14 @@ export class InviteSettings extends pulumi.CustomResource {
             resourceInputs["expireInvitedUsers"] = args?.expireInvitedUsers;
             resourceInputs["inviteExpiration"] = args?.inviteExpiration;
             resourceInputs["inviteUrl"] = args?.inviteUrl;
+            resourceInputs["maxReminders"] = args?.maxReminders;
             resourceInputs["projectId"] = args?.projectId;
+            resourceInputs["reminderEmailTemplateId"] = args?.reminderEmailTemplateId;
+            resourceInputs["reminderInterval"] = args?.reminderInterval;
+            resourceInputs["reminderTextTemplateId"] = args?.reminderTextTemplateId;
             resourceInputs["requireInvitation"] = args?.requireInvitation;
             resourceInputs["sendEmail"] = args?.sendEmail;
+            resourceInputs["sendReminders"] = args?.sendReminders;
             resourceInputs["sendText"] = args?.sendText;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -149,9 +179,25 @@ export interface InviteSettingsState {
      */
     inviteUrl?: pulumi.Input<string | undefined>;
     /**
+     * The maximum number of reminders to send for each invitation, between 1 and 5.
+     */
+    maxReminders?: pulumi.Input<number | undefined>;
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
     projectId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    reminderEmailTemplateId?: pulumi.Input<string | undefined>;
+    /**
+     * How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+     */
+    reminderInterval?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    reminderTextTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether users must be invited before they can sign up to the project.
      */
@@ -160,6 +206,10 @@ export interface InviteSettingsState {
      * Whether to send invitation emails to users.
      */
     sendEmail?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+     */
+    sendReminders?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to send invitation SMS messages to users.
      */
@@ -195,9 +245,25 @@ export interface InviteSettingsArgs {
      */
     inviteUrl?: pulumi.Input<string | undefined>;
     /**
+     * The maximum number of reminders to send for each invitation, between 1 and 5.
+     */
+    maxReminders?: pulumi.Input<number | undefined>;
+    /**
      * The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
      */
     projectId: pulumi.Input<string>;
+    /**
+     * The ID of the email template to send reminders with, taken from a `descope.EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    reminderEmailTemplateId?: pulumi.Input<string | undefined>;
+    /**
+     * How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+     */
+    reminderInterval?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+     */
+    reminderTextTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Whether users must be invited before they can sign up to the project.
      */
@@ -206,6 +272,10 @@ export interface InviteSettingsArgs {
      * Whether to send invitation emails to users.
      */
     sendEmail?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+     */
+    sendReminders?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to send invitation SMS messages to users.
      */

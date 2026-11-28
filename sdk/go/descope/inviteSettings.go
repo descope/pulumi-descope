@@ -28,12 +28,22 @@ type InviteSettings struct {
 	InviteExpiration pulumi.StringOutput `pulumi:"inviteExpiration"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl pulumi.StringOutput `pulumi:"inviteUrl"`
+	// The maximum number of reminders to send for each invitation, between 1 and 5.
+	MaxReminders pulumi.IntOutput `pulumi:"maxReminders"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
+	// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderEmailTemplateId pulumi.StringOutput `pulumi:"reminderEmailTemplateId"`
+	// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+	ReminderInterval pulumi.StringOutput `pulumi:"reminderInterval"`
+	// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderTextTemplateId pulumi.StringOutput `pulumi:"reminderTextTemplateId"`
 	// Whether users must be invited before they can sign up to the project.
 	RequireInvitation pulumi.BoolOutput `pulumi:"requireInvitation"`
 	// Whether to send invitation emails to users.
 	SendEmail pulumi.BoolOutput `pulumi:"sendEmail"`
+	// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+	SendReminders pulumi.BoolOutput `pulumi:"sendReminders"`
 	// Whether to send invitation SMS messages to users.
 	SendText pulumi.BoolOutput `pulumi:"sendText"`
 }
@@ -83,12 +93,22 @@ type inviteSettingsState struct {
 	InviteExpiration *string `pulumi:"inviteExpiration"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl *string `pulumi:"inviteUrl"`
+	// The maximum number of reminders to send for each invitation, between 1 and 5.
+	MaxReminders *int `pulumi:"maxReminders"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId *string `pulumi:"projectId"`
+	// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderEmailTemplateId *string `pulumi:"reminderEmailTemplateId"`
+	// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+	ReminderInterval *string `pulumi:"reminderInterval"`
+	// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderTextTemplateId *string `pulumi:"reminderTextTemplateId"`
 	// Whether users must be invited before they can sign up to the project.
 	RequireInvitation *bool `pulumi:"requireInvitation"`
 	// Whether to send invitation emails to users.
 	SendEmail *bool `pulumi:"sendEmail"`
+	// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+	SendReminders *bool `pulumi:"sendReminders"`
 	// Whether to send invitation SMS messages to users.
 	SendText *bool `pulumi:"sendText"`
 }
@@ -106,12 +126,22 @@ type InviteSettingsState struct {
 	InviteExpiration pulumi.StringPtrInput
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl pulumi.StringPtrInput
+	// The maximum number of reminders to send for each invitation, between 1 and 5.
+	MaxReminders pulumi.IntPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringPtrInput
+	// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderEmailTemplateId pulumi.StringPtrInput
+	// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+	ReminderInterval pulumi.StringPtrInput
+	// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderTextTemplateId pulumi.StringPtrInput
 	// Whether users must be invited before they can sign up to the project.
 	RequireInvitation pulumi.BoolPtrInput
 	// Whether to send invitation emails to users.
 	SendEmail pulumi.BoolPtrInput
+	// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+	SendReminders pulumi.BoolPtrInput
 	// Whether to send invitation SMS messages to users.
 	SendText pulumi.BoolPtrInput
 }
@@ -133,12 +163,22 @@ type inviteSettingsArgs struct {
 	InviteExpiration *string `pulumi:"inviteExpiration"`
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl *string `pulumi:"inviteUrl"`
+	// The maximum number of reminders to send for each invitation, between 1 and 5.
+	MaxReminders *int `pulumi:"maxReminders"`
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId string `pulumi:"projectId"`
+	// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderEmailTemplateId *string `pulumi:"reminderEmailTemplateId"`
+	// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+	ReminderInterval *string `pulumi:"reminderInterval"`
+	// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderTextTemplateId *string `pulumi:"reminderTextTemplateId"`
 	// Whether users must be invited before they can sign up to the project.
 	RequireInvitation *bool `pulumi:"requireInvitation"`
 	// Whether to send invitation emails to users.
 	SendEmail *bool `pulumi:"sendEmail"`
+	// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+	SendReminders *bool `pulumi:"sendReminders"`
 	// Whether to send invitation SMS messages to users.
 	SendText *bool `pulumi:"sendText"`
 }
@@ -157,12 +197,22 @@ type InviteSettingsArgs struct {
 	InviteExpiration pulumi.StringPtrInput
 	// Custom URL to include in the message sent to invited users.
 	InviteUrl pulumi.StringPtrInput
+	// The maximum number of reminders to send for each invitation, between 1 and 5.
+	MaxReminders pulumi.IntPtrInput
 	// The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 	ProjectId pulumi.StringInput
+	// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderEmailTemplateId pulumi.StringPtrInput
+	// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+	ReminderInterval pulumi.StringPtrInput
+	// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+	ReminderTextTemplateId pulumi.StringPtrInput
 	// Whether users must be invited before they can sign up to the project.
 	RequireInvitation pulumi.BoolPtrInput
 	// Whether to send invitation emails to users.
 	SendEmail pulumi.BoolPtrInput
+	// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+	SendReminders pulumi.BoolPtrInput
 	// Whether to send invitation SMS messages to users.
 	SendText pulumi.BoolPtrInput
 }
@@ -284,9 +334,29 @@ func (o InviteSettingsOutput) InviteUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *InviteSettings) pulumi.StringOutput { return v.InviteUrl }).(pulumi.StringOutput)
 }
 
+// The maximum number of reminders to send for each invitation, between 1 and 5.
+func (o InviteSettingsOutput) MaxReminders() pulumi.IntOutput {
+	return o.ApplyT(func(v *InviteSettings) pulumi.IntOutput { return v.MaxReminders }).(pulumi.IntOutput)
+}
+
 // The ID of the project that these settings belong to. Changing this value will require the resource to be deleted and recreated.
 func (o InviteSettingsOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InviteSettings) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// The ID of the email template to send reminders with, taken from a `EmailTemplate` resource with its `method` set to `invite`. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+func (o InviteSettingsOutput) ReminderEmailTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *InviteSettings) pulumi.StringOutput { return v.ReminderEmailTemplateId }).(pulumi.StringOutput)
+}
+
+// How long to wait before sending a reminder, measured from the last invitation or reminder sent to the user. Use values such as "2 days", "1 week", etc. The minimum value is "1 day".
+func (o InviteSettingsOutput) ReminderInterval() pulumi.StringOutput {
+	return o.ApplyT(func(v *InviteSettings) pulumi.StringOutput { return v.ReminderInterval }).(pulumi.StringOutput)
+}
+
+// The ID of the invitation SMS template to send reminders with. An empty value (the default) sends reminders with the same template as the invitation, and the value `System` selects the built-in System template.
+func (o InviteSettingsOutput) ReminderTextTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *InviteSettings) pulumi.StringOutput { return v.ReminderTextTemplateId }).(pulumi.StringOutput)
 }
 
 // Whether users must be invited before they can sign up to the project.
@@ -297,6 +367,11 @@ func (o InviteSettingsOutput) RequireInvitation() pulumi.BoolOutput {
 // Whether to send invitation emails to users.
 func (o InviteSettingsOutput) SendEmail() pulumi.BoolOutput {
 	return o.ApplyT(func(v *InviteSettings) pulumi.BoolOutput { return v.SendEmail }).(pulumi.BoolOutput)
+}
+
+// Whether to automatically resend the invitation to users who have not accepted it yet, every `reminderInterval` and up to `maxReminders` times. Reminders are only sent through a custom connector, so turning this on requires `emailConnectorId` to be set when invitations are sent by email. Turning reminders on only affects invitations sent from then on.
+func (o InviteSettingsOutput) SendReminders() pulumi.BoolOutput {
+	return o.ApplyT(func(v *InviteSettings) pulumi.BoolOutput { return v.SendReminders }).(pulumi.BoolOutput)
 }
 
 // Whether to send invitation SMS messages to users.

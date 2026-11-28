@@ -34,6 +34,7 @@ class OutboundAppArgs:
                  discovery_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 outbound_app_id: pulumi.Input[Optional[_builtins.str]] = None,
                  pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  revocation_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -58,6 +59,7 @@ class OutboundAppArgs:
         :param pulumi.Input[_builtins.str] discovery_url: The provider's OpenID Connect discovery endpoint, used to look up its other endpoints.
         :param pulumi.Input[_builtins.str] logo: A URL for an image to display as the outbound application's logo.
         :param pulumi.Input[_builtins.str] name: A name for the outbound application.
+        :param pulumi.Input[_builtins.str] outbound_app_id: The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] pkce: Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: How the provider should behave when the user is already signed in. Common values are `none`, `login`, `consent` and `select_account`.
         :param pulumi.Input[_builtins.str] revocation_url: The provider's token revocation endpoint.
@@ -94,6 +96,8 @@ class OutboundAppArgs:
             pulumi.set(__self__, "logo", logo)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if outbound_app_id is not None:
+            pulumi.set(__self__, "outbound_app_id", outbound_app_id)
         if pkce is not None:
             pulumi.set(__self__, "pkce", pkce)
         if prompts is not None:
@@ -288,6 +292,18 @@ class OutboundAppArgs:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter(name="outboundAppId")
+    def outbound_app_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        """
+        return pulumi.get(self, "outbound_app_id")
+
+    @outbound_app_id.setter
+    def outbound_app_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "outbound_app_id", value)
+
+    @_builtins.property
     @pulumi.getter
     def pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -377,6 +393,7 @@ class _OutboundAppState:
                  discovery_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 outbound_app_id: pulumi.Input[Optional[_builtins.str]] = None,
                  pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -401,6 +418,7 @@ class _OutboundAppState:
         :param pulumi.Input[_builtins.str] discovery_url: The provider's OpenID Connect discovery endpoint, used to look up its other endpoints.
         :param pulumi.Input[_builtins.str] logo: A URL for an image to display as the outbound application's logo.
         :param pulumi.Input[_builtins.str] name: A name for the outbound application.
+        :param pulumi.Input[_builtins.str] outbound_app_id: The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] pkce: Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: How the provider should behave when the user is already signed in. Common values are `none`, `login`, `consent` and `select_account`.
@@ -437,6 +455,8 @@ class _OutboundAppState:
             pulumi.set(__self__, "logo", logo)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if outbound_app_id is not None:
+            pulumi.set(__self__, "outbound_app_id", outbound_app_id)
         if pkce is not None:
             pulumi.set(__self__, "pkce", pkce)
         if project_id is not None:
@@ -621,6 +641,18 @@ class _OutboundAppState:
         pulumi.set(self, "name", value)
 
     @_builtins.property
+    @pulumi.getter(name="outboundAppId")
+    def outbound_app_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        """
+        return pulumi.get(self, "outbound_app_id")
+
+    @outbound_app_id.setter
+    def outbound_app_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "outbound_app_id", value)
+
+    @_builtins.property
     @pulumi.getter
     def pkce(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -725,6 +757,7 @@ class OutboundApp(pulumi.CustomResource):
                  discovery_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 outbound_app_id: pulumi.Input[Optional[_builtins.str]] = None,
                  pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -753,6 +786,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] discovery_url: The provider's OpenID Connect discovery endpoint, used to look up its other endpoints.
         :param pulumi.Input[_builtins.str] logo: A URL for an image to display as the outbound application's logo.
         :param pulumi.Input[_builtins.str] name: A name for the outbound application.
+        :param pulumi.Input[_builtins.str] outbound_app_id: The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] pkce: Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: How the provider should behave when the user is already signed in. Common values are `none`, `login`, `consent` and `select_account`.
@@ -800,6 +834,7 @@ class OutboundApp(pulumi.CustomResource):
                  discovery_url: pulumi.Input[Optional[_builtins.str]] = None,
                  logo: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
+                 outbound_app_id: pulumi.Input[Optional[_builtins.str]] = None,
                  pkce: pulumi.Input[Optional[_builtins.bool]] = None,
                  project_id: pulumi.Input[Optional[_builtins.str]] = None,
                  prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -830,6 +865,7 @@ class OutboundApp(pulumi.CustomResource):
             __props__.__dict__["discovery_url"] = discovery_url
             __props__.__dict__["logo"] = logo
             __props__.__dict__["name"] = name
+            __props__.__dict__["outbound_app_id"] = outbound_app_id
             __props__.__dict__["pkce"] = pkce
             if project_id is None and not opts.urn:
                 raise TypeError("Missing required property 'project_id'")
@@ -865,6 +901,7 @@ class OutboundApp(pulumi.CustomResource):
             discovery_url: pulumi.Input[Optional[_builtins.str]] = None,
             logo: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
+            outbound_app_id: pulumi.Input[Optional[_builtins.str]] = None,
             pkce: pulumi.Input[Optional[_builtins.bool]] = None,
             project_id: pulumi.Input[Optional[_builtins.str]] = None,
             prompts: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
@@ -893,6 +930,7 @@ class OutboundApp(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] discovery_url: The provider's OpenID Connect discovery endpoint, used to look up its other endpoints.
         :param pulumi.Input[_builtins.str] logo: A URL for an image to display as the outbound application's logo.
         :param pulumi.Input[_builtins.str] name: A name for the outbound application.
+        :param pulumi.Input[_builtins.str] outbound_app_id: The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[_builtins.bool] pkce: Whether to use PKCE when exchanging the authorization code, which is required by some providers and recommended by all of them.
         :param pulumi.Input[_builtins.str] project_id: The ID of the Descope project this outbound application belongs to. Changing this value will require the resource to be deleted and recreated.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] prompts: How the provider should behave when the user is already signed in. Common values are `none`, `login`, `consent` and `select_account`.
@@ -919,6 +957,7 @@ class OutboundApp(pulumi.CustomResource):
         __props__.__dict__["discovery_url"] = discovery_url
         __props__.__dict__["logo"] = logo
         __props__.__dict__["name"] = name
+        __props__.__dict__["outbound_app_id"] = outbound_app_id
         __props__.__dict__["pkce"] = pkce
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["prompts"] = prompts
@@ -1039,6 +1078,14 @@ class OutboundApp(pulumi.CustomResource):
         A name for the outbound application.
         """
         return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="outboundAppId")
+    def outbound_app_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        The ID of the outbound application. Set it to create the application under an ID of your choosing, for example one that the application calling Descope looks the application up by, or leave it out to let Descope generate one. A chosen ID has 1 to 30 lowercase letters, digits or hyphens. Changing this value will require the resource to be deleted and recreated.
+        """
+        return pulumi.get(self, "outbound_app_id")
 
     @_builtins.property
     @pulumi.getter

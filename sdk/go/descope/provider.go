@@ -20,7 +20,7 @@ type Provider struct {
 
 	// An optional base URL for the Descope API
 	BaseUrl pulumi.StringPtrOutput `pulumi:"baseUrl"`
-	// A valid management key for your Descope company
+	// A valid management key for your Descope company, or a workload identity token for a federated management key
 	ManagementKey pulumi.StringPtrOutput `pulumi:"managementKey"`
 	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
 	ProjectId pulumi.StringPtrOutput `pulumi:"projectId"`
@@ -52,7 +52,7 @@ func NewProvider(ctx *pulumi.Context,
 type providerArgs struct {
 	// An optional base URL for the Descope API
 	BaseUrl *string `pulumi:"baseUrl"`
-	// A valid management key for your Descope company
+	// A valid management key for your Descope company, or a workload identity token for a federated management key
 	ManagementKey *string `pulumi:"managementKey"`
 	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
 	ProjectId *string `pulumi:"projectId"`
@@ -62,7 +62,7 @@ type providerArgs struct {
 type ProviderArgs struct {
 	// An optional base URL for the Descope API
 	BaseUrl pulumi.StringPtrInput
-	// A valid management key for your Descope company
+	// A valid management key for your Descope company, or a workload identity token for a federated management key
 	ManagementKey pulumi.StringPtrInput
 	// Deprecated: The projectId attribute in the 'descope' provider block is no longer required and can be safely removed
 	ProjectId pulumi.StringPtrInput
@@ -133,7 +133,7 @@ func (o ProviderOutput) BaseUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BaseUrl }).(pulumi.StringPtrOutput)
 }
 
-// A valid management key for your Descope company
+// A valid management key for your Descope company, or a workload identity token for a federated management key
 func (o ProviderOutput) ManagementKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ManagementKey }).(pulumi.StringPtrOutput)
 }

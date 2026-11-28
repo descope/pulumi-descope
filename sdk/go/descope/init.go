@@ -125,6 +125,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &HubspotConnector{}
 	case "descope:index/inboundApp:InboundApp":
 		r = &InboundApp{}
+	case "descope:index/inboundAppAttribute:InboundAppAttribute":
+		r = &InboundAppAttribute{}
 	case "descope:index/incodeConnector:IncodeConnector":
 		r = &IncodeConnector{}
 	case "descope:index/intercomConnector:IntercomConnector":
@@ -560,6 +562,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"descope",
 		"index/inboundApp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"descope",
+		"index/inboundAppAttribute",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
